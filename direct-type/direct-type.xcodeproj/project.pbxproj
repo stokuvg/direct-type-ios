@@ -13,6 +13,7 @@
 		066BD9E02456ACB5009E610B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 066BD9DF2456ACB5009E610B /* Assets.xcassets */; };
 		066BD9E32456ACB5009E610B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 066BD9E12456ACB5009E610B /* LaunchScreen.storyboard */; };
 		066BD9EC2456B3A2009E610B /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066BD9EB2456B3A2009E610B /* R.generated.swift */; };
+		06D700332456B5FC00E55FC8 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06D700322456B5FC00E55FC8 /* Color.xcassets */; };
 		C29161DB95966DD7132DBD19 /* Pods_direct_type.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A49B0215E0F4A582FB1EC5E /* Pods_direct_type.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		066BD9E22456ACB5009E610B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		066BD9E42456ACB5009E610B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		066BD9EB2456B3A2009E610B /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
+		06D700322456B5FC00E55FC8 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		8A49B0215E0F4A582FB1EC5E /* Pods_direct_type.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_direct_type.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8C351EB920291E353136BB9 /* Pods-direct-type.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-direct-type.debug.xcconfig"; path = "Target Support Files/Pods-direct-type/Pods-direct-type.debug.xcconfig"; sourceTree = "<group>"; };
 		F6660969F9095E20D9CE432A /* Pods-direct-type.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-direct-type.release.xcconfig"; path = "Target Support Files/Pods-direct-type/Pods-direct-type.release.xcconfig"; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				066BD9DA2456ACB4009E610B /* ViewController.swift */,
 				066BD9DC2456ACB4009E610B /* Main.storyboard */,
 				066BD9DF2456ACB5009E610B /* Assets.xcassets */,
+				06D700322456B5FC00E55FC8 /* Color.xcassets */,
 				066BD9E12456ACB5009E610B /* LaunchScreen.storyboard */,
 				066BD9E42456ACB5009E610B /* Info.plist */,
 			);
@@ -153,6 +156,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				066BD9E32456ACB5009E610B /* LaunchScreen.storyboard in Resources */,
+				06D700332456B5FC00E55FC8 /* Color.xcassets in Resources */,
 				066BD9E02456ACB5009E610B /* Assets.xcassets in Resources */,
 				066BD9DE2456ACB4009E610B /* Main.storyboard in Resources */,
 			);
