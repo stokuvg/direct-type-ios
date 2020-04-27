@@ -114,6 +114,659 @@ struct R: Rswift.Validatable {
   }
   #endif
 
+  /// This `R.color` struct is generated, and contains static references to 10 colors.
+  struct color {
+    /// Color `color-alart`.
+    static let colorAlart = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-alart")
+    /// Color `color-base`.
+    static let colorBase = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-base")
+    /// Color `color-black`.
+    static let colorBlack = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-black")
+    /// Color `color-button`.
+    static let colorButton = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-button")
+    /// Color `color-line`.
+    static let colorLine = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-line")
+    /// Color `color-main`.
+    static let colorMain = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-main")
+    /// Color `color-parts_gray`.
+    static let colorParts_gray = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-parts_gray")
+    /// Color `color-sub2`.
+    static let colorSub2 = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-sub2")
+    /// Color `color-sub`.
+    static let colorSub = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-sub")
+    /// Color `color-white`.
+    static let colorWhite = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-white")
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "color-alart", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorAlart(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorAlart, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "color-base", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorBase(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorBase, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "color-black", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorBlack(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorBlack, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "color-button", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorButton(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorButton, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "color-line", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorLine(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorLine, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "color-main", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorMain(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorMain, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "color-parts_gray", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorParts_gray(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorParts_gray, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "color-sub", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorSub(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorSub, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "color-sub2", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorSub2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorSub2, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "color-white", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorWhite(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorWhite, compatibleWith: traitCollection)
+    }
+    #endif
+
+    fileprivate init() {}
+  }
+
+  /// This `R.image` struct is generated, and contains static references to 59 images.
+  struct image {
+    /// Image `arBtm_2`.
+    static let arBtm_2 = Rswift.ImageResource(bundle: R.hostingBundle, name: "arBtm_2")
+    /// Image `arDefaultWhite`.
+    static let arDefaultWhite = Rswift.ImageResource(bundle: R.hostingBundle, name: "arDefaultWhite")
+    /// Image `arTop`.
+    static let arTop = Rswift.ImageResource(bundle: R.hostingBundle, name: "arTop")
+    /// Image `ar_BL`.
+    static let ar_BL = Rswift.ImageResource(bundle: R.hostingBundle, name: "ar_BL")
+    /// Image `ar`.
+    static let ar = Rswift.ImageResource(bundle: R.hostingBundle, name: "ar")
+    /// Image `box`.
+    static let box = Rswift.ImageResource(bundle: R.hostingBundle, name: "box")
+    /// Image `card_keep`.
+    static let card_keep = Rswift.ImageResource(bundle: R.hostingBundle, name: "card_keep")
+    /// Image `card`.
+    static let card = Rswift.ImageResource(bundle: R.hostingBundle, name: "card")
+    /// Image `checkInactive`.
+    static let checkInactive = Rswift.ImageResource(bundle: R.hostingBundle, name: "checkInactive")
+    /// Image `checkOff`.
+    static let checkOff = Rswift.ImageResource(bundle: R.hostingBundle, name: "checkOff")
+    /// Image `checkOn`.
+    static let checkOn = Rswift.ImageResource(bundle: R.hostingBundle, name: "checkOn")
+    /// Image `checkSelectedWhite`.
+    static let checkSelectedWhite = Rswift.ImageResource(bundle: R.hostingBundle, name: "checkSelectedWhite")
+    /// Image `close`.
+    static let close = Rswift.ImageResource(bundle: R.hostingBundle, name: "close")
+    /// Image `companyName`.
+    static let companyName = Rswift.ImageResource(bundle: R.hostingBundle, name: "companyName")
+    /// Image `deleteDefault`.
+    static let deleteDefault = Rswift.ImageResource(bundle: R.hostingBundle, name: "deleteDefault")
+    /// Image `diagnosisSelected`.
+    static let diagnosisSelected = Rswift.ImageResource(bundle: R.hostingBundle, name: "diagnosisSelected")
+    /// Image `diagnosis_gray`.
+    static let diagnosis_gray = Rswift.ImageResource(bundle: R.hostingBundle, name: "diagnosis_gray")
+    /// Image `diagnosis`.
+    static let diagnosis = Rswift.ImageResource(bundle: R.hostingBundle, name: "diagnosis")
+    /// Image `done02`.
+    static let done02 = Rswift.ImageResource(bundle: R.hostingBundle, name: "done02")
+    /// Image `editSelected`.
+    static let editSelected = Rswift.ImageResource(bundle: R.hostingBundle, name: "editSelected")
+    /// Image `hukidashi_small`.
+    static let hukidashi_small = Rswift.ImageResource(bundle: R.hostingBundle, name: "hukidashi_small")
+    /// Image `hukidashi`.
+    static let hukidashi = Rswift.ImageResource(bundle: R.hostingBundle, name: "hukidashi")
+    /// Image `illust01`.
+    static let illust01 = Rswift.ImageResource(bundle: R.hostingBundle, name: "illust01")
+    /// Image `illust02`.
+    static let illust02 = Rswift.ImageResource(bundle: R.hostingBundle, name: "illust02")
+    /// Image `img01`.
+    static let img01 = Rswift.ImageResource(bundle: R.hostingBundle, name: "img01")
+    /// Image `indigator_gray`.
+    static let indigator_gray = Rswift.ImageResource(bundle: R.hostingBundle, name: "indigator_gray")
+    /// Image `indigator_sub`.
+    static let indigator_sub = Rswift.ImageResource(bundle: R.hostingBundle, name: "indigator_sub")
+    /// Image `keepDefault_GN`.
+    static let keepDefault_GN = Rswift.ImageResource(bundle: R.hostingBundle, name: "keepDefault_GN")
+    /// Image `keepSelected_GN`.
+    static let keepSelected_GN = Rswift.ImageResource(bundle: R.hostingBundle, name: "keepSelected_GN")
+    /// Image `keikenshokushu`.
+    static let keikenshokushu = Rswift.ImageResource(bundle: R.hostingBundle, name: "keikenshokushu")
+    /// Image `likeDefaultBase`.
+    static let likeDefaultBase = Rswift.ImageResource(bundle: R.hostingBundle, name: "likeDefaultBase")
+    /// Image `likeDefault`.
+    static let likeDefault = Rswift.ImageResource(bundle: R.hostingBundle, name: "likeDefault")
+    /// Image `likeSelected`.
+    static let likeSelected = Rswift.ImageResource(bundle: R.hostingBundle, name: "likeSelected")
+    /// Image `like_gray`.
+    static let like_gray = Rswift.ImageResource(bundle: R.hostingBundle, name: "like_gray")
+    /// Image `managementDefault_GN`.
+    static let managementDefault_GN = Rswift.ImageResource(bundle: R.hostingBundle, name: "managementDefault_GN")
+    /// Image `management_GN`.
+    static let management_GN = Rswift.ImageResource(bundle: R.hostingBundle, name: "management_GN")
+    /// Image `minyuuryoku`.
+    static let minyuuryoku = Rswift.ImageResource(bundle: R.hostingBundle, name: "minyuuryoku")
+    /// Image `mypageDefault_GN`.
+    static let mypageDefault_GN = Rswift.ImageResource(bundle: R.hostingBundle, name: "mypageDefault_GN")
+    /// Image `mypage_GN`.
+    static let mypage_GN = Rswift.ImageResource(bundle: R.hostingBundle, name: "mypage_GN")
+    /// Image `new_GN`.
+    static let new_GN = Rswift.ImageResource(bundle: R.hostingBundle, name: "new_GN")
+    /// Image `period`.
+    static let period = Rswift.ImageResource(bundle: R.hostingBundle, name: "period")
+    /// Image `place`.
+    static let place = Rswift.ImageResource(bundle: R.hostingBundle, name: "place")
+    /// Image `plusDefault`.
+    static let plusDefault = Rswift.ImageResource(bundle: R.hostingBundle, name: "plusDefault")
+    /// Image `pr`.
+    static let pr = Rswift.ImageResource(bundle: R.hostingBundle, name: "pr")
+    /// Image `recommendedDefault_GN`.
+    static let recommendedDefault_GN = Rswift.ImageResource(bundle: R.hostingBundle, name: "recommendedDefault_GN")
+    /// Image `recommendedSelected_GN`.
+    static let recommendedSelected_GN = Rswift.ImageResource(bundle: R.hostingBundle, name: "recommendedSelected_GN")
+    /// Image `refineDefaultWhiteBase`.
+    static let refineDefaultWhiteBase = Rswift.ImageResource(bundle: R.hostingBundle, name: "refineDefaultWhiteBase")
+    /// Image `required`.
+    static let required = Rswift.ImageResource(bundle: R.hostingBundle, name: "required")
+    /// Image `resumeSelected`.
+    static let resumeSelected = Rswift.ImageResource(bundle: R.hostingBundle, name: "resumeSelected")
+    /// Image `resume_gray`.
+    static let resume_gray = Rswift.ImageResource(bundle: R.hostingBundle, name: "resume_gray")
+    /// Image `rogin`.
+    static let rogin = Rswift.ImageResource(bundle: R.hostingBundle, name: "rogin")
+    /// Image `salary`.
+    static let salary = Rswift.ImageResource(bundle: R.hostingBundle, name: "salary")
+    /// Image `settingSelected`.
+    static let settingSelected = Rswift.ImageResource(bundle: R.hostingBundle, name: "settingSelected")
+    /// Image `setting_white`.
+    static let setting_white = Rswift.ImageResource(bundle: R.hostingBundle, name: "setting_white")
+    /// Image `slider_gray`.
+    static let slider_gray = Rswift.ImageResource(bundle: R.hostingBundle, name: "slider_gray")
+    /// Image `slider_sub`.
+    static let slider_sub = Rswift.ImageResource(bundle: R.hostingBundle, name: "slider_sub")
+    /// Image `slider_white`.
+    static let slider_white = Rswift.ImageResource(bundle: R.hostingBundle, name: "slider_white")
+    /// Image `sortDefaultWhiteBase`.
+    static let sortDefaultWhiteBase = Rswift.ImageResource(bundle: R.hostingBundle, name: "sortDefaultWhiteBase")
+    /// Image `upcoming`.
+    static let upcoming = Rswift.ImageResource(bundle: R.hostingBundle, name: "upcoming")
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "ar", bundle: ..., traitCollection: ...)`
+    static func ar(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.ar, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "arBtm_2", bundle: ..., traitCollection: ...)`
+    static func arBtm_2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.arBtm_2, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "arDefaultWhite", bundle: ..., traitCollection: ...)`
+    static func arDefaultWhite(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.arDefaultWhite, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "arTop", bundle: ..., traitCollection: ...)`
+    static func arTop(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.arTop, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "ar_BL", bundle: ..., traitCollection: ...)`
+    static func ar_BL(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.ar_BL, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "box", bundle: ..., traitCollection: ...)`
+    static func box(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.box, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "card", bundle: ..., traitCollection: ...)`
+    static func card(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.card, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "card_keep", bundle: ..., traitCollection: ...)`
+    static func card_keep(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.card_keep, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "checkInactive", bundle: ..., traitCollection: ...)`
+    static func checkInactive(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.checkInactive, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "checkOff", bundle: ..., traitCollection: ...)`
+    static func checkOff(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.checkOff, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "checkOn", bundle: ..., traitCollection: ...)`
+    static func checkOn(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.checkOn, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "checkSelectedWhite", bundle: ..., traitCollection: ...)`
+    static func checkSelectedWhite(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.checkSelectedWhite, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "close", bundle: ..., traitCollection: ...)`
+    static func close(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.close, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "companyName", bundle: ..., traitCollection: ...)`
+    static func companyName(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.companyName, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "deleteDefault", bundle: ..., traitCollection: ...)`
+    static func deleteDefault(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.deleteDefault, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "diagnosis", bundle: ..., traitCollection: ...)`
+    static func diagnosis(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.diagnosis, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "diagnosisSelected", bundle: ..., traitCollection: ...)`
+    static func diagnosisSelected(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.diagnosisSelected, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "diagnosis_gray", bundle: ..., traitCollection: ...)`
+    static func diagnosis_gray(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.diagnosis_gray, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "done02", bundle: ..., traitCollection: ...)`
+    static func done02(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.done02, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "editSelected", bundle: ..., traitCollection: ...)`
+    static func editSelected(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.editSelected, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "hukidashi", bundle: ..., traitCollection: ...)`
+    static func hukidashi(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.hukidashi, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "hukidashi_small", bundle: ..., traitCollection: ...)`
+    static func hukidashi_small(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.hukidashi_small, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "illust01", bundle: ..., traitCollection: ...)`
+    static func illust01(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.illust01, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "illust02", bundle: ..., traitCollection: ...)`
+    static func illust02(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.illust02, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "img01", bundle: ..., traitCollection: ...)`
+    static func img01(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.img01, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "indigator_gray", bundle: ..., traitCollection: ...)`
+    static func indigator_gray(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.indigator_gray, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "indigator_sub", bundle: ..., traitCollection: ...)`
+    static func indigator_sub(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.indigator_sub, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "keepDefault_GN", bundle: ..., traitCollection: ...)`
+    static func keepDefault_GN(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.keepDefault_GN, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "keepSelected_GN", bundle: ..., traitCollection: ...)`
+    static func keepSelected_GN(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.keepSelected_GN, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "keikenshokushu", bundle: ..., traitCollection: ...)`
+    static func keikenshokushu(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.keikenshokushu, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "likeDefault", bundle: ..., traitCollection: ...)`
+    static func likeDefault(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.likeDefault, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "likeDefaultBase", bundle: ..., traitCollection: ...)`
+    static func likeDefaultBase(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.likeDefaultBase, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "likeSelected", bundle: ..., traitCollection: ...)`
+    static func likeSelected(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.likeSelected, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "like_gray", bundle: ..., traitCollection: ...)`
+    static func like_gray(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.like_gray, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "managementDefault_GN", bundle: ..., traitCollection: ...)`
+    static func managementDefault_GN(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.managementDefault_GN, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "management_GN", bundle: ..., traitCollection: ...)`
+    static func management_GN(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.management_GN, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "minyuuryoku", bundle: ..., traitCollection: ...)`
+    static func minyuuryoku(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.minyuuryoku, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "mypageDefault_GN", bundle: ..., traitCollection: ...)`
+    static func mypageDefault_GN(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.mypageDefault_GN, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "mypage_GN", bundle: ..., traitCollection: ...)`
+    static func mypage_GN(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.mypage_GN, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "new_GN", bundle: ..., traitCollection: ...)`
+    static func new_GN(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.new_GN, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "period", bundle: ..., traitCollection: ...)`
+    static func period(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.period, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "place", bundle: ..., traitCollection: ...)`
+    static func place(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.place, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "plusDefault", bundle: ..., traitCollection: ...)`
+    static func plusDefault(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.plusDefault, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "pr", bundle: ..., traitCollection: ...)`
+    static func pr(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.pr, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "recommendedDefault_GN", bundle: ..., traitCollection: ...)`
+    static func recommendedDefault_GN(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.recommendedDefault_GN, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "recommendedSelected_GN", bundle: ..., traitCollection: ...)`
+    static func recommendedSelected_GN(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.recommendedSelected_GN, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "refineDefaultWhiteBase", bundle: ..., traitCollection: ...)`
+    static func refineDefaultWhiteBase(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.refineDefaultWhiteBase, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "required", bundle: ..., traitCollection: ...)`
+    static func required(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.required, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "resumeSelected", bundle: ..., traitCollection: ...)`
+    static func resumeSelected(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.resumeSelected, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "resume_gray", bundle: ..., traitCollection: ...)`
+    static func resume_gray(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.resume_gray, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "rogin", bundle: ..., traitCollection: ...)`
+    static func rogin(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.rogin, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "salary", bundle: ..., traitCollection: ...)`
+    static func salary(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.salary, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "settingSelected", bundle: ..., traitCollection: ...)`
+    static func settingSelected(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.settingSelected, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "setting_white", bundle: ..., traitCollection: ...)`
+    static func setting_white(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.setting_white, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "slider_gray", bundle: ..., traitCollection: ...)`
+    static func slider_gray(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.slider_gray, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "slider_sub", bundle: ..., traitCollection: ...)`
+    static func slider_sub(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.slider_sub, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "slider_white", bundle: ..., traitCollection: ...)`
+    static func slider_white(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.slider_white, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "sortDefaultWhiteBase", bundle: ..., traitCollection: ...)`
+    static func sortDefaultWhiteBase(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.sortDefaultWhiteBase, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "upcoming", bundle: ..., traitCollection: ...)`
+    static func upcoming(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.upcoming, compatibleWith: traitCollection)
+    }
+    #endif
+
+    fileprivate init() {}
+  }
+
   fileprivate struct intern: Rswift.Validatable {
     fileprivate static func validate() throws {
       try _R.validate()
