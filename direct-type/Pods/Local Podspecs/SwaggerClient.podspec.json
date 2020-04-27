@@ -1,0 +1,26 @@
+{
+  "name": "SwaggerClient",
+  "platforms": {
+    "ios": "9.0",
+    "osx": "10.11",
+    "tvos": "9.0"
+  },
+  "version": "0.20.2.7",
+  "source": {
+    "git": "git@github.com:swagger-api/swagger-mustache.git",
+    "tag": "v1.0.0"
+  },
+  "authors": "Swagger Codegen",
+  "license": "Proprietary",
+  "homepage": "http://example.com/todo/",
+  "summary": "TODOアプリ組み込みAPI",
+  "source_files": "SwaggerClient/Classes/**/*.swift",
+  "dependencies": {
+    "PromiseKit": [
+      "~> 6.8"
+    ],
+    "Alamofire": [
+      "~> 4.9.0"
+    ]
+  }
+}
