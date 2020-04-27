@@ -8,23 +8,33 @@
 
 import UIKit
 
+// WebViewの表示
+// 下部にBack/Forwardボタン
 class TmpWebVC: BasePresentVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+            
+        self.tmpNavigationBar.tintColor = UIColor.init(colorType: .color_white)
+        self.tmpNavigationBar.barTintColor = UIColor.init(colorType: .color_main)
+        self.tmpNavigationBar.titleTextAttributes = [
+            .font: UIFont(name: "HiraginoSans-W3", size: 24.0) as Any,
+            .foregroundColor: UIColor.init(colorType: .color_white) as Any,
+        ]
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+        self.view.backgroundColor = UIColor.init(colorType: .color_base)
+        
+        // 閉じるボタン
+        self.leftCloseDisp()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
-    */
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
 
 }
