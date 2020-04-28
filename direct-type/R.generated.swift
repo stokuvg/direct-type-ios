@@ -812,6 +812,26 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
+  /// This `R.nib` struct is generated, and contains static references to 1 nibs.
+  struct nib {
+    /// Nib `JobOfferBigCard`.
+    static let jobOfferBigCard = _R.nib._JobOfferBigCard()
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "JobOfferBigCard", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobOfferBigCard) instead")
+    static func jobOfferBigCard(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.jobOfferBigCard)
+    }
+    #endif
+
+    static func jobOfferBigCard(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobOfferBigCard? {
+      return R.nib.jobOfferBigCard.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobOfferBigCard
+    }
+
+    fileprivate init() {}
+  }
+
   fileprivate struct intern: Rswift.Validatable {
     fileprivate static func validate() throws {
       try _R.validate()
@@ -831,6 +851,23 @@ struct _R: Rswift.Validatable {
     try storyboard.validate()
     #endif
   }
+
+  #if os(iOS) || os(tvOS)
+  struct nib {
+    struct _JobOfferBigCard: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "JobOfferBigCard"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobOfferBigCard? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobOfferBigCard
+      }
+
+      fileprivate init() {}
+    }
+
+    fileprivate init() {}
+  }
+  #endif
 
   #if os(iOS) || os(tvOS)
   struct storyboard: Rswift.Validatable {

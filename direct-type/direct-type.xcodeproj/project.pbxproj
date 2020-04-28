@@ -33,6 +33,10 @@
 		06D700332456B5FC00E55FC8 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06D700322456B5FC00E55FC8 /* Color.xcassets */; };
 		06E5197A2457BA36004E4B7A /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519792457BA36004E4B7A /* SplashVC.swift */; };
 		06E5197D2457BFBE004E4B7A /* BaseNaviController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5197C2457BFBE004E4B7A /* BaseNaviController.swift */; };
+		06E519802457CF63004E4B7A /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5197F2457CF63004E4B7A /* BaseTableViewCell.swift */; };
+		06E519832457CF90004E4B7A /* JobOfferBigCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519812457CF90004E4B7A /* JobOfferBigCard.swift */; };
+		06E519842457CF90004E4B7A /* JobOfferBigCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06E519822457CF90004E4B7A /* JobOfferBigCard.xib */; };
+		06E519862457D2C1004E4B7A /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519852457D2C1004E4B7A /* UIView+Extensions.swift */; };
 		C29161DB95966DD7132DBD19 /* Pods_direct_type.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A49B0215E0F4A582FB1EC5E /* Pods_direct_type.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +69,10 @@
 		06D700322456B5FC00E55FC8 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		06E519792457BA36004E4B7A /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		06E5197C2457BFBE004E4B7A /* BaseNaviController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNaviController.swift; sourceTree = "<group>"; };
+		06E5197F2457CF63004E4B7A /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		06E519812457CF90004E4B7A /* JobOfferBigCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobOfferBigCard.swift; sourceTree = "<group>"; };
+		06E519822457CF90004E4B7A /* JobOfferBigCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobOfferBigCard.xib; sourceTree = "<group>"; };
+		06E519852457D2C1004E4B7A /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		8A49B0215E0F4A582FB1EC5E /* Pods_direct_type.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_direct_type.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8C351EB920291E353136BB9 /* Pods-direct-type.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-direct-type.debug.xcconfig"; path = "Target Support Files/Pods-direct-type/Pods-direct-type.debug.xcconfig"; sourceTree = "<group>"; };
 		F6660969F9095E20D9CE432A /* Pods-direct-type.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-direct-type.release.xcconfig"; path = "Target Support Files/Pods-direct-type/Pods-direct-type.release.xcconfig"; sourceTree = "<group>"; };
@@ -103,6 +111,7 @@
 		0667636D2457B02800AC5039 /* Job */ = {
 			isa = PBXGroup;
 			children = (
+				06E5197E2457CF31004E4B7A /* Cell */,
 				0667636E2457B04500AC5039 /* HomeVC.swift */,
 				066763752457B09F00AC5039 /* HomeVC.storyboard */,
 			);
@@ -178,6 +187,7 @@
 			children = (
 				067F28E72456D112000AAD69 /* UIColor+Extensions.swift */,
 				067F28E92456D135000AAD69 /* UIFont+Extensions.swift */,
+				06E519852457D2C1004E4B7A /* UIView+Extensions.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -194,6 +204,7 @@
 				066763612457AB7200AC5039 /* BaseTabBC.swift */,
 				066763632457ABDB00AC5039 /* BaseTabBC.storyboard */,
 				06E5197C2457BFBE004E4B7A /* BaseNaviController.swift */,
+				06E5197F2457CF63004E4B7A /* BaseTableViewCell.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -212,6 +223,15 @@
 			children = (
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		06E5197E2457CF31004E4B7A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				06E519812457CF90004E4B7A /* JobOfferBigCard.swift */,
+				06E519822457CF90004E4B7A /* JobOfferBigCard.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		47EC95279A88E89B17F99C58 /* Pods */ = {
@@ -293,6 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				066BD9E32456ACB5009E610B /* LaunchScreen.storyboard in Resources */,
+				06E519842457CF90004E4B7A /* JobOfferBigCard.xib in Resources */,
 				06D700332456B5FC00E55FC8 /* Color.xcassets in Resources */,
 				066763782457B0A700AC5039 /* KeepListVC.storyboard in Resources */,
 				066763762457B09F00AC5039 /* HomeVC.storyboard in Resources */,
@@ -374,8 +395,10 @@
 			files = (
 				06E5197D2457BFBE004E4B7A /* BaseNaviController.swift in Sources */,
 				067F28D22456CE39000AAD69 /* TmpBasicVC.swift in Sources */,
+				06E519862457D2C1004E4B7A /* UIView+Extensions.swift in Sources */,
 				066763622457AB7200AC5039 /* BaseTabBC.swift in Sources */,
 				066763672457AF2400AC5039 /* MyPageVC.swift in Sources */,
+				06E519802457CF63004E4B7A /* BaseTableViewCell.swift in Sources */,
 				066763722457B08300AC5039 /* EntryVC.swift in Sources */,
 				0667636C2457B02200AC5039 /* KeepListVC.swift in Sources */,
 				067F28EA2456D135000AAD69 /* UIFont+Extensions.swift in Sources */,
@@ -387,6 +410,7 @@
 				06E5197A2457BA36004E4B7A /* SplashVC.swift in Sources */,
 				067F28D02456CCB8000AAD69 /* BaseVC.swift in Sources */,
 				067F28E52456D05F000AAD69 /* TmpWebVC.swift in Sources */,
+				06E519832457CF90004E4B7A /* JobOfferBigCard.swift in Sources */,
 				067F28E12456D038000AAD69 /* BasePresentVC.swift in Sources */,
 				067F28E32456D053000AAD69 /* TmpSub1VC.swift in Sources */,
 			);
