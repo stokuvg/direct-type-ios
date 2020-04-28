@@ -11,10 +11,24 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        UINavigationBar.appearance().isTranslucent = false
+        UITabBar.appearance().isTranslucent = false
+        
+        // ログイン済み情報があればタブ表示,無ければ初期値入力,ログイン画面へ
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let tabSB = UIStoryboard(name: "BaseTabBC", bundle: nil)
+        let tabBC = tabSB.instantiateViewController(withIdentifier: "Sbid_BaseTabBC")
+        
+        self.window?.rootViewController = tabBC
+        
+        self.window?.makeKeyAndVisible()
+        
         return true
     }
 
