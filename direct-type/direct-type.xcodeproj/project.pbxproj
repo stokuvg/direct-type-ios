@@ -50,6 +50,28 @@
 		06E519A02457DAD7004E4B7A /* WithDrawalCompleteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5199F2457DAD7004E4B7A /* WithDrawalCompleteVC.swift */; };
 		06E519A22457DC44004E4B7A /* InitialInputRegistVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519A12457DC44004E4B7A /* InitialInputRegistVC.swift */; };
 		06E519A42457DC7B004E4B7A /* InitialInputCompleteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519A32457DC7B004E4B7A /* InitialInputCompleteVC.swift */; };
+		06E519A72458138E004E4B7A /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519A62458138E004E4B7A /* SignupVC.swift */; };
+		06E519A92458139B004E4B7A /* SignupConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519A82458139B004E4B7A /* SignupConfirmVC.swift */; };
+		06E519AB245813CA004E4B7A /* InitialInputListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519AA245813CA004E4B7A /* InitialInputListVC.swift */; };
+		06E519AD245813DC004E4B7A /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519AC245813DC004E4B7A /* LoginVC.swift */; };
+		06E519AF245813E9004E4B7A /* LoginConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519AE245813E9004E4B7A /* LoginConfirmVC.swift */; };
+		06E519B1245814B2004E4B7A /* EntryConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519B0245814B2004E4B7A /* EntryConfirmVC.swift */; };
+		06E519B3245814BD004E4B7A /* EntryLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519B2245814BD004E4B7A /* EntryLoginVC.swift */; };
+		06E519B5245814C7004E4B7A /* EntryCompleteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519B4245814C7004E4B7A /* EntryCompleteVC.swift */; };
+		06E519B7245814D4004E4B7A /* ProfileEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519B6245814D4004E4B7A /* ProfileEditVC.swift */; };
+		06E519B9245814DF004E4B7A /* ResumeEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519B8245814DF004E4B7A /* ResumeEditVC.swift */; };
+		06E519BB245814EB004E4B7A /* CareerEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519BA245814EB004E4B7A /* CareerEditVC.swift */; };
+		06E519BE24581558004E4B7A /* ScountListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519BD24581558004E4B7A /* ScountListVC.swift */; };
+		06E519C024581561004E4B7A /* ScountDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519BF24581561004E4B7A /* ScountDetailVC.swift */; };
+		06E519C22458156A004E4B7A /* AccessDenyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519C12458156A004E4B7A /* AccessDenyVC.swift */; };
+		06E519C52458159F004E4B7A /* SnoothCareerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519C42458159F004E4B7A /* SnoothCareerVC.swift */; };
+		06E519C7245815B0004E4B7A /* CareerPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519C6245815B0004E4B7A /* CareerPreviewVC.swift */; };
+		06E519C9245815C8004E4B7A /* CareerEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519C8245815C8004E4B7A /* CareerEditVC.swift */; };
+		06E519CC24581634004E4B7A /* ProfilePreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519CB24581634004E4B7A /* ProfilePreviewVC.swift */; };
+		06E519CE2458163F004E4B7A /* ResumePreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519CD2458163F004E4B7A /* ResumePreviewVC.swift */; };
+		06E519D02458164B004E4B7A /* ScoutPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519CF2458164B004E4B7A /* ScoutPreview.swift */; };
+		06E519D324581684004E4B7A /* ContentsEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519D224581684004E4B7A /* ContentsEditVC.swift */; };
+		06E519D6245816A5004E4B7A /* WebTemplateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519D5245816A5004E4B7A /* WebTemplateVC.swift */; };
 		C29161DB95966DD7132DBD19 /* Pods_direct_type.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A49B0215E0F4A582FB1EC5E /* Pods_direct_type.framework */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +121,28 @@
 		06E5199F2457DAD7004E4B7A /* WithDrawalCompleteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithDrawalCompleteVC.swift; sourceTree = "<group>"; };
 		06E519A12457DC44004E4B7A /* InitialInputRegistVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialInputRegistVC.swift; sourceTree = "<group>"; };
 		06E519A32457DC7B004E4B7A /* InitialInputCompleteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialInputCompleteVC.swift; sourceTree = "<group>"; };
+		06E519A62458138E004E4B7A /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
+		06E519A82458139B004E4B7A /* SignupConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupConfirmVC.swift; sourceTree = "<group>"; };
+		06E519AA245813CA004E4B7A /* InitialInputListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialInputListVC.swift; sourceTree = "<group>"; };
+		06E519AC245813DC004E4B7A /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		06E519AE245813E9004E4B7A /* LoginConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginConfirmVC.swift; sourceTree = "<group>"; };
+		06E519B0245814B2004E4B7A /* EntryConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryConfirmVC.swift; sourceTree = "<group>"; };
+		06E519B2245814BD004E4B7A /* EntryLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryLoginVC.swift; sourceTree = "<group>"; };
+		06E519B4245814C7004E4B7A /* EntryCompleteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCompleteVC.swift; sourceTree = "<group>"; };
+		06E519B6245814D4004E4B7A /* ProfileEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditVC.swift; sourceTree = "<group>"; };
+		06E519B8245814DF004E4B7A /* ResumeEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeEditVC.swift; sourceTree = "<group>"; };
+		06E519BA245814EB004E4B7A /* CareerEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerEditVC.swift; sourceTree = "<group>"; };
+		06E519BD24581558004E4B7A /* ScountListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScountListVC.swift; sourceTree = "<group>"; };
+		06E519BF24581561004E4B7A /* ScountDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScountDetailVC.swift; sourceTree = "<group>"; };
+		06E519C12458156A004E4B7A /* AccessDenyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessDenyVC.swift; sourceTree = "<group>"; };
+		06E519C42458159F004E4B7A /* SnoothCareerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnoothCareerVC.swift; sourceTree = "<group>"; };
+		06E519C6245815B0004E4B7A /* CareerPreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerPreviewVC.swift; sourceTree = "<group>"; };
+		06E519C8245815C8004E4B7A /* CareerEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerEditVC.swift; sourceTree = "<group>"; };
+		06E519CB24581634004E4B7A /* ProfilePreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePreviewVC.swift; sourceTree = "<group>"; };
+		06E519CD2458163F004E4B7A /* ResumePreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumePreviewVC.swift; sourceTree = "<group>"; };
+		06E519CF2458164B004E4B7A /* ScoutPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutPreview.swift; sourceTree = "<group>"; };
+		06E519D224581684004E4B7A /* ContentsEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsEditVC.swift; sourceTree = "<group>"; };
+		06E519D5245816A5004E4B7A /* WebTemplateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebTemplateVC.swift; sourceTree = "<group>"; };
 		8A49B0215E0F4A582FB1EC5E /* Pods_direct_type.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_direct_type.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8C351EB920291E353136BB9 /* Pods-direct-type.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-direct-type.debug.xcconfig"; path = "Target Support Files/Pods-direct-type/Pods-direct-type.debug.xcconfig"; sourceTree = "<group>"; };
 		F6660969F9095E20D9CE432A /* Pods-direct-type.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-direct-type.release.xcconfig"; path = "Target Support Files/Pods-direct-type/Pods-direct-type.release.xcconfig"; sourceTree = "<group>"; };
@@ -150,6 +194,9 @@
 			children = (
 				066763712457B08300AC5039 /* EntryVC.swift */,
 				066763732457B08F00AC5039 /* EntryVC.storyboard */,
+				06E519B0245814B2004E4B7A /* EntryConfirmVC.swift */,
+				06E519B2245814BD004E4B7A /* EntryLoginVC.swift */,
+				06E519B4245814C7004E4B7A /* EntryCompleteVC.swift */,
 			);
 			path = Entry;
 			sourceTree = "<group>";
@@ -199,6 +246,12 @@
 		067F28D62456CEBF000AAD69 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				06E519D424581691004E4B7A /* WebView */,
+				06E519D124581667004E4B7A /* Edit */,
+				06E519CA24581622004E4B7A /* Preview */,
+				06E519C324581584004E4B7A /* Career */,
+				06E519BC2458154A004E4B7A /* Scount */,
+				06E519A524581342004E4B7A /* Signup */,
 				06E519942457D8BF004E4B7A /* Setting */,
 				06E5198B2457D6EF004E4B7A /* Chemistry */,
 				06E519872457D64B004E4B7A /* InitialInput */,
@@ -251,6 +304,8 @@
 		06E5197B2457BABF004E4B7A /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				06E519AC245813DC004E4B7A /* LoginVC.swift */,
+				06E519AE245813E9004E4B7A /* LoginConfirmVC.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -269,6 +324,7 @@
 			children = (
 				06E519A12457DC44004E4B7A /* InitialInputRegistVC.swift */,
 				06E519A32457DC7B004E4B7A /* InitialInputCompleteVC.swift */,
+				06E519AA245813CA004E4B7A /* InitialInputListVC.swift */,
 			);
 			path = InitialInput;
 			sourceTree = "<group>";
@@ -295,6 +351,64 @@
 				06E5199F2457DAD7004E4B7A /* WithDrawalCompleteVC.swift */,
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		06E519A524581342004E4B7A /* Signup */ = {
+			isa = PBXGroup;
+			children = (
+				06E519A62458138E004E4B7A /* SignupVC.swift */,
+				06E519A82458139B004E4B7A /* SignupConfirmVC.swift */,
+			);
+			path = Signup;
+			sourceTree = "<group>";
+		};
+		06E519BC2458154A004E4B7A /* Scount */ = {
+			isa = PBXGroup;
+			children = (
+				06E519BD24581558004E4B7A /* ScountListVC.swift */,
+				06E519BF24581561004E4B7A /* ScountDetailVC.swift */,
+				06E519C12458156A004E4B7A /* AccessDenyVC.swift */,
+			);
+			path = Scount;
+			sourceTree = "<group>";
+		};
+		06E519C324581584004E4B7A /* Career */ = {
+			isa = PBXGroup;
+			children = (
+				06E519C42458159F004E4B7A /* SnoothCareerVC.swift */,
+				06E519C6245815B0004E4B7A /* CareerPreviewVC.swift */,
+				06E519C8245815C8004E4B7A /* CareerEditVC.swift */,
+			);
+			path = Career;
+			sourceTree = "<group>";
+		};
+		06E519CA24581622004E4B7A /* Preview */ = {
+			isa = PBXGroup;
+			children = (
+				06E519CB24581634004E4B7A /* ProfilePreviewVC.swift */,
+				06E519CD2458163F004E4B7A /* ResumePreviewVC.swift */,
+				06E519CF2458164B004E4B7A /* ScoutPreview.swift */,
+			);
+			path = Preview;
+			sourceTree = "<group>";
+		};
+		06E519D124581667004E4B7A /* Edit */ = {
+			isa = PBXGroup;
+			children = (
+				06E519D224581684004E4B7A /* ContentsEditVC.swift */,
+				06E519B6245814D4004E4B7A /* ProfileEditVC.swift */,
+				06E519B8245814DF004E4B7A /* ResumeEditVC.swift */,
+				06E519BA245814EB004E4B7A /* CareerEditVC.swift */,
+			);
+			path = Edit;
+			sourceTree = "<group>";
+		};
+		06E519D424581691004E4B7A /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				06E519D5245816A5004E4B7A /* WebTemplateVC.swift */,
+			);
+			path = WebView;
 			sourceTree = "<group>";
 		};
 		47EC95279A88E89B17F99C58 /* Pods */ = {
@@ -461,31 +575,53 @@
 				06E5198F2457D70B004E4B7A /* ChemistrySelect.swift in Sources */,
 				06E519862457D2C1004E4B7A /* UIView+Extensions.swift in Sources */,
 				066763622457AB7200AC5039 /* BaseTabBC.swift in Sources */,
+				06E519B1245814B2004E4B7A /* EntryConfirmVC.swift in Sources */,
 				066763672457AF2400AC5039 /* MyPageVC.swift in Sources */,
 				06E5199E2457DABE004E4B7A /* WithDrawal.swift in Sources */,
+				06E519BB245814EB004E4B7A /* CareerEditVC.swift in Sources */,
 				06E519802457CF63004E4B7A /* BaseTableViewCell.swift in Sources */,
+				06E519A72458138E004E4B7A /* SignupVC.swift in Sources */,
 				06E519912457D742004E4B7A /* ChemistryResult.swift in Sources */,
 				06E5199A2457DA18004E4B7A /* AccountChangeVC.swift in Sources */,
+				06E519CC24581634004E4B7A /* ProfilePreviewVC.swift in Sources */,
 				066763722457B08300AC5039 /* EntryVC.swift in Sources */,
 				06E519A42457DC7B004E4B7A /* InitialInputCompleteVC.swift in Sources */,
 				0667636C2457B02200AC5039 /* KeepListVC.swift in Sources */,
 				06E5198A2457D6C1004E4B7A /* JobOfferDetail.swift in Sources */,
+				06E519C22458156A004E4B7A /* AccessDenyVC.swift in Sources */,
 				067F28EA2456D135000AAD69 /* UIFont+Extensions.swift in Sources */,
 				067F28E82456D112000AAD69 /* UIColor+Extensions.swift in Sources */,
 				0667636F2457B04500AC5039 /* HomeVC.swift in Sources */,
+				06E519C52458159F004E4B7A /* SnoothCareerVC.swift in Sources */,
 				06E519A02457DAD7004E4B7A /* WithDrawalCompleteVC.swift in Sources */,
 				06E5199C2457DA2D004E4B7A /* AccountChangeCompleteVC.swift in Sources */,
+				06E519C7245815B0004E4B7A /* CareerPreviewVC.swift in Sources */,
 				06E519982457DA0D004E4B7A /* ApproachSettingVC.swift in Sources */,
 				06E519932457D750004E4B7A /* OwnPRVC.swift in Sources */,
 				067F28DF2456D013000AAD69 /* TmpNaviTopVC.swift in Sources */,
+				06E519D02458164B004E4B7A /* ScoutPreview.swift in Sources */,
+				06E519C024581561004E4B7A /* ScountDetailVC.swift in Sources */,
+				06E519AD245813DC004E4B7A /* LoginVC.swift in Sources */,
 				066BD9D72456ACB4009E610B /* AppDelegate.swift in Sources */,
+				06E519D6245816A5004E4B7A /* WebTemplateVC.swift in Sources */,
+				06E519A92458139B004E4B7A /* SignupConfirmVC.swift in Sources */,
+				06E519B5245814C7004E4B7A /* EntryCompleteVC.swift in Sources */,
 				06E519A22457DC44004E4B7A /* InitialInputRegistVC.swift in Sources */,
+				06E519AF245813E9004E4B7A /* LoginConfirmVC.swift in Sources */,
+				06E519B7245814D4004E4B7A /* ProfileEditVC.swift in Sources */,
+				06E519AB245813CA004E4B7A /* InitialInputListVC.swift in Sources */,
 				066BD9EC2456B3A2009E610B /* R.generated.swift in Sources */,
 				06E5197A2457BA36004E4B7A /* SplashVC.swift in Sources */,
+				06E519BE24581558004E4B7A /* ScountListVC.swift in Sources */,
+				06E519C9245815C8004E4B7A /* CareerEditVC.swift in Sources */,
 				067F28D02456CCB8000AAD69 /* BaseVC.swift in Sources */,
+				06E519B3245814BD004E4B7A /* EntryLoginVC.swift in Sources */,
+				06E519B9245814DF004E4B7A /* ResumeEditVC.swift in Sources */,
+				06E519D324581684004E4B7A /* ContentsEditVC.swift in Sources */,
 				067F28E52456D05F000AAD69 /* TmpWebVC.swift in Sources */,
 				06E519832457CF90004E4B7A /* JobOfferBigCard.swift in Sources */,
 				06E5198D2457D6FF004E4B7A /* ChemistryStart.swift in Sources */,
+				06E519CE2458163F004E4B7A /* ResumePreviewVC.swift in Sources */,
 				067F28E12456D038000AAD69 /* BasePresentVC.swift in Sources */,
 				067F28E32456D053000AAD69 /* TmpSub1VC.swift in Sources */,
 				06E519962457D8D1004E4B7A /* SettingVC.swift in Sources */,
