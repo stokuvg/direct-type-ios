@@ -89,12 +89,50 @@ struct R: Rswift.Validatable {
   }
 
   #if os(iOS) || os(tvOS)
-  /// This `R.storyboard` struct is generated, and contains static references to 2 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 7 storyboards.
   struct storyboard {
+    /// Storyboard `BaseTabBC`.
+    static let baseTabBC = _R.storyboard.baseTabBC()
+    /// Storyboard `EntryVC`.
+    static let entryVC = _R.storyboard.entryVC()
+    /// Storyboard `HomeVC`.
+    static let homeVC = _R.storyboard.homeVC()
+    /// Storyboard `KeepListVC`.
+    static let keepListVC = _R.storyboard.keepListVC()
     /// Storyboard `LaunchScreen`.
     static let launchScreen = _R.storyboard.launchScreen()
-    /// Storyboard `Main`.
-    static let main = _R.storyboard.main()
+    /// Storyboard `MyPageVC`.
+    static let myPageVC = _R.storyboard.myPageVC()
+    /// Storyboard `SplashVC`.
+    static let splashVC = _R.storyboard.splashVC()
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "BaseTabBC", bundle: ...)`
+    static func baseTabBC(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.baseTabBC)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "EntryVC", bundle: ...)`
+    static func entryVC(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.entryVC)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "HomeVC", bundle: ...)`
+    static func homeVC(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.homeVC)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "KeepListVC", bundle: ...)`
+    static func keepListVC(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.keepListVC)
+    }
+    #endif
 
     #if os(iOS) || os(tvOS)
     /// `UIStoryboard(name: "LaunchScreen", bundle: ...)`
@@ -104,9 +142,16 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIStoryboard(name: "Main", bundle: ...)`
-    static func main(_: Void = ()) -> UIKit.UIStoryboard {
-      return UIKit.UIStoryboard(resource: R.storyboard.main)
+    /// `UIStoryboard(name: "MyPageVC", bundle: ...)`
+    static func myPageVC(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.myPageVC)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "SplashVC", bundle: ...)`
+    static func splashVC(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.splashVC)
     }
     #endif
 
@@ -791,12 +836,121 @@ struct _R: Rswift.Validatable {
   struct storyboard: Rswift.Validatable {
     static func validate() throws {
       #if os(iOS) || os(tvOS)
+      try baseTabBC.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
+      try entryVC.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
+      try homeVC.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
+      try keepListVC.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
       try launchScreen.validate()
       #endif
       #if os(iOS) || os(tvOS)
-      try main.validate()
+      try myPageVC.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
+      try splashVC.validate()
       #endif
     }
+
+    #if os(iOS) || os(tvOS)
+    struct baseTabBC: Rswift.StoryboardResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "BaseTabBC"
+      let sbid_BaseTabBC = StoryboardViewControllerResource<BaseTabBC>(identifier: "Sbid_BaseTabBC")
+
+      func sbid_BaseTabBC(_: Void = ()) -> BaseTabBC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_BaseTabBC)
+      }
+
+      static func validate() throws {
+        if UIKit.UIImage(named: "keepDefault_GN", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'keepDefault_GN' is used in storyboard 'BaseTabBC', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "keepSelected_GN", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'keepSelected_GN' is used in storyboard 'BaseTabBC', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "managementDefault_GN", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'managementDefault_GN' is used in storyboard 'BaseTabBC', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "management_GN", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'management_GN' is used in storyboard 'BaseTabBC', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "mypageDefault_GN", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'mypageDefault_GN' is used in storyboard 'BaseTabBC', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "mypage_GN", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'mypage_GN' is used in storyboard 'BaseTabBC', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "recommendedDefault_GN", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'recommendedDefault_GN' is used in storyboard 'BaseTabBC', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "recommendedSelected_GN", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'recommendedSelected_GN' is used in storyboard 'BaseTabBC', but couldn't be loaded.") }
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+        if _R.storyboard.baseTabBC().sbid_BaseTabBC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_BaseTabBC' could not be loaded from storyboard 'BaseTabBC' as 'BaseTabBC'.") }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    struct entryVC: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = EntryVC
+
+      let bundle = R.hostingBundle
+      let name = "EntryVC"
+      let sbid_EntryVC = StoryboardViewControllerResource<EntryVC>(identifier: "Sbid_EntryVC")
+
+      func sbid_EntryVC(_: Void = ()) -> EntryVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_EntryVC)
+      }
+
+      static func validate() throws {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+        if _R.storyboard.entryVC().sbid_EntryVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_EntryVC' could not be loaded from storyboard 'EntryVC' as 'EntryVC'.") }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    struct homeVC: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = HomeVC
+
+      let bundle = R.hostingBundle
+      let name = "HomeVC"
+      let sbid_HomeVC = StoryboardViewControllerResource<HomeVC>(identifier: "Sbid_HomeVC")
+
+      func sbid_HomeVC(_: Void = ()) -> HomeVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_HomeVC)
+      }
+
+      static func validate() throws {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+        if _R.storyboard.homeVC().sbid_HomeVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_HomeVC' could not be loaded from storyboard 'HomeVC' as 'HomeVC'.") }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    struct keepListVC: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = KeepListVC
+
+      let bundle = R.hostingBundle
+      let name = "KeepListVC"
+      let sbid_KeepListVC = StoryboardViewControllerResource<KeepListVC>(identifier: "Sbid_KeepListVC")
+
+      func sbid_KeepListVC(_: Void = ()) -> KeepListVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_KeepListVC)
+      }
+
+      static func validate() throws {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+        if _R.storyboard.keepListVC().sbid_KeepListVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_KeepListVC' could not be loaded from storyboard 'KeepListVC' as 'KeepListVC'.") }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
 
     #if os(iOS) || os(tvOS)
     struct launchScreen: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
@@ -815,11 +969,33 @@ struct _R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
-    struct main: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
-      typealias InitialController = ViewController
+    struct myPageVC: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = MyPageVC
 
       let bundle = R.hostingBundle
-      let name = "Main"
+      let name = "MyPageVC"
+      let sbid_MyPageVC = StoryboardViewControllerResource<MyPageVC>(identifier: "Sbid_MyPageVC")
+
+      func sbid_MyPageVC(_: Void = ()) -> MyPageVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_MyPageVC)
+      }
+
+      static func validate() throws {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+        if _R.storyboard.myPageVC().sbid_MyPageVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_MyPageVC' could not be loaded from storyboard 'MyPageVC' as 'MyPageVC'.") }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    struct splashVC: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = SplashVC
+
+      let bundle = R.hostingBundle
+      let name = "SplashVC"
 
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {

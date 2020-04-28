@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Base TabBC-->
+        <scene sceneID="mSw-cP-y4t">
+            <objects>
+                <tabBarController storyboardIdentifier="Sbid_BaseTabBC" id="p5z-Iz-eGF" customClass="BaseTabBC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bGt-Kf-ukq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="IKQ-cZ-yEe" kind="relationship" relationship="viewControllers" id="BDb-0H-Ixc"/>
+                        <segue destination="Ppu-CM-S3P" kind="relationship" relationship="viewControllers" id="FgL-HT-Wo2"/>
+                        <segue destination="hfP-cf-Djs" kind="relationship" relationship="viewControllers" id="sQE-cX-hbl"/>
+                        <segue destination="KSE-jg-psw" kind="relationship" relationship="viewControllers" id="2Q8-eP-gsn"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0L0-V9-poY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2550" y="-1187"/>
+        </scene>
+        <!--MyPageVC-->
+        <scene sceneID="7Iv-95-Xd8">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="Sbid_MyPageVC" storyboardName="MyPageVC" id="qw3-dj-gMe" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="マイページ" image="mypageDefault_GN" id="fPj-qJ-p0H"/>
+                    <navigationItem key="navigationItem" id="DTy-Yu-CXK"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hvA-IT-9nM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1148" y="55"/>
+        </scene>
+        <!--EntryVC-->
+        <scene sceneID="aHb-YT-zyE">
+            <objects>
+                <viewControllerPlaceholder storyboardName="EntryVC" id="wdQ-Zu-eai" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="応募管理" image="managementDefault_GN" id="0uF-iV-C09"/>
+                    <navigationItem key="navigationItem" id="xBw-Se-zk4"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x7Z-fB-Gig" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2049" y="55"/>
+        </scene>
+        <!--KeepListVC-->
+        <scene sceneID="ten-bC-0Kz">
+            <objects>
+                <viewControllerPlaceholder storyboardName="KeepListVC" id="9bX-5L-8Sj" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="キープリスト" image="keepDefault_GN" id="psB-gR-mh7"/>
+                    <navigationItem key="navigationItem" id="NK2-cw-2G2"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5mU-cd-LgZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3026" y="55"/>
+        </scene>
+        <!--求人情報-->
+        <scene sceneID="acb-Jb-Zj6">
+            <objects>
+                <navigationController id="IKQ-cZ-yEe" customClass="BaseNaviController" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="求人情報" image="recommendedDefault_GN" selectedImage="recommendedSelected_GN" id="HJn-Gm-AH2"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="C5Q-xc-ikp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="uqA-tZ-ofb" kind="relationship" relationship="rootViewController" id="Agg-1k-MWo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mh5-RM-KJ0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3904" y="-465"/>
+        </scene>
+        <!--キープリスト-->
+        <scene sceneID="BUC-Zl-2uS">
+            <objects>
+                <navigationController id="Ppu-CM-S3P" customClass="BaseNaviController" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="キープリスト" image="keepDefault_GN" selectedImage="keepSelected_GN" id="DuN-1A-Cj6"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Zhq-vc-fNM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="9bX-5L-8Sj" kind="relationship" relationship="rootViewController" id="ymy-Zf-1VE"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O0e-vc-dXN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3026" y="-466"/>
+        </scene>
+        <!--応募管理-->
+        <scene sceneID="gGq-4d-w7h">
+            <objects>
+                <navigationController id="hfP-cf-Djs" customClass="BaseNaviController" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="応募管理" image="managementDefault_GN" selectedImage="management_GN" id="Xbn-zq-IRi"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zAW-dc-e40">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="wdQ-Zu-eai" kind="relationship" relationship="rootViewController" id="WdT-M3-aov"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tR7-T0-jwh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2049" y="-466"/>
+        </scene>
+        <!--マイページ-->
+        <scene sceneID="dtU-IG-2NH">
+            <objects>
+                <navigationController id="KSE-jg-psw" customClass="BaseNaviController" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="マイページ" image="mypageDefault_GN" selectedImage="mypage_GN" id="qD5-Io-LEZ"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8GL-e3-aO8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="qw3-dj-gMe" kind="relationship" relationship="rootViewController" id="Uhn-g1-zrh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d4g-xA-PDf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1149" y="-466"/>
+        </scene>
+        <!--HomeVC-->
+        <scene sceneID="oXi-N6-xhk">
+            <objects>
+                <viewControllerPlaceholder storyboardName="HomeVC" id="uqA-tZ-ofb" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="求人情報" image="recommendedDefault_GN" id="XLc-xL-a06"/>
+                    <navigationItem key="navigationItem" id="ONo-zz-leN"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XqM-Ov-fPo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3906" y="55"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="keepDefault_GN" width="24" height="25"/>
+        <image name="keepSelected_GN" width="24" height="24"/>
+        <image name="managementDefault_GN" width="20" height="21"/>
+        <image name="management_GN" width="24" height="24"/>
+        <image name="mypageDefault_GN" width="20" height="20"/>
+        <image name="mypage_GN" width="24" height="24"/>
+        <image name="recommendedDefault_GN" width="20" height="20"/>
+        <image name="recommendedSelected_GN" width="20" height="20"/>
+    </resources>
+</document>
