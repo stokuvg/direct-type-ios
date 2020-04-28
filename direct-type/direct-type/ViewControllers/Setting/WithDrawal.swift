@@ -1,5 +1,5 @@
 //
-//  KeepListVC.swift
+//  WithDrawal.swift
 //  direct-type
 //
 //  Created by ms-mb015 on 2020/04/28.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KeepListVC: TmpNaviTopVC {
+class WithDrawal: TmpBasicVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
