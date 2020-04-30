@@ -43,7 +43,7 @@ extension UIColor {
             case .color_parts_gray:
                 colorName = "color-parts-gray"
             case .color_line:
-                colorName = "color-liney"
+                colorName = "color-line"
             case .color_button:
                 colorName = "color-button"
             case .color_alart:

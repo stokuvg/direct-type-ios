@@ -45,6 +45,10 @@ class TmpNaviTopVC: BaseVC {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
+    
+    func title(name:String) {
+        self.navigationController?.navigationBar.topItem?.title = name
+    }
 
 }
 

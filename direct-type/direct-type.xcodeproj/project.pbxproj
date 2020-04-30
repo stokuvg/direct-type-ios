@@ -31,6 +31,8 @@
 		067F28E82456D112000AAD69 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067F28E72456D112000AAD69 /* UIColor+Extensions.swift */; };
 		067F28EA2456D135000AAD69 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067F28E92456D135000AAD69 /* UIFont+Extensions.swift */; };
 		06D700332456B5FC00E55FC8 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06D700322456B5FC00E55FC8 /* Color.xcassets */; };
+		06DCAEA9245A70A8008FE9FA /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DCAEA8245A70A8008FE9FA /* UITableView+Extensions.swift */; };
+		06DCAEAB245A7616008FE9FA /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DCAEAA245A7616008FE9FA /* UILabel+Extensions.swift */; };
 		06E5197A2457BA36004E4B7A /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519792457BA36004E4B7A /* SplashVC.swift */; };
 		06E5197D2457BFBE004E4B7A /* BaseNaviController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5197C2457BFBE004E4B7A /* BaseNaviController.swift */; };
 		06E519802457CF63004E4B7A /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5197F2457CF63004E4B7A /* BaseTableViewCell.swift */; };
@@ -102,6 +104,8 @@
 		067F28E72456D112000AAD69 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		067F28E92456D135000AAD69 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		06D700322456B5FC00E55FC8 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
+		06DCAEA8245A70A8008FE9FA /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
+		06DCAEAA245A7616008FE9FA /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
 		06E519792457BA36004E4B7A /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		06E5197C2457BFBE004E4B7A /* BaseNaviController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNaviController.swift; sourceTree = "<group>"; };
 		06E5197F2457CF63004E4B7A /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
@@ -271,6 +275,8 @@
 				067F28E72456D112000AAD69 /* UIColor+Extensions.swift */,
 				067F28E92456D135000AAD69 /* UIFont+Extensions.swift */,
 				06E519852457D2C1004E4B7A /* UIView+Extensions.swift */,
+				06DCAEA8245A70A8008FE9FA /* UITableView+Extensions.swift */,
+				06DCAEAA245A7616008FE9FA /* UILabel+Extensions.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -597,6 +603,7 @@
 				06E5199C2457DA2D004E4B7A /* AccountChangeCompleteVC.swift in Sources */,
 				06E519C7245815B0004E4B7A /* CareerPreviewVC.swift in Sources */,
 				06E519982457DA0D004E4B7A /* ApproachSettingVC.swift in Sources */,
+				06DCAEAB245A7616008FE9FA /* UILabel+Extensions.swift in Sources */,
 				06E519932457D750004E4B7A /* OwnPRVC.swift in Sources */,
 				067F28DF2456D013000AAD69 /* TmpNaviTopVC.swift in Sources */,
 				06E519D02458164B004E4B7A /* ScoutPreview.swift in Sources */,
@@ -613,6 +620,7 @@
 				066BD9EC2456B3A2009E610B /* R.generated.swift in Sources */,
 				06E5197A2457BA36004E4B7A /* SplashVC.swift in Sources */,
 				06E519BE24581558004E4B7A /* ScountListVC.swift in Sources */,
+				06DCAEA9245A70A8008FE9FA /* UITableView+Extensions.swift in Sources */,
 				06E519C9245815C8004E4B7A /* CareerVC.swift in Sources */,
 				067F28D02456CCB8000AAD69 /* BaseVC.swift in Sources */,
 				06E519B3245814BD004E4B7A /* EntryLoginVC.swift in Sources */,
