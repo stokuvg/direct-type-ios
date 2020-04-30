@@ -1,5 +1,5 @@
 //
-//  CareerEditVC.swift
+//  CareerVC.swift
 //  direct-type
 //
 //  Created by ms-mb015 on 2020/04/28.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CareerEditVC: TmpBasicVC {
+class CareerVC: TmpBasicVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()

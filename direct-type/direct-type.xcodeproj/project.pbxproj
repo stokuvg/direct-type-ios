@@ -66,7 +66,7 @@
 		06E519C22458156A004E4B7A /* AccessDenyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519C12458156A004E4B7A /* AccessDenyVC.swift */; };
 		06E519C52458159F004E4B7A /* SnoothCareerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519C42458159F004E4B7A /* SnoothCareerVC.swift */; };
 		06E519C7245815B0004E4B7A /* CareerPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519C6245815B0004E4B7A /* CareerPreviewVC.swift */; };
-		06E519C9245815C8004E4B7A /* CareerEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519C8245815C8004E4B7A /* CareerEditVC.swift */; };
+		06E519C9245815C8004E4B7A /* CareerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519C8245815C8004E4B7A /* CareerVC.swift */; };
 		06E519CC24581634004E4B7A /* ProfilePreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519CB24581634004E4B7A /* ProfilePreviewVC.swift */; };
 		06E519CE2458163F004E4B7A /* ResumePreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519CD2458163F004E4B7A /* ResumePreviewVC.swift */; };
 		06E519D02458164B004E4B7A /* ScoutPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519CF2458164B004E4B7A /* ScoutPreview.swift */; };
@@ -137,7 +137,7 @@
 		06E519C12458156A004E4B7A /* AccessDenyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessDenyVC.swift; sourceTree = "<group>"; };
 		06E519C42458159F004E4B7A /* SnoothCareerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnoothCareerVC.swift; sourceTree = "<group>"; };
 		06E519C6245815B0004E4B7A /* CareerPreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerPreviewVC.swift; sourceTree = "<group>"; };
-		06E519C8245815C8004E4B7A /* CareerEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerEditVC.swift; sourceTree = "<group>"; };
+		06E519C8245815C8004E4B7A /* CareerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerVC.swift; sourceTree = "<group>"; };
 		06E519CB24581634004E4B7A /* ProfilePreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePreviewVC.swift; sourceTree = "<group>"; };
 		06E519CD2458163F004E4B7A /* ResumePreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumePreviewVC.swift; sourceTree = "<group>"; };
 		06E519CF2458164B004E4B7A /* ScoutPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutPreview.swift; sourceTree = "<group>"; };
@@ -377,7 +377,7 @@
 			children = (
 				06E519C42458159F004E4B7A /* SnoothCareerVC.swift */,
 				06E519C6245815B0004E4B7A /* CareerPreviewVC.swift */,
-				06E519C8245815C8004E4B7A /* CareerEditVC.swift */,
+				06E519C8245815C8004E4B7A /* CareerVC.swift */,
 			);
 			path = Career;
 			sourceTree = "<group>";
@@ -613,7 +613,7 @@
 				066BD9EC2456B3A2009E610B /* R.generated.swift in Sources */,
 				06E5197A2457BA36004E4B7A /* SplashVC.swift in Sources */,
 				06E519BE24581558004E4B7A /* ScountListVC.swift in Sources */,
-				06E519C9245815C8004E4B7A /* CareerEditVC.swift in Sources */,
+				06E519C9245815C8004E4B7A /* CareerVC.swift in Sources */,
 				067F28D02456CCB8000AAD69 /* BaseVC.swift in Sources */,
 				06E519B3245814BD004E4B7A /* EntryLoginVC.swift in Sources */,
 				06E519B9245814DF004E4B7A /* ResumeEditVC.swift in Sources */,
