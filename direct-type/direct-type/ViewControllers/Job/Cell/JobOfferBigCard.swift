@@ -12,6 +12,7 @@ import AlamofireImage
 class JobOfferBigCard: BaseTableViewCell {
     
     @IBOutlet weak var spaceView:UIView!
+    @IBOutlet weak var stackView:UIStackView!
     @IBOutlet weak var thumnailImageView:UIImageView!
     @IBOutlet weak var limitedMarkView:UIView!
     @IBOutlet weak var limitedLabel:UILabel!
@@ -63,7 +64,33 @@ class JobOfferBigCard: BaseTableViewCell {
     
     func setup(data:[String: Any]) {
         if data.count > 0 {
+            let job:String = (data["job"] as! String)
+            jobLabel.text(text: job, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
             
+            let price:String = (data["price"] as! String)
+            let priceText = (price + "万円")
+            saralyLabel.text(text: priceText, fontType: .C_font_M , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+            
+            let special:String = (data["special"] as! String)
+            if special.count > 0 {
+                saralySpecialLabel.text(text: special, fontType: .C_font_M , textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
+                saralySpecialMarkLabel.text(text: "万円", fontType: .C_font_L , textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
+                saralySpecialLabel.isHidden = false
+                saralySpecialMarkLabel.isHidden = false
+            } else {
+                saralySpecialLabel.text(text: special, fontType: .C_font_M , textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
+                saralySpecialLabel.isHidden = true
+                saralySpecialMarkLabel.isHidden = true
+            }
+            
+            let area:String = (data["area"] as! String)
+            areaLabel.text(text: area, fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+            
+            let company:String = (data["company"] as! String)
+            companyNameLabel.text(text: company, fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+            
+            let main:String = (data["main"] as! String)
+            catchLabel.text(text: main, fontType: .C_font_SS , textColor: UIColor.init(colorType: .color_parts_gray)!, alignment: .left)
         }
     }
     

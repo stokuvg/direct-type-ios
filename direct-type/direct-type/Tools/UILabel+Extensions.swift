@@ -44,7 +44,6 @@ extension UILabel {
     }
     
     func text(text:String,fontType:FontType,textColor:UIColor, alignment:NSTextAlignment) {
-        NSLog("UILabel text start")
         var attributes:[NSAttributedString.Key:Any] = [:]
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = alignment

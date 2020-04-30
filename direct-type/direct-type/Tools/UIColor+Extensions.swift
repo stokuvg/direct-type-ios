@@ -41,7 +41,7 @@ extension UIColor {
             case .color_white:
                 colorName = "color-white"
             case .color_parts_gray:
-                colorName = "color-parts-gray"
+                colorName = "color-parts_gray"
             case .color_line:
                 colorName = "color-line"
             case .color_button:

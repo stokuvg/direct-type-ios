@@ -41,23 +41,26 @@ extension HomeVC: UITableViewDelegate {
 extension HomeVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.loadCell(cellName: "JobOfferBigCard", indexPath: indexPath) as! JobOfferBigCard
         let row = indexPath.row
-        switch row {
-            case 0:
-                let cell = tableView.loadCell(cellName: "JobOfferBigCard") as! JobOfferBigCard
-                
-                return cell
-            case 1:
-                let cell = tableView.loadCell(cellName: "JobOfferBigCard") as! JobOfferBigCard
-                
-                return cell
-            default:
-                return UITableViewCell()
-        }
+        let data:[String:Any] = [
+            "row":row,
+            "end":true,
+            "job":"PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
+            "price":"500~700",
+            "special":"850",
+            "area":"東京都23区内",
+            "company":"株式会社キャリアデザインITパートナーズ「type」",
+            "main":"メディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！",
+        ]
+        
+        cell.setup(data: data)
+        
+        return cell
     }
     
     
