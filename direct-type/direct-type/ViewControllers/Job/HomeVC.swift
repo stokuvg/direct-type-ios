@@ -10,6 +10,9 @@ import UIKit
 
 class HomeVC: TmpNaviTopVC {
     @IBOutlet weak var homeTableView:UITableView!
+    
+    var dispTableData:[[String: Any]] = []
+    var masterTableData:[[String:Any]] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +24,7 @@ class HomeVC: TmpNaviTopVC {
         
         homeTableView.registerNib(nibName: "JobOfferBigCardCell", idName: "JobOfferBigCardCell")
         homeTableView.registerNib(nibName: "KeepCardCell", idName: "KeepCardCell")
+        homeTableView.registerNib(nibName: "JobOfferCardMoreCell", idName: "JobOfferCardMoreCell")
     }
 
 }

@@ -25,6 +25,8 @@
 		066EF6C5245BB9C400E15AD2 /* KeepCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066EF6C3245BB9C400E15AD2 /* KeepCardCell.swift */; };
 		066EF6C6245BB9C400E15AD2 /* KeepCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 066EF6C4245BB9C400E15AD2 /* KeepCardCell.xib */; };
 		066EF6C8245BBA1100E15AD2 /* BaseJobCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066EF6C7245BBA1100E15AD2 /* BaseJobCardCell.swift */; };
+		066EF6CB245C119000E15AD2 /* JobOfferCardMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066EF6C9245C119000E15AD2 /* JobOfferCardMoreCell.swift */; };
+		066EF6CC245C119000E15AD2 /* JobOfferCardMoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 066EF6CA245C119000E15AD2 /* JobOfferCardMoreCell.xib */; };
 		067F28D02456CCB8000AAD69 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067F28CF2456CCB8000AAD69 /* BaseVC.swift */; };
 		067F28D22456CE39000AAD69 /* TmpBasicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067F28D12456CE39000AAD69 /* TmpBasicVC.swift */; };
 		067F28DF2456D013000AAD69 /* TmpNaviTopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067F28DE2456D013000AAD69 /* TmpNaviTopVC.swift */; };
@@ -101,6 +103,8 @@
 		066EF6C3245BB9C400E15AD2 /* KeepCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeepCardCell.swift; sourceTree = "<group>"; };
 		066EF6C4245BB9C400E15AD2 /* KeepCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeepCardCell.xib; sourceTree = "<group>"; };
 		066EF6C7245BBA1100E15AD2 /* BaseJobCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseJobCardCell.swift; sourceTree = "<group>"; };
+		066EF6C9245C119000E15AD2 /* JobOfferCardMoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobOfferCardMoreCell.swift; sourceTree = "<group>"; };
+		066EF6CA245C119000E15AD2 /* JobOfferCardMoreCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobOfferCardMoreCell.xib; sourceTree = "<group>"; };
 		067F28CF2456CCB8000AAD69 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		067F28D12456CE39000AAD69 /* TmpBasicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpBasicVC.swift; sourceTree = "<group>"; };
 		067F28DE2456D013000AAD69 /* TmpNaviTopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpNaviTopVC.swift; sourceTree = "<group>"; };
@@ -330,6 +334,8 @@
 			children = (
 				06E519812457CF90004E4B7A /* JobOfferBigCardCell.swift */,
 				06E519822457CF90004E4B7A /* JobOfferBigCardCell.xib */,
+				066EF6C9245C119000E15AD2 /* JobOfferCardMoreCell.swift */,
+				066EF6CA245C119000E15AD2 /* JobOfferCardMoreCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -507,6 +513,7 @@
 				066BD9E32456ACB5009E610B /* LaunchScreen.storyboard in Resources */,
 				066EF6C6245BB9C400E15AD2 /* KeepCardCell.xib in Resources */,
 				06E519842457CF90004E4B7A /* JobOfferBigCardCell.xib in Resources */,
+				066EF6CC245C119000E15AD2 /* JobOfferCardMoreCell.xib in Resources */,
 				06D700332456B5FC00E55FC8 /* Color.xcassets in Resources */,
 				066763782457B0A700AC5039 /* KeepListVC.storyboard in Resources */,
 				066763762457B09F00AC5039 /* HomeVC.storyboard in Resources */,
@@ -629,6 +636,7 @@
 				06E519B7245814D4004E4B7A /* ProfileEditVC.swift in Sources */,
 				06E519AB245813CA004E4B7A /* InitialInputListVC.swift in Sources */,
 				066BD9EC2456B3A2009E610B /* R.generated.swift in Sources */,
+				066EF6CB245C119000E15AD2 /* JobOfferCardMoreCell.swift in Sources */,
 				066EF6C5245BB9C400E15AD2 /* KeepCardCell.swift in Sources */,
 				06E5197A2457BA36004E4B7A /* SplashVC.swift in Sources */,
 				06E519BE24581558004E4B7A /* ScountListVC.swift in Sources */,

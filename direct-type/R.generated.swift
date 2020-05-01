@@ -812,10 +812,12 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 2 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 3 nibs.
   struct nib {
     /// Nib `JobOfferBigCardCell`.
     static let jobOfferBigCardCell = _R.nib._JobOfferBigCardCell()
+    /// Nib `JobOfferCardMoreCell`.
+    static let jobOfferCardMoreCell = _R.nib._JobOfferCardMoreCell()
     /// Nib `KeepCardCell`.
     static let keepCardCell = _R.nib._KeepCardCell()
 
@@ -824,6 +826,14 @@ struct R: Rswift.Validatable {
     @available(*, deprecated, message: "Use UINib(resource: R.nib.jobOfferBigCardCell) instead")
     static func jobOfferBigCardCell(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.jobOfferBigCardCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "JobOfferCardMoreCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobOfferCardMoreCell) instead")
+    static func jobOfferCardMoreCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.jobOfferCardMoreCell)
     }
     #endif
 
@@ -837,6 +847,10 @@ struct R: Rswift.Validatable {
 
     static func jobOfferBigCardCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobOfferBigCardCell? {
       return R.nib.jobOfferBigCardCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobOfferBigCardCell
+    }
+
+    static func jobOfferCardMoreCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobOfferCardMoreCell? {
+      return R.nib.jobOfferCardMoreCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobOfferCardMoreCell
     }
 
     static func keepCardCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> KeepCardCell? {
@@ -898,6 +912,17 @@ struct _R: Rswift.Validatable {
           if UIKit.UIColor(named: "color-sub", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-sub' is used in storyboard 'JobOfferBigCardCell', but couldn't be loaded.") }
           if UIKit.UIColor(named: "color-white", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-white' is used in storyboard 'JobOfferBigCardCell', but couldn't be loaded.") }
         }
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _JobOfferCardMoreCell: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "JobOfferCardMoreCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobOfferCardMoreCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobOfferCardMoreCell
       }
 
       fileprivate init() {}
