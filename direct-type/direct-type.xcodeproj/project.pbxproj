@@ -239,6 +239,7 @@
 		066BD9D52456ACB4009E610B /* direct-type */ = {
 			isa = PBXGroup;
 			children = (
+				26B6E8B4245C1B4B00BE5B90 /* Generated */,
 				067F28D62456CEBF000AAD69 /* ViewControllers */,
 				067F28D32456CE61000AAD69 /* Model */,
 				06D700342456CB7300E55FC8 /* Common */,
@@ -430,6 +431,21 @@
 				06E519D5245816A5004E4B7A /* WebTemplateVC.swift */,
 			);
 			path = WebView;
+			sourceTree = "<group>";
+		};
+		26B6E8B4245C1B4B00BE5B90 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				26B6E8B5245C1B7000BE5B90 /* BySwagger */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		26B6E8B5245C1B7000BE5B90 /* BySwagger */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BySwagger;
 			sourceTree = "<group>";
 		};
 		47EC95279A88E89B17F99C58 /* Pods */ = {
