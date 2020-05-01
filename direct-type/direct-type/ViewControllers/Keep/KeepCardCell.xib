@@ -157,13 +157,13 @@
                                                                                         </constraints>
                                                                                     </imageView>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTX-bs-jW2">
-                                                                                        <rect key="frame" x="16" y="0.0" width="69.5" height="30"/>
+                                                                                        <rect key="frame" x="16" y="0.0" width="42" height="30"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tVr-1Q-PM7">
-                                                                                        <rect key="frame" x="85.5" y="0.0" width="35" height="30"/>
+                                                                                        <rect key="frame" x="58" y="0.0" width="35" height="30"/>
                                                                                         <subviews>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="万円" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iLq-ux-Cbi">
                                                                                                 <rect key="frame" x="0.0" y="4.5" width="35" height="20.5"/>
@@ -178,6 +178,10 @@
                                                                                             <constraint firstAttribute="bottom" secondItem="iLq-ux-Cbi" secondAttribute="bottom" constant="5" id="hXh-9a-CT0"/>
                                                                                             <constraint firstAttribute="width" constant="35" id="q4U-Vh-x0x"/>
                                                                                         </constraints>
+                                                                                    </view>
+                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iR4-eY-4NU">
+                                                                                        <rect key="frame" x="93" y="0.0" width="27.5" height="30"/>
+                                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                                     </view>
                                                                                 </subviews>
                                                                             </stackView>
