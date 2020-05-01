@@ -47,6 +47,7 @@ extension UILabel {
         var attributes:[NSAttributedString.Key:Any] = [:]
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = alignment
+        paragraphStyle.lineBreakMode = .byTruncatingTail
         
         let textFont = UIFont.init(fontType: fontType)
         

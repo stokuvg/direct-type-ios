@@ -22,6 +22,9 @@
 		066BD9E02456ACB5009E610B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 066BD9DF2456ACB5009E610B /* Assets.xcassets */; };
 		066BD9E32456ACB5009E610B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 066BD9E12456ACB5009E610B /* LaunchScreen.storyboard */; };
 		066BD9EC2456B3A2009E610B /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066BD9EB2456B3A2009E610B /* R.generated.swift */; };
+		066EF6C5245BB9C400E15AD2 /* KeepCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066EF6C3245BB9C400E15AD2 /* KeepCardCell.swift */; };
+		066EF6C6245BB9C400E15AD2 /* KeepCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 066EF6C4245BB9C400E15AD2 /* KeepCardCell.xib */; };
+		066EF6C8245BBA1100E15AD2 /* BaseJobCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066EF6C7245BBA1100E15AD2 /* BaseJobCardCell.swift */; };
 		067F28D02456CCB8000AAD69 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067F28CF2456CCB8000AAD69 /* BaseVC.swift */; };
 		067F28D22456CE39000AAD69 /* TmpBasicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067F28D12456CE39000AAD69 /* TmpBasicVC.swift */; };
 		067F28DF2456D013000AAD69 /* TmpNaviTopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067F28DE2456D013000AAD69 /* TmpNaviTopVC.swift */; };
@@ -36,8 +39,8 @@
 		06E5197A2457BA36004E4B7A /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519792457BA36004E4B7A /* SplashVC.swift */; };
 		06E5197D2457BFBE004E4B7A /* BaseNaviController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5197C2457BFBE004E4B7A /* BaseNaviController.swift */; };
 		06E519802457CF63004E4B7A /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5197F2457CF63004E4B7A /* BaseTableViewCell.swift */; };
-		06E519832457CF90004E4B7A /* JobOfferBigCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519812457CF90004E4B7A /* JobOfferBigCard.swift */; };
-		06E519842457CF90004E4B7A /* JobOfferBigCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06E519822457CF90004E4B7A /* JobOfferBigCard.xib */; };
+		06E519832457CF90004E4B7A /* JobOfferBigCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519812457CF90004E4B7A /* JobOfferBigCardCell.swift */; };
+		06E519842457CF90004E4B7A /* JobOfferBigCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06E519822457CF90004E4B7A /* JobOfferBigCardCell.xib */; };
 		06E519862457D2C1004E4B7A /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519852457D2C1004E4B7A /* UIView+Extensions.swift */; };
 		06E5198A2457D6C1004E4B7A /* JobOfferDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519892457D6C1004E4B7A /* JobOfferDetail.swift */; };
 		06E5198D2457D6FF004E4B7A /* ChemistryStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5198C2457D6FF004E4B7A /* ChemistryStart.swift */; };
@@ -95,6 +98,9 @@
 		066BD9E22456ACB5009E610B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		066BD9E42456ACB5009E610B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		066BD9EB2456B3A2009E610B /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
+		066EF6C3245BB9C400E15AD2 /* KeepCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeepCardCell.swift; sourceTree = "<group>"; };
+		066EF6C4245BB9C400E15AD2 /* KeepCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeepCardCell.xib; sourceTree = "<group>"; };
+		066EF6C7245BBA1100E15AD2 /* BaseJobCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseJobCardCell.swift; sourceTree = "<group>"; };
 		067F28CF2456CCB8000AAD69 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		067F28D12456CE39000AAD69 /* TmpBasicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpBasicVC.swift; sourceTree = "<group>"; };
 		067F28DE2456D013000AAD69 /* TmpNaviTopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpNaviTopVC.swift; sourceTree = "<group>"; };
@@ -109,8 +115,8 @@
 		06E519792457BA36004E4B7A /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		06E5197C2457BFBE004E4B7A /* BaseNaviController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNaviController.swift; sourceTree = "<group>"; };
 		06E5197F2457CF63004E4B7A /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
-		06E519812457CF90004E4B7A /* JobOfferBigCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobOfferBigCard.swift; sourceTree = "<group>"; };
-		06E519822457CF90004E4B7A /* JobOfferBigCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobOfferBigCard.xib; sourceTree = "<group>"; };
+		06E519812457CF90004E4B7A /* JobOfferBigCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobOfferBigCardCell.swift; sourceTree = "<group>"; };
+		06E519822457CF90004E4B7A /* JobOfferBigCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobOfferBigCardCell.xib; sourceTree = "<group>"; };
 		06E519852457D2C1004E4B7A /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		06E519892457D6C1004E4B7A /* JobOfferDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobOfferDetail.swift; sourceTree = "<group>"; };
 		06E5198C2457D6FF004E4B7A /* ChemistryStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryStart.swift; sourceTree = "<group>"; };
@@ -178,6 +184,8 @@
 			children = (
 				0667636B2457B02200AC5039 /* KeepListVC.swift */,
 				066763772457B0A700AC5039 /* KeepListVC.storyboard */,
+				066EF6C3245BB9C400E15AD2 /* KeepCardCell.swift */,
+				066EF6C4245BB9C400E15AD2 /* KeepCardCell.xib */,
 			);
 			path = Keep;
 			sourceTree = "<group>";
@@ -294,6 +302,7 @@
 				066763632457ABDB00AC5039 /* BaseTabBC.storyboard */,
 				06E5197C2457BFBE004E4B7A /* BaseNaviController.swift */,
 				06E5197F2457CF63004E4B7A /* BaseTableViewCell.swift */,
+				066EF6C7245BBA1100E15AD2 /* BaseJobCardCell.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -319,8 +328,8 @@
 		06E5197E2457CF31004E4B7A /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				06E519812457CF90004E4B7A /* JobOfferBigCard.swift */,
-				06E519822457CF90004E4B7A /* JobOfferBigCard.xib */,
+				06E519812457CF90004E4B7A /* JobOfferBigCardCell.swift */,
+				06E519822457CF90004E4B7A /* JobOfferBigCardCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -496,7 +505,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				066BD9E32456ACB5009E610B /* LaunchScreen.storyboard in Resources */,
-				06E519842457CF90004E4B7A /* JobOfferBigCard.xib in Resources */,
+				066EF6C6245BB9C400E15AD2 /* KeepCardCell.xib in Resources */,
+				06E519842457CF90004E4B7A /* JobOfferBigCardCell.xib in Resources */,
 				06D700332456B5FC00E55FC8 /* Color.xcassets in Resources */,
 				066763782457B0A700AC5039 /* KeepListVC.storyboard in Resources */,
 				066763762457B09F00AC5039 /* HomeVC.storyboard in Resources */,
@@ -615,9 +625,11 @@
 				06E519B5245814C7004E4B7A /* EntryCompleteVC.swift in Sources */,
 				06E519A22457DC44004E4B7A /* InitialInputRegistVC.swift in Sources */,
 				06E519AF245813E9004E4B7A /* LoginConfirmVC.swift in Sources */,
+				066EF6C8245BBA1100E15AD2 /* BaseJobCardCell.swift in Sources */,
 				06E519B7245814D4004E4B7A /* ProfileEditVC.swift in Sources */,
 				06E519AB245813CA004E4B7A /* InitialInputListVC.swift in Sources */,
 				066BD9EC2456B3A2009E610B /* R.generated.swift in Sources */,
+				066EF6C5245BB9C400E15AD2 /* KeepCardCell.swift in Sources */,
 				06E5197A2457BA36004E4B7A /* SplashVC.swift in Sources */,
 				06E519BE24581558004E4B7A /* ScountListVC.swift in Sources */,
 				06DCAEA9245A70A8008FE9FA /* UITableView+Extensions.swift in Sources */,
@@ -627,7 +639,7 @@
 				06E519B9245814DF004E4B7A /* ResumeEditVC.swift in Sources */,
 				06E519D324581684004E4B7A /* ContentsEditVC.swift in Sources */,
 				067F28E52456D05F000AAD69 /* TmpWebVC.swift in Sources */,
-				06E519832457CF90004E4B7A /* JobOfferBigCard.swift in Sources */,
+				06E519832457CF90004E4B7A /* JobOfferBigCardCell.swift in Sources */,
 				06E5198D2457D6FF004E4B7A /* ChemistryStart.swift in Sources */,
 				06E519CE2458163F004E4B7A /* ResumePreviewVC.swift in Sources */,
 				067F28E12456D038000AAD69 /* BasePresentVC.swift in Sources */,

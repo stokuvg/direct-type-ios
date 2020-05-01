@@ -1,5 +1,5 @@
 //
-//  JobOfferBigCard.swift
+//  JobOfferBigCardCell.swift
 //  direct-type
 //
 //  Created by ms-mb015 on 2020/04/28.
@@ -9,43 +9,22 @@
 import UIKit
 import AlamofireImage
 
-class JobOfferBigCard: BaseTableViewCell {
-    
-    @IBOutlet weak var spaceView:UIView!
-    @IBOutlet weak var stackView:UIStackView!
-    @IBOutlet weak var thumnailImageView:UIImageView!
-    @IBOutlet weak var limitedMarkView:UIView!
-    @IBOutlet weak var limitedLabel:UILabel!
-    @IBOutlet weak var jobLabel:UILabel!
-    @IBOutlet weak var saralyView:UIView!
-    @IBOutlet weak var saralyLabel:UILabel!
-    @IBOutlet weak var saralySpecialLabel:UILabel!
-    @IBOutlet weak var saralySpecialMarkLabel:UILabel!
-    @IBOutlet weak var saralyCationLabel:UILabel!
-    
-    @IBOutlet weak var areaView:UIView!
-    @IBOutlet weak var areaLabel:UILabel!
-    @IBOutlet weak var companyView:UIView!
-    @IBOutlet weak var companyNameLabel:UILabel!
-    @IBOutlet weak var catchLabel:UILabel!
-    @IBOutlet weak var btnView:UIView!
-    
-    @IBOutlet weak var deleteBtn:UIButton!
-    @IBOutlet weak var keepBtn:UIButton!
+class JobOfferBigCardCell: BaseJobCardCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        spaceView.layer.cornerRadius = 15
+        
+        stackView.layer.cornerRadius = 15
+        
+        // サムネイル
+        thumnailImageView.layer.cornerRadius = 15
+        thumnailImageView.layer.maskedCorners = [.layerMinXMinYCorner,.layerMaxXMinYCorner]
         
         limitedLabel.text(text: "終了間近", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         
-        // ボタン
-        let shadowColor = UIColor.init(colorType: .color_black)
-        spaceView.layer.shadowColor = shadowColor?.cgColor
-        spaceView.shadowOpacity = 0.5
-        spaceView.layer.shadowRadius = 10
-        spaceView.shadowOffset = CGSize(width: 1.0, height: 3.0)
+        btnView.layer.cornerRadius = 15
+        btnView.layer.maskedCorners = [.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
         
         let textColor:UIColor = UIColor.init(colorType: .color_line)!
         deleteBtn.titleLabel?.text(text: "見送り", fontType: .C_font_M, textColor: textColor, alignment: .center)
@@ -64,6 +43,14 @@ class JobOfferBigCard: BaseTableViewCell {
     
     func setup(data:[String: Any]) {
         if data.count > 0 {
+            let endFlag:Bool = (data["end"] as! Bool)
+            if endFlag {
+                self.limitedMarkBackView.isHidden = true
+            }
+            
+            let imageUrlString:String = (data["image"] as! String)
+            thumnailImageView.af_setImage(withURL: URL(string: imageUrlString)!)
+            
             let job:String = (data["job"] as! String)
             jobLabel.text(text: job, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
             
@@ -71,17 +58,26 @@ class JobOfferBigCard: BaseTableViewCell {
             let priceText = (price + "万円")
             saralyLabel.text(text: priceText, fontType: .C_font_M , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
             
+            //TODO:初回は非表示
+            saralySpecialLabel.isHidden = true
+            saralySpecialMarkLabel.isHidden = true
+            cautionView.isHidden = true
+            /*
             let special:String = (data["special"] as! String)
-            if special.count > 0 {
-                saralySpecialLabel.text(text: special, fontType: .C_font_M , textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
-                saralySpecialMarkLabel.text(text: "万円", fontType: .C_font_L , textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
-                saralySpecialLabel.isHidden = false
-                saralySpecialMarkLabel.isHidden = false
+            if special.count > 0 && Int(special)! > 0 {
+                saralySpecialLabel.text(text: special, fontType: .C_font_L , textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
+                saralySpecialMarkLabel.text(text: "万円", fontType: .C_font_M , textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
+                saralySpecialLabel.isHidden = true
+                saralySpecialMarkLabel.isHidden = true
+                saralyCautionLabel.text(text: "通常よりも", fontType: .C_font_S, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
             } else {
+                cautionView.isHidden = true
+                
                 saralySpecialLabel.text(text: special, fontType: .C_font_M , textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
                 saralySpecialLabel.isHidden = true
                 saralySpecialMarkLabel.isHidden = true
             }
+            */
             
             let area:String = (data["area"] as! String)
             areaLabel.text(text: area, fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
