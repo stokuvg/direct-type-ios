@@ -23,6 +23,9 @@
                             <constraint firstAttribute="height" constant="45" id="AWG-4a-iT5"/>
                         </constraints>
                         <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="moreBtnAction" destination="KGk-i7-Jjw" eventType="touchUpInside" id="2aO-w5-CQ2"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

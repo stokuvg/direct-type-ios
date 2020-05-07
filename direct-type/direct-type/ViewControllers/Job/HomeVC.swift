@@ -15,6 +15,7 @@ class HomeVC: TmpNaviTopVC {
     var masterTableData:[[String:Any]] = []
     
     var moreBtnDispFlag:Bool = false
+    var moreCnt:Int = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +68,8 @@ class HomeVC: TmpNaviTopVC {
             "company":"株式会社キャリアデザインITパートナーズ「type」",
             "main":"メディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！\nメディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！",
         ]
-        for _ in 0..<100 {
+//        for _ in 0..<100 {
+        for _ in 0..<15 {
             let randomValue = Int.random(in: 1...3)
             switch randomValue {
                 case 1:
@@ -123,6 +125,7 @@ extension HomeVC: UITableViewDataSource {
         // row の最後がもっと見るボタンかどうか
         if moreBtnDispFlag == true && (row == dispTableData.count) {
             let cell = tableView.loadCell(cellName: "JobOfferCardMoreCell", indexPath: indexPath) as! JobOfferCardMoreCell
+            cell.delegate = self
             return cell
         } else {
             let data = dispTableData[row]
@@ -183,5 +186,38 @@ extension HomeVC: UITableViewDataSource {
         */
     }
     
-    
+}
+
+extension HomeVC: JobOfferCardMoreCellDelegate {
+    func moreDataAdd() {
+        // 現在の数とマスタの数を比較
+        let checkCount = masterTableData.count - dispTableData.count
+        // パターン 同じ:0 マスタの方が多い:1 表示の方が多い:これは無いはず
+        if checkCount == 0 {
+            // 同じ数
+        } else if checkCount > 0 {
+            // マスタの方が多い
+            
+            // 追加で表示する数より、残りの表示する数の方が多い
+            if checkCount == moreDataCount {
+                for i in 0..<moreDataCount {
+                    let cnt = i+(moreCnt*10)
+                    let data = masterTableData[cnt]
+                    dispTableData.append(data)
+                }
+                self.homeTableView.reloadData()
+            } else if checkCount > moreDataCount {
+                for i in 0..<moreDataCount {
+                    let cnt = i+(moreCnt*10)
+                    let data = masterTableData[cnt]
+                    dispTableData.append(data)
+                }
+                self.homeTableView.reloadData()
+            } else {
+                
+            }
+        } else {
+            
+        }
+    }
 }

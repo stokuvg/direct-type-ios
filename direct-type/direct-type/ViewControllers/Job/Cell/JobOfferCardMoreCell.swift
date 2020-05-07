@@ -8,9 +8,18 @@
 
 import UIKit
 
+protocol JobOfferCardMoreCellDelegate {
+    func moreDataAdd()
+}
+
 class JobOfferCardMoreCell: BaseTableViewCell {
     
     @IBOutlet weak var moreBtn:UIButton!
+    @IBAction func moreBtnAction() {
+        self.delegate.moreDataAdd()
+    }
+    
+    var delegate:JobOfferCardMoreCellDelegate!
 
     override func awakeFromNib() {
         super.awakeFromNib()
