@@ -4,7 +4,7 @@ direct type のiOSアプリ
 ## プロジェクト組み込み
 
 ```
-$cd api/
+$ cd api/
 $ sh gen.sh
 $ cd ../direct-type/
 $ pod install
