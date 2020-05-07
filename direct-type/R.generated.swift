@@ -954,7 +954,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 3 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 4 nibs.
   struct nib {
     /// Nib `JobOfferBigCardCell`.
     static let jobOfferBigCardCell = _R.nib._JobOfferBigCardCell()
@@ -962,6 +962,8 @@ struct R: Rswift.Validatable {
     static let jobOfferCardMoreCell = _R.nib._JobOfferCardMoreCell()
     /// Nib `KeepCardCell`.
     static let keepCardCell = _R.nib._KeepCardCell()
+    /// Nib `NoCardView`.
+    static let noCardView = _R.nib._NoCardView()
 
     #if os(iOS) || os(tvOS)
     /// `UINib(name: "JobOfferBigCardCell", in: bundle)`
@@ -987,6 +989,14 @@ struct R: Rswift.Validatable {
     }
     #endif
 
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "NoCardView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.noCardView) instead")
+    static func noCardView(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.noCardView)
+    }
+    #endif
+
     static func jobOfferBigCardCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobOfferBigCardCell? {
       return R.nib.jobOfferBigCardCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobOfferBigCardCell
     }
@@ -997,6 +1007,10 @@ struct R: Rswift.Validatable {
 
     static func keepCardCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> KeepCardCell? {
       return R.nib.keepCardCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? KeepCardCell
+    }
+
+    static func noCardView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> NoCardView? {
+      return R.nib.noCardView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? NoCardView
     }
 
     fileprivate init() {}
@@ -1030,6 +1044,7 @@ struct _R: Rswift.Validatable {
     static func validate() throws {
       try _JobOfferBigCardCell.validate()
       try _KeepCardCell.validate()
+      try _NoCardView.validate()
     }
 
     struct _JobOfferBigCardCell: Rswift.NibResourceType, Rswift.Validatable {
@@ -1088,6 +1103,25 @@ struct _R: Rswift.Validatable {
         if #available(iOS 11.0, tvOS 11.0, *) {
           if UIKit.UIColor(named: "color-black", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-black' is used in storyboard 'KeepCardCell', but couldn't be loaded.") }
           if UIKit.UIColor(named: "color-white", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-white' is used in storyboard 'KeepCardCell', but couldn't be loaded.") }
+        }
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _NoCardView: Rswift.NibResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "NoCardView"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> NoCardView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? NoCardView
+      }
+
+      static func validate() throws {
+        if UIKit.UIImage(named: "card", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'card' is used in nib 'NoCardView', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "illust02", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'illust02' is used in nib 'NoCardView', but couldn't be loaded.") }
+        if #available(iOS 11.0, tvOS 11.0, *) {
+          if UIKit.UIColor(named: "color-white", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-white' is used in storyboard 'NoCardView', but couldn't be loaded.") }
         }
       }
 

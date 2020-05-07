@@ -16,26 +16,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mfZ-LV-y0J">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OvQ-mJ-0rK">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="tfu-Z5-xdN" id="O0N-7f-oea"/>
-                                    <outlet property="delegate" destination="tfu-Z5-xdN" id="nFe-Ca-BPg"/>
-                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="62Z-Z7-XBb" firstAttribute="bottom" secondItem="OvQ-mJ-0rK" secondAttribute="bottom" id="88I-a5-AqW"/>
+                            <constraint firstItem="mfZ-LV-y0J" firstAttribute="top" secondItem="62Z-Z7-XBb" secondAttribute="top" id="9Jm-VD-Mq8"/>
                             <constraint firstItem="OvQ-mJ-0rK" firstAttribute="leading" secondItem="62Z-Z7-XBb" secondAttribute="leading" id="9uy-Sa-6Xp"/>
+                            <constraint firstItem="62Z-Z7-XBb" firstAttribute="trailing" secondItem="mfZ-LV-y0J" secondAttribute="trailing" id="CBu-UW-cBB"/>
                             <constraint firstItem="62Z-Z7-XBb" firstAttribute="trailing" secondItem="OvQ-mJ-0rK" secondAttribute="trailing" id="Hr5-kh-omn"/>
+                            <constraint firstItem="mfZ-LV-y0J" firstAttribute="leading" secondItem="62Z-Z7-XBb" secondAttribute="leading" id="khg-Lc-sS0"/>
                             <constraint firstItem="OvQ-mJ-0rK" firstAttribute="top" secondItem="62Z-Z7-XBb" secondAttribute="top" id="tJP-Oc-5u3"/>
+                            <constraint firstItem="62Z-Z7-XBb" firstAttribute="bottom" secondItem="mfZ-LV-y0J" secondAttribute="bottom" id="xEy-4T-XjS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="62Z-Z7-XBb"/>
                     </view>
                     <connections>
                         <outlet property="homeTableView" destination="OvQ-mJ-0rK" id="OeO-hQ-d40"/>
+                        <outlet property="noCardBackView" destination="mfZ-LV-y0J" id="hmt-5Q-ZzN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qfK-7G-ASd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -11,11 +11,14 @@ import UIKit
 class HomeVC: TmpNaviTopVC {
     @IBOutlet weak var homeTableView:UITableView!
     
+    @IBOutlet weak var noCardBackView:UIView!
+    
     var dispTableData:[[String: Any]] = []
     var masterTableData:[[String:Any]] = []
     
     var moreBtnDispFlag:Bool = false
     var moreCnt:Int = 1
+    var noCardFlag:Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +30,23 @@ class HomeVC: TmpNaviTopVC {
         
         homeTableView.registerNib(nibName: "JobOfferBigCardCell", idName: "JobOfferBigCardCell")
         homeTableView.registerNib(nibName: "JobOfferCardMoreCell", idName: "JobOfferCardMoreCell")
+        homeTableView.registerNib(nibName: "JobNoOfferCardCell", idName: "JobNoOfferCardCell")
         
-        self.makeDummyData()
-        self.homeTableView.reloadData()
+//        self.makeDummyData()
+        if masterTableData.count > 0 {
+            homeTableView.isHidden = false
+            self.homeTableView.delegate = self
+            self.homeTableView.dataSource = self
+            self.homeTableView.reloadData()
+        } else {
+            let cardNoView = UINib(nibName: "NoCardView", bundle: nil)
+                .instantiate(withOwner: nil, options: nil)
+                .first as! NoCardView
+            cardNoView.delegate = self
+            noCardBackView.addSubview(cardNoView)
+            
+            homeTableView.isHidden = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -105,11 +122,20 @@ extension HomeVC: UITableViewDelegate {
         }
         return UITableView.automaticDimension
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let row = indexPath.row
+    }
 }
 
 extension HomeVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if masterTableData.count == 0 {
+            noCardFlag = true
+            return 1
+        }
+        noCardFlag = true
         if masterTableData.count > dispTableData.count {
             moreBtnDispFlag = true
             return (dispTableData.count + 1)
@@ -167,5 +193,10 @@ extension HomeVC: JobOfferCardMoreCellDelegate {
         } else {
             
         }
+    }
+}
+
+extension HomeVC: NoCardViewDelegate {
+    func registEditAction() {
     }
 }

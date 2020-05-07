@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		063350DD2463EC4B00AF90F3 /* NoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063350DC2463EC4B00AF90F3 /* NoCardView.swift */; };
+		063350DF2463EC5800AF90F3 /* NoCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 063350DE2463EC5800AF90F3 /* NoCardView.xib */; };
 		066763622457AB7200AC5039 /* BaseTabBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066763612457AB7200AC5039 /* BaseTabBC.swift */; };
 		066763642457ABDB00AC5039 /* BaseTabBC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 066763632457ABDB00AC5039 /* BaseTabBC.storyboard */; };
 		066763672457AF2400AC5039 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066763662457AF2400AC5039 /* MyPageVC.swift */; };
@@ -106,6 +108,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		063350DC2463EC4B00AF90F3 /* NoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoCardView.swift; sourceTree = "<group>"; };
+		063350DE2463EC5800AF90F3 /* NoCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoCardView.xib; sourceTree = "<group>"; };
 		066763612457AB7200AC5039 /* BaseTabBC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBC.swift; sourceTree = "<group>"; };
 		066763632457ABDB00AC5039 /* BaseTabBC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BaseTabBC.storyboard; sourceTree = "<group>"; };
 		066763662457AF2400AC5039 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
@@ -248,6 +252,8 @@
 				0667636E2457B04500AC5039 /* HomeVC.swift */,
 				066763752457B09F00AC5039 /* HomeVC.storyboard */,
 				06E519892457D6C1004E4B7A /* JobOfferDetail.swift */,
+				063350DC2463EC4B00AF90F3 /* NoCardView.swift */,
+				063350DE2463EC5800AF90F3 /* NoCardView.xib */,
 			);
 			path = Job;
 			sourceTree = "<group>";
@@ -639,6 +645,7 @@
 				26BF48DC24639D2B00E00215 /* MstL_skill.tsv in Resources */,
 				26BF48E524639D2B00E00215 /* MstL3_overtime.tsv in Resources */,
 				26BF48E324639D2B00E00215 /* MstK10_salary.tsv in Resources */,
+				063350DF2463EC5800AF90F3 /* NoCardView.xib in Resources */,
 				066763692457AF3100AC5039 /* MyPageVC.storyboard in Resources */,
 				26BF48E724639D2B00E00215 /* MstK9_employmentType.tsv in Resources */,
 				066BD9E02456ACB5009E610B /* Assets.xcassets in Resources */,
@@ -777,6 +784,7 @@
 				26BF48EE24639DEE00E00215 /* EditableObj.swift in Sources */,
 				06E519B3245814BD004E4B7A /* EntryLoginVC.swift in Sources */,
 				26BF48F024639E7100E00215 /* Constants.swift in Sources */,
+				063350DD2463EC4B00AF90F3 /* NoCardView.swift in Sources */,
 				06E519B9245814DF004E4B7A /* ResumeEditVC.swift in Sources */,
 				06E519D324581684004E4B7A /* ContentsEditVC.swift in Sources */,
 				06C347242463A595000FB4DA /* UIButton+Extensions.swift in Sources */,
