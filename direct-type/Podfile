@@ -16,7 +16,7 @@ target 'direct-type' do
 #  pod "PromiseKit", "~> 6.8"
 
   ##=== Swagger ===
-  pod 'SwaggerClient', :path => 'generated/promise'
+  pod 'SwaggerClient', :path => '../generated/promise'
   
   ##=== Progress
   pod 'SVProgressHUD'
