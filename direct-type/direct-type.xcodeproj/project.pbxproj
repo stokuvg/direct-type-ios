@@ -157,6 +157,7 @@
 		06E519CF2458164B004E4B7A /* ScoutPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutPreview.swift; sourceTree = "<group>"; };
 		06E519D224581684004E4B7A /* ContentsEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsEditVC.swift; sourceTree = "<group>"; };
 		06E519D5245816A5004E4B7A /* WebTemplateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebTemplateVC.swift; sourceTree = "<group>"; };
+		26BFA93824638E8600B3D558 /* Models */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Models; path = ../../../../generated/promise/SwaggerClient/Classes/Swaggers/Models; sourceTree = "<group>"; };
 		8A49B0215E0F4A582FB1EC5E /* Pods_direct_type.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_direct_type.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8C351EB920291E353136BB9 /* Pods-direct-type.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-direct-type.debug.xcconfig"; path = "Target Support Files/Pods-direct-type/Pods-direct-type.debug.xcconfig"; sourceTree = "<group>"; };
 		F6660969F9095E20D9CE432A /* Pods-direct-type.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-direct-type.release.xcconfig"; path = "Target Support Files/Pods-direct-type/Pods-direct-type.release.xcconfig"; sourceTree = "<group>"; };
@@ -239,6 +240,7 @@
 		066BD9D52456ACB4009E610B /* direct-type */ = {
 			isa = PBXGroup;
 			children = (
+				26B6E8B4245C1B4B00BE5B90 /* Generated */,
 				067F28D62456CEBF000AAD69 /* ViewControllers */,
 				067F28D32456CE61000AAD69 /* Model */,
 				06D700342456CB7300E55FC8 /* Common */,
@@ -430,6 +432,22 @@
 				06E519D5245816A5004E4B7A /* WebTemplateVC.swift */,
 			);
 			path = WebView;
+			sourceTree = "<group>";
+		};
+		26B6E8B4245C1B4B00BE5B90 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				26B6E8B5245C1B7000BE5B90 /* BySwagger */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		26B6E8B5245C1B7000BE5B90 /* BySwagger */ = {
+			isa = PBXGroup;
+			children = (
+				26BFA93824638E8600B3D558 /* Models */,
+			);
+			path = BySwagger;
 			sourceTree = "<group>";
 		};
 		47EC95279A88E89B17F99C58 /* Pods */ = {

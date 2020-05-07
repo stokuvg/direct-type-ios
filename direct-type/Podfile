@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '12.0'
+platform :ios, '12.0'
 
 target 'direct-type' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -10,13 +10,13 @@ target 'direct-type' do
 
   # Pods for direct-type
 
-  pod 'AWSMobileClient', '~> 2.12.1'      # Required dependency
+#  pod 'AWSMobileClient', '~> 2.12.1'      # Required dependency
 
   ##=== PromiseKit
 #  pod "PromiseKit", "~> 6.8"
 
   ##=== Swagger ===
-  pod 'SwaggerClient', :path => 'generated/promise'
+  pod 'SwaggerClient', :path => '../generated/promise'
   
   ##=== Progress
   pod 'SVProgressHUD'
