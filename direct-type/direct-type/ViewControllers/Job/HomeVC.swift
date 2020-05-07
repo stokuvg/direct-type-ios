@@ -13,6 +13,8 @@ class HomeVC: TmpNaviTopVC {
     
     var dispTableData:[[String: Any]] = []
     var masterTableData:[[String:Any]] = []
+    
+    var moreBtnDispFlag:Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,66 @@ class HomeVC: TmpNaviTopVC {
         homeTableView.registerNib(nibName: "JobOfferBigCardCell", idName: "JobOfferBigCardCell")
         homeTableView.registerNib(nibName: "KeepCardCell", idName: "KeepCardCell")
         homeTableView.registerNib(nibName: "JobOfferCardMoreCell", idName: "JobOfferCardMoreCell")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.makeDummyData()
+        self.homeTableView.reloadData()
+    }
+    
+    private func makeDummyData() {
+        let data1:[String:Any] = [
+            "end":true,
+            "image":"https://type.jp/s/img_banner/top_pc_side_number1.jpg",
+            "job":"PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
+            "price":"500~700",
+            "special":"850",
+            "area":"東京都23区内",
+            "company":"株式会社キャリアデザインITパートナーズ「type」",
+            "main":"メディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！",
+        ]
+        let data2:[String:Any] = [
+            "end":false,
+            "image":"https://type.jp/s/img_banner/top_pc_side_number1.jpg",
+            "job":"PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円\nPG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
+            "price":"500~700",
+            "special":"850",
+            "area":"東京都23区内",
+            "company":"株式会社キャリアデザインITパートナーズ「type」",
+            "main":"メディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！\nメディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！",
+        ]
+        let data3:[String:Any] = [
+            "end":false,
+            "image":"https://type.jp/s/img_banner/top_pc_side_number1.jpg",
+            "job":"PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円\nPG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
+            "price":"500~700",
+            "special":"",
+            "area":"東京都23区内",
+            "company":"株式会社キャリアデザインITパートナーズ「type」",
+            "main":"メディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！\nメディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！",
+        ]
+        for _ in 0..<100 {
+            let randomValue = Int.random(in: 1...3)
+            switch randomValue {
+                case 1:
+                    masterTableData.append(data1)
+                case 2:
+                    masterTableData.append(data2)
+                case 3:
+                    masterTableData.append(data3)
+                default:
+                    masterTableData.append(data1)
+            }
+        }
+        
+        if masterTableData.count > moreDataCount {
+            for i in 0..<moreDataCount {
+                let data = masterTableData[i]
+                dispTableData.append(data)
+            }
+        }
     }
 
 }
@@ -46,7 +108,13 @@ extension HomeVC: UITableViewDelegate {
 extension HomeVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        if masterTableData.count > dispTableData.count {
+            moreBtnDispFlag = true
+            return (dispTableData.count + 1)
+        } else {
+            moreBtnDispFlag = false
+            return dispTableData.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

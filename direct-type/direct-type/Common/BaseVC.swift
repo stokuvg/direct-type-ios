@@ -19,6 +19,8 @@ enum NaviType {
 }
 
 class BaseVC: UIViewController {
+    
+    var moreDataCount:Int = 20 // もっと見る 件数
 
     override func viewDidLoad() {
         super.viewDidLoad()
