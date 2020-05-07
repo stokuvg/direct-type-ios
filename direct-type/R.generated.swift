@@ -275,6 +275,148 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
+  /// This `R.file` struct is generated, and contains static references to 17 files.
+  struct file {
+    /// Resource file `MstK10_salary.tsv`.
+    static let mstK10_salaryTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstK10_salary", pathExtension: "tsv")
+    /// Resource file `MstK11_entryPlace.tsv`.
+    static let mstK11_entryPlaceTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstK11_entryPlace", pathExtension: "tsv")
+    /// Resource file `MstK13_schoolType.tsv`.
+    static let mstK13_schoolTypeTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstK13_schoolType", pathExtension: "tsv")
+    /// Resource file `MstK14_place.tsv`.
+    static let mstK14_placeTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstK14_place", pathExtension: "tsv")
+    /// Resource file `MstK25_employment.tsv`.
+    static let mstK25_employmentTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstK25_employment", pathExtension: "tsv")
+    /// Resource file `MstK25_sex.tsv`.
+    static let mstK25_sexTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstK25_sex", pathExtension: "tsv")
+    /// Resource file `MstK3_changeCount.tsv`.
+    static let mstK3_changeCountTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstK3_changeCount", pathExtension: "tsv")
+    /// Resource file `MstK4_jobType.tsv`.
+    static let mstK4_jobTypeTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstK4_jobType", pathExtension: "tsv")
+    /// Resource file `MstK5_jobExperimentYear.tsv`.
+    static let mstK5_jobExperimentYearTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstK5_jobExperimentYear", pathExtension: "tsv")
+    /// Resource file `MstK6_businessType.tsv`.
+    static let mstK6_businessTypeTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstK6_businessType", pathExtension: "tsv")
+    /// Resource file `MstK7_skillEnglish.tsv`.
+    static let mstK7_skillEnglishTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstK7_skillEnglish", pathExtension: "tsv")
+    /// Resource file `MstK8_qualification.tsv`.
+    static let mstK8_qualificationTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstK8_qualification", pathExtension: "tsv")
+    /// Resource file `MstK9_employmentType.tsv`.
+    static let mstK9_employmentTypeTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstK9_employmentType", pathExtension: "tsv")
+    /// Resource file `MstL2_prCode.tsv`.
+    static let mstL2_prCodeTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstL2_prCode", pathExtension: "tsv")
+    /// Resource file `MstL3_overtime.tsv`.
+    static let mstL3_overtimeTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstL3_overtime", pathExtension: "tsv")
+    /// Resource file `MstL_skill.tsv`.
+    static let mstL_skillTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstL_skill", pathExtension: "tsv")
+    /// Resource file `MstL_skillYear.tsv`.
+    static let mstL_skillYearTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstL_skillYear", pathExtension: "tsv")
+
+    /// `bundle.url(forResource: "MstK10_salary", withExtension: "tsv")`
+    static func mstK10_salaryTsv(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.mstK10_salaryTsv
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "MstK11_entryPlace", withExtension: "tsv")`
+    static func mstK11_entryPlaceTsv(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.mstK11_entryPlaceTsv
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "MstK13_schoolType", withExtension: "tsv")`
+    static func mstK13_schoolTypeTsv(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.mstK13_schoolTypeTsv
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "MstK14_place", withExtension: "tsv")`
+    static func mstK14_placeTsv(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.mstK14_placeTsv
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "MstK25_employment", withExtension: "tsv")`
+    static func mstK25_employmentTsv(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.mstK25_employmentTsv
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "MstK25_sex", withExtension: "tsv")`
+    static func mstK25_sexTsv(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.mstK25_sexTsv
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "MstK3_changeCount", withExtension: "tsv")`
+    static func mstK3_changeCountTsv(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.mstK3_changeCountTsv
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "MstK4_jobType", withExtension: "tsv")`
+    static func mstK4_jobTypeTsv(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.mstK4_jobTypeTsv
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "MstK5_jobExperimentYear", withExtension: "tsv")`
+    static func mstK5_jobExperimentYearTsv(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.mstK5_jobExperimentYearTsv
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "MstK6_businessType", withExtension: "tsv")`
+    static func mstK6_businessTypeTsv(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.mstK6_businessTypeTsv
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "MstK7_skillEnglish", withExtension: "tsv")`
+    static func mstK7_skillEnglishTsv(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.mstK7_skillEnglishTsv
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "MstK8_qualification", withExtension: "tsv")`
+    static func mstK8_qualificationTsv(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.mstK8_qualificationTsv
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "MstK9_employmentType", withExtension: "tsv")`
+    static func mstK9_employmentTypeTsv(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.mstK9_employmentTypeTsv
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "MstL2_prCode", withExtension: "tsv")`
+    static func mstL2_prCodeTsv(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.mstL2_prCodeTsv
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "MstL3_overtime", withExtension: "tsv")`
+    static func mstL3_overtimeTsv(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.mstL3_overtimeTsv
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "MstL_skill", withExtension: "tsv")`
+    static func mstL_skillTsv(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.mstL_skillTsv
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "MstL_skillYear", withExtension: "tsv")`
+    static func mstL_skillYearTsv(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.mstL_skillYearTsv
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    fileprivate init() {}
+  }
+
   /// This `R.image` struct is generated, and contains static references to 59 images.
   struct image {
     /// Image `arBtm_2`.

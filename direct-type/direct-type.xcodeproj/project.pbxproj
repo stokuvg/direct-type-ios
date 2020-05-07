@@ -79,6 +79,28 @@
 		06E519D02458164B004E4B7A /* ScoutPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519CF2458164B004E4B7A /* ScoutPreview.swift */; };
 		06E519D324581684004E4B7A /* ContentsEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519D224581684004E4B7A /* ContentsEditVC.swift */; };
 		06E519D6245816A5004E4B7A /* WebTemplateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519D5245816A5004E4B7A /* WebTemplateVC.swift */; };
+		26BF48D924639D2B00E00215 /* MstK25_employment.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48C824639D2A00E00215 /* MstK25_employment.tsv */; };
+		26BF48DA24639D2B00E00215 /* MstK14_place.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48C924639D2A00E00215 /* MstK14_place.tsv */; };
+		26BF48DB24639D2B00E00215 /* MstK11_entryPlace.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48CA24639D2A00E00215 /* MstK11_entryPlace.tsv */; };
+		26BF48DC24639D2B00E00215 /* MstL_skill.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48CB24639D2A00E00215 /* MstL_skill.tsv */; };
+		26BF48DD24639D2B00E00215 /* MstK25_sex.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48CC24639D2A00E00215 /* MstK25_sex.tsv */; };
+		26BF48DE24639D2B00E00215 /* MstK13_schoolType.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48CD24639D2A00E00215 /* MstK13_schoolType.tsv */; };
+		26BF48DF24639D2B00E00215 /* MstK6_businessType.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48CE24639D2A00E00215 /* MstK6_businessType.tsv */; };
+		26BF48E024639D2B00E00215 /* MstK3_changeCount.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48CF24639D2A00E00215 /* MstK3_changeCount.tsv */; };
+		26BF48E124639D2B00E00215 /* MstL_skillYear.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48D024639D2A00E00215 /* MstL_skillYear.tsv */; };
+		26BF48E224639D2B00E00215 /* MstK4_jobType.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48D124639D2A00E00215 /* MstK4_jobType.tsv */; };
+		26BF48E324639D2B00E00215 /* MstK10_salary.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48D224639D2A00E00215 /* MstK10_salary.tsv */; };
+		26BF48E424639D2B00E00215 /* MstL2_prCode.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48D324639D2A00E00215 /* MstL2_prCode.tsv */; };
+		26BF48E524639D2B00E00215 /* MstL3_overtime.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48D424639D2B00E00215 /* MstL3_overtime.tsv */; };
+		26BF48E624639D2B00E00215 /* MstK8_qualification.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48D524639D2B00E00215 /* MstK8_qualification.tsv */; };
+		26BF48E724639D2B00E00215 /* MstK9_employmentType.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48D624639D2B00E00215 /* MstK9_employmentType.tsv */; };
+		26BF48E824639D2B00E00215 /* MstK5_jobExperimentYear.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48D724639D2B00E00215 /* MstK5_jobExperimentYear.tsv */; };
+		26BF48E924639D2B00E00215 /* MstK7_skillEnglish.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48D824639D2B00E00215 /* MstK7_skillEnglish.tsv */; };
+		26BF48EB24639D6500E00215 /* SelectItemsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF48EA24639D6500E00215 /* SelectItemsManager.swift */; };
+		26BF48EE24639DEE00E00215 /* EditableObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF48ED24639DED00E00215 /* EditableObj.swift */; };
+		26BF48F024639E7100E00215 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF48EF24639E7100E00215 /* Constants.swift */; };
+		26BF48F224639F7600E00215 /* ObjDbg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF48F124639F7600E00215 /* ObjDbg.swift */; };
+		26BF48F424639F9900E00215 /* ObjUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF48F324639F9900E00215 /* ObjUser.swift */; };
 		C29161DB95966DD7132DBD19 /* Pods_direct_type.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A49B0215E0F4A582FB1EC5E /* Pods_direct_type.framework */; };
 /* End PBXBuildFile section */
 
@@ -157,7 +179,29 @@
 		06E519CF2458164B004E4B7A /* ScoutPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutPreview.swift; sourceTree = "<group>"; };
 		06E519D224581684004E4B7A /* ContentsEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsEditVC.swift; sourceTree = "<group>"; };
 		06E519D5245816A5004E4B7A /* WebTemplateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebTemplateVC.swift; sourceTree = "<group>"; };
-		26BFA93824638E8600B3D558 /* Models */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Models; path = ../../../../generated/promise/SwaggerClient/Classes/Swaggers/Models; sourceTree = "<group>"; };
+		26BF48C524639A8200E00215 /* Models */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Models; path = ../../../../generated/promise/SwaggerClient/Classes/Swaggers/Models; sourceTree = "<group>"; };
+		26BF48C824639D2A00E00215 /* MstK25_employment.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK25_employment.tsv; sourceTree = "<group>"; };
+		26BF48C924639D2A00E00215 /* MstK14_place.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK14_place.tsv; sourceTree = "<group>"; };
+		26BF48CA24639D2A00E00215 /* MstK11_entryPlace.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK11_entryPlace.tsv; sourceTree = "<group>"; };
+		26BF48CB24639D2A00E00215 /* MstL_skill.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstL_skill.tsv; sourceTree = "<group>"; };
+		26BF48CC24639D2A00E00215 /* MstK25_sex.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK25_sex.tsv; sourceTree = "<group>"; };
+		26BF48CD24639D2A00E00215 /* MstK13_schoolType.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK13_schoolType.tsv; sourceTree = "<group>"; };
+		26BF48CE24639D2A00E00215 /* MstK6_businessType.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK6_businessType.tsv; sourceTree = "<group>"; };
+		26BF48CF24639D2A00E00215 /* MstK3_changeCount.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK3_changeCount.tsv; sourceTree = "<group>"; };
+		26BF48D024639D2A00E00215 /* MstL_skillYear.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstL_skillYear.tsv; sourceTree = "<group>"; };
+		26BF48D124639D2A00E00215 /* MstK4_jobType.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK4_jobType.tsv; sourceTree = "<group>"; };
+		26BF48D224639D2A00E00215 /* MstK10_salary.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK10_salary.tsv; sourceTree = "<group>"; };
+		26BF48D324639D2A00E00215 /* MstL2_prCode.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstL2_prCode.tsv; sourceTree = "<group>"; };
+		26BF48D424639D2B00E00215 /* MstL3_overtime.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstL3_overtime.tsv; sourceTree = "<group>"; };
+		26BF48D524639D2B00E00215 /* MstK8_qualification.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK8_qualification.tsv; sourceTree = "<group>"; };
+		26BF48D624639D2B00E00215 /* MstK9_employmentType.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK9_employmentType.tsv; sourceTree = "<group>"; };
+		26BF48D724639D2B00E00215 /* MstK5_jobExperimentYear.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK5_jobExperimentYear.tsv; sourceTree = "<group>"; };
+		26BF48D824639D2B00E00215 /* MstK7_skillEnglish.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK7_skillEnglish.tsv; sourceTree = "<group>"; };
+		26BF48EA24639D6500E00215 /* SelectItemsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectItemsManager.swift; sourceTree = "<group>"; };
+		26BF48ED24639DED00E00215 /* EditableObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableObj.swift; sourceTree = "<group>"; };
+		26BF48EF24639E7100E00215 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		26BF48F124639F7600E00215 /* ObjDbg.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjDbg.swift; sourceTree = "<group>"; };
+		26BF48F324639F9900E00215 /* ObjUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjUser.swift; sourceTree = "<group>"; };
 		8A49B0215E0F4A582FB1EC5E /* Pods_direct_type.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_direct_type.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8C351EB920291E353136BB9 /* Pods-direct-type.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-direct-type.debug.xcconfig"; path = "Target Support Files/Pods-direct-type/Pods-direct-type.debug.xcconfig"; sourceTree = "<group>"; };
 		F6660969F9095E20D9CE432A /* Pods-direct-type.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-direct-type.release.xcconfig"; path = "Target Support Files/Pods-direct-type/Pods-direct-type.release.xcconfig"; sourceTree = "<group>"; };
@@ -240,6 +284,7 @@
 		066BD9D52456ACB4009E610B /* direct-type */ = {
 			isa = PBXGroup;
 			children = (
+				26BF48EF24639E7100E00215 /* Constants.swift */,
 				26B6E8B4245C1B4B00BE5B90 /* Generated */,
 				067F28D62456CEBF000AAD69 /* ViewControllers */,
 				067F28D32456CE61000AAD69 /* Model */,
@@ -257,6 +302,7 @@
 		067F28D32456CE61000AAD69 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				26BF48EC24639DD200E00215 /* Editable */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -437,6 +483,7 @@
 		26B6E8B4245C1B4B00BE5B90 /* Generated */ = {
 			isa = PBXGroup;
 			children = (
+				26BF48C624639CC700E00215 /* ByMaster */,
 				26B6E8B5245C1B7000BE5B90 /* BySwagger */,
 			);
 			path = Generated;
@@ -445,9 +492,52 @@
 		26B6E8B5245C1B7000BE5B90 /* BySwagger */ = {
 			isa = PBXGroup;
 			children = (
-				26BFA93824638E8600B3D558 /* Models */,
+				26BF48C524639A8200E00215 /* Models */,
 			);
 			path = BySwagger;
+			sourceTree = "<group>";
+		};
+		26BF48C624639CC700E00215 /* ByMaster */ = {
+			isa = PBXGroup;
+			children = (
+				26BF48EA24639D6500E00215 /* SelectItemsManager.swift */,
+				26BF48C724639CD500E00215 /* TSV */,
+			);
+			path = ByMaster;
+			sourceTree = "<group>";
+		};
+		26BF48C724639CD500E00215 /* TSV */ = {
+			isa = PBXGroup;
+			children = (
+				26BF48CF24639D2A00E00215 /* MstK3_changeCount.tsv */,
+				26BF48D124639D2A00E00215 /* MstK4_jobType.tsv */,
+				26BF48D724639D2B00E00215 /* MstK5_jobExperimentYear.tsv */,
+				26BF48CE24639D2A00E00215 /* MstK6_businessType.tsv */,
+				26BF48D824639D2B00E00215 /* MstK7_skillEnglish.tsv */,
+				26BF48D524639D2B00E00215 /* MstK8_qualification.tsv */,
+				26BF48D624639D2B00E00215 /* MstK9_employmentType.tsv */,
+				26BF48D224639D2A00E00215 /* MstK10_salary.tsv */,
+				26BF48CA24639D2A00E00215 /* MstK11_entryPlace.tsv */,
+				26BF48CD24639D2A00E00215 /* MstK13_schoolType.tsv */,
+				26BF48C924639D2A00E00215 /* MstK14_place.tsv */,
+				26BF48C824639D2A00E00215 /* MstK25_employment.tsv */,
+				26BF48CC24639D2A00E00215 /* MstK25_sex.tsv */,
+				26BF48CB24639D2A00E00215 /* MstL_skill.tsv */,
+				26BF48D024639D2A00E00215 /* MstL_skillYear.tsv */,
+				26BF48D324639D2A00E00215 /* MstL2_prCode.tsv */,
+				26BF48D424639D2B00E00215 /* MstL3_overtime.tsv */,
+			);
+			path = TSV;
+			sourceTree = "<group>";
+		};
+		26BF48EC24639DD200E00215 /* Editable */ = {
+			isa = PBXGroup;
+			children = (
+				26BF48ED24639DED00E00215 /* EditableObj.swift */,
+				26BF48F124639F7600E00215 /* ObjDbg.swift */,
+				26BF48F324639F9900E00215 /* ObjUser.swift */,
+			);
+			path = Editable;
 			sourceTree = "<group>";
 		};
 		47EC95279A88E89B17F99C58 /* Pods */ = {
@@ -528,18 +618,35 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26BF48DE24639D2B00E00215 /* MstK13_schoolType.tsv in Resources */,
 				066BD9E32456ACB5009E610B /* LaunchScreen.storyboard in Resources */,
 				066EF6C6245BB9C400E15AD2 /* KeepCardCell.xib in Resources */,
+				26BF48E924639D2B00E00215 /* MstK7_skillEnglish.tsv in Resources */,
 				06E519842457CF90004E4B7A /* JobOfferBigCardCell.xib in Resources */,
 				066EF6CC245C119000E15AD2 /* JobOfferCardMoreCell.xib in Resources */,
+				26BF48DF24639D2B00E00215 /* MstK6_businessType.tsv in Resources */,
 				06D700332456B5FC00E55FC8 /* Color.xcassets in Resources */,
+				26BF48E224639D2B00E00215 /* MstK4_jobType.tsv in Resources */,
 				066763782457B0A700AC5039 /* KeepListVC.storyboard in Resources */,
+				26BF48E624639D2B00E00215 /* MstK8_qualification.tsv in Resources */,
+				26BF48E424639D2B00E00215 /* MstL2_prCode.tsv in Resources */,
+				26BF48E124639D2B00E00215 /* MstL_skillYear.tsv in Resources */,
+				26BF48E024639D2B00E00215 /* MstK3_changeCount.tsv in Resources */,
 				066763762457B09F00AC5039 /* HomeVC.storyboard in Resources */,
+				26BF48DC24639D2B00E00215 /* MstL_skill.tsv in Resources */,
+				26BF48E524639D2B00E00215 /* MstL3_overtime.tsv in Resources */,
+				26BF48E324639D2B00E00215 /* MstK10_salary.tsv in Resources */,
 				066763692457AF3100AC5039 /* MyPageVC.storyboard in Resources */,
+				26BF48E724639D2B00E00215 /* MstK9_employmentType.tsv in Resources */,
 				066BD9E02456ACB5009E610B /* Assets.xcassets in Resources */,
+				26BF48DB24639D2B00E00215 /* MstK11_entryPlace.tsv in Resources */,
 				066763742457B08F00AC5039 /* EntryVC.storyboard in Resources */,
+				26BF48D924639D2B00E00215 /* MstK25_employment.tsv in Resources */,
+				26BF48DA24639D2B00E00215 /* MstK14_place.tsv in Resources */,
 				066BD9DE2456ACB4009E610B /* SplashVC.storyboard in Resources */,
 				066763642457ABDB00AC5039 /* BaseTabBC.storyboard in Resources */,
+				26BF48E824639D2B00E00215 /* MstK5_jobExperimentYear.tsv in Resources */,
+				26BF48DD24639D2B00E00215 /* MstK25_sex.tsv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,11 +727,13 @@
 				066763672457AF2400AC5039 /* MyPageVC.swift in Sources */,
 				06E5199E2457DABE004E4B7A /* WithDrawal.swift in Sources */,
 				06E519BB245814EB004E4B7A /* CareerEditVC.swift in Sources */,
+				26BF48EB24639D6500E00215 /* SelectItemsManager.swift in Sources */,
 				06E519802457CF63004E4B7A /* BaseTableViewCell.swift in Sources */,
 				06E519A72458138E004E4B7A /* SignupVC.swift in Sources */,
 				06E519912457D742004E4B7A /* ChemistryResult.swift in Sources */,
 				06E5199A2457DA18004E4B7A /* AccountChangeVC.swift in Sources */,
 				06E519CC24581634004E4B7A /* ProfilePreviewVC.swift in Sources */,
+				26BF48F224639F7600E00215 /* ObjDbg.swift in Sources */,
 				066763722457B08300AC5039 /* EntryVC.swift in Sources */,
 				06E519A42457DC7B004E4B7A /* InitialInputCompleteVC.swift in Sources */,
 				0667636C2457B02200AC5039 /* KeepListVC.swift in Sources */,
@@ -632,6 +741,7 @@
 				06E519C22458156A004E4B7A /* AccessDenyVC.swift in Sources */,
 				067F28EA2456D135000AAD69 /* UIFont+Extensions.swift in Sources */,
 				067F28E82456D112000AAD69 /* UIColor+Extensions.swift in Sources */,
+				26BF48F424639F9900E00215 /* ObjUser.swift in Sources */,
 				0667636F2457B04500AC5039 /* HomeVC.swift in Sources */,
 				06E519C52458159F004E4B7A /* SnoothCareerVC.swift in Sources */,
 				06E519A02457DAD7004E4B7A /* WithDrawalCompleteVC.swift in Sources */,
@@ -661,7 +771,9 @@
 				06DCAEA9245A70A8008FE9FA /* UITableView+Extensions.swift in Sources */,
 				06E519C9245815C8004E4B7A /* CareerVC.swift in Sources */,
 				067F28D02456CCB8000AAD69 /* BaseVC.swift in Sources */,
+				26BF48EE24639DEE00E00215 /* EditableObj.swift in Sources */,
 				06E519B3245814BD004E4B7A /* EntryLoginVC.swift in Sources */,
+				26BF48F024639E7100E00215 /* Constants.swift in Sources */,
 				06E519B9245814DF004E4B7A /* ResumeEditVC.swift in Sources */,
 				06E519D324581684004E4B7A /* ContentsEditVC.swift in Sources */,
 				067F28E52456D05F000AAD69 /* TmpWebVC.swift in Sources */,
