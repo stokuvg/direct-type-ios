@@ -27,13 +27,13 @@ class HomeVC: TmpNaviTopVC {
         homeTableView.registerNib(nibName: "JobOfferBigCardCell", idName: "JobOfferBigCardCell")
         homeTableView.registerNib(nibName: "KeepCardCell", idName: "KeepCardCell")
         homeTableView.registerNib(nibName: "JobOfferCardMoreCell", idName: "JobOfferCardMoreCell")
+        
+        self.makeDummyData()
+        self.homeTableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.makeDummyData()
-        self.homeTableView.reloadData()
     }
     
     private func makeDummyData() {
@@ -86,6 +86,11 @@ class HomeVC: TmpNaviTopVC {
                 let data = masterTableData[i]
                 dispTableData.append(data)
             }
+        } else {
+            for i in 0..<masterTableData.count {
+                let data = masterTableData[i]
+                dispTableData.append(data)
+            }
         }
     }
 
@@ -94,14 +99,10 @@ class HomeVC: TmpNaviTopVC {
 extension HomeVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let row = indexPath.row
-        switch row {
-            case 0:
-//                return 600
-                return UITableView.automaticDimension
-            
-        default:
-            return UITableView.automaticDimension
+        if row == dispTableData.count && moreBtnDispFlag {
+            return 70
         }
+        return UITableView.automaticDimension
     }
 }
 
@@ -118,8 +119,19 @@ extension HomeVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.loadCell(cellName: "JobOfferBigCardCell", indexPath: indexPath) as! JobOfferBigCardCell
         let row = indexPath.row
+        // row の最後がもっと見るボタンかどうか
+        if moreBtnDispFlag == true && (row == dispTableData.count) {
+            let cell = tableView.loadCell(cellName: "JobOfferCardMoreCell", indexPath: indexPath) as! JobOfferCardMoreCell
+            return cell
+        } else {
+            let data = dispTableData[row]
+            let cell = tableView.loadCell(cellName: "JobOfferBigCardCell", indexPath: indexPath) as! JobOfferBigCardCell
+            cell.setup(data: data)
+            return cell
+        }
+        
+        /*
         // TODO:データ取得を行えるようになった際に変更
         if row == 0 {
             let data:[String:Any] = [
@@ -168,6 +180,7 @@ extension HomeVC: UITableViewDataSource {
         }
         
         return cell
+        */
     }
     
     
