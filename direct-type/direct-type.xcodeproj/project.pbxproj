@@ -12,6 +12,7 @@
 		063350E12463FB3F00AF90F3 /* JobOfferDetailVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 063350E02463FB3F00AF90F3 /* JobOfferDetailVC.storyboard */; };
 		063350E32463FD9600AF90F3 /* NaviButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063350E22463FD9600AF90F3 /* NaviButtonsView.swift */; };
 		063350E52463FD9C00AF90F3 /* NaviButtonsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 063350E42463FD9C00AF90F3 /* NaviButtonsView.xib */; };
+		0645705D2464F77700F3B015 /* Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0645705C2464F77700F3B015 /* Logs.swift */; };
 		066763622457AB7200AC5039 /* BaseTabBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066763612457AB7200AC5039 /* BaseTabBC.swift */; };
 		066763642457ABDB00AC5039 /* BaseTabBC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 066763632457ABDB00AC5039 /* BaseTabBC.storyboard */; };
 		066763672457AF2400AC5039 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066763662457AF2400AC5039 /* MyPageVC.swift */; };
@@ -116,6 +117,7 @@
 		063350E02463FB3F00AF90F3 /* JobOfferDetailVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JobOfferDetailVC.storyboard; sourceTree = "<group>"; };
 		063350E22463FD9600AF90F3 /* NaviButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaviButtonsView.swift; sourceTree = "<group>"; };
 		063350E42463FD9C00AF90F3 /* NaviButtonsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NaviButtonsView.xib; sourceTree = "<group>"; };
+		0645705C2464F77700F3B015 /* Logs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logs.swift; sourceTree = "<group>"; };
 		066763612457AB7200AC5039 /* BaseTabBC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBC.swift; sourceTree = "<group>"; };
 		066763632457ABDB00AC5039 /* BaseTabBC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BaseTabBC.storyboard; sourceTree = "<group>"; };
 		066763662457AF2400AC5039 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
@@ -355,6 +357,7 @@
 				06DCAEA8245A70A8008FE9FA /* UITableView+Extensions.swift */,
 				06DCAEAA245A7616008FE9FA /* UILabel+Extensions.swift */,
 				06C347232463A595000FB4DA /* UIButton+Extensions.swift */,
+				0645705C2464F77700F3B015 /* Logs.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -767,6 +770,7 @@
 				06E519C52458159F004E4B7A /* SnoothCareerVC.swift in Sources */,
 				06E519A02457DAD7004E4B7A /* WithDrawalCompleteVC.swift in Sources */,
 				06E5199C2457DA2D004E4B7A /* AccountChangeCompleteVC.swift in Sources */,
+				0645705D2464F77700F3B015 /* Logs.swift in Sources */,
 				06E519C7245815B0004E4B7A /* CareerPreviewVC.swift in Sources */,
 				06E519982457DA0D004E4B7A /* ApproachSettingVC.swift in Sources */,
 				06DCAEAB245A7616008FE9FA /* UILabel+Extensions.swift in Sources */,

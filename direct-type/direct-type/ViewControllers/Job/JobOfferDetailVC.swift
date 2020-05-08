@@ -31,6 +31,8 @@ class JobOfferDetailVC: TmpBasicVC {
 
         // Do any additional setup after loading the view.
         self.setNaviButtons()
+        
+        Log.selectLog(logLevel: .debug, "self.navigationController.viewControllers:\(self.navigationController?.viewControllers)")
     }
     
     private func setNaviButtons() {

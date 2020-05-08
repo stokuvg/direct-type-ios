@@ -13,33 +13,23 @@ class TmpNaviTopVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.delegate = self
+//        self.navigationController?.navigationBar.delegate = self
         
         self.view.backgroundColor = UIColor.init(colorType: .color_base)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        /*
-        */
+//        Log.selectLog(logLevel: .debug, "TmpNaviTopVC viewWillAppear start")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+//        Log.selectLog(logLevel: .debug, "TmpNaviTopVC viewDidAppear start")
     }
     
     func title(name:String) {
         self.navigationController?.navigationBar.topItem?.title = name
     }
 
-}
-
-extension TmpNaviTopVC: UINavigationBarDelegate {
-    
-    /*
-    func position(for bar: UIBarPositioning) -> UIBarPosition {
-        return .topAttached
-    }
-    */
 }
