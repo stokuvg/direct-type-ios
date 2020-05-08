@@ -31,27 +31,21 @@ class JobOfferDetailVC: TmpBasicVC {
 
         // Do any additional setup after loading the view.
         self.setNaviButtons()
-        
-        Log.selectLog(logLevel: .debug, "self.navigationController.viewControllers:\(self.navigationController?.viewControllers)")
     }
     
     private func setNaviButtons() {
-        guard let width = self.navigationController?.navigationBar.frame.size.width,let height = self.navigationController?.navigationBar.frame.size.height else {
-            return
-        }
-        
-        let rect = CGRect(x: 0, y: 0, width: width, height: height)
         
         let titleView = UINib(nibName: "NaviButtonsView", bundle: nil)
         .instantiate(withOwner: nil, options: nil)
             .first as! NaviButtonsView
         titleView.delegate = self
         
-        titleView.frame = rect
-        
         self.navigationItem.titleView = titleView
         
         buttonsView = titleView
+        
+        Log.selectLog(logLevel: .debug, "titleView:\(String(describing: self.navigationItem.titleView))")
+        Log.selectLog(logLevel: .debug, "navigationBar:\(String(describing: self.navigationController?.navigationBar))")
     }
     
 }

@@ -21,6 +21,9 @@ extension UIButton {
     func setNoRadiusTitle(text:String,fontType:FontType,textColor:UIColor, alignment:NSTextAlignment) {
         
         self.setTitle(text, for: .normal)
+        
         self.titleLabel?.text(text: text, fontType: fontType, textColor: textColor, alignment: alignment)
+        self.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.titleLabel?.lineBreakMode = .byClipping
     }
 }
