@@ -51,12 +51,10 @@ class HomeVC: TmpNaviTopVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NSLog("HomeVC viewWillAppear start")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        NSLog("HomeVC viewDidAppear start")
     }
     
     private func makeDummyData() {

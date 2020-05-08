@@ -31,6 +31,7 @@ class BaseVC: UIViewController {
         // 画面タップ不可設定
         SVProgressHUD.setDefaultMaskType(.black)
         
+//        self.navigationItem.backBarButtonItem = UIBarButtonItem(image: UIImage(named: "arDefaultWhite"), style: .plain, target: self, action: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
