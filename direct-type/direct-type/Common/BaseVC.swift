@@ -24,8 +24,10 @@ class BaseVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        self.navigationController?.navigationBar.barStyle = .black
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.init(colorType: .color_black)
 
         // 画面タップ不可設定
         SVProgressHUD.setDefaultMaskType(.black)
@@ -37,6 +39,16 @@ class BaseVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    
+    func getVC<T: UIViewController>(sbName:String,vcName:String) -> T? {
+            
+        let sb = UIStoryboard(name: sbName, bundle: nil)
+            
+        let sbid = "Sbid_" + vcName
+            
+        let vc = sb.instantiateViewController(withIdentifier: sbid) as! T
+        return vc
     }
 
 }

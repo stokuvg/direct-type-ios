@@ -89,7 +89,7 @@ struct R: Rswift.Validatable {
   }
 
   #if os(iOS) || os(tvOS)
-  /// This `R.storyboard` struct is generated, and contains static references to 7 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 8 storyboards.
   struct storyboard {
     /// Storyboard `BaseTabBC`.
     static let baseTabBC = _R.storyboard.baseTabBC()
@@ -97,6 +97,8 @@ struct R: Rswift.Validatable {
     static let entryVC = _R.storyboard.entryVC()
     /// Storyboard `HomeVC`.
     static let homeVC = _R.storyboard.homeVC()
+    /// Storyboard `JobOfferDetailVC`.
+    static let jobOfferDetailVC = _R.storyboard.jobOfferDetailVC()
     /// Storyboard `KeepListVC`.
     static let keepListVC = _R.storyboard.keepListVC()
     /// Storyboard `LaunchScreen`.
@@ -124,6 +126,13 @@ struct R: Rswift.Validatable {
     /// `UIStoryboard(name: "HomeVC", bundle: ...)`
     static func homeVC(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.homeVC)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "JobOfferDetailVC", bundle: ...)`
+    static func jobOfferDetailVC(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.jobOfferDetailVC)
     }
     #endif
 
@@ -954,7 +963,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 4 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 5 nibs.
   struct nib {
     /// Nib `JobOfferBigCardCell`.
     static let jobOfferBigCardCell = _R.nib._JobOfferBigCardCell()
@@ -962,6 +971,8 @@ struct R: Rswift.Validatable {
     static let jobOfferCardMoreCell = _R.nib._JobOfferCardMoreCell()
     /// Nib `KeepCardCell`.
     static let keepCardCell = _R.nib._KeepCardCell()
+    /// Nib `NaviButtonsView`.
+    static let naviButtonsView = _R.nib._NaviButtonsView()
     /// Nib `NoCardView`.
     static let noCardView = _R.nib._NoCardView()
 
@@ -990,6 +1001,14 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
+    /// `UINib(name: "NaviButtonsView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.naviButtonsView) instead")
+    static func naviButtonsView(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.naviButtonsView)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
     /// `UINib(name: "NoCardView", in: bundle)`
     @available(*, deprecated, message: "Use UINib(resource: R.nib.noCardView) instead")
     static func noCardView(_: Void = ()) -> UIKit.UINib {
@@ -1007,6 +1026,10 @@ struct R: Rswift.Validatable {
 
     static func keepCardCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> KeepCardCell? {
       return R.nib.keepCardCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? KeepCardCell
+    }
+
+    static func naviButtonsView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> NaviButtonsView? {
+      return R.nib.naviButtonsView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? NaviButtonsView
     }
 
     static func noCardView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> NoCardView? {
@@ -1109,6 +1132,17 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
 
+    struct _NaviButtonsView: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "NaviButtonsView"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> NaviButtonsView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? NaviButtonsView
+      }
+
+      fileprivate init() {}
+    }
+
     struct _NoCardView: Rswift.NibResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "NoCardView"
@@ -1143,6 +1177,9 @@ struct _R: Rswift.Validatable {
       #endif
       #if os(iOS) || os(tvOS)
       try homeVC.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
+      try jobOfferDetailVC.validate()
       #endif
       #if os(iOS) || os(tvOS)
       try keepListVC.validate()
@@ -1224,6 +1261,26 @@ struct _R: Rswift.Validatable {
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
         if _R.storyboard.homeVC().sbid_HomeVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_HomeVC' could not be loaded from storyboard 'HomeVC' as 'HomeVC'.") }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    struct jobOfferDetailVC: Rswift.StoryboardResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "JobOfferDetailVC"
+      let sbid_JobOfferDetailVC = StoryboardViewControllerResource<JobOfferDetailVC>(identifier: "Sbid_JobOfferDetailVC")
+
+      func sbid_JobOfferDetailVC(_: Void = ()) -> JobOfferDetailVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_JobOfferDetailVC)
+      }
+
+      static func validate() throws {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+        if _R.storyboard.jobOfferDetailVC().sbid_JobOfferDetailVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_JobOfferDetailVC' could not be loaded from storyboard 'JobOfferDetailVC' as 'JobOfferDetailVC'.") }
       }
 
       fileprivate init() {}

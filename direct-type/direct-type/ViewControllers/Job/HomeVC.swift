@@ -32,7 +32,7 @@ class HomeVC: TmpNaviTopVC {
         homeTableView.registerNib(nibName: "JobOfferCardMoreCell", idName: "JobOfferCardMoreCell")
         homeTableView.registerNib(nibName: "JobNoOfferCardCell", idName: "JobNoOfferCardCell")
         
-//        self.makeDummyData()
+        self.makeDummyData()
         if masterTableData.count > 0 {
             homeTableView.isHidden = false
             self.homeTableView.delegate = self
@@ -125,6 +125,12 @@ extension HomeVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = indexPath.row
+        if row == dispTableData.count {
+            return
+        }
+        
+        let vc = getVC(sbName: "JobOfferDetailVC", vcName: "JobOfferDetailVC") as! JobOfferDetailVC
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

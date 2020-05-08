@@ -17,4 +17,10 @@ extension UIButton {
         
         self.cornerRadius = self.bounds.height/2
     }
+    
+    func setNoRadiusTitle(text:String,fontType:FontType,textColor:UIColor, alignment:NSTextAlignment) {
+        
+        self.setTitle(text, for: .normal)
+        self.titleLabel?.text(text: text, fontType: fontType, textColor: textColor, alignment: alignment)
+    }
 }

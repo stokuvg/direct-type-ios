@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		063350DD2463EC4B00AF90F3 /* NoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063350DC2463EC4B00AF90F3 /* NoCardView.swift */; };
 		063350DF2463EC5800AF90F3 /* NoCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 063350DE2463EC5800AF90F3 /* NoCardView.xib */; };
+		063350E12463FB3F00AF90F3 /* JobOfferDetailVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 063350E02463FB3F00AF90F3 /* JobOfferDetailVC.storyboard */; };
+		063350E32463FD9600AF90F3 /* NaviButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063350E22463FD9600AF90F3 /* NaviButtonsView.swift */; };
+		063350E52463FD9C00AF90F3 /* NaviButtonsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 063350E42463FD9C00AF90F3 /* NaviButtonsView.xib */; };
 		066763622457AB7200AC5039 /* BaseTabBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066763612457AB7200AC5039 /* BaseTabBC.swift */; };
 		066763642457ABDB00AC5039 /* BaseTabBC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 066763632457ABDB00AC5039 /* BaseTabBC.storyboard */; };
 		066763672457AF2400AC5039 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066763662457AF2400AC5039 /* MyPageVC.swift */; };
@@ -47,7 +50,7 @@
 		06E519832457CF90004E4B7A /* JobOfferBigCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519812457CF90004E4B7A /* JobOfferBigCardCell.swift */; };
 		06E519842457CF90004E4B7A /* JobOfferBigCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06E519822457CF90004E4B7A /* JobOfferBigCardCell.xib */; };
 		06E519862457D2C1004E4B7A /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519852457D2C1004E4B7A /* UIView+Extensions.swift */; };
-		06E5198A2457D6C1004E4B7A /* JobOfferDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519892457D6C1004E4B7A /* JobOfferDetail.swift */; };
+		06E5198A2457D6C1004E4B7A /* JobOfferDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519892457D6C1004E4B7A /* JobOfferDetailVC.swift */; };
 		06E5198D2457D6FF004E4B7A /* ChemistryStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5198C2457D6FF004E4B7A /* ChemistryStart.swift */; };
 		06E5198F2457D70B004E4B7A /* ChemistrySelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5198E2457D70B004E4B7A /* ChemistrySelect.swift */; };
 		06E519912457D742004E4B7A /* ChemistryResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519902457D742004E4B7A /* ChemistryResult.swift */; };
@@ -110,6 +113,9 @@
 /* Begin PBXFileReference section */
 		063350DC2463EC4B00AF90F3 /* NoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoCardView.swift; sourceTree = "<group>"; };
 		063350DE2463EC5800AF90F3 /* NoCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoCardView.xib; sourceTree = "<group>"; };
+		063350E02463FB3F00AF90F3 /* JobOfferDetailVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JobOfferDetailVC.storyboard; sourceTree = "<group>"; };
+		063350E22463FD9600AF90F3 /* NaviButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaviButtonsView.swift; sourceTree = "<group>"; };
+		063350E42463FD9C00AF90F3 /* NaviButtonsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NaviButtonsView.xib; sourceTree = "<group>"; };
 		066763612457AB7200AC5039 /* BaseTabBC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBC.swift; sourceTree = "<group>"; };
 		066763632457ABDB00AC5039 /* BaseTabBC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BaseTabBC.storyboard; sourceTree = "<group>"; };
 		066763662457AF2400AC5039 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
@@ -150,7 +156,7 @@
 		06E519812457CF90004E4B7A /* JobOfferBigCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobOfferBigCardCell.swift; sourceTree = "<group>"; };
 		06E519822457CF90004E4B7A /* JobOfferBigCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobOfferBigCardCell.xib; sourceTree = "<group>"; };
 		06E519852457D2C1004E4B7A /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
-		06E519892457D6C1004E4B7A /* JobOfferDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobOfferDetail.swift; sourceTree = "<group>"; };
+		06E519892457D6C1004E4B7A /* JobOfferDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobOfferDetailVC.swift; sourceTree = "<group>"; };
 		06E5198C2457D6FF004E4B7A /* ChemistryStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryStart.swift; sourceTree = "<group>"; };
 		06E5198E2457D70B004E4B7A /* ChemistrySelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistrySelect.swift; sourceTree = "<group>"; };
 		06E519902457D742004E4B7A /* ChemistryResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryResult.swift; sourceTree = "<group>"; };
@@ -251,9 +257,12 @@
 				06E5197E2457CF31004E4B7A /* Cell */,
 				0667636E2457B04500AC5039 /* HomeVC.swift */,
 				066763752457B09F00AC5039 /* HomeVC.storyboard */,
-				06E519892457D6C1004E4B7A /* JobOfferDetail.swift */,
+				06E519892457D6C1004E4B7A /* JobOfferDetailVC.swift */,
+				063350E02463FB3F00AF90F3 /* JobOfferDetailVC.storyboard */,
 				063350DC2463EC4B00AF90F3 /* NoCardView.swift */,
 				063350DE2463EC5800AF90F3 /* NoCardView.xib */,
+				063350E22463FD9600AF90F3 /* NaviButtonsView.swift */,
+				063350E42463FD9C00AF90F3 /* NaviButtonsView.xib */,
 			);
 			path = Job;
 			sourceTree = "<group>";
@@ -645,6 +654,7 @@
 				26BF48DC24639D2B00E00215 /* MstL_skill.tsv in Resources */,
 				26BF48E524639D2B00E00215 /* MstL3_overtime.tsv in Resources */,
 				26BF48E324639D2B00E00215 /* MstK10_salary.tsv in Resources */,
+				063350E12463FB3F00AF90F3 /* JobOfferDetailVC.storyboard in Resources */,
 				063350DF2463EC5800AF90F3 /* NoCardView.xib in Resources */,
 				066763692457AF3100AC5039 /* MyPageVC.storyboard in Resources */,
 				26BF48E724639D2B00E00215 /* MstK9_employmentType.tsv in Resources */,
@@ -654,6 +664,7 @@
 				26BF48D924639D2B00E00215 /* MstK25_employment.tsv in Resources */,
 				26BF48DA24639D2B00E00215 /* MstK14_place.tsv in Resources */,
 				066BD9DE2456ACB4009E610B /* SplashVC.storyboard in Resources */,
+				063350E52463FD9C00AF90F3 /* NaviButtonsView.xib in Resources */,
 				066763642457ABDB00AC5039 /* BaseTabBC.storyboard in Resources */,
 				26BF48E824639D2B00E00215 /* MstK5_jobExperimentYear.tsv in Resources */,
 				26BF48DD24639D2B00E00215 /* MstK25_sex.tsv in Resources */,
@@ -747,7 +758,7 @@
 				066763722457B08300AC5039 /* EntryVC.swift in Sources */,
 				06E519A42457DC7B004E4B7A /* InitialInputCompleteVC.swift in Sources */,
 				0667636C2457B02200AC5039 /* KeepListVC.swift in Sources */,
-				06E5198A2457D6C1004E4B7A /* JobOfferDetail.swift in Sources */,
+				06E5198A2457D6C1004E4B7A /* JobOfferDetailVC.swift in Sources */,
 				06E519C22458156A004E4B7A /* AccessDenyVC.swift in Sources */,
 				067F28EA2456D135000AAD69 /* UIFont+Extensions.swift in Sources */,
 				067F28E82456D112000AAD69 /* UIColor+Extensions.swift in Sources */,
@@ -792,6 +803,7 @@
 				06E519832457CF90004E4B7A /* JobOfferBigCardCell.swift in Sources */,
 				06E5198D2457D6FF004E4B7A /* ChemistryStart.swift in Sources */,
 				06E519CE2458163F004E4B7A /* ResumePreviewVC.swift in Sources */,
+				063350E32463FD9600AF90F3 /* NaviButtonsView.swift in Sources */,
 				067F28E12456D038000AAD69 /* BasePresentVC.swift in Sources */,
 				067F28E32456D053000AAD69 /* TmpSub1VC.swift in Sources */,
 				06E519962457D8D1004E4B7A /* SettingVC.swift in Sources */,
