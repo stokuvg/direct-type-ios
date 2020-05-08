@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="KxU-iE-RTU">
+            <objects>
+                <navigationController id="sxO-y1-U7Z" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NAd-EM-Zdw">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GbL-4I-zfB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="804" y="94"/>
+        </scene>
+        <!--Profile PreviewVC-->
+        <scene sceneID="Nft-qx-q9D">
+            <objects>
+                <viewController storyboardIdentifier="Sbid_ProfilePreviewVC" id="M7u-aK-RVq" customClass="ProfilePreviewVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="g1q-tj-8Hw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WQt-jE-FSR" userLabel="メイン">
+                                <rect key="frame" x="0.0" y="44" width="414" height="728"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NtB-K7-xq7">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="728"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="M7u-aK-RVq" id="6Zc-eL-ekX"/>
+                                            <outlet property="delegate" destination="M7u-aK-RVq" id="OGC-UX-zw7"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="NtB-K7-xq7" secondAttribute="bottom" id="F8w-9G-GHh"/>
+                                    <constraint firstAttribute="trailing" secondItem="NtB-K7-xq7" secondAttribute="trailing" id="ZEP-Sm-n5a"/>
+                                    <constraint firstItem="NtB-K7-xq7" firstAttribute="leading" secondItem="WQt-jE-FSR" secondAttribute="leading" id="f07-AL-N2I"/>
+                                    <constraint firstItem="NtB-K7-xq7" firstAttribute="top" secondItem="WQt-jE-FSR" secondAttribute="top" id="koD-Jm-D0S"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xff-J5-hrZ" userLabel="フッタ">
+                                <rect key="frame" x="0.0" y="772" width="414" height="90"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WdS-GT-DZi">
+                                        <rect key="frame" x="20" y="20" width="374" height="50"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="actCommit:" destination="M7u-aK-RVq" eventType="touchUpInside" id="aIw-IM-vjh"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="WdS-GT-DZi" firstAttribute="top" secondItem="xff-J5-hrZ" secondAttribute="top" constant="20" id="ErF-YE-Hd3"/>
+                                    <constraint firstAttribute="bottom" secondItem="WdS-GT-DZi" secondAttribute="bottom" constant="20" id="GuC-c5-PoC"/>
+                                    <constraint firstAttribute="height" constant="90" id="VFj-JW-iha"/>
+                                    <constraint firstItem="WdS-GT-DZi" firstAttribute="leading" secondItem="xff-J5-hrZ" secondAttribute="leading" constant="20" id="cPI-fn-2aW"/>
+                                    <constraint firstAttribute="trailing" secondItem="WdS-GT-DZi" secondAttribute="trailing" constant="20" id="sAe-Pc-YNF"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="wY6-Xn-oPj" firstAttribute="trailing" secondItem="WQt-jE-FSR" secondAttribute="trailing" id="LeS-vi-7nT"/>
+                            <constraint firstItem="wY6-Xn-oPj" firstAttribute="bottom" secondItem="xff-J5-hrZ" secondAttribute="bottom" id="ccG-yM-z8B"/>
+                            <constraint firstItem="wY6-Xn-oPj" firstAttribute="trailing" secondItem="xff-J5-hrZ" secondAttribute="trailing" id="h95-U2-fDS"/>
+                            <constraint firstItem="WQt-jE-FSR" firstAttribute="leading" secondItem="wY6-Xn-oPj" secondAttribute="leading" id="i0u-jY-FP6"/>
+                            <constraint firstItem="xff-J5-hrZ" firstAttribute="top" secondItem="WQt-jE-FSR" secondAttribute="bottom" id="i4r-HG-Mub"/>
+                            <constraint firstItem="xff-J5-hrZ" firstAttribute="leading" secondItem="wY6-Xn-oPj" secondAttribute="leading" id="ieL-ZS-746"/>
+                            <constraint firstItem="WQt-jE-FSR" firstAttribute="top" secondItem="wY6-Xn-oPj" secondAttribute="top" id="jPa-E2-3zG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="wY6-Xn-oPj"/>
+                    </view>
+                    <connections>
+                        <outlet property="btnCommit" destination="WdS-GT-DZi" id="KUr-Sm-qyb"/>
+                        <outlet property="tableVW" destination="NtB-K7-xq7" id="a5r-uI-Vwr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2AW-pJ-zxA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1551" y="94"/>
+        </scene>
+    </scenes>
+</document>

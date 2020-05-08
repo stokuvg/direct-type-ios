@@ -15,9 +15,65 @@
                     <view key="view" contentMode="scaleToFill" id="mVS-Xx-YBk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[H-1]マイページのダミー" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQu-DF-j36">
+                                <rect key="frame" x="7" y="7" width="306" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="3jc-nH-ez8">
+                                <rect key="frame" x="7" y="34.5" width="306" height="526.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KIB-j9-wIu" userLabel="プロフィール">
+                                        <rect key="frame" x="0.0" y="0.0" width="306" height="131.5"/>
+                                        <state key="normal" title="プロフィール"/>
+                                        <connections>
+                                            <action selector="actButton01:" destination="AEi-ts-bdm" eventType="touchUpInside" id="BUJ-i9-7Tr"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GMn-2f-Oss">
+                                        <rect key="frame" x="0.0" y="131.5" width="306" height="132"/>
+                                        <state key="normal" title="履歴書"/>
+                                        <connections>
+                                            <action selector="actButton02:" destination="AEi-ts-bdm" eventType="touchUpInside" id="o1X-wn-zih"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6DQ-iO-axa">
+                                        <rect key="frame" x="0.0" y="263.5" width="306" height="131.5"/>
+                                        <state key="normal" title="職務経歴書・スキルシート"/>
+                                        <connections>
+                                            <action selector="actButton03:" destination="AEi-ts-bdm" eventType="touchUpInside" id="Ajx-cU-H6N"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vdW-Qy-b6a">
+                                        <rect key="frame" x="0.0" y="395" width="306" height="131.5"/>
+                                        <state key="normal" title="さくさく職歴書"/>
+                                        <connections>
+                                            <action selector="actButton04:" destination="AEi-ts-bdm" eventType="touchUpInside" id="aff-jW-CWX"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="3jc-nH-ez8" firstAttribute="top" secondItem="BQu-DF-j36" secondAttribute="bottom" constant="7" id="1Kr-KR-g0S"/>
+                            <constraint firstItem="fam-Ox-1va" firstAttribute="trailing" secondItem="3jc-nH-ez8" secondAttribute="trailing" constant="7" id="EUn-hO-YyB"/>
+                            <constraint firstItem="fam-Ox-1va" firstAttribute="bottom" secondItem="3jc-nH-ez8" secondAttribute="bottom" constant="7" id="HlC-WC-aKr"/>
+                            <constraint firstItem="fam-Ox-1va" firstAttribute="trailing" secondItem="BQu-DF-j36" secondAttribute="trailing" constant="7" id="kL7-dj-y3k"/>
+                            <constraint firstItem="BQu-DF-j36" firstAttribute="leading" secondItem="fam-Ox-1va" secondAttribute="leading" constant="7" id="nmI-1N-AEa"/>
+                            <constraint firstItem="BQu-DF-j36" firstAttribute="top" secondItem="fam-Ox-1va" secondAttribute="top" constant="7" id="pC0-Sg-KEN"/>
+                            <constraint firstItem="3jc-nH-ez8" firstAttribute="leading" secondItem="fam-Ox-1va" secondAttribute="leading" constant="7" id="wxq-je-EJh"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="fam-Ox-1va"/>
                     </view>
+                    <connections>
+                        <outlet property="btnButton01" destination="KIB-j9-wIu" id="hEw-R6-vpU"/>
+                        <outlet property="btnButton02" destination="GMn-2f-Oss" id="Eto-3v-DWC"/>
+                        <outlet property="btnButton03" destination="6DQ-iO-axa" id="1M0-5j-gNA"/>
+                        <outlet property="btnButton04" destination="vdW-Qy-b6a" id="T0D-DX-tEl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vtR-eP-OXc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
