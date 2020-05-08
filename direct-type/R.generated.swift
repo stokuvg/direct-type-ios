@@ -963,8 +963,16 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 5 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 9 nibs.
   struct nib {
+    /// Nib `JobDetailArticleCell`.
+    static let jobDetailArticleCell = _R.nib._JobDetailArticleCell()
+    /// Nib `JobDetailArticleHeaderView`.
+    static let jobDetailArticleHeaderView = _R.nib._JobDetailArticleHeaderView()
+    /// Nib `JobDetailDataCell`.
+    static let jobDetailDataCell = _R.nib._JobDetailDataCell()
+    /// Nib `JobDetailGuideBookHeaderView`.
+    static let jobDetailGuideBookHeaderView = _R.nib._JobDetailGuideBookHeaderView()
     /// Nib `JobOfferBigCardCell`.
     static let jobOfferBigCardCell = _R.nib._JobOfferBigCardCell()
     /// Nib `JobOfferCardMoreCell`.
@@ -975,6 +983,38 @@ struct R: Rswift.Validatable {
     static let naviButtonsView = _R.nib._NaviButtonsView()
     /// Nib `NoCardView`.
     static let noCardView = _R.nib._NoCardView()
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "JobDetailArticleCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailArticleCell) instead")
+    static func jobDetailArticleCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.jobDetailArticleCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "JobDetailArticleHeaderView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailArticleHeaderView) instead")
+    static func jobDetailArticleHeaderView(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.jobDetailArticleHeaderView)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "JobDetailDataCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailDataCell) instead")
+    static func jobDetailDataCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.jobDetailDataCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "JobDetailGuideBookHeaderView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailGuideBookHeaderView) instead")
+    static func jobDetailGuideBookHeaderView(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.jobDetailGuideBookHeaderView)
+    }
+    #endif
 
     #if os(iOS) || os(tvOS)
     /// `UINib(name: "JobOfferBigCardCell", in: bundle)`
@@ -1015,6 +1055,22 @@ struct R: Rswift.Validatable {
       return UIKit.UINib(resource: R.nib.noCardView)
     }
     #endif
+
+    static func jobDetailArticleCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailArticleCell? {
+      return R.nib.jobDetailArticleCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailArticleCell
+    }
+
+    static func jobDetailArticleHeaderView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailArticleHeaderView? {
+      return R.nib.jobDetailArticleHeaderView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailArticleHeaderView
+    }
+
+    static func jobDetailDataCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailDataCell? {
+      return R.nib.jobDetailDataCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailDataCell
+    }
+
+    static func jobDetailGuideBookHeaderView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailGuideBookHeaderView? {
+      return R.nib.jobDetailGuideBookHeaderView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailGuideBookHeaderView
+    }
 
     static func jobOfferBigCardCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobOfferBigCardCell? {
       return R.nib.jobOfferBigCardCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobOfferBigCardCell
@@ -1068,6 +1124,50 @@ struct _R: Rswift.Validatable {
       try _JobOfferBigCardCell.validate()
       try _KeepCardCell.validate()
       try _NoCardView.validate()
+    }
+
+    struct _JobDetailArticleCell: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "JobDetailArticleCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailArticleCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailArticleCell
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _JobDetailArticleHeaderView: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "JobDetailArticleHeaderView"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailArticleHeaderView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailArticleHeaderView
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _JobDetailDataCell: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "JobDetailDataCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailDataCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailDataCell
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _JobDetailGuideBookHeaderView: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "JobDetailGuideBookHeaderView"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailGuideBookHeaderView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailGuideBookHeaderView
+      }
+
+      fileprivate init() {}
     }
 
     struct _JobOfferBigCardCell: Rswift.NibResourceType, Rswift.Validatable {

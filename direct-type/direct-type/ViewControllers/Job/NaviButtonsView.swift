@@ -48,10 +48,10 @@ class NaviButtonsView: UIView {
         workContentsBtn.setNoRadiusTitle(text: "仕事内容", fontType: .font_SSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         workContentsBtn.backgroundColor = UIColor.init(colorType: .color_black)
         
-        appImportantBtn.setNoRadiusTitle(text: "応募要件", fontType: .font_SSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        appImportantBtn.setNoRadiusTitle(text: "応募資格", fontType: .font_SSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         appImportantBtn.backgroundColor = UIColor.init(colorType: .color_black)
         
-        employeeBtn.setNoRadiusTitle(text: "待遇・福利厚生", fontType: .font_SSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        employeeBtn.setNoRadiusTitle(text: "待遇", fontType: .font_SSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         employeeBtn.backgroundColor = UIColor.init(colorType: .color_black)
         
         infomationBtn.setNoRadiusTitle(text: "企業情報", fontType: .font_SSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
