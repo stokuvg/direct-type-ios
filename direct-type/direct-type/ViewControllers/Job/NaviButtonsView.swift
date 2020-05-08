@@ -45,16 +45,16 @@ class NaviButtonsView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        workContentsBtn.setNoRadiusTitle(text: "仕事内容", fontType: .font_SS, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        workContentsBtn.setNoRadiusTitle(text: "仕事内容", fontType: .font_SSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         workContentsBtn.backgroundColor = UIColor.init(colorType: .color_black)
         
-        appImportantBtn.setNoRadiusTitle(text: "応募要件", fontType: .font_SS, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        appImportantBtn.setNoRadiusTitle(text: "応募要件", fontType: .font_SSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         appImportantBtn.backgroundColor = UIColor.init(colorType: .color_black)
         
-        employeeBtn.setNoRadiusTitle(text: "待遇・福利厚生", fontType: .font_SS, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        employeeBtn.setNoRadiusTitle(text: "待遇・福利厚生", fontType: .font_SSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         employeeBtn.backgroundColor = UIColor.init(colorType: .color_black)
         
-        infomationBtn.setNoRadiusTitle(text: "企業情報", fontType: .font_SS, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        infomationBtn.setNoRadiusTitle(text: "企業情報", fontType: .font_SSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         infomationBtn.backgroundColor = UIColor.init(colorType: .color_black)
     }
     

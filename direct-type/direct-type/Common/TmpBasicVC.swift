@@ -15,13 +15,7 @@ class TmpBasicVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.tintColor = UIColor.init(colorType: .color_white)
-        self.navigationController?.navigationBar.barTintColor = UIColor.init(colorType: .color_black)
-        self.navigationController?.navigationBar.titleTextAttributes = [
-            .font: UIFont(name: "HiraginoSans-W3", size: 24.0) as Any,
-            .foregroundColor: UIColor.init(colorType: .color_white) as Any,
-        ]
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+//        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         self.view.backgroundColor = UIColor.init(colorType: .color_base)
     }

@@ -15,6 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        if #available(iOS 13.0, *) {
+            UIApplication.shared.statusBarStyle = .darkContent
+        }
         UINavigationBar.appearance().isTranslucent = false
         UITabBar.appearance().isTranslucent = false
         

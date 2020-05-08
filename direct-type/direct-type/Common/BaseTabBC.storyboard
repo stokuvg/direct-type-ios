@@ -65,7 +65,7 @@
             <objects>
                 <navigationController id="IKQ-cZ-yEe" customClass="BaseNaviController" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="求人情報" image="recommendedDefault_GN" selectedImage="recommendedSelected_GN" id="HJn-Gm-AH2"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="C5Q-xc-ikp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="C5Q-xc-ikp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -82,7 +82,7 @@
             <objects>
                 <navigationController id="Ppu-CM-S3P" customClass="BaseNaviController" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="キープリスト" image="keepDefault_GN" selectedImage="keepSelected_GN" id="DuN-1A-Cj6"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Zhq-vc-fNM">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="Zhq-vc-fNM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -99,7 +99,7 @@
             <objects>
                 <navigationController id="hfP-cf-Djs" customClass="BaseNaviController" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="応募管理" image="managementDefault_GN" selectedImage="management_GN" id="Xbn-zq-IRi"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zAW-dc-e40">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="zAW-dc-e40">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -116,7 +116,7 @@
             <objects>
                 <navigationController id="KSE-jg-psw" customClass="BaseNaviController" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="マイページ" image="mypageDefault_GN" selectedImage="mypage_GN" id="qD5-Io-LEZ"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8GL-e3-aO8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="8GL-e3-aO8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
