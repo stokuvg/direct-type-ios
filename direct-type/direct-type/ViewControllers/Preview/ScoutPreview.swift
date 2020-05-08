@@ -8,6 +8,7 @@
 
 import UIKit
 
+//===[H-6]「スカウト希望条件確認」※初期スコープアウト
 class ScoutPreview: TmpBasicVC {
 
     override func viewDidLoad() {

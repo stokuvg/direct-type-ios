@@ -89,7 +89,7 @@ struct R: Rswift.Validatable {
   }
 
   #if os(iOS) || os(tvOS)
-  /// This `R.storyboard` struct is generated, and contains static references to 8 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 9 storyboards.
   struct storyboard {
     /// Storyboard `BaseTabBC`.
     static let baseTabBC = _R.storyboard.baseTabBC()
@@ -105,6 +105,8 @@ struct R: Rswift.Validatable {
     static let launchScreen = _R.storyboard.launchScreen()
     /// Storyboard `MyPageVC`.
     static let myPageVC = _R.storyboard.myPageVC()
+    /// Storyboard `Preview`.
+    static let preview = _R.storyboard.preview()
     /// Storyboard `SplashVC`.
     static let splashVC = _R.storyboard.splashVC()
 
@@ -154,6 +156,13 @@ struct R: Rswift.Validatable {
     /// `UIStoryboard(name: "MyPageVC", bundle: ...)`
     static func myPageVC(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.myPageVC)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "Preview", bundle: ...)`
+    static func preview(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.preview)
     }
     #endif
 
@@ -963,8 +972,10 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 5 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 6 nibs.
   struct nib {
+    /// Nib `HPreviewTBCell`.
+    static let hPreviewTBCell = _R.nib._HPreviewTBCell()
     /// Nib `JobOfferBigCardCell`.
     static let jobOfferBigCardCell = _R.nib._JobOfferBigCardCell()
     /// Nib `JobOfferCardMoreCell`.
@@ -975,6 +986,14 @@ struct R: Rswift.Validatable {
     static let naviButtonsView = _R.nib._NaviButtonsView()
     /// Nib `NoCardView`.
     static let noCardView = _R.nib._NoCardView()
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "HPreviewTBCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.hPreviewTBCell) instead")
+    static func hPreviewTBCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.hPreviewTBCell)
+    }
+    #endif
 
     #if os(iOS) || os(tvOS)
     /// `UINib(name: "JobOfferBigCardCell", in: bundle)`
@@ -1016,6 +1035,10 @@ struct R: Rswift.Validatable {
     }
     #endif
 
+    static func hPreviewTBCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HPreviewTBCell? {
+      return R.nib.hPreviewTBCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HPreviewTBCell
+    }
+
     static func jobOfferBigCardCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobOfferBigCardCell? {
       return R.nib.jobOfferBigCardCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobOfferBigCardCell
     }
@@ -1035,6 +1058,14 @@ struct R: Rswift.Validatable {
     static func noCardView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> NoCardView? {
       return R.nib.noCardView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? NoCardView
     }
+
+    fileprivate init() {}
+  }
+
+  /// This `R.reuseIdentifier` struct is generated, and contains static references to 1 reuse identifiers.
+  struct reuseIdentifier {
+    /// Reuse identifier `Cell_HPreviewTBCell`.
+    static let cell_HPreviewTBCell: Rswift.ReuseIdentifier<HPreviewTBCell> = Rswift.ReuseIdentifier(identifier: "Cell_HPreviewTBCell")
 
     fileprivate init() {}
   }
@@ -1068,6 +1099,20 @@ struct _R: Rswift.Validatable {
       try _JobOfferBigCardCell.validate()
       try _KeepCardCell.validate()
       try _NoCardView.validate()
+    }
+
+    struct _HPreviewTBCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
+      typealias ReusableType = HPreviewTBCell
+
+      let bundle = R.hostingBundle
+      let identifier = "Cell_HPreviewTBCell"
+      let name = "HPreviewTBCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HPreviewTBCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HPreviewTBCell
+      }
+
+      fileprivate init() {}
     }
 
     struct _JobOfferBigCardCell: Rswift.NibResourceType, Rswift.Validatable {
@@ -1189,6 +1234,9 @@ struct _R: Rswift.Validatable {
       #endif
       #if os(iOS) || os(tvOS)
       try myPageVC.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
+      try preview.validate()
       #endif
       #if os(iOS) || os(tvOS)
       try splashVC.validate()
@@ -1341,6 +1389,26 @@ struct _R: Rswift.Validatable {
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
         if _R.storyboard.myPageVC().sbid_MyPageVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_MyPageVC' could not be loaded from storyboard 'MyPageVC' as 'MyPageVC'.") }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    struct preview: Rswift.StoryboardResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "Preview"
+      let sbid_ProfilePreviewVC = StoryboardViewControllerResource<ProfilePreviewVC>(identifier: "Sbid_ProfilePreviewVC")
+
+      func sbid_ProfilePreviewVC(_: Void = ()) -> ProfilePreviewVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_ProfilePreviewVC)
+      }
+
+      static func validate() throws {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+        if _R.storyboard.preview().sbid_ProfilePreviewVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_ProfilePreviewVC' could not be loaded from storyboard 'Preview' as 'ProfilePreviewVC'.") }
       }
 
       fileprivate init() {}

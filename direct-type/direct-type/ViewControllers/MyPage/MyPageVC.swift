@@ -8,23 +8,36 @@
 
 import UIKit
 
+//[H-1]
 class MyPageVC: TmpNaviTopVC {
 
+    //=== ダミーで定義しています
+    //プロフィール
+    @IBOutlet weak var btnButton01: UIButton!
+    @IBAction func actButton01(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Preview", bundle: nil)
+        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ProfilePreviewVC") as? ProfilePreviewVC{
+            self.navigationController?.pushViewController(nvc, animated: true)
+        }
+
+    }
+    //履歴書
+    @IBOutlet weak var btnButton02: UIButton!
+    @IBAction func actButton02(_ sender: UIButton) {
+    }
+    //職務経歴書・スキルシート
+    @IBOutlet weak var btnButton03: UIButton!
+    @IBAction func actButton03(_ sender: UIButton) {
+    }
+    //さくさく職歴書
+    @IBOutlet weak var btnButton04: UIButton!
+    @IBAction func actButton04(_ sender: UIButton) {
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
-    */
 
 }

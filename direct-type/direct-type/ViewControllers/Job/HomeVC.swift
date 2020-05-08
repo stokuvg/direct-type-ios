@@ -51,6 +51,15 @@ class HomeVC: TmpNaviTopVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        //[Dbg]___
+        if Constants.DbgAutoPushVC {
+            let storyboard = UIStoryboard(name: "Preview", bundle: nil)
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ProfilePreviewVC") as? ProfilePreviewVC{
+                self.navigationController?.pushViewController(nvc, animated: true)
+            }
+        }
+        //[Dbg]^^^
     }
     
     override func viewDidAppear(_ animated: Bool) {
