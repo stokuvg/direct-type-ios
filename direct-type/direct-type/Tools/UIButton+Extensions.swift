@@ -16,6 +16,10 @@ extension UIButton {
         self.titleLabel?.text(text: text, fontType: fontType, textColor: textColor, alignment: alignment)
         
         self.cornerRadius = self.bounds.height/2
+        
+        self.setTitleColor(textColor.withAlphaComponent(0.8), for: .highlighted) //ボタン押下時のフィードバック（仮）
+        self.isExclusiveTouch = true //同時押し不可にしておく
+
     }
     
     func setNoRadiusTitle(text:String,fontType:FontType,textColor:UIColor, alignment:NSTextAlignment) {

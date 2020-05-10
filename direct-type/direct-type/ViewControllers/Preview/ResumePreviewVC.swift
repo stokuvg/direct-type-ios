@@ -8,6 +8,7 @@
 
 import UIKit
 
+//===[H-3]「履歴書確認」
 class ResumePreviewVC: TmpBasicVC {
 
     override func viewDidLoad() {
