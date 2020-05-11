@@ -78,3 +78,44 @@ extension ProfileBirthday {
         return "\(birthdayYear)年\(birthdayMonth)月\(birthdayDay)日"
     }
 }
+
+//=== 開発用の項目と定義など
+//ObjUserと対応させる
+enum EditItemProfile: String, EditItemProtocol {
+    case familyName
+    case firstName
+    case familyNameKana
+    case firstNameKana
+    case birthday
+    case gender
+    case zipCode
+    case prefecture
+    case address1
+    case address2
+    case mailAddress
+    case mobilePhoneNo
+    //表示名
+    var dispName: String {
+        switch self {
+        case .familyName:       return "氏"
+        case .firstName:        return "名"
+        case .familyNameKana:   return "氏（カナ）"
+        case .firstNameKana:    return "名（カナ）"
+        case .birthday:         return "誕生日"
+        case .gender:           return "性別"
+        case .zipCode:          return "郵便番号"
+        case .prefecture:       return "都道府県"
+        case .address1:         return "市区町村"
+        case .address2:         return "丁目・番地・建物名など"
+        case .mailAddress:      return "メールアドレス"
+        case .mobilePhoneNo:    return "帯電話番号（変更不可：認証アカウントと同一）"
+        }
+    }
+    //Placeholder Text
+    var placeholder: String {
+        return "[\(self.itemKey) PlaceHolder]"
+    }
+    var itemKey: String {
+        return "User_\(self.rawValue)" //ここでUniqになるようにしておく
+    }
+}

@@ -49,7 +49,7 @@ class SelectItemsManager: NSObject {
         loadMaster(type: .schoolType)
         loadMaster(type: .place)
         loadMaster(type: .employment)
-        loadMaster(type: .sex)
+        loadMaster(type: .gender)
         loadMaster(type: .changeCount)
         loadMasterGrp(type: .jobType)
         loadMaster(type: .jobExperimentYear)
@@ -187,7 +187,7 @@ extension SelectItemsManager {
         case schoolType
         case place
         case employment
-        case sex
+        case gender
         case changeCount
         case jobType
         case jobExperimentYear
@@ -207,7 +207,7 @@ extension SelectItemsManager {
             case .schoolType:           return "MstK13_schoolType"
             case .place:                return "MstK14_place"
             case .employment:           return "MstK25_employment"
-            case .sex:                  return "MstK25_sex"
+            case .gender:               return "MstK25_gender"
             case .changeCount:          return "MstK3_changeCount"
             case .jobType:              return "MstK4_jobType"
             case .jobExperimentYear:    return "MstK5_jobExperimentYear"
@@ -246,7 +246,7 @@ extension SelectItemsManager {
             } catch {
                 // contents could not be loaded
             }
-//            MyLog.Log(.master, title: "[\(type.fName)] \(arrCodeDisp.count)件のマスタを読み込みました")
+//            ////MyLog.Log(.master, title: "[\(type.fName)] \(arrCodeDisp.count)件のマスタを読み込みました")
             //===[ソート後のものを保持しておく]===___
             arrMaster[type] = []
             arrMaster[type]?.append(Constants.SelectItemsUndefine) //先頭に未選択をつけておく
@@ -322,7 +322,7 @@ extension SelectItemsManager {
             //    }
             //}
             ////===[Debug: 内容確認]===^^^
-//            MyLog.Log(.master, title: "[\(type.fName)] \(arrCodeDisp.count)件のマスタを読み込みました")
+//            ////MyLog.Log(.master, title: "[\(type.fName)] \(arrCodeDisp.count)件のマスタを読み込みました")
         }
     }
     //======================================================
@@ -333,4 +333,19 @@ extension SelectItemsManager {
     class func getMaster(_ type: TsvMaster) -> ([CodeDisp], [GrpCodeDisp]) {
         return (self.shared.arrMasterDai[type] ?? [], self.shared.arrMasterSyou[type] ?? [])
     }
+    //======================================================
+    //種別とコードを渡すと、対応するCodeDispを返却する
+    class func getCodeDisp(_ type: TsvMaster, code: String) -> CodeDisp? {
+        let mst: [CodeDisp] = getMaster(type)
+        return mst.filter { (cd) -> Bool in
+            cd.code == code
+        }.first
+    }
+    class func getCodeDisp(_ type: TsvMaster, code: Int) -> CodeDisp? {
+        let mst: [CodeDisp] = getMaster(type)
+        return mst.filter { (cd) -> Bool in
+            cd.code == String(code)
+        }.first
+    }
+
 }
