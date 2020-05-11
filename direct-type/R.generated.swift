@@ -972,7 +972,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 10 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 11 nibs.
   struct nib {
     /// Nib `HPreviewTBCell`.
     static let hPreviewTBCell = _R.nib._HPreviewTBCell()
@@ -988,6 +988,8 @@ struct R: Rswift.Validatable {
     static let jobOfferBigCardCell = _R.nib._JobOfferBigCardCell()
     /// Nib `JobOfferCardMoreCell`.
     static let jobOfferCardMoreCell = _R.nib._JobOfferCardMoreCell()
+    /// Nib `JobOfferCardReloadCell`.
+    static let jobOfferCardReloadCell = _R.nib._JobOfferCardReloadCell()
     /// Nib `KeepCardCell`.
     static let keepCardCell = _R.nib._KeepCardCell()
     /// Nib `NaviButtonsView`.
@@ -1052,6 +1054,14 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
+    /// `UINib(name: "JobOfferCardReloadCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobOfferCardReloadCell) instead")
+    static func jobOfferCardReloadCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.jobOfferCardReloadCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
     /// `UINib(name: "KeepCardCell", in: bundle)`
     @available(*, deprecated, message: "Use UINib(resource: R.nib.keepCardCell) instead")
     static func keepCardCell(_: Void = ()) -> UIKit.UINib {
@@ -1101,6 +1111,10 @@ struct R: Rswift.Validatable {
 
     static func jobOfferCardMoreCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobOfferCardMoreCell? {
       return R.nib.jobOfferCardMoreCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobOfferCardMoreCell
+    }
+
+    static func jobOfferCardReloadCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobOfferCardReloadCell? {
+      return R.nib.jobOfferCardReloadCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobOfferCardReloadCell
     }
 
     static func keepCardCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> KeepCardCell? {
@@ -1248,6 +1262,17 @@ struct _R: Rswift.Validatable {
 
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobOfferCardMoreCell? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobOfferCardMoreCell
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _JobOfferCardReloadCell: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "JobOfferCardReloadCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobOfferCardReloadCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobOfferCardReloadCell
       }
 
       fileprivate init() {}

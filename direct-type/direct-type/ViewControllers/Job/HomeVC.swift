@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum CardDispType:Int {
+    case none   // 何も無い
+    case add    // 追加
+    case end    // 最後まで表示
+}
+
 class HomeVC: TmpNaviTopVC {
     @IBOutlet weak var homeTableView:UITableView!
     
@@ -16,9 +22,8 @@ class HomeVC: TmpNaviTopVC {
     var dispTableData:[[String: Any]] = []
     var masterTableData:[[String:Any]] = []
     
-    var moreBtnDispFlag:Bool = false
     var moreCnt:Int = 1
-    var noCardFlag:Bool = false
+    var dispType:CardDispType = .none
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,17 +37,19 @@ class HomeVC: TmpNaviTopVC {
         homeTableView.backgroundColor = UIColor.init(colorType: .color_base)
         homeTableView.rowHeight = 600
         
-        homeTableView.registerNib(nibName: "JobOfferBigCardCell", idName: "JobOfferBigCardCell")
-        homeTableView.registerNib(nibName: "JobOfferCardMoreCell", idName: "JobOfferCardMoreCell")
-        homeTableView.registerNib(nibName: "JobNoOfferCardCell", idName: "JobNoOfferCardCell")
+        homeTableView.registerNib(nibName: "JobOfferBigCardCell", idName: "JobOfferBigCardCell")        // 求人カード
+        homeTableView.registerNib(nibName: "JobOfferCardMoreCell", idName: "JobOfferCardMoreCell")      // もっと見る
+        homeTableView.registerNib(nibName: "JobOfferCardReloadCell", idName: "JobOfferCardReloadCell")// 全求人カード表示/更新
         
         self.makeDummyData()
         if masterTableData.count > 0 {
             homeTableView.isHidden = false
+            dispType = .add
             self.homeTableView.delegate = self
             self.homeTableView.dataSource = self
             self.homeTableView.reloadData()
         } else {
+            dispType = .none
             let cardNoView = UINib(nibName: "NoCardView", bundle: nil)
                 .instantiate(withOwner: nil, options: nil)
                 .first as! NoCardView
@@ -134,8 +141,10 @@ class HomeVC: TmpNaviTopVC {
 extension HomeVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let row = indexPath.row
-        if row == dispTableData.count && moreBtnDispFlag {
+        if row == dispTableData.count && dispType == .add {
             return 100
+        } else if row == dispTableData.count && dispType == .end {
+            return 250
         }
         return UITableView.automaticDimension
     }
@@ -154,32 +163,44 @@ extension HomeVC: UITableViewDelegate {
 extension HomeVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if masterTableData.count == 0 {
-            noCardFlag = true
-            return 1
-        }
-        noCardFlag = true
-        if masterTableData.count > dispTableData.count {
-            moreBtnDispFlag = true
+        
+        // 表示可能なデータの数と現在表示している数が同じ
+        if masterTableData.count == dispTableData.count {
+            dispType = .end
             return (dispTableData.count + 1)
         } else {
-            moreBtnDispFlag = false
-            return dispTableData.count
+            dispType = .add
+            return (dispTableData.count + 1)
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = indexPath.row
-        // row の最後がもっと見るボタンかどうか
-        if moreBtnDispFlag == true && (row == dispTableData.count) {
-            let cell = tableView.loadCell(cellName: "JobOfferCardMoreCell", indexPath: indexPath) as! JobOfferCardMoreCell
-            cell.delegate = self
-            return cell
-        } else {
-            let data = dispTableData[row]
-            let cell = tableView.loadCell(cellName: "JobOfferBigCardCell", indexPath: indexPath) as! JobOfferBigCardCell
-            cell.setup(data: data)
-            return cell
+        switch dispType {
+        case .add:
+            if row == dispTableData.count {
+                let cell = tableView.loadCell(cellName: "JobOfferCardMoreCell", indexPath: indexPath) as! JobOfferCardMoreCell
+                cell.delegate = self
+                return cell
+            } else {
+                let data = dispTableData[row]
+                let cell = tableView.loadCell(cellName: "JobOfferBigCardCell", indexPath: indexPath) as! JobOfferBigCardCell
+                cell.setup(data: data)
+                return cell
+            }
+        case .end:
+            if row == dispTableData.count {
+                let cell = tableView.loadCell(cellName: "JobOfferCardReloadCell", indexPath: indexPath) as! JobOfferCardReloadCell
+                cell.delegate = self
+                return cell
+            } else {
+                let data = dispTableData[row]
+                let cell = tableView.loadCell(cellName: "JobOfferBigCardCell", indexPath: indexPath) as! JobOfferBigCardCell
+                cell.setup(data: data)
+                return cell
+            }
+        default:
+            return UITableViewCell()
         }
     }
     
@@ -221,5 +242,13 @@ extension HomeVC: JobOfferCardMoreCellDelegate {
 
 extension HomeVC: NoCardViewDelegate {
     func registEditAction() {
+    }
+}
+
+extension HomeVC: JobOfferCardReloadCellDelegate {
+    func allTableReloadAction() {
+        Log.selectLog(logLevel: .debug, "allTableReloadAction start")
+        // 精度の高い求人を受け取る
+        self.homeTableView.reloadData()
     }
 }
