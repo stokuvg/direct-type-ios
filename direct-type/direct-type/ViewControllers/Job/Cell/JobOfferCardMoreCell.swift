@@ -25,6 +25,7 @@ class JobOfferCardMoreCell: BaseTableViewCell {
         super.awakeFromNib()
         // Initialization code
         //        deleteBtn.titleLabel?.text(text: "見送り", fontType: .C_font_M, textColor: textColor, alignment: .center)
+        self.backgroundColor = UIColor.init(colorType: .color_base)
         
         moreBtn.setTitle("もっと見る", for: .normal)
         

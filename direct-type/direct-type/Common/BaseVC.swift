@@ -31,13 +31,15 @@ class BaseVC: UIViewController {
         // 画面タップ不可設定
         SVProgressHUD.setDefaultMaskType(.black)
         
-//        self.navigationItem.backBarButtonItem = UIBarButtonItem(image: UIImage(named: "arDefaultWhite"), style: .plain, target: self, action: nil)
+        self.navigationItem.backBarButtonItem = UIBarButtonItem.init(title: "", style: .plain, target: self, action: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         Log.selectLog(logLevel: .debug, "BaseVC viewWillAppear start")
+        
+        self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "arDefaultWhite")
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "arDefaultWhite")
         
         if #available(iOS 13.0, *) {
             self.setStattusBarStyle(style: .darkContent)
@@ -79,6 +81,9 @@ class BaseVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 //        Log.selectLog(logLevel: .debug, "BaseVC viewWillDisappear start")
+
+        self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "arDefaultWhite")
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "arDefaultWhite")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -93,6 +98,18 @@ class BaseVC: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return statusBarStyle
+    }
+    
+    //
+    func setRightSearchBtn() {
+        let searchImage = UIImage(named: "refineDefaultWhiteBase")
+        let searchItemBtn = UIBarButtonItem.init(image: searchImage, style: .done, target: self, action: #selector(searchBtnAction))
+        
+        self.navigationItem.rightBarButtonItem = searchItemBtn
+    }
+    
+    @objc func searchBtnAction() {
+        
     }
     
     func getVC<T: UIViewController>(sbName:String,vcName:String) -> T? {

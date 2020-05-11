@@ -26,6 +26,10 @@ class HomeVC: TmpNaviTopVC {
         // Do any additional setup after loading the view.
         title(name: "あなたにぴったりの求人")
         
+        // TODO:初回リリースでは外す
+//        self.setRightSearchBtn()
+        
+        homeTableView.backgroundColor = UIColor.init(colorType: .color_base)
         homeTableView.rowHeight = 600
         
         homeTableView.registerNib(nibName: "JobOfferBigCardCell", idName: "JobOfferBigCardCell")
@@ -131,7 +135,7 @@ extension HomeVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let row = indexPath.row
         if row == dispTableData.count && moreBtnDispFlag {
-            return 70
+            return 100
         }
         return UITableView.automaticDimension
     }

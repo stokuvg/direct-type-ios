@@ -972,9 +972,10 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-<<<<<<< HEAD
-  /// This `R.nib` struct is generated, and contains static references to 9 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 10 nibs.
   struct nib {
+    /// Nib `HPreviewTBCell`.
+    static let hPreviewTBCell = _R.nib._HPreviewTBCell()
     /// Nib `JobDetailArticleCell`.
     static let jobDetailArticleCell = _R.nib._JobDetailArticleCell()
     /// Nib `JobDetailArticleHeaderView`.
@@ -983,12 +984,6 @@ struct R: Rswift.Validatable {
     static let jobDetailDataCell = _R.nib._JobDetailDataCell()
     /// Nib `JobDetailGuideBookHeaderView`.
     static let jobDetailGuideBookHeaderView = _R.nib._JobDetailGuideBookHeaderView()
-=======
-  /// This `R.nib` struct is generated, and contains static references to 6 nibs.
-  struct nib {
-    /// Nib `HPreviewTBCell`.
-    static let hPreviewTBCell = _R.nib._HPreviewTBCell()
->>>>>>> 275ab3fd1bb7f33708c48a1f1a7e801002892e14
     /// Nib `JobOfferBigCardCell`.
     static let jobOfferBigCardCell = _R.nib._JobOfferBigCardCell()
     /// Nib `JobOfferCardMoreCell`.
@@ -1001,7 +996,14 @@ struct R: Rswift.Validatable {
     static let noCardView = _R.nib._NoCardView()
 
     #if os(iOS) || os(tvOS)
-<<<<<<< HEAD
+    /// `UINib(name: "HPreviewTBCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.hPreviewTBCell) instead")
+    static func hPreviewTBCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.hPreviewTBCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
     /// `UINib(name: "JobDetailArticleCell", in: bundle)`
     @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailArticleCell) instead")
     static func jobDetailArticleCell(_: Void = ()) -> UIKit.UINib {
@@ -1030,12 +1032,6 @@ struct R: Rswift.Validatable {
     @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailGuideBookHeaderView) instead")
     static func jobDetailGuideBookHeaderView(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.jobDetailGuideBookHeaderView)
-=======
-    /// `UINib(name: "HPreviewTBCell", in: bundle)`
-    @available(*, deprecated, message: "Use UINib(resource: R.nib.hPreviewTBCell) instead")
-    static func hPreviewTBCell(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.hPreviewTBCell)
->>>>>>> 275ab3fd1bb7f33708c48a1f1a7e801002892e14
     }
     #endif
 
@@ -1079,7 +1075,10 @@ struct R: Rswift.Validatable {
     }
     #endif
 
-<<<<<<< HEAD
+    static func hPreviewTBCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HPreviewTBCell? {
+      return R.nib.hPreviewTBCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HPreviewTBCell
+    }
+
     static func jobDetailArticleCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailArticleCell? {
       return R.nib.jobDetailArticleCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailArticleCell
     }
@@ -1094,10 +1093,6 @@ struct R: Rswift.Validatable {
 
     static func jobDetailGuideBookHeaderView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailGuideBookHeaderView? {
       return R.nib.jobDetailGuideBookHeaderView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailGuideBookHeaderView
-=======
-    static func hPreviewTBCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HPreviewTBCell? {
-      return R.nib.hPreviewTBCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HPreviewTBCell
->>>>>>> 275ab3fd1bb7f33708c48a1f1a7e801002892e14
     }
 
     static func jobOfferBigCardCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobOfferBigCardCell? {
@@ -1162,7 +1157,20 @@ struct _R: Rswift.Validatable {
       try _NoCardView.validate()
     }
 
-<<<<<<< HEAD
+    struct _HPreviewTBCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
+      typealias ReusableType = HPreviewTBCell
+
+      let bundle = R.hostingBundle
+      let identifier = "Cell_HPreviewTBCell"
+      let name = "HPreviewTBCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HPreviewTBCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HPreviewTBCell
+      }
+
+      fileprivate init() {}
+    }
+
     struct _JobDetailArticleCell: Rswift.NibResourceType {
       let bundle = R.hostingBundle
       let name = "JobDetailArticleCell"
@@ -1202,17 +1210,6 @@ struct _R: Rswift.Validatable {
 
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailGuideBookHeaderView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailGuideBookHeaderView
-=======
-    struct _HPreviewTBCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
-      typealias ReusableType = HPreviewTBCell
-
-      let bundle = R.hostingBundle
-      let identifier = "Cell_HPreviewTBCell"
-      let name = "HPreviewTBCell"
-
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HPreviewTBCell? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HPreviewTBCell
->>>>>>> 275ab3fd1bb7f33708c48a1f1a7e801002892e14
       }
 
       fileprivate init() {}
@@ -1430,6 +1427,7 @@ struct _R: Rswift.Validatable {
 
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
+          if UIKit.UIColor(named: "color-base", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-base' is used in storyboard 'JobOfferDetailVC', but couldn't be loaded.") }
         }
         if _R.storyboard.jobOfferDetailVC().sbid_JobOfferDetailVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_JobOfferDetailVC' could not be loaded from storyboard 'JobOfferDetailVC' as 'JobOfferDetailVC'.") }
       }

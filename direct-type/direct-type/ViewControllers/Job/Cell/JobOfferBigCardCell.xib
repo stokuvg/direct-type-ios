@@ -205,7 +205,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="16" height="25"/>
                                                             </imageView>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="bottom" secondItem="Oya-1d-veS" secondAttribute="bottom" id="MWE-bR-t5A"/>
                                                             <constraint firstAttribute="width" constant="16" id="Xha-jH-crd"/>

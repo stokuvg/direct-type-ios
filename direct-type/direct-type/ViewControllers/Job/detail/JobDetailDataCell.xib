@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,49 +23,49 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YgN-jK-fDd">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" name="color-white"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="LKy-5i-Aim"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e7C-ve-Djh">
                                 <rect key="frame" x="0.0" y="40" width="320" height="60"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" name="color-white"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="JZA-Ux-vIa"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="po3-E0-g9z">
                                 <rect key="frame" x="0.0" y="100" width="320" height="50"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" name="color-white"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Szv-1z-rv1"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jbq-tj-Lrl">
                                 <rect key="frame" x="0.0" y="150" width="320" height="40"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" name="color-white"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="AxJ-L6-cXj"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kIS-Dh-gdm">
                                 <rect key="frame" x="0.0" y="190" width="320" height="40"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" name="color-white"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Igi-Nx-YBZ"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M2Q-bb-2Zh">
                                 <rect key="frame" x="0.0" y="230" width="320" height="30"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" name="color-white"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="qIs-LP-biq"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZBe-st-eQT">
                                 <rect key="frame" x="0.0" y="260" width="320" height="290"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" name="color-white"/>
                             </view>
                         </subviews>
                     </stackView>
@@ -90,4 +91,9 @@
             <point key="canvasLocation" x="132" y="139"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <namedColor name="color-white">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

@@ -18,6 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <color key="backgroundColor" name="color-white"/>
             </tableViewCellContentView>
+            <color key="backgroundColor" name="color-white"/>
             <point key="canvasLocation" x="132" y="96"/>
         </tableViewCell>
     </objects>

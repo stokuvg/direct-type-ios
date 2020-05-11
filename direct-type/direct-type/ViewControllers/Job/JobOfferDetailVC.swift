@@ -136,9 +136,13 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 let cell = tableView.loadCell(cellName: "JobDetailArticleCell", indexPath: indexPath) as! JobDetailArticleCell
                 return cell
             case (1,0):
-                return UITableViewCell()
+                let cell = UITableViewCell()
+                cell.backgroundColor = UIColor.init(colorType: .color_base)
+                return cell
             default:
-                return UITableViewCell()
+                let cell = UITableViewCell()
+                cell.backgroundColor = UIColor.init(colorType: .color_base)
+                return cell
         }
     }
     

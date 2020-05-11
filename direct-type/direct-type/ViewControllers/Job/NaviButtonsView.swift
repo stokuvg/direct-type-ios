@@ -45,6 +45,8 @@ class NaviButtonsView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        self.backgroundColor = UIColor.init(colorType: .color_sub)
+        
         workContentsBtn.setNoRadiusTitle(text: "仕事内容", fontType: .font_SSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         workContentsBtn.backgroundColor = UIColor.init(colorType: .color_black)
         

@@ -14,6 +14,7 @@ class JobOfferBigCardCell: BaseJobCardCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.backgroundColor = UIColor.init(colorType: .color_base)
         
         stackView.layer.cornerRadius = 15
         
@@ -21,6 +22,7 @@ class JobOfferBigCardCell: BaseJobCardCell {
         thumnailImageView.layer.cornerRadius = 15
         thumnailImageView.layer.maskedCorners = [.layerMinXMinYCorner,.layerMaxXMinYCorner]
         
+        limitedMarkView.cornerRadius = 5
         limitedLabel.text(text: "終了間近", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         
         btnView.layer.cornerRadius = 15

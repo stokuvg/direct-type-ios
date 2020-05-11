@@ -32,6 +32,7 @@ class JobDetailDataCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.backgroundColor = UIColor.init(colorType: .color_base)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
