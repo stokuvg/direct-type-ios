@@ -21,8 +21,8 @@ protocol EditItemProtocol {
 enum EditType {
     case readonly           //String
     case inputText          //String
+    case inputZipcode       //String - String
     case inputTextSecret    //String
-    case suggestInputText   //String
     case selectDrum         //一覧からの選択（Drumで表示）
     case selectSingle       //一覧からの選択（単体選択）
     case selectMulti        //一覧からの選択（複数選択）
@@ -46,6 +46,8 @@ struct EditableItem {
         //=== そのまま値を表示してよいもの
         case .readonly, .inputText, .inputTextSecret:
             return "\(_val)"
+    case .inputZipcode:
+        return "\(_val)"
         //=== 選択肢一覧を取得し、指定項目の表示名を求めて表示するもの
         case .selectDrum:
             let selectionItems = SelectItemsManager.getSelectItems(type: self.editItem, grpCodeFilter: nil)
@@ -53,8 +55,6 @@ struct EditableItem {
                 obj.code == _val
             }.first?.disp ?? Constants.SelectItemsUndefine.disp
             return "\(buf)"
-        case .suggestInputText:
-            return "\(_val)"
 
         case .selectSingle, .selectMulti, .selectSpecisl:
             let selectionItems = SelectItemsManager.getSelectItems(type: self.editItem, grpCodeFilter: nil)

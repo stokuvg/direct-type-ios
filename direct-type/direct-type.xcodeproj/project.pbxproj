@@ -122,6 +122,15 @@
 		26BF48F024639E7100E00215 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF48EF24639E7100E00215 /* Constants.swift */; };
 		26BF48F224639F7600E00215 /* ObjDbg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF48F124639F7600E00215 /* ObjDbg.swift */; };
 		26BF48F424639F9900E00215 /* ObjUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF48F324639F9900E00215 /* ObjUser.swift */; };
+		26CFC45F2469495800E458E2 /* ConstantsPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFC45E2469495800E458E2 /* ConstantsPreview.swift */; };
+		26CFC4662469496D00E458E2 /* HEditZipcodeTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFC4602469496D00E458E2 /* HEditZipcodeTBCell.swift */; };
+		26CFC4672469496D00E458E2 /* Edit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26CFC4612469496D00E458E2 /* Edit.storyboard */; };
+		26CFC4682469496D00E458E2 /* HEditZipcodeTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26CFC4622469496D00E458E2 /* HEditZipcodeTBCell.xib */; };
+		26CFC4692469496D00E458E2 /* HEditTextTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26CFC4632469496D00E458E2 /* HEditTextTBCell.xib */; };
+		26CFC46A2469496D00E458E2 /* HEditTextTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFC4642469496D00E458E2 /* HEditTextTBCell.swift */; };
+		26CFC46B2469496D00E458E2 /* EditableItemH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFC4652469496D00E458E2 /* EditableItemH.swift */; };
+		26CFC46E246949B800E458E2 /* MyColorDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFC46C246949B800E458E2 /* MyColorDefine.swift */; };
+		26CFC46F246949B800E458E2 /* ClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFC46D246949B800E458E2 /* ClassExtensions.swift */; };
 		C29161DB95966DD7132DBD19 /* Pods_direct_type.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A49B0215E0F4A582FB1EC5E /* Pods_direct_type.framework */; };
 /* End PBXBuildFile section */
 
@@ -244,6 +253,15 @@
 		26BF48EF24639E7100E00215 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		26BF48F124639F7600E00215 /* ObjDbg.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjDbg.swift; sourceTree = "<group>"; };
 		26BF48F324639F9900E00215 /* ObjUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjUser.swift; sourceTree = "<group>"; };
+		26CFC45E2469495800E458E2 /* ConstantsPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsPreview.swift; sourceTree = "<group>"; };
+		26CFC4602469496D00E458E2 /* HEditZipcodeTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HEditZipcodeTBCell.swift; sourceTree = "<group>"; };
+		26CFC4612469496D00E458E2 /* Edit.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Edit.storyboard; sourceTree = "<group>"; };
+		26CFC4622469496D00E458E2 /* HEditZipcodeTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HEditZipcodeTBCell.xib; sourceTree = "<group>"; };
+		26CFC4632469496D00E458E2 /* HEditTextTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HEditTextTBCell.xib; sourceTree = "<group>"; };
+		26CFC4642469496D00E458E2 /* HEditTextTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HEditTextTBCell.swift; sourceTree = "<group>"; };
+		26CFC4652469496D00E458E2 /* EditableItemH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableItemH.swift; sourceTree = "<group>"; };
+		26CFC46C246949B800E458E2 /* MyColorDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyColorDefine.swift; sourceTree = "<group>"; };
+		26CFC46D246949B800E458E2 /* ClassExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassExtensions.swift; sourceTree = "<group>"; };
 		8A49B0215E0F4A582FB1EC5E /* Pods_direct_type.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_direct_type.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8C351EB920291E353136BB9 /* Pods-direct-type.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-direct-type.debug.xcconfig"; path = "Target Support Files/Pods-direct-type/Pods-direct-type.debug.xcconfig"; sourceTree = "<group>"; };
 		F6660969F9095E20D9CE432A /* Pods-direct-type.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-direct-type.release.xcconfig"; path = "Target Support Files/Pods-direct-type/Pods-direct-type.release.xcconfig"; sourceTree = "<group>"; };
@@ -522,6 +540,7 @@
 			isa = PBXGroup;
 			children = (
 				260BBFDD24651732003D163A /* HPreviewTBCell.swift */,
+				26CFC45E2469495800E458E2 /* ConstantsPreview.swift */,
 				260BBFDF24651732003D163A /* HPreviewTBCell.xib */,
 				260BBFDE24651732003D163A /* Preview.storyboard */,
 				06E519CB24581634004E4B7A /* ProfilePreviewVC.swift */,
@@ -534,7 +553,15 @@
 		06E519D124581667004E4B7A /* Edit */ = {
 			isa = PBXGroup;
 			children = (
+				26CFC46D246949B800E458E2 /* ClassExtensions.swift */,
+				26CFC46C246949B800E458E2 /* MyColorDefine.swift */,
 				06E519D224581684004E4B7A /* ContentsEditVC.swift */,
+				26CFC4612469496D00E458E2 /* Edit.storyboard */,
+				26CFC4652469496D00E458E2 /* EditableItemH.swift */,
+				26CFC4642469496D00E458E2 /* HEditTextTBCell.swift */,
+				26CFC4632469496D00E458E2 /* HEditTextTBCell.xib */,
+				26CFC4602469496D00E458E2 /* HEditZipcodeTBCell.swift */,
+				26CFC4622469496D00E458E2 /* HEditZipcodeTBCell.xib */,
 				06E519B6245814D4004E4B7A /* ProfileEditVC.swift */,
 				06E519B8245814DF004E4B7A /* ResumeEditVC.swift */,
 				06E519BA245814EB004E4B7A /* CareerEditVC.swift */,
@@ -708,6 +735,7 @@
 				06D700332456B5FC00E55FC8 /* Color.xcassets in Resources */,
 				26BF48E224639D2B00E00215 /* MstK4_jobType.tsv in Resources */,
 				064570642465427000F3B015 /* JobDetailGuideBookHeaderView.xib in Resources */,
+				26CFC4682469496D00E458E2 /* HEditZipcodeTBCell.xib in Resources */,
 				066763782457B0A700AC5039 /* KeepListVC.storyboard in Resources */,
 				26BF48E624639D2B00E00215 /* MstK8_qualification.tsv in Resources */,
 				26BF48E424639D2B00E00215 /* MstL2_prCode.tsv in Resources */,
@@ -727,12 +755,14 @@
 				26BF48DB24639D2B00E00215 /* MstK11_entryPlace.tsv in Resources */,
 				066763742457B08F00AC5039 /* EntryVC.storyboard in Resources */,
 				26BF48D924639D2B00E00215 /* MstK25_employment.tsv in Resources */,
+				26CFC4692469496D00E458E2 /* HEditTextTBCell.xib in Resources */,
 				260BBFE224651732003D163A /* HPreviewTBCell.xib in Resources */,
 				26BF48DA24639D2B00E00215 /* MstK14_place.tsv in Resources */,
 				066BD9DE2456ACB4009E610B /* SplashVC.storyboard in Resources */,
 				063350E52463FD9C00AF90F3 /* NaviButtonsView.xib in Resources */,
 				066763642457ABDB00AC5039 /* BaseTabBC.storyboard in Resources */,
 				26BF48E824639D2B00E00215 /* MstK5_jobExperimentYear.tsv in Resources */,
+				26CFC4672469496D00E458E2 /* Edit.storyboard in Resources */,
 				066B2D872468DD0D00355E03 /* JobOfferCardReloadCell.xib in Resources */,
 				064EF6FC24654FDB00853ADD /* JobDetailArticleCell.xib in Resources */,
 				26BF48DD24639D2B00E00215 /* MstK25_sex.tsv in Resources */,
@@ -845,7 +875,9 @@
 				067F28DF2456D013000AAD69 /* TmpNaviTopVC.swift in Sources */,
 				06E519D02458164B004E4B7A /* ScoutPreview.swift in Sources */,
 				06E519C024581561004E4B7A /* ScountDetailVC.swift in Sources */,
+				26CFC45F2469495800E458E2 /* ConstantsPreview.swift in Sources */,
 				06E519AD245813DC004E4B7A /* LoginVC.swift in Sources */,
+				26CFC46F246949B800E458E2 /* ClassExtensions.swift in Sources */,
 				066BD9D72456ACB4009E610B /* AppDelegate.swift in Sources */,
 				06E519D6245816A5004E4B7A /* WebTemplateVC.swift in Sources */,
 				06E519A92458139B004E4B7A /* SignupConfirmVC.swift in Sources */,
@@ -862,12 +894,15 @@
 				260BBFDC2465171D003D163A /* MdlProfile.swift in Sources */,
 				06E5197A2457BA36004E4B7A /* SplashVC.swift in Sources */,
 				06E519BE24581558004E4B7A /* ScountListVC.swift in Sources */,
+				26CFC46E246949B800E458E2 /* MyColorDefine.swift in Sources */,
 				260BBFE024651732003D163A /* HPreviewTBCell.swift in Sources */,
 				06DCAEA9245A70A8008FE9FA /* UITableView+Extensions.swift in Sources */,
+				26CFC46A2469496D00E458E2 /* HEditTextTBCell.swift in Sources */,
 				06E519C9245815C8004E4B7A /* CareerVC.swift in Sources */,
 				067F28D02456CCB8000AAD69 /* BaseVC.swift in Sources */,
 				26BF48EE24639DEE00E00215 /* EditableObj.swift in Sources */,
 				06E519B3245814BD004E4B7A /* EntryLoginVC.swift in Sources */,
+				26CFC46B2469496D00E458E2 /* EditableItemH.swift in Sources */,
 				066B2D862468DD0D00355E03 /* JobOfferCardReloadCell.swift in Sources */,
 				26BF48F024639E7100E00215 /* Constants.swift in Sources */,
 				064EF6F724654A7300853ADD /* JobDetailDataCell.swift in Sources */,
@@ -877,6 +912,7 @@
 				06C347242463A595000FB4DA /* UIButton+Extensions.swift in Sources */,
 				067F28E52456D05F000AAD69 /* TmpWebVC.swift in Sources */,
 				06E519832457CF90004E4B7A /* JobOfferBigCardCell.swift in Sources */,
+				26CFC4662469496D00E458E2 /* HEditZipcodeTBCell.swift in Sources */,
 				06E5198D2457D6FF004E4B7A /* ChemistryStart.swift in Sources */,
 				06E519CE2458163F004E4B7A /* ResumePreviewVC.swift in Sources */,
 				063350E32463FD9600AF90F3 /* NaviButtonsView.swift in Sources */,
