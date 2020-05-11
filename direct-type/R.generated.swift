@@ -177,7 +177,7 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.color` struct is generated, and contains static references to 10 colors.
+  /// This `R.color` struct is generated, and contains static references to 12 colors.
   struct color {
     /// Color `color-alart`.
     static let colorAlart = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-alart")
@@ -193,6 +193,10 @@ struct R: Rswift.Validatable {
     static let colorMain = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-main")
     /// Color `color-parts_gray`.
     static let colorParts_gray = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-parts_gray")
+    /// Color `color-slider-gray`.
+    static let colorSliderGray = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-slider-gray")
+    /// Color `color-slider-sub`.
+    static let colorSliderSub = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-slider-sub")
     /// Color `color-sub2`.
     static let colorSub2 = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-sub2")
     /// Color `color-sub`.
@@ -260,6 +264,24 @@ struct R: Rswift.Validatable {
     @available(iOS 11.0, *)
     static func colorParts_gray(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
       return UIKit.UIColor(resource: R.color.colorParts_gray, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "color-slider-gray", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorSliderGray(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorSliderGray, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "color-slider-sub", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorSliderSub(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorSliderSub, compatibleWith: traitCollection)
     }
     #endif
 
