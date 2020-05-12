@@ -43,9 +43,8 @@ class JobDetailDataCell: UITableViewCell {
     
     var cellWidth:CGFloat = 0
     
-    var images:[UIImage] = []
-    var imageViews:[UIImageView] = []
     
+    var imageList:[String] = []
     var imageCnt:Int = 0
 
     override func awakeFromNib() {
@@ -92,9 +91,9 @@ class JobDetailDataCell: UITableViewCell {
                 imageView.backgroundColor = UIColor.init(colorType: .color_black)
                 imageView.contentMode = .scaleAspectFit
                 imageView.af_setImage(withURL: imageUrl!)
-                
+                imageView.tag = (i+1)
                 imageView.cornerRadius = 15
-                imageViews.append(imageView)
+                imageList.append(imageUrlString)
                 self.mainImagesScrollView.addSubview(imageView)
             }
             self.mainImagesScrollView.contentSize = CGSize(width: (CGFloat(imageUrls.count) * viewWidth), height: viewHeight)
@@ -103,128 +102,90 @@ class JobDetailDataCell: UITableViewCell {
         }
     }
     
+    func setupImageViews() {
+        if imageList.count > 0 {
+            for i in 0..<self.imageList.count {
+                let imageUrlString = imageList[i]
+                let imageUrl = URL(string: imageUrlString)
+                let scrollX:CGFloat = (margin + (viewWidth * CGFloat(i)))
+                let imageView = UIImageView.init(frame: CGRect(x: scrollX, y: imageY, width: imageW, height: imageH))
+                imageView.backgroundColor = UIColor.init(colorType: .color_black)
+                imageView.contentMode = .scaleAspectFit
+                imageView.af_setImage(withURL: imageUrl!)
+                imageView.tag = (i+1)
+                imageView.cornerRadius = 15
+                self.mainImagesScrollView.addSubview(imageView)
+            }
+            
+        }
+    }
+    
+    private func updatePageControl(scrollView:UIScrollView) {
+        Log.selectLog(logLevel: .debug, "JobDetailDataCell updatePageControl start")
+        
+        let pageWidth = scrollView.frame.size.width
+        Log.selectLog(logLevel: .debug, "pageWidth:\(pageWidth)")
+        let pageOffsetX = scrollView.contentOffset.x
+        Log.selectLog(logLevel: .debug, "pageOffsetX:\(pageOffsetX)")
+        let pageNo = Int(pageOffsetX / pageWidth)
+        Log.selectLog(logLevel: .debug, "pageNo:\(pageNo)")
+        self.mainImagesControl.currentPage = pageNo
+        
+        let checkPageNo = Int(pageOffsetX / pageWidth / 1.5)
+        Log.selectLog(logLevel: .debug, "checkPageNo:\(checkPageNo)")
+    }
+    
 }
 
 extension JobDetailDataCell: UIScrollViewDelegate {
     
+    /*
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        Log.selectLog(logLevel: .debug, "JobDetailDataCell scrollViewWillEndDragging start")
+        
+        Log.selectLog(logLevel: .debug, "scrollView:\(scrollView)")
+    }
+    */
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        Log.selectLog(logLevel: .debug, "JobDetailDataCell scrollViewDidScroll start")
         
-        /*
-        for i in 0..<imageViews.count {
-            let imageView = imageViews[i]
-            images.append(imageView.image!)
-        }
-        */
+        let offsetX = self.mainImagesScrollView.contentOffset.x
+//        Log.selectLog(logLevel: .debug, "offsetX:\(offsetX)")
         
-        let offsetX = scrollView.contentOffset.x
-        
-        if offsetX > (scrollView.frame.size.width * 1.5) {
+        if offsetX > (self.mainImagesScrollView.frame.size.width * 1.5) {
+            // 画像の要素を末尾の要素にする
+            let sortedImage = self.imageList[0]
+            self.imageList.append(sortedImage)
+            // 画像の一覧の先頭要素を削除
+            self.imageList.removeFirst()
+            // 順番が入れ替えられたimageListで描画
+            self.setupImageViews()
             
-            scrollSubViewChangeLast()
+            // ページコントロールを更新
+            self.updatePageControl(scrollView: scrollView)
             
-            scrollView.contentOffset.x -= self.mainImagesScrollView.bounds.size.width
+//            self.mainImagesScrollView.contentOffset.x -= self.mainImagesScrollView.frame.size.width
+            self.mainImagesScrollView.contentOffset.x -= cellWidth
             
-            let subViews = scrollView.subviews
-            for subView in subViews {
-                Log.selectLog(logLevel: .debug, "subView:\(subView)")
-            }
-            
-        }
-        
-        if offsetX < (scrollView.frame.size.width * 0.5) {
-            
-            scrollSubViewChangeFirst()
-            /*
-            let imageView = scrollView.subviews.first as! UIImageView
-            let newImage = imageView.image
-            images.removeLast()
-            images.insert(newImage!, at: 0)
-            
-            layoutImages()
-            scrollView.contentOffset.x += scrollView.contentSize.width
-            */
-            scrollView.contentOffset.x += self.mainImagesScrollView.bounds.size.width
         }
         
+        if offsetX < (self.mainImagesScrollView.frame.size.width * 0.5) {
+            // 画像の末尾要素を先頭の要素にする
+            let sortedImage = self.imageList.last
+            self.imageList.insert(sortedImage!, at: 0)
+            // 画像の一覧の末尾要素を削除
+            self.imageList.removeLast()
+            // 順番が入れ替えられたimageListで描画
+            self.setupImageViews()
+            // ページコントロールを更新
+            self.updatePageControl(scrollView: scrollView)
+            
+//            self.mainImagesScrollView.contentOffset.x += self.mainImagesScrollView.bounds.size.width
+            self.mainImagesScrollView.contentOffset.x += cellWidth
+            
+        }
         
-        let scrollViewPageCnt:Int = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
-        mainImagesControl.currentPage = scrollViewPageCnt
     }
     
-    private func scrollSubViewChangeLast() {
-        Log.selectLog(logLevel: .debug, "scrollSubViewChangeLast start")
-        
-        for subView in self.mainImagesScrollView.subviews {
-            if subView is UIImageView {
-                subView.removeFromSuperview()
-            }
-        }
-        
-        for subView in self.mainImagesScrollView.subviews {
-            Log.selectLog(logLevel: .debug, "subView:\(subView)")
-        }
-        
-        /*
-        let firstSubView = self.mainImagesScrollView.subviews.first
-        Log.selectLog(logLevel: .debug, "firstSubView:\(String(describing: firstSubView))")
-        
-        if firstSubView is UIImageView {
-            let addImageView = self.mainImagesScrollView.subviews.first as! UIImageView
-            
-            let i:Int = 0
-            for subView in self.mainImagesScrollView.subviews {
-                if i == 0 {
-                    subView.removeFromSuperview()
-                } else {
-                    break
-                }
-            }
-            
-            for logSubView01 in self.mainImagesScrollView.subviews {
-                Log.selectLog(logLevel: .debug, "logSubView01:\(String(describing: logSubView01))")
-            }
-            
-            
-            self.mainImagesScrollView.subviews.insert(addImageView, at: (imageCnt-1))
-            
-            for logSubView02 in self.mainImagesScrollView.subviews {
-                Log.selectLog(logLevel: .debug, "logSubView02:\(String(describing: logSubView02))")
-            }
-            
-            
-            
-        }
-        */
-        
-        let contentWidth = self.mainImagesScrollView.bounds.size.width * CGFloat(imageCnt)
-        let contentHeight = self.mainImagesScrollView.bounds.size.height
-        self.mainImagesScrollView.contentSize = CGSize(width: contentWidth,
-                                                       height: contentHeight)
-    }
-    
-    private func scrollSubViewChangeFirst() {
-        Log.selectLog(logLevel: .debug, "scrollSubViewChangeFirst start")
-        var subViews = self.mainImagesScrollView.subviews
-        for subView in subViews {
-            Log.selectLog(logLevel: .debug, "subView:\(subView)")
-        }
-        
-        let addImageView = subViews[(imageCnt-1)] as! UIImageView
-        
-        var i:Int = 0
-        for subView in subViews {
-            if i == (imageCnt-1) {
-                subView.removeFromSuperview()
-            } else {
-                continue
-            }
-            i += 1
-        }
-        subViews.insert(addImageView, at: 0)
-        
-        let contentWidth = self.mainImagesScrollView.bounds.size.width * CGFloat(imageCnt)
-        let contentHeight = self.mainImagesScrollView.bounds.size.height
-        self.mainImagesScrollView.contentSize = CGSize(width: contentWidth,
-                                                       height: contentHeight)
-    }
 }

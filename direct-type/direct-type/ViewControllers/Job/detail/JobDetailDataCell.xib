@@ -118,7 +118,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZBe-st-eQT">
                                 <rect key="frame" x="0.0" y="300" width="320" height="260"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w1r-KI-86a">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w1r-KI-86a">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="260"/>
                                         <viewLayoutGuide key="contentLayoutGuide" id="waM-e2-qtI"/>
                                         <viewLayoutGuide key="frameLayoutGuide" id="age-36-lP1"/>

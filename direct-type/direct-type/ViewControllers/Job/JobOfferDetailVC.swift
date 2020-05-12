@@ -16,7 +16,7 @@ class JobOfferDetailVC: TmpBasicVC {
     
     let dummyData:[String:Any] = [
         "end":true,
-        "images":["https://type.jp/s/img_banner/top_pc_side_number1.jpg","https://type.jp/s/campaign83/img/pc/top.png","https://type.jp/s/campaign83/img/scout.png",],
+        "images":["https://type.jp/s/img_banner/top_pc_side_number1.jpg","https://type.jp/s/campaign83/img/pc/top.png","https://type.jp/s/campaign83/img/scout.png","https://woman-type.jp/s/renewal/pc/img/top/191105_u29.png"],
         "job":"SE/RPAやAI,loT関連案件など",
         "price":"400~900",
         "special":"850",
