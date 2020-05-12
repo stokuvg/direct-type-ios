@@ -94,10 +94,12 @@ extension SubSelectSingleVC: SubSelectProtocol {
 extension SubSelectSingleVC: SubSelectSingleDelegate {
     func actPopupSelect(changeItem: CodeDisp) {
         print(changeItem.debugDisp)//編集中の値の保持（と描画）
-        self.navigationController?.popViewController(animated: true)
+//        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true) { }
     }
     func actPopupCancel() {
-        self.navigationController?.popViewController(animated: true)
+//        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true) { }
     }
 }
 

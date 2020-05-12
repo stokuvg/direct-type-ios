@@ -45,6 +45,7 @@ class ProfileEditVC: TmpBasicVC {
         self.tableVW.register(UINib(nibName: "HEditTextTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HEditTextTBCell")
         self.tableVW.register(UINib(nibName: "HEditDrumTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HEditDrumTBCell")
         self.tableVW.register(UINib(nibName: "HEditZipcodeTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HEditZipcodeTBCell")
+        
     }
     
     func initData(_ item: MdlItemH) {
@@ -107,13 +108,9 @@ extension ProfileEditVC: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true) //ハイライトの解除
         let item = arrData[indexPath.row]
         print(item.debugDisp)
-        
         if item.editType == .selectDrumYMD {
             print("年月日指定するドラム")
         }
-
-
-
 
         if let cell = tableView.cellForRow(at: indexPath) as? HEditTextTBCell {
             cell.tfValue.becomeFirstResponder()
@@ -307,14 +304,15 @@ extension ProfileEditVC: InputItemHDelegate {
         case .selectDrumYMD: //Pickerを生成する
             showPickerYMD(tf, item)
         case .selectSingle:
+            //さらに子ナビさせたいので
             let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
             if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSingleVC") as? SubSelectSingleVC{
                 nvc.initData(editableItem: item, type: .gender)
-
                 print(String(repeating: "=", count: 33))
-                print(navigationController?.description)
-
-                self.navigationController?.pushViewController(nvc, animated: true)
+                //遷移アニメーション関連
+                nvc.modalTransitionStyle = .crossDissolve
+                self.present(nvc, animated: true) {
+                }
                 tf.resignFirstResponder()//???
             }
         case .selectMulti:

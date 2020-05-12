@@ -20,8 +20,8 @@ struct Constants {
     static let SelectItemsNotSelect: String = "選択しない"   //ユーザが「選択しない」を選んだ場合
 
     //[Debug] Debug時以外はfalseにすべきフラグで設定しておく
-    static let DbgAutoPushVC: Bool = false
-    static let DbgDispStatus: Bool = false
+    static let DbgAutoPushVC: Bool = true
+    static let DbgDispStatus: Bool = true
     static let DbgSkipLocalValidate: Bool = false
     static let DbgCmnInputDefault: Bool = true
 }

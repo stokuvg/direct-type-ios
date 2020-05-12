@@ -128,10 +128,10 @@ extension ProfilePreviewVC: UITableViewDataSource, UITableViewDelegate {
         if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ProfileEditVC") as? ProfileEditVC{
             nvc.initData(item)
             //遷移アニメーション関連
-//            nvc.modalTransitionStyle = .coverVertical
-//            self.present(nvc, animated: true) {
-//            }
-            self.navigationController?.pushViewController(nvc, animated: true)
+            nvc.modalTransitionStyle = .coverVertical
+            self.present(nvc, animated: true) {
+            }
+//            self.navigationController?.pushViewController(nvc, animated: true)
 
         }
     }

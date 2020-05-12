@@ -1620,9 +1620,7 @@ struct _R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
-    struct edit: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
-      typealias InitialController = UIKit.UINavigationController
-
+    struct edit: Rswift.StoryboardResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "Edit"
       let sbid_ProfileEditVC = StoryboardViewControllerResource<ProfileEditVC>(identifier: "Sbid_ProfileEditVC")
