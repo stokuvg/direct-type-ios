@@ -8,14 +8,28 @@
 
 import UIKit
 
-class JobDetailArticleHeaderView: UIView {
+protocol JobDetailArticleHeaderViewDelegate {
+    func articleHeaderAction()
+}
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+class JobDetailArticleHeaderView: UIView {
+    
+    @IBOutlet weak var titleLabel:UILabel!
+    @IBOutlet weak var headerOpenBtn:UIButton!
+    @IBAction func headerOpenAction() {
+        
     }
-    */
+    
+    var delegate:JobDetailArticleHeaderViewDelegate!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    func setup(string:String) {
+        self.titleLabel.text(text: string, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        
+        headerOpenBtn.setTitle(text: "続きを読む", fontType: .C_font_SS, textColor: UIColor.init(colorType: .color_sub)!, alignment: .center)
+    }
 
 }

@@ -1245,6 +1245,7 @@ struct _R: Rswift.Validatable {
   #if os(iOS) || os(tvOS)
   struct nib: Rswift.Validatable {
     static func validate() throws {
+      try _JobDetailDataCell.validate()
       try _JobOfferBigCardCell.validate()
       try _KeepCardCell.validate()
       try _NoCardView.validate()
@@ -1328,12 +1329,24 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
 
-    struct _JobDetailDataCell: Rswift.NibResourceType {
+    struct _JobDetailDataCell: Rswift.NibResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "JobDetailDataCell"
 
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailDataCell? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailDataCell
+      }
+
+      static func validate() throws {
+        if UIKit.UIImage(named: "companyName", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'companyName' is used in nib 'JobDetailDataCell', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "period", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'period' is used in nib 'JobDetailDataCell', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "place", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'place' is used in nib 'JobDetailDataCell', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "salary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'salary' is used in nib 'JobDetailDataCell', but couldn't be loaded.") }
+        if #available(iOS 11.0, tvOS 11.0, *) {
+          if UIKit.UIColor(named: "color-slider-gray", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-slider-gray' is used in storyboard 'JobDetailDataCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "color-slider-sub", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-slider-sub' is used in storyboard 'JobDetailDataCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "color-white", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-white' is used in storyboard 'JobDetailDataCell', but couldn't be loaded.") }
+        }
       }
 
       fileprivate init() {}

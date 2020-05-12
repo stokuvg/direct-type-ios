@@ -21,7 +21,7 @@ class JobOfferDetailVC: TmpBasicVC {
         "price":"400~900",
         "special":"850",
         "area":"東京都23区、東京都（２３区を除く）、神奈川県（横浜市、川崎市を除く）、横浜市、川崎市、埼玉県、千葉県、福岡県",
-        "company":"株式会社キャリアデザインITパートナーズ「type」",
+        "company":"株式会社キャリアデザインITパートナーズ「type IT派遣」※(株)キャリアデザインセンター100%出費",
         "period_start":"",
         "period_end":"2020/02/26",
         "tags":["高度成長企業","急募求人","服装自由","英語活かせる","駅から徒歩５分","管理職採用","産休育休実績あり",],
@@ -96,7 +96,7 @@ extension JobOfferDetailVC: UITableViewDelegate {
         let row = indexPath.row
         switch (section,row) {
             case (0,0):
-                return 600
+                return 700
             default:
                 return UITableView.automaticDimension
         }
@@ -124,6 +124,8 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 let view = UINib(nibName: "JobDetailArticleHeaderView", bundle: nil)
                     .instantiate(withOwner: self, options: nil)
                     .first as! JobDetailArticleHeaderView
+                let articleTitle = dummyData["main_title"] as! String
+                view.setup(string: articleTitle)
                 return view
             case 2:
                 // 募集要項
