@@ -101,6 +101,9 @@
 		260BBFE124651732003D163A /* Preview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 260BBFDE24651732003D163A /* Preview.storyboard */; };
 		260BBFE224651732003D163A /* HPreviewTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 260BBFDF24651732003D163A /* HPreviewTBCell.xib */; };
 		26800520246A2B440053A7F4 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2680051F246A2B440053A7F4 /* Date+Extensions.swift */; };
+		26989F7F246A5E520050AC40 /* HEditDrumTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26989F7D246A5E520050AC40 /* HEditDrumTBCell.xib */; };
+		26989F80246A5E520050AC40 /* HEditDrumTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26989F7E246A5E520050AC40 /* HEditDrumTBCell.swift */; };
+		26989F82246A66640050AC40 /* EditableBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26989F81246A66630050AC40 /* EditableBase.swift */; };
 		26BF48D924639D2B00E00215 /* MstK25_employment.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48C824639D2A00E00215 /* MstK25_employment.tsv */; };
 		26BF48DA24639D2B00E00215 /* MstK14_place.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48C924639D2A00E00215 /* MstK14_place.tsv */; };
 		26BF48DB24639D2B00E00215 /* MstK11_entryPlace.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48CA24639D2A00E00215 /* MstK11_entryPlace.tsv */; };
@@ -232,6 +235,9 @@
 		260BBFDE24651732003D163A /* Preview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preview.storyboard; sourceTree = "<group>"; };
 		260BBFDF24651732003D163A /* HPreviewTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HPreviewTBCell.xib; sourceTree = "<group>"; };
 		2680051F246A2B440053A7F4 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		26989F7D246A5E520050AC40 /* HEditDrumTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HEditDrumTBCell.xib; sourceTree = "<group>"; };
+		26989F7E246A5E520050AC40 /* HEditDrumTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HEditDrumTBCell.swift; sourceTree = "<group>"; };
+		26989F81246A66630050AC40 /* EditableBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableBase.swift; sourceTree = "<group>"; };
 		26BF48C524639A8200E00215 /* Models */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Models; path = ../../../../generated/promise/SwaggerClient/Classes/Swaggers/Models; sourceTree = "<group>"; };
 		26BF48C824639D2A00E00215 /* MstK25_employment.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK25_employment.tsv; sourceTree = "<group>"; };
 		26BF48C924639D2A00E00215 /* MstK14_place.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK14_place.tsv; sourceTree = "<group>"; };
@@ -557,10 +563,10 @@
 			isa = PBXGroup;
 			children = (
 				2680051E246A29D50053A7F4 /* EditableSub */,
+				06E519B6245814D4004E4B7A /* ProfileEditVC.swift */,
 				06E519D224581684004E4B7A /* ContentsEditVC.swift */,
 				26CFC4612469496D00E458E2 /* Edit.storyboard */,
 				26CFC4652469496D00E458E2 /* EditableItemH.swift */,
-				06E519B6245814D4004E4B7A /* ProfileEditVC.swift */,
 				06E519B8245814DF004E4B7A /* ResumeEditVC.swift */,
 				06E519BA245814EB004E4B7A /* CareerEditVC.swift */,
 			);
@@ -586,8 +592,11 @@
 		2680051E246A29D50053A7F4 /* EditableSub */ = {
 			isa = PBXGroup;
 			children = (
+				26989F81246A66630050AC40 /* EditableBase.swift */,
 				26CFC46D246949B800E458E2 /* ClassExtensions.swift */,
 				26CFC46C246949B800E458E2 /* MyColorDefine.swift */,
+				26989F7E246A5E520050AC40 /* HEditDrumTBCell.swift */,
+				26989F7D246A5E520050AC40 /* HEditDrumTBCell.xib */,
 				26CFC4642469496D00E458E2 /* HEditTextTBCell.swift */,
 				26CFC4632469496D00E458E2 /* HEditTextTBCell.xib */,
 				26CFC4602469496D00E458E2 /* HEditZipcodeTBCell.swift */,
@@ -753,6 +762,7 @@
 				26BF48E124639D2B00E00215 /* MstL_skillYear.tsv in Resources */,
 				26BF48E024639D2B00E00215 /* MstK3_changeCount.tsv in Resources */,
 				066763762457B09F00AC5039 /* HomeVC.storyboard in Resources */,
+				26989F7F246A5E520050AC40 /* HEditDrumTBCell.xib in Resources */,
 				26BF48DC24639D2B00E00215 /* MstL_skill.tsv in Resources */,
 				26BF48E524639D2B00E00215 /* MstL3_overtime.tsv in Resources */,
 				26BF48E324639D2B00E00215 /* MstK10_salary.tsv in Resources */,
@@ -871,6 +881,7 @@
 				06E519A42457DC7B004E4B7A /* InitialInputCompleteVC.swift in Sources */,
 				0667636C2457B02200AC5039 /* KeepListVC.swift in Sources */,
 				06E5198A2457D6C1004E4B7A /* JobOfferDetailVC.swift in Sources */,
+				26989F82246A66640050AC40 /* EditableBase.swift in Sources */,
 				06E519C22458156A004E4B7A /* AccessDenyVC.swift in Sources */,
 				067F28EA2456D135000AAD69 /* UIFont+Extensions.swift in Sources */,
 				067F28E82456D112000AAD69 /* UIColor+Extensions.swift in Sources */,
@@ -884,6 +895,7 @@
 				06E519982457DA0D004E4B7A /* ApproachSettingVC.swift in Sources */,
 				06DCAEAB245A7616008FE9FA /* UILabel+Extensions.swift in Sources */,
 				06E519932457D750004E4B7A /* OwnPRVC.swift in Sources */,
+				26989F80246A5E520050AC40 /* HEditDrumTBCell.swift in Sources */,
 				067F28DF2456D013000AAD69 /* TmpNaviTopVC.swift in Sources */,
 				06E519D02458164B004E4B7A /* ScoutPreview.swift in Sources */,
 				06E519C024581561004E4B7A /* ScountDetailVC.swift in Sources */,

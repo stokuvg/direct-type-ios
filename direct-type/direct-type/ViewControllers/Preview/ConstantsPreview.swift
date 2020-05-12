@@ -8,6 +8,18 @@
 
 import UIKit
 
+//EditableItemKeyを付与しておき、押下イベントで個別処理をできるように拡張しておく
+class IKBarButtonItem: UIBarButtonItem {
+    var parentPicker: IKPickerView? = nil
+}
+class IKPickerView: UIPickerView {
+    var itemKey: EditableItemKey = "<undefine>"
+    var parentTF: IKTextField? = nil
+}
+class IKTextField: UITextField {
+    var itemKey: EditableItemKey = "<undefine>"
+}
+
 enum HPreviewItemType {
     case undefine
     case fullname       //===４．氏名（必須）
