@@ -63,9 +63,7 @@ class ProfilePreviewVC: TmpBasicVC {
         //    ・性別は初回入力時「選択しない」の場合「--」
         //    ・表記形式は「{生年}年{生月}月{生日} ({年齢}歳) / {性別}」
         let tmpBirthday: String = _detail.birthday.dispYmd()
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withFullDate]
-        let date = formatter.date(from: tmpBirthday) ?? Date(timeIntervalSince1970: 0)
+        let date = DateHelper.convStr2Date(tmpBirthday)
         let bufBirthday: String = date.dispYmdJP()
         let bufAge: String = "\(date.age)歳"
         let bufGender: String = SelectItemsManager.getCodeDisp(.gender, code: _detail.gender)?.disp ?? "--"

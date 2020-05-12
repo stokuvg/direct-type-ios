@@ -7,7 +7,6 @@
 //
 //アプリ用のモデル<MdlHoge>と、入力編集用のモデル<EditItemHoge>
 
-
 import UIKit
 import SwaggerClient
 
@@ -68,9 +67,7 @@ class MdlProfile: Codable {
 
     convenience init(dto: Profile) {
         let bufDate = dto.birthday.dispYmd
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withFullDate]
-        let date = formatter.date(from: bufDate) ?? Date(timeIntervalSince1970: 0)
+        let date = DateHelper.convStr2Date(bufDate)
         self.init(familyName: dto.familyName, firstName: dto.firstName, familyNameKana: dto.familyNameKana, firstNameKana: dto.firstNameKana, birthday: date, gender: dto.gender, zipCode: dto.zipCode, prefecture: dto.prefecture, address1: dto.address1, address2: dto.address2, mailAddress: dto.mailAddress, mobilePhoneNo: dto.mobilePhoneNo)
     }
 
@@ -116,25 +113,12 @@ enum EditItemProfile: String, EditItemProtocol {
         return "[\(self.itemKey) PlaceHolder]"
     }
     var itemKey: String {
-        return "User_\(self.rawValue)" //ここでUniqになるようにしておく
+        return "Profile_\(self.rawValue)" //ここでUniqになるようにしておく
     }
 }
 
-
-//=== 仮
 extension ProfileBirthday {
-    var dispYmdJP: String {
-        return "\(birthdayYear)年\(birthdayMonth)月\(birthdayDay)日"
-    }
     var dispYmd: String {
         return "\(birthdayYear.zeroUme(4))-\(birthdayMonth.zeroUme(2))-\(birthdayDay.zeroUme(2))"
-    }
-}
-extension Date {
-    var age: Int {
-        if let _age = Calendar.current.dateComponents([.year], from: self, to: Date()).year {
-            return _age
-        }
-        return 0
     }
 }

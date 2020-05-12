@@ -23,7 +23,7 @@ class HEditDrumTBCell: UITableViewCell {
     var delegate: InputItemHDelegate!
 
     @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var tfValue: UITextField!
+    @IBOutlet weak var tfValue: IKTextField!
     @IBOutlet weak var lblDebug: UILabel!
 
     override func awakeFromNib() {
@@ -33,14 +33,15 @@ class HEditDrumTBCell: UITableViewCell {
     func initCell(_ delegate: InputItemHDelegate, _ item: EditableItemH) {
         self.delegate = delegate
         self.item = item
+        tfValue.itemKey = item.editableItemKey
     }
     
     func dispCell() {
         guard let _item = item else { return }
         let bufTitle = _item.dispName //_item.type.dispTitle
         lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
-        tfValue.text = _item.curVal
-        
+        let date: Date = DateHelper.convStr2Date(_item.curVal)
+        tfValue.text = date.dispYmdJP()
         lblDebug.text = ""
         if Constants.DbgDispStatus {
             let bufDebug = _item.debugDisp
@@ -58,12 +59,10 @@ class HEditDrumTBCell: UITableViewCell {
 extension HEditDrumTBCell {
     @IBAction func actEditingDidBegin(_ sender: IKTextField) {
         guard let _item = item else { return }
-        print("❤️[\(sender.itemKey)] [\(#function)]❤️ [\(sender.text ?? "")]")
         delegate?.editingDidBegin(sender, _item)
     }
     @IBAction func actEditingDidEnd(_ sender: IKTextField) {
         guard let _item = item else { return }
-        print("❤️[\(sender.itemKey)] [\(#function)]❤️ [\(sender.text ?? "")]")
         delegate?.editingDidEnd(sender, _item)
     }
 }

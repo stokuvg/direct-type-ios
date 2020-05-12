@@ -68,9 +68,7 @@ class HPreviewTBCell: UITableViewCell {
                 return "\(bufFullname)（\(bufFullnameKana)）"
             case .birthGender:
                 let tmpBirthday: String = _item.childItems[0].curVal
-                let formatter = ISO8601DateFormatter()
-                formatter.formatOptions = [.withFullDate]
-                let date = formatter.date(from: tmpBirthday) ?? Date(timeIntervalSince1970: 0)
+                let date = DateHelper.convStr2Date(tmpBirthday)
                 let bufBirthday: String = date.dispYmdJP()
                 let bufAge: String = "\(date.age)歳"
                 let tmpGender: String = _item.childItems[1].valDisp

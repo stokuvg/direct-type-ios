@@ -10,7 +10,11 @@ import UIKit
 
 //EditableItemKeyを付与しておき、押下イベントで個別処理をできるように拡張しておく
 class IKBarButtonItem: UIBarButtonItem {
-    var parentPicker: IKPickerView? = nil
+    var parentPicker: Any? = nil//IKPickerView//IKDatePicker
+}
+class IKDatePicker: UIDatePicker {
+    var itemKey: EditableItemKey = "<undefine>"
+    var parentTF: IKTextField? = nil
 }
 class IKPickerView: UIPickerView {
     var itemKey: EditableItemKey = "<undefine>"
