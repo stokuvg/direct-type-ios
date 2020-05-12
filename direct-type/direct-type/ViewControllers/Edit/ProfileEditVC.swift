@@ -78,8 +78,21 @@ extension ProfileEditVC: UITableViewDataSource, UITableViewDelegate {
             cell.initCell(item)
             cell.dispCell()
             return cell
-        default:
+            
+        case .inputZipcode:
             let cell: HEditZipcodeTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditZipcodeTBCell", for: indexPath) as! HEditZipcodeTBCell
+            cell.initCell(item)
+            cell.dispCell()
+            return cell
+
+        case .selectDrumYMD:
+            let cell: HEditTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditTextTBCell", for: indexPath) as! HEditTextTBCell
+            cell.initCell(item)
+            cell.dispCell()
+            return cell
+
+        default:
+            let cell: HEditTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditTextTBCell", for: indexPath) as! HEditTextTBCell
             cell.initCell(item)
             cell.dispCell()
             return cell
@@ -90,6 +103,15 @@ extension ProfileEditVC: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true) //ハイライトの解除
         let item = arrData[indexPath.row]
         print(item.debugDisp)
+        
+        if item.editType == .selectDrumYMD {
+            print("年月日指定するドラム")
+        }
+        if let cell = tableView.cellForRow(at: indexPath) as? HEditTextTBCell {
+            cell.tfValue.becomeFirstResponder()
+        }
+        
+        
         
     }
 }

@@ -23,6 +23,7 @@ enum EditType {
     case inputText          //String
     case inputZipcode       //String - String
     case inputTextSecret    //String
+    case selectDrumYMD      //一覧からの選択（Drumで表示）
     case selectDrum         //一覧からの選択（Drumで表示）
     case selectSingle       //一覧からの選択（単体選択）
     case selectMulti        //一覧からの選択（複数選択）
@@ -46,8 +47,12 @@ struct EditableItem {
         //=== そのまま値を表示してよいもの
         case .readonly, .inputText, .inputTextSecret:
             return "\(_val)"
-    case .inputZipcode:
-        return "\(_val)"
+        case .inputZipcode:
+            return "\(_val)"
+        //=== 選択肢一覧を取得し、指定項目の表示名を求めて表示するもの
+        case .selectDrumYMD:
+            let buf = _val//!!!
+            return "\(buf)"
         //=== 選択肢一覧を取得し、指定項目の表示名を求めて表示するもの
         case .selectDrum:
             let selectionItems = SelectItemsManager.getSelectItems(type: self.editItem, grpCodeFilter: nil)

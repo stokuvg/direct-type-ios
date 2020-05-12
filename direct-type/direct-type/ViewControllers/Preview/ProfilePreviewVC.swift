@@ -38,12 +38,11 @@ class ProfilePreviewVC: TmpBasicVC {
         //ダミーデータ投入しておく
         let profile: Profile =
         Profile(familyName: "スマ澤", firstName: "太郎", familyNameKana: "スマザワ", firstNameKana: "タロウ",
-                birthday: ProfileBirthday(birthdayYear: 1996, birthdayMonth: 5, birthdayDay: 8),
+                birthday: ProfileBirthday(birthdayYear: 1996, birthdayMonth: 4, birthdayDay: 28),
                 gender: 1, zipCode: "1234567", prefecture: 13, address1: "港区赤坂3-21-20", address2: "赤坂ロングロングローングビーチビル2F",
                 mailAddress: "hoge@example.co.jp",
                 mobilePhoneNo: "09012345678" )
         detail = MdlProfile(dto: profile)
-        
         //========
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
         guard let _detail = detail else { return }
@@ -63,14 +62,15 @@ class ProfilePreviewVC: TmpBasicVC {
         //    ・生年月日は初回入力項目なので未入力は想定しない
         //    ・性別は初回入力時「選択しない」の場合「--」
         //    ・表記形式は「{生年}年{生月}月{生日} ({年齢}歳) / {性別}」
-        let bufBirthday: String = _detail.birthday.disp
-        let tmpAge: Int = 23
-        let bufAge: String = "\(tmpAge)歳"
+        let tmpBirthday: String = _detail.birthday.dispYmd()
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withFullDate]
+        let date = formatter.date(from: tmpBirthday) ?? Date(timeIntervalSince1970: 0)
+        let bufBirthday: String = date.dispYmdJP()
+        let bufAge: String = "\(date.age)歳"
         let bufGender: String = SelectItemsManager.getCodeDisp(.gender, code: _detail.gender)?.disp ?? "--"
         arrData.append(MdlItemH(.birthGender, "\(bufBirthday)（\(bufAge)） / \(bufGender)", childItems: [
-            EditableItemH(type: .inputText, editItem: EditItemProfile.birthday, val: "\(_detail.birthday.birthdayYear)"),
-            EditableItemH(type: .inputText, editItem: EditItemProfile.birthday, val: "\(_detail.birthday.birthdayMonth)"),
-            EditableItemH(type: .inputText, editItem: EditItemProfile.birthday, val: "\(_detail.birthday.birthdayDay)"),
+            EditableItemH(type: .selectDrumYMD, editItem: EditItemProfile.birthday, val: "\(_detail.birthday.dispYmd())"),
             EditableItemH(type: .inputText, editItem: EditItemProfile.gender, val: "\(_detail.gender)"),
         ]))
 

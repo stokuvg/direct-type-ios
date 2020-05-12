@@ -5,6 +5,8 @@
 //  Created by ms-mb014 on 2020/05/08.
 //  Copyright © 2020 ms-mb015. All rights reserved.
 //
+//アプリ用のモデル<MdlHoge>と、入力編集用のモデル<EditItemHoge>
+
 
 import UIKit
 import SwaggerClient
@@ -18,7 +20,7 @@ class MdlProfile: Codable {
      var familyNameKana: String = ""
     /** 名（カナ） */
      var firstNameKana: String = ""
-     var birthday: ProfileBirthday = ProfileBirthday(birthdayYear: 1986, birthdayMonth: 4, birthdayDay: 1)
+    var birthday: Date = Date(timeIntervalSince1970: 0)
     /** 性別 */
      var gender: Int = 0
     /** 郵便番号 */
@@ -49,7 +51,7 @@ class MdlProfile: Codable {
         case mobilePhoneNo = "mobile_phone_no"
     }
     
-    public init(familyName: String, firstName: String, familyNameKana: String, firstNameKana: String, birthday: ProfileBirthday, gender: Int, zipCode: String, prefecture: Int, address1: String, address2: String, mailAddress: String, mobilePhoneNo: String) {
+    public init(familyName: String, firstName: String, familyNameKana: String, firstNameKana: String, birthday: Date, gender: Int, zipCode: String, prefecture: Int, address1: String, address2: String, mailAddress: String, mobilePhoneNo: String) {
         self.familyName = familyName
         self.firstName = firstName
         self.familyNameKana = familyNameKana
@@ -65,17 +67,15 @@ class MdlProfile: Codable {
     }
 
     convenience init(dto: Profile) {
-        self.init(familyName: dto.familyName, firstName: dto.firstName, familyNameKana: dto.familyNameKana, firstNameKana: dto.firstNameKana, birthday: dto.birthday, gender: dto.gender, zipCode: dto.zipCode, prefecture: dto.prefecture, address1: dto.address1, address2: dto.address2, mailAddress: dto.mailAddress, mobilePhoneNo: dto.mobilePhoneNo)
+        let bufDate = dto.birthday.dispYmd
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withFullDate]
+        let date = formatter.date(from: bufDate) ?? Date(timeIntervalSince1970: 0)
+        self.init(familyName: dto.familyName, firstName: dto.firstName, familyNameKana: dto.familyNameKana, firstNameKana: dto.firstNameKana, birthday: date, gender: dto.gender, zipCode: dto.zipCode, prefecture: dto.prefecture, address1: dto.address1, address2: dto.address2, mailAddress: dto.mailAddress, mobilePhoneNo: dto.mobilePhoneNo)
     }
 
     var debugDisp: String {
         return "[\(familyName) \(firstName)（\(familyNameKana) \(firstNameKana)）"
-    }
-}
-
-extension ProfileBirthday {
-    var disp: String {
-        return "\(birthdayYear)年\(birthdayMonth)月\(birthdayDay)日"
     }
 }
 
@@ -117,5 +117,24 @@ enum EditItemProfile: String, EditItemProtocol {
     }
     var itemKey: String {
         return "User_\(self.rawValue)" //ここでUniqになるようにしておく
+    }
+}
+
+
+//=== 仮
+extension ProfileBirthday {
+    var dispYmdJP: String {
+        return "\(birthdayYear)年\(birthdayMonth)月\(birthdayDay)日"
+    }
+    var dispYmd: String {
+        return "\(birthdayYear.zeroUme(4))-\(birthdayMonth.zeroUme(2))-\(birthdayDay.zeroUme(2))"
+    }
+}
+extension Date {
+    var age: Int {
+        if let _age = Calendar.current.dateComponents([.year], from: self, to: Date()).year {
+            return _age
+        }
+        return 0
     }
 }

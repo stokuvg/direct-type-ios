@@ -29,6 +29,10 @@ struct EditableItemH {
         case .inputZipcode:
             return "\(_val)"
         //=== 選択肢一覧を取得し、指定項目の表示名を求めて表示するもの
+        case .selectDrumYMD:
+            let buf = _val//???Dateを表示ように変換
+            return "\(buf)"
+        //=== 選択肢一覧を取得し、指定項目の表示名を求めて表示するもの
         case .selectDrum:
             let selectionItems = SelectItemsManager.getSelectItems(type: self.editItem, grpCodeFilter: nil)
             let buf = selectionItems.filter { (obj) -> Bool in
