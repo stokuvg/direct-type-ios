@@ -67,13 +67,13 @@ class HPreviewTBCell: UITableViewCell {
                 let bufFullnameKana: String = "\(_item.childItems[2].valDisp) \(_item.childItems[3].valDisp)"
                 return "\(bufFullname)（\(bufFullnameKana)）"
             case .birthGender:
-                let bufBirthdayY: String = _item.childItems[0].valDisp
-                let bufBirthdayM: String = _item.childItems[1].valDisp
-                let bufBirthdayD: String = _item.childItems[2].valDisp
-                let bufBirthday: String = "\(bufBirthdayY)年\(bufBirthdayM)月\(bufBirthdayD)日"
-                let tmpAge: Int = 23
-                let bufAge: String = "\(tmpAge)歳"
-                let tmpGender: String = _item.childItems[3].valDisp
+                let tmpBirthday: String = _item.childItems[0].curVal
+                let formatter = ISO8601DateFormatter()
+                formatter.formatOptions = [.withFullDate]
+                let date = formatter.date(from: tmpBirthday) ?? Date(timeIntervalSince1970: 0)
+                let bufBirthday: String = date.dispYmdJP()
+                let bufAge: String = "\(date.age)歳"
+                let tmpGender: String = _item.childItems[1].valDisp
                 print("\t[tmpGender: \(tmpGender)]")
                 let bufGender: String = SelectItemsManager.getCodeDisp(.gender, code: tmpGender)?.disp ?? "--"
                 print("\t[bufGender: \(bufGender)]")
