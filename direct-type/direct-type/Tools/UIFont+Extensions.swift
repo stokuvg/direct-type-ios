@@ -31,35 +31,35 @@ enum FontType {
     var lineSpacing:CGFloat {
         switch self {
             case .font_L:
-                return 28
+                return 4
             case .font_M:
-                return 24
+                return 4
             case .font_Sb:
-                return 22
+                return 8
             case .font_S:
-                return 16
+                return 2
             case .font_SSb:
-                return 14
+                return 3
             case .font_SS:
-                return 14
+                return 3
             case .C_font_XL:
-                return 34
+                return 4
             case .C_font_L:
-                return 28
+                return 4
             case .C_font_M:
-                return 24
+                return 6
             case .C_font_Sb:
-                return 22
+                return 8
             case .C_font_S:
-                return 16
+                return 2
             case .C_font_SSb:
-                return 14
+                return 2
             case .C_font_SS:
-                return 22
+                return 10
             case .C_font_SSSb:
-                return 16
+                return 6
             case .C_font_SSS:
-                return 14
+                return 4
         }
     }
 }
