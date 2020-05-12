@@ -89,12 +89,14 @@ struct R: Rswift.Validatable {
   }
 
   #if os(iOS) || os(tvOS)
-  /// This `R.storyboard` struct is generated, and contains static references to 10 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 11 storyboards.
   struct storyboard {
     /// Storyboard `BaseTabBC`.
     static let baseTabBC = _R.storyboard.baseTabBC()
     /// Storyboard `Edit`.
     static let edit = _R.storyboard.edit()
+    /// Storyboard `EditablePopup`.
+    static let editablePopup = _R.storyboard.editablePopup()
     /// Storyboard `EntryVC`.
     static let entryVC = _R.storyboard.entryVC()
     /// Storyboard `HomeVC`.
@@ -123,6 +125,13 @@ struct R: Rswift.Validatable {
     /// `UIStoryboard(name: "Edit", bundle: ...)`
     static func edit(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.edit)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "EditablePopup", bundle: ...)`
+    static func editablePopup(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.editablePopup)
     }
     #endif
 
@@ -1003,7 +1012,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 14 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 17 nibs.
   struct nib {
     /// Nib `HEditDrumTBCell`.
     static let hEditDrumTBCell = _R.nib._HEditDrumTBCell()
@@ -1033,6 +1042,12 @@ struct R: Rswift.Validatable {
     static let naviButtonsView = _R.nib._NaviButtonsView()
     /// Nib `NoCardView`.
     static let noCardView = _R.nib._NoCardView()
+    /// Nib `SubSelectDaiTBCell`.
+    static let subSelectDaiTBCell = _R.nib._SubSelectDaiTBCell()
+    /// Nib `SubSelectSyouTBCell`.
+    static let subSelectSyouTBCell = _R.nib._SubSelectSyouTBCell()
+    /// Nib `SubSelectTBCell`.
+    static let subSelectTBCell = _R.nib._SubSelectTBCell()
 
     #if os(iOS) || os(tvOS)
     /// `UINib(name: "HEditDrumTBCell", in: bundle)`
@@ -1146,6 +1161,30 @@ struct R: Rswift.Validatable {
     }
     #endif
 
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "SubSelectDaiTBCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.subSelectDaiTBCell) instead")
+    static func subSelectDaiTBCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.subSelectDaiTBCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "SubSelectSyouTBCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.subSelectSyouTBCell) instead")
+    static func subSelectSyouTBCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.subSelectSyouTBCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "SubSelectTBCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.subSelectTBCell) instead")
+    static func subSelectTBCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.subSelectTBCell)
+    }
+    #endif
+
     static func hEditDrumTBCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HEditDrumTBCell? {
       return R.nib.hEditDrumTBCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HEditDrumTBCell
     }
@@ -1202,10 +1241,22 @@ struct R: Rswift.Validatable {
       return R.nib.noCardView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? NoCardView
     }
 
+    static func subSelectDaiTBCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SubSelectDaiTBCell? {
+      return R.nib.subSelectDaiTBCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SubSelectDaiTBCell
+    }
+
+    static func subSelectSyouTBCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SubSelectSyouTBCell? {
+      return R.nib.subSelectSyouTBCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SubSelectSyouTBCell
+    }
+
+    static func subSelectTBCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SubSelectTBCell? {
+      return R.nib.subSelectTBCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SubSelectTBCell
+    }
+
     fileprivate init() {}
   }
 
-  /// This `R.reuseIdentifier` struct is generated, and contains static references to 4 reuse identifiers.
+  /// This `R.reuseIdentifier` struct is generated, and contains static references to 7 reuse identifiers.
   struct reuseIdentifier {
     /// Reuse identifier `Cell_HEditDrumTBCell`.
     static let cell_HEditDrumTBCell: Rswift.ReuseIdentifier<HEditDrumTBCell> = Rswift.ReuseIdentifier(identifier: "Cell_HEditDrumTBCell")
@@ -1215,6 +1266,12 @@ struct R: Rswift.Validatable {
     static let cell_HEditZipcodeTBCell: Rswift.ReuseIdentifier<HEditZipcodeTBCell> = Rswift.ReuseIdentifier(identifier: "Cell_HEditZipcodeTBCell")
     /// Reuse identifier `Cell_HPreviewTBCell`.
     static let cell_HPreviewTBCell: Rswift.ReuseIdentifier<HPreviewTBCell> = Rswift.ReuseIdentifier(identifier: "Cell_HPreviewTBCell")
+    /// Reuse identifier `Cell_SubSelectDaiTBCell`.
+    static let cell_SubSelectDaiTBCell: Rswift.ReuseIdentifier<SubSelectDaiTBCell> = Rswift.ReuseIdentifier(identifier: "Cell_SubSelectDaiTBCell")
+    /// Reuse identifier `Cell_SubSelectSyouTBCell`.
+    static let cell_SubSelectSyouTBCell: Rswift.ReuseIdentifier<SubSelectSyouTBCell> = Rswift.ReuseIdentifier(identifier: "Cell_SubSelectSyouTBCell")
+    /// Reuse identifier `Cell_SubSelectTBCell`.
+    static let cell_SubSelectTBCell: Rswift.ReuseIdentifier<SubSelectTBCell> = Rswift.ReuseIdentifier(identifier: "Cell_SubSelectTBCell")
 
     fileprivate init() {}
   }
@@ -1453,6 +1510,45 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
 
+    struct _SubSelectDaiTBCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
+      typealias ReusableType = SubSelectDaiTBCell
+
+      let bundle = R.hostingBundle
+      let identifier = "Cell_SubSelectDaiTBCell"
+      let name = "SubSelectDaiTBCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SubSelectDaiTBCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SubSelectDaiTBCell
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _SubSelectSyouTBCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
+      typealias ReusableType = SubSelectSyouTBCell
+
+      let bundle = R.hostingBundle
+      let identifier = "Cell_SubSelectSyouTBCell"
+      let name = "SubSelectSyouTBCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SubSelectSyouTBCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SubSelectSyouTBCell
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _SubSelectTBCell: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "SubSelectTBCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SubSelectTBCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SubSelectTBCell
+      }
+
+      fileprivate init() {}
+    }
+
     fileprivate init() {}
   }
   #endif
@@ -1465,6 +1561,9 @@ struct _R: Rswift.Validatable {
       #endif
       #if os(iOS) || os(tvOS)
       try edit.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
+      try editablePopup.validate()
       #endif
       #if os(iOS) || os(tvOS)
       try entryVC.validate()
@@ -1521,7 +1620,9 @@ struct _R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
-    struct edit: Rswift.StoryboardResourceType, Rswift.Validatable {
+    struct edit: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = UIKit.UINavigationController
+
       let bundle = R.hostingBundle
       let name = "Edit"
       let sbid_ProfileEditVC = StoryboardViewControllerResource<ProfileEditVC>(identifier: "Sbid_ProfileEditVC")
@@ -1536,6 +1637,38 @@ struct _R: Rswift.Validatable {
           if UIKit.UIColor(named: "color-black", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-black' is used in storyboard 'Edit', but couldn't be loaded.") }
         }
         if _R.storyboard.edit().sbid_ProfileEditVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_ProfileEditVC' could not be loaded from storyboard 'Edit' as 'ProfileEditVC'.") }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    struct editablePopup: Rswift.StoryboardResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "EditablePopup"
+      let sbid_SubSelectMultiVC = StoryboardViewControllerResource<SubSelectMultiVC>(identifier: "Sbid_SubSelectMultiVC")
+      let sbid_SubSelectSingleVC = StoryboardViewControllerResource<SubSelectSingleVC>(identifier: "Sbid_SubSelectSingleVC")
+      let sbid_SubSelectSpecialVC = StoryboardViewControllerResource<SubSelectSpecialVC>(identifier: "Sbid_SubSelectSpecialVC")
+
+      func sbid_SubSelectMultiVC(_: Void = ()) -> SubSelectMultiVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_SubSelectMultiVC)
+      }
+
+      func sbid_SubSelectSingleVC(_: Void = ()) -> SubSelectSingleVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_SubSelectSingleVC)
+      }
+
+      func sbid_SubSelectSpecialVC(_: Void = ()) -> SubSelectSpecialVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_SubSelectSpecialVC)
+      }
+
+      static func validate() throws {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+        if _R.storyboard.editablePopup().sbid_SubSelectMultiVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_SubSelectMultiVC' could not be loaded from storyboard 'EditablePopup' as 'SubSelectMultiVC'.") }
+        if _R.storyboard.editablePopup().sbid_SubSelectSingleVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_SubSelectSingleVC' could not be loaded from storyboard 'EditablePopup' as 'SubSelectSingleVC'.") }
+        if _R.storyboard.editablePopup().sbid_SubSelectSpecialVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_SubSelectSpecialVC' could not be loaded from storyboard 'EditablePopup' as 'SubSelectSpecialVC'.") }
       }
 
       fileprivate init() {}

@@ -79,7 +79,7 @@ extension ProfileEditVC: UITableViewDataSource, UITableViewDelegate {
         switch item.editType {
         case .inputText:
             let cell: HEditTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditTextTBCell", for: indexPath) as! HEditTextTBCell
-            cell.initCell(item)
+            cell.initCell(self, item)
             cell.dispCell()
             return cell
             
@@ -97,7 +97,7 @@ extension ProfileEditVC: UITableViewDataSource, UITableViewDelegate {
 
         default:
             let cell: HEditTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditTextTBCell", for: indexPath) as! HEditTextTBCell
-            cell.initCell(item)
+            cell.initCell(self, item)
             cell.dispCell()
             return cell
         }
@@ -111,6 +111,10 @@ extension ProfileEditVC: UITableViewDataSource, UITableViewDelegate {
         if item.editType == .selectDrumYMD {
             print("年月日指定するドラム")
         }
+
+
+
+
         if let cell = tableView.cellForRow(at: indexPath) as? HEditTextTBCell {
             cell.tfValue.becomeFirstResponder()
         }
@@ -291,17 +295,43 @@ extension ProfileEditVC: InputItemHDelegate {
     }
     
     func editingDidBegin(_ tf: IKTextField, _ item: EditableItemH) {
-        print(#line, #function)
 //        actTargetInputTextBegin(tf, item) //元のTextFieldに被せるもの（なくて良い）
         //画面全体での初期状態での値と編集中の値を保持させておくため
 //        guard let editableModel = editableModel else { return }
 //        let (_, editTemp) = editableModel.makeTempItem(item)
         //=== タイプによって割り込み処理
+        print(#line, #function, item.debugDisp)
         switch item.editType {
         case .selectDrum: //Pickerを生成する
             showPicker(tf, item)
         case .selectDrumYMD: //Pickerを生成する
             showPickerYMD(tf, item)
+        case .selectSingle:
+            let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSingleVC") as? SubSelectSingleVC{
+                nvc.initData(editableItem: item, type: .gender)
+
+                print(String(repeating: "=", count: 33))
+                print(navigationController?.description)
+
+                self.navigationController?.pushViewController(nvc, animated: true)
+                tf.resignFirstResponder()//???
+            }
+        case .selectMulti:
+            let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectMultiVC") as? SubSelectMultiVC{
+                nvc.initData(type: .entryPlace)
+                self.navigationController?.pushViewController(nvc, animated: true)
+                tf.resignFirstResponder()//???
+            }
+        case .selectSpecisl:
+            let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSpecialVC") as? SubSelectSpecialVC{
+                nvc.initData(editableItem: item)
+                self.navigationController?.pushViewController(nvc, animated: true)
+                tf.resignFirstResponder()//???
+            }
+
         default:
             break
         }

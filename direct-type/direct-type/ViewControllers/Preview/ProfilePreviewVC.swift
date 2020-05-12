@@ -69,7 +69,7 @@ class ProfilePreviewVC: TmpBasicVC {
         let bufGender: String = SelectItemsManager.getCodeDisp(.gender, code: _detail.gender)?.disp ?? "--"
         arrData.append(MdlItemH(.birthGender, "\(bufBirthday)（\(bufAge)） / \(bufGender)", childItems: [
             EditableItemH(type: .selectDrumYMD, editItem: EditItemProfile.birthday, val: "\(_detail.birthday.dispYmd())"),
-            EditableItemH(type: .inputText, editItem: EditItemProfile.gender, val: "\(_detail.gender)"),
+            EditableItemH(type: .selectSingle, editItem: EditItemProfile.gender, val: "\(_detail.gender)"),
         ]))
 
         //===６．住所
@@ -124,15 +124,14 @@ extension ProfilePreviewVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true) //ハイライトの解除
         let item = arrData[indexPath.row]
-        print(item.debugDisp)
-        
         let storyboard = UIStoryboard(name: "Edit", bundle: nil)
         if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ProfileEditVC") as? ProfileEditVC{
             nvc.initData(item)
             //遷移アニメーション関連
-            nvc.modalTransitionStyle = .coverVertical
-            self.present(nvc, animated: true) {
-            }
+//            nvc.modalTransitionStyle = .coverVertical
+//            self.present(nvc, animated: true) {
+//            }
+            self.navigationController?.pushViewController(nvc, animated: true)
 
         }
     }
