@@ -10,16 +10,18 @@ import UIKit
 
 class HEditTextTBCell: UITableViewCell {
     var item: EditableItemH? = nil
-    
+    var delegate: InputItemHDelegate!
+
     @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var tfValue: UITextField!
+    @IBOutlet weak var tfValue: IKTextField!
     @IBOutlet weak var lblDebug: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
     }
 
-    func initCell(_ item: EditableItemH) {
+    func initCell(_ delegate: InputItemHDelegate, _ item: EditableItemH) {
+        self.delegate = delegate
         self.item = item
     }
     
@@ -41,3 +43,17 @@ class HEditTextTBCell: UITableViewCell {
     }
     
 }
+
+
+//=== 文字入力に伴うTextField関連の通知
+extension HEditTextTBCell {
+    @IBAction func actEditingDidBegin(_ sender: IKTextField) {
+        guard let _item = item else { return }
+        delegate?.editingDidBegin(sender, _item)
+    }
+    @IBAction func actEditingDidEnd(_ sender: IKTextField) {
+        guard let _item = item else { return }
+        delegate?.editingDidEnd(sender, _item)
+    }
+}
+

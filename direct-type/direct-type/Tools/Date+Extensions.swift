@@ -9,6 +9,18 @@
 import UIKit
 
 class DateHelper {
+    class func convStr2Date(_ buf: String) -> Date {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withFullDate]
+        let date = formatter.date(from: buf) ?? Date(timeIntervalSince1970: 0)
+        return date
+    }
+    class func convDate2Str(_ date: Date) -> String {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withFullDate]
+        let buf = formatter.string(from: date)
+        return buf
+    }
     class func dateTimeFormatterYmdJP() -> DateFormatter {
          let dateTimeFormatter = DateFormatter()
          dateTimeFormatter.locale = Locale(identifier: "en_US_POSIX")
@@ -41,5 +53,11 @@ extension Date {
     }
 }
 
-
-
+extension Date {
+    var age: Int {
+        if let _age = Calendar.current.dateComponents([.year], from: self, to: Date()).year {
+            return _age
+        }
+        return 0
+    }
+}

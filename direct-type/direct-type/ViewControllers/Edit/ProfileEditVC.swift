@@ -45,6 +45,7 @@ class ProfileEditVC: TmpBasicVC {
         self.tableVW.register(UINib(nibName: "HEditTextTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HEditTextTBCell")
         self.tableVW.register(UINib(nibName: "HEditDrumTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HEditDrumTBCell")
         self.tableVW.register(UINib(nibName: "HEditZipcodeTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HEditZipcodeTBCell")
+        
     }
     
     func initData(_ item: MdlItemH) {
@@ -79,7 +80,7 @@ extension ProfileEditVC: UITableViewDataSource, UITableViewDelegate {
         switch item.editType {
         case .inputText:
             let cell: HEditTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditTextTBCell", for: indexPath) as! HEditTextTBCell
-            cell.initCell(item)
+            cell.initCell(self, item)
             cell.dispCell()
             return cell
             
@@ -97,7 +98,7 @@ extension ProfileEditVC: UITableViewDataSource, UITableViewDelegate {
 
         default:
             let cell: HEditTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditTextTBCell", for: indexPath) as! HEditTextTBCell
-            cell.initCell(item)
+            cell.initCell(self, item)
             cell.dispCell()
             return cell
         }
@@ -107,32 +108,54 @@ extension ProfileEditVC: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true) //ハイライトの解除
         let item = arrData[indexPath.row]
         print(item.debugDisp)
-        
         if item.editType == .selectDrumYMD {
             print("年月日指定するドラム")
         }
+
         if let cell = tableView.cellForRow(at: indexPath) as? HEditTextTBCell {
             cell.tfValue.becomeFirstResponder()
         }
-        
-        
-        
     }
 }
 
 
 //=== 文字入力に伴うTextField関連の通知
 extension ProfileEditVC {
-    @IBAction func actEditingDidBegin(_ sender: IKTextField) {
-        showPicker(sender)
-    }
-    @IBAction func actEditingDidEnd(_ sender: IKTextField) {
-        hidePicker(sender)
-    }
     //=== 表示・非表示
-    func showPicker(_ textField: IKTextField) {
-        //親子の依存関係がある場合に、親が選択済か調べる。未選択の場合には子は選択できない
-        print("❤️❤️ Picker 表示 [\(textField.itemKey)] [\(textField.inputView)] [\(textField.inputAccessoryView)]")
+    func showPickerYMD(_ textField: IKTextField, _ item: EditableItemH) {
+        print("❤️❤️ 日時変更Picker 表示 [\(textField.itemKey)] [\(item.debugDisp)]")
+        //Pickerを表示する
+        let picker = IKDatePicker()
+        let bufDate = item.curVal
+        let date = DateHelper.convStr2Date(bufDate)
+        picker.date = date
+        picker.datePickerMode = .date
+        picker.calendar = date.calendarJP
+        picker.locale = Locale(identifier: "ja_JP")
+        picker.itemKey = textField.itemKey
+        picker.parentTF = textField
+        textField.inputView = picker //
+        //Pickerにボタンをつけておく（Pickerにというか、inputViewに対して付くため、Softwareキーボードなければ最下部に、あればその上につく
+        let rect = CGRect(origin: CGPoint.zero, size: CGSize.init(width: 260, height: 45))
+        let toolbar = UIToolbar(frame: rect)//Autolayout補正かかるけど、そこそこの横幅指定が必要
+        let lbl = UILabel(frame: rect)
+        lbl.textAlignment = .center
+        lbl.text = "\(item.dispName)を選択してください"
+        let separator1 = IKBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let barLbl = IKBarButtonItem.init(customView: lbl)
+        let separator2 = IKBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let btnClose = IKBarButtonItem.init(title: "閉じる", style: .done, target: self, action: #selector(actDatePickerCancelButton))
+        let btnSelect = IKBarButtonItem.init(title: "選択", style: .done, target: self, action: #selector(actDatePickerSelectButton))
+        //=== itemKeyをつけておく
+        btnSelect.parentPicker = picker
+        btnClose.parentPicker = picker
+        toolbar.setItems([btnClose, separator1, barLbl, separator2, btnSelect], animated: true)
+        textField.inputAccessoryView = toolbar
+        textField.inputAccessoryView?.backgroundColor = .green
+    }
+    
+    func showPicker(_ textField: IKTextField, _ item: EditableItemH) {
+        print("❤️❤️ Picker 表示 [\(textField.itemKey)] [\(item.debugDisp)]")
         //Pickerを表示する
         let picker = IKPickerView()
         picker.delegate = self
@@ -145,7 +168,7 @@ extension ProfileEditVC {
         let toolbar = UIToolbar(frame: rect)//Autolayout補正かかるけど、そこそこの横幅指定が必要
         let lbl = UILabel(frame: rect)
         lbl.textAlignment = .center
-        lbl.text = "経験年数を選択してください"
+        lbl.text = "\(item.dispName)を選択してください"
         let separator1 = IKBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let barLbl = IKBarButtonItem.init(customView: lbl)
         let separator2 = IKBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -155,17 +178,28 @@ extension ProfileEditVC {
         btnSelect.parentPicker = picker
         btnClose.parentPicker = picker
         toolbar.setItems([btnClose, separator1, barLbl, separator2, btnSelect], animated: true)
-        let tfSubDummy = textField
-        tfSubDummy.inputAccessoryView = toolbar
-        tfSubDummy.inputAccessoryView?.backgroundColor = .green
-
+        textField.inputAccessoryView = toolbar
+        textField.inputAccessoryView?.backgroundColor = .green
     }
     func hidePicker(_ textField: IKTextField) {
-        //print("❤️❤️ Picker 消す [\(textField.itemKey)]")
+        print("❤️❤️ Picker 消す [\(textField.itemKey)]")
         textField.inputAccessoryView = nil //ここで、関連つけていたToolbarを殺す
         textField.inputView = nil //ここで、関連つけていたPickerを殺す
     }
-    
+
+    //ピッカーにつけた〔選択〕〔Cancel〕ボタン
+    @objc func actDatePickerSelectButton(_ sender: IKBarButtonItem) {
+        guard let picker = sender.parentPicker as? IKDatePicker else { return }
+        picker.parentTF?.text = picker.date.dispYmdJP()
+        //TODO: 値も反映したい
+        self.view.endEditing(false)
+    }
+    @objc func actDatePickerCancelButton(_ sender: IKBarButtonItem) {
+        guard let picker = sender.parentPicker as? IKDatePicker else { return }
+        print("❤️[\(picker.itemKey)]❤️ 年月日ピッカー〔キャンセル〕ボタン押下❤️")
+        self.view.endEditing(false)
+    }
+
     //ピッカーにつけた〔選択〕〔Cancel〕ボタン
     @objc func actPickerSelectButton(_ sender: IKBarButtonItem) {
         guard let picker = sender.parentPicker as? IKPickerView else { return }
@@ -258,16 +292,44 @@ extension ProfileEditVC: InputItemHDelegate {
     }
     
     func editingDidBegin(_ tf: IKTextField, _ item: EditableItemH) {
-        print(#line, #function)
 //        actTargetInputTextBegin(tf, item) //元のTextFieldに被せるもの（なくて良い）
         //画面全体での初期状態での値と編集中の値を保持させておくため
 //        guard let editableModel = editableModel else { return }
 //        let (_, editTemp) = editableModel.makeTempItem(item)
         //=== タイプによって割り込み処理
-        print(item.debugDisp)
+        print(#line, #function, item.debugDisp)
         switch item.editType {
-        case .selectDrum, .selectDrumYMD: //Pickerを生成する
-            showPicker(tf)
+        case .selectDrum: //Pickerを生成する
+            showPicker(tf, item)
+        case .selectDrumYMD: //Pickerを生成する
+            showPickerYMD(tf, item)
+        case .selectSingle:
+            //さらに子ナビさせたいので
+            let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSingleVC") as? SubSelectSingleVC{
+                nvc.initData(editableItem: item, type: .gender)
+                print(String(repeating: "=", count: 33))
+                //遷移アニメーション関連
+                nvc.modalTransitionStyle = .crossDissolve
+                self.present(nvc, animated: true) {
+                }
+                tf.resignFirstResponder()//???
+            }
+        case .selectMulti:
+            let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectMultiVC") as? SubSelectMultiVC{
+                nvc.initData(type: .entryPlace)
+                self.navigationController?.pushViewController(nvc, animated: true)
+                tf.resignFirstResponder()//???
+            }
+        case .selectSpecisl:
+            let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSpecialVC") as? SubSelectSpecialVC{
+                nvc.initData(editableItem: item)
+                self.navigationController?.pushViewController(nvc, animated: true)
+                tf.resignFirstResponder()//???
+            }
+
         default:
             break
         }
