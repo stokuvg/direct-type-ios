@@ -13,6 +13,22 @@ class JobOfferDetailVC: TmpBasicVC {
     @IBOutlet weak var detailTableView:UITableView!
     
     var buttonsView:NaviButtonsView!
+    
+    let dummyData:[String:Any] = [
+        "end":true,
+        "images":["https://type.jp/s/img_banner/top_pc_side_number1.jpg","https://type.jp/s/campaign83/img/pc/top.png","https://type.jp/s/campaign83/img/scout.png","https://woman-type.jp/s/renewal/pc/img/top/191105_u29.png"],
+        "job":"SE/RPAやAI,loT関連案件など",
+        "price":"400~900",
+        "special":"850",
+        "area":"東京都23区、東京都（２３区を除く）、神奈川県（横浜市、川崎市を除く）、横浜市、川崎市、埼玉県、千葉県、福岡県",
+        "company":"株式会社キャリアデザインITパートナーズ「type」",
+        "period_start":"",
+        "period_end":"2020/02/26",
+        "tags":["高度成長企業","急募求人","服装自由","英語活かせる","駅から徒歩５分","管理職採用","産休育休実績あり",],
+        "main_title":"RPA,AI,loT関連プロジェクトや、大手メーカのーのR&D・・・\nこれから成長する若手こそ、案件にこだわろう。",
+        "main_article":"◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n",
+        "salary_exampl":"■２５歳サブリーダー／年収４００万円\n■２５歳サブリーダー／年収４００万円\n■２５歳サブリーダー／年収４００万円\n■２５歳サブリーダー／年収４００万円\n■２５歳サブリーダー／年収４００万円\n■２５歳サブリーダー／年収４００万円\n■２５歳サブリーダー／年収４００万円\n",
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,9 +38,6 @@ class JobOfferDetailVC: TmpBasicVC {
         
         self.detailTableView.backgroundColor = UIColor.init(colorType: .color_base)
         
-        self.detailTableView.registerNib(nibName: "JobDetailDataCell", idName: "JobDetailDataCell")
-        self.detailTableView.registerNib(nibName: "JobDetailArticleCell", idName: "JobDetailArticleCell")
-        
         /// section 0
         // 終了間近,スカウト
         // 職種名
@@ -33,8 +46,10 @@ class JobOfferDetailVC: TmpBasicVC {
         // 社名
         // 掲載期限
         // メイン画像
+        self.detailTableView.registerNib(nibName: "JobDetailDataCell", idName: "JobDetailDataCell")
         /// section 1
         // 記事
+        self.detailTableView.registerNib(nibName: "JobDetailArticleCell", idName: "JobDetailArticleCell")
         /// section 2
         // PRコード
         // 給与例
@@ -77,7 +92,14 @@ class JobOfferDetailVC: TmpBasicVC {
 extension JobOfferDetailVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        let section = indexPath.section
+        let row = indexPath.row
+        switch (section,row) {
+            case (0,0):
+                return 600
+            default:
+                return UITableView.automaticDimension
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -98,11 +120,13 @@ extension JobOfferDetailVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
             case 1:
+                // メイン記事タイトル
                 let view = UINib(nibName: "JobDetailArticleHeaderView", bundle: nil)
                     .instantiate(withOwner: self, options: nil)
                     .first as! JobDetailArticleHeaderView
                 return view
             case 2:
+                // 募集要項
                 let view = UINib(nibName: "JobDetailGuideBookHeaderView", bundle: nil)
                     .instantiate(withOwner: self, options: nil)
                     .first as! JobDetailGuideBookHeaderView
@@ -131,6 +155,8 @@ extension JobOfferDetailVC: UITableViewDataSource {
         switch (section,row) {
             case (0,0):
                 let cell = tableView.loadCell(cellName: "JobDetailDataCell", indexPath: indexPath) as! JobDetailDataCell
+                cell.setCellWidth(width: self.detailTableView.frame.size.width)
+                cell.setup(data: dummyData)
                 return cell
             case (0,1):
                 let cell = tableView.loadCell(cellName: "JobDetailArticleCell", indexPath: indexPath) as! JobDetailArticleCell
