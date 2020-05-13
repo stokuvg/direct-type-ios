@@ -65,6 +65,9 @@ class ProfileEditVC: EditableBasicVC {
         super.viewWillAppear(animated)
         dispData()
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
 
 }
 

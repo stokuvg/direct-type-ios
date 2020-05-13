@@ -12,7 +12,6 @@ import UIKit
 extension EditableBasicVC {
     //=== 表示・非表示
     func showPickerYMD(_ textField: IKTextField, _ item: EditableItemH) {
-        print("❤️❤️ 日時変更Picker 表示 [\(textField.itemKey)] [\(item.debugDisp)]")
         //Pickerを表示する
         let picker = IKDatePicker()
         let bufDate = item.curVal
@@ -47,14 +46,11 @@ extension EditableBasicVC {
     @objc func actDatePickerSelectButton(_ sender: IKBarButtonItem) {
         guard let picker = sender.parentPicker as? IKDatePicker else { return }
         picker.parentTF?.text = picker.date.dispYmdJP()
-        //TODO: 値も反映したい
         self.view.endEditing(false)
     }
     @objc func actDatePickerCancelButton(_ sender: IKBarButtonItem) {
         guard let picker = sender.parentPicker as? IKDatePicker else { return }
-        print("❤️[\(picker.itemKey)]❤️ 年月日ピッカー〔キャンセル〕ボタン押下❤️")
         self.view.endEditing(false)
     }
-
 
 }

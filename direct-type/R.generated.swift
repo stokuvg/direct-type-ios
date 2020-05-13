@@ -1662,7 +1662,9 @@ struct _R: Rswift.Validatable {
       }
 
       static func validate() throws {
+        if UIKit.UIImage(named: "close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'close' is used in storyboard 'EditablePopup', but couldn't be loaded.") }
         if #available(iOS 11.0, tvOS 11.0, *) {
+          if UIKit.UIColor(named: "color-black", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-black' is used in storyboard 'EditablePopup', but couldn't be loaded.") }
         }
         if _R.storyboard.editablePopup().sbid_SubSelectMultiVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_SubSelectMultiVC' could not be loaded from storyboard 'EditablePopup' as 'SubSelectMultiVC'.") }
         if _R.storyboard.editablePopup().sbid_SubSelectSingleVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_SubSelectSingleVC' could not be loaded from storyboard 'EditablePopup' as 'SubSelectSingleVC'.") }

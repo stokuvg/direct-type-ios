@@ -39,38 +39,26 @@ extension EditableBasicVC {
         textField.inputAccessoryView?.backgroundColor = .green
     }
     func hidePicker(_ textField: IKTextField) {
-        print("❤️❤️ Picker 消す [\(textField.itemKey)]")
+        print("❤️❤️❤️❤️ Picker 消す ❤️❤️[\(textField.itemKey)]❤️❤️❤️❤️")
+        textField.resignFirstResponder()//???
         textField.inputAccessoryView = nil //ここで、関連つけていたToolbarを殺す
         textField.inputView = nil //ここで、関連つけていたPickerを殺す
-        textField.resignFirstResponder()//???
     }
 
     //ピッカーにつけた〔選択〕〔Cancel〕ボタン
     @objc func actPickerSelectButton(_ sender: IKBarButtonItem) {
+        print(#line, #function)
         guard let picker = sender.parentPicker as? IKPickerView else { return }
-        print("❤️[\(picker.itemKey)]❤️ ピッカー〔選択〕ボタン押下❤️")
-//        let selectionItems = arrSubData
-//        guard selectionItems.count > 0 else { return }//そもそも項目がない（依存関係ありの時など）
-//        let num = picker.selectedRow(inComponent: 0)
-//        guard selectionItems.count > num else { return }//マスタ配列が取得できていない
-//        let _selectedItem = selectionItems[num]//現時点での選択肢一覧から、実際に選択されたものを取得
-//        //選択されたものに変更があったか調べる。依存関係がある場合には、関連する項目の値をリセット（未選択：""）にする
-//        if let (selItemKey, selIdxPath) = curSubItem {
-//            //print(_selectedItem.debugDisp, "せんたくされたよ！", selItemKey, selIdxPath.description, _selectedItem.debugDisp)
-//            dicSelectedCode[selItemKey] = _selectedItem
-//            if _selectedItem.code == "" { //未選択コードは選択しない（仮）
-//                dicSelectedCode.removeValue(forKey: selItemKey)
-//            }
-//            tableVW.reloadRows(at: [selIdxPath], with: .none) //該当セルの描画しなおし
-//            dispData()
-//        }
-        self.view.endEditing(false) //forceフラグはどこに効いてくるのか？
+        print(#line, #function)
+        self.view.endEditing(true)
+        print(#line, #function)
     }
     @objc func actPickerCancelButton(_ sender: IKBarButtonItem) {
-        guard let picker = sender.parentPicker as? IKPickerView else { return }
-        print("❤️[\(picker.itemKey)]❤️ ピッカー〔キャンセル〕ボタン押下❤️")
-        //=== キャンセルされたら、次のセルへ移動せず閉じる
-        self.view.endEditing(false) //forceフラグはどこに効いてくるのか？
+        print(#line, #function)
+//        guard let picker = sender.parentPicker as? IKPickerView else { return }
+        print(#line, #function)
+        self.view.endEditing(true)
+        print(#line, #function)
     }
 
 }

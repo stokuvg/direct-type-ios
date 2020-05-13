@@ -20,13 +20,17 @@ class SubSelectSingleVC: BaseVC {
 //    var dicSelectedCode: Set<CodeDisp> = []
     var dicChange: [String: Bool] = [:]  //CodeDisp.code : true
 
+    @IBOutlet weak var vwHead: UIView!
     @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var tableVW: UITableView!
-    
-    @IBOutlet weak var btnCancel: UIButton!
-    @IBAction func actCancel(_ sender: UIButton) {
+    @IBOutlet weak var btnBack: UIButton!
+    @IBAction func actBack(_ sender: UIButton) {
         actPopupCancel()
     }
+
+    @IBOutlet weak var vwMain: UIView!
+    @IBOutlet weak var tableVW: UITableView!
+    
+    @IBOutlet weak var vwFoot: UIView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
         actPopupSelect(changeItem: CodeDisp("2", "hogehoge"))
@@ -34,6 +38,12 @@ class SubSelectSingleVC: BaseVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //====デザイン適用
+        vwHead.backgroundColor = UIColor.init(colorType: .color_main)!
+        vwMain.backgroundColor = UIColor.init(colorType: .color_white)!
+        vwFoot.backgroundColor = UIColor.init(colorType: .color_main)!
+        btnCommit.setTitle(text: "この内容で保存", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
         self.title = "項目選択のサブ画面"
     }
     func initData(editableItem: EditableItemH, type: SelectItemsManager.TsvMaster) {
@@ -42,7 +52,8 @@ class SubSelectSingleVC: BaseVC {
         self.arrData = SelectItemsManager.getMaster(type)
     }
     func dispData() {
-        self.lblTitle.text = "\(editableItem.dispName) \(arrData.count)件"
+        let bufTitle: String = "\(editableItem.dispName) \(arrData.count)件"
+        lblTitle.text(text: bufTitle, fontType: .font_L, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

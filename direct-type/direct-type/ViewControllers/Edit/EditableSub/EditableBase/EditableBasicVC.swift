@@ -77,9 +77,6 @@ extension EditableBasicVC: InputItemHDelegate {
     }
     
     
-//    func editingDidBegin(_ tf: IKTextField, _ item: EditableItemH) {
-//        showPickerYMD(tf, item)
-//    }
     func editingDidBegin(_ tf: IKTextField, _ item: EditableItemH) {
         print(#line, #function)
         actTargetInputTextBegin(tf, item) //元のTextFieldに被せるもの（なくて良い）
@@ -101,6 +98,10 @@ extension EditableBasicVC: InputItemHDelegate {
             if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSingleVC") as? SubSelectSingleVC{
                 nvc.initData(editableItem: item, type: .gender)
                 print(String(repeating: "=", count: 33))
+                
+                actPickerCancelButton(IKBarButtonItem())
+                actDatePickerCancelButton(IKBarButtonItem())
+                
                 //遷移アニメーション関連
                 //self.navigationController?.pushViewController(nvc, animated: true)
                 nvc.modalTransitionStyle = .crossDissolve
@@ -141,14 +142,15 @@ extension EditableBasicVC: InputItemHDelegate {
         }
     }
     func editingDidEnd(_ tf: IKTextField, _ item: EditableItemH) {
+        print(#line, #function, tf.description)
         dissmissTargetTfArea() //元のTextFieldに被せるもの（なくて良い）
         //=== タイプによって割り込み処理
         switch item.editType {
         case .selectDrum:
-            print("Picker閉じる時の処理 [\(item.editableItemKey): \(item.dispName)]")
+            print("Picker閉じる時の処理 [\(item.editableItemKey): \(item.dispName)] [\(tf.description)]")
             hidePicker(tf)
         case .selectDrumYMD:
-            print("Picker閉じる時の処理 [\(item.editableItemKey): \(item.dispName)]")
+            print("Picker閉じる時の処理 [\(item.editableItemKey): \(item.dispName)] [\(tf.description)]")
             hidePicker(tf)
         case .readonly:
             break
