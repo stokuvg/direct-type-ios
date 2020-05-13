@@ -59,6 +59,26 @@ class JobOfferDetailVC: TmpBasicVC {
         self.detailTableView.registerNib(nibName: "JobDetailSalaryExampleCell", idName: "JobDetailSalaryExampleCell")
         /// section 3
         // 募集要項
+        // 1.募集背景:              必須
+        // 2.仕事内容:              必須
+        // 　・案件例:               任意
+        // 　・手掛ける商品・サービス:   任意
+        // 　・開発環境・業務範囲:     任意
+        // 　・注目ポイント:           任意
+        // 3.応募資格:              必須
+        // 　・歓迎する経験・スキル:     任意
+        // 　・過去の採用例:           任意
+        // 　・この仕事の向き・不向き:  任意
+        // 4.雇用携帯コード:        必須
+        // 5.給与:               必須
+        // 　・賞与について:          任意
+        // 6.勤務時間:             必須
+        //   ・残業について:
+        // 7.勤務地:              必須
+        //   ・交通詳細
+        // 8.休日休暇:            必須
+        // 9.待遇・福利厚生:       必須
+        // 　・産休・育休取得:      任意
         /// section 4
         // 取材メモ
         /// section 5
@@ -154,6 +174,8 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 return 1
             case 2:
                 return 2
+            case 3:
+                return 9
             default:
                 return 1
         }
