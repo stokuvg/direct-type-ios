@@ -47,7 +47,9 @@ class JobOfferBigCardCell: BaseJobCardCell {
         if data.count > 0 {
             let endFlag:Bool = (data["end"] as! Bool)
             if endFlag {
-                self.limitedMarkBackView.isHidden = true
+//                self.limitedMarkBackView.isHidden = true
+                self.limitedMarkView.isHidden = true
+                self.stackView.removeArrangedSubview(self.limitedMarkBackView)
             }
             
             let imageUrlString:String = (data["image"] as! String)
