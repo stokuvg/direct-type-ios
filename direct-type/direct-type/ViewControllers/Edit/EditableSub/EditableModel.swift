@@ -19,12 +19,11 @@ enum EditableGamen {
     }
 }
 
-
-class EditableBase {
+class EditableModel {
     var editableGamen: EditableGamen! //画面種別の定義（必須）
     //↑PickerやSuggestなどの元となるTextFieldの管理なんかも、必要ならこれで管理しちゃう
     //編集可能項目の定義（グループテーブル利用）
-    var arrData: [[EditableItem]] = [[]]
+    var arrData: [[EditableItemH]] = [[]]
     var dispSectionTitles: [String] = []//テーブルやコレクション以外では不要だが定義しておく
     //編集中の値の管理
     var editTempCD: [EditableItemKey: EditableItemCurVal] = [:]//String/CodeDispのCodeを入れておく（ItemEditable.curVal)
@@ -39,8 +38,8 @@ class EditableBase {
         switch editableGamen {
         case .profile:
             guard let (mdlProfile) = item as? (MdlProfile) else { return } //タプルで受けれる!!
-            let secDbg: [EditableItem] = [
-                EditableItem(type: .readonly, editItem: EditItemUser.userId, val: mdlProfile.familyName),
+            let secDbg: [EditableItemH] = [
+                EditableItemH(type: .readonly, editItem: EditItemUser.userId, val: mdlProfile.familyName),
             ]
             arrData = [secDbg]
             dispSectionTitles = ["開発確認項目"]
@@ -83,21 +82,21 @@ class EditableBase {
         lastEditableItemKey = arrTextFieldNextDoneKey.last ?? "" //最後の項目のキーを保持させとく
     }
     //=== 編集中の値の保持
-    func changeTempItem(_ item: EditableItem, text: String) {
+    func changeTempItem(_ item: EditableItemH, text: String) {
         editTempCD[item.editableItemKey] = text
         if item.orgVal == text {
             editTempCD.removeValue(forKey: item.editableItemKey)
         }
     }
-    //=== EditableItemKeyを渡すと、現在の編集適用したEditableItemを返す
-    func getItemByKey(_ itemKey: EditableItemKey) -> EditableItem? {
+    //=== EditableItemKeyを渡すと、現在の編集適用したEditableItemHを返す
+    func getItemByKey(_ itemKey: EditableItemKey) -> EditableItemH? {
         guard let indexPath = dicTextFieldIndexPath[itemKey] else { return nil }
         let item = arrData[indexPath.section][indexPath.row]
         let (_, editTemp) = makeTempItem(item)
         return editTemp
     }
     //変更なければnil返す（変更検知のため）
-    func makeTempItem(_ item: EditableItem) -> (Bool, EditableItem) {
+    func makeTempItem(_ item: EditableItemH) -> (Bool, EditableItemH) {
         if let tempCD = editTempCD[item.editableItemKey] {
             var result = item
             result.curVal = tempCD

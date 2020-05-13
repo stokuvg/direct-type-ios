@@ -100,10 +100,11 @@
 		260BBFE024651732003D163A /* HPreviewTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260BBFDD24651732003D163A /* HPreviewTBCell.swift */; };
 		260BBFE124651732003D163A /* Preview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 260BBFDE24651732003D163A /* Preview.storyboard */; };
 		260BBFE224651732003D163A /* HPreviewTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 260BBFDF24651732003D163A /* HPreviewTBCell.xib */; };
+		26133A54246B7A00001802BB /* EditableBasicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26133A53246B7A00001802BB /* EditableBasicVC.swift */; };
 		26800520246A2B440053A7F4 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2680051F246A2B440053A7F4 /* Date+Extensions.swift */; };
 		26989F7F246A5E520050AC40 /* HEditDrumTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26989F7D246A5E520050AC40 /* HEditDrumTBCell.xib */; };
 		26989F80246A5E520050AC40 /* HEditDrumTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26989F7E246A5E520050AC40 /* HEditDrumTBCell.swift */; };
-		26989F82246A66640050AC40 /* EditableBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26989F81246A66630050AC40 /* EditableBase.swift */; };
+		26989F82246A66640050AC40 /* EditableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26989F81246A66630050AC40 /* EditableModel.swift */; };
 		269AFFC2246A929300DB364B /* SubSelectDaiTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269AFFB8246A929200DB364B /* SubSelectDaiTBCell.swift */; };
 		269AFFC3246A929300DB364B /* SubSelectTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269AFFB9246A929200DB364B /* SubSelectTBCell.swift */; };
 		269AFFC4246A929300DB364B /* SubSelectSyouTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269AFFBA246A929200DB364B /* SubSelectSyouTBCell.swift */; };
@@ -244,10 +245,11 @@
 		260BBFDD24651732003D163A /* HPreviewTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HPreviewTBCell.swift; sourceTree = "<group>"; };
 		260BBFDE24651732003D163A /* Preview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preview.storyboard; sourceTree = "<group>"; };
 		260BBFDF24651732003D163A /* HPreviewTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HPreviewTBCell.xib; sourceTree = "<group>"; };
+		26133A53246B7A00001802BB /* EditableBasicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableBasicVC.swift; sourceTree = "<group>"; };
 		2680051F246A2B440053A7F4 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		26989F7D246A5E520050AC40 /* HEditDrumTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HEditDrumTBCell.xib; sourceTree = "<group>"; };
 		26989F7E246A5E520050AC40 /* HEditDrumTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HEditDrumTBCell.swift; sourceTree = "<group>"; };
-		26989F81246A66630050AC40 /* EditableBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableBase.swift; sourceTree = "<group>"; };
+		26989F81246A66630050AC40 /* EditableModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableModel.swift; sourceTree = "<group>"; };
 		269AFFB8246A929200DB364B /* SubSelectDaiTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubSelectDaiTBCell.swift; sourceTree = "<group>"; };
 		269AFFB9246A929200DB364B /* SubSelectTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubSelectTBCell.swift; sourceTree = "<group>"; };
 		269AFFBA246A929200DB364B /* SubSelectSyouTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubSelectSyouTBCell.swift; sourceTree = "<group>"; };
@@ -613,7 +615,7 @@
 			isa = PBXGroup;
 			children = (
 				269AFFB7246A929200DB364B /* SubSelect */,
-				26989F81246A66630050AC40 /* EditableBase.swift */,
+				26989F81246A66630050AC40 /* EditableModel.swift */,
 				26CFC46D246949B800E458E2 /* ClassExtensions.swift */,
 				26CFC46C246949B800E458E2 /* MyColorDefine.swift */,
 				26989F7E246A5E520050AC40 /* HEditDrumTBCell.swift */,
@@ -639,6 +641,7 @@
 				269AFFBF246A929200DB364B /* SubSelectTBCell.xib */,
 				269AFFC0246A929200DB364B /* SubSelectDaiTBCell.xib */,
 				269AFFC1246A929200DB364B /* SubSelectSpecialVC.swift */,
+				26133A53246B7A00001802BB /* EditableBasicVC.swift */,
 			);
 			path = SubSelect;
 			sourceTree = "<group>";
@@ -901,6 +904,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				06E5197D2457BFBE004E4B7A /* BaseNaviController.swift in Sources */,
+				26133A54246B7A00001802BB /* EditableBasicVC.swift in Sources */,
 				269AFFCB246A929300DB364B /* SubSelectSpecialVC.swift in Sources */,
 				067F28D22456CE39000AAD69 /* TmpBasicVC.swift in Sources */,
 				06E5198F2457D70B004E4B7A /* ChemistrySelect.swift in Sources */,
@@ -925,7 +929,7 @@
 				06E519A42457DC7B004E4B7A /* InitialInputCompleteVC.swift in Sources */,
 				0667636C2457B02200AC5039 /* KeepListVC.swift in Sources */,
 				06E5198A2457D6C1004E4B7A /* JobOfferDetailVC.swift in Sources */,
-				26989F82246A66640050AC40 /* EditableBase.swift in Sources */,
+				26989F82246A66640050AC40 /* EditableModel.swift in Sources */,
 				06E519C22458156A004E4B7A /* AccessDenyVC.swift in Sources */,
 				067F28EA2456D135000AAD69 /* UIFont+Extensions.swift in Sources */,
 				067F28E82456D112000AAD69 /* UIColor+Extensions.swift in Sources */,

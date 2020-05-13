@@ -13,7 +13,7 @@ class ProfileEditVC: TmpBasicVC {
     var arrData: [EditableItemH] = [] //???EditableItemにする予定
 
     //編集中の情報
-    var editableModel: EditableBase? //画面編集項目のモデルと管理
+    var editableModel: EditableModel? //画面編集項目のモデルと管理
     
     @IBOutlet weak var vwHead: UIView!
     @IBOutlet weak var lblTitle: UILabel!
@@ -118,117 +118,6 @@ extension ProfileEditVC: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-
-//=== 文字入力に伴うTextField関連の通知
-extension ProfileEditVC {
-    //=== 表示・非表示
-    func showPickerYMD(_ textField: IKTextField, _ item: EditableItemH) {
-        print("❤️❤️ 日時変更Picker 表示 [\(textField.itemKey)] [\(item.debugDisp)]")
-        //Pickerを表示する
-        let picker = IKDatePicker()
-        let bufDate = item.curVal
-        let date = DateHelper.convStr2Date(bufDate)
-        picker.date = date
-        picker.datePickerMode = .date
-        picker.calendar = date.calendarJP
-        picker.locale = Locale(identifier: "ja_JP")
-        picker.itemKey = textField.itemKey
-        picker.parentTF = textField
-        textField.inputView = picker //
-        //Pickerにボタンをつけておく（Pickerにというか、inputViewに対して付くため、Softwareキーボードなければ最下部に、あればその上につく
-        let rect = CGRect(origin: CGPoint.zero, size: CGSize.init(width: 260, height: 45))
-        let toolbar = UIToolbar(frame: rect)//Autolayout補正かかるけど、そこそこの横幅指定が必要
-        let lbl = UILabel(frame: rect)
-        lbl.textAlignment = .center
-        lbl.text = "\(item.dispName)を選択してください"
-        let separator1 = IKBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let barLbl = IKBarButtonItem.init(customView: lbl)
-        let separator2 = IKBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let btnClose = IKBarButtonItem.init(title: "閉じる", style: .done, target: self, action: #selector(actDatePickerCancelButton))
-        let btnSelect = IKBarButtonItem.init(title: "選択", style: .done, target: self, action: #selector(actDatePickerSelectButton))
-        //=== itemKeyをつけておく
-        btnSelect.parentPicker = picker
-        btnClose.parentPicker = picker
-        toolbar.setItems([btnClose, separator1, barLbl, separator2, btnSelect], animated: true)
-        textField.inputAccessoryView = toolbar
-        textField.inputAccessoryView?.backgroundColor = .green
-    }
-    
-    func showPicker(_ textField: IKTextField, _ item: EditableItemH) {
-        print("❤️❤️ Picker 表示 [\(textField.itemKey)] [\(item.debugDisp)]")
-        //Pickerを表示する
-        let picker = IKPickerView()
-        picker.delegate = self
-        picker.dataSource = self
-        picker.itemKey = textField.itemKey
-        picker.parentTF = textField
-        textField.inputView = picker //
-        //Pickerにボタンをつけておく（Pickerにというか、inputViewに対して付くため、Softwareキーボードなければ最下部に、あればその上につく
-        let rect = CGRect(origin: CGPoint.zero, size: CGSize.init(width: 260, height: 45))
-        let toolbar = UIToolbar(frame: rect)//Autolayout補正かかるけど、そこそこの横幅指定が必要
-        let lbl = UILabel(frame: rect)
-        lbl.textAlignment = .center
-        lbl.text = "\(item.dispName)を選択してください"
-        let separator1 = IKBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let barLbl = IKBarButtonItem.init(customView: lbl)
-        let separator2 = IKBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let btnClose = IKBarButtonItem.init(title: "閉じる", style: .done, target: self, action: #selector(actPickerCancelButton))
-        let btnSelect = IKBarButtonItem.init(title: "選択", style: .done, target: self, action: #selector(actPickerSelectButton))
-        //=== itemKeyをつけておく
-        btnSelect.parentPicker = picker
-        btnClose.parentPicker = picker
-        toolbar.setItems([btnClose, separator1, barLbl, separator2, btnSelect], animated: true)
-        textField.inputAccessoryView = toolbar
-        textField.inputAccessoryView?.backgroundColor = .green
-    }
-    func hidePicker(_ textField: IKTextField) {
-        print("❤️❤️ Picker 消す [\(textField.itemKey)]")
-        textField.inputAccessoryView = nil //ここで、関連つけていたToolbarを殺す
-        textField.inputView = nil //ここで、関連つけていたPickerを殺す
-    }
-
-    //ピッカーにつけた〔選択〕〔Cancel〕ボタン
-    @objc func actDatePickerSelectButton(_ sender: IKBarButtonItem) {
-        guard let picker = sender.parentPicker as? IKDatePicker else { return }
-        picker.parentTF?.text = picker.date.dispYmdJP()
-        //TODO: 値も反映したい
-        self.view.endEditing(false)
-    }
-    @objc func actDatePickerCancelButton(_ sender: IKBarButtonItem) {
-        guard let picker = sender.parentPicker as? IKDatePicker else { return }
-        print("❤️[\(picker.itemKey)]❤️ 年月日ピッカー〔キャンセル〕ボタン押下❤️")
-        self.view.endEditing(false)
-    }
-
-    //ピッカーにつけた〔選択〕〔Cancel〕ボタン
-    @objc func actPickerSelectButton(_ sender: IKBarButtonItem) {
-        guard let picker = sender.parentPicker as? IKPickerView else { return }
-        print("❤️[\(picker.itemKey)]❤️ ピッカー〔選択〕ボタン押下❤️")
-//        let selectionItems = arrSubData
-//        guard selectionItems.count > 0 else { return }//そもそも項目がない（依存関係ありの時など）
-//        let num = picker.selectedRow(inComponent: 0)
-//        guard selectionItems.count > num else { return }//マスタ配列が取得できていない
-//        let _selectedItem = selectionItems[num]//現時点での選択肢一覧から、実際に選択されたものを取得
-//        //選択されたものに変更があったか調べる。依存関係がある場合には、関連する項目の値をリセット（未選択：""）にする
-//        if let (selItemKey, selIdxPath) = curSubItem {
-//            //print(_selectedItem.debugDisp, "せんたくされたよ！", selItemKey, selIdxPath.description, _selectedItem.debugDisp)
-//            dicSelectedCode[selItemKey] = _selectedItem
-//            if _selectedItem.code == "" { //未選択コードは選択しない（仮）
-//                dicSelectedCode.removeValue(forKey: selItemKey)
-//            }
-//            tableVW.reloadRows(at: [selIdxPath], with: .none) //該当セルの描画しなおし
-//            dispData()
-//        }
-        self.view.endEditing(false) //forceフラグはどこに効いてくるのか？
-    }
-    @objc func actPickerCancelButton(_ sender: IKBarButtonItem) {
-        guard let picker = sender.parentPicker as? IKPickerView else { return }
-        print("❤️[\(picker.itemKey)]❤️ ピッカー〔キャンセル〕ボタン押下❤️")
-        //=== キャンセルされたら、次のセルへ移動せず閉じる
-        self.view.endEditing(false) //forceフラグはどこに効いてくるのか？
-    }
-
-}
 
 
 extension ProfileEditVC: UIPickerViewDataSource, UIPickerViewDelegate {
