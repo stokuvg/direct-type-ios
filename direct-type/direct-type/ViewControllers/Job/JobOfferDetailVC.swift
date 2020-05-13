@@ -27,7 +27,7 @@ class JobOfferDetailVC: TmpBasicVC {
         "tags":["高度成長企業","急募求人","服装自由","英語活かせる","駅から徒歩５分","管理職採用","産休育休実績あり",],
         "main_title":"RPA,AI,loT関連プロジェクトや、大手メーカのーのR&D・・・\nこれから成長する若手こそ、案件にこだわろう。",
         "main_article":"◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n",
-        "salary_exampl":"■２５歳サブリーダー／年収４００万円\n■２５歳サブリーダー／年収４００万円\n■２５歳サブリーダー／年収４００万円\n■２５歳サブリーダー／年収４００万円\n■２５歳サブリーダー／年収４００万円\n■２５歳サブリーダー／年収４００万円\n■２５歳サブリーダー／年収４００万円\n",
+        "salary_example":"■２５歳サブリーダー／年収４００万円\n■２８歳PL／年収４８０万円\n■３０歳PM／年収５５０万円\n■３２歳PM／年収５８０万円\n■３５歳PM／年収６５０万円\n■４０歳マネージャー／年収７４０万円\n■４５歳部長／年収８００万円\n",
     ]
     
     var articleOpenFlag:Bool = false
@@ -56,6 +56,7 @@ class JobOfferDetailVC: TmpBasicVC {
         // PRコード
         self.detailTableView.registerNib(nibName: "JobDetailPRCodeTagsCell", idName: "JobDetailPRCodeTagsCell")
         // 給与例
+        self.detailTableView.registerNib(nibName: "JobDetailSalaryExampleCell", idName: "JobDetailSalaryExampleCell")
         /// section 3
         // 募集要項
         /// section 4
@@ -111,7 +112,7 @@ extension JobOfferDetailVC: UITableViewDelegate {
         switch section {
             case 1:
                 return articleOpenFlag ? 120 : 60
-            case 2:
+            case 3:
                 return 60
             default:
                 return 0
@@ -132,7 +133,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 let articleTitle = dummyData["main_title"] as! String
                 view.setup(string: articleTitle,openFlag: articleOpenFlag)
                 return view
-            case 2:
+            case 3:
                 // 募集要項
                 let view = UINib(nibName: "JobDetailGuideBookHeaderView", bundle: nil)
                     .instantiate(withOwner: self, options: nil)
@@ -151,6 +152,8 @@ extension JobOfferDetailVC: UITableViewDataSource {
         switch section {
             case 0:
                 return 1
+            case 2:
+                return 2
             default:
                 return 1
         }
@@ -174,6 +177,16 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 } else {
                     cell.setup(data: "")
                 }
+                return cell
+            case (2,0):
+                let cell = tableView.loadCell(cellName: "JobDetailPRCodeTagsCell", indexPath: indexPath) as! JobDetailPRCodeTagsCell
+                let datas = dummyData["tags"] as! [String]
+                cell.setup(datas: datas)
+                return cell
+            case (2,1):
+                let cell = tableView.loadCell(cellName: "JobDetailSalaryExampleCell", indexPath: indexPath) as! JobDetailSalaryExampleCell
+                let examples = dummyData["salary_example"] as! String
+                cell.setup(data: examples)
                 return cell
             default:
                 let cell = UITableViewCell()

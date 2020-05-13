@@ -17,6 +17,9 @@
 		064570642465427000F3B015 /* JobDetailGuideBookHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 064570632465427000F3B015 /* JobDetailGuideBookHeaderView.xib */; };
 		0645DDFC246B907000592572 /* JobDetailPRCodeTagsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0645DDFA246B907000592572 /* JobDetailPRCodeTagsCell.swift */; };
 		0645DDFD246B907000592572 /* JobDetailPRCodeTagsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0645DDFB246B907000592572 /* JobDetailPRCodeTagsCell.xib */; };
+		0645DDFF246B969000592572 /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0645DDFE246B969000592572 /* Tags.swift */; };
+		0645DE02246BB6A100592572 /* JobDetailSalaryExampleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0645DE00246BB6A100592572 /* JobDetailSalaryExampleCell.swift */; };
+		0645DE03246BB6A100592572 /* JobDetailSalaryExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0645DE01246BB6A100592572 /* JobDetailSalaryExampleCell.xib */; };
 		064EF6F724654A7300853ADD /* JobDetailDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EF6F524654A7300853ADD /* JobDetailDataCell.swift */; };
 		064EF6F824654A7300853ADD /* JobDetailDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 064EF6F624654A7300853ADD /* JobDetailDataCell.xib */; };
 		064EF6FB24654FDB00853ADD /* JobDetailArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EF6F924654FDB00853ADD /* JobDetailArticleCell.swift */; };
@@ -161,6 +164,9 @@
 		064570632465427000F3B015 /* JobDetailGuideBookHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailGuideBookHeaderView.xib; sourceTree = "<group>"; };
 		0645DDFA246B907000592572 /* JobDetailPRCodeTagsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailPRCodeTagsCell.swift; sourceTree = "<group>"; };
 		0645DDFB246B907000592572 /* JobDetailPRCodeTagsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailPRCodeTagsCell.xib; sourceTree = "<group>"; };
+		0645DDFE246B969000592572 /* Tags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
+		0645DE00246BB6A100592572 /* JobDetailSalaryExampleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailSalaryExampleCell.swift; sourceTree = "<group>"; };
+		0645DE01246BB6A100592572 /* JobDetailSalaryExampleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailSalaryExampleCell.xib; sourceTree = "<group>"; };
 		064EF6F524654A7300853ADD /* JobDetailDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailDataCell.swift; sourceTree = "<group>"; };
 		064EF6F624654A7300853ADD /* JobDetailDataCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailDataCell.xib; sourceTree = "<group>"; };
 		064EF6F924654FDB00853ADD /* JobDetailArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailArticleCell.swift; sourceTree = "<group>"; };
@@ -324,6 +330,8 @@
 				064EF6FF2465551D00853ADD /* JobDetailArticleHeaderView.xib */,
 				0645DDFA246B907000592572 /* JobDetailPRCodeTagsCell.swift */,
 				0645DDFB246B907000592572 /* JobDetailPRCodeTagsCell.xib */,
+				0645DE00246BB6A100592572 /* JobDetailSalaryExampleCell.swift */,
+				0645DE01246BB6A100592572 /* JobDetailSalaryExampleCell.xib */,
 			);
 			path = detail;
 			sourceTree = "<group>";
@@ -455,6 +463,7 @@
 				06C347232463A595000FB4DA /* UIButton+Extensions.swift */,
 				2680051F246A2B440053A7F4 /* Date+Extensions.swift */,
 				0645705C2464F77700F3B015 /* Logs.swift */,
+				0645DDFE246B969000592572 /* Tags.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -800,6 +809,7 @@
 				26BF48E224639D2B00E00215 /* MstK4_jobType.tsv in Resources */,
 				269AFFCA246A929300DB364B /* SubSelectDaiTBCell.xib in Resources */,
 				064570642465427000F3B015 /* JobDetailGuideBookHeaderView.xib in Resources */,
+				0645DE03246BB6A100592572 /* JobDetailSalaryExampleCell.xib in Resources */,
 				26CFC4682469496D00E458E2 /* HEditZipcodeTBCell.xib in Resources */,
 				066763782457B0A700AC5039 /* KeepListVC.storyboard in Resources */,
 				26BF48E624639D2B00E00215 /* MstK8_qualification.tsv in Resources */,
@@ -936,6 +946,7 @@
 				06E519C22458156A004E4B7A /* AccessDenyVC.swift in Sources */,
 				067F28EA2456D135000AAD69 /* UIFont+Extensions.swift in Sources */,
 				067F28E82456D112000AAD69 /* UIColor+Extensions.swift in Sources */,
+				0645DDFF246B969000592572 /* Tags.swift in Sources */,
 				26BF48F424639F9900E00215 /* ObjUser.swift in Sources */,
 				0667636F2457B04500AC5039 /* HomeVC.swift in Sources */,
 				06E519C52458159F004E4B7A /* SnoothCareerVC.swift in Sources */,
@@ -966,6 +977,7 @@
 				06E519B7245814D4004E4B7A /* ProfileEditVC.swift in Sources */,
 				06E519AB245813CA004E4B7A /* InitialInputListVC.swift in Sources */,
 				066BD9EC2456B3A2009E610B /* R.generated.swift in Sources */,
+				0645DE02246BB6A100592572 /* JobDetailSalaryExampleCell.swift in Sources */,
 				066EF6CB245C119000E15AD2 /* JobOfferCardMoreCell.swift in Sources */,
 				064EF6FE2465550E00853ADD /* JobDetailArticleHeaderView.swift in Sources */,
 				066EF6C5245BB9C400E15AD2 /* KeepCardCell.swift in Sources */,

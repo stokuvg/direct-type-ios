@@ -1012,7 +1012,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 18 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 19 nibs.
   struct nib {
     /// Nib `HEditDrumTBCell`.
     static let hEditDrumTBCell = _R.nib._HEditDrumTBCell()
@@ -1032,6 +1032,8 @@ struct R: Rswift.Validatable {
     static let jobDetailGuideBookHeaderView = _R.nib._JobDetailGuideBookHeaderView()
     /// Nib `JobDetailPRCodeTagsCell`.
     static let jobDetailPRCodeTagsCell = _R.nib._JobDetailPRCodeTagsCell()
+    /// Nib `JobDetailSalaryExampleCell`.
+    static let jobDetailSalaryExampleCell = _R.nib._JobDetailSalaryExampleCell()
     /// Nib `JobOfferBigCardCell`.
     static let jobOfferBigCardCell = _R.nib._JobOfferBigCardCell()
     /// Nib `JobOfferCardMoreCell`.
@@ -1120,6 +1122,14 @@ struct R: Rswift.Validatable {
     @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailPRCodeTagsCell) instead")
     static func jobDetailPRCodeTagsCell(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.jobDetailPRCodeTagsCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "JobDetailSalaryExampleCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailSalaryExampleCell) instead")
+    static func jobDetailSalaryExampleCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.jobDetailSalaryExampleCell)
     }
     #endif
 
@@ -1229,6 +1239,10 @@ struct R: Rswift.Validatable {
 
     static func jobDetailPRCodeTagsCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailPRCodeTagsCell? {
       return R.nib.jobDetailPRCodeTagsCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailPRCodeTagsCell
+    }
+
+    static func jobDetailSalaryExampleCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailSalaryExampleCell? {
+      return R.nib.jobDetailSalaryExampleCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailSalaryExampleCell
     }
 
     static func jobOfferBigCardCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobOfferBigCardCell? {
@@ -1440,6 +1454,17 @@ struct _R: Rswift.Validatable {
 
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailPRCodeTagsCell? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailPRCodeTagsCell
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _JobDetailSalaryExampleCell: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "JobDetailSalaryExampleCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailSalaryExampleCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailSalaryExampleCell
       }
 
       fileprivate init() {}
@@ -1768,6 +1793,7 @@ struct _R: Rswift.Validatable {
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
           if UIKit.UIColor(named: "color-base", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-base' is used in storyboard 'JobOfferDetailVC', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "color-line", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-line' is used in storyboard 'JobOfferDetailVC', but couldn't be loaded.") }
         }
         if _R.storyboard.jobOfferDetailVC().sbid_JobOfferDetailVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_JobOfferDetailVC' could not be loaded from storyboard 'JobOfferDetailVC' as 'JobOfferDetailVC'.") }
       }
