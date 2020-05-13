@@ -29,7 +29,20 @@ class HEditTextTBCell: UITableViewCell {
         guard let _item = item else { return }
         let bufTitle = _item.dispName //_item.type.dispTitle
         lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
-        tfValue.text = _item.curVal
+        var bufVal: String = ""
+        switch _item.editType {
+        case .selectDrumYMD:
+            bufVal = _item.valDisp
+        case .selectDrum, .selectSingle:
+            bufVal = _item.valDisp
+        case .selectMulti:
+            bufVal = _item.valDisp
+        case .selectSpecisl:
+            bufVal = _item.valDisp
+        default:
+            bufVal = _item.curVal
+        }
+        tfValue.text = bufVal
         
         lblDebug.text = ""
         if Constants.DbgDispStatus {

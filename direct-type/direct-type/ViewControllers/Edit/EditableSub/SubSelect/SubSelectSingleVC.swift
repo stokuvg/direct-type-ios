@@ -36,7 +36,7 @@ class SubSelectSingleVC: BaseVC {
         var arr: [CodeDisp] = []
         for (key, val) in dicChange {
             if let item: CodeDisp = SelectItemsManager.getCodeDisp(.gender, code: key) {
-                arr.append(item)
+                if val == true { arr.append(item) } //選択状態のもののみ追加
             }
         }
         if let selItem = arr.first {
@@ -93,27 +93,21 @@ extension SubSelectSingleVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true) //ハイライトの解除
         let item = arrData[indexPath.row]
-        dicChange.removeAll() //Single選択の場合は、まるっと削除して仕舞えば良い
+        dicChange.removeAll() //Single選択の場合は、まるっと削除してから追加
         let vals = "".split(separator: "_") //選択状態をバラす
         let select0: Bool = vals.contains { (val) -> Bool in val == item.code }//item.valに選択されているもの配列が付いているので、そこにあるかチェック
         let select: Bool = dicChange[item.code] ?? select0  //差分情報優先
         dicChange[item.code] = !select
         //該当セルの描画しなおし
-//        tableView.reloadRows(at: [indexPath], with: .none)
         tableView.reloadData()
-        print(#line, #function, item.debugDisp, dicChange.count, dicChange.description)
-//        actPopupSelect(changeItem: item)
+        //actPopupSelect(changeItem: item)//選択したもの即時反映の場合
     }
 }
 
-extension SubSelectSingleVC: SubSelectProtocol {
-    
-}
-
-//=== 複数選択ポップアップで選択させる場合の処理 ===
+//=== 単一選択ポップアップで選択させる場合の処理 ===
 extension SubSelectSingleVC: SubSelectSingleDelegate {
     func actPopupSelect(changeItem: CodeDisp) {
-        print(changeItem.debugDisp)//編集中の値の保持（と描画）
+        //print(changeItem.debugDisp)//編集中の値の保持（と描画）
 //        self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true) { }
     }
@@ -123,3 +117,7 @@ extension SubSelectSingleVC: SubSelectSingleDelegate {
     }
 }
 
+
+extension SubSelectSingleVC: SubSelectProtocol {
+    
+}
