@@ -55,6 +55,7 @@ class EditableBasicVC: TmpBasicVC {
 //セルでのテキスト入力の変更
 extension EditableBasicVC: InputItemHDelegate {
     func textFieldShouldReturn(_ textField: IKTextField, _ item: EditableItemH) -> Bool {
+        print(#line, #function)
         if textField.returnKeyType == .next {
             return moveNextCell(item.editableItemKey)//次のセルへ遷移
         }
@@ -65,6 +66,7 @@ extension EditableBasicVC: InputItemHDelegate {
        return true
     }
     func textFieldShouldClear(_ tf: IKTextField, _ item: EditableItemH) -> Bool {
+        print(#line, #function)
         guard let editableModel = editableModel else { return true }
         editableModel.changeTempItem(item, text: "")//編集中の値の保持（と描画）
         if let depKey = editableModel.clearDependencyItemByKey(item.editableItemKey) { //依存関係があればクリア
@@ -73,37 +75,75 @@ extension EditableBasicVC: InputItemHDelegate {
         dispEditableItemByKey(item.editableItemKey)//大正の表示を更新する
         return true
     }
-
+    
+    
+//    func editingDidBegin(_ tf: IKTextField, _ item: EditableItemH) {
+//        showPickerYMD(tf, item)
+//    }
     func editingDidBegin(_ tf: IKTextField, _ item: EditableItemH) {
+        print(#line, #function)
         actTargetInputTextBegin(tf, item) //元のTextFieldに被せるもの（なくて良い）
 
         //画面全体での初期状態での値と編集中の値を保持させておくため
-        guard let editableModel = editableModel else { return }
-        let (_, editTemp) = editableModel.makeTempItem(item)
+//!!!        guard let editableModel = editableModel else { return }
+//!!!        let (_, editTemp) = editableModel.makeTempItem(item)
         //=== タイプによって割り込み処理
         switch item.editType {
         case .selectDrum: //Pickerを生成する
             print("Picker開く時の処理 [\(item.editableItemKey): \(item.dispName)]")
-//            showPicker(tf, item)
-            break
-        case .selectDrumYMD:
+            showPicker(tf, item)
+        case .selectDrumYMD: //Pickerを生成する
             print("Picker開く時の処理 [\(item.editableItemKey): \(item.dispName)]")
-//            showPicker(tf, item)
-break
+            showPickerYMD(tf, item)
+        case .selectSingle:
+            //さらに子ナビさせたいので
+            let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSingleVC") as? SubSelectSingleVC{
+                nvc.initData(editableItem: item, type: .gender)
+                print(String(repeating: "=", count: 33))
+                //遷移アニメーション関連
+                //self.navigationController?.pushViewController(nvc, animated: true)
+                nvc.modalTransitionStyle = .crossDissolve
+                self.view.endEditing(true)
+                hidePicker(tf)
+                self.present(nvc, animated: true) {
+                }
+                tf.resignFirstResponder()//???
+            }
+        case .selectMulti:
+            let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectMultiVC") as? SubSelectMultiVC{
+                nvc.initData(type: .entryPlace)
+                //遷移アニメーション関連
+                //self.navigationController?.pushViewController(nvc, animated: true)
+                nvc.modalTransitionStyle = .crossDissolve
+                self.view.endEditing(true)
+                hidePicker(tf)
+                self.present(nvc, animated: true) {
+                }
+                tf.resignFirstResponder()//???
+            }
+        case .selectSpecisl:
+            let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSpecialVC") as? SubSelectSpecialVC{
+                nvc.initData(editableItem: item)
+                //遷移アニメーション関連
+                //self.navigationController?.pushViewController(nvc, animated: true)
+                nvc.modalTransitionStyle = .crossDissolve
+                self.view.endEditing(true)
+                hidePicker(tf)
+                self.present(nvc, animated: true) {
+                }
+                tf.resignFirstResponder()//???
+            }
         case .readonly:
             break
         case .inputText:
             break
-        case .inputTextSecret:
-            break
         case .inputZipcode:
             break
-        case .selectSingle:
+        case .inputTextSecret:
             break
-        case .selectMulti:
-            break
-        case .selectSpecisl:
-                break
         }
     }
     func editingDidEnd(_ tf: IKTextField, _ item: EditableItemH) {
@@ -112,10 +152,10 @@ break
         switch item.editType {
         case .selectDrum:
             print("Picker閉じる時の処理 [\(item.editableItemKey): \(item.dispName)]")
-//            hidePicker(tf)
+            hidePicker(tf)
         case .selectDrumYMD:
             print("Picker閉じる時の処理 [\(item.editableItemKey): \(item.dispName)]")
-//            hidePicker(tf)
+            hidePicker(tf)
         case .readonly:
             break
         case .inputText:
@@ -142,7 +182,7 @@ break
 
 
 //=== 文字入力に伴うTextField関連の通知
-extension ProfileEditVC {
+extension EditableBasicVC {
     //=== 表示・非表示
     func showPickerYMD(_ textField: IKTextField, _ item: EditableItemH) {
         print("❤️❤️ 日時変更Picker 表示 [\(textField.itemKey)] [\(item.debugDisp)]")
@@ -251,3 +291,55 @@ extension ProfileEditVC {
     }
 
 }
+
+
+
+
+//################################################################################
+extension EditableBasicVC: UIPickerViewDataSource, UIPickerViewDelegate {
+    enum PickerType: Int {
+        case select = 0
+    }
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        guard let pickerView = pickerView as? IKPickerView else { return 0 }
+        guard let editableModel = editableModel else { return 0 }
+        let selectionItems = editableModel.makePickerItems(itemKey: pickerView.itemKey)
+        guard selectionItems.count > 0 else { return 0 } //選択肢マスタがなければドラムも表示しないため0
+        return 1
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        guard let pickerView = pickerView as? IKPickerView else { return 0 }
+        guard let editableModel = editableModel else { return 0 }
+        let selectionItems = editableModel.makePickerItems(itemKey: pickerView.itemKey)
+        return selectionItems.count
+    }
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        guard let pickerView = pickerView as? IKPickerView else { return UIView() }
+        guard let editableModel = editableModel else { return UIView() }
+        let selectionItems = editableModel.makePickerItems(itemKey: pickerView.itemKey)
+        guard selectionItems.count > row else { return UIView() }//マスタ配列が取得できていない
+        let item = selectionItems[row]
+        let lbl = UILabel.init(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: pickerView.bounds.size.width - 20, height: 30)))
+        lbl.font = UIFont.systemFont(ofSize: 30)
+        lbl.text = item.disp
+        lbl.textAlignment = NSTextAlignment.center
+        lbl.adjustsFontSizeToFitWidth = true //フォント縮小での自動リサイズ
+        lbl.minimumScaleFactor = 0.5 //フォント縮小での自動リサイズ
+        return lbl
+    }
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 60.0
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        guard let pickerView = pickerView as? IKPickerView else { return }
+        guard let editableModel = editableModel else { return }
+        let selectionItems = editableModel.makePickerItems(itemKey: pickerView.itemKey)
+        guard selectionItems.count > row else { return }//マスタ配列が取得できていない
+        let item = selectionItems[row]
+        
+        //!!! フィードバックするためにTextFieldが知りたい
+        guard let parentTF = pickerView.parentTF as? IKTextField else { return }
+        parentTF.text = item.disp
+    }
+}
+
