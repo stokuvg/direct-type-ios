@@ -35,15 +35,31 @@ class EditableModel {
     //=== 表示項目の設定
     func initItemEditable(_ editableGamen: EditableGamen, _ item: Any) {
         self.editableGamen = editableGamen
+        print(editableGamen)
         switch editableGamen {
         case .profile:
             guard let (mdlProfile) = item as? (MdlProfile) else { return } //タプルで受けれる!!
+            let _detail = mdlProfile
             let secDbg: [EditableItemH] = [
-                EditableItemH(type: .readonly, editItem: EditItemUser.userId, val: mdlProfile.familyName),
+                EditableItemH(type: .inputText, editItem: EditItemProfile.familyName, val: _detail.familyName),
+                EditableItemH(type: .inputText, editItem: EditItemProfile.firstName, val: _detail.firstName),
+                EditableItemH(type: .inputText, editItem: EditItemProfile.familyNameKana, val: _detail.familyNameKana),
+                EditableItemH(type: .inputText, editItem: EditItemProfile.firstNameKana, val: _detail.firstNameKana),
+                EditableItemH(type: .selectDrumYMD, editItem: EditItemProfile.birthday, val: "\(_detail.birthday.dispYmd())"),
+                EditableItemH(type: .selectSingle, editItem: EditItemProfile.gender, val: "\(_detail.gender)"),
+                EditableItemH(type: .selectDrum, editItem: EditItemProfile.firstName, val: "\(_detail.familyNameKana)"),
+                EditableItemH(type: .inputText, editItem: EditItemProfile.firstName, val: "\(_detail.firstName)"),
+                EditableItemH(type: .inputTextSecret, editItem: EditItemProfile.firstName, val: "\(_detail.familyName)"),
+                EditableItemH(type: .inputZipcode, editItem: EditItemProfile.firstName, val: "\(_detail.firstNameKana)"),
+                EditableItemH(type: .inputZipcode, editItem: EditItemProfile.zipCode, val: _detail.zipCode),
+                EditableItemH(type: .inputText, editItem: EditItemProfile.prefecture, val: "\(_detail.prefecture)"),
+                EditableItemH(type: .inputText, editItem: EditItemProfile.address1, val: _detail.address1),
+                EditableItemH(type: .inputText, editItem: EditItemProfile.address2, val: _detail.address2),
+                EditableItemH(type: .inputText, editItem: EditItemProfile.mailAddress, val: _detail.mailAddress),
+                EditableItemH(type: .inputText, editItem: EditItemProfile.mobilePhoneNo, val: _detail.mobilePhoneNo),
             ]
-            arrData = [secDbg]
-            dispSectionTitles = ["開発確認項目"]
-
+            arrData = [secDbg, secDbg]
+            dispSectionTitles = ["開発確認項目1", "開発確認項目2"]
         }
         chkTableCellAll()//登録項目に応じて、TextFieldを渡り歩かせるための情報を生成しておく
     }

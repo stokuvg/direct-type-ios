@@ -47,18 +47,11 @@ extension EditableBasicVC {
 
     //ピッカーにつけた〔選択〕〔Cancel〕ボタン
     @objc func actPickerSelectButton(_ sender: IKBarButtonItem) {
-        print(#line, #function)
         guard let picker = sender.parentPicker as? IKPickerView else { return }
-        print(#line, #function)
         self.view.endEditing(true)
-        print(#line, #function)
     }
     @objc func actPickerCancelButton(_ sender: IKBarButtonItem) {
-        print(#line, #function)
-//        guard let picker = sender.parentPicker as? IKPickerView else { return }
-        print(#line, #function)
         self.view.endEditing(true)
-        print(#line, #function)
     }
 
 }

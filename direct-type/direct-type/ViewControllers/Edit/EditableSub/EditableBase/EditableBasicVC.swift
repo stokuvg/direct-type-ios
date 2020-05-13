@@ -78,12 +78,10 @@ extension EditableBasicVC: InputItemHDelegate {
     
     
     func editingDidBegin(_ tf: IKTextField, _ item: EditableItemH) {
-        print(#line, #function)
         actTargetInputTextBegin(tf, item) //元のTextFieldに被せるもの（なくて良い）
-
         //画面全体での初期状態での値と編集中の値を保持させておくため
-//!!!        guard let editableModel = editableModel else { return }
-//!!!        let (_, editTemp) = editableModel.makeTempItem(item)
+        guard let editableModel = editableModel else { return }
+        let (_, editTemp) = editableModel.makeTempItem(item)
         //=== タイプによって割り込み処理
         switch item.editType {
         case .selectDrum: //Pickerを生成する
@@ -139,7 +137,6 @@ extension EditableBasicVC: InputItemHDelegate {
         }
     }
     func editingDidEnd(_ tf: IKTextField, _ item: EditableItemH) {
-        print(#line, #function, tf.description)
         dissmissTargetTfArea() //元のTextFieldに被せるもの（なくて良い）
         //=== タイプによって割り込み処理
         switch item.editType {

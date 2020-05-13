@@ -79,7 +79,6 @@ extension SubSelectMultiVC: UITableViewDataSource, UITableViewDelegate {
         dicChange[item.code] = !select
         //該当セルの描画しなおし
         tableView.reloadRows(at: [indexPath], with: .none)
-        print(#line, #function, item.debugDisp)
     }
 }
 
