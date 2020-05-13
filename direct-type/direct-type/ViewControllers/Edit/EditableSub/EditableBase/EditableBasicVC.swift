@@ -94,43 +94,40 @@ extension EditableBasicVC: InputItemHDelegate {
             showPickerYMD(tf, item)
         case .selectSingle:
             //さらに子ナビさせたいので
-            let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
-            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSingleVC") as? SubSelectSingleVC{
-                nvc.initData(editableItem: item, type: .gender)
-                print(String(repeating: "=", count: 33))
-                
-                actPickerCancelButton(IKBarButtonItem())
-                actDatePickerCancelButton(IKBarButtonItem())
-                
-                //遷移アニメーション関連
-                //self.navigationController?.pushViewController(nvc, animated: true)
-                nvc.modalTransitionStyle = .crossDissolve
-                self.present(nvc, animated: true) {
+            DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+                tf.resignFirstResponder()//自分を解除しておかないと、戻ってきたときにまた遷移してしまうため
+                let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
+                if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSingleVC") as? SubSelectSingleVC{
+                    nvc.initData(editableItem: item, type: .gender)
+                    //遷移アニメーション関連
+                    nvc.modalTransitionStyle = .crossDissolve
+                    self.present(nvc, animated: true) {}
                 }
-                tf.resignFirstResponder()//???
-            }
+            })
         case .selectMulti:
-            let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
-            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectMultiVC") as? SubSelectMultiVC{
-                nvc.initData(type: .entryPlace)
-                //遷移アニメーション関連
-                //self.navigationController?.pushViewController(nvc, animated: true)
-                nvc.modalTransitionStyle = .crossDissolve
-                self.present(nvc, animated: true) {
+            //さらに子ナビさせたいので
+            DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+                tf.resignFirstResponder()//自分を解除しておかないと、戻ってきたときにまた遷移してしまうため
+                let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
+                if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectMultiVC") as? SubSelectMultiVC{
+                    nvc.initData(type: .entryPlace)
+                    //遷移アニメーション関連
+                    nvc.modalTransitionStyle = .crossDissolve
+                    self.present(nvc, animated: true) {}
                 }
-                tf.resignFirstResponder()//???
-            }
+            })
         case .selectSpecisl:
-            let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
-            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSpecialVC") as? SubSelectSpecialVC{
-                nvc.initData(editableItem: item)
-                //遷移アニメーション関連
-                //self.navigationController?.pushViewController(nvc, animated: true)
-                nvc.modalTransitionStyle = .crossDissolve
-                self.present(nvc, animated: true) {
+            //さらに子ナビさせたいので
+            DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+                tf.resignFirstResponder()//自分を解除しておかないと、戻ってきたときにまた遷移してしまうため
+                let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
+                if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSpecialVC") as? SubSelectSpecialVC{
+                    nvc.initData(editableItem: item)
+                    //遷移アニメーション関連
+                    nvc.modalTransitionStyle = .crossDissolve
+                    self.present(nvc, animated: true) {}
                 }
-                tf.resignFirstResponder()//???
-            }
+            })
         case .readonly:
             break
         case .inputText:
