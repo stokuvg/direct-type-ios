@@ -14,15 +14,51 @@
         <view contentMode="scaleToFill" restorationIdentifier="Xib_JobDetailArticleHeaderView" id="iN0-l3-epB" customClass="JobDetailArticleHeaderView" customModule="direct_type" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bw-lg-rHa">
+                    <rect key="frame" x="15" y="3" width="290" height="60"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Boe-GJ-MEp">
+                    <rect key="frame" x="225" y="23" width="80" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="34" id="XxY-qW-la3"/>
+                        <constraint firstAttribute="width" constant="80" id="dIr-uh-HaN"/>
+                    </constraints>
+                    <state key="normal" title="続きを読む">
+                        <color key="titleColor" name="color-sub"/>
+                    </state>
+                    <connections>
+                        <action selector="headerOpenAction" destination="iN0-l3-epB" eventType="touchUpInside" id="Gdh-RN-s4P"/>
+                    </connections>
+                </button>
+            </subviews>
             <color key="backgroundColor" name="color-white"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Boe-GJ-MEp" secondAttribute="trailing" constant="15" id="1Q1-R7-dfI"/>
+                <constraint firstItem="8bw-lg-rHa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="CFg-o4-67t"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="8bw-lg-rHa" secondAttribute="trailing" constant="15" id="b6j-vK-UTp"/>
+                <constraint firstItem="8bw-lg-rHa" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" constant="3" id="gRN-oG-7Hf"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Boe-GJ-MEp" secondAttribute="bottom" constant="3" id="ieo-Ru-Uac"/>
+                <constraint firstItem="8bw-lg-rHa" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="3" id="tEp-DK-3Fg"/>
+            </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="headerOpenBtn" destination="Boe-GJ-MEp" id="wXe-PW-Xps"/>
+                <outlet property="titleLabel" destination="8bw-lg-rHa" id="PYW-K5-kEq"/>
+            </connections>
             <point key="canvasLocation" x="132" y="96"/>
         </view>
     </objects>
     <resources>
+        <namedColor name="color-sub">
+            <color red="1" green="0.35294117647058826" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="color-white">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

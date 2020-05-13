@@ -91,7 +91,7 @@ class HomeVC: TmpNaviTopVC {
         let data2:[String:Any] = [
             "end":false,
             "image":"https://type.jp/s/img_banner/top_pc_side_number1.jpg",
-            "job":"PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円\nPG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
+            "job":"PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
             "price":"500~700",
             "special":"850",
             "area":"東京都23区内",
@@ -101,7 +101,7 @@ class HomeVC: TmpNaviTopVC {
         let data3:[String:Any] = [
             "end":false,
             "image":"https://type.jp/s/img_banner/top_pc_side_number1.jpg",
-            "job":"PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円\nPG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
+            "job":"PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
             "price":"500~700",
             "special":"",
             "area":"東京都23区内",
@@ -109,14 +109,15 @@ class HomeVC: TmpNaviTopVC {
             "main":"メディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！\nメディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！",
         ]
 //        for _ in 0..<100 {
-        for _ in 0..<15 {
-            let randomValue = Int.random(in: 1...3)
-            switch randomValue {
-                case 1:
+        for i in 0..<15 {
+            let cnt = i % 3
+//            let randomValue = Int.random(in: 1...3)
+            switch cnt {
+                case 0:
                     masterTableData.append(data1)
-                case 2:
+                case 1:
                     masterTableData.append(data2)
-                case 3:
+                case 2:
                     masterTableData.append(data3)
                 default:
                     masterTableData.append(data1)

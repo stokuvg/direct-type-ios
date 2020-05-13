@@ -8,17 +8,34 @@
 
 import UIKit
 
-class JobDetailArticleCell: UITableViewCell {
+protocol JobDetailArticleCellDelegate {
+    func articleCellCloseAction()
+}
+
+class JobDetailArticleCell: BaseTableViewCell {
+    
+    @IBOutlet weak var articleMainLabel:UILabel!
+    @IBOutlet weak var articleCloseBtn:UIButton!
+    @IBAction func articleCloseBtnAction() {
+        self.delegate.articleCellCloseAction()
+    }
+    
+    var delegate:JobDetailArticleCellDelegate!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        articleCloseBtn.setNoRadiusTitle(text: "▲ 閉じる", fontType: .C_font_SS, textColor: UIColor.init(colorType: .color_line)!, alignment: .center)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func setup(data:String) {
+        articleMainLabel.text(text: data, fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
     }
     
 }
