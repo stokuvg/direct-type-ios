@@ -149,8 +149,8 @@ extension SelectItemsManager {
         let grp: [GrpCodeDisp] = SelectItemsManager.getMaster(.jobType).1
         //指定されたgrpCodeで絞り込んだ[CodeDisp]配列を返したい
         guard let grpCode = grpCodeFilter else {
-            return [Constants.SelectItemsUndefine] + grp.map { (item) -> CodeDisp in
-                return item.codeDisp//先頭に未選択をつけておく
+            return grp.map { (item) -> CodeDisp in
+                return item.codeDisp
             }
         }
         let filter = grp.filter { (grpCodeDisp) -> Bool in
@@ -158,7 +158,7 @@ extension SelectItemsManager {
         }.map { (item) -> CodeDisp in
             return item.codeDisp
         }
-        return [Constants.SelectItemsUndefine] + filter
+        return filter
     }
     class func SelectItems_Occupation_Grp() -> [GrpCodeDisp] {
         var arr: [GrpCodeDisp] = []
@@ -249,7 +249,6 @@ extension SelectItemsManager {
 //            ////MyLog.Log(.master, title: "[\(type.fName)] \(arrCodeDisp.count)件のマスタを読み込みました")
             //===[ソート後のものを保持しておく]===___
             arrMaster[type] = []
-            arrMaster[type]?.append(Constants.SelectItemsUndefine) //先頭に未選択をつけておく
             for (num, item) in arrCodeDisp.sorted(by: { (mae, ato) -> Bool in
                 mae.sortNum < ato.sortNum
             }).enumerated() {
@@ -295,7 +294,6 @@ extension SelectItemsManager {
             }
             //===[ソート後のものを保持しておく]===___
             arrMasterDai[type] = []
-            arrMasterDai[type]?.append(Constants.SelectItemsUndefine) //先頭に未選択をつけておく
             for (num, item) in arrCodeDispGrp.sorted(by: { (mae, ato) -> Bool in
                 mae.sortNum < ato.sortNum
             }).enumerated() {

@@ -12,8 +12,8 @@ class HEditZipcodeTBCell: UITableViewCell {
     var item: EditableItemH? = nil
     
     @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var tfValueZip3: UITextField!
-    @IBOutlet weak var tfValueZip4: UITextField!
+    @IBOutlet weak var tfValueZip3: IKTextField!
+    @IBOutlet weak var tfValueZip4: IKTextField!
     @IBOutlet weak var lblDebug: UILabel!
 
     override func awakeFromNib() {

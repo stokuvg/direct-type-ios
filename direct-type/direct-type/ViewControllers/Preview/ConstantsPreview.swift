@@ -8,6 +8,18 @@
 
 import UIKit
 
+//選択されたTextFieldに被せているもの
+class TargetAreaVW: UIView {
+    override func draw(_ rect: CGRect) {
+        UIColor(rgba: "#2e24").setStroke()
+        UIColor(rgba: "#4f41").setFill()
+        let rectangle = UIBezierPath(roundedRect: rect, cornerRadius: 8.0)
+        rectangle.lineWidth = 3
+//        rectangle.fill()
+        rectangle.stroke()
+    }
+}
+
 //EditableItemKeyを付与しておき、押下イベントで個別処理をできるように拡張しておく
 class IKBarButtonItem: UIBarButtonItem {
     var parentPicker: Any? = nil//IKPickerView//IKDatePicker

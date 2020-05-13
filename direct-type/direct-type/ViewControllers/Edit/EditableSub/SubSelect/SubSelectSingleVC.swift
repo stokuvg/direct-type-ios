@@ -20,21 +20,40 @@ class SubSelectSingleVC: BaseVC {
 //    var dicSelectedCode: Set<CodeDisp> = []
     var dicChange: [String: Bool] = [:]  //CodeDisp.code : true
 
+    @IBOutlet weak var vwHead: UIView!
     @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var tableVW: UITableView!
-    
-    @IBOutlet weak var btnCancel: UIButton!
-    @IBAction func actCancel(_ sender: UIButton) {
+    @IBOutlet weak var btnBack: UIButton!
+    @IBAction func actBack(_ sender: UIButton) {
         actPopupCancel()
     }
+
+    @IBOutlet weak var vwMain: UIView!
+    @IBOutlet weak var tableVW: UITableView!
+    
+    @IBOutlet weak var vwFoot: UIView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
-        actPopupSelect(changeItem: CodeDisp("2", "hogehoge"))
+        var arr: [CodeDisp] = []
+        for (key, val) in dicChange {
+            if let item: CodeDisp = SelectItemsManager.getCodeDisp(.gender, code: key) {
+                if val == true { arr.append(item) } //選択状態のもののみ追加
+            }
+        }
+        if let selItem = arr.first {
+            actPopupSelect(changeItem: selItem) //単一選択のため
+        } else {
+            actPopupSelect(changeItem: Constants.SelectItemsUndefine) //単一選択のため
+        }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "項目選択のサブ画面"
+        //====デザイン適用
+        vwHead.backgroundColor = UIColor.init(colorType: .color_main)!
+        vwMain.backgroundColor = UIColor.init(colorType: .color_white)!
+        vwFoot.backgroundColor = UIColor.init(colorType: .color_main)!
+        btnCommit.setTitle(text: "選択", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
     }
     func initData(editableItem: EditableItemH, type: SelectItemsManager.TsvMaster) {
         self.type = type
@@ -42,7 +61,8 @@ class SubSelectSingleVC: BaseVC {
         self.arrData = SelectItemsManager.getMaster(type)
     }
     func dispData() {
-        self.lblTitle.text = "\(editableItem.dispName) \(arrData.count)件"
+        let bufTitle: String = "\(editableItem.dispName) \(arrData.count)件"
+        lblTitle.text(text: bufTitle, fontType: .font_L, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -73,27 +93,21 @@ extension SubSelectSingleVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true) //ハイライトの解除
         let item = arrData[indexPath.row]
-        dicChange.removeAll() //Single選択の場合は、まるっと削除して仕舞えば良い
+        dicChange.removeAll() //Single選択の場合は、まるっと削除してから追加
         let vals = "".split(separator: "_") //選択状態をバラす
         let select0: Bool = vals.contains { (val) -> Bool in val == item.code }//item.valに選択されているもの配列が付いているので、そこにあるかチェック
         let select: Bool = dicChange[item.code] ?? select0  //差分情報優先
         dicChange[item.code] = !select
         //該当セルの描画しなおし
-//        tableView.reloadRows(at: [indexPath], with: .none)
         tableView.reloadData()
-        print(#line, #function, item.debugDisp, dicChange.count, dicChange.description)
-//        actPopupSelect(changeItem: item)
+        //actPopupSelect(changeItem: item)//選択したもの即時反映の場合
     }
 }
 
-extension SubSelectSingleVC: SubSelectProtocol {
-    
-}
-
-//=== 複数選択ポップアップで選択させる場合の処理 ===
+//=== 単一選択ポップアップで選択させる場合の処理 ===
 extension SubSelectSingleVC: SubSelectSingleDelegate {
     func actPopupSelect(changeItem: CodeDisp) {
-        print(changeItem.debugDisp)//編集中の値の保持（と描画）
+        //print(changeItem.debugDisp)//編集中の値の保持（と描画）
 //        self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true) { }
     }
@@ -103,3 +117,7 @@ extension SubSelectSingleVC: SubSelectSingleDelegate {
     }
 }
 
+
+extension SubSelectSingleVC: SubSelectProtocol {
+    
+}

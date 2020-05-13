@@ -19,12 +19,11 @@ enum EditableGamen {
     }
 }
 
-
-class EditableBase {
+class EditableModel {
     var editableGamen: EditableGamen! //画面種別の定義（必須）
     //↑PickerやSuggestなどの元となるTextFieldの管理なんかも、必要ならこれで管理しちゃう
     //編集可能項目の定義（グループテーブル利用）
-    var arrData: [[EditableItem]] = [[]]
+    var arrData: [[EditableItemH]] = [[]]
     var dispSectionTitles: [String] = []//テーブルやコレクション以外では不要だが定義しておく
     //編集中の値の管理
     var editTempCD: [EditableItemKey: EditableItemCurVal] = [:]//String/CodeDispのCodeを入れておく（ItemEditable.curVal)
@@ -36,15 +35,31 @@ class EditableBase {
     //=== 表示項目の設定
     func initItemEditable(_ editableGamen: EditableGamen, _ item: Any) {
         self.editableGamen = editableGamen
+        print(editableGamen)
         switch editableGamen {
         case .profile:
             guard let (mdlProfile) = item as? (MdlProfile) else { return } //タプルで受けれる!!
-            let secDbg: [EditableItem] = [
-                EditableItem(type: .readonly, editItem: EditItemUser.userId, val: mdlProfile.familyName),
+            let _detail = mdlProfile
+            let secDbg: [EditableItemH] = [
+                EditableItemH(type: .inputText, editItem: EditItemProfile.familyName, val: _detail.familyName),
+                EditableItemH(type: .inputText, editItem: EditItemProfile.firstName, val: _detail.firstName),
+                EditableItemH(type: .inputText, editItem: EditItemProfile.familyNameKana, val: _detail.familyNameKana),
+                EditableItemH(type: .inputText, editItem: EditItemProfile.firstNameKana, val: _detail.firstNameKana),
+                EditableItemH(type: .selectDrumYMD, editItem: EditItemProfile.birthday, val: "\(_detail.birthday.dispYmd())"),
+                EditableItemH(type: .selectSingle, editItem: EditItemProfile.gender, val: "\(_detail.gender)"),
+                EditableItemH(type: .selectDrum, editItem: EditItemProfile.firstName, val: "\(_detail.familyNameKana)"),
+                EditableItemH(type: .inputText, editItem: EditItemProfile.firstName, val: "\(_detail.firstName)"),
+                EditableItemH(type: .inputTextSecret, editItem: EditItemProfile.firstName, val: "\(_detail.familyName)"),
+                EditableItemH(type: .inputZipcode, editItem: EditItemProfile.firstName, val: "\(_detail.firstNameKana)"),
+                EditableItemH(type: .inputZipcode, editItem: EditItemProfile.zipCode, val: _detail.zipCode),
+                EditableItemH(type: .inputText, editItem: EditItemProfile.prefecture, val: "\(_detail.prefecture)"),
+                EditableItemH(type: .inputText, editItem: EditItemProfile.address1, val: _detail.address1),
+                EditableItemH(type: .inputText, editItem: EditItemProfile.address2, val: _detail.address2),
+                EditableItemH(type: .inputText, editItem: EditItemProfile.mailAddress, val: _detail.mailAddress),
+                EditableItemH(type: .inputText, editItem: EditItemProfile.mobilePhoneNo, val: _detail.mobilePhoneNo),
             ]
-            arrData = [secDbg]
-            dispSectionTitles = ["開発確認項目"]
-
+            arrData = [secDbg, secDbg]
+            dispSectionTitles = ["開発確認項目1", "開発確認項目2"]
         }
         chkTableCellAll()//登録項目に応じて、TextFieldを渡り歩かせるための情報を生成しておく
     }
@@ -83,21 +98,21 @@ class EditableBase {
         lastEditableItemKey = arrTextFieldNextDoneKey.last ?? "" //最後の項目のキーを保持させとく
     }
     //=== 編集中の値の保持
-    func changeTempItem(_ item: EditableItem, text: String) {
+    func changeTempItem(_ item: EditableItemH, text: String) {
         editTempCD[item.editableItemKey] = text
         if item.orgVal == text {
             editTempCD.removeValue(forKey: item.editableItemKey)
         }
     }
-    //=== EditableItemKeyを渡すと、現在の編集適用したEditableItemを返す
-    func getItemByKey(_ itemKey: EditableItemKey) -> EditableItem? {
+    //=== EditableItemKeyを渡すと、現在の編集適用したEditableItemHを返す
+    func getItemByKey(_ itemKey: EditableItemKey) -> EditableItemH? {
         guard let indexPath = dicTextFieldIndexPath[itemKey] else { return nil }
         let item = arrData[indexPath.section][indexPath.row]
         let (_, editTemp) = makeTempItem(item)
         return editTemp
     }
     //変更なければnil返す（変更検知のため）
-    func makeTempItem(_ item: EditableItem) -> (Bool, EditableItem) {
+    func makeTempItem(_ item: EditableItemH) -> (Bool, EditableItemH) {
         if let tempCD = editTempCD[item.editableItemKey] {
             var result = item
             result.curVal = tempCD

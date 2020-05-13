@@ -70,6 +70,12 @@ class ProfilePreviewVC: TmpBasicVC {
         arrData.append(MdlItemH(.birthGender, "\(bufBirthday)（\(bufAge)） / \(bufGender)", childItems: [
             EditableItemH(type: .selectDrumYMD, editItem: EditItemProfile.birthday, val: "\(_detail.birthday.dispYmd())"),
             EditableItemH(type: .selectSingle, editItem: EditItemProfile.gender, val: "\(_detail.gender)"),
+            EditableItemH(type: .selectDrum, editItem: EditItemProfile.firstName, val: "\(_detail.familyNameKana)"),
+            
+            EditableItemH(type: .inputText, editItem: EditItemProfile.firstName, val: "\(_detail.firstName)"),
+            EditableItemH(type: .inputTextSecret, editItem: EditItemProfile.firstName, val: "\(_detail.familyName)"),
+            EditableItemH(type: .inputZipcode, editItem: EditItemProfile.firstName, val: "\(_detail.firstNameKana)"),
+
         ]))
 
         //===６．住所
