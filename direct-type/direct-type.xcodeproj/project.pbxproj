@@ -15,6 +15,8 @@
 		0645705D2464F77700F3B015 /* Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0645705C2464F77700F3B015 /* Logs.swift */; };
 		064570622465426500F3B015 /* JobDetailGuideBookHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064570612465426500F3B015 /* JobDetailGuideBookHeaderView.swift */; };
 		064570642465427000F3B015 /* JobDetailGuideBookHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 064570632465427000F3B015 /* JobDetailGuideBookHeaderView.xib */; };
+		0645DDFC246B907000592572 /* JobDetailPRCodeTagsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0645DDFA246B907000592572 /* JobDetailPRCodeTagsCell.swift */; };
+		0645DDFD246B907000592572 /* JobDetailPRCodeTagsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0645DDFB246B907000592572 /* JobDetailPRCodeTagsCell.xib */; };
 		064EF6F724654A7300853ADD /* JobDetailDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EF6F524654A7300853ADD /* JobDetailDataCell.swift */; };
 		064EF6F824654A7300853ADD /* JobDetailDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 064EF6F624654A7300853ADD /* JobDetailDataCell.xib */; };
 		064EF6FB24654FDB00853ADD /* JobDetailArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EF6F924654FDB00853ADD /* JobDetailArticleCell.swift */; };
@@ -157,6 +159,8 @@
 		0645705C2464F77700F3B015 /* Logs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logs.swift; sourceTree = "<group>"; };
 		064570612465426500F3B015 /* JobDetailGuideBookHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailGuideBookHeaderView.swift; sourceTree = "<group>"; };
 		064570632465427000F3B015 /* JobDetailGuideBookHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailGuideBookHeaderView.xib; sourceTree = "<group>"; };
+		0645DDFA246B907000592572 /* JobDetailPRCodeTagsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailPRCodeTagsCell.swift; sourceTree = "<group>"; };
+		0645DDFB246B907000592572 /* JobDetailPRCodeTagsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailPRCodeTagsCell.xib; sourceTree = "<group>"; };
 		064EF6F524654A7300853ADD /* JobDetailDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailDataCell.swift; sourceTree = "<group>"; };
 		064EF6F624654A7300853ADD /* JobDetailDataCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailDataCell.xib; sourceTree = "<group>"; };
 		064EF6F924654FDB00853ADD /* JobDetailArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailArticleCell.swift; sourceTree = "<group>"; };
@@ -318,6 +322,8 @@
 				064EF6FA24654FDB00853ADD /* JobDetailArticleCell.xib */,
 				064EF6FD2465550E00853ADD /* JobDetailArticleHeaderView.swift */,
 				064EF6FF2465551D00853ADD /* JobDetailArticleHeaderView.xib */,
+				0645DDFA246B907000592572 /* JobDetailPRCodeTagsCell.swift */,
+				0645DDFB246B907000592572 /* JobDetailPRCodeTagsCell.xib */,
 			);
 			path = detail;
 			sourceTree = "<group>";
@@ -804,6 +810,7 @@
 				26989F7F246A5E520050AC40 /* HEditDrumTBCell.xib in Resources */,
 				26BF48DC24639D2B00E00215 /* MstL_skill.tsv in Resources */,
 				26BF48E524639D2B00E00215 /* MstL3_overtime.tsv in Resources */,
+				0645DDFD246B907000592572 /* JobDetailPRCodeTagsCell.xib in Resources */,
 				26BF48E324639D2B00E00215 /* MstK10_salary.tsv in Resources */,
 				063350E12463FB3F00AF90F3 /* JobOfferDetailVC.storyboard in Resources */,
 				064EF7002465551D00853ADD /* JobDetailArticleHeaderView.xib in Resources */,
@@ -950,6 +957,7 @@
 				066BD9D72456ACB4009E610B /* AppDelegate.swift in Sources */,
 				06E519D6245816A5004E4B7A /* WebTemplateVC.swift in Sources */,
 				06E519A92458139B004E4B7A /* SignupConfirmVC.swift in Sources */,
+				0645DDFC246B907000592572 /* JobDetailPRCodeTagsCell.swift in Sources */,
 				06E519B5245814C7004E4B7A /* EntryCompleteVC.swift in Sources */,
 				06E519A22457DC44004E4B7A /* InitialInputRegistVC.swift in Sources */,
 				269AFFC3246A929300DB364B /* SubSelectTBCell.swift in Sources */,

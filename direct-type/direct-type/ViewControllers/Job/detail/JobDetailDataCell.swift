@@ -9,7 +9,7 @@
 import UIKit
 import AlamofireImage
 
-class JobDetailDataCell: UITableViewCell {
+class JobDetailDataCell: BaseTableViewCell {
     
     @IBOutlet weak var dataStackView:UIStackView!
     
@@ -78,7 +78,11 @@ class JobDetailDataCell: UITableViewCell {
     }
     
     func setup(data:[String:Any]) {
-        
+        // 終了間近
+        let end = data["end"] as! Bool
+        if end {
+            dataStackView.removeArrangedSubview(imminetAndScountBackView)
+        }
         // 職種
         let job = data["job"] as! String
         self.jobCategoryLabel.text(text: job, fontType: .C_font_L, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)

@@ -29,6 +29,8 @@ class JobOfferDetailVC: TmpBasicVC {
         "main_article":"◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n",
         "salary_exampl":"■２５歳サブリーダー／年収４００万円\n■２５歳サブリーダー／年収４００万円\n■２５歳サブリーダー／年収４００万円\n■２５歳サブリーダー／年収４００万円\n■２５歳サブリーダー／年収４００万円\n■２５歳サブリーダー／年収４００万円\n■２５歳サブリーダー／年収４００万円\n",
     ]
+    
+    var articleOpenFlag:Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +54,7 @@ class JobOfferDetailVC: TmpBasicVC {
         self.detailTableView.registerNib(nibName: "JobDetailArticleCell", idName: "JobDetailArticleCell")
         /// section 2
         // PRコード
+        self.detailTableView.registerNib(nibName: "JobDetailPRCodeTagsCell", idName: "JobDetailPRCodeTagsCell")
         // 給与例
         /// section 3
         // 募集要項
@@ -96,7 +99,9 @@ extension JobOfferDetailVC: UITableViewDelegate {
         let row = indexPath.row
         switch (section,row) {
             case (0,0):
-                return 700
+                return 550
+            case (1,0):
+                return articleOpenFlag ? UITableView.automaticDimension : 0
             default:
                 return UITableView.automaticDimension
         }
@@ -105,8 +110,7 @@ extension JobOfferDetailVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
             case 1:
-                // TODO:閉じているときと開いている時でサイズが違う
-                return 60
+                return articleOpenFlag ? 120 : 60
             case 2:
                 return 60
             default:
@@ -124,8 +128,9 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 let view = UINib(nibName: "JobDetailArticleHeaderView", bundle: nil)
                     .instantiate(withOwner: self, options: nil)
                     .first as! JobDetailArticleHeaderView
+                view.delegate = self
                 let articleTitle = dummyData["main_title"] as! String
-                view.setup(string: articleTitle)
+                view.setup(string: articleTitle,openFlag: articleOpenFlag)
                 return view
             case 2:
                 // 募集要項
@@ -145,7 +150,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
             case 0:
-                return 2
+                return 1
             default:
                 return 1
         }
@@ -160,12 +165,14 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 cell.setCellWidth(width: self.detailTableView.frame.size.width)
                 cell.setup(data: dummyData)
                 return cell
-            case (0,1):
-                let cell = tableView.loadCell(cellName: "JobDetailArticleCell", indexPath: indexPath) as! JobDetailArticleCell
-                return cell
             case (1,0):
-                let cell = UITableViewCell()
-                cell.backgroundColor = UIColor.init(colorType: .color_base)
+                let cell = tableView.loadCell(cellName: "JobDetailArticleCell", indexPath: indexPath) as! JobDetailArticleCell
+                if articleOpenFlag {
+                    let articleString = dummyData["main_article"] as! String
+                    cell.setup(data: articleString)
+                } else {
+                    cell.setup(data: "")
+                }
                 return cell
             default:
                 let cell = UITableViewCell()
@@ -209,4 +216,12 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
     }
     
     
+}
+
+extension JobOfferDetailVC: JobDetailArticleHeaderViewDelegate {
+    func articleHeaderAction() {
+        self.articleOpenFlag = !self.articleOpenFlag
+        let index = IndexSet(arrayLiteral: 1)
+        self.detailTableView.reloadSections(index, with: .automatic)
+    }
 }

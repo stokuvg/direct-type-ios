@@ -1,16 +1,14 @@
 //
-//  JobDetailArticleCell.swift
+//  JobDetailPRCodeTagsCell.swift
 //  direct-type
 //
-//  Created by ms-mb015 on 2020/05/08.
+//  Created by ms-mb015 on 2020/05/13.
 //  Copyright © 2020 ms-mb015. All rights reserved.
 //
 
 import UIKit
 
-class JobDetailArticleCell: BaseTableViewCell {
-    
-    @IBOutlet weak var articleMainLabel:UILabel!
+class JobDetailPRCodeTagsCell: BaseTableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,10 +19,6 @@ class JobDetailArticleCell: BaseTableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-    }
-    
-    func setup(data:String) {
-        articleMainLabel.text(text: data, fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
     }
     
 }
