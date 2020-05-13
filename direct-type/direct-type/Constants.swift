@@ -23,5 +23,5 @@ struct Constants {
     static let DbgAutoPushVC: Bool = false
     static let DbgDispStatus: Bool = false
     static let DbgSkipLocalValidate: Bool = false
-    static let DbgCmnInputDefault: Bool = true
+    static let DbgCmnInputDefault: Bool = false
 }
