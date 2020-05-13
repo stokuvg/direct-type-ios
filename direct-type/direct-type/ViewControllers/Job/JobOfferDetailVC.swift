@@ -28,6 +28,64 @@ class JobOfferDetailVC: TmpBasicVC {
         "main_title":"RPA,AI,loT関連プロジェクトや、大手メーカのーのR&D・・・\nこれから成長する若手こそ、案件にこだわろう。",
         "main_article":"◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n",
         "salary_example":"■２５歳サブリーダー／年収４００万円\n■２８歳PL／年収４８０万円\n■３０歳PM／年収５５０万円\n■３２歳PM／年収５８０万円\n■３５歳PM／年収６５０万円\n■４０歳マネージャー／年収７４０万円\n■４５歳部長／年収８００万円\n",
+        "guidebook":[
+            // 1.募集背景:       必須
+            ["title":"募集背景",
+             "indispensable":"",    // 必須項目
+                "optional":"",      // 任意項目
+            ],
+            // 2.仕事内容:       必須
+            // ・案件例:        任意
+            // ・手掛ける商品・サービス:  任意
+            // ・開発環境・業務範囲:   任意
+            // ・注目ポイント:      任意
+            ["title":"仕事内容",
+            "indispensable":"",    // 必須項目
+               "optional":"",      // 任意項目
+            ],
+            // 3.応募資格:       必須
+            // ・歓迎する経験・スキル:   任意
+            // ・過去の採用例:      任意
+            // ・この仕事の向き・不向き: 任意
+            ["title":"応募資格",
+            "indispensable":"",    // 必須項目
+               "optional":"",      // 任意項目
+            ],
+            // 4.雇用携帯コード:    必須
+            ["title":"雇用携帯コード",
+            "indispensable":"",    // 必須項目
+               "optional":"",      // 任意項目
+            ],
+            // 5.給与:        必須
+            // ・賞与について:     任意
+            ["title":"給与",
+            "indispensable":"",    // 必須項目
+               "optional":"",
+            ],
+            // 6.勤務時間:       必須
+            //  ・残業について:
+            ["title":"勤務時間",
+            "indispensable":"",    // 必須項目
+               "optional":"",
+            ],
+            // 7.勤務地:       必須
+            //  ・交通詳細
+            ["title":"勤務地",
+            "indispensable":"",    // 必須項目
+               "optional":"",
+            ],
+            // 8.休日休暇:      必須
+            ["title":"休日休暇",
+            "indispensable":"",    // 必須項目
+               "optional":"",
+            ],
+            // 9.待遇・福利厚生:    必須
+            // ・産休・育休取得:   任意
+            ["title":"待遇・福利厚生",
+            "indispensable":"",    // 必須項目
+               "optional":"",
+            ],
+        ],
     ]
     
     var articleOpenFlag:Bool = false
@@ -59,6 +117,8 @@ class JobOfferDetailVC: TmpBasicVC {
         self.detailTableView.registerNib(nibName: "JobDetailSalaryExampleCell", idName: "JobDetailSalaryExampleCell")
         /// section 3
         // 募集要項
+        self.detailTableView.registerNib(nibName: "JobDetailWorkCell", idName: "JobDetailWorkCell")
+        self.detailTableView.registerNib(nibName: "JobDetailItemCell", idName: "JobDetailItemCell")
         // 1.募集背景:              必須
         // 2.仕事内容:              必須
         // 　・案件例:               任意
@@ -210,6 +270,19 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 let examples = dummyData["salary_example"] as! String
                 cell.setup(data: examples)
                 return cell
+            case (3,_):
+                let guideBookData = dummyData["guidebook"] as! [[String:Any]]
+                let itemData = guideBookData[row]
+                switch row {
+                    case 1:
+                        let cell = tableView.loadCell(cellName: "JobDetailWorkCell", indexPath: indexPath) as! JobDetailWorkCell
+                        cell.setup(data: itemData)
+                        return cell
+                    default:
+                        let cell = tableView.loadCell(cellName: "JobDetailItemCell", indexPath: indexPath) as! JobDetailItemCell
+                        cell.setup(data: itemData)
+                        return cell
+                }
             default:
                 let cell = UITableViewCell()
                 cell.backgroundColor = UIColor.init(colorType: .color_base)
