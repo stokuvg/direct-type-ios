@@ -167,6 +167,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 return cell
             case (1,0):
                 let cell = tableView.loadCell(cellName: "JobDetailArticleCell", indexPath: indexPath) as! JobDetailArticleCell
+                cell.delegate = self
                 if articleOpenFlag {
                     let articleString = dummyData["main_article"] as! String
                     cell.setup(data: articleString)
@@ -218,10 +219,21 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
     
 }
 
+// 職種のオープン
 extension JobOfferDetailVC: JobDetailArticleHeaderViewDelegate {
     func articleHeaderAction() {
-        self.articleOpenFlag = !self.articleOpenFlag
+        self.articleOpenFlag = true
         let index = IndexSet(arrayLiteral: 1)
         self.detailTableView.reloadSections(index, with: .automatic)
     }
+}
+
+// 職種のクローズ
+extension JobOfferDetailVC: JobDetailArticleCellDelegate {
+    func articleCellCloseAction() {
+        self.articleOpenFlag = false
+        let index = IndexSet(arrayLiteral: 1)
+        self.detailTableView.reloadSections(index, with: .automatic)
+    }
+    
 }

@@ -1012,7 +1012,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 17 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 18 nibs.
   struct nib {
     /// Nib `HEditDrumTBCell`.
     static let hEditDrumTBCell = _R.nib._HEditDrumTBCell()
@@ -1030,6 +1030,8 @@ struct R: Rswift.Validatable {
     static let jobDetailDataCell = _R.nib._JobDetailDataCell()
     /// Nib `JobDetailGuideBookHeaderView`.
     static let jobDetailGuideBookHeaderView = _R.nib._JobDetailGuideBookHeaderView()
+    /// Nib `JobDetailPRCodeTagsCell`.
+    static let jobDetailPRCodeTagsCell = _R.nib._JobDetailPRCodeTagsCell()
     /// Nib `JobOfferBigCardCell`.
     static let jobOfferBigCardCell = _R.nib._JobOfferBigCardCell()
     /// Nib `JobOfferCardMoreCell`.
@@ -1110,6 +1112,14 @@ struct R: Rswift.Validatable {
     @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailGuideBookHeaderView) instead")
     static func jobDetailGuideBookHeaderView(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.jobDetailGuideBookHeaderView)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "JobDetailPRCodeTagsCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailPRCodeTagsCell) instead")
+    static func jobDetailPRCodeTagsCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.jobDetailPRCodeTagsCell)
     }
     #endif
 
@@ -1215,6 +1225,10 @@ struct R: Rswift.Validatable {
 
     static func jobDetailGuideBookHeaderView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailGuideBookHeaderView? {
       return R.nib.jobDetailGuideBookHeaderView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailGuideBookHeaderView
+    }
+
+    static func jobDetailPRCodeTagsCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailPRCodeTagsCell? {
+      return R.nib.jobDetailPRCodeTagsCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailPRCodeTagsCell
     }
 
     static func jobOfferBigCardCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobOfferBigCardCell? {
@@ -1415,6 +1429,17 @@ struct _R: Rswift.Validatable {
 
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailGuideBookHeaderView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailGuideBookHeaderView
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _JobDetailPRCodeTagsCell: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "JobDetailPRCodeTagsCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailPRCodeTagsCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailPRCodeTagsCell
       }
 
       fileprivate init() {}

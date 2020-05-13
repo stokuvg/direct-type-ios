@@ -25,8 +25,7 @@ class JobDetailArticleHeaderView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
                 
-        headerOpenBtn.setTitle(text: "続きを読む", fontType: .C_font_SS, textColor: UIColor.init(colorType: .color_sub)!, alignment: .center)
-        self.headerOpenBtn.backgroundColor = UIColor.init(colorType: .color_line)
+        headerOpenBtn.setNoRadiusTitle(text: "続きを読む", fontType: .C_font_SS, textColor: UIColor.init(colorType: .color_sub)!, alignment: .center)
     }
     
     func setup(string:String,openFlag:Bool) {
