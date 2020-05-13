@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -52,7 +51,6 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" name="color-button"/>
                 <constraints>
                     <constraint firstItem="vJI-Yl-CdQ" firstAttribute="top" secondItem="bSe-zB-f3f" secondAttribute="bottom" constant="4" id="2uC-7i-Bu6"/>
                     <constraint firstAttribute="trailing" secondItem="vJI-Yl-CdQ" secondAttribute="trailing" constant="2" id="A3E-yE-qMu"/>
@@ -72,9 +70,4 @@
             <point key="canvasLocation" x="137.68115942028987" y="62.276785714285708"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <namedColor name="color-button">
-            <color red="0.0" green="0.72549019607843135" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-    </resources>
 </document>

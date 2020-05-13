@@ -33,7 +33,17 @@ class SubSelectSingleVC: BaseVC {
     @IBOutlet weak var vwFoot: UIView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
-        actPopupSelect(changeItem: CodeDisp("2", "hogehoge"))
+        var arr: [CodeDisp] = []
+        for (key, val) in dicChange {
+            if let item: CodeDisp = SelectItemsManager.getCodeDisp(.gender, code: key) {
+                arr.append(item)
+            }
+        }
+        if let selItem = arr.first {
+            actPopupSelect(changeItem: selItem) //単一選択のため
+        } else {
+            actPopupSelect(changeItem: Constants.SelectItemsUndefine) //単一選択のため
+        }
     }
 
     override func viewDidLoad() {
@@ -42,9 +52,8 @@ class SubSelectSingleVC: BaseVC {
         vwHead.backgroundColor = UIColor.init(colorType: .color_main)!
         vwMain.backgroundColor = UIColor.init(colorType: .color_white)!
         vwFoot.backgroundColor = UIColor.init(colorType: .color_main)!
-        btnCommit.setTitle(text: "この内容で保存", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        btnCommit.setTitle(text: "選択", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
-        self.title = "項目選択のサブ画面"
     }
     func initData(editableItem: EditableItemH, type: SelectItemsManager.TsvMaster) {
         self.type = type
