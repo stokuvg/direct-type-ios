@@ -166,6 +166,7 @@ class JobOfferDetailVC: TmpBasicVC {
         // 会社概要
         /// section 8
         // 応募ボタン/キープのボタン
+        /// section 9
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -200,6 +201,14 @@ extension JobOfferDetailVC: UITableViewDelegate {
                 return 550
             case (1,0):
                 return articleOpenFlag ? UITableView.automaticDimension : 0
+            case (4,0):
+                return 0
+            case (5,0):
+                return 0
+            case (6,0):
+                return 0
+            case (7,0):
+                return 0
             default:
                 return UITableView.automaticDimension
         }
@@ -211,6 +220,8 @@ extension JobOfferDetailVC: UITableViewDelegate {
                 return articleOpenFlag ? 120 : 60
             case 3:
                 return 60
+            case 4,5,6,7:
+                return 55
             default:
                 return 0
         }
@@ -236,13 +247,25 @@ extension JobOfferDetailVC: UITableViewDataSource {
                     .instantiate(withOwner: self, options: nil)
                     .first as! JobDetailGuideBookHeaderView
                 return view
+            case 4,5,6,7:
+                // 取材メモ
+                // 選考プロセス
+                // 連絡先
+                // 会社概要
+                let view = UINib(nibName: "JobDetailFoldingHeaderView", bundle: nil)
+                    .instantiate(withOwner: self, options: nil)
+                    .first as! JobDetailFoldingHeaderView
+                view.tag = section
+                view.delegate = self
+                
+                return view
             default:
                 return nil
         }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 8
+        return 10
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -388,4 +411,11 @@ extension JobOfferDetailVC: JobDetailArticleCellDelegate {
         self.detailTableView.reloadSections(index, with: .automatic)
     }
     
+}
+
+// 折りたたみヘッダー
+extension JobOfferDetailVC: FoldingHeaderViewDelegate {
+    func foldOpenCloseAction() {
+        
+    }
 }

@@ -1021,7 +1021,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 23 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 24 nibs.
   struct nib {
     /// Nib `HEditDrumTBCell`.
     static let hEditDrumTBCell = _R.nib._HEditDrumTBCell()
@@ -1037,6 +1037,8 @@ struct R: Rswift.Validatable {
     static let jobDetailArticleHeaderView = _R.nib._JobDetailArticleHeaderView()
     /// Nib `JobDetailDataCell`.
     static let jobDetailDataCell = _R.nib._JobDetailDataCell()
+    /// Nib `JobDetailFoldingHeaderView`.
+    static let jobDetailFoldingHeaderView = _R.nib._JobDetailFoldingHeaderView()
     /// Nib `JobDetailGuideBookHeaderView`.
     static let jobDetailGuideBookHeaderView = _R.nib._JobDetailGuideBookHeaderView()
     /// Nib `JobDetailItemAttentionView`.
@@ -1123,6 +1125,14 @@ struct R: Rswift.Validatable {
     @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailDataCell) instead")
     static func jobDetailDataCell(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.jobDetailDataCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "JobDetailFoldingHeaderView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailFoldingHeaderView) instead")
+    static func jobDetailFoldingHeaderView(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.jobDetailFoldingHeaderView)
     }
     #endif
 
@@ -1280,6 +1290,10 @@ struct R: Rswift.Validatable {
 
     static func jobDetailDataCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailDataCell? {
       return R.nib.jobDetailDataCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailDataCell
+    }
+
+    static func jobDetailFoldingHeaderView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailFoldingHeaderView? {
+      return R.nib.jobDetailFoldingHeaderView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailFoldingHeaderView
     }
 
     static func jobDetailGuideBookHeaderView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailGuideBookHeaderView? {
@@ -1498,6 +1512,17 @@ struct _R: Rswift.Validatable {
           if UIKit.UIColor(named: "color-slider-sub", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-slider-sub' is used in storyboard 'JobDetailDataCell', but couldn't be loaded.") }
           if UIKit.UIColor(named: "color-white", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-white' is used in storyboard 'JobDetailDataCell', but couldn't be loaded.") }
         }
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _JobDetailFoldingHeaderView: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "JobDetailFoldingHeaderView"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailFoldingHeaderView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailFoldingHeaderView
       }
 
       fileprivate init() {}
