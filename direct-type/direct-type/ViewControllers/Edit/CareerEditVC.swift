@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CareerEditVC: TmpBasicVC {
+class CareerEditVC: EditableTableBasicVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()

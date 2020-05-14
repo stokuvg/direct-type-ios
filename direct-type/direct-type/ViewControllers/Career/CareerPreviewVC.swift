@@ -8,23 +8,12 @@
 
 import UIKit
 
-class CareerPreviewVC: TmpBasicVC {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+//===[C-15]「職務経歴書確認」
+class CareerPreviewVC: PreviewBaseVC {
+    //共通プレビューをOverrideして利用する
+    override func initData() {
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func dispData() {
+        title = "[C-15]「職務経歴書確認」"
     }
-    */
-
 }

@@ -55,7 +55,7 @@ struct EditableItemH {
     }
     
     //=== 初期化 ===
-    init(type: EditType, editItem: EditItemProtocol, val code: String) {
+    init(type: EditType, editItem: EditItemProtocol, val code: Code) {
         self.editType = type
         self.editItem = editItem
         self.editableItemKey = editItem.itemKey

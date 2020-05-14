@@ -13,6 +13,7 @@ extension EditableBasicVC {
     //=== 表示・非表示
     func showPicker(_ textField: IKTextField, _ item: EditableItemH) {
         print("❤️❤️ Picker 表示 [\(textField.itemKey)] [\(item.debugDisp)]")
+        
         //Pickerを表示する
         let picker = IKPickerView()
         picker.delegate = self
