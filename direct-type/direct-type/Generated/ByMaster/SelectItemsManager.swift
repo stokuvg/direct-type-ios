@@ -97,6 +97,8 @@ class SelectItemsManager: NSObject {
     }
     class func getSelectItemsByKey(_ itemKey: EditableItemKey, grpCodeFilter: String?) -> [CodeDisp] {
         switch itemKey {
+        case EditItemProfile.gender.itemKey:
+            return SelectItemsManager.getMaster(.gender)
         case EditItemDbg.jobType.itemKey:
             return SelectItems_JobType()
         case EditItemDbg.occupation.itemKey:

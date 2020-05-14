@@ -171,10 +171,10 @@ extension SubSelectSpecialVC: SubSelectProtocol {
 extension SubSelectSpecialVC: SubSelectSpecialDelegate {
     func actPopupSelect(changeItems1: [CodeDisp], changeItems2: [CodeDisp]) {
         print(changeItems1.debugDescription, changeItems2.debugDescription)//編集中の値の保持（と描画）
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true) { }
     }
     func actPopupCancel() {
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true) { }
     }
 }
 

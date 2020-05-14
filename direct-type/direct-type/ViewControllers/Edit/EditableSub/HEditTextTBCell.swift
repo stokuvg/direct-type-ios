@@ -23,6 +23,7 @@ class HEditTextTBCell: UITableViewCell {
     func initCell(_ delegate: InputItemHDelegate, _ item: EditableItemH) {
         self.delegate = delegate
         self.item = item
+        tfValue.itemKey = item.editableItemKey
     }
     
     func dispCell() {

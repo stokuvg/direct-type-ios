@@ -17,7 +17,6 @@ class SubSelectSingleVC: BaseVC {
     var type: SelectItemsManager.TsvMaster!
     var editableItem: EditableItemH!
     var arrData: [CodeDisp] = []
-//    var dicSelectedCode: Set<CodeDisp> = []
     var dicChange: [String: Bool] = [:]  //CodeDisp.code : true
 
     @IBOutlet weak var vwHead: UIView!
@@ -107,12 +106,9 @@ extension SubSelectSingleVC: UITableViewDataSource, UITableViewDelegate {
 //=== 単一選択ポップアップで選択させる場合の処理 ===
 extension SubSelectSingleVC: SubSelectSingleDelegate {
     func actPopupSelect(changeItem: CodeDisp) {
-        //print(changeItem.debugDisp)//編集中の値の保持（と描画）
-//        self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true) { }
     }
     func actPopupCancel() {
-//        self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true) { }
     }
 }
