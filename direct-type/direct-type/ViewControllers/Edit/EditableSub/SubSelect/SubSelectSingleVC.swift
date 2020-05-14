@@ -14,7 +14,6 @@ protocol SubSelectSingleDelegate {
 }
 
 class SubSelectSingleVC: BaseVC {
-    var type: SelectItemsManager.TsvMaster!
     var editableItem: EditableItemH!
     var arrData: [CodeDisp] = []
     var dicChange: [String: Bool] = [:]  //CodeDisp.code : true
@@ -33,10 +32,15 @@ class SubSelectSingleVC: BaseVC {
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
         var arr: [CodeDisp] = []
-        for (key, val) in dicChange {
-            if let item: CodeDisp = SelectItemsManager.getCodeDisp(.gender, code: key) {
-                if val == true { arr.append(item) } //選択状態のもののみ追加
+        if let tsvMaster = SelectItemsManager.getTsvMasterByKey(editableItem.editableItemKey) {
+            for (key, val) in dicChange {
+                if let item: CodeDisp = SelectItemsManager.getCodeDisp(tsvMaster, code: key) {
+                    if val == true { arr.append(item) } //選択状態のもののみ追加
+                }
             }
+        }
+        for item in arr {
+            print("\t⭐️\(item.debugDisp)⭐️")
         }
         if let selItem = arr.first {
             actPopupSelect(changeItem: selItem) //単一選択のため
@@ -54,10 +58,10 @@ class SubSelectSingleVC: BaseVC {
         btnCommit.setTitle(text: "選択", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
     }
-    func initData(editableItem: EditableItemH, type: SelectItemsManager.TsvMaster) {
-        self.type = type
+    func initData(editableItem: EditableItemH) {
         self.editableItem = editableItem
-        self.arrData = SelectItemsManager.getMaster(type)
+        //self.arrData = SelectItemsManager.getMaster(type)
+        self.arrData = SelectItemsManager.getSelectItems(type: editableItem.editItem, grpCodeFilter: nil)
     }
     func dispData() {
         let bufTitle: String = "\(editableItem.dispName) \(arrData.count)件"

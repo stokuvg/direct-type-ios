@@ -71,9 +71,11 @@ class ProfilePreviewVC: TmpBasicVC {
             EditableItemH(type: .selectDrumYMD, editItem: EditItemProfile.birthday, val: "\(_detail.birthday.dispYmd())"),
             EditableItemH(type: .selectSingle, editItem: EditItemProfile.gender, val: "\(_detail.gender)"),
 
-            EditableItemH(type: .selectDrum, editItem: EditItemProfile.gender, val: "\(_detail.gender)"),
-        EditableItemH(type: .selectMulti, editItem: EditItemProfile.gender, val: "\(_detail.gender)"),
-        EditableItemH(type: .selectSpecisl, editItem: EditItemProfile.gender, val: "\(_detail.gender)"),
+        EditableItemH(type: .selectDrum, editItem: EditItemProfile.prefecture, val: ""),
+        EditableItemH(type: .selectMulti, editItem: EditItemProfile.prefecture, val: ""),
+        EditableItemH(type: .selectSingle, editItem: EditItemProfile.prefecture, val: ""),
+
+        EditableItemH(type: .selectSpecisl, editItem: EditItemProfile.prefecture, val: ""),
         ]))
 
         //===６．住所
@@ -86,7 +88,7 @@ class ProfilePreviewVC: TmpBasicVC {
         let bufAddress: String = "\(bufPrefecture)\(_detail.address1)\(_detail.address2)"
         arrData.append(MdlItemH(.adderss, "〒\(bufZipCode)\n\(bufAddress)", childItems: [
             EditableItemH(type: .inputZipcode, editItem: EditItemProfile.zipCode, val: _detail.zipCode),
-            EditableItemH(type: .inputText, editItem: EditItemProfile.prefecture, val: bufPrefecture),
+            EditableItemH(type: .selectSingle, editItem: EditItemProfile.prefecture, val: bufPrefecture),
             EditableItemH(type: .inputText, editItem: EditItemProfile.address1, val: _detail.address1),
             EditableItemH(type: .inputText, editItem: EditItemProfile.address2, val: _detail.address2),
         ]))

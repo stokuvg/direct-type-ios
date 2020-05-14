@@ -9,15 +9,14 @@
 import UIKit
 
 protocol SubSelectMultiDelegate {
-    func actPopupSelect(changeItems: [String: Bool])
+    func actPopupSelect(changeItems: [Code: Bool])
     func actPopupCancel()
 }
 
 class SubSelectMultiVC: BaseVC {
-    var type: SelectItemsManager.TsvMaster!
     var editableItem: EditableItemH!
     var arrData: [CodeDisp] = []
-    var dicChange: [String: Bool] = [:]  //CodeDisp.code : true
+    var dicChange: [Code: Bool] = [:]  //CodeDisp.code : true
 
     @IBOutlet weak var vwHead: UIView!
     @IBOutlet weak var lblTitle: UILabel!
@@ -44,10 +43,9 @@ class SubSelectMultiVC: BaseVC {
         btnCommit.setTitle(text: "選択", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
     }
-    func initData(editableItem: EditableItemH, type: SelectItemsManager.TsvMaster) {
-        self.type = type
+    func initData(editableItem: EditableItemH) {
         self.editableItem = editableItem
-        self.arrData = SelectItemsManager.getMaster(type)
+        self.arrData = SelectItemsManager.getSelectItems(type: editableItem.editItem, grpCodeFilter: nil)
     }
     func dispData() {
         let bufTitle: String = "\(editableItem.dispName) \(arrData.count)件"

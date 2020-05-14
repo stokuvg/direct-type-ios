@@ -21,11 +21,11 @@ class MdlProfile: Codable {
      var firstNameKana: String = ""
     var birthday: Date = Date(timeIntervalSince1970: 0)
     /** 性別 */
-     var gender: Int = 0
+     var gender: Code = ""
     /** 郵便番号 */
      var zipCode: String = ""
     /** 都道府県 */
-     var prefecture: Int = 0
+     var prefecture: Code = ""
     /** 市区町村 */
      var address1: String = ""
     /** 丁目・番地・建物名など */
@@ -50,7 +50,7 @@ class MdlProfile: Codable {
         case mobilePhoneNo = "mobile_phone_no"
     }
     
-    public init(familyName: String, firstName: String, familyNameKana: String, firstNameKana: String, birthday: Date, gender: Int, zipCode: String, prefecture: Int, address1: String, address2: String, mailAddress: String, mobilePhoneNo: String) {
+    public init(familyName: String, firstName: String, familyNameKana: String, firstNameKana: String, birthday: Date, gender: Code, zipCode: String, prefecture: Code, address1: String, address2: String, mailAddress: String, mobilePhoneNo: String) {
         self.familyName = familyName
         self.firstName = firstName
         self.familyNameKana = familyNameKana
@@ -66,9 +66,12 @@ class MdlProfile: Codable {
     }
 
     convenience init(dto: Profile) {
+        //ApiモデルをAppモデルに変換して保持させる
         let bufDate = dto.birthday.dispYmd
-        let date = DateHelper.convStr2Date(bufDate)
-        self.init(familyName: dto.familyName, firstName: dto.firstName, familyNameKana: dto.familyNameKana, firstNameKana: dto.firstNameKana, birthday: date, gender: dto.gender, zipCode: dto.zipCode, prefecture: dto.prefecture, address1: dto.address1, address2: dto.address2, mailAddress: dto.mailAddress, mobilePhoneNo: dto.mobilePhoneNo)
+        let _date = DateHelper.convStr2Date(bufDate)
+        let _gender = "\(dto.gender)"
+        let _prefecture = "\(dto.prefecture)"
+        self.init(familyName: dto.familyName, firstName: dto.firstName, familyNameKana: dto.familyNameKana, firstNameKana: dto.firstNameKana, birthday: _date, gender: _gender, zipCode: dto.zipCode, prefecture: _prefecture, address1: dto.address1, address2: dto.address2, mailAddress: dto.mailAddress, mobilePhoneNo: dto.mobilePhoneNo)
     }
 
     var debugDisp: String {

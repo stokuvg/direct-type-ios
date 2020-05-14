@@ -147,8 +147,6 @@
 		26BF48EB24639D6500E00215 /* SelectItemsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF48EA24639D6500E00215 /* SelectItemsManager.swift */; };
 		26BF48EE24639DEE00E00215 /* EditableObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF48ED24639DED00E00215 /* EditableObj.swift */; };
 		26BF48F024639E7100E00215 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF48EF24639E7100E00215 /* Constants.swift */; };
-		26BF48F224639F7600E00215 /* ObjDbg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF48F124639F7600E00215 /* ObjDbg.swift */; };
-		26BF48F424639F9900E00215 /* ObjUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF48F324639F9900E00215 /* ObjUser.swift */; };
 		26CFC45F2469495800E458E2 /* ConstantsPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFC45E2469495800E458E2 /* ConstantsPreview.swift */; };
 		26CFC4662469496D00E458E2 /* HEditZipcodeTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFC4602469496D00E458E2 /* HEditZipcodeTBCell.swift */; };
 		26CFC4672469496D00E458E2 /* Edit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26CFC4612469496D00E458E2 /* Edit.storyboard */; };
@@ -305,8 +303,6 @@
 		26BF48EA24639D6500E00215 /* SelectItemsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectItemsManager.swift; sourceTree = "<group>"; };
 		26BF48ED24639DED00E00215 /* EditableObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableObj.swift; sourceTree = "<group>"; };
 		26BF48EF24639E7100E00215 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		26BF48F124639F7600E00215 /* ObjDbg.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjDbg.swift; sourceTree = "<group>"; };
-		26BF48F324639F9900E00215 /* ObjUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjUser.swift; sourceTree = "<group>"; };
 		26CFC45E2469495800E458E2 /* ConstantsPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsPreview.swift; sourceTree = "<group>"; };
 		26CFC4602469496D00E458E2 /* HEditZipcodeTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HEditZipcodeTBCell.swift; sourceTree = "<group>"; };
 		26CFC4612469496D00E458E2 /* Edit.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Edit.storyboard; sourceTree = "<group>"; };
@@ -745,8 +741,6 @@
 			isa = PBXGroup;
 			children = (
 				26BF48ED24639DED00E00215 /* EditableObj.swift */,
-				26BF48F124639F7600E00215 /* ObjDbg.swift */,
-				26BF48F324639F9900E00215 /* ObjUser.swift */,
 			);
 			path = Editable;
 			sourceTree = "<group>";
@@ -974,7 +968,6 @@
 				064EF6FB24654FDB00853ADD /* JobDetailArticleCell.swift in Sources */,
 				269AFFC2246A929300DB364B /* SubSelectDaiTBCell.swift in Sources */,
 				06E519CC24581634004E4B7A /* ProfilePreviewVC.swift in Sources */,
-				26BF48F224639F7600E00215 /* ObjDbg.swift in Sources */,
 				066763722457B08300AC5039 /* EntryVC.swift in Sources */,
 				06E519A42457DC7B004E4B7A /* InitialInputCompleteVC.swift in Sources */,
 				0667636C2457B02200AC5039 /* KeepListVC.swift in Sources */,
@@ -984,7 +977,6 @@
 				067F28EA2456D135000AAD69 /* UIFont+Extensions.swift in Sources */,
 				067F28E82456D112000AAD69 /* UIColor+Extensions.swift in Sources */,
 				0645DDFF246B969000592572 /* Tags.swift in Sources */,
-				26BF48F424639F9900E00215 /* ObjUser.swift in Sources */,
 				0667636F2457B04500AC5039 /* HomeVC.swift in Sources */,
 				06E519C52458159F004E4B7A /* SnoothCareerVC.swift in Sources */,
 				06E519A02457DAD7004E4B7A /* WithDrawalCompleteVC.swift in Sources */,
