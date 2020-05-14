@@ -151,8 +151,6 @@
 		26BF48EB24639D6500E00215 /* SelectItemsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF48EA24639D6500E00215 /* SelectItemsManager.swift */; };
 		26BF48EE24639DEE00E00215 /* EditableObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF48ED24639DED00E00215 /* EditableObj.swift */; };
 		26BF48F024639E7100E00215 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF48EF24639E7100E00215 /* Constants.swift */; };
-		26BF48F224639F7600E00215 /* ObjDbg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF48F124639F7600E00215 /* ObjDbg.swift */; };
-		26BF48F424639F9900E00215 /* ObjUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF48F324639F9900E00215 /* ObjUser.swift */; };
 		26CFC45F2469495800E458E2 /* ConstantsPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFC45E2469495800E458E2 /* ConstantsPreview.swift */; };
 		26CFC4662469496D00E458E2 /* HEditZipcodeTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFC4602469496D00E458E2 /* HEditZipcodeTBCell.swift */; };
 		26CFC4672469496D00E458E2 /* Edit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26CFC4612469496D00E458E2 /* Edit.storyboard */; };
@@ -162,6 +160,17 @@
 		26CFC46B2469496D00E458E2 /* EditableItemH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFC4652469496D00E458E2 /* EditableItemH.swift */; };
 		26CFC46E246949B800E458E2 /* MyColorDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFC46C246949B800E458E2 /* MyColorDefine.swift */; };
 		26CFC46F246949B800E458E2 /* ClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFC46D246949B800E458E2 /* ClassExtensions.swift */; };
+		26F2A819246D0CE90037D47F /* MdlReqEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A818246D0CE90037D47F /* MdlReqEntry.swift */; };
+		26F2A81B246D10C30037D47F /* MdlResume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A81A246D10C30037D47F /* MdlResume.swift */; };
+		26F2A81D246D10DA0037D47F /* MdlCareer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A81C246D10DA0037D47F /* MdlCareer.swift */; };
+		26F2A81F246D128D0037D47F /* MdlCareerCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A81E246D128D0037D47F /* MdlCareerCard.swift */; };
+		26F2A821246D12F10037D47F /* MdlCareerCardWorkPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A820246D12F10037D47F /* MdlCareerCardWorkPeriod.swift */; };
+		26F2A823246D1E270037D47F /* MdlResumeLastJobExperiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A822246D1E270037D47F /* MdlResumeLastJobExperiment.swift */; };
+		26F2A825246D23660037D47F /* MdlResumeSchool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A824246D23660037D47F /* MdlResumeSchool.swift */; };
+		26F2A827246D23800037D47F /* MdlResumeSkillLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A826246D23800037D47F /* MdlResumeSkillLanguage.swift */; };
+		26F2A829246D2A230037D47F /* MdlResumeJobExperiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A828246D2A230037D47F /* MdlResumeJobExperiments.swift */; };
+		26F2A82B246D2EE90037D47F /* EditableTableBasicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A82A246D2EE90037D47F /* EditableTableBasicVC.swift */; };
+		26F2A82D246D31020037D47F /* PreviewBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A82C246D31020037D47F /* PreviewBaseVC.swift */; };
 		C29161DB95966DD7132DBD19 /* Pods_direct_type.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A49B0215E0F4A582FB1EC5E /* Pods_direct_type.framework */; };
 /* End PBXBuildFile section */
 
@@ -313,8 +322,6 @@
 		26BF48EA24639D6500E00215 /* SelectItemsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectItemsManager.swift; sourceTree = "<group>"; };
 		26BF48ED24639DED00E00215 /* EditableObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableObj.swift; sourceTree = "<group>"; };
 		26BF48EF24639E7100E00215 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		26BF48F124639F7600E00215 /* ObjDbg.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjDbg.swift; sourceTree = "<group>"; };
-		26BF48F324639F9900E00215 /* ObjUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjUser.swift; sourceTree = "<group>"; };
 		26CFC45E2469495800E458E2 /* ConstantsPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsPreview.swift; sourceTree = "<group>"; };
 		26CFC4602469496D00E458E2 /* HEditZipcodeTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HEditZipcodeTBCell.swift; sourceTree = "<group>"; };
 		26CFC4612469496D00E458E2 /* Edit.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Edit.storyboard; sourceTree = "<group>"; };
@@ -324,6 +331,17 @@
 		26CFC4652469496D00E458E2 /* EditableItemH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableItemH.swift; sourceTree = "<group>"; };
 		26CFC46C246949B800E458E2 /* MyColorDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyColorDefine.swift; sourceTree = "<group>"; };
 		26CFC46D246949B800E458E2 /* ClassExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassExtensions.swift; sourceTree = "<group>"; };
+		26F2A818246D0CE90037D47F /* MdlReqEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlReqEntry.swift; sourceTree = "<group>"; };
+		26F2A81A246D10C30037D47F /* MdlResume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlResume.swift; sourceTree = "<group>"; };
+		26F2A81C246D10DA0037D47F /* MdlCareer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlCareer.swift; sourceTree = "<group>"; };
+		26F2A81E246D128D0037D47F /* MdlCareerCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlCareerCard.swift; sourceTree = "<group>"; };
+		26F2A820246D12F10037D47F /* MdlCareerCardWorkPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlCareerCardWorkPeriod.swift; sourceTree = "<group>"; };
+		26F2A822246D1E270037D47F /* MdlResumeLastJobExperiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlResumeLastJobExperiment.swift; sourceTree = "<group>"; };
+		26F2A824246D23660037D47F /* MdlResumeSchool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlResumeSchool.swift; sourceTree = "<group>"; };
+		26F2A826246D23800037D47F /* MdlResumeSkillLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlResumeSkillLanguage.swift; sourceTree = "<group>"; };
+		26F2A828246D2A230037D47F /* MdlResumeJobExperiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlResumeJobExperiments.swift; sourceTree = "<group>"; };
+		26F2A82A246D2EE90037D47F /* EditableTableBasicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTableBasicVC.swift; sourceTree = "<group>"; };
+		26F2A82C246D31020037D47F /* PreviewBaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewBaseVC.swift; sourceTree = "<group>"; };
 		8A49B0215E0F4A582FB1EC5E /* Pods_direct_type.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_direct_type.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8C351EB920291E353136BB9 /* Pods-direct-type.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-direct-type.debug.xcconfig"; path = "Target Support Files/Pods-direct-type/Pods-direct-type.debug.xcconfig"; sourceTree = "<group>"; };
 		F6660969F9095E20D9CE432A /* Pods-direct-type.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-direct-type.release.xcconfig"; path = "Target Support Files/Pods-direct-type/Pods-direct-type.release.xcconfig"; sourceTree = "<group>"; };
@@ -621,6 +639,7 @@
 				260BBFDF24651732003D163A /* HPreviewTBCell.xib */,
 				260BBFDE24651732003D163A /* Preview.storyboard */,
 				06E519CB24581634004E4B7A /* ProfilePreviewVC.swift */,
+				26F2A82C246D31020037D47F /* PreviewBaseVC.swift */,
 				06E519CD2458163F004E4B7A /* ResumePreviewVC.swift */,
 				06E519CF2458164B004E4B7A /* ScoutPreview.swift */,
 			);
@@ -652,6 +671,15 @@
 			isa = PBXGroup;
 			children = (
 				260BBFDB2465171D003D163A /* MdlProfile.swift */,
+				26F2A818246D0CE90037D47F /* MdlReqEntry.swift */,
+				26F2A81A246D10C30037D47F /* MdlResume.swift */,
+				26F2A824246D23660037D47F /* MdlResumeSchool.swift */,
+				26F2A826246D23800037D47F /* MdlResumeSkillLanguage.swift */,
+				26F2A822246D1E270037D47F /* MdlResumeLastJobExperiment.swift */,
+				26F2A828246D2A230037D47F /* MdlResumeJobExperiments.swift */,
+				26F2A81C246D10DA0037D47F /* MdlCareer.swift */,
+				26F2A81E246D128D0037D47F /* MdlCareerCard.swift */,
+				26F2A820246D12F10037D47F /* MdlCareerCardWorkPeriod.swift */,
 			);
 			path = ExSwagger;
 			sourceTree = "<group>";
@@ -662,6 +690,7 @@
 				26989F81246A66630050AC40 /* EditableModel.swift */,
 				26CFC4652469496D00E458E2 /* EditableItemH.swift */,
 				26133A53246B7A00001802BB /* EditableBasicVC.swift */,
+				26F2A82A246D2EE90037D47F /* EditableTableBasicVC.swift */,
 				26133A55246B9D48001802BB /* EditableBasicVC+Picker.swift */,
 				26133A57246B9DC2001802BB /* EditableBasicVC+PickerYMD.swift */,
 			);
@@ -689,15 +718,15 @@
 			isa = PBXGroup;
 			children = (
 				269AFFBD246A929200DB364B /* EditablePopup.storyboard */,
+				269AFFBB246A929200DB364B /* SubSelectSingleVC.swift */,
+				269AFFBE246A929200DB364B /* SubSelectMultiVC.swift */,
+				269AFFC1246A929200DB364B /* SubSelectSpecialVC.swift */,
 				269AFFB8246A929200DB364B /* SubSelectDaiTBCell.swift */,
 				269AFFB9246A929200DB364B /* SubSelectTBCell.swift */,
 				269AFFBA246A929200DB364B /* SubSelectSyouTBCell.swift */,
-				269AFFBB246A929200DB364B /* SubSelectSingleVC.swift */,
 				269AFFBC246A929200DB364B /* SubSelectSyouTBCell.xib */,
-				269AFFBE246A929200DB364B /* SubSelectMultiVC.swift */,
 				269AFFBF246A929200DB364B /* SubSelectTBCell.xib */,
 				269AFFC0246A929200DB364B /* SubSelectDaiTBCell.xib */,
-				269AFFC1246A929200DB364B /* SubSelectSpecialVC.swift */,
 			);
 			path = SubSelect;
 			sourceTree = "<group>";
@@ -757,8 +786,6 @@
 			isa = PBXGroup;
 			children = (
 				26BF48ED24639DED00E00215 /* EditableObj.swift */,
-				26BF48F124639F7600E00215 /* ObjDbg.swift */,
-				26BF48F324639F9900E00215 /* ObjUser.swift */,
 			);
 			path = Editable;
 			sourceTree = "<group>";
@@ -968,9 +995,11 @@
 				06E5197D2457BFBE004E4B7A /* BaseNaviController.swift in Sources */,
 				26133A54246B7A00001802BB /* EditableBasicVC.swift in Sources */,
 				269AFFCB246A929300DB364B /* SubSelectSpecialVC.swift in Sources */,
+				26F2A82D246D31020037D47F /* PreviewBaseVC.swift in Sources */,
 				067F28D22456CE39000AAD69 /* TmpBasicVC.swift in Sources */,
 				06B94F60246BE37C002FEDDC /* JobDetailWorkCell.swift in Sources */,
 				06E5198F2457D70B004E4B7A /* ChemistrySelect.swift in Sources */,
+				26F2A829246D2A230037D47F /* MdlResumeJobExperiments.swift in Sources */,
 				06E519862457D2C1004E4B7A /* UIView+Extensions.swift in Sources */,
 				066763622457AB7200AC5039 /* BaseTabBC.swift in Sources */,
 				06E519B1245814B2004E4B7A /* EntryConfirmVC.swift in Sources */,
@@ -983,22 +1012,23 @@
 				06E519A72458138E004E4B7A /* SignupVC.swift in Sources */,
 				26800520246A2B440053A7F4 /* Date+Extensions.swift in Sources */,
 				06E519912457D742004E4B7A /* ChemistryResult.swift in Sources */,
+				26F2A821246D12F10037D47F /* MdlCareerCardWorkPeriod.swift in Sources */,
 				06E5199A2457DA18004E4B7A /* AccountChangeVC.swift in Sources */,
 				064570622465426500F3B015 /* JobDetailGuideBookHeaderView.swift in Sources */,
 				064EF6FB24654FDB00853ADD /* JobDetailArticleCell.swift in Sources */,
 				269AFFC2246A929300DB364B /* SubSelectDaiTBCell.swift in Sources */,
 				06E519CC24581634004E4B7A /* ProfilePreviewVC.swift in Sources */,
-				26BF48F224639F7600E00215 /* ObjDbg.swift in Sources */,
 				066763722457B08300AC5039 /* EntryVC.swift in Sources */,
 				06E519A42457DC7B004E4B7A /* InitialInputCompleteVC.swift in Sources */,
 				0667636C2457B02200AC5039 /* KeepListVC.swift in Sources */,
 				06E5198A2457D6C1004E4B7A /* JobOfferDetailVC.swift in Sources */,
+				26F2A827246D23800037D47F /* MdlResumeSkillLanguage.swift in Sources */,
+				26F2A825246D23660037D47F /* MdlResumeSchool.swift in Sources */,
 				26989F82246A66640050AC40 /* EditableModel.swift in Sources */,
 				06E519C22458156A004E4B7A /* AccessDenyVC.swift in Sources */,
 				067F28EA2456D135000AAD69 /* UIFont+Extensions.swift in Sources */,
 				067F28E82456D112000AAD69 /* UIColor+Extensions.swift in Sources */,
 				0645DDFF246B969000592572 /* Tags.swift in Sources */,
-				26BF48F424639F9900E00215 /* ObjUser.swift in Sources */,
 				0667636F2457B04500AC5039 /* HomeVC.swift in Sources */,
 				06E519C52458159F004E4B7A /* SnoothCareerVC.swift in Sources */,
 				06E519A02457DAD7004E4B7A /* WithDrawalCompleteVC.swift in Sources */,
@@ -1007,6 +1037,7 @@
 				06E519C7245815B0004E4B7A /* CareerPreviewVC.swift in Sources */,
 				06E519982457DA0D004E4B7A /* ApproachSettingVC.swift in Sources */,
 				06DCAEAB245A7616008FE9FA /* UILabel+Extensions.swift in Sources */,
+				26F2A81B246D10C30037D47F /* MdlResume.swift in Sources */,
 				06E519932457D750004E4B7A /* OwnPRVC.swift in Sources */,
 				26989F80246A5E520050AC40 /* HEditDrumTBCell.swift in Sources */,
 				067F28DF2456D013000AAD69 /* TmpNaviTopVC.swift in Sources */,
@@ -1029,6 +1060,7 @@
 				269AFFC3246A929300DB364B /* SubSelectTBCell.swift in Sources */,
 				06E519AF245813E9004E4B7A /* LoginConfirmVC.swift in Sources */,
 				066EF6C8245BBA1100E15AD2 /* BaseJobCardCell.swift in Sources */,
+				26F2A82B246D2EE90037D47F /* EditableTableBasicVC.swift in Sources */,
 				06E519B7245814D4004E4B7A /* ProfileEditVC.swift in Sources */,
 				06E519AB245813CA004E4B7A /* InitialInputListVC.swift in Sources */,
 				066BD9EC2456B3A2009E610B /* R.generated.swift in Sources */,
@@ -1042,6 +1074,7 @@
 				06E519BE24581558004E4B7A /* ScountListVC.swift in Sources */,
 				26CFC46E246949B800E458E2 /* MyColorDefine.swift in Sources */,
 				260BBFE024651732003D163A /* HPreviewTBCell.swift in Sources */,
+				26F2A81F246D128D0037D47F /* MdlCareerCard.swift in Sources */,
 				06DCAEA9245A70A8008FE9FA /* UITableView+Extensions.swift in Sources */,
 				26CFC46A2469496D00E458E2 /* HEditTextTBCell.swift in Sources */,
 				06E519C9245815C8004E4B7A /* CareerVC.swift in Sources */,
@@ -1052,9 +1085,11 @@
 				066BC827246CF3CA00FE607F /* JobDetailItemAttentionView.swift in Sources */,
 				26CFC46B2469496D00E458E2 /* EditableItemH.swift in Sources */,
 				066B2D862468DD0D00355E03 /* JobOfferCardReloadCell.swift in Sources */,
+				26F2A819246D0CE90037D47F /* MdlReqEntry.swift in Sources */,
 				26BF48F024639E7100E00215 /* Constants.swift in Sources */,
 				064EF6F724654A7300853ADD /* JobDetailDataCell.swift in Sources */,
 				063350DD2463EC4B00AF90F3 /* NoCardView.swift in Sources */,
+				26F2A823246D1E270037D47F /* MdlResumeLastJobExperiment.swift in Sources */,
 				06E519B9245814DF004E4B7A /* ResumeEditVC.swift in Sources */,
 				06E519D324581684004E4B7A /* ContentsEditVC.swift in Sources */,
 				06C347242463A595000FB4DA /* UIButton+Extensions.swift in Sources */,
@@ -1062,6 +1097,7 @@
 				06E519832457CF90004E4B7A /* JobOfferBigCardCell.swift in Sources */,
 				26CFC4662469496D00E458E2 /* HEditZipcodeTBCell.swift in Sources */,
 				06E5198D2457D6FF004E4B7A /* ChemistryStart.swift in Sources */,
+				26F2A81D246D10DA0037D47F /* MdlCareer.swift in Sources */,
 				06E519CE2458163F004E4B7A /* ResumePreviewVC.swift in Sources */,
 				063350E32463FD9600AF90F3 /* NaviButtonsView.swift in Sources */,
 				067F28E12456D038000AAD69 /* BasePresentVC.swift in Sources */,

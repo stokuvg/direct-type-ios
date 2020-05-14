@@ -9,23 +9,26 @@
 import UIKit
 
 protocol SubSelectMultiDelegate {
-    func actPopupSelect(changeItems: [String: Bool])
+    func actPopupSelect(changeItems: [Code: Bool])
     func actPopupCancel()
 }
 
 class SubSelectMultiVC: BaseVC {
-    var type: SelectItemsManager.TsvMaster!
+    var editableItem: EditableItemH!
     var arrData: [CodeDisp] = []
-//    var dicSelectedCode: Set<CodeDisp> = []
-    var dicChange: [String: Bool] = [:]  //CodeDisp.code : true
+    var dicChange: [Code: Bool] = [:]  //CodeDisp.code : true
 
+    @IBOutlet weak var vwHead: UIView!
     @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var tableVW: UITableView!
-    
-    @IBOutlet weak var btnCancel: UIButton!
-    @IBAction func actCancel(_ sender: UIButton) {
+    @IBOutlet weak var btnBack: UIButton!
+    @IBAction func actBack(_ sender: UIButton) {
         actPopupCancel()
     }
+
+    @IBOutlet weak var vwMain: UIView!
+    @IBOutlet weak var tableVW: UITableView!
+    
+    @IBOutlet weak var vwFoot: UIView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
         actPopupSelect(changeItems: ["4" : true])
@@ -33,20 +36,24 @@ class SubSelectMultiVC: BaseVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "項目選択のサブ画面"
+        //====デザイン適用
+        vwHead.backgroundColor = UIColor.init(colorType: .color_main)!
+        vwMain.backgroundColor = UIColor.init(colorType: .color_white)!
+        vwFoot.backgroundColor = UIColor.init(colorType: .color_main)!
+        btnCommit.setTitle(text: "選択", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
     }
-    func initData(type: SelectItemsManager.TsvMaster) {
-        self.type = type
-        self.arrData = SelectItemsManager.getMaster(type)
-        print(self.arrData.count, self.arrData.debugDescription)
+    func initData(editableItem: EditableItemH) {
+        self.editableItem = editableItem
+        self.arrData = SelectItemsManager.getSelectItems(type: editableItem.editItem, grpCodeFilter: nil)
     }
     func dispData() {
-        self.lblTitle.text = "\(self.arrData.count)件"
-        print(self.arrData.count, self.arrData.debugDescription)
+        let bufTitle: String = "\(editableItem.dispName) \(arrData.count)件"
+        lblTitle.text(text: bufTitle, fontType: .font_L, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        dispData()
+        dispData()
     }
 }
 
@@ -100,12 +107,14 @@ extension SubSelectMultiVC: SubSelectMultiDelegate {
             }
         }
         //選択されているコードを連結文字列にする
-        let codes = selCodes.joined(separator: "/")
+        let codes = selCodes.sorted(by: { (lv, rv) -> Bool in
+            lv < rv
+        }).joined(separator: "/")
         print(codes)//編集中の値の保持（と描画）
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true) { }
     }
     func actPopupCancel() {
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true) { }
     }
 }
 

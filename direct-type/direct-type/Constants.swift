@@ -21,7 +21,7 @@ struct Constants {
 
     //[Debug] Debug時以外はfalseにすべきフラグで設定しておく
     static let DbgAutoPushVC: Bool = false
-    static let DbgDispStatus: Bool = false
+    static let DbgDispStatus: Bool = true
     static let DbgSkipLocalValidate: Bool = false
     static let DbgCmnInputDefault: Bool = false
 }

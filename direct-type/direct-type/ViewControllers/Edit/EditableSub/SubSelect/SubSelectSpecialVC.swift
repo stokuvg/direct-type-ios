@@ -5,6 +5,7 @@
 //  Created by ms-mb014 on 2020/04/23.
 //  Copyright © 2020 ms-mb014. All rights reserved.
 //
+//Mst5_経験年数がサブ選択。
 
 import UIKit
 
@@ -14,8 +15,8 @@ protocol SubSelectSpecialDelegate {
 }
 
 class SubSelectSpecialVC: BaseVC {
+//    var typeDai: SelectItemsManager.TsvMaster!
     var editableItem: EditableItemH!
-    var typeDai: SelectItemsManager.TsvMaster!
     var arrDataGrp: [[CodeDisp]] = []
     var arrSelected: [Bool] = []
 
@@ -24,14 +25,18 @@ class SubSelectSpecialVC: BaseVC {
     var arrSubData: [CodeDisp] = []
     var dicSelectedCode: [String: CodeDisp] = [:]//小分類コードに対応する経験年数のCodeDispを設定する
 
+    @IBOutlet weak var vwHead: UIView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var tfSubDummy: IKTextField!
-    @IBOutlet weak var tableVW: UITableView!
-    
-    @IBOutlet weak var btnCancel: UIButton!
-    @IBAction func actCancel(_ sender: UIButton) {
+    @IBOutlet weak var btnBack: UIButton!
+    @IBAction func actBack(_ sender: UIButton) {
         actPopupCancel()
     }
+
+    @IBOutlet weak var vwMain: UIView!
+    @IBOutlet weak var tableVW: UITableView!
+    
+    @IBOutlet weak var vwFoot: UIView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
         actPopupSelect(changeItems1: [CodeDisp("2", "hogehoge1")], changeItems2: [CodeDisp("3", "hogehoge2")])
@@ -39,8 +44,12 @@ class SubSelectSpecialVC: BaseVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "項目選択のサブ画面"
-        
+        //====デザイン適用
+        vwHead.backgroundColor = UIColor.init(colorType: .color_main)!
+        vwMain.backgroundColor = UIColor.init(colorType: .color_white)!
+        vwFoot.backgroundColor = UIColor.init(colorType: .color_main)!
+        btnCommit.setTitle(text: "選択", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
         //=== テーブル初期化
         self.tableVW.estimatedRowHeight = 60
         self.tableVW.rowHeight = UITableView.automaticDimension
@@ -51,10 +60,9 @@ class SubSelectSpecialVC: BaseVC {
         self.editableItem = editableItem
         self.arrSubData = SelectItemsManager.getMaster(.jobExperimentYear)
         //大項目の一覧のみ作成
-//        let dai = SelectItemsManager.getMaster(.skill).0
-//        let syou = SelectItemsManager.getMaster(.skill).1
-        let dai = SelectItemsManager.getMaster(.jobType).0
-        let syou = SelectItemsManager.getMaster(.jobType).1
+        guard let tsvMaster = SelectItemsManager.getTsvMasterByKey(editableItem.editableItemKey) else { return }
+        let dai = SelectItemsManager.getMaster(tsvMaster).0
+        let syou = SelectItemsManager.getMaster(tsvMaster).1
         for itemDai in dai {
             var hoge: [CodeDisp] = []
             hoge.append(itemDai)
@@ -67,10 +75,10 @@ class SubSelectSpecialVC: BaseVC {
             arrDataGrp.append(hoge)
             arrSelected.append(false)//該当セクションが展開されているか否か
         }
-        arrDataGrp.removeFirst()//最初にある「未選択」を削除しておく
     }
     func dispData() {
-        self.lblTitle.text = "\(editableItem.dispName) \(dicSelectedCode.count)件選択"
+        let bufTitle: String = "\(editableItem.dispName) \(dicSelectedCode.count)件選択"
+        lblTitle.text(text: bufTitle, fontType: .font_L, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -171,12 +179,17 @@ extension SubSelectSpecialVC: SubSelectProtocol {
 extension SubSelectSpecialVC: SubSelectSpecialDelegate {
     func actPopupSelect(changeItems1: [CodeDisp], changeItems2: [CodeDisp]) {
         print(changeItems1.debugDescription, changeItems2.debugDescription)//編集中の値の保持（と描画）
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true) { }
     }
     func actPopupCancel() {
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true) { }
     }
 }
+
+
+
+
+
 
 
 

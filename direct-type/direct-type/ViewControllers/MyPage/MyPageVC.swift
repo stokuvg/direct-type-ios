@@ -19,15 +19,22 @@ class MyPageVC: TmpNaviTopVC {
         if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ProfilePreviewVC") as? ProfilePreviewVC{
             self.navigationController?.pushViewController(nvc, animated: true)
         }
-
     }
     //履歴書
     @IBOutlet weak var btnButton02: UIButton!
     @IBAction func actButton02(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Preview", bundle: nil)
+        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ResumePreviewVC") as? ResumePreviewVC{
+            self.navigationController?.pushViewController(nvc, animated: true)
+        }
     }
     //職務経歴書・スキルシート
     @IBOutlet weak var btnButton03: UIButton!
     @IBAction func actButton03(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Preview", bundle: nil)
+        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_CareerPreviewVC") as? CareerPreviewVC{
+            self.navigationController?.pushViewController(nvc, animated: true)
+        }
     }
     //さくさく職歴書
     @IBOutlet weak var btnButton04: UIButton!

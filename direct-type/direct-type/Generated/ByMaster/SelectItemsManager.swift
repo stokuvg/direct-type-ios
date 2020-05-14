@@ -66,7 +66,7 @@ class SelectItemsManager: NSObject {
     func initDependency() {
         //依存関係の設定
         dicParentKey.removeAll()
-        dicParentKey[EditItemDbg.occupation.itemKey] = EditItemDbg.jobType.itemKey
+//        dicParentKey[EditItemDbg.occupation.itemKey] = EditItemDbg.jobType.itemKey
     }
     //itemKeyを渡すと、親が存在するかチェックし、ある場合にはそのキーと値を返すもの
     func chkParent(_ itemKey: EditableItemKey, editTempCD: [EditableItemKey: EditableItemCurVal]) -> (EditableItemKey?, EditableItemCurVal) {
@@ -88,7 +88,6 @@ class SelectItemsManager: NSObject {
         return (nil, "")
     }
 
-    
     //=== キャッシュ保持のクリア
     class func allClear() {
         let ud = UserDefaults.standard
@@ -97,45 +96,42 @@ class SelectItemsManager: NSObject {
     }
     class func getSelectItemsByKey(_ itemKey: EditableItemKey, grpCodeFilter: String?) -> [CodeDisp] {
         switch itemKey {
-        case EditItemDbg.jobType.itemKey:
-            return SelectItems_JobType()
-        case EditItemDbg.occupation.itemKey:
-            return SelectItems_Occupation(grpCodeFilter: grpCodeFilter) //指定Grpで絞り込む（nilだと全て返す）
-        case EditItemDbg.prefecture.itemKey, EditItemUser.prefecture.itemKey:
-            return SelectItems_Prefecture
+        case EditItemProfile.gender.itemKey:
+            return getSelectItems(type: .gender, nil)
+        case EditItemProfile.prefecture.itemKey:
+            return getSelectItems(type: .prefecture, nil)
         default:
             break
         }
         return []
     }
     class func getSelectItems(type: Any, grpCodeFilter: String?) -> [CodeDisp] {
-        if let _type = type as? EditItemDbg {
-            return getSelectItems(type: _type, grpCodeFilter)
-        }
-        if let _type = type as? EditItemUser {
+        if let _type = type as? EditItemProfile {
             return getSelectItems(type: _type, grpCodeFilter)
         }
         return []
     }
-    private class func getSelectItems(type: EditItemDbg, _ grpCodeFilter: String?) -> [CodeDisp] {
+    private class func getSelectItems(type: EditItemProfile, _ grpCodeFilter: String?) -> [CodeDisp] {
         switch type {
-        case .textAlphabet:     return []
-        case .textKatakana:     return []
-        case .password:         return []
+        case .familyName:       return []
+        case .firstName:        return []
+        case .familyNameKana:   return []
+        case .firstNameKana:    return []
+        case .birthday:         return []
+        case .gender:           return SelectItems_Gender
+        case .zipCode:          return []
         case .prefecture:       return SelectItems_Prefecture
-        case .suggestCompany:   return []
-        case .suggestHyakunin:  return []
-        case .jobType:          return SelectItems_JobType()
-        case .occupation:       return SelectItems_Occupation(grpCodeFilter: grpCodeFilter) //!!!絞り込む
+        case .address1:         return []
+        case .address2:         return []
+        case .mailAddress:      return []
+        case .mobilePhoneNo:    return []
         }
     }
-    private class func getSelectItems(type: EditItemUser, _ grpCodeFilter: String?) -> [CodeDisp] {
-        switch type {
-        case .userId:           return []
-        case .nameKana:         return []
-        case .email:            return []
-        case .phone:            return []
-        case .prefecture:       return SelectItems_Prefecture
+    class func getTsvMasterByKey(_ itemKey: EditableItemKey) -> TsvMaster? {
+        switch itemKey {
+        case EditItemProfile.gender.itemKey:        return .gender
+        case EditItemProfile.prefecture.itemKey:    return .place
+        default: return nil
         }
     }
 }
@@ -175,9 +171,11 @@ extension SelectItemsManager {
 
 //======================================================
 //=== マスタデータ定義 (とりあえずソース埋め込み)
-//=== 都道府県コード（とは異なるコード体系）
 var SelectItems_Prefecture: [CodeDisp] {
-    return SelectItemsManager.getMaster(.place) //?!
+    return SelectItemsManager.getMaster(.place)
+}
+var SelectItems_Gender: [CodeDisp] {
+    return SelectItemsManager.getMaster(.gender)
 }
 //======================================================
 extension SelectItemsManager {
@@ -333,7 +331,7 @@ extension SelectItemsManager {
     }
     //======================================================
     //種別とコードを渡すと、対応するCodeDispを返却する
-    class func getCodeDisp(_ type: TsvMaster, code: String) -> CodeDisp? {
+    class func getCodeDisp(_ type: TsvMaster, code: Code) -> CodeDisp? {
         let mst: [CodeDisp] = getMaster(type)
         return mst.filter { (cd) -> Bool in
             cd.code == code

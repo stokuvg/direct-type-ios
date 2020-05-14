@@ -55,14 +55,15 @@ extension EditableObj {
 }
 
 //=== 選択項目で、内部用Codeとユーザ表示用Dispを扱えるようにするもの（内部用CodeはAPI指定に使うものと同一だと管理が楽）
+typealias Code = String
 class CodeDisp: Codable {
-    var code: String
+    var code: Code
     var disp: String
     
     var debugDisp: String {
         return "[\(code)]: [\(disp)]"
     }
-    init(_ code: String = "", _ disp: String) {
+    init(_ code: Code = "", _ disp: String) {
         self.code = code
         self.disp = disp
     }
@@ -87,7 +88,7 @@ class GrpCodeDisp: Codable {
     var debugDisp: String {
         return "<\(grp)> [\(codeDisp.code)]: [\(codeDisp.disp)]"
     }
-    init(_ grp: String = "", _ code: String = "", _ disp: String) {
+    init(_ grp: String = "", _ code: Code = "", _ disp: String) {
         self.grp = grp
         self.codeDisp = CodeDisp(code, disp)
     }
@@ -96,13 +97,13 @@ class GrpCodeDisp: Codable {
 //======
 class SortCodeDisp: Codable {
     var sortNum: Int
-    var code: String
+    var code: Code
     var disp: String
     
     var debugDisp: String {
         return "[\(sortNum)]\t [\(code)]: [\(disp)]"
     }
-    init(_ sortNum: String, _ code: String = "", _ disp: String) {
+    init(_ sortNum: String, _ code: Code = "", _ disp: String) {
         self.sortNum = Int(sortNum) ?? 0
         self.code = code
         self.disp = disp
@@ -127,7 +128,7 @@ class SortGrpCodeDisp: Codable {
     var debugDisp: String {
         return "[\(sortNum)]\t <\(grp)> [\(codeDisp.code)]: [\(codeDisp.disp)]"
     }
-    init(_ grp: String = "", _ sortNum: String, _ code: String = "", _ disp: String) {
+    init(_ grp: String = "", _ sortNum: String, _ code: Code = "", _ disp: String) {
         self.grp = grp
         self.sortNum = Int(sortNum) ?? 0
         self.codeDisp = CodeDisp(code, disp)
