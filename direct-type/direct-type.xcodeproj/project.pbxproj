@@ -165,6 +165,8 @@
 		26F2A825246D23660037D47F /* MdlResumeSchool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A824246D23660037D47F /* MdlResumeSchool.swift */; };
 		26F2A827246D23800037D47F /* MdlResumeSkillLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A826246D23800037D47F /* MdlResumeSkillLanguage.swift */; };
 		26F2A829246D2A230037D47F /* MdlResumeJobExperiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A828246D2A230037D47F /* MdlResumeJobExperiments.swift */; };
+		26F2A82B246D2EE90037D47F /* EditableTableBasicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A82A246D2EE90037D47F /* EditableTableBasicVC.swift */; };
+		26F2A82D246D31020037D47F /* PreviewBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A82C246D31020037D47F /* PreviewBaseVC.swift */; };
 		C29161DB95966DD7132DBD19 /* Pods_direct_type.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A49B0215E0F4A582FB1EC5E /* Pods_direct_type.framework */; };
 /* End PBXBuildFile section */
 
@@ -330,6 +332,8 @@
 		26F2A824246D23660037D47F /* MdlResumeSchool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlResumeSchool.swift; sourceTree = "<group>"; };
 		26F2A826246D23800037D47F /* MdlResumeSkillLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlResumeSkillLanguage.swift; sourceTree = "<group>"; };
 		26F2A828246D2A230037D47F /* MdlResumeJobExperiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlResumeJobExperiments.swift; sourceTree = "<group>"; };
+		26F2A82A246D2EE90037D47F /* EditableTableBasicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTableBasicVC.swift; sourceTree = "<group>"; };
+		26F2A82C246D31020037D47F /* PreviewBaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewBaseVC.swift; sourceTree = "<group>"; };
 		8A49B0215E0F4A582FB1EC5E /* Pods_direct_type.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_direct_type.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8C351EB920291E353136BB9 /* Pods-direct-type.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-direct-type.debug.xcconfig"; path = "Target Support Files/Pods-direct-type/Pods-direct-type.debug.xcconfig"; sourceTree = "<group>"; };
 		F6660969F9095E20D9CE432A /* Pods-direct-type.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-direct-type.release.xcconfig"; path = "Target Support Files/Pods-direct-type/Pods-direct-type.release.xcconfig"; sourceTree = "<group>"; };
@@ -623,6 +627,7 @@
 				260BBFDF24651732003D163A /* HPreviewTBCell.xib */,
 				260BBFDE24651732003D163A /* Preview.storyboard */,
 				06E519CB24581634004E4B7A /* ProfilePreviewVC.swift */,
+				26F2A82C246D31020037D47F /* PreviewBaseVC.swift */,
 				06E519CD2458163F004E4B7A /* ResumePreviewVC.swift */,
 				06E519CF2458164B004E4B7A /* ScoutPreview.swift */,
 			);
@@ -673,6 +678,7 @@
 				26989F81246A66630050AC40 /* EditableModel.swift */,
 				26CFC4652469496D00E458E2 /* EditableItemH.swift */,
 				26133A53246B7A00001802BB /* EditableBasicVC.swift */,
+				26F2A82A246D2EE90037D47F /* EditableTableBasicVC.swift */,
 				26133A55246B9D48001802BB /* EditableBasicVC+Picker.swift */,
 				26133A57246B9DC2001802BB /* EditableBasicVC+PickerYMD.swift */,
 			);
@@ -975,6 +981,7 @@
 				06E5197D2457BFBE004E4B7A /* BaseNaviController.swift in Sources */,
 				26133A54246B7A00001802BB /* EditableBasicVC.swift in Sources */,
 				269AFFCB246A929300DB364B /* SubSelectSpecialVC.swift in Sources */,
+				26F2A82D246D31020037D47F /* PreviewBaseVC.swift in Sources */,
 				067F28D22456CE39000AAD69 /* TmpBasicVC.swift in Sources */,
 				06B94F60246BE37C002FEDDC /* JobDetailWorkCell.swift in Sources */,
 				06E5198F2457D70B004E4B7A /* ChemistrySelect.swift in Sources */,
@@ -1038,6 +1045,7 @@
 				269AFFC3246A929300DB364B /* SubSelectTBCell.swift in Sources */,
 				06E519AF245813E9004E4B7A /* LoginConfirmVC.swift in Sources */,
 				066EF6C8245BBA1100E15AD2 /* BaseJobCardCell.swift in Sources */,
+				26F2A82B246D2EE90037D47F /* EditableTableBasicVC.swift in Sources */,
 				06E519B7245814D4004E4B7A /* ProfileEditVC.swift in Sources */,
 				06E519AB245813CA004E4B7A /* InitialInputListVC.swift in Sources */,
 				066BD9EC2456B3A2009E610B /* R.generated.swift in Sources */,

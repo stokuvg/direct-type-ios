@@ -1918,16 +1918,28 @@ struct _R: Rswift.Validatable {
     struct preview: Rswift.StoryboardResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "Preview"
+      let sbid_CareerPreviewVC = StoryboardViewControllerResource<CareerPreviewVC>(identifier: "Sbid_CareerPreviewVC")
       let sbid_ProfilePreviewVC = StoryboardViewControllerResource<ProfilePreviewVC>(identifier: "Sbid_ProfilePreviewVC")
+      let sbid_ResumePreviewVC = StoryboardViewControllerResource<ResumePreviewVC>(identifier: "Sbid_ResumePreviewVC")
+
+      func sbid_CareerPreviewVC(_: Void = ()) -> CareerPreviewVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_CareerPreviewVC)
+      }
 
       func sbid_ProfilePreviewVC(_: Void = ()) -> ProfilePreviewVC? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_ProfilePreviewVC)
       }
 
+      func sbid_ResumePreviewVC(_: Void = ()) -> ResumePreviewVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_ResumePreviewVC)
+      }
+
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
+        if _R.storyboard.preview().sbid_CareerPreviewVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_CareerPreviewVC' could not be loaded from storyboard 'Preview' as 'CareerPreviewVC'.") }
         if _R.storyboard.preview().sbid_ProfilePreviewVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_ProfilePreviewVC' could not be loaded from storyboard 'Preview' as 'ProfilePreviewVC'.") }
+        if _R.storyboard.preview().sbid_ResumePreviewVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_ResumePreviewVC' could not be loaded from storyboard 'Preview' as 'ResumePreviewVC'.") }
       }
 
       fileprivate init() {}

@@ -10,31 +10,8 @@ import UIKit
 import SwaggerClient
 
 //===[H-2]「個人プロフィール確認」
-class ProfilePreviewVC: TmpBasicVC {
-    var detail: MdlProfile? = nil
-    var arrData: [MdlItemH] = []
-
-    @IBOutlet weak var tableVW: UITableView!
-    @IBOutlet weak var btnCommit: UIButton!
-    @IBAction func actCommit(_ sender: UIButton) {
-        print(#line, #function, detail?.debugDisp)
-    }
-
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        title = "個人プロフィール"
-        btnCommit.setTitle(text: "完了する", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
-        btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
-
-        //=== テーブル初期化
-        self.tableVW.estimatedRowHeight = 100
-        self.tableVW.rowHeight = UITableView.automaticDimension
-        self.tableVW.register(UINib(nibName: "HPreviewTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HPreviewTBCell")
-        initData()
-    }
-    func initData() {
+class ProfilePreviewVC: PreviewBaseVC {
+    override func initData() {
         //ダミーデータ投入しておく
         let profile: Profile =
         Profile(familyName: "スマ澤", firstName: "太郎", familyNameKana: "スマザワ", firstNameKana: "タロウ",
@@ -112,35 +89,7 @@ class ProfilePreviewVC: TmpBasicVC {
             EditableItemH(type: .inputText, editItem: EditItemProfile.mobilePhoneNo, val: _detail.mobilePhoneNo),
         ]))
     }
-}
-
-
-extension ProfilePreviewVC: UITableViewDataSource, UITableViewDelegate {
-    //=== 通常テーブル
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrData.count
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = arrData[indexPath.row]
-        let cell: HPreviewTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HPreviewTBCell", for: indexPath) as! HPreviewTBCell
-        cell.initCell(item)
-        cell.dispCell()
-        return cell
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true) //ハイライトの解除
-        let item = arrData[indexPath.row]
-        let storyboard = UIStoryboard(name: "Edit", bundle: nil)
-        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ProfileEditVC") as? ProfileEditVC{
-            nvc.initData(item)
-            //遷移アニメーション関連
-            nvc.modalTransitionStyle = .coverVertical
-            self.present(nvc, animated: true) {
-            }
-//            self.navigationController?.pushViewController(nvc, animated: true)
-
-        }
+    override func dispData() {
+        title = "個人プロフィール"
     }
 }
-
-

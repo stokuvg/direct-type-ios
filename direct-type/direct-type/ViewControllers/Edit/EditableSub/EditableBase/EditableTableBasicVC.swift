@@ -1,15 +1,15 @@
 //
-//  ProfileEditVC.swift
+//  EditableTableBasicVC.swift
 //  direct-type
 //
-//  Created by ms-mb015 on 2020/04/28.
+//  Created by ms-mb014 on 2020/05/14.
 //  Copyright © 2020 ms-mb015. All rights reserved.
 //
 
 import UIKit
 import SwaggerClient
 
-class ProfileEditVC: EditableBasicVC {
+class EditableTableBasicVC: EditableBasicVC {
     var item: MdlItemH? = nil
     var arrData: [EditableItemH] = []
     
@@ -76,7 +76,7 @@ class ProfileEditVC: EditableBasicVC {
     }
 }
 
-extension ProfileEditVC: UITableViewDataSource, UITableViewDelegate {
+extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
     //=== 通常テーブル
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrData.count
@@ -118,7 +118,6 @@ extension ProfileEditVC: UITableViewDataSource, UITableViewDelegate {
         }
     }
 }
-
 
 
 
