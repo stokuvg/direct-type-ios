@@ -320,18 +320,52 @@ extension JobOfferDetailVC: UIScrollViewDelegate {
 extension JobOfferDetailVC: NaviButtonsViewDelegate {
     func workContentsAction() {
         buttonsView.colorChange(no:0)
+        
+        let section = 3
+        let titleName = "仕事内容"
+        self.guidebookScrollAnimation(section: section,titleName: titleName)
     }
     
     func appImportantAction() {
         buttonsView.colorChange(no:1)
+        
+        let section = 3
+        let titleName = "応募資格"
+        self.guidebookScrollAnimation(section: section,titleName: titleName)
     }
     
     func employeeAction() {
         buttonsView.colorChange(no:2)
+        
+        let section = 3
+        let titleName = "待遇"
+        self.guidebookScrollAnimation(section: section,titleName: titleName)
     }
     
     func informationAction() {
         buttonsView.colorChange(no:3)
+        
+        let section = 3
+        let titleName = "企業情報"
+        self.guidebookScrollAnimation(section: section,titleName: titleName)
+    }
+    
+    func guidebookScrollAnimation(section:Int, titleName:String) {
+        let guidebookData = dummyData["guidebook"] as! [[String:Any]]
+        
+        var row:Int = 0
+        for i in 0..<guidebookData.count {
+            let data = guidebookData[i]
+            if let keyName:String = (data["title"] as! String) {
+                if keyName.hasPrefix("待遇") {
+                    row = i
+                    break
+                }
+            }
+        }
+        
+        let indexPath = IndexPath.init(row: row, section: section)
+        self.detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
     
     
