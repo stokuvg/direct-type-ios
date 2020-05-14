@@ -386,7 +386,7 @@
                                         <rect key="frame" x="20" y="20" width="374" height="50"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
-                                            <action selector="actCommit:" destination="mlm-xq-Kg1" eventType="touchUpInside" id="wMA-Ls-jnA"/>
+                                            <action selector="actCommit:" destination="B4P-8Y-68R" eventType="touchUpInside" id="LHC-uU-zwg"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -484,7 +484,7 @@
                                                         </constraints>
                                                         <state key="normal" title="Button" image="close"/>
                                                         <connections>
-                                                            <action selector="actCancel:" destination="B4P-8Y-68R" eventType="touchUpInside" id="hGS-vQ-QMQ"/>
+                                                            <action selector="actBack:" destination="B4P-8Y-68R" eventType="touchUpInside" id="6rD-ob-kkn"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -550,8 +550,14 @@
                         <viewLayoutGuide key="safeArea" id="uCT-a4-ogP"/>
                     </view>
                     <connections>
+                        <outlet property="btnBack" destination="TvK-7k-fTr" id="AkD-WA-fio"/>
+                        <outlet property="btnCommit" destination="d8y-Uz-3hX" id="ZOp-5J-h4n"/>
+                        <outlet property="lblTitle" destination="3uZ-FK-bL9" id="FdG-Kq-ju8"/>
                         <outlet property="tableVW" destination="D2a-Dg-nHP" id="r15-9K-Xz8"/>
-                        <outlet property="tfSubDummy" destination="ofo-jY-BB4" id="3x4-Uf-my7"/>
+                        <outlet property="tfSubDummy" destination="ofo-jY-BB4" id="mMI-3K-KDQ"/>
+                        <outlet property="vwFoot" destination="z9K-Q5-Z17" id="XDb-Nv-Wrz"/>
+                        <outlet property="vwHead" destination="0Cd-TF-wYY" id="1b1-EB-fGa"/>
+                        <outlet property="vwMain" destination="Ix6-gA-edR" id="bH2-6F-XLM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U4w-JZ-3XD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
