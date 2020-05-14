@@ -19,6 +19,7 @@ class MdlProfile: Codable {
      var familyNameKana: String = ""
     /** 名（カナ） */
      var firstNameKana: String = ""
+
     var birthday: Date = Date(timeIntervalSince1970: 0)
     /** 性別 */
      var gender: Code = ""
@@ -50,7 +51,7 @@ class MdlProfile: Codable {
         case mobilePhoneNo = "mobile_phone_no"
     }
     
-    public init(familyName: String, firstName: String, familyNameKana: String, firstNameKana: String, birthday: Date, gender: Code, zipCode: String, prefecture: Code, address1: String, address2: String, mailAddress: String, mobilePhoneNo: String) {
+    init(familyName: String, firstName: String, familyNameKana: String, firstNameKana: String, birthday: Date, gender: Code, zipCode: String, prefecture: Code, address1: String, address2: String, mailAddress: String, mobilePhoneNo: String) {
         self.familyName = familyName
         self.firstName = firstName
         self.familyNameKana = familyNameKana
@@ -65,8 +66,8 @@ class MdlProfile: Codable {
         self.mobilePhoneNo = mobilePhoneNo
     }
 
+    //ApiモデルをAppモデルに変換して保持させる
     convenience init(dto: Profile) {
-        //ApiモデルをAppモデルに変換して保持させる
         let bufDate = dto.birthday.dispYmd
         let _date = DateHelper.convStr2Date(bufDate)
         let _gender = "\(dto.gender)"
@@ -79,8 +80,7 @@ class MdlProfile: Codable {
     }
 }
 
-//=== 開発用の項目と定義など
-//ObjUserと対応させる
+//=== 編集用の項目と定義など
 enum EditItemProfile: String, EditItemProtocol {
     case familyName
     case firstName

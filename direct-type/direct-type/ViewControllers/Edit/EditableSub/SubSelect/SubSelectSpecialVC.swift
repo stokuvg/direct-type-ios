@@ -5,6 +5,7 @@
 //  Created by ms-mb014 on 2020/04/23.
 //  Copyright © 2020 ms-mb014. All rights reserved.
 //
+//Mst5_経験年数がサブ選択。
 
 import UIKit
 
@@ -14,7 +15,7 @@ protocol SubSelectSpecialDelegate {
 }
 
 class SubSelectSpecialVC: BaseVC {
-    var typeDai: SelectItemsManager.TsvMaster!
+//    var typeDai: SelectItemsManager.TsvMaster!
     var editableItem: EditableItemH!
     var arrDataGrp: [[CodeDisp]] = []
     var arrSelected: [Bool] = []
@@ -55,12 +56,13 @@ class SubSelectSpecialVC: BaseVC {
         self.tableVW.register(UINib(nibName: "SubSelectDaiTBCell", bundle: nil), forCellReuseIdentifier: "Cell_SubSelectDaiTBCell")
         self.tableVW.register(UINib(nibName: "SubSelectSyouTBCell", bundle: nil), forCellReuseIdentifier: "Cell_SubSelectSyouTBCell")
     }
-    func initData(editableItem: EditableItemH, type: SelectItemsManager.TsvMaster) {
+    func initData(editableItem: EditableItemH) {
         self.editableItem = editableItem
         self.arrSubData = SelectItemsManager.getMaster(.jobExperimentYear)
         //大項目の一覧のみ作成
-        let dai = SelectItemsManager.getMaster(type).0
-        let syou = SelectItemsManager.getMaster(type).1
+        guard let tsvMaster = SelectItemsManager.getTsvMasterByKey(editableItem.editableItemKey) else { return }
+        let dai = SelectItemsManager.getMaster(tsvMaster).0
+        let syou = SelectItemsManager.getMaster(tsvMaster).1
         for itemDai in dai {
             var hoge: [CodeDisp] = []
             hoge.append(itemDai)
@@ -73,7 +75,6 @@ class SubSelectSpecialVC: BaseVC {
             arrDataGrp.append(hoge)
             arrSelected.append(false)//該当セクションが展開されているか否か
         }
-        arrDataGrp.removeFirst()//最初にある「未選択」を削除しておく
     }
     func dispData() {
         let bufTitle: String = "\(editableItem.dispName) \(dicSelectedCode.count)件選択"
@@ -184,6 +185,11 @@ extension SubSelectSpecialVC: SubSelectSpecialDelegate {
         self.dismiss(animated: true) { }
     }
 }
+
+
+
+
+
 
 
 

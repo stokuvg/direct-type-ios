@@ -120,7 +120,7 @@ extension EditableBasicVC: InputItemHDelegate {
                 tf.resignFirstResponder()//自分を解除しておかないと、戻ってきたときにまた遷移してしまうため
                 let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSpecialVC") as? SubSelectSpecialVC{
-                    nvc.initData(editableItem: item, type: .jobType) // jobType | skill
+                    nvc.initData(editableItem: item) // jobType | skill
                     //遷移アニメーション関連
                     nvc.modalTransitionStyle = .crossDissolve
                     self.present(nvc, animated: true) {}

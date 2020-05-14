@@ -41,6 +41,13 @@ extension Int {
         return String(buf.suffix(len))
     }
 }
+extension String {
+    func zeroUme(_ len: Int) -> String {
+        var buf = String(repeating: "0", count: len)
+        buf += String(self)
+        return String(buf.suffix(len))
+    }
+}
 class WakuVW: UIView {
     override func draw(_ rect: CGRect) {
         UIColor.gray.setStroke()
