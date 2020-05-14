@@ -34,7 +34,7 @@
                                                     <constraint firstAttribute="height" constant="1" id="4yz-Ru-0x4"/>
                                                 </constraints>
                                             </view>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fPg-p0-Qk4">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="donutsDefault" translatesAutoresizingMaskIntoConstraints="NO" id="fPg-p0-Qk4">
                                                 <rect key="frame" x="12" y="10" width="20" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="RXc-Pe-AEx"/>
@@ -65,8 +65,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="68e-yd-CcM">
                                         <rect key="frame" x="0.0" y="45" width="290" height="40"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WvO-9K-Rsa">
-                                                <rect key="frame" x="12" y="12" width="266" height="16"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WvO-9K-Rsa">
+                                                <rect key="frame" x="15" y="12" width="260" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -75,9 +75,9 @@
                                         <color key="backgroundColor" name="color-white"/>
                                         <constraints>
                                             <constraint firstItem="WvO-9K-Rsa" firstAttribute="top" secondItem="68e-yd-CcM" secondAttribute="top" constant="12" id="7Sq-Bp-RVA"/>
-                                            <constraint firstItem="WvO-9K-Rsa" firstAttribute="leading" secondItem="68e-yd-CcM" secondAttribute="leading" constant="12" id="QUu-5h-c7b"/>
+                                            <constraint firstItem="WvO-9K-Rsa" firstAttribute="leading" secondItem="68e-yd-CcM" secondAttribute="leading" constant="15" id="QUu-5h-c7b"/>
                                             <constraint firstAttribute="bottom" secondItem="WvO-9K-Rsa" secondAttribute="bottom" constant="12" id="RSo-cp-EWb"/>
-                                            <constraint firstAttribute="trailing" secondItem="WvO-9K-Rsa" secondAttribute="trailing" constant="12" id="jHL-dt-xHR"/>
+                                            <constraint firstAttribute="trailing" secondItem="WvO-9K-Rsa" secondAttribute="trailing" constant="15" id="jHL-dt-xHR"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -110,6 +110,7 @@
             <connections>
                 <outlet property="indispensableLabel" destination="WvO-9K-Rsa" id="Rcc-Qp-gZ8"/>
                 <outlet property="indispensableView" destination="68e-yd-CcM" id="sbX-hz-wMB"/>
+                <outlet property="itemBackView" destination="8ex-Ke-4GU" id="26D-pH-S8S"/>
                 <outlet property="itemStackView" destination="lnU-Mr-MQB" id="i0l-oX-kAy"/>
                 <outlet property="line" destination="zww-D7-0pH" id="tue-Fb-ygc"/>
                 <outlet property="titleLabel" destination="gE1-uo-ky4" id="ver-Du-rmF"/>
@@ -120,6 +121,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="donutsDefault" width="20" height="20"/>
         <namedColor name="color-base">
             <color red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

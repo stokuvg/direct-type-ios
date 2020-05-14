@@ -22,9 +22,14 @@ class JobDetailWorkCell: BaseJobDetailCell {
     }
     
     func setup(data:[String:Any]) {
+        Log.selectLog(logLevel: .debug, "JobDetailWorkCell setup start")
         
+        Log.selectLog(logLevel: .debug, "data:\(data)")
         let title = data["title"] as! String
         titleLabel.text(text: title, fontType: .font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        
+        let indispensableText = data["indispensable"] as! String
+        self.indispensableLabel.text(text: indispensableText, fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
     }
     
 }

@@ -10,6 +10,7 @@ import UIKit
 
 class BaseJobDetailCell: BaseTableViewCell {
     
+    @IBOutlet weak var itemBackView:UIView!
     @IBOutlet weak var itemStackView:UIStackView!
     @IBOutlet weak var titleView:UIView!
     @IBOutlet weak var titleMark:UIImageView!

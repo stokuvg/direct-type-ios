@@ -475,7 +475,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.image` struct is generated, and contains static references to 59 images.
+  /// This `R.image` struct is generated, and contains static references to 60 images.
   struct image {
     /// Image `arBtm_2`.
     static let arBtm_2 = Rswift.ImageResource(bundle: R.hostingBundle, name: "arBtm_2")
@@ -515,6 +515,8 @@ struct R: Rswift.Validatable {
     static let diagnosis = Rswift.ImageResource(bundle: R.hostingBundle, name: "diagnosis")
     /// Image `done02`.
     static let done02 = Rswift.ImageResource(bundle: R.hostingBundle, name: "done02")
+    /// Image `donutsDefault`.
+    static let donutsDefault = Rswift.ImageResource(bundle: R.hostingBundle, name: "donutsDefault")
     /// Image `editSelected`.
     static let editSelected = Rswift.ImageResource(bundle: R.hostingBundle, name: "editSelected")
     /// Image `hukidashi_small`.
@@ -726,6 +728,13 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "done02", bundle: ..., traitCollection: ...)`
     static func done02(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.done02, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "donutsDefault", bundle: ..., traitCollection: ...)`
+    static func donutsDefault(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.donutsDefault, compatibleWith: traitCollection)
     }
     #endif
 
@@ -1012,7 +1021,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 21 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 23 nibs.
   struct nib {
     /// Nib `HEditDrumTBCell`.
     static let hEditDrumTBCell = _R.nib._HEditDrumTBCell()
@@ -1030,8 +1039,12 @@ struct R: Rswift.Validatable {
     static let jobDetailDataCell = _R.nib._JobDetailDataCell()
     /// Nib `JobDetailGuideBookHeaderView`.
     static let jobDetailGuideBookHeaderView = _R.nib._JobDetailGuideBookHeaderView()
+    /// Nib `JobDetailItemAttentionView`.
+    static let jobDetailItemAttentionView = _R.nib._JobDetailItemAttentionView()
     /// Nib `JobDetailItemCell`.
     static let jobDetailItemCell = _R.nib._JobDetailItemCell()
+    /// Nib `JobDetailItemOptionalView`.
+    static let jobDetailItemOptionalView = _R.nib._JobDetailItemOptionalView()
     /// Nib `JobDetailPRCodeTagsCell`.
     static let jobDetailPRCodeTagsCell = _R.nib._JobDetailPRCodeTagsCell()
     /// Nib `JobDetailSalaryExampleCell`.
@@ -1122,10 +1135,26 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
+    /// `UINib(name: "JobDetailItemAttentionView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailItemAttentionView) instead")
+    static func jobDetailItemAttentionView(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.jobDetailItemAttentionView)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
     /// `UINib(name: "JobDetailItemCell", in: bundle)`
     @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailItemCell) instead")
     static func jobDetailItemCell(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.jobDetailItemCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "JobDetailItemOptionalView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailItemOptionalView) instead")
+    static func jobDetailItemOptionalView(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.jobDetailItemOptionalView)
     }
     #endif
 
@@ -1257,8 +1286,16 @@ struct R: Rswift.Validatable {
       return R.nib.jobDetailGuideBookHeaderView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailGuideBookHeaderView
     }
 
+    static func jobDetailItemAttentionView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailItemAttentionView? {
+      return R.nib.jobDetailItemAttentionView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailItemAttentionView
+    }
+
     static func jobDetailItemCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailItemCell? {
       return R.nib.jobDetailItemCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailItemCell
+    }
+
+    static func jobDetailItemOptionalView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailItemOptionalView? {
+      return R.nib.jobDetailItemOptionalView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailItemOptionalView
     }
 
     static func jobDetailPRCodeTagsCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailPRCodeTagsCell? {
@@ -1359,6 +1396,7 @@ struct _R: Rswift.Validatable {
   struct nib: Rswift.Validatable {
     static func validate() throws {
       try _JobDetailDataCell.validate()
+      try _JobDetailItemCell.validate()
       try _JobOfferBigCardCell.validate()
       try _KeepCardCell.validate()
       try _NoCardView.validate()
@@ -1476,12 +1514,43 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
 
-    struct _JobDetailItemCell: Rswift.NibResourceType {
+    struct _JobDetailItemAttentionView: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "JobDetailItemAttentionView"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailItemAttentionView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailItemAttentionView
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _JobDetailItemCell: Rswift.NibResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "JobDetailItemCell"
 
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailItemCell? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailItemCell
+      }
+
+      static func validate() throws {
+        if UIKit.UIImage(named: "donutsDefault", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'donutsDefault' is used in nib 'JobDetailItemCell', but couldn't be loaded.") }
+        if #available(iOS 11.0, tvOS 11.0, *) {
+          if UIKit.UIColor(named: "color-base", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-base' is used in storyboard 'JobDetailItemCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "color-line", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-line' is used in storyboard 'JobDetailItemCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "color-white", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-white' is used in storyboard 'JobDetailItemCell', but couldn't be loaded.") }
+        }
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _JobDetailItemOptionalView: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "JobDetailItemOptionalView"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailItemOptionalView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailItemOptionalView
       }
 
       fileprivate init() {}

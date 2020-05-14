@@ -31,8 +31,9 @@ class JobOfferDetailVC: TmpBasicVC {
         "guidebook":[
             // 1.募集背景:       必須
             ["title":"募集背景",
-             "indispensable":"",    // 必須項目
-                "optional":"",      // 任意項目
+             "indispensable":"ここに募集背景の必須項目内容を表示",    // 必須項目
+                "optional":[],      // 任意項目
+                "attention":[],
             ],
             // 2.仕事内容:       必須
             // ・案件例:        任意
@@ -40,8 +41,13 @@ class JobOfferDetailVC: TmpBasicVC {
             // ・開発環境・業務範囲:   任意
             // ・注目ポイント:      任意
             ["title":"仕事内容",
-            "indispensable":"",    // 必須項目
-               "optional":"",      // 任意項目
+            "indispensable":"多種多様なプロジェクトの中から、あなたの経験や希望に応じた案件で活躍していただきます。\n",    // 必須項目
+            "optional":[],      // 任意項目
+            // 注目
+            "attention":[
+                ["title":"希望を吸い上げる風土だから、理想のキャリアパスを描きやすい","text":"当社では、基本的にユニット（チーム体制）でのプロジェクト配属になっており、四半期に1回面談を実施し、ユニット長がここの希望を吸い上げいます。"],
+                ["title":"明確な評価制度【充実のインセンティブ/若手も大幅昇給可能】","text":"評価を行うのは、ここの頑張りや実力を一番近くで目にしているユニット長なので、納得感のある評価を得られます。"],
+            ]
             ],
             // 3.応募資格:       必須
             // ・歓迎する経験・スキル:   任意
@@ -49,41 +55,52 @@ class JobOfferDetailVC: TmpBasicVC {
             // ・この仕事の向き・不向き: 任意
             ["title":"応募資格",
             "indispensable":"",    // 必須項目
-               "optional":"",      // 任意項目
+            "optional":[
+                ["title":"歓迎する経験・スキル","text":"⭐︎リーダーを目指したい方、あるいはPM/PL経験者は、大歓迎です！"],
+                ["title":"過去の採用例","text":""],
+                ["title":"この仕事の向き・不向き","text":"向いている人\n新しいことにチャレンジしながら、理想のキャリアパスを実現したい方には向いてます。\n向いてない人\n現状維持を望む方や、意欲が乏しい方には、合わないかもしれません。"],
+                ],      // 任意項目
+                "attention":[],
             ],
-            // 4.雇用携帯コード:    必須
-            ["title":"雇用携帯コード",
-            "indispensable":"",    // 必須項目
-               "optional":"",      // 任意項目
+            // 4.雇用携帯:    必須
+            ["title":"雇用形態",
+            "indispensable":"正社員",    // 必須項目
+            "optional":[],      // 任意項目
+            "attention":[],
             ],
             // 5.給与:        必須
             // ・賞与について:     任意
             ["title":"給与",
             "indispensable":"",    // 必須項目
-               "optional":"",
+            "optional":[],      // 任意項目
+            "attention":[],
             ],
             // 6.勤務時間:       必須
             //  ・残業について:
             ["title":"勤務時間",
-            "indispensable":"",    // 必須項目
-               "optional":"",
+            "indispensable":"09:00~18:00(実動８時間)",    // 必須項目
+                "optional":[["title":"残業について","text":"月の平均残業時間は10〜20時間程度です。\n1日に換算すると1日30分〜１時間程度になります。\n当社は働き方改革が叫ばれる以前から残業を抑える取り組みをしており、\n労務上の観点から20時間以内になるように指示しています。\nその結果、20時以降社内に残る社員はほどんどいません。"]],      // 任意項目
+                "attention":[],
             ],
             // 7.勤務地:       必須
             //  ・交通詳細
             ["title":"勤務地",
             "indispensable":"",    // 必須項目
-               "optional":"",
+            "optional":[],      // 任意項目
+            "attention":[],
             ],
             // 8.休日休暇:      必須
             ["title":"休日休暇",
             "indispensable":"",    // 必須項目
-               "optional":"",
+            "optional":[],      // 任意項目
+            "attention":[],
             ],
             // 9.待遇・福利厚生:    必須
             // ・産休・育休取得:   任意
             ["title":"待遇・福利厚生",
-            "indispensable":"",    // 必須項目
-               "optional":"",
+            "indispensable":"◆昇給年1回\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n\n《各種手当て》\n・時間外手当\n・管理職手当(ユニット長:10万円,部長:20万円)\n・通勤手当(課税対象免状限度額を上限とする)",    // 必須項目
+            "optional":[],      // 任意項目
+            "attention":[],
             ],
         ],
     ]
@@ -273,16 +290,9 @@ extension JobOfferDetailVC: UITableViewDataSource {
             case (3,_):
                 let guideBookData = dummyData["guidebook"] as! [[String:Any]]
                 let itemData = guideBookData[row]
-                switch row {
-                    case 1:
-                        let cell = tableView.loadCell(cellName: "JobDetailWorkCell", indexPath: indexPath) as! JobDetailWorkCell
-                        cell.setup(data: itemData)
-                        return cell
-                    default:
-                        let cell = tableView.loadCell(cellName: "JobDetailItemCell", indexPath: indexPath) as! JobDetailItemCell
-                        cell.setup(data: itemData)
-                        return cell
-                }
+                let cell = tableView.loadCell(cellName: "JobDetailItemCell", indexPath: indexPath) as! JobDetailItemCell
+                cell.setup(data: itemData)
+                return cell
             default:
                 let cell = UITableViewCell()
                 cell.backgroundColor = UIColor.init(colorType: .color_base)
