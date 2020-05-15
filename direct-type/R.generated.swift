@@ -1021,7 +1021,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 24 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 29 nibs.
   struct nib {
     /// Nib `HEditDrumTBCell`.
     static let hEditDrumTBCell = _R.nib._HEditDrumTBCell()
@@ -1035,10 +1035,22 @@ struct R: Rswift.Validatable {
     static let jobDetailArticleCell = _R.nib._JobDetailArticleCell()
     /// Nib `JobDetailArticleHeaderView`.
     static let jobDetailArticleHeaderView = _R.nib._JobDetailArticleHeaderView()
+    /// Nib `JobDetailBrowserView`.
+    static let jobDetailBrowserView = _R.nib._JobDetailBrowserView()
     /// Nib `JobDetailDataCell`.
     static let jobDetailDataCell = _R.nib._JobDetailDataCell()
     /// Nib `JobDetailFoldingHeaderView`.
     static let jobDetailFoldingHeaderView = _R.nib._JobDetailFoldingHeaderView()
+    /// Nib `JobDetailFoldingItemCell`.
+    static let jobDetailFoldingItemCell = _R.nib._JobDetailFoldingItemCell()
+    /// Nib `JobDetailFoldingMemoCell`.
+    static let jobDetailFoldingMemoCell = _R.nib._JobDetailFoldingMemoCell()
+    /// Nib `JobDetailFoldingOutlineCell`.
+    static let jobDetailFoldingOutlineCell = _R.nib._JobDetailFoldingOutlineCell()
+    /// Nib `JobDetailFoldingPhoneNumberCell`.
+    static let jobDetailFoldingPhoneNumberCell = _R.nib._JobDetailFoldingPhoneNumberCell()
+    /// Nib `JobDetailFoldingProcessCell`.
+    static let jobDetailFoldingProcessCell = _R.nib._JobDetailFoldingProcessCell()
     /// Nib `JobDetailGuideBookHeaderView`.
     static let jobDetailGuideBookHeaderView = _R.nib._JobDetailGuideBookHeaderView()
     /// Nib `JobDetailItemAttentionView`.
@@ -1051,8 +1063,6 @@ struct R: Rswift.Validatable {
     static let jobDetailPRCodeTagsCell = _R.nib._JobDetailPRCodeTagsCell()
     /// Nib `JobDetailSalaryExampleCell`.
     static let jobDetailSalaryExampleCell = _R.nib._JobDetailSalaryExampleCell()
-    /// Nib `JobDetailWorkCell`.
-    static let jobDetailWorkCell = _R.nib._JobDetailWorkCell()
     /// Nib `JobOfferBigCardCell`.
     static let jobOfferBigCardCell = _R.nib._JobOfferBigCardCell()
     /// Nib `JobOfferCardMoreCell`.
@@ -1121,6 +1131,14 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
+    /// `UINib(name: "JobDetailBrowserView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailBrowserView) instead")
+    static func jobDetailBrowserView(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.jobDetailBrowserView)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
     /// `UINib(name: "JobDetailDataCell", in: bundle)`
     @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailDataCell) instead")
     static func jobDetailDataCell(_: Void = ()) -> UIKit.UINib {
@@ -1133,6 +1151,46 @@ struct R: Rswift.Validatable {
     @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailFoldingHeaderView) instead")
     static func jobDetailFoldingHeaderView(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.jobDetailFoldingHeaderView)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "JobDetailFoldingItemCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailFoldingItemCell) instead")
+    static func jobDetailFoldingItemCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.jobDetailFoldingItemCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "JobDetailFoldingMemoCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailFoldingMemoCell) instead")
+    static func jobDetailFoldingMemoCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.jobDetailFoldingMemoCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "JobDetailFoldingOutlineCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailFoldingOutlineCell) instead")
+    static func jobDetailFoldingOutlineCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.jobDetailFoldingOutlineCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "JobDetailFoldingPhoneNumberCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailFoldingPhoneNumberCell) instead")
+    static func jobDetailFoldingPhoneNumberCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.jobDetailFoldingPhoneNumberCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "JobDetailFoldingProcessCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailFoldingProcessCell) instead")
+    static func jobDetailFoldingProcessCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.jobDetailFoldingProcessCell)
     }
     #endif
 
@@ -1181,14 +1239,6 @@ struct R: Rswift.Validatable {
     @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailSalaryExampleCell) instead")
     static func jobDetailSalaryExampleCell(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.jobDetailSalaryExampleCell)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UINib(name: "JobDetailWorkCell", in: bundle)`
-    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailWorkCell) instead")
-    static func jobDetailWorkCell(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.jobDetailWorkCell)
     }
     #endif
 
@@ -1288,12 +1338,36 @@ struct R: Rswift.Validatable {
       return R.nib.jobDetailArticleHeaderView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailArticleHeaderView
     }
 
+    static func jobDetailBrowserView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailBrowserView? {
+      return R.nib.jobDetailBrowserView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailBrowserView
+    }
+
     static func jobDetailDataCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailDataCell? {
       return R.nib.jobDetailDataCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailDataCell
     }
 
     static func jobDetailFoldingHeaderView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailFoldingHeaderView? {
       return R.nib.jobDetailFoldingHeaderView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailFoldingHeaderView
+    }
+
+    static func jobDetailFoldingItemCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailFoldingItemCell? {
+      return R.nib.jobDetailFoldingItemCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailFoldingItemCell
+    }
+
+    static func jobDetailFoldingMemoCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailFoldingMemoCell? {
+      return R.nib.jobDetailFoldingMemoCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailFoldingMemoCell
+    }
+
+    static func jobDetailFoldingOutlineCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailFoldingOutlineCell? {
+      return R.nib.jobDetailFoldingOutlineCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailFoldingOutlineCell
+    }
+
+    static func jobDetailFoldingPhoneNumberCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailFoldingPhoneNumberCell? {
+      return R.nib.jobDetailFoldingPhoneNumberCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailFoldingPhoneNumberCell
+    }
+
+    static func jobDetailFoldingProcessCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailFoldingProcessCell? {
+      return R.nib.jobDetailFoldingProcessCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailFoldingProcessCell
     }
 
     static func jobDetailGuideBookHeaderView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailGuideBookHeaderView? {
@@ -1318,10 +1392,6 @@ struct R: Rswift.Validatable {
 
     static func jobDetailSalaryExampleCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailSalaryExampleCell? {
       return R.nib.jobDetailSalaryExampleCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailSalaryExampleCell
-    }
-
-    static func jobDetailWorkCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailWorkCell? {
-      return R.nib.jobDetailWorkCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailWorkCell
     }
 
     static func jobOfferBigCardCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobOfferBigCardCell? {
@@ -1494,6 +1564,17 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
 
+    struct _JobDetailBrowserView: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "JobDetailBrowserView"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailBrowserView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailBrowserView
+      }
+
+      fileprivate init() {}
+    }
+
     struct _JobDetailDataCell: Rswift.NibResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "JobDetailDataCell"
@@ -1523,6 +1604,61 @@ struct _R: Rswift.Validatable {
 
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailFoldingHeaderView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailFoldingHeaderView
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _JobDetailFoldingItemCell: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "JobDetailFoldingItemCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailFoldingItemCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailFoldingItemCell
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _JobDetailFoldingMemoCell: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "JobDetailFoldingMemoCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailFoldingMemoCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailFoldingMemoCell
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _JobDetailFoldingOutlineCell: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "JobDetailFoldingOutlineCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailFoldingOutlineCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailFoldingOutlineCell
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _JobDetailFoldingPhoneNumberCell: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "JobDetailFoldingPhoneNumberCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailFoldingPhoneNumberCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailFoldingPhoneNumberCell
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _JobDetailFoldingProcessCell: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "JobDetailFoldingProcessCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailFoldingProcessCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailFoldingProcessCell
       }
 
       fileprivate init() {}
@@ -1598,17 +1734,6 @@ struct _R: Rswift.Validatable {
 
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailSalaryExampleCell? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailSalaryExampleCell
-      }
-
-      fileprivate init() {}
-    }
-
-    struct _JobDetailWorkCell: Rswift.NibResourceType {
-      let bundle = R.hostingBundle
-      let name = "JobDetailWorkCell"
-
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailWorkCell? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailWorkCell
       }
 
       fileprivate init() {}
