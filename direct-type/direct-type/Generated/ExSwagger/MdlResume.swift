@@ -34,18 +34,6 @@ class MdlResume: Codable {
         self.qualifications = qualifications
         self.ownPr = ownPr
     }
-    enum CodingKeys: String, CodingKey {
-        case employment
-        case changeCount = "change_count"
-        case lastJobExperiment = "last_job_experiment"
-        case jobExperiments = "job_experiments"
-        case businessTypes = "business_types"
-        case school
-        case skillLanguage = "skill_language"
-        case qualifications
-        case ownPr = "own_pr"
-    }
-
     //ApiモデルをAppモデルに変換して保持させる
     convenience init(dto: Resume) {
         let _employment = "\(dto.employment)"
@@ -74,7 +62,7 @@ class MdlResume: Codable {
 }
 
 //=== 編集用の項目と定義など
-enum EditItemResume: String, EditItemProtocol {
+enum EditItemMdlResume: String, EditItemProtocol {
     case employment
     case changeCount
     case lastJobExperiment
@@ -89,12 +77,12 @@ enum EditItemResume: String, EditItemProtocol {
         switch self {
         case .employment:           return "就業状況"
         case .changeCount:          return "転職回数"
-        case .lastJobExperiment:    return ""
-        case .jobExperiments:       return ""
-        case .businessTypes:        return ""
-        case .school:               return ""
-        case .skillLanguage:        return ""
-        case .qualifications:       return ""
+        case .lastJobExperiment:    return "直近の経験職種"
+        case .jobExperiments:       return "その他の経験職種"
+        case .businessTypes:        return "経験業種"
+        case .school:               return "最終学歴"
+        case .skillLanguage:        return "語学"
+        case .qualifications:       return "資格"
         case .ownPr:                return "自己PR"
         }
     }
@@ -102,7 +90,5 @@ enum EditItemResume: String, EditItemProtocol {
     var placeholder: String {
         return "[\(self.itemKey) PlaceHolder]"
     }
-    var itemKey: String {
-        return "Resume_\(self.rawValue)" //ここでUniqになるようにしておく
-    }
+    var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" } //画面内でUniqになるようなキーを定義（配列利用時は除く）
 }

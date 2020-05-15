@@ -647,8 +647,8 @@
 				260BBFDD24651732003D163A /* HPreviewTBCell.swift */,
 				260BBFDF24651732003D163A /* HPreviewTBCell.xib */,
 				260BBFDE24651732003D163A /* Preview.storyboard */,
-				06E519CB24581634004E4B7A /* ProfilePreviewVC.swift */,
 				26F2A82C246D31020037D47F /* PreviewBaseVC.swift */,
+				06E519CB24581634004E4B7A /* ProfilePreviewVC.swift */,
 				06E519CD2458163F004E4B7A /* ResumePreviewVC.swift */,
 				06E519CF2458164B004E4B7A /* ScoutPreview.swift */,
 			);

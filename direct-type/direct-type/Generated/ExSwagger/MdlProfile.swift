@@ -36,21 +36,6 @@ class MdlProfile: Codable {
     /** 携帯電話番号（変更不可：認証アカウントと同一） */
      var mobilePhoneNo: String = ""
 
-    enum CodingKeys: String, CodingKey {
-        case familyName = "family_name"
-        case firstName = "first_name"
-        case familyNameKana = "family_name_kana"
-        case firstNameKana = "first_name_kana"
-        case birthday
-        case gender
-        case zipCode = "zip_code"
-        case prefecture
-        case address1
-        case address2
-        case mailAddress = "mail_address"
-        case mobilePhoneNo = "mobile_phone_no"
-    }
-    
     init(familyName: String, firstName: String, familyNameKana: String, firstNameKana: String, birthday: Date, gender: Code, zipCode: String, prefecture: Code, address1: String, address2: String, mailAddress: String, mobilePhoneNo: String) {
         self.familyName = familyName
         self.firstName = firstName
@@ -65,7 +50,6 @@ class MdlProfile: Codable {
         self.mailAddress = mailAddress
         self.mobilePhoneNo = mobilePhoneNo
     }
-
     //ApiモデルをAppモデルに変換して保持させる
     convenience init(dto: Profile) {
         let bufDate = dto.birthday.dispYmd
@@ -81,7 +65,7 @@ class MdlProfile: Codable {
 }
 
 //=== 編集用の項目と定義など
-enum EditItemProfile: String, EditItemProtocol {
+enum EditItemMdlProfile: String, EditItemProtocol {
     case familyName
     case firstName
     case familyNameKana
@@ -115,9 +99,7 @@ enum EditItemProfile: String, EditItemProtocol {
     var placeholder: String {
         return "[\(self.itemKey) PlaceHolder]"
     }
-    var itemKey: String {
-        return "Profile_\(self.rawValue)" //ここでUniqになるようにしておく
-    }
+    var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" } //画面内でUniqになるようなキーを定義（配列利用時は除く）
 }
 
 extension ProfileBirthday {

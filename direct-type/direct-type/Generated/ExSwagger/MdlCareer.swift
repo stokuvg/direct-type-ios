@@ -16,10 +16,6 @@ class MdlCareer: Codable {
     init(businessTypes: [MdlCareerCard] = []) {
         self.businessTypes = businessTypes
     }
-    enum CodingKeys: String, CodingKey {
-        case businessTypes = "business_types"
-    }
-
     //ApiモデルをAppモデルに変換して保持させる
     convenience init(dto: Career) {
         var _businessTypes: [MdlCareerCard] = []
@@ -41,15 +37,13 @@ enum EditItemCareer: String, EditItemProtocol {
     //表示名
     var dispName: String {
         switch self {
-        case .businessTypes:       return "氏"
+        case .businessTypes:    return "職務経歴書"
         }
     }
     //Placeholder Text
     var placeholder: String {
         return "[\(self.itemKey) PlaceHolder]"
     }
-    var itemKey: String {
-        return "Career_\(self.rawValue)" //ここでUniqになるようにしておく
-    }
+    var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" } //画面内でUniqになるようなキーを定義（配列利用時は除く）
 }
 
