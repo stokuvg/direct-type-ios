@@ -11,6 +11,8 @@ import SwaggerClient
 
 //===[H-2]「個人プロフィール確認」
 class ProfilePreviewVC: PreviewBaseVC {
+    var detail: MdlProfile? = nil
+    
     override func initData() {
         //ダミーデータ投入しておく
         let profile: Profile =
@@ -29,11 +31,11 @@ class ProfilePreviewVC: PreviewBaseVC {
         //    ・表記形式は「{氏} {名} （{氏(カナ)} {名(カナ)}」
         let bufFullname: String = "\(_detail.familyName) \(_detail.firstName)"
         let bufFullnameKana: String = "\(_detail.familyNameKana) \(_detail.firstNameKana)"
-        arrData.append(MdlItemH(.fullname, "\(bufFullname)（\(bufFullnameKana)）", childItems: [
-            EditableItemH(type: .inputText, editItem: EditItemProfile.familyName, val: _detail.familyName),
-            EditableItemH(type: .inputText, editItem: EditItemProfile.firstName, val: _detail.firstName),
-            EditableItemH(type: .inputText, editItem: EditItemProfile.familyNameKana, val: _detail.familyNameKana),
-            EditableItemH(type: .inputText, editItem: EditItemProfile.firstNameKana, val: _detail.firstNameKana),
+        arrData.append(MdlItemH(.fullnameH2, "\(bufFullname)（\(bufFullnameKana)）", childItems: [
+            EditableItemH(type: .inputText, editItem: EditItemMdlProfile.familyName, val: _detail.familyName),
+            EditableItemH(type: .inputText, editItem: EditItemMdlProfile.firstName, val: _detail.firstName),
+            EditableItemH(type: .inputText, editItem: EditItemMdlProfile.familyNameKana, val: _detail.familyNameKana),
+            EditableItemH(type: .inputText, editItem: EditItemMdlProfile.firstNameKana, val: _detail.firstNameKana),
         ]))
         ////===５．生年月日・性別（必須）
         //    ・生年月日は初回入力項目なので未入力は想定しない
@@ -44,15 +46,15 @@ class ProfilePreviewVC: PreviewBaseVC {
         let bufBirthday: String = date.dispYmdJP()
         let bufAge: String = "\(date.age)歳"
         let bufGender: String = SelectItemsManager.getCodeDisp(.gender, code: _detail.gender)?.disp ?? "--"
-        arrData.append(MdlItemH(.birthGender, "\(bufBirthday)（\(bufAge)） / \(bufGender)", childItems: [
-            EditableItemH(type: .selectDrumYMD, editItem: EditItemProfile.birthday, val: "\(_detail.birthday.dispYmd())"),
-            EditableItemH(type: .selectSingle, editItem: EditItemProfile.gender, val: "\(_detail.gender)"),
+        arrData.append(MdlItemH(.birthGenderH2, "\(bufBirthday)（\(bufAge)） / \(bufGender)", childItems: [
+            EditableItemH(type: .selectDrumYMD, editItem: EditItemMdlProfile.birthday, val: "\(_detail.birthday.dispYmd())"),
+            EditableItemH(type: .selectSingle, editItem: EditItemMdlProfile.gender, val: "\(_detail.gender)"),
 
-        EditableItemH(type: .selectDrum, editItem: EditItemProfile.prefecture, val: ""),
-        EditableItemH(type: .selectMulti, editItem: EditItemProfile.prefecture, val: ""),
-        EditableItemH(type: .selectSingle, editItem: EditItemProfile.prefecture, val: ""),
+        EditableItemH(type: .selectDrum, editItem: EditItemMdlProfile.prefecture, val: ""),
+        EditableItemH(type: .selectMulti, editItem: EditItemMdlProfile.prefecture, val: ""),
+        EditableItemH(type: .selectSingle, editItem: EditItemMdlProfile.prefecture, val: ""),
 
-        EditableItemH(type: .selectSpecisl, editItem: EditItemProfile.prefecture, val: ""),
+        EditableItemH(type: .selectSpecisl, editItem: EditItemMdlProfile.prefecture, val: ""),
         ]))
 
         //===６．住所
@@ -63,18 +65,18 @@ class ProfilePreviewVC: PreviewBaseVC {
         let bufZipCode: String = "\(_detail.zipCode)"
         let bufPrefecture: String = SelectItemsManager.getCodeDisp(.place, code: _detail.prefecture)?.disp ?? ""
         let bufAddress: String = "\(bufPrefecture)\(_detail.address1)\(_detail.address2)"
-        arrData.append(MdlItemH(.adderss, "〒\(bufZipCode)\n\(bufAddress)", childItems: [
-            EditableItemH(type: .inputZipcode, editItem: EditItemProfile.zipCode, val: _detail.zipCode),
-            EditableItemH(type: .selectSingle, editItem: EditItemProfile.prefecture, val: bufPrefecture),
-            EditableItemH(type: .inputText, editItem: EditItemProfile.address1, val: _detail.address1),
-            EditableItemH(type: .inputText, editItem: EditItemProfile.address2, val: _detail.address2),
+        arrData.append(MdlItemH(.adderssH2, "〒\(bufZipCode)\n\(bufAddress)", childItems: [
+            EditableItemH(type: .inputZipcode, editItem: EditItemMdlProfile.zipCode, val: _detail.zipCode),
+            EditableItemH(type: .selectSingle, editItem: EditItemMdlProfile.prefecture, val: bufPrefecture),
+            EditableItemH(type: .inputText, editItem: EditItemMdlProfile.address1, val: _detail.address1),
+            EditableItemH(type: .inputText, editItem: EditItemMdlProfile.address2, val: _detail.address2),
         ]))
 
         //===７．メールアドレス
         //    ・未記入時は「未入力（必須）」と表示
         let bufMailAddress: String = _detail.mailAddress
-        arrData.append(MdlItemH(.email, "\(bufMailAddress)", childItems: [
-            EditableItemH(type: .inputText, editItem: EditItemProfile.mailAddress, val: _detail.mailAddress),
+        arrData.append(MdlItemH(.emailH2, "\(bufMailAddress)", childItems: [
+            EditableItemH(type: .inputText, editItem: EditItemMdlProfile.mailAddress, val: _detail.mailAddress),
         ]))
 
         //===８．携帯電話番号
@@ -85,8 +87,8 @@ class ProfilePreviewVC: PreviewBaseVC {
         //    注意文の文字種：font-SS、文字色：color-parts-grau
         let bufMobilePhoneNo: String = _detail.mobilePhoneNo
         let bufMobilePhoneNoNotice: String = "＊電話番号の変更は「設定」→「アカウント変更」よりお願いします"
-        arrData.append(MdlItemH(.mobilephone, "\(bufMobilePhoneNo)", "\(bufMobilePhoneNoNotice)", readonly: true, childItems: [
-            EditableItemH(type: .inputText, editItem: EditItemProfile.mobilePhoneNo, val: _detail.mobilePhoneNo),
+        arrData.append(MdlItemH(.mobilephoneH2, "\(bufMobilePhoneNo)", "\(bufMobilePhoneNoNotice)", readonly: true, childItems: [
+            EditableItemH(type: .inputText, editItem: EditItemMdlProfile.mobilePhoneNo, val: _detail.mobilePhoneNo),
         ]))
     }
     override func dispData() {

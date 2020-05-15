@@ -38,20 +38,42 @@ class IKTextField: UITextField {
 
 enum HPreviewItemType {
     case undefine
-    case fullname       //===４．氏名（必須）
-    case birthGender    //===５．生年月日・性別（必須）
-    case adderss        //===６．住所
-    case email          //===７．メールアドレス
-    case mobilephone    //===８．携帯電話番号
+    //=== [H-2]個人プロフィール編集
+    case fullnameH2       //===４．氏名（必須）
+    case birthGenderH2    //===５．生年月日・性別（必須）
+    case adderssH2        //===６．住所
+    case emailH2          //===７．メールアドレス
+    case mobilephoneH2    //===８．携帯電話番号
+    //=== [H-3]履歴書編集
+    case employmentH3           //===(3a)就業状況
+    case changeCountH3          //===(3b)転職回数
+    case lastJobExperimentH3    //===(3c)直近の経験職種
+    case jobExperimentsH3       //===(3d)その他の経験職種
+    case businessTypesH3        //===(3e)経験業種
+    case schoolH3               //===(3f)最終学歴
+    case skillLanguageH3        //===(3g)語学
+    case qualificationsH3       //===(3h)資格
+    case ownPr                  //===(3i)自己PR
 
     var dispTitle: String {
         switch self {
         case .undefine:     return "<未定義>"
-        case .fullname:     return "氏名"
-        case .birthGender:  return "生年月日・性別"
-        case .adderss:      return "住所"
-        case .email:        return "メールアドレス"
-        case .mobilephone:  return "アカウント（認証済み電話番号）"
+        //=== [H-2]個人プロフィール編集
+        case .fullnameH2:     return "氏名"
+        case .birthGenderH2:  return "生年月日・性別"
+        case .adderssH2:      return "住所"
+        case .emailH2:        return "メールアドレス"
+        case .mobilephoneH2:  return "アカウント（認証済み電話番号）"
+        //=== [H-3]履歴書編集
+        case .employmentH3:         return "就業状況"
+        case .changeCountH3:        return "転職回数"
+        case .lastJobExperimentH3:  return "直近の経験職種"
+        case .jobExperimentsH3:     return "その他の経験職種"
+        case .businessTypesH3:      return "経験業種"
+        case .schoolH3:             return "最終学歴"
+        case .skillLanguageH3:      return "語学"
+        case .qualificationsH3:     return "資格"
+        case .ownPr:                return "自己PR"
         }
     }
 }

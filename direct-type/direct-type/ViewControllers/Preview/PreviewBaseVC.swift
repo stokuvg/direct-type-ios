@@ -13,13 +13,12 @@ import SwaggerClient
 //===[H-3]「履歴書確認」
 //===[C-15]「職務経歴書確認」
 class PreviewBaseVC: TmpBasicVC {
-    var detail: MdlProfile? = nil
     var arrData: [MdlItemH] = []
 
     @IBOutlet weak var tableVW: UITableView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
-        print(#line, #function, detail?.debugDisp)
+        print(#line, #function)
     }
 
     override func viewDidLoad() {

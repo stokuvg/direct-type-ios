@@ -94,24 +94,63 @@ class SelectItemsManager: NSObject {
         ud.removeObject(forKey: SelectItemKey.MstCompanyKey)
         self.shared.isCachedCompany = false
     }
+    //===EditableItemKeyから直接TsvMasterに繋げて良い気がする...
     class func getSelectItemsByKey(_ itemKey: EditableItemKey, grpCodeFilter: String?) -> [CodeDisp] {
         switch itemKey {
-        case EditItemProfile.gender.itemKey:
+        case EditItemMdlProfile.gender.itemKey:
             return getSelectItems(type: .gender, nil)
-        case EditItemProfile.prefecture.itemKey:
+        case EditItemMdlProfile.prefecture.itemKey:
             return getSelectItems(type: .prefecture, nil)
+
+        case EditItemMdlResume.employment.itemKey:
+            return getSelectItems(type: .employment, nil)
+        case EditItemMdlResume.changeCount.itemKey:
+            return getSelectItems(type: .changeCount, nil)
+            
+        case EditItemMdlResumeLastJobExperiment.jobType.itemKey:
+
+            let buf0 =  SelectItemsManager.getMaster(.jobType).0
+            let buf1 =  SelectItemsManager.getMaster(.jobType).1
+            print(buf0.count, buf1.count)
+
+            let (g, i) =  SelectItemsManager.getMaster(.jobType)
+            print(g.count, i.count)
+
+            return SelectItems_Occupation(grpCodeFilter: nil)
+
+        case EditItemMdlResumeLastJobExperiment.jobExperimentYear.itemKey:
+            return SelectItemsManager.getMaster(.jobExperimentYear)
+            
+        case EditItemMdlResumeJobExperiments.jobType.itemKey:
+
+            let buf0 =  SelectItemsManager.getMaster(.jobType).0
+            let buf1 =  SelectItemsManager.getMaster(.jobType).1
+            print(buf0.count, buf1.count)
+
+            let (g, i) =  SelectItemsManager.getMaster(.jobType)
+            print(g.count, i.count)
+
+            return SelectItems_Occupation(grpCodeFilter: nil)
+
+        case EditItemMdlResumeJobExperiments.jobExperimentYear.itemKey:
+            return SelectItemsManager.getMaster(.jobExperimentYear)
+            
+
         default:
             break
         }
         return []
     }
     class func getSelectItems(type: Any, grpCodeFilter: String?) -> [CodeDisp] {
-        if let _type = type as? EditItemProfile {
+        if let _type = type as? EditItemMdlProfile {
+            return getSelectItems(type: _type, grpCodeFilter)
+        }
+        if let _type = type as? EditItemMdlResume {
             return getSelectItems(type: _type, grpCodeFilter)
         }
         return []
     }
-    private class func getSelectItems(type: EditItemProfile, _ grpCodeFilter: String?) -> [CodeDisp] {
+    private class func getSelectItems(type: EditItemMdlProfile, _ grpCodeFilter: String?) -> [CodeDisp] {
         switch type {
         case .familyName:       return []
         case .firstName:        return []
@@ -127,10 +166,23 @@ class SelectItemsManager: NSObject {
         case .mobilePhoneNo:    return []
         }
     }
+    private class func getSelectItems(type: EditItemMdlResume, _ grpCodeFilter: String?) -> [CodeDisp] {
+        switch type {
+        case .employment:           return SelectItemsManager.getMaster(.jobType)
+        case .changeCount:          return SelectItemsManager.getMaster(.changeCount)
+        case .lastJobExperiment:    return []
+        case .jobExperiments:       return []
+        case .businessTypes:        return []
+        case .school:               return []
+        case .skillLanguage:        return []
+        case .qualifications:       return []
+        case .ownPr:                return []
+        }
+    }
     class func getTsvMasterByKey(_ itemKey: EditableItemKey) -> TsvMaster? {
         switch itemKey {
-        case EditItemProfile.gender.itemKey:        return .gender
-        case EditItemProfile.prefecture.itemKey:    return .place
+        case EditItemMdlProfile.gender.itemKey:        return .gender
+        case EditItemMdlProfile.prefecture.itemKey:    return .place
         default: return nil
         }
     }
@@ -342,6 +394,12 @@ extension SelectItemsManager {
         return mst.filter { (cd) -> Bool in
             cd.code == String(code)
         }.first
+    }
+    class func getCodeDispSyou(_ type: TsvMaster, code: Code) -> CodeDisp? {
+        let (_, mst) = getMaster(type)
+        return mst.filter { (cd) -> Bool in
+            cd.codeDisp.code == code
+        }.first?.codeDisp
     }
 
 }

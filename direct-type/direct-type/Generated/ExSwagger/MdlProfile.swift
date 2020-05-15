@@ -81,7 +81,7 @@ class MdlProfile: Codable {
 }
 
 //=== 編集用の項目と定義など
-enum EditItemProfile: String, EditItemProtocol {
+enum EditItemMdlProfile: String, EditItemProtocol {
     case familyName
     case firstName
     case familyNameKana

@@ -74,7 +74,7 @@ class MdlResume: Codable {
 }
 
 //=== 編集用の項目と定義など
-enum EditItemResume: String, EditItemProtocol {
+enum EditItemMdlResume: String, EditItemProtocol {
     case employment
     case changeCount
     case lastJobExperiment

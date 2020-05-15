@@ -58,43 +58,9 @@ class HPreviewTBCell: UITableViewCell {
         let bufTitle: String = _item.type.dispTitle
         //let bufValue: String = _item.value
         let bufNotice: String = _item.notice
-        var bufValue: String {
-            switch _item.type {
-            case .undefine:
-                return "<未定義>"
-            case .fullname:
-                let bufFullname: String = "\(_item.childItems[0].valDisp) \(_item.childItems[1].valDisp)"
-                let bufFullnameKana: String = "\(_item.childItems[2].valDisp) \(_item.childItems[3].valDisp)"
-                return "\(bufFullname)（\(bufFullnameKana)）"
-            case .birthGender:
-                let tmpBirthday: String = _item.childItems[0].curVal
-                let date = DateHelper.convStr2Date(tmpBirthday)
-                let bufBirthday: String = date.dispYmdJP()
-                let bufAge: String = "\(date.age)歳"
-                let tmpGender: String = _item.childItems[1].valDisp
-                print("\t[tmpGender: \(tmpGender)]")
-                let bufGender: String = SelectItemsManager.getCodeDisp(.gender, code: tmpGender)?.disp ?? "--"
-                print("\t[bufGender: \(bufGender)]")
-                return "\(bufBirthday)（\(bufAge)） / \(bufGender)"
-            case .adderss:
-                let tmpZipCode: String = _item.childItems[0].valDisp
-                let bufZipCode: String = "\(String.substr(tmpZipCode, 1, 3))-\(String.substr(tmpZipCode, 4, 4))"
-                let tmpPrefecture: String = _item.childItems[1].valDisp
-                let bufPrefecture: String = SelectItemsManager.getCodeDisp(.place, code: tmpPrefecture)?.disp ?? ""
-                let bufAddress: String = "\(bufPrefecture)\(_item.childItems[2].valDisp)\(_item.childItems[3].valDisp)"
-                return "〒\(bufZipCode)\n\(bufAddress)"
-            case .email:
-                let bufMailAddress: String = _item.childItems[0].valDisp
-                return bufMailAddress
-            case .mobilephone:
-                let bufMobilePhoneNo: String = _item.childItems[0].valDisp
-                return bufMobilePhoneNo
-            default:
-                return ""
-            }
-        }
+        let bufValue: String = dispCellValue(_item)
         
-        //===表示mさせる
+        //===表示させる
         lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
         lblValue.text(text: bufValue, fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         lblNotice.text(text: bufNotice, fontType: .font_SS, textColor: UIColor.init(colorType: .color_parts_gray)!, alignment: .left)
@@ -104,9 +70,75 @@ class HPreviewTBCell: UITableViewCell {
             lblNotice.isHidden = false
         }
     }
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+}
+
+
+extension HPreviewTBCell {
+    func dispCellValue(_ _item: MdlItemH) -> String {
+        switch _item.type {
+        case .undefine:
+            return "<未定義>"
+        case .fullnameH2:
+            let bufFullname: String = "\(_item.childItems[0].valDisp) \(_item.childItems[1].valDisp)"
+            let bufFullnameKana: String = "\(_item.childItems[2].valDisp) \(_item.childItems[3].valDisp)"
+            return "\(bufFullname)（\(bufFullnameKana)）"
+        case .birthGenderH2:
+            let tmpBirthday: String = _item.childItems[0].curVal
+            let date = DateHelper.convStr2Date(tmpBirthday)
+            let bufBirthday: String = date.dispYmdJP()
+            let bufAge: String = "\(date.age)歳"
+            let tmpGender: String = _item.childItems[1].valDisp
+            let bufGender: String = SelectItemsManager.getCodeDisp(.gender, code: tmpGender)?.disp ?? "--"
+            return "\(bufBirthday)（\(bufAge)） / \(bufGender)"
+        case .adderssH2:
+            let tmpZipCode: String = _item.childItems[0].valDisp
+            let bufZipCode: String = "\(String.substr(tmpZipCode, 1, 3))-\(String.substr(tmpZipCode, 4, 4))"
+            let tmpPrefecture: String = _item.childItems[1].valDisp
+            let bufPrefecture: String = SelectItemsManager.getCodeDisp(.place, code: tmpPrefecture)?.disp ?? ""
+            let bufAddress: String = "\(bufPrefecture)\(_item.childItems[2].valDisp)\(_item.childItems[3].valDisp)"
+            return "〒\(bufZipCode)\n\(bufAddress)"
+
+        case .employmentH3:
+            let tmp0: String = _item.childItems[0].curVal
+            let buf0: String = SelectItemsManager.getCodeDisp(.employment, code: tmp0)?.disp ?? ""
+            return "\(buf0)"
+        case .changeCountH3:
+            let tmp0: String = _item.childItems[0].curVal
+            let buf0: String = SelectItemsManager.getCodeDisp(.changeCount, code: tmp0)?.disp ?? ""
+            return "\(buf0)"
+        case .lastJobExperimentH3:
+            let tmp0: String = _item.childItems[0].curVal
+            let buf0: String = SelectItemsManager.getCodeDispSyou(.jobType, code: tmp0)?.disp ?? ""
+            let tmp1: String = _item.childItems[1].curVal
+            let buf1: String = SelectItemsManager.getCodeDisp(.jobExperimentYear, code: tmp1)?.disp ?? ""
+            let bufExperiment = "\(buf0) \(buf1)"
+            return bufExperiment
+        case .jobExperimentsH3:
+            let val: String = "3:2_5:3_55:4_9:5_11:6_13:7_11"
+            var disp: [String] = []
+            for job in val.split(separator: "_") {
+                let buf = String(job).split(separator: ":")
+                guard buf.count == 2 else { continue }
+                let tmp0 = String(buf[0])
+                let tmp1 = String(buf[1])
+                let buf0: String = SelectItemsManager.getCodeDispSyou(.jobType, code: tmp0)?.disp ?? ""
+                let buf1: String = SelectItemsManager.getCodeDisp(.jobExperimentYear, code: tmp1)?.disp ?? ""
+                let bufExperiment: String = "\(buf0) \(buf1)"
+                disp.append(bufExperiment)
+            }
+            return disp.joined(separator: "\n")
+        case .businessTypesH3:
+            let tmp0: String = _item.childItems[0].curVal
+            let buf0: String = SelectItemsManager.getCodeDispSyou(.businessType, code: tmp0)?.disp ?? ""
+            return "\(buf0)"
+
+
+
+        default:
+            return _item.childItems[0].valDisp
+        }
+    }
 }
