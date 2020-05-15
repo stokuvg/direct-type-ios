@@ -62,6 +62,25 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true) //ハイライトの解除
         let item = arrData[indexPath.row]
+
+        //プレビューから直接編集へ行ってよし
+        if let skipEditMemoItem = item.childItems.first {
+            switch skipEditMemoItem.editType {
+            case .inputMemo:
+                //さらに子ナビさせたいので
+                let storyboard = UIStoryboard(name: "Edit", bundle: nil)
+                if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubInputMemoVC") as? SubInputMemoVC{
+                    nvc.initData(editableItem: skipEditMemoItem)
+                    //遷移アニメーション関連
+                    nvc.modalTransitionStyle = .coverVertical
+                    self.present(nvc, animated: true) {}
+                }
+                return
+            default:
+                break
+            }
+        }
+        //通常の複数編集画面
         let storyboard = UIStoryboard(name: "Edit", bundle: nil)
         if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ProfileEditVC") as? ProfileEditVC{
             nvc.initData(item)
@@ -69,10 +88,7 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
             nvc.modalTransitionStyle = .coverVertical
             self.present(nvc, animated: true) {
             }
-//            self.navigationController?.pushViewController(nvc, animated: true)
-
         }
     }
 }
-
 

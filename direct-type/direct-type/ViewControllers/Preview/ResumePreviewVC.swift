@@ -88,7 +88,7 @@ class ResumePreviewVC: PreviewBaseVC {
         arrData.append(MdlItemH(.qualificationsH3, "", childItems: _qualifications))
         //===(3i)自己PR
         arrData.append(MdlItemH(.ownPr, "", childItems: [
-            EditableItemH(type: .inputText, editItem: EditItemMdlResume.ownPr, val: _detail.ownPr),
+            EditableItemH(type: .inputMemo, editItem: EditItemMdlResume.ownPr, val: _detail.ownPr),
         ]))
         
     }

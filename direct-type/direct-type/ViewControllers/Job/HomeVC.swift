@@ -66,7 +66,7 @@ class HomeVC: TmpNaviTopVC {
         //[Dbg]___
         if Constants.DbgAutoPushVC {
             let storyboard = UIStoryboard(name: "Preview", bundle: nil)
-            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ProfilePreviewVC") as? ProfilePreviewVC{
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_CareerPreviewVC") as? CareerPreviewVC{
                 self.navigationController?.pushViewController(nvc, animated: true)
             }
         }

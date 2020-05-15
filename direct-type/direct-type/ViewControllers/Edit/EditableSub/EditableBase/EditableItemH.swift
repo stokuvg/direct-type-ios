@@ -26,6 +26,8 @@ struct EditableItemH {
         //=== そのまま値を表示してよいもの
         case .readonly, .inputText, .inputTextSecret:
             return "\(_val)"
+        case .inputMemo://改行コードの扱いの考慮が必要か？
+            return "\(_val)"
         case .inputZipcode:
             return "\(_val)"
         //=== 選択肢一覧を取得し、指定項目の表示名を求めて表示するもの

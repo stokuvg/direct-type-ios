@@ -126,6 +126,20 @@ extension EditableBasicVC: InputItemHDelegate {
                     self.present(nvc, animated: true) {}
                 }
             })
+        case .inputMemo:
+//            //さらに子ナビさせたいので
+//            DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+//                tf.resignFirstResponder()//自分を解除しておかないと、戻ってきたときにまた遷移してしまうため
+//                let storyboard = UIStoryboard(name: "Edit", bundle: nil)
+//                if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubInputMemoVC") as? SubInputMemoVC{
+//                    nvc.initData(editableItem: item)
+//                    //遷移アニメーション関連
+//                    nvc.modalTransitionStyle = .crossDissolve
+//                    self.present(nvc, animated: true) {}
+//                }
+//            })
+            break
+
         case .readonly:
             break
         case .inputText:
@@ -140,6 +154,8 @@ extension EditableBasicVC: InputItemHDelegate {
         dissmissTargetTfArea() //元のTextFieldに被せるもの（なくて良い）
         //=== タイプによって割り込み処理
         switch item.editType {
+        case .inputMemo:
+            print("テキストビューでの大量文字入力時")
         case .selectDrum:
             print("Picker閉じる時の処理 [\(item.editableItemKey): \(item.dispName)] [\(tf.description)]")
             hidePicker(tf)

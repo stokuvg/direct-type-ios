@@ -20,7 +20,8 @@ protocol EditItemProtocol {
 
 enum EditType {
     case readonly           //String
-    case inputText          //String
+    case inputText          //String(TextField)
+    case inputMemo          //String(TextView)
     case inputZipcode       //String - String
     case inputTextSecret    //String
     case selectDrumYMD      //一覧からの選択（Drumで表示）
