@@ -16,15 +16,15 @@ class MdlCareerCard: Codable {
     /** 企業名 */
     var companyName: String
     /** 雇用形態 */
-    var employmentType: Int
+    var employmentType: Code
     /** 従業員数（数値）*これもマスタじゃないのか？ */
-    var employeesCount: Int
+    var employeesCount: Code
     /** 年収 */
     var salary: Code
     /** 職務内容本文 */
     var contents: String
 
-    init(workPeriod: MdlCareerCardWorkPeriod, companyName: String, employmentType: Int, employeesCount: Int, salary: Code, contents: String) {
+    init(workPeriod: MdlCareerCardWorkPeriod, companyName: String, employmentType: Code, employeesCount: Code, salary: Code, contents: String) {
         self.workPeriod = workPeriod
         self.companyName = companyName
         self.employmentType = employmentType
@@ -35,8 +35,10 @@ class MdlCareerCard: Codable {
     //ApiモデルをAppモデルに変換して保持させる
     convenience init(dto: CareerCard) {
         let _workPeriod: MdlCareerCardWorkPeriod = MdlCareerCardWorkPeriod.init(dto: dto.workPeriod)
+        let _employmentType = "\(dto.employmentType)"
+        let _employeesCount = "\(dto.employeesCount)"
         let _salary = "\(dto.salary)"
-        self.init(workPeriod: _workPeriod, companyName: dto.companyName, employmentType: dto.employmentType, employeesCount: dto.employeesCount, salary: _salary, contents: dto.contents)
+        self.init(workPeriod: _workPeriod, companyName: dto.companyName, employmentType: _employmentType, employeesCount: _employeesCount, salary: _salary, contents: dto.contents)
     }
     var debugDisp: String {
         return "[workPeriod: \(workPeriod.debugDisp)] [companyName: \(companyName)] [employmentType: \(employmentType)] [employeesCount: \(employeesCount)] [salary: \(salary)] [contents: \(contents)]"
