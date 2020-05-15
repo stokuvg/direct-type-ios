@@ -18,9 +18,9 @@ class CareerPreviewVC: PreviewBaseVC {
         let careerCard: CareerCard =
             CareerCard(workPeriod: CareerCardWorkPeriod(startYear: "2016", startMonth: "04", endYear: "2020", endMonth: "03"),
                        companyName: "ほにゃらら産業合資会社",
-                       employmentType: 1,
-                       employeesCount: 1,
-                       salary: 1,
+                       employmentType: 2,
+                       employeesCount: 2,
+                       salary: 8,
                        contents: String(repeating: "職業経歴本文が入ります。",  count: 13) )
         detail = MdlCareerCard(dto: careerCard)
         //========
@@ -34,28 +34,28 @@ class CareerPreviewVC: PreviewBaseVC {
 
         //[C-15]職務経歴書編集
         //case .workPeriod:       return "雇用期間"
-        arrData.append(MdlItemH(.workPeriod, "", childItems: [
+        arrData.append(MdlItemH(.workPeriodC15, "", childItems: [
             EditableItemH(type: .selectDrumYMD, editItem: EditItemCareerCardWorkPeriod.startDate, val: _detail.workPeriod.startDate.dispYmd()),
             EditableItemH(type: .selectDrumYMD, editItem: EditItemCareerCardWorkPeriod.endDate, val: _detail.workPeriod.endDate.dispYmd()),
         ]))
         //case .companyName:      return "企業名"
-        arrData.append(MdlItemH(.companyName, "", childItems: [
+        arrData.append(MdlItemH(.companyNameC15, "", childItems: [
             EditableItemH(type: .inputText, editItem: EditItemCareerCard.companyName, val: _detail.companyName),
         ]))
         //case .employmentType:   return "雇用形態"
-        arrData.append(MdlItemH(.employmentType, "", childItems: [
+        arrData.append(MdlItemH(.employmentTypeC15, "", childItems: [
             EditableItemH(type: .selectDrum, editItem: EditItemCareerCard.employmentType, val: _detail.employmentType),
         ]))
         //case .employeesCount:   return "従業員数"
-        arrData.append(MdlItemH(.employeesCount, "", childItems: [
-            EditableItemH(type: .selectDrum, editItem: EditItemCareerCard.employeesCount, val: _detail.employeesCount),
+        arrData.append(MdlItemH(.employeesCountC15, "", childItems: [
+            EditableItemH(type: .inputText, editItem: EditItemCareerCard.employeesCount, val: _detail.employeesCount),
         ]))
         //case .salary:           return "年収"
-        arrData.append(MdlItemH(.salary, "", childItems: [
+        arrData.append(MdlItemH(.salaryC15, "", childItems: [
             EditableItemH(type: .selectDrum, editItem: EditItemCareerCard.salary, val: _detail.salary),
         ]))
         //case .contents:         return "職務内容本文"
-        arrData.append(MdlItemH(.contents, "", childItems: [
+        arrData.append(MdlItemH(.contentsC15, "", childItems: [
             EditableItemH(type: .inputText, editItem: EditItemCareerCard.contents, val: _detail.contents),
         ]))
     }

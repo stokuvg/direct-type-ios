@@ -55,12 +55,12 @@ enum HPreviewItemType {
     case qualificationsH3       //===(3h)資格
     case ownPr                  //===(3i)自己PR
     //[C-15]職務経歴書編集
-    case workPeriod     //===雇用期間
-    case companyName    //===企業名
-    case employmentType //===雇用形態
-    case employeesCount //===従業員数（数値）*これもマスタじゃないのか？ */
-    case salary         //===年収
-    case contents       //===職務内容本文
+    case workPeriodC15      //===雇用期間
+    case companyNameC15     //===企業名
+    case employmentTypeC15  //===雇用形態
+    case employeesCountC15  //===従業員数（数値）*これもマスタじゃないのか？ */
+    case salaryC15          //===年収
+    case contentsC15        //===職務内容本文
     
     var dispTitle: String {
         switch self {
@@ -82,12 +82,12 @@ enum HPreviewItemType {
         case .qualificationsH3:     return "資格"
         case .ownPr:                return "自己PR"
         //[C-15]職務経歴書編集
-        case .workPeriod:       return "雇用期間"
-        case .companyName:      return "企業名"
-        case .employmentType:   return "雇用形態"
-        case .employeesCount:   return "従業員数"
-        case .salary:           return "年収"
-        case .contents:         return "職務内容本文"
+        case .workPeriodC15:        return "雇用期間"
+        case .companyNameC15:       return "企業名"
+        case .employmentTypeC15:    return "雇用形態"
+        case .employeesCountC15:    return "従業員数"
+        case .salaryC15:            return "年収"
+        case .contentsC15:          return "職務内容本文"
         }
     }
 }

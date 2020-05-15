@@ -170,6 +170,25 @@ extension HPreviewTBCell {
             }
             return disp.joined(separator: "\n")
 
+        //[C-15]職務経歴書編集
+        case .workPeriodC15: //雇用期間
+            let tmp0: String = _item.childItems[0].curVal
+            let date0 = DateHelper.convStr2Date(tmp0)
+            let buf0: String = date0.dispYmdJP()
+            let tmp1: String = _item.childItems[1].curVal
+            let date1 = DateHelper.convStr2Date(tmp1)
+            let buf1: String = date1.dispYmdJP()
+            return "\(buf0)〜\(buf1)" //「現在就業中」をどう表す？「直近」の場合で、「開始」はあるが「終了」が未設定の場合か？
+        case .employmentTypeC15: //雇用形態
+            let tmp0: String = _item.childItems[0].curVal
+            let buf0: String = SelectItemsManager.getCodeDisp(.employmentType, code: tmp0)?.disp ?? ""
+            return "\(buf0)"
+        case .salaryC15: //年収
+            let tmp0: String = _item.childItems[0].curVal
+            let buf0: String = SelectItemsManager.getCodeDisp(.salary, code: tmp0)?.disp ?? ""
+            return "\(buf0)"
+
+            
         default:
             return _item.childItems[0].curVal
         }
