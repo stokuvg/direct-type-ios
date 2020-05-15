@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FoldingHeaderViewDelegate {
-    func foldOpenCloseAction()
+    func foldOpenCloseAction(tag:Int)
 }
 
 class BaseFoldingHeaderView: UIView {
@@ -18,7 +18,7 @@ class BaseFoldingHeaderView: UIView {
     @IBOutlet weak var foldingMarkLabel:UILabel!
     @IBOutlet weak var headerFoldBtn:UIButton!
     @IBAction func headerOpenCloseAction() {
-        self.delegate.foldOpenCloseAction()
+        self.delegate.foldOpenCloseAction(tag: self.tag)
     }
     
     var delegate:FoldingHeaderViewDelegate!

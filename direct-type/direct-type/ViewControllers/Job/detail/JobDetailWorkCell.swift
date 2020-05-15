@@ -24,7 +24,7 @@ class JobDetailWorkCell: BaseJobDetailCell {
     func setup(data:[String:Any]) {
         Log.selectLog(logLevel: .debug, "JobDetailWorkCell setup start")
         
-        Log.selectLog(logLevel: .debug, "data:\(data)")
+//        Log.selectLog(logLevel: .debug, "data:\(data)")
         let title = data["title"] as! String
         titleLabel.text(text: title, fontType: .font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         

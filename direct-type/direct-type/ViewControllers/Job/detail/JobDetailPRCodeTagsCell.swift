@@ -30,7 +30,7 @@ class JobDetailPRCodeTagsCell: BaseTableViewCell {
     }
         
     private func subViewsRemove() {
-        Log.selectLog(logLevel: .debug, "JobDetailPRCodeTagsCell subViewsRemove start")
+//        Log.selectLog(logLevel: .debug, "JobDetailPRCodeTagsCell subViewsRemove start")
         if (tagsView != nil) {
             for _sub in tagsView.subviews {
 //                Log.selectLog(logLevel: .debug, "_sub:\(_sub)")
@@ -40,7 +40,7 @@ class JobDetailPRCodeTagsCell: BaseTableViewCell {
                 }
             }
         } else {
-            Log.selectLog(logLevel: .debug, "tagViewがセットされていない")
+//            Log.selectLog(logLevel: .debug, "tagViewがセットされていない")
         }
     }
     

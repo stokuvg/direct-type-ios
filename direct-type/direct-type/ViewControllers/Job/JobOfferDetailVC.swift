@@ -103,9 +103,19 @@ class JobOfferDetailVC: TmpBasicVC {
             "attention":[],
             ],
         ],
+        "folding":[
+            ["title":"取材メモ"],
+            ["title":"選考プロセス"],
+            ["title":"連絡先"],
+            ["title":"会社概要"],
+        ],
     ]
     
     var articleOpenFlag:Bool = false
+    var coverageMemoOpenFlag:Bool = false
+    var selectionProcessOpenFlag:Bool = false
+    var phoneNumberOpenFlag:Bool = false
+    var companyOutlineOpenFlag:Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -202,13 +212,13 @@ extension JobOfferDetailVC: UITableViewDelegate {
             case (1,0):
                 return articleOpenFlag ? UITableView.automaticDimension : 0
             case (4,0):
-                return 0
+                return coverageMemoOpenFlag ? UITableView.automaticDimension : 0
             case (5,0):
-                return 0
+                return selectionProcessOpenFlag ? UITableView.automaticDimension : 0
             case (6,0):
-                return 0
+                return phoneNumberOpenFlag ? UITableView.automaticDimension : 0
             case (7,0):
-                return 0
+                return companyOutlineOpenFlag ? UITableView.automaticDimension : 0
             default:
                 return UITableView.automaticDimension
         }
@@ -255,8 +265,27 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 let view = UINib(nibName: "JobDetailFoldingHeaderView", bundle: nil)
                     .instantiate(withOwner: self, options: nil)
                     .first as! JobDetailFoldingHeaderView
-                view.tag = section
                 view.delegate = self
+                let foldingDatas = dummyData["folding"] as! [[String: Any]]
+                view.tag = (section - foldingDatas.count)
+                let foldingData = foldingDatas[(section - (foldingDatas.count))]
+                
+                var openFlag:Bool = false
+                switch section {
+                    case 4:
+                        openFlag = coverageMemoOpenFlag
+                    case 5:
+                        openFlag = selectionProcessOpenFlag
+                    case 6:
+                        openFlag = phoneNumberOpenFlag
+                    case 7:
+                        openFlag = companyOutlineOpenFlag
+                    default:
+                        openFlag = false
+                }
+                
+                let title = foldingData["title"] as! String
+                view.setup(title: title,openFlag: openFlag)
                 
                 return view
             default:
@@ -415,7 +444,24 @@ extension JobOfferDetailVC: JobDetailArticleCellDelegate {
 
 // 折りたたみヘッダー
 extension JobOfferDetailVC: FoldingHeaderViewDelegate {
-    func foldOpenCloseAction() {
+    func foldOpenCloseAction(tag: Int) {
         
+        let foldingDatas = dummyData["folding"] as! [[String: Any]]
+        
+        let section = foldingDatas.count + tag
+        let index = IndexSet(arrayLiteral: section)
+        switch tag {
+        case 0:
+            coverageMemoOpenFlag = !companyOutlineOpenFlag
+        case 1:
+            selectionProcessOpenFlag = !selectionProcessOpenFlag
+        case 2:
+            phoneNumberOpenFlag = !phoneNumberOpenFlag
+        case 3:
+            companyOutlineOpenFlag = !companyOutlineOpenFlag
+        default:
+            break
+        }
+        self.detailTableView.reloadSections(index, with: .automatic)
     }
 }
