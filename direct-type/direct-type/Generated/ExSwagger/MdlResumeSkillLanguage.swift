@@ -26,13 +26,6 @@ class MdlResumeSkillLanguage: Codable {
         self.languageEnglish = languageEnglish
         self.languageStudySkill = languageStudySkill
     }
-    enum CodingKeys: String, CodingKey {
-        case languageToeicScore = "language_toeic_score"
-        case languageToeflScore = "language_toefl_score"
-        case languageEnglish = "language_english"
-        case languageStudySkill = "language_study_skill"
-    }
-
     //ApiモデルをAppモデルに変換して保持させる
     convenience init(dto: ResumeSkillLanguage) {
         let bufLanguageToeicScore: String = dto.languageToeicScore ?? ""
@@ -64,7 +57,5 @@ enum EditItemMdlResumeSkillLanguage: String, EditItemProtocol {
     var placeholder: String {
         return "[\(self.itemKey) PlaceHolder]"
     }
-    var itemKey: String {
-        return "MdlResumeSkillLanguage_\(self.rawValue)" //ここでUniqになるようにしておく
-    }
+    var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" } //画面内でUniqになるようなキーを定義（配列利用時は除く）
 }

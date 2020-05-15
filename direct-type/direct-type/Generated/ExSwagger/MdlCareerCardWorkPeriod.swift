@@ -15,15 +15,10 @@ class MdlCareerCardWorkPeriod: Codable {
     /** 勤務終了年月 */
     var endDate: Date = Date(timeIntervalSince1970: 0)
 
-     init(startDate: Date, endDate: Date) {
+    init(startDate: Date, endDate: Date) {
         self.startDate = startDate
         self.endDate = endDate
     }
-     enum CodingKeys: String, CodingKey {
-        case startDate = "start_date"
-        case endDate = "end_date"
-    }
-
     //ApiモデルをAppモデルに変換して保持させる
     convenience init(dto: CareerCardWorkPeriod) {
         let bufStart: String = "\(dto.startYear.zeroUme(4))-\(dto.endMonth.zeroUme(2))-01"
@@ -44,15 +39,13 @@ enum EditItemCareerCardWorkPeriod: String, EditItemProtocol {
     //表示名
     var dispName: String {
         switch self {
-        case .startDate:       return "氏"
-        case .endDate:        return "名"
+        case .startDate:    return "勤務開始年月"
+        case .endDate:      return "勤務終了年月"
         }
     }
     //Placeholder Text
     var placeholder: String {
         return "[\(self.itemKey) PlaceHolder]"
     }
-    var itemKey: String {
-        return "CareerCardWorkPeriod_\(self.rawValue)" //ここでUniqになるようにしておく
-    }
+    var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" } //画面内でUniqになるようなキーを定義（配列利用時は除く）
 }

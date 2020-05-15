@@ -32,15 +32,6 @@ class MdlCareerCard: Codable {
         self.salary = salary
         self.contents = contents
     }
-    enum CodingKeys: String, CodingKey {
-        case workPeriod = "work_period"
-        case companyName = "company_name"
-        case employmentType = "employment_type"
-        case employeesCount = "employees_count"
-        case salary
-        case contents
-    }
-
     //ApiモデルをAppモデルに変換して保持させる
     convenience init(dto: CareerCard) {
         let _workPeriod: MdlCareerCardWorkPeriod = MdlCareerCardWorkPeriod.init(dto: dto.workPeriod)
@@ -75,7 +66,5 @@ enum EditItemCareerCard: String, EditItemProtocol {
     var placeholder: String {
         return "[\(self.itemKey) PlaceHolder]"
     }
-    var itemKey: String {
-        return "CareerCard_\(self.rawValue)" //ここでUniqになるようにしておく
-    }
+    var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" } //画面内でUniqになるようなキーを定義（配列利用時は除く）
 }

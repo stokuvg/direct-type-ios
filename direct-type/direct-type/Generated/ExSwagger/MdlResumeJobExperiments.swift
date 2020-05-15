@@ -19,11 +19,6 @@ class MdlResumeJobExperiments: Codable {
         self.jobType = jobType
         self.jobExperimentYear = jobExperimentYear
     }
-    public enum CodingKeys: String, CodingKey {
-        case jobType = "job_type"
-        case jobExperimentYear = "job_experiment_year"
-    }
-
     //ApiモデルをAppモデルに変換して保持させる
     convenience init(dto: ResumeJobExperiments) {
         let _jobType = "\(dto.jobType ?? 0)"
@@ -42,7 +37,7 @@ enum EditItemMdlResumeJobExperiments: String, EditItemProtocol {
     //表示名
     var dispName: String {
         switch self {
-        case .jobType:              return "経験職種：小分類"
+        case .jobType:              return "経験職種"
         case .jobExperimentYear:    return "経験年数"
         }
     }
@@ -50,7 +45,5 @@ enum EditItemMdlResumeJobExperiments: String, EditItemProtocol {
     var placeholder: String {
         return "[\(self.itemKey) PlaceHolder]"
     }
-    var itemKey: String {
-        return "MdlResumeJobExperiments_\(self.rawValue)" //ここでUniqになるようにしておく
-    }
+    var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" } //画面内でUniqになるようなキーを定義（配列利用時は除く）
 }

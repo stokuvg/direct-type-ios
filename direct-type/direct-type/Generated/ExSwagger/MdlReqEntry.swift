@@ -78,9 +78,9 @@ enum EditItemReqEntry: String, EditItemProtocol {
     //表示名
     var dispName: String {
         switch self {
-        case .profileModel:     return ""
-        case .resumeModel:      return ""
-        case .careerModel:      return ""
+        case .profileModel:     return "プロフィール"
+        case .resumeModel:      return "履歴書"
+        case .careerModel:      return "職務経歴書・スキルシート"
         case .selfPr:           return "自己PR"
         case .hopeWorkPlace:    return "希望勤務地"
         case .hopeSalary:       return "希望年収"
@@ -93,8 +93,6 @@ enum EditItemReqEntry: String, EditItemProtocol {
     var placeholder: String {
         return "[\(self.itemKey) PlaceHolder]"
     }
-    var itemKey: String {
-        return "ReqEntry_\(self.rawValue)" //ここでUniqになるようにしておく
-    }
+    var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" } //画面内でUniqになるようなキーを定義（配列利用時は除く）
 }
 
