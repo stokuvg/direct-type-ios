@@ -14,8 +14,15 @@ class JobDetailFoldingHeaderView: BaseFoldingHeaderView {
         super.awakeFromNib()
     }
     
-    func setup(data:[String: Any]) {
+    func setup(title: String, openFlag:Bool) {
+        Log.selectLog(logLevel: .debug, "JobDetailFoldingHeaderView setup start")
         
+//        Log.selectLog(logLevel: .debug, "openFlag:\(openFlag)")
+        
+        self.titleLabel.text(text: title, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        
+        let flagText:String = openFlag ? "-" : "+"
+        self.foldingMarkLabel.text(text: flagText, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
     }
 
 }

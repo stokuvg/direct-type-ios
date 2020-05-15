@@ -103,9 +103,48 @@ class JobOfferDetailVC: TmpBasicVC {
             "attention":[],
             ],
         ],
+        "folding":[
+            [
+                "title":"取材メモ",
+                "text":"ここにテキストを入れる",
+                "step":[
+                    ["title":"step1","text":"step1のテキストを入れる"],
+                    ["title":"step2","text":"step2のテキストを入れる"],
+                    ["title":"step3","text":"step3のテキストを入れる"],
+                    ["title":"step4","text":"step4のテキストを入れる"],
+                ],
+                "headline":[
+                    ["head1":"見出し1","text":"ここにテキスト"],
+                    ["head2":"見出し2","text":"ここにテキスト"],
+                    ["head3":"見出し3","text":"ここにテキスト"],
+                ]
+            ],
+            [
+                "title":"選考プロセス",
+                "text":"",
+                "step":[],
+                "headline":[],
+            ],
+            [
+                "title":"連絡先",
+                 "text":"〒 100-0004\n東京都千代田区大手町二丁目６番１号 朝日生命大手町ビル２階\n採用担当\nTEL / 03-6261-4536\nE-mail / saiyo@systemsoft.co.jp\nhttp://www.systemsoft.co.jp/",
+                 "step":[],
+                 "headline":[],
+            ],
+            [
+                "title":"会社概要",
+                 "text":"",
+                 "step":[],
+                 "headline":[],
+            ],
+        ],
     ]
     
     var articleOpenFlag:Bool = false
+    var coverageMemoOpenFlag:Bool = false
+    var selectionProcessOpenFlag:Bool = false
+    var phoneNumberOpenFlag:Bool = false
+    var companyOutlineOpenFlag:Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,7 +173,6 @@ class JobOfferDetailVC: TmpBasicVC {
         self.detailTableView.registerNib(nibName: "JobDetailSalaryExampleCell", idName: "JobDetailSalaryExampleCell")
         /// section 3
         // 募集要項
-        self.detailTableView.registerNib(nibName: "JobDetailWorkCell", idName: "JobDetailWorkCell")
         self.detailTableView.registerNib(nibName: "JobDetailItemCell", idName: "JobDetailItemCell")
         // 1.募集背景:              必須
         // 2.仕事内容:              必須
@@ -156,17 +194,21 @@ class JobOfferDetailVC: TmpBasicVC {
         // 8.休日休暇:            必須
         // 9.待遇・福利厚生:       必須
         // 　・産休・育休取得:      任意
+        self.detailTableView.registerNib(nibName: "JobDetailFoldingItemCell", idName: "JobDetailFoldingItemCell")
         /// section 4
         // 取材メモ
+        self.detailTableView.registerNib(nibName: "JobDetailFoldingMemoCell", idName: "JobDetailFoldingMemoCell")
         /// section 5
         // 選考プロセス
+        self.detailTableView.registerNib(nibName: "JobDetailFoldingProcessCell", idName: "JobDetailFoldingProcessCell")
         /// section 6
         // 連絡先
+        self.detailTableView.registerNib(nibName: "JobDetailFoldingPhoneNumberCell", idName: "JobDetailFoldingPhoneNumberCell")
         /// section 7
         // 会社概要
+        self.detailTableView.registerNib(nibName: "JobDetailFoldingOutlineCell", idName: "JobDetailFoldingOutlineCell")
         /// section 8
         // 応募ボタン/キープのボタン
-        /// section 9
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -202,13 +244,13 @@ extension JobOfferDetailVC: UITableViewDelegate {
             case (1,0):
                 return articleOpenFlag ? UITableView.automaticDimension : 0
             case (4,0):
-                return 0
+                return coverageMemoOpenFlag ? UITableView.automaticDimension : 0
             case (5,0):
-                return 0
+                return selectionProcessOpenFlag ? UITableView.automaticDimension : 0
             case (6,0):
-                return 0
+                return phoneNumberOpenFlag ? UITableView.automaticDimension : 0
             case (7,0):
-                return 0
+                return companyOutlineOpenFlag ? UITableView.automaticDimension : 0
             default:
                 return UITableView.automaticDimension
         }
@@ -255,8 +297,27 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 let view = UINib(nibName: "JobDetailFoldingHeaderView", bundle: nil)
                     .instantiate(withOwner: self, options: nil)
                     .first as! JobDetailFoldingHeaderView
-                view.tag = section
                 view.delegate = self
+                let foldingDatas = dummyData["folding"] as! [[String: Any]]
+                view.tag = (section - foldingDatas.count)
+                let foldingData = foldingDatas[(section - (foldingDatas.count))]
+                
+                var openFlag:Bool = false
+                switch section {
+                    case 4:
+                        openFlag = coverageMemoOpenFlag
+                    case 5:
+                        openFlag = selectionProcessOpenFlag
+                    case 6:
+                        openFlag = phoneNumberOpenFlag
+                    case 7:
+                        openFlag = companyOutlineOpenFlag
+                    default:
+                        openFlag = false
+                }
+                
+                let title = foldingData["title"] as! String
+                view.setup(title: title,openFlag: openFlag)
                 
                 return view
             default:
@@ -316,6 +377,39 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 let cell = tableView.loadCell(cellName: "JobDetailItemCell", indexPath: indexPath) as! JobDetailItemCell
                 cell.setup(data: itemData)
                 return cell
+            case (4,_),(5,_),(7,_):
+                let cell = tableView.loadCell(cellName: "JobDetailFoldingItemCell", indexPath: indexPath) as! JobDetailFoldingItemCell
+                var textType:TextType!
+                var openFlag:Bool = false
+                if section == 4 {
+                    textType = .text
+                    openFlag = coverageMemoOpenFlag
+                } else if section == 5 {
+                    textType = .step
+                    openFlag = selectionProcessOpenFlag
+                } else if section == 6 {
+                    textType = .textLink
+                    openFlag = phoneNumberOpenFlag
+                } else {
+                    textType = .headline
+                    openFlag = companyOutlineOpenFlag
+                }
+                
+                let foldingDatas = dummyData["folding"] as! [[String: Any]]
+                let cnt = section - foldingDatas.count
+                let foldingData = foldingDatas[cnt]
+                
+                cell.setup(data: foldingData, textType: textType,flag: openFlag)
+                
+                return cell
+            case (6, _):
+                let cell = tableView.loadCell(cellName: "JobDetailFoldingPhoneNumberCell", indexPath: indexPath) as! JobDetailFoldingPhoneNumberCell
+                let foldingDatas = dummyData["folding"] as! [[String: Any]]
+                let cnt = section - foldingDatas.count
+                let foldingData = foldingDatas[cnt]
+                
+                cell.setup(data: foldingData)
+                return cell
             default:
                 let cell = UITableViewCell()
                 cell.backgroundColor = UIColor.init(colorType: .color_base)
@@ -368,9 +462,14 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
     func informationAction() {
         buttonsView.colorChange(no:3)
         
-        let section = 3
-        let titleName = "企業情報"
-        self.guidebookScrollAnimation(section: section,titleName: titleName)
+//        let section = 3
+//        let titleName = "企業情報"
+//        self.guidebookScrollAnimation(section: section,titleName: titleName)
+        
+        companyOutlineOpenFlag = true
+        let indexPath = IndexPath.init(row: 0, section: 7)
+        self.detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
+//        self.detailTableView.reloadSections(index, with: .top)
     }
     
     func guidebookScrollAnimation(section:Int, titleName:String) {
@@ -415,7 +514,24 @@ extension JobOfferDetailVC: JobDetailArticleCellDelegate {
 
 // 折りたたみヘッダー
 extension JobOfferDetailVC: FoldingHeaderViewDelegate {
-    func foldOpenCloseAction() {
+    func foldOpenCloseAction(tag: Int) {
         
+        let foldingDatas = dummyData["folding"] as! [[String: Any]]
+        
+        let section = foldingDatas.count + tag
+        let index = IndexSet(arrayLiteral: section)
+        switch tag {
+        case 0:
+            coverageMemoOpenFlag = !companyOutlineOpenFlag
+        case 1:
+            selectionProcessOpenFlag = !selectionProcessOpenFlag
+        case 2:
+            phoneNumberOpenFlag = !phoneNumberOpenFlag
+        case 3:
+            companyOutlineOpenFlag = !companyOutlineOpenFlag
+        default:
+            break
+        }
+        self.detailTableView.reloadSections(index, with: .automatic)
     }
 }
