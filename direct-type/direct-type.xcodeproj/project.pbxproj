@@ -121,6 +121,7 @@
 		26133A56246B9D48001802BB /* EditableBasicVC+Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26133A55246B9D48001802BB /* EditableBasicVC+Picker.swift */; };
 		26133A58246B9DC2001802BB /* EditableBasicVC+PickerYMD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26133A57246B9DC2001802BB /* EditableBasicVC+PickerYMD.swift */; };
 		26800520246A2B440053A7F4 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2680051F246A2B440053A7F4 /* Date+Extensions.swift */; };
+		268BFF56246E8292004B2640 /* SubInputMemoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BFF55246E8292004B2640 /* SubInputMemoVC.swift */; };
 		26989F7F246A5E520050AC40 /* HEditDrumTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26989F7D246A5E520050AC40 /* HEditDrumTBCell.xib */; };
 		26989F80246A5E520050AC40 /* HEditDrumTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26989F7E246A5E520050AC40 /* HEditDrumTBCell.swift */; };
 		26989F82246A66640050AC40 /* EditableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26989F81246A66630050AC40 /* EditableModel.swift */; };
@@ -294,6 +295,7 @@
 		26133A55246B9D48001802BB /* EditableBasicVC+Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditableBasicVC+Picker.swift"; sourceTree = "<group>"; };
 		26133A57246B9DC2001802BB /* EditableBasicVC+PickerYMD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditableBasicVC+PickerYMD.swift"; sourceTree = "<group>"; };
 		2680051F246A2B440053A7F4 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		268BFF55246E8292004B2640 /* SubInputMemoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubInputMemoVC.swift; sourceTree = "<group>"; };
 		26989F7D246A5E520050AC40 /* HEditDrumTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HEditDrumTBCell.xib; sourceTree = "<group>"; };
 		26989F7E246A5E520050AC40 /* HEditDrumTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HEditDrumTBCell.swift; sourceTree = "<group>"; };
 		26989F81246A66630050AC40 /* EditableModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableModel.swift; sourceTree = "<group>"; };
@@ -661,7 +663,7 @@
 				2680051E246A29D50053A7F4 /* EditableSub */,
 				06E519B6245814D4004E4B7A /* ProfileEditVC.swift */,
 				06E519D224581684004E4B7A /* ContentsEditVC.swift */,
-				26CFC4612469496D00E458E2 /* Edit.storyboard */,
+				268BFF55246E8292004B2640 /* SubInputMemoVC.swift */,
 				06E519B8245814DF004E4B7A /* ResumeEditVC.swift */,
 				06E519BA245814EB004E4B7A /* CareerEditVC.swift */,
 			);
@@ -728,6 +730,7 @@
 			children = (
 				269AFFBD246A929200DB364B /* EditablePopup.storyboard */,
 				269AFFBB246A929200DB364B /* SubSelectSingleVC.swift */,
+				26CFC4612469496D00E458E2 /* Edit.storyboard */,
 				269AFFBE246A929200DB364B /* SubSelectMultiVC.swift */,
 				269AFFC1246A929200DB364B /* SubSelectSpecialVC.swift */,
 				269AFFB8246A929200DB364B /* SubSelectDaiTBCell.swift */,
@@ -1052,6 +1055,7 @@
 				06E519932457D750004E4B7A /* OwnPRVC.swift in Sources */,
 				26989F80246A5E520050AC40 /* HEditDrumTBCell.swift in Sources */,
 				067F28DF2456D013000AAD69 /* TmpNaviTopVC.swift in Sources */,
+				268BFF56246E8292004B2640 /* SubInputMemoVC.swift in Sources */,
 				06B94F64246BE38E002FEDDC /* JobDetailItemCell.swift in Sources */,
 				06E519D02458164B004E4B7A /* ScoutPreview.swift in Sources */,
 				06E519C024581561004E4B7A /* ScountDetailVC.swift in Sources */,

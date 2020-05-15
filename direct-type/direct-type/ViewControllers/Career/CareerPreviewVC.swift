@@ -56,7 +56,7 @@ class CareerPreviewVC: PreviewBaseVC {
         ]))
         //case .contents:         return "職務内容本文"
         arrData.append(MdlItemH(.contentsC15, "", childItems: [
-            EditableItemH(type: .inputText, editItem: EditItemCareerCard.contents, val: _detail.contents),
+            EditableItemH(type: .inputMemo, editItem: EditItemCareerCard.contents, val: _detail.contents),
         ]))
     }
     override func dispData() {

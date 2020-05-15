@@ -79,6 +79,8 @@ class EditableModel {
                     isSelectable = false
                 case .inputText, .inputTextSecret:
                     isSelectable = true
+                case .inputMemo:
+                    isSelectable = true
                 case .selectDrum:
                     isSelectable = true //これ、どうしようか？（選択適用した後にnextCell処理を入れるなら含めてもOK）
                 case .selectSingle, .selectMulti, .selectSpecisl:
