@@ -12,15 +12,15 @@ import SwaggerClient
 class MdlResumeSkillLanguage: Codable {
 
     /** TOEIC（未記入：\&quot;\&quot;） */
-    var languageToeicScore: String?
+    var languageToeicScore: String
     /** TOEFL（未記入：\&quot;\&quot;） */
-    var languageToeflScore: String?
+    var languageToeflScore: String
     /** 英語スキル（未記入：\&quot;\&quot;） */
     var languageEnglish: String
     /** 英語以外語学スキル（未記入：\&quot;\&quot;） */
     var languageStudySkill: String
 
-    init(languageToeicScore: String?, languageToeflScore: String?, languageEnglish: String, languageStudySkill: String) {
+    init(languageToeicScore: String, languageToeflScore: String, languageEnglish: String, languageStudySkill: String) {
         self.languageToeicScore = languageToeicScore
         self.languageToeflScore = languageToeflScore
         self.languageEnglish = languageEnglish
@@ -35,7 +35,9 @@ class MdlResumeSkillLanguage: Codable {
 
     //ApiモデルをAppモデルに変換して保持させる
     convenience init(dto: ResumeSkillLanguage) {
-        self.init(languageToeicScore: dto.languageToeicScore, languageToeflScore: dto.languageToeflScore, languageEnglish: dto.languageEnglish, languageStudySkill: dto.languageStudySkill)
+        let bufLanguageToeicScore: String = dto.languageToeicScore ?? ""
+        let bufLanguageToeflScore: String = dto.languageToeflScore ?? ""
+        self.init(languageToeicScore: bufLanguageToeicScore, languageToeflScore: bufLanguageToeflScore, languageEnglish: dto.languageEnglish, languageStudySkill: dto.languageStudySkill)
     }
     var debugDisp: String {
         return "[toeic: \(languageToeicScore)] [toefl: \(languageToeflScore)] [english: \(languageEnglish)] [study: \(languageStudySkill)]"

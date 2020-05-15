@@ -67,7 +67,7 @@ class ProfilePreviewVC: PreviewBaseVC {
         let bufAddress: String = "\(bufPrefecture)\(_detail.address1)\(_detail.address2)"
         arrData.append(MdlItemH(.adderssH2, "〒\(bufZipCode)\n\(bufAddress)", childItems: [
             EditableItemH(type: .inputZipcode, editItem: EditItemMdlProfile.zipCode, val: _detail.zipCode),
-            EditableItemH(type: .selectSingle, editItem: EditItemMdlProfile.prefecture, val: bufPrefecture),
+            EditableItemH(type: .selectSingle, editItem: EditItemMdlProfile.prefecture, val: _detail.prefecture),
             EditableItemH(type: .inputText, editItem: EditItemMdlProfile.address1, val: _detail.address1),
             EditableItemH(type: .inputText, editItem: EditItemMdlProfile.address2, val: _detail.address2),
         ]))
