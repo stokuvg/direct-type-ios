@@ -2021,6 +2021,7 @@ struct _R: Rswift.Validatable {
       let sbid_CareerPreviewVC = StoryboardViewControllerResource<CareerPreviewVC>(identifier: "Sbid_CareerPreviewVC")
       let sbid_ProfilePreviewVC = StoryboardViewControllerResource<ProfilePreviewVC>(identifier: "Sbid_ProfilePreviewVC")
       let sbid_ResumePreviewVC = StoryboardViewControllerResource<ResumePreviewVC>(identifier: "Sbid_ResumePreviewVC")
+      let sbid_SnoothCareerPreviewVC = StoryboardViewControllerResource<SnoothCareerPreviewVC>(identifier: "Sbid_SnoothCareerPreviewVC")
 
       func sbid_CareerPreviewVC(_: Void = ()) -> CareerPreviewVC? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_CareerPreviewVC)
@@ -2034,12 +2035,17 @@ struct _R: Rswift.Validatable {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_ResumePreviewVC)
       }
 
+      func sbid_SnoothCareerPreviewVC(_: Void = ()) -> SnoothCareerPreviewVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_SnoothCareerPreviewVC)
+      }
+
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
         if _R.storyboard.preview().sbid_CareerPreviewVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_CareerPreviewVC' could not be loaded from storyboard 'Preview' as 'CareerPreviewVC'.") }
         if _R.storyboard.preview().sbid_ProfilePreviewVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_ProfilePreviewVC' could not be loaded from storyboard 'Preview' as 'ProfilePreviewVC'.") }
         if _R.storyboard.preview().sbid_ResumePreviewVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_ResumePreviewVC' could not be loaded from storyboard 'Preview' as 'ResumePreviewVC'.") }
+        if _R.storyboard.preview().sbid_SnoothCareerPreviewVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_SnoothCareerPreviewVC' could not be loaded from storyboard 'Preview' as 'SnoothCareerPreviewVC'.") }
       }
 
       fileprivate init() {}

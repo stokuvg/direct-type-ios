@@ -231,5 +231,75 @@
             </objects>
             <point key="canvasLocation" x="2235" y="94"/>
         </scene>
+        <!--Snooth Career PreviewVC-->
+        <scene sceneID="g2R-VF-psS">
+            <objects>
+                <viewController storyboardIdentifier="Sbid_SnoothCareerPreviewVC" id="Ra9-GO-rb9" customClass="SnoothCareerPreviewVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qAR-5C-3OB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8qK-Ka-IvM" userLabel="メイン">
+                                <rect key="frame" x="0.0" y="44" width="414" height="728"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gQj-aF-cbF">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="728"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="Ra9-GO-rb9" id="Ykv-f5-qXC"/>
+                                            <outlet property="delegate" destination="Ra9-GO-rb9" id="KuW-bF-o2Y"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="gQj-aF-cbF" firstAttribute="top" secondItem="8qK-Ka-IvM" secondAttribute="top" id="0Pq-EF-bg9"/>
+                                    <constraint firstAttribute="trailing" secondItem="gQj-aF-cbF" secondAttribute="trailing" id="9lz-5I-BSc"/>
+                                    <constraint firstAttribute="bottom" secondItem="gQj-aF-cbF" secondAttribute="bottom" id="VQV-Pg-JSJ"/>
+                                    <constraint firstItem="gQj-aF-cbF" firstAttribute="leading" secondItem="8qK-Ka-IvM" secondAttribute="leading" id="vBO-tT-ySh"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5gz-ZX-rzI" userLabel="フッタ">
+                                <rect key="frame" x="0.0" y="772" width="414" height="90"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WjQ-Vu-mZO">
+                                        <rect key="frame" x="20" y="20" width="374" height="50"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="actCommit:" destination="Ra9-GO-rb9" eventType="touchUpInside" id="Bex-xv-SqB"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="WjQ-Vu-mZO" firstAttribute="leading" secondItem="5gz-ZX-rzI" secondAttribute="leading" constant="20" id="3Kz-n4-WZ8"/>
+                                    <constraint firstAttribute="trailing" secondItem="WjQ-Vu-mZO" secondAttribute="trailing" constant="20" id="MhD-zN-QqH"/>
+                                    <constraint firstAttribute="bottom" secondItem="WjQ-Vu-mZO" secondAttribute="bottom" constant="20" id="OKb-Tw-X0Y"/>
+                                    <constraint firstItem="WjQ-Vu-mZO" firstAttribute="top" secondItem="5gz-ZX-rzI" secondAttribute="top" constant="20" id="fWM-dz-VCe"/>
+                                    <constraint firstAttribute="height" constant="90" id="oo8-rI-bc1"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="8qK-Ka-IvM" firstAttribute="leading" secondItem="k2f-21-TUT" secondAttribute="leading" id="2AN-nL-LvX"/>
+                            <constraint firstItem="8qK-Ka-IvM" firstAttribute="top" secondItem="k2f-21-TUT" secondAttribute="top" id="HgU-Kb-mSH"/>
+                            <constraint firstItem="k2f-21-TUT" firstAttribute="trailing" secondItem="8qK-Ka-IvM" secondAttribute="trailing" id="Iat-Hb-pbA"/>
+                            <constraint firstItem="5gz-ZX-rzI" firstAttribute="leading" secondItem="k2f-21-TUT" secondAttribute="leading" id="Phd-2u-0Nw"/>
+                            <constraint firstItem="k2f-21-TUT" firstAttribute="trailing" secondItem="5gz-ZX-rzI" secondAttribute="trailing" id="eCS-GR-kQo"/>
+                            <constraint firstItem="5gz-ZX-rzI" firstAttribute="top" secondItem="8qK-Ka-IvM" secondAttribute="bottom" id="idW-OH-UYR"/>
+                            <constraint firstItem="k2f-21-TUT" firstAttribute="bottom" secondItem="5gz-ZX-rzI" secondAttribute="bottom" id="qrh-VO-F8X"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="k2f-21-TUT"/>
+                    </view>
+                    <connections>
+                        <outlet property="btnCommit" destination="WjQ-Vu-mZO" id="ysd-IL-puz"/>
+                        <outlet property="tableVW" destination="gQj-aF-cbF" id="XT4-NI-Dgz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Brd-hZ-VqH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2235" y="94"/>
+        </scene>
     </scenes>
 </document>

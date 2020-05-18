@@ -1,0 +1,63 @@
+//
+//  MdlAppSmoothCareerWorkBackgroundDetail.swift
+//  direct-type
+//
+//  Created by ms-mb014 on 2020/05/15.
+//  Copyright © 2020 ms-mb015. All rights reserved.
+//
+
+import UIKit
+import SwaggerClient
+
+/** 職務経歴詳細 */
+class MdlAppSmoothCareerWorkBackgroundDetail: Codable {
+
+    /** 在籍企業の業種 */
+    var businessType: Code
+    var experieneManagement: [Code]
+    /** PCスキル：Excel */
+    var skillExcel: Code
+    /** PCスキル：Word */
+    var skillWord: Code
+    /** PCスキル：PowerPoint */
+    var skillPowerPoint: Code
+
+    init(businessType: Code, experieneManagement: [Code], skillExcel: Code, skillWord: Code, skillPowerPoint: Code) {
+        self.businessType = businessType
+        self.experieneManagement = experieneManagement
+        self.skillExcel = skillExcel
+        self.skillWord = skillWord
+        self.skillPowerPoint = skillPowerPoint
+    }
+    //ApiモデルをAppモデルに変換して保持させる
+    //＊これはアプリ専用モデルを想定しているため不要
+    
+    var debugDisp: String {
+        return "[businessType: \(businessType)] [experieneManagement: \(experieneManagement.description)] [skillExcel: \(skillExcel)] [skillWord: \(skillWord)] [skillPowerPoint: \(skillPowerPoint)] "
+    }
+}
+
+//=== 編集用の項目と定義など
+enum EditItemMdlAppSmoothCareerWorkBackgroundDetail: String, EditItemProtocol {
+    case businessType
+    case experieneManagement
+    case skillExcel
+    case skillWord
+    case skillPowerPoint
+    //表示名
+    var dispName: String {
+        switch self {
+        case .businessType:         return "在籍企業の業種"
+        case .experieneManagement:  return ""
+        case .skillExcel:           return "PCスキル：Excel"
+        case .skillWord:            return "PCスキル：Word"
+        case .skillPowerPoint:      return "PCスキル：PowerPoint"
+        }
+    }
+    //Placeholder Text
+    var placeholder: String {
+        return "[\(self.itemKey) PlaceHolder]"
+    }
+    var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" } //画面内でUniqになるようなキーを定義（配列利用時は除く）
+}
+

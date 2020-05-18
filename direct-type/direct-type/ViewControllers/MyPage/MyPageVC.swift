@@ -39,6 +39,10 @@ class MyPageVC: TmpNaviTopVC {
     //さくさく職歴書
     @IBOutlet weak var btnButton04: UIButton!
     @IBAction func actButton04(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Preview", bundle: nil)
+        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SnoothCareerPreviewVC") as? SnoothCareerPreviewVC{
+            self.navigationController?.pushViewController(nvc, animated: true)
+        }
     }
     
     override func viewDidLoad() {
