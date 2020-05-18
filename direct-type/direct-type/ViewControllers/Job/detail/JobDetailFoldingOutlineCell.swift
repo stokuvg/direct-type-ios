@@ -37,11 +37,11 @@ class JobDetailFoldingOutlineCell: BaseTableViewCell {
     }
     
     func setup(data:[String: Any]) {
-        Log.selectLog(logLevel: .debug, "JobDetailFoldingOutlineCell data start")
-        Log.selectLog(logLevel: .debug, "data:\(data)")
+//        Log.selectLog(logLevel: .debug, "JobDetailFoldingOutlineCell data start")
+//        Log.selectLog(logLevel: .debug, "data:\(data)")
         
         let descriptionData = data["Description"] as! [String: Any]
-        Log.selectLog(logLevel: .debug, "descriptionData:\(descriptionData)")
+//        Log.selectLog(logLevel: .debug, "descriptionData:\(descriptionData)")
         let title = descriptionData["title"] as! String
         let item = descriptionData["item"] as! String
         

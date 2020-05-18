@@ -108,9 +108,9 @@ class JobDetailFoldingPhoneNumberCell: BaseTableViewCell {
 extension JobDetailFoldingPhoneNumberCell: UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        Log.selectLog(logLevel: .debug, "JobDetailFoldingPhoneNumberCell shouldInteractWith start")
+//        Log.selectLog(logLevel: .debug, "JobDetailFoldingPhoneNumberCell shouldInteractWith start")
         
-        Log.selectLog(logLevel: .debug, "URL:\(URL)")
+//        Log.selectLog(logLevel: .debug, "URL:\(URL)")
         UIApplication.shared.open(URL, options: [:], completionHandler: nil)
         
         return false

@@ -9,16 +9,50 @@
 import UIKit
 
 class JobDetailFoldingProcessCell: BaseTableViewCell {
+    
+    @IBOutlet weak var stackView:UIStackView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func setup(data:[String: Any]) {
+//        Log.selectLog(logLevel: .debug, "data:\(data)")
+        
+        let steps:[[String: Any]] = data["steps"] as! [[String: Any]]
+        if steps.count > 0 {
+            for step in steps {
+                let view = UINib.init(nibName: "JobDetailStepView", bundle: nil)
+                .instantiate(withOwner: self, options: nil)
+                .first as! JobDetailStepView
+                
+                view.setup(data: step)
+                
+                self.stackView.addArrangedSubview(view)
+            }
+        }
+        
+        let text1:[[String: Any]] = data["text1"] as! [[String: Any]]
+        if text1.count > 0 {
+            
+        }
+        
+        let text2:[[String: Any]] = data["text2"] as! [[String: Any]]
+        if text2.count > 0 {
+            
+        }
+        
     }
     
 }

@@ -15,7 +15,7 @@ class JobDetailFoldingHeaderView: BaseFoldingHeaderView {
     }
     
     func setup(title: String, openFlag:Bool) {
-        Log.selectLog(logLevel: .debug, "JobDetailFoldingHeaderView setup start")
+//        Log.selectLog(logLevel: .debug, "JobDetailFoldingHeaderView setup start")
         
 //        Log.selectLog(logLevel: .debug, "openFlag:\(openFlag)")
         

@@ -123,9 +123,15 @@ class JobOfferDetailVC: TmpBasicVC {
             "process":
             [
                 "title":"選考プロセス",
-                "text":"",
-                "step":[],
-                "headline":[],
+                "steps":[
+                    ["title":"step1","text":"Web応募による書類選考"],
+                    ["title":"step2","text":"面談（１〜２回）※面談は１回のケースが多いですが、場合によって２回になる可能性もあります。"],
+                    ["title":"step3","text":"内定"],
+                    ["title":"step4","text":"Web応募による書類選考"],
+                    ["title":"step5","text":"Web応募による書類選考"],
+                ],
+                "text1":"",
+                "text2":"",
             ],
             "phone_number":
             [
@@ -419,7 +425,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 let cell = tableView.loadCell(cellName: "JobDetailItemCell", indexPath: indexPath) as! JobDetailItemCell
                 cell.setup(data: itemData)
                 return cell
-            case (4,_),(5,_):
+            case (4,_):
                 let cell = tableView.loadCell(cellName: "JobDetailFoldingItemCell", indexPath: indexPath) as! JobDetailFoldingItemCell
                 var textType:TextType!
                 var openFlag:Bool = false
@@ -443,6 +449,13 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 
 //                cell.setup(data: foldingData, textType: textType,flag: openFlag)
                 
+                return cell
+            case (5, _):
+                let cell = tableView.loadCell(cellName: "JobDetailFoldingProcessCell", indexPath: indexPath) as! JobDetailFoldingProcessCell
+                let foldingDatas = dummyData["folding"] as! [String: Any]
+                let foldingData = foldingDatas["process"] as! [String: Any]
+                
+                cell.setup(data: foldingData)
                 return cell
             case (6, _):
                 let cell = tableView.loadCell(cellName: "JobDetailFoldingPhoneNumberCell", indexPath: indexPath) as! JobDetailFoldingPhoneNumberCell

@@ -1067,8 +1067,8 @@ struct R: Rswift.Validatable {
     static let jobDetailPRCodeTagsCell = _R.nib._JobDetailPRCodeTagsCell()
     /// Nib `JobDetailSalaryExampleCell`.
     static let jobDetailSalaryExampleCell = _R.nib._JobDetailSalaryExampleCell()
-    /// Nib `JobDetailSpaceView`.
-    static let jobDetailSpaceView = _R.nib._JobDetailSpaceView()
+    /// Nib `JobDetailStepView`.
+    static let jobDetailStepView = _R.nib._JobDetailStepView()
     /// Nib `JobOfferBigCardCell`.
     static let jobOfferBigCardCell = _R.nib._JobOfferBigCardCell()
     /// Nib `JobOfferCardMoreCell`.
@@ -1265,10 +1265,10 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UINib(name: "JobDetailSpaceView", in: bundle)`
-    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailSpaceView) instead")
-    static func jobDetailSpaceView(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.jobDetailSpaceView)
+    /// `UINib(name: "JobDetailStepView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailStepView) instead")
+    static func jobDetailStepView(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.jobDetailStepView)
     }
     #endif
 
@@ -1432,8 +1432,8 @@ struct R: Rswift.Validatable {
       return R.nib.jobDetailSalaryExampleCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailSalaryExampleCell
     }
 
-    static func jobDetailSpaceView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailSpaceView? {
-      return R.nib.jobDetailSpaceView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailSpaceView
+    static func jobDetailStepView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailStepView? {
+      return R.nib.jobDetailStepView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailStepView
     }
 
     static func jobOfferBigCardCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobOfferBigCardCell? {
@@ -1814,12 +1814,12 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
 
-    struct _JobDetailSpaceView: Rswift.NibResourceType {
+    struct _JobDetailStepView: Rswift.NibResourceType {
       let bundle = R.hostingBundle
-      let name = "JobDetailSpaceView"
+      let name = "JobDetailStepView"
 
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailSpaceView? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailSpaceView
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailStepView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailStepView
       }
 
       fileprivate init() {}

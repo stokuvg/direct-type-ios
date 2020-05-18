@@ -33,8 +33,8 @@ class JobDetailFoldingItemCell: BaseTableViewCell {
     }
     
     func setup(data:[String: Any], textType:TextType, flag:Bool) {
-        Log.selectLog(logLevel: .debug, "JobDetailFoldingItemCell setup start")
-        Log.selectLog(logLevel: .debug, "data:\(data)")
+//        Log.selectLog(logLevel: .debug, "JobDetailFoldingItemCell setup start")
+//        Log.selectLog(logLevel: .debug, "data:\(data)")
         if textType == .text {
             // テキストのみ
         } else if textType == .step {
@@ -54,7 +54,7 @@ class JobDetailFoldingItemCell: BaseTableViewCell {
                 browerView.frame = frame
                 
                 browerView.setup(data: text)
-                Log.selectLog(logLevel: .debug, "browserView:\(browerView)")
+//                Log.selectLog(logLevel: .debug, "browserView:\(browerView)")
                 
                 self.addSubview(browerView)
             }
