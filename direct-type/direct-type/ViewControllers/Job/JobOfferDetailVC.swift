@@ -140,9 +140,14 @@ class JobOfferDetailVC: TmpBasicVC {
             "outline":
             [
                 "title":"会社概要",
-                 "text":"",
-                 "step":[],
-                 "headline":[],
+                "Description":["title":"事業内容","item":"■WEBアプリの企画・開発・導入支援\n■スマホ・タブレットアプリの企画・開発・導入支援\n■システムコンサルテーション事業\n■ソフトウェアパッケージの開発・販売・導入支援\n■サーバ・ネットワーク設計・構築・運用管理サービスの提供\n■アウトソーシング\n"],                                                      // 必須
+                "clients":["title":"主要取引先","names":"青葉出版(株)\n(株)オープンハウス・ディベロップメント\n(株)CSEビジテック\n(株)\n(株)\n(株)"],                                                     // 任意
+                "media":["title":"事業・サービスのメディア掲載実績","items":"明治大学博物館\nユニバーサルコンピューター(株)"],                                   // 任意
+                "establishment":["title":"設立","items":"1996年12月"],                                                         // 任意
+                "employees":["title":"従業員数","employees":"132名(技術者118名)","average":"３２歳","ratio":"","halfway":"約５割"],   // 任意
+                "capital":["title":"資本金","results":"20,000,000円"],                                                       // 任意
+                "sales":["title":"売上高","results":"14億円(2018年11月実績)"],                                                       // 任意
+                "representative":["title":"代表者","name":"代表取締役社長　峯岸 正積","career":"1979年11月5日生まれ。2002年コニカミノルタ株式会社に入社。"],                                     // 任意
             ],
         ],
     ]
@@ -391,7 +396,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 let cell = tableView.loadCell(cellName: "JobDetailItemCell", indexPath: indexPath) as! JobDetailItemCell
                 cell.setup(data: itemData)
                 return cell
-            case (4,_),(5,_),(7,_):
+            case (4,_),(5,_):
                 let cell = tableView.loadCell(cellName: "JobDetailFoldingItemCell", indexPath: indexPath) as! JobDetailFoldingItemCell
                 var textType:TextType!
                 var openFlag:Bool = false
@@ -420,6 +425,13 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 let cell = tableView.loadCell(cellName: "JobDetailFoldingPhoneNumberCell", indexPath: indexPath) as! JobDetailFoldingPhoneNumberCell
                 let foldingDatas = dummyData["folding"] as! [String: Any]
                 let foldingData = foldingDatas["phone_number"] as! [String: Any]
+                
+                cell.setup(data: foldingData)
+                return cell
+            case (7, _):
+                let cell = tableView.loadCell(cellName: "JobDetailFoldingOutlineCell", indexPath: indexPath) as! JobDetailFoldingOutlineCell
+                let foldingDatas = dummyData["folding"] as! [String: Any]
+                let foldingData = foldingDatas["outline"] as! [String: Any]
                 
                 cell.setup(data: foldingData)
                 return cell
@@ -481,8 +493,9 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
         
         companyOutlineOpenFlag = true
         let indexPath = IndexPath.init(row: 0, section: 7)
+        let indexSet = IndexSet(arrayLiteral: 7)
+        self.detailTableView.reloadSections(indexSet, with: .top)
         self.detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
-//        self.detailTableView.reloadSections(index, with: .top)
     }
     
     func guidebookScrollAnimation(section:Int, titleName:String) {
