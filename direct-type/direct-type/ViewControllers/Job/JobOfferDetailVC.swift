@@ -104,6 +104,7 @@ class JobOfferDetailVC: TmpBasicVC {
             ],
         ],
         "folding":[
+            "memo":
             [
                 "title":"取材メモ",
                 "text":"ここにテキストを入れる",
@@ -119,18 +120,24 @@ class JobOfferDetailVC: TmpBasicVC {
                     ["head3":"見出し3","text":"ここにテキスト"],
                 ]
             ],
+            "process":
             [
                 "title":"選考プロセス",
                 "text":"",
                 "step":[],
                 "headline":[],
             ],
+            "phone_number":
             [
                 "title":"連絡先",
-                 "text":"〒 100-0004\n東京都千代田区大手町二丁目６番１号 朝日生命大手町ビル２階\n採用担当\nTEL / 03-6261-4536\nE-mail / saiyo@systemsoft.co.jp\nhttp://www.systemsoft.co.jp/",
-                 "step":[],
-                 "headline":[],
+                "url":"http://www.systemsoft.co.jp/",
+                "zipcode":"100-0004",
+                "address":"東京都千代田区大手町二丁目６番１号 朝日生命大手町ビル２階",
+                "tel":"03-6261-4536",
+                "person":"採用担当",
+                "email":"saiyo@systemsoft.co.jp",
             ],
+            "outline":
             [
                 "title":"会社概要",
                  "text":"",
@@ -290,6 +297,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                     .first as! JobDetailGuideBookHeaderView
                 return view
             case 4,5,6,7:
+                Log.selectLog(logLevel: .debug, "section:\(section)")
                 // 取材メモ
                 // 選考プロセス
                 // 連絡先
@@ -298,23 +306,29 @@ extension JobOfferDetailVC: UITableViewDataSource {
                     .instantiate(withOwner: self, options: nil)
                     .first as! JobDetailFoldingHeaderView
                 view.delegate = self
-                let foldingDatas = dummyData["folding"] as! [[String: Any]]
+                let foldingDatas = dummyData["folding"] as! [String: Any]
                 view.tag = (section - foldingDatas.count)
-                let foldingData = foldingDatas[(section - (foldingDatas.count))]
                 
                 var openFlag:Bool = false
+                var keyName:String = ""
                 switch section {
                     case 4:
                         openFlag = coverageMemoOpenFlag
+                        keyName = "memo"
                     case 5:
                         openFlag = selectionProcessOpenFlag
+                        keyName = "process"
                     case 6:
                         openFlag = phoneNumberOpenFlag
+                        keyName = "phone_number"
                     case 7:
                         openFlag = companyOutlineOpenFlag
+                        keyName = "outline"
                     default:
                         openFlag = false
+                        keyName = ""
                 }
+                let foldingData = foldingDatas[keyName] as! [String:Any]
                 
                 let title = foldingData["title"] as! String
                 view.setup(title: title,openFlag: openFlag)
@@ -395,18 +409,17 @@ extension JobOfferDetailVC: UITableViewDataSource {
                     openFlag = companyOutlineOpenFlag
                 }
                 
-                let foldingDatas = dummyData["folding"] as! [[String: Any]]
+                let foldingDatas = dummyData["folding"] as! [String: Any]
                 let cnt = section - foldingDatas.count
-                let foldingData = foldingDatas[cnt]
+//                let foldingData = foldingDatas[cnt]
                 
-                cell.setup(data: foldingData, textType: textType,flag: openFlag)
+//                cell.setup(data: foldingData, textType: textType,flag: openFlag)
                 
                 return cell
             case (6, _):
                 let cell = tableView.loadCell(cellName: "JobDetailFoldingPhoneNumberCell", indexPath: indexPath) as! JobDetailFoldingPhoneNumberCell
-                let foldingDatas = dummyData["folding"] as! [[String: Any]]
-                let cnt = section - foldingDatas.count
-                let foldingData = foldingDatas[cnt]
+                let foldingDatas = dummyData["folding"] as! [String: Any]
+                let foldingData = foldingDatas["phone_number"] as! [String: Any]
                 
                 cell.setup(data: foldingData)
                 return cell
@@ -516,7 +529,7 @@ extension JobOfferDetailVC: JobDetailArticleCellDelegate {
 extension JobOfferDetailVC: FoldingHeaderViewDelegate {
     func foldOpenCloseAction(tag: Int) {
         
-        let foldingDatas = dummyData["folding"] as! [[String: Any]]
+        let foldingDatas = dummyData["folding"] as! [String: Any]
         
         let section = foldingDatas.count + tag
         let index = IndexSet(arrayLiteral: section)

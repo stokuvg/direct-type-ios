@@ -18,9 +18,10 @@ class JobDetailFoldingPhoneNumberCell: BaseTableViewCell {
         self.textView.textColor = UIColor.init(colorType: .color_black)
         self.textView.font = UIFont.init(fontType: .C_font_S)
         self.textView.linkTextAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor.init(colorType: .color_sub) as Any
+            NSAttributedString.Key.foregroundColor: UIColor.init(colorType: .color_black) as Any
         ]
-        self.textView.dataDetectorTypes = .all
+        self.textView.dataDetectorTypes = .link
+        self.textView.isSelectable = true
         self.textView.delegate = self
         
         self.textView.isUserInteractionEnabled = true
@@ -37,19 +38,69 @@ class JobDetailFoldingPhoneNumberCell: BaseTableViewCell {
     }
     
     func setup(data: [String: Any]) {
-        let text = data["text"] as! String
-//        self.textView.text = text
+        
+        let style = NSMutableParagraphStyle()
+        style.lineSpacing = FontType.C_font_S.lineSpacing
+        let attributes = [NSAttributedString.Key.paragraphStyle : style]
+        
+        let urlString = data["url"] as! String
+        let zipcodeString = data["zipcode"] as! String
+        let addressString = data["address"] as! String
+        let telString = data["tel"] as! String
+        let personString = data["person"] as! String
+        let emailString = data["email"] as! String
+        
+        let text = self.makeAdoptionText(url: urlString, zipCode: zipcodeString, address: addressString, tel: telString, person: personString, email: emailString)
 
         let attributedString = NSMutableAttributedString(string: text)
 
-        let range = attributedString.mutableString.range(of: "http://www.systemsoft.co.jp/")
-//        attributedString.setAttributes([.underlineStyle : NSUnderlineStyle.single.rawValue, .link: URL(string: "https://www.yahoo.co.jp/")!, .foregroundColor: UIColor.white, .paragraphStyle: style,], range: range)
+        let range = attributedString.mutableString.range(of: urlString)
 
         attributedString.addAttribute(.link,
-        value: "https://www.google.co.jp/",
+        value: urlString,
         range: range)
         
-        self.textView.attributedText = attributedString
+        self.textView.attributedText = NSAttributedString(string: attributedString.string, attributes: attributes)
+    }
+    
+    private func makeAdoptionText(url:String,zipCode:String,address:String,tel:String,person:String,email:String) -> String {
+        let text = NSMutableString()
+        
+        // 郵便番号         必須
+        // 住所            必須
+        // 担当者          任意
+        // 電話番号         任意
+        // メールアドレス     任意
+        // URL             任意
+        text.append("〒 ")
+        text.append(zipCode)
+        text.append("\n")
+        
+        text.append(address)
+        text.append("\n")
+        
+        if tel.count > 0 {
+            text.append("TEL / ")
+            text.append(tel)
+            text.append("\n")
+        }
+        
+        if person.count > 0 {
+            text.append("E-mail / ")
+            text.append(email)
+            text.append("\n")
+        }
+        
+        if email.count > 0 {
+            text.append(person)
+            text.append("\n")
+        }
+        
+        if url.count > 0 {
+            text.append(url)
+        }
+        
+        return text as String
     }
     
 }
@@ -60,6 +111,7 @@ extension JobDetailFoldingPhoneNumberCell: UITextViewDelegate {
         Log.selectLog(logLevel: .debug, "JobDetailFoldingPhoneNumberCell shouldInteractWith start")
         
         Log.selectLog(logLevel: .debug, "URL:\(URL)")
+        UIApplication.shared.open(URL, options: [:], completionHandler: nil)
         
         return false
     }
