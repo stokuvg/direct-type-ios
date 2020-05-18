@@ -40,7 +40,7 @@ class MyPageVC: TmpNaviTopVC {
     @IBOutlet weak var btnButton04: UIButton!
     @IBAction func actButton04(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Preview", bundle: nil)
-        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SnoothCareerPreviewVC") as? SnoothCareerPreviewVC{
+        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SmoothCareerPreviewVC") as? SmoothCareerPreviewVC{
             self.navigationController?.pushViewController(nvc, animated: true)
         }
     }

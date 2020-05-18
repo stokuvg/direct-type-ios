@@ -15,13 +15,13 @@ class MdlAppSmoothCareerComponyDescription: Codable {
 
     /** 勤務先企業名 */
     var companyName: String
-    /** 社員数（コードで指定） */
-    var employeesCount: Code
+    /** 社員数（任意数値：8桁） */
+    var employeesCount: String
     var workPeriod: MdlAppSmoothCareerComponyDescriptionWorkPeriod
     /** 雇用形態 */
     var employmentType: Code
 
-    init(companyName: String, employeesCount: Code, workPeriod: MdlAppSmoothCareerComponyDescriptionWorkPeriod, employmentType: Code) {
+    init(companyName: String, employeesCount: String, workPeriod: MdlAppSmoothCareerComponyDescriptionWorkPeriod, employmentType: Code) {
         self.companyName = companyName
         self.employeesCount = employeesCount
         self.workPeriod = workPeriod
