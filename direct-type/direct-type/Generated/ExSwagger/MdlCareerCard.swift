@@ -17,8 +17,8 @@ class MdlCareerCard: Codable {
     var companyName: String
     /** 雇用形態 */
     var employmentType: Code
-    /** 従業員数（数値）*これもマスタじゃないのか？ */
-    var employeesCount: Code
+    /** 従業員数（数値）*任意数値、8桁で良い？ */
+    var employeesCount: String
     /** 年収 */
     var salary: Code
     /** 職務内容本文 */

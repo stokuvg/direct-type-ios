@@ -61,6 +61,15 @@ enum HPreviewItemType {
     case employeesCountC15  //===従業員数（数値）*これもマスタじゃないのか？ */
     case salaryC15          //===年収
     case contentsC15        //===職務内容本文
+    //[F系統]職歴書サクサク
+    case companyNameF11     //=== [F-11] 入力（勤務先企業名）
+    case businessTypesF12   //=== [F-12] 入力（在籍企業の業種）
+    case employeesCountF13  //=== [F-13] 入力（社員数）
+    case workPeriodF14      //=== [F-14] 入力（在籍期間）
+    case employmentTypeF15  //=== [F-15] 入力（雇用形態）
+    case managementsF16     //=== [F-16] 入力（マネジメント経験）
+    case pcSkillF22         //=== [F-22] 職種別入力（PCスキル）
+
     
     var dispTitle: String {
         switch self {
@@ -88,6 +97,14 @@ enum HPreviewItemType {
         case .employeesCountC15:    return "従業員数"
         case .salaryC15:            return "年収"
         case .contentsC15:          return "職務内容本文"
+        //[F系統]職歴書サクサク
+        case .companyNameF11:       return "勤務先企業名"
+        case .businessTypesF12:     return "在籍企業の業種"
+        case .employeesCountF13:    return "社員数"
+        case .workPeriodF14:        return "在籍期間"
+        case .employmentTypeF15:    return "雇用形態"
+        case .managementsF16:       return "マネジメント経験"
+        case .pcSkillF22:           return "PCスキル"
         }
     }
 }
