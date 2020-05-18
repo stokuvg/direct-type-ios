@@ -14,7 +14,7 @@ class MdlAppSmoothCareerWorkBackgroundDetail: Codable {
 
     /** 在籍企業の業種 */
     var businessType: Code
-    var experieneManagement: [Code]
+    var experienceManagement: Code
     /** PCスキル：Excel */
     var skillExcel: Code
     /** PCスキル：Word */
@@ -22,9 +22,9 @@ class MdlAppSmoothCareerWorkBackgroundDetail: Codable {
     /** PCスキル：PowerPoint */
     var skillPowerPoint: Code
 
-    init(businessType: Code, experieneManagement: [Code], skillExcel: Code, skillWord: Code, skillPowerPoint: Code) {
+    init(businessType: Code, experienceManagement: Code, skillExcel: Code, skillWord: Code, skillPowerPoint: Code) {
         self.businessType = businessType
-        self.experieneManagement = experieneManagement
+        self.experienceManagement = experienceManagement
         self.skillExcel = skillExcel
         self.skillWord = skillWord
         self.skillPowerPoint = skillPowerPoint
@@ -33,14 +33,14 @@ class MdlAppSmoothCareerWorkBackgroundDetail: Codable {
     //＊これはアプリ専用モデルを想定しているため不要
     
     var debugDisp: String {
-        return "[businessType: \(businessType)] [experieneManagement: \(experieneManagement.description)] [skillExcel: \(skillExcel)] [skillWord: \(skillWord)] [skillPowerPoint: \(skillPowerPoint)] "
+        return "[businessType: \(businessType)] [experienceManagement: \(experienceManagement)] [skillExcel: \(skillExcel)] [skillWord: \(skillWord)] [skillPowerPoint: \(skillPowerPoint)] "
     }
 }
 
 //=== 編集用の項目と定義など
 enum EditItemMdlAppSmoothCareerWorkBackgroundDetail: String, EditItemProtocol {
     case businessType
-    case experieneManagement
+    case experienceManagement
     case skillExcel
     case skillWord
     case skillPowerPoint
@@ -48,7 +48,7 @@ enum EditItemMdlAppSmoothCareerWorkBackgroundDetail: String, EditItemProtocol {
     var dispName: String {
         switch self {
         case .businessType:         return "在籍企業の業種"
-        case .experieneManagement:  return ""
+        case .experienceManagement: return "マネジメント経験"
         case .skillExcel:           return "PCスキル：Excel"
         case .skillWord:            return "PCスキル：Word"
         case .skillPowerPoint:      return "PCスキル：PowerPoint"

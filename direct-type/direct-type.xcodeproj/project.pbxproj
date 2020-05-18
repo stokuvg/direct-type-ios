@@ -131,6 +131,11 @@
 		26133A54246B7A00001802BB /* EditableBasicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26133A53246B7A00001802BB /* EditableBasicVC.swift */; };
 		26133A56246B9D48001802BB /* EditableBasicVC+Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26133A55246B9D48001802BB /* EditableBasicVC+Picker.swift */; };
 		26133A58246B9DC2001802BB /* EditableBasicVC+PickerYMD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26133A57246B9DC2001802BB /* EditableBasicVC+PickerYMD.swift */; };
+		26147F30247258E9009B30B5 /* HPreviewTBCell+dispCellValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26147F2F247258E9009B30B5 /* HPreviewTBCell+dispCellValue.swift */; };
+		26147F322472630B009B30B5 /* MstF16_management.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26147F312472630B009B30B5 /* MstF16_management.tsv */; };
+		26147F36247267F9009B30B5 /* MstF22_pcSkillWord.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26147F33247267F9009B30B5 /* MstF22_pcSkillWord.tsv */; };
+		26147F37247267F9009B30B5 /* MstF22_pcSkillExcel.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26147F34247267F9009B30B5 /* MstF22_pcSkillExcel.tsv */; };
+		26147F38247267F9009B30B5 /* MstF22_pcSkillPowerPoint.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26147F35247267F9009B30B5 /* MstF22_pcSkillPowerPoint.tsv */; };
 		26800520246A2B440053A7F4 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2680051F246A2B440053A7F4 /* Date+Extensions.swift */; };
 		268BFF56246E8292004B2640 /* SubInputMemoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BFF55246E8292004B2640 /* SubInputMemoVC.swift */; };
 		268BFF58246E8D25004B2640 /* SmoothCareerPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BFF57246E8D25004B2640 /* SmoothCareerPreviewVC.swift */; };
@@ -321,6 +326,11 @@
 		26133A53246B7A00001802BB /* EditableBasicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableBasicVC.swift; sourceTree = "<group>"; };
 		26133A55246B9D48001802BB /* EditableBasicVC+Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditableBasicVC+Picker.swift"; sourceTree = "<group>"; };
 		26133A57246B9DC2001802BB /* EditableBasicVC+PickerYMD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditableBasicVC+PickerYMD.swift"; sourceTree = "<group>"; };
+		26147F2F247258E9009B30B5 /* HPreviewTBCell+dispCellValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HPreviewTBCell+dispCellValue.swift"; sourceTree = "<group>"; };
+		26147F312472630B009B30B5 /* MstF16_management.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstF16_management.tsv; sourceTree = "<group>"; };
+		26147F33247267F9009B30B5 /* MstF22_pcSkillWord.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstF22_pcSkillWord.tsv; sourceTree = "<group>"; };
+		26147F34247267F9009B30B5 /* MstF22_pcSkillExcel.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstF22_pcSkillExcel.tsv; sourceTree = "<group>"; };
+		26147F35247267F9009B30B5 /* MstF22_pcSkillPowerPoint.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstF22_pcSkillPowerPoint.tsv; sourceTree = "<group>"; };
 		2680051F246A2B440053A7F4 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		268BFF55246E8292004B2640 /* SubInputMemoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubInputMemoVC.swift; sourceTree = "<group>"; };
 		268BFF57246E8D25004B2640 /* SmoothCareerPreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmoothCareerPreviewVC.swift; sourceTree = "<group>"; };
@@ -691,6 +701,7 @@
 			children = (
 				26CFC45E2469495800E458E2 /* ConstantsPreview.swift */,
 				260BBFDD24651732003D163A /* HPreviewTBCell.swift */,
+				26147F2F247258E9009B30B5 /* HPreviewTBCell+dispCellValue.swift */,
 				260BBFDF24651732003D163A /* HPreviewTBCell.xib */,
 				260BBFDE24651732003D163A /* Preview.storyboard */,
 				26F2A82C246D31020037D47F /* PreviewBaseVC.swift */,
@@ -838,6 +849,10 @@
 				26BF48D024639D2A00E00215 /* MstL_skillYear.tsv */,
 				26BF48D324639D2A00E00215 /* MstL2_prCode.tsv */,
 				26BF48D424639D2B00E00215 /* MstL3_overtime.tsv */,
+				26147F312472630B009B30B5 /* MstF16_management.tsv */,
+				26147F34247267F9009B30B5 /* MstF22_pcSkillExcel.tsv */,
+				26147F35247267F9009B30B5 /* MstF22_pcSkillPowerPoint.tsv */,
+				26147F33247267F9009B30B5 /* MstF22_pcSkillWord.tsv */,
 			);
 			path = TSV;
 			sourceTree = "<group>";
@@ -929,10 +944,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				26BF48DE24639D2B00E00215 /* MstK13_schoolType.tsv in Resources */,
+				26147F322472630B009B30B5 /* MstF16_management.tsv in Resources */,
 				066BD9E32456ACB5009E610B /* LaunchScreen.storyboard in Resources */,
 				066EF6C6245BB9C400E15AD2 /* KeepCardCell.xib in Resources */,
 				26BF48E924639D2B00E00215 /* MstK7_skillEnglish.tsv in Resources */,
 				064EF6F824654A7300853ADD /* JobDetailDataCell.xib in Resources */,
+				26147F36247267F9009B30B5 /* MstF22_pcSkillWord.tsv in Resources */,
 				066F2707246E32270040BDC1 /* JobDetailFoldingItemCell.xib in Resources */,
 				06E519842457CF90004E4B7A /* JobOfferBigCardCell.xib in Resources */,
 				066EF6CC245C119000E15AD2 /* JobOfferCardMoreCell.xib in Resources */,
@@ -950,6 +967,7 @@
 				26BF48E624639D2B00E00215 /* MstK8_qualification.tsv in Resources */,
 				26BF48E424639D2B00E00215 /* MstL2_prCode.tsv in Resources */,
 				26BF48E124639D2B00E00215 /* MstL_skillYear.tsv in Resources */,
+				26147F37247267F9009B30B5 /* MstF22_pcSkillExcel.tsv in Resources */,
 				26BF48E024639D2B00E00215 /* MstK3_changeCount.tsv in Resources */,
 				066763762457B09F00AC5039 /* HomeVC.storyboard in Resources */,
 				26989F7F246A5E520050AC40 /* HEditDrumTBCell.xib in Resources */,
@@ -962,6 +980,7 @@
 				269AFFC6246A929300DB364B /* SubSelectSyouTBCell.xib in Resources */,
 				063350DF2463EC5800AF90F3 /* NoCardView.xib in Resources */,
 				066763692457AF3100AC5039 /* MyPageVC.storyboard in Resources */,
+				26147F38247267F9009B30B5 /* MstF22_pcSkillPowerPoint.tsv in Resources */,
 				066F271D246E81B60040BDC1 /* JobDetailFoldingOutlineCell.xib in Resources */,
 				26BF48E724639D2B00E00215 /* MstK9_employmentType.tsv in Resources */,
 				066BD9E02456ACB5009E610B /* Assets.xcassets in Resources */,
@@ -1109,6 +1128,7 @@
 				06409C73246D3A6800EA6BBB /* JobDetailFoldingHeaderView.swift in Sources */,
 				06E519982457DA0D004E4B7A /* ApproachSettingVC.swift in Sources */,
 				06DCAEAB245A7616008FE9FA /* UILabel+Extensions.swift in Sources */,
+				26147F30247258E9009B30B5 /* HPreviewTBCell+dispCellValue.swift in Sources */,
 				26F2A81B246D10C30037D47F /* MdlResume.swift in Sources */,
 				06E519932457D750004E4B7A /* OwnPRVC.swift in Sources */,
 				26989F80246A5E520050AC40 /* HEditDrumTBCell.swift in Sources */,

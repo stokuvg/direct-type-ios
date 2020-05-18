@@ -19,7 +19,7 @@ class CareerPreviewVC: PreviewBaseVC {
             CareerCard(workPeriod: CareerCardWorkPeriod(startYear: "2016", startMonth: "04", endYear: "2020", endMonth: "03"),
                        companyName: "ほにゃらら産業合資会社",
                        employmentType: 2,
-                       employeesCount: 2,
+                       employeesCount: 256,
                        salary: 8,
                        contents: String(repeating: "職業経歴本文が入ります。",  count: 13) )
         detail = MdlCareerCard(dto: careerCard)

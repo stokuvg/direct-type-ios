@@ -333,8 +333,16 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.file` struct is generated, and contains static references to 17 files.
+  /// This `R.file` struct is generated, and contains static references to 21 files.
   struct file {
+    /// Resource file `MstF16_management.tsv`.
+    static let mstF16_managementTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstF16_management", pathExtension: "tsv")
+    /// Resource file `MstF22_pcSkillExcel.tsv`.
+    static let mstF22_pcSkillExcelTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstF22_pcSkillExcel", pathExtension: "tsv")
+    /// Resource file `MstF22_pcSkillPowerPoint.tsv`.
+    static let mstF22_pcSkillPowerPointTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstF22_pcSkillPowerPoint", pathExtension: "tsv")
+    /// Resource file `MstF22_pcSkillWord.tsv`.
+    static let mstF22_pcSkillWordTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstF22_pcSkillWord", pathExtension: "tsv")
     /// Resource file `MstK10_salary.tsv`.
     static let mstK10_salaryTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstK10_salary", pathExtension: "tsv")
     /// Resource file `MstK11_entryPlace.tsv`.
@@ -369,6 +377,30 @@ struct R: Rswift.Validatable {
     static let mstL_skillTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstL_skill", pathExtension: "tsv")
     /// Resource file `MstL_skillYear.tsv`.
     static let mstL_skillYearTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstL_skillYear", pathExtension: "tsv")
+
+    /// `bundle.url(forResource: "MstF16_management", withExtension: "tsv")`
+    static func mstF16_managementTsv(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.mstF16_managementTsv
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "MstF22_pcSkillExcel", withExtension: "tsv")`
+    static func mstF22_pcSkillExcelTsv(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.mstF22_pcSkillExcelTsv
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "MstF22_pcSkillPowerPoint", withExtension: "tsv")`
+    static func mstF22_pcSkillPowerPointTsv(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.mstF22_pcSkillPowerPointTsv
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "MstF22_pcSkillWord", withExtension: "tsv")`
+    static func mstF22_pcSkillWordTsv(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.mstF22_pcSkillWordTsv
+      return fileResource.bundle.url(forResource: fileResource)
+    }
 
     /// `bundle.url(forResource: "MstK10_salary", withExtension: "tsv")`
     static func mstK10_salaryTsv(_: Void = ()) -> Foundation.URL? {
