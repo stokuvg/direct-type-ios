@@ -15,12 +15,12 @@ class SmoothCareerPreviewVC: PreviewBaseVC {
     //共通プレビューをOverrideして利用する
     override func initData() {
         //ダミーデータ投入しておく
-        let tmpStartDate: String = "2015-04"
+        let tmpStartDate: String = "2015-04-01"
         let dateStartDate = DateHelper.convStr2Date(tmpStartDate)
-        let tmpEndDate: String = "2020-05"
+        let tmpEndDate: String = "2020-05-01"
         let dateEndDate = DateHelper.convStr2Date(tmpEndDate)
         let bufWorkBackgroundDetail: MdlAppSmoothCareerWorkBackgroundDetail =
-        MdlAppSmoothCareerWorkBackgroundDetail(businessType: "1", experieneManagement: ["1", "3", "5"], skillExcel: "1", skillWord: "1", skillPowerPoint: "1")
+        MdlAppSmoothCareerWorkBackgroundDetail(businessType: "2", experienceManagement: "3", skillExcel: "4", skillWord: "4", skillPowerPoint: "4")
         let smoothCareer: MdlAppSmoothCareer =
         MdlAppSmoothCareer(componyDescription: MdlAppSmoothCareerComponyDescription(companyName: "篠原重工株式会社", employeesCount: "512", workPeriod: MdlAppSmoothCareerComponyDescriptionWorkPeriod(workStartDate: dateStartDate, workEndDate: dateEndDate), employmentType: "1"), workBackgroundDetail: bufWorkBackgroundDetail, salary: "1")
         detail = smoothCareer
@@ -61,7 +61,7 @@ class SmoothCareerPreviewVC: PreviewBaseVC {
         //ある（6～10人）
         //ある（11人～）
         arrData.append(MdlItemH(.managementsF16, "", childItems: [
-            EditableItemH(type: .selectDrum, editItem: EditItemMdlAppSmoothCareerWorkBackgroundDetail.experieneManagement, val: _detail.workBackgroundDetail.experieneManagement.description),
+            EditableItemH(type: .selectDrum, editItem: EditItemMdlAppSmoothCareerWorkBackgroundDetail.experienceManagement, val: _detail.workBackgroundDetail.experienceManagement),
         ]))
         //◆F-22職種別入力（PCスキル）
         //・「PCスキル」の入力をする：「Excel」「Word」「PowerPoint」・それぞれドラム選択

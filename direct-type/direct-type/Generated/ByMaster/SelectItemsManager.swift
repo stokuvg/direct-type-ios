@@ -62,6 +62,9 @@ class SelectItemsManager: NSObject {
         loadMaster(type: .skill)
         loadMaster(type: .skillYear)
         loadMaster(type: .management)
+        loadMaster(type: .pcSkillWord)
+        loadMaster(type: .pcSkillExcel)
+        loadMaster(type: .pcSkillPowerPoint)
     }
     //=== 依存関係の解決
     func initDependency() {
@@ -136,6 +139,17 @@ class SelectItemsManager: NSObject {
         case EditItemMdlResumeJobExperiments.jobExperimentYear.itemKey:
             return SelectItemsManager.getMaster(.jobExperimentYear)
             
+        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.experienceManagement.itemKey:
+            return SelectItemsManager.getMaster(.management)
+        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.businessType.itemKey:
+            return SelectItemsManager.getMaster(.businessType)
+        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.skillExcel.itemKey:
+            return SelectItemsManager.getMaster(.pcSkillExcel)
+        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.skillWord.itemKey:
+            return SelectItemsManager.getMaster(.pcSkillWord)
+        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.skillPowerPoint.itemKey:
+            return SelectItemsManager.getMaster(.pcSkillPowerPoint)
+
 
         default:
             break
@@ -251,6 +265,10 @@ extension SelectItemsManager {
         case skill
         case skillYear
         case management
+        case pcSkillExcel
+        case pcSkillWord
+        case pcSkillPowerPoint
+
         
         var fName: String {
             switch self {
@@ -272,6 +290,9 @@ extension SelectItemsManager {
             case .skill:                return "MstL_skill"
             case .skillYear:            return "MstL_skillYear"
             case .management:           return "MstF16_management"
+            case .pcSkillWord:          return "MstF22_pcSkillWord"
+            case .pcSkillExcel:         return "MstF22_pcSkillExcel"
+            case .pcSkillPowerPoint:    return "MstF22_pcSkillPowerPoint"
             }
         }
     }
@@ -299,7 +320,7 @@ extension SelectItemsManager {
             } catch {
                 // contents could not be loaded
             }
-//            ////MyLog.Log(.master, title: "[\(type.fName)] \(arrCodeDisp.count)件のマスタを読み込みました")
+            print("[\(type.fName)] \(arrCodeDisp.count)件のマスタを読み込みました")
             //===[ソート後のものを保持しておく]===___
             arrMaster[type] = []
             for (num, item) in arrCodeDisp.sorted(by: { (mae, ato) -> Bool in
@@ -373,7 +394,7 @@ extension SelectItemsManager {
             //    }
             //}
             ////===[Debug: 内容確認]===^^^
-//            ////MyLog.Log(.master, title: "[\(type.fName)] \(arrCodeDisp.count)件のマスタを読み込みました")
+            print("[\(type.fName)] \(arrCodeDisp.count)件のマスタを読み込みました")
         }
     }
     //======================================================
