@@ -1,5 +1,5 @@
 //
-//  SnoothCareerVC.swift
+//  SmoothCareerVC.swift
 //  direct-type
 //
 //  Created by ms-mb015 on 2020/04/28.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SnoothCareerVC: TmpBasicVC {
+class SmoothCareerVC: TmpBasicVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()

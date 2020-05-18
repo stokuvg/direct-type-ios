@@ -59,8 +59,9 @@ class SelectItemsManager: NSObject {
         loadMaster(type: .employmentType)
         loadMaster(type: .prCode)
         loadMaster(type: .overtime)
-//        loadMaster(type: .skill)//これあとで
+        loadMaster(type: .skill)
         loadMaster(type: .skillYear)
+        loadMaster(type: .management)
     }
     //=== 依存関係の解決
     func initDependency() {
@@ -249,6 +250,7 @@ extension SelectItemsManager {
         case overtime
         case skill
         case skillYear
+        case management
         
         var fName: String {
             switch self {
@@ -269,6 +271,7 @@ extension SelectItemsManager {
             case .overtime:             return "MstL3_overtime"
             case .skill:                return "MstL_skill"
             case .skillYear:            return "MstL_skillYear"
+            case .management:           return "MstF16_management"
             }
         }
     }
