@@ -221,6 +221,7 @@ class JobOfferDetailVC: TmpBasicVC {
         self.detailTableView.registerNib(nibName: "JobDetailFoldingOutlineCell", idName: "JobDetailFoldingOutlineCell")
         /// section 8
         // 応募ボタン/キープのボタン
+        self.detailTableView.registerNib(nibName: "JobDetailFooterApplicationCell", idName: "JobDetailFooterApplicationCell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -263,6 +264,8 @@ extension JobOfferDetailVC: UITableViewDelegate {
                 return phoneNumberOpenFlag ? UITableView.automaticDimension : 0
             case (7,0):
                 return companyOutlineOpenFlag ? UITableView.automaticDimension : 0
+            case (8,0):
+                return 120
             default:
                 return UITableView.automaticDimension
         }
@@ -283,6 +286,26 @@ extension JobOfferDetailVC: UITableViewDelegate {
 }
 
 extension JobOfferDetailVC: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        switch section {
+        case 7:
+            return 35
+        default:
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        switch section {
+            case 7:
+                let view = UIView()
+                view.backgroundColor = UIColor.init(colorType: .color_base)
+                return view
+            default:
+                return UIView()
+        }
+    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
@@ -345,7 +368,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 10
+        return 9
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -434,6 +457,9 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 let foldingData = foldingDatas["outline"] as! [String: Any]
                 
                 cell.setup(data: foldingData)
+                return cell
+            case (8, _):
+                let cell = tableView.loadCell(cellName: "JobDetailFooterApplicationCell", indexPath: indexPath) as! JobDetailFooterApplicationCell
                 return cell
             default:
                 let cell = UITableViewCell()

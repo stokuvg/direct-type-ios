@@ -78,8 +78,6 @@ class JobDetailFoldingOutlineCell: BaseTableViewCell {
         
         let representative = data["representative"] as! [String: Any]
         self.makeRepresentativeView(data: representative)
-        
-        self.makeSpaceView()
     }
     
     // 取引先
@@ -206,16 +204,5 @@ class JobDetailFoldingOutlineCell: BaseTableViewCell {
             
             self.stackView.addArrangedSubview(view)
         }
-    }
-    
-    // スペース
-    private func makeSpaceView() {
-        let view = UINib.init(nibName: "JobDetailFoldingOptionalView", bundle: nil)
-        .instantiate(withOwner: self, options: nil)
-        .first as! JobDetailFoldingOptionalView
-        
-        view.setup(title: "", item: "")
-        
-        self.stackView.addArrangedSubview(view)
     }
 }

@@ -79,6 +79,10 @@
 		067F28E52456D05F000AAD69 /* TmpWebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067F28E42456D05F000AAD69 /* TmpWebVC.swift */; };
 		067F28E82456D112000AAD69 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067F28E72456D112000AAD69 /* UIColor+Extensions.swift */; };
 		067F28EA2456D135000AAD69 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067F28E92456D135000AAD69 /* UIFont+Extensions.swift */; };
+		068FFAA224725F4B0083E130 /* JobDetailFooterApplicationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068FFAA024725F4B0083E130 /* JobDetailFooterApplicationCell.swift */; };
+		068FFAA324725F4B0083E130 /* JobDetailFooterApplicationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068FFAA124725F4B0083E130 /* JobDetailFooterApplicationCell.xib */; };
+		068FFAA52472662A0083E130 /* JobDetailSpaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068FFAA42472662A0083E130 /* JobDetailSpaceView.swift */; };
+		068FFAA7247266370083E130 /* JobDetailSpaceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068FFAA6247266370083E130 /* JobDetailSpaceView.xib */; };
 		06B94F64246BE38E002FEDDC /* JobDetailItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B94F62246BE38E002FEDDC /* JobDetailItemCell.swift */; };
 		06B94F65246BE38E002FEDDC /* JobDetailItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06B94F63246BE38E002FEDDC /* JobDetailItemCell.xib */; };
 		06C347242463A595000FB4DA /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C347232463A595000FB4DA /* UIButton+Extensions.swift */; };
@@ -266,6 +270,10 @@
 		067F28E42456D05F000AAD69 /* TmpWebVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpWebVC.swift; sourceTree = "<group>"; };
 		067F28E72456D112000AAD69 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		067F28E92456D135000AAD69 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
+		068FFAA024725F4B0083E130 /* JobDetailFooterApplicationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailFooterApplicationCell.swift; sourceTree = "<group>"; };
+		068FFAA124725F4B0083E130 /* JobDetailFooterApplicationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailFooterApplicationCell.xib; sourceTree = "<group>"; };
+		068FFAA42472662A0083E130 /* JobDetailSpaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailSpaceView.swift; sourceTree = "<group>"; };
+		068FFAA6247266370083E130 /* JobDetailSpaceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailSpaceView.xib; sourceTree = "<group>"; };
 		06B94F62246BE38E002FEDDC /* JobDetailItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailItemCell.swift; sourceTree = "<group>"; };
 		06B94F63246BE38E002FEDDC /* JobDetailItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailItemCell.xib; sourceTree = "<group>"; };
 		06C347232463A595000FB4DA /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
@@ -430,6 +438,10 @@
 				066F271B246E81B60040BDC1 /* JobDetailFoldingOutlineCell.xib */,
 				0662C60224722E280053CAD9 /* JobDetailFoldingOptionalView.swift */,
 				0662C60424722E390053CAD9 /* JobDetailFoldingOptionalView.xib */,
+				068FFAA024725F4B0083E130 /* JobDetailFooterApplicationCell.swift */,
+				068FFAA124725F4B0083E130 /* JobDetailFooterApplicationCell.xib */,
+				068FFAA42472662A0083E130 /* JobDetailSpaceView.swift */,
+				068FFAA6247266370083E130 /* JobDetailSpaceView.xib */,
 			);
 			path = detail;
 			sourceTree = "<group>";
@@ -923,6 +935,7 @@
 				066BD9E32456ACB5009E610B /* LaunchScreen.storyboard in Resources */,
 				066EF6C6245BB9C400E15AD2 /* KeepCardCell.xib in Resources */,
 				26BF48E924639D2B00E00215 /* MstK7_skillEnglish.tsv in Resources */,
+				068FFAA7247266370083E130 /* JobDetailSpaceView.xib in Resources */,
 				064EF6F824654A7300853ADD /* JobDetailDataCell.xib in Resources */,
 				066F2707246E32270040BDC1 /* JobDetailFoldingItemCell.xib in Resources */,
 				06E519842457CF90004E4B7A /* JobOfferBigCardCell.xib in Resources */,
@@ -937,6 +950,7 @@
 				064570642465427000F3B015 /* JobDetailGuideBookHeaderView.xib in Resources */,
 				0645DE03246BB6A100592572 /* JobDetailSalaryExampleCell.xib in Resources */,
 				26CFC4682469496D00E458E2 /* HEditZipcodeTBCell.xib in Resources */,
+				068FFAA324725F4B0083E130 /* JobDetailFooterApplicationCell.xib in Resources */,
 				066BC829246CF40C00FE607F /* JobDetailItemAttentionView.xib in Resources */,
 				066763782457B0A700AC5039 /* KeepListVC.storyboard in Resources */,
 				26BF48E624639D2B00E00215 /* MstK8_qualification.tsv in Resources */,
@@ -1086,6 +1100,7 @@
 				26F2A827246D23800037D47F /* MdlResumeSkillLanguage.swift in Sources */,
 				26F2A825246D23660037D47F /* MdlResumeSchool.swift in Sources */,
 				26989F82246A66640050AC40 /* EditableModel.swift in Sources */,
+				068FFAA224725F4B0083E130 /* JobDetailFooterApplicationCell.swift in Sources */,
 				06E519C22458156A004E4B7A /* AccessDenyVC.swift in Sources */,
 				067F28EA2456D135000AAD69 /* UIFont+Extensions.swift in Sources */,
 				067F28E82456D112000AAD69 /* UIColor+Extensions.swift in Sources */,
@@ -1104,6 +1119,7 @@
 				06E519932457D750004E4B7A /* OwnPRVC.swift in Sources */,
 				26989F80246A5E520050AC40 /* HEditDrumTBCell.swift in Sources */,
 				067F28DF2456D013000AAD69 /* TmpNaviTopVC.swift in Sources */,
+				068FFAA52472662A0083E130 /* JobDetailSpaceView.swift in Sources */,
 				268BFF56246E8292004B2640 /* SubInputMemoVC.swift in Sources */,
 				06B94F64246BE38E002FEDDC /* JobDetailItemCell.swift in Sources */,
 				06E519D02458164B004E4B7A /* ScoutPreview.swift in Sources */,
