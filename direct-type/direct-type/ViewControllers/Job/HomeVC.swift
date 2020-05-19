@@ -66,8 +66,24 @@ class HomeVC: TmpNaviTopVC {
         //[Dbg]___
         if Constants.DbgAutoPushVC {
             let storyboard = UIStoryboard(name: "Preview", bundle: nil)
+            switch Constants.DbgAutoPushVCNum {
+            case 1:
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ProfilePreviewVC") as? ProfilePreviewVC{
+                self.navigationController?.pushViewController(nvc, animated: true)
+            }
+            case 2:
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ResumePreviewVC") as? ResumePreviewVC{
+                self.navigationController?.pushViewController(nvc, animated: true)
+            }
+            case 3:
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_CareerPreviewVC") as? CareerPreviewVC{
+                self.navigationController?.pushViewController(nvc, animated: true)
+            }
+            case 4:
             if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SmoothCareerPreviewVC") as? SmoothCareerPreviewVC{
                 self.navigationController?.pushViewController(nvc, animated: true)
+            }
+            default: break
             }
         }
         //[Dbg]^^^

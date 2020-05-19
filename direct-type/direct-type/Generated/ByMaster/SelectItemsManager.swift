@@ -101,44 +101,75 @@ class SelectItemsManager: NSObject {
     //===EditableItemKeyから直接TsvMasterに繋げて良い気がする...
     class func getSelectItemsByKey(_ itemKey: EditableItemKey, grpCodeFilter: String?) -> [CodeDisp] {
         switch itemKey {
+//            /** 性別 */
+//             var gender: Code = ""
+//            /** 都道府県 */
+//             var prefecture: Code = ""
         case EditItemMdlProfile.gender.itemKey:
             return getSelectItems(type: .gender, nil)
         case EditItemMdlProfile.prefecture.itemKey:
             return getSelectItems(type: .prefecture, nil)
 
+//            /** 就業状況 */
+//            var employment: Code
+//            /** 転職回数 */
+//            var changeCount: Code
+//            var businessTypes: [Code]
+//            var qualifications: [Code]
         case EditItemMdlResume.employment.itemKey:
+//let buf = getSelectItems(type: .employment, nil)
+//print(buf.count, buf.first?.debugDisp)
             return getSelectItems(type: .employment, nil)
         case EditItemMdlResume.changeCount.itemKey:
             return getSelectItems(type: .changeCount, nil)
-            
         case EditItemMdlResumeLastJobExperiment.jobType.itemKey:
-
+            //=== JobTypeを選ぶとOccupationが決まるようなもの
+//            let (g, i) =  SelectItemsManager.getMaster(.jobType)
+            return SelectItems_Occupation(grpCodeFilter: nil)
+        case EditItemMdlResumeJobExperiments.jobType.itemKey:
+            return SelectItems_Occupation(grpCodeFilter: nil)
+        case EditItemMdlResume.businessTypes.itemKey:
+            return getSelectItems(type: .businessTypes, nil)
+        case EditItemMdlResumeSkillLanguage.languageEnglish.itemKey:
+            return getSelectItems(type: .skillLanguage, nil)
+        case EditItemMdlResume.qualifications.itemKey:
+            return getSelectItems(type: .qualifications, nil)
+        case EditItemMdlResumeLastJobExperiment.jobType.itemKey:
             let buf0 =  SelectItemsManager.getMaster(.jobType).0
             let buf1 =  SelectItemsManager.getMaster(.jobType).1
             print(buf0.count, buf1.count)
-
+            //=== JobTypeを選ぶとOccupationが決まるようなもの
             let (g, i) =  SelectItemsManager.getMaster(.jobType)
             print(g.count, i.count)
-
             return SelectItems_Occupation(grpCodeFilter: nil)
-
         case EditItemMdlResumeLastJobExperiment.jobExperimentYear.itemKey:
             return SelectItemsManager.getMaster(.jobExperimentYear)
-            
         case EditItemMdlResumeJobExperiments.jobType.itemKey:
-
-            let buf0 =  SelectItemsManager.getMaster(.jobType).0
-            let buf1 =  SelectItemsManager.getMaster(.jobType).1
-            print(buf0.count, buf1.count)
-
+            //=== JobTypeを選ぶとOccupationが決まるようなもの
             let (g, i) =  SelectItemsManager.getMaster(.jobType)
-            print(g.count, i.count)
-
             return SelectItems_Occupation(grpCodeFilter: nil)
-
         case EditItemMdlResumeJobExperiments.jobExperimentYear.itemKey:
             return SelectItemsManager.getMaster(.jobExperimentYear)
-            
+
+            //=========
+            //class MdlAppSmoothCareer: Codable {
+            //    /** 年収（＊初回登録必須、ここでは非表示） */
+            //    var salary: Code
+            //class MdlAppSmoothCareerComponyDescription: Codable {
+            //    /** 雇用形態 */
+            //    var employmentType: Code
+            //class MdlAppSmoothCareerWorkBackgroundDetail: Codable {
+            //    /** 在籍企業の業種 */
+            //    var businessType: Code
+            //    var experienceManagement: Code
+            //    /** PCスキル：Excel */
+            //    var skillExcel: Code
+            //    /** PCスキル：Word */
+            //    var skillWord: Code
+            //    /** PCスキル：PowerPoint */
+            //    var skillPowerPoint: Code
+            //
+
         case EditItemMdlAppSmoothCareerWorkBackgroundDetail.experienceManagement.itemKey:
             return SelectItemsManager.getMaster(.management)
         case EditItemMdlAppSmoothCareerWorkBackgroundDetail.businessType.itemKey:
@@ -149,7 +180,6 @@ class SelectItemsManager: NSObject {
             return SelectItemsManager.getMaster(.pcSkillWord)
         case EditItemMdlAppSmoothCareerWorkBackgroundDetail.skillPowerPoint.itemKey:
             return SelectItemsManager.getMaster(.pcSkillPowerPoint)
-
 
         default:
             break
@@ -183,14 +213,14 @@ class SelectItemsManager: NSObject {
     }
     private class func getSelectItems(type: EditItemMdlResume, _ grpCodeFilter: String?) -> [CodeDisp] {
         switch type {
-        case .employment:           return SelectItemsManager.getMaster(.jobType)
+        case .employment:           return SelectItemsManager.getMaster(.employment)
         case .changeCount:          return SelectItemsManager.getMaster(.changeCount)
         case .lastJobExperiment:    return []
         case .jobExperiments:       return []
-        case .businessTypes:        return []
+        case .businessTypes:        return SelectItemsManager.getMaster(.businessType)
         case .school:               return []
-        case .skillLanguage:        return []
-        case .qualifications:       return []
+        case .skillLanguage:        return SelectItemsManager.getMaster(.skillEnglish)
+        case .qualifications:       return SelectItemsManager.getMaster(.qualification)
         case .ownPr:                return []
         }
     }
