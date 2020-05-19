@@ -107,18 +107,7 @@ class JobOfferDetailVC: TmpBasicVC {
             "memo":
             [
                 "title":"取材メモ",
-                "text":"ここにテキストを入れる",
-                "step":[
-                    ["title":"step1","text":"step1のテキストを入れる"],
-                    ["title":"step2","text":"step2のテキストを入れる"],
-                    ["title":"step3","text":"step3のテキストを入れる"],
-                    ["title":"step4","text":"step4のテキストを入れる"],
-                ],
-                "headline":[
-                    ["head1":"見出し1","text":"ここにテキスト"],
-                    ["head2":"見出し2","text":"ここにテキスト"],
-                    ["head3":"見出し3","text":"ここにテキスト"],
-                ]
+                "text":"ここにテキストを入れる\n\nここにテキストを入れる",
             ],
             "process":
             [
@@ -130,8 +119,8 @@ class JobOfferDetailVC: TmpBasicVC {
                     ["title":"step4","text":"Web応募による書類選考"],
                     ["title":"step5","text":"Web応募による書類選考"],
                 ],
-                "text1":"",
-                "text2":"",
+                "text1":"【type】の専用応募フォームからご応募ください。\n※ご応募については秘密厳守いたします。\n※\n※\n\n",
+                "text2":"----------------------------\n当求人案件は株式会社キャリアデザインセンターが運営する株式会社システムソフト type採用事務局にて応募の受付業務を代行しております。",
             ],
             "phone_number":
             [
@@ -331,7 +320,6 @@ extension JobOfferDetailVC: UITableViewDataSource {
                     .first as! JobDetailGuideBookHeaderView
                 return view
             case 4,5,6,7:
-                Log.selectLog(logLevel: .debug, "section:\(section)")
                 // 取材メモ
                 // 選考プロセス
                 // 連絡先
@@ -426,28 +414,12 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 cell.setup(data: itemData)
                 return cell
             case (4,_):
-                let cell = tableView.loadCell(cellName: "JobDetailFoldingItemCell", indexPath: indexPath) as! JobDetailFoldingItemCell
-                var textType:TextType!
-                var openFlag:Bool = false
-                if section == 4 {
-                    textType = .text
-                    openFlag = coverageMemoOpenFlag
-                } else if section == 5 {
-                    textType = .step
-                    openFlag = selectionProcessOpenFlag
-                } else if section == 6 {
-                    textType = .textLink
-                    openFlag = phoneNumberOpenFlag
-                } else {
-                    textType = .headline
-                    openFlag = companyOutlineOpenFlag
-                }
+                let cell = tableView.loadCell(cellName: "JobDetailFoldingMemoCell", indexPath: indexPath) as! JobDetailFoldingMemoCell
                 
                 let foldingDatas = dummyData["folding"] as! [String: Any]
-                let cnt = section - foldingDatas.count
-//                let foldingData = foldingDatas[cnt]
-                
-//                cell.setup(data: foldingData, textType: textType,flag: openFlag)
+                let foldingData = foldingDatas["memo"] as! [String: Any]
+                let memoText = foldingData["text"] as! String
+                cell.setup(data: memoText)
                 
                 return cell
             case (5, _):
@@ -587,7 +559,7 @@ extension JobOfferDetailVC: FoldingHeaderViewDelegate {
         let index = IndexSet(arrayLiteral: section)
         switch tag {
         case 0:
-            coverageMemoOpenFlag = !companyOutlineOpenFlag
+            coverageMemoOpenFlag = !coverageMemoOpenFlag
         case 1:
             selectionProcessOpenFlag = !selectionProcessOpenFlag
         case 2:

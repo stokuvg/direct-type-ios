@@ -43,14 +43,24 @@ class JobDetailFoldingProcessCell: BaseTableViewCell {
             }
         }
         
-        let text1:[[String: Any]] = data["text1"] as! [[String: Any]]
+        let text1:String = data["text1"] as! String
         if text1.count > 0 {
+            let view = UINib.init(nibName: "JobDetailTextView", bundle: nil)
+            .instantiate(withOwner: self, options: nil)
+            .first as! JobDetailTextView
             
+            view.setup(data: text1)
+            self.stackView.addArrangedSubview(view)
         }
         
-        let text2:[[String: Any]] = data["text2"] as! [[String: Any]]
+        let text2:String = data["text2"] as! String
         if text2.count > 0 {
+            let view = UINib.init(nibName: "JobDetailTextView", bundle: nil)
+            .instantiate(withOwner: self, options: nil)
+            .first as! JobDetailTextView
             
+            view.setup(data: text2)
+            self.stackView.addArrangedSubview(view)
         }
         
     }
