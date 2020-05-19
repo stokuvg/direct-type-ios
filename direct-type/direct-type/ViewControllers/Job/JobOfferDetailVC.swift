@@ -471,6 +471,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 }
             case (8, _):
                 let cell = tableView.loadCell(cellName: "JobDetailFooterApplicationCell", indexPath: indexPath) as! JobDetailFooterApplicationCell
+                cell.delegate = self
                 return cell
             default:
                 let cell = UITableViewCell()
@@ -596,5 +597,16 @@ extension JobOfferDetailVC: FoldingHeaderViewDelegate {
             break
         }
         self.detailTableView.reloadSections(index, with: .automatic)
+    }
+}
+
+extension JobOfferDetailVC: JobDetailFooterApplicationCellDelegate {
+    
+    func footerApplicationBtnAction() {
+        // TODO:応募フォームに遷移
+    }
+    
+    func footerKeepBtnAction() {
+        // キープ情報送信
     }
 }
