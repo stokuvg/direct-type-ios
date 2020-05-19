@@ -54,23 +54,15 @@ class JobDetailImageCell: BaseTableViewCell {
         viewWidth = self.mainImageBackView.frame.size.width
         viewHeight = self.mainImageBackView.frame.size.height
         
-        Log.selectLog(logLevel: .debug, "viewHeight:\(String(describing: viewHeight))")
-        
         // 表示画像用
         imageH = viewHeight                     // 画像高さ 比率 11:8
         imageW = (imageH * 11 / 8) - (margin * 2)
         
-//        imageW = viewWidth - (margin * 2)       // 画像幅　比率 11:8
-        Log.selectLog(logLevel: .debug, "imageW:\(String(describing: imageW))")
         imageY = 0        // 画像表示位置 Y
         
-        Log.selectLog(logLevel: .debug, "imageY:\(String(describing: imageY))")
-        
-//        imageX = margin                         // 画像表示位置 X
         imageX = (viewWidth - imageW) / 2                         // 画像表示位置 X
-//        margin = imageX
+        
         margin = imageX
-        Log.selectLog(logLevel: .debug, "imageX:\(String(describing: imageX))")
         
         self.mainImagesScrollView = UIScrollView.init(frame: CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight))
         self.mainImagesScrollView.isPagingEnabled = true
@@ -83,19 +75,16 @@ class JobDetailImageCell: BaseTableViewCell {
         let imageUrls:[String] = data["images"] as! [String]
         imageCnt = imageUrls.count
         if imageUrls.count > 1 {
-            Log.selectLog(logLevel: .debug, "viewWidth:\(String(describing: viewWidth))")
             
             self.mainImagesControl.numberOfPages = imageUrls.count
             
             for i in 0..<(imageUrls.count * 3) {
-//            for i in 0..<imageUrls.count {
                 var cnt:Int = 0
                 cnt = i
                 if i >= imageUrls.count {
                     cnt = i % imageUrls.count
                 }
                 let imageUrlString = imageUrls[cnt]
-//                let imageUrlString = imageUrls[i]
                 let imageUrl = URL(string: imageUrlString)
                 let scrollX:CGFloat = (margin + (viewWidth * CGFloat(i)))
 
@@ -108,15 +97,9 @@ class JobDetailImageCell: BaseTableViewCell {
                 imageView.layer.masksToBounds = true
                 imageView.clipsToBounds = true
                 
-                Log.selectLog(logLevel: .debug, "imageView:\(imageView)")
- 
-                
                 self.mainImagesScrollView.addSubview(imageView)
             }
-//            self.mainImagesScrollView.contentSize = CGSize(width: (CGFloat(imageUrls.count) * viewWidth), height: viewHeight)
             self.mainImagesScrollView.contentSize = CGSize(width: (CGFloat(imageUrls.count*3) * viewWidth), height: viewHeight)
-            
-            Log.selectLog(logLevel: .debug, "self.mainImagesScrollView:\(String(describing: self.mainImagesScrollView))")
             
         } else {
             

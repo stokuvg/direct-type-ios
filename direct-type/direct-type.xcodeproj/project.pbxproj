@@ -60,10 +60,6 @@
 		066EF6C8245BBA1100E15AD2 /* BaseJobCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066EF6C7245BBA1100E15AD2 /* BaseJobCardCell.swift */; };
 		066EF6CB245C119000E15AD2 /* JobOfferCardMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066EF6C9245C119000E15AD2 /* JobOfferCardMoreCell.swift */; };
 		066EF6CC245C119000E15AD2 /* JobOfferCardMoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 066EF6CA245C119000E15AD2 /* JobOfferCardMoreCell.xib */; };
-		066F2706246E32270040BDC1 /* JobDetailFoldingItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066F2704246E32270040BDC1 /* JobDetailFoldingItemCell.swift */; };
-		066F2707246E32270040BDC1 /* JobDetailFoldingItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 066F2705246E32270040BDC1 /* JobDetailFoldingItemCell.xib */; };
-		066F2709246E68DE0040BDC1 /* JobDetailBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066F2708246E68DE0040BDC1 /* JobDetailBrowserView.swift */; };
-		066F270B246E68E50040BDC1 /* JobDetailBrowserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 066F270A246E68E50040BDC1 /* JobDetailBrowserView.xib */; };
 		066F270D246E6B820040BDC1 /* UITextView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066F270C246E6B820040BDC1 /* UITextView+Extensions.swift */; };
 		066F2710246E811F0040BDC1 /* JobDetailFoldingMemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066F270E246E811F0040BDC1 /* JobDetailFoldingMemoCell.swift */; };
 		066F2711246E811F0040BDC1 /* JobDetailFoldingMemoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 066F270F246E811F0040BDC1 /* JobDetailFoldingMemoCell.xib */; };
@@ -265,10 +261,6 @@
 		066EF6C7245BBA1100E15AD2 /* BaseJobCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseJobCardCell.swift; sourceTree = "<group>"; };
 		066EF6C9245C119000E15AD2 /* JobOfferCardMoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobOfferCardMoreCell.swift; sourceTree = "<group>"; };
 		066EF6CA245C119000E15AD2 /* JobOfferCardMoreCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobOfferCardMoreCell.xib; sourceTree = "<group>"; };
-		066F2704246E32270040BDC1 /* JobDetailFoldingItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailFoldingItemCell.swift; sourceTree = "<group>"; };
-		066F2705246E32270040BDC1 /* JobDetailFoldingItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailFoldingItemCell.xib; sourceTree = "<group>"; };
-		066F2708246E68DE0040BDC1 /* JobDetailBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailBrowserView.swift; sourceTree = "<group>"; };
-		066F270A246E68E50040BDC1 /* JobDetailBrowserView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailBrowserView.xib; sourceTree = "<group>"; };
 		066F270C246E6B820040BDC1 /* UITextView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extensions.swift"; sourceTree = "<group>"; };
 		066F270E246E811F0040BDC1 /* JobDetailFoldingMemoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailFoldingMemoCell.swift; sourceTree = "<group>"; };
 		066F270F246E811F0040BDC1 /* JobDetailFoldingMemoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailFoldingMemoCell.xib; sourceTree = "<group>"; };
@@ -452,10 +444,6 @@
 				066BC828246CF40C00FE607F /* JobDetailItemAttentionView.xib */,
 				06409C72246D3A6800EA6BBB /* JobDetailFoldingHeaderView.swift */,
 				06409C74246D3ACB00EA6BBB /* JobDetailFoldingHeaderView.xib */,
-				066F2704246E32270040BDC1 /* JobDetailFoldingItemCell.swift */,
-				066F2705246E32270040BDC1 /* JobDetailFoldingItemCell.xib */,
-				066F2708246E68DE0040BDC1 /* JobDetailBrowserView.swift */,
-				066F270A246E68E50040BDC1 /* JobDetailBrowserView.xib */,
 				066F270E246E811F0040BDC1 /* JobDetailFoldingMemoCell.swift */,
 				066F270F246E811F0040BDC1 /* JobDetailFoldingMemoCell.xib */,
 				066F2712246E818A0040BDC1 /* JobDetailFoldingProcessCell.swift */,
@@ -980,7 +968,6 @@
 				26BF48E924639D2B00E00215 /* MstK7_skillEnglish.tsv in Resources */,
 				064EF6F824654A7300853ADD /* JobDetailDataCell.xib in Resources */,
 				26147F36247267F9009B30B5 /* MstF22_pcSkillWord.tsv in Resources */,
-				066F2707246E32270040BDC1 /* JobDetailFoldingItemCell.xib in Resources */,
 				06E519842457CF90004E4B7A /* JobOfferBigCardCell.xib in Resources */,
 				066EF6CC245C119000E15AD2 /* JobOfferCardMoreCell.xib in Resources */,
 				0662C60524722E390053CAD9 /* JobDetailFoldingOptionalView.xib in Resources */,
@@ -1018,7 +1005,6 @@
 				066F271D246E81B60040BDC1 /* JobDetailFoldingOutlineCell.xib in Resources */,
 				26BF48E724639D2B00E00215 /* MstK9_employmentType.tsv in Resources */,
 				066BD9E02456ACB5009E610B /* Assets.xcassets in Resources */,
-				066F270B246E68E50040BDC1 /* JobDetailBrowserView.xib in Resources */,
 				066F2711246E811F0040BDC1 /* JobDetailFoldingMemoCell.xib in Resources */,
 				269AFFC7246A929300DB364B /* EditablePopup.storyboard in Resources */,
 				269AFFC9246A929300DB364B /* SubSelectTBCell.xib in Resources */,
@@ -1118,7 +1104,6 @@
 				26F2A82D246D31020037D47F /* PreviewBaseVC.swift in Sources */,
 				0662C60324722E280053CAD9 /* JobDetailFoldingOptionalView.swift in Sources */,
 				066F2710246E811F0040BDC1 /* JobDetailFoldingMemoCell.swift in Sources */,
-				066F2709246E68DE0040BDC1 /* JobDetailBrowserView.swift in Sources */,
 				067F28D22456CE39000AAD69 /* TmpBasicVC.swift in Sources */,
 				06E5198F2457D70B004E4B7A /* ChemistrySelect.swift in Sources */,
 				26F2A829246D2A230037D47F /* MdlResumeJobExperiments.swift in Sources */,
@@ -1226,7 +1211,6 @@
 				064EF6F724654A7300853ADD /* JobDetailDataCell.swift in Sources */,
 				063350DD2463EC4B00AF90F3 /* NoCardView.swift in Sources */,
 				26F2A823246D1E270037D47F /* MdlResumeLastJobExperiment.swift in Sources */,
-				066F2706246E32270040BDC1 /* JobDetailFoldingItemCell.swift in Sources */,
 				06E519B9245814DF004E4B7A /* ResumeEditVC.swift in Sources */,
 				06E519D324581684004E4B7A /* ContentsEditVC.swift in Sources */,
 				06C347242463A595000FB4DA /* UIButton+Extensions.swift in Sources */,

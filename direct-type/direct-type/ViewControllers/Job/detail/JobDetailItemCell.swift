@@ -43,6 +43,7 @@ class JobDetailItemCell: BaseJobDetailCell {
         let indispensableText = data["indispensable"] as! String
         self.indispensableLabel.text(text: indispensableText, fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         
+        /*
         let optional = data["optional"] as! [[String:Any]]
         if optional.count > 0 {
             let optionalFrameWidth = self.itemBackView.frame.size.width
@@ -84,5 +85,7 @@ class JobDetailItemCell: BaseJobDetailCell {
                 self.itemStackView.addArrangedSubview(attentionView)
             }
         }
+        */
+        
     }
 }

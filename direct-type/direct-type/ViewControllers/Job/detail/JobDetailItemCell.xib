@@ -31,13 +31,13 @@
                                                 <rect key="frame" x="12" y="44" width="266" height="1"/>
                                                 <color key="backgroundColor" name="color-line"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="4yz-Ru-0x4"/>
+                                                    <constraint firstAttribute="height" priority="999" constant="1" id="4yz-Ru-0x4"/>
                                                 </constraints>
                                             </view>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="donutsDefault" translatesAutoresizingMaskIntoConstraints="NO" id="fPg-p0-Qk4">
                                                 <rect key="frame" x="12" y="10" width="20" height="25"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="25" id="RXc-Pe-AEx"/>
+                                                    <constraint firstAttribute="height" priority="999" constant="25" id="RXc-Pe-AEx"/>
                                                     <constraint firstAttribute="width" constant="20" id="zzm-th-SzO"/>
                                                 </constraints>
                                             </imageView>
@@ -57,7 +57,7 @@
                                             <constraint firstAttribute="bottom" secondItem="zww-D7-0pH" secondAttribute="bottom" id="Gg6-WS-43C"/>
                                             <constraint firstItem="gE1-uo-ky4" firstAttribute="leading" secondItem="fPg-p0-Qk4" secondAttribute="trailing" constant="12" id="Hc1-bL-q6n"/>
                                             <constraint firstItem="zww-D7-0pH" firstAttribute="leading" secondItem="Ba1-tb-qRm" secondAttribute="leading" constant="12" id="REK-Yo-9At"/>
-                                            <constraint firstAttribute="height" constant="45" id="Zge-ls-nO1"/>
+                                            <constraint firstAttribute="height" priority="999" constant="45" id="Zge-ls-nO1"/>
                                             <constraint firstItem="fPg-p0-Qk4" firstAttribute="leading" secondItem="Ba1-tb-qRm" secondAttribute="leading" constant="12" id="imA-r3-kvd"/>
                                             <constraint firstAttribute="trailing" secondItem="zww-D7-0pH" secondAttribute="trailing" constant="12" id="rGO-wA-WPo"/>
                                         </constraints>

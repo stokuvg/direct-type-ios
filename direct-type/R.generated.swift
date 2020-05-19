@@ -1053,7 +1053,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 34 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 32 nibs.
   struct nib {
     /// Nib `HEditDrumTBCell`.
     static let hEditDrumTBCell = _R.nib._HEditDrumTBCell()
@@ -1067,14 +1067,10 @@ struct R: Rswift.Validatable {
     static let jobDetailArticleCell = _R.nib._JobDetailArticleCell()
     /// Nib `JobDetailArticleHeaderView`.
     static let jobDetailArticleHeaderView = _R.nib._JobDetailArticleHeaderView()
-    /// Nib `JobDetailBrowserView`.
-    static let jobDetailBrowserView = _R.nib._JobDetailBrowserView()
     /// Nib `JobDetailDataCell`.
     static let jobDetailDataCell = _R.nib._JobDetailDataCell()
     /// Nib `JobDetailFoldingHeaderView`.
     static let jobDetailFoldingHeaderView = _R.nib._JobDetailFoldingHeaderView()
-    /// Nib `JobDetailFoldingItemCell`.
-    static let jobDetailFoldingItemCell = _R.nib._JobDetailFoldingItemCell()
     /// Nib `JobDetailFoldingMemoCell`.
     static let jobDetailFoldingMemoCell = _R.nib._JobDetailFoldingMemoCell()
     /// Nib `JobDetailFoldingOptionalView`.
@@ -1173,14 +1169,6 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UINib(name: "JobDetailBrowserView", in: bundle)`
-    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailBrowserView) instead")
-    static func jobDetailBrowserView(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.jobDetailBrowserView)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
     /// `UINib(name: "JobDetailDataCell", in: bundle)`
     @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailDataCell) instead")
     static func jobDetailDataCell(_: Void = ()) -> UIKit.UINib {
@@ -1193,14 +1181,6 @@ struct R: Rswift.Validatable {
     @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailFoldingHeaderView) instead")
     static func jobDetailFoldingHeaderView(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.jobDetailFoldingHeaderView)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UINib(name: "JobDetailFoldingItemCell", in: bundle)`
-    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailFoldingItemCell) instead")
-    static func jobDetailFoldingItemCell(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.jobDetailFoldingItemCell)
     }
     #endif
 
@@ -1420,20 +1400,12 @@ struct R: Rswift.Validatable {
       return R.nib.jobDetailArticleHeaderView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailArticleHeaderView
     }
 
-    static func jobDetailBrowserView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailBrowserView? {
-      return R.nib.jobDetailBrowserView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailBrowserView
-    }
-
     static func jobDetailDataCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailDataCell? {
       return R.nib.jobDetailDataCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailDataCell
     }
 
     static func jobDetailFoldingHeaderView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailFoldingHeaderView? {
       return R.nib.jobDetailFoldingHeaderView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailFoldingHeaderView
-    }
-
-    static func jobDetailFoldingItemCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailFoldingItemCell? {
-      return R.nib.jobDetailFoldingItemCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailFoldingItemCell
     }
 
     static func jobDetailFoldingMemoCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailFoldingMemoCell? {
@@ -1667,17 +1639,6 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
 
-    struct _JobDetailBrowserView: Rswift.NibResourceType {
-      let bundle = R.hostingBundle
-      let name = "JobDetailBrowserView"
-
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailBrowserView? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailBrowserView
-      }
-
-      fileprivate init() {}
-    }
-
     struct _JobDetailDataCell: Rswift.NibResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "JobDetailDataCell"
@@ -1706,17 +1667,6 @@ struct _R: Rswift.Validatable {
 
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailFoldingHeaderView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailFoldingHeaderView
-      }
-
-      fileprivate init() {}
-    }
-
-    struct _JobDetailFoldingItemCell: Rswift.NibResourceType {
-      let bundle = R.hostingBundle
-      let name = "JobDetailFoldingItemCell"
-
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailFoldingItemCell? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailFoldingItemCell
       }
 
       fileprivate init() {}
