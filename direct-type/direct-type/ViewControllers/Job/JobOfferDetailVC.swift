@@ -168,8 +168,9 @@ class JobOfferDetailVC: TmpBasicVC {
         // 勤務地
         // 社名
         // 掲載期限
-        // メイン画像
         self.detailTableView.registerNib(nibName: "JobDetailDataCell", idName: "JobDetailDataCell")
+        // メイン画像
+        self.detailTableView.registerNib(nibName: "JobDetailImageCell", idName: "JobDetailImageCell")
         /// section 1
         // 記事
         self.detailTableView.registerNib(nibName: "JobDetailArticleCell", idName: "JobDetailArticleCell")
@@ -248,7 +249,10 @@ extension JobOfferDetailVC: UITableViewDelegate {
         let row = indexPath.row
         switch (section,row) {
             case (0,0):
-                return 550
+                return UITableView.automaticDimension
+//                return 253
+            case (0,1):
+                return 290
             case (1,0):
                 return articleOpenFlag ? UITableView.automaticDimension : 0
             case (4,0):
@@ -368,7 +372,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
             case 0:
-                return 1
+                return 2
             case 2:
                 return 2
             case 3:
@@ -384,6 +388,10 @@ extension JobOfferDetailVC: UITableViewDataSource {
         switch (section,row) {
             case (0,0):
                 let cell = tableView.loadCell(cellName: "JobDetailDataCell", indexPath: indexPath) as! JobDetailDataCell
+                cell.setup(data: dummyData)
+                return cell
+            case (0,1):
+                let cell = tableView.loadCell(cellName: "JobDetailImageCell", indexPath: indexPath) as! JobDetailImageCell
                 cell.setCellWidth(width: self.detailTableView.frame.size.width)
                 cell.setup(data: dummyData)
                 return cell

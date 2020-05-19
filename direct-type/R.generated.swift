@@ -1053,7 +1053,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 33 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 34 nibs.
   struct nib {
     /// Nib `HEditDrumTBCell`.
     static let hEditDrumTBCell = _R.nib._HEditDrumTBCell()
@@ -1089,6 +1089,8 @@ struct R: Rswift.Validatable {
     static let jobDetailFooterApplicationCell = _R.nib._JobDetailFooterApplicationCell()
     /// Nib `JobDetailGuideBookHeaderView`.
     static let jobDetailGuideBookHeaderView = _R.nib._JobDetailGuideBookHeaderView()
+    /// Nib `JobDetailImageCell`.
+    static let jobDetailImageCell = _R.nib._JobDetailImageCell()
     /// Nib `JobDetailItemAttentionView`.
     static let jobDetailItemAttentionView = _R.nib._JobDetailItemAttentionView()
     /// Nib `JobDetailItemCell`.
@@ -1255,6 +1257,14 @@ struct R: Rswift.Validatable {
     @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailGuideBookHeaderView) instead")
     static func jobDetailGuideBookHeaderView(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.jobDetailGuideBookHeaderView)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "JobDetailImageCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobDetailImageCell) instead")
+    static func jobDetailImageCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.jobDetailImageCell)
     }
     #endif
 
@@ -1452,6 +1462,10 @@ struct R: Rswift.Validatable {
 
     static func jobDetailGuideBookHeaderView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailGuideBookHeaderView? {
       return R.nib.jobDetailGuideBookHeaderView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailGuideBookHeaderView
+    }
+
+    static func jobDetailImageCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailImageCell? {
+      return R.nib.jobDetailImageCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailImageCell
     }
 
     static func jobDetailItemAttentionView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailItemAttentionView? {
@@ -1678,8 +1692,7 @@ struct _R: Rswift.Validatable {
         if UIKit.UIImage(named: "place", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'place' is used in nib 'JobDetailDataCell', but couldn't be loaded.") }
         if UIKit.UIImage(named: "salary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'salary' is used in nib 'JobDetailDataCell', but couldn't be loaded.") }
         if #available(iOS 11.0, tvOS 11.0, *) {
-          if UIKit.UIColor(named: "color-slider-gray", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-slider-gray' is used in storyboard 'JobDetailDataCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "color-slider-sub", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-slider-sub' is used in storyboard 'JobDetailDataCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "color-black", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-black' is used in storyboard 'JobDetailDataCell', but couldn't be loaded.") }
           if UIKit.UIColor(named: "color-white", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-white' is used in storyboard 'JobDetailDataCell', but couldn't be loaded.") }
         }
       }
@@ -1791,6 +1804,17 @@ struct _R: Rswift.Validatable {
 
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailGuideBookHeaderView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailGuideBookHeaderView
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _JobDetailImageCell: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "JobDetailImageCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailImageCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailImageCell
       }
 
       fileprivate init() {}
