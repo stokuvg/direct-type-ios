@@ -15,6 +15,7 @@ enum CardDispType:Int {
 }
 
 class HomeVC: TmpNaviTopVC {
+    
     @IBOutlet weak var homeTableView:UITableView!
     
     @IBOutlet weak var noCardBackView:UIView!
@@ -29,7 +30,14 @@ class HomeVC: TmpNaviTopVC {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        title(name: "あなたにぴったりの求人")
+        
+        let flag = self.getHomeDisplayFlag()
+        if flag {
+            self.makeHomeTitleView()
+        } else {
+//            title(name: "あなたにぴったりの求人")
+            self.makeHomeTitleView()
+        }
         
         // TODO:初回リリースでは外す
 //        self.setRightSearchBtn()
@@ -77,6 +85,29 @@ class HomeVC: TmpNaviTopVC {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    
+    private func makeHomeTitleView() {
+        guard let width = self.navigationController?.navigationBar.frame.size.width,
+            let height = self.navigationController?.navigationBar.frame.size.height else {
+                Log.selectLog(logLevel: .debug, "navigationController.navigationBarのサイズ取得の失敗")
+                return
+        }
+        
+        let view = UINib(nibName: "HomeTitleView", bundle: nil)
+        .instantiate(withOwner: self, options: nil)
+        .first as! HomeTitleView
+        
+        let viewRect = CGRect(x: 0, y: 20, width: width, height: height)
+        view.frame = viewRect
+        
+//        self.navigationController?.view.addSubview(view)
+    }
+    
+    private func getHomeDisplayFlag() -> Bool {
+        let ud = UserDefaults.standard
+        let homeFlag = ud.bool(forKey: "home")
+        return homeFlag
     }
     
     private func makeDummyData() {

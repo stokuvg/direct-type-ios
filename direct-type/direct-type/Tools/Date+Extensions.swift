@@ -51,6 +51,17 @@ extension Date {
         print("\t[\(self.description)]\t[\(buf)]")
         return buf
     }
+    
+    func dispHomeDate() -> String {
+        
+        let formatter:DateFormatter = DateFormatter()
+        // 曜日を漢字で出すために、設定
+        formatter.locale = Locale(identifier: "ja_JP")
+        formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.dateFormat = "M月d日 EEE曜日 HH:mm"
+        
+        return formatter.string(from: self)
+    }
 }
 
 extension Date {

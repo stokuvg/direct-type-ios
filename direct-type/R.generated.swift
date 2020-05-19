@@ -1053,7 +1053,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 32 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 33 nibs.
   struct nib {
     /// Nib `HEditDrumTBCell`.
     static let hEditDrumTBCell = _R.nib._HEditDrumTBCell()
@@ -1063,6 +1063,8 @@ struct R: Rswift.Validatable {
     static let hEditZipcodeTBCell = _R.nib._HEditZipcodeTBCell()
     /// Nib `HPreviewTBCell`.
     static let hPreviewTBCell = _R.nib._HPreviewTBCell()
+    /// Nib `HomeTitleView`.
+    static let homeTitleView = _R.nib._HomeTitleView()
     /// Nib `JobDetailArticleCell`.
     static let jobDetailArticleCell = _R.nib._JobDetailArticleCell()
     /// Nib `JobDetailArticleHeaderView`.
@@ -1149,6 +1151,14 @@ struct R: Rswift.Validatable {
     @available(*, deprecated, message: "Use UINib(resource: R.nib.hPreviewTBCell) instead")
     static func hPreviewTBCell(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.hPreviewTBCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "HomeTitleView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.homeTitleView) instead")
+    static func homeTitleView(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.homeTitleView)
     }
     #endif
 
@@ -1392,6 +1402,10 @@ struct R: Rswift.Validatable {
       return R.nib.hPreviewTBCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HPreviewTBCell
     }
 
+    static func homeTitleView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HomeTitleView? {
+      return R.nib.homeTitleView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HomeTitleView
+    }
+
     static func jobDetailArticleCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobDetailArticleCell? {
       return R.nib.jobDetailArticleCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobDetailArticleCell
     }
@@ -1612,6 +1626,17 @@ struct _R: Rswift.Validatable {
 
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HPreviewTBCell? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HPreviewTBCell
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _HomeTitleView: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "HomeTitleView"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HomeTitleView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HomeTitleView
       }
 
       fileprivate init() {}

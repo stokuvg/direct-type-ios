@@ -27,13 +27,13 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="62Z-Z7-XBb" firstAttribute="bottom" secondItem="OvQ-mJ-0rK" secondAttribute="bottom" id="88I-a5-AqW"/>
                             <constraint firstItem="mfZ-LV-y0J" firstAttribute="top" secondItem="62Z-Z7-XBb" secondAttribute="top" id="9Jm-VD-Mq8"/>
-                            <constraint firstItem="OvQ-mJ-0rK" firstAttribute="leading" secondItem="62Z-Z7-XBb" secondAttribute="leading" id="9uy-Sa-6Xp"/>
                             <constraint firstItem="62Z-Z7-XBb" firstAttribute="trailing" secondItem="mfZ-LV-y0J" secondAttribute="trailing" id="CBu-UW-cBB"/>
-                            <constraint firstItem="62Z-Z7-XBb" firstAttribute="trailing" secondItem="OvQ-mJ-0rK" secondAttribute="trailing" id="Hr5-kh-omn"/>
+                            <constraint firstItem="OvQ-mJ-0rK" firstAttribute="top" secondItem="mfZ-LV-y0J" secondAttribute="top" id="Kvw-r5-aC9"/>
+                            <constraint firstItem="OvQ-mJ-0rK" firstAttribute="bottom" secondItem="62Z-Z7-XBb" secondAttribute="bottom" id="RGB-E5-rNV"/>
+                            <constraint firstItem="OvQ-mJ-0rK" firstAttribute="leading" secondItem="62Z-Z7-XBb" secondAttribute="leading" id="jl1-2p-kWk"/>
+                            <constraint firstItem="OvQ-mJ-0rK" firstAttribute="trailing" secondItem="62Z-Z7-XBb" secondAttribute="trailing" id="jlH-I9-ei8"/>
                             <constraint firstItem="mfZ-LV-y0J" firstAttribute="leading" secondItem="62Z-Z7-XBb" secondAttribute="leading" id="khg-Lc-sS0"/>
-                            <constraint firstItem="OvQ-mJ-0rK" firstAttribute="top" secondItem="62Z-Z7-XBb" secondAttribute="top" id="tJP-Oc-5u3"/>
                             <constraint firstItem="62Z-Z7-XBb" firstAttribute="bottom" secondItem="mfZ-LV-y0J" secondAttribute="bottom" id="xEy-4T-XjS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="62Z-Z7-XBb"/>
