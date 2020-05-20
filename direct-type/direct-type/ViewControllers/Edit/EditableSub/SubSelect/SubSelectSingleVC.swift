@@ -32,14 +32,13 @@ class SubSelectSingleVC: BaseVC {
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
         var arr: [CodeDisp] = []
-//        if let tsvMaster = SelectItemsManager.getTsvMasterByKey(editableItem.editableItemKey) {
         let tsvMaster = editableItem.editItem.tsvMaster
-            for (key, val) in dicChange {
-                if let item: CodeDisp = SelectItemsManager.getCodeDisp(tsvMaster, code: key) {
-                    if val == true { arr.append(item) } //選択状態のもののみ追加
-                }
+        for (key, val) in dicChange {
+            if let item: CodeDisp = SelectItemsManager.getCodeDisp(tsvMaster, code: key) {
+                if val == true { arr.append(item) } //選択状態のもののみ追加
             }
-//        }
+        }
+        //2段階のもの、Grpだと選択されないので
         for item in arr {
             print("\t⭐️\(item.debugDisp)⭐️")
         }
