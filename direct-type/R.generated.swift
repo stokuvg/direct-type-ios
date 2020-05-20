@@ -2073,11 +2073,11 @@ struct _R: Rswift.Validatable {
     struct edit: Rswift.StoryboardResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "Edit"
-      let sbid_ProfileEditVC = StoryboardViewControllerResource<ProfileEditVC>(identifier: "Sbid_ProfileEditVC")
+      let sbid_SubEditBaseVC = StoryboardViewControllerResource<SubEditBaseVC>(identifier: "Sbid_SubEditBaseVC")
       let sbid_SubInputMemoVC = StoryboardViewControllerResource<SubInputMemoVC>(identifier: "Sbid_SubInputMemoVC")
 
-      func sbid_ProfileEditVC(_: Void = ()) -> ProfileEditVC? {
-        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_ProfileEditVC)
+      func sbid_SubEditBaseVC(_: Void = ()) -> SubEditBaseVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_SubEditBaseVC)
       }
 
       func sbid_SubInputMemoVC(_: Void = ()) -> SubInputMemoVC? {
@@ -2089,7 +2089,7 @@ struct _R: Rswift.Validatable {
         if #available(iOS 11.0, tvOS 11.0, *) {
           if UIKit.UIColor(named: "color-black", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-black' is used in storyboard 'Edit', but couldn't be loaded.") }
         }
-        if _R.storyboard.edit().sbid_ProfileEditVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_ProfileEditVC' could not be loaded from storyboard 'Edit' as 'ProfileEditVC'.") }
+        if _R.storyboard.edit().sbid_SubEditBaseVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_SubEditBaseVC' could not be loaded from storyboard 'Edit' as 'SubEditBaseVC'.") }
         if _R.storyboard.edit().sbid_SubInputMemoVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_SubInputMemoVC' could not be loaded from storyboard 'Edit' as 'SubInputMemoVC'.") }
       }
 

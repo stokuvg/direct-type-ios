@@ -13,7 +13,7 @@ extension EditableBasicVC {
     //=== 表示・非表示
     func showPickerYMD(_ textField: IKTextField, _ item: EditableItemH) {
         //親子の依存関係がある場合に、親が選択済か調べる。未選択の場合には子は選択できない
-        guard let editableModel = editableModel else { return }
+        //guard let editableModel = editableModel else { return }
         let (depKey, depCurSel) = SelectItemsManager.shared.chkParent(textField.itemKey, editTempCD: editableModel.editTempCD)
         if let _ = depKey, depCurSel == "" { //依存関係あるけど未選択だった場合
             self.view.endEditing(true)
@@ -54,7 +54,7 @@ extension EditableBasicVC {
     @objc func actDatePickerSelectButton(_ sender: IKBarButtonItem) {
         guard let picker = sender.parentPicker as? IKDatePicker else { return }
         picker.parentTF?.text = picker.date.dispYmdJP()
-        guard let editableModel = editableModel else { return }
+        //guard let editableModel = editableModel else { return }
         guard let item = editableModel.getItemByKey(picker.itemKey) else { return }
         editableModel.changeTempItem(item, text: picker.date.dispYmd())
         self.view.endEditing(false)

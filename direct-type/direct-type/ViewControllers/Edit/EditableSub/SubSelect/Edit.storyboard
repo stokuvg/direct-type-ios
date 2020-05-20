@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Profile EditVC-->
+        <!--Sub Edit BaseVC-->
         <scene sceneID="N1O-0n-M5q">
             <objects>
-                <viewController storyboardIdentifier="Sbid_ProfileEditVC" id="QrZ-Tr-UOd" customClass="ProfileEditVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Sbid_SubEditBaseVC" id="QrZ-Tr-UOd" customClass="SubEditBaseVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xrc-5b-UPX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
