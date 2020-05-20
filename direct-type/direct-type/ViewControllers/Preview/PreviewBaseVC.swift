@@ -82,7 +82,7 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
         }
         //通常の複数編集画面
         let storyboard = UIStoryboard(name: "Edit", bundle: nil)
-        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ProfileEditVC") as? ProfileEditVC{
+        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubEditBaseVC") as? SubEditBaseVC{
             nvc.initData(item)
             //遷移アニメーション関連
             nvc.modalTransitionStyle = .coverVertical

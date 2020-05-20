@@ -65,20 +65,20 @@ extension EditableBasicVC: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         guard let pickerView = pickerView as? IKPickerView else { return 0 }
-        guard let editableModel = editableModel else { return 0 }
+        //guard let editableModel = editableModel else { return 0 }
         let selectionItems = editableModel.makePickerItems(itemKey: pickerView.itemKey)
         guard selectionItems.count > 0 else { return 0 } //選択肢マスタがなければドラムも表示しないため0
         return 1
     }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         guard let pickerView = pickerView as? IKPickerView else { return 0 }
-        guard let editableModel = editableModel else { return 0 }
+        //guard let editableModel = editableModel else { return 0 }
         let selectionItems = editableModel.makePickerItems(itemKey: pickerView.itemKey)
         return selectionItems.count
     }
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         guard let pickerView = pickerView as? IKPickerView else { return UIView() }
-        guard let editableModel = editableModel else { return UIView() }
+        //guard let editableModel = editableModel else { return UIView() }
         let selectionItems = editableModel.makePickerItems(itemKey: pickerView.itemKey)
         guard selectionItems.count > row else { return UIView() }//マスタ配列が取得できていない
         let item = selectionItems[row]
@@ -95,7 +95,7 @@ extension EditableBasicVC: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         guard let pickerView = pickerView as? IKPickerView else { return }
-        guard let editableModel = editableModel else { return }
+        //guard let editableModel = editableModel else { return }
         let selectionItems = editableModel.makePickerItems(itemKey: pickerView.itemKey)
         guard selectionItems.count > row else { return }//マスタ配列が取得できていない
         let item = selectionItems[row]

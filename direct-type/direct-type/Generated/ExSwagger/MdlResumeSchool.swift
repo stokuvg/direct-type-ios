@@ -18,20 +18,20 @@ class MdlResumeSchool: Codable {
     /** 学科・専攻 */
     var subject: String
     /** 卒業年月 */
-    var guraduationYear: String
+    var graduationYear: String
 
-    init(schoolName: String, department: String, subject: String, guraduationYear: String) {
+    init(schoolName: String, department: String, subject: String, graduationYear: String) {
         self.schoolName = schoolName
         self.department = department
         self.subject = subject
-        self.guraduationYear = guraduationYear
+        self.graduationYear = graduationYear
     }
     //ApiモデルをAppモデルに変換して保持させる
     convenience init(dto: ResumeSchool) {
-        self.init(schoolName: dto.schoolName, department: dto.department, subject: dto.subject, guraduationYear: dto.guraduationYear)
+        self.init(schoolName: dto.schoolName, department: dto.department, subject: dto.subject, graduationYear: dto.graduationYear)
     }
     var debugDisp: String {
-        return "[schoolName: \(schoolName)] [department: \(department)] [subject: \(subject)] [guraduationYear: \(guraduationYear)]"
+        return "[schoolName: \(schoolName)] [department: \(department)] [subject: \(subject)] [graduationYear: \(graduationYear)]"
     }
 }
 
@@ -40,14 +40,14 @@ enum EditItemMdlResumeSchool: String, EditItemProtocol {
     case schoolName
     case department
     case subject
-    case guraduationYear
+    case graduationYear
     //表示名
     var dispName: String {
         switch self {
         case .schoolName:       return "学校名"
         case .department:       return "学部"
         case .subject:          return "学科・専攻"
-        case .guraduationYear:  return "卒業年月"
+        case .graduationYear:  return "卒業年月"
         }
     }
     //Placeholder Text
