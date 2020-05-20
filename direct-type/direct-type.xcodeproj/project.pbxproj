@@ -158,6 +158,7 @@
 		269AFFC9246A929300DB364B /* SubSelectTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269AFFBF246A929200DB364B /* SubSelectTBCell.xib */; };
 		269AFFCA246A929300DB364B /* SubSelectDaiTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269AFFC0246A929200DB364B /* SubSelectDaiTBCell.xib */; };
 		269AFFCB246A929300DB364B /* SubSelectSpecialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269AFFC1246A929200DB364B /* SubSelectSpecialVC.swift */; };
+		26A5DD642475028E0035267A /* SubSelectSpecialVC+Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5DD632475028E0035267A /* SubSelectSpecialVC+Picker.swift */; };
 		26BF48D924639D2B00E00215 /* MstK25_employmentStatus.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48C824639D2A00E00215 /* MstK25_employmentStatus.tsv */; };
 		26BF48DA24639D2B00E00215 /* MstK14_place.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48C924639D2A00E00215 /* MstK14_place.tsv */; };
 		26BF48DB24639D2B00E00215 /* MstK11_entryPlace.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48CA24639D2A00E00215 /* MstK11_entryPlace.tsv */; };
@@ -355,6 +356,7 @@
 		269AFFBF246A929200DB364B /* SubSelectTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubSelectTBCell.xib; sourceTree = "<group>"; };
 		269AFFC0246A929200DB364B /* SubSelectDaiTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubSelectDaiTBCell.xib; sourceTree = "<group>"; };
 		269AFFC1246A929200DB364B /* SubSelectSpecialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubSelectSpecialVC.swift; sourceTree = "<group>"; };
+		26A5DD632475028E0035267A /* SubSelectSpecialVC+Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubSelectSpecialVC+Picker.swift"; sourceTree = "<group>"; };
 		26BF48C524639A8200E00215 /* Models */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Models; path = ../../../../generated/promise/SwaggerClient/Classes/Swaggers/Models; sourceTree = "<group>"; };
 		26BF48C824639D2A00E00215 /* MstK25_employmentStatus.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK25_employmentStatus.tsv; sourceTree = "<group>"; };
 		26BF48C924639D2A00E00215 /* MstK14_place.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK14_place.tsv; sourceTree = "<group>"; };
@@ -798,6 +800,7 @@
 				26CFC4612469496D00E458E2 /* Edit.storyboard */,
 				269AFFBE246A929200DB364B /* SubSelectMultiVC.swift */,
 				269AFFC1246A929200DB364B /* SubSelectSpecialVC.swift */,
+				26A5DD632475028E0035267A /* SubSelectSpecialVC+Picker.swift */,
 				269AFFB8246A929200DB364B /* SubSelectDaiTBCell.swift */,
 				269AFFB9246A929200DB364B /* SubSelectTBCell.swift */,
 				269AFFBA246A929200DB364B /* SubSelectSyouTBCell.swift */,
@@ -1175,6 +1178,7 @@
 				066EF6C5245BB9C400E15AD2 /* KeepCardCell.swift in Sources */,
 				260BBFDC2465171D003D163A /* MdlProfile.swift in Sources */,
 				269AFFC4246A929300DB364B /* SubSelectSyouTBCell.swift in Sources */,
+				26A5DD642475028E0035267A /* SubSelectSpecialVC+Picker.swift in Sources */,
 				06E5197A2457BA36004E4B7A /* SplashVC.swift in Sources */,
 				06E519BE24581558004E4B7A /* ScountListVC.swift in Sources */,
 				26CFC46E246949B800E458E2 /* MyColorDefine.swift in Sources */,

@@ -49,7 +49,7 @@ class ResumePreviewVC: PreviewBaseVC {
         //===(3c)直近の経験職種
         let _jobType: String = "\(_detail.lastJobExperiment.jobType)"
         arrData.append(MdlItemH(.lastJobExperimentH3, "11", childItems: [
-            EditableItemH(type: .selectSingle, editItem: EditItemMdlResumeLastJobExperiment.jobType, val: _jobType),
+            EditableItemH(type: .selectSpecisl, editItem: EditItemMdlResumeLastJobExperiment.jobType, val: _jobType),
             EditableItemH(type: .selectSingle, editItem: EditItemMdlResumeLastJobExperiment.jobExperimentYear, val: _detail.lastJobExperiment.jobExperimentYear),
         ]))
         //===(3d)その他の経験職種
