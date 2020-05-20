@@ -60,11 +60,10 @@ class SubSelectSingleVC: BaseVC {
     }
     func initData(editableItem: EditableItemH) {
         self.editableItem = editableItem
-        
-        let arr = SelectItemsManager.getSelectItems(type: editableItem.editItem, grpCodeFilter: nil)
-        print("✳️✳️✳️", #line, #function, arr.count)
-        
-        self.arrData = SelectItemsManager.getSelectItems(type: editableItem.editItem, grpCodeFilter: nil)
+        let cd: [CodeDisp] = SelectItemsManager.getMaster(editableItem.editItem.tsvMaster)
+        let (grp, gcd): ([CodeDisp], [GrpCodeDisp]) = SelectItemsManager.getMaster(editableItem.editItem.tsvMaster)
+        print("[cd: \(cd.count)] / [grp: \(grp.count)] [gcd: \(gcd.count)] ")
+        self.arrData = (grp.count != 0) ? grp : cd
     }
     func dispData() {
         let bufTitle: String = "\(editableItem.dispName) \(arrData.count)件"

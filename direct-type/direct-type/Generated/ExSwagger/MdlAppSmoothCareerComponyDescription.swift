@@ -52,6 +52,7 @@ enum EditItemMdlAppSmoothCareerComponyDescription: String, EditItemProtocol {
     }
     var tsvMaster: SelectItemsManager.TsvMaster {
         switch self {
+        case .employmentType: return .employmentType
         default: return .undefine
         }
     }

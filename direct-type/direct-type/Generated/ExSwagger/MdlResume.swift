@@ -91,7 +91,7 @@ enum EditItemMdlResume: String, EditItemProtocol {
         case .employmentStatus: return .employmentStatus
         case .changeCount: return .changeCount
         case .businessTypes: return .businessType
-        case .qualifications: return .employmentStatus
+        case .qualifications: return .qualification
         default: return .undefine
         }
     }
