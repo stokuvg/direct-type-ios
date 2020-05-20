@@ -32,13 +32,14 @@ class SubSelectSingleVC: BaseVC {
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
         var arr: [CodeDisp] = []
-        if let tsvMaster = SelectItemsManager.getTsvMasterByKey(editableItem.editableItemKey) {
+//        if let tsvMaster = SelectItemsManager.getTsvMasterByKey(editableItem.editableItemKey) {
+        let tsvMaster = editableItem.editItem.tsvMaster
             for (key, val) in dicChange {
                 if let item: CodeDisp = SelectItemsManager.getCodeDisp(tsvMaster, code: key) {
                     if val == true { arr.append(item) } //選択状態のもののみ追加
                 }
             }
-        }
+//        }
         for item in arr {
             print("\t⭐️\(item.debugDisp)⭐️")
         }
@@ -62,7 +63,7 @@ class SubSelectSingleVC: BaseVC {
         self.editableItem = editableItem
         let cd: [CodeDisp] = SelectItemsManager.getMaster(editableItem.editItem.tsvMaster)
         let (grp, gcd): ([CodeDisp], [GrpCodeDisp]) = SelectItemsManager.getMaster(editableItem.editItem.tsvMaster)
-        print("[cd: \(cd.count)] / [grp: \(grp.count)] [gcd: \(gcd.count)] ")
+        //print("[cd: \(cd.count)] / [grp: \(grp.count)] [gcd: \(gcd.count)] ")
         self.arrData = (grp.count != 0) ? grp : cd
     }
     func dispData() {

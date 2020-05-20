@@ -60,9 +60,10 @@ class SubSelectSpecialVC: BaseVC {
         self.editableItem = editableItem
         self.arrSubData = SelectItemsManager.getMaster(.jobExperimentYear)
         //大項目の一覧のみ作成
-        guard let tsvMaster = SelectItemsManager.getTsvMasterByKey(editableItem.editableItemKey) else { return }
-        let dai = SelectItemsManager.getMaster(tsvMaster).0
-        let syou = SelectItemsManager.getMaster(tsvMaster).1
+        //guard let tsvMaster = SelectItemsManager.getTsvMasterByKey(editableItem.editableItemKey) else { return }
+        //let dai = SelectItemsManager.getMaster(tsvMaster).0
+        //let syou = SelectItemsManager.getMaster(tsvMaster).1
+        let (dai, syou): ([CodeDisp], [GrpCodeDisp]) = SelectItemsManager.getMaster(editableItem.editItem.tsvMaster)
         for itemDai in dai {
             var hoge: [CodeDisp] = []
             hoge.append(itemDai)

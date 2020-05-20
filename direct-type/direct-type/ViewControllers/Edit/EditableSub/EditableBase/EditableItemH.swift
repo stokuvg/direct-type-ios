@@ -36,14 +36,16 @@ struct EditableItemH {
             return "\(buf)"
         //=== 選択肢一覧を取得し、指定項目の表示名を求めて表示するもの
         case .selectDrum:
-            let selectionItems = SelectItemsManager.getSelectItems(type: self.editItem, grpCodeFilter: nil)
+//            let selectionItems = SelectItemsManager.getSelectItems(type: self.editItem, grpCodeFilter: nil)
+            let selectionItems: [CodeDisp] = SelectItemsManager.getMaster(self.editItem.tsvMaster)
             let buf = selectionItems.filter { (obj) -> Bool in
                 obj.code == _val
             }.first?.disp ?? Constants.SelectItemsUndefine.disp
             return "\(buf)"
 
         case .selectSingle, .selectMulti, .selectSpecisl:
-            let selectionItems = SelectItemsManager.getSelectItems(type: self.editItem, grpCodeFilter: nil)
+//            let selectionItems = SelectItemsManager.getSelectItems(type: self.editItem, grpCodeFilter: nil)
+            let selectionItems: [CodeDisp] = SelectItemsManager.getMaster(self.editItem.tsvMaster)
             let buf = selectionItems.filter { (obj) -> Bool in
                 obj.code == _val
             }.first?.disp ?? Constants.SelectItemsUndefine.disp
@@ -51,7 +53,8 @@ struct EditableItemH {
         }
     }
     var debugDisp: String {
-        let selectionItems = SelectItemsManager.getSelectItems(type: self.editItem, grpCodeFilter: nil)
+//        let selectionItems = SelectItemsManager.getSelectItems(type: self.editItem, grpCodeFilter: nil)
+        let selectionItems: [CodeDisp] = SelectItemsManager.getMaster(self.editItem.tsvMaster)
         let cnt = selectionItems.count
         return "[\(editableItemKey)]\t[\(editType)] [\(dispName)] ... [\(orgVal!)] -> [\(curVal)] / (\(cnt)件)"
     }

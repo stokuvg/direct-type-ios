@@ -45,8 +45,9 @@ class SubSelectMultiVC: BaseVC {
     }
     func initData(editableItem: EditableItemH) {
         self.editableItem = editableItem
-        self.arrData = SelectItemsManager.getSelectItems(type: editableItem.editItem, grpCodeFilter: nil)
-    }
+//        self.arrData = SelectItemsManager.getSelectItems(type: editableItem.editItem, grpCodeFilter: nil)
+        self.arrData = SelectItemsManager.getMaster(editableItem.editItem.tsvMaster)
+}
     func dispData() {
         let bufTitle: String = "\(editableItem.dispName) \(arrData.count)件"
         lblTitle.text(text: bufTitle, fontType: .font_L, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
