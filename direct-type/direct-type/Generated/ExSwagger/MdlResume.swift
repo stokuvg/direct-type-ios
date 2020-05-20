@@ -86,6 +86,15 @@ enum EditItemMdlResume: String, EditItemProtocol {
         case .ownPr:                return "自己PR"
         }
     }
+    var tsvMaster: SelectItemsManager.TsvMaster {
+        switch self {
+        case .employmentStatus: return .employmentStatus
+        case .changeCount: return .changeCount
+        case .businessTypes: return .businessType
+        case .qualifications: return .employmentStatus
+        default: return .undefine
+        }
+    }
     //Placeholder Text
     var placeholder: String {
         return "[\(self.itemKey) PlaceHolder]"

@@ -95,6 +95,13 @@ enum EditItemMdlProfile: String, EditItemProtocol {
         case .mobilePhoneNo:    return "帯電話番号（変更不可：認証アカウントと同一）"
         }
     }
+    var tsvMaster: SelectItemsManager.TsvMaster {
+        switch self {
+        case .gender: return .gender
+        case .prefecture: return .place
+        default: return .undefine
+        }
+    }
     //Placeholder Text
     var placeholder: String {
         return "[\(self.itemKey) PlaceHolder]"

@@ -53,6 +53,12 @@ enum EditItemMdlResumeSkillLanguage: String, EditItemProtocol {
         case .languageStudySkill:   return "英語以外語学スキル"
         }
     }
+    var tsvMaster: SelectItemsManager.TsvMaster {
+        switch self {
+        case .languageEnglish: return .skillEnglish
+        default: return .undefine
+        }
+    }
     //Placeholder Text
     var placeholder: String {
         return "[\(self.itemKey) PlaceHolder]"

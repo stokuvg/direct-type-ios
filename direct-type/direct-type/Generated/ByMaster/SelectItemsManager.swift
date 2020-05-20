@@ -287,6 +287,8 @@ var SelectItems_Gender: [CodeDisp] {
 //======================================================
 extension SelectItemsManager {
     enum TsvMaster {
+        case undefine //コードじゃないでの定義なし
+
         case salary
         case entryPlace
         case schoolType
@@ -308,10 +310,10 @@ extension SelectItemsManager {
         case pcSkillExcel
         case pcSkillWord
         case pcSkillPowerPoint
-
         
         var fName: String {
             switch self {
+            case .undefine:             return ""
             case .salary:               return "MstK10_salary"
             case .entryPlace:           return "MstK11_entryPlace"
             case .schoolType:           return "MstK13_schoolType"

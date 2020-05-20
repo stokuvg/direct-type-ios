@@ -45,9 +45,14 @@ enum EditItemMdlAppSmoothCareerComponyDescription: String, EditItemProtocol {
     var dispName: String {
         switch self {
         case .companyName:      return "勤務先企業名"
-        case .employeesCount:   return "社員数（コードで指定）"
+        case .employeesCount:   return "社員数"
         case .workPeriod:       return "在籍期間"
         case .employmentType:   return "雇用形態"
+        }
+    }
+    var tsvMaster: SelectItemsManager.TsvMaster {
+        switch self {
+        default: return .undefine
         }
     }
     //Placeholder Text

@@ -44,7 +44,7 @@ class CareerPreviewVC: PreviewBaseVC {
         ]))
         //case .employmentType:   return "雇用形態"
         arrData.append(MdlItemH(.employmentTypeC15, "", childItems: [
-            EditableItemH(type: .selectDrum, editItem: EditItemCareerCard.employmentType, val: _detail.employmentType),
+            EditableItemH(type: .selectSingle, editItem: EditItemCareerCard.employmentType, val: _detail.employmentType),
         ]))
         //case .employeesCount:   return "従業員数"
         arrData.append(MdlItemH(.employeesCountC15, "", childItems: [
@@ -52,7 +52,7 @@ class CareerPreviewVC: PreviewBaseVC {
         ]))
         //case .salary:           return "年収"
         arrData.append(MdlItemH(.salaryC15, "", childItems: [
-            EditableItemH(type: .selectDrum, editItem: EditItemCareerCard.salary, val: _detail.salary),
+            EditableItemH(type: .selectSingle, editItem: EditItemCareerCard.salary, val: _detail.salary),
         ]))
         //case .contents:         return "職務内容本文"
         arrData.append(MdlItemH(.contentsC15, "", childItems: [

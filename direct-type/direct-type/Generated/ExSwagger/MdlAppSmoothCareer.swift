@@ -44,6 +44,13 @@ enum EditItemMdlAppSmoothCareer: String, EditItemProtocol {
         case .salary:               return "年収（＊初回登録必須、ここでは非表示）"
         }
     }
+    var tsvMaster: SelectItemsManager.TsvMaster {
+        switch self {
+        case .componyDescription:   return .undefine
+        case .workBackgroundDetail: return .undefine
+        case .salary:               return .undefine
+        }
+    }
     //Placeholder Text
     var placeholder: String {
         return "[\(self.itemKey) PlaceHolder]"
