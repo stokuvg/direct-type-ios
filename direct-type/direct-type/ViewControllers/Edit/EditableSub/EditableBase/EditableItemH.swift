@@ -47,7 +47,7 @@ struct EditableItemH {
             let buf = selectionItems.filter { (obj) -> Bool in
                 obj.code == _val
             }.first?.disp ?? Constants.SelectItemsUndefine.disp
-            return "\(buf)(仮)"
+            return "\(buf)"
         }
     }
     var debugDisp: String {

@@ -40,8 +40,8 @@ class ResumePreviewVC: PreviewBaseVC {
         //=== [H-3]履歴書編集
         //===(3a)就業状況
         arrData.append(MdlItemH(.employmentH3, "", childItems: [
-            EditableItemH(type: .selectDrum, editItem: EditItemMdlResume.employment, val: _detail.employment),
-            EditableItemH(type: .selectSingle, editItem: EditItemMdlResume.employment, val: _detail.employment),
+            EditableItemH(type: .selectDrum, editItem: EditItemMdlResume.employmentStatus, val: _detail.employmentStatus),
+            EditableItemH(type: .selectSingle, editItem: EditItemMdlResume.employmentStatus, val: _detail.employmentStatus),
         ]))
         //===(3b)転職回数
         arrData.append(MdlItemH(.changeCountH3, "", childItems: [
@@ -51,7 +51,6 @@ class ResumePreviewVC: PreviewBaseVC {
         //===(3c)直近の経験職種
         let _jobType: String = "\(_detail.lastJobExperiment.jobType)"
         arrData.append(MdlItemH(.lastJobExperimentH3, "11", childItems: [
-            EditableItemH(type: .selectSpecisl, editItem: EditItemMdlResumeLastJobExperiment.jobType, val: _jobType),
             EditableItemH(type: .selectDrum, editItem: EditItemMdlResumeLastJobExperiment.jobType, val: _jobType),
             EditableItemH(type: .selectSingle, editItem: EditItemMdlResumeLastJobExperiment.jobType, val: _jobType),
             EditableItemH(type: .selectDrumYMD, editItem: EditItemMdlResumeLastJobExperiment.jobExperimentYear, val: _detail.lastJobExperiment.jobExperimentYear),
@@ -59,7 +58,6 @@ class ResumePreviewVC: PreviewBaseVC {
         //===(3d)その他の経験職種
         var _jobExperiments: [EditableItemH] = []
         for jobExperiment in _detail.jobExperiments {
-            _jobExperiments.append(EditableItemH(type: .selectSpecisl, editItem: EditItemMdlResumeJobExperiments.jobType, val: jobExperiment.jobType))
             _jobExperiments.append(EditableItemH(type: .selectDrum, editItem: EditItemMdlResumeJobExperiments.jobType, val: jobExperiment.jobType))
             _jobExperiments.append(EditableItemH(type: .selectSingle, editItem: EditItemMdlResumeJobExperiments.jobType, val: jobExperiment.jobType))
             _jobExperiments.append(EditableItemH(type: .selectDrum, editItem: EditItemMdlResumeJobExperiments.jobExperimentYear, val: jobExperiment.jobExperimentYear))
@@ -69,6 +67,8 @@ class ResumePreviewVC: PreviewBaseVC {
         var _businessTypes: [EditableItemH] = []
         for businessType in _detail.businessTypes {
             _businessTypes.append(EditableItemH(type: .selectMulti, editItem: EditItemMdlResume.businessTypes, val: businessType))
+            _businessTypes.append(EditableItemH(type: .selectDrum, editItem: EditItemMdlResume.businessTypes, val: businessType))
+            _businessTypes.append(EditableItemH(type: .selectSingle, editItem: EditItemMdlResume.businessTypes, val: businessType))
         }
         arrData.append(MdlItemH(.businessTypesH3, "", childItems: _businessTypes))
         //===(3f)最終学歴
@@ -76,13 +76,14 @@ class ResumePreviewVC: PreviewBaseVC {
             EditableItemH(type: .inputText, editItem: EditItemMdlResumeSchool.schoolName, val: _detail.school.schoolName),
             EditableItemH(type: .inputText, editItem: EditItemMdlResumeSchool.department, val: _detail.school.department),
             EditableItemH(type: .inputText, editItem: EditItemMdlResumeSchool.subject, val: _detail.school.subject),
-            EditableItemH(type: .inputText, editItem: EditItemMdlResumeSchool.graduationYear, val: _detail.school.graduationYear),
+            EditableItemH(type: .selectDrumYMD, editItem: EditItemMdlResumeSchool.graduationYear, val: _detail.school.graduationYear),
         ]))
         //===(3g)語学
         arrData.append(MdlItemH(.skillLanguageH3, "", childItems: [
             EditableItemH(type: .inputText, editItem: EditItemMdlResumeSkillLanguage.languageToeicScore, val: _detail.skillLanguage.languageToeicScore),
             EditableItemH(type: .inputText, editItem: EditItemMdlResumeSkillLanguage.languageToeflScore, val: _detail.skillLanguage.languageToeflScore),
             EditableItemH(type: .selectDrum, editItem: EditItemMdlResumeSkillLanguage.languageEnglish, val: _detail.skillLanguage.languageEnglish),
+            EditableItemH(type: .selectSingle, editItem: EditItemMdlResumeSkillLanguage.languageEnglish, val: _detail.skillLanguage.languageEnglish),
             EditableItemH(type: .inputMemo, editItem: EditItemMdlResumeSkillLanguage.languageStudySkill, val: _detail.skillLanguage.languageStudySkill),
         ]))
         //===(3h)資格

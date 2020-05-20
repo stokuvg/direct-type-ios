@@ -351,8 +351,8 @@ struct R: Rswift.Validatable {
     static let mstK13_schoolTypeTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstK13_schoolType", pathExtension: "tsv")
     /// Resource file `MstK14_place.tsv`.
     static let mstK14_placeTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstK14_place", pathExtension: "tsv")
-    /// Resource file `MstK25_employment.tsv`.
-    static let mstK25_employmentTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstK25_employment", pathExtension: "tsv")
+    /// Resource file `MstK25_employmentStatus.tsv`.
+    static let mstK25_employmentStatusTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstK25_employmentStatus", pathExtension: "tsv")
     /// Resource file `MstK25_gender.tsv`.
     static let mstK25_genderTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstK25_gender", pathExtension: "tsv")
     /// Resource file `MstK3_changeCount.tsv`.
@@ -426,9 +426,9 @@ struct R: Rswift.Validatable {
       return fileResource.bundle.url(forResource: fileResource)
     }
 
-    /// `bundle.url(forResource: "MstK25_employment", withExtension: "tsv")`
-    static func mstK25_employmentTsv(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.mstK25_employmentTsv
+    /// `bundle.url(forResource: "MstK25_employmentStatus", withExtension: "tsv")`
+    static func mstK25_employmentStatusTsv(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.mstK25_employmentStatusTsv
       return fileResource.bundle.url(forResource: fileResource)
     }
 

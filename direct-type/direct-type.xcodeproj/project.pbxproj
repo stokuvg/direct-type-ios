@@ -162,7 +162,7 @@
 		269AFFC9246A929300DB364B /* SubSelectTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269AFFBF246A929200DB364B /* SubSelectTBCell.xib */; };
 		269AFFCA246A929300DB364B /* SubSelectDaiTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269AFFC0246A929200DB364B /* SubSelectDaiTBCell.xib */; };
 		269AFFCB246A929300DB364B /* SubSelectSpecialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269AFFC1246A929200DB364B /* SubSelectSpecialVC.swift */; };
-		26BF48D924639D2B00E00215 /* MstK25_employment.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48C824639D2A00E00215 /* MstK25_employment.tsv */; };
+		26BF48D924639D2B00E00215 /* MstK25_employmentStatus.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48C824639D2A00E00215 /* MstK25_employmentStatus.tsv */; };
 		26BF48DA24639D2B00E00215 /* MstK14_place.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48C924639D2A00E00215 /* MstK14_place.tsv */; };
 		26BF48DB24639D2B00E00215 /* MstK11_entryPlace.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48CA24639D2A00E00215 /* MstK11_entryPlace.tsv */; };
 		26BF48DC24639D2B00E00215 /* MstL_skill.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48CB24639D2A00E00215 /* MstL_skill.tsv */; };
@@ -364,7 +364,7 @@
 		269AFFC0246A929200DB364B /* SubSelectDaiTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubSelectDaiTBCell.xib; sourceTree = "<group>"; };
 		269AFFC1246A929200DB364B /* SubSelectSpecialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubSelectSpecialVC.swift; sourceTree = "<group>"; };
 		26BF48C524639A8200E00215 /* Models */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Models; path = ../../../../generated/promise/SwaggerClient/Classes/Swaggers/Models; sourceTree = "<group>"; };
-		26BF48C824639D2A00E00215 /* MstK25_employment.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK25_employment.tsv; sourceTree = "<group>"; };
+		26BF48C824639D2A00E00215 /* MstK25_employmentStatus.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK25_employmentStatus.tsv; sourceTree = "<group>"; };
 		26BF48C924639D2A00E00215 /* MstK14_place.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK14_place.tsv; sourceTree = "<group>"; };
 		26BF48CA24639D2A00E00215 /* MstK11_entryPlace.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK11_entryPlace.tsv; sourceTree = "<group>"; };
 		26BF48CB24639D2A00E00215 /* MstL_skill.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstL_skill.tsv; sourceTree = "<group>"; };
@@ -861,7 +861,7 @@
 				26BF48CA24639D2A00E00215 /* MstK11_entryPlace.tsv */,
 				26BF48CD24639D2A00E00215 /* MstK13_schoolType.tsv */,
 				26BF48C924639D2A00E00215 /* MstK14_place.tsv */,
-				26BF48C824639D2A00E00215 /* MstK25_employment.tsv */,
+				26BF48C824639D2A00E00215 /* MstK25_employmentStatus.tsv */,
 				26BF48CC24639D2A00E00215 /* MstK25_gender.tsv */,
 				26BF48CB24639D2A00E00215 /* MstL_skill.tsv */,
 				26BF48D024639D2A00E00215 /* MstL_skillYear.tsv */,
@@ -1012,7 +1012,7 @@
 				260BBFE124651732003D163A /* Preview.storyboard in Resources */,
 				26BF48DB24639D2B00E00215 /* MstK11_entryPlace.tsv in Resources */,
 				066763742457B08F00AC5039 /* EntryVC.storyboard in Resources */,
-				26BF48D924639D2B00E00215 /* MstK25_employment.tsv in Resources */,
+				26BF48D924639D2B00E00215 /* MstK25_employmentStatus.tsv in Resources */,
 				066BC825246CD0C100FE607F /* JobDetailItemOptionalView.xib in Resources */,
 				26CFC4692469496D00E458E2 /* HEditTextTBCell.xib in Resources */,
 				260BBFE224651732003D163A /* HPreviewTBCell.xib in Resources */,

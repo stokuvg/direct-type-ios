@@ -92,8 +92,6 @@ class EditableModel {
                 }
                 if isSelectable {
                     arrTextFieldNextDoneKey.append(item.editableItemKey) //移動対象のものだけに絞る（ReadOnlyなど選択不可なものは除外
-                    print(item.editableItemKey)
-
                 }
             }
         }
