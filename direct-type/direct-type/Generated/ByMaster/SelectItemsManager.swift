@@ -48,7 +48,7 @@ class SelectItemsManager: NSObject {
         loadMaster(type: .entryPlace)
         loadMaster(type: .schoolType)
         loadMaster(type: .place)
-        loadMaster(type: .employment)
+        loadMaster(type: .employmentStatus)
         loadMaster(type: .gender)
         loadMaster(type: .changeCount)
         loadMasterGrp(type: .jobType)
@@ -100,72 +100,95 @@ class SelectItemsManager: NSObject {
     }
     //===EditableItemKeyから直接TsvMasterに繋げて良い気がする...
     class func getSelectItemsByKey(_ itemKey: EditableItemKey, grpCodeFilter: String?) -> [CodeDisp] {
+        print("\t🐱[\(itemKey)]🐱\(grpCodeFilter)🐱要チェック")
+
         switch itemKey {
-        case EditItemMdlProfile.gender.itemKey:
-            return getSelectItems(type: .gender, nil)
-        case EditItemMdlProfile.prefecture.itemKey:
-            return getSelectItems(type: .prefecture, nil)
+        //=== プロフィール
+        case EditItemMdlProfile.gender.itemKey: //性別 gender: Code
+            return SelectItemsManager.getMaster(.gender)
+        case EditItemMdlProfile.prefecture.itemKey: // 都道府県 prefecture: Code
+            return SelectItemsManager.getMaster(.place)
 
-        case EditItemMdlResume.employment.itemKey:
-            return getSelectItems(type: .employment, nil)
-        case EditItemMdlResume.changeCount.itemKey:
-            return getSelectItems(type: .changeCount, nil)
-            
-        case EditItemMdlResumeLastJobExperiment.jobType.itemKey:
-
+        //=== 履歴書
+        case EditItemMdlResume.employmentStatus.itemKey: //就業状況 employmentStatus: Code
+            return SelectItemsManager.getMaster(.employmentType)
+        case EditItemMdlResume.changeCount.itemKey:// 転職回数 changeCount: Code
+            return SelectItemsManager.getMaster(.changeCount)
+        //___依存あり
+        case EditItemMdlResumeLastJobExperiment.jobType.itemKey: //直近の経験職種：小分類 jobType: Code
             let buf0 =  SelectItemsManager.getMaster(.jobType).0
             let buf1 =  SelectItemsManager.getMaster(.jobType).1
-            print(buf0.count, buf1.count)
-
-            let (g, i) =  SelectItemsManager.getMaster(.jobType)
-            print(g.count, i.count)
-
-            return SelectItems_Occupation(grpCodeFilter: nil)
-
-        case EditItemMdlResumeLastJobExperiment.jobExperimentYear.itemKey:
+            return buf0
+        case EditItemMdlResumeLastJobExperiment.jobExperimentYear.itemKey: //直近の経験年数 jobExperimentYear: Code
             return SelectItemsManager.getMaster(.jobExperimentYear)
-            
-        case EditItemMdlResumeJobExperiments.jobType.itemKey:
-
+        //___依存あり
+        case EditItemMdlResumeJobExperiments.jobType.itemKey: //その他の経験職種：小分類 jobType: [Code]
             let buf0 =  SelectItemsManager.getMaster(.jobType).0
             let buf1 =  SelectItemsManager.getMaster(.jobType).1
-            print(buf0.count, buf1.count)
-
-            let (g, i) =  SelectItemsManager.getMaster(.jobType)
-            print(g.count, i.count)
-
-            return SelectItems_Occupation(grpCodeFilter: nil)
-
-        case EditItemMdlResumeJobExperiments.jobExperimentYear.itemKey:
+            return buf0
+        case EditItemMdlResumeJobExperiments.jobExperimentYear.itemKey: //その他の経験年数 jobExperimentYear: [Code]
             return SelectItemsManager.getMaster(.jobExperimentYear)
-            
-        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.experienceManagement.itemKey:
+        //___依存あり
+        case EditItemMdlResume.businessTypes.itemKey://経験職種 businessTypes: [Code]
+            let buf0 =  SelectItemsManager.getMaster(.businessType).0
+            let buf1 =  SelectItemsManager.getMaster(.businessType).1
+            return buf0
+        case EditItemMdlResumeSkillLanguage.languageEnglish.itemKey://英語スキル
+            return SelectItemsManager.getMaster(.skillEnglish)
+        case EditItemMdlResume.qualifications.itemKey: //資格 qualifications: [Code]
+            return SelectItemsManager.getMaster(.qualification)
+
+        //=== 職歴書
+        case EditItemCareerCard.employmentType.itemKey: //雇用形態 employmentType: Code
+            return SelectItemsManager.getMaster(.employmentType)
+        case EditItemCareerCard.salary.itemKey: //年収（＊初回登録必須、ここでは非表示） salary: Code
+            return SelectItemsManager.getMaster(.salary)
+
+        //=== サクサク職歴書
+        case EditItemMdlAppSmoothCareer.salary.itemKey: //年収（＊初回登録必須、ここでは非表示） salary: Code
+            return SelectItemsManager.getMaster(.salary)
+        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.businessType.itemKey: //在籍企業の業種 businessType: Code
+            let buf0 =  SelectItemsManager.getMaster(.businessType).0
+            let buf1 =  SelectItemsManager.getMaster(.businessType).1
+            return buf0
+        case EditItemMdlAppSmoothCareerComponyDescription.employmentType.itemKey: //雇用形態 employmentType: Code
+            return SelectItemsManager.getMaster(.employmentType)
+        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.experienceManagement.itemKey: //マネジメント経験 experienceManagement: Code
             return SelectItemsManager.getMaster(.management)
-        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.businessType.itemKey:
-            return SelectItemsManager.getMaster(.businessType)
-        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.skillExcel.itemKey:
+        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.skillExcel.itemKey: //PCスキル：Excel skillExcel: Code
             return SelectItemsManager.getMaster(.pcSkillExcel)
-        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.skillWord.itemKey:
+        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.skillWord.itemKey: //PCスキル：Word skillWord: Code
             return SelectItemsManager.getMaster(.pcSkillWord)
-        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.skillPowerPoint.itemKey:
+        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.skillPowerPoint.itemKey: //PCスキル：PowerPoint skillPowerPoint: Code
             return SelectItemsManager.getMaster(.pcSkillPowerPoint)
 
-
         default:
+            print("\t🐶[\(itemKey)]🐶\(grpCodeFilter)🐶===コードなら対応を!")
             break
         }
+        
         return []
     }
+    
+    //単一選択の編集からやってくる
     class func getSelectItems(type: Any, grpCodeFilter: String?) -> [CodeDisp] {
+        print("\t🐻[\(type)]🐻\(grpCodeFilter)🐻===フィルタあり取得===")
+        return [Constants.SelectItemsUndefine, Constants.SelectItemsUndefine, Constants.SelectItemsUndefine]//!!!ダミー返す
         if let _type = type as? EditItemMdlProfile {
             return getSelectItems(type: _type, grpCodeFilter)
         }
         if let _type = type as? EditItemMdlResume {
             return getSelectItems(type: _type, grpCodeFilter)
         }
+        if let _type = type as? EditItemMdlResumeSkillLanguage {
+            return getSelectItems(type: _type, grpCodeFilter)
+        }
         return []
     }
     private class func getSelectItems(type: EditItemMdlProfile, _ grpCodeFilter: String?) -> [CodeDisp] {
+        print("\t🐻[\(type)]🐻\(grpCodeFilter)🐻===フィルタあり取得===")
+        return [Constants.SelectItemsUndefine, Constants.SelectItemsUndefine, Constants.SelectItemsUndefine]//!!!ダミー返す
+
         switch type {
         case .familyName:       return []
         case .firstName:        return []
@@ -182,16 +205,33 @@ class SelectItemsManager: NSObject {
         }
     }
     private class func getSelectItems(type: EditItemMdlResume, _ grpCodeFilter: String?) -> [CodeDisp] {
+        print("\t🐻[\(type)]🐻\(grpCodeFilter)🐻===フィルタあり取得===")
+        return [Constants.SelectItemsUndefine, Constants.SelectItemsUndefine, Constants.SelectItemsUndefine]//!!!ダミー返す
+
+        print(#line, #function, type.itemKey, grpCodeFilter ?? "")
         switch type {
-        case .employment:           return SelectItemsManager.getMaster(.jobType)
+        case .employmentStatus:           return SelectItemsManager.getMaster(.employmentStatus)
         case .changeCount:          return SelectItemsManager.getMaster(.changeCount)
         case .lastJobExperiment:    return []
         case .jobExperiments:       return []
-        case .businessTypes:        return []
+        case .businessTypes:
+            
+            print("経験業種", SelectItemsManager.getMaster(.businessType).count )
+            return SelectItemsManager.getMaster(.businessType)
         case .school:               return []
-        case .skillLanguage:        return []
-        case .qualifications:       return []
+        case .skillLanguage:
+            return SelectItemsManager.getMaster(.skillEnglish)
+        case .qualifications:       return SelectItemsManager.getMaster(.qualification)
         case .ownPr:                return []
+        }
+    }
+    private class func getSelectItems(type: EditItemMdlResumeSkillLanguage, _ grpCodeFilter: String?) -> [CodeDisp] {
+        print(#line, #function, type.itemKey, grpCodeFilter ?? "")
+        switch type {
+        case .languageToeicScore:   return []
+        case .languageToeflScore:   return []
+        case .languageEnglish:      return SelectItemsManager.getMaster(.skillEnglish) //ドラムでの選択肢
+        case .languageStudySkill:   return []
         }
     }
     class func getTsvMasterByKey(_ itemKey: EditableItemKey) -> TsvMaster? {
@@ -251,7 +291,7 @@ extension SelectItemsManager {
         case entryPlace
         case schoolType
         case place
-        case employment
+        case employmentStatus
         case gender
         case changeCount
         case jobType
@@ -276,7 +316,7 @@ extension SelectItemsManager {
             case .entryPlace:           return "MstK11_entryPlace"
             case .schoolType:           return "MstK13_schoolType"
             case .place:                return "MstK14_place"
-            case .employment:           return "MstK25_employment"
+            case .employmentStatus:     return "MstK25_employmentStatus"
             case .gender:               return "MstK25_gender"
             case .changeCount:          return "MstK3_changeCount"
             case .jobType:              return "MstK4_jobType"
@@ -400,6 +440,7 @@ extension SelectItemsManager {
     //======================================================
     //未選択をどうのタイミングでつけるかなど考慮の余地あり
     class func getMaster(_ type: TsvMaster) -> [CodeDisp] {
+        print(#line, #function, type)
         return self.shared.arrMaster[type] ?? []
     }
     class func getMaster(_ type: TsvMaster) -> ([CodeDisp], [GrpCodeDisp]) {

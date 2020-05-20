@@ -11,7 +11,7 @@ import SwaggerClient
 /** 履歴書 (H3) */
 class MdlResume: Codable {
     /** 就業状況 */
-    var employment: Code
+    var employmentStatus: Code
     /** 転職回数 */
     var changeCount: Code
     var lastJobExperiment: MdlResumeLastJobExperiment
@@ -23,8 +23,8 @@ class MdlResume: Codable {
     /** 自己PR */
     var ownPr: String
 
-    init(employment: Code, changeCount: Code, lastJobExperiment: MdlResumeLastJobExperiment, jobExperiments: [MdlResumeJobExperiments], businessTypes: [Code], school: MdlResumeSchool, skillLanguage: MdlResumeSkillLanguage, qualifications: [Code], ownPr: String) {
-        self.employment = employment
+    init(employmentStatus: Code, changeCount: Code, lastJobExperiment: MdlResumeLastJobExperiment, jobExperiments: [MdlResumeJobExperiments], businessTypes: [Code], school: MdlResumeSchool, skillLanguage: MdlResumeSkillLanguage, qualifications: [Code], ownPr: String) {
+        self.employmentStatus = employmentStatus
         self.changeCount = changeCount
         self.lastJobExperiment = lastJobExperiment
         self.jobExperiments = jobExperiments
@@ -54,16 +54,16 @@ class MdlResume: Codable {
             _qualifications.append("\(item)")
         }
 
-        self.init(employment: _employment, changeCount: _changeCount, lastJobExperiment: _lastJobExperiment, jobExperiments: _jobExperiments, businessTypes: _businessTypes, school: _school, skillLanguage: _skillLanguage, qualifications: _qualifications, ownPr: dto.ownPr)
+        self.init(employmentStatus: _employment, changeCount: _changeCount, lastJobExperiment: _lastJobExperiment, jobExperiments: _jobExperiments, businessTypes: _businessTypes, school: _school, skillLanguage: _skillLanguage, qualifications: _qualifications, ownPr: dto.ownPr)
     }
     var debugDisp: String {
-        return "[employment: \(employment)] [changeCount: \(changeCount)]"
+        return "[employmentStatus: \(employmentStatus)] [changeCount: \(changeCount)]"
     }
 }
 
 //=== 編集用の項目と定義など
 enum EditItemMdlResume: String, EditItemProtocol {
-    case employment
+    case employmentStatus
     case changeCount
     case lastJobExperiment
     case jobExperiments
@@ -75,7 +75,7 @@ enum EditItemMdlResume: String, EditItemProtocol {
     //表示名
     var dispName: String {
         switch self {
-        case .employment:           return "就業状況"
+        case .employmentStatus:     return "就業状況"
         case .changeCount:          return "転職回数"
         case .lastJobExperiment:    return "直近の経験職種"
         case .jobExperiments:       return "その他の経験職種"

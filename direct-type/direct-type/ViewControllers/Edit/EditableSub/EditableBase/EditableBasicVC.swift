@@ -12,7 +12,7 @@ import SVProgressHUD
 //=== 編集可能項目の対応
 class EditableBasicVC: TmpBasicVC {
     //編集中の情報
-    var editableModel: EditableModel? //画面編集項目のモデルと管理
+    var editableModel: EditableModel = EditableModel() //画面編集項目のモデルと管理
     //=== OVerrideして使う
     func moveNextCell(_ editableItemKey: String) -> Bool { return true } //次の項目へ移動
     func dispEditableItemAll() {} //すべての項目を表示する
@@ -67,7 +67,7 @@ extension EditableBasicVC: InputItemHDelegate {
     }
     func textFieldShouldClear(_ tf: IKTextField, _ item: EditableItemH) -> Bool {
         print(#line, #function)
-        guard let editableModel = editableModel else { return true }
+        //guard let editableModel = editableModel else { return true }
         editableModel.changeTempItem(item, text: "")//編集中の値の保持（と描画）
         if let depKey = editableModel.clearDependencyItemByKey(item.editableItemKey) { //依存関係があればクリア
             dispEditableItemByKey(depKey)//依存してた方の表示も更新する
@@ -80,7 +80,7 @@ extension EditableBasicVC: InputItemHDelegate {
     func editingDidBegin(_ tf: IKTextField, _ item: EditableItemH) {
         actTargetInputTextBegin(tf, item) //元のTextFieldに被せるもの（なくて良い）
         //画面全体での初期状態での値と編集中の値を保持させておくため
-        guard let editableModel = editableModel else { return }
+        //guard let editableModel = editableModel else { return }
         let (_, editTemp) = editableModel.makeTempItem(item)
         //=== タイプによって割り込み処理
         switch item.editType {
@@ -180,7 +180,7 @@ extension EditableBasicVC: InputItemHDelegate {
         print("💛[\(tf.itemKey)] 編集終わり💛「[\(tf.tag)] \(#function)」[\(tf.itemKey)][\(tf.text ?? "")] [\(tf.inputAccessoryView)] [\(tf.inputView)]")
     }
     func changedItem(_ tf: IKTextField, _ item: EditableItemH, text: String) {
-        guard let editableModel = editableModel else { return }
+        //guard let editableModel = editableModel else { return }
         editableModel.changeTempItem(item, text: text)//入力値の反映
     }
 }

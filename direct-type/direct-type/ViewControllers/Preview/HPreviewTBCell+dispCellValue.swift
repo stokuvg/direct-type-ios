@@ -30,16 +30,15 @@ extension HPreviewTBCell {
             let tmp0: String = _item.childItems[0].valDisp
             let buf0: String = "\(String.substr(tmp0, 1, 3))-\(String.substr(tmp0, 4, 4))"
             let tmp1: String = _item.childItems[1].curVal
-            print(tmp1)
             let buf1: String = SelectItemsManager.getCodeDisp(.place, code: tmp1)?.disp ?? "---"
             let buf2: String = _item.childItems[2].valDisp
             let buf3: String = _item.childItems[3].valDisp
-            let bufAddress: String = "\(buf1)\(buf2)\(buf3)"
+            let bufAddress: String = "[1:\(buf1)][2:\(buf2)][3:\(buf3)]"
             return "〒\(buf0)\n\(bufAddress)"
 
         case .employmentH3:
             let tmp0: String = _item.childItems[0].curVal
-            let buf0: String = SelectItemsManager.getCodeDisp(.employment, code: tmp0)?.disp ?? ""
+            let buf0: String = SelectItemsManager.getCodeDisp(.employmentStatus, code: tmp0)?.disp ?? ""
             return "\(buf0)"
         case .changeCountH3:
             let tmp0: String = _item.childItems[0].curVal

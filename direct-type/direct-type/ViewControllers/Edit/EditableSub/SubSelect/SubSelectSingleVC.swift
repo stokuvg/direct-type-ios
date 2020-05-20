@@ -60,7 +60,10 @@ class SubSelectSingleVC: BaseVC {
     }
     func initData(editableItem: EditableItemH) {
         self.editableItem = editableItem
-        //self.arrData = SelectItemsManager.getMaster(type)
+        
+        let arr = SelectItemsManager.getSelectItems(type: editableItem.editItem, grpCodeFilter: nil)
+        print("✳️✳️✳️", #line, #function, arr.count)
+        
         self.arrData = SelectItemsManager.getSelectItems(type: editableItem.editItem, grpCodeFilter: nil)
     }
     func dispData() {
