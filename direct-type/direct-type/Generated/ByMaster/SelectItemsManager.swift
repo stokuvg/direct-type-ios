@@ -115,75 +115,53 @@ class SelectItemsManager: NSObject {
         case EditItemMdlResume.changeCount.itemKey:// 転職回数 changeCount: Code
             return SelectItemsManager.getMaster(.changeCount)
         //___依存あり
-        case EditItemMdlResume.businessTypes.itemKey://経験職種 businessTypes: [Code]
+        case EditItemMdlResumeLastJobExperiment.jobType.itemKey: //直近の経験職種：小分類 jobType: Code
             let buf0 =  SelectItemsManager.getMaster(.jobType).0
             let buf1 =  SelectItemsManager.getMaster(.jobType).1
             return buf0
-        case EditItemMdlResume.qualifications.itemKey: //経験業種 qualifications: [Code]
-            return getSelectItems(type: .qualifications, nil)
+        case EditItemMdlResumeLastJobExperiment.jobExperimentYear.itemKey: //直近の経験年数 jobExperimentYear: Code
+            return SelectItemsManager.getMaster(.jobExperimentYear)
+        //___依存あり
+        case EditItemMdlResumeJobExperiments.jobType.itemKey: //その他の経験職種：小分類 jobType: [Code]
+            let buf0 =  SelectItemsManager.getMaster(.jobType).0
+            let buf1 =  SelectItemsManager.getMaster(.jobType).1
+            return buf0
+        case EditItemMdlResumeJobExperiments.jobExperimentYear.itemKey: //その他の経験年数 jobExperimentYear: [Code]
+            return SelectItemsManager.getMaster(.jobExperimentYear)
+        //___依存あり
+        case EditItemMdlResume.businessTypes.itemKey://経験職種 businessTypes: [Code]
+            let buf0 =  SelectItemsManager.getMaster(.businessType).0
+            let buf1 =  SelectItemsManager.getMaster(.businessType).1
+            return buf0
+        case EditItemMdlResumeSkillLanguage.languageEnglish.itemKey://英語スキル
+            return SelectItemsManager.getMaster(.skillEnglish)
+        case EditItemMdlResume.qualifications.itemKey: //資格 qualifications: [Code]
+            return SelectItemsManager.getMaster(.qualification)
 
-//        case EditItemMdlResumeLastJobExperiment.jobType.itemKey:
-//            return SelectItems_Occupation(grpCodeFilter: nil)
-//        case EditItemMdlResumeJobExperiments.jobType.itemKey:
-//            return SelectItems_Occupation(grpCodeFilter: nil)
-//
+        //=== 職歴書
+        case EditItemCareerCard.employmentType.itemKey: //雇用形態 employmentType: Code
+            return SelectItemsManager.getMaster(.employmentType)
+        case EditItemCareerCard.salary.itemKey: //年収（＊初回登録必須、ここでは非表示） salary: Code
+            return SelectItemsManager.getMaster(.salary)
 
-            
-//        case EditItemMdlResumeSkillLanguage.languageEnglish.itemKey:
-//            return getSelectItems(type: .skillLanguage, nil)
-//
-//        case EditItemMdlResumeLastJobExperiment.jobType.itemKey:
-//            let buf0 =  SelectItemsManager.getMaster(.jobType).0
-//            let buf1 =  SelectItemsManager.getMaster(.jobType).1
-//            //=== JobTypeを選ぶとOccupationが決まるようなもの
-//            let (g, i) =  SelectItemsManager.getMaster(.jobType)
-//            return SelectItems_Occupation(grpCodeFilter: nil)
-//        case EditItemMdlResumeLastJobExperiment.jobExperimentYear.itemKey:
-//            return SelectItemsManager.getMaster(.jobExperimentYear)
-//        case EditItemMdlResumeJobExperiments.jobType.itemKey:
-//            //=== JobTypeを選ぶとOccupationが決まるようなもの
-//            let (g, i) =  SelectItemsManager.getMaster(.jobType)
-//            return SelectItems_Occupation(grpCodeFilter: nil)
-//        case EditItemMdlResumeJobExperiments.jobExperimentYear.itemKey:
-//            return SelectItemsManager.getMaster(.jobExperimentYear)
-//
-//            //=========
-//            //class MdlAppSmoothCareer: Codable {
-//            //    /** 年収（＊初回登録必須、ここでは非表示） */
-//            //    var salary: Code
-//            //class MdlAppSmoothCareerComponyDescription: Codable {
-//            //    /** 雇用形態 */
-//            //    var employmentType: Code
-//            //class MdlAppSmoothCareerWorkBackgroundDetail: Codable {
-//            //    /** 在籍企業の業種 */
-//            //    var businessType: Code
-//            //    var experienceManagement: Code
-//            //    /** PCスキル：Excel */
-//            //    var skillExcel: Code
-//            //    /** PCスキル：Word */
-//            //    var skillWord: Code
-//            //    /** PCスキル：PowerPoint */
-//            //    var skillPowerPoint: Code
-//            //
-//
-//        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.experienceManagement.itemKey:
-//            return SelectItemsManager.getMaster(.management)
-//        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.businessType.itemKey:
-//            return SelectItemsManager.getMaster(.businessType)
-//        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.skillExcel.itemKey:
-//            return SelectItemsManager.getMaster(.pcSkillExcel)
-//        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.skillWord.itemKey:
-//            return SelectItemsManager.getMaster(.pcSkillWord)
-//        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.skillPowerPoint.itemKey:
-//            return SelectItemsManager.getMaster(.pcSkillPowerPoint)
-//
-//        //=== 職歴書
-//        case EditItemCareerCard.employmentType.itemKey:
-//            return SelectItemsManager.getMaster(.employmentType)
-//        case EditItemCareerCard.salary.itemKey:
-//            return SelectItemsManager.getMaster(.salary)
-            
-            
+        //=== サクサク職歴書
+        case EditItemMdlAppSmoothCareer.salary.itemKey: //年収（＊初回登録必須、ここでは非表示） salary: Code
+            return SelectItemsManager.getMaster(.salary)
+        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.businessType.itemKey: //在籍企業の業種 businessType: Code
+            let buf0 =  SelectItemsManager.getMaster(.businessType).0
+            let buf1 =  SelectItemsManager.getMaster(.businessType).1
+            return buf0
+        case EditItemMdlAppSmoothCareerComponyDescription.employmentType.itemKey: //雇用形態 employmentType: Code
+            return SelectItemsManager.getMaster(.employmentType)
+        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.experienceManagement.itemKey: //マネジメント経験 experienceManagement: Code
+            return SelectItemsManager.getMaster(.management)
+        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.skillExcel.itemKey: //PCスキル：Excel skillExcel: Code
+            return SelectItemsManager.getMaster(.pcSkillExcel)
+        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.skillWord.itemKey: //PCスキル：Word skillWord: Code
+            return SelectItemsManager.getMaster(.pcSkillWord)
+        case EditItemMdlAppSmoothCareerWorkBackgroundDetail.skillPowerPoint.itemKey: //PCスキル：PowerPoint skillPowerPoint: Code
+            return SelectItemsManager.getMaster(.pcSkillPowerPoint)
+
         default:
             print("\t🐶[\(itemKey)]🐶\(grpCodeFilter)🐶===コードなら対応を!")
             break

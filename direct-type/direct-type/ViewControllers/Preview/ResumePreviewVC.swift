@@ -41,34 +41,28 @@ class ResumePreviewVC: PreviewBaseVC {
         //===(3a)就業状況
         arrData.append(MdlItemH(.employmentH3, "", childItems: [
             EditableItemH(type: .selectDrum, editItem: EditItemMdlResume.employmentStatus, val: _detail.employmentStatus),
-            EditableItemH(type: .selectSingle, editItem: EditItemMdlResume.employmentStatus, val: _detail.employmentStatus),
         ]))
         //===(3b)転職回数
         arrData.append(MdlItemH(.changeCountH3, "", childItems: [
             EditableItemH(type: .selectDrum, editItem: EditItemMdlResume.changeCount, val: _detail.changeCount),
-            EditableItemH(type: .selectSingle, editItem: EditItemMdlResume.changeCount, val: _detail.changeCount),
         ]))
         //===(3c)直近の経験職種
         let _jobType: String = "\(_detail.lastJobExperiment.jobType)"
         arrData.append(MdlItemH(.lastJobExperimentH3, "11", childItems: [
             EditableItemH(type: .selectDrum, editItem: EditItemMdlResumeLastJobExperiment.jobType, val: _jobType),
-            EditableItemH(type: .selectSingle, editItem: EditItemMdlResumeLastJobExperiment.jobType, val: _jobType),
-            EditableItemH(type: .selectDrumYMD, editItem: EditItemMdlResumeLastJobExperiment.jobExperimentYear, val: _detail.lastJobExperiment.jobExperimentYear),
+            EditableItemH(type: .selectDrum, editItem: EditItemMdlResumeLastJobExperiment.jobExperimentYear, val: _detail.lastJobExperiment.jobExperimentYear),
         ]))
         //===(3d)その他の経験職種
         var _jobExperiments: [EditableItemH] = []
         for jobExperiment in _detail.jobExperiments {
             _jobExperiments.append(EditableItemH(type: .selectDrum, editItem: EditItemMdlResumeJobExperiments.jobType, val: jobExperiment.jobType))
-            _jobExperiments.append(EditableItemH(type: .selectSingle, editItem: EditItemMdlResumeJobExperiments.jobType, val: jobExperiment.jobType))
             _jobExperiments.append(EditableItemH(type: .selectDrum, editItem: EditItemMdlResumeJobExperiments.jobExperimentYear, val: jobExperiment.jobExperimentYear))
         }
         arrData.append(MdlItemH(.jobExperimentsH3, "", childItems: _jobExperiments))
         //===(3e)経験業種
         var _businessTypes: [EditableItemH] = []
         for businessType in _detail.businessTypes {
-            _businessTypes.append(EditableItemH(type: .selectMulti, editItem: EditItemMdlResume.businessTypes, val: businessType))
             _businessTypes.append(EditableItemH(type: .selectDrum, editItem: EditItemMdlResume.businessTypes, val: businessType))
-            _businessTypes.append(EditableItemH(type: .selectSingle, editItem: EditItemMdlResume.businessTypes, val: businessType))
         }
         arrData.append(MdlItemH(.businessTypesH3, "", childItems: _businessTypes))
         //===(3f)最終学歴
@@ -83,7 +77,6 @@ class ResumePreviewVC: PreviewBaseVC {
             EditableItemH(type: .inputText, editItem: EditItemMdlResumeSkillLanguage.languageToeicScore, val: _detail.skillLanguage.languageToeicScore),
             EditableItemH(type: .inputText, editItem: EditItemMdlResumeSkillLanguage.languageToeflScore, val: _detail.skillLanguage.languageToeflScore),
             EditableItemH(type: .selectDrum, editItem: EditItemMdlResumeSkillLanguage.languageEnglish, val: _detail.skillLanguage.languageEnglish),
-            EditableItemH(type: .selectSingle, editItem: EditItemMdlResumeSkillLanguage.languageEnglish, val: _detail.skillLanguage.languageEnglish),
             EditableItemH(type: .inputMemo, editItem: EditItemMdlResumeSkillLanguage.languageStudySkill, val: _detail.skillLanguage.languageStudySkill),
         ]))
         //===(3h)資格
@@ -96,7 +89,6 @@ class ResumePreviewVC: PreviewBaseVC {
         arrData.append(MdlItemH(.ownPr, "", childItems: [
             EditableItemH(type: .inputMemo, editItem: EditItemMdlResume.ownPr, val: _detail.ownPr),
         ]))
-        
     }
     override func dispData() {
         title = "履歴書"
