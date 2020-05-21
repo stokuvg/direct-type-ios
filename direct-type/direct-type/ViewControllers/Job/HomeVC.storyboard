@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,19 +23,19 @@
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OvQ-mJ-0rK">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" name="color-base"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="62Z-Z7-XBb" firstAttribute="bottom" secondItem="OvQ-mJ-0rK" secondAttribute="bottom" id="88I-a5-AqW"/>
+                            <constraint firstItem="OvQ-mJ-0rK" firstAttribute="leading" secondItem="62Z-Z7-XBb" secondAttribute="leading" id="8Lh-e6-c70"/>
                             <constraint firstItem="mfZ-LV-y0J" firstAttribute="top" secondItem="62Z-Z7-XBb" secondAttribute="top" id="9Jm-VD-Mq8"/>
-                            <constraint firstItem="OvQ-mJ-0rK" firstAttribute="leading" secondItem="62Z-Z7-XBb" secondAttribute="leading" id="9uy-Sa-6Xp"/>
                             <constraint firstItem="62Z-Z7-XBb" firstAttribute="trailing" secondItem="mfZ-LV-y0J" secondAttribute="trailing" id="CBu-UW-cBB"/>
-                            <constraint firstItem="62Z-Z7-XBb" firstAttribute="trailing" secondItem="OvQ-mJ-0rK" secondAttribute="trailing" id="Hr5-kh-omn"/>
+                            <constraint firstItem="OvQ-mJ-0rK" firstAttribute="trailing" secondItem="62Z-Z7-XBb" secondAttribute="trailing" id="LQa-pg-oIl"/>
+                            <constraint firstAttribute="bottom" secondItem="OvQ-mJ-0rK" secondAttribute="bottom" id="dVt-L8-Of8"/>
                             <constraint firstItem="mfZ-LV-y0J" firstAttribute="leading" secondItem="62Z-Z7-XBb" secondAttribute="leading" id="khg-Lc-sS0"/>
-                            <constraint firstItem="OvQ-mJ-0rK" firstAttribute="top" secondItem="62Z-Z7-XBb" secondAttribute="top" id="tJP-Oc-5u3"/>
                             <constraint firstItem="62Z-Z7-XBb" firstAttribute="bottom" secondItem="mfZ-LV-y0J" secondAttribute="bottom" id="xEy-4T-XjS"/>
+                            <constraint firstItem="OvQ-mJ-0rK" firstAttribute="top" secondItem="62Z-Z7-XBb" secondAttribute="top" id="yqE-2B-72h"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="62Z-Z7-XBb"/>
                     </view>
@@ -48,4 +49,9 @@
             <point key="canvasLocation" x="132" y="80"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="color-base">
+            <color red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

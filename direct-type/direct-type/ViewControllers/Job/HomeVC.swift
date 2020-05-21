@@ -15,21 +15,33 @@ enum CardDispType:Int {
 }
 
 class HomeVC: TmpNaviTopVC {
-    @IBOutlet weak var homeTableView:UITableView!
     
     @IBOutlet weak var noCardBackView:UIView!
+    
+//    @IBOutlet weak var homeNaviBackView:UIView!
+//    @IBOutlet weak var homeNaviHeight:NSLayoutConstraint!
+    @IBOutlet weak var homeTableView:UITableView!
     
     var dispTableData:[[String: Any]] = []
     var masterTableData:[[String:Any]] = []
     
     var moreCnt:Int = 1
     var dispType:CardDispType = .none
+    
+    var safeAreaTop:CGFloat!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        title(name: "あなたにぴったりの求人")
+        
+        let flag = self.getHomeDisplayFlag()
+        if flag {
+            self.linesTitle(date: Date().dispHomeDate(), title: "あなたにぴったりの求人")
+        } else {
+            self.title(name: "おすすめ求人一覧")
+//            self.linesTitle(date: Date().dispHomeDate(), title: "あなたにぴったりの求人")
+        }
         
         // TODO:初回リリースでは外す
 //        self.setRightSearchBtn()
@@ -63,6 +75,9 @@ class HomeVC: TmpNaviTopVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        safeAreaTop = self.view.safeAreaInsets.top
+        
+        /*
         //[Dbg]___
         if Constants.DbgAutoPushVC {
             let storyboard = UIStoryboard(name: "Preview", bundle: nil)
@@ -87,10 +102,24 @@ class HomeVC: TmpNaviTopVC {
             }
         }
         //[Dbg]^^^
+        */
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+
+    }
+    
+    private func getHomeDisplayFlag() -> Bool {
+        let ud = UserDefaults.standard
+        let homeFlag = ud.bool(forKey: "home")
+        return homeFlag
     }
     
     private func makeDummyData() {

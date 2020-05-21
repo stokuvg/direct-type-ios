@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="Xib_JobDetailImageCell" selectionStyle="default" indentationWidth="10" rowHeight="44" id="KGk-i7-Jjw" customClass="JobDetailImageCell" customModule="direct_type" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="290"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="290"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jiE-R7-6Ox">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="250"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="250" id="qrW-fs-5EJ"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xu1-P8-SsO">
+                        <rect key="frame" x="0.0" y="250" width="320" height="40"/>
+                        <subviews>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="c1I-QX-cwX">
+                                <rect key="frame" x="110" y="1.5" width="100" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="1qb-Ea-BCI"/>
+                                    <constraint firstAttribute="height" constant="37" id="klI-HN-6qH"/>
+                                </constraints>
+                                <color key="pageIndicatorTintColor" name="color-slider-gray"/>
+                                <color key="currentPageIndicatorTintColor" name="color-slider-sub"/>
+                            </pageControl>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="c1I-QX-cwX" firstAttribute="centerY" secondItem="Xu1-P8-SsO" secondAttribute="centerY" id="lSd-xg-nvw"/>
+                            <constraint firstItem="c1I-QX-cwX" firstAttribute="centerX" secondItem="Xu1-P8-SsO" secondAttribute="centerX" id="oQU-Hy-gua"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Xu1-P8-SsO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="N1b-2L-6Gd"/>
+                    <constraint firstItem="Xu1-P8-SsO" firstAttribute="top" secondItem="jiE-R7-6Ox" secondAttribute="bottom" id="Yga-66-pHU"/>
+                    <constraint firstItem="jiE-R7-6Ox" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ZEb-gp-hcO"/>
+                    <constraint firstItem="jiE-R7-6Ox" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="b8B-6t-OVB"/>
+                    <constraint firstAttribute="bottom" secondItem="Xu1-P8-SsO" secondAttribute="bottom" id="f4W-bq-xRI"/>
+                    <constraint firstAttribute="trailing" secondItem="jiE-R7-6Ox" secondAttribute="trailing" id="gnv-a4-ERe"/>
+                    <constraint firstAttribute="trailing" secondItem="Xu1-P8-SsO" secondAttribute="trailing" id="z8O-rp-OyL"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" name="color-white"/>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="mainImageBackView" destination="jiE-R7-6Ox" id="h3p-Kp-jAd"/>
+                <outlet property="mainImagesControl" destination="c1I-QX-cwX" id="tid-mh-gxI"/>
+                <outlet property="mainImagesPageControlBackView" destination="Xu1-P8-SsO" id="vwm-5L-rAb"/>
+            </connections>
+            <point key="canvasLocation" x="132" y="139"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="color-slider-gray">
+            <color red="0.82352941176470584" green="0.82352941176470584" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="color-slider-sub">
+            <color red="1" green="0.35294117647058826" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="color-white">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

@@ -107,18 +107,7 @@ class JobOfferDetailVC: TmpBasicVC {
             "memo":
             [
                 "title":"取材メモ",
-                "text":"ここにテキストを入れる",
-                "step":[
-                    ["title":"step1","text":"step1のテキストを入れる"],
-                    ["title":"step2","text":"step2のテキストを入れる"],
-                    ["title":"step3","text":"step3のテキストを入れる"],
-                    ["title":"step4","text":"step4のテキストを入れる"],
-                ],
-                "headline":[
-                    ["head1":"見出し1","text":"ここにテキスト"],
-                    ["head2":"見出し2","text":"ここにテキスト"],
-                    ["head3":"見出し3","text":"ここにテキスト"],
-                ]
+                "text":"ここにテキストを入れる\n\nここにテキストを入れる",
             ],
             "process":
             [
@@ -130,8 +119,8 @@ class JobOfferDetailVC: TmpBasicVC {
                     ["title":"step4","text":"Web応募による書類選考"],
                     ["title":"step5","text":"Web応募による書類選考"],
                 ],
-                "text1":"",
-                "text2":"",
+                "text1":"【type】の専用応募フォームからご応募ください。\n※ご応募については秘密厳守いたします。\n※\n※\n\n",
+                "text2":"----------------------------\n当求人案件は株式会社キャリアデザインセンターが運営する株式会社システムソフト type採用事務局にて応募の受付業務を代行しております。",
             ],
             "phone_number":
             [
@@ -179,8 +168,9 @@ class JobOfferDetailVC: TmpBasicVC {
         // 勤務地
         // 社名
         // 掲載期限
-        // メイン画像
         self.detailTableView.registerNib(nibName: "JobDetailDataCell", idName: "JobDetailDataCell")
+        // メイン画像
+        self.detailTableView.registerNib(nibName: "JobDetailImageCell", idName: "JobDetailImageCell")
         /// section 1
         // 記事
         self.detailTableView.registerNib(nibName: "JobDetailArticleCell", idName: "JobDetailArticleCell")
@@ -212,7 +202,6 @@ class JobOfferDetailVC: TmpBasicVC {
         // 8.休日休暇:            必須
         // 9.待遇・福利厚生:       必須
         // 　・産休・育休取得:      任意
-        self.detailTableView.registerNib(nibName: "JobDetailFoldingItemCell", idName: "JobDetailFoldingItemCell")
         /// section 4
         // 取材メモ
         self.detailTableView.registerNib(nibName: "JobDetailFoldingMemoCell", idName: "JobDetailFoldingMemoCell")
@@ -259,7 +248,10 @@ extension JobOfferDetailVC: UITableViewDelegate {
         let row = indexPath.row
         switch (section,row) {
             case (0,0):
-                return 550
+                return UITableView.automaticDimension
+//                return 253
+            case (0,1):
+                return 290
             case (1,0):
                 return articleOpenFlag ? UITableView.automaticDimension : 0
             case (4,0):
@@ -331,7 +323,6 @@ extension JobOfferDetailVC: UITableViewDataSource {
                     .first as! JobDetailGuideBookHeaderView
                 return view
             case 4,5,6,7:
-                Log.selectLog(logLevel: .debug, "section:\(section)")
                 // 取材メモ
                 // 選考プロセス
                 // 連絡先
@@ -380,7 +371,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
             case 0:
-                return 1
+                return 2
             case 2:
                 return 2
             case 3:
@@ -396,19 +387,27 @@ extension JobOfferDetailVC: UITableViewDataSource {
         switch (section,row) {
             case (0,0):
                 let cell = tableView.loadCell(cellName: "JobDetailDataCell", indexPath: indexPath) as! JobDetailDataCell
+                cell.setup(data: dummyData)
+                return cell
+            case (0,1):
+                let cell = tableView.loadCell(cellName: "JobDetailImageCell", indexPath: indexPath) as! JobDetailImageCell
                 cell.setCellWidth(width: self.detailTableView.frame.size.width)
                 cell.setup(data: dummyData)
                 return cell
             case (1,0):
-                let cell = tableView.loadCell(cellName: "JobDetailArticleCell", indexPath: indexPath) as! JobDetailArticleCell
-                cell.delegate = self
                 if articleOpenFlag {
-                    let articleString = dummyData["main_article"] as! String
-                    cell.setup(data: articleString)
+                    let cell = tableView.loadCell(cellName: "JobDetailArticleCell", indexPath: indexPath) as! JobDetailArticleCell
+                    cell.delegate = self
+                    if articleOpenFlag {
+                        let articleString = dummyData["main_article"] as! String
+                        cell.setup(data: articleString)
+                    } else {
+                        cell.setup(data: "")
+                    }
+                    return cell
                 } else {
-                    cell.setup(data: "")
+                    return UITableViewCell()
                 }
-                return cell
             case (2,0):
                 let cell = tableView.loadCell(cellName: "JobDetailPRCodeTagsCell", indexPath: indexPath) as! JobDetailPRCodeTagsCell
                 let datas = dummyData["tags"] as! [String]
@@ -426,53 +425,53 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 cell.setup(data: itemData)
                 return cell
             case (4,_):
-                let cell = tableView.loadCell(cellName: "JobDetailFoldingItemCell", indexPath: indexPath) as! JobDetailFoldingItemCell
-                var textType:TextType!
-                var openFlag:Bool = false
-                if section == 4 {
-                    textType = .text
-                    openFlag = coverageMemoOpenFlag
-                } else if section == 5 {
-                    textType = .step
-                    openFlag = selectionProcessOpenFlag
-                } else if section == 6 {
-                    textType = .textLink
-                    openFlag = phoneNumberOpenFlag
+                if coverageMemoOpenFlag {
+                    let cell = tableView.loadCell(cellName: "JobDetailFoldingMemoCell", indexPath: indexPath) as! JobDetailFoldingMemoCell
+                    
+                    let foldingDatas = dummyData["folding"] as! [String: Any]
+                    let foldingData = foldingDatas["memo"] as! [String: Any]
+                    let memoText = foldingData["text"] as! String
+                    cell.setup(data: memoText)
+                    return cell
                 } else {
-                    textType = .headline
-                    openFlag = companyOutlineOpenFlag
+                    return UITableViewCell()
                 }
-                
-                let foldingDatas = dummyData["folding"] as! [String: Any]
-                let cnt = section - foldingDatas.count
-//                let foldingData = foldingDatas[cnt]
-                
-//                cell.setup(data: foldingData, textType: textType,flag: openFlag)
-                
-                return cell
             case (5, _):
-                let cell = tableView.loadCell(cellName: "JobDetailFoldingProcessCell", indexPath: indexPath) as! JobDetailFoldingProcessCell
-                let foldingDatas = dummyData["folding"] as! [String: Any]
-                let foldingData = foldingDatas["process"] as! [String: Any]
-                
-                cell.setup(data: foldingData)
-                return cell
+                if selectionProcessOpenFlag {
+                    let cell = tableView.loadCell(cellName: "JobDetailFoldingProcessCell", indexPath: indexPath) as! JobDetailFoldingProcessCell
+                    let foldingDatas = dummyData["folding"] as! [String: Any]
+                    let foldingData = foldingDatas["process"] as! [String: Any]
+                    
+                    cell.setup(data: foldingData)
+                    return cell
+                } else {
+                    return UITableViewCell()
+                }
             case (6, _):
-                let cell = tableView.loadCell(cellName: "JobDetailFoldingPhoneNumberCell", indexPath: indexPath) as! JobDetailFoldingPhoneNumberCell
-                let foldingDatas = dummyData["folding"] as! [String: Any]
-                let foldingData = foldingDatas["phone_number"] as! [String: Any]
-                
-                cell.setup(data: foldingData)
-                return cell
+                if phoneNumberOpenFlag {
+                    let cell = tableView.loadCell(cellName: "JobDetailFoldingPhoneNumberCell", indexPath: indexPath) as! JobDetailFoldingPhoneNumberCell
+                    let foldingDatas = dummyData["folding"] as! [String: Any]
+                    let foldingData = foldingDatas["phone_number"] as! [String: Any]
+                    
+                    cell.setup(data: foldingData)
+                    return cell
+                } else {
+                    return UITableViewCell()
+                }
             case (7, _):
-                let cell = tableView.loadCell(cellName: "JobDetailFoldingOutlineCell", indexPath: indexPath) as! JobDetailFoldingOutlineCell
-                let foldingDatas = dummyData["folding"] as! [String: Any]
-                let foldingData = foldingDatas["outline"] as! [String: Any]
-                
-                cell.setup(data: foldingData)
-                return cell
+                if companyOutlineOpenFlag {
+                    let cell = tableView.loadCell(cellName: "JobDetailFoldingOutlineCell", indexPath: indexPath) as! JobDetailFoldingOutlineCell
+                    let foldingDatas = dummyData["folding"] as! [String: Any]
+                    let foldingData = foldingDatas["outline"] as! [String: Any]
+                    
+                    cell.setup(data: foldingData)
+                    return cell
+                } else {
+                    return UITableViewCell()
+                }
             case (8, _):
                 let cell = tableView.loadCell(cellName: "JobDetailFooterApplicationCell", indexPath: indexPath) as! JobDetailFooterApplicationCell
+                cell.delegate = self
                 return cell
             default:
                 let cell = UITableViewCell()
@@ -587,7 +586,7 @@ extension JobOfferDetailVC: FoldingHeaderViewDelegate {
         let index = IndexSet(arrayLiteral: section)
         switch tag {
         case 0:
-            coverageMemoOpenFlag = !companyOutlineOpenFlag
+            coverageMemoOpenFlag = !coverageMemoOpenFlag
         case 1:
             selectionProcessOpenFlag = !selectionProcessOpenFlag
         case 2:
@@ -598,5 +597,16 @@ extension JobOfferDetailVC: FoldingHeaderViewDelegate {
             break
         }
         self.detailTableView.reloadSections(index, with: .automatic)
+    }
+}
+
+extension JobOfferDetailVC: JobDetailFooterApplicationCellDelegate {
+    
+    func footerApplicationBtnAction() {
+        // TODO:応募フォームに遷移
+    }
+    
+    func footerKeepBtnAction() {
+        // キープ情報送信
     }
 }

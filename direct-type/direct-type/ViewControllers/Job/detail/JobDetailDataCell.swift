@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AlamofireImage
 
 class JobDetailDataCell: BaseTableViewCell {
     
@@ -15,6 +14,12 @@ class JobDetailDataCell: BaseTableViewCell {
     
     // 終了間近,スカウト
     @IBOutlet weak var imminetAndScountBackView:UIView!
+    @IBOutlet weak var endBackView:UIView!
+    @IBOutlet weak var endLabel:UILabel!
+    
+    @IBOutlet weak var scountBackView:UIView!
+    @IBOutlet weak var scountLabel:UILabel!
+    
     // 職種名
     @IBOutlet weak var jobCategoryBackView:UIView!
     @IBOutlet weak var jobCategoryLabel:UILabel!
@@ -31,32 +36,12 @@ class JobDetailDataCell: BaseTableViewCell {
     // 掲載期限
     @IBOutlet weak var limitBackView:UIView!
     @IBOutlet weak var limitLabel:UILabel!
-    // メイン画像
-    @IBOutlet weak var mainImageBackView:UIView!
-    @IBOutlet weak var mainImagesScrollView:UIScrollView!
-    // 画像複数
-    @IBOutlet weak var mainImagesPageControlBackView:UIView!
-    @IBOutlet weak var mainImagesControl:UIPageControl!
-    
-    var viewWidth:CGFloat!
-    var viewHeight:CGFloat!
-    var imageX:CGFloat!
-    var imageY:CGFloat!
-    var imageW:CGFloat!
-    var imageH:CGFloat!
-    
-    var margin:CGFloat = 15
-    
-    var cellWidth:CGFloat = 0
-    
-    var imageCnt:Int = 0
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        Log.selectLog(logLevel: .debug, "JobDetailDataCell awakeFromNib start")
         // Initialization code
         self.backgroundColor = UIColor.init(colorType: .color_base)
-        
-        self.mainImagesScrollView.delegate = self
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -65,24 +50,24 @@ class JobDetailDataCell: BaseTableViewCell {
         // Configure the view for the selected state
     }
     
-    func setCellWidth(width:CGFloat) {
-        cellWidth = width
-        
-        viewWidth = cellWidth
-        viewHeight = self.mainImageBackView.frame.size.height
-        
-        imageW = viewWidth - (margin * 2)
-        imageH = imageW*8/11
-        imageY = (viewHeight - imageH)/2
-        imageX = margin
+    override func prepareForReuse() {
+        super.prepareForReuse()
     }
     
     func setup(data:[String:Any]) {
+        Log.selectLog(logLevel: .debug, "JobDetailDataCell setup start")
+        
         // 終了間近
         let end = data["end"] as! Bool
-        if end {
+        if end == false {
             dataStackView.removeArrangedSubview(imminetAndScountBackView)
+        } else {
+            endLabel.text(text: "終了間近", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         }
+        
+        // スカウト情報
+        scountLabel.text(text: "スカウトが届いています", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
+        
         // 職種
         let job = data["job"] as! String
         self.jobCategoryLabel.text(text: job, fontType: .C_font_L, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
@@ -105,37 +90,6 @@ class JobDetailDataCell: BaseTableViewCell {
         
         let period_string = period_start + "〜" + period_end
         self.limitLabel.text(text: period_string, fontType: .C_font_SSb ,textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
-        // 画像セット
-        let imageUrls:[String] = data["images"] as! [String]
-        imageCnt = imageUrls.count
-        if imageUrls.count > 1 {
-            
-            self.mainImagesControl.numberOfPages = imageUrls.count
-            
-            for i in 0..<(imageUrls.count * 3) {
-//            for i in 0..<imageUrls.count {
-                var cnt:Int = 0
-                cnt = i
-                if i >= imageUrls.count {
-                    cnt = i % imageUrls.count
-                }
-                let imageUrlString = imageUrls[cnt]
-//                let imageUrlString = imageUrls[i]
-                let imageUrl = URL(string: imageUrlString)
-                let scrollX:CGFloat = (margin + (viewWidth * CGFloat(i)))
-                let imageView = UIImageView.init(frame: CGRect(x: scrollX, y: imageY, width: imageW, height: imageH))
-                imageView.backgroundColor = UIColor.init(colorType: .color_black)
-                imageView.contentMode = .scaleAspectFit
-                imageView.af_setImage(withURL: imageUrl!)
-                imageView.cornerRadius = 15
-                
-                self.mainImagesScrollView.addSubview(imageView)
-            }
-//            self.mainImagesScrollView.contentSize = CGSize(width: (CGFloat(imageUrls.count) * viewWidth), height: viewHeight)
-            self.mainImagesScrollView.contentSize = CGSize(width: (CGFloat(imageUrls.count*3) * viewWidth), height: viewHeight)
-        } else {
-            
-        }
     }
     
     private func changeFormatString(string:String) -> String {
@@ -154,29 +108,6 @@ class JobDetailDataCell: BaseTableViewCell {
         
         return changeFormatter.string(from: date!)
         
-    }
-    
-}
-
-extension JobDetailDataCell: UIScrollViewDelegate {
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        Log.selectLog(logLevel: .debug, "JobDetailDataCell scrollViewDidScroll start")
-        
-        let pageWidth = scrollView.contentSize.width / 3.0
-        
-        if scrollView.contentOffset.x <= 0.0 || (scrollView.contentOffset.x > pageWidth * 2.0) {
-            scrollView.contentOffset.x = pageWidth
-        }
-        
-        let pageOffsetX = Int(scrollView.contentOffset.x)
-        
-        let scrollWidth = Int(scrollView.bounds.size.width)
-        
-        let pageNo = pageOffsetX / scrollWidth
-        let changePageNo = pageNo % imageCnt
-        
-        self.mainImagesControl.currentPage = changePageNo
     }
     
 }

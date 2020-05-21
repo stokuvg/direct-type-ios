@@ -9,10 +9,16 @@
 import UIKit
 
 class JobDetailFoldingMemoCell: BaseTableViewCell {
+    
+    @IBOutlet weak var memoLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -21,4 +27,7 @@ class JobDetailFoldingMemoCell: BaseTableViewCell {
         // Configure the view for the selected state
     }
     
+    func setup(data:String) {
+        self.memoLabel.text(text: data, fontType: .C_font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+    }
 }
