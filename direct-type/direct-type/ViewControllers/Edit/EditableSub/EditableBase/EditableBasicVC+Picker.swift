@@ -85,6 +85,7 @@ extension EditableBasicVC: UIPickerViewDataSource, UIPickerViewDelegate {
         let lbl = UILabel.init(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: pickerView.bounds.size.width - 20, height: 30)))
         lbl.font = UIFont.systemFont(ofSize: 30)
         lbl.text = item.disp
+        if Constants.DbgDispStatus { lbl.text = item.debugDisp } //[Dbg: コードも表示しておく]
         lbl.textAlignment = NSTextAlignment.center
         lbl.adjustsFontSizeToFitWidth = true //フォント縮小での自動リサイズ
         lbl.minimumScaleFactor = 0.5 //フォント縮小での自動リサイズ

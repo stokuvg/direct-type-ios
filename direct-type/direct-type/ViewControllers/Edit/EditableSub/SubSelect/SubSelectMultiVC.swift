@@ -31,8 +31,6 @@ class SubSelectMultiVC: BaseVC {
     @IBOutlet weak var vwFoot: UIView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
-
-        print(#line, #function, dicChange.debugDescription)
         var bufResult: String = ""
         let arr = dicChange.filter { (cb) -> Bool in
             cb.value
@@ -54,7 +52,7 @@ class SubSelectMultiVC: BaseVC {
         btnCommit.setTitle(text: "選択", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
     }
-    func initData(editableItem: EditableItemH) {
+    func initData(editableItem: EditableItemH, selecingCodes: String) {
         self.editableItem = editableItem
 //        self.arrData = SelectItemsManager.getSelectItems(type: editableItem.editItem, grpCodeFilter: nil)
         self.arrData = SelectItemsManager.getMaster(editableItem.editItem.tsvMaster)

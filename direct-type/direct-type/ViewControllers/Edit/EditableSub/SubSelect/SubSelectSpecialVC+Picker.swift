@@ -76,6 +76,7 @@ extension SubSelectSpecialVC: UIPickerViewDataSource, UIPickerViewDelegate {
         let lbl = UILabel.init(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: pickerView.bounds.size.width - 20, height: 30)))
         lbl.font = UIFont.systemFont(ofSize: 30)
         lbl.text = item.disp
+        if Constants.DbgDispStatus { lbl.text = item.debugDisp } //[Dbg: コードも表示しておく]
         lbl.textAlignment = NSTextAlignment.center
         lbl.adjustsFontSizeToFitWidth = true //フォント縮小での自動リサイズ
         lbl.minimumScaleFactor = 0.5 //フォント縮小での自動リサイズ
@@ -104,12 +105,7 @@ extension SubSelectSpecialVC {
         let _selectedItem = selectionItems[num]//現時点での選択肢一覧から、実際に選択されたものを取得
         //選択されたものに変更があったか調べる。依存関係がある場合には、関連する項目の値をリセット（未選択：""）にする
         if let (selItemKey, selIdxPath) = curSubItem {
-            print(_selectedItem.debugDisp, "せんたくされたよ！", selItemKey, selIdxPath.description, _selectedItem.debugDisp)
             dicSelectedCode[selItemKey] = _selectedItem
-            print(_selectedItem.debugDisp)
-
-
-
             if _selectedItem.code == "" { //未選択コードは選択しない（仮）
                 dicSelectedCode.removeValue(forKey: selItemKey)
             }

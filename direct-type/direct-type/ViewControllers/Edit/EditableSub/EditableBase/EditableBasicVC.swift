@@ -96,7 +96,7 @@ extension EditableBasicVC: InputItemHDelegate {
                 tf.resignFirstResponder()//自分を解除しておかないと、戻ってきたときにまた遷移してしまうため
                 let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSingleVC") as? SubSelectSingleVC{
-                    nvc.initData(editableItem: item)
+                    nvc.initData(editableItem: item, selecingCodes: "")
                     //遷移アニメーション関連
                     nvc.modalTransitionStyle = .crossDissolve
                     self.present(nvc, animated: true) {}
@@ -108,7 +108,7 @@ extension EditableBasicVC: InputItemHDelegate {
                 tf.resignFirstResponder()//自分を解除しておかないと、戻ってきたときにまた遷移してしまうため
                 let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectMultiVC") as? SubSelectMultiVC{
-                    nvc.initData(editableItem: item)
+                    nvc.initData(editableItem: item, selecingCodes: "")
                     //遷移アニメーション関連
                     nvc.modalTransitionStyle = .crossDissolve
                     self.present(nvc, animated: true) {}
@@ -120,7 +120,7 @@ extension EditableBasicVC: InputItemHDelegate {
                 tf.resignFirstResponder()//自分を解除しておかないと、戻ってきたときにまた遷移してしまうため
                 let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSpecialVC") as? SubSelectSpecialVC{
-                    nvc.initData(editableItem: item) // jobType | skill
+                    nvc.initData(editableItem: item, selecingCodes: "") // jobType | skill
                     //遷移アニメーション関連
                     nvc.modalTransitionStyle = .crossDissolve
                     self.present(nvc, animated: true) {}

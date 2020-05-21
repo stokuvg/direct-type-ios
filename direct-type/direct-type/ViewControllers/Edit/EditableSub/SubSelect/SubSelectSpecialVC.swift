@@ -39,39 +39,15 @@ class SubSelectSpecialVC: BaseVC {
     @IBOutlet weak var vwFoot: UIView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
-        //let val: String = "3:2_5:3_55:4_9:5_11:6_13:7_11"
-        var bufResult: String = ""
         var arrResult: [String] = []
-        var arr1: [CodeDisp] = []
-        var arr2: [CodeDisp] = []
-        if selectYearMode {
-            for (k, v) in dicSelectedCode {
+        for (k, v) in dicSelectedCode {
+            if selectYearMode {
                 arrResult.append("\(k):\(v.code)")
-                if let val = SelectItemsManager.getCodeDispSyou(editableItem.editItem.tsvMaster, code: k) {
-                    print("\t[\(val.debugDisp)], [\(v.debugDisp)] ... [\(k)][\(v.debugDisp)]")
-                    arr1.append(val)
-                }
+            } else {
+                arrResult.append("\(k)")
             }
-            for (_, val) in dicSelectedCode { arr2.append(val) }
-        } else {
-            for key in dicSelectedCode.keys {
-                arrResult.append("\(key)")
-            }
-            for (_, val) in dicSelectedCode { arr1.append(val) }
         }
-        print("\t❣️❣️❣️[\(bufResult)]❣️❣️❣️")
-        print(String(repeating: "=", count: 44))
-        for (num, item) in arr1.enumerated() {
-            print("\t#\(num) ... [\(item.debugDisp)]")
-        }
-        print(String(repeating: "-", count: 22))
-        for (num, item) in arr2.enumerated() {
-            print("\t#\(num) ... [\(item.debugDisp)]")
-        }
-        print(String(repeating: "=", count: 44))
-
-
-        bufResult = arrResult.joined(separator: "_")
+        let bufResult: String = arrResult.joined(separator: "_")
         actPopupSelect(selectedItemsCode: bufResult)
     }
 
@@ -89,10 +65,17 @@ class SubSelectSpecialVC: BaseVC {
         self.tableVW.register(UINib(nibName: "SubSelectDaiTBCell", bundle: nil), forCellReuseIdentifier: "Cell_SubSelectDaiTBCell")
         self.tableVW.register(UINib(nibName: "SubSelectSyouTBCell", bundle: nil), forCellReuseIdentifier: "Cell_SubSelectSyouTBCell")
     }
-    func initData(editableItem: EditableItemH) {
+    func initData(editableItem: EditableItemH, selecingCodes: String) {
         self.editableItem = editableItem
-        self.arrSubData = SelectItemsManager.getMaster(.jobExperimentYear)
         print("\t❤️[editableItem.editItem.tsvMaster: \(editableItem.editItem.tsvMaster)]")
+        switch editableItem.editItem.tsvMaster {
+        case .jobType:
+            self.arrSubData = SelectItemsManager.getMaster(.jobExperimentYear)
+        case .skill:
+            self.arrSubData = SelectItemsManager.getMaster(.skillYear)
+        default:
+            self.arrSubData = [Constants.SelectItemsUndefine, Constants.SelectItemsUndefine, Constants.SelectItemsUndefine]
+        }
         let (dai, syou): ([CodeDisp], [GrpCodeDisp]) = SelectItemsManager.getMaster(editableItem.editItem.tsvMaster)
         for itemDai in dai {
             var hoge: [CodeDisp] = []

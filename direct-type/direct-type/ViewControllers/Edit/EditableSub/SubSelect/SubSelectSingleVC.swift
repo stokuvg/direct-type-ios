@@ -31,19 +31,8 @@ class SubSelectSingleVC: BaseVC {
     @IBOutlet weak var vwFoot: UIView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
-        print(dicChange.description)
-        var arr: [CodeDisp] = []
-        let tsvMaster = editableItem.editItem.tsvMaster
-        for (key, val) in dicChange {
-            if let item: CodeDisp = SelectItemsManager.getCodeDisp(tsvMaster, code: key) {
-                if val == true { arr.append(item) } //選択状態のもののみ追加
-            }
-        }
-        if let selItem = arr.first {
-            actPopupSelect(selectedItemsCode: selItem.code) //単一選択のため
-        } else {
-            actPopupSelect(selectedItemsCode: Constants.SelectItemsUndefine.code) //単一選択のため
-        }
+        let selCode: String = dicChange.first?.key ?? ""  //単一選択のため
+        actPopupSelect(selectedItemsCode: selCode)
     }
 
     override func viewDidLoad() {
@@ -55,7 +44,7 @@ class SubSelectSingleVC: BaseVC {
         btnCommit.setTitle(text: "選択", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
     }
-    func initData(editableItem: EditableItemH) {
+    func initData(editableItem: EditableItemH, selecingCodes: String) {
         self.editableItem = editableItem
         let cd: [CodeDisp] = SelectItemsManager.getMaster(editableItem.editItem.tsvMaster)
         let (grp, gcd): ([CodeDisp], [GrpCodeDisp]) = SelectItemsManager.getMaster(editableItem.editItem.tsvMaster)
