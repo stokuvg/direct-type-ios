@@ -42,6 +42,12 @@ enum EditItemMdlResumeLastJobExperiment: String, EditItemProtocol {
         case .jobExperimentYear:    return "直近の経験年数"
         }
     }
+    var tsvMaster: SelectItemsManager.TsvMaster {
+        switch self {
+        case .jobType: return .jobType
+        case .jobExperimentYear: return .jobExperimentYear
+        }
+    }
     //Placeholder Text
     var placeholder: String {
         return "[\(self.itemKey) PlaceHolder]"

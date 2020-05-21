@@ -89,6 +89,13 @@ enum EditItemReqEntry: String, EditItemProtocol {
         case .exAnswer3:        return "独自質問③"
         }
     }
+    var tsvMaster: SelectItemsManager.TsvMaster {
+        switch self {
+        case .hopeWorkPlace: return .entryPlace
+        case .hopeSalary: return .salary
+        default: return .undefine
+        }
+    }
     //Placeholder Text
     var placeholder: String {
         return "[\(self.itemKey) PlaceHolder]"

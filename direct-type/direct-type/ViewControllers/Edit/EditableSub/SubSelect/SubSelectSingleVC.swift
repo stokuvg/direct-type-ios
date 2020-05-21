@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SubSelectSingleDelegate {
-    func actPopupSelect(changeItem: CodeDisp)
+    func actPopupSelect(selectedItemsCode: String)
     func actPopupCancel()
 }
 
@@ -17,6 +17,7 @@ class SubSelectSingleVC: BaseVC {
     var editableItem: EditableItemH!
     var arrData: [CodeDisp] = []
     var dicChange: [String: Bool] = [:]  //CodeDisp.code : true
+    var mainTsvMaster: SelectItemsManager.TsvMaster = .undefine
 
     @IBOutlet weak var vwHead: UIView!
     @IBOutlet weak var lblTitle: UILabel!
@@ -31,22 +32,8 @@ class SubSelectSingleVC: BaseVC {
     @IBOutlet weak var vwFoot: UIView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
-        var arr: [CodeDisp] = []
-        if let tsvMaster = SelectItemsManager.getTsvMasterByKey(editableItem.editableItemKey) {
-            for (key, val) in dicChange {
-                if let item: CodeDisp = SelectItemsManager.getCodeDisp(tsvMaster, code: key) {
-                    if val == true { arr.append(item) } //選択状態のもののみ追加
-                }
-            }
-        }
-        for item in arr {
-            print("\t⭐️\(item.debugDisp)⭐️")
-        }
-        if let selItem = arr.first {
-            actPopupSelect(changeItem: selItem) //単一選択のため
-        } else {
-            actPopupSelect(changeItem: Constants.SelectItemsUndefine) //単一選択のため
-        }
+        let selCode: String = dicChange.first?.key ?? ""  //単一選択のため
+        actPopupSelect(selectedItemsCode: selCode)
     }
 
     override func viewDidLoad() {
@@ -58,13 +45,13 @@ class SubSelectSingleVC: BaseVC {
         btnCommit.setTitle(text: "選択", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
     }
-    func initData(editableItem: EditableItemH) {
+    func initData(editableItem: EditableItemH, selecingCodes: String) {
         self.editableItem = editableItem
-        
-        let arr = SelectItemsManager.getSelectItems(type: editableItem.editItem, grpCodeFilter: nil)
-        print("✳️✳️✳️", #line, #function, arr.count)
-        
-        self.arrData = SelectItemsManager.getSelectItems(type: editableItem.editItem, grpCodeFilter: nil)
+        self.mainTsvMaster = editableItem.editItem.tsvMaster
+        let cd: [CodeDisp] = SelectItemsManager.getMaster(self.mainTsvMaster)
+        let (grp, gcd): ([CodeDisp], [GrpCodeDisp]) = SelectItemsManager.getMaster(self.mainTsvMaster)
+        print("[cd: \(cd.count)] / [grp: \(grp.count)] [gcd: \(gcd.count)] ")
+        self.arrData = (grp.count != 0) ? grp : cd
     }
     func dispData() {
         let bufTitle: String = "\(editableItem.dispName) \(arrData.count)件"
@@ -112,8 +99,12 @@ extension SubSelectSingleVC: UITableViewDataSource, UITableViewDelegate {
 
 //=== 単一選択ポップアップで選択させる場合の処理 ===
 extension SubSelectSingleVC: SubSelectSingleDelegate {
-    func actPopupSelect(changeItem: CodeDisp) {
-        self.dismiss(animated: true) { }
+    func actPopupSelect(selectedItemsCode: String) {
+        print("\t🐼🐼[\(selectedItemsCode)]🐼これが選択されました🐼🐼")//編集中の値の保持（と描画）
+        for item in SelectItemsManager.convCodeDisp(mainTsvMaster, selectedItemsCode) {
+            print(item.debugDisp)
+        }
+//        self.dismiss(animated: true) { }
     }
     func actPopupCancel() {
         self.dismiss(animated: true) { }

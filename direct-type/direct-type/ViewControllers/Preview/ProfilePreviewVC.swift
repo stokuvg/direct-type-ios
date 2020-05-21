@@ -48,7 +48,7 @@ class ProfilePreviewVC: PreviewBaseVC {
         let bufGender: String = SelectItemsManager.getCodeDisp(.gender, code: _detail.gender)?.disp ?? "--"
         arrData.append(MdlItemH(.birthGenderH2, "\(bufBirthday)（\(bufAge)） / \(bufGender)", childItems: [
             EditableItemH(type: .selectDrumYMD, editItem: EditItemMdlProfile.birthday, val: "\(_detail.birthday.dispYmd())"),
-            EditableItemH(type: .selectDrum, editItem: EditItemMdlProfile.gender, val: "\(_detail.gender)"),
+            EditableItemH(type: .selectSingle, editItem: EditItemMdlProfile.gender, val: "\(_detail.gender)"),
         ]))
 
         //===６．住所
@@ -61,7 +61,7 @@ class ProfilePreviewVC: PreviewBaseVC {
         let bufAddress: String = "\(bufPrefecture)\(_detail.address1)\(_detail.address2)"
         arrData.append(MdlItemH(.adderssH2, "〒\(bufZipCode)\n\(bufAddress)", childItems: [
             EditableItemH(type: .inputZipcode, editItem: EditItemMdlProfile.zipCode, val: _detail.zipCode),
-            EditableItemH(type: .selectDrum, editItem: EditItemMdlProfile.prefecture, val: _detail.prefecture),
+            EditableItemH(type: .selectSingle, editItem: EditItemMdlProfile.prefecture, val: _detail.prefecture),
             EditableItemH(type: .inputText, editItem: EditItemMdlProfile.address1, val: _detail.address1),
             EditableItemH(type: .inputText, editItem: EditItemMdlProfile.address2, val: _detail.address2),
         ]))

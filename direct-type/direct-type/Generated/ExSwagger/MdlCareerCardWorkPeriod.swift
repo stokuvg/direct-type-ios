@@ -43,6 +43,11 @@ enum EditItemCareerCardWorkPeriod: String, EditItemProtocol {
         case .endDate:      return "勤務終了年月"
         }
     }
+    var tsvMaster: SelectItemsManager.TsvMaster {
+        switch self {
+        default: return .undefine
+        }
+    }
     //Placeholder Text
     var placeholder: String {
         return "[\(self.itemKey) PlaceHolder]"
