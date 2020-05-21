@@ -26,10 +26,10 @@ class MdlJobCard: Codable {
     /** 年収例コード */
     var salaryCode: Int
     /** 勤務地コード */
-    var workPlaceCode: Int
+    var workPlaceCode: [Int]
     var userFilter: UserFilterInfo
     
-    init(jobCardCode: String,displayPeriod:EntryFormInfoDisplayPeriod, companyName: String, jobName:String, mainTitle:String, mainPicture: String, salaryCode:Int, workPlaceCode:Int, userFilter:UserFilterInfo) {
+    init(jobCardCode: String,displayPeriod:EntryFormInfoDisplayPeriod, companyName: String, jobName:String, mainTitle:String, mainPicture: String, salaryCode:Int, workPlaceCode:[Int], userFilter:UserFilterInfo) {
         self.jobCardCode = jobCardCode
         self.displayPeriod = displayPeriod
         self.companyName = companyName
