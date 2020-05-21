@@ -8,49 +8,17 @@
 
 import UIKit
 
-protocol SubSelectSingleDelegate {
-    func actPopupSelect(selectedItemsCode: String)
-    func actPopupCancel()
-}
-
-class SubSelectSingleVC: BaseVC {
-    var editableItem: EditableItemH!
-    var arrData: [CodeDisp] = []
-    var dicChange: [String: Bool] = [:]  //CodeDisp.code : true
-    var mainTsvMaster: SelectItemsManager.TsvMaster = .undefine
-
-    @IBOutlet weak var vwHead: UIView!
-    @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var btnBack: UIButton!
-    @IBAction func actBack(_ sender: UIButton) {
-        actPopupCancel()
-    }
-
-    @IBOutlet weak var vwMain: UIView!
-    @IBOutlet weak var tableVW: UITableView!
-    
-    @IBOutlet weak var vwFoot: UIView!
-    @IBOutlet weak var btnCommit: UIButton!
-    @IBAction func actCommit(_ sender: UIButton) {
-        let selCode: String = dicChange.first?.key ?? ""  //単一選択のため
-        actPopupSelect(selectedItemsCode: selCode)
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //====デザイン適用
-        vwHead.backgroundColor = UIColor.init(colorType: .color_main)!
-        vwMain.backgroundColor = UIColor.init(colorType: .color_white)!
-        vwFoot.backgroundColor = UIColor.init(colorType: .color_main)!
-        btnCommit.setTitle(text: "選択", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
-        btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
-    }
-    func initData(editableItem: EditableItemH, selecingCodes: String) {
+class SubSelectSingleVC: SubSelectBaseVC {
+    func initData(editableItem: EditableItemH, selectingCodes: String) {
         self.editableItem = editableItem
         self.mainTsvMaster = editableItem.editItem.tsvMaster
+        //選択肢一覧を取得する（グループタイプはSpecialを利用するため来ない想定）
         let cd: [CodeDisp] = SelectItemsManager.getMaster(self.mainTsvMaster)
         let (grp, gcd): ([CodeDisp], [GrpCodeDisp]) = SelectItemsManager.getMaster(self.mainTsvMaster)
-        print("[cd: \(cd.count)] / [grp: \(grp.count)] [gcd: \(gcd.count)] ")
+        if grp.count != 0 {
+            print("*** （グループタイプはSpecialを利用するため、本番では来ない想定）")
+            print("[cd: \(cd.count)] / [grp: \(grp.count)] [gcd: \(gcd.count)] ")
+        }
         self.arrData = (grp.count != 0) ? grp : cd
     }
     func dispData() {
@@ -97,21 +65,5 @@ extension SubSelectSingleVC: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-//=== 単一選択ポップアップで選択させる場合の処理 ===
-extension SubSelectSingleVC: SubSelectSingleDelegate {
-    func actPopupSelect(selectedItemsCode: String) {
-        print("\t🐼🐼[\(selectedItemsCode)]🐼これが選択されました🐼🐼")//編集中の値の保持（と描画）
-        for item in SelectItemsManager.convCodeDisp(mainTsvMaster, selectedItemsCode) {
-            print(item.debugDisp)
-        }
-//        self.dismiss(animated: true) { }
-    }
-    func actPopupCancel() {
-        self.dismiss(animated: true) { }
-    }
-}
-
-
-extension SubSelectSingleVC: SubSelectProtocol {
-    
+extension SubSelectSingleVC: SubSelectProtocol {    
 }

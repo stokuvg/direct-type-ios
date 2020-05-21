@@ -8,56 +8,12 @@
 
 import UIKit
 
-protocol SubSelectMultiDelegate {
-    func actPopupSelect(selectedItemsCode: String)
-    func actPopupCancel()
-}
-
-class SubSelectMultiVC: BaseVC {
-    var editableItem: EditableItemH!
-    var arrData: [CodeDisp] = []
-    var dicChange: [Code: Bool] = [:]  //CodeDisp.code : true
-    var mainTsvMaster: SelectItemsManager.TsvMaster = .undefine
-
-    @IBOutlet weak var vwHead: UIView!
-    @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var btnBack: UIButton!
-    @IBAction func actBack(_ sender: UIButton) {
-        actPopupCancel()
-    }
-
-    @IBOutlet weak var vwMain: UIView!
-    @IBOutlet weak var tableVW: UITableView!
-    
-    @IBOutlet weak var vwFoot: UIView!
-    @IBOutlet weak var btnCommit: UIButton!
-    @IBAction func actCommit(_ sender: UIButton) {
-        var bufResult: String = ""
-        let arr = dicChange.filter { (cb) -> Bool in
-            cb.value
-        }
-        var arrResult: [String] = []
-        for item in arr {
-            arrResult.append(item.key)
-        }
-        bufResult = arrResult.joined(separator: "_")
-        actPopupSelect(selectedItemsCode: bufResult)
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //====デザイン適用
-        vwHead.backgroundColor = UIColor.init(colorType: .color_main)!
-        vwMain.backgroundColor = UIColor.init(colorType: .color_white)!
-        vwFoot.backgroundColor = UIColor.init(colorType: .color_main)!
-        btnCommit.setTitle(text: "選択", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
-        btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
-    }
-    func initData(editableItem: EditableItemH, selecingCodes: String) {
+class SubSelectMultiVC: SubSelectBaseVC {
+    func initData(editableItem: EditableItemH, selectingCodes: String) {
         self.editableItem = editableItem
         self.mainTsvMaster = editableItem.editItem.tsvMaster
         self.arrData = SelectItemsManager.getMaster(self.mainTsvMaster)
-}
+    }
     func dispData() {
         let bufTitle: String = "\(editableItem.dispName) \(arrData.count)件"
         lblTitle.text(text: bufTitle, fontType: .font_L, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
@@ -103,20 +59,4 @@ extension SubSelectMultiVC: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension SubSelectMultiVC: SubSelectProtocol {
-    
 }
-
-//=== 複数選択ポップアップで選択させる場合の処理 ===
-extension SubSelectMultiVC: SubSelectMultiDelegate {
-    func actPopupSelect(selectedItemsCode: String) {
-        print("\t🐼🐼[\(selectedItemsCode)]🐼これが選択されました🐼🐼")//編集中の値の保持（と描画）
-        for item in SelectItemsManager.convCodeDisp(mainTsvMaster, selectedItemsCode) {
-            print(item.debugDisp)
-        }
-//        self.dismiss(animated: true) { }
-    }
-    func actPopupCancel() {
-        self.dismiss(animated: true) { }
-    }
-}
-

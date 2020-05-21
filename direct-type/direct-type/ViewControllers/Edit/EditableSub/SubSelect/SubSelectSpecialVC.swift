@@ -67,7 +67,7 @@ class SubSelectSpecialVC: BaseVC {
         self.tableVW.register(UINib(nibName: "SubSelectDaiTBCell", bundle: nil), forCellReuseIdentifier: "Cell_SubSelectDaiTBCell")
         self.tableVW.register(UINib(nibName: "SubSelectSyouTBCell", bundle: nil), forCellReuseIdentifier: "Cell_SubSelectSyouTBCell")
     }
-    func initData(editableItem: EditableItemH, selecingCodes: String) {
+    func initData(editableItem: EditableItemH, selectingCodes: String) {
         self.editableItem = editableItem
         self.mainTsvMaster = editableItem.editItem.tsvMaster
         switch editableItem.editItem.tsvMaster {
