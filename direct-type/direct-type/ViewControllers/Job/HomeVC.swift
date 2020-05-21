@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwaggerClient
 
 enum CardDispType:Int {
     case none   // 何も無い
@@ -22,13 +23,14 @@ class HomeVC: TmpNaviTopVC {
 //    @IBOutlet weak var homeNaviHeight:NSLayoutConstraint!
     @IBOutlet weak var homeTableView:UITableView!
     
+    var masterJobCards: JobCardList? = nil
+    var dispJobCards: JobCardList? = nil
+    
     var dispTableData:[[String: Any]] = []
     var masterTableData:[[String:Any]] = []
     
     var moreCnt:Int = 1
     var dispType:CardDispType = .none
-    
-    var safeAreaTop:CGFloat!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,8 +76,6 @@ class HomeVC: TmpNaviTopVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        safeAreaTop = self.view.safeAreaInsets.top
         
         /*
         //[Dbg]___
@@ -123,6 +123,18 @@ class HomeVC: TmpNaviTopVC {
     }
     
     private func makeDummyData() {
+        
+        let mdlJobCard1 = MdlJobCard(
+            jobCardCode: <#T##String#>,
+            displayPeriod: <#T##EntryFormInfoDisplayPeriod#>,
+            companyName: <#T##String#>,
+            jobName: <#T##String#>,
+            mainTitle: <#T##String#>,
+            mainPicture: <#T##String#>,
+            salaryCode: <#T##Int#>,
+            workPlaceCode: <#T##Int#>,
+            userFilter: <#T##UserFilterInfo#>)
+        
         let data1:[String:Any] = [
             "end":true,
             "image":"https://type.jp/s/img_banner/top_pc_side_number1.jpg",
