@@ -28,7 +28,7 @@ class MdlResumeSchool: Codable {
     }
     //ApiモデルをAppモデルに変換して保持させる
     convenience init(dto: ResumeSchool) {        
-        self.init(schoolName: dto.schoolName, department: dto.department, subject: dto.subject, graduationYear: dto.guraduationYear)
+        self.init(schoolName: dto.schoolName, department: dto.department, subject: dto.subject, graduationYear: dto.graduationYear)
     }
     
     var debugDisp: String {
