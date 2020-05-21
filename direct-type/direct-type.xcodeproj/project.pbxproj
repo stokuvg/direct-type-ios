@@ -159,6 +159,7 @@
 		269AFFCA246A929300DB364B /* SubSelectDaiTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269AFFC0246A929200DB364B /* SubSelectDaiTBCell.xib */; };
 		269AFFCB246A929300DB364B /* SubSelectSpecialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269AFFC1246A929200DB364B /* SubSelectSpecialVC.swift */; };
 		26A5DD642475028E0035267A /* SubSelectSpecialVC+Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5DD632475028E0035267A /* SubSelectSpecialVC+Picker.swift */; };
+		26A5DD662476547D0035267A /* SubSelectBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5DD652476547D0035267A /* SubSelectBaseVC.swift */; };
 		26BF48D924639D2B00E00215 /* MstK25_employmentStatus.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48C824639D2A00E00215 /* MstK25_employmentStatus.tsv */; };
 		26BF48DA24639D2B00E00215 /* MstK14_place.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48C924639D2A00E00215 /* MstK14_place.tsv */; };
 		26BF48DB24639D2B00E00215 /* MstK11_entryPlace.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48CA24639D2A00E00215 /* MstK11_entryPlace.tsv */; };
@@ -357,6 +358,7 @@
 		269AFFC0246A929200DB364B /* SubSelectDaiTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubSelectDaiTBCell.xib; sourceTree = "<group>"; };
 		269AFFC1246A929200DB364B /* SubSelectSpecialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubSelectSpecialVC.swift; sourceTree = "<group>"; };
 		26A5DD632475028E0035267A /* SubSelectSpecialVC+Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubSelectSpecialVC+Picker.swift"; sourceTree = "<group>"; };
+		26A5DD652476547D0035267A /* SubSelectBaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSelectBaseVC.swift; sourceTree = "<group>"; };
 		26BF48C524639A8200E00215 /* Models */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Models; path = ../../../../generated/promise/SwaggerClient/Classes/Swaggers/Models; sourceTree = "<group>"; };
 		26BF48C824639D2A00E00215 /* MstK25_employmentStatus.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK25_employmentStatus.tsv; sourceTree = "<group>"; };
 		26BF48C924639D2A00E00215 /* MstK14_place.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK14_place.tsv; sourceTree = "<group>"; };
@@ -797,6 +799,7 @@
 		269AFFB7246A929200DB364B /* SubSelect */ = {
 			isa = PBXGroup;
 			children = (
+				26A5DD652476547D0035267A /* SubSelectBaseVC.swift */,
 				269AFFBB246A929200DB364B /* SubSelectSingleVC.swift */,
 				269AFFBE246A929200DB364B /* SubSelectMultiVC.swift */,
 				269AFFC1246A929200DB364B /* SubSelectSpecialVC.swift */,
@@ -1148,6 +1151,7 @@
 				067F28DF2456D013000AAD69 /* TmpNaviTopVC.swift in Sources */,
 				268BFF56246E8292004B2640 /* SubInputMemoVC.swift in Sources */,
 				06B94F64246BE38E002FEDDC /* JobDetailItemCell.swift in Sources */,
+				26A5DD662476547D0035267A /* SubSelectBaseVC.swift in Sources */,
 				06E519D02458164B004E4B7A /* ScoutPreview.swift in Sources */,
 				06E519C024581561004E4B7A /* ScountDetailVC.swift in Sources */,
 				26133A58246B9DC2001802BB /* EditableBasicVC+PickerYMD.swift in Sources */,
