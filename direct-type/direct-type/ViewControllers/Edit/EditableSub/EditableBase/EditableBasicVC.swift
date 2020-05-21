@@ -10,7 +10,11 @@ import UIKit
 import SVProgressHUD
 
 //=== 編集可能項目の対応
-class EditableBasicVC: TmpBasicVC {
+class EditableBasicVC: TmpBasicVC, SubSelectFeedbackDelegate {
+    func changedSelect(codes: String) {
+        print("\t🌸🌸[\(codes)]🌸🌸フィードバックだよ")
+    }
+    
     //編集中の情報
     var editableModel: EditableModel = EditableModel() //画面編集項目のモデルと管理
     //=== OVerrideして使う
@@ -96,7 +100,8 @@ extension EditableBasicVC: InputItemHDelegate {
                 tf.resignFirstResponder()//自分を解除しておかないと、戻ってきたときにまた遷移してしまうため
                 let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSingleVC") as? SubSelectSingleVC{
-                    nvc.initData(editableItem: item, selectingCodes: "")
+                    print("\t🌸🌸[\(item.curVal)] -> [\(editTemp.curVal)]🌸🌸")
+                    nvc.initData(self, editableItem: item, selectingCodes: editTemp.curVal)
                     //遷移アニメーション関連
                     nvc.modalTransitionStyle = .crossDissolve
                     self.present(nvc, animated: true) {}
@@ -108,7 +113,8 @@ extension EditableBasicVC: InputItemHDelegate {
                 tf.resignFirstResponder()//自分を解除しておかないと、戻ってきたときにまた遷移してしまうため
                 let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectMultiVC") as? SubSelectMultiVC{
-                    nvc.initData(editableItem: item, selectingCodes: "")
+                    print("\t🌸🌸[\(item.curVal)] -> [\(editTemp.curVal)]🌸🌸")
+                    nvc.initData(self, editableItem: item, selectingCodes: editTemp.curVal)
                     //遷移アニメーション関連
                     nvc.modalTransitionStyle = .crossDissolve
                     self.present(nvc, animated: true) {}

@@ -15,7 +15,7 @@ protocol SubSelectSpecialDelegate {
 }
 
 class SubSelectSpecialVC: BaseVC {
-    let selectYearMode: Bool = true
+    let selectYearMode: Bool = false
     var editableItem: EditableItemH!
     var arrDataGrp: [[CodeDisp]] = []
     var arrSelected: [Bool] = []
