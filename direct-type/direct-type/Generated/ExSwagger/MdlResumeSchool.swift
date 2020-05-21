@@ -28,7 +28,7 @@ class MdlResumeSchool: Codable {
     }
     //ApiモデルをAppモデルに変換して保持させる
     convenience init(dto: ResumeSchool) {        
-        self.init(schoolName: dto.schoolName, department: dto.department, subject: dto.subject, graduationYear: dto.guraduationYear)
+        self.init(schoolName: dto.schoolName, department: dto.department, subject: dto.subject, graduationYear: dto.graduationYear)
     }
     
     var debugDisp: String {
@@ -48,7 +48,12 @@ enum EditItemMdlResumeSchool: String, EditItemProtocol {
         case .schoolName:       return "学校名"
         case .department:       return "学部"
         case .subject:          return "学科・専攻"
-        case .graduationYear:  return "卒業年月"
+        case .graduationYear:   return "卒業年月"
+        }
+    }
+    var tsvMaster: SelectItemsManager.TsvMaster {
+        switch self {
+        default: return .undefine
         }
     }
     //Placeholder Text

@@ -39,6 +39,12 @@ enum EditItemMdlAppSmoothCareerComponyDescriptionWorkPeriod: String, EditItemPro
         case .workEndDate:      return "在籍期間：終了年月"
         }
     }
+    var tsvMaster: SelectItemsManager.TsvMaster {
+        switch self {
+        default: return .undefine
+        }
+    }
+
     //Placeholder Text
     var placeholder: String {
         return "[\(self.itemKey) PlaceHolder]"

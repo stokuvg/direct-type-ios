@@ -143,12 +143,15 @@ class EditableModel {
         let (depKey, depCurSel) = SelectItemsManager.shared.chkParent(itemKey, editTempCD: editTempCD)
         if let depKey = depKey {
             if depCurSel != "" {
-                selectionItems = SelectItemsManager.getSelectItemsByKey(itemKey, grpCodeFilter: depCurSel)//しぼりこみがあるばあい
+//                selectionItems = SelectItemsManager.getSelectItemsByKey(itemKey, grpCodeFilter: depCurSel)//しぼりこみがあるばあい
+                selectionItems = [Constants.SelectItemsUndefine, Constants.SelectItemsUndefine, ] //!!!ダミー
             } else {
                 selectionItems = [Constants.SelectItemsUndefine] //「未定義」な値を表示させておく
             }
         } else {
-            selectionItems = SelectItemsManager.getSelectItemsByKey(itemKey, grpCodeFilter: nil)//しぼりこみがないばあい
+//            selectionItems = SelectItemsManager.getSelectItemsByKey(itemKey, grpCodeFilter: nil)//しぼりこみがないばあい
+//            selectionItems = SelectItemsManager.getSelectItemsByKey(itemKey, grpCodeFilter: nil)//しぼりこみがないばあい
+            selectionItems = [Constants.SelectItemsUndefine, Constants.SelectItemsUndefine, ] //!!!ダミー
         }
         return selectionItems
     }

@@ -64,6 +64,13 @@ enum EditItemCareerCard: String, EditItemProtocol {
         case .contents:         return "職務内容本文"
         }
     }
+    var tsvMaster: SelectItemsManager.TsvMaster {
+        switch self {
+        case .employmentType: return .employmentType
+        case .salary: return .salary
+        default: return .undefine
+        }
+    }
     //Placeholder Text
     var placeholder: String {
         return "[\(self.itemKey) PlaceHolder]"

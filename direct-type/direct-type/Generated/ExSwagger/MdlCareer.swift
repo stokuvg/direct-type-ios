@@ -40,6 +40,11 @@ enum EditItemCareer: String, EditItemProtocol {
         case .businessTypes:    return "職務経歴書"
         }
     }
+    var tsvMaster: SelectItemsManager.TsvMaster {
+        switch self {
+        case .businessTypes: return .businessType
+        }
+    }
     //Placeholder Text
     var placeholder: String {
         return "[\(self.itemKey) PlaceHolder]"

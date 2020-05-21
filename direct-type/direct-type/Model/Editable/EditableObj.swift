@@ -16,6 +16,7 @@ protocol EditItemProtocol {
     var itemKey: String { get }
     var dispName: String { get }
     var placeholder: String { get }
+    var tsvMaster: SelectItemsManager.TsvMaster { get }
 }
 
 enum EditType {

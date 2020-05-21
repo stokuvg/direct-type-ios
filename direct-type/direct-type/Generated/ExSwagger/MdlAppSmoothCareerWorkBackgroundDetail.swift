@@ -54,6 +54,15 @@ enum EditItemMdlAppSmoothCareerWorkBackgroundDetail: String, EditItemProtocol {
         case .skillPowerPoint:      return "PCスキル：PowerPoint"
         }
     }
+    var tsvMaster: SelectItemsManager.TsvMaster {
+        switch self {
+        case .businessType: return .businessType
+        case .experienceManagement: return .management
+        case .skillExcel: return .pcSkillExcel
+        case .skillWord: return .pcSkillWord
+        case .skillPowerPoint: return .pcSkillPowerPoint
+        }
+    }
     //Placeholder Text
     var placeholder: String {
         return "[\(self.itemKey) PlaceHolder]"
