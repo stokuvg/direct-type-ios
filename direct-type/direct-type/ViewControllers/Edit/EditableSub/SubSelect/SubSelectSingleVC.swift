@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SubSelectSingleDelegate {
-    func actPopupSelect(changeItem: CodeDisp)
+    func actPopupSelect(selectedItemsCode: String)
     func actPopupCancel()
 }
 
@@ -31,6 +31,7 @@ class SubSelectSingleVC: BaseVC {
     @IBOutlet weak var vwFoot: UIView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
+        print(dicChange.description)
         var arr: [CodeDisp] = []
         let tsvMaster = editableItem.editItem.tsvMaster
         for (key, val) in dicChange {
@@ -38,14 +39,10 @@ class SubSelectSingleVC: BaseVC {
                 if val == true { arr.append(item) } //選択状態のもののみ追加
             }
         }
-        //2段階のもの、Grpだと選択されないので
-        for item in arr {
-            print("\t⭐️\(item.debugDisp)⭐️")
-        }
         if let selItem = arr.first {
-            actPopupSelect(changeItem: selItem) //単一選択のため
+            actPopupSelect(selectedItemsCode: selItem.code) //単一選択のため
         } else {
-            actPopupSelect(changeItem: Constants.SelectItemsUndefine) //単一選択のため
+            actPopupSelect(selectedItemsCode: Constants.SelectItemsUndefine.code) //単一選択のため
         }
     }
 
@@ -111,8 +108,10 @@ extension SubSelectSingleVC: UITableViewDataSource, UITableViewDelegate {
 
 //=== 単一選択ポップアップで選択させる場合の処理 ===
 extension SubSelectSingleVC: SubSelectSingleDelegate {
-    func actPopupSelect(changeItem: CodeDisp) {
-        self.dismiss(animated: true) { }
+    func actPopupSelect(selectedItemsCode: String) {
+        let curCodes = selectedItemsCode.split(separator: "_").map { (obj) -> String in String(obj) }
+        print("\t🐼🐼🐼[\(curCodes)][\(selectedItemsCode)]🐼🐼🐼これが選択されました🐼🐼🐼")//編集中の値の保持（と描画）
+//        self.dismiss(animated: true) { }
     }
     func actPopupCancel() {
         self.dismiss(animated: true) { }

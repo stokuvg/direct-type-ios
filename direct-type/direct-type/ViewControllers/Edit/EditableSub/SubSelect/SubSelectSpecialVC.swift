@@ -10,7 +10,7 @@
 import UIKit
 
 protocol SubSelectSpecialDelegate {
-    func actPopupSelect(changeItems1: [CodeDisp], changeItems2: [CodeDisp])
+    func actPopupSelect(selectedItemsCode: String)
     func actPopupCancel()
 }
 
@@ -59,9 +59,20 @@ class SubSelectSpecialVC: BaseVC {
             }
             for (_, val) in dicSelectedCode { arr1.append(val) }
         }
-        bufResult = arrResult.joined(separator: "_")
         print("\t❣️❣️❣️[\(bufResult)]❣️❣️❣️")
-        actPopupSelect(changeItems1: arr1, changeItems2: arr2)
+        print(String(repeating: "=", count: 44))
+        for (num, item) in arr1.enumerated() {
+            print("\t#\(num) ... [\(item.debugDisp)]")
+        }
+        print(String(repeating: "-", count: 22))
+        for (num, item) in arr2.enumerated() {
+            print("\t#\(num) ... [\(item.debugDisp)]")
+        }
+        print(String(repeating: "=", count: 44))
+
+
+        bufResult = arrResult.joined(separator: "_")
+        actPopupSelect(selectedItemsCode: bufResult)
     }
 
     override func viewDidLoad() {
@@ -175,17 +186,10 @@ extension SubSelectSpecialVC: SubSelectProtocol {
 
 //=== 複数選択ポップアップで選択させる場合の処理 ===
 extension SubSelectSpecialVC: SubSelectSpecialDelegate {
-    func actPopupSelect(changeItems1: [CodeDisp], changeItems2: [CodeDisp]) {
-        print(String(repeating: "=", count: 44))
-        for (num, item) in changeItems1.enumerated() {
-            print("\t#\(num) ... [\(item.debugDisp)]")
-        }
-        print(String(repeating: "-", count: 22))
-        for (num, item) in changeItems2.enumerated() {
-            print("\t#\(num) ... [\(item.debugDisp)]")
-        }
-        print(String(repeating: "=", count: 44))
-//!!!        self.dismiss(animated: true) { }
+    func actPopupSelect(selectedItemsCode: String) {
+        let curCodes = selectedItemsCode.split(separator: "_").map { (obj) -> String in String(obj) }
+        print("\t🐼🐼🐼[\(curCodes)][\(selectedItemsCode)]🐼🐼🐼これが選択されました🐼🐼🐼")//編集中の値の保持（と描画）
+//        self.dismiss(animated: true) { }
     }
     func actPopupCancel() {
         self.dismiss(animated: true) { }

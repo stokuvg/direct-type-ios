@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SubSelectMultiDelegate {
-    func actPopupSelect(changeItems: [Code: Bool])
+    func actPopupSelect(selectedItemsCode: String)
     func actPopupCancel()
 }
 
@@ -31,7 +31,18 @@ class SubSelectMultiVC: BaseVC {
     @IBOutlet weak var vwFoot: UIView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
-        actPopupSelect(changeItems: ["4" : true])
+
+        print(#line, #function, dicChange.debugDescription)
+        var bufResult: String = ""
+        let arr = dicChange.filter { (cb) -> Bool in
+            cb.value
+        }
+        var arrResult: [String] = []
+        for item in arr {
+            arrResult.append(item.key)
+        }
+        bufResult = arrResult.joined(separator: "_")
+        actPopupSelect(selectedItemsCode: bufResult)
     }
 
     override func viewDidLoad() {
@@ -67,7 +78,8 @@ extension SubSelectMultiVC: UITableViewDataSource, UITableViewDelegate {
         let item = arrData[indexPath.row]
         let cell: SubSelectTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_SubSelectTBCell", for: indexPath) as! SubSelectTBCell
         //選択状態があるかチェックして反映させる
-        let vals = "1_3_5".split(separator: "_") //選択状態をバラす
+//        let vals = "1_3_5".split(separator: "_") //選択状態をバラす
+        let vals = "".split(separator: "_") //選択状態をバラす
         let select0: Bool = vals.contains { (val) -> Bool in val == item.code }//item.valに選択されているもの配列が付いているので、そこにあるかチェック
         let select: Bool = dicChange[item.code] ?? select0  //差分情報優先
         let select2: Bool = dicChange[item.code] ?? false
@@ -81,7 +93,8 @@ extension SubSelectMultiVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true) //ハイライトの解除
         let item = arrData[indexPath.row]
-        let vals = "1_3_5".split(separator: "_") //選択状態をバラす
+//        let vals = "1_3_5".split(separator: "_") //選択状態をバラす
+        let vals = "".split(separator: "_") //選択状態をバラす
         let select0: Bool = vals.contains { (val) -> Bool in val == item.code }//item.valに選択されているもの配列が付いているので、そこにあるかチェック
         let select: Bool = dicChange[item.code] ?? select0  //差分情報優先
         dicChange[item.code] = !select
@@ -96,23 +109,10 @@ extension SubSelectMultiVC: SubSelectProtocol {
 
 //=== 複数選択ポップアップで選択させる場合の処理 ===
 extension SubSelectMultiVC: SubSelectMultiDelegate {
-    func actPopupSelect(changeItems: [String : Bool]) {
-        let curCodes = "1_3_5".split(separator: "_").map { (obj) -> String in String(obj) }
-        var selCodes: Set<String> = Set(curCodes)
-        
-        for change in changeItems {
-            if change.value {
-                selCodes.insert(change.key)
-            } else {
-                selCodes.remove(change.key)
-            }
-        }
-        //選択されているコードを連結文字列にする
-        let codes = selCodes.sorted(by: { (lv, rv) -> Bool in
-            lv < rv
-        }).joined(separator: "/")
-        print(codes)//編集中の値の保持（と描画）
-        self.dismiss(animated: true) { }
+    func actPopupSelect(selectedItemsCode: String) {
+        let curCodes = selectedItemsCode.split(separator: "_").map { (obj) -> String in String(obj) }
+        print("\t🐼🐼🐼[\(curCodes)][\(selectedItemsCode)]🐼🐼🐼これが選択されました🐼🐼🐼")//編集中の値の保持（と描画）
+//        self.dismiss(animated: true) { }
     }
     func actPopupCancel() {
         self.dismiss(animated: true) { }
