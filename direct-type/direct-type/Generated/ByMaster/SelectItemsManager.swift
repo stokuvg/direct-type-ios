@@ -59,7 +59,7 @@ class SelectItemsManager: NSObject {
         loadMaster(type: .employmentType)
         loadMaster(type: .prCode)
         loadMaster(type: .overtime)
-        loadMaster(type: .skill)
+        loadMasterGrp(type: .skill)
         loadMaster(type: .skillYear)
         loadMaster(type: .management)
         loadMaster(type: .pcSkillWord)
@@ -469,3 +469,26 @@ extension SelectItemsManager {
     }
 
 }
+
+//サブ選択の戻り値をCodeDispに展開するもの
+//複数の場合は[_]でつなぐ。2段階指定のものはさらに[:]でつなぐ...[1_2_3] or [1:1_2:2_3:3]など
+extension SelectItemsManager {
+    class func convCodeDisp(_ tsv1: TsvMaster, _ tsv2: TsvMaster, _ codes: String) -> [(CodeDisp, CodeDisp)] {
+        return codes.split(separator: "_").map { (obj) -> (CodeDisp, CodeDisp) in
+            let cd = String(obj).split(separator: ":")
+            if cd.count == 2 {
+                let cd1: CodeDisp = SelectItemsManager.getCodeDispSyou(tsv1, code: String(cd[0])) ?? Constants.SelectItemsUndefine
+                let cd2: CodeDisp = SelectItemsManager.getCodeDisp(tsv2, code: String(cd[1])) ?? Constants.SelectItemsUndefine
+                return (cd1, cd2)
+            } else {
+                return (Constants.SelectItemsUndefine, Constants.SelectItemsUndefine)
+            }
+        }
+    }
+    class func convCodeDisp(_ tsv1: TsvMaster, _ codes: String) -> [CodeDisp] {
+        return codes.split(separator: "_").map { (obj) -> (CodeDisp) in
+            SelectItemsManager.getCodeDispSyou(tsv1, code: String(obj)) ?? Constants.SelectItemsUndefine
+        }
+    }
+}
+

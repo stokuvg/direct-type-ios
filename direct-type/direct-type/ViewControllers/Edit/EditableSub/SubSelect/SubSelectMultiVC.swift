@@ -108,8 +108,7 @@ extension SubSelectMultiVC: SubSelectProtocol {
 //=== 複数選択ポップアップで選択させる場合の処理 ===
 extension SubSelectMultiVC: SubSelectMultiDelegate {
     func actPopupSelect(selectedItemsCode: String) {
-        let curCodes = selectedItemsCode.split(separator: "_").map { (obj) -> String in String(obj) }
-        print("\t🐼🐼🐼[\(curCodes)][\(selectedItemsCode)]🐼🐼🐼これが選択されました🐼🐼🐼")//編集中の値の保持（と描画）
+        print("\t🐼🐼[\(selectedItemsCode)]🐼これが選択されました🐼🐼")//編集中の値の保持（と描画）
 //        self.dismiss(animated: true) { }
     }
     func actPopupCancel() {

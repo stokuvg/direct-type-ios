@@ -170,12 +170,17 @@ extension SubSelectSpecialVC: SubSelectProtocol {
 //=== 複数選択ポップアップで選択させる場合の処理 ===
 extension SubSelectSpecialVC: SubSelectSpecialDelegate {
     func actPopupSelect(selectedItemsCode: String) {
-        let curCodes = selectedItemsCode.split(separator: "_").map { (obj) -> String in String(obj) }
-        print("\t🐼🐼🐼[\(curCodes)][\(selectedItemsCode)]🐼🐼🐼これが選択されました🐼🐼🐼")//編集中の値の保持（と描画）
-//        self.dismiss(animated: true) { }
+        print("\t🐼🐼[\(selectedItemsCode)]🐼これが選択されました🐼🐼")//編集中の値の保持（と描画）
+        let hoge = selectedItemsCode.split(separator: "_").map { cdcd in
+            let cc = cdcd.split(separator: ":")
+            print(cc.count, cc[0], cc[1])
+        }
+        for item in SelectItemsManager.convCodeDisp(.skill, .skillYear, selectedItemsCode) {
+            print(item.0.debugDisp, item.1.debugDisp)
+        }
+        //        self.dismiss(animated: true) { }
     }
     func actPopupCancel() {
         self.dismiss(animated: true) { }
     }
 }
-
