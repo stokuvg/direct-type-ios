@@ -964,7 +964,7 @@ components:
             - school_name
             - department
             - subject
-            - guraduation_year
+            - graduation_year
           properties:
             school_name:
               type: string
@@ -978,9 +978,9 @@ components:
               type: string
               example: subject
               description: 学科・専攻
-            guraduation_year:
+            graduation_year:
               type: string
-              example: guraduationYear
+              example: graduationYear
               description: 卒業年月
 
         skill_language:
