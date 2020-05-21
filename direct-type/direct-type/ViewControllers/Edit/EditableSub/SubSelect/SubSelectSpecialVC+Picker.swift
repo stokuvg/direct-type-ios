@@ -106,6 +106,10 @@ extension SubSelectSpecialVC {
         if let (selItemKey, selIdxPath) = curSubItem {
             print(_selectedItem.debugDisp, "せんたくされたよ！", selItemKey, selIdxPath.description, _selectedItem.debugDisp)
             dicSelectedCode[selItemKey] = _selectedItem
+            print(_selectedItem.debugDisp)
+
+
+
             if _selectedItem.code == "" { //未選択コードは選択しない（仮）
                 dicSelectedCode.removeValue(forKey: selItemKey)
             }

@@ -362,7 +362,7 @@ extension SelectItemsManager {
             } catch {
                 // contents could not be loaded
             }
-            print("[\(type.fName)] \(arrCodeDisp.count)件のマスタを読み込みました")
+            //print("[\(type.fName)] \(arrCodeDisp.count)件のマスタを読み込みました")
             //===[ソート後のものを保持しておく]===___
             arrMaster[type] = []
             for (num, item) in arrCodeDisp.sorted(by: { (mae, ato) -> Bool in
@@ -436,7 +436,7 @@ extension SelectItemsManager {
             //    }
             //}
             ////===[Debug: 内容確認]===^^^
-            print("[\(type.fName)] \(arrCodeDisp.count)件のマスタを読み込みました")
+            //print("[\(type.fName)] \(arrCodeDisp.count)件のマスタを読み込みました")
         }
     }
     //======================================================

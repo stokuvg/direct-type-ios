@@ -727,8 +727,8 @@
 			children = (
 				2680051E246A29D50053A7F4 /* EditableSub */,
 				06E519B6245814D4004E4B7A /* SubEditBaseVC.swift */,
-				06E519D224581684004E4B7A /* ContentsEditVC.swift */,
 				268BFF55246E8292004B2640 /* SubInputMemoVC.swift */,
+				06E519D224581684004E4B7A /* ContentsEditVC.swift */,
 			);
 			path = Edit;
 			sourceTree = "<group>";
@@ -765,6 +765,8 @@
 		26133A59246B9E65001802BB /* EditableBase */ = {
 			isa = PBXGroup;
 			children = (
+				269AFFBD246A929200DB364B /* EditablePopup.storyboard */,
+				26CFC4612469496D00E458E2 /* Edit.storyboard */,
 				26989F81246A66630050AC40 /* EditableModel.swift */,
 				26CFC4652469496D00E458E2 /* EditableItemH.swift */,
 				26133A53246B7A00001802BB /* EditableBasicVC.swift */,
@@ -778,10 +780,10 @@
 		2680051E246A29D50053A7F4 /* EditableSub */ = {
 			isa = PBXGroup;
 			children = (
-				26133A59246B9E65001802BB /* EditableBase */,
-				269AFFB7246A929200DB364B /* SubSelect */,
 				26CFC46D246949B800E458E2 /* ClassExtensions.swift */,
 				26CFC46C246949B800E458E2 /* MyColorDefine.swift */,
+				26133A59246B9E65001802BB /* EditableBase */,
+				269AFFB7246A929200DB364B /* SubSelect */,
 				26989F7E246A5E520050AC40 /* HEditDrumTBCell.swift */,
 				26989F7D246A5E520050AC40 /* HEditDrumTBCell.xib */,
 				26CFC4642469496D00E458E2 /* HEditTextTBCell.swift */,
@@ -795,17 +797,15 @@
 		269AFFB7246A929200DB364B /* SubSelect */ = {
 			isa = PBXGroup;
 			children = (
-				269AFFBD246A929200DB364B /* EditablePopup.storyboard */,
 				269AFFBB246A929200DB364B /* SubSelectSingleVC.swift */,
-				26CFC4612469496D00E458E2 /* Edit.storyboard */,
 				269AFFBE246A929200DB364B /* SubSelectMultiVC.swift */,
 				269AFFC1246A929200DB364B /* SubSelectSpecialVC.swift */,
 				26A5DD632475028E0035267A /* SubSelectSpecialVC+Picker.swift */,
-				269AFFB8246A929200DB364B /* SubSelectDaiTBCell.swift */,
 				269AFFB9246A929200DB364B /* SubSelectTBCell.swift */,
+				269AFFBF246A929200DB364B /* SubSelectTBCell.xib */,
 				269AFFBA246A929200DB364B /* SubSelectSyouTBCell.swift */,
 				269AFFBC246A929200DB364B /* SubSelectSyouTBCell.xib */,
-				269AFFBF246A929200DB364B /* SubSelectTBCell.xib */,
+				269AFFB8246A929200DB364B /* SubSelectDaiTBCell.swift */,
 				269AFFC0246A929200DB364B /* SubSelectDaiTBCell.xib */,
 			);
 			path = SubSelect;

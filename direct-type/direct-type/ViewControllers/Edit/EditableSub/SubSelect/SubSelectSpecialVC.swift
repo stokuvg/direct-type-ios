@@ -15,7 +15,7 @@ protocol SubSelectSpecialDelegate {
 }
 
 class SubSelectSpecialVC: BaseVC {
-    let selectYearMode: Bool = false
+    let selectYearMode: Bool = true
     var editableItem: EditableItemH!
     var arrDataGrp: [[CodeDisp]] = []
     var arrSelected: [Bool] = []
@@ -39,7 +39,29 @@ class SubSelectSpecialVC: BaseVC {
     @IBOutlet weak var vwFoot: UIView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
-        actPopupSelect(changeItems1: [CodeDisp("2", "hogehoge1")], changeItems2: [CodeDisp("3", "hogehoge2")])
+        //let val: String = "3:2_5:3_55:4_9:5_11:6_13:7_11"
+        var bufResult: String = ""
+        var arrResult: [String] = []
+        var arr1: [CodeDisp] = []
+        var arr2: [CodeDisp] = []
+        if selectYearMode {
+            for (k, v) in dicSelectedCode {
+                arrResult.append("\(k):\(v.code)")
+                if let val = SelectItemsManager.getCodeDispSyou(editableItem.editItem.tsvMaster, code: k) {
+                    print("\t[\(val.debugDisp)], [\(v.debugDisp)] ... [\(k)][\(v.debugDisp)]")
+                    arr1.append(val)
+                }
+            }
+            for (_, val) in dicSelectedCode { arr2.append(val) }
+        } else {
+            for key in dicSelectedCode.keys {
+                arrResult.append("\(key)")
+            }
+            for (_, val) in dicSelectedCode { arr1.append(val) }
+        }
+        bufResult = arrResult.joined(separator: "_")
+        print("\t❣️❣️❣️[\(bufResult)]❣️❣️❣️")
+        actPopupSelect(changeItems1: arr1, changeItems2: arr2)
     }
 
     override func viewDidLoad() {
@@ -59,10 +81,7 @@ class SubSelectSpecialVC: BaseVC {
     func initData(editableItem: EditableItemH) {
         self.editableItem = editableItem
         self.arrSubData = SelectItemsManager.getMaster(.jobExperimentYear)
-        //大項目の一覧のみ作成
-        //guard let tsvMaster = SelectItemsManager.getTsvMasterByKey(editableItem.editableItemKey) else { return }
-        //let dai = SelectItemsManager.getMaster(tsvMaster).0
-        //let syou = SelectItemsManager.getMaster(tsvMaster).1
+        print("\t❤️[editableItem.editItem.tsvMaster: \(editableItem.editItem.tsvMaster)]")
         let (dai, syou): ([CodeDisp], [GrpCodeDisp]) = SelectItemsManager.getMaster(editableItem.editItem.tsvMaster)
         for itemDai in dai {
             var hoge: [CodeDisp] = []
@@ -74,7 +93,8 @@ class SubSelectSpecialVC: BaseVC {
             }
             print(" * \(itemDai.debugDisp) - \(hoge.count)件")
             arrDataGrp.append(hoge)
-            arrSelected.append(false)//該当セクションが展開されているか否か
+//            arrSelected.append(false)//該当セクションが展開されているか否か
+            arrSelected.append(true)//該当セクションが展開されているか否か
         }
     }
     func dispData() {
@@ -156,8 +176,16 @@ extension SubSelectSpecialVC: SubSelectProtocol {
 //=== 複数選択ポップアップで選択させる場合の処理 ===
 extension SubSelectSpecialVC: SubSelectSpecialDelegate {
     func actPopupSelect(changeItems1: [CodeDisp], changeItems2: [CodeDisp]) {
-        print(changeItems1.debugDescription, changeItems2.debugDescription)//編集中の値の保持（と描画）
-        self.dismiss(animated: true) { }
+        print(String(repeating: "=", count: 44))
+        for (num, item) in changeItems1.enumerated() {
+            print("\t#\(num) ... [\(item.debugDisp)]")
+        }
+        print(String(repeating: "-", count: 22))
+        for (num, item) in changeItems2.enumerated() {
+            print("\t#\(num) ... [\(item.debugDisp)]")
+        }
+        print(String(repeating: "=", count: 44))
+//!!!        self.dismiss(animated: true) { }
     }
     func actPopupCancel() {
         self.dismiss(animated: true) { }
