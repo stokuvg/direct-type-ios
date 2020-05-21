@@ -15,12 +15,14 @@ protocol SubSelectSpecialDelegate {
 }
 
 class SubSelectSpecialVC: BaseVC {
-    let selectYearMode: Bool = true
+    let selectYearMode: Bool = false
     var editableItem: EditableItemH!
     var arrDataGrp: [[CodeDisp]] = []
     var arrSelected: [Bool] = []
+    var mainTsvMaster: SelectItemsManager.TsvMaster = .undefine
 
     //サブ選択用
+    var subTsvMaster: SelectItemsManager.TsvMaster = .undefine
     var curSubItem: (String, IndexPath)? = nil
     var arrSubData: [CodeDisp] = []
     var dicSelectedCode: [String: CodeDisp] = [:]//小分類コードに対応する経験年数のCodeDispを設定する
@@ -67,16 +69,16 @@ class SubSelectSpecialVC: BaseVC {
     }
     func initData(editableItem: EditableItemH, selecingCodes: String) {
         self.editableItem = editableItem
-        print("\t❤️[editableItem.editItem.tsvMaster: \(editableItem.editItem.tsvMaster)]")
+        self.mainTsvMaster = editableItem.editItem.tsvMaster
         switch editableItem.editItem.tsvMaster {
         case .jobType:
-            self.arrSubData = SelectItemsManager.getMaster(.jobExperimentYear)
+            self.subTsvMaster = .jobExperimentYear
         case .skill:
-            self.arrSubData = SelectItemsManager.getMaster(.skillYear)
-        default:
-            self.arrSubData = [Constants.SelectItemsUndefine, Constants.SelectItemsUndefine, Constants.SelectItemsUndefine]
+            self.subTsvMaster = .skillYear
+        default: break
         }
-        let (dai, syou): ([CodeDisp], [GrpCodeDisp]) = SelectItemsManager.getMaster(editableItem.editItem.tsvMaster)
+        self.arrSubData = SelectItemsManager.getMaster(self.subTsvMaster)
+        let (dai, syou): ([CodeDisp], [GrpCodeDisp]) = SelectItemsManager.getMaster(self.mainTsvMaster)
         for itemDai in dai {
             var hoge: [CodeDisp] = []
             hoge.append(itemDai)
@@ -87,7 +89,6 @@ class SubSelectSpecialVC: BaseVC {
             }
             print(" * \(itemDai.debugDisp) - \(hoge.count)件")
             arrDataGrp.append(hoge)
-//            arrSelected.append(false)//該当セクションが展開されているか否か
             arrSelected.append(true)//該当セクションが展開されているか否か
         }
     }
@@ -170,14 +171,18 @@ extension SubSelectSpecialVC: SubSelectProtocol {
 //=== 複数選択ポップアップで選択させる場合の処理 ===
 extension SubSelectSpecialVC: SubSelectSpecialDelegate {
     func actPopupSelect(selectedItemsCode: String) {
+        //___選択状態の確認
         print("\t🐼🐼[\(selectedItemsCode)]🐼これが選択されました🐼🐼")//編集中の値の保持（と描画）
-        let hoge = selectedItemsCode.split(separator: "_").map { cdcd in
-            let cc = cdcd.split(separator: ":")
-            print(cc.count, cc[0], cc[1])
+        if selectYearMode {
+            for item in SelectItemsManager.convCodeDisp(mainTsvMaster, subTsvMaster, selectedItemsCode) {
+                print(item.0.debugDisp, item.1.debugDisp)
+            }
+        } else {
+            for item in SelectItemsManager.convCodeDisp(mainTsvMaster, selectedItemsCode) {
+                print(item.debugDisp)
+            }
         }
-        for item in SelectItemsManager.convCodeDisp(.skill, .skillYear, selectedItemsCode) {
-            print(item.0.debugDisp, item.1.debugDisp)
-        }
+        //^^^選択状態の確認
         //        self.dismiss(animated: true) { }
     }
     func actPopupCancel() {

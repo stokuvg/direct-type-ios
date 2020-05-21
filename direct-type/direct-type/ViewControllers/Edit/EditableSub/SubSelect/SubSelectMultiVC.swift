@@ -17,6 +17,7 @@ class SubSelectMultiVC: BaseVC {
     var editableItem: EditableItemH!
     var arrData: [CodeDisp] = []
     var dicChange: [Code: Bool] = [:]  //CodeDisp.code : true
+    var mainTsvMaster: SelectItemsManager.TsvMaster = .undefine
 
     @IBOutlet weak var vwHead: UIView!
     @IBOutlet weak var lblTitle: UILabel!
@@ -54,8 +55,8 @@ class SubSelectMultiVC: BaseVC {
     }
     func initData(editableItem: EditableItemH, selecingCodes: String) {
         self.editableItem = editableItem
-//        self.arrData = SelectItemsManager.getSelectItems(type: editableItem.editItem, grpCodeFilter: nil)
-        self.arrData = SelectItemsManager.getMaster(editableItem.editItem.tsvMaster)
+        self.mainTsvMaster = editableItem.editItem.tsvMaster
+        self.arrData = SelectItemsManager.getMaster(self.mainTsvMaster)
 }
     func dispData() {
         let bufTitle: String = "\(editableItem.dispName) \(arrData.count)件"
@@ -109,6 +110,9 @@ extension SubSelectMultiVC: SubSelectProtocol {
 extension SubSelectMultiVC: SubSelectMultiDelegate {
     func actPopupSelect(selectedItemsCode: String) {
         print("\t🐼🐼[\(selectedItemsCode)]🐼これが選択されました🐼🐼")//編集中の値の保持（と描画）
+        for item in SelectItemsManager.convCodeDisp(mainTsvMaster, selectedItemsCode) {
+            print(item.debugDisp)
+        }
 //        self.dismiss(animated: true) { }
     }
     func actPopupCancel() {

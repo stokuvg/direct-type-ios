@@ -17,6 +17,7 @@ class SubSelectSingleVC: BaseVC {
     var editableItem: EditableItemH!
     var arrData: [CodeDisp] = []
     var dicChange: [String: Bool] = [:]  //CodeDisp.code : true
+    var mainTsvMaster: SelectItemsManager.TsvMaster = .undefine
 
     @IBOutlet weak var vwHead: UIView!
     @IBOutlet weak var lblTitle: UILabel!
@@ -46,9 +47,10 @@ class SubSelectSingleVC: BaseVC {
     }
     func initData(editableItem: EditableItemH, selecingCodes: String) {
         self.editableItem = editableItem
-        let cd: [CodeDisp] = SelectItemsManager.getMaster(editableItem.editItem.tsvMaster)
-        let (grp, gcd): ([CodeDisp], [GrpCodeDisp]) = SelectItemsManager.getMaster(editableItem.editItem.tsvMaster)
-        //print("[cd: \(cd.count)] / [grp: \(grp.count)] [gcd: \(gcd.count)] ")
+        self.mainTsvMaster = editableItem.editItem.tsvMaster
+        let cd: [CodeDisp] = SelectItemsManager.getMaster(self.mainTsvMaster)
+        let (grp, gcd): ([CodeDisp], [GrpCodeDisp]) = SelectItemsManager.getMaster(self.mainTsvMaster)
+        print("[cd: \(cd.count)] / [grp: \(grp.count)] [gcd: \(gcd.count)] ")
         self.arrData = (grp.count != 0) ? grp : cd
     }
     func dispData() {
@@ -99,6 +101,9 @@ extension SubSelectSingleVC: UITableViewDataSource, UITableViewDelegate {
 extension SubSelectSingleVC: SubSelectSingleDelegate {
     func actPopupSelect(selectedItemsCode: String) {
         print("\t🐼🐼[\(selectedItemsCode)]🐼これが選択されました🐼🐼")//編集中の値の保持（と描画）
+        for item in SelectItemsManager.convCodeDisp(mainTsvMaster, selectedItemsCode) {
+            print(item.debugDisp)
+        }
 //        self.dismiss(animated: true) { }
     }
     func actPopupCancel() {
