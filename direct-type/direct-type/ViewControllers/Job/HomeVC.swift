@@ -39,8 +39,8 @@ class HomeVC: TmpNaviTopVC {
         if flag {
             self.linesTitle(date: Date().dispHomeDate(), title: "あなたにぴったりの求人")
         } else {
-//            title(name: "あなたにぴったりの求人")
-            self.linesTitle(date: Date().dispHomeDate(), title: "あなたにぴったりの求人")
+            self.title(name: "おすすめ求人一覧")
+//            self.linesTitle(date: Date().dispHomeDate(), title: "あなたにぴったりの求人")
         }
         
         // TODO:初回リリースでは外す
