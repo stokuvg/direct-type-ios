@@ -16,15 +16,19 @@ enum CardDispType:Int {
 
 class HomeVC: TmpNaviTopVC {
     
-    @IBOutlet weak var homeTableView:UITableView!
-    
     @IBOutlet weak var noCardBackView:UIView!
+    
+//    @IBOutlet weak var homeNaviBackView:UIView!
+//    @IBOutlet weak var homeNaviHeight:NSLayoutConstraint!
+    @IBOutlet weak var homeTableView:UITableView!
     
     var dispTableData:[[String: Any]] = []
     var masterTableData:[[String:Any]] = []
     
     var moreCnt:Int = 1
     var dispType:CardDispType = .none
+    
+    var safeAreaTop:CGFloat!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +37,10 @@ class HomeVC: TmpNaviTopVC {
         
         let flag = self.getHomeDisplayFlag()
         if flag {
-            self.makeHomeTitleView()
+            self.linesTitle(date: Date().dispHomeDate(), title: "あなたにぴったりの求人")
         } else {
 //            title(name: "あなたにぴったりの求人")
-            self.makeHomeTitleView()
+            self.linesTitle(date: Date().dispHomeDate(), title: "あなたにぴったりの求人")
         }
         
         // TODO:初回リリースでは外す
@@ -71,6 +75,8 @@ class HomeVC: TmpNaviTopVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        safeAreaTop = self.view.safeAreaInsets.top
+        
         /*
         //[Dbg]___
         if Constants.DbgAutoPushVC {
@@ -101,23 +107,13 @@ class HomeVC: TmpNaviTopVC {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        
     }
     
-    private func makeHomeTitleView() {
-        guard let width = self.navigationController?.navigationBar.frame.size.width,
-            let height = self.navigationController?.navigationBar.frame.size.height else {
-                Log.selectLog(logLevel: .debug, "navigationController.navigationBarのサイズ取得の失敗")
-                return
-        }
-        
-        let view = UINib(nibName: "HomeTitleView", bundle: nil)
-        .instantiate(withOwner: self, options: nil)
-        .first as! HomeTitleView
-        
-        let viewRect = CGRect(x: 0, y: 20, width: width, height: height)
-        view.frame = viewRect
-        
-//        self.navigationController?.view.addSubview(view)
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+
     }
     
     private func getHomeDisplayFlag() -> Bool {

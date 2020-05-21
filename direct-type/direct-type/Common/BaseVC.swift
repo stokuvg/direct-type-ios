@@ -100,6 +100,46 @@ class BaseVC: UIViewController {
         return statusBarStyle
     }
     
+    func linesTitle(date:String,title:String) {
+        
+        let dateAttributes: [NSAttributedString.Key : Any] = [
+            .foregroundColor : UIColor.init(colorType: .color_white) as Any,
+            .font : UIFont.init(fontType: .C_font_Sb) as Any
+        ]
+        let dateString = NSAttributedString(string: date, attributes: dateAttributes)
+        
+        let paragraphAttributes: [NSAttributedString.Key : Any] = [
+            .foregroundColor : UIColor.init(colorType: .color_white) as Any,
+            .font : UIFont.init(name: "HiraginoSans-W3", size: 6.0) as Any
+        ]
+        let paragraphString = NSAttributedString(string: "\n\n", attributes: paragraphAttributes)
+        
+        let titleAttributes: [NSAttributedString.Key : Any] = [
+            .foregroundColor : UIColor.init(colorType: .color_white) as Any,
+            .font : UIFont.init(fontType: .C_font_L) as Any
+        ]
+        let titleString = NSAttributedString(string: title, attributes: titleAttributes)
+        let mutableString = NSMutableAttributedString()
+        
+        mutableString.append(dateString)
+        mutableString.append(paragraphString)
+        mutableString.append(titleString)
+        
+        let naviX:CGFloat = 25
+        let naviY:CGFloat = 0
+        let width = (self.navigationController?.navigationBar.bounds.size.width)! - 25
+        let naviW:CGFloat = width
+        let naviH:CGFloat = (self.navigationController?.navigationBar.bounds.size.height)!
+        let titleLabel = UILabel()
+        titleLabel.frame = CGRect(x: naviX, y: naviY, width: naviW, height: naviH)
+                
+        titleLabel.numberOfLines = 3
+        titleLabel.textAlignment = .left
+        titleLabel.backgroundColor = UIColor.clear
+        titleLabel.attributedText = mutableString
+        self.navigationItem.titleView = titleLabel
+    }
+    
     //
     func setRightSearchBtn() {
         let searchImage = UIImage(named: "refineDefaultWhiteBase")

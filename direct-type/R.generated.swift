@@ -2191,6 +2191,7 @@ struct _R: Rswift.Validatable {
 
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
+          if UIKit.UIColor(named: "color-base", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-base' is used in storyboard 'HomeVC', but couldn't be loaded.") }
         }
         if _R.storyboard.homeVC().sbid_HomeVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_HomeVC' could not be loaded from storyboard 'HomeVC' as 'HomeVC'.") }
       }

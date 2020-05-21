@@ -1204,11 +1204,7 @@
 				064EF6F724654A7300853ADD /* JobDetailDataCell.swift in Sources */,
 				063350DD2463EC4B00AF90F3 /* NoCardView.swift in Sources */,
 				26F2A823246D1E270037D47F /* MdlResumeLastJobExperiment.swift in Sources */,
-<<<<<<< HEAD
 				06E519B9245814DF004E4B7A /* ResumeEditVC.swift in Sources */,
-=======
-				066F2706246E32270040BDC1 /* JobDetailFoldingItemCell.swift in Sources */,
->>>>>>> develop
 				06E519D324581684004E4B7A /* ContentsEditVC.swift in Sources */,
 				06C347242463A595000FB4DA /* UIButton+Extensions.swift in Sources */,
 				066F271C246E81B60040BDC1 /* JobDetailFoldingOutlineCell.swift in Sources */,
