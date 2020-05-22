@@ -74,7 +74,7 @@ class CognitoAuthVC: BaseVC {
             var buf: String = ""
             switch signUpResult.signUpConfirmationState {
             case .confirmed:    buf = "confirmed"
-            self.actLogin(sender)//続けてログインも実施してしまう
+//[簡易認証Skip]            self.actLogin(sender)//続けてログインも実施してしまう
             case .unconfirmed:  buf = "unconfirmed"
             case .unknown:      buf = "unknown"
             }

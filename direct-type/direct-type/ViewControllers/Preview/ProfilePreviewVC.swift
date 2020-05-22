@@ -14,24 +14,20 @@ import TudApi
 class ProfilePreviewVC: PreviewBaseVC {
     var detail: MdlProfile? = nil
     
-//    override func actCommit(_ sender: UIButton) {
-//        print(#line, #function, "ボタン押下でAPIフェッチ確認")
-//
-//        var profile: MdlProfile!
-//        ProfileAPI.profileControllerGet()
-//        .done { resp in
-//            let model = MdlProfile(dto: resp)
-//            print(model.debugDisp)
-//            profile = model
-//        }
-//        .catch { (error) in
-//            print(error.localizedDescription)
-//        }
-//        .finally {
-//            print(profile.debugDisp)
-////            self.showConfirm(title: "プロフィール取得した2", message: profile.debugDisp, onlyOK: true)
-//        }
-//    }
+    override func actCommit(_ sender: UIButton) {
+        print(#line, #function, "ボタン押下でAPIフェッチ確認")
+        AuthManager.needAuth(true)
+        ProfileAPI.profileControllerGet()
+        .done { resp in
+            let model = MdlProfile(dto: resp)
+            print(model.debugDisp)
+        }
+        .catch { (error) in
+            print(error.localizedDescription)
+        }
+        .finally {
+        }
+    }
     
     
     

@@ -11,6 +11,8 @@ import UIKit
 typealias BigDecimal = Double
 
 struct Constants {
+    //=== 認証関連 (これと、【awsconfiguration.json】に設定しておく)
+    static let CognitoIdentityPoolId: String = "ap-northeast-1:4da204bb-c86f-419d-9879-8744af15248f"
 //    //Suggest検索関連
 //    static let SuggestCellHeight: CGFloat = 25.0 //表示項目数の高さ
 //    static let SuggestSearchResultMax: Int = 100 //結果の表示項目数の最大

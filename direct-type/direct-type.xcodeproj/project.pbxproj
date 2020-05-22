@@ -208,6 +208,7 @@
 		26F2A829246D2A230037D47F /* MdlResumeJobExperiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A828246D2A230037D47F /* MdlResumeJobExperiments.swift */; };
 		26F2A82B246D2EE90037D47F /* EditableTableBasicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A82A246D2EE90037D47F /* EditableTableBasicVC.swift */; };
 		26F2A82D246D31020037D47F /* PreviewBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A82C246D31020037D47F /* PreviewBaseVC.swift */; };
+		26FC4EE02477C775003B56C3 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FC4EDF2477C775003B56C3 /* AuthManager.swift */; };
 		C29161DB95966DD7132DBD19 /* Pods_direct_type.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A49B0215E0F4A582FB1EC5E /* Pods_direct_type.framework */; };
 /* End PBXBuildFile section */
 
@@ -416,6 +417,7 @@
 		26F2A828246D2A230037D47F /* MdlResumeJobExperiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlResumeJobExperiments.swift; sourceTree = "<group>"; };
 		26F2A82A246D2EE90037D47F /* EditableTableBasicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTableBasicVC.swift; sourceTree = "<group>"; };
 		26F2A82C246D31020037D47F /* PreviewBaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewBaseVC.swift; sourceTree = "<group>"; };
+		26FC4EDF2477C775003B56C3 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		8A49B0215E0F4A582FB1EC5E /* Pods_direct_type.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_direct_type.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8C351EB920291E353136BB9 /* Pods-direct-type.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-direct-type.debug.xcconfig"; path = "Target Support Files/Pods-direct-type/Pods-direct-type.debug.xcconfig"; sourceTree = "<group>"; };
 		F6660969F9095E20D9CE432A /* Pods-direct-type.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-direct-type.release.xcconfig"; path = "Target Support Files/Pods-direct-type/Pods-direct-type.release.xcconfig"; sourceTree = "<group>"; };
@@ -807,6 +809,7 @@
 			children = (
 				2636075A2477A37C00032880 /* CognitoAuthVC.swift */,
 				2636075C2477A39900032880 /* Auth.storyboard */,
+				26FC4EDF2477C775003B56C3 /* AuthManager.swift */,
 			);
 			path = AuthManager;
 			sourceTree = "<group>";
@@ -1198,6 +1201,7 @@
 				06E519AD245813DC004E4B7A /* LoginVC.swift in Sources */,
 				06409C71246D386A00EA6BBB /* BaseFoldingHeaderView.swift in Sources */,
 				268BFF58246E8D25004B2640 /* SmoothCareerPreviewVC.swift in Sources */,
+				26FC4EE02477C775003B56C3 /* AuthManager.swift in Sources */,
 				26CFC46F246949B800E458E2 /* ClassExtensions.swift in Sources */,
 				26133A56246B9D48001802BB /* EditableBasicVC+Picker.swift in Sources */,
 				269AFFC8246A929300DB364B /* SubSelectMultiVC.swift in Sources */,

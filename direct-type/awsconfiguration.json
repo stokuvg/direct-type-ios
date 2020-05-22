@@ -18,10 +18,5 @@
             "AppClientId": "2gjhd7ngnr760089nf7ou4ifnn",
             "Region": "ap-northeast-1"
         }
-    },
-    "Auth": {
-      "Default": {
-        "authenticationFlowType": "CUSTOM_AUTH"
-      }
     }
 }
