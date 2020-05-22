@@ -487,7 +487,12 @@ extension SelectItemsManager {
     }
     class func convCodeDisp(_ tsv1: TsvMaster, _ codes: String) -> [CodeDisp] {
         return codes.split(separator: "_").map { (obj) -> (CodeDisp) in
-            SelectItemsManager.getCodeDisp(tsv1, code: String(obj)) ?? Constants.SelectItemsUndefine
+            switch tsv1 {
+            case .jobType, .businessType, .skill:
+                return SelectItemsManager.getCodeDispSyou(tsv1, code: String(obj)) ?? Constants.SelectItemsUndefine
+            default:
+                return SelectItemsManager.getCodeDisp(tsv1, code: String(obj)) ?? Constants.SelectItemsUndefine
+            }
         }
     }
 }

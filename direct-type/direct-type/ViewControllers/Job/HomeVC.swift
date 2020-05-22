@@ -77,7 +77,8 @@ class HomeVC: TmpNaviTopVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        /*
+        safeAreaTop = self.view.safeAreaInsets.top
+        
         //[Dbg]___
         if Constants.DbgAutoPushVC {
             let storyboard = UIStoryboard(name: "Preview", bundle: nil)
@@ -102,7 +103,6 @@ class HomeVC: TmpNaviTopVC {
             }
         }
         //[Dbg]^^^
-        */
     }
     
     override func viewDidAppear(_ animated: Bool) {

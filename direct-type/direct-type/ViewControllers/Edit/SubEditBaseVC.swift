@@ -12,5 +12,7 @@ class SubEditBaseVC: EditableTableBasicVC {
     override func initData(_ item: MdlItemH) {
         self.item = item
         for child in item.childItems { arrData.append(child) }
+        //=== IndexPathなどを設定するため
+        editableModel.initItemEditable(arrData)
     }
 }
