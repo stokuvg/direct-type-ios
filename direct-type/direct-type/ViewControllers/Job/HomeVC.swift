@@ -31,6 +31,8 @@ class HomeVC: TmpNaviTopVC {
     
     var moreCnt:Int = 1
     var dispType:CardDispType = .none
+    
+    var safeAreaTop:CGFloat!
 
     override func viewDidLoad() {
         super.viewDidLoad()
