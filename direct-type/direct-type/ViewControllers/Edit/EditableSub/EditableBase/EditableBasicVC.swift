@@ -34,6 +34,7 @@ class EditableBasicVC: TmpBasicVC, SubSelectFeedbackDelegate {
         showTargetTF(self.view, tf)
     }
     func showTargetTF(_ parent: UIView, _ tf: IKTextField) {
+        if !Constants.DbgDispStatus { return }
         let origin: CGPoint = tf.bounds.origin
         let sz: CGSize = tf.bounds.size
         let origin2 = tf.convert(origin, to: parent)
@@ -52,6 +53,7 @@ class EditableBasicVC: TmpBasicVC, SubSelectFeedbackDelegate {
         targetTfArea?.backgroundColor = .red
     }
     func dissmissTargetTfArea() {
+        if !Constants.DbgDispStatus { return }
         targetTfArea?.removeFromSuperview()
         targetTfArea = nil
     }

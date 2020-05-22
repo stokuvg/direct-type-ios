@@ -10,6 +10,7 @@ import UIKit
 import SwaggerClient
 
 class EditableTableBasicVC: EditableBasicVC {
+    var vwKbTapArea: UIView = UIView(frame: CGRect.zero)
     var item: MdlItemH? = nil
     var arrData: [EditableItemH] = []
     
@@ -42,6 +43,11 @@ class EditableTableBasicVC: EditableBasicVC {
         self.tableVW.register(UINib(nibName: "HEditTextTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HEditTextTBCell")
         self.tableVW.register(UINib(nibName: "HEditDrumTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HEditDrumTBCell")
         self.tableVW.register(UINib(nibName: "HEditZipcodeTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HEditZipcodeTBCell")
+        //=== Keyboard制御
+        vwKbTapArea.backgroundColor = .black
+        vwKbTapArea.alpha = 0.0
+        vwKbTapArea.isUserInteractionEnabled = false //Keyboardエリア以外のTapで消すならtrueにする
+        self.view.addSubview(vwKbTapArea)
     }
     func initData(_ item: MdlItemH) {
         self.item = item
@@ -61,6 +67,44 @@ class EditableTableBasicVC: EditableBasicVC {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
+    //=== Notification通知の登録 ===
+    // 画面遷移時にも取り除かないもの（他の画面で変更があった場合の更新のため）
+    override func initNotify() {
+    }
+    // この画面に遷移したときに登録するもの
+    override func addNotify() {
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: UIResponder.keyboardDidShowNotification, object: nil)
+        nc.addObserver(self, selector: #selector(keyboardDidHide(notification:)), name: UIResponder.keyboardDidHideNotification, object: nil)
+    }
+    // 他の画面に遷移するときに消して良いもの
+    override func removeNotify() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidHideNotification, object: nil)
+    }
+    @objc func keyboardDidShow(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else { return }
+        let szDevice = UIScreen.main.bounds.size
+        if let rect = userInfo["UIKeyboardFrameEndUserInfoKey"] as? CGRect {
+            let safeAreaT = self.view.safeAreaInsets.top
+            let safeAreaB = self.view.safeAreaInsets.bottom
+            let szKeyBoard = rect.size
+            let szGamen = self.view.frame.size
+            let size = CGSize(width: szGamen.width - 4,
+                              height: szGamen.height - szKeyBoard.height - 4 - safeAreaT)
+            let frame = CGRect(origin: CGPoint(x: 2, y: 2 + safeAreaT), size: size)
+            self.vwKbTapArea.frame = frame
+            //!!!print(szDevice, szGamen, szKeyBoard, tableVW.contentInset.top, tableVW.contentInset.bottom, safeAreaT, safeAreaB)
+            tableVW.contentInset.bottom =  szKeyBoard.height - safeAreaB
+        }
+    }
+    @objc func keyboardDidHide(notification: NSNotification) {
+        self.vwKbTapArea.frame = CGRect.zero
+        tableVW.contentInset.bottom = 0
+    }
+
+    
+    
     
     //=======================================================================================================
     //EditableBaseを元に、汎用テーブルIFを利用する場合のBaseクラス
@@ -83,6 +127,10 @@ class EditableTableBasicVC: EditableBasicVC {
     //=======================================================================================================
 
 }
+
+
+
+
 
 extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
     //=== 通常テーブル

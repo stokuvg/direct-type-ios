@@ -32,6 +32,8 @@ class BaseVC: UIViewController {
         SVProgressHUD.setDefaultMaskType(.black)
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem.init(title: "", style: .plain, target: self, action: nil)
+
+        initNotify()//通知登録（画面遷移でも残すもの）
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,6 +73,7 @@ class BaseVC: UIViewController {
                 .foregroundColor: UIColor.init(colorType: .color_white) as Any,
             ]
         }
+        addNotify()//通知登録（画面遷移で消すもの）
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -84,13 +87,24 @@ class BaseVC: UIViewController {
 
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "arDefaultWhite")
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "arDefaultWhite")
+        removeNotify()//通知解除（画面遷移で消すもの）
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 //        Log.selectLog(logLevel: .debug, "BaseVC viewDidDisappear start")
     }
-    
+    //=== Notification通知の登録 ===
+    // 画面遷移時にも取り除かないもの（他の画面で変更があった場合の更新のため）
+    func initNotify() {
+    }
+    // この画面に遷移したときに登録するもの
+    func addNotify() {
+    }
+    // 他の画面に遷移するときに消して良いもの
+    func removeNotify() {
+    }
+
     func setStattusBarStyle(style: UIStatusBarStyle) {
         statusBarStyle = style
         self.setNeedsStatusBarAppearanceUpdate()

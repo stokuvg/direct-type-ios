@@ -55,6 +55,8 @@ extension EditableBasicVC {
         guard let picker = sender.parentPicker as? IKDatePicker else { return }
         picker.parentTF?.text = picker.date.dispYmdJP()
         //guard let editableModel = editableModel else { return }
+        print(picker.itemKey)
+        print(editableModel.arrData.debugDescription)
         guard let item = editableModel.getItemByKey(picker.itemKey) else { return }
         editableModel.changeTempItem(item, text: picker.date.dispYmd())
         self.view.endEditing(false)
