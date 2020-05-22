@@ -142,6 +142,9 @@
 		26147F36247267F9009B30B5 /* MstF22_pcSkillWord.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26147F33247267F9009B30B5 /* MstF22_pcSkillWord.tsv */; };
 		26147F37247267F9009B30B5 /* MstF22_pcSkillExcel.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26147F34247267F9009B30B5 /* MstF22_pcSkillExcel.tsv */; };
 		26147F38247267F9009B30B5 /* MstF22_pcSkillPowerPoint.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26147F35247267F9009B30B5 /* MstF22_pcSkillPowerPoint.tsv */; };
+		2636075B2477A37C00032880 /* CognitoAuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2636075A2477A37C00032880 /* CognitoAuthVC.swift */; };
+		2636075D2477A39900032880 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2636075C2477A39900032880 /* Auth.storyboard */; };
+		2636075F2477AB4900032880 /* BaseVC+ShowDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2636075E2477AB4900032880 /* BaseVC+ShowDialog.swift */; };
 		26800520246A2B440053A7F4 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2680051F246A2B440053A7F4 /* Date+Extensions.swift */; };
 		268BFF56246E8292004B2640 /* SubInputMemoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BFF55246E8292004B2640 /* SubInputMemoVC.swift */; };
 		268BFF58246E8D25004B2640 /* SmoothCareerPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BFF57246E8D25004B2640 /* SmoothCareerPreviewVC.swift */; };
@@ -346,6 +349,9 @@
 		26147F33247267F9009B30B5 /* MstF22_pcSkillWord.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstF22_pcSkillWord.tsv; sourceTree = "<group>"; };
 		26147F34247267F9009B30B5 /* MstF22_pcSkillExcel.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstF22_pcSkillExcel.tsv; sourceTree = "<group>"; };
 		26147F35247267F9009B30B5 /* MstF22_pcSkillPowerPoint.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstF22_pcSkillPowerPoint.tsv; sourceTree = "<group>"; };
+		2636075A2477A37C00032880 /* CognitoAuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CognitoAuthVC.swift; sourceTree = "<group>"; };
+		2636075C2477A39900032880 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
+		2636075E2477AB4900032880 /* BaseVC+ShowDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseVC+ShowDialog.swift"; sourceTree = "<group>"; };
 		2680051F246A2B440053A7F4 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		268BFF55246E8292004B2640 /* SubInputMemoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubInputMemoVC.swift; sourceTree = "<group>"; };
 		268BFF57246E8D25004B2640 /* SmoothCareerPreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmoothCareerPreviewVC.swift; sourceTree = "<group>"; };
@@ -546,6 +552,7 @@
 		066BD9D52456ACB4009E610B /* direct-type */ = {
 			isa = PBXGroup;
 			children = (
+				263607592477A35E00032880 /* AuthManager */,
 				26BF48EF24639E7100E00215 /* Constants.swift */,
 				26B6E8B4245C1B4B00BE5B90 /* Generated */,
 				067F28D62456CEBF000AAD69 /* ViewControllers */,
@@ -612,6 +619,7 @@
 			isa = PBXGroup;
 			children = (
 				067F28CF2456CCB8000AAD69 /* BaseVC.swift */,
+				2636075E2477AB4900032880 /* BaseVC+ShowDialog.swift */,
 				067F28D12456CE39000AAD69 /* TmpBasicVC.swift */,
 				067F28DE2456D013000AAD69 /* TmpNaviTopVC.swift */,
 				067F28E02456D038000AAD69 /* BasePresentVC.swift */,
@@ -792,6 +800,15 @@
 				26133A57246B9DC2001802BB /* EditableBasicVC+PickerYMD.swift */,
 			);
 			path = EditableBase;
+			sourceTree = "<group>";
+		};
+		263607592477A35E00032880 /* AuthManager */ = {
+			isa = PBXGroup;
+			children = (
+				2636075A2477A37C00032880 /* CognitoAuthVC.swift */,
+				2636075C2477A39900032880 /* Auth.storyboard */,
+			);
+			path = AuthManager;
 			sourceTree = "<group>";
 		};
 		2680051E246A29D50053A7F4 /* EditableSub */ = {
@@ -1012,6 +1029,7 @@
 				066763692457AF3100AC5039 /* MyPageVC.storyboard in Resources */,
 				0685017E24738D98009770A3 /* JobDetailImageCell.xib in Resources */,
 				26147F38247267F9009B30B5 /* MstF22_pcSkillPowerPoint.tsv in Resources */,
+				2636075D2477A39900032880 /* Auth.storyboard in Resources */,
 				066F271D246E81B60040BDC1 /* JobDetailFoldingOutlineCell.xib in Resources */,
 				26BF48E724639D2B00E00215 /* MstK9_employmentType.tsv in Resources */,
 				066BD9E02456ACB5009E610B /* Assets.xcassets in Resources */,
@@ -1175,6 +1193,7 @@
 				06E519D02458164B004E4B7A /* ScoutPreview.swift in Sources */,
 				06E519C024581561004E4B7A /* ScountDetailVC.swift in Sources */,
 				26133A58246B9DC2001802BB /* EditableBasicVC+PickerYMD.swift in Sources */,
+				2636075F2477AB4900032880 /* BaseVC+ShowDialog.swift in Sources */,
 				26CFC45F2469495800E458E2 /* ConstantsPreview.swift in Sources */,
 				06E519AD245813DC004E4B7A /* LoginVC.swift in Sources */,
 				06409C71246D386A00EA6BBB /* BaseFoldingHeaderView.swift in Sources */,
@@ -1208,6 +1227,7 @@
 				06E519BE24581558004E4B7A /* ScountListVC.swift in Sources */,
 				26CFC46E246949B800E458E2 /* MyColorDefine.swift in Sources */,
 				260BBFE024651732003D163A /* HPreviewTBCell.swift in Sources */,
+				2636075B2477A37C00032880 /* CognitoAuthVC.swift in Sources */,
 				26F2A81F246D128D0037D47F /* MdlCareerCard.swift in Sources */,
 				06DCAEA9245A70A8008FE9FA /* UITableView+Extensions.swift in Sources */,
 				26CFC46A2469496D00E458E2 /* HEditTextTBCell.swift in Sources */,

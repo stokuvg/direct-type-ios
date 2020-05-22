@@ -89,8 +89,10 @@ struct R: Rswift.Validatable {
   }
 
   #if os(iOS) || os(tvOS)
-  /// This `R.storyboard` struct is generated, and contains static references to 11 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 12 storyboards.
   struct storyboard {
+    /// Storyboard `Auth`.
+    static let auth = _R.storyboard.auth()
     /// Storyboard `BaseTabBC`.
     static let baseTabBC = _R.storyboard.baseTabBC()
     /// Storyboard `Edit`.
@@ -113,6 +115,13 @@ struct R: Rswift.Validatable {
     static let preview = _R.storyboard.preview()
     /// Storyboard `SplashVC`.
     static let splashVC = _R.storyboard.splashVC()
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "Auth", bundle: ...)`
+    static func auth(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.auth)
+    }
+    #endif
 
     #if os(iOS) || os(tvOS)
     /// `UIStoryboard(name: "BaseTabBC", bundle: ...)`
@@ -2039,6 +2048,9 @@ struct _R: Rswift.Validatable {
   struct storyboard: Rswift.Validatable {
     static func validate() throws {
       #if os(iOS) || os(tvOS)
+      try auth.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
       try baseTabBC.validate()
       #endif
       #if os(iOS) || os(tvOS)
@@ -2072,6 +2084,26 @@ struct _R: Rswift.Validatable {
       try splashVC.validate()
       #endif
     }
+
+    #if os(iOS) || os(tvOS)
+    struct auth: Rswift.StoryboardResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "Auth"
+      let sbid_CognitoAuthVC = StoryboardViewControllerResource<CognitoAuthVC>(identifier: "Sbid_CognitoAuthVC")
+
+      func sbid_CognitoAuthVC(_: Void = ()) -> CognitoAuthVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_CognitoAuthVC)
+      }
+
+      static func validate() throws {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+        if _R.storyboard.auth().sbid_CognitoAuthVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_CognitoAuthVC' could not be loaded from storyboard 'Auth' as 'CognitoAuthVC'.") }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
 
     #if os(iOS) || os(tvOS)
     struct baseTabBC: Rswift.StoryboardResourceType, Rswift.Validatable {

@@ -44,11 +44,21 @@ class MyPageVC: TmpNaviTopVC {
             self.navigationController?.pushViewController(nvc, animated: true)
         }
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-
+    //認証
+    @IBOutlet weak var btnButton05: UIButton!
+    @IBAction func actButton05(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Auth", bundle: nil)
+        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_CognitoAuthVC") as? CognitoAuthVC{
+            self.navigationController?.pushViewController(nvc, animated: true)
+        }
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        btnButton01.setTitle("プロフィール", for: .normal)
+        btnButton02.setTitle("履歴書", for: .normal)
+        btnButton03.setTitle("職務経歴書・スキルシート", for: .normal)
+        btnButton04.setTitle("さくさく職歴書", for: .normal)
+        btnButton05.setTitle("認証", for: .normal)
+    }
 }
