@@ -39,6 +39,7 @@ class JobOfferBigCardCell: BaseJobCardCell {
         deleteBtn.layer.cornerRadius = 15
         deleteBtn.layer.maskedCorners = [.layerMinXMaxYCorner]
         
+        keepBtn.titleLabel?.text(text: "キープ", fontType: .C_font_M, textColor: UIColor.init(colorType: .color_sub)!, alignment: .center)
         keepBtn.layer.cornerRadius = 15
         keepBtn.layer.maskedCorners = [.layerMaxXMaxYCorner]
     }
