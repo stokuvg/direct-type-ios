@@ -193,6 +193,7 @@
 		26CFC46B2469496D00E458E2 /* EditableItemH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFC4652469496D00E458E2 /* EditableItemH.swift */; };
 		26CFC46E246949B800E458E2 /* MyColorDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFC46C246949B800E458E2 /* MyColorDefine.swift */; };
 		26CFC46F246949B800E458E2 /* ClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFC46D246949B800E458E2 /* ClassExtensions.swift */; };
+		26D4CB22247777F1002EE9A9 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 26D4CB21247777F1002EE9A9 /* awsconfiguration.json */; };
 		26F2A819246D0CE90037D47F /* MdlReqEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A818246D0CE90037D47F /* MdlReqEntry.swift */; };
 		26F2A81B246D10C30037D47F /* MdlResume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A81A246D10C30037D47F /* MdlResume.swift */; };
 		26F2A81D246D10DA0037D47F /* MdlCareer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A81C246D10DA0037D47F /* MdlCareer.swift */; };
@@ -397,6 +398,7 @@
 		26CFC4652469496D00E458E2 /* EditableItemH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableItemH.swift; sourceTree = "<group>"; };
 		26CFC46C246949B800E458E2 /* MyColorDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyColorDefine.swift; sourceTree = "<group>"; };
 		26CFC46D246949B800E458E2 /* ClassExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassExtensions.swift; sourceTree = "<group>"; };
+		26D4CB21247777F1002EE9A9 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		26F2A818246D0CE90037D47F /* MdlReqEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlReqEntry.swift; sourceTree = "<group>"; };
 		26F2A81A246D10C30037D47F /* MdlResume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlResume.swift; sourceTree = "<group>"; };
 		26F2A81C246D10DA0037D47F /* MdlCareer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlCareer.swift; sourceTree = "<group>"; };
@@ -524,6 +526,7 @@
 		066BD9CA2456ACB4009E610B = {
 			isa = PBXGroup;
 			children = (
+				26D4CB21247777F1002EE9A9 /* awsconfiguration.json */,
 				066BD9EB2456B3A2009E610B /* R.generated.swift */,
 				066BD9D52456ACB4009E610B /* direct-type */,
 				066BD9D42456ACB4009E610B /* Products */,
@@ -1027,6 +1030,7 @@
 				26BF48DA24639D2B00E00215 /* MstK14_place.tsv in Resources */,
 				066BD9DE2456ACB4009E610B /* SplashVC.storyboard in Resources */,
 				063350E52463FD9C00AF90F3 /* NaviButtonsView.xib in Resources */,
+				26D4CB22247777F1002EE9A9 /* awsconfiguration.json in Resources */,
 				066763642457ABDB00AC5039 /* BaseTabBC.storyboard in Resources */,
 				26BF48E824639D2B00E00215 /* MstK5_jobExperimentYear.tsv in Resources */,
 				26CFC4672469496D00E458E2 /* Edit.storyboard in Resources */,

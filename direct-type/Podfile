@@ -10,7 +10,8 @@ target 'direct-type' do
 
   # Pods for direct-type
 
-#  pod 'AWSMobileClient', '~> 2.12.1'      # Required dependency
+  ##=== Cognito ===
+  pod 'AWSMobileClient', '~> 2.13.0'      # Required dependency
 
   ##=== PromiseKit
 #  pod "PromiseKit", "~> 6.8"
