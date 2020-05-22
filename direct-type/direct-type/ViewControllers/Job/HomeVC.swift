@@ -23,11 +23,11 @@ class HomeVC: TmpNaviTopVC {
 //    @IBOutlet weak var homeNaviHeight:NSLayoutConstraint!
     @IBOutlet weak var homeTableView:UITableView!
     
-    var masterJobCards: MdlJobCardList? = nil
-    var dispJobCards: MdlJobCardList? = nil
+    var masterJobCards: MdlJobCardList!
+    var dispJobCards: MdlJobCardList = MdlJobCardList.init()
     
-    var dispTableData:[[String: Any]] = []
-    var masterTableData:[[String:Any]] = []
+//    var dispTableData:[[String: Any]] = []
+//    var masterTableData:[[String:Any]] = []
     
     var moreCnt:Int = 1
     var dispType:CardDispType = .none
@@ -56,7 +56,8 @@ class HomeVC: TmpNaviTopVC {
         homeTableView.registerNib(nibName: "JobOfferCardReloadCell", idName: "JobOfferCardReloadCell")// 全求人カード表示/更新
         
         self.makeDummyData()
-        if masterTableData.count > 0 {
+        if (masterJobCards.jobCards.count) > 0 {
+//        if masterTableData.count > 0 {
             homeTableView.isHidden = false
             dispType = .add
             self.homeTableView.delegate = self
@@ -125,12 +126,12 @@ class HomeVC: TmpNaviTopVC {
     private func makeDummyData() {
         
         let mdlData1:MdlJobCard = MdlJobCard.init(jobCardCode: "1",
-                                                  displayPeriod: EntryFormInfoDisplayPeriod.init(startAt: "2020/05/01", endAt: "2020/05/31"),
+                                                  displayPeriod: EntryFormInfoDisplayPeriod.init(startAt: "2020/05/16", endAt: "2020/05/28"),
                                                   companyName: "株式会社キャリアデザインITパートナーズ「type」",
                                                   jobName: "PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
                                                   mainTitle: "メディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！",
                                                   mainPicture: "https://type.jp/s/img_banner/top_pc_side_number1.jpg",
-                                                  salaryCode: 2,
+                                                  salaryCode: [7,11],
                                                   workPlaceCode: [1,44],
                                                   userFilter: UserFilterInfo.init(tudKeepStatus: true, tudSkipStatus: true))
         
@@ -141,7 +142,7 @@ class HomeVC: TmpNaviTopVC {
                                                   jobName: "PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
                                                   mainTitle: "メディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！",
                                                   mainPicture: "https://type.jp/s/img_banner/top_pc_side_number1.jpg",
-                                                  salaryCode: 3,
+                                                  salaryCode: [7,11],
                                                   workPlaceCode: [1,44],
                                                   userFilter: UserFilterInfo.init(tudKeepStatus: true, tudSkipStatus: true))
         
@@ -152,7 +153,7 @@ class HomeVC: TmpNaviTopVC {
                                                   jobName: "PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
                                                   mainTitle: "メディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！",
                                                   mainPicture: "https://type.jp/s/img_banner/top_pc_side_number1.jpg",
-                                                  salaryCode: 4,
+                                                  salaryCode: [7,11],
                                                   workPlaceCode: [1,44],
                                                   userFilter: UserFilterInfo.init(tudKeepStatus: true, tudSkipStatus: true))
         
@@ -166,18 +167,19 @@ class HomeVC: TmpNaviTopVC {
             ]
         )
         
-        if (masterJobCards?.jobCards.count)! > moreDataCount {
+        if masterJobCards.jobCards.count > moreDataCount {
             for i in 0..<moreDataCount {
-                let jobCardBig = (masterJobCards?.jobCards[i])!
-                dispJobCards?.jobCards.append(jobCardBig)
+                let jobCardBig = masterJobCards.jobCards[i]
+                dispJobCards.jobCards.append(jobCardBig)
             }
         } else {
-            for i in 0..<(masterJobCards?.jobCards.count)! {
-                let data = masterJobCards?.jobCards[i]
-                dispJobCards?.jobCards.append(data!)
+            for i in 0..<masterJobCards.jobCards.count {
+                let data = masterJobCards.jobCards[i]
+                dispJobCards.jobCards.append(data)
             }
         }
         
+        /*
         if masterTableData.count > moreDataCount {
             for i in 0..<moreDataCount {
                 let data = masterTableData[i]
@@ -189,9 +191,7 @@ class HomeVC: TmpNaviTopVC {
                 dispTableData.append(data)
             }
         }
-
-        
-        
+         
         let data1:[String:Any] = [
             "end":true,
             "image":"https://type.jp/s/img_banner/top_pc_side_number1.jpg",
@@ -249,6 +249,7 @@ class HomeVC: TmpNaviTopVC {
                 dispTableData.append(data)
             }
         }
+        */
     }
 
 }
@@ -256,9 +257,11 @@ class HomeVC: TmpNaviTopVC {
 extension HomeVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let row = indexPath.row
-        if row == dispTableData.count && dispType == .add {
+        if row == dispJobCards.jobCards.count && dispType == .add {
+//        if row == dispTableData.count && dispType == .add {
             return 100
-        } else if row == dispTableData.count && dispType == .end {
+        } else if row == dispJobCards.jobCards.count && dispType == .end {
+//        } else if row == dispTableData.count && dispType == .end {
             return 250
         }
         return UITableView.automaticDimension
@@ -266,7 +269,8 @@ extension HomeVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = indexPath.row
-        if row == dispTableData.count {
+        if row == dispJobCards.jobCards.count {
+//        if row == dispTableData.count {
             return
         }
         
@@ -280,36 +284,47 @@ extension HomeVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         // 表示可能なデータの数と現在表示している数が同じ
-        if masterTableData.count == dispTableData.count {
+        let jobCardsCount = dispJobCards.jobCards.count
+        
+        if masterJobCards.jobCards.count == dispJobCards.jobCards.count {
+//        if masterTableData.count == dispTableData.count {
             dispType = .end
-            return (dispTableData.count + 1)
+            return (jobCardsCount + 1)
+//            return (dispTableData.count + 1)
         } else {
             dispType = .add
-            return (dispTableData.count + 1)
+            return (jobCardsCount + 1)
+//            return (dispTableData.count + 1)
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let jobCardsCount = dispJobCards.jobCards.count
         let row = indexPath.row
         switch dispType {
         case .add:
-            if row == dispTableData.count {
+            if row == jobCardsCount {
+//            if row == dispTableData.count {
                 let cell = tableView.loadCell(cellName: "JobOfferCardMoreCell", indexPath: indexPath) as! JobOfferCardMoreCell
                 cell.delegate = self
                 return cell
             } else {
-                let data = dispTableData[row]
+                let data = dispJobCards.jobCards[row]
+//                let data = dispTableData[row]
+                
                 let cell = tableView.loadCell(cellName: "JobOfferBigCardCell", indexPath: indexPath) as! JobOfferBigCardCell
                 cell.setup(data: data)
                 return cell
             }
         case .end:
-            if row == dispTableData.count {
+            if row == dispJobCards.jobCards.count {
+//            if row == dispTableData.count {
                 let cell = tableView.loadCell(cellName: "JobOfferCardReloadCell", indexPath: indexPath) as! JobOfferCardReloadCell
                 cell.delegate = self
                 return cell
             } else {
-                let data = dispTableData[row]
+                let data = dispJobCards.jobCards[row]
+//                let data = dispTableData[row]
                 let cell = tableView.loadCell(cellName: "JobOfferBigCardCell", indexPath: indexPath) as! JobOfferBigCardCell
                 cell.setup(data: data)
                 return cell
@@ -324,7 +339,10 @@ extension HomeVC: UITableViewDataSource {
 extension HomeVC: JobOfferCardMoreCellDelegate {
     func moreDataAdd() {
         // 現在の数とマスタの数を比較
-        let checkCount = masterTableData.count - dispTableData.count
+        let masterCount = masterJobCards.jobCards.count
+        let dispCount = dispJobCards.jobCards.count
+        let checkCount = (masterCount - dispCount)
+//        let checkCount = masterTableData.count - dispTableData.count
         // パターン 同じ:0 マスタの方が多い:1 表示の方が多い:これは無いはず
         if checkCount == 0 {
             // 同じ数
@@ -335,15 +353,19 @@ extension HomeVC: JobOfferCardMoreCellDelegate {
             if checkCount == moreDataCount {
                 for i in 0..<moreDataCount {
                     let cnt = i+(moreCnt*10)
-                    let data = masterTableData[cnt]
-                    dispTableData.append(data)
+                    let jobCard = masterJobCards.jobCards[cnt]
+//                    let data = masterTableData[cnt]
+                    dispJobCards.jobCards.append(jobCard)
+//                    dispTableData.append(data)
                 }
                 self.homeTableView.reloadData()
             } else if checkCount > moreDataCount {
                 for i in 0..<moreDataCount {
                     let cnt = i+(moreCnt*10)
-                    let data = masterTableData[cnt]
-                    dispTableData.append(data)
+                    let jobCard = masterJobCards.jobCards[cnt]
+                    dispJobCards.jobCards.append(jobCard)
+//                    let data = masterTableData[cnt]
+//                    dispTableData.append(data)
                 }
                 self.homeTableView.reloadData()
             } else {
