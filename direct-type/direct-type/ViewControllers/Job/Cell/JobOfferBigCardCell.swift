@@ -66,19 +66,19 @@ class JobOfferBigCardCell: BaseJobCardCell {
         var limitedType:LimitedType!
         switch (startFlag,endFlag) {
             case (false,false):
-                Log.selectLog(logLevel: .debug, "両方当たる")
+//                Log.selectLog(logLevel: .debug, "両方当たる")
                 // 終了マークのみ表示
                 limitedType = .end
             case (false,true):
-                Log.selectLog(logLevel: .debug, "掲載開始から７日以内")
+//                Log.selectLog(logLevel: .debug, "掲載開始から７日以内")
                 // NEWマークのみ表示
                 limitedType = .new
             case (true,false):
-                Log.selectLog(logLevel: .debug, "掲載終了まで７日以内")
+//                Log.selectLog(logLevel: .debug, "掲載終了まで７日以内")
                 // 終了マークのみ表示
                 limitedType = .end
             default:
-                Log.selectLog(logLevel: .debug, "それ以外")
+//                Log.selectLog(logLevel: .debug, "それ以外")
                 limitedType = LimitedType.none
         }
         self.limitedMarkSetting(type: limitedType)
@@ -92,11 +92,11 @@ class JobOfferBigCardCell: BaseJobCardCell {
         if displayFlag {
             
             let minPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.salaryMinCode)?.disp
-            Log.selectLog(logLevel: .debug, "minPriceLabel:\(String(describing: minPriceLabel))")
+//            Log.selectLog(logLevel: .debug, "minPriceLabel:\(String(describing: minPriceLabel))")
             let minPrice = self.cutText(defaultText: minPriceLabel!,cutString: "万円")
             let maxPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.salaryMaxCode)?.disp
             let maxPrice = self.cutText(defaultText: maxPriceLabel!,cutString: "万円")
-            Log.selectLog(logLevel: .debug, "maxPriceLabel:\(String(describing: maxPriceLabel))")
+//            Log.selectLog(logLevel: .debug, "maxPriceLabel:\(String(describing: maxPriceLabel))")
             
             let priceText = minPrice + "〜" + maxPrice
             saralyLabel.text(text: priceText, fontType: .C_font_M , textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
@@ -114,27 +114,27 @@ class JobOfferBigCardCell: BaseJobCardCell {
         
         // 勤務地
         let areaText = self.makeAreaNames(codes: data.workPlaceCode)
-        Log.selectLog(logLevel: .debug, "areaText:\(String(describing: areaText))")
+//        Log.selectLog(logLevel: .debug, "areaText:\(String(describing: areaText))")
         areaLabel.text(text: areaText, fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         
         // 社名
         let companyName = data.companyName
-        Log.selectLog(logLevel: .debug, "companyName:\(String(describing: companyName))")
+//        Log.selectLog(logLevel: .debug, "companyName:\(String(describing: companyName))")
         companyNameLabel.text(text: companyName, fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         
         // メイン
         let mainText = data.mainTitle
-        Log.selectLog(logLevel: .debug, "mainText:\(String(describing: mainText))")
+//        Log.selectLog(logLevel: .debug, "mainText:\(String(describing: mainText))")
         catchLabel.text(text: mainText, fontType: .C_font_SS , textColor: UIColor.init(colorType: .color_parts_gray)!, alignment: .left)
         
         // 見送りボタン
         let skip = data.skipStatus
-        Log.selectLog(logLevel: .debug, "skip:\(String(describing: skip))")
+//        Log.selectLog(logLevel: .debug, "skip:\(String(describing: skip))")
         self.skipSetting(flag:skip)
         
         // キープボタン
         let keep = data.keepStatus
-        Log.selectLog(logLevel: .debug, "keep:\(String(describing: keep))")
+//        Log.selectLog(logLevel: .debug, "keep:\(String(describing: keep))")
         self.keepSetting(flag:keep)
         
         /*
@@ -194,7 +194,7 @@ class JobOfferBigCardCell: BaseJobCardCell {
                 self.limitedMarkView.isHidden = true
                 self.stackView.removeArrangedSubview(self.limitedMarkBackView)
             case .new:
-                self.limitedLabel.text(text: "NEW", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+                self.limitedLabel.text(text: "", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
                 self.limitedImageView.image = UIImage(named: "new")
             case .end:
                 limitedLabel.text(text: "終了間近", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
@@ -206,12 +206,12 @@ class JobOfferBigCardCell: BaseJobCardCell {
         var retInterval:Double!
         
         let startDate = DateHelper.convStr2Date(startDateString)
-        Log.selectLog(logLevel: .debug, "startDate:\(startDate)")
+//        Log.selectLog(logLevel: .debug, "startDate:\(startDate)")
         
         retInterval = nowDate.timeIntervalSince(startDate)
         
         let ret = retInterval/86400
-        Log.selectLog(logLevel: .debug, "ret:\(ret)")
+//        Log.selectLog(logLevel: .debug, "ret:\(ret)")
         if ret > 7 {
             return true
         }
@@ -223,12 +223,12 @@ class JobOfferBigCardCell: BaseJobCardCell {
         var retInterval:Double!
         
         let endDate = DateHelper.convStr2Date(endDateString)
-        Log.selectLog(logLevel: .debug, "endDate:\(endDate)")
+//        Log.selectLog(logLevel: .debug, "endDate:\(endDate)")
         
         retInterval = endDate.timeIntervalSince(nowDate)
         
         let ret = retInterval/86400
-        Log.selectLog(logLevel: .debug, "ret:\(ret)")
+//        Log.selectLog(logLevel: .debug, "ret:\(ret)")
         if ret > 7 {
             return true
         }

@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol BaseJobCardCellDelegate {
+    func skipAction(tag:Int)
+    func keepAction(tag:Int)
+}
+
 class BaseJobCardCell: BaseTableViewCell {
     
     @IBOutlet weak var spaceView:UIView!
@@ -38,7 +43,17 @@ class BaseJobCardCell: BaseTableViewCell {
     
     @IBOutlet weak var btnView:UIView!
     @IBOutlet weak var deleteBtn:UIButton!
+    @IBAction func deleteBtnAction() {
+//        Log.selectLog(logLevel: .debug, "deleteBtnAction start")
+        self.delegate.skipAction(tag: self.tag)
+    }
     @IBOutlet weak var keepBtn:UIButton!
+    @IBAction func keepBtnAction() {
+//        Log.selectLog(logLevel: .debug, "keepBtnAction start")
+        self.delegate.keepAction(tag: self.tag)
+    }
+    
+    var delegate:BaseJobCardCellDelegate!
 
     override func awakeFromNib() {
         super.awakeFromNib()

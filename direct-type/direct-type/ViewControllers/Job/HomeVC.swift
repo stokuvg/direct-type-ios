@@ -141,7 +141,7 @@ class HomeVC: TmpNaviTopVC {
         
         
         let mdlData2:MdlJobCard = MdlJobCard.init(jobCardCode: "2",
-                                                  displayPeriod: EntryFormInfoDisplayPeriod.init(startAt: "2020/05/01", endAt: "2020/05/31"),
+                                                  displayPeriod: EntryFormInfoDisplayPeriod.init(startAt: "2020/05/16", endAt: "2020/05/31"),
                                                   companyName: "株式会社キャリアデザインITパートナーズ「type」",
                                                   jobName: "PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
                                                   mainTitle: "メディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！",
@@ -325,6 +325,8 @@ extension HomeVC: UITableViewDataSource {
 //                let data = dispTableData[row]
                 
                 let cell = tableView.loadCell(cellName: "JobOfferBigCardCell", indexPath: indexPath) as! JobOfferBigCardCell
+                cell.delegate = self
+                cell.tag = row
                 cell.setup(data: data)
                 return cell
             }
@@ -338,6 +340,8 @@ extension HomeVC: UITableViewDataSource {
                 let data = dispJobCards.jobCards[row]
 //                let data = dispTableData[row]
                 let cell = tableView.loadCell(cellName: "JobOfferBigCardCell", indexPath: indexPath) as! JobOfferBigCardCell
+                cell.delegate = self
+                cell.tag = row
                 cell.setup(data: data)
                 return cell
             }
@@ -400,4 +404,16 @@ extension HomeVC: JobOfferCardReloadCellDelegate {
         // 精度の高い求人を受け取る
         self.homeTableView.reloadData()
     }
+}
+
+extension HomeVC: BaseJobCardCellDelegate {
+    func skipAction(tag: Int) {
+        Log.selectLog(logLevel: .debug, "skipAction tag:\(tag)")
+    }
+    
+    func keepAction(tag: Int) {
+        Log.selectLog(logLevel: .debug, "keepAction tag:\(tag)")
+    }
+    
+    
 }

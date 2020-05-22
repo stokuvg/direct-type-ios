@@ -1071,7 +1071,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 34 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 33 nibs.
   struct nib {
     /// Nib `HEditDrumTBCell`.
     static let hEditDrumTBCell = _R.nib._HEditDrumTBCell()
@@ -1127,8 +1127,6 @@ struct R: Rswift.Validatable {
     static let jobOfferCardMoreCell = _R.nib._JobOfferCardMoreCell()
     /// Nib `JobOfferCardReloadCell`.
     static let jobOfferCardReloadCell = _R.nib._JobOfferCardReloadCell()
-    /// Nib `JobOfferSelectCell`.
-    static let jobOfferSelectCell = _R.nib._JobOfferSelectCell()
     /// Nib `KeepCardCell`.
     static let keepCardCell = _R.nib._KeepCardCell()
     /// Nib `NaviButtonsView`.
@@ -1359,14 +1357,6 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UINib(name: "JobOfferSelectCell", in: bundle)`
-    @available(*, deprecated, message: "Use UINib(resource: R.nib.jobOfferSelectCell) instead")
-    static func jobOfferSelectCell(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.jobOfferSelectCell)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
     /// `UINib(name: "KeepCardCell", in: bundle)`
     @available(*, deprecated, message: "Use UINib(resource: R.nib.keepCardCell) instead")
     static func keepCardCell(_: Void = ()) -> UIKit.UINib {
@@ -1522,10 +1512,6 @@ struct R: Rswift.Validatable {
       return R.nib.jobOfferCardReloadCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobOfferCardReloadCell
     }
 
-    static func jobOfferSelectCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobOfferSelectCell? {
-      return R.nib.jobOfferSelectCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobOfferSelectCell
-    }
-
     static func keepCardCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> KeepCardCell? {
       return R.nib.keepCardCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? KeepCardCell
     }
@@ -1603,7 +1589,6 @@ struct _R: Rswift.Validatable {
       try _JobDetailFooterApplicationCell.validate()
       try _JobDetailItemCell.validate()
       try _JobOfferBigCardCell.validate()
-      try _JobOfferSelectCell.validate()
       try _KeepCardCell.validate()
       try _NoCardView.validate()
     }
@@ -1958,24 +1943,6 @@ struct _R: Rswift.Validatable {
 
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobOfferCardReloadCell? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobOfferCardReloadCell
-      }
-
-      fileprivate init() {}
-    }
-
-    struct _JobOfferSelectCell: Rswift.NibResourceType, Rswift.Validatable {
-      let bundle = R.hostingBundle
-      let name = "JobOfferSelectCell"
-
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> JobOfferSelectCell? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? JobOfferSelectCell
-      }
-
-      static func validate() throws {
-        if UIKit.UIImage(named: "deleteDefault", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'deleteDefault' is used in nib 'JobOfferSelectCell', but couldn't be loaded.") }
-        if #available(iOS 11.0, tvOS 11.0, *) {
-          if UIKit.UIColor(named: "color-line", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-line' is used in storyboard 'JobOfferSelectCell', but couldn't be loaded.") }
-        }
       }
 
       fileprivate init() {}

@@ -282,6 +282,9 @@
                                                         <state key="normal" title="見送り" image="deleteDefault">
                                                             <color key="titleColor" name="color-line"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="deleteBtnAction" destination="KGk-i7-Jjw" eventType="touchUpInside" id="YdG-XU-yEX"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xq0-ao-yN0">
                                                         <rect key="frame" x="140.5" y="0.0" width="139.5" height="54"/>
@@ -290,6 +293,9 @@
                                                         <state key="normal" title="キープ" image="likeSelected">
                                                             <color key="titleColor" name="color-sub"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="keepBtnAction" destination="KGk-i7-Jjw" eventType="touchUpInside" id="c8W-Lf-gEw"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
