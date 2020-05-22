@@ -108,6 +108,7 @@ class JobOfferBigCardCell: BaseJobCardCell {
         // 特別年収 TODO:初回は非表示
         saralySpecialLabel.isHidden = true
         saralySpecialMarkLabel.isHidden = true
+        cautionView.isHidden = true
         self.stackView.addArrangedSubview(cautionView)
 //        cautionView.isHidden = true
         

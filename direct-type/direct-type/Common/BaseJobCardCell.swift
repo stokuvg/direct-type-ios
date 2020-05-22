@@ -34,6 +34,8 @@ class BaseJobCardCell: BaseTableViewCell {
     @IBOutlet weak var catchView:UIView!
     @IBOutlet weak var catchLabel:UILabel!
     
+    @IBOutlet weak var btnTopSpaceView:UIView!
+    
     @IBOutlet weak var btnView:UIView!
     @IBOutlet weak var deleteBtn:UIButton!
     @IBOutlet weak var keepBtn:UIButton!
