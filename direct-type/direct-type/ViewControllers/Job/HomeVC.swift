@@ -131,8 +131,12 @@ class HomeVC: TmpNaviTopVC {
                                                   jobName: "PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
                                                   mainTitle: "メディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！",
                                                   mainPicture: "https://type.jp/s/img_banner/top_pc_side_number1.jpg",
-                                                  salaryCode: [7,11],
-                                                  workPlaceCode: [1,44],
+                                                  salaryMinCode: 7,
+                                                  salaryMaxCode: 11,
+                                                  salaryDisplay: true,
+                                                  workPlaceCode: [1,2,3,4,5,6],
+                                                  keepStatus: false,
+                                                  skipStatus: false,
                                                   userFilter: UserFilterInfo.init(tudKeepStatus: true, tudSkipStatus: true))
         
         
@@ -142,8 +146,12 @@ class HomeVC: TmpNaviTopVC {
                                                   jobName: "PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
                                                   mainTitle: "メディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！",
                                                   mainPicture: "https://type.jp/s/img_banner/top_pc_side_number1.jpg",
-                                                  salaryCode: [7,11],
-                                                  workPlaceCode: [1,44],
+                                                  salaryMinCode: 9,
+                                                  salaryMaxCode: 10,
+                                                  salaryDisplay: false,
+                                                  workPlaceCode: [8,9,10,11,12,13,15],
+                                                  keepStatus: false,
+                                                  skipStatus: false,
                                                   userFilter: UserFilterInfo.init(tudKeepStatus: true, tudSkipStatus: true))
         
         
@@ -153,8 +161,12 @@ class HomeVC: TmpNaviTopVC {
                                                   jobName: "PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
                                                   mainTitle: "メディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！",
                                                   mainPicture: "https://type.jp/s/img_banner/top_pc_side_number1.jpg",
-                                                  salaryCode: [7,11],
-                                                  workPlaceCode: [1,44],
+                                                  salaryMinCode: 20,
+                                                  salaryMaxCode: 24,
+                                                  salaryDisplay: true,
+                                                  workPlaceCode: [44,45,46,47,48,49,50],
+                                                  keepStatus: false,
+                                                  skipStatus: false,
                                                   userFilter: UserFilterInfo.init(tudKeepStatus: true, tudSkipStatus: true))
         
         masterJobCards = MdlJobCardList.init(jobCards:
