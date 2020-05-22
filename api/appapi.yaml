@@ -1,13 +1,13 @@
 openapi: 3.0.0
 info:
-  version: 4.30.16
+  version: 5.21.01
   title: アプリ想定モデル・API
   description: アプリの想定モデル・APIの仕様書です
 
 paths:
 
 ###============================================================###
-###======== ユーザ状態管理 ======== 
+###======== ユーザ状態管理 ========
   /dummy/api43:
     get:
       tags:
@@ -38,7 +38,7 @@ paths:
           description: 成功
 
 ###============================================================###
-###======== 初回登録 ======== 
+###======== 初回登録 ========
   /dummy/api26:
     post:
       tags:
@@ -57,7 +57,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserStatus'
 
-###======== プロフィール ======== 
+###======== プロフィール ========
   /dummy/api10:
     get:
       tags:
@@ -84,7 +84,7 @@ paths:
         200:
           description: 成功
 
-###======== 履歴書 ======== 
+###======== 履歴書 ========
   /dummy/api11:
     get:
       tags:
@@ -111,7 +111,7 @@ paths:
         200:
           description: 成功
 
-###======== 職務経歴書 ======== 
+###======== 職務経歴書 ========
   /dummy/api12:
     get:
       tags:
@@ -138,7 +138,7 @@ paths:
         200:
           description: 成功
 
-###======== スカウト希望条件 ======== 
+###======== スカウト希望条件 ========
   /dummy/api41:
     get:
       tags:
@@ -167,7 +167,7 @@ paths:
         200:
           description: 成功
 
-###======== 相性診断結果 ======== 
+###======== 相性診断結果 ========
   /dummy/api48:
     get:
       tags:
@@ -194,7 +194,7 @@ paths:
         200:
           description: 成功
 
-###======== 応募フォーム ======== 
+###======== 応募フォーム ========
   /dummy/api13/{jobCode}:
     get:
       tags:
@@ -240,7 +240,7 @@ paths:
         200:
           description: 成功
 
-###======== アプローチ ======== 
+###======== アプローチ ========
   /dummy/api31:
     get:
       tags:
@@ -268,7 +268,7 @@ paths:
         200:
           description: 成功
 
-###======== ホーム ======== 
+###======== ホーム ========
   /dummy/api01_02:
     post:
       tags:
@@ -317,7 +317,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/JobCardDetail'
 
-###======== 見送り ======== 
+###======== 見送り ========
   /dummy/api05:
     post:
       tags:
@@ -332,7 +332,7 @@ paths:
         200:
           description: 成功
 
-###======== キープ ======== 
+###======== キープ ========
   /dummy/api03:
     post:
       tags:
@@ -387,7 +387,7 @@ paths:
 ###===認証関連：24,25, 33,34,35,36 39,40
 ###=== 30???
 ### https://type.qiita.com/y_kawamata/items/e251d8904820d5b5ceaf
-###============================== 
+###==============================
   /dummy/api24:
     post:
       tags:
@@ -442,7 +442,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/AuthSignupResendResp'
 
-###============================== 
+###==============================
   /dummy/api39:
     post:
       tags:
@@ -498,7 +498,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/AuthSigninResendResp'
 
-###============================== 
+###==============================
   /dummy/api33:
     post:
       tags:
@@ -552,7 +552,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/AuthChangeAccountResendResp'
 
-###============================== 
+###==============================
   /dummy/api36:
     post:
       tags:
@@ -561,7 +561,7 @@ paths:
       responses:
         200:
           description: 成功
-###============================== 
+###==============================
   /dummy/dmy01:
     get:
       tags:
@@ -573,12 +573,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AppSmoothCareer'
-###============================== 
+###==============================
 
 
 ###============================================================###
 ###============================================================###
-###======== スキーマ定義 ======== 
+###======== スキーマ定義 ========
 components:
   schemas:
 ###============================================================###
@@ -1561,9 +1561,11 @@ components:
           example: 0
           description: 年収例コード
         work_place_code:
-          type: integer
-          example: 0
           description: 勤務地コード
+          type: array
+          example: [1,34]
+          items:
+            type: integer
         user_filter:
           $ref: '#/components/schemas/UserFilterInfo'
 
@@ -1781,7 +1783,7 @@ components:
           type: string
           example: overtime_about
           description: 残業について
-        ##=====================  
+        ##=====================
         work_place:
           type: string
           example: work_place
@@ -1806,7 +1808,7 @@ components:
           type: string
           example: childcare
           description: ３４．産休・育休取得状況（任意）
-        ##=====================          
+        ##=====================
         interview_memo:
           type: object
           description: ３５．取材メモ（任意）
@@ -1832,7 +1834,7 @@ components:
               type: string
               example: （＊s3画像URL）
               description: 写真（３）
-        ##=====================          
+        ##=====================
         selection_process:
           type: object
           description: ３６．選考プロセス（必須）
@@ -1868,7 +1870,7 @@ components:
               type: string
               example: selection_process_detail
               description: 詳細
-        ##=====================          
+        ##=====================
         contact_info:
           type: object
           description: ３７．連絡先（必須）
@@ -1904,7 +1906,7 @@ components:
               type: string
               example: contact_mail
               description: 表示用e-mailアドレス
-        ##=====================          
+        ##=====================
         company_description:
           type: object
           description: ３８．会社概要（必須）
@@ -1970,7 +1972,7 @@ components:
               type: string
               example: president_history
               description: ┗【代表者略歴】
-        ##=====================          
+        ##=====================
         user_filter:
           $ref: '#/components/schemas/UserFilterInfo'
 

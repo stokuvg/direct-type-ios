@@ -88,6 +88,8 @@
 		06B94F64246BE38E002FEDDC /* JobDetailItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B94F62246BE38E002FEDDC /* JobDetailItemCell.swift */; };
 		06B94F65246BE38E002FEDDC /* JobDetailItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06B94F63246BE38E002FEDDC /* JobDetailItemCell.xib */; };
 		06C347242463A595000FB4DA /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C347232463A595000FB4DA /* UIButton+Extensions.swift */; };
+		06CDF6BF247643200075370F /* MdlJobCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CDF6BE247643200075370F /* MdlJobCard.swift */; };
+		06CDF6C1247648730075370F /* MdlJobCardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CDF6C0247648730075370F /* MdlJobCardList.swift */; };
 		06D700332456B5FC00E55FC8 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06D700322456B5FC00E55FC8 /* Color.xcassets */; };
 		06DCAEA9245A70A8008FE9FA /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DCAEA8245A70A8008FE9FA /* UITableView+Extensions.swift */; };
 		06DCAEAB245A7616008FE9FA /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DCAEAA245A7616008FE9FA /* UILabel+Extensions.swift */; };
@@ -289,6 +291,8 @@
 		06B94F62246BE38E002FEDDC /* JobDetailItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailItemCell.swift; sourceTree = "<group>"; };
 		06B94F63246BE38E002FEDDC /* JobDetailItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailItemCell.xib; sourceTree = "<group>"; };
 		06C347232463A595000FB4DA /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
+		06CDF6BE247643200075370F /* MdlJobCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlJobCard.swift; sourceTree = "<group>"; };
+		06CDF6C0247648730075370F /* MdlJobCardList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlJobCardList.swift; sourceTree = "<group>"; };
 		06D700322456B5FC00E55FC8 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		06DCAEA8245A70A8008FE9FA /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		06DCAEAA245A7616008FE9FA /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
@@ -766,6 +770,8 @@
 				268BFF5C246E8FF8004B2640 /* MdlAppSmoothCareerComponyDescription.swift */,
 				268BFF5B246E8FF8004B2640 /* MdlAppSmoothCareerComponyDescriptionWorkPeriod.swift */,
 				268BFF5D246E8FF8004B2640 /* MdlAppSmoothCareerWorkBackgroundDetail.swift */,
+				06CDF6BE247643200075370F /* MdlJobCard.swift */,
+				06CDF6C0247648730075370F /* MdlJobCardList.swift */,
 			);
 			path = ExSwagger;
 			sourceTree = "<group>";
@@ -1128,7 +1134,9 @@
 				064EF6FB24654FDB00853ADD /* JobDetailArticleCell.swift in Sources */,
 				269AFFC2246A929300DB364B /* SubSelectDaiTBCell.swift in Sources */,
 				066CC17C24735DDB009A123A /* JobDetailTextView.swift in Sources */,
+				06CDF6BF247643200075370F /* MdlJobCard.swift in Sources */,
 				06E519CC24581634004E4B7A /* ProfilePreviewVC.swift in Sources */,
+				06CDF6C1247648730075370F /* MdlJobCardList.swift in Sources */,
 				066763722457B08300AC5039 /* EntryVC.swift in Sources */,
 				06E519A42457DC7B004E4B7A /* InitialInputCompleteVC.swift in Sources */,
 				0667636C2457B02200AC5039 /* KeepListVC.swift in Sources */,
@@ -1212,7 +1220,6 @@
 				064EF6F724654A7300853ADD /* JobDetailDataCell.swift in Sources */,
 				063350DD2463EC4B00AF90F3 /* NoCardView.swift in Sources */,
 				26F2A823246D1E270037D47F /* MdlResumeLastJobExperiment.swift in Sources */,
-				06E519B9245814DF004E4B7A /* ResumeEditVC.swift in Sources */,
 				06E519D324581684004E4B7A /* ContentsEditVC.swift in Sources */,
 				06C347242463A595000FB4DA /* UIButton+Extensions.swift in Sources */,
 				066F271C246E81B60040BDC1 /* JobDetailFoldingOutlineCell.swift in Sources */,

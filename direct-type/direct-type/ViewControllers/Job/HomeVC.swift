@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwaggerClient
 
 enum CardDispType:Int {
     case none   // 何も無い
@@ -22,13 +23,14 @@ class HomeVC: TmpNaviTopVC {
 //    @IBOutlet weak var homeNaviHeight:NSLayoutConstraint!
     @IBOutlet weak var homeTableView:UITableView!
     
+    var masterJobCards: MdlJobCardList? = nil
+    var dispJobCards: MdlJobCardList? = nil
+    
     var dispTableData:[[String: Any]] = []
     var masterTableData:[[String:Any]] = []
     
     var moreCnt:Int = 1
     var dispType:CardDispType = .none
-    
-    var safeAreaTop:CGFloat!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,6 +123,75 @@ class HomeVC: TmpNaviTopVC {
     }
     
     private func makeDummyData() {
+        
+        let mdlData1:MdlJobCard = MdlJobCard.init(jobCardCode: "1",
+                                                  displayPeriod: EntryFormInfoDisplayPeriod.init(startAt: "2020/05/01", endAt: "2020/05/31"),
+                                                  companyName: "株式会社キャリアデザインITパートナーズ「type」",
+                                                  jobName: "PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
+                                                  mainTitle: "メディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！",
+                                                  mainPicture: "https://type.jp/s/img_banner/top_pc_side_number1.jpg",
+                                                  salaryCode: 2,
+                                                  workPlaceCode: [1,44],
+                                                  userFilter: UserFilterInfo.init(tudKeepStatus: true, tudSkipStatus: true))
+        
+        
+        let mdlData2:MdlJobCard = MdlJobCard.init(jobCardCode: "2",
+                                                  displayPeriod: EntryFormInfoDisplayPeriod.init(startAt: "2020/05/01", endAt: "2020/05/31"),
+                                                  companyName: "株式会社キャリアデザインITパートナーズ「type」",
+                                                  jobName: "PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
+                                                  mainTitle: "メディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！",
+                                                  mainPicture: "https://type.jp/s/img_banner/top_pc_side_number1.jpg",
+                                                  salaryCode: 3,
+                                                  workPlaceCode: [1,44],
+                                                  userFilter: UserFilterInfo.init(tudKeepStatus: true, tudSkipStatus: true))
+        
+        
+        let mdlData3:MdlJobCard = MdlJobCard.init(jobCardCode: "3",
+                                                  displayPeriod: EntryFormInfoDisplayPeriod.init(startAt: "2020/05/01", endAt: "2020/05/31"),
+                                                  companyName: "株式会社キャリアデザインITパートナーズ「type」",
+                                                  jobName: "PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
+                                                  mainTitle: "メディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！",
+                                                  mainPicture: "https://type.jp/s/img_banner/top_pc_side_number1.jpg",
+                                                  salaryCode: 4,
+                                                  workPlaceCode: [1,44],
+                                                  userFilter: UserFilterInfo.init(tudKeepStatus: true, tudSkipStatus: true))
+        
+        masterJobCards = MdlJobCardList.init(jobCards:
+            [
+                mdlData1,mdlData2,mdlData3,
+                mdlData1,mdlData2,mdlData3,
+                mdlData1,mdlData2,mdlData3,
+                mdlData1,mdlData2,mdlData3,
+                mdlData1,mdlData2,mdlData3,
+            ]
+        )
+        
+        if (masterJobCards?.jobCards.count)! > moreDataCount {
+            for i in 0..<moreDataCount {
+                let jobCardBig = (masterJobCards?.jobCards[i])!
+                dispJobCards?.jobCards.append(jobCardBig)
+            }
+        } else {
+            for i in 0..<(masterJobCards?.jobCards.count)! {
+                let data = masterJobCards?.jobCards[i]
+                dispJobCards?.jobCards.append(data!)
+            }
+        }
+        
+        if masterTableData.count > moreDataCount {
+            for i in 0..<moreDataCount {
+                let data = masterTableData[i]
+                dispTableData.append(data)
+            }
+        } else {
+            for i in 0..<masterTableData.count {
+                let data = masterTableData[i]
+                dispTableData.append(data)
+            }
+        }
+
+        
+        
         let data1:[String:Any] = [
             "end":true,
             "image":"https://type.jp/s/img_banner/top_pc_side_number1.jpg",
