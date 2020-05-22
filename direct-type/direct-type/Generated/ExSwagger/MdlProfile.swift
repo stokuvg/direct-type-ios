@@ -8,7 +8,8 @@
 //アプリ用のモデル<MdlHoge>と、入力編集用のモデル<EditItemHoge>
 
 import UIKit
-import SwaggerClient
+//import SwaggerClient
+import TudApi
 
 class MdlProfile: Codable {
     /** 氏 */
@@ -51,13 +52,29 @@ class MdlProfile: Codable {
         self.mobilePhoneNo = mobilePhoneNo
     }
     //ApiモデルをAppモデルに変換して保持させる
-    convenience init(dto: Profile) {
-        let bufDate = dto.birthday.dispYmd
+    convenience init(dto: GetProfileResponseDTO) {
+        let bufDate = dto.birthday
         let _date = DateHelper.convStr2Date(bufDate)
-        let _gender = "\(dto.gender)"
-        let _prefecture = "\(dto.prefecture)"
-        self.init(familyName: dto.familyName, firstName: dto.firstName, familyNameKana: dto.familyNameKana, firstNameKana: dto.firstNameKana, birthday: _date, gender: _gender, zipCode: dto.zipCode, prefecture: _prefecture, address1: dto.address1, address2: dto.address2, mailAddress: dto.mailAddress, mobilePhoneNo: dto.mobilePhoneNo)
+        self.init(familyName: dto.familyName, firstName: dto.firstName, familyNameKana: dto.familyNameKana, firstNameKana: dto.firstNameKana, birthday: _date, gender: dto.genderId, zipCode: dto.zipCode, prefecture: dto.prefectureId, address1: dto.city, address2: dto.town, mailAddress: dto.email, mobilePhoneNo: dto.phoneNumber)
     }
+    //=== 作成・更新のモデルは、アプリ=>APIなので不要だな ===
+    //convenience init(dto: CreateProfileRequestDTO) {
+    //    let bufDate = dto.birthday ?? ""
+    //    let _date = DateHelper.convStr2Date(bufDate)
+    //    self.init(familyName: dto.familyName, firstName: dto.firstName, familyNameKana: dto.familyNameKana, firstNameKana: dto.firstNameKana, birthday: _date, gender: dto.genderId, zipCode: dto.zipCode, prefecture: dto.prefectureId, address1: dto.city, address2: dto.town, mailAddress: dto.email, mobilePhoneNo: "")
+    //}
+    //convenience init(dto: UpdateProfileRequestDTO) {
+    //    let bufDate = dto.birthday ?? ""
+    //    let _date = DateHelper.convStr2Date(bufDate)
+    //    self.init(familyName: dto.familyName ?? "", firstName: dto.firstName ?? "", familyNameKana: dto.familyNameKana ?? "", firstNameKana: dto.firstNameKana ?? "", birthday: _date, gender: dto.genderId ?? "", zipCode: dto.zipCode ?? "", prefecture: dto.prefectureId ?? "", address1: dto.city ?? "", address2: dto.town ?? "", mailAddress: dto.email ?? "", mobilePhoneNo: "")
+    //}
+//    convenience init(dto: Profile) {
+//        let bufDate = dto.birthday.dispYmd
+//        let _date = DateHelper.convStr2Date(bufDate)
+//        let _gender = "\(dto.gender)"
+//        let _prefecture = "\(dto.prefecture)"
+//        self.init(familyName: dto.familyName, firstName: dto.firstName, familyNameKana: dto.familyNameKana, firstNameKana: dto.firstNameKana, birthday: _date, gender: _gender, zipCode: dto.zipCode, prefecture: _prefecture, address1: dto.address1, address2: dto.address2, mailAddress: dto.mailAddress, mobilePhoneNo: dto.mobilePhoneNo)
+//    }
 
     var debugDisp: String {
         return "[\(familyName) \(firstName)（\(familyNameKana) \(firstNameKana)）"
@@ -109,8 +126,8 @@ enum EditItemMdlProfile: String, EditItemProtocol {
     var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" } //画面内でUniqになるようなキーを定義（配列利用時は除く）
 }
 
-extension ProfileBirthday {
-    var dispYmd: String {
-        return "\(birthdayYear.zeroUme(4))-\(birthdayMonth.zeroUme(2))-\(birthdayDay.zeroUme(2))"
-    }
-}
+//extension ProfileBirthday {
+//    var dispYmd: String {
+//        return "\(birthdayYear.zeroUme(4))-\(birthdayMonth.zeroUme(2))-\(birthdayDay.zeroUme(2))"
+//    }
+//}

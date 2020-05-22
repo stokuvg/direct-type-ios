@@ -8,6 +8,8 @@
 
 import UIKit
 
+typealias BigDecimal = Double
+
 struct Constants {
 //    //Suggest検索関連
 //    static let SuggestCellHeight: CGFloat = 25.0 //表示項目数の高さ

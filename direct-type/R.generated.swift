@@ -333,7 +333,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.file` struct is generated, and contains static references to 21 files.
+  /// This `R.file` struct is generated, and contains static references to 22 files.
   struct file {
     /// Resource file `MstF16_management.tsv`.
     static let mstF16_managementTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstF16_management", pathExtension: "tsv")
@@ -377,6 +377,8 @@ struct R: Rswift.Validatable {
     static let mstL_skillTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstL_skill", pathExtension: "tsv")
     /// Resource file `MstL_skillYear.tsv`.
     static let mstL_skillYearTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstL_skillYear", pathExtension: "tsv")
+    /// Resource file `awsconfiguration.json`.
+    static let awsconfigurationJson = Rswift.FileResource(bundle: R.hostingBundle, name: "awsconfiguration", pathExtension: "json")
 
     /// `bundle.url(forResource: "MstF16_management", withExtension: "tsv")`
     static func mstF16_managementTsv(_: Void = ()) -> Foundation.URL? {
@@ -501,6 +503,12 @@ struct R: Rswift.Validatable {
     /// `bundle.url(forResource: "MstL_skillYear", withExtension: "tsv")`
     static func mstL_skillYearTsv(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.mstL_skillYearTsv
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "awsconfiguration", withExtension: "json")`
+    static func awsconfigurationJson(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.awsconfigurationJson
       return fileResource.bundle.url(forResource: fileResource)
     }
 

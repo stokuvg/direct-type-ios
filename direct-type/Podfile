@@ -16,8 +16,11 @@ target 'direct-type' do
   ##=== PromiseKit
 #  pod "PromiseKit", "~> 6.8"
 
-  ##=== Swagger ===
+  ##=== Swagger ===（仮定義なアプリモデル生成用）
   pod 'SwaggerClient', :path => '../generated/promise'
+
+  ##=== Swagger ===（最終的なサーバ側API）
+  pod 'TudApi', :path => '../generatedSvr/promise'
   
   ##=== Progress
   pod 'SVProgressHUD'

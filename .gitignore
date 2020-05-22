@@ -1,5 +1,6 @@
 .DS_Store
 *.swp
 generated/*
+generatedSvr/*
 UserInterfaceState.xcuserstate
 

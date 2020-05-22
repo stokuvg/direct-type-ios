@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import SwaggerClient
+//import SwaggerClient
+import TudApi
 
 //===[H-2]「個人プロフィール確認」
 class ProfilePreviewVC: PreviewBaseVC {
@@ -15,12 +16,12 @@ class ProfilePreviewVC: PreviewBaseVC {
     
     override func initData() {
         //ダミーデータ投入しておく
-        let profile: Profile =
-        Profile(familyName: "スマ澤", firstName: "太郎", familyNameKana: "スマザワ", firstNameKana: "タロウ",
-                birthday: ProfileBirthday(birthdayYear: 1996, birthdayMonth: 4, birthdayDay: 28),
-                gender: 1, zipCode: "1234567", prefecture: 13, address1: "港区赤坂3-21-20", address2: "赤坂ロングロングローングビーチビル2F",
-                mailAddress: "hoge@example.co.jp",
-                mobilePhoneNo: "09012345678" )
+        let profile: GetProfileResponseDTO =
+        GetProfileResponseDTO(familyName: "スマ澤", firstName: "太郎", familyNameKana: "スマザワ", firstNameKana: "タロウ",
+                              birthday: "1996-04-28", genderId: "1",
+                              zipCode: "1234567", prefectureId: "13", city: "港区赤坂3-21-20", town: "赤坂ロングロングローングビーチビル2F",
+                              email: "hoge@example.co.jp",
+                              phoneNumber: "09012345678" )
         detail = MdlProfile(dto: profile)
         //========
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
