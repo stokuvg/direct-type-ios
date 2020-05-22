@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 5.21.01
+  version: 5.22.02
   title: アプリ想定モデル・API
   description: アプリの想定モデル・APIの仕様書です
 
@@ -1518,8 +1518,12 @@ components:
         - job_name
         - mainTitle
         - main_picture
-        - salary_code
+        - salary_min_code
+        - salary_max_code
         - work_place_code
+        - is_salary_display
+        - keep_status
+        - skip_status
         - user_filter
       properties:
         job_card_code:
@@ -1556,16 +1560,31 @@ components:
           type: string
           example: （＊s3画像URL）
           description: メイン記事写真
-        salary_code:
+        minSalaryId:
           type: integer
           example: 0
-          description: 年収例コード
+          description: 年収下限例コード
+        maxSalaryId:
+          type: integer
+          example: 0
+          description: 年収上限例コード
+        isSalaryDisplay:
+            type: boolean
+            example: true
         work_place_code:
           description: 勤務地コード
           type: array
           example: [1,34]
           items:
             type: integer
+        keep_status:
+            type: boolean
+            example: true
+            description: キープ状態 true,false
+        skip_status:
+            type: boolean
+            example: true
+            description: 見送り状態
         user_filter:
           $ref: '#/components/schemas/UserFilterInfo'
 
