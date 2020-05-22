@@ -89,8 +89,10 @@ struct R: Rswift.Validatable {
   }
 
   #if os(iOS) || os(tvOS)
-  /// This `R.storyboard` struct is generated, and contains static references to 11 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 12 storyboards.
   struct storyboard {
+    /// Storyboard `Auth`.
+    static let auth = _R.storyboard.auth()
     /// Storyboard `BaseTabBC`.
     static let baseTabBC = _R.storyboard.baseTabBC()
     /// Storyboard `Edit`.
@@ -113,6 +115,13 @@ struct R: Rswift.Validatable {
     static let preview = _R.storyboard.preview()
     /// Storyboard `SplashVC`.
     static let splashVC = _R.storyboard.splashVC()
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "Auth", bundle: ...)`
+    static func auth(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.auth)
+    }
+    #endif
 
     #if os(iOS) || os(tvOS)
     /// `UIStoryboard(name: "BaseTabBC", bundle: ...)`
@@ -333,7 +342,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.file` struct is generated, and contains static references to 21 files.
+  /// This `R.file` struct is generated, and contains static references to 22 files.
   struct file {
     /// Resource file `MstF16_management.tsv`.
     static let mstF16_managementTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstF16_management", pathExtension: "tsv")
@@ -377,6 +386,8 @@ struct R: Rswift.Validatable {
     static let mstL_skillTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstL_skill", pathExtension: "tsv")
     /// Resource file `MstL_skillYear.tsv`.
     static let mstL_skillYearTsv = Rswift.FileResource(bundle: R.hostingBundle, name: "MstL_skillYear", pathExtension: "tsv")
+    /// Resource file `awsconfiguration.json`.
+    static let awsconfigurationJson = Rswift.FileResource(bundle: R.hostingBundle, name: "awsconfiguration", pathExtension: "json")
 
     /// `bundle.url(forResource: "MstF16_management", withExtension: "tsv")`
     static func mstF16_managementTsv(_: Void = ()) -> Foundation.URL? {
@@ -501,6 +512,12 @@ struct R: Rswift.Validatable {
     /// `bundle.url(forResource: "MstL_skillYear", withExtension: "tsv")`
     static func mstL_skillYearTsv(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.mstL_skillYearTsv
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "awsconfiguration", withExtension: "json")`
+    static func awsconfigurationJson(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.awsconfigurationJson
       return fileResource.bundle.url(forResource: fileResource)
     }
 
@@ -2031,6 +2048,9 @@ struct _R: Rswift.Validatable {
   struct storyboard: Rswift.Validatable {
     static func validate() throws {
       #if os(iOS) || os(tvOS)
+      try auth.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
       try baseTabBC.validate()
       #endif
       #if os(iOS) || os(tvOS)
@@ -2064,6 +2084,26 @@ struct _R: Rswift.Validatable {
       try splashVC.validate()
       #endif
     }
+
+    #if os(iOS) || os(tvOS)
+    struct auth: Rswift.StoryboardResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "Auth"
+      let sbid_CognitoAuthVC = StoryboardViewControllerResource<CognitoAuthVC>(identifier: "Sbid_CognitoAuthVC")
+
+      func sbid_CognitoAuthVC(_: Void = ()) -> CognitoAuthVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_CognitoAuthVC)
+      }
+
+      static func validate() throws {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+        if _R.storyboard.auth().sbid_CognitoAuthVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_CognitoAuthVC' could not be loaded from storyboard 'Auth' as 'CognitoAuthVC'.") }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
 
     #if os(iOS) || os(tvOS)
     struct baseTabBC: Rswift.StoryboardResourceType, Rswift.Validatable {

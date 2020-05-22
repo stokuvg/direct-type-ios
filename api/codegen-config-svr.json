@@ -1,12 +1,11 @@
 {
-    "projectName": "SwaggerClient",
+    "projectName": "TudApi",
     "allowUnicodeIdentifiers" : true,
     "unwrapRequired" : true,
     "lenientTypeCast" : false,
     "responseAs" : "PromiseKit",
-    "podVersion" : "0.20.4.30",
+    "podVersion" : "0.20.5.22",
     "podHomepage" : "http://example.com/todo/",
-    "podSummary" : "アプリ想定API"
+    "podSummary" : "サーバ側API"
 }
-
 
