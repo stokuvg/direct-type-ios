@@ -11,8 +11,9 @@ import SVProgressHUD
 
 //=== 編集可能項目の対応
 class EditableBasicVC: TmpBasicVC, SubSelectFeedbackDelegate {
-    func changedSelect(codes: String) {
-        print("\t🌸🌸[\(codes)]🌸🌸フィードバックだよ")
+    func changedSelect(editItem: EditableItemH, codes: String) {
+        editableModel.changeTempItem(editItem, text: codes)//入力値の反映
+        dispEditableItemByKey(editItem.editableItemKey)//対象の表示を更新する
     }
     
     //編集中の情報
@@ -76,7 +77,7 @@ extension EditableBasicVC: InputItemHDelegate {
         if let depKey = editableModel.clearDependencyItemByKey(item.editableItemKey) { //依存関係があればクリア
             dispEditableItemByKey(depKey)//依存してた方の表示も更新する
         }
-        dispEditableItemByKey(item.editableItemKey)//大正の表示を更新する
+        dispEditableItemByKey(item.editableItemKey)//対象の表示を更新する
         return true
     }
     
@@ -95,7 +96,7 @@ extension EditableBasicVC: InputItemHDelegate {
             print("Picker開く時の処理 [\(item.editableItemKey): \(item.dispName)]")
             showPickerYMD(tf, item)
         case .selectSingle:
-            //さらに子ナビさせたいので
+            //さらに子ナビさせたいので@objc  
             DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
                 tf.resignFirstResponder()//自分を解除しておかないと、戻ってきたときにまた遷移してしまうため
                 let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)

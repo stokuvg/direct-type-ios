@@ -46,6 +46,8 @@ class EditableTableBasicVC: EditableBasicVC {
     func initData(_ item: MdlItemH) {
         self.item = item
         for child in item.childItems { arrData.append(child) }
+        //=== IndexPathなどを設定するため
+        editableModel.initItemEditable(arrData)
     }
     func dispData() {
         guard let _item = item else { return }
@@ -59,6 +61,27 @@ class EditableTableBasicVC: EditableBasicVC {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
+    
+    //=======================================================================================================
+    //EditableBaseを元に、汎用テーブルIFを利用する場合のBaseクラス
+    //=== OVerrideして使う
+    //func moveNextCell(_ editableItemKey: String) -> Bool { return true } //次の項目へ移動
+    //func dispEditableItemAll() {} //すべての項目を表示する
+    //func dispEditableItemByKey(_ itemKey: EditableItemKey) {} //指定した項目を表示する （TODO：複数キーの一括指定に拡張予定）
+    //=== 表示更新
+    @objc override func dispEditableItemAll() {
+        self.tableVW.reloadData()//項目の再描画
+    }
+    override func dispEditableItemByKey(_ itemKey: EditableItemKey) {
+        self.tableVW.reloadData()//項目の再描画//!!!
+        print(editableModel.dicTextFieldIndexPath.description)
+        
+        guard let curIdxPath = editableModel.dicTextFieldIndexPath[itemKey] else { return }
+        print("🌸[\(#function)]🌸[\(editableModel)]🌸[\(itemKey)]🌸[\(curIdxPath)]")
+        tableVW.reloadRows(at: [curIdxPath], with: UITableView.RowAnimation.automatic)
+    }
+    //=======================================================================================================
+
 }
 
 extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
@@ -67,8 +90,9 @@ extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
         return arrData.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = arrData[indexPath.row]
-        
+        let _item = arrData[indexPath.row]
+        let (isChange, editTemp) = editableModel.makeTempItem(_item)
+        let item: EditableItemH! = isChange ? editTemp : _item
         switch item.editType {
         case .inputText:
             let cell: HEditTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditTextTBCell", for: indexPath) as! HEditTextTBCell
@@ -89,6 +113,7 @@ extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
             return cell
 
         default:
+            print("🌸[\(#function)]🌸[\(#line)]🌸🌸")
             let cell: HEditTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditTextTBCell", for: indexPath) as! HEditTextTBCell
             cell.initCell(self, item)
             cell.dispCell()

@@ -14,13 +14,13 @@ protocol SubSelectBaseDelegate {
     func actPopupCancel()
 }
 protocol SubSelectFeedbackDelegate {
-    func changedSelect(codes: String)
+    func changedSelect(editItem: EditableItemH, codes: String)
 }
 class SubSelectBaseVC: BaseVC {
     var delegate: SubSelectFeedbackDelegate? = nil
     var singleMode: Bool = true
-    var selectCodes: String = ""
-    
+    var editableModel: EditableModel = EditableModel() //画面編集項目のモデルと管理//???
+
     var editableItem: EditableItemH!
     var arrData: [CodeDisp] = []
     var dicChange: [String: Bool] = [:]  //CodeDisp.code : true
@@ -59,7 +59,6 @@ class SubSelectBaseVC: BaseVC {
         self.delegate = delegate
         self.editableItem = editableItem
         self.mainTsvMaster = editableItem.editItem.tsvMaster
-        self.selectCodes = selectingCodes
         for key in selectingCodes.split(separator: "_") {
             self.dicChange[String(key)] = true
         }
@@ -68,6 +67,8 @@ class SubSelectBaseVC: BaseVC {
         let (grp, _): ([CodeDisp], [GrpCodeDisp]) = SelectItemsManager.getMaster(self.mainTsvMaster)
         //print("[cd: \(cd.count)] / [grp: \(grp.count)] [gcd: \(gcd.count)] ")
         self.arrData = (grp.count != 0) ? grp : cd
+        //=== IndexPathなどを設定するため
+        editableModel.initItemEditable([editableItem])//単独だけど共通化のため
     }
     func dispData() {
         let bufTitle: String = "\(editableItem.dispName) \(arrData.count)件"
@@ -82,11 +83,12 @@ class SubSelectBaseVC: BaseVC {
 //=== 単一・複数選択ポップアップで選択させる場合の処理 ===
 extension SubSelectBaseVC: SubSelectBaseDelegate {
     func actPopupSelect(selectedItemsCode: String) {
-        print("\t🐼[\(selectCodes)]🐼 => [\(selectedItemsCode)]🐼これが選択されました🐼🐼")//編集中の値の保持（と描画）
+        print("\t🐼[\(selectedItemsCode)]🐼これが選択されました🐼🐼")//編集中の値の保持（と描画）
         for item in SelectItemsManager.convCodeDisp(mainTsvMaster, selectedItemsCode) {
             print(item.debugDisp)
         }
-//        self.dismiss(animated: true) { }
+        self.delegate?.changedSelect(editItem: self.editableItem, codes: selectedItemsCode) //フィードバックしておく
+        self.dismiss(animated: true) {}
     }
     func actPopupCancel() {
         self.dismiss(animated: true) { }
@@ -102,13 +104,7 @@ extension SubSelectBaseVC: UITableViewDataSource, UITableViewDelegate {
         let item = arrData[indexPath.row]
         let cell: SubSelectTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_SubSelectTBCell", for: indexPath) as! SubSelectTBCell
         //選択状態があるかチェックして反映させる
-        let vals = self.selectCodes.split(separator: "_") //選択状態をバラす
-        let select0: Bool = vals.contains { (val) -> Bool in val == item.code }//item.valに選択されているもの配列が付いているので、そこにあるかチェック
-        let select: Bool = dicChange[item.code] ?? select0  //差分情報優先
-//        let select2: Bool = dicChange[item.code] ?? false
-//        if select0 != select {
-//            print("[sel0: \(select0)]  [tempSel: \(select2)] => [\(select)]")
-//        }
+        let select: Bool = dicChange[item.code] ?? false  //差分情報優先
         cell.initCell(self, item, select)
         cell.dispCell()
         return cell
@@ -119,9 +115,7 @@ extension SubSelectBaseVC: UITableViewDataSource, UITableViewDelegate {
         if (singleMode) { //=== Single
             dicChange.removeAll() //Single選択の場合は、まるっと削除してから追加
         }
-        let vals = self.selectCodes.split(separator: "_") //選択状態をバラす
-        let select0: Bool = vals.contains { (val) -> Bool in val == item.code }//item.valに選択されているもの配列が付いているので、そこにあるかチェック
-        let select: Bool = dicChange[item.code] ?? select0  //差分情報優先
+        let select: Bool = dicChange[item.code] ?? false  //差分情報優先
         dicChange[item.code] = !select
         //該当セルの描画しなおし
         if (singleMode) { //=== Single
