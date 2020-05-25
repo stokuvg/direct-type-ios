@@ -47,15 +47,10 @@ class EditableTableBasicVC: EditableBasicVC {
         vwKbTapArea.backgroundColor = .black
         vwKbTapArea.alpha = 0.0
         vwKbTapArea.isUserInteractionEnabled = false //Keyboardエリア以外のTapで消すならtrueにする
-        if Constants.DbgDispStatus {
-            vwKbTapArea.backgroundColor = .blue
-            vwKbTapArea.alpha = 0.3
-            vwKbTapArea.isUserInteractionEnabled = false //Keyboardエリア以外のTapで消すならtrueにする
-            self.view.addSubview(vwKbTapArea)
-            //ジェスチャーつけとく
-            let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(kbAreaTap(_:)))
-            vwKbTapArea.addGestureRecognizer(tapGesture)
-        }
+        self.view.addSubview(vwKbTapArea)
+        //ジェスチャーつけとく
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(kbAreaTap(_:)))
+        vwKbTapArea.addGestureRecognizer(tapGesture)
     }
     @objc func kbAreaTap(_ sender: UIGestureRecognizer) {
         self.view.endEditing(true)
@@ -118,13 +113,35 @@ class EditableTableBasicVC: EditableBasicVC {
         tableVW.contentInset.bottom = 0
     }
 
-    
-    
-    
     //=======================================================================================================
     //EditableBaseを元に、汎用テーブルIFを利用する場合のBaseクラス
     //=== OVerrideして使う
     //func moveNextCell(_ editableItemKey: String) -> Bool { return true } //次の項目へ移動
+    //func dispEditableItemAll() {} //すべての項目を表示する
+    //func dispEditableItemByKey(_ itemKey: EditableItemKey) {} //指定した項目を表示する （TODO：複数キーの一括指定に拡張予定）
+    override func moveNextCell(_ editableItemKey: String) -> Bool {  //次のセルへ遷移
+        for (cnt, item) in editableModel.arrTextFieldNextDoneKey.enumerated() {
+            print("\t\(cnt) \(item == editableItemKey ? "💥" : "")\t\(editableItemKey) \(item)")
+        }
+        let idx = editableModel.arrTextFieldNextDoneKey.firstIndex(where: { (item) -> Bool in
+            item == editableItemKey
+        }) ?? 0
+        let nextIdx = idx + 1
+        if editableModel.arrTextFieldNextDoneKey.count > nextIdx {
+            let nextKey = editableModel.arrTextFieldNextDoneKey[nextIdx]
+            guard let curIdxPath = editableModel.dicTextFieldIndexPath[editableItemKey] else { return true }
+            guard let nextIdxPath = editableModel.dicTextFieldIndexPath[nextKey] else { return true }
+            print("[\(editableItemKey)]\(curIdxPath.description)セルから、 [\(nextKey)]\(nextIdxPath.description)セルへ移動したい")
+            tableVW.scrollToRow(at: nextIdxPath, at: .middle, animated: false)//trueにすると後続処理でcell見つからない可能性あり＊その場合はAnimation完了後に実施すべき
+            if let cell = tableVW.cellForRow(at: nextIdxPath) as? HEditTextTBCell {
+                if let next = cell.tfValue {
+                    next.becomeFirstResponder()
+                    return false
+                }
+            }
+        }
+        return true //制御できなかったので、とりあえずデフォルト処理を実施
+    }
     //func dispEditableItemAll() {} //すべての項目を表示する
     //func dispEditableItemByKey(_ itemKey: EditableItemKey) {} //指定した項目を表示する （TODO：複数キーの一括指定に拡張予定）
     //=== 表示更新
@@ -140,11 +157,7 @@ class EditableTableBasicVC: EditableBasicVC {
         tableVW.reloadRows(at: [curIdxPath], with: UITableView.RowAnimation.automatic)
     }
     //=======================================================================================================
-
 }
-
-
-
 
 
 extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
@@ -158,8 +171,13 @@ extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
         let item: EditableItemH! = isChange ? editTemp : _item
         switch item.editType {
         case .inputText:
+            //!!!
+            let returnKeyType: UIReturnKeyType = (item.editableItemKey == editableModel.lastEditableItemKey) ? .done : .next
+            print("[returnKeyType: \(returnKeyType.rawValue)]")
+
+            
             let cell: HEditTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditTextTBCell", for: indexPath) as! HEditTextTBCell
-            cell.initCell(self, item)
+            cell.initCell(self, item, returnKeyType)
             cell.dispCell()
             return cell
             
@@ -177,8 +195,10 @@ extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
 
         default:
             print("🌸[\(#function)]🌸[\(#line)]🌸🌸")
+            let returnKeyType: UIReturnKeyType = (item.editableItemKey == editableModel.lastEditableItemKey) ? .done : .next
+            print("[returnKeyType: \(returnKeyType.rawValue)]")
             let cell: HEditTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditTextTBCell", for: indexPath) as! HEditTextTBCell
-            cell.initCell(self, item)
+            cell.initCell(self, item, returnKeyType)
             cell.dispCell()
             return cell
         }

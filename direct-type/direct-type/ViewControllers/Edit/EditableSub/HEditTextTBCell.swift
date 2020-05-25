@@ -11,6 +11,7 @@ import UIKit
 class HEditTextTBCell: UITableViewCell {
     var item: EditableItemH? = nil
     var delegate: InputItemHDelegate!
+    var returnKeyType: UIReturnKeyType = .next
 
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var tfValue: IKTextField!
@@ -20,10 +21,12 @@ class HEditTextTBCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-    func initCell(_ delegate: InputItemHDelegate, _ item: EditableItemH) {
+    func initCell(_ delegate: InputItemHDelegate, _ item: EditableItemH, _ returnKeyType: UIReturnKeyType) {
         self.delegate = delegate
         self.item = item
+        self.returnKeyType = returnKeyType
         tfValue.itemKey = item.editableItemKey
+        tfValue.returnKeyType = returnKeyType
     }
     
     func dispCell() {
@@ -44,7 +47,7 @@ class HEditTextTBCell: UITableViewCell {
             bufVal = _item.curVal
         }
         tfValue.text = bufVal
-        
+        tfValue.returnKeyType = returnKeyType
         lblDebug.text = ""
         if Constants.DbgDispStatus {
             let bufDebug = _item.debugDisp
@@ -71,3 +74,37 @@ extension HEditTextTBCell {
     }
 }
 
+
+
+
+extension HEditTextTBCell: UITextFieldDelegate {
+    //=== ピッカーで選択させる場合の処理 ===
+    //===元のTextFieldの直接編集は却下したい
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let textField = textField as? IKTextField else { return true }
+        if let tfiv = textField.inputView as? UIPickerView {
+            print("❤️[\(textField.itemKey)] [\(#function)]❤️ ❤️[Pickerのため編集抑止]❤️")
+            return false //Pickerに結びついていたら編集却下とする
+        }
+        return true
+    }
+    //今はTextField使い捨てなので無理ですが、ちゃんと画面定義してすべて保持するようにしておけば、Nextでの移動も可能になる
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let textField = textField as? IKTextField else { return true }
+        print("❤️[\(textField.itemKey)] [\(#function)]❤️ ❤️[Return押された]❤️")
+        if let delegate = delegate {
+            return delegate.textFieldShouldReturn(textField, item!)
+        }
+       return true
+    }
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        guard let textField = textField as? IKTextField else { return true }
+        print(item)
+        print("❤️[\(textField.itemKey)] [\(#function)]❤️ ❤️[Clear押された]❤️")
+        if let delegate = delegate {
+            return delegate.textFieldShouldClear(textField, item!)
+        }
+        return true
+    }
+    
+}

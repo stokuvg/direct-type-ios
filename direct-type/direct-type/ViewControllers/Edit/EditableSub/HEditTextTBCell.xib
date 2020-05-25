@@ -33,6 +33,7 @@
                                 <connections>
                                     <action selector="actEditingDidBegin:" destination="KGk-i7-Jjw" eventType="editingDidBegin" id="ARW-K7-6gc"/>
                                     <action selector="actEditingDidEnd:" destination="KGk-i7-Jjw" eventType="editingDidEnd" id="241-yV-Oxb"/>
+                                    <outlet property="delegate" destination="KGk-i7-Jjw" id="lO0-uA-QPX"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="yv8-ws-A9d">
