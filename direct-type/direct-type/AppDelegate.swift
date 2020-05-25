@@ -23,6 +23,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().isTranslucent = false
 
         //=== Cognito認証の初期化処理を組み込む
+        // Amazon Cognito 認証情報プロバイダーを初期化します
+        let credentialsProvider = AWSCognitoCredentialsProvider(
+            regionType:.APNortheast1,
+            identityPoolId: Constants.CognitoIdentityPoolId)
+        let configuration = AWSServiceConfiguration(
+            region:.APNortheast1,
+            credentialsProvider: credentialsProvider)
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
         AWSMobileClient.default().initialize { (userState, error) in
             if let userState = userState {
                 print("UserState: \(userState.rawValue)")
