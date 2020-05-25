@@ -62,7 +62,7 @@ class EditableBasicVC: TmpBasicVC, SubSelectFeedbackDelegate {
 //セルでのテキスト入力の変更
 extension EditableBasicVC: InputItemHDelegate {
     func textFieldShouldReturn(_ textField: IKTextField, _ item: EditableItemH) -> Bool {
-        print(#line, #function)
+        print(#line, #function, "[textField.returnKeyType: \(textField.returnKeyType.rawValue)]")
         if textField.returnKeyType == .next {
             return moveNextCell(item.editableItemKey)//次のセルへ遷移
         }

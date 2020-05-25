@@ -9,6 +9,7 @@
 import UIKit
 //import SwaggerClient
 import TudApi
+import SVProgressHUD
 
 //===[H-2]「個人プロフィール確認」
 class ProfilePreviewVC: PreviewBaseVC {
@@ -16,50 +17,26 @@ class ProfilePreviewVC: PreviewBaseVC {
     
     override func actCommit(_ sender: UIButton) {
         print(#line, #function, "ボタン押下でAPIフェッチ確認")
-        AuthManager.needAuth(true)
-        fetchGetProfile()
+//
+//        let num = arc4random_uniform(2)
+//        print(num)
+//        if num == 0 {
+//            fetchCreateProfile()
+//        } else {
+//            fetchUpdateProfile()
+//        }
     }
-    private func fetchCreateProfile() {
-        let param: CreateProfileRequestDTO = CreateProfileRequestDTO(familyName: "試験", firstName: "太郎", familyNameKana: "シケン", firstNameKana: "タロウ", birthday: "1995-11-01", genderId: "2", zipCode: "1234567", prefectureId: "13", city: "有楽町1-1-1", town: "東御苑", email: "test@example.com")
-        AuthManager.needAuth(true)
-        ProfileAPI.profileControllerCreate(body: param)
-        .done { resp in
-            print(resp)
-        }
-        .catch { (error) in
-            print(error.localizedDescription)
-        }
-        .finally {
-        }
-    }
-    private func fetchGetProfile() {
-        ProfileAPI.profileControllerGet()
-        .done { resp in
-            let model = MdlProfile(dto: resp)
-            print(model.debugDisp)
-        }
-        .catch { (error) in
-            print(error.localizedDescription)
-        }
-        .finally {
-        }
-    }
-
-    
-    
     override func initData() {
-        //ダミーデータ投入しておく
-        let profile: GetProfileResponseDTO =
-        GetProfileResponseDTO(familyName: "スマ澤", firstName: "太郎", familyNameKana: "スマザワ", firstNameKana: "タロウ",
-                              birthday: "1996-04-28", genderId: "1",
-                              zipCode: "1234567", prefectureId: "13", city: "港区赤坂3-21-20", town: "赤坂ロングロングローングビーチビル2F",
-                              email: "hoge@example.co.jp",
-                              phoneNumber: "09012345678" )
-        detail = MdlProfile(dto: profile)
-        //========
+        title = "個人プロフィール"
+        if Constants.DbgOfflineMode {
+            self.detail = MdlProfile(familyName: "familyName", firstName: "firstName", familyNameKana: "familyNameKana", firstNameKana: "firstNameKana", birthday: DateHelper.convStr2Date("1900-01-01"), gender: "gender", zipCode: "zipCode", prefecture: "prefecture", address1: "address1", address2: "address2", mailAddress: "mailAddress", mobilePhoneNo: "mobilePhoneNo")
+        }
+    }
+    
+    override func dispData() {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
         guard let _detail = detail else { return }
-
+        self.arrData.removeAll()//いったん全件を削除しておく
         //===４．氏名（必須）
         //    ・未記入時は「未入力（必須）」と表示
         //    ・表記形式は「{氏} {名} （{氏(カナ)} {名(カナ)}」
@@ -118,8 +95,71 @@ class ProfilePreviewVC: PreviewBaseVC {
         arrData.append(MdlItemH(.mobilephoneH2, "\(bufMobilePhoneNo)", "\(bufMobilePhoneNoNotice)", readonly: true, childItems: [
             EditableItemH(type: .inputText, editItem: EditItemMdlProfile.mobilePhoneNo, val: _detail.mobilePhoneNo),
         ]))
+        
+        tableVW.reloadData()//描画しなおし
     }
-    override func dispData() {
-        title = "個人プロフィール"
+    
+    //========================================
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        fetchGetProfile()
+    }
+}
+
+//=== APIフェッチ
+extension ProfilePreviewVC {
+
+    private func fetchGetProfile() {
+        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
+        SVProgressHUD.show(withStatus: "プロフィール情報の取得")
+        AuthManager.needAuth(true)
+        ProfileAPI.profileControllerGet()
+        .done { resp in
+            let model = MdlProfile(dto: resp)
+            print(model.debugDisp)
+            self.detail = model
+        }
+        .catch { (error) in
+            self.showError(error)
+        }
+        .finally {
+            self.dispData()
+            SVProgressHUD.dismiss()
+        }
+    }
+    private func fetchCreateProfile() {
+        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
+        let param: CreateProfileRequestDTO = CreateProfileRequestDTO(familyName: "試験", firstName: "太郎", familyNameKana: "シケン", firstNameKana: "タロウ", birthday: "1995-11-01", genderId: "2", zipCode: "1234567", prefectureId: "13", city: "有楽町1-1-1", town: "東御苑", email: "test@example.com")
+        AuthManager.needAuth(true)
+        ProfileAPI.profileControllerCreate(body: param)
+        .done { resp in
+            print(resp)
+        }
+        .catch { (error) in
+            print(error.localizedDescription)
+        }
+        .finally {
+            self.fetchGetProfile()
+        }
+    }
+    private func fetchUpdateProfile() {
+        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
+        let param: UpdateProfileRequestDTO = UpdateProfileRequestDTO(familyName: "試験2", firstName: "太郎2", familyNameKana: "シケン2", firstNameKana: "タロウ2", birthday: "2005-12-02", genderId: "1", zipCode: "2345678", prefectureId: "14", city: "有楽町2-2-2", town: "外縁", email: "test2@example.com")
+        AuthManager.needAuth(true)
+        ProfileAPI.profileControllerUpdate(body: param)
+        .done { resp in
+            print(resp)
+        }
+        .catch { (error) in
+            print(error.localizedDescription)
+        }
+        .finally {
+            self.fetchGetProfile()
+        }
+    }
+
+
 }
