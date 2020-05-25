@@ -47,8 +47,23 @@ class EditableTableBasicVC: EditableBasicVC {
         vwKbTapArea.backgroundColor = .black
         vwKbTapArea.alpha = 0.0
         vwKbTapArea.isUserInteractionEnabled = false //Keyboardエリア以外のTapで消すならtrueにする
-        self.view.addSubview(vwKbTapArea)
+        if Constants.DbgDispStatus {
+            vwKbTapArea.backgroundColor = .blue
+            vwKbTapArea.alpha = 0.3
+            vwKbTapArea.isUserInteractionEnabled = false //Keyboardエリア以外のTapで消すならtrueにする
+            self.view.addSubview(vwKbTapArea)
+            //ジェスチャーつけとく
+            let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(kbAreaTap(_:)))
+            vwKbTapArea.addGestureRecognizer(tapGesture)
+        }
     }
+    @objc func kbAreaTap(_ sender: UIGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    override func actTargetInputTextBegin(_ tf: IKTextField, _ item: EditableItemH) {
+        showTargetTF(tableVW, tf)//一緒にスクロールするように親を変えるためoverride
+    }
+
     func initData(_ item: MdlItemH) {
         self.item = item
         for child in item.childItems { arrData.append(child) }

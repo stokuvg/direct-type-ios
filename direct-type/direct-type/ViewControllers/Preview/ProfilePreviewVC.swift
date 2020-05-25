@@ -17,14 +17,14 @@ class ProfilePreviewVC: PreviewBaseVC {
     
     override func actCommit(_ sender: UIButton) {
         print(#line, #function, "ボタン押下でAPIフェッチ確認")
-        
-        let num = arc4random_uniform(2)
-        print(num)
-        if num == 0 {
-            fetchCreateProfile()
-        } else {
-            fetchUpdateProfile()
-        }
+//
+//        let num = arc4random_uniform(2)
+//        print(num)
+//        if num == 0 {
+//            fetchCreateProfile()
+//        } else {
+//            fetchUpdateProfile()
+//        }
     }
     override func initData() {
         title = "個人プロフィール"
