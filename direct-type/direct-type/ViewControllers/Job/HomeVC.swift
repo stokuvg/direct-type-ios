@@ -411,10 +411,23 @@ extension HomeVC: JobOfferCardReloadCellDelegate {
 extension HomeVC: BaseJobCardCellDelegate {
     func skipAction(tag: Int) {
         Log.selectLog(logLevel: .debug, "skipAction tag:\(tag)")
+        
+        let row = tag
+        
+        // TODO:通信処理
+        
+        //            return (jobCardsCount + 1)
+        self.dispJobCards.jobCards.remove(at: row)
+        
+        let deleteIndex = IndexPath(row: row, section: 0)
+        
+        // TODO:スピードを変えるのは難しい？
+        self.homeTableView.deleteRows(at: [deleteIndex], with: .automatic)
     }
     
     func keepAction(tag: Int) {
         Log.selectLog(logLevel: .debug, "keepAction tag:\(tag)")
+        // TODO:通信処理
     }
     
     

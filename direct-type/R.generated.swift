@@ -1928,14 +1928,14 @@ struct _R: Rswift.Validatable {
         if UIKit.UIImage(named: "card", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'card' is used in nib 'JobOfferBigCardCell', but couldn't be loaded.") }
         if UIKit.UIImage(named: "companyName", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'companyName' is used in nib 'JobOfferBigCardCell', but couldn't be loaded.") }
         if UIKit.UIImage(named: "deleteDefault", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'deleteDefault' is used in nib 'JobOfferBigCardCell', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "likeSelected", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'likeSelected' is used in nib 'JobOfferBigCardCell', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "like_gray", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'like_gray' is used in nib 'JobOfferBigCardCell', but couldn't be loaded.") }
         if UIKit.UIImage(named: "place", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'place' is used in nib 'JobOfferBigCardCell', but couldn't be loaded.") }
         if UIKit.UIImage(named: "salary", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'salary' is used in nib 'JobOfferBigCardCell', but couldn't be loaded.") }
         if UIKit.UIImage(named: "upcoming", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'upcoming' is used in nib 'JobOfferBigCardCell', but couldn't be loaded.") }
         if #available(iOS 11.0, tvOS 11.0, *) {
           if UIKit.UIColor(named: "color-black", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-black' is used in storyboard 'JobOfferBigCardCell', but couldn't be loaded.") }
           if UIKit.UIColor(named: "color-line", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-line' is used in storyboard 'JobOfferBigCardCell', but couldn't be loaded.") }
-          if UIKit.UIColor(named: "color-sub", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-sub' is used in storyboard 'JobOfferBigCardCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "color-parts_gray", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-parts_gray' is used in storyboard 'JobOfferBigCardCell', but couldn't be loaded.") }
           if UIKit.UIColor(named: "color-white", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-white' is used in storyboard 'JobOfferBigCardCell', but couldn't be loaded.") }
         }
       }

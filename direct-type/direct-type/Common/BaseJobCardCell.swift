@@ -47,11 +47,6 @@ class BaseJobCardCell: BaseTableViewCell {
 //        Log.selectLog(logLevel: .debug, "deleteBtnAction start")
         self.delegate.skipAction(tag: self.tag)
     }
-    @IBOutlet weak var keepBtn:UIButton!
-    @IBAction func keepBtnAction() {
-//        Log.selectLog(logLevel: .debug, "keepBtnAction start")
-        self.delegate.keepAction(tag: self.tag)
-    }
     
     var delegate:BaseJobCardCellDelegate!
 

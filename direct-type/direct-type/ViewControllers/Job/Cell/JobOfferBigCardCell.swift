@@ -17,6 +17,18 @@ enum LimitedType {
 
 class JobOfferBigCardCell: BaseJobCardCell {
 
+    @IBOutlet weak var keepBtn:UIButton!
+    @IBAction func keepBtnAction() {
+//        Log.selectLog(logLevel: .debug, "keepBtnAction start")
+        
+        keepFlag = !keepFlag
+        self.keepBtnSetting(flag: keepFlag)
+        
+        self.delegate.keepAction(tag: self.tag)
+    }
+    
+    var keepFlag:Bool!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -136,7 +148,8 @@ class JobOfferBigCardCell: BaseJobCardCell {
         // キープボタン
         let keep = data.keepStatus
 //        Log.selectLog(logLevel: .debug, "keep:\(String(describing: keep))")
-        self.keepSetting(flag:keep)
+        keepFlag = keep
+        self.keepBtnSetting(flag: keep)
         
         /*
         if data.count > 0 {
@@ -259,11 +272,25 @@ class JobOfferBigCardCell: BaseJobCardCell {
     
     // 見送り設定
     func skipSetting(flag: Bool) {
-        
     }
     
     func keepSetting(flag: Bool) {
+        Log.selectLog(logLevel: .debug, "JobOfferBigCardCell keepSetting start")
+    }
+    
+    private func keepBtnSetting(flag:Bool) {
         
+        let noSelectImage = UIImage(named: "like_gray")
+        let selectedImage = UIImage(named: "likeSelected")
+        let useImage = flag ? selectedImage : noSelectImage
+        
+        let noSelectColor = UIColor.init(colorType: .color_parts_gray)
+        let selectColor = UIColor.init(colorType: .color_sub)
+        let useColor = flag ? selectColor : noSelectColor
+        
+        keepBtn.setTitleColor(useColor, for: .normal)
+        
+        keepBtn.setImage(useImage, for: .normal)
     }
     
 }

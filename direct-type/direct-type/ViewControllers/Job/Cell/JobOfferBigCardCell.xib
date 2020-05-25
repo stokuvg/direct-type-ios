@@ -290,8 +290,8 @@
                                                         <rect key="frame" x="140.5" y="0.0" width="139.5" height="54"/>
                                                         <color key="backgroundColor" name="color-white"/>
                                                         <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="17"/>
-                                                        <state key="normal" title="キープ" image="likeSelected">
-                                                            <color key="titleColor" name="color-sub"/>
+                                                        <state key="normal" title="キープ" image="like_gray">
+                                                            <color key="titleColor" name="color-parts_gray"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="keepBtnAction" destination="KGk-i7-Jjw" eventType="touchUpInside" id="c8W-Lf-gEw"/>
@@ -373,7 +373,7 @@
         <image name="card" width="383" height="646"/>
         <image name="companyName" width="16" height="16"/>
         <image name="deleteDefault" width="36" height="36"/>
-        <image name="likeSelected" width="36" height="36"/>
+        <image name="like_gray" width="36" height="36"/>
         <image name="place" width="16" height="16"/>
         <image name="salary" width="16" height="17"/>
         <image name="upcoming" width="56" height="18"/>
@@ -383,8 +383,8 @@
         <namedColor name="color-line">
             <color red="0.82352941176470584" green="0.82352941176470584" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="color-sub">
-            <color red="1" green="0.35294117647058826" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="color-parts_gray">
+            <color red="0.41176470588235292" green="0.41176470588235292" blue="0.41176470588235292" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="color-white">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
