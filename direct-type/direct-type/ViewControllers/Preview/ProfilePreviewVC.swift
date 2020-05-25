@@ -25,10 +25,12 @@ class ProfilePreviewVC: PreviewBaseVC {
         } else {
             fetchUpdateProfile()
         }
-
     }
     override func initData() {
         title = "個人プロフィール"
+        if Constants.DbgOfflineMode {
+            self.detail = MdlProfile(familyName: "familyName", firstName: "firstName", familyNameKana: "familyNameKana", firstNameKana: "firstNameKana", birthday: DateHelper.convStr2Date("1900-01-01"), gender: "gender", zipCode: "zipCode", prefecture: "prefecture", address1: "address1", address2: "address2", mailAddress: "mailAddress", mobilePhoneNo: "mobilePhoneNo")
+        }
     }
     
     override func dispData() {
@@ -111,6 +113,7 @@ class ProfilePreviewVC: PreviewBaseVC {
 extension ProfilePreviewVC {
 
     private func fetchGetProfile() {
+        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         SVProgressHUD.show(withStatus: "プロフィール情報の取得")
         AuthManager.needAuth(true)
         ProfileAPI.profileControllerGet()
@@ -128,6 +131,7 @@ extension ProfilePreviewVC {
         }
     }
     private func fetchCreateProfile() {
+        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         let param: CreateProfileRequestDTO = CreateProfileRequestDTO(familyName: "試験", firstName: "太郎", familyNameKana: "シケン", firstNameKana: "タロウ", birthday: "1995-11-01", genderId: "2", zipCode: "1234567", prefectureId: "13", city: "有楽町1-1-1", town: "東御苑", email: "test@example.com")
         AuthManager.needAuth(true)
         ProfileAPI.profileControllerCreate(body: param)
@@ -142,6 +146,7 @@ extension ProfilePreviewVC {
         }
     }
     private func fetchUpdateProfile() {
+        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         let param: UpdateProfileRequestDTO = UpdateProfileRequestDTO(familyName: "試験2", firstName: "太郎2", familyNameKana: "シケン2", firstNameKana: "タロウ2", birthday: "2005-12-02", genderId: "1", zipCode: "2345678", prefectureId: "14", city: "有楽町2-2-2", town: "外縁", email: "test2@example.com")
         AuthManager.needAuth(true)
         ProfileAPI.profileControllerUpdate(body: param)
