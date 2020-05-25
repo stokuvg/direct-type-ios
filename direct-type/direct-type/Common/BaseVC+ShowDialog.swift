@@ -35,7 +35,6 @@ extension BaseVC {
         return promise
     }
     
-
     internal func showFinishReport(title: String, message: String, completion: @escaping () -> Void) {
         self.showConfirm(title: title, message: message, onlyOK: true)
         .done { _ in
@@ -46,5 +45,64 @@ extension BaseVC {
         .finally {
         }
     }
+
+    internal func showErrorPromise(_ error: Error) -> Promise<Void> {
+        let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+        return self.showErrorPromise(myErr)
+    }
+    internal func showErrorPromise(_ myErrorDisp: MyErrorDisp) -> Promise<Void> {
+        let (promise, resolver) = Promise<Void>.pending()
+        let bufTitle = "\(myErrorDisp.title) (\(myErrorDisp.code))"
+        let alert = UIAlertController.init(title: bufTitle, message: myErrorDisp.message, preferredStyle: .alert)
+        //<UIView:_UIAlertControllerInterfaceActionGroupView:UIView:_UIInterfaceActionGroupHeaderScrollView:UIView> の <UILabel> が title　/　message
+        let okAction = UIAlertAction.init(title: "OK", style: .default) { _ in
+            resolver.fulfill(Void())
+        }
+        alert.addAction(okAction)
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+        }
+        return promise
+    }
+    internal func showError(_ myErrorDisp: MyErrorDisp) {
+        self.showErrorPromise(myErrorDisp)
+        .done { _ in
+        }
+        .catch { (error) in
+        }
+        .finally {
+        }
+    }
+    internal func showError(_ error: Error) {
+        let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+        return self.showError(myErr)
+    }
+//    internal func showErrorRetry(_ error: Error, errResume: ApiResumeObj) -> Promise<Void> {
+//        let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+//        return self.showErrorRetryPromise(myErr)
+//    }
+    internal func showErrorRetryPromise(_ myErrorDisp: MyErrorDisp) -> Promise<Void> {
+        let (promise, resolver) = Promise<Void>.pending()
+        let bufTitle = "\(myErrorDisp.title) (\(myErrorDisp.code))"
+        let alert = UIAlertController.init(title: bufTitle, message: myErrorDisp.message, preferredStyle: .alert)
+        //<UIView:_UIAlertControllerInterfaceActionGroupView:UIView:_UIInterfaceActionGroupHeaderScrollView:UIView> の <UILabel> が title　/　message
+        let retryAction = UIAlertAction.init(title: "今すぐリトライ", style: .default) { _ in
+            resolver.fulfill(Void())
+        }
+        let resumeLaterAction = UIAlertAction.init(title: "あとでリトライ", style: .default) { _ in
+            resolver.reject(AlertError.resumeLater)
+        }
+        let cancelAction = UIAlertAction.init(title: "キャンセル", style: .cancel) { _ in
+            resolver.reject(AlertError.cancel)
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(retryAction)
+        alert.addAction(resumeLaterAction)
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+        }
+        return promise
+    }
+
 }
 
