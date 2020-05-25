@@ -18,10 +18,6 @@ struct Constants {
     static let ApiAutoRetryDelaySecond: DispatchTimeInterval = .seconds(1) // 自動リトライ間隔
     //=== 認証関連 (これと、【awsconfiguration.json】に設定しておく)
     static let CognitoIdentityPoolId: String = "ap-northeast-1:4da204bb-c86f-419d-9879-8744af15248f"
-//    //Suggest検索関連
-//    static let SuggestCellHeight: CGFloat = 25.0 //表示項目数の高さ
-//    static let SuggestSearchResultMax: Int = 100 //結果の表示項目数の最大
-//    static let SuggestSearchDispLineMax: Int = 5 //結果の表示行数の最大（超えた場合はスクロール）
     
     //選択しなどでマスタからの選択だった場合の文言
     static let SelectItemsUndefine: CodeDisp = CodeDisp("", "<未選択>")  //未定義な値だった場合
@@ -30,7 +26,7 @@ struct Constants {
 
     //[Debug] Debug時以外はfalseにすべきフラグで設定しておく
     static let DbgAutoSelTabVC: Bool = false
-    static let DbgAutoPushVC: Bool = true
+    static let DbgAutoPushVC: Bool = false
     static let DbgAutoPushVCNum: Int = 1  //0:なし, 1:プロフィール, 2:履歴書, 3:職歴, 4:サクサク職歴
     
     static let DbgDispStatus: Bool = false
