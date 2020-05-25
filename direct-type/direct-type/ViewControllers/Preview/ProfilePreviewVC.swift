@@ -17,6 +17,9 @@ class ProfilePreviewVC: PreviewBaseVC {
     override func actCommit(_ sender: UIButton) {
         print(#line, #function, "ボタン押下でAPIフェッチ確認")
         AuthManager.needAuth(true)
+        fetchGetProfile()
+    }
+    private func fetchGetProfile() {
         ProfileAPI.profileControllerGet()
         .done { resp in
             let model = MdlProfile(dto: resp)
@@ -27,8 +30,20 @@ class ProfilePreviewVC: PreviewBaseVC {
         }
         .finally {
         }
+
+        
+//        ProfileAPI.profileControllerGet()
+//        .done { resp in
+//            let model = MdlProfile(dto: resp)
+//            print(model.debugDisp)
+//        }
+//        .catch { (error) in
+//            print(error.localizedDescription)
+//        }
+//        .finally {
+//        }
     }
-    
+
     
     
     override func initData() {

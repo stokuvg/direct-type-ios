@@ -64,7 +64,7 @@ class CognitoAuthVC: BaseVC {
         let password: String = tfPassword.text ?? ""
         AWSMobileClient.default().signUp(username: username, password: password) { (signUpResult, error) in
             if let _error = error {
-                let buf = CognitoAuthVC.convAnyError(_error).debugDisp
+                let buf = AuthManager.convAnyError(_error).debugDisp
                 DispatchQueue.main.async { print(#line, #function, buf); self.lblStatus.text = "\(Date())\n\(buf)" }
                 return
             }
@@ -87,7 +87,7 @@ class CognitoAuthVC: BaseVC {
         let password: String = tfPassword.text ?? ""
         AWSMobileClient.default().signIn(username: username, password: password) { (signInResult, error) in
             if let _error = error {
-                let buf = CognitoAuthVC.convAnyError(_error).debugDisp
+                let buf = AuthManager.convAnyError(_error).debugDisp
                 DispatchQueue.main.async { print(#line, #function, buf); self.lblStatus.text = "\(Date())\n\(buf)" }
                 return
             }
@@ -122,7 +122,7 @@ class CognitoAuthVC: BaseVC {
         print("[bufChallenge: \(bufChallenge)]")
         AWSMobileClient.default().confirmSignIn(challengeResponse: bufChallenge, completionHandler: { (signInResult, error) in
             if let _error = error  {
-                let buf = CognitoAuthVC.convAnyError(_error).debugDisp
+                let buf = AuthManager.convAnyError(_error).debugDisp
                 DispatchQueue.main.async { print(#line, #function, buf); self.lblStatus.text = "\(Date())\n\(buf)" }
                 print("＊＊＊認証コードチェックでのエラー＊＊＊")
                 return
@@ -158,7 +158,7 @@ class CognitoAuthVC: BaseVC {
     @IBAction func actLogout(_ sender: Any) {
         AWSMobileClient.default().signOut { (error) in
             if let _error = error {
-                let buf = CognitoAuthVC.convAnyError(_error).debugDisp
+                let buf = AuthManager.convAnyError(_error).debugDisp
                 DispatchQueue.main.async { print(#line, #function, buf); self.lblStatus.text = "\(Date())\n\(buf)" }
                 return
             }
@@ -216,153 +216,5 @@ class CognitoAuthVC: BaseVC {
         }
     }
 
-}
-
-
-struct MyErrorDisp {
-    var code: Int = 0
-    var title: String = "エラー"
-    var message: String = "エラーが発生しました"
-    let orgErr: Error!
-    var arrValidErrMsg: [String] = [] // 複合種キーになりかねないから、とりあえず抜粋モデルにしておく
-    
-    var debugDisp: String {
-        var buf: String = ""
-//        buf += "▽\(orgErr.localizedDescription) -> \n"
-        buf += "\t[\(code): \(title)] ... [\(message)]\n"
-        for valid in arrValidErrMsg {
-            buf += "✨[\(valid)]"
-        }
-        return buf
-    }
-}
-
-
-extension CognitoAuthVC {
-    class func convAnyError(_ error: Error) -> MyErrorDisp {
-        //====== 初期準備 ======
-        var myErrorDisp: MyErrorDisp = MyErrorDisp(orgErr: error)
-        guard let _error = error as? NSError  else {
-            print("=== 準備失敗 ===\n", myErrorDisp.debugDisp, "\n==================")
-            return myErrorDisp
-        }
-        //=== UserDefine Error は、そのまま表示させておわる
-        myErrorDisp.code = _error.code
-        myErrorDisp.title = "❤️" + _error.domain
-        myErrorDisp.message = _error.userInfo.description
-        
-        //=== AWS Mobile Client:
-        if let orgErr = error as? AWSMobileClientError {
-            myErrorDisp.title = "AWSMobileClient"
-            myErrorDisp.message = orgErr.dispError
-            return myErrorDisp
-        }
-        switch _error.domain {
-            //=== NSURLErrorDomain（ネットワーク接続がないときにやってくる： Auth系など、-1009 で返ってくる場合）
-            case  "NSURLErrorDomain":
-                myErrorDisp.title = "NSURLErrorDomain"
-                if let msg = _error.userInfo["NSLocalizedDescription"] as? String {
-                    myErrorDisp.message = msg
-                }
-                return myErrorDisp
-        default:
-            myErrorDisp.message = "[\(_error.code)] \(_error.domain)"
-        }
-        return myErrorDisp
-    }
-}
-
-
-public extension AWSMobileClientError {
-    var dispError: String {
-        switch self {
-        case .aliasExists(let message):
-            return "aliasExists: [\(message)]"
-        case .codeDeliveryFailure(let message):
-            return "codeDeliveryFailure: [\(message)]"
-        case .codeMismatch(let message):
-            return "codeMismatch: [\(message)]"
-        case .expiredCode(let message):
-            return "expiredCode: [\(message)]"
-        case .groupExists(let message):
-            return "groupExists: [\(message)]"
-        case .internalError(let message):
-            return "internalError: [\(message)]"
-        case .invalidLambdaResponse(let message):
-            return "invalidLambdaResponse: [\(message)]"
-        case .invalidOAuthFlow(let message):
-            return "invalidOAuthFlow: [\(message)]"
-        case .invalidParameter(let message):
-            return "invalidParameter: [\(message)]"
-        case .invalidPassword(let message):
-            return "invalidPassword: [\(message)]"
-        case .invalidUserPoolConfiguration(let message):
-            return "invalidUserPoolConfiguration: [\(message)]"
-        case .limitExceeded(let message):
-            return "limitExceeded: [\(message)]"
-        case .mfaMethodNotFound(let message):
-            return "mfaMethodNotFound: [\(message)]"
-        case .notAuthorized(let message):
-            return "notAuthorized: [\(message)]"
-        case .passwordResetRequired(let message):
-            return "passwordResetRequired: [\(message)]"
-        case .resourceNotFound(let message):
-            return "resourceNotFound: [\(message)]"
-        case .scopeDoesNotExist(let message):
-            return "scopeDoesNotExist: [\(message)]"
-        case .softwareTokenMFANotFound(let message):
-            return "softwareTokenMFANotFound: [\(message)]"
-        case .tooManyFailedAttempts(let message):
-            return "tooManyFailedAttempts: [\(message)]"
-        case .tooManyRequests(let message):
-            return "tooManyRequests: [\(message)]"
-        case .unexpectedLambda(let message):
-            return "unexpectedLambda: [\(message)]"
-        case .userLambdaValidation(let message):
-            return "userLambdaValidation: [\(message)]"
-        case .userNotConfirmed(let message):
-            return "userNotConfirmed: [\(message)]"
-        case .userNotFound(let message):
-            return "userNotFound: [\(message)]"
-        case .usernameExists(let message):
-            return "usernameExists: [\(message)]"
-        case .unknown(let message):
-            return "unknown: [\(message)]"
-        case .notSignedIn(let message):
-            return "notSignedIn: [\(message)]"
-        case .identityIdUnavailable(let message):
-            return "identityIdUnavailable: [\(message)]"
-        case .guestAccessNotAllowed(let message):
-            return "guestAccessNotAllowed: [\(message)]"
-        case .federationProviderExists(let message):
-            return "federationProviderExists: [\(message)]"
-        case .cognitoIdentityPoolNotConfigured(let message):
-            return "cognitoIdentityPoolNotConfigured: [\(message)]"
-        case .unableToSignIn(let message):
-            return "unableToSignIn: [\(message)]"
-        case .invalidState(let message):
-            return "invalidState: [\(message)]"
-        case .userPoolNotConfigured(let message):
-            return "userPoolNotConfigured: [\(message)]"
-        case .userCancelledSignIn(let message):
-            return "userCancelledSignIn: [\(message)]"
-        case .badRequest(let message):
-            return "badRequest: [\(message)]"
-        case .expiredRefreshToken(let message):
-            return "expiredRefreshToken: [\(message)]"
-        case .errorLoadingPage(let message):
-            return "errorLoadingPage: [\(message)]"
-        case .securityFailed(let message):
-            return "securityFailed: [\(message)]"
-        case .idTokenNotIssued(let message):
-            return "idTokenNotIssued: [\(message)]"
-        case .idTokenAndAcceessTokenNotIssued(let message):
-            return "idTokenAndAcceessTokenNotIssued: [\(message)]"
-        case .invalidConfiguration(let message):
-            return "invalidConfiguration: [\(message)]"
-        case .deviceNotRemembered(let message):
-            return "deviceNotRemembered: [\(message)]"
-        }
-    }
 }
 

@@ -11,6 +11,11 @@ import UIKit
 typealias BigDecimal = Double
 
 struct Constants {
+    //=== 通信関連の設定値
+    static let FetchIntervalSecond: TimeInterval = 10 * 60 // 10minutes経つまで、フェッチを抑止する(APIError.noFetchを返す)
+    static let ApiAutoRetryMax: Int = 1 // 自動リトライ回数（初回含めているので、2以上じゃないとidTokenリフレッシュができない）
+    // ⇒ 401の場合だけは、かならずリトライを１回は試みると内部で処理しておくべきか？（サインイン頻度の仕様によって考慮する）
+    static let ApiAutoRetryDelaySecond: DispatchTimeInterval = .seconds(1) // 自動リトライ間隔
     //=== 認証関連 (これと、【awsconfiguration.json】に設定しておく)
     static let CognitoIdentityPoolId: String = "ap-northeast-1:4da204bb-c86f-419d-9879-8744af15248f"
 //    //Suggest検索関連
@@ -25,7 +30,7 @@ struct Constants {
 
     //[Debug] Debug時以外はfalseにすべきフラグで設定しておく
     static let DbgAutoSelTabVC: Bool = false
-    static let DbgAutoPushVC: Bool = false
+    static let DbgAutoPushVC: Bool = true
     static let DbgAutoPushVCNum: Int = 1  //0:なし, 1:プロフィール, 2:履歴書, 3:職歴, 4:サクサク職歴
     
     static let DbgDispStatus: Bool = false

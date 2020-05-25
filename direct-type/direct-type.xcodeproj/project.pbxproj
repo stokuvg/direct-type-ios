@@ -145,6 +145,7 @@
 		2636075B2477A37C00032880 /* CognitoAuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2636075A2477A37C00032880 /* CognitoAuthVC.swift */; };
 		2636075D2477A39900032880 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2636075C2477A39900032880 /* Auth.storyboard */; };
 		2636075F2477AB4900032880 /* BaseVC+ShowDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2636075E2477AB4900032880 /* BaseVC+ShowDialog.swift */; };
+		2636AEFB247B595000CA1F6D /* Ext_ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2636AEFA247B595000CA1F6D /* Ext_ErrorMessage.swift */; };
 		26800520246A2B440053A7F4 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2680051F246A2B440053A7F4 /* Date+Extensions.swift */; };
 		268BFF56246E8292004B2640 /* SubInputMemoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BFF55246E8292004B2640 /* SubInputMemoVC.swift */; };
 		268BFF58246E8D25004B2640 /* SmoothCareerPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BFF57246E8D25004B2640 /* SmoothCareerPreviewVC.swift */; };
@@ -165,6 +166,7 @@
 		269AFFC9246A929300DB364B /* SubSelectTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269AFFBF246A929200DB364B /* SubSelectTBCell.xib */; };
 		269AFFCA246A929300DB364B /* SubSelectDaiTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269AFFC0246A929200DB364B /* SubSelectDaiTBCell.xib */; };
 		269AFFCB246A929300DB364B /* SubSelectSpecialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269AFFC1246A929200DB364B /* SubSelectSpecialVC.swift */; };
+		26A4C1CB247B4A81008D8E68 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A4C1CA247B4A81008D8E68 /* ApiManager.swift */; };
 		26A5DD642475028E0035267A /* SubSelectSpecialVC+Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5DD632475028E0035267A /* SubSelectSpecialVC+Picker.swift */; };
 		26A5DD662476547D0035267A /* SubSelectBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5DD652476547D0035267A /* SubSelectBaseVC.swift */; };
 		26BF48D924639D2B00E00215 /* MstK25_employmentStatus.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48C824639D2A00E00215 /* MstK25_employmentStatus.tsv */; };
@@ -353,6 +355,7 @@
 		2636075A2477A37C00032880 /* CognitoAuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CognitoAuthVC.swift; sourceTree = "<group>"; };
 		2636075C2477A39900032880 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		2636075E2477AB4900032880 /* BaseVC+ShowDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseVC+ShowDialog.swift"; sourceTree = "<group>"; };
+		2636AEFA247B595000CA1F6D /* Ext_ErrorMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ext_ErrorMessage.swift; sourceTree = "<group>"; };
 		2680051F246A2B440053A7F4 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		268BFF55246E8292004B2640 /* SubInputMemoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubInputMemoVC.swift; sourceTree = "<group>"; };
 		268BFF57246E8D25004B2640 /* SmoothCareerPreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmoothCareerPreviewVC.swift; sourceTree = "<group>"; };
@@ -373,6 +376,7 @@
 		269AFFBF246A929200DB364B /* SubSelectTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubSelectTBCell.xib; sourceTree = "<group>"; };
 		269AFFC0246A929200DB364B /* SubSelectDaiTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubSelectDaiTBCell.xib; sourceTree = "<group>"; };
 		269AFFC1246A929200DB364B /* SubSelectSpecialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubSelectSpecialVC.swift; sourceTree = "<group>"; };
+		26A4C1CA247B4A81008D8E68 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		26A5DD632475028E0035267A /* SubSelectSpecialVC+Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubSelectSpecialVC+Picker.swift"; sourceTree = "<group>"; };
 		26A5DD652476547D0035267A /* SubSelectBaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSelectBaseVC.swift; sourceTree = "<group>"; };
 		26BF48C524639A8200E00215 /* Models */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Models; path = ../../../../generated/promise/SwaggerClient/Classes/Swaggers/Models; sourceTree = "<group>"; };
@@ -808,8 +812,10 @@
 			isa = PBXGroup;
 			children = (
 				2636075A2477A37C00032880 /* CognitoAuthVC.swift */,
+				2636AEFA247B595000CA1F6D /* Ext_ErrorMessage.swift */,
 				2636075C2477A39900032880 /* Auth.storyboard */,
 				26FC4EDF2477C775003B56C3 /* AuthManager.swift */,
+				26A4C1CA247B4A81008D8E68 /* ApiManager.swift */,
 			);
 			path = AuthManager;
 			sourceTree = "<group>";
@@ -1178,6 +1184,7 @@
 				0645DDFF246B969000592572 /* Tags.swift in Sources */,
 				0667636F2457B04500AC5039 /* HomeVC.swift in Sources */,
 				06E519A02457DAD7004E4B7A /* WithDrawalCompleteVC.swift in Sources */,
+				26A4C1CB247B4A81008D8E68 /* ApiManager.swift in Sources */,
 				06E5199C2457DA2D004E4B7A /* AccountChangeCompleteVC.swift in Sources */,
 				268BFF60246E8FF8004B2640 /* MdlAppSmoothCareerWorkBackgroundDetail.swift in Sources */,
 				0645705D2464F77700F3B015 /* Logs.swift in Sources */,
@@ -1231,6 +1238,7 @@
 				06E519BE24581558004E4B7A /* ScountListVC.swift in Sources */,
 				26CFC46E246949B800E458E2 /* MyColorDefine.swift in Sources */,
 				260BBFE024651732003D163A /* HPreviewTBCell.swift in Sources */,
+				2636AEFB247B595000CA1F6D /* Ext_ErrorMessage.swift in Sources */,
 				2636075B2477A37C00032880 /* CognitoAuthVC.swift in Sources */,
 				26F2A81F246D128D0037D47F /* MdlCareerCard.swift in Sources */,
 				06DCAEA9245A70A8008FE9FA /* UITableView+Extensions.swift in Sources */,
