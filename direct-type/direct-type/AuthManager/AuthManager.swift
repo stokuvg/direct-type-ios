@@ -34,7 +34,7 @@ final public class AuthManager {
         AWSCognitoIdentityUserPool.default().currentUser()?.getSession()
         .continueOnSuccessWith(block: { (task) -> Void in
             token = task.result?.idToken?.tokenString
-            print(token, task.result?.expirationTime) //Debug:
+            //print(token, task.result?.expirationTime) //Debug:
         })
         return token
     }
@@ -44,11 +44,6 @@ final public class AuthManager {
     public static let shared = AuthManager()
     private init() {
         AWSMobileClient.default().initialize() {_,_ in }
-//        //=== idTokenをKeyChainStoreから読み取ってみる
-//        if let val = MyKeychain.idToken.value() {
-//            idToken = val
-//        }
-//        print(#line, #file, #function, idToken)
     }
 }
 

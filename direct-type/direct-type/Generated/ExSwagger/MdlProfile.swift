@@ -77,9 +77,32 @@ class MdlProfile: Codable {
 //    }
 
     var debugDisp: String {
-        return "[\(familyName) \(firstName)（\(familyNameKana) \(firstNameKana)）"
+        let _gender = SelectItemsManager.getCodeDisp(.gender, code: gender)?.debugDisp ?? ""
+        let _prefecture = SelectItemsManager.getCodeDisp(.place, code: prefecture)?.debugDisp ?? ""
+       return "[\(familyName) \(firstName)（\(familyNameKana) \(firstNameKana)）] [\(_gender)] [\(zipCode)] [\(_prefecture)] [\(address1)] [\(address2)] [\(mailAddress)] [\(mobilePhoneNo)]"
     }
 }
+
+var birthday: Date = Date(timeIntervalSince1970: 0)
+/** 性別 */
+ var gender: Code = ""
+/** 郵便番号 */
+ var zipCode: String = ""
+/** 都道府県 */
+ var prefecture: Code = ""
+/** 市区町村 */
+ var address1: String = ""
+/** 丁目・番地・建物名など */
+ var address2: String = ""
+/** メールアドレス */
+ var mailAddress: String = ""
+/** 携帯電話番号（変更不可：認証アカウントと同一） */
+ var mobilePhoneNo: String = ""
+
+
+
+
+
 
 //=== 編集用の項目と定義など
 enum EditItemMdlProfile: String, EditItemProtocol {

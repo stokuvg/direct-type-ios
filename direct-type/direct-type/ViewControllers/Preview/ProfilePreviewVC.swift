@@ -19,6 +19,19 @@ class ProfilePreviewVC: PreviewBaseVC {
         AuthManager.needAuth(true)
         fetchGetProfile()
     }
+    private func fetchCreateProfile() {
+        let param: CreateProfileRequestDTO = CreateProfileRequestDTO(familyName: "試験", firstName: "太郎", familyNameKana: "シケン", firstNameKana: "タロウ", birthday: "1995-11-01", genderId: "2", zipCode: "1234567", prefectureId: "13", city: "有楽町1-1-1", town: "東御苑", email: "test@example.com")
+        AuthManager.needAuth(true)
+        ProfileAPI.profileControllerCreate(body: param)
+        .done { resp in
+            print(resp)
+        }
+        .catch { (error) in
+            print(error.localizedDescription)
+        }
+        .finally {
+        }
+    }
     private func fetchGetProfile() {
         ProfileAPI.profileControllerGet()
         .done { resp in
@@ -30,18 +43,6 @@ class ProfilePreviewVC: PreviewBaseVC {
         }
         .finally {
         }
-
-        
-//        ProfileAPI.profileControllerGet()
-//        .done { resp in
-//            let model = MdlProfile(dto: resp)
-//            print(model.debugDisp)
-//        }
-//        .catch { (error) in
-//            print(error.localizedDescription)
-//        }
-//        .finally {
-//        }
     }
 
     
