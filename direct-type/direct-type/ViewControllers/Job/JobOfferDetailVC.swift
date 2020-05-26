@@ -7,12 +7,67 @@
 //
 
 import UIKit
+import SwaggerClient
 
 class JobOfferDetailVC: TmpBasicVC {
     
     @IBOutlet weak var detailTableView:UITableView!
     
     var buttonsView:NaviButtonsView!
+    
+    var _mdlJobDetail:MdlJobCardDetail! = MdlJobCardDetail.init(
+        jobCardCode: "1",
+        jobName: "SE/RPAやAI,loT関連案件など",
+        salaryMinId: 10,
+        salaryMaxId: 14,
+        isSalaryDisplay: true,
+        salaryOffer: "",
+        workPlaceCodes: [10,20,30,40],
+        companyName: "株式会社キャリアデザインITパートナーズ「type IT派遣」※(株)キャリアデザインセンター100%出費",
+        displayPeriod: JobCardDetailDisplayPeriod.init(startAt: "20200525", endAt: "20200601"),
+        mainPicture: "https://type.jp/s/img_banner/top_pc_side_number1.jpg",
+        subPictures: ["https://type.jp/s/campaign83/img/pc/top.png","https://type.jp/s/campaign83/img/scout.png","https://woman-type.jp/s/renewal/pc/img/top/191105_u29.png",""],
+        mainTitle: "RPA,AI,loT関連プロジェクトや、大手メーカのーのR&D・・・\nこれから成長する若手こそ、案件にこだわろう。",
+        mainContents: "◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n",
+        prCodes: [1,3,5,7,9],
+        salarySample: "■２５歳サブリーダー／年収４００万円\n■２８歳PL／年収４８０万円\n■３０歳PM／年収５５０万円\n■３２歳PM／年収５８０万円\n■３５歳PM／年収６５０万円\n■４０歳マネージャー／年収７４０万円\n■４５歳部長／年収８００万円\n",
+        recruitmentReason: JobCardDetailRecruitmentReason.init(indispensable: "ここに募集背景の必須項目内容を表示", _optional: [], attention: []),
+        jobDescription: JobCardDetailJobDescription.init(indispensable: "",
+                                                         option: [],
+                                                         attention: []),
+        /*
+        jobDescription: JobCardDetailJobDescription.init(indispensable: "多種多様なプロジェクトの中から、あなたの経験や希望に応じた案件で活躍していただきます。\n", optional: [], attention: [
+            JobCardDetailJobDescriptionAttention.init(title: "希望を吸い上げる風土だから、理想のキャリアパスを描きやすい", text: "当社では、基本的にユニット（チーム体制）でのプロジェクト配属になっており、四半期に1回面談を実施し、ユニット長がここの希望を吸い上げいます。"),
+            JobCardDetailJobDescriptionAttention.init(title: "明確な評価制度【充実のインセンティブ/若手も大幅昇給可能】", text: "評価を行うのは、ここの頑張りや実力を一番近くで目にしているユニット長なので、納得感のある評価を得られます。"),
+            ]),
+        */
+        jobExample: <#T##String#>,
+        product: <#T##String#>,
+        scope: <#T##String#>,
+        spotTitle1: <#T##String#>,
+        spotDetail1: <#T##String#>,
+        spotTitle2: <#T##String#>,
+        spotDetail2: <#T##String#>,
+        qualification: <#T##String#>,
+        betterSkill: <#T##String#>,
+        applicationExample: <#T##String#>,
+        suitableUnsuitable: <#T##String#>,
+        employmentType: <#T##Int#>,
+        salary: <#T##String#>,
+        bonusAbout: <#T##String#>,
+        jobtime: <#T##String#>,
+        overtimeCode: <#T##Int#>,
+        overtimeAbout: <#T##String#>,
+        workPlace: <#T##String#>,
+        transport: <#T##String#>,
+        holiday: <#T##String#>,
+        welfare: <#T##String#>,
+        childcare: <#T##String#>,
+        interviewMemo: JobCardDetailInterviewMemo.init(interviewContent: "ここにテキストを入れる\n\nここにテキストを入れる", interviewPhoto1: "", interviewPhoto2: "", interviewPhoto3: ""),
+        selectionProcess: JobCardDetailSelectionProcess.init(selectionProcess1: "Web応募による書類選考", selectionProcess2: "面談（１〜２回）※面談は１回のケースが多いですが、場合によって２回になる可能性もあります。", selectionProcess3: "内定", selectionProcess4: "Web応募による書類選考", selectionProcess5: "Web応募による書類選考", selectionProcessDetail: "【type】の専用応募フォームからご応募ください。\n※ご応募については秘密厳守いたします。\n※\n※\n\n----------------------------\n当求人案件は株式会社キャリアデザインセンターが運営する株式会社システムソフト type採用事務局にて応募の受付業務を代行しております。"),
+        contactInfo: JobCardDetailContactInfo.init(companyUrl: "http://www.systemsoft.co.jp/", contactZipcode: "100-0004", contactAddress: "東京都千代田区大手町二丁目６番１号 朝日生命大手町ビル２階", contactPhone: "03-6261-4536", contactPerson: "採用担当", contactMail: "saiyo@systemsoft.co.jp"),
+        companyDescription: <#T##JobCardDetailCompanyDescription#>,
+        userFilter: UserFilterInfo.init(tudKeepStatus: false, tudSkipStatus: false))
     
     let dummyData:[String:Any] = [
         "end":true,

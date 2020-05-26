@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 5.22.02
+  version: 5.25.04
   title: アプリ想定モデル・API
   description: アプリの想定モデル・APIの仕様書です
 
@@ -1593,30 +1593,32 @@ components:
       required: #必須定義
         - job_card_code
         - job_name
-        - salary_code
+        - salary_min_id
+        - salary_max_id
         - salary_offer
         - work_place_codes
         - company_name
         - display_period
         - main_picture
+        - sub_pictures
         - main_title
         - main_contents
         - pr_codes
         - salary_sample
         - recruitment_reason
-        #- product
-        #- scope
-        #- spot_title1
-        #- spot_detail1
-        #- spot_title2
-        #- spot_detail2
+        - product
+        - scope
+        - spot_title1
+        - spot_detail1
+        - spot_title2
+        - spot_detail2
         - qualification
-        #- better_skill
-        #- application_example
-        #- suitable_unsuitable
+        - better_skill
+        - application_example
+        - suitable_unsuitable
         - employment_type
         - salary
-        #- bonus_about
+        - bonus_about
         - jobtime
         - overtime_code    ##必須で良い？
         - overtime_about    ##必須で良い？
@@ -1624,8 +1626,8 @@ components:
         - transport
         - holiday
         - welfare
-        #- childcare
-        #- interview_memo
+        - childcare
+        - interview_memo
         - selection_process
         - contact_info
         - user_filter
@@ -1644,10 +1646,21 @@ components:
           example: job_name
           description: ６．職種名
         ##=====================
-        salary_code:
+        salary_min_id:
           type: integer
           example: 0
-          description: ７．給与＊年収例コード＊
+          description: ７．給与下限＊年収例コード＊
+        ##=====================
+        salary_max_id:
+            type: integer
+            example: 0
+            description: ７．給与上限＊年収例コード＊
+            ##=====================
+        
+        isSalaryDisplay:
+            type: boolean
+            example: true
+            description: 給与公開フラグ
         ##=====================
         salary_offer:
           type: string
@@ -1687,6 +1700,15 @@ components:
           example: （＊s3画像URL）
           description: １１．求人メイン画像＊メイン記事写真＊
         ##=====================
+        sub_pictures:
+          description: １１. 求人メイン画像＊サブ画像最大３枚＊
+          example: (サブ画像URL1,サブ画像URL2,サブ画像URL3)
+          type: array
+          items:
+            type: string
+            example: "https://~,https://~"
+            description: (サブ画像URL1,サブ画像URL2,サブ画像URL3)
+        ##=====================
         ##１２．メイン記事
         main_title:
           type: string
@@ -1711,14 +1733,81 @@ components:
           description: １４．給与例
         ##=====================
         recruitment_reason:
-          type: string
-          example: recruitment_reason
+          type: object
           description: 15．募集背景（必須）
+          required: #必須定義
+            - indispensable
+            - optional
+            - attention
+          properties:
+            indispensable:
+                type: string
+                example: indispensable
+                description: 必須項目
+            optional:
+                type: array
+                items:
+                    type: string
+                    description: 任意項目
+            attention:
+                type: array
+                items:
+                    type: string
+                    description: 注目
         ##=====================
         job_description:
-          type: string
+          type: object
           example: job_description
           description: １６．仕事内容（必須）
+          required: #必須定義
+            - indispensable
+            - option
+            - attention
+          properties:
+            indispensable:
+                type: string
+                example: indispensable
+                description: 必須項目
+            option:
+                type: array
+                example: 仕事内容 任意
+                description: 任意項目
+                items:
+                    type: object
+                    required: #必須定義
+                        - title
+                        - text
+                    properties:
+                        title:
+                            type: string
+                            example:
+                            description: 任意
+                        text:
+                            type: string
+                            example:
+                            description: 任意
+                    example: title:"",text:""
+                    description: 任意項目
+            attention:
+                type: array
+                example: 仕事内容 注目
+                description: 任意項目
+                items:
+                    type: object
+                    required: #必須定義
+                        - title
+                        - text
+                    properties:
+                        title:
+                            type: string
+                            example:
+                            description: 任意
+                        text:
+                            type: string
+                            example:
+                            description: 任意
+                        example: title:"",text:""
+                    description: 注目
         ##=====================
         job_example:
           type: string
