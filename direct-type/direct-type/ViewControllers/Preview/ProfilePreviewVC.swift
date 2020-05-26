@@ -14,10 +14,47 @@ import SVProgressHUD
 //===[H-2]「個人プロフィール確認」
 class ProfilePreviewVC: PreviewBaseVC {
     var detail: MdlProfile? = nil
+    var editableModel: EditableModel = EditableModel() //画面編集項目のモデルと管理
     
     override func actCommit(_ sender: UIButton) {
         print(#line, #function, "ボタン押下でAPIフェッチ確認")
-//
+        print(#line, #function, "✳️\(detail?.debugDisp)✳️")
+        print(#line, String(repeating: "=", count: 44))
+        for _item in arrData {
+            print(_item.debugDisp)
+            var arr: [EditableItemH] = []
+            for ei in _item.childItems {
+                arr.append(ei)
+            }
+            editableModel.arrData.append(arr)
+            print(#line, String(repeating: "-", count: 33))
+        }
+        print(#line, String(repeating: "=", count: 44))
+        print(editableModel.arrData.count)
+        print(#line, String(repeating: "=", count: 44))
+        editableModel.chkTableCellAll()
+        print(#line, String(repeating: "=", count: 44))
+        print(editableModel.arrTextFieldNextDoneKey.description)
+        print(#line, String(repeating: "=", count: 44))
+
+//        for _item in arrData {
+//            print(_item.)
+//            let (isChange, editTemp) = editableModel.makeTempItem(_item)
+//            let item: EditableItemH! = isChange ? editTemp : _item
+//            if isChange {
+//                print("▼変更ありました___")
+//                print(_item.debugDisp)
+//                print(item.debugDisp)
+//            } else {
+//                print("▼変更ないです___")
+//                print(_item.debugDisp)
+//                print(item.debugDisp)
+//            }
+//            print(String(repeating: "-", count: 33))
+//        }
+        print(String(repeating: "=", count: 44))
+
+        
 //        let num = arc4random_uniform(2)
 //        print(num)
 //        if num == 0 {

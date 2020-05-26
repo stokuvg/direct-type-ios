@@ -25,7 +25,23 @@ class EditableTableBasicVC: EditableBasicVC {
     @IBOutlet weak var vwFoot: UIView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
-        self.dismiss(animated: true) {}
+        print(#line, String(repeating: "=", count: 44))
+        print("\titem: \(item?.debugDisp)")
+        print(#line, String(repeating: "-", count: 33))
+        print("\t [childItems: \(item?.childItems.count) 件]")
+        if let _item = item {
+            for ei in _item.childItems {
+                print("\t\t\(ei.debugDisp)")
+            }
+        }
+        print(#line, String(repeating: "-", count: 33))
+        print("\t [arrData:    \(arrData.count) 件]")
+        for ei in arrData {
+            print("\t\t\(ei.debugDisp)")
+        }
+        print(#line, String(repeating: "=", count: 44))
+
+//        self.dismiss(animated: true) {}
     }
 
     override func viewDidLoad() {
