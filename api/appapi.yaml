@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 5.25.04
+  version: 5.26.01
   title: アプリ想定モデル・API
   description: アプリの想定モデル・APIの仕様書です
 
@@ -1733,95 +1733,81 @@ components:
           description: １４．給与例
         ##=====================
         recruitment_reason:
-          type: object
-          description: 15．募集背景（必須）
-          required: #必須定義
-            - indispensable
-            - optional
-            - attention
-          properties:
-            indispensable:
-                type: string
-                example: indispensable
-                description: 必須項目
-            optional:
-                type: array
-                items:
-                    type: string
-                    description: 任意項目
-            attention:
-                type: array
-                items:
-                    type: string
-                    description: 注目
+            type: string
+            example: title
+            description: 15. 募集背景(必須)
         ##=====================
         job_description:
           type: object
           example: job_description
           description: １６．仕事内容（必須）
           required: #必須定義
-            - indispensable
-            - option
-            - attention
+            - title
+            - text
           properties:
-            indispensable:
+            title:
                 type: string
-                example: indispensable
-                description: 必須項目
-            option:
-                type: array
-                example: 仕事内容 任意
-                description: 任意項目
-                items:
-                    type: object
-                    required: #必須定義
-                        - title
-                        - text
-                    properties:
-                        title:
-                            type: string
-                            example:
-                            description: 任意
-                        text:
-                            type: string
-                            example:
-                            description: 任意
-                    example: title:"",text:""
-                    description: 任意項目
-            attention:
-                type: array
-                example: 仕事内容 注目
-                description: 任意項目
-                items:
-                    type: object
-                    required: #必須定義
-                        - title
-                        - text
-                    properties:
-                        title:
-                            type: string
-                            example:
-                            description: 任意
-                        text:
-                            type: string
-                            example:
-                            description: 任意
-                        example: title:"",text:""
-                    description: 注目
+                example: title
+                description: 仕事内容タイトル
+            text:
+                type: string
+                example: text
+                description: 仕事内容テキスト
         ##=====================
         job_example:
-          type: string
+          type: object
           example: job_example
+          required: #必須
+            - title
+            - text
+          properties:
+            title:
+                type: string
+                example: title
+                description: 案件例タイトル
+            text:
+                type: string
+                example: text
+                description: 案件例テキスト
           description: １７．案件例（任意）
         ##=====================
         product:
-          type: string
+          type: array
           example: product
+          items:
+                type: object
+                required: #必須定義
+                    - title
+                    - text
+                properties:
+                    title:
+                        type: string
+                        example:
+                        description: タイトル
+                    text:
+                        type: string
+                        example:
+                        description: テキスト
+                example: title:"",text:""
           description: １８．手がける商品・サービス（任意）
         ##=====================
         scope:
-          type: string
+          type: array
           example: scope
+          items:
+            type: object
+            required: #必須定義
+                - title
+                - text
+            properties:
+                title:
+                    type: string
+                    example: 開発環境・業務範囲タイトル
+                    description: タイトル
+                text:
+                    type: string
+                    example: 開発環境・業務範囲テキスト
+                example: title:"",text:""
           description: １９．開発環境・業務範囲（任意）
         ##=====================
         ##２０．注目ポイント（任意）
@@ -2024,62 +2010,158 @@ components:
             - media_coverage
             - established
             - employees_count
-            - average_age
-            - gener_ratio
-            - middle_enter
-            - capital
-            - turnover
-            - president_name
-            - president_history
+            - president_data
           properties:
             enterprise_contents:
-              type: string
+              type: object
+              required:
+                - title:
+                - text:
+              properties:
+                title:
+                    type: string
+                    example:
+                    description: 事業内容タイトル
+                text:
+                    type: string
+                    example:
+                    description: 事業内容テキスト
               example: enterprise_contents
               description: 事業内容
             main_customer:
-              type: string
+              type: object
+              required:
+                - title:
+                - text:
+              properties:
+                title:
+                    type: string
+                    example:
+                    description: 主要取引先タイトル
+                text:
+                    type: string
+                    example:
+                    description: 主要取引先テキスト
               example: main_customer
               description: 主要取引先
             media_coverage:
-              type: string
+              type: object
+              required:
+                - title:
+                - text:
+              properties:
+                title:
+                    type: string
+                    example:
+                    description: メディアタイトル
+                text:
+                    type: string
+                    example:
+                    description: メディアテキスト
               example: media_coverage
               description: 事業・サービスのメディア掲載実績
             established:
-              type: string
+              type: object
+              required:
+                - title:
+                - text:
+              properties:
+                title:
+                    type: string
+                    example:
+                    description: 設立タイトル
+                text:
+                    type: string
+                    example:
+                    description: 設立テキスト
               example: established
               description: 設立
             employees_count:
-              type: string
+              type: object
+              required:
+                - title:
+                - count:
+                - average_age:
+                - gender_ratio:
+                - middle_enter:
+                - capital:
+                - turnover:
+              properties:
+                title:
+                    type: string
+                    example: title
+                    description: 従業員数タイトル
+                count:
+                    type: string
+                    example: count
+                    description: 従業員数
+                average_age:
+                    type: string
+                    example: average_age
+                    description: 平均年齢
+                gender_ratio:
+                    type: string
+                    example: gender_ratio
+                    description: 男女比
+                middle_enter:
+                    type: string
+                    example: middle_enter
+                    description: 中途入社者の割合
               example: employees_count
               description: 従業員数
-            average_age:
-              type: string
-              example: average_age
-              description: ┗【平均年齢】
-            gener_ratio:
-              type: string
-              example: gener_ratio
-              description: ┗【男女比】
-            middle_enter:
-              type: string
-              example: middle_enter
-              description: ┗【中途入社者の割合】
             capital:
-              type: string
+              type: object
+              required:
+                - title:
+                - text:
+              properties:
+                title:
+                    type: string
+                    example: title
+                    description: 資本金タイトル
+                text:
+                    type: string
+                    example: text
+                    description: 資本金内容
               example: capital
               description: 資本金
             turnover:
-              type: string
+              type: object
+              required:
+                - title:
+                - text:
+              properties:
+                title:
+                    type: string
+                    example: title
+                    description: 売上高タイトル
+                text:
+                    type: string
+                    example: text
+                    description: 売上高内容
               example: turnover
               description: 売上高
-            president_name:
-              type: string
-              example: president_name
+            president_data:
+              type: object
+              required:
+                - title:
+                - president_name:
+                - president_history
+              properties:
+                title:
+                    type: string
+                    example: title
+                    description: 代表者タイトル
+                president_name:
+                    type: string
+                    example: president_name
+                    description: 代表者名
+                president_history:
+                    type: string
+                    example: president_history
+                    description: 代表者略歴
+              example: president_data
               description: 代表者
-            president_history:
-              type: string
-              example: president_history
-              description: ┗【代表者略歴】
         ##=====================
         user_filter:
           $ref: '#/components/schemas/UserFilterInfo'

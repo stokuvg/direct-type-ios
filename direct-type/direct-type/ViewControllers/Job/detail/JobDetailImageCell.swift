@@ -70,21 +70,36 @@ class JobDetailImageCell: BaseTableViewCell {
         self.mainImageBackView.addSubview(self.mainImagesScrollView)
     }
     
-    func setup(data:[String:Any]) {
+    func setup(data: MdlJobCardDetail) {
         // 画像セット
-        let imageUrls:[String] = data["images"] as! [String]
-        imageCnt = imageUrls.count
-        if imageUrls.count > 1 {
+        
+        let mainImageUrlString:String = data.mainPicture
+        let subImageUrlStrings:[String] = data.subPictures
+        
+        var imageUrlStrings:[String] = [mainImageUrlString]
+        if subImageUrlStrings.count > 0 {
+            for i in 0..<subImageUrlStrings.count {
+                let _subImageUrlString = subImageUrlStrings[i]
+                if _subImageUrlString.count > 0 {
+                    imageUrlStrings.append(_subImageUrlString)
+                }
+            }
+        }
+        
+        Log.selectLog(logLevel: .debug, "imageUrlStrings:\(imageUrlStrings)")
+        
+        imageCnt = imageUrlStrings.count
+        if imageCnt > 1 {
             
-            self.mainImagesControl.numberOfPages = imageUrls.count
+            self.mainImagesControl.numberOfPages = imageUrlStrings.count
             
-            for i in 0..<(imageUrls.count * 3) {
+            for i in 0..<(imageUrlStrings.count * 3) {
                 var cnt:Int = 0
                 cnt = i
-                if i >= imageUrls.count {
-                    cnt = i % imageUrls.count
+                if i >= imageUrlStrings.count {
+                    cnt = i % imageUrlStrings.count
                 }
-                let imageUrlString = imageUrls[cnt]
+                let imageUrlString = imageUrlStrings[cnt]
                 let imageUrl = URL(string: imageUrlString)
                 let scrollX:CGFloat = (margin + (viewWidth * CGFloat(i)))
 
@@ -99,7 +114,7 @@ class JobDetailImageCell: BaseTableViewCell {
                 
                 self.mainImagesScrollView.addSubview(imageView)
             }
-            self.mainImagesScrollView.contentSize = CGSize(width: (CGFloat(imageUrls.count*3) * viewWidth), height: viewHeight)
+            self.mainImagesScrollView.contentSize = CGSize(width: (CGFloat(imageUrlStrings.count*3) * viewWidth), height: viewHeight)
             
         } else {
             

@@ -39,15 +39,15 @@ class MdlJobCardDetail: Codable {
     /** １４．給与例 */
     var salarySample: String
     /** 15．募集背景（必須） */
-    var recruitmentReason: JobCardDetailRecruitmentReason
+    var recruitmentReason: String
     /** １６．仕事内容（必須） */
     var jobDescription: JobCardDetailJobDescription
     /** １７．案件例（任意） */
-    var jobExample: String
+    var jobExample: JobCardDetailJobExample
     /** １８．手がける商品・サービス（任意） */
-    var product: String
+    var product: [JobCardDetailProduct]
     /** １９．開発環境・業務範囲（任意） */
-    var scope: String
+    var scope: [JobCardDetailScope]
     /** 注目ポイント見出し１ */
     var spotTitle1: String
     /** 注目ポイント本文１ */
@@ -93,7 +93,7 @@ class MdlJobCardDetail: Codable {
     var companyDescription: JobCardDetailCompanyDescription
     var userFilter: UserFilterInfo
 
-    init(jobCardCode: String, jobName: String, salaryMinId:Int, salaryMaxId:Int,isSalaryDisplay:Bool, salaryOffer: String, workPlaceCodes: [Int], companyName: String, displayPeriod: JobCardDetailDisplayPeriod, mainPicture: String, subPictures: [String], mainTitle: String, mainContents: String, prCodes: [Int], salarySample: String, recruitmentReason: JobCardDetailRecruitmentReason, jobDescription: JobCardDetailJobDescription, jobExample: String, product: String, scope: String, spotTitle1: String, spotDetail1: String, spotTitle2: String, spotDetail2: String, qualification: String, betterSkill: String, applicationExample: String, suitableUnsuitable: String, employmentType: Int, salary: String, bonusAbout: String, jobtime: String, overtimeCode: Int, overtimeAbout: String, workPlace: String, transport: String, holiday: String, welfare: String, childcare: String, interviewMemo: JobCardDetailInterviewMemo, selectionProcess: JobCardDetailSelectionProcess, contactInfo: JobCardDetailContactInfo, companyDescription: JobCardDetailCompanyDescription, userFilter: UserFilterInfo) {
+    init(jobCardCode: String, jobName: String, salaryMinId:Int, salaryMaxId:Int,isSalaryDisplay:Bool, salaryOffer: String, workPlaceCodes: [Int], companyName: String, displayPeriod: JobCardDetailDisplayPeriod, mainPicture: String, subPictures: [String], mainTitle: String, mainContents: String, prCodes: [Int], salarySample: String, recruitmentReason: String, jobDescription: JobCardDetailJobDescription, jobExample: JobCardDetailJobExample, product: [JobCardDetailProduct], scope: [JobCardDetailScope], spotTitle1: String, spotDetail1: String, spotTitle2: String, spotDetail2: String, qualification: String, betterSkill: String, applicationExample: String, suitableUnsuitable: String, employmentType: Int, salary: String, bonusAbout: String, jobtime: String, overtimeCode: Int, overtimeAbout: String, workPlace: String, transport: String, holiday: String, welfare: String, childcare: String, interviewMemo: JobCardDetailInterviewMemo, selectionProcess: JobCardDetailSelectionProcess, contactInfo: JobCardDetailContactInfo, companyDescription: JobCardDetailCompanyDescription, userFilter: UserFilterInfo) {
         
         self.jobCardCode = jobCardCode
         self.jobName = jobName
@@ -162,7 +162,7 @@ class MdlJobCardDetail: Codable {
         let _suitableUnsuitable = dto.suitableUnsuitable
         let _companyDescription = dto.companyDescription
         
-        self.init(jobCardCode: dto.jobCardCode, jobName: dto.jobName, salaryMinId: dto.salaryMinId, salaryMaxId: dto.salaryMaxId, isSalaryDisplay: dto.isSalaryDisplay!, salaryOffer: dto.salaryOffer,                  workPlaceCodes: dto.workPlaceCodes, companyName: dto.companyName, displayPeriod: dto.displayPeriod, mainPicture: dto.mainPicture, subPictures: dto.subPictures,                  mainTitle: dto.mainTitle, mainContents: dto.mainContents, prCodes: dto.prCodes, salarySample: dto.salarySample,                  recruitmentReason: dto.recruitmentReason, jobDescription: _jobDescription, jobExample: _jobExample, product: _product,                  scope: _scope, spotTitle1: _spotTitle1, spotDetail1: _spotDetail1, spotTitle2: _spotTitle2, spotDetail2: _spotDetail2,                  qualification: dto.qualification, betterSkill: dto.betterSkill, applicationExample: dto.applicationExample, suitableUnsuitable: _suitableUnsuitable,                  employmentType: dto.employmentType, salary: dto.salary, bonusAbout: _bonusAbout, jobtime: dto.jobtime, overtimeCode: dto.overtimeCode,                  overtimeAbout: dto.overtimeAbout, workPlace: dto.workPlace, transport: dto.transport, holiday: dto.holiday, welfare: dto.welfare,                  childcare: _childcare, interviewMemo: _interviewMemo, selectionProcess: dto.selectionProcess, contactInfo: dto.contactInfo,                  companyDescription: _companyDescription!, userFilter: dto.userFilter)
+        self.init(jobCardCode: dto.jobCardCode, jobName: dto.jobName, salaryMinId: dto.salaryMinId, salaryMaxId: dto.salaryMaxId, isSalaryDisplay: dto.isSalaryDisplay!, salaryOffer: dto.salaryOffer,                  workPlaceCodes: dto.workPlaceCodes, companyName: dto.companyName, displayPeriod: dto.displayPeriod, mainPicture: dto.mainPicture, subPictures: dto.subPictures,                  mainTitle: dto.mainTitle, mainContents: dto.mainContents, prCodes: dto.prCodes, salarySample: dto.salarySample, recruitmentReason: dto.recruitmentReason, jobDescription: _jobDescription, jobExample: _jobExample, product: _product,                  scope: _scope, spotTitle1: _spotTitle1, spotDetail1: _spotDetail1, spotTitle2: _spotTitle2, spotDetail2: _spotDetail2,                  qualification: dto.qualification, betterSkill: dto.betterSkill, applicationExample: dto.applicationExample, suitableUnsuitable: _suitableUnsuitable,                  employmentType: dto.employmentType, salary: dto.salary, bonusAbout: _bonusAbout, jobtime: dto.jobtime, overtimeCode: dto.overtimeCode,                  overtimeAbout: dto.overtimeAbout, workPlace: dto.workPlace, transport: dto.transport, holiday: dto.holiday, welfare: dto.welfare,                  childcare: _childcare, interviewMemo: _interviewMemo, selectionProcess: dto.selectionProcess, contactInfo: dto.contactInfo,                  companyDescription: _companyDescription!, userFilter: dto.userFilter)
     }
 
     var debugDisp: String {

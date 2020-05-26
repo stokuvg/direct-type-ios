@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwaggerClient
 
 class JobDetailPRCodeTagsCell: BaseTableViewCell {
     
@@ -23,9 +24,19 @@ class JobDetailPRCodeTagsCell: BaseTableViewCell {
         // Configure the view for the selected state
     }
     
-    func setup(datas:[String]) {
+    func setup(prcodeNos:[Int]){
+//    func setup(datas:[String]) {
         changeTagsViewSize()
         subViewsRemove()
+        
+        var datas:[String] = []
+        for i in 0..<prcodeNos.count {
+            let prCodeNo = prcodeNos[i]
+            let prCode:String = (SelectItemsManager.getCodeDisp(.prCode, code: prCodeNo)?.disp)!
+            let prCodeString = "#" + prCode
+            datas.append(prCodeString)
+        }
+        
         tagsView.setKind(datas: datas, frame: tagsView.frame)
     }
         

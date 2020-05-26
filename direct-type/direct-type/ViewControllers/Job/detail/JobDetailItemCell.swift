@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwaggerClient
 
 class JobDetailItemCell: BaseJobDetailCell {
 
@@ -33,15 +34,63 @@ class JobDetailItemCell: BaseJobDetailCell {
         }
     }
     
-    func setup(data:[String:Any]) {
+    func setup(data: MdlJobCardDetail,row: Int) {
+//    func setup(data:[String:Any]) {
 //        Log.selectLog(logLevel: .debug, "JobDetailItemCell setup start")
         
 //        Log.selectLog(logLevel: .debug, "data:\(data)")
-        let title = data["title"] as! String
-        titleLabel.text(text: title, fontType: .font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         
-        let indispensableText = data["indispensable"] as! String
-        self.indispensableLabel.text(text: indispensableText, fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        /*
+
+         // 1.仕事内容:              必須
+         // 　・案件例:               任意
+         // 　・手掛ける商品・サービス:   任意
+         // 　・開発環境・業務範囲:     任意
+         // 　・注目ポイント:           任意
+         // 2.応募資格:              必須
+         // 　・歓迎する経験・スキル:     任意
+         // 　・過去の採用例:           任意
+         // 　・この仕事の向き・不向き:  任意
+         // 3.雇用携帯コード:        必須
+         // 4.給与:               必須
+         // 　・賞与について:          任意
+         // 5.勤務時間:             必須
+         //   ・残業について:
+         // 6.勤務地:              必須
+         //   ・交通詳細
+         // 7.休日休暇:            必須
+         // 8.待遇・福利厚生:       必須
+         // 　・産休・育休取得:      任意
+         */
+        var title:String = ""
+        var text:String = ""
+        switch row {
+            case 0:
+                // 仕事内容
+                title = data.jobDescription.title
+                text = data.jobDescription.text
+            default:
+                title = ""
+                text = ""
+        }
+        titleLabel.text(text: title, fontType: .font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        self.indispensableLabel.text(text: text, fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        
+        // 任意
+        var optionalCnt:Int = 0
+        switch row {
+        case 0:
+            // 案件例
+            if data.jobExample.text.count > 0 {
+                optionalCnt += 0
+            }
+            // 手がける商品・サービス
+            if data.
+            // 開発環境
+            
+        default:
+            optionalCnt = 0
+        }
         
         /*
         let optional = data["optional"] as! [[String:Any]]

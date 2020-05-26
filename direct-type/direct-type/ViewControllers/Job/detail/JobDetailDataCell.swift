@@ -12,13 +12,11 @@ class JobDetailDataCell: BaseTableViewCell {
     
     @IBOutlet weak var dataStackView:UIStackView!
     
-    // 終了間近,スカウト
-    @IBOutlet weak var imminetAndScountBackView:UIView!
-    @IBOutlet weak var endBackView:UIView!
-    @IBOutlet weak var endLabel:UILabel!
-    
-    @IBOutlet weak var scountBackView:UIView!
-    @IBOutlet weak var scountLabel:UILabel!
+    // 期限,スカウト
+    @IBOutlet weak var limitedAndScountBackView:UIView!
+    @IBOutlet weak var limitedBackView:UIView!
+    @IBOutlet weak var limitedImageView:UIImageView!
+    @IBOutlet weak var limitedLabel:UILabel!
     
     // 職種名
     @IBOutlet weak var jobCategoryBackView:UIView!
@@ -54,42 +52,103 @@ class JobDetailDataCell: BaseTableViewCell {
         super.prepareForReuse()
     }
     
-    func setup(data:[String:Any]) {
+    func setup(data:MdlJobCardDetail) {
         Log.selectLog(logLevel: .debug, "JobDetailDataCell setup start")
         
-        // 終了間近
-        let end = data["end"] as! Bool
-        if end == false {
-            dataStackView.removeArrangedSubview(imminetAndScountBackView)
-        } else {
-            endLabel.text(text: "終了間近", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
-        }
         
-        // スカウト情報
-        scountLabel.text(text: "スカウトが届いています", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
+        let nowDate = Date()
+        // NEWマーク 表示チェック
+        let start_date_string = data.displayPeriod.startAt
+        let startFlag = newMarkFlagCheck(startDateString: start_date_string, nowDate: nowDate)
+        // 終了マーク 表示チェック
+        let end_date_string = data.displayPeriod.endAt
+        let endFlag = endFlagHiddenCheck(endDateString:end_date_string, nowDate:nowDate)
+                
+        var limitedType:LimitedType!
+        switch (startFlag,endFlag) {
+            case (false,false):
+//                Log.selectLog(logLevel: .debug, "両方当たる")
+                // 終了マークのみ表示
+                limitedType = .end
+            case (false,true):
+//                Log.selectLog(logLevel: .debug, "掲載開始から７日以内")
+                // NEWマークのみ表示
+                limitedType = .new
+            case (true,false):
+//                Log.selectLog(logLevel: .debug, "掲載終了まで７日以内")
+                // 終了マークのみ表示
+                limitedType = .end
+            default:
+//                Log.selectLog(logLevel: .debug, "それ以外")
+                limitedType = LimitedType.none
+        }
+        self.limitedMarkSetting(type: limitedType)
         
         // 職種
-        let job = data["job"] as! String
+//        let job = data["job"] as! String
+        let job = data.jobName
         self.jobCategoryLabel.text(text: job, fontType: .C_font_L, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         // 年収
-        let salary = data["price"] as! String
-        self.salaryLabel.text(text: salary, fontType: .C_font_XL, textColor: UIColor.init(colorType: .color_sub)!, alignment: .center)
-        self.salaryMarkLabel.text(text: "万円", fontType: .C_font_Sb ,textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
+        let salaryDisplay = data.isSalaryDisplay
+        if salaryDisplay {
+            let minPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.salaryMinId)?.disp
+//            Log.selectLog(logLevel: .debug, "minPriceLabel:\(String(describing: minPriceLabel))")
+            let minPrice = self.cutText(defaultText: minPriceLabel!,cutString: "万円")
+            let maxPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.salaryMaxId)?.disp
+            let maxPrice = self.cutText(defaultText: maxPriceLabel!,cutString: "万円")
+
+            let priceText = minPrice + "〜" + maxPrice
+            self.salaryLabel.text(text: priceText, fontType: .C_font_XL, textColor: UIColor.init(colorType: .color_sub)!, alignment: .center)
+            self.salaryMarkLabel.text(text: "万円", fontType: .C_font_Sb ,textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
+        } else {
+            self.salaryLabel.text(text: "非公開", fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+            self.salaryMarkLabel.text(text: "", fontType: .C_font_M, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
+        }
         // 勤務地
-        let area = data["area"] as! String
-        self.workPlaceLabel.text(text: area, fontType: .C_font_SSb ,textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        let areaText = self.makeAreaNames(codes: data.workPlaceCodes)
+        self.workPlaceLabel.text(text: areaText, fontType: .C_font_SSb ,textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         // 社名
-        let company = data["company"] as! String
+        let company = data.companyName
         self.companyLabel.text(text: company, fontType: .C_font_SSb ,textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
-        // 期間
-        let period_start_string:String = data["period_start"] as! String
-        let period_end_string:String = data["period_end"] as! String
                 
-        let period_start = self.changeFormatString(string: period_start_string)
-        let period_end = self.changeFormatString(string: period_end_string)
-        
-        let period_string = period_start + "〜" + period_end
+        // 掲載期間
+        let period_string = start_date_string + "〜" + end_date_string
         self.limitLabel.text(text: period_string, fontType: .C_font_SSb ,textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+    }
+    
+    private func cutText(defaultText: String, cutString: String) -> String {
+        let curArray = defaultText.components(separatedBy: cutString)
+        let displayText = curArray.first!
+        
+        return displayText
+    }
+    
+    private func makeAreaNames(codes:[Int]) -> String {
+        var text:String = ""
+        for i in 0..<codes.count {
+            let code = codes[i]
+            let placeText = (SelectItemsManager.getCodeDisp(.place, code: code)?.disp)!
+            text = text + placeText
+            if (codes.count - 1) > i {
+                text += ","
+            }
+        }
+        
+        return text
+    }
+    
+    private func limitedMarkSetting(type:LimitedType) {
+        switch type {
+            case .none:
+                self.limitedAndScountBackView.isHidden = true
+                self.dataStackView.removeArrangedSubview(self.limitedAndScountBackView)
+            case .new:
+                self.limitedLabel.text(text: "", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+                self.limitedImageView.image = UIImage(named: "new")
+            case .end:
+                limitedLabel.text(text: "終了間近", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+                self.limitedImageView.image = UIImage(named: "upcoming")
+        }
     }
     
     private func changeFormatString(string:String) -> String {

@@ -18,13 +18,12 @@ class JobDetailStepView: UIView {
         super.awakeFromNib()
     }
     
-    func setup(data:[String: Any]) {
+    func setup(no:String,text:String) {
+//    func setup(data:[String: Any]) {
 //        Log.selectLog(logLevel: .debug, "data:\(data)")
-        let step = data["title"] as! String
         
-        stepLabel.text(text: step, fontType: .C_font_S, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        stepLabel.text(text: no, fontType: .C_font_S, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         
-        let text = data["text"] as! String
         textLabel.text(text: text, fontType: .C_font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         
     }

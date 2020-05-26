@@ -31,44 +31,45 @@ class JobOfferDetailVC: TmpBasicVC {
         mainContents: "◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n",
         prCodes: [1,3,5,7,9],
         salarySample: "■２５歳サブリーダー／年収４００万円\n■２８歳PL／年収４８０万円\n■３０歳PM／年収５５０万円\n■３２歳PM／年収５８０万円\n■３５歳PM／年収６５０万円\n■４０歳マネージャー／年収７４０万円\n■４５歳部長／年収８００万円\n",
-        recruitmentReason: JobCardDetailRecruitmentReason.init(indispensable: "ここに募集背景の必須項目内容を表示", _optional: [], attention: []),
-        jobDescription: JobCardDetailJobDescription.init(indispensable: "",
-                                                         option: [],
-                                                         attention: []),
-        /*
-        jobDescription: JobCardDetailJobDescription.init(indispensable: "多種多様なプロジェクトの中から、あなたの経験や希望に応じた案件で活躍していただきます。\n", optional: [], attention: [
-            JobCardDetailJobDescriptionAttention.init(title: "希望を吸い上げる風土だから、理想のキャリアパスを描きやすい", text: "当社では、基本的にユニット（チーム体制）でのプロジェクト配属になっており、四半期に1回面談を実施し、ユニット長がここの希望を吸い上げいます。"),
-            JobCardDetailJobDescriptionAttention.init(title: "明確な評価制度【充実のインセンティブ/若手も大幅昇給可能】", text: "評価を行うのは、ここの頑張りや実力を一番近くで目にしているユニット長なので、納得感のある評価を得られます。"),
-            ]),
-        */
-        jobExample: <#T##String#>,
-        product: <#T##String#>,
-        scope: <#T##String#>,
-        spotTitle1: <#T##String#>,
-        spotDetail1: <#T##String#>,
-        spotTitle2: <#T##String#>,
-        spotDetail2: <#T##String#>,
-        qualification: <#T##String#>,
-        betterSkill: <#T##String#>,
-        applicationExample: <#T##String#>,
-        suitableUnsuitable: <#T##String#>,
-        employmentType: <#T##Int#>,
-        salary: <#T##String#>,
-        bonusAbout: <#T##String#>,
-        jobtime: <#T##String#>,
-        overtimeCode: <#T##Int#>,
-        overtimeAbout: <#T##String#>,
-        workPlace: <#T##String#>,
-        transport: <#T##String#>,
-        holiday: <#T##String#>,
-        welfare: <#T##String#>,
-        childcare: <#T##String#>,
+        recruitmentReason: "",
+        jobDescription: JobCardDetailJobDescription.init(title: "仕事内容", text: "多種多様なプロジェクトの中から、あなたの経験や希望に応じた案件で活躍していただきます。\n"),
+        jobExample: JobCardDetailJobExample.init(title: "案件例", text: "【RPA案件】\n●大手不動産会社:データ入力の自動化\n●メガバンク:生産業務の自動化\nなど"),
+        product: [],
+        scope: [],
+        spotTitle1: "希望を吸い上げる風土だから、理想のキャリアパスを描きやすい",
+        spotDetail1: "当社では、基本的にユニット（チーム体制）でのプロジェクト配属になっており、四半期に1回面談を実施し、ユニット長がここの希望を吸い上げいます。",
+        spotTitle2: "明確な評価制度【充実のインセンティブ/若手も大幅昇給可能】",
+        spotDetail2: "評価を行うのは、ここの頑張りや実力を一番近くで目にしているユニット長なので、納得感のある評価を得られます。",
+        qualification: "◆学歴不問\n◆なんらかの開発経験のある方\n\n",
+        betterSkill: "⭐︎リーダーを目指したい方、あるいはPM/PL経験者は、大歓迎です！",
+        applicationExample: "",
+        suitableUnsuitable: "向いている人\n新しいことにチャレンジしながら、理想のキャリアパスを実現したい方には向いてます。\n向いてない人\n現状維持を望む方や、意欲が乏しい方には、合わないかもしれません。",
+        employmentType: 1,
+        salary: "",
+        bonusAbout: "",
+        jobtime: "09:00~18:00(実動８時間)",
+        overtimeCode: 2,
+        overtimeAbout: "月の平均残業時間は10～20時間程度です。\n1日に換算すると1日30分～１時間程度になります。\n当社は働き方改革が叫ばれる以前から残業を抑える取り組みをしており、\n労務上の観点から20時間以内になるように指示しています。\nその結果、20時以降社内に残る社員はほどんどいません。",
+        workPlace: "",
+        transport: "",
+        holiday: "",
+        welfare: "",
+        childcare: "",
         interviewMemo: JobCardDetailInterviewMemo.init(interviewContent: "ここにテキストを入れる\n\nここにテキストを入れる", interviewPhoto1: "", interviewPhoto2: "", interviewPhoto3: ""),
         selectionProcess: JobCardDetailSelectionProcess.init(selectionProcess1: "Web応募による書類選考", selectionProcess2: "面談（１〜２回）※面談は１回のケースが多いですが、場合によって２回になる可能性もあります。", selectionProcess3: "内定", selectionProcess4: "Web応募による書類選考", selectionProcess5: "Web応募による書類選考", selectionProcessDetail: "【type】の専用応募フォームからご応募ください。\n※ご応募については秘密厳守いたします。\n※\n※\n\n----------------------------\n当求人案件は株式会社キャリアデザインセンターが運営する株式会社システムソフト type採用事務局にて応募の受付業務を代行しております。"),
         contactInfo: JobCardDetailContactInfo.init(companyUrl: "http://www.systemsoft.co.jp/", contactZipcode: "100-0004", contactAddress: "東京都千代田区大手町二丁目６番１号 朝日生命大手町ビル２階", contactPhone: "03-6261-4536", contactPerson: "採用担当", contactMail: "saiyo@systemsoft.co.jp"),
-        companyDescription: <#T##JobCardDetailCompanyDescription#>,
+        companyDescription: JobCardDetailCompanyDescription.init(
+            enterpriseContents: JobCardDetailCompanyDescriptionEnterpriseContents.init(title: "事業内容", text: "■WEBアプリの企画・開発・導入支援\n■スマホ・タブレットアプリの企画・開発・導入支援\n■システムコンサルテーション事業\n■ソフトウェアパッケージの開発・販売・導入支援\n■サーバ・ネットワーク設計・構築・運用管理サービスの提供\n■アウトソーシング\n"),
+            mainCustomer: JobCardDetailCompanyDescriptionMainCustomer.init(title: "主要取引先", text: "青葉出版(株)\n(株)オープンハウス・ディベロップメント\n(株)CSEビジテック\n(株)\n(株)\n(株)"),
+            mediaCoverage: JobCardDetailCompanyDescriptionMediaCoverage.init(title: "事業・サービスのメディア掲載実績", text: "明治大学博物館\nユニバーサルコンピューター(株)"),
+            established: JobCardDetailCompanyDescriptionEstablished.init(title: "設立", text: "1996年12月"),
+            employeesCount: JobCardDetailCompanyDescriptionEmployeesCount.init(title: "従業員数", count: "132名(技術者118名)", averageAge: "３２歳", genderRatio: "5/5", middleEnter: "約５割"),
+            capital: JobCardDetailCompanyDescriptionCapital.init(title: "資本金", text: "20,000,000円"),
+            turnover: JobCardDetailCompanyDescriptionTurnover.init(title: "売上高", text: "14億円(2018年11月実績)"),
+            presidentData: JobCardDetailCompanyDescriptionPresidentData.init(title: "代表者", presidentName: "代表取締役社長　峯岸 正積", presidentHistory: "1979年11月5日生まれ。2002年コニカミノルタ株式会社に入社。")),
         userFilter: UserFilterInfo.init(tudKeepStatus: false, tudSkipStatus: false))
     
+    /*
     let dummyData:[String:Any] = [
         "end":true,
         "images":["https://type.jp/s/img_banner/top_pc_side_number1.jpg","https://type.jp/s/campaign83/img/pc/top.png","https://type.jp/s/campaign83/img/scout.png","https://woman-type.jp/s/renewal/pc/img/top/191105_u29.png"],
@@ -201,6 +202,7 @@ class JobOfferDetailVC: TmpBasicVC {
             ],
         ],
     ]
+    */
     
     var articleOpenFlag:Bool = false
     var coverageMemoOpenFlag:Bool = false
@@ -237,25 +239,24 @@ class JobOfferDetailVC: TmpBasicVC {
         /// section 3
         // 募集要項
         self.detailTableView.registerNib(nibName: "JobDetailItemCell", idName: "JobDetailItemCell")
-        // 1.募集背景:              必須
-        // 2.仕事内容:              必須
+        // 1.仕事内容:              必須
         // 　・案件例:               任意
         // 　・手掛ける商品・サービス:   任意
         // 　・開発環境・業務範囲:     任意
         // 　・注目ポイント:           任意
-        // 3.応募資格:              必須
+        // 2.応募資格:              必須
         // 　・歓迎する経験・スキル:     任意
         // 　・過去の採用例:           任意
         // 　・この仕事の向き・不向き:  任意
-        // 4.雇用携帯コード:        必須
-        // 5.給与:               必須
+        // 3.雇用携帯コード:        必須
+        // 4.給与:               必須
         // 　・賞与について:          任意
-        // 6.勤務時間:             必須
+        // 5.勤務時間:             必須
         //   ・残業について:
-        // 7.勤務地:              必須
+        // 6.勤務地:              必須
         //   ・交通詳細
-        // 8.休日休暇:            必須
-        // 9.待遇・福利厚生:       必須
+        // 7.休日休暇:            必須
+        // 8.待遇・福利厚生:       必須
         // 　・産休・育休取得:      任意
         /// section 4
         // 取材メモ
@@ -293,7 +294,6 @@ class JobOfferDetailVC: TmpBasicVC {
         
         buttonsView = titleView
     }
-    
 }
 
 extension JobOfferDetailVC: UITableViewDelegate {
@@ -368,7 +368,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                     .instantiate(withOwner: self, options: nil)
                     .first as! JobDetailArticleHeaderView
                 view.delegate = self
-                let articleTitle = dummyData["main_title"] as! String
+                let articleTitle = _mdlJobDetail.mainTitle
                 view.setup(string: articleTitle,openFlag: articleOpenFlag)
                 return view
             case 3:
@@ -386,31 +386,27 @@ extension JobOfferDetailVC: UITableViewDataSource {
                     .instantiate(withOwner: self, options: nil)
                     .first as! JobDetailFoldingHeaderView
                 view.delegate = self
-                let foldingDatas = dummyData["folding"] as! [String: Any]
-                view.tag = (section - foldingDatas.count)
+                view.tag = (section - 4)
                 
                 var openFlag:Bool = false
-                var keyName:String = ""
+                var title:String = ""
                 switch section {
                     case 4:
                         openFlag = coverageMemoOpenFlag
-                        keyName = "memo"
+                        title = "取材メモ"
                     case 5:
                         openFlag = selectionProcessOpenFlag
-                        keyName = "process"
+                        title = "選考プロセス"
                     case 6:
                         openFlag = phoneNumberOpenFlag
-                        keyName = "phone_number"
+                        title = "連絡先"
                     case 7:
                         openFlag = companyOutlineOpenFlag
-                        keyName = "outline"
+                        title = "会社概要"
                     default:
                         openFlag = false
-                        keyName = ""
+                        title = ""
                 }
-                let foldingData = foldingDatas[keyName] as! [String:Any]
-                
-                let title = foldingData["title"] as! String
                 view.setup(title: title,openFlag: openFlag)
                 
                 return view
@@ -430,7 +426,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
             case 2:
                 return 2
             case 3:
-                return 9
+                return 8
             default:
                 return 1
         }
@@ -441,20 +437,22 @@ extension JobOfferDetailVC: UITableViewDataSource {
         let row = indexPath.row
         switch (section,row) {
             case (0,0):
+                // 求人内容
                 let cell = tableView.loadCell(cellName: "JobDetailDataCell", indexPath: indexPath) as! JobDetailDataCell
-                cell.setup(data: dummyData)
+                cell.setup(data: _mdlJobDetail)
                 return cell
             case (0,1):
                 let cell = tableView.loadCell(cellName: "JobDetailImageCell", indexPath: indexPath) as! JobDetailImageCell
                 cell.setCellWidth(width: self.detailTableView.frame.size.width)
-                cell.setup(data: dummyData)
+                cell.setup(data: _mdlJobDetail)
                 return cell
             case (1,0):
                 if articleOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailArticleCell", indexPath: indexPath) as! JobDetailArticleCell
                     cell.delegate = self
                     if articleOpenFlag {
-                        let articleString = dummyData["main_article"] as! String
+                        let articleString = _mdlJobDetail.mainContents
+//                        let articleString = dummyData["main_article"] as! String
                         cell.setup(data: articleString)
                     } else {
                         cell.setup(data: "")
@@ -465,28 +463,33 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 }
             case (2,0):
                 let cell = tableView.loadCell(cellName: "JobDetailPRCodeTagsCell", indexPath: indexPath) as! JobDetailPRCodeTagsCell
-                let datas = dummyData["tags"] as! [String]
-                cell.setup(datas: datas)
+                let datas = _mdlJobDetail.prCodes
+//                let datas = dummyData["tags"] as! [String]
+                cell.setup(prcodeNos: datas)
                 return cell
             case (2,1):
                 let cell = tableView.loadCell(cellName: "JobDetailSalaryExampleCell", indexPath: indexPath) as! JobDetailSalaryExampleCell
-                let examples = dummyData["salary_example"] as! String
+                let examples = _mdlJobDetail.salarySample
+//                let examples = dummyData["salary_example"] as! String
                 cell.setup(data: examples)
                 return cell
             case (3,_):
-                let guideBookData = dummyData["guidebook"] as! [[String:Any]]
-                let itemData = guideBookData[row]
+//                let guideBookData = dummyData["guidebook"] as! [[String:Any]]
+//                let itemData = guideBookData[row]
                 let cell = tableView.loadCell(cellName: "JobDetailItemCell", indexPath: indexPath) as! JobDetailItemCell
-                cell.setup(data: itemData)
+                cell.setup(data: _mdlJobDetail,row:row)
+//                cell.setup(data: itemData)
                 return cell
             case (4,_):
                 if coverageMemoOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailFoldingMemoCell", indexPath: indexPath) as! JobDetailFoldingMemoCell
                     
-                    let foldingDatas = dummyData["folding"] as! [String: Any]
-                    let foldingData = foldingDatas["memo"] as! [String: Any]
-                    let memoText = foldingData["text"] as! String
-                    cell.setup(data: memoText)
+                    let memoData = _mdlJobDetail.interviewMemo
+                    cell.setup(data: memoData)
+//                    let foldingDatas = dummyData["folding"] as! [String: Any]
+//                    let foldingData = foldingDatas["memo"] as! [String: Any]
+//                    let memoText = foldingData["text"] as! String
+//                    cell.setup(data: memoText)
                     return cell
                 } else {
                     return UITableViewCell()
@@ -494,10 +497,9 @@ extension JobOfferDetailVC: UITableViewDataSource {
             case (5, _):
                 if selectionProcessOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailFoldingProcessCell", indexPath: indexPath) as! JobDetailFoldingProcessCell
-                    let foldingDatas = dummyData["folding"] as! [String: Any]
-                    let foldingData = foldingDatas["process"] as! [String: Any]
                     
-                    cell.setup(data: foldingData)
+                    let process = _mdlJobDetail.selectionProcess
+                    cell.setup(data: process)
                     return cell
                 } else {
                     return UITableViewCell()
@@ -505,21 +507,19 @@ extension JobOfferDetailVC: UITableViewDataSource {
             case (6, _):
                 if phoneNumberOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailFoldingPhoneNumberCell", indexPath: indexPath) as! JobDetailFoldingPhoneNumberCell
-                    let foldingDatas = dummyData["folding"] as! [String: Any]
-                    let foldingData = foldingDatas["phone_number"] as! [String: Any]
                     
-                    cell.setup(data: foldingData)
+                    let data = _mdlJobDetail.contactInfo
+                    cell.setup(data: data)
                     return cell
                 } else {
                     return UITableViewCell()
                 }
-            case (7, _):
+        case (7, _):    // 会社概要
                 if companyOutlineOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailFoldingOutlineCell", indexPath: indexPath) as! JobDetailFoldingOutlineCell
-                    let foldingDatas = dummyData["folding"] as! [String: Any]
-                    let foldingData = foldingDatas["outline"] as! [String: Any]
                     
-                    cell.setup(data: foldingData)
+                    let data = _mdlJobDetail.companyDescription
+                    cell.setup(data: data)
                     return cell
                 } else {
                     return UITableViewCell()
@@ -592,9 +592,10 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
     }
     
     func guidebookScrollAnimation(section:Int, titleName:String) {
-        let guidebookData = dummyData["guidebook"] as! [[String:Any]]
+//        let guidebookData = dummyData["guidebook"] as! [[String:Any]]
         
         var row:Int = 0
+        /*
         for i in 0..<guidebookData.count {
             let data = guidebookData[i]
             if let keyName:String = (data["title"] as! String) {
@@ -604,6 +605,7 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
                 }
             }
         }
+        */
         
         let indexPath = IndexPath.init(row: row, section: section)
         self.detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
@@ -635,9 +637,10 @@ extension JobOfferDetailVC: JobDetailArticleCellDelegate {
 extension JobOfferDetailVC: FoldingHeaderViewDelegate {
     func foldOpenCloseAction(tag: Int) {
         
-        let foldingDatas = dummyData["folding"] as! [String: Any]
+//        let foldingDatas = dummyData["folding"] as! [String: Any]
         
-        let section = foldingDatas.count + tag
+//        let section = foldingDatas.count + tag
+        let section = 4 + tag
         let index = IndexSet(arrayLiteral: section)
         switch tag {
         case 0:

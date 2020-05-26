@@ -216,39 +216,6 @@ class JobOfferBigCardCell: BaseJobCardCell {
         }
     }
     
-    private func newMarkFlagCheck(startDateString: String, nowDate:Date) -> Bool {
-        var retInterval:Double!
-        
-        let startDate = DateHelper.convStr2Date(startDateString)
-//        Log.selectLog(logLevel: .debug, "startDate:\(startDate)")
-        
-        retInterval = nowDate.timeIntervalSince(startDate)
-        
-        let ret = retInterval/86400
-//        Log.selectLog(logLevel: .debug, "ret:\(ret)")
-        if ret > 7 {
-            return true
-        }
-        return false
-        
-    }
-    
-    private func endFlagHiddenCheck(endDateString: String, nowDate:Date) -> Bool {
-        var retInterval:Double!
-        
-        let endDate = DateHelper.convStr2Date(endDateString)
-//        Log.selectLog(logLevel: .debug, "endDate:\(endDate)")
-        
-        retInterval = endDate.timeIntervalSince(nowDate)
-        
-        let ret = retInterval/86400
-//        Log.selectLog(logLevel: .debug, "ret:\(ret)")
-        if ret > 7 {
-            return true
-        }
-        return false
-    }
-    
     private func cutText(defaultText: String, cutString: String) -> String {
         let curArray = defaultText.components(separatedBy: cutString)
         let displayText = curArray.first!
