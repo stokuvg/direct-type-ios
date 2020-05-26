@@ -56,7 +56,7 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = arrData[indexPath.row]
         let cell: HPreviewTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HPreviewTBCell", for: indexPath) as! HPreviewTBCell
-        cell.initCell(item)
+        cell.initCell(item, editTempCD: editableModel.editTempCD)//編集中の値を表示適用させるためeditTempCDを渡す
         cell.dispCell()
         return cell
     }
@@ -106,5 +106,15 @@ extension PreviewBaseVC: nameEditableTableBasicDelegate {
                 }
             }
         }
+//        //元のchildItemsに適用しないと表示更新されないな...
+//        for mdlItem in arrData {
+//            for (n, item) in mdlItem.childItems.enumerated() {
+//                //変更あるかチェック
+//                if let temp = editTempCD[item.editableItemKey] {
+//                    print("\t#\(n): \(item.debugDisp)")
+//                }
+//            }
+//        }
+        tableVW.reloadData()
     }
 }

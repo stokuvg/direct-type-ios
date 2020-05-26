@@ -17,21 +17,24 @@ class ProfilePreviewVC: PreviewBaseVC {
     
     override func actCommit(_ sender: UIButton) {
         print(#line, #function, "ボタン押下でAPIフェッチ確認")
-        for items in editableModel.arrData {
-            for _item in items {
+        tableVW.reloadData()
+        //===変更内容の確認
+        print(#line, String(repeating: "=", count: 44))
+        for (y, items) in editableModel.arrData.enumerated() {
+            for (x, _item) in items.enumerated() {
                 let (isChange, editTemp) = editableModel.makeTempItem(_item)
                 let item: EditableItemH! = isChange ? editTemp : _item
                 if isChange {
-                    print("\t▼変更あり: \(item.debugDisp)")
+                    print("\t(\(y)-\(x)) ✍️ [\(item.debugDisp)]")
+                } else {
+                    print("\t(\(y)-\(x)) 　 [\(item.debugDisp)]")
                 }
             }
         }
-        print(String(repeating: "=", count: 44))
+        print(#line, String(repeating: "=", count: 44))
     }
     override func initData() {
         title = "個人プロフィール"
-        
-        
         
         if Constants.DbgOfflineMode {
             self.detail = MdlProfile(familyName: "familyName", firstName: "firstName", familyNameKana: "familyNameKana", firstNameKana: "firstNameKana", birthday: DateHelper.convStr2Date("1900-01-01"), gender: "gender", zipCode: "zipCode", prefecture: "prefecture", address1: "address1", address2: "address2", mailAddress: "mailAddress", mobilePhoneNo: "mobilePhoneNo")
