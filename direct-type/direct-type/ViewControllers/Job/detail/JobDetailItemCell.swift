@@ -77,19 +77,47 @@ class JobDetailItemCell: BaseJobDetailCell {
         self.indispensableLabel.text(text: text, fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         
         // 任意
-        var optionalCnt:Int = 0
+        var optionalDatas:[[String:Any]] = []
         switch row {
-        case 0:
-            // 案件例
-            if data.jobExample.text.count > 0 {
-                optionalCnt += 0
+            case 0:
+                // 案件例
+                if data.jobExample.text.count > 0 {
+                    let exampleData = ["title":data.jobExample.title,"text":data.jobExample.text]
+                    optionalDatas.append(exampleData)
+                }
+                // 手がける商品・サービス
+                if data.product.text.count > 0 {
+                    let productData = ["title":data.product.title,"text":data.product.text]
+                    optionalDatas.append(productData)
+                }
+                // 開発環境
+                if data.scope.text.count > 0 {
+                    let scopeData = ["title":data.scope.title,"text":data.scope.text]
+                    optionalDatas.append(scopeData)
+                }
+                
+            default:
+                optionalDatas = []
+        }
+        
+        if optionalDatas.count > 0 {
+            let optionalFrameWidth = self.itemBackView.frame.size.width
+            for i in 0..<optionalDatas.count {
+                let optionalView = UINib.init(nibName: "JobDetailItemOptionalView", bundle: nil)
+                .instantiate(withOwner: self, options: nil)
+                .first as! JobDetailItemOptionalView
+                
+                var viewFrame = optionalView.frame
+                viewFrame.size.width = optionalFrameWidth
+                optionalView.frame = viewFrame
+                
+                optionalView.tag = (i+1)
+                
+                let optionalData = optionalDatas[i]
+                optionalView.setup(datas: optionalData)
+                
+                self.itemStackView.addArrangedSubview(optionalView)
             }
-            // 手がける商品・サービス
-            if data.
-            // 開発環境
-            
-        default:
-            optionalCnt = 0
         }
         
         /*

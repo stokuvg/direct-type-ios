@@ -1772,42 +1772,37 @@ components:
           description: １７．案件例（任意）
         ##=====================
         product:
-          type: array
+          type: object
           example: product
-          items:
-                type: object
-                required: #必須定義
-                    - title
-                    - text
-                properties:
-                    title:
-                        type: string
-                        example:
-                        description: タイトル
-                    text:
-                        type: string
-                        example:
-                        description: テキスト
-                example: title:"",text:""
+          required: #必須定義
+            - title
+            - text
+          properties:
+            title:
+                type: string
+                example: title
+                description: 手がける商品・サービス タイトル
+            text:
+                type: string
+                example: text
+                description: 手がける商品・サービス テキスト
           description: １８．手がける商品・サービス（任意）
         ##=====================
         scope:
-          type: array
+          type: object
           example: scope
-          items:
-            type: object
-            required: #必須定義
-                - title
-                - text
-            properties:
-                title:
-                    type: string
-                    example: 開発環境・業務範囲タイトル
-                    description: タイトル
-                text:
-                    type: string
-                    example: 開発環境・業務範囲テキスト
-                example: title:"",text:""
+          required: #必須定義
+            - title
+            - text
+          properties:
+            title:
+                type: string
+                example: title
+                description: １９．開発環境・業務範囲 タイトル
+            text:
+                type: string
+                example: text
+                description: １９．開発環境・業務範囲 テキスト
           description: １９．開発環境・業務範囲（任意）
         ##=====================
         ##２０．注目ポイント（任意）
