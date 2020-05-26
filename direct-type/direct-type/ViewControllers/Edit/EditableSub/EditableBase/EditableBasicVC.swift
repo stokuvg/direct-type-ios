@@ -74,7 +74,6 @@ extension EditableBasicVC: InputItemHDelegate {
     }
     func textFieldShouldClear(_ tf: IKTextField, _ item: EditableItemH) -> Bool {
         print(#line, #function)
-        //guard let editableModel = editableModel else { return true }
         editableModel.changeTempItem(item, text: "")//編集中の値の保持（と描画）
         if let depKey = editableModel.clearDependencyItemByKey(item.editableItemKey) { //依存関係があればクリア
             dispEditableItemByKey(depKey)//依存してた方の表示も更新する
@@ -82,8 +81,6 @@ extension EditableBasicVC: InputItemHDelegate {
         dispEditableItemByKey(item.editableItemKey)//対象の表示を更新する
         return true
     }
-    
-    
     func editingDidBegin(_ tf: IKTextField, _ item: EditableItemH) {
         actTargetInputTextBegin(tf, item) //元のTextFieldに被せるもの（なくて良い）
         //画面全体での初期状態での値と編集中の値を保持させておくため
@@ -189,7 +186,6 @@ extension EditableBasicVC: InputItemHDelegate {
         print("💛[\(tf.itemKey)] 編集終わり💛「[\(tf.tag)] \(#function)」[\(tf.itemKey)][\(tf.text ?? "")] [\(tf.inputAccessoryView)] [\(tf.inputView)]")
     }
     func changedItem(_ tf: IKTextField, _ item: EditableItemH, text: String) {
-        //guard let editableModel = editableModel else { return }
         editableModel.changeTempItem(item, text: text)//入力値の反映
     }
 }

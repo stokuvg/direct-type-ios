@@ -72,6 +72,10 @@ extension HEditTextTBCell {
         guard let _item = item else { return }
         delegate?.editingDidEnd(sender, _item)
     }
+    @IBAction func actEditingChanged(_ sender: IKTextField) {
+        guard let _item = item else { return }
+        delegate?.changedItem(sender, _item, text: sender.text ?? "")
+    }
 }
 
 
@@ -99,12 +103,10 @@ extension HEditTextTBCell: UITextFieldDelegate {
     }
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         guard let textField = textField as? IKTextField else { return true }
-        print(item)
         print("❤️[\(textField.itemKey)] [\(#function)]❤️ ❤️[Clear押された]❤️")
         if let delegate = delegate {
             return delegate.textFieldShouldClear(textField, item!)
         }
         return true
     }
-    
 }

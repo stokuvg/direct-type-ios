@@ -16,6 +16,7 @@ protocol InputItemHDelegate {
     //=== 入力制御
     func editingDidBegin(_ tf: IKTextField, _ item: EditableItemH)
     func editingDidEnd(_ tf: IKTextField, _ item: EditableItemH)
+    func changedItem(_ tf: IKTextField, _ item: EditableItemH, text: String)
 }
 
 class HEditDrumTBCell: UITableViewCell {
