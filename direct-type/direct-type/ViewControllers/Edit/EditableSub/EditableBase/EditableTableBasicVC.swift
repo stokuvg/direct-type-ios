@@ -42,7 +42,7 @@ class EditableTableBasicVC: EditableBasicVC {
 //        print(#line, String(repeating: "-", count: 33))
         //編集画面でのeditTempCDを、そのまま前の画面に渡しても良い気がする
         self.delegate?.changedSelect(editItem: item, editTempCD: editableModel.editTempCD) //フィードバックしておく
-        //self.dismiss(animated: true) {}
+        self.dismiss(animated: true) {}
     }
 
     override func viewDidLoad() {

@@ -13,6 +13,7 @@ import SwaggerClient
 //===[H-3]「履歴書確認」
 //===[C-15]「職務経歴書確認」
 class PreviewBaseVC: TmpBasicVC {
+    var editableModel: EditableModel = EditableModel() //画面編集項目のモデルと管理
     var arrData: [MdlItemH] = []
 
     @IBOutlet weak var tableVW: UITableView!
@@ -95,14 +96,15 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
 
 extension PreviewBaseVC: nameEditableTableBasicDelegate {
     func changedSelect(editItem: MdlItemH, editTempCD: [EditableItemKey : EditableItemCurVal]) {
-        print(#line, #function, editItem.debugDisp)
+        //=== 消し込み対応のため、子項目をなめて変更点を適用する
         if editTempCD.count > 0 {
-            print("▼変更がありました")
             for (key, val) in editTempCD {
-                print("\t[\(key)]\t[\(val)]")
+                if let item = editItem.childItems.filter { (ei) -> Bool in
+                    ei.editableItemKey == key
+                }.first {
+                    editableModel.changeTempItem(item, text: val)
+                }
             }
         }
     }
-    
-    
 }

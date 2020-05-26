@@ -14,56 +14,25 @@ import SVProgressHUD
 //===[H-2]「個人プロフィール確認」
 class ProfilePreviewVC: PreviewBaseVC {
     var detail: MdlProfile? = nil
-    var editableModel: EditableModel = EditableModel() //画面編集項目のモデルと管理
     
     override func actCommit(_ sender: UIButton) {
         print(#line, #function, "ボタン押下でAPIフェッチ確認")
-        print(#line, #function, "✳️\(detail?.debugDisp)✳️")
-        print(#line, String(repeating: "=", count: 44))
-//        for _item in arrData {
-//            print(_item.debugDisp)
-//            var arr: [EditableItemH] = []
-//            for ei in _item.childItems {
-//                arr.append(ei)
-//            }
-//            editableModel.arrData.append(arr)
-//            print(#line, String(repeating: "-", count: 33))
-//        }
-        print(#line, String(repeating: "=", count: 44))
-        print(editableModel.arrData.count)
-        print(#line, String(repeating: "=", count: 44))
-        editableModel.chkTableCellAll()
-        print(#line, String(repeating: "=", count: 44))
-        print(editableModel.arrTextFieldNextDoneKey.description)
-        print(#line, String(repeating: "=", count: 44))
-
-//        for _item in arrData {
-//            let (isChange, editTemp) = editableModel.makeTempItem(_item)
-//            let item: EditableItemH! = isChange ? editTemp : _item
-//            if isChange {
-//                print("▼変更ありました___")
-//                print(_item.debugDisp)
-//                print(item.debugDisp)
-//            } else {
-//                print("▼変更ないです___")
-//                print(_item.debugDisp)
-//                print(item.debugDisp)
-//            }
-//            print(String(repeating: "-", count: 33))
-//        }
+        for items in editableModel.arrData {
+            for _item in items {
+                let (isChange, editTemp) = editableModel.makeTempItem(_item)
+                let item: EditableItemH! = isChange ? editTemp : _item
+                if isChange {
+                    print("\t▼変更あり: \(item.debugDisp)")
+                }
+            }
+        }
         print(String(repeating: "=", count: 44))
-
-        
-//        let num = arc4random_uniform(2)
-//        print(num)
-//        if num == 0 {
-//            fetchCreateProfile()
-//        } else {
-//            fetchUpdateProfile()
-//        }
     }
     override func initData() {
         title = "個人プロフィール"
+        
+        
+        
         if Constants.DbgOfflineMode {
             self.detail = MdlProfile(familyName: "familyName", firstName: "firstName", familyNameKana: "familyNameKana", firstNameKana: "firstNameKana", birthday: DateHelper.convStr2Date("1900-01-01"), gender: "gender", zipCode: "zipCode", prefecture: "prefecture", address1: "address1", address2: "address2", mailAddress: "mailAddress", mobilePhoneNo: "mobilePhoneNo")
         }
@@ -73,6 +42,7 @@ class ProfilePreviewVC: PreviewBaseVC {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
         guard let _detail = detail else { return }
         self.arrData.removeAll()//いったん全件を削除しておく
+        editableModel.arrData.removeAll()//こちらで管理させる？！
         //===４．氏名（必須）
         //    ・未記入時は「未入力（必須）」と表示
         //    ・表記形式は「{氏} {名} （{氏(カナ)} {名(カナ)}」
@@ -131,7 +101,17 @@ class ProfilePreviewVC: PreviewBaseVC {
         arrData.append(MdlItemH(.mobilephoneH2, "\(bufMobilePhoneNo)", "\(bufMobilePhoneNoNotice)", readonly: true, childItems: [
             EditableItemH(type: .inputText, editItem: EditItemMdlProfile.mobilePhoneNo, val: _detail.mobilePhoneNo),
         ]))
-        
+        //=== editableModelで管理させる
+        editableModel.arrData.removeAll()
+        for items in arrData { editableModel.arrData.append(items.childItems) }
+//        print(#line, String(repeating: "=", count: 44))
+//        print(editableModel.arrData.debugDescription)
+//        for (y, items) in editableModel.arrData.enumerated() {
+//            for (x, item) in items.enumerated() {
+//                print("\t(\(y)-\(x)) [\(item.debugDisp)]")
+//            }
+//        }
+//        print(#line, String(repeating: "=", count: 44))
         tableVW.reloadData()//描画しなおし
     }
     
