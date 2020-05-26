@@ -32,6 +32,7 @@ class ProfilePreviewVC: PreviewBaseVC {
             }
         }
         print(#line, String(repeating: "=", count: 44))
+        fetchUpdateProfile()
     }
     override func initData() {
         title = "個人プロフィール"
@@ -149,24 +150,40 @@ extension ProfilePreviewVC {
             SVProgressHUD.dismiss()
         }
     }
-    private func fetchCreateProfile() {
-        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-        let param: CreateProfileRequestDTO = CreateProfileRequestDTO(familyName: "試験", firstName: "太郎", familyNameKana: "シケン", firstNameKana: "タロウ", birthday: "1995-11-01", genderId: "2", zipCode: "1234567", prefectureId: "13", city: "有楽町1-1-1", town: "東御苑", email: "test@example.com")
-        AuthManager.needAuth(true)
-        ProfileAPI.profileControllerCreate(body: param)
-        .done { resp in
-            print(resp)
-        }
-        .catch { (error) in
-            print(error.localizedDescription)
-        }
-        .finally {
-            self.fetchGetProfile()
-        }
-    }
+//    private func fetchCreateProfile() {
+//        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
+//        let param: CreateProfileRequestDTO = CreateProfileRequestDTO(familyName: "試験", firstName: "太郎", familyNameKana: "シケン", firstNameKana: "タロウ", birthday: "1995-11-01", genderId: "2", zipCode: "1234567", prefectureId: "13", city: "有楽町1-1-1", town: "東御苑", email: "test@example.com")
+//        AuthManager.needAuth(true)
+//        ProfileAPI.profileControllerCreate(body: param)
+//        .done { resp in
+//            print(resp)
+//        }
+//        .catch { (error) in
+//            print(error.localizedDescription)
+//        }
+//        .finally {
+//            self.fetchGetProfile()
+//        }
+//    }
     private func fetchUpdateProfile() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-        let param: UpdateProfileRequestDTO = UpdateProfileRequestDTO(familyName: "試験2", firstName: "太郎2", familyNameKana: "シケン2", firstNameKana: "タロウ2", birthday: "2005-12-02", genderId: "1", zipCode: "2345678", prefectureId: "14", city: "有楽町2-2-2", town: "外縁", email: "test2@example.com")
+        var param = UpdateProfileRequestDTO(familyName: nil, firstName: nil, familyNameKana: nil, firstNameKana: nil, birthday: nil, genderId: nil, zipCode: nil, prefectureId: nil, city: nil, town: nil, email: nil)
+        for (key, val) in editableModel.editTempCD {
+            switch key {
+            case EditItemMdlProfile.familyName.itemKey: param.familyName = val
+            case EditItemMdlProfile.firstName.itemKey: param.firstName = val
+            case EditItemMdlProfile.familyNameKana.itemKey: param.familyNameKana = val
+            case EditItemMdlProfile.firstNameKana.itemKey: param.firstNameKana = val
+            case EditItemMdlProfile.birthday.itemKey: param.birthday = val
+            case EditItemMdlProfile.gender.itemKey: param.genderId = val
+            case EditItemMdlProfile.zipCode.itemKey: param.zipCode = val
+            case EditItemMdlProfile.prefecture.itemKey: param.prefectureId = val
+            case EditItemMdlProfile.address1.itemKey: param.city = val
+            case EditItemMdlProfile.address2.itemKey: param.town = val
+            case EditItemMdlProfile.mailAddress.itemKey: param.email = val
+            default: break
+            }
+        }
         AuthManager.needAuth(true)
         ProfileAPI.profileControllerUpdate(body: param)
         .done { resp in
