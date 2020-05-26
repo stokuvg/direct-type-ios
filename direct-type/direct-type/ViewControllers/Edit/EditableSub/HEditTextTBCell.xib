@@ -26,11 +26,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="maj-dC-N1p" customClass="IKTextField" customModule="direct_type" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="maj-dC-N1p" customClass="IKTextField" customModule="direct_type" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="24.5" width="280" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
+                                    <action selector="actEditingChanged:" destination="KGk-i7-Jjw" eventType="editingChanged" id="5QP-sC-nUO"/>
                                     <action selector="actEditingDidBegin:" destination="KGk-i7-Jjw" eventType="editingDidBegin" id="ARW-K7-6gc"/>
                                     <action selector="actEditingDidEnd:" destination="KGk-i7-Jjw" eventType="editingDidEnd" id="241-yV-Oxb"/>
                                     <outlet property="delegate" destination="KGk-i7-Jjw" id="lO0-uA-QPX"/>

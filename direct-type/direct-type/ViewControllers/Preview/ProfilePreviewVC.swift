@@ -17,17 +17,26 @@ class ProfilePreviewVC: PreviewBaseVC {
     
     override func actCommit(_ sender: UIButton) {
         print(#line, #function, "ボタン押下でAPIフェッチ確認")
-//
-//        let num = arc4random_uniform(2)
-//        print(num)
-//        if num == 0 {
-//            fetchCreateProfile()
-//        } else {
-//            fetchUpdateProfile()
-//        }
+        tableVW.reloadData()
+        //===変更内容の確認
+        print(#line, String(repeating: "=", count: 44))
+        for (y, items) in editableModel.arrData.enumerated() {
+            for (x, _item) in items.enumerated() {
+                let (isChange, editTemp) = editableModel.makeTempItem(_item)
+                let item: EditableItemH! = isChange ? editTemp : _item
+                if isChange {
+                    print("\t(\(y)-\(x)) ✍️ [\(item.debugDisp)]")
+                } else {
+                    print("\t(\(y)-\(x)) 　 [\(item.debugDisp)]")
+                }
+            }
+        }
+        print(#line, String(repeating: "=", count: 44))
+        fetchUpdateProfile()
     }
     override func initData() {
         title = "個人プロフィール"
+        
         if Constants.DbgOfflineMode {
             self.detail = MdlProfile(familyName: "familyName", firstName: "firstName", familyNameKana: "familyNameKana", firstNameKana: "firstNameKana", birthday: DateHelper.convStr2Date("1900-01-01"), gender: "gender", zipCode: "zipCode", prefecture: "prefecture", address1: "address1", address2: "address2", mailAddress: "mailAddress", mobilePhoneNo: "mobilePhoneNo")
         }
@@ -37,6 +46,7 @@ class ProfilePreviewVC: PreviewBaseVC {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
         guard let _detail = detail else { return }
         self.arrData.removeAll()//いったん全件を削除しておく
+        editableModel.arrData.removeAll()//こちらで管理させる？！
         //===４．氏名（必須）
         //    ・未記入時は「未入力（必須）」と表示
         //    ・表記形式は「{氏} {名} （{氏(カナ)} {名(カナ)}」
@@ -95,7 +105,17 @@ class ProfilePreviewVC: PreviewBaseVC {
         arrData.append(MdlItemH(.mobilephoneH2, "\(bufMobilePhoneNo)", "\(bufMobilePhoneNoNotice)", readonly: true, childItems: [
             EditableItemH(type: .inputText, editItem: EditItemMdlProfile.mobilePhoneNo, val: _detail.mobilePhoneNo),
         ]))
-        
+        //=== editableModelで管理させる
+        editableModel.arrData.removeAll()
+        for items in arrData { editableModel.arrData.append(items.childItems) }
+//        print(#line, String(repeating: "=", count: 44))
+//        print(editableModel.arrData.debugDescription)
+//        for (y, items) in editableModel.arrData.enumerated() {
+//            for (x, item) in items.enumerated() {
+//                print("\t(\(y)-\(x)) [\(item.debugDisp)]")
+//            }
+//        }
+//        print(#line, String(repeating: "=", count: 44))
         tableVW.reloadData()//描画しなおし
     }
     
@@ -130,24 +150,40 @@ extension ProfilePreviewVC {
             SVProgressHUD.dismiss()
         }
     }
-    private func fetchCreateProfile() {
-        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-        let param: CreateProfileRequestDTO = CreateProfileRequestDTO(familyName: "試験", firstName: "太郎", familyNameKana: "シケン", firstNameKana: "タロウ", birthday: "1995-11-01", genderId: "2", zipCode: "1234567", prefectureId: "13", city: "有楽町1-1-1", town: "東御苑", email: "test@example.com")
-        AuthManager.needAuth(true)
-        ProfileAPI.profileControllerCreate(body: param)
-        .done { resp in
-            print(resp)
-        }
-        .catch { (error) in
-            print(error.localizedDescription)
-        }
-        .finally {
-            self.fetchGetProfile()
-        }
-    }
+//    private func fetchCreateProfile() {
+//        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
+//        let param: CreateProfileRequestDTO = CreateProfileRequestDTO(familyName: "試験", firstName: "太郎", familyNameKana: "シケン", firstNameKana: "タロウ", birthday: "1995-11-01", genderId: "2", zipCode: "1234567", prefectureId: "13", city: "有楽町1-1-1", town: "東御苑", email: "test@example.com")
+//        AuthManager.needAuth(true)
+//        ProfileAPI.profileControllerCreate(body: param)
+//        .done { resp in
+//            print(resp)
+//        }
+//        .catch { (error) in
+//            print(error.localizedDescription)
+//        }
+//        .finally {
+//            self.fetchGetProfile()
+//        }
+//    }
     private func fetchUpdateProfile() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-        let param: UpdateProfileRequestDTO = UpdateProfileRequestDTO(familyName: "試験2", firstName: "太郎2", familyNameKana: "シケン2", firstNameKana: "タロウ2", birthday: "2005-12-02", genderId: "1", zipCode: "2345678", prefectureId: "14", city: "有楽町2-2-2", town: "外縁", email: "test2@example.com")
+        var param = UpdateProfileRequestDTO(familyName: nil, firstName: nil, familyNameKana: nil, firstNameKana: nil, birthday: nil, genderId: nil, zipCode: nil, prefectureId: nil, city: nil, town: nil, email: nil)
+        for (key, val) in editableModel.editTempCD {
+            switch key {
+            case EditItemMdlProfile.familyName.itemKey: param.familyName = val
+            case EditItemMdlProfile.firstName.itemKey: param.firstName = val
+            case EditItemMdlProfile.familyNameKana.itemKey: param.familyNameKana = val
+            case EditItemMdlProfile.firstNameKana.itemKey: param.firstNameKana = val
+            case EditItemMdlProfile.birthday.itemKey: param.birthday = val
+            case EditItemMdlProfile.gender.itemKey: param.genderId = val
+            case EditItemMdlProfile.zipCode.itemKey: param.zipCode = val
+            case EditItemMdlProfile.prefecture.itemKey: param.prefectureId = val
+            case EditItemMdlProfile.address1.itemKey: param.city = val
+            case EditItemMdlProfile.address2.itemKey: param.town = val
+            case EditItemMdlProfile.mailAddress.itemKey: param.email = val
+            default: break
+            }
+        }
         AuthManager.needAuth(true)
         ProfileAPI.profileControllerUpdate(body: param)
         .done { resp in

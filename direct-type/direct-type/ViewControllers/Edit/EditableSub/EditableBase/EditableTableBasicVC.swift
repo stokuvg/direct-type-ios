@@ -9,10 +9,14 @@
 import UIKit
 import SwaggerClient
 
+protocol nameEditableTableBasicDelegate {
+    func changedSelect(editItem: MdlItemH, editTempCD: [EditableItemKey: EditableItemCurVal])
+}
+
 class EditableTableBasicVC: EditableBasicVC {
+    var delegate: nameEditableTableBasicDelegate? = nil
     var vwKbTapArea: UIView = UIView(frame: CGRect.zero)
-    var item: MdlItemH? = nil
-    var arrData: [EditableItemH] = []
+    var item: MdlItemH!
     
     @IBOutlet weak var vwHead: UIView!
     @IBOutlet weak var lblTitle: UILabel!
@@ -25,6 +29,19 @@ class EditableTableBasicVC: EditableBasicVC {
     @IBOutlet weak var vwFoot: UIView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
+//        print(#line, String(repeating: "=", count: 44))
+//        //=== 存在するTextField項目を列挙し、現在の値を取得する
+//        for tfKey in editableModel.arrTextFieldNextDoneKey {
+//            guard let _item = editableModel.getItemByKey(tfKey) else { continue }
+//            let (isChange, editTemp) = editableModel.makeTempItem(_item)
+//            if isChange {
+//                let item: EditableItemH! = isChange ? editTemp : _item
+//                print("\t\t\(item.debugDisp)")
+//            }
+//        }
+//        print(#line, String(repeating: "-", count: 33))
+        //編集画面でのeditTempCDを、そのまま前の画面に渡しても良い気がする
+        self.delegate?.changedSelect(editItem: item, editTempCD: editableModel.editTempCD) //フィードバックしておく
         self.dismiss(animated: true) {}
     }
 
@@ -59,11 +76,11 @@ class EditableTableBasicVC: EditableBasicVC {
         showTargetTF(tableVW, tf)//一緒にスクロールするように親を変えるためoverride
     }
 
-    func initData(_ item: MdlItemH) {
+    func initData(_ delegate: nameEditableTableBasicDelegate, _ item: MdlItemH) {
+        self.delegate = delegate
         self.item = item
-        for child in item.childItems { arrData.append(child) }
         //=== IndexPathなどを設定するため
-        editableModel.initItemEditable(arrData)
+        editableModel.initItemEditable(item.childItems)
     }
     func dispData() {
         guard let _item = item else { return }
@@ -149,11 +166,7 @@ class EditableTableBasicVC: EditableBasicVC {
         self.tableVW.reloadData()//項目の再描画
     }
     override func dispEditableItemByKey(_ itemKey: EditableItemKey) {
-        self.tableVW.reloadData()//項目の再描画//!!!
-        print(editableModel.dicTextFieldIndexPath.description)
-        
         guard let curIdxPath = editableModel.dicTextFieldIndexPath[itemKey] else { return }
-        print("🌸[\(#function)]🌸[\(editableModel)]🌸[\(itemKey)]🌸[\(curIdxPath)]")
         tableVW.reloadRows(at: [curIdxPath], with: UITableView.RowAnimation.automatic)
     }
     //=======================================================================================================
@@ -163,19 +176,15 @@ class EditableTableBasicVC: EditableBasicVC {
 extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
     //=== 通常テーブル
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrData.count
+        return item.childItems.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let _item = arrData[indexPath.row]
+        let _item = item.childItems[indexPath.row]
         let (isChange, editTemp) = editableModel.makeTempItem(_item)
         let item: EditableItemH! = isChange ? editTemp : _item
         switch item.editType {
         case .inputText:
-            //!!!
             let returnKeyType: UIReturnKeyType = (item.editableItemKey == editableModel.lastEditableItemKey) ? .done : .next
-            print("[returnKeyType: \(returnKeyType.rawValue)]")
-
-            
             let cell: HEditTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditTextTBCell", for: indexPath) as! HEditTextTBCell
             cell.initCell(self, item, returnKeyType)
             cell.dispCell()
@@ -211,6 +220,12 @@ extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
         }
     }
 }
+
+
+
+
+
+//==========================================================================================
 
 
 

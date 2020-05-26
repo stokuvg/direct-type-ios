@@ -28,9 +28,9 @@ class HEditZipcodeTBCell: UITableViewCell {
         guard let _item = item else { return }
         let bufTitle = _item.dispName //_item.type.dispTitle
         lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
-        tfValueZip3.text = String.substr(_item.curVal, 1, 3)
-        tfValueZip4.text = String.substr(_item.curVal, 4, 4)
-
+        var zipcode = _item.curVal.zeroUme(7)
+        tfValueZip3.text = String.substr(zipcode, 1, 3)
+        tfValueZip4.text = String.substr(zipcode, 4, 4)
         lblDebug.text = ""
         if Constants.DbgDispStatus {
             let bufDebug = _item.debugDisp

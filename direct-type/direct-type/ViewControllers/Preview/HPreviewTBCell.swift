@@ -31,6 +31,7 @@ class MdlItemH {
 
 class HPreviewTBCell: UITableViewCell {
     var item: MdlItemH? = nil
+    var editTempCD: [EditableItemKey: EditableItemCurVal] = [:]
     
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblValue: UILabel!
@@ -41,8 +42,9 @@ class HPreviewTBCell: UITableViewCell {
         // Initialization code
     }
 
-    func initCell(_ item: MdlItemH) {
+    func initCell(_ item: MdlItemH, editTempCD: [EditableItemKey: EditableItemCurVal]) {
         self.item = item
+        self.editTempCD = editTempCD//表示だけに使用するため横流し
         if item.readonly {
             self.isUserInteractionEnabled = false
             self.accessoryType = .none
@@ -54,21 +56,21 @@ class HPreviewTBCell: UITableViewCell {
     
     func dispCell() {
         guard let _item = item else { return }
+        //子項目に値を適用させておく必要ありだ
+        for (n, item) in _item.childItems.enumerated() {
+            if let temp = editTempCD[item.editableItemKey] {
+                _item.childItems[n].curVal = temp
+            }
+        }
         //===表示用文字列の生成
         let bufTitle: String = _item.type.dispTitle
-        //let bufValue: String = _item.value
-        let bufNotice: String = _item.notice
         let bufValue: String = dispCellValue(_item)
-        
+        let bufNotice: String = _item.notice
         //===表示させる
         lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
         lblValue.text(text: bufValue, fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         lblNotice.text(text: bufNotice, fontType: .font_SS, textColor: UIColor.init(colorType: .color_parts_gray)!, alignment: .left)
-        if _item.notice == "" {
-            lblNotice.isHidden = true
-        } else {
-            lblNotice.isHidden = false
-        }
+        lblNotice.isHidden = (_item.notice == "") ? true : false
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
