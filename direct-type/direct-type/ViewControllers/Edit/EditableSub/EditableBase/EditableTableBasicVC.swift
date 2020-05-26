@@ -9,7 +9,12 @@
 import UIKit
 import SwaggerClient
 
+protocol nameEditableTableBasicDelegate {
+    func changedSelect(editItem: MdlItemH, editTempCD: [EditableItemKey: EditableItemCurVal])
+}
+
 class EditableTableBasicVC: EditableBasicVC {
+    var delegate: nameEditableTableBasicDelegate? = nil
     var vwKbTapArea: UIView = UIView(frame: CGRect.zero)
     var item: MdlItemH!
     
@@ -24,28 +29,20 @@ class EditableTableBasicVC: EditableBasicVC {
     @IBOutlet weak var vwFoot: UIView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
-        print(#line, String(repeating: "=", count: 44))
-        print("\titem: \(item.debugDisp)")
-        print(#line, String(repeating: "-", count: 33))
-        print("\t [childItems: \(item.childItems.count) 件]")
-        if let _item = item {
-            for ei in _item.childItems {
-                print("\t\t\(ei.debugDisp)")
-            }
-        }
-        print(#line, String(repeating: "-", count: 33))
-        
-        //=== 存在するTextField項目を列挙し、現在の値を取得する
-        for tfKey in editableModel.arrTextFieldNextDoneKey {
-            guard let item = editableModel.getItemByKey(tfKey) else { continue }
-            guard let curIdxPath = editableModel.dicTextFieldIndexPath[tfKey] else { continue }
-            if let cell = self.tableVW.cellForRow(at: curIdxPath) as? HEditTextTBCell {
-                print("🌸[\(item.debugDisp)🌸[\(curIdxPath)]🌸[\(cell.tfValue.text ?? "")]")
-            }
-        }
-        print(#line, String(repeating: "=", count: 44))
-
-//        self.dismiss(animated: true) {}
+//        print(#line, String(repeating: "=", count: 44))
+//        //=== 存在するTextField項目を列挙し、現在の値を取得する
+//        for tfKey in editableModel.arrTextFieldNextDoneKey {
+//            guard let _item = editableModel.getItemByKey(tfKey) else { continue }
+//            let (isChange, editTemp) = editableModel.makeTempItem(_item)
+//            if isChange {
+//                let item: EditableItemH! = isChange ? editTemp : _item
+//                print("\t\t\(item.debugDisp)")
+//            }
+//        }
+//        print(#line, String(repeating: "-", count: 33))
+        //編集画面でのeditTempCDを、そのまま前の画面に渡しても良い気がする
+        self.delegate?.changedSelect(editItem: item, editTempCD: editableModel.editTempCD) //フィードバックしておく
+        //self.dismiss(animated: true) {}
     }
 
     override func viewDidLoad() {
@@ -79,7 +76,8 @@ class EditableTableBasicVC: EditableBasicVC {
         showTargetTF(tableVW, tf)//一緒にスクロールするように親を変えるためoverride
     }
 
-    func initData(_ item: MdlItemH) {
+    func initData(_ delegate: nameEditableTableBasicDelegate, _ item: MdlItemH) {
+        self.delegate = delegate
         self.item = item
         //=== IndexPathなどを設定するため
         editableModel.initItemEditable(item.childItems)

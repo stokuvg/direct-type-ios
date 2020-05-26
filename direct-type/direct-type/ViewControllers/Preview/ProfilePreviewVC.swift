@@ -20,15 +20,15 @@ class ProfilePreviewVC: PreviewBaseVC {
         print(#line, #function, "ボタン押下でAPIフェッチ確認")
         print(#line, #function, "✳️\(detail?.debugDisp)✳️")
         print(#line, String(repeating: "=", count: 44))
-        for _item in arrData {
-            print(_item.debugDisp)
-            var arr: [EditableItemH] = []
-            for ei in _item.childItems {
-                arr.append(ei)
-            }
-            editableModel.arrData.append(arr)
-            print(#line, String(repeating: "-", count: 33))
-        }
+//        for _item in arrData {
+//            print(_item.debugDisp)
+//            var arr: [EditableItemH] = []
+//            for ei in _item.childItems {
+//                arr.append(ei)
+//            }
+//            editableModel.arrData.append(arr)
+//            print(#line, String(repeating: "-", count: 33))
+//        }
         print(#line, String(repeating: "=", count: 44))
         print(editableModel.arrData.count)
         print(#line, String(repeating: "=", count: 44))
@@ -38,7 +38,6 @@ class ProfilePreviewVC: PreviewBaseVC {
         print(#line, String(repeating: "=", count: 44))
 
 //        for _item in arrData {
-//            print(_item.)
 //            let (isChange, editTemp) = editableModel.makeTempItem(_item)
 //            let item: EditableItemH! = isChange ? editTemp : _item
 //            if isChange {

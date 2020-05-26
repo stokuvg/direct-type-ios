@@ -83,7 +83,7 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
         //通常の複数編集画面
         let storyboard = UIStoryboard(name: "Edit", bundle: nil)
         if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubEditBaseVC") as? SubEditBaseVC{
-            nvc.initData(item)
+            nvc.initData(self, item)
             //遷移アニメーション関連
             nvc.modalTransitionStyle = .coverVertical
             self.present(nvc, animated: true) {
@@ -92,3 +92,17 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+
+extension PreviewBaseVC: nameEditableTableBasicDelegate {
+    func changedSelect(editItem: MdlItemH, editTempCD: [EditableItemKey : EditableItemCurVal]) {
+        print(#line, #function, editItem.debugDisp)
+        if editTempCD.count > 0 {
+            print("▼変更がありました")
+            for (key, val) in editTempCD {
+                print("\t[\(key)]\t[\(val)]")
+            }
+        }
+    }
+    
+    
+}

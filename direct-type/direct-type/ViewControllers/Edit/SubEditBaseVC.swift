@@ -9,7 +9,8 @@
 import UIKit
 
 class SubEditBaseVC: EditableTableBasicVC {
-    override func initData(_ item: MdlItemH) {
+    override func initData(_ delegate: nameEditableTableBasicDelegate, _ item: MdlItemH) {
+        self.delegate = delegate
         self.item = item
         //=== IndexPathなどを設定するため
         editableModel.initItemEditable(item.childItems)

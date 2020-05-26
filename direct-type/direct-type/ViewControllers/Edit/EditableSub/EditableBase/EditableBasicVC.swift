@@ -62,7 +62,6 @@ class EditableBasicVC: TmpBasicVC, SubSelectFeedbackDelegate {
 //セルでのテキスト入力の変更
 extension EditableBasicVC: InputItemHDelegate {
     func textFieldShouldReturn(_ textField: IKTextField, _ item: EditableItemH) -> Bool {
-        print(#line, #function, "[textField.returnKeyType: \(textField.returnKeyType.rawValue)]")
         if textField.returnKeyType == .next {
             return moveNextCell(item.editableItemKey)//次のセルへ遷移
         }
@@ -73,7 +72,6 @@ extension EditableBasicVC: InputItemHDelegate {
        return true
     }
     func textFieldShouldClear(_ tf: IKTextField, _ item: EditableItemH) -> Bool {
-        print(#line, #function)
         editableModel.changeTempItem(item, text: "")//編集中の値の保持（と描画）
         if let depKey = editableModel.clearDependencyItemByKey(item.editableItemKey) { //依存関係があればクリア
             dispEditableItemByKey(depKey)//依存してた方の表示も更新する
