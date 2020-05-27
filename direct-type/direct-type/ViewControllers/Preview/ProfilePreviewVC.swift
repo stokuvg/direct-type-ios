@@ -130,17 +130,39 @@ class ProfilePreviewVC: PreviewBaseVC {
 }
 
 //=== APIフェッチ
-extension ProfilePreviewVC {
+extension UpdateProfileRequestDTO {
+    init() {
+        self.init(familyName: nil, firstName: nil, familyNameKana: nil, firstNameKana: nil, birthday: nil, genderId: nil, zipCode: nil, prefectureId: nil, city: nil, town: nil, email: nil)
+    }
+    init(_ editTempCD: [EditableItemKey: EditableItemCurVal]) {
+        self.init()
+        for (key, val) in editTempCD {
+            switch key {
+            case EditItemMdlProfile.familyName.itemKey: self.familyName = val
+            case EditItemMdlProfile.firstName.itemKey: self.firstName = val
+            case EditItemMdlProfile.familyNameKana.itemKey: self.familyNameKana = val
+            case EditItemMdlProfile.firstNameKana.itemKey: self.firstNameKana = val
+            case EditItemMdlProfile.birthday.itemKey: self.birthday = val
+            case EditItemMdlProfile.gender.itemKey: self.genderId = val
+            case EditItemMdlProfile.zipCode.itemKey: self.zipCode = val
+            case EditItemMdlProfile.prefecture.itemKey: self.prefectureId = val
+            case EditItemMdlProfile.address1.itemKey: self.city = val
+            case EditItemMdlProfile.address2.itemKey: self.town = val
+            case EditItemMdlProfile.mailAddress.itemKey: self.email = val
+            default: break
+            }
+        }
+    }
+}
 
+extension ProfilePreviewVC {
     private func fetchGetProfile() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         SVProgressHUD.show(withStatus: "プロフィール情報の取得")
-        AuthManager.needAuth(true)
-        ProfileAPI.profileControllerGet()
-        .done { resp in
-            let model = MdlProfile(dto: resp)
-            print(model.debugDisp)
-            self.detail = model
+        ApiManager.getProfile(Void(), isRetry: true)
+        .done { result in
+            print(result.debugDisp)
+            self.detail = result
         }
         .catch { (error) in
             self.showError(error)
@@ -150,81 +172,20 @@ extension ProfilePreviewVC {
             SVProgressHUD.dismiss()
         }
     }
-//    private func fetchCreateProfile() {
-//        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-//        let param: CreateProfileRequestDTO = CreateProfileRequestDTO(familyName: "試験", firstName: "太郎", familyNameKana: "シケン", firstNameKana: "タロウ", birthday: "1995-11-01", genderId: "2", zipCode: "1234567", prefectureId: "13", city: "有楽町1-1-1", town: "東御苑", email: "test@example.com")
-//        AuthManager.needAuth(true)
-//        ProfileAPI.profileControllerCreate(body: param)
-//        .done { resp in
-//            print(resp)
-//        }
-//        .catch { (error) in
-//            print(error.localizedDescription)
-//        }
-//        .finally {
-//            self.fetchGetProfile()
-//        }
-//    }
     private func fetchUpdateProfile() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-        var param = UpdateProfileRequestDTO(familyName: nil, firstName: nil, familyNameKana: nil, firstNameKana: nil, birthday: nil, genderId: nil, zipCode: nil, prefectureId: nil, city: nil, town: nil, email: nil)
-        for (key, val) in editableModel.editTempCD {
-            switch key {
-            case EditItemMdlProfile.familyName.itemKey: param.familyName = val
-            case EditItemMdlProfile.firstName.itemKey: param.firstName = val
-            case EditItemMdlProfile.familyNameKana.itemKey: param.familyNameKana = val
-            case EditItemMdlProfile.firstNameKana.itemKey: param.firstNameKana = val
-            case EditItemMdlProfile.birthday.itemKey: param.birthday = val
-            case EditItemMdlProfile.gender.itemKey: param.genderId = val
-            case EditItemMdlProfile.zipCode.itemKey: param.zipCode = val
-            case EditItemMdlProfile.prefecture.itemKey: param.prefectureId = val
-            case EditItemMdlProfile.address1.itemKey: param.city = val
-            case EditItemMdlProfile.address2.itemKey: param.town = val
-            case EditItemMdlProfile.mailAddress.itemKey: param.email = val
-            default: break
-            }
-        }
-        AuthManager.needAuth(true)
-        ProfileAPI.profileControllerUpdate(body: param)
-        .done { resp in
-            print(resp)
+        let param = UpdateProfileRequestDTO(editableModel.editTempCD)
+        SVProgressHUD.show(withStatus: "プロフィール情報の更新")
+        ApiManager.updateProfile(param, isRetry: true)
+        .done { result in
             self.fetchGetProfile()
         }
         .catch { (error) in
-            print(error.localizedDescription)
-            let myErr = AuthManager.convAnyError(error)
-            print(myErr.debugDisp)
-            switch myErr.code {
-            case 400: //Validation Errorは自動リトライしない
-                print("400: Validation Errorは自動リトライしない(個別チェック)")
-            default:
-                print(#line, error.localizedDescription)
-            }
-            self.showError(myErr)
-//
-//            if let _error = error as? NSError {
-//                print(#line, "NSError", _error.localizedDescription)
-//                print(#line, "[domain: \(_error.domain)]")
-//                print(#line, "[code: \(_error.code)]")
-//                print(#line, "[userInfo: \(_error.userInfo)]")
-//            }
-//            if let _error = error as? ErrorResponse {
-//                switch _error {
-//                case .error(let code, let data, let error):
-//                    if let _data = data {
-//                        let jsonStr = String(bytes: _data, encoding: .utf8)!
-//                        print("JSONに変換して表示: [\(jsonStr)]", error.localizedDescription)
-//                        self.showConfirm(title: "エラー \(code)", message: jsonStr, onlyOK: true)
-//
-//                        print("\n\n\(jsonStr)\n\n\n")
-//                    }
-//                }
-//            }
+            self.showError(error)
         }
         .finally {
-//            self.fetchGetProfile()
+            self.dispData()
+            SVProgressHUD.dismiss()
         }
     }
-
-
 }

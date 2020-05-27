@@ -65,54 +65,51 @@ extension ApiManager {
         print("今が: \(tiCurrent) / 最終更新が: \(tiLastUpdate) ... \(tiCurrent - tiLastUpdate) > \(Constants.FetchIntervalSecond) : \(flg)")
         return flg
     }
-//    //=== プロフィール取得 ===
-//    struct GetProfileParam: Codable {
-//    }
-//    fileprivate class func getProfile(_ param: GetProfileParam, isRetry: Bool = true) -> Promise<MdlProfile> {
-//        if isRetry {
-//            return firstly { () -> Promise<MdlProfile> in
-//                retry(args: param, task: getProfileFetch) { (error) -> Bool in return true }
-//            }
-//        } else {
-//            return getProfileFetch(param: param)
-//        }
-//    }
-//    private class func getProfileFetch(param: GetProfileParam) -> Promise<MdlProfile> {
-//        let (promise, resolver) = Promise<MdlProfile>.pending()
-//        AuthManager.needAuth(true)
-//        ProfileAPI.profileControllerGet()
-//        .done { result in
-//            print(result)
-//            resolver.fulfill(MdlProfile(dto: result)) //変換しておく
-//        }
-//        .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
-//            print(error)
-//            resolver.reject(error)
-//        }
-//        .finally {
-//        }
-//        return promise
-//    }
-    //=== プロフィール登録 ===
-    fileprivate class func createProfile(_ param: CreateProfileRequestDTO, isRetry: Bool = true) -> Promise<Void> {
+}
+
+extension ApiManager {
+    //=== プロフィール取得 ===
+    class func getProfile(_ param: Void, isRetry: Bool = true) -> Promise<MdlProfile> {
         if isRetry {
-            return firstly { () -> Promise<Void> in
+            return firstly { () -> Promise<MdlProfile> in
                 retry(args: param, task: getProfileFetch) { (error) -> Bool in return true }
             }
         } else {
             return getProfileFetch(param: param)
         }
     }
-    private class func getProfileFetch(param: CreateProfileRequestDTO) -> Promise<Void> {
-        let (promise, resolver) = Promise<Void>.pending()
+    private class func getProfileFetch(param: Void) -> Promise<MdlProfile> {
+        let (promise, resolver) = Promise<MdlProfile>.pending()
         AuthManager.needAuth(true)
         ProfileAPI.profileControllerGet()
         .done { result in
-            print(result)
-            resolver.fulfill(Void()) //変換しておく
+            resolver.fulfill(MdlProfile(dto: result)) //変換しておく
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
-            print(error)
+            resolver.reject(error)
+        }
+        .finally {
+        }
+        return promise
+    }
+    //=== プロフィール更新 ===
+    class func updateProfile(_ param: UpdateProfileRequestDTO, isRetry: Bool = true) -> Promise<Void> {
+        if isRetry {
+            return firstly { () -> Promise<Void> in
+                retry(args: param, task: updateProfileFetch) { (error) -> Bool in return true }
+            }
+        } else {
+            return updateProfileFetch(param: param)
+        }
+    }
+    private class func updateProfileFetch(param: UpdateProfileRequestDTO) -> Promise<Void> {
+        let (promise, resolver) = Promise<Void>.pending()
+        AuthManager.needAuth(true)
+        ProfileAPI.profileControllerUpdate(body: param)
+        .done { result in
+            resolver.fulfill(Void())
+        }
+        .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
             resolver.reject(error)
         }
         .finally {
