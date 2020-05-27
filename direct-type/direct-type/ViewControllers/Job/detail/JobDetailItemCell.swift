@@ -36,33 +36,7 @@ class JobDetailItemCell: BaseJobDetailCell {
     
     func setup(data: MdlJobCardDetail,row: Int) {
 //    func setup(data:[String:Any]) {
-        Log.selectLog(logLevel: .debug, "JobDetailItemCell setup start")
-
-        Log.selectLog(logLevel: .debug, "row:\(row)")
-//        Log.selectLog(logLevel: .debug, "data:\(data)")
         
-        /*
-
-         // 1.仕事内容:              必須
-         // 　・案件例:               任意
-         // 　・手掛ける商品・サービス:   任意
-         // 　・開発環境・業務範囲:     任意
-         // 　・注目ポイント:           任意
-         // 2.応募資格:              必須
-         // 　・歓迎する経験・スキル:     任意
-         // 　・過去の採用例:           任意
-         // 　・この仕事の向き・不向き:  任意
-         // 3.雇用携帯コード:        必須
-         // 4.給与:               必須
-         // 　・賞与について:          任意
-         // 5.勤務時間:             必須
-         //   ・残業について:
-         // 6.勤務地:              必須
-         //   ・交通詳細
-         // 7.休日休暇:            必須
-         // 8.待遇・福利厚生:       必須
-         // 　・産休・育休取得:      任意
-         */
         var title:String = ""
         var text:String = ""
         switch row {
@@ -147,12 +121,51 @@ class JobDetailItemCell: BaseJobDetailCell {
                     let suitableUnsuitableData = ["title": title, "text": text]
                     optionalDatas.append(suitableUnsuitableData)
                 }
+            case 3:
+                // 賞与について
+                if data.bonusAbout.text!.count > 0 {
+                    let title = data.bonusAbout.title!
+                    let text = data.bonusAbout.text!
+                    let bonusAboutData = ["title":title,"text":text]
+                    optionalDatas.append(bonusAboutData)
+                }
+            case 4:
+                // 残業について
+                if data.overtimeAbout.text!.count > 0 {
+                    let title = data.overtimeAbout.title!
+                    let text = data.overtimeAbout.text!
+                    let overtimeAboutData = ["title":title,"text":text]
+                    optionalDatas.append(overtimeAboutData)
+                }
+                // 残業時間目安
+                if data.overtimeCode.code! > 0 {
+                    let title = data.overtimeCode.title
+                    let code = SelectItemsManager.getCodeDisp(.overtime, code: data.overtimeCode.code!)?.disp
+                    let text = code
+                    let overtimeCodeData = ["title":title, "text":text]
+                    optionalDatas.append(overtimeCodeData as [String : Any])
+                }
+            case 5:
+                // 交通・詳細
+                if data.transport.text!.count > 0 {
+                    let title = data.transport.title!
+                    let text = data.transport.text!
+                    let transportData = ["title":title,"text":text]
+                    optionalDatas.append(transportData)
+                }
+            case 7:
+                // 産休・育休取得状況
+                if data.childcare.text!.count > 0 {
+                    let title = data.childcare.title!
+                    let text = data.childcare.text!
+                    let childcareData = ["title":title,"text":text]
+                    optionalDatas.append(childcareData)
+                }
             default:
                 optionalDatas = []
         }
         
         if optionalDatas.count > 0 {
-            Log.selectLog(logLevel: .debug, "任意用View")
             let optionalFrameWidth = self.itemBackView.frame.size.width
             for i in 0..<optionalDatas.count {
                 let optionalView = UINib.init(nibName: "JobDetailItemOptionalView", bundle: nil)
@@ -170,14 +183,13 @@ class JobDetailItemCell: BaseJobDetailCell {
                 
                 self.itemStackView.addArrangedSubview(optionalView)
             }
+        } else {
+            Log.selectLog(logLevel: .debug, "任意用Viewは他は入らない")
         }
-        
-        Log.selectLog(logLevel: .debug, "任意用View 追加後 self.itemStackView.subviews:\(self.itemStackView.subviews)")
         
         // 注目
         var attentionDatas:[[String:Any]] = []
         if row == 0 {
-            Log.selectLog(logLevel: .debug, "注目用View")
             let spotTitle1 = data.spotTitle1
             let spotDetail1 = data.spotDetail1
             
@@ -207,52 +219,8 @@ class JobDetailItemCell: BaseJobDetailCell {
                 self.itemStackView.addArrangedSubview(attentionView)
             }
         } else {
-            
+            Log.selectLog(logLevel: .debug, "注目用Viewは他は入らない")
         }
-        
-        /*
-        let optional = data["optional"] as! [[String:Any]]
-        if optional.count > 0 {
-            let optionalFrameWidth = self.itemBackView.frame.size.width
-            for i in 0..<optional.count {
-                let optionalView = UINib.init(nibName: "JobDetailItemOptionalView", bundle: nil)
-                .instantiate(withOwner: self, options: nil)
-                .first as! JobDetailItemOptionalView
-                
-                var viewFrame = optionalView.frame
-                viewFrame.size.width = optionalFrameWidth
-                optionalView.frame = viewFrame
-                
-                optionalView.tag = (i+1)
-                
-                let optionalData = optional[i]
-                optionalView.setup(datas: optionalData)
-                
-                self.itemStackView.addArrangedSubview(optionalView)
-            }
-        }
-        
-        let attention = data["attention"] as! [[String:Any]]
-        if attention.count > 0 {
-            let attentionFrameWidth = self.itemBackView.frame.size.width
-            for i in 0..<attention.count {
-                let attentionView = UINib.init(nibName: "JobDetailItemAttentionView", bundle: nil)
-                .instantiate(withOwner: self, options: nil)
-                .first as! JobDetailItemAttentionView
-                
-                var viewFrame = attentionView.frame
-                viewFrame.size.width = attentionFrameWidth
-                attentionView.frame = viewFrame
-                
-                attentionView.tag = (i+1)
-                
-                let attentionData = attention[i]
-                attentionView.setup(datas: attentionData)
-                
-                self.itemStackView.addArrangedSubview(attentionView)
-            }
-        }
-        */
         
     }
 }

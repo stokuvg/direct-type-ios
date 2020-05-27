@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -54,7 +53,7 @@
                             <rect key="frame" x="0.0" y="35" width="414" height="40"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LRV-XB-E1G">
-                                    <rect key="frame" x="15" y="15" width="384" height="10"/>
+                                    <rect key="frame" x="15" y="10" width="384" height="20"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -62,8 +61,8 @@
                             </subviews>
                             <color key="backgroundColor" name="color-white"/>
                             <constraints>
-                                <constraint firstItem="LRV-XB-E1G" firstAttribute="top" secondItem="ZTe-c7-VsQ" secondAttribute="top" constant="15" id="1qn-OC-vxB"/>
-                                <constraint firstAttribute="bottom" secondItem="LRV-XB-E1G" secondAttribute="bottom" constant="15" id="2zt-OC-nNC"/>
+                                <constraint firstItem="LRV-XB-E1G" firstAttribute="top" secondItem="ZTe-c7-VsQ" secondAttribute="top" constant="10" id="1qn-OC-vxB"/>
+                                <constraint firstAttribute="bottom" secondItem="LRV-XB-E1G" secondAttribute="bottom" constant="10" id="2zt-OC-nNC"/>
                                 <constraint firstItem="LRV-XB-E1G" firstAttribute="leading" secondItem="ZTe-c7-VsQ" secondAttribute="leading" constant="15" id="I4C-sK-IDm"/>
                                 <constraint firstAttribute="trailing" secondItem="LRV-XB-E1G" secondAttribute="trailing" constant="15" id="jWo-8k-6C2"/>
                             </constraints>
@@ -81,14 +80,13 @@
             <color key="backgroundColor" name="color-white"/>
             <constraints>
                 <constraint firstItem="6yb-hY-LnH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="1gW-c2-O1v"/>
-                <constraint firstItem="6yb-hY-LnH" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Anq-jk-89F"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="6yb-hY-LnH" secondAttribute="trailing" id="AtK-ih-dvy"/>
+                <constraint firstItem="6yb-hY-LnH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Anq-jk-89F"/>
+                <constraint firstAttribute="trailing" secondItem="6yb-hY-LnH" secondAttribute="trailing" id="AtK-ih-dvy"/>
                 <constraint firstAttribute="bottom" secondItem="6yb-hY-LnH" secondAttribute="bottom" id="Ckf-yp-EgS"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="markLabel" destination="PP1-lA-ERJ" id="tuJ-aN-Ryz"/>
                 <outlet property="textLabel" destination="LRV-XB-E1G" id="2WH-Mf-oqc"/>

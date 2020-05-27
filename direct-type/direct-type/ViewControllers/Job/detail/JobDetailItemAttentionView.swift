@@ -16,7 +16,6 @@ class JobDetailItemAttentionView: UIView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         self.markLabel.text(text: "注 目", fontType: .C_font_Sb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
     }
     

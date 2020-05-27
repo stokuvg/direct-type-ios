@@ -10,7 +10,7 @@ import UIKit
 
 class JobDetailItemOptionalView: UIView {
     
-    @IBOutlet weak var stackView:UIStackView!
+    @IBOutlet weak var optionalStackView:UIStackView!
     @IBOutlet weak var titleView:UIView!
     @IBOutlet weak var titleLabel:UILabel!
     @IBOutlet weak var itemView:UIView!

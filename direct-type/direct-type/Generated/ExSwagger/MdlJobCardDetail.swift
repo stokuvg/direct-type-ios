@@ -69,17 +69,17 @@ class MdlJobCardDetail: Codable {
     /** ２6．給与（必須）＊「想定給与」＊ */
     var salary: JobCardDetailSalary
     /** ２７．賞与について（任意） */
-    var bonusAbout: String
+    var bonusAbout: JobCardDetailBonusAbout
     /** 28．勤務時間（必須） */
     var jobtime: JobCardDetailJobtime
     /** 目安残業時間 */
-    var overtimeCode: Int
+    var overtimeCode: JobCardDetailOvertimeCode
     /** 残業について */
-    var overtimeAbout: String
+    var overtimeAbout: JobCardDetailOvertimeAbout
     /** 30．勤務地（必須） */
     var workPlace: JobCardDetailWorkPlace
     /** ３１．交通・詳細（必須） */
-    var transport: String
+    var transport: JobCardDetailTransport
     /** ＊３２．休日休暇（必須） */
     var holiday: JobCardDetailHoliday
     /** ＊３３．待遇・福利厚生（必須） */
@@ -93,7 +93,7 @@ class MdlJobCardDetail: Codable {
     var companyDescription: JobCardDetailCompanyDescription
     var userFilter: UserFilterInfo
 
-    init(jobCardCode: String, jobName: String, salaryMinId:Int, salaryMaxId:Int,isSalaryDisplay:Bool, salaryOffer: String, workPlaceCodes: [Int], companyName: String, displayPeriod: JobCardDetailDisplayPeriod, mainPicture: String, subPictures: [String], mainTitle: String, mainContents: String, prCodes: [Int], salarySample: String, recruitmentReason: String, jobDescription: JobCardDetailJobDescription, jobExample: JobCardDetailJobExample, product: JobCardDetailProduct, scope: JobCardDetailScope, spotTitle1: String, spotDetail1: String, spotTitle2: String, spotDetail2: String, qualification: JobCardDetailQualification, betterSkill: JobCardDetailBetterSkill, applicationExample: JobCardDetailApplicationExample, suitableUnsuitable: JobCardDetailSuitableUnsuitable, employmentType: JobCardDetailEmploymentType, salary: JobCardDetailSalary, bonusAbout: String, jobtime: JobCardDetailJobtime, overtimeCode: Int, overtimeAbout: String, workPlace: JobCardDetailWorkPlace, transport: String, holiday: JobCardDetailHoliday, welfare: JobCardDetailWelfare, childcare: JobCardDetailChildcare, interviewMemo: JobCardDetailInterviewMemo, selectionProcess: JobCardDetailSelectionProcess, contactInfo: JobCardDetailContactInfo, companyDescription: JobCardDetailCompanyDescription, userFilter: UserFilterInfo) {
+    init(jobCardCode: String, jobName: String, salaryMinId:Int, salaryMaxId:Int,isSalaryDisplay:Bool, salaryOffer: String, workPlaceCodes: [Int], companyName: String, displayPeriod: JobCardDetailDisplayPeriod, mainPicture: String, subPictures: [String], mainTitle: String, mainContents: String, prCodes: [Int], salarySample: String, recruitmentReason: String, jobDescription: JobCardDetailJobDescription, jobExample: JobCardDetailJobExample, product: JobCardDetailProduct, scope: JobCardDetailScope, spotTitle1: String, spotDetail1: String, spotTitle2: String, spotDetail2: String, qualification: JobCardDetailQualification, betterSkill: JobCardDetailBetterSkill, applicationExample: JobCardDetailApplicationExample, suitableUnsuitable: JobCardDetailSuitableUnsuitable, employmentType: JobCardDetailEmploymentType, salary: JobCardDetailSalary, bonusAbout: JobCardDetailBonusAbout, jobtime: JobCardDetailJobtime, overtimeCode: JobCardDetailOvertimeCode, overtimeAbout: JobCardDetailOvertimeAbout, workPlace: JobCardDetailWorkPlace, transport: JobCardDetailTransport, holiday: JobCardDetailHoliday, welfare: JobCardDetailWelfare, childcare: JobCardDetailChildcare, interviewMemo: JobCardDetailInterviewMemo, selectionProcess: JobCardDetailSelectionProcess, contactInfo: JobCardDetailContactInfo, companyDescription: JobCardDetailCompanyDescription, userFilter: UserFilterInfo) {
         
         self.jobCardCode = jobCardCode
         self.jobName = jobName

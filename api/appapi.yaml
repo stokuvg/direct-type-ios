@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 5.27.01
+  version: 5.27.02
   title: アプリ想定モデル・API
   description: アプリの想定モデル・APIの仕様書です
 
@@ -1926,7 +1926,19 @@ components:
           description: ２6．給与（必須）＊「想定給与」＊
         ##=====================
         bonus_about:
-          type: string
+          type: object
+          required:
+            - title:
+            - text:
+          properties:
+            title:
+                type: string
+                example: title
+                description: 賞与について タイトル
+            text:
+                type: string
+                example: text
+                description: 賞与について テキスト
           example: bonus_about
           description: ２７．賞与について（任意）
         ##=====================
@@ -1949,11 +1961,36 @@ components:
         ##=====================
         ##29．残業について（残業時間）
         overtime_code:
-          type: integer
+          type: object
+          required:
+            - title:
+            - code:
+          properties:
+            title:
+                type: string
+                example: title
+                description: 目安残業時間タイトル
+            code:
+                type: integer
+                example: 0
+                description: 目安残業時間コード
           example: 0
           description: 目安残業時間
         overtime_about:
-          type: string
+          type: object
+          required:
+            - title:
+            - text:
+          properties:
+            title:
+                type: string
+                example: title
+                description: 残業について タイトル
+                
+            text:
+                type: string
+                example: text
+                description: 残業について テキスト
           example: overtime_about
           description: 残業について
         ##=====================
@@ -1975,7 +2012,19 @@ components:
           description: 30．勤務地（必須）
         ##=====================
         transport:
-          type: string
+          type: object
+          required:
+            - title:
+            - text:
+          properties:
+            title:
+                type: string
+                example: title
+                description: 交通・詳細タイトル
+            text:
+                type: string
+                example: text
+                description: 交通・詳細テキスト
           example: transport
           description: ３１．交通・詳細（必須）
         ##=====================

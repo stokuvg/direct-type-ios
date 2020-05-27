@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -59,7 +58,7 @@
                             <rect key="frame" x="0.0" y="75" width="414" height="25"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="25" id="tFx-gf-5xB"/>
+                                <constraint firstAttribute="height" priority="750" constant="25" id="tFx-gf-5xB"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -69,17 +68,16 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="x79-AS-sNw" secondAttribute="bottom" id="AOn-c5-OO6"/>
                 <constraint firstItem="x79-AS-sNw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="M9G-pd-unR"/>
-                <constraint firstItem="x79-AS-sNw" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="PBr-pU-bFn"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="x79-AS-sNw" secondAttribute="trailing" id="nY9-Ee-UEe"/>
+                <constraint firstItem="x79-AS-sNw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PBr-pU-bFn"/>
+                <constraint firstAttribute="trailing" secondItem="x79-AS-sNw" secondAttribute="trailing" id="nY9-Ee-UEe"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="itemLabel" destination="sTC-4p-K9m" id="i0W-nX-mDn"/>
                 <outlet property="itemView" destination="t3A-La-U1c" id="yrY-iE-Mpa"/>
-                <outlet property="stackView" destination="x79-AS-sNw" id="v3b-yM-zqw"/>
+                <outlet property="optionalStackView" destination="x79-AS-sNw" id="QBZ-mk-E5x"/>
                 <outlet property="titleLabel" destination="Riq-tM-HWd" id="AYY-72-Yoa"/>
                 <outlet property="titleView" destination="qCC-KX-Vrg" id="Ubm-mC-QnU"/>
             </connections>

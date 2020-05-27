@@ -43,7 +43,6 @@ class JobDetailImageCell: BaseTableViewCell {
     }
         
     func setCellWidth(width:CGFloat) {
-        Log.selectLog(logLevel: .debug, "JobDetailDataCell setCellWidth start")
         
         var mainImageBackFrame = self.mainImageBackView.frame
         mainImageBackFrame.size.width = self.contentView.frame.size.width
@@ -85,8 +84,6 @@ class JobDetailImageCell: BaseTableViewCell {
                 }
             }
         }
-        
-        Log.selectLog(logLevel: .debug, "imageUrlStrings:\(imageUrlStrings)")
         
         imageCnt = imageUrlStrings.count
         if imageCnt > 1 {
