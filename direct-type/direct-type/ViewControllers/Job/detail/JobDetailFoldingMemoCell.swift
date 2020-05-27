@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwaggerClient
 
 class JobDetailFoldingMemoCell: BaseTableViewCell {
     
@@ -27,7 +28,13 @@ class JobDetailFoldingMemoCell: BaseTableViewCell {
         // Configure the view for the selected state
     }
     
-    func setup(data:String) {
-        self.memoLabel.text(text: data, fontType: .C_font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+    func setup(data: JobCardDetailInterviewMemo) {
+//    func setup(data:String) {
+        let memoText = data.interviewContent
+        self.memoLabel.text(text: memoText, fontType: .C_font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        
+        let memoImageUrlString1 = data.interviewPhoto1
+        let memoImageUrlString2 = data.interviewPhoto2
+        let memoImageUrlString3 = data.interviewPhoto3
     }
 }

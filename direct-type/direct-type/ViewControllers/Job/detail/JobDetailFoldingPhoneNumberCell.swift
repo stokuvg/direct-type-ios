@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwaggerClient
 
 class JobDetailFoldingPhoneNumberCell: BaseTableViewCell {
     
@@ -37,20 +38,21 @@ class JobDetailFoldingPhoneNumberCell: BaseTableViewCell {
         // Configure the view for the selected state
     }
     
-    func setup(data: [String: Any]) {
+    func setup(data: JobCardDetailContactInfo){
+//    func setup(data: [String: Any]) {
         
         let style = NSMutableParagraphStyle()
         style.lineSpacing = FontType.C_font_S.lineSpacing
         let attributes = [NSAttributedString.Key.paragraphStyle : style]
         
-        let urlString = data["url"] as! String
-        let zipcodeString = data["zipcode"] as! String
-        let addressString = data["address"] as! String
-        let telString = data["tel"] as! String
-        let personString = data["person"] as! String
-        let emailString = data["email"] as! String
+        let urlString = data.companyUrl
+        let zipCodeString = data.contactZipcode
+        let addressString = data.contactAddress
+        let telString = data.contactPhone
+        let personString = data.contactPerson
+        let emailString = data.contactMail
         
-        let text = self.makeAdoptionText(url: urlString, zipCode: zipcodeString, address: addressString, tel: telString, person: personString, email: emailString)
+        let text = self.makeAdoptionText(url: urlString, zipCode: zipCodeString, address: addressString, tel: telString, person: personString, email: emailString)
 
         let attributedString = NSMutableAttributedString(string: text)
 
