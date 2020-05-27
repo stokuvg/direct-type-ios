@@ -53,6 +53,12 @@ class MyPageVC: TmpNaviTopVC {
         }
     }
 
+    //Get Jobs
+    @IBOutlet weak var btnButton06: UIButton!
+    @IBAction func actButton06(_ sender: UIButton) {
+        fetchGetJobList()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         btnButton01.setTitle("プロフィール", for: .normal)
@@ -60,5 +66,23 @@ class MyPageVC: TmpNaviTopVC {
         btnButton03.setTitle("職務経歴書・スキルシート", for: .normal)
         btnButton04.setTitle("さくさく職歴書", for: .normal)
         btnButton05.setTitle("認証", for: .normal)
+        btnButton06.setTitle("API [Get] /jobs", for: .normal)
+    }
+}
+
+
+//=== APIフェッチ
+extension MyPageVC {
+    private func fetchGetJobList() {
+        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
+        ApiManager.getJobs(Void(), isRetry: true)
+        .done { result in
+            print(result.debugDisp)
+        }
+        .catch { (error) in
+            self.showError(error)
+        }
+        .finally {
+        }
     }
 }
