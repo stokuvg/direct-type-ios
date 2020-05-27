@@ -87,7 +87,56 @@ extension ApiManager {
         return promise
     }
 }
+//================================================================
+//=== プロフィール作成 ===
+extension CreateProfileRequestDTO {
+    init() {
+        self.init(familyName: "", firstName: "", familyNameKana: "", firstNameKana: "", birthday: "", genderId: "", zipCode: "", prefectureId: "", city: "", town: "", email: "")
+    }
+    init(_ profile: MdlProfile) {
+        self.init()
+        self.familyName = profile.familyName
+        self.firstName = profile.firstName
+        self.familyNameKana = profile.familyNameKana
+        self.firstNameKana = profile.firstNameKana
+        self.birthday = profile.birthday.dispYmd()
+        self.genderId = profile.gender
+        self.zipCode = profile.zipCode
+        self.prefectureId = profile.prefecture
+        self.city = profile.address1
+        self.town = profile.address2
+        self.email = profile.mailAddress
+    }
 
-//================================================================
-//================================================================
-//================================================================
+}
+
+
+    
+extension ApiManager {
+    class func createProfile(_ param: CreateProfileRequestDTO, isRetry: Bool = true) -> Promise<Void> {
+        if isRetry {
+            return firstly { () -> Promise<Void> in
+                retry(args: param, task: createProfileFetch) { (error) -> Bool in return true }
+            }
+        } else {
+            return createProfileFetch(param: param)
+        }
+    }
+    private class func createProfileFetch(param: CreateProfileRequestDTO) -> Promise<Void> {
+        let (promise, resolver) = Promise<Void>.pending()
+        AuthManager.needAuth(true)
+        ProfileAPI.profileControllerCreate(body: param)
+        .done { result in
+            resolver.fulfill(Void())
+        }
+        .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
+            resolver.reject(error)
+        }
+        .finally {
+        }
+        return promise
+    }
+}
+////================================================================
+////================================================================
+////================================================================

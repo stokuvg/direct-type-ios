@@ -38,7 +38,7 @@ class ProfilePreviewVC: PreviewBaseVC {
         title = "個人プロフィール"
         
         if Constants.DbgOfflineMode {
-            self.detail = MdlProfile(familyName: "familyName", firstName: "firstName", familyNameKana: "familyNameKana", firstNameKana: "firstNameKana", birthday: DateHelper.convStr2Date("1900-01-01"), gender: "gender", zipCode: "zipCode", prefecture: "prefecture", address1: "address1", address2: "address2", mailAddress: "mailAddress", mobilePhoneNo: "mobilePhoneNo")
+            self.detail = MdlProfile(familyName: "スマ澤", firstName: "花子", familyNameKana: "スマザワ", firstNameKana: "ハナコ", birthday: DateHelper.convStr2Date("1996-04-01"), gender: "2", zipCode: "1234567", prefecture: "22", address1: "千代田区", address2: "有楽町1-2-3　ネオ新橋ビル", mailAddress: "sumahana@example.com", mobilePhoneNo: Constants.Auth_username)
         }
     }
     
@@ -140,6 +140,21 @@ extension ProfilePreviewVC {
             self.detail = result
         }
         .catch { (error) in
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            switch myErr.code {
+            case 404:
+                let message: String = "本来は初回登録でProfileやResumeの一部データが登録され作成されているはず\n\n代わりにダミーの初期投入をしておく"
+                self.showConfirm(title: "特殊対応", message: message)
+                .done { _ in
+                    self.fetchCreateProfile()
+                }
+                .catch { (error) in
+                }
+                .finally {
+                }
+            default: break
+            }
+
             self.showError(error)
         }
         .finally {
@@ -152,6 +167,23 @@ extension ProfilePreviewVC {
         let param = UpdateProfileRequestDTO(editableModel.editTempCD)
         SVProgressHUD.show(withStatus: "プロフィール情報の更新")
         ApiManager.updateProfile(param, isRetry: true)
+        .done { result in
+            self.fetchGetProfile()
+        }
+        .catch { (error) in
+            self.showError(error)
+        }
+        .finally {
+            self.dispData()
+            SVProgressHUD.dismiss()
+        }
+    }
+    private func fetchCreateProfile() {
+        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
+        let profile = MdlProfile(familyName: "スマ澤", firstName: "花子", familyNameKana: "スマザワ", firstNameKana: "ハナコ", birthday: DateHelper.convStr2Date("1996-04-01"), gender: "2", zipCode: "1234567", prefecture: "22", address1: "千代田区", address2: "有楽町1-2-3　ネオ新橋ビル", mailAddress: "sumahana@example.com", mobilePhoneNo: Constants.Auth_username)
+        let param = CreateProfileRequestDTO(profile)
+        SVProgressHUD.show(withStatus: "プロフィール情報の作成")
+        ApiManager.createProfile(param, isRetry: true)
         .done { result in
             self.fetchGetProfile()
         }
