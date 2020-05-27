@@ -26,7 +26,7 @@ struct Constants {
 
     //[Debug] Debug時以外はfalseにすべきフラグで設定しておく
     static let DbgAutoSelTabVC: Bool = false
-    static let DbgAutoPushVC: Bool = false
+    static let DbgAutoPushVC: Bool = true
     static let DbgAutoPushVCNum: Int = 1  //0:なし, 1:プロフィール, 2:履歴書, 3:職歴, 4:サクサク職歴
     static let DbgOfflineMode: Bool = false
     
