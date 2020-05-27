@@ -29,11 +29,8 @@
 //===== 複数のAPIを並列で叩く場合 =====
 //= DispatchGroup と DispatchQueue を用いる予定
 
-import UIKit
-
 import PromiseKit
 import TudApi
-
 
 public enum ApiError: Error {
     case badParameter(String)
@@ -68,59 +65,7 @@ extension ApiManager {
 }
 
 extension ApiManager {
-    //=== プロフィール取得 ===
-    class func getProfile(_ param: Void, isRetry: Bool = true) -> Promise<MdlProfile> {
-        if isRetry {
-            return firstly { () -> Promise<MdlProfile> in
-                retry(args: param, task: getProfileFetch) { (error) -> Bool in return true }
-            }
-        } else {
-            return getProfileFetch(param: param)
-        }
-    }
-    private class func getProfileFetch(param: Void) -> Promise<MdlProfile> {
-        let (promise, resolver) = Promise<MdlProfile>.pending()
-        AuthManager.needAuth(true)
-        ProfileAPI.profileControllerGet()
-        .done { result in
-            resolver.fulfill(MdlProfile(dto: result)) //変換しておく
-        }
-        .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
-            resolver.reject(error)
-        }
-        .finally {
-        }
-        return promise
-    }
-    //=== プロフィール更新 ===
-    class func updateProfile(_ param: UpdateProfileRequestDTO, isRetry: Bool = true) -> Promise<Void> {
-        if isRetry {
-            return firstly { () -> Promise<Void> in
-                retry(args: param, task: updateProfileFetch) { (error) -> Bool in return true }
-            }
-        } else {
-            return updateProfileFetch(param: param)
-        }
-    }
-    private class func updateProfileFetch(param: UpdateProfileRequestDTO) -> Promise<Void> {
-        let (promise, resolver) = Promise<Void>.pending()
-        AuthManager.needAuth(true)
-        ProfileAPI.profileControllerUpdate(body: param)
-        .done { result in
-            resolver.fulfill(Void())
-        }
-        .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
-            resolver.reject(error)
-        }
-        .finally {
-        }
-        return promise
-    }
-}
-
-
-extension ApiManager {
-    //宣言で「U ...」として可変長引数を受け取っても、task呼ぶ時に破綻していくのでダメだ
+    //宣言で「U ...」として可変長引数を受け取っても、task呼ぶ時に破綻していくのでだめなので固定長にした
     class func retry<T, U>(args: U, task: @escaping (U) -> Promise<T>, preRetry: @escaping (Error) -> Bool) -> Promise<T> {
         var count = 0
         func p() -> Promise<T> {
@@ -156,8 +101,4 @@ extension ApiManager {
         }
         return p()
     }
-
 }
-
-
-

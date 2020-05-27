@@ -130,31 +130,6 @@ class ProfilePreviewVC: PreviewBaseVC {
 }
 
 //=== APIフェッチ
-extension UpdateProfileRequestDTO {
-    init() {
-        self.init(familyName: nil, firstName: nil, familyNameKana: nil, firstNameKana: nil, birthday: nil, genderId: nil, zipCode: nil, prefectureId: nil, city: nil, town: nil, email: nil)
-    }
-    init(_ editTempCD: [EditableItemKey: EditableItemCurVal]) {
-        self.init()
-        for (key, val) in editTempCD {
-            switch key {
-            case EditItemMdlProfile.familyName.itemKey: self.familyName = val
-            case EditItemMdlProfile.firstName.itemKey: self.firstName = val
-            case EditItemMdlProfile.familyNameKana.itemKey: self.familyNameKana = val
-            case EditItemMdlProfile.firstNameKana.itemKey: self.firstNameKana = val
-            case EditItemMdlProfile.birthday.itemKey: self.birthday = val
-            case EditItemMdlProfile.gender.itemKey: self.genderId = val
-            case EditItemMdlProfile.zipCode.itemKey: self.zipCode = val
-            case EditItemMdlProfile.prefecture.itemKey: self.prefectureId = val
-            case EditItemMdlProfile.address1.itemKey: self.city = val
-            case EditItemMdlProfile.address2.itemKey: self.town = val
-            case EditItemMdlProfile.mailAddress.itemKey: self.email = val
-            default: break
-            }
-        }
-    }
-}
-
 extension ProfilePreviewVC {
     private func fetchGetProfile() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
