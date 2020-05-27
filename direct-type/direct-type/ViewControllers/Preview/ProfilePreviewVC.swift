@@ -18,20 +18,20 @@ class ProfilePreviewVC: PreviewBaseVC {
     override func actCommit(_ sender: UIButton) {
         print(#line, #function, "ボタン押下でAPIフェッチ確認")
         tableVW.reloadData()
-        //===変更内容の確認
-        print(#line, String(repeating: "=", count: 44))
-        for (y, items) in editableModel.arrData.enumerated() {
-            for (x, _item) in items.enumerated() {
-                let (isChange, editTemp) = editableModel.makeTempItem(_item)
-                let item: EditableItemH! = isChange ? editTemp : _item
-                if isChange {
-                    print("\t(\(y)-\(x)) ✍️ [\(item.debugDisp)]")
-                } else {
-                    print("\t(\(y)-\(x)) 　 [\(item.debugDisp)]")
-                }
-            }
-        }
-        print(#line, String(repeating: "=", count: 44))
+//        //===変更内容の確認
+//        print(#line, String(repeating: "=", count: 44))
+//        for (y, items) in editableModel.arrData.enumerated() {
+//            for (x, _item) in items.enumerated() {
+//                let (isChange, editTemp) = editableModel.makeTempItem(_item)
+//                let item: EditableItemH! = isChange ? editTemp : _item
+//                if isChange {
+//                    print("\t(\(y)-\(x)) ✍️ [\(item.debugDisp)]")
+//                } else {
+//                    print("\t(\(y)-\(x)) 　 [\(item.debugDisp)]")
+//                }
+//            }
+//        }
+//        print(#line, String(repeating: "=", count: 44))
         fetchUpdateProfile()
     }
     override func initData() {
@@ -188,12 +188,41 @@ extension ProfilePreviewVC {
         ProfileAPI.profileControllerUpdate(body: param)
         .done { resp in
             print(resp)
+            self.fetchGetProfile()
         }
         .catch { (error) in
             print(error.localizedDescription)
+            let myErr = AuthManager.convAnyError(error)
+            print(myErr.debugDisp)
+            switch myErr.code {
+            case 400: //Validation Errorは自動リトライしない
+                print("400: Validation Errorは自動リトライしない(個別チェック)")
+            default:
+                print(#line, error.localizedDescription)
+            }
+            self.showError(myErr)
+//
+//            if let _error = error as? NSError {
+//                print(#line, "NSError", _error.localizedDescription)
+//                print(#line, "[domain: \(_error.domain)]")
+//                print(#line, "[code: \(_error.code)]")
+//                print(#line, "[userInfo: \(_error.userInfo)]")
+//            }
+//            if let _error = error as? ErrorResponse {
+//                switch _error {
+//                case .error(let code, let data, let error):
+//                    if let _data = data {
+//                        let jsonStr = String(bytes: _data, encoding: .utf8)!
+//                        print("JSONに変換して表示: [\(jsonStr)]", error.localizedDescription)
+//                        self.showConfirm(title: "エラー \(code)", message: jsonStr, onlyOK: true)
+//
+//                        print("\n\n\(jsonStr)\n\n\n")
+//                    }
+//                }
+//            }
         }
         .finally {
-            self.fetchGetProfile()
+//            self.fetchGetProfile()
         }
     }
 
