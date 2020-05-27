@@ -26,38 +26,45 @@
                                 <rect key="frame" x="7" y="34.5" width="306" height="526.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KIB-j9-wIu">
-                                        <rect key="frame" x="0.0" y="0.0" width="306" height="105.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="306" height="88"/>
                                         <state key="normal" title="プロフィール"/>
                                         <connections>
                                             <action selector="actButton01:" destination="AEi-ts-bdm" eventType="touchUpInside" id="BUJ-i9-7Tr"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GMn-2f-Oss">
-                                        <rect key="frame" x="0.0" y="105.5" width="306" height="105"/>
+                                        <rect key="frame" x="0.0" y="88" width="306" height="87.5"/>
                                         <state key="normal" title="履歴書"/>
                                         <connections>
                                             <action selector="actButton02:" destination="AEi-ts-bdm" eventType="touchUpInside" id="o1X-wn-zih"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6DQ-iO-axa">
-                                        <rect key="frame" x="0.0" y="210.5" width="306" height="105.5"/>
+                                        <rect key="frame" x="0.0" y="175.5" width="306" height="88"/>
                                         <state key="normal" title="職務経歴書・スキルシート"/>
                                         <connections>
                                             <action selector="actButton03:" destination="AEi-ts-bdm" eventType="touchUpInside" id="Ajx-cU-H6N"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vdW-Qy-b6a">
-                                        <rect key="frame" x="0.0" y="316" width="306" height="105"/>
+                                        <rect key="frame" x="0.0" y="263.5" width="306" height="87.5"/>
                                         <state key="normal" title="さくさく職歴書"/>
                                         <connections>
                                             <action selector="actButton04:" destination="AEi-ts-bdm" eventType="touchUpInside" id="aff-jW-CWX"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vRS-Oe-8No">
-                                        <rect key="frame" x="0.0" y="421" width="306" height="105.5"/>
-                                        <state key="normal" title="さくさく職歴書"/>
+                                        <rect key="frame" x="0.0" y="351" width="306" height="88"/>
+                                        <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="actButton05:" destination="AEi-ts-bdm" eventType="touchUpInside" id="pjI-u3-Qp5"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rNx-Fe-w7y">
+                                        <rect key="frame" x="0.0" y="439" width="306" height="87.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="actButton06:" destination="AEi-ts-bdm" eventType="touchUpInside" id="06q-h1-3Qg"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -81,6 +88,7 @@
                         <outlet property="btnButton03" destination="6DQ-iO-axa" id="1M0-5j-gNA"/>
                         <outlet property="btnButton04" destination="vdW-Qy-b6a" id="T0D-DX-tEl"/>
                         <outlet property="btnButton05" destination="vRS-Oe-8No" id="Km6-gv-Zd0"/>
+                        <outlet property="btnButton06" destination="rNx-Fe-w7y" id="ryn-wB-gcf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vtR-eP-OXc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

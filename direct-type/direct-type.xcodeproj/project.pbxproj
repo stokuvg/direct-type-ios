@@ -171,6 +171,8 @@
 		26A5DD642475028E0035267A /* SubSelectSpecialVC+Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5DD632475028E0035267A /* SubSelectSpecialVC+Picker.swift */; };
 		26A5DD662476547D0035267A /* SubSelectBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5DD652476547D0035267A /* SubSelectBaseVC.swift */; };
 		26B491DC247E2F4E00B58AD4 /* ApiManager+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B491DB247E2F4E00B58AD4 /* ApiManager+Profile.swift */; };
+		26B491DE247E394900B58AD4 /* ApiManager+Jobs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B491DD247E394900B58AD4 /* ApiManager+Jobs.swift */; };
+		26B491E0247E3CB100B58AD4 /* ApiManager+Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B491DF247E3CB100B58AD4 /* ApiManager+Entry.swift */; };
 		26BF48D924639D2B00E00215 /* MstK25_employmentStatus.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48C824639D2A00E00215 /* MstK25_employmentStatus.tsv */; };
 		26BF48DA24639D2B00E00215 /* MstK14_place.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48C924639D2A00E00215 /* MstK14_place.tsv */; };
 		26BF48DB24639D2B00E00215 /* MstK11_entryPlace.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48CA24639D2A00E00215 /* MstK11_entryPlace.tsv */; };
@@ -383,6 +385,8 @@
 		26A5DD632475028E0035267A /* SubSelectSpecialVC+Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubSelectSpecialVC+Picker.swift"; sourceTree = "<group>"; };
 		26A5DD652476547D0035267A /* SubSelectBaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSelectBaseVC.swift; sourceTree = "<group>"; };
 		26B491DB247E2F4E00B58AD4 /* ApiManager+Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Profile.swift"; sourceTree = "<group>"; };
+		26B491DD247E394900B58AD4 /* ApiManager+Jobs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Jobs.swift"; sourceTree = "<group>"; };
+		26B491DF247E3CB100B58AD4 /* ApiManager+Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Entry.swift"; sourceTree = "<group>"; };
 		26BF48C524639A8200E00215 /* Models */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Models; path = ../../../../generated/promise/SwaggerClient/Classes/Swaggers/Models; sourceTree = "<group>"; };
 		26BF48C824639D2A00E00215 /* MstK25_employmentStatus.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK25_employmentStatus.tsv; sourceTree = "<group>"; };
 		26BF48C924639D2A00E00215 /* MstK14_place.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK14_place.tsv; sourceTree = "<group>"; };
@@ -822,6 +826,8 @@
 				26FC4EDF2477C775003B56C3 /* AuthManager.swift */,
 				26A4C1CA247B4A81008D8E68 /* ApiManager.swift */,
 				26B491DB247E2F4E00B58AD4 /* ApiManager+Profile.swift */,
+				26B491DD247E394900B58AD4 /* ApiManager+Jobs.swift */,
+				26B491DF247E3CB100B58AD4 /* ApiManager+Entry.swift */,
 			);
 			path = AuthManager;
 			sourceTree = "<group>";
@@ -1178,6 +1184,7 @@
 				066763722457B08300AC5039 /* EntryVC.swift in Sources */,
 				06E519A42457DC7B004E4B7A /* InitialInputCompleteVC.swift in Sources */,
 				0667636C2457B02200AC5039 /* KeepListVC.swift in Sources */,
+				26B491DE247E394900B58AD4 /* ApiManager+Jobs.swift in Sources */,
 				068501802473CE43009770A3 /* HomeTitleView.swift in Sources */,
 				06E5198A2457D6C1004E4B7A /* JobOfferDetailVC.swift in Sources */,
 				26F2A827246D23800037D47F /* MdlResumeSkillLanguage.swift in Sources */,
@@ -1201,6 +1208,7 @@
 				06DCAEAB245A7616008FE9FA /* UILabel+Extensions.swift in Sources */,
 				26147F30247258E9009B30B5 /* HPreviewTBCell+dispCellValue.swift in Sources */,
 				26F2A81B246D10C30037D47F /* MdlResume.swift in Sources */,
+				26B491E0247E3CB100B58AD4 /* ApiManager+Entry.swift in Sources */,
 				06E519932457D750004E4B7A /* OwnPRVC.swift in Sources */,
 				26989F80246A5E520050AC40 /* HEditDrumTBCell.swift in Sources */,
 				067F28DF2456D013000AAD69 /* TmpNaviTopVC.swift in Sources */,

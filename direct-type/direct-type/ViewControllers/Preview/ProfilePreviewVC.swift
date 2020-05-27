@@ -105,17 +105,17 @@ class ProfilePreviewVC: PreviewBaseVC {
         arrData.append(MdlItemH(.mobilephoneH2, "\(bufMobilePhoneNo)", "\(bufMobilePhoneNoNotice)", readonly: true, childItems: [
             EditableItemH(type: .inputText, editItem: EditItemMdlProfile.mobilePhoneNo, val: _detail.mobilePhoneNo),
         ]))
-        //=== editableModelで管理させる
-        editableModel.arrData.removeAll()
-        for items in arrData { editableModel.arrData.append(items.childItems) }
-//        print(#line, String(repeating: "=", count: 44))
-//        print(editableModel.arrData.debugDescription)
-//        for (y, items) in editableModel.arrData.enumerated() {
-//            for (x, item) in items.enumerated() {
-//                print("\t(\(y)-\(x)) [\(item.debugDisp)]")
-//            }
-//        }
-//        print(#line, String(repeating: "=", count: 44))
+//        //=== editableModelで管理させる
+//        editableModel.arrData.removeAll()
+//        for items in arrData { editableModel.arrData.append(items.childItems) }
+        print(#line, String(repeating: "=", count: 44))
+        print(editableModel.arrData.debugDescription)
+        for (y, items) in editableModel.arrData.enumerated() {
+            for (x, item) in items.enumerated() {
+                print("\t(\(y)-\(x)) [\(item.debugDisp)]")
+            }
+        }
+        print(#line, String(repeating: "=", count: 44))
         tableVW.reloadData()//描画しなおし
     }
     
@@ -164,3 +164,4 @@ extension ProfilePreviewVC {
         }
     }
 }
+
