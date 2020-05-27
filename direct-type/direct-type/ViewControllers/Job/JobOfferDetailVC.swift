@@ -40,21 +40,21 @@ class JobOfferDetailVC: TmpBasicVC {
         spotDetail1: "当社では、基本的にユニット（チーム体制）でのプロジェクト配属になっており、四半期に1回面談を実施し、ユニット長がここの希望を吸い上げいます。",
         spotTitle2: "明確な評価制度【充実のインセンティブ/若手も大幅昇給可能】",
         spotDetail2: "評価を行うのは、ここの頑張りや実力を一番近くで目にしているユニット長なので、納得感のある評価を得られます。",
-        qualification: "◆学歴不問\n◆なんらかの開発経験のある方\n\n",
-        betterSkill: "⭐︎リーダーを目指したい方、あるいはPM/PL経験者は、大歓迎です！",
-        applicationExample: "",
-        suitableUnsuitable: "向いている人\n新しいことにチャレンジしながら、理想のキャリアパスを実現したい方には向いてます。\n向いてない人\n現状維持を望む方や、意欲が乏しい方には、合わないかもしれません。",
-        employmentType: 1,
-        salary: "",
+        qualification: JobCardDetailQualification.init(title: "応募資格",text: "◆学歴不問\n◆なんらかの開発経験のある方\n\n"),
+        betterSkill: JobCardDetailBetterSkill.init(title: "歓迎する経験・スキル", text: ""),
+        applicationExample: JobCardDetailApplicationExample.init(title: "過去の採用例", text: "多彩な経験を持った、幅広い年齢層の方が当社に入社し、活躍しています。\n"),
+        suitableUnsuitable: JobCardDetailSuitableUnsuitable.init(title: "この仕事の向き・不向き", text: "向いている人\n新しいことにチャレンジしながら、理想のキャリアパスを実現したい方には向いてます。\n向いてない人\n現状維持を望む方や、意欲が乏しい方には、合わないかもしれません。"),
+        employmentType: JobCardDetailEmploymentType.init(title: "雇用形態", type: 1),
+        salary: JobCardDetailSalary.init(title: "給与", text: "★前職給与保証／想定月収３３万円〜６２万円\n\n年棒４００万円〜７５０万円（１２分割で支給）＋各種手当＋インセンティブ"),
         bonusAbout: "",
-        jobtime: "09:00~18:00(実動８時間)",
+        jobtime: JobCardDetailJobtime.init(title: "勤務時間", text: "09:00~18:00(実動８時間)"),
         overtimeCode: 2,
         overtimeAbout: "月の平均残業時間は10～20時間程度です。\n1日に換算すると1日30分～１時間程度になります。\n当社は働き方改革が叫ばれる以前から残業を抑える取り組みをしており、\n労務上の観点から20時間以内になるように指示しています。\nその結果、20時以降社内に残る社員はほどんどいません。",
-        workPlace: "",
+        workPlace: JobCardDetailWorkPlace.init(title: "勤務地", text: "★東京本社または株式会社DigiITへの出向、福岡本社勤務\n（首都圏のお客様先での常駐案件もあり）"),
         transport: "",
-        holiday: "",
-        welfare: "",
-        childcare: "",
+        holiday: JobCardDetailHoliday.init(title: "休日休暇", text: "☆年間休日124日☆\n\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n"),
+        welfare: JobCardDetailWelfare.init(title: "待遇・福利厚生", text: "◆\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n"),
+        childcare: JobCardDetailChildcare.init(title: "産休・育休取得状況", text: ""),
         interviewMemo: JobCardDetailInterviewMemo.init(interviewContent: "ここにテキストを入れる\n\nここにテキストを入れる", interviewPhoto1: "", interviewPhoto2: "", interviewPhoto3: ""),
         selectionProcess: JobCardDetailSelectionProcess.init(selectionProcess1: "Web応募による書類選考", selectionProcess2: "面談（１〜２回）※面談は１回のケースが多いですが、場合によって２回になる可能性もあります。", selectionProcess3: "内定", selectionProcess4: "Web応募による書類選考", selectionProcess5: "Web応募による書類選考", selectionProcessDetail: "【type】の専用応募フォームからご応募ください。\n※ご応募については秘密厳守いたします。\n※\n※\n\n----------------------------\n当求人案件は株式会社キャリアデザインセンターが運営する株式会社システムソフト type採用事務局にて応募の受付業務を代行しております。"),
         contactInfo: JobCardDetailContactInfo.init(companyUrl: "http://www.systemsoft.co.jp/", contactZipcode: "100-0004", contactAddress: "東京都千代田区大手町二丁目６番１号 朝日生命大手町ビル２階", contactPhone: "03-6261-4536", contactPerson: "採用担当", contactMail: "saiyo@systemsoft.co.jp"),
@@ -557,24 +557,27 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
         buttonsView.colorChange(no:0)
         
         let section = 3
+        let row = 0
         let titleName = "仕事内容"
-        self.guidebookScrollAnimation(section: section,titleName: titleName)
+        self.guidebookScrollAnimation(section: section,row: row, titleName: titleName)
     }
     
     func appImportantAction() {
         buttonsView.colorChange(no:1)
         
         let section = 3
+        let row = 1
         let titleName = "応募資格"
-        self.guidebookScrollAnimation(section: section,titleName: titleName)
+        self.guidebookScrollAnimation(section: section,row: row, titleName: titleName)
     }
     
     func employeeAction() {
         buttonsView.colorChange(no:2)
         
         let section = 3
+        let row = 7
         let titleName = "待遇"
-        self.guidebookScrollAnimation(section: section,titleName: titleName)
+        self.guidebookScrollAnimation(section: section,row: row, titleName: titleName)
     }
     
     func informationAction() {
@@ -591,21 +594,11 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
         self.detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
     
-    func guidebookScrollAnimation(section:Int, titleName:String) {
+    // 募集要項の移動
+    func guidebookScrollAnimation(section: Int,row: Int,titleName: String) {
+        Log.selectLog(logLevel: .debug, "guidebookScrollAnimation start")
+        Log.selectLog(logLevel: .debug, "section:\(section)")
 //        let guidebookData = dummyData["guidebook"] as! [[String:Any]]
-        
-        var row:Int = 0
-        /*
-        for i in 0..<guidebookData.count {
-            let data = guidebookData[i]
-            if let keyName:String = (data["title"] as! String) {
-                if keyName.hasPrefix("待遇") {
-                    row = i
-                    break
-                }
-            }
-        }
-        */
         
         let indexPath = IndexPath.init(row: row, section: section)
         self.detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)

@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 5.26.01
+  version: 5.27.01
   title: アプリ想定モデル・API
   description: アプリの想定モデル・APIの仕様書です
 
@@ -1824,32 +1824,104 @@ components:
           description: 注目ポイント本文２
         ##=====================
         qualification:
-          type: string
+          type: object
+          required:
+            - title:
+            - text:
+          properties:
+            title:
+                type: string
+                example: title
+                description: 応募資格 タイトル
+            text:
+                type: string
+                example: text
+                description: 応募資格 テキスト
           example: qualification
           description: ２１．応募資格（必須）
         ##=====================
         better_skill:
-          type: string
+          type: object
+          required:
+            - title:
+            - text:
+          properties:
+            title:
+                type: string
+                example: title
+                description: 歓迎する経験・スキル タイトル
+            text:
+                type: string
+                example: text
+                description: 歓迎する経験・スキル テキスト
           example: better_skill
           description: ２２．歓迎する経験・スキル（任意）
         ##=====================
         application_example:
-          type: string
+          type: object
+          required:
+            - title:
+            - text:
+          properties:
+            title:
+                type: string
+                example: title
+                description: 過去の採用例 タイトル
+            text:
+                type: string
+                example: text
+                description: 過去の採用例 テキスト
           example: application_example
           description: ２３．過去の採用例（任意）
         ##=====================
         suitable_unsuitable:
-          type: string
+          type: object
+          required:
+            - title:
+            - text:
+          properties:
+            title:
+                type: string
+                example: title
+                description: この仕事の向き・不向き タイトル
+            text:
+                type: string
+                example: text
+                description: この仕事の向き・不向き テキスト
           example: suitable_unsuitable
           description: ２４．この仕事の向き・不向き（任意）
         ##=====================
         employment_type:
-          type: integer
-          example: 0
+          type: object
+          required:
+            - title:
+            - type:
+          properties:
+            title:
+                type: string
+                example: title
+                description: 雇用形態 タイトル
+            type:
+                type: integer
+                example: 0
+                description: 雇用形態コード
+          example: employment_type
           description: ２５．雇用形態コード（必須）
         ##=====================
         salary:
-          type: string
+          type: object
+          required:
+            - title:
+            - text:
+          properties:
+            title:
+                type: string
+                example: title
+                description: 給与 タイトル
+            text:
+                type: string
+                example: text
+                description: 給与 テキスト
           example: salary
           description: ２6．給与（必須）＊「想定給与」＊
         ##=====================
@@ -1859,7 +1931,19 @@ components:
           description: ２７．賞与について（任意）
         ##=====================
         jobtime:
-          type: string
+          type: object
+          required:
+            - title:
+            - text:
+          properties:
+            title:
+                type: string
+                example: title
+                description: 勤務時間 タイトル
+            text:
+                type: string
+                example: text
+                description: 勤務時間 テキスト
           example: jobtime
           description: 28．勤務時間（必須）
         ##=====================
@@ -1874,7 +1958,19 @@ components:
           description: 残業について
         ##=====================
         work_place:
-          type: string
+          type: object
+          required:
+            - title:
+            - text:
+          properties:
+            title:
+                type: string
+                example: title
+                description: 勤務地 タイトル
+            text:
+                type: string
+                example: text
+                description: 勤務地 テキスト
           example: work_place
           description: 30．勤務地（必須）
         ##=====================
@@ -1884,19 +1980,55 @@ components:
           description: ３１．交通・詳細（必須）
         ##=====================
         holiday:
-          type: string
-          example: holiday
-          description: ＊３２．休日休暇（必須）
+            type: object
+            required:
+              - title:
+              - text:
+            properties:
+              title:
+                  type: string
+                  example: title
+                  description: 休日休暇 タイトル
+              text:
+                  type: string
+                  example: text
+                  description: 休日休暇 テキスト
+            example: holiday
+            description: ＊３２．休日休暇（必須）
         ##=====================
         welfare:
-          type: string
-          example: welfare
-          description: ＊３３．待遇・福利厚生（必須）
+            type: object
+            required:
+              - title:
+              - text:
+            properties:
+              title:
+                  type: string
+                  example: title
+                  description: 待遇・福利厚生 タイトル
+              text:
+                  type: string
+                  example: text
+                  description: 待遇・福利厚生 テキスト
+            example: welfare
+            description: ＊３３．待遇・福利厚生（必須）
         ##=====================
         childcare:
-          type: string
-          example: childcare
-          description: ３４．産休・育休取得状況（任意）
+            type: object
+            required:
+              - title:
+              - text:
+            properties:
+              title:
+                  type: string
+                  example: title
+                  description: 産休・育休取得状況 タイトル
+              text:
+                  type: string
+                  example: text
+                  description: 産休・育休取得状況 テキスト
+            example: childcare
+            description: ３４．産休・育休取得状況（任意）
         ##=====================
         interview_memo:
           type: object
