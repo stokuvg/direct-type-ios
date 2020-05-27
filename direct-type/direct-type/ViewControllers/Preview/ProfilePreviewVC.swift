@@ -204,6 +204,8 @@ extension ProfilePreviewVC {
                         let jsonStr = String(bytes: _data, encoding: .utf8)!
                         print("JSONに変換して表示: [\(jsonStr)]", error.localizedDescription)
                         self.showConfirm(title: "エラー \(code)", message: jsonStr, onlyOK: true)
+                        
+                        print("\n\n\(jsonStr)\n\n\n")
                     }
                 }
             }
