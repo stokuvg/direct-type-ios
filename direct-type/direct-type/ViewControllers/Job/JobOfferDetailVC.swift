@@ -46,15 +46,15 @@ class JobOfferDetailVC: TmpBasicVC {
         suitableUnsuitable: JobCardDetailSuitableUnsuitable.init(title: "この仕事の向き・不向き", text: "向いている人\n新しいことにチャレンジしながら、理想のキャリアパスを実現したい方には向いてます。\n向いてない人\n現状維持を望む方や、意欲が乏しい方には、合わないかもしれません。"),
         employmentType: JobCardDetailEmploymentType.init(title: "雇用形態", type: 1),
         salary: JobCardDetailSalary.init(title: "給与", text: "★前職給与保証／想定月収３３万円〜６２万円\n\n年棒４００万円〜７５０万円（１２分割で支給）＋各種手当＋インセンティブ"),
-        bonusAbout: "",
+        bonusAbout: JobCardDetailBonusAbout.init(title: "賞与について", text: "ここにテキストを表示"),
         jobtime: JobCardDetailJobtime.init(title: "勤務時間", text: "09:00~18:00(実動８時間)"),
-        overtimeCode: 2,
-        overtimeAbout: "月の平均残業時間は10～20時間程度です。\n1日に換算すると1日30分～１時間程度になります。\n当社は働き方改革が叫ばれる以前から残業を抑える取り組みをしており、\n労務上の観点から20時間以内になるように指示しています。\nその結果、20時以降社内に残る社員はほどんどいません。",
+        overtimeCode: JobCardDetailOvertimeCode.init(title: "目安残業時間", code: 2),
+        overtimeAbout: JobCardDetailOvertimeAbout.init(title: "残業について", text: "月の平均残業時間は10～20時間程度です。\n1日に換算すると1日30分～１時間程度になります。\n当社は働き方改革が叫ばれる以前から残業を抑える取り組みをしており、\n労務上の観点から20時間以内になるように指示しています。\nその結果、20時以降社内に残る社員はほどんどいません。"),
         workPlace: JobCardDetailWorkPlace.init(title: "勤務地", text: "★東京本社または株式会社DigiITへの出向、福岡本社勤務\n（首都圏のお客様先での常駐案件もあり）"),
-        transport: "",
+        transport: JobCardDetailTransport.init(title: "交通・詳細", text: "・つくばエクスプレス「秋葉原駅」より徒歩1分\n・\n・\n"),
         holiday: JobCardDetailHoliday.init(title: "休日休暇", text: "☆年間休日124日☆\n\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n"),
         welfare: JobCardDetailWelfare.init(title: "待遇・福利厚生", text: "◆\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n"),
-        childcare: JobCardDetailChildcare.init(title: "産休・育休取得状況", text: ""),
+        childcare: JobCardDetailChildcare.init(title: "産休・育休取得状況", text: "ここにテキストを入れる\nここにテキストを入れる\nここにテキストを入れる\nここにテキストを入れる\n"),
         interviewMemo: JobCardDetailInterviewMemo.init(interviewContent: "ここにテキストを入れる\n\nここにテキストを入れる", interviewPhoto1: "", interviewPhoto2: "", interviewPhoto3: ""),
         selectionProcess: JobCardDetailSelectionProcess.init(selectionProcess1: "Web応募による書類選考", selectionProcess2: "面談（１〜２回）※面談は１回のケースが多いですが、場合によって２回になる可能性もあります。", selectionProcess3: "内定", selectionProcess4: "Web応募による書類選考", selectionProcess5: "Web応募による書類選考", selectionProcessDetail: "【type】の専用応募フォームからご応募ください。\n※ご応募については秘密厳守いたします。\n※\n※\n\n----------------------------\n当求人案件は株式会社キャリアデザインセンターが運営する株式会社システムソフト type採用事務局にて応募の受付業務を代行しております。"),
         contactInfo: JobCardDetailContactInfo.init(companyUrl: "http://www.systemsoft.co.jp/", contactZipcode: "100-0004", contactAddress: "東京都千代田区大手町二丁目６番１号 朝日生命大手町ビル２階", contactPhone: "03-6261-4536", contactPerson: "採用担当", contactMail: "saiyo@systemsoft.co.jp"),
@@ -69,142 +69,8 @@ class JobOfferDetailVC: TmpBasicVC {
             presidentData: JobCardDetailCompanyDescriptionPresidentData.init(title: "代表者", presidentName: "代表取締役社長　峯岸 正積", presidentHistory: "1979年11月5日生まれ。2002年コニカミノルタ株式会社に入社。")),
         userFilter: UserFilterInfo.init(tudKeepStatus: false, tudSkipStatus: false))
     
-    /*
-    let dummyData:[String:Any] = [
-        "end":true,
-        "images":["https://type.jp/s/img_banner/top_pc_side_number1.jpg","https://type.jp/s/campaign83/img/pc/top.png","https://type.jp/s/campaign83/img/scout.png","https://woman-type.jp/s/renewal/pc/img/top/191105_u29.png"],
-        "job":"SE/RPAやAI,loT関連案件など",
-        "price":"400~900",
-        "special":"850",
-        "area":"東京都23区、東京都（２３区を除く）、神奈川県（横浜市、川崎市を除く）、横浜市、川崎市、埼玉県、千葉県、福岡県",
-        "company":"株式会社キャリアデザインITパートナーズ「type IT派遣」※(株)キャリアデザインセンター100%出費",
-        "period_start":"",
-        "period_end":"2020/02/26",
-        "tags":["高度成長企業","急募求人","服装自由","英語活かせる","駅から徒歩５分","管理職採用","産休育休実績あり",],
-        "main_title":"RPA,AI,loT関連プロジェクトや、大手メーカのーのR&D・・・\nこれから成長する若手こそ、案件にこだわろう。",
-        "main_article":"◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n",
-        "salary_example":"■２５歳サブリーダー／年収４００万円\n■２８歳PL／年収４８０万円\n■３０歳PM／年収５５０万円\n■３２歳PM／年収５８０万円\n■３５歳PM／年収６５０万円\n■４０歳マネージャー／年収７４０万円\n■４５歳部長／年収８００万円\n",
-        "guidebook":[
-            // 1.募集背景:       必須
-            ["title":"募集背景",
-             "indispensable":"ここに募集背景の必須項目内容を表示",    // 必須項目
-                "optional":[],      // 任意項目
-                "attention":[],
-            ],
-            // 2.仕事内容:       必須
-            // ・案件例:        任意
-            // ・手掛ける商品・サービス:  任意
-            // ・開発環境・業務範囲:   任意
-            // ・注目ポイント:      任意
-            ["title":"仕事内容",
-            "indispensable":"多種多様なプロジェクトの中から、あなたの経験や希望に応じた案件で活躍していただきます。\n",    // 必須項目
-            "optional":[],      // 任意項目
-            // 注目
-            "attention":[
-                ["title":"希望を吸い上げる風土だから、理想のキャリアパスを描きやすい","text":"当社では、基本的にユニット（チーム体制）でのプロジェクト配属になっており、四半期に1回面談を実施し、ユニット長がここの希望を吸い上げいます。"],
-                ["title":"明確な評価制度【充実のインセンティブ/若手も大幅昇給可能】","text":"評価を行うのは、ここの頑張りや実力を一番近くで目にしているユニット長なので、納得感のある評価を得られます。"],
-            ]
-            ],
-            // 3.応募資格:       必須
-            // ・歓迎する経験・スキル:   任意
-            // ・過去の採用例:      任意
-            // ・この仕事の向き・不向き: 任意
-            ["title":"応募資格",
-            "indispensable":"",    // 必須項目
-            "optional":[
-                ["title":"歓迎する経験・スキル","text":"⭐︎リーダーを目指したい方、あるいはPM/PL経験者は、大歓迎です！"],
-                ["title":"過去の採用例","text":""],
-                ["title":"この仕事の向き・不向き","text":"向いている人\n新しいことにチャレンジしながら、理想のキャリアパスを実現したい方には向いてます。\n向いてない人\n現状維持を望む方や、意欲が乏しい方には、合わないかもしれません。"],
-                ],      // 任意項目
-                "attention":[],
-            ],
-            // 4.雇用携帯:    必須
-            ["title":"雇用形態",
-            "indispensable":"正社員",    // 必須項目
-            "optional":[],      // 任意項目
-            "attention":[],
-            ],
-            // 5.給与:        必須
-            // ・賞与について:     任意
-            ["title":"給与",
-            "indispensable":"",    // 必須項目
-            "optional":[],      // 任意項目
-            "attention":[],
-            ],
-            // 6.勤務時間:       必須
-            //  ・残業について:
-            ["title":"勤務時間",
-            "indispensable":"09:00~18:00(実動８時間)",    // 必須項目
-                "optional":[["title":"残業について","text":"月の平均残業時間は10〜20時間程度です。\n1日に換算すると1日30分〜１時間程度になります。\n当社は働き方改革が叫ばれる以前から残業を抑える取り組みをしており、\n労務上の観点から20時間以内になるように指示しています。\nその結果、20時以降社内に残る社員はほどんどいません。"]],      // 任意項目
-                "attention":[],
-            ],
-            // 7.勤務地:       必須
-            //  ・交通詳細
-            ["title":"勤務地",
-            "indispensable":"",    // 必須項目
-            "optional":[],      // 任意項目
-            "attention":[],
-            ],
-            // 8.休日休暇:      必須
-            ["title":"休日休暇",
-            "indispensable":"",    // 必須項目
-            "optional":[],      // 任意項目
-            "attention":[],
-            ],
-            // 9.待遇・福利厚生:    必須
-            // ・産休・育休取得:   任意
-            ["title":"待遇・福利厚生",
-            "indispensable":"◆昇給年1回\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n\n《各種手当て》\n・時間外手当\n・管理職手当(ユニット長:10万円,部長:20万円)\n・通勤手当(課税対象免状限度額を上限とする)",    // 必須項目
-            "optional":[],      // 任意項目
-            "attention":[],
-            ],
-        ],
-        "folding":[
-            "memo":
-            [
-                "title":"取材メモ",
-                "text":"ここにテキストを入れる\n\nここにテキストを入れる",
-            ],
-            "process":
-            [
-                "title":"選考プロセス",
-                "steps":[
-                    ["title":"step1","text":"Web応募による書類選考"],
-                    ["title":"step2","text":"面談（１〜２回）※面談は１回のケースが多いですが、場合によって２回になる可能性もあります。"],
-                    ["title":"step3","text":"内定"],
-                    ["title":"step4","text":"Web応募による書類選考"],
-                    ["title":"step5","text":"Web応募による書類選考"],
-                ],
-                "text1":"【type】の専用応募フォームからご応募ください。\n※ご応募については秘密厳守いたします。\n※\n※\n\n",
-                "text2":"----------------------------\n当求人案件は株式会社キャリアデザインセンターが運営する株式会社システムソフト type採用事務局にて応募の受付業務を代行しております。",
-            ],
-            "phone_number":
-            [
-                "title":"連絡先",
-                "url":"http://www.systemsoft.co.jp/",
-                "zipcode":"100-0004",
-                "address":"東京都千代田区大手町二丁目６番１号 朝日生命大手町ビル２階",
-                "tel":"03-6261-4536",
-                "person":"採用担当",
-                "email":"saiyo@systemsoft.co.jp",
-            ],
-            "outline":
-            [
-                "title":"会社概要",
-                "Description":["title":"事業内容","item":"■WEBアプリの企画・開発・導入支援\n■スマホ・タブレットアプリの企画・開発・導入支援\n■システムコンサルテーション事業\n■ソフトウェアパッケージの開発・販売・導入支援\n■サーバ・ネットワーク設計・構築・運用管理サービスの提供\n■アウトソーシング\n"],                                                      // 必須
-                "clients":["title":"主要取引先","names":"青葉出版(株)\n(株)オープンハウス・ディベロップメント\n(株)CSEビジテック\n(株)\n(株)\n(株)"],                                                     // 任意
-                "media":["title":"事業・サービスのメディア掲載実績","items":"明治大学博物館\nユニバーサルコンピューター(株)"],                                   // 任意
-                "establishment":["title":"設立","items":"1996年12月"],                                                         // 任意
-                "employees":["title":"従業員数","employees":"132名(技術者118名)","average":"３２歳","ratio":"","halfway":"約５割"],   // 任意
-                "capital":["title":"資本金","results":"20,000,000円"],                                                       // 任意
-                "sales":["title":"売上高","results":"14億円(2018年11月実績)"],                                                       // 任意
-                "representative":["title":"代表者","name":"代表取締役社長　峯岸 正積","career":"1979年11月5日生まれ。2002年コニカミノルタ株式会社に入社。"],                                     // 任意
-            ],
-        ],
-    ]
-    */
-    
     var articleOpenFlag:Bool = false
+    var memoDispFlag:Bool = false
     var coverageMemoOpenFlag:Bool = false
     var selectionProcessOpenFlag:Bool = false
     var phoneNumberOpenFlag:Bool = false
@@ -217,6 +83,8 @@ class JobOfferDetailVC: TmpBasicVC {
         self.setNaviButtons()
         
         self.detailTableView.backgroundColor = UIColor.init(colorType: .color_base)
+        
+        memoDispFlag = self.memoDispFlagCheck(memo: _mdlJobDetail.interviewMemo)
         
         /// section 0
         // 終了間近,スカウト
@@ -294,6 +162,14 @@ class JobOfferDetailVC: TmpBasicVC {
         
         buttonsView = titleView
     }
+    
+    // 取材メモ表示フラグ
+    private func memoDispFlagCheck(memo: JobCardDetailInterviewMemo) -> Bool {
+        if memo.interviewContent.count > 0 || memo.interviewPhoto1.count > 0 || memo.interviewPhoto2.count > 0 || memo.interviewPhoto3.count > 0{
+            return true
+        }
+        return false
+    }
 }
 
 extension JobOfferDetailVC: UITableViewDelegate {
@@ -330,7 +206,9 @@ extension JobOfferDetailVC: UITableViewDelegate {
                 return articleOpenFlag ? 120 : 60
             case 3:
                 return 60
-            case 4,5,6,7:
+            case 4:
+                return memoDispFlag ? 50 : 0
+            case 5,6,7:
                 return 55
             default:
                 return 0
@@ -378,6 +256,22 @@ extension JobOfferDetailVC: UITableViewDataSource {
                     .first as! JobDetailGuideBookHeaderView
                 return view
             case 4,5,6,7:
+                var dispFlag:Bool = false
+                switch section {
+                    case 4:
+                        dispFlag = memoDispFlag
+                    case 5:
+                        dispFlag = true
+                    case 6:
+                        dispFlag = true
+                    case 7:
+                        dispFlag = true
+                    default:
+                        dispFlag = false
+                }
+                if dispFlag == false {
+                    return nil
+                }
                 // 取材メモ
                 // 選考プロセス
                 // 連絡先
@@ -597,8 +491,6 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
     // 募集要項の移動
     func guidebookScrollAnimation(section: Int,row: Int,titleName: String) {
         Log.selectLog(logLevel: .debug, "guidebookScrollAnimation start")
-        Log.selectLog(logLevel: .debug, "section:\(section)")
-//        let guidebookData = dummyData["guidebook"] as! [[String:Any]]
         
         let indexPath = IndexPath.init(row: row, section: section)
         self.detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
