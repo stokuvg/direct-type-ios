@@ -8,8 +8,7 @@
 
 import UIKit
 import AWSMobileClient
-import SwaggerClient
-
+import TudApi
 
 public extension AWSMobileClientError {
     var dispError: String {
@@ -168,9 +167,6 @@ struct MyErrorDisp {
         var buf: String = ""
         buf += "✨▽\(orgErr.localizedDescription) -> \n"
         buf += "✨\t[\(code): \(title)] ... [\(message)]\n"
-//        if dicParam.count > 0 {
-//            buf += "✨\t付帯情報あり: \(dicParam.description)"
-//        }
         for valid in arrValidErrMsg {
             buf += "✨\t[\(valid.property)] ... [\(valid.constraintsKey)] [\(valid.constraintsVal)]\n"
         }
@@ -187,6 +183,9 @@ extension AuthManager {
             print("=== 準備失敗 ===\n", myErrorDisp.debugDisp, "\n==================")
             return myErrorDisp
         }
+        
+        
+        
         //=== UserDefine Error は、そのまま表示させておわる
         if let error = error as? ApiError {
             switch error {
@@ -254,8 +253,8 @@ extension AuthManager {
                 myErrorDisp.message = cocorErrMsg
                 return myErrorDisp
         
-            case "SwaggerClient.ErrorResponse":
-                myErrorDisp.title = "SwaggerClient.ErrorResponse"
+            case "TudApi.ErrorResponse":
+                myErrorDisp.title = "TudApi.ErrorResponse"
                 switch error as? Error {
                 case .none:
                     myErrorDisp.message = "[\(_error.code)] \(_error.domain)"
@@ -341,6 +340,7 @@ extension AuthManager {
         return myErrorDisp
     }
 }
+
 
 
 

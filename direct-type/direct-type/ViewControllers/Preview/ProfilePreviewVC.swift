@@ -188,30 +188,41 @@ extension ProfilePreviewVC {
         ProfileAPI.profileControllerUpdate(body: param)
         .done { resp in
             print(resp)
+            self.fetchGetProfile()
         }
         .catch { (error) in
             print(error.localizedDescription)
-            if let _error = error as? NSError {
-                print(#line, "NSError", _error.localizedDescription)
-                print(#line, "[domain: \(_error.domain)]")
-                print(#line, "[code: \(_error.code)]")
-                print(#line, "[userInfo: \(_error.userInfo)]")
+            let myErr = AuthManager.convAnyError(error)
+            print(myErr.debugDisp)
+            switch myErr.code {
+            case 400: //Validation Errorは自動リトライしない
+                print("400: Validation Errorは自動リトライしない(個別チェック)")
+            default:
+                print(#line, error.localizedDescription)
             }
-            if let _error = error as? ErrorResponse {
-                switch _error {
-                case .error(let code, let data, let error):
-                    if let _data = data {
-                        let jsonStr = String(bytes: _data, encoding: .utf8)!
-                        print("JSONに変換して表示: [\(jsonStr)]", error.localizedDescription)
-                        self.showConfirm(title: "エラー \(code)", message: jsonStr, onlyOK: true)
-                        
-                        print("\n\n\(jsonStr)\n\n\n")
-                    }
-                }
-            }
+            self.showError(myErr)
+//
+//            if let _error = error as? NSError {
+//                print(#line, "NSError", _error.localizedDescription)
+//                print(#line, "[domain: \(_error.domain)]")
+//                print(#line, "[code: \(_error.code)]")
+//                print(#line, "[userInfo: \(_error.userInfo)]")
+//            }
+//            if let _error = error as? ErrorResponse {
+//                switch _error {
+//                case .error(let code, let data, let error):
+//                    if let _data = data {
+//                        let jsonStr = String(bytes: _data, encoding: .utf8)!
+//                        print("JSONに変換して表示: [\(jsonStr)]", error.localizedDescription)
+//                        self.showConfirm(title: "エラー \(code)", message: jsonStr, onlyOK: true)
+//
+//                        print("\n\n\(jsonStr)\n\n\n")
+//                    }
+//                }
+//            }
         }
         .finally {
-            self.fetchGetProfile()
+//            self.fetchGetProfile()
         }
     }
 
