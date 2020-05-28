@@ -18,22 +18,25 @@ class ProfilePreviewVC: PreviewBaseVC {
     override func actCommit(_ sender: UIButton) {
         print(#line, #function, "ボタン押下でAPIフェッチ確認")
         tableVW.reloadData()
-//        //===変更内容の確認
-//        print(#line, String(repeating: "=", count: 44))
-//        for (y, items) in editableModel.arrData.enumerated() {
-//            for (x, _item) in items.enumerated() {
-//                let (isChange, editTemp) = editableModel.makeTempItem(_item)
-//                let item: EditableItemH! = isChange ? editTemp : _item
-//                if isChange {
-//                    print("\t(\(y)-\(x)) ✍️ [\(item.debugDisp)]")
-//                } else {
-//                    print("\t(\(y)-\(x)) 　 [\(item.debugDisp)]")
-//                }
-//            }
-//        }
-//        print(#line, String(repeating: "=", count: 44))
-        fetchUpdateProfile()
+//        fetchUpdateProfile()
+        validateUpdateProfile()
     }
+    
+    func validateUpdateProfile() {
+        ValidateManager.dbgDispCurrentItems(editableModel: editableModel) //[Dbg: 状態確認]
+        let chkErr = chkValidationErr()
+        if chkErr.count > 0 {
+            print("＊＊＊　Validationエラー発生: \(chkErr.count)件　＊＊＊")
+            var msg: String = ""
+            for err in chkErr {
+                msg = "\(msg)\(err.value)\n"
+            }
+            self.showConfirm(title: "Validationエラー (\(chkErr.count)件)", message: msg)
+        } else {
+            print("＊＊＊　Validationエラーなし　＊＊＊")
+        }
+    }
+    
     override func initData() {
         title = "個人プロフィール"
         
@@ -105,17 +108,11 @@ class ProfilePreviewVC: PreviewBaseVC {
         arrData.append(MdlItemH(.mobilephoneH2, "\(bufMobilePhoneNo)", "\(bufMobilePhoneNoNotice)", readonly: true, childItems: [
             EditableItemH(type: .inputText, editItem: EditItemMdlProfile.mobilePhoneNo, val: _detail.mobilePhoneNo),
         ]))
-//        //=== editableModelで管理させる
-//        editableModel.arrData.removeAll()
-//        for items in arrData { editableModel.arrData.append(items.childItems) }
-        print(#line, String(repeating: "=", count: 44))
-        print(editableModel.arrData.debugDescription)
-        for (y, items) in editableModel.arrData.enumerated() {
-            for (x, item) in items.enumerated() {
-                print("\t(\(y)-\(x)) [\(item.debugDisp)]")
-            }
-        }
-        print(#line, String(repeating: "=", count: 44))
+
+        //=== editableModelで管理させる
+        editableModel.arrData.removeAll()
+        for items in arrData { editableModel.arrData.append(items.childItems) }//editableModelに登録
+        editableModel.chkTableCellAll()//これ実施しておくと、getItemByKeyが利用可能になる
         tableVW.reloadData()//描画しなおし
     }
     
@@ -194,6 +191,32 @@ extension ProfilePreviewVC {
             self.dispData()
             SVProgressHUD.dismiss()
         }
+    }
+}
+
+
+//バリデーションチェックしてみて、問題あったらエラ〜メッセージを定義しちゃっとく
+//なんかエラーあったらtrue返しとく
+extension ProfilePreviewVC {
+    func chkValidationErr() -> [EditableItemKey: String] {
+        var dicError: [EditableItemKey: String] = [:]
+        //必須チェック
+        for itemKey in [
+            EditItemMdlProfile.familyName.itemKey,
+            EditItemMdlProfile.firstName.itemKey,
+            EditItemMdlProfile.familyNameKana.itemKey,
+            EditItemMdlProfile.firstNameKana.itemKey,
+            ]
+        {
+            if let temp = editableModel.editTempCD[itemKey], let item = editableModel.getItemByKey(itemKey) {
+                if temp.isEmpty { dicError[itemKey] = "\(item.dispName) は必須項目です" }
+                print("\t変更したもののみチェック: [\(item.debugDisp)]\t[\(temp)]")
+            }
+        }
+        print("\t* editTempCD: \(editableModel.editTempCD))")
+        print("\t* dicError: \(dicError))")
+
+        return dicError
     }
 }
 

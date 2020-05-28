@@ -11,7 +11,8 @@ import UIKit
 typealias BigDecimal = Double
 
 struct Constants {
-    static let Auth_username: String = "+819001234567" //安全なダミー番号: https://stabucky.com/wp/archives/6180
+    static let Auth_username: String = "+819046010406"
+//    static let Auth_username: String = "+819001234567" //安全なダミー番号: https://stabucky.com/wp/archives/6180
     static let Auth_password: String = "Abcd123$"
 
     //=== 通信関連の設定値
@@ -31,7 +32,7 @@ struct Constants {
     static let DbgAutoSelTabVC: Bool = false
     static let DbgAutoPushVC: Bool = false
     static let DbgAutoPushVCNum: Int = 1  //0:なし, 1:プロフィール, 2:履歴書, 3:職歴, 4:サクサク職歴
-    static let DbgOfflineMode: Bool = false
+    static let DbgOfflineMode: Bool = true
     
 
     static let DbgDispStatus: Bool = false

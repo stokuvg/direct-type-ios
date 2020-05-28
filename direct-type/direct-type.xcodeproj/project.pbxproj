@@ -167,6 +167,7 @@
 		269AFFC9246A929300DB364B /* SubSelectTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269AFFBF246A929200DB364B /* SubSelectTBCell.xib */; };
 		269AFFCA246A929300DB364B /* SubSelectDaiTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269AFFC0246A929200DB364B /* SubSelectDaiTBCell.xib */; };
 		269AFFCB246A929300DB364B /* SubSelectSpecialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269AFFC1246A929200DB364B /* SubSelectSpecialVC.swift */; };
+		26A1F57C247F5D3300834213 /* ValidateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1F57B247F5D3300834213 /* ValidateManager.swift */; };
 		26A4C1CB247B4A81008D8E68 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A4C1CA247B4A81008D8E68 /* ApiManager.swift */; };
 		26A5DD642475028E0035267A /* SubSelectSpecialVC+Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5DD632475028E0035267A /* SubSelectSpecialVC+Picker.swift */; };
 		26A5DD662476547D0035267A /* SubSelectBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5DD652476547D0035267A /* SubSelectBaseVC.swift */; };
@@ -381,6 +382,7 @@
 		269AFFBF246A929200DB364B /* SubSelectTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubSelectTBCell.xib; sourceTree = "<group>"; };
 		269AFFC0246A929200DB364B /* SubSelectDaiTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubSelectDaiTBCell.xib; sourceTree = "<group>"; };
 		269AFFC1246A929200DB364B /* SubSelectSpecialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubSelectSpecialVC.swift; sourceTree = "<group>"; };
+		26A1F57B247F5D3300834213 /* ValidateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateManager.swift; sourceTree = "<group>"; };
 		26A4C1CA247B4A81008D8E68 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		26A5DD632475028E0035267A /* SubSelectSpecialVC+Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubSelectSpecialVC+Picker.swift"; sourceTree = "<group>"; };
 		26A5DD652476547D0035267A /* SubSelectBaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSelectBaseVC.swift; sourceTree = "<group>"; };
@@ -566,6 +568,7 @@
 		066BD9D52456ACB4009E610B /* direct-type */ = {
 			isa = PBXGroup;
 			children = (
+				26A1F57A247F5D1000834213 /* ValidateManager */,
 				263607592477A35E00032880 /* AuthManager */,
 				26BF48EF24639E7100E00215 /* Constants.swift */,
 				26B6E8B4245C1B4B00BE5B90 /* Generated */,
@@ -865,6 +868,14 @@
 				269AFFC0246A929200DB364B /* SubSelectDaiTBCell.xib */,
 			);
 			path = SubSelect;
+			sourceTree = "<group>";
+		};
+		26A1F57A247F5D1000834213 /* ValidateManager */ = {
+			isa = PBXGroup;
+			children = (
+				26A1F57B247F5D3300834213 /* ValidateManager.swift */,
+			);
+			path = ValidateManager;
 			sourceTree = "<group>";
 		};
 		26B6E8B4245C1B4B00BE5B90 /* Generated */ = {
@@ -1261,6 +1272,7 @@
 				26CFC46A2469496D00E458E2 /* HEditTextTBCell.swift in Sources */,
 				067F28D02456CCB8000AAD69 /* BaseVC.swift in Sources */,
 				26BF48EE24639DEE00E00215 /* EditableObj.swift in Sources */,
+				26A1F57C247F5D3300834213 /* ValidateManager.swift in Sources */,
 				269AFFC5246A929300DB364B /* SubSelectSingleVC.swift in Sources */,
 				06E519B3245814BD004E4B7A /* EntryLoginVC.swift in Sources */,
 				066BC827246CF3CA00FE607F /* JobDetailItemAttentionView.swift in Sources */,
