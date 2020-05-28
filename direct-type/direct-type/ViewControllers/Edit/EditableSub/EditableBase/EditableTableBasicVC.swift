@@ -40,7 +40,9 @@ class EditableTableBasicVC: EditableBasicVC {
     }
     
     func chkValidateError() -> Bool {
+        if Constants.DbgSkipLocalValidate { return false }//[Dbg: ローカルValidationスキップ]
         ValidateManager.dbgDispCurrentItems(editableModel: editableModel) //[Dbg: 状態確認]
+        dicValidErr.removeAll()//チェック前に、既存のエラーを全削除しておく
         let chkErr = ValidateManager.chkValidationErr(editableModel)
         if chkErr.count > 0 {
             var msg: String = ""

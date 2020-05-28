@@ -17,12 +17,15 @@ class ProfilePreviewVC: PreviewBaseVC {
     
     override func actCommit(_ sender: UIButton) {
         print(#line, #function, "ボタン押下でAPIフェッチ確認")
-        tableVW.reloadData()
-//        fetchUpdateProfile()
-        validateUpdateProfile()
+        if validateUpdateProfile() {
+            tableVW.reloadData()
+            return
+        }
+        fetchUpdateProfile()
     }
     
-    func validateUpdateProfile() {
+    func validateUpdateProfile() -> Bool {
+        if Constants.DbgSkipLocalValidate { return false }//[Dbg: ローカルValidationスキップ]
         ValidateManager.dbgDispCurrentItems(editableModel: editableModel) //[Dbg: 状態確認]
         let chkErr = chkValidationErr()
         if chkErr.count > 0 {
@@ -32,8 +35,10 @@ class ProfilePreviewVC: PreviewBaseVC {
                 msg = "\(msg)\(err.value)\n"
             }
             self.showConfirm(title: "Validationエラー (\(chkErr.count)件)", message: msg)
+            return true
         } else {
             print("＊＊＊　Validationエラーなし　＊＊＊")
+            return false
         }
     }
     
@@ -168,7 +173,24 @@ extension ProfilePreviewVC {
             self.fetchGetProfile()
         }
         .catch { (error) in
-            self.showError(error)
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            switch myErr.code {
+            case 400:
+                print(myErr.debugDisp)
+                //✨    [familyName] ... [isNotEmpty] [familyName should not be empty]
+                //✨    [firstName] ... [isNotEmpty] [firstName should not be empty]
+                //✨    [firstNameKana] ... [isNotEmpty] [firstNameKana should not be empty]
+                for valid in myErr.arrValidErrMsg {
+                    switch valid.property { //これで対応する項目に結びつける
+                    default:
+                        print("\t[\(valid.property)]\t[\(valid.constraintsKey)] : [\(valid.constraintsVal)]")
+                    }
+                }
+
+                
+            default:
+                self.showError(error)
+            }
         }
         .finally {
             self.dispData()
