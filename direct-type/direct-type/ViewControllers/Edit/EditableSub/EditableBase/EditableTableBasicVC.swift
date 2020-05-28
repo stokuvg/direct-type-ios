@@ -30,10 +30,10 @@ class EditableTableBasicVC: EditableBasicVC {
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
         ValidateManager.dbgDispCurrentItems(editableModel: editableModel) //[Dbg: 状態確認]
-        if chkValidateError() {
-            tableVW.reloadData()
-            return
-        }
+//        if chkValidateError() {
+//            tableVW.reloadData()
+//            return
+//        }
         //編集画面でのeditTempCDを、そのまま前の画面に渡しても良い気がする
         self.delegate?.changedSelect(editItem: itemGrp, editTempCD: editableModel.editTempCD) //フィードバックしておく
         self.dismiss(animated: true) {}

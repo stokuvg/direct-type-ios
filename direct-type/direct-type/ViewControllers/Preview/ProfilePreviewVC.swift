@@ -34,7 +34,10 @@ class ProfilePreviewVC: PreviewBaseVC {
             for err in chkErr {
                 msg = "\(msg)\(err.value)\n"
             }
-            self.showConfirm(title: "Validationエラー (\(chkErr.count)件)", message: msg)
+//            self.showConfirm(title: "Validationエラー (\(chkErr.count)件)", message: msg)
+
+
+
             return true
         } else {
             print("＊＊＊　Validationエラーなし　＊＊＊")
@@ -182,11 +185,14 @@ extension ProfilePreviewVC {
                 //✨    [firstNameKana] ... [isNotEmpty] [firstNameKana should not be empty]
                 for valid in myErr.arrValidErrMsg {
                     switch valid.property { //これで対応する項目に結びつける
+                    case "familyName", "firstName", "familyNameKana", "firstNameKana":
+                        self.dicValidErrMsg[HPreviewItemType.fullnameH2.itemKey] = valid.constraintsVal
                     default:
-                        print("\t[\(valid.property)]\t[\(valid.constraintsKey)] : [\(valid.constraintsVal)]")
+                        print("❤️\t[\(valid.property)]\t[\(valid.constraintsKey)] : [\(valid.constraintsVal)]")
+                        self.dicValidErrMsg[HPreviewItemType.adderssH2.itemKey] = "あどれすちがう"
+
                     }
                 }
-
                 
             default:
                 self.showError(error)

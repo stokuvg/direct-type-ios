@@ -15,6 +15,7 @@ import SwaggerClient
 class PreviewBaseVC: TmpBasicVC {
     var editableModel: EditableModel = EditableModel() //画面編集項目のモデルと管理
     var arrData: [MdlItemH] = []
+    var dicValidErrMsg: [MdlItemHTypeKey: String] = [:]//MdlItemH.type
 
     @IBOutlet weak var tableVW: UITableView!
     @IBOutlet weak var btnCommit: UIButton!
@@ -56,7 +57,8 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = arrData[indexPath.row]
         let cell: HPreviewTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HPreviewTBCell", for: indexPath) as! HPreviewTBCell
-        cell.initCell(item, editTempCD: editableModel.editTempCD)//編集中の値を表示適用させるためeditTempCDを渡す
+        let errMsg = dicValidErrMsg[item.type.itemKey] ?? ""
+        cell.initCell(item, editTempCD: editableModel.editTempCD, errMsg: errMsg)//編集中の値を表示適用させるためeditTempCDを渡す
         cell.dispCell()
         return cell
     }
