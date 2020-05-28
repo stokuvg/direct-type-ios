@@ -32,8 +32,39 @@ class ProfilePreviewVC: PreviewBaseVC {
 //            }
 //        }
 //        print(#line, String(repeating: "=", count: 44))
-        fetchUpdateProfile()
+//        fetchUpdateProfile()
+        validateUpdateProfile()
     }
+    
+    func validateUpdateProfile() {
+        //___Validation試すために復活。editableModel完結とかできれば不要になるかも
+//        print(#line, String(repeating: "=", count: 44))
+//        for (y, items) in editableModel.arrData.enumerated() {
+//            for (x, _item) in items.enumerated() {
+//                let (isChange, editTemp) = editableModel.makeTempItem(_item)
+//                let item: EditableItemH! = isChange ? editTemp : _item
+//                if isChange {
+//                    print("\t(\(y)-\(x)) ✍️ [\(item.debugDisp)]")
+//                } else {
+//                    print("\t(\(y)-\(x)) 　 [\(item.debugDisp)]")
+//                }
+//            }
+//        }
+        //^^^Validation試すために復活。editableModel完結とかできれば不要になるかも
+        let chkErr = chkValidationErr()
+        if chkErr.count > 0 {
+            print("＊＊＊　Validationエラー発生: \(chkErr.count)件　＊＊＊")
+            var msg: String = ""
+            for err in chkErr {
+                msg = "\(msg)\(err.value)\n"
+            }
+            self.showConfirm(title: "Validationエラー (\(chkErr.count)件)", message: msg)
+            
+        } else {
+            print("＊＊＊　Validationエラーなし　＊＊＊")
+        }
+    }
+    
     override func initData() {
         title = "個人プロフィール"
         
@@ -105,18 +136,24 @@ class ProfilePreviewVC: PreviewBaseVC {
         arrData.append(MdlItemH(.mobilephoneH2, "\(bufMobilePhoneNo)", "\(bufMobilePhoneNoNotice)", readonly: true, childItems: [
             EditableItemH(type: .inputText, editItem: EditItemMdlProfile.mobilePhoneNo, val: _detail.mobilePhoneNo),
         ]))
-//        //=== editableModelで管理させる
-//        editableModel.arrData.removeAll()
-//        for items in arrData { editableModel.arrData.append(items.childItems) }
-        print(#line, String(repeating: "=", count: 44))
-        print(editableModel.arrData.debugDescription)
-        for (y, items) in editableModel.arrData.enumerated() {
-            for (x, item) in items.enumerated() {
-                print("\t(\(y)-\(x)) [\(item.debugDisp)]")
-            }
-        }
-        print(#line, String(repeating: "=", count: 44))
+
+        //___Validation試すために復活。editableModel完結とかできれば不要になるかも
+        //=== editableModelで管理させる
+        editableModel.arrData.removeAll()
+        for items in arrData { editableModel.arrData.append(items.childItems) }
+        editableModel.chkTableCellAll()//これ実施しておくと、getItemByKeyが利用可能になる
         tableVW.reloadData()//描画しなおし
+
+//        print(#line, String(repeating: "=", count: 44))
+//        print(editableModel.arrData.debugDescription)
+//        for (y, items) in editableModel.arrData.enumerated() {
+//            for (x, item) in items.enumerated() {
+//                print("\t(\(y)-\(x)) [\(item.debugDisp)]")
+//            }
+//        }
+//        print(#line, String(repeating: "=", count: 44))
+        //^^^Validation試すために復活。editableModel完結とかできれば不要になるかも
+
     }
     
     //========================================
@@ -197,3 +234,48 @@ extension ProfilePreviewVC {
     }
 }
 
+
+
+
+
+
+//バリデーションチェックしてみて、問題あったらエラ〜メッセージを定義しちゃっとく
+//なんかエラーあったらtrue返しとく
+extension ProfilePreviewVC {
+    func chkValidationErr() -> [EditableItemKey: String] {
+        var dicError: [EditableItemKey: String] = [:]
+        //必須チェック
+        for itemKey in [
+            EditItemMdlProfile.familyName.itemKey,
+            EditItemMdlProfile.firstName.itemKey,
+            EditItemMdlProfile.familyNameKana.itemKey,
+            EditItemMdlProfile.firstNameKana.itemKey,
+            ]
+        {
+            if let temp = editableModel.editTempCD[itemKey], let item = editableModel.getItemByKey(itemKey) {
+                if temp.isEmpty { dicError[itemKey] = "\(item.dispName) は必須項目です" }
+                print("\t変更したもののみチェック: [\(item.debugDisp)]\t[\(temp)]")
+            }
+        }
+        print("\t* editTempCD: \(editableModel.editTempCD))")
+        print("\t* dicError: \(dicError))")
+
+        return dicError
+    }
+}
+
+                
+//            if (dicValue[item] ?? "").isEmpty { dicError[item] = "\(item.disp) は必須項目です" }
+//        }
+        //[Dbg: 以降のValidateチェックをパスする]
+//        if Constants.DbgSkipLocalValidate { return dicError }
+//}
+//        //文字長チェック
+//        let maxlen: Int = 20 //ちゃんとやるなら、最小と最大を定義して、ごそっとやるとか
+//        for item in [AuthParam.note, ] {
+//            let len = (dicValue[item] ?? "").count
+//            if len > maxlen { dicError[item] = "\(item.disp) は\(maxlen)文字までです　(\(len - maxlen)文字多い)" }
+//        }
+//    }
+//    return dicError
+//}
