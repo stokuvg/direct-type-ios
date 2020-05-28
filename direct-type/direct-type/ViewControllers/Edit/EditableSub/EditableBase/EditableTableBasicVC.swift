@@ -42,8 +42,40 @@ class EditableTableBasicVC: EditableBasicVC {
 //        print(#line, String(repeating: "-", count: 33))
         //編集画面でのeditTempCDを、そのまま前の画面に渡しても良い気がする
         self.delegate?.changedSelect(editItem: item, editTempCD: editableModel.editTempCD) //フィードバックしておく
-        self.dismiss(animated: true) {}
+        
+        validate()
+        
+//        self.dismiss(animated: true) {}
     }
+    
+    func validate() {
+        //___Validation試すために復活。editableModel完結とかできれば不要になるかも
+        print(#line, String(repeating: "=", count: 44))
+        for (y, items) in editableModel.arrData.enumerated() {
+            for (x, _item) in items.enumerated() {
+                let (isChange, editTemp) = editableModel.makeTempItem(_item)
+                let item: EditableItemH! = isChange ? editTemp : _item
+                if isChange {
+                    //print("\t(\(y)-\(x)) ✍️ [\(item.debugDisp)]")
+                    subValidate(self.item, item)
+                } else {
+                    //print("\t(\(y)-\(x)) 　 [\(item.debugDisp)]")
+                }
+            }
+        }
+        tableVW.reloadData()
+        //^^^Validation試すために復活。editableModel完結とかできれば不要になるかも
+    }
+    func subValidate(_ itemGrp: MdlItemH, _ item: EditableItemH) {
+        print("\t✍️[\(itemGrp.debugDisp)]\t[\(item.debugDisp)]")
+        //項目グループでのバリデーション（住所の場合なんかかな？複数項目を足した文字数でのチェックという...ってことは、変更点だけじゃだめ？
+        //項目個別でのバリデーション
+        let hoge = ValidateManager.subValidate(itemGrp, item)
+        print(hoge)
+//        dicValidErr[item.editableItemKey] = "\(item.dispName)は必須です"
+        dicValidErr = hoge
+    }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -186,7 +218,8 @@ extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
         case .inputText:
             let returnKeyType: UIReturnKeyType = (item.editableItemKey == editableModel.lastEditableItemKey) ? .done : .next
             let cell: HEditTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditTextTBCell", for: indexPath) as! HEditTextTBCell
-            cell.initCell(self, item, returnKeyType)
+            let errMsg = dicValidErr[item.editableItemKey] ?? ""
+            cell.initCell(self, item, errMsg: errMsg, returnKeyType)
             cell.dispCell()
             return cell
             
@@ -207,7 +240,8 @@ extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
             let returnKeyType: UIReturnKeyType = (item.editableItemKey == editableModel.lastEditableItemKey) ? .done : .next
             print("[returnKeyType: \(returnKeyType.rawValue)]")
             let cell: HEditTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditTextTBCell", for: indexPath) as! HEditTextTBCell
-            cell.initCell(self, item, returnKeyType)
+            let errMsg = dicValidErr[item.editableItemKey] ?? ""
+            cell.initCell(self, item, errMsg: errMsg, returnKeyType)
             cell.dispCell()
             return cell
         }
