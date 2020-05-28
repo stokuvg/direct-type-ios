@@ -16,7 +16,7 @@ protocol nameEditableTableBasicDelegate {
 class EditableTableBasicVC: EditableBasicVC {
     var delegate: nameEditableTableBasicDelegate? = nil
     var vwKbTapArea: UIView = UIView(frame: CGRect.zero)
-    var item: MdlItemH!
+    var itemGrp: MdlItemH!
     
     @IBOutlet weak var vwHead: UIView!
     @IBOutlet weak var lblTitle: UILabel!
@@ -29,53 +29,32 @@ class EditableTableBasicVC: EditableBasicVC {
     @IBOutlet weak var vwFoot: UIView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
-//        print(#line, String(repeating: "=", count: 44))
-//        //=== 存在するTextField項目を列挙し、現在の値を取得する
-//        for tfKey in editableModel.arrTextFieldNextDoneKey {
-//            guard let _item = editableModel.getItemByKey(tfKey) else { continue }
-//            let (isChange, editTemp) = editableModel.makeTempItem(_item)
-//            if isChange {
-//                let item: EditableItemH! = isChange ? editTemp : _item
-//                print("\t\t\(item.debugDisp)")
-//            }
-//        }
-//        print(#line, String(repeating: "-", count: 33))
+        ValidateManager.dbgDispCurrentItems(editableModel: editableModel) //[Dbg: 状態確認]
+        if chkValidateError() {
+            tableVW.reloadData()
+            return
+        }
         //編集画面でのeditTempCDを、そのまま前の画面に渡しても良い気がする
-        self.delegate?.changedSelect(editItem: item, editTempCD: editableModel.editTempCD) //フィードバックしておく
-        
-        validate()
-        
-//        self.dismiss(animated: true) {}
+        self.delegate?.changedSelect(editItem: itemGrp, editTempCD: editableModel.editTempCD) //フィードバックしておく
+        self.dismiss(animated: true) {}
     }
     
-    func validate() {
-        //___Validation試すために復活。editableModel完結とかできれば不要になるかも
-        print(#line, String(repeating: "=", count: 44))
-        for (y, items) in editableModel.arrData.enumerated() {
-            for (x, _item) in items.enumerated() {
-                let (isChange, editTemp) = editableModel.makeTempItem(_item)
-                let item: EditableItemH! = isChange ? editTemp : _item
-                if isChange {
-                    //print("\t(\(y)-\(x)) ✍️ [\(item.debugDisp)]")
-                    subValidate(self.item, item)
-                } else {
-                    //print("\t(\(y)-\(x)) 　 [\(item.debugDisp)]")
-                }
+    func chkValidateError() -> Bool {
+        ValidateManager.dbgDispCurrentItems(editableModel: editableModel) //[Dbg: 状態確認]
+        let chkErr = ValidateManager.chkValidationErr(editableModel)
+        if chkErr.count > 0 {
+            var msg: String = ""
+            for (key, err) in chkErr {
+                dicValidErr[key] = err.joined(separator: "\n")
+                let name = editableModel.getItemByKey(key)?.dispName ?? ""
+                msg = "\(msg)\(name): \(err)\n"
             }
+            self.showConfirm(title: "Validationエラー (\(chkErr.count)件)", message: msg)
+            return true
+        } else {
+            return false
         }
-        tableVW.reloadData()
-        //^^^Validation試すために復活。editableModel完結とかできれば不要になるかも
     }
-    func subValidate(_ itemGrp: MdlItemH, _ item: EditableItemH) {
-        print("\t✍️[\(itemGrp.debugDisp)]\t[\(item.debugDisp)]")
-        //項目グループでのバリデーション（住所の場合なんかかな？複数項目を足した文字数でのチェックという...ってことは、変更点だけじゃだめ？
-        //項目個別でのバリデーション
-        let hoge = ValidateManager.subValidate(itemGrp, item)
-        print(hoge)
-//        dicValidErr[item.editableItemKey] = "\(item.dispName)は必須です"
-        dicValidErr = hoge
-    }
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,14 +87,14 @@ class EditableTableBasicVC: EditableBasicVC {
         showTargetTF(tableVW, tf)//一緒にスクロールするように親を変えるためoverride
     }
 
-    func initData(_ delegate: nameEditableTableBasicDelegate, _ item: MdlItemH) {
+    func initData(_ delegate: nameEditableTableBasicDelegate, _ itemGrp: MdlItemH) {
         self.delegate = delegate
-        self.item = item
+        self.itemGrp = itemGrp
         //=== IndexPathなどを設定するため
-        editableModel.initItemEditable(item.childItems)
+        editableModel.initItemEditable(itemGrp.childItems)
     }
     func dispData() {
-        guard let _item = item else { return }
+        guard let _item = itemGrp else { return }
         lblTitle.text(text: _item.type.dispTitle, fontType: .font_L, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
     }
     
@@ -208,10 +187,10 @@ class EditableTableBasicVC: EditableBasicVC {
 extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
     //=== 通常テーブル
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return item.childItems.count
+        return itemGrp.childItems.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let _item = item.childItems[indexPath.row]
+        let _item = itemGrp.childItems[indexPath.row]
         let (isChange, editTemp) = editableModel.makeTempItem(_item)
         let item: EditableItemH! = isChange ? editTemp : _item
         switch item.editType {
@@ -256,10 +235,32 @@ extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
 }
 
 
-
-
-
 //==========================================================================================
-
-
-
+extension ValidateManager {
+    class func subValidateNotEmntyByKey(_ editableModel: EditableModel) -> [EditableItemKey: [String]] {
+        var dicError: [EditableItemKey: [String]] = [:]
+        //必須チェック
+        for itemKey in editableModel.arrTextFieldNextDoneKey {
+            if let item = editableModel.getItemByKey(itemKey) {
+                let (isChange, editTemp) = editableModel.makeTempItem(item)
+                if isChange {
+                    if editTemp.curVal == "" {
+                        dicError = ValidateManager.addDicArrVal(dic: dicError, key: item.editableItemKey, val: "\(item.dispName)は必須項目です")
+                    }
+                }
+            }
+        }
+        return dicError
+    }
+    class func chkValidationErr(_ editableModel: EditableModel) -> [EditableItemKey: [String]] {
+        var dicError: [EditableItemKey: [String]] = [:]
+        //必須チェック
+        for (key, vals) in subValidateNotEmntyByKey(editableModel) {
+            for val in vals {
+                dicError = ValidateManager.addDicArrVal(dic: dicError, key: key, val: val)
+            }
+        }
+            
+        return dicError
+    }
+}

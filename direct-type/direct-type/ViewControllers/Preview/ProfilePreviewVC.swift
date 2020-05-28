@@ -18,39 +18,12 @@ class ProfilePreviewVC: PreviewBaseVC {
     override func actCommit(_ sender: UIButton) {
         print(#line, #function, "ボタン押下でAPIフェッチ確認")
         tableVW.reloadData()
-//        //===変更内容の確認
-//        print(#line, String(repeating: "=", count: 44))
-//        for (y, items) in editableModel.arrData.enumerated() {
-//            for (x, _item) in items.enumerated() {
-//                let (isChange, editTemp) = editableModel.makeTempItem(_item)
-//                let item: EditableItemH! = isChange ? editTemp : _item
-//                if isChange {
-//                    print("\t(\(y)-\(x)) ✍️ [\(item.debugDisp)]")
-//                } else {
-//                    print("\t(\(y)-\(x)) 　 [\(item.debugDisp)]")
-//                }
-//            }
-//        }
-//        print(#line, String(repeating: "=", count: 44))
 //        fetchUpdateProfile()
         validateUpdateProfile()
     }
     
     func validateUpdateProfile() {
-        //___Validation試すために復活。editableModel完結とかできれば不要になるかも
-//        print(#line, String(repeating: "=", count: 44))
-//        for (y, items) in editableModel.arrData.enumerated() {
-//            for (x, _item) in items.enumerated() {
-//                let (isChange, editTemp) = editableModel.makeTempItem(_item)
-//                let item: EditableItemH! = isChange ? editTemp : _item
-//                if isChange {
-//                    print("\t(\(y)-\(x)) ✍️ [\(item.debugDisp)]")
-//                } else {
-//                    print("\t(\(y)-\(x)) 　 [\(item.debugDisp)]")
-//                }
-//            }
-//        }
-        //^^^Validation試すために復活。editableModel完結とかできれば不要になるかも
+        ValidateManager.dbgDispCurrentItems(editableModel: editableModel) //[Dbg: 状態確認]
         let chkErr = chkValidationErr()
         if chkErr.count > 0 {
             print("＊＊＊　Validationエラー発生: \(chkErr.count)件　＊＊＊")
@@ -59,7 +32,6 @@ class ProfilePreviewVC: PreviewBaseVC {
                 msg = "\(msg)\(err.value)\n"
             }
             self.showConfirm(title: "Validationエラー (\(chkErr.count)件)", message: msg)
-            
         } else {
             print("＊＊＊　Validationエラーなし　＊＊＊")
         }
@@ -137,23 +109,11 @@ class ProfilePreviewVC: PreviewBaseVC {
             EditableItemH(type: .inputText, editItem: EditItemMdlProfile.mobilePhoneNo, val: _detail.mobilePhoneNo),
         ]))
 
-        //___Validation試すために復活。editableModel完結とかできれば不要になるかも
         //=== editableModelで管理させる
         editableModel.arrData.removeAll()
-        for items in arrData { editableModel.arrData.append(items.childItems) }
+        for items in arrData { editableModel.arrData.append(items.childItems) }//editableModelに登録
         editableModel.chkTableCellAll()//これ実施しておくと、getItemByKeyが利用可能になる
         tableVW.reloadData()//描画しなおし
-
-//        print(#line, String(repeating: "=", count: 44))
-//        print(editableModel.arrData.debugDescription)
-//        for (y, items) in editableModel.arrData.enumerated() {
-//            for (x, item) in items.enumerated() {
-//                print("\t(\(y)-\(x)) [\(item.debugDisp)]")
-//            }
-//        }
-//        print(#line, String(repeating: "=", count: 44))
-        //^^^Validation試すために復活。editableModel完結とかできれば不要になるかも
-
     }
     
     //========================================
@@ -233,10 +193,6 @@ extension ProfilePreviewVC {
         }
     }
 }
-
-
-
-
 
 
 //バリデーションチェックしてみて、問題あったらエラ〜メッセージを定義しちゃっとく
