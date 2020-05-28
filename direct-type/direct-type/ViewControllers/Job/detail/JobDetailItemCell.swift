@@ -42,37 +42,49 @@ class JobDetailItemCell: BaseJobDetailCell {
         switch row {
             case 0:
                 // 仕事内容
-                title = data.jobDescription.title
-                text = data.jobDescription.text
+//                title = data.jobDescription.title
+//                text = data.jobDescription.text
+                title = "仕事内容"
+                text = data.jobDescription
             case 1:
                 // 応募資格
-                title = data.qualification.title!
-                text = data.qualification.text!
+//                title = data.qualification.title!
+//                text = data.qualification.text!
+                title = "応募資格"
+                text = data.qualification
             case 2:
                 // 雇用形態
-                title = data.employmentType.title!
-                let type = SelectItemsManager.getCodeDisp(.employmentType, code: data.employmentType.type!)?.disp
+//                title = data.employmentType.title!
+//let type = SelectItemsManager.getCodeDisp(.employmentType, code: data.employmentType.type!)?.disp
+                title = "雇用形態"
+                let type = SelectItemsManager.getCodeDisp(.employmentType, code: data.employmentType)?.disp
+                
                 text = type!
             case 3:
                 // 給与
-                title = data.salary.title!
-                text = data.salary.text!
+//                title = data.salary.title!
+                title = "給与"
+                text = data.salary
             case 4:
                 // 勤務時間
-                title = data.jobtime.title!
-                text = data.jobtime.text!
+//                title = data.jobtime.title!
+                title = "勤務時間"
+                text = data.jobtime
             case 5:
                 // 勤務地
-                title = data.workPlace.title!
-                text = data.workPlace.text!
+//                title = data.workPlace.title!
+                title = "勤務時間"
+                text = data.workPlace
             case 6:
                 // 休日休暇
-                title = data.holiday.title!
-                text = data.holiday.text!
+//                title = data.holiday.title!
+                title = "休日休暇"
+                text = data.holiday
             case 7:
                 // 待遇・福利厚生
-                title = data.welfare.title!
-                text = data.welfare.text!
+//                title = data.welfare.title!
+                title = "待遇・福利厚生"
+                text = data.welfare
             default:
                 title = ""
                 text = ""
@@ -85,80 +97,91 @@ class JobDetailItemCell: BaseJobDetailCell {
         switch row {
             case 0:
                 // 案件例
-                if data.jobExample.text.count > 0 {
-                    let exampleData = ["title":data.jobExample.title,"text":data.jobExample.text]
+                if data.jobExample.count > 0 {
+//                    let exampleData = ["title":data.jobExample.title,"text":data.jobExample.text]
+                    let exampleData = ["title":"案件例","text":data.jobExample]
                     optionalDatas.append(exampleData)
                 }
                 // 手がける商品・サービス
-                if data.product.text.count > 0 {
-                    let productData = ["title":data.product.title,"text":data.product.text]
+                if data.product.count > 0 {
+//                    let productData = ["title":data.product.title,"text":data.product.text]
+                    let productData = ["title":"手がける商品・サービス","text":data.product]
                     optionalDatas.append(productData)
                 }
                 // 開発環境
-                if data.scope.text.count > 0 {
-                    let scopeData = ["title":data.scope.title,"text":data.scope.text]
+                if data.scope.count > 0 {
+//                    let scopeData = ["title":data.scope.title,"text":data.scope.text]
+                    let scopeData = ["title":"開発環境・業務範囲","text":data.scope]
                     optionalDatas.append(scopeData)
                 }
             case 1:
                 // 歓迎するスキル
-                if data.betterSkill.text!.count > 0 {
-                    let title = data.betterSkill.title!
-                    let text = data.betterSkill.text!
-                    let skillData:[String: Any] = ["title": title, "text": text]
+                if data.betterSkill.count > 0 {
+//                    let title = data.betterSkill.title!
+                    let text = data.betterSkill
+//                    let skillData:[String: Any] = ["title": title, "text": text]
+                    let skillData:[String: Any] = ["title": "歓迎する経験・スキル", "text": text]
                     optionalDatas.append(skillData)
                 }
                 // 過去の採用例
-                if data.applicationExample.text!.count > 0 {
-                    let title = data.applicationExample.title!
-                    let text = data.applicationExample.text!
-                    let applicationExampleData = ["title":title, "text": text]
+                if data.applicationExample.count > 0 {
+//                    let title = data.applicationExample.title!
+                    let text = data.applicationExample
+//                    let applicationExampleData = ["title":title, "text": text]
+                    let applicationExampleData = ["title":"過去の採用例", "text": text]
                     optionalDatas.append(applicationExampleData)
                 }
                 // この仕事の向き・不向き
-                if data.suitableUnsuitable.text!.count > 0 {
-                    let title = data.suitableUnsuitable.title!
-                    let text = data.suitableUnsuitable.text!
-                    let suitableUnsuitableData = ["title": title, "text": text]
+                if data.suitableUnsuitable.count > 0 {
+//                    let title = data.suitableUnsuitable.title!
+                    let text = data.suitableUnsuitable
+//                    let suitableUnsuitableData = ["title": title, "text": text]
+                    let suitableUnsuitableData = ["title": "この仕事の向き・不向き", "text": text]
                     optionalDatas.append(suitableUnsuitableData)
                 }
             case 3:
                 // 賞与について
-                if data.bonusAbout.text!.count > 0 {
-                    let title = data.bonusAbout.title!
-                    let text = data.bonusAbout.text!
-                    let bonusAboutData = ["title":title,"text":text]
+                if data.bonusAbout.count > 0 {
+//                    let title = data.bonusAbout.title!
+                    let text = data.bonusAbout
+//                    let bonusAboutData = ["title":title,"text":text]
+                    let bonusAboutData = ["title":"賞与について","text":text]
                     optionalDatas.append(bonusAboutData)
                 }
             case 4:
                 // 残業について
-                if data.overtimeAbout.text!.count > 0 {
-                    let title = data.overtimeAbout.title!
-                    let text = data.overtimeAbout.text!
-                    let overtimeAboutData = ["title":title,"text":text]
+                if data.overtimeAbout.count > 0 {
+//                    let title = data.overtimeAbout.title!
+                    let text = data.overtimeAbout
+//                    let overtimeAboutData = ["title":title,"text":text]
+                    let overtimeAboutData = ["title":"残業について","text":text]
                     optionalDatas.append(overtimeAboutData)
                 }
                 // 残業時間目安
-                if data.overtimeCode.code! > 0 {
-                    let title = data.overtimeCode.title
-                    let code = SelectItemsManager.getCodeDisp(.overtime, code: data.overtimeCode.code!)?.disp
+                if data.overtimeCode > 0 {
+//                    let title = data.overtimeCode.title
+                    let code = SelectItemsManager.getCodeDisp(.overtime, code: data.overtimeCode)?.disp
                     let text = code
-                    let overtimeCodeData = ["title":title, "text":text]
+//                    let overtimeCodeData = ["title":title, "text":text]
+                    let overtimeCodeData = ["title":"残業時間目安", "text":text]
                     optionalDatas.append(overtimeCodeData as [String : Any])
                 }
             case 5:
                 // 交通・詳細
-                if data.transport.text!.count > 0 {
-                    let title = data.transport.title!
-                    let text = data.transport.text!
-                    let transportData = ["title":title,"text":text]
+                if data.transport.count > 0 {
+//                    let title = data.transport.title!
+                    let text = data.transport
+//                    let transportData = ["title":title,"text":text]
+                    let transportData = ["title":"交通・詳細","text":text]
                     optionalDatas.append(transportData)
                 }
             case 7:
                 // 産休・育休取得状況
-                if data.childcare.text!.count > 0 {
-                    let title = data.childcare.title!
-                    let text = data.childcare.text!
-                    let childcareData = ["title":title,"text":text]
+                if data.childcare.count > 0 {
+//                    let title = data.childcare.title!
+                    let text = data.childcare
+//                    let childcareData = ["title":title,"text":text]
+                    let childcareData = ["title":"産休・育休取得状況","text":text]
                     optionalDatas.append(childcareData)
                 }
             default:
