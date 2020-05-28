@@ -41,13 +41,13 @@ class MdlJobCardDetail: Codable {
     /** 15．募集背景（必須） */
     var recruitmentReason: String
     /** １６．仕事内容（必須） */
-    var jobDescription: JobCardDetailJobDescription
+    var jobDescription: String
     /** １７．案件例（任意） */
-    var jobExample: JobCardDetailJobExample
+    var jobExample: String
     /** １８．手がける商品・サービス（任意） */
-    var product: JobCardDetailProduct
+    var product: String
     /** １９．開発環境・業務範囲（任意） */
-    var scope: JobCardDetailScope
+    var scope: String
     /** 注目ポイント見出し１ */
     var spotTitle1: String
     /** 注目ポイント本文１ */
@@ -57,35 +57,35 @@ class MdlJobCardDetail: Codable {
     /** 注目ポイント本文２ */
     var spotDetail2: String
     /** ２１．応募資格（必須） */
-    var qualification: JobCardDetailQualification
+    var qualification: String
     /** ２２．歓迎する経験・スキル（任意） */
-    var betterSkill: JobCardDetailBetterSkill
+    var betterSkill: String
     /** ２３．過去の採用例（任意） */
-    var applicationExample: JobCardDetailApplicationExample
+    var applicationExample: String
     /** ２４．この仕事の向き・不向き（任意） */
-    var suitableUnsuitable: JobCardDetailSuitableUnsuitable
+    var suitableUnsuitable: String
     /** ２５．雇用形態コード（必須） */
-    var employmentType: JobCardDetailEmploymentType
+    var employmentType: Int
     /** ２6．給与（必須）＊「想定給与」＊ */
-    var salary: JobCardDetailSalary
+    var salary: String
     /** ２７．賞与について（任意） */
-    var bonusAbout: JobCardDetailBonusAbout
+    var bonusAbout: String
     /** 28．勤務時間（必須） */
-    var jobtime: JobCardDetailJobtime
+    var jobtime: String
     /** 目安残業時間 */
-    var overtimeCode: JobCardDetailOvertimeCode
+    var overtimeCode: Int
     /** 残業について */
-    var overtimeAbout: JobCardDetailOvertimeAbout
+    var overtimeAbout: String
     /** 30．勤務地（必須） */
-    var workPlace: JobCardDetailWorkPlace
+    var workPlace: String
     /** ３１．交通・詳細（必須） */
-    var transport: JobCardDetailTransport
+    var transport: String
     /** ＊３２．休日休暇（必須） */
-    var holiday: JobCardDetailHoliday
+    var holiday: String
     /** ＊３３．待遇・福利厚生（必須） */
-    var welfare: JobCardDetailWelfare
+    var welfare: String
     /** ３４．産休・育休取得状況（任意） */
-    var childcare: JobCardDetailChildcare
+    var childcare: String
     
     var interviewMemo: JobCardDetailInterviewMemo
     var selectionProcess: JobCardDetailSelectionProcess
@@ -93,7 +93,7 @@ class MdlJobCardDetail: Codable {
     var companyDescription: JobCardDetailCompanyDescription
     var userFilter: UserFilterInfo
 
-    init(jobCardCode: String, jobName: String, salaryMinId:Int, salaryMaxId:Int,isSalaryDisplay:Bool, salaryOffer: String, workPlaceCodes: [Int], companyName: String, displayPeriod: JobCardDetailDisplayPeriod, mainPicture: String, subPictures: [String], mainTitle: String, mainContents: String, prCodes: [Int], salarySample: String, recruitmentReason: String, jobDescription: JobCardDetailJobDescription, jobExample: JobCardDetailJobExample, product: JobCardDetailProduct, scope: JobCardDetailScope, spotTitle1: String, spotDetail1: String, spotTitle2: String, spotDetail2: String, qualification: JobCardDetailQualification, betterSkill: JobCardDetailBetterSkill, applicationExample: JobCardDetailApplicationExample, suitableUnsuitable: JobCardDetailSuitableUnsuitable, employmentType: JobCardDetailEmploymentType, salary: JobCardDetailSalary, bonusAbout: JobCardDetailBonusAbout, jobtime: JobCardDetailJobtime, overtimeCode: JobCardDetailOvertimeCode, overtimeAbout: JobCardDetailOvertimeAbout, workPlace: JobCardDetailWorkPlace, transport: JobCardDetailTransport, holiday: JobCardDetailHoliday, welfare: JobCardDetailWelfare, childcare: JobCardDetailChildcare, interviewMemo: JobCardDetailInterviewMemo, selectionProcess: JobCardDetailSelectionProcess, contactInfo: JobCardDetailContactInfo, companyDescription: JobCardDetailCompanyDescription, userFilter: UserFilterInfo) {
+    init(jobCardCode: String, jobName: String, salaryMinId:Int, salaryMaxId:Int,isSalaryDisplay:Bool, salaryOffer: String, workPlaceCodes: [Int], companyName: String, displayPeriod: JobCardDetailDisplayPeriod, mainPicture: String, subPictures: [String], mainTitle: String, mainContents: String, prCodes: [Int], salarySample: String, recruitmentReason: String, jobDescription: String, jobExample: String, product: String, scope: String, spotTitle1: String, spotDetail1: String, spotTitle2: String, spotDetail2: String, qualification: String, betterSkill: String, applicationExample: String, suitableUnsuitable: String, employmentType: Int, salary: String, bonusAbout: String, jobtime: String, overtimeCode: Int, overtimeAbout: String, workPlace: String, transport: String, holiday: String, welfare: String, childcare: String, interviewMemo: JobCardDetailInterviewMemo, selectionProcess: JobCardDetailSelectionProcess, contactInfo: JobCardDetailContactInfo, companyDescription: JobCardDetailCompanyDescription, userFilter: UserFilterInfo) {
         
         self.jobCardCode = jobCardCode
         self.jobName = jobName

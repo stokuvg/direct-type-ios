@@ -41,11 +41,11 @@ class JobDetailFoldingOutlineCell: BaseTableViewCell {
 //        Log.selectLog(logLevel: .debug, "JobDetailFoldingOutlineCell data start")
 //        Log.selectLog(logLevel: .debug, "data:\(data)")
         
-        let title = data.enterpriseContents.title
-        let item = data.enterpriseContents.text
+        let title = "事業内容"
+        let item = data.enterpriseContents
         
-        descriptionTitle.text(text: title!, fontType: .C_font_Sb, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
-        descriptionLabel.text(text: item!, fontType: .C_font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        descriptionTitle.text(text: title, fontType: .C_font_Sb, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
+        descriptionLabel.text(text: item, fontType: .C_font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         
         let clients = data.mainCustomer
         self.makeClientsView(data: clients)
@@ -70,25 +70,25 @@ class JobDetailFoldingOutlineCell: BaseTableViewCell {
     }
     
     // 取引先
-    private func makeClientsView(data: JobCardDetailCompanyDescriptionMainCustomer) {
+    private func makeClientsView(data: String) {
         Log.selectLog(logLevel: .debug, "makeClientsView start")
-        let title = data.title
-        let names = data.text
+        let title = "取引先"
+        let names = data
         
-        if title!.count > 0 && names!.count > 0 {
+        if title.count > 0 && names.count > 0 {
             let view = UINib.init(nibName: "JobDetailFoldingOptionalView", bundle: nil)
             .instantiate(withOwner: self, options: nil)
             .first as! JobDetailFoldingOptionalView
-            view.setup(title: title!, item: names!)
+            view.setup(title: title, item: names)
             
             self.stackView.addArrangedSubview(view)
         }
     }
     // メディア
-    private func makeMediaView(data: JobCardDetailCompanyDescriptionMediaCoverage) {
+    private func makeMediaView(data: String) {
         Log.selectLog(logLevel: .debug, "makeMediaView start")
-        let title = data.title!
-        let text = data.text!
+        let title = "事業・サービスのメディア掲載実績"
+        let text = data
         
         if title.count > 0 && text.count > 0 {
             let view = UINib.init(nibName: "JobDetailFoldingOptionalView", bundle: nil)
@@ -101,10 +101,10 @@ class JobDetailFoldingOutlineCell: BaseTableViewCell {
     }
     
     // 設立
-    private func makeEstablishmentView(data: JobCardDetailCompanyDescriptionEstablished) {
+    private func makeEstablishmentView(data: String) {
         Log.selectLog(logLevel: .debug, "makeEstablishmentView start")
-        let title = data.title!
-        let items = data.text!
+        let title = "設立"
+        let items = data
         
         if title.count > 0 && items.count > 0 {
             let view = UINib.init(nibName: "JobDetailFoldingOptionalView", bundle: nil)
@@ -119,40 +119,40 @@ class JobDetailFoldingOutlineCell: BaseTableViewCell {
     // 従業員
     private func makeEmployeesView(data: JobCardDetailCompanyDescriptionEmployeesCount){
         Log.selectLog(logLevel: .debug, "makeEmployeesView start")
-        let title = data.title!
-        let employees = data.count!
+        let title = "従業員"
+        let employees = Int(data.count!)
         
-        if title.count > 0 && employees.count > 0 {
-            var text = employees
+        if title.count > 0 && employees! > 0 {
+            var text = data.count
             
             let average = data.averageAge!
             let ratio = data.genderRatio!
             let halfway = data.middleEnter!
             
             if average.count > 0 {
-                text = text + "\n" + "平均年齢／" + average
+                text = text! + "\n" + "平均年齢／" + average
             }
             
             if ratio.count > 0 {
-                text = text + "\n" + "男女比／" + average
+                text = text! + "\n" + "男女比／" + average
             }
             
             if halfway.count > 0 {
-                text = text + "\n" + "中途入社者の割合／" + halfway
+                text = text! + "\n" + "中途入社者の割合／" + halfway
             }
             
             let view = UINib.init(nibName: "JobDetailFoldingOptionalView", bundle: nil)
             .instantiate(withOwner: self, options: nil)
             .first as! JobDetailFoldingOptionalView
-            view.setup(title: title, item: text)
+            view.setup(title: title, item: text!)
             
             self.stackView.addArrangedSubview(view)
         }
     }
     // 資本金
-    private func makeCapitalView(data: JobCardDetailCompanyDescriptionCapital) {
-        let title = data.title!
-        let results = data.text!
+    private func makeCapitalView(data: String) {
+        let title = "資本金"
+        let results = data
         
         if title.count > 0 && results.count > 0 {
             let view = UINib.init(nibName: "JobDetailFoldingOptionalView", bundle: nil)
@@ -164,9 +164,9 @@ class JobDetailFoldingOutlineCell: BaseTableViewCell {
         }
     }
     // 売上高
-    private func makeSalesView(data: JobCardDetailCompanyDescriptionTurnover) {
-        let title = data.title!
-        let results = data.text!
+    private func makeSalesView(data: String) {
+        let title = "売上高"
+        let results = data
         
         if title.count > 0 && results.count > 0 {
             let view = UINib.init(nibName: "JobDetailFoldingOptionalView", bundle: nil)
@@ -179,7 +179,7 @@ class JobDetailFoldingOutlineCell: BaseTableViewCell {
     }
     // 代表
     private func makeRepresentativeView(data: JobCardDetailCompanyDescriptionPresidentData) {
-        let title = data.title!
+        let title = "代表者"
         let name = data.presidentName!
         let carrer = data.presidentHistory
         
