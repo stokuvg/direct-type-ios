@@ -12,30 +12,8 @@ final public class ValidateManager {
     }
 }
 
-
+//==========================================================================================
 extension ValidateManager {
-    class func subValidate(_ itemGrp: MdlItemH, _ item: EditableItemH) -> [EditableItemKey: [String]] {
-        var dic: [EditableItemKey: [String]] = [:]
-        print("\t✍️[\(itemGrp.debugDisp)]\t[\(item.debugDisp)]")
-        for n in 1...3 {
-            dic = addDicArrVal(dic: dic, key: item.editableItemKey, val: "\(n)-0つめ")
-            dic = addDicArrVal(dic: dic, key: EditItemMdlProfile.familyName.itemKey, val: "\(n)-1つめ")
-            dic = addDicArrVal(dic: dic, key: EditItemMdlProfile.familyNameKana.itemKey, val: "\(n)-2つめ")
-            dic = addDicArrVal(dic: dic, key: EditItemMdlProfile.familyNameKana.itemKey, val: "\(n)-3つめ")
-            dic = addDicArrVal(dic: dic, key: EditItemMdlProfile.firstNameKana.itemKey, val: "\(n)-4つめ")
-        }
-        
-        print(String(repeating: "=", count: 44))
-        for (key, val) in dic {
-            print(#line, #function, key, val.count, val.description)
-
-        }
-        print(String(repeating: "=", count: 44))
-
-        
-        
-        return dic
-    }
     class func addDicArrVal(dic: [EditableItemKey: [String]], key: EditableItemKey, val: String) -> [EditableItemKey: [String]] {
         var new: [EditableItemKey: [String]] = dic
         if var hoge = dic[key] {
@@ -46,9 +24,6 @@ extension ValidateManager {
         }
         return new
     }
-}
-
-extension ValidateManager {
     class func dbgDispCurrentItems(editableModel: EditableModel) {
         return//!!!
         //===変更内容の確認
@@ -66,4 +41,37 @@ extension ValidateManager {
         }
         print(#line, String(repeating: "=", count: 44))
     }
+}
+//==========================================================================================
+extension ValidateManager {
+    class func chkValidationErr(_ editableModel: EditableModel) -> [EditableItemKey: [String]] {
+        var dicError: [EditableItemKey: [String]] = [:]
+        //必須チェック
+        for (key, vals) in subValidateNotEmntyByKey(editableModel) {
+            for val in vals {
+                dicError = ValidateManager.addDicArrVal(dic: dicError, key: key, val: val)
+            }
+        }
+        return dicError
+    }
+    //============================================
+    class func subValidateNotEmntyByKey(_ editableModel: EditableModel) -> [EditableItemKey: [String]] {
+        var dicError: [EditableItemKey: [String]] = [:]
+        //必須チェック
+        for itemKey in editableModel.arrTextFieldNextDoneKey {
+            if let item = editableModel.getItemByKey(itemKey) {
+                let (isChange, editTemp) = editableModel.makeTempItem(item)
+                if isChange {
+                    if editTemp.curVal == "" {
+                        dicError = ValidateManager.addDicArrVal(dic: dicError, key: item.editableItemKey, val: "\(item.dispName)は必須項目です")
+                    }
+                }
+            }
+        }
+        return dicError
+    }
+    //============================================
+    //============================================
+    //============================================
+    
 }

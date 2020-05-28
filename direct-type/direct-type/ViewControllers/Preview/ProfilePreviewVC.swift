@@ -220,18 +220,3 @@ extension ProfilePreviewVC {
     }
 }
 
-                
-//            if (dicValue[item] ?? "").isEmpty { dicError[item] = "\(item.disp) は必須項目です" }
-//        }
-        //[Dbg: 以降のValidateチェックをパスする]
-//        if Constants.DbgSkipLocalValidate { return dicError }
-//}
-//        //文字長チェック
-//        let maxlen: Int = 20 //ちゃんとやるなら、最小と最大を定義して、ごそっとやるとか
-//        for item in [AuthParam.note, ] {
-//            let len = (dicValue[item] ?? "").count
-//            if len > maxlen { dicError[item] = "\(item.disp) は\(maxlen)文字までです　(\(len - maxlen)文字多い)" }
-//        }
-//    }
-//    return dicError
-//}

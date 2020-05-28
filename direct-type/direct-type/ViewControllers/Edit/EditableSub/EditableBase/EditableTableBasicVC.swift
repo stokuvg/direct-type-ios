@@ -233,34 +233,3 @@ extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
         }
     }
 }
-
-
-//==========================================================================================
-extension ValidateManager {
-    class func subValidateNotEmntyByKey(_ editableModel: EditableModel) -> [EditableItemKey: [String]] {
-        var dicError: [EditableItemKey: [String]] = [:]
-        //必須チェック
-        for itemKey in editableModel.arrTextFieldNextDoneKey {
-            if let item = editableModel.getItemByKey(itemKey) {
-                let (isChange, editTemp) = editableModel.makeTempItem(item)
-                if isChange {
-                    if editTemp.curVal == "" {
-                        dicError = ValidateManager.addDicArrVal(dic: dicError, key: item.editableItemKey, val: "\(item.dispName)は必須項目です")
-                    }
-                }
-            }
-        }
-        return dicError
-    }
-    class func chkValidationErr(_ editableModel: EditableModel) -> [EditableItemKey: [String]] {
-        var dicError: [EditableItemKey: [String]] = [:]
-        //必須チェック
-        for (key, vals) in subValidateNotEmntyByKey(editableModel) {
-            for val in vals {
-                dicError = ValidateManager.addDicArrVal(dic: dicError, key: key, val: val)
-            }
-        }
-            
-        return dicError
-    }
-}
