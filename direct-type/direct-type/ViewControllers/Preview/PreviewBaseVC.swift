@@ -17,7 +17,7 @@ class PreviewBaseVC: TmpBasicVC {
     var arrData: [MdlItemH] = []
     
     //ValidationError管理
-    var dicGrpValidErrMsg: [MdlItemHTypeKey: [String]] = [:]//MdlItemH.type
+    var dicGrpValidErrMsg: [MdlItemHTypeKey: [ValidationErrMsg]] = [:]//MdlItemH.type
     var dicValidErrMsg: [EditableItemKey: [ValidationErrMsg]] = [:] //[ItemEditable.item: ErrMsg]　（TODO：これもEditableBaseで管理にするか））
     
     @IBOutlet weak var tableVW: UITableView!

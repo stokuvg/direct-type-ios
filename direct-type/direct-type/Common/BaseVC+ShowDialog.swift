@@ -103,6 +103,25 @@ extension BaseVC {
         }
         return promise
     }
-
 }
 
+extension BaseVC {
+    internal func showValidationError(title: String, message: String) {
+        let storyboard = R.storyboard.dialog()
+        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_TestDialogVC") as? MyCmnDialogVC {
+            var buttons: [DlgActionItem] = []
+//            for item in [DlgActionType.dlgCmnBtnCancel, DlgActionType.dlgCmnBtnNG, DlgActionType.dlgCmnBtnOK] {
+            for item in [DlgActionType.dlgCmnBtnOK] {
+                buttons.append(DlgActionItem(action: item, completion: {
+                }))
+            }
+            let axis: DlgDetail.AxisType = .horizontal //ボタンは縦横の指定が可能
+            let dlgItem: DlgDetail = DlgDetail(title: title, message: message, buttons: buttons, axisType: axis)
+            nvc.initData(item: dlgItem)
+            //遷移アニメーション関連
+            nvc.modalTransitionStyle = .crossDissolve
+            self.present(nvc, animated: true) {
+            }
+        }
+    }
+}

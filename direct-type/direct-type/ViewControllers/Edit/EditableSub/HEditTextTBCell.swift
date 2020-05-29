@@ -31,6 +31,7 @@ class HEditTextTBCell: UITableViewCell {
         self.returnKeyType = returnKeyType
         tfValue.itemKey = item.editableItemKey
         tfValue.returnKeyType = returnKeyType
+        tfValue.placeholder = item.placeholder
     }
     
     func dispCell() {

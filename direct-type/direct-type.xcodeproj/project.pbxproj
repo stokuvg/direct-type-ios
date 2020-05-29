@@ -169,6 +169,9 @@
 		269AFFCB246A929300DB364B /* SubSelectSpecialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269AFFC1246A929200DB364B /* SubSelectSpecialVC.swift */; };
 		26A1F57C247F5D3300834213 /* ValidateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1F57B247F5D3300834213 /* ValidateManager.swift */; };
 		26A1F57E247FB28B00834213 /* Validate+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1F57D247FB28B00834213 /* Validate+Profile.swift */; };
+		26A1F5832480F23100834213 /* DlgStackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1F5802480F23100834213 /* DlgStackButton.swift */; };
+		26A1F5842480F23100834213 /* MyCmnDialogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1F5812480F23100834213 /* MyCmnDialogVC.swift */; };
+		26A1F5852480F23100834213 /* Dialog.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26A1F5822480F23100834213 /* Dialog.storyboard */; };
 		26A4C1CB247B4A81008D8E68 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A4C1CA247B4A81008D8E68 /* ApiManager.swift */; };
 		26A5DD642475028E0035267A /* SubSelectSpecialVC+Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5DD632475028E0035267A /* SubSelectSpecialVC+Picker.swift */; };
 		26A5DD662476547D0035267A /* SubSelectBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5DD652476547D0035267A /* SubSelectBaseVC.swift */; };
@@ -385,6 +388,9 @@
 		269AFFC1246A929200DB364B /* SubSelectSpecialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubSelectSpecialVC.swift; sourceTree = "<group>"; };
 		26A1F57B247F5D3300834213 /* ValidateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateManager.swift; sourceTree = "<group>"; };
 		26A1F57D247FB28B00834213 /* Validate+Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validate+Profile.swift"; sourceTree = "<group>"; };
+		26A1F5802480F23100834213 /* DlgStackButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DlgStackButton.swift; sourceTree = "<group>"; };
+		26A1F5812480F23100834213 /* MyCmnDialogVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCmnDialogVC.swift; sourceTree = "<group>"; };
+		26A1F5822480F23100834213 /* Dialog.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Dialog.storyboard; sourceTree = "<group>"; };
 		26A4C1CA247B4A81008D8E68 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		26A5DD632475028E0035267A /* SubSelectSpecialVC+Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubSelectSpecialVC+Picker.swift"; sourceTree = "<group>"; };
 		26A5DD652476547D0035267A /* SubSelectBaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSelectBaseVC.swift; sourceTree = "<group>"; };
@@ -637,6 +643,7 @@
 		06D700342456CB7300E55FC8 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				26A1F57F2480F23100834213 /* Dialog */,
 				067F28CF2456CCB8000AAD69 /* BaseVC.swift */,
 				2636075E2477AB4900032880 /* BaseVC+ShowDialog.swift */,
 				067F28D12456CE39000AAD69 /* TmpBasicVC.swift */,
@@ -881,6 +888,16 @@
 			path = ValidateManager;
 			sourceTree = "<group>";
 		};
+		26A1F57F2480F23100834213 /* Dialog */ = {
+			isa = PBXGroup;
+			children = (
+				26A1F5802480F23100834213 /* DlgStackButton.swift */,
+				26A1F5812480F23100834213 /* MyCmnDialogVC.swift */,
+				26A1F5822480F23100834213 /* Dialog.storyboard */,
+			);
+			path = Dialog;
+			sourceTree = "<group>";
+		};
 		26B6E8B4245C1B4B00BE5B90 /* Generated */ = {
 			isa = PBXGroup;
 			children = (
@@ -1064,6 +1081,7 @@
 				066763692457AF3100AC5039 /* MyPageVC.storyboard in Resources */,
 				0685017E24738D98009770A3 /* JobDetailImageCell.xib in Resources */,
 				26147F38247267F9009B30B5 /* MstF22_pcSkillPowerPoint.tsv in Resources */,
+				26A1F5852480F23100834213 /* Dialog.storyboard in Resources */,
 				2636075D2477A39900032880 /* Auth.storyboard in Resources */,
 				066F271D246E81B60040BDC1 /* JobDetailFoldingOutlineCell.xib in Resources */,
 				26BF48E724639D2B00E00215 /* MstK9_employmentType.tsv in Resources */,
@@ -1186,6 +1204,7 @@
 				26800520246A2B440053A7F4 /* Date+Extensions.swift in Sources */,
 				06E519912457D742004E4B7A /* ChemistryResult.swift in Sources */,
 				26B491DC247E2F4E00B58AD4 /* ApiManager+Profile.swift in Sources */,
+				26A1F5832480F23100834213 /* DlgStackButton.swift in Sources */,
 				068FFAA924727A810083E130 /* JobDetailStepView.swift in Sources */,
 				26F2A821246D12F10037D47F /* MdlCareerCardWorkPeriod.swift in Sources */,
 				06E5199A2457DA18004E4B7A /* AccountChangeVC.swift in Sources */,
@@ -1219,6 +1238,7 @@
 				0645705D2464F77700F3B015 /* Logs.swift in Sources */,
 				06E519C7245815B0004E4B7A /* CareerPreviewVC.swift in Sources */,
 				06409C73246D3A6800EA6BBB /* JobDetailFoldingHeaderView.swift in Sources */,
+				26A1F5842480F23100834213 /* MyCmnDialogVC.swift in Sources */,
 				06E519982457DA0D004E4B7A /* ApproachSettingVC.swift in Sources */,
 				06DCAEAB245A7616008FE9FA /* UILabel+Extensions.swift in Sources */,
 				26147F30247258E9009B30B5 /* HPreviewTBCell+dispCellValue.swift in Sources */,

@@ -89,12 +89,14 @@ struct R: Rswift.Validatable {
   }
 
   #if os(iOS) || os(tvOS)
-  /// This `R.storyboard` struct is generated, and contains static references to 12 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 13 storyboards.
   struct storyboard {
     /// Storyboard `Auth`.
     static let auth = _R.storyboard.auth()
     /// Storyboard `BaseTabBC`.
     static let baseTabBC = _R.storyboard.baseTabBC()
+    /// Storyboard `Dialog`.
+    static let dialog = _R.storyboard.dialog()
     /// Storyboard `Edit`.
     static let edit = _R.storyboard.edit()
     /// Storyboard `EditablePopup`.
@@ -127,6 +129,13 @@ struct R: Rswift.Validatable {
     /// `UIStoryboard(name: "BaseTabBC", bundle: ...)`
     static func baseTabBC(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.baseTabBC)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "Dialog", bundle: ...)`
+    static func dialog(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.dialog)
     }
     #endif
 
@@ -2072,6 +2081,9 @@ struct _R: Rswift.Validatable {
       try baseTabBC.validate()
       #endif
       #if os(iOS) || os(tvOS)
+      try dialog.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
       try edit.validate()
       #endif
       #if os(iOS) || os(tvOS)
@@ -2145,6 +2157,26 @@ struct _R: Rswift.Validatable {
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
         if _R.storyboard.baseTabBC().sbid_BaseTabBC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_BaseTabBC' could not be loaded from storyboard 'BaseTabBC' as 'BaseTabBC'.") }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    struct dialog: Rswift.StoryboardResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "Dialog"
+      let sbid_TestDialogVC = StoryboardViewControllerResource<MyCmnDialogVC>(identifier: "Sbid_TestDialogVC")
+
+      func sbid_TestDialogVC(_: Void = ()) -> MyCmnDialogVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_TestDialogVC)
+      }
+
+      static func validate() throws {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+        if _R.storyboard.dialog().sbid_TestDialogVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_TestDialogVC' could not be loaded from storyboard 'Dialog' as 'MyCmnDialogVC'.") }
       }
 
       fileprivate init() {}

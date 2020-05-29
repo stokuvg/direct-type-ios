@@ -27,15 +27,15 @@ class ProfilePreviewVC: PreviewBaseVC {
     func validateUpdateProfile() -> Bool {
         if Constants.DbgSkipLocalValidate { return false }//[Dbg: ローカルValidationスキップ]
         ValidateManager.dbgDispCurrentItems(editableModel: editableModel) //[Dbg: 状態確認]
-        let chkErr = chkValidationErr()
+        let chkErr = ValidateManager.chkValidationErr(editableModel)
         if chkErr.count > 0 {
             print("＊＊＊　Validationエラー発生: \(chkErr.count)件　＊＊＊")
             var msg: String = ""
             for err in chkErr {
                 msg = "\(msg)\(err.value)\n"
             }
-            self.showConfirm(title: "Validationエラー (\(chkErr.count)件)", message: msg)
-            /* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
+            self.showValidationError(title: "Validationエラー (\(chkErr.count)件)", message: msg)
+//            /* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
             return true
         } else {
             print("＊＊＊　Validationエラーなし　＊＊＊")
@@ -90,7 +90,8 @@ class ProfilePreviewVC: PreviewBaseVC {
         let bufPrefecture: String = SelectItemsManager.getCodeDisp(.place, code: _detail.prefecture)?.disp ?? ""
         let bufAddress: String = "\(bufPrefecture)\(_detail.address1)\(_detail.address2)"
         arrData.append(MdlItemH(.adderssH2, "〒\(bufZipCode)\n\(bufAddress)", childItems: [
-            EditableItemH(type: .inputZipcode, editItem: EditItemMdlProfile.zipCode, val: _detail.zipCode),
+            //EditableItemH(type: .inputZipcode, editItem: EditItemMdlProfile.zipCode, val: _detail.zipCode),
+            EditableItemH(type: .inputText, editItem: EditItemMdlProfile.zipCode, val: _detail.zipCode),
             EditableItemH(type: .selectSingle, editItem: EditItemMdlProfile.prefecture, val: _detail.prefecture),
             EditableItemH(type: .inputText, editItem: EditItemMdlProfile.address1, val: _detail.address1),
             EditableItemH(type: .inputText, editItem: EditItemMdlProfile.address2, val: _detail.address2),
@@ -169,6 +170,7 @@ extension ProfilePreviewVC {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         let param = UpdateProfileRequestDTO(editableModel.editTempCD)
 //        let param = UpdateProfileRequestDTO(familyName: "", firstName: "", familyNameKana: "", firstNameKana: "", birthday: "", genderId: "", zipCode: "", prefectureId: "", city: "", town: "", email: "")
+        
         self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
         self.dicValidErrMsg.removeAll()//状態をクリアしておく
         SVProgressHUD.show(withStatus: "プロフィール情報の更新")
@@ -180,50 +182,7 @@ extension ProfilePreviewVC {
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
             case 400:
-                var dicGrpError: [MdlItemHTypeKey: [String]] = [:]
-                var dicError: [MdlItemHTypeKey: [String]] = [:]
-                for valid in myErr.arrValidErrMsg {
-                    //===グループ側のエラー
-                    switch valid.property { //これで対応する項目に結びつける
-                    case "familyName", "firstName", "familyNameKana", "firstNameKana":
-                        dicGrpError.addDicArrVal(key: HPreviewItemType.fullnameH2.itemKey, val: valid.constraintsVal)
-                    case "birthday", "genderId":
-                        dicGrpError.addDicArrVal(key: HPreviewItemType.birthGenderH2.itemKey, val: valid.constraintsVal)
-                    case "zipCode", "prefectureId", "city", "town":
-                        dicGrpError.addDicArrVal(key: HPreviewItemType.adderssH2.itemKey, val: valid.constraintsVal)
-                    case "email":
-                        dicGrpError.addDicArrVal(key: HPreviewItemType.emailH2.itemKey, val: valid.constraintsVal)
-                    default:
-                        print("❤️\t[\(valid.property)]\t[\(valid.constraintsKey)] : [\(valid.constraintsVal)]")
-                    }
-                    //===個別のエラー
-                    switch valid.property { //これで対応する項目に結びつける
-                    case "familyName":
-                        dicError.addDicArrVal(key: EditItemMdlProfile.familyName.itemKey, val: valid.constraintsVal)
-                    case "firstName":
-                        dicError.addDicArrVal(key: EditItemMdlProfile.firstName.itemKey, val: valid.constraintsVal)
-                    case "familyNameKana":
-                        dicError.addDicArrVal(key: EditItemMdlProfile.familyNameKana.itemKey, val: valid.constraintsVal)
-                    case "firstNameKana":
-                        dicError.addDicArrVal(key: EditItemMdlProfile.firstNameKana.itemKey, val: valid.constraintsVal)
-                    case "birthday":
-                        dicError.addDicArrVal(key: EditItemMdlProfile.birthday.itemKey, val: valid.constraintsVal)
-                    case "genderId":
-                        dicError.addDicArrVal(key: EditItemMdlProfile.gender.itemKey, val: valid.constraintsVal)
-                    case "zipCode":
-                        dicError.addDicArrVal(key: EditItemMdlProfile.zipCode.itemKey, val: valid.constraintsVal)
-                    case "prefectureId":
-                        dicError.addDicArrVal(key: EditItemMdlProfile.prefecture.itemKey, val: valid.constraintsVal)
-                    case "city":
-                        dicError.addDicArrVal(key: EditItemMdlProfile.address1.itemKey, val: valid.constraintsVal)
-                    case "town":
-                        dicError.addDicArrVal(key: EditItemMdlProfile.address2.itemKey, val: valid.constraintsVal)
-                    case "email":
-                        dicError.addDicArrVal(key: EditItemMdlProfile.mailAddress.itemKey, val: valid.constraintsVal)
-                    default:
-                        print("❤️\t[\(valid.property)]\t[\(valid.constraintsKey)] : [\(valid.constraintsVal)]")
-                    }
-                }
+                let (dicGrpError, dicError) = ValidateManager.canvValidErrMsgProfile(myErr.arrValidErrMsg)
                 self.dicGrpValidErrMsg = dicGrpError
                 self.dicValidErrMsg = dicError
             default:
@@ -245,7 +204,15 @@ extension ProfilePreviewVC {
             self.fetchGetProfile()
         }
         .catch { (error) in
-            self.showError(error)
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            switch myErr.code {
+            case 400:
+                let (dicGrpError, dicError) = ValidateManager.canvValidErrMsgProfile(myErr.arrValidErrMsg)
+                self.dicGrpValidErrMsg = dicGrpError
+                self.dicValidErrMsg = dicError
+            default:
+                self.showError(error)
+            }
         }
         .finally {
             self.dispData()
@@ -253,30 +220,3 @@ extension ProfilePreviewVC {
         }
     }
 }
-
-
-//バリデーションチェックしてみて、問題あったらエラ〜メッセージを定義しちゃっとく
-//なんかエラーあったらtrue返しとく
-extension ProfilePreviewVC {
-    func chkValidationErr() -> [EditableItemKey: String] {
-        var dicError: [EditableItemKey: String] = [:]
-        //必須チェック
-        for itemKey in [
-            EditItemMdlProfile.familyName.itemKey,
-            EditItemMdlProfile.firstName.itemKey,
-//            EditItemMdlProfile.familyNameKana.itemKey,
-//            EditItemMdlProfile.firstNameKana.itemKey,
-            ]
-        {
-            if let temp = editableModel.editTempCD[itemKey], let item = editableModel.getItemByKey(itemKey) {
-                if temp.isEmpty { dicError[itemKey] = "\(item.dispName) は必須項目です" }
-                print("\t変更したもののみチェック: [\(item.debugDisp)]\t[\(temp)]")
-            }
-        }
-        print("\t* editTempCD: \(editableModel.editTempCD))")
-        print("\t* dicError: \(dicError))")
-
-        return dicError
-    }
-}
-

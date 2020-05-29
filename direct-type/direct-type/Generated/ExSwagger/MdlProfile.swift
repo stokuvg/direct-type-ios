@@ -99,11 +99,6 @@ var birthday: Date = Date(timeIntervalSince1970: 0)
 /** 携帯電話番号（変更不可：認証アカウントと同一） */
  var mobilePhoneNo: String = ""
 
-
-
-
-
-
 //=== 編集用の項目と定義など
 enum EditItemMdlProfile: String, EditItemProtocol {
     case familyName
@@ -144,7 +139,12 @@ enum EditItemMdlProfile: String, EditItemProtocol {
     }
     //Placeholder Text
     var placeholder: String {
-        return "[\(self.itemKey) PlaceHolder]"
+        switch self {
+        case .zipCode:
+            return "ハイフンなしで入力してください"
+        default:
+            return "[\(self.itemKey) PlaceHolder]"
+        }
     }
     var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" } //画面内でUniqになるようなキーを定義（配列利用時は除く）
 }
