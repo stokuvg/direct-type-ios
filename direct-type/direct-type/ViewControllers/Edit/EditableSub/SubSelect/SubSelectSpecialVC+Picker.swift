@@ -88,7 +88,7 @@ extension SubSelectSpecialVC: UIPickerViewDataSource, UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let selectionItems = arrSubData
         guard selectionItems.count > row else { return }//マスタ配列が取得できていない
-        let item = selectionItems[row]
+        //let item = selectionItems[row]
     }
 }
 

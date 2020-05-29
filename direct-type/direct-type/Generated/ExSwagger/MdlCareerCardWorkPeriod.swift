@@ -28,7 +28,7 @@ class MdlCareerCardWorkPeriod: Codable {
         self.init(startDate: _start, endDate: _end)
     }
     var debugDisp: String {
-        return "[start: \(startDate.dispYmdJP)] [end: \(endDate.dispYmdJP)]"
+        return "[start: \(String(describing: startDate.dispYmdJP))] [end: \(String(describing: endDate.dispYmdJP))]"
     }
 }
 

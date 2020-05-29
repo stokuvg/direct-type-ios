@@ -24,7 +24,7 @@ class MdlAppSmoothCareerComponyDescriptionWorkPeriod: Codable {
     //＊これはアプリ専用モデルを想定しているため不要
 
     var debugDisp: String {
-        return "[start: \(workStartDate.dispYmdJP)] [end: \(workEndDate.dispYmdJP)]"
+        return "[start: \(String(describing: workStartDate.dispYmdJP))] [end: \(String(describing: workEndDate.dispYmdJP))]"
     }
 }
 

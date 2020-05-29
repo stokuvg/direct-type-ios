@@ -145,7 +145,7 @@ class EditableModel {
         let selectionItems: [CodeDisp]
         //親子の依存関係がある場合に、親が選択済か調べる。選択済の場合には、それで絞り込んだ一覧データを返す
         let (depKey, depCurSel) = SelectItemsManager.shared.chkParent(itemKey, editTempCD: editTempCD)
-        if let depKey = depKey {
+        if let _ = depKey {
             if depCurSel != "" {
 //                selectionItems = SelectItemsManager.getSelectItemsByKey(itemKey, grpCodeFilter: depCurSel)//しぼりこみがあるばあい
                 selectionItems = [Constants.SelectItemsUndefine, Constants.SelectItemsUndefine, ] //!!!ダミー

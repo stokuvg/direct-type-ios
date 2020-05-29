@@ -54,6 +54,7 @@ class CognitoAuthVC: BaseVC {
         }
         DispatchQueue.main.async {
             self.showConfirm(title: "認証チェック", message: buf, onlyOK: true)
+            /* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
             self.lblStatus.text = "\(Date())\n\(buf)"
         }
     }
@@ -102,6 +103,7 @@ class CognitoAuthVC: BaseVC {
             let msg = "CloudWatchのロググループ\n「/aws/lambda/create-auth-challenge」\n\n「INFO RETURNED」の「passCode」を確認して入力します"
                 DispatchQueue.main.async {
                     self.showConfirm(title: "認証手順", message: "続けて認証コードを入力して、\n〔Confirm〕ボタンを押してください\n\n\(msg)", onlyOK: true)
+                    /* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
                 }
                 
             case .deviceSRPAuth:            buf = "deviceSRPAuth"
@@ -131,6 +133,7 @@ class CognitoAuthVC: BaseVC {
                 case .signedIn:                 buf = "signedIn"
                     DispatchQueue.main.async {
                         self.showConfirm(title: "認証手順", message: "ログインしました", onlyOK: true)
+                        /* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
                         self.checkAuthStatus()
                     }
 
@@ -164,6 +167,7 @@ class CognitoAuthVC: BaseVC {
             let buf = "User is signed Out."
             DispatchQueue.main.async {
                 self.showConfirm(title: "認証手順", message: "ログアウトしました", onlyOK: true)
+                /* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
                 self.checkAuthStatus()
             }
             DispatchQueue.main.async { print(#line, #function, buf); self.lblStatus.text = "\(Date())\n\(buf)" }
