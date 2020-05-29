@@ -38,16 +38,6 @@ class PreviewBaseVC: TmpBasicVC {
         self.tableVW.register(UINib(nibName: "HPreviewTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HPreviewTBCell")
         initData()
         chkButtonEnable()//ボタン死活チェック
-        
-        
-        self.dicGrpValidErrMsg.addDicArrVal(key: HPreviewItemType.fullnameH2.itemKey, val: "3件エラー")
-        self.dicValidErrMsg.addDicArrVal(key: EditItemMdlProfile.firstNameKana.itemKey, val: "かなえらー1")
-        self.dicValidErrMsg.addDicArrVal(key: EditItemMdlProfile.familyNameKana.itemKey, val: "かなえらー2")
-        self.dicValidErrMsg.addDicArrVal(key: EditItemMdlProfile.familyNameKana.itemKey, val: "かなえらー3")
-        self.dicGrpValidErrMsg.addDicArrVal(key: HPreviewItemType.adderssH2.itemKey, val: "1件エラー")
-        self.dicValidErrMsg.addDicArrVal(key: EditItemMdlProfile.address1.itemKey, val: "あどれすえらー")
-
-        
     }
     func initData() {
     }

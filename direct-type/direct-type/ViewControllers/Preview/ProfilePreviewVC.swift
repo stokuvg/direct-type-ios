@@ -170,6 +170,7 @@ extension ProfilePreviewVC {
         let param = UpdateProfileRequestDTO(editableModel.editTempCD)
 //        let param = UpdateProfileRequestDTO(familyName: "", firstName: "", familyNameKana: "", firstNameKana: "", birthday: "", genderId: "", zipCode: "", prefectureId: "", city: "", town: "", email: "")
         self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
+        self.dicValidErrMsg.removeAll()//状態をクリアしておく
         SVProgressHUD.show(withStatus: "プロフィール情報の更新")
         ApiManager.updateProfile(param, isRetry: true)
         .done { result in
@@ -179,23 +180,52 @@ extension ProfilePreviewVC {
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
             case 400:
-                var dicError: [MdlItemHTypeKey: [String]] = [:]//MdlItemH.type
-
+                var dicGrpError: [MdlItemHTypeKey: [String]] = [:]
+                var dicError: [MdlItemHTypeKey: [String]] = [:]
                 for valid in myErr.arrValidErrMsg {
+                    //===グループ側のエラー
                     switch valid.property { //これで対応する項目に結びつける
                     case "familyName", "firstName", "familyNameKana", "firstNameKana":
-                        dicError.addDicArrVal(key: HPreviewItemType.fullnameH2.itemKey, val: valid.constraintsVal)
+                        dicGrpError.addDicArrVal(key: HPreviewItemType.fullnameH2.itemKey, val: valid.constraintsVal)
                     case "birthday", "genderId":
-                        dicError.addDicArrVal(key: HPreviewItemType.birthGenderH2.itemKey, val: valid.constraintsVal)
+                        dicGrpError.addDicArrVal(key: HPreviewItemType.birthGenderH2.itemKey, val: valid.constraintsVal)
                     case "zipCode", "prefectureId", "city", "town":
-                        dicError.addDicArrVal(key: HPreviewItemType.adderssH2.itemKey, val: valid.constraintsVal)
+                        dicGrpError.addDicArrVal(key: HPreviewItemType.adderssH2.itemKey, val: valid.constraintsVal)
                     case "email":
-                        dicError.addDicArrVal(key: HPreviewItemType.emailH2.itemKey, val: valid.constraintsVal)
+                        dicGrpError.addDicArrVal(key: HPreviewItemType.emailH2.itemKey, val: valid.constraintsVal)
+                    default:
+                        print("❤️\t[\(valid.property)]\t[\(valid.constraintsKey)] : [\(valid.constraintsVal)]")
+                    }
+                    //===個別のエラー
+                    switch valid.property { //これで対応する項目に結びつける
+                    case "familyName":
+                        dicError.addDicArrVal(key: EditItemMdlProfile.familyName.itemKey, val: valid.constraintsVal)
+                    case "firstName":
+                        dicError.addDicArrVal(key: EditItemMdlProfile.firstName.itemKey, val: valid.constraintsVal)
+                    case "familyNameKana":
+                        dicError.addDicArrVal(key: EditItemMdlProfile.familyNameKana.itemKey, val: valid.constraintsVal)
+                    case "firstNameKana":
+                        dicError.addDicArrVal(key: EditItemMdlProfile.firstNameKana.itemKey, val: valid.constraintsVal)
+                    case "birthday":
+                        dicError.addDicArrVal(key: EditItemMdlProfile.birthday.itemKey, val: valid.constraintsVal)
+                    case "genderId":
+                        dicError.addDicArrVal(key: EditItemMdlProfile.gender.itemKey, val: valid.constraintsVal)
+                    case "zipCode":
+                        dicError.addDicArrVal(key: EditItemMdlProfile.zipCode.itemKey, val: valid.constraintsVal)
+                    case "prefectureId":
+                        dicError.addDicArrVal(key: EditItemMdlProfile.prefecture.itemKey, val: valid.constraintsVal)
+                    case "city":
+                        dicError.addDicArrVal(key: EditItemMdlProfile.address1.itemKey, val: valid.constraintsVal)
+                    case "town":
+                        dicError.addDicArrVal(key: EditItemMdlProfile.address2.itemKey, val: valid.constraintsVal)
+                    case "email":
+                        dicError.addDicArrVal(key: EditItemMdlProfile.mailAddress.itemKey, val: valid.constraintsVal)
                     default:
                         print("❤️\t[\(valid.property)]\t[\(valid.constraintsKey)] : [\(valid.constraintsVal)]")
                     }
                 }
-                self.dicGrpValidErrMsg = dicError
+                self.dicGrpValidErrMsg = dicGrpError
+                self.dicValidErrMsg = dicError
             default:
                 self.showError(error)
             }
