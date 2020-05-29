@@ -11,9 +11,9 @@ import UIKit
 extension ValidateManager {
 
     class func canvValidErrMsgProfile(_ arrValidErrMsg: [SwaValidErrMsg]) -> ([MdlItemHTypeKey: [String]],
-        [MdlItemHTypeKey: [String]]) {
+        [EditableItemKey: [String]]) {
         var dicGrpError: [MdlItemHTypeKey: [String]] = [:]
-        var dicError: [MdlItemHTypeKey: [String]] = [:]
+        var dicError: [EditableItemKey: [String]] = [:]
         for valid in arrValidErrMsg {
             //===グループ側のエラー
             switch valid.property { //これで対応する項目に結びつける

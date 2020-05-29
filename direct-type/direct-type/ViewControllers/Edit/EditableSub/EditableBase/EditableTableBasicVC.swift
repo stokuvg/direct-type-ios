@@ -46,10 +46,13 @@ class EditableTableBasicVC: EditableBasicVC {
         let chkErr = ValidateManager.chkValidationErr(editableModel)
         if chkErr.count > 0 {
             var msg: String = ""
-            for (key, err) in chkErr {
-                dicValidErrMsg[key] = err.joined(separator: "\n")
+            for (key, errs) in chkErr {
+                //dicValidErrMsg[key] = err.joined(separator: "\n")
+                for err in errs {
+                    dicValidErrMsg.addDicArrVal(key: key, val: err)
+                }
                 let name = editableModel.getItemByKey(key)?.dispName ?? ""
-                msg = "\(msg)\(name): \(err)\n"
+                msg = "\(msg)\(name): \(errs.joined(separator: "\n"))\n"
             }
             self.showConfirm(title: "Validationエラー (\(chkErr.count)件)", message: msg)
             /* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
@@ -93,14 +96,7 @@ class EditableTableBasicVC: EditableBasicVC {
     func initData(_ delegate: nameEditableTableBasicDelegate, _ itemGrp: MdlItemH, _ arrErrMsg: [EditableItemKey: [ValidationErrMsg]]) {
         self.delegate = delegate
         self.itemGrp = itemGrp
-        self.arrErrMsg = arrErrMsg
-        for (key, vals) in arrErrMsg {
-            dicValidErrMsg[key] = vals.joined(separator: "\n")
-        }
-        print(#line, #function, "🧡🧡🧡[arrErrMsg: \(arrErrMsg)]🧡🧡🧡")
-        print(#line, #function, "🧡🧡🧡[dicValidErrMsg: \(dicValidErrMsg)]🧡🧡🧡")
-
-        
+        self.dicValidErrMsg = arrErrMsg
         //=== IndexPathなどを設定するため
         editableModel.initItemEditable(itemGrp.childItems)
     }
@@ -208,7 +204,7 @@ extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
         case .inputText:
             let returnKeyType: UIReturnKeyType = (item.editableItemKey == editableModel.lastEditableItemKey) ? .done : .next
             let cell: HEditTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditTextTBCell", for: indexPath) as! HEditTextTBCell
-            let errMsg = dicValidErrMsg[item.editableItemKey] ?? ""
+            let errMsg = dicValidErrMsg[item.editableItemKey]?.joined(separator: "\n" ) ?? ""
             cell.initCell(self, item, errMsg: errMsg, returnKeyType)
             cell.dispCell()
             return cell
@@ -230,7 +226,7 @@ extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
             let returnKeyType: UIReturnKeyType = (item.editableItemKey == editableModel.lastEditableItemKey) ? .done : .next
             print("[returnKeyType: \(returnKeyType.rawValue)]")
             let cell: HEditTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditTextTBCell", for: indexPath) as! HEditTextTBCell
-            let errMsg = dicValidErrMsg[item.editableItemKey] ?? ""
+            let errMsg = dicValidErrMsg[item.editableItemKey]?.joined(separator: "\n") ?? ""
             cell.initCell(self, item, errMsg: errMsg, returnKeyType)
             cell.dispCell()
             return cell

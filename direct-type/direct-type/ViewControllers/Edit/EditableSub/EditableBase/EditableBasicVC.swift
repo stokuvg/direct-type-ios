@@ -23,8 +23,7 @@ class EditableBasicVC: TmpBasicVC, SubSelectFeedbackDelegate {
     func dispEditableItemAll() {} //すべての項目を表示する
     func dispEditableItemByKey(_ itemKey: EditableItemKey) {} //指定した項目を表示する （TODO：複数キーの一括指定に拡張予定）
     //ValidationError管理
-    var dicValidErrMsg: [EditableItemKey: ValidationErrMsg] = [:] //[ItemEditable.item: ErrMsg]　（TODO：これもEditableBaseで管理にするか））
-    var arrErrMsg: [EditableItemKey: [ValidationErrMsg]] = [:] //子画面に引き渡されたエラー
+    var dicValidErrMsg: [EditableItemKey: [ValidationErrMsg]] = [:] //[ItemEditable.item: ErrMsg]
 
     //====================================================
     //SuggestなどでのActiveなTextFieldを表示するため

@@ -27,7 +27,7 @@ class ProfilePreviewVC: PreviewBaseVC {
     func validateUpdateProfile() -> Bool {
         if Constants.DbgSkipLocalValidate { return false }//[Dbg: ローカルValidationスキップ]
         ValidateManager.dbgDispCurrentItems(editableModel: editableModel) //[Dbg: 状態確認]
-        let chkErr = chkValidationErr()
+        let chkErr = ValidateManager.chkValidationErr(editableModel)
         if chkErr.count > 0 {
             print("＊＊＊　Validationエラー発生: \(chkErr.count)件　＊＊＊")
             var msg: String = ""
@@ -220,27 +220,3 @@ extension ProfilePreviewVC {
         }
     }
 }
-
-//バリデーションチェックしてみて、問題あったらエラ〜メッセージを定義しちゃっとく
-//なんかエラーあったらtrue返しとく
-extension ProfilePreviewVC {
-    func chkValidationErr() -> [EditableItemKey: String] {
-        var dicError: [EditableItemKey: String] = [:]
-        //必須チェック
-        for itemKey in [
-            EditItemMdlProfile.familyName.itemKey,
-            EditItemMdlProfile.firstName.itemKey,
-            ]
-        {
-            if let temp = editableModel.editTempCD[itemKey], let item = editableModel.getItemByKey(itemKey) {
-                if temp.isEmpty { dicError[itemKey] = "\(item.dispName) は必須項目です" }
-                print("\t変更したもののみチェック: [\(item.debugDisp)]\t[\(temp)]")
-            }
-        }
-        print("\t* editTempCD: \(editableModel.editTempCD))")
-        print("\t* dicError: \(dicError))")
-
-        return dicError
-    }
-}
-
