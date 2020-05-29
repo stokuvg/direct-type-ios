@@ -178,23 +178,23 @@ extension ProfilePreviewVC {
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
             case 400:
-                print(myErr.arrValidErrMsg.description)
-                
+                var dicError: [MdlItemHTypeKey: [String]] = [:]//MdlItemH.type
+
                 for valid in myErr.arrValidErrMsg {
                     switch valid.property { //これで対応する項目に結びつける
                     case "familyName", "firstName", "familyNameKana", "firstNameKana":
-                        self.dicValidErrMsg[HPreviewItemType.fullnameH2.itemKey] = valid.constraintsVal
+                        dicError = ValidateManager.addDicArrVal(dic: dicError, key: HPreviewItemType.fullnameH2.itemKey, val: valid.constraintsVal)
                     case "birthday", "genderId":
-                        self.dicValidErrMsg[HPreviewItemType.birthGenderH2.itemKey] = valid.constraintsVal
+                        dicError = ValidateManager.addDicArrVal(dic: dicError, key: HPreviewItemType.birthGenderH2.itemKey, val: valid.constraintsVal)
                     case "zipCode", "prefectureId", "city", "town":
-                        self.dicValidErrMsg[HPreviewItemType.adderssH2.itemKey] = valid.constraintsVal
+                        dicError = ValidateManager.addDicArrVal(dic: dicError, key: HPreviewItemType.adderssH2.itemKey, val: valid.constraintsVal)
                     case "email":
-                        self.dicValidErrMsg[HPreviewItemType.emailH2.itemKey] = valid.constraintsVal
+                        dicError = ValidateManager.addDicArrVal(dic: dicError, key: HPreviewItemType.emailH2.itemKey, val: valid.constraintsVal)
                     default:
                         print("❤️\t[\(valid.property)]\t[\(valid.constraintsKey)] : [\(valid.constraintsVal)]")
-//                        self.dicValidErrMsg[HPreviewItemType.mobilephoneH2.itemKey] = "未割り当てあり"
                     }
                 }
+                self.dicValidErrMsg = dicError
             default:
                 self.showError(error)
             }
