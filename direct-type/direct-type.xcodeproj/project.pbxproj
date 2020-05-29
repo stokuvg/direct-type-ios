@@ -168,6 +168,7 @@
 		269AFFCA246A929300DB364B /* SubSelectDaiTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269AFFC0246A929200DB364B /* SubSelectDaiTBCell.xib */; };
 		269AFFCB246A929300DB364B /* SubSelectSpecialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269AFFC1246A929200DB364B /* SubSelectSpecialVC.swift */; };
 		26A1F57C247F5D3300834213 /* ValidateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1F57B247F5D3300834213 /* ValidateManager.swift */; };
+		26A1F57E247FB28B00834213 /* Validate+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1F57D247FB28B00834213 /* Validate+Profile.swift */; };
 		26A4C1CB247B4A81008D8E68 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A4C1CA247B4A81008D8E68 /* ApiManager.swift */; };
 		26A5DD642475028E0035267A /* SubSelectSpecialVC+Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5DD632475028E0035267A /* SubSelectSpecialVC+Picker.swift */; };
 		26A5DD662476547D0035267A /* SubSelectBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5DD652476547D0035267A /* SubSelectBaseVC.swift */; };
@@ -383,6 +384,7 @@
 		269AFFC0246A929200DB364B /* SubSelectDaiTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubSelectDaiTBCell.xib; sourceTree = "<group>"; };
 		269AFFC1246A929200DB364B /* SubSelectSpecialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubSelectSpecialVC.swift; sourceTree = "<group>"; };
 		26A1F57B247F5D3300834213 /* ValidateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateManager.swift; sourceTree = "<group>"; };
+		26A1F57D247FB28B00834213 /* Validate+Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validate+Profile.swift"; sourceTree = "<group>"; };
 		26A4C1CA247B4A81008D8E68 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		26A5DD632475028E0035267A /* SubSelectSpecialVC+Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubSelectSpecialVC+Picker.swift"; sourceTree = "<group>"; };
 		26A5DD652476547D0035267A /* SubSelectBaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSelectBaseVC.swift; sourceTree = "<group>"; };
@@ -874,6 +876,7 @@
 			isa = PBXGroup;
 			children = (
 				26A1F57B247F5D3300834213 /* ValidateManager.swift */,
+				26A1F57D247FB28B00834213 /* Validate+Profile.swift */,
 			);
 			path = ValidateManager;
 			sourceTree = "<group>";
@@ -1171,6 +1174,7 @@
 				06E519862457D2C1004E4B7A /* UIView+Extensions.swift in Sources */,
 				066763622457AB7200AC5039 /* BaseTabBC.swift in Sources */,
 				06E519B1245814B2004E4B7A /* EntryConfirmVC.swift in Sources */,
+				26A1F57E247FB28B00834213 /* Validate+Profile.swift in Sources */,
 				066763672457AF2400AC5039 /* MyPageVC.swift in Sources */,
 				06E5199E2457DABE004E4B7A /* WithDrawal.swift in Sources */,
 				268BFF5A246E8F18004B2640 /* MdlAppSmoothCareer.swift in Sources */,

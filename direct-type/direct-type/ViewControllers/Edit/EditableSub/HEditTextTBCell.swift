@@ -100,7 +100,7 @@ extension HEditTextTBCell: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let textField = textField as? IKTextField else { return true }
         if let tfiv = textField.inputView as? UIPickerView {
-            print("❤️[\(textField.itemKey)] [\(#function)]❤️ ❤️[Pickerのため編集抑止]❤️")
+            print("❤️[\(textField.itemKey)][\(tfiv.description)] [\(#function)]❤️ ❤️[Pickerのため編集抑止]❤️")
             return false //Pickerに結びついていたら編集却下とする
         }
         return true

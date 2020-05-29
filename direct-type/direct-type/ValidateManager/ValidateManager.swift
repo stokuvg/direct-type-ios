@@ -14,18 +14,8 @@ final public class ValidateManager {
 
 //==========================================================================================
 extension ValidateManager {
-    class func addDicArrVal(dic: [EditableItemKey: [String]], key: EditableItemKey, val: String) -> [EditableItemKey: [String]] {
-        var new: [EditableItemKey: [String]] = dic
-        if var hoge = dic[key] {
-            hoge.append(val)
-            new[key] = hoge
-        } else {
-            new[key] = [val]
-        }
-        return new
-    }
     class func dbgDispCurrentItems(editableModel: EditableModel) {
-        return//!!!
+//        return//!!!
         //===変更内容の確認
         print(#line, String(repeating: "=", count: 44))
         for (y, items) in editableModel.arrData.enumerated() {
@@ -49,7 +39,7 @@ extension ValidateManager {
         //必須チェック
         for (key, vals) in subValidateNotEmntyByKey(editableModel) {
             for val in vals {
-                dicError = ValidateManager.addDicArrVal(dic: dicError, key: key, val: val)
+                dicError.addDicArrVal(key: key, val: val)
             }
         }
         return dicError
@@ -63,7 +53,7 @@ extension ValidateManager {
                 let (isChange, editTemp) = editableModel.makeTempItem(item)
                 if isChange {
                     if editTemp.curVal == "" {
-                        dicError = ValidateManager.addDicArrVal(dic: dicError, key: item.editableItemKey, val: "\(item.dispName)は必須項目です")
+                        dicError.addDicArrVal(key: item.editableItemKey, val: "\(item.dispName)は必須項目です")
                     }
                 }
             }

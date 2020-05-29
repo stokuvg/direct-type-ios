@@ -18,6 +18,7 @@ extension UIButton {
         self.cornerRadius = self.bounds.height/2
         
         self.setTitleColor(textColor.withAlphaComponent(0.8), for: .highlighted) //ボタン押下時のフィードバック（仮）
+        self.setTitleColor(textColor.withAlphaComponent(0.4), for: .disabled) //ボタン非活性時のフィードバック（仮）
         self.isExclusiveTouch = true //同時押し不可にしておく
 
     }

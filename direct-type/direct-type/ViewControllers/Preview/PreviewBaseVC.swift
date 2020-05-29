@@ -15,11 +15,15 @@ import SwaggerClient
 class PreviewBaseVC: TmpBasicVC {
     var editableModel: EditableModel = EditableModel() //画面編集項目のモデルと管理
     var arrData: [MdlItemH] = []
-
+    
+    //ValidationError管理
+    var dicGrpValidErrMsg: [MdlItemHTypeKey: [String]] = [:]//MdlItemH.type
+    var dicValidErrMsg: [EditableItemKey: [ValidationErrMsg]] = [:] //[ItemEditable.item: ErrMsg]　（TODO：これもEditableBaseで管理にするか））
+    
     @IBOutlet weak var tableVW: UITableView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
-        print(#line, #function)
+        print(#line, #function, "＊オーバーライドして使う＊")
     }
 
     override func viewDidLoad() {
@@ -33,18 +37,28 @@ class PreviewBaseVC: TmpBasicVC {
         self.tableVW.rowHeight = UITableView.automaticDimension
         self.tableVW.register(UINib(nibName: "HPreviewTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HPreviewTBCell")
         initData()
+        chkButtonEnable()//ボタン死活チェック
     }
     func initData() {
     }
     func dispData() {
-        title = "個人プロフィール"
+        title = "＊プレビュー＊"
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         dispData()
+        chkButtonEnable()//ボタン死活チェック
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+    }
+    func chkButtonEnable() {
+        //=== 変更なければフェッチ不要
+        if editableModel.editTempCD.count > 0 {
+            btnCommit.isEnabled = true
+        } else {
+            btnCommit.isEnabled = false
+        }
     }
 }
 
@@ -56,7 +70,8 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = arrData[indexPath.row]
         let cell: HPreviewTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HPreviewTBCell", for: indexPath) as! HPreviewTBCell
-        cell.initCell(item, editTempCD: editableModel.editTempCD)//編集中の値を表示適用させるためeditTempCDを渡す
+        let errMsg = dicGrpValidErrMsg[item.type.itemKey]?.joined(separator: "\n") ?? ""
+        cell.initCell(item, editTempCD: editableModel.editTempCD, errMsg: errMsg)//編集中の値を表示適用させるためeditTempCDを渡す
         cell.dispCell()
         return cell
     }
@@ -84,7 +99,9 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
         //通常の複数編集画面
         let storyboard = UIStoryboard(name: "Edit", bundle: nil)
         if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubEditBaseVC") as? SubEditBaseVC{
-            nvc.initData(self, item)
+            var arrErrMsg: [EditableItemKey: [ValidationErrMsg]] = [:] //子画面に引き渡すエラー
+            arrErrMsg = dicValidErrMsg //抜粋せずに、まるっと渡しておく
+            nvc.initData(self, item, arrErrMsg)
             //遷移アニメーション関連
             nvc.modalTransitionStyle = .coverVertical
             self.present(nvc, animated: true) {
@@ -93,28 +110,19 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-
 extension PreviewBaseVC: nameEditableTableBasicDelegate {
     func changedSelect(editItem: MdlItemH, editTempCD: [EditableItemKey : EditableItemCurVal]) {
         //=== 消し込み対応のため、子項目をなめて変更点を適用する
         if editTempCD.count > 0 {
             for (key, val) in editTempCD {
-                if let item = editItem.childItems.filter { (ei) -> Bool in
+                if let item = editItem.childItems.filter({ (ei) -> Bool in
                     ei.editableItemKey == key
-                }.first {
+                }).first {
                     editableModel.changeTempItem(item, text: val)
                 }
             }
         }
-//        //元のchildItemsに適用しないと表示更新されないな...
-//        for mdlItem in arrData {
-//            for (n, item) in mdlItem.childItems.enumerated() {
-//                //変更あるかチェック
-//                if let temp = editTempCD[item.editableItemKey] {
-//                    print("\t#\(n): \(item.debugDisp)")
-//                }
-//            }
-//        }
+        chkButtonEnable()//ボタン死活チェック
         tableVW.reloadData()
     }
 }

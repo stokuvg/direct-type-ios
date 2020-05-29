@@ -48,7 +48,7 @@ extension EditableBasicVC {
 
     //ピッカーにつけた〔選択〕〔Cancel〕ボタン
     @objc func actPickerSelectButton(_ sender: IKBarButtonItem) {
-        guard let picker = sender.parentPicker as? IKPickerView else { return }
+//        guard let picker = sender.parentPicker as? IKPickerView else { return }
         self.view.endEditing(true)
     }
     @objc func actPickerCancelButton(_ sender: IKBarButtonItem) {
@@ -100,9 +100,7 @@ extension EditableBasicVC: UIPickerViewDataSource, UIPickerViewDelegate {
         let selectionItems = editableModel.makePickerItems(itemKey: pickerView.itemKey)
         guard selectionItems.count > row else { return }//マスタ配列が取得できていない
         let item = selectionItems[row]
-        
-        //!!! フィードバックするためにTextFieldが知りたい
-        guard let parentTF = pickerView.parentTF as? IKTextField else { return }
+        guard let parentTF = pickerView.parentTF else { return }//フィードバックさせるため
         parentTF.text = item.disp
     }
 }

@@ -30,26 +30,29 @@ class EditableTableBasicVC: EditableBasicVC {
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
         ValidateManager.dbgDispCurrentItems(editableModel: editableModel) //[Dbg: 状態確認]
-        if chkValidateError() {
-            tableVW.reloadData()
-            return
-        }
+//        if chkValidateError() {
+//            tableVW.reloadData()
+//            return
+//        }
         //編集画面でのeditTempCDを、そのまま前の画面に渡しても良い気がする
         self.delegate?.changedSelect(editItem: itemGrp, editTempCD: editableModel.editTempCD) //フィードバックしておく
         self.dismiss(animated: true) {}
     }
     
     func chkValidateError() -> Bool {
+        if Constants.DbgSkipLocalValidate { return false }//[Dbg: ローカルValidationスキップ]
         ValidateManager.dbgDispCurrentItems(editableModel: editableModel) //[Dbg: 状態確認]
+        dicValidErrMsg.removeAll()//チェック前に、既存のエラーを全削除しておく
         let chkErr = ValidateManager.chkValidationErr(editableModel)
         if chkErr.count > 0 {
             var msg: String = ""
             for (key, err) in chkErr {
-                dicValidErr[key] = err.joined(separator: "\n")
+                dicValidErrMsg[key] = err.joined(separator: "\n")
                 let name = editableModel.getItemByKey(key)?.dispName ?? ""
                 msg = "\(msg)\(name): \(err)\n"
             }
             self.showConfirm(title: "Validationエラー (\(chkErr.count)件)", message: msg)
+            /* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
             return true
         } else {
             return false
@@ -87,9 +90,17 @@ class EditableTableBasicVC: EditableBasicVC {
         showTargetTF(tableVW, tf)//一緒にスクロールするように親を変えるためoverride
     }
 
-    func initData(_ delegate: nameEditableTableBasicDelegate, _ itemGrp: MdlItemH) {
+    func initData(_ delegate: nameEditableTableBasicDelegate, _ itemGrp: MdlItemH, _ arrErrMsg: [EditableItemKey: [ValidationErrMsg]]) {
         self.delegate = delegate
         self.itemGrp = itemGrp
+        self.arrErrMsg = arrErrMsg
+        for (key, vals) in arrErrMsg {
+            dicValidErrMsg[key] = vals.joined(separator: "\n")
+        }
+        print(#line, #function, "🧡🧡🧡[arrErrMsg: \(arrErrMsg)]🧡🧡🧡")
+        print(#line, #function, "🧡🧡🧡[dicValidErrMsg: \(dicValidErrMsg)]🧡🧡🧡")
+
+        
         //=== IndexPathなどを設定するため
         editableModel.initItemEditable(itemGrp.childItems)
     }
@@ -122,7 +133,7 @@ class EditableTableBasicVC: EditableBasicVC {
     }
     @objc func keyboardDidShow(notification: NSNotification) {
         guard let userInfo = notification.userInfo else { return }
-        let szDevice = UIScreen.main.bounds.size
+        //let szDevice = UIScreen.main.bounds.size
         if let rect = userInfo["UIKeyboardFrameEndUserInfoKey"] as? CGRect {
             let safeAreaT = self.view.safeAreaInsets.top
             let safeAreaB = self.view.safeAreaInsets.bottom
@@ -197,7 +208,7 @@ extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
         case .inputText:
             let returnKeyType: UIReturnKeyType = (item.editableItemKey == editableModel.lastEditableItemKey) ? .done : .next
             let cell: HEditTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditTextTBCell", for: indexPath) as! HEditTextTBCell
-            let errMsg = dicValidErr[item.editableItemKey] ?? ""
+            let errMsg = dicValidErrMsg[item.editableItemKey] ?? ""
             cell.initCell(self, item, errMsg: errMsg, returnKeyType)
             cell.dispCell()
             return cell
@@ -219,7 +230,7 @@ extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
             let returnKeyType: UIReturnKeyType = (item.editableItemKey == editableModel.lastEditableItemKey) ? .done : .next
             print("[returnKeyType: \(returnKeyType.rawValue)]")
             let cell: HEditTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditTextTBCell", for: indexPath) as! HEditTextTBCell
-            let errMsg = dicValidErr[item.editableItemKey] ?? ""
+            let errMsg = dicValidErrMsg[item.editableItemKey] ?? ""
             cell.initCell(self, item, errMsg: errMsg, returnKeyType)
             cell.dispCell()
             return cell

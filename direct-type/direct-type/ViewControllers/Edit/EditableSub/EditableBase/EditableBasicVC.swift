@@ -23,7 +23,9 @@ class EditableBasicVC: TmpBasicVC, SubSelectFeedbackDelegate {
     func dispEditableItemAll() {} //すべての項目を表示する
     func dispEditableItemByKey(_ itemKey: EditableItemKey) {} //指定した項目を表示する （TODO：複数キーの一括指定に拡張予定）
     //ValidationError管理
-    var dicValidErr: [EditableItemKey: ValidationErrMsg] = [:] //[ItemEditable.item: ErrMsg]　（TODO：これもEditableBaseで管理にするか））
+    var dicValidErrMsg: [EditableItemKey: ValidationErrMsg] = [:] //[ItemEditable.item: ErrMsg]　（TODO：これもEditableBaseで管理にするか））
+    var arrErrMsg: [EditableItemKey: [ValidationErrMsg]] = [:] //子画面に引き渡されたエラー
+
     //====================================================
     //SuggestなどでのActiveなTextFieldを表示するため
     var targetTfArea: TargetAreaVW? = nil//これは触った場所を表すために
@@ -181,7 +183,7 @@ extension EditableBasicVC: InputItemHDelegate {
         case .selectSpecisl:
             break
         }
-        print("💛[\(tf.itemKey)] 編集終わり💛「[\(tf.tag)] \(#function)」[\(tf.itemKey)][\(tf.text ?? "")] [\(tf.inputAccessoryView)] [\(tf.inputView)]")
+        print("💛[\(tf.itemKey)] 編集終わり💛「[\(tf.tag)] \(#function)」[\(tf.itemKey)][\(tf.text ?? "")] [\(String(describing: tf.inputAccessoryView))] [\(String(describing: tf.inputView))]")
     }
     func changedItem(_ tf: IKTextField, _ item: EditableItemH, text: String) {
         editableModel.changeTempItem(item, text: text)//入力値の反映

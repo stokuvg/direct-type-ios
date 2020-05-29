@@ -145,7 +145,7 @@ extension SubSelectSpecialVC: UITableViewDataSource, UITableViewDelegate {
             tableView.reloadData() //該当セルの描画しなおし
         } else {
             //そのセルの選択状態に応じて、経験年数を入れさせるか、解錠するかを選ぶ
-            if let selITem = dicSelectedCode[item.code] {
+            if let _ = dicSelectedCode[item.code] {
                 dicSelectedCode.removeValue(forKey: item.code)//削除する
                 tableView.reloadRows(at: [indexPath], with: .none) //該当セルの描画しなおし
                 dispData()

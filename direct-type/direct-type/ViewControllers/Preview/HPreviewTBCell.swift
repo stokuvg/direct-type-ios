@@ -8,6 +8,7 @@
 
 import UIKit
 
+typealias MdlItemHTypeKey = String //EditItemProtocol.itemKey
 class MdlItemH {
     var type: HPreviewItemType = .undefine
     var value: String = ""
@@ -31,19 +32,23 @@ class MdlItemH {
 
 class HPreviewTBCell: UITableViewCell {
     var item: MdlItemH? = nil
+    var errMsg: String = ""
     var editTempCD: [EditableItemKey: EditableItemCurVal] = [:]
     
+    @IBOutlet weak var vwMainArea: UIView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblValue: UILabel!
     @IBOutlet weak var lblNotice: UILabel!
+    @IBOutlet weak var lblErrorMsg: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    func initCell(_ item: MdlItemH, editTempCD: [EditableItemKey: EditableItemCurVal]) {
+    func initCell(_ item: MdlItemH, editTempCD: [EditableItemKey: EditableItemCurVal], errMsg: String) {
         self.item = item
+        self.errMsg = errMsg
         self.editTempCD = editTempCD//表示だけに使用するため横流し
         if item.readonly {
             self.isUserInteractionEnabled = false
@@ -71,6 +76,18 @@ class HPreviewTBCell: UITableViewCell {
         lblValue.text(text: bufValue, fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         lblNotice.text(text: bufNotice, fontType: .font_SS, textColor: UIColor.init(colorType: .color_parts_gray)!, alignment: .left)
         lblNotice.isHidden = (_item.notice == "") ? true : false
+        //Validationエラー発生時の表示
+        if errMsg != "" {
+            lblErrorMsg.text = errMsg
+            if UITraitCollection.isDarkMode == true {
+                vwMainArea.backgroundColor = UIColor.init(red: 0.3, green: 0.1, blue: 0.1, alpha: 1.0)
+            } else {
+                vwMainArea.backgroundColor = UIColor.init(red: 1.0, green: 0.8, blue: 0.8, alpha: 1.0)
+            }
+        } else {
+            lblErrorMsg.text = ""
+            vwMainArea.backgroundColor = self.backgroundColor
+        }
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

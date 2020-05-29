@@ -36,7 +36,7 @@ class IKTextField: UITextField {
     var itemKey: EditableItemKey = "<undefine>"
 }
 
-enum HPreviewItemType {
+enum HPreviewItemType: String {
     case undefine
     //=== [H-2]個人プロフィール編集
     case fullnameH2       //===４．氏名（必須）
@@ -70,7 +70,6 @@ enum HPreviewItemType {
     case managementsF16     //=== [F-16] 入力（マネジメント経験）
     case pcSkillF22         //=== [F-22] 職種別入力（PCスキル）
 
-    
     var dispTitle: String {
         switch self {
         case .undefine:     return "<未定義>"
@@ -107,4 +106,5 @@ enum HPreviewItemType {
         case .pcSkillF22:           return "PCスキル"
         }
     }
+    var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" }
 }

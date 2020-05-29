@@ -30,7 +30,6 @@ class SelectItemsManager: NSObject {
     var isCachedCompany: Bool = false
     var selectedCompany: String? = nil
     var selectedDebugDisp: String {
-        return
         "[Company: \(SelectItemsManager.shared.selectedCompany ?? "")] "
     }
     
@@ -365,7 +364,7 @@ extension SelectItemsManager {
             //print("[\(type.fName)] \(arrCodeDisp.count)件のマスタを読み込みました")
             //===[ソート後のものを保持しておく]===___
             arrMaster[type] = []
-            for (num, item) in arrCodeDisp.sorted(by: { (mae, ato) -> Bool in
+            for (_, item) in arrCodeDisp.sorted(by: { (mae, ato) -> Bool in
                 mae.sortNum < ato.sortNum
             }).enumerated() {
                 let item: CodeDisp = CodeDisp(item.code, item.disp)
@@ -410,14 +409,14 @@ extension SelectItemsManager {
             }
             //===[ソート後のものを保持しておく]===___
             arrMasterDai[type] = []
-            for (num, item) in arrCodeDispGrp.sorted(by: { (mae, ato) -> Bool in
+            for (_, item) in arrCodeDispGrp.sorted(by: { (mae, ato) -> Bool in
                 mae.sortNum < ato.sortNum
             }).enumerated() {
                 let item: CodeDisp = CodeDisp(item.code, item.disp)
                 arrMasterDai[type]?.append(item)
             }
             arrMasterSyou[type] = []
-            for (num, item) in arrCodeDisp.sorted(by: { (mae, ato) -> Bool in
+            for (_, item) in arrCodeDisp.sorted(by: { (mae, ato) -> Bool in
                 mae.sortNum < ato.sortNum
             }).enumerated() {
                 let item: GrpCodeDisp = GrpCodeDisp(item.grp, item.codeDisp.code, item.codeDisp.disp)
