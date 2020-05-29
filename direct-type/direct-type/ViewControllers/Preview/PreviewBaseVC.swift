@@ -15,8 +15,11 @@ import SwaggerClient
 class PreviewBaseVC: TmpBasicVC {
     var editableModel: EditableModel = EditableModel() //画面編集項目のモデルと管理
     var arrData: [MdlItemH] = []
+    
+    //ValidationError管理
     var dicGrpValidErrMsg: [MdlItemHTypeKey: [String]] = [:]//MdlItemH.type
-
+    var dicValidErrMsg: [EditableItemKey: [ValidationErrMsg]] = [:] //[ItemEditable.item: ErrMsg]　（TODO：これもEditableBaseで管理にするか））
+    
     @IBOutlet weak var tableVW: UITableView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
@@ -35,6 +38,16 @@ class PreviewBaseVC: TmpBasicVC {
         self.tableVW.register(UINib(nibName: "HPreviewTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HPreviewTBCell")
         initData()
         chkButtonEnable()//ボタン死活チェック
+        
+        
+        self.dicGrpValidErrMsg.addDicArrVal(key: HPreviewItemType.fullnameH2.itemKey, val: "3件エラー")
+        self.dicValidErrMsg.addDicArrVal(key: EditItemMdlProfile.firstNameKana.itemKey, val: "かなえらー1")
+        self.dicValidErrMsg.addDicArrVal(key: EditItemMdlProfile.familyNameKana.itemKey, val: "かなえらー2")
+        self.dicValidErrMsg.addDicArrVal(key: EditItemMdlProfile.familyNameKana.itemKey, val: "かなえらー3")
+        self.dicGrpValidErrMsg.addDicArrVal(key: HPreviewItemType.adderssH2.itemKey, val: "1件エラー")
+        self.dicValidErrMsg.addDicArrVal(key: EditItemMdlProfile.address1.itemKey, val: "あどれすえらー")
+
+        
     }
     func initData() {
     }
@@ -96,7 +109,9 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
         //通常の複数編集画面
         let storyboard = UIStoryboard(name: "Edit", bundle: nil)
         if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubEditBaseVC") as? SubEditBaseVC{
-            nvc.initData(self, item)
+            var arrErrMsg: [EditableItemKey: [ValidationErrMsg]] = [:] //子画面に引き渡すエラー
+            arrErrMsg = dicValidErrMsg //抜粋せずに、まるっと渡しておく
+            nvc.initData(self, item, arrErrMsg)
             //遷移アニメーション関連
             nvc.modalTransitionStyle = .coverVertical
             self.present(nvc, animated: true) {
@@ -104,7 +119,6 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
         }
     }
 }
-
 
 extension PreviewBaseVC: nameEditableTableBasicDelegate {
     func changedSelect(editItem: MdlItemH, editTempCD: [EditableItemKey : EditableItemCurVal]) {
