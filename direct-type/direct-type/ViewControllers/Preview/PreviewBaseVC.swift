@@ -34,6 +34,7 @@ class PreviewBaseVC: TmpBasicVC {
         self.tableVW.rowHeight = UITableView.automaticDimension
         self.tableVW.register(UINib(nibName: "HPreviewTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HPreviewTBCell")
         initData()
+        chkButtonEnable()//ボタン死活チェック
     }
     func initData() {
     }
@@ -43,9 +44,18 @@ class PreviewBaseVC: TmpBasicVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         dispData()
+        chkButtonEnable()//ボタン死活チェック
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+    }
+    func chkButtonEnable() {
+        //=== 変更なければフェッチ不要
+        if editableModel.editTempCD.count > 0 {
+            btnCommit.isEnabled = true
+        } else {
+            btnCommit.isEnabled = false
+        }
     }
 }
 
@@ -108,15 +118,7 @@ extension PreviewBaseVC: nameEditableTableBasicDelegate {
                 }
             }
         }
-//        //元のchildItemsに適用しないと表示更新されないな...
-//        for mdlItem in arrData {
-//            for (n, item) in mdlItem.childItems.enumerated() {
-//                //変更あるかチェック
-//                if let temp = editTempCD[item.editableItemKey] {
-//                    print("\t#\(n): \(item.debugDisp)")
-//                }
-//            }
-//        }
+        chkButtonEnable()//ボタン死活チェック
         tableVW.reloadData()
     }
 }

@@ -34,10 +34,7 @@ class ProfilePreviewVC: PreviewBaseVC {
             for err in chkErr {
                 msg = "\(msg)\(err.value)\n"
             }
-//            self.showConfirm(title: "Validationエラー (\(chkErr.count)件)", message: msg)
-
-
-
+            self.showConfirm(title: "Validationエラー (\(chkErr.count)件)", message: msg)
             return true
         } else {
             print("＊＊＊　Validationエラーなし　＊＊＊")
@@ -170,6 +167,8 @@ extension ProfilePreviewVC {
     private func fetchUpdateProfile() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         let param = UpdateProfileRequestDTO(editableModel.editTempCD)
+//        let param = UpdateProfileRequestDTO(familyName: "", firstName: "", familyNameKana: "", firstNameKana: "", birthday: "", genderId: "", zipCode: "", prefectureId: "", city: "", town: "", email: "")
+        self.dicValidErrMsg.removeAll()//状態をクリアしておく
         SVProgressHUD.show(withStatus: "プロフィール情報の更新")
         ApiManager.updateProfile(param, isRetry: true)
         .done { result in
@@ -179,21 +178,23 @@ extension ProfilePreviewVC {
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
             case 400:
-                print(myErr.debugDisp)
-                //✨    [familyName] ... [isNotEmpty] [familyName should not be empty]
-                //✨    [firstName] ... [isNotEmpty] [firstName should not be empty]
-                //✨    [firstNameKana] ... [isNotEmpty] [firstNameKana should not be empty]
+                print(myErr.arrValidErrMsg.description)
+                
                 for valid in myErr.arrValidErrMsg {
                     switch valid.property { //これで対応する項目に結びつける
                     case "familyName", "firstName", "familyNameKana", "firstNameKana":
                         self.dicValidErrMsg[HPreviewItemType.fullnameH2.itemKey] = valid.constraintsVal
+                    case "birthday", "genderId":
+                        self.dicValidErrMsg[HPreviewItemType.birthGenderH2.itemKey] = valid.constraintsVal
+                    case "zipCode", "prefectureId", "city", "town":
+                        self.dicValidErrMsg[HPreviewItemType.adderssH2.itemKey] = valid.constraintsVal
+                    case "email":
+                        self.dicValidErrMsg[HPreviewItemType.emailH2.itemKey] = valid.constraintsVal
                     default:
                         print("❤️\t[\(valid.property)]\t[\(valid.constraintsKey)] : [\(valid.constraintsVal)]")
-                        self.dicValidErrMsg[HPreviewItemType.adderssH2.itemKey] = "あどれすちがう"
-
+//                        self.dicValidErrMsg[HPreviewItemType.mobilephoneH2.itemKey] = "未割り当てあり"
                     }
                 }
-                
             default:
                 self.showError(error)
             }
