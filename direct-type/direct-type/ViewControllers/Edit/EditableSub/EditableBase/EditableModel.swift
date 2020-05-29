@@ -8,17 +8,6 @@
 
 import UIKit
 
-//汎用入力画面の種類
-enum EditableGamen {
-    case profile
-
-    var disp: String {
-        switch self {
-        case .profile:  return "プロフィール"
-        }
-    }
-}
-
 class EditableModel {
 //    var editableGamen: EditableGamen! //画面種別の定義（必須）
     //↑PickerやSuggestなどの元となるTextFieldの管理なんかも、必要ならこれで管理しちゃう
@@ -31,37 +20,6 @@ class EditableModel {
     var dicTextFieldIndexPath: [EditableItemKey: IndexPath] = [:]
     var arrTextFieldNextDoneKey: [EditableItemKey] = []
     var lastEditableItemKey: EditableItemKey = "" //項目渡り歩いてのDoneに対応させるため
-
-    //=== 表示項目の設定
-//    func initItemEditable(_ editableGamen: EditableGamen, _ item: Any) {
-//        self.editableGamen = editableGamen
-//        switch editableGamen {
-//        case .profile:
-//            guard let (mdlProfile) = item as? (MdlProfile) else { return } //タプルで受けれる!!
-//            let _detail = mdlProfile
-//            let secDbg: [EditableItemH] = [
-//                EditableItemH(type: .inputText, editItem: EditItemMdlProfile.familyName, val: _detail.familyName),
-//                EditableItemH(type: .inputText, editItem: EditItemMdlProfile.firstName, val: _detail.firstName),
-//                EditableItemH(type: .inputText, editItem: EditItemMdlProfile.familyNameKana, val: _detail.familyNameKana),
-//                EditableItemH(type: .inputText, editItem: EditItemMdlProfile.firstNameKana, val: _detail.firstNameKana),
-//                EditableItemH(type: .selectDrumYMD, editItem: EditItemMdlProfile.birthday, val: "\(_detail.birthday.dispYmd())"),
-//                EditableItemH(type: .selectSingle, editItem: EditItemMdlProfile.gender, val: "\(_detail.gender)"),
-//                EditableItemH(type: .selectDrum, editItem: EditItemMdlProfile.firstName, val: "\(_detail.familyNameKana)"),
-//                EditableItemH(type: .inputText, editItem: EditItemMdlProfile.firstName, val: "\(_detail.firstName)"),
-//                EditableItemH(type: .inputTextSecret, editItem: EditItemMdlProfile.firstName, val: "\(_detail.familyName)"),
-//                EditableItemH(type: .inputZipcode, editItem: EditItemMdlProfile.firstName, val: "\(_detail.firstNameKana)"),
-//                EditableItemH(type: .inputZipcode, editItem: EditItemMdlProfile.zipCode, val: _detail.zipCode),
-//                EditableItemH(type: .inputText, editItem: EditItemMdlProfile.prefecture, val: "\(_detail.prefecture)"),
-//                EditableItemH(type: .inputText, editItem: EditItemMdlProfile.address1, val: _detail.address1),
-//                EditableItemH(type: .inputText, editItem: EditItemMdlProfile.address2, val: _detail.address2),
-//                EditableItemH(type: .inputText, editItem: EditItemMdlProfile.mailAddress, val: _detail.mailAddress),
-//                EditableItemH(type: .inputText, editItem: EditItemMdlProfile.mobilePhoneNo, val: _detail.mobilePhoneNo),
-//            ]
-//            arrData = [secDbg, secDbg]
-//            dispSectionTitles = ["開発確認項目1", "開発確認項目2"]
-//        }
-//        chkTableCellAll()//登録項目に応じて、TextFieldを渡り歩かせるための情報を生成しておく
-//    }
 
     func initItemEditable(_ arrItem: [EditableItemH]) {
         arrData = [arrItem]
