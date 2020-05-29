@@ -231,11 +231,10 @@ class HomeVC: TmpNaviTopVC {
         )
         */
         
+        dispJobCards = MdlJobCardList()
         if masterJobCards.jobCards.count > moreDataCount {
-            for i in 0..<moreDataCount {
-                let jobCardBig = masterJobCards.jobCards[i]
-                dispJobCards.jobCards.append(jobCardBig)
-            }
+            let jobCards = masterJobCards.jobCards
+            dispJobCards.jobCards = jobCards
         } else {
             for i in 0..<masterJobCards.jobCards.count {
                 let data = masterJobCards.jobCards[i]
