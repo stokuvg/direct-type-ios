@@ -34,8 +34,8 @@ class ProfilePreviewVC: PreviewBaseVC {
             for err in chkErr {
                 msg = "\(msg)\(err.value)\n"
             }
-            self.showConfirm(title: "Validationエラー (\(chkErr.count)件)", message: msg)
-            /* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
+            self.showValidationError(title: "Validationエラー (\(chkErr.count)件)", message: msg)
+//            /* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
             return true
         } else {
             print("＊＊＊　Validationエラーなし　＊＊＊")
