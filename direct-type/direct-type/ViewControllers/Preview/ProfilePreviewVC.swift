@@ -168,7 +168,7 @@ extension ProfilePreviewVC {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         let param = UpdateProfileRequestDTO(editableModel.editTempCD)
 //        let param = UpdateProfileRequestDTO(familyName: "", firstName: "", familyNameKana: "", firstNameKana: "", birthday: "", genderId: "", zipCode: "", prefectureId: "", city: "", town: "", email: "")
-        self.dicValidErrMsg.removeAll()//状態をクリアしておく
+        self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
         SVProgressHUD.show(withStatus: "プロフィール情報の更新")
         ApiManager.updateProfile(param, isRetry: true)
         .done { result in
@@ -183,18 +183,18 @@ extension ProfilePreviewVC {
                 for valid in myErr.arrValidErrMsg {
                     switch valid.property { //これで対応する項目に結びつける
                     case "familyName", "firstName", "familyNameKana", "firstNameKana":
-                        dicError = ValidateManager.addDicArrVal(dic: dicError, key: HPreviewItemType.fullnameH2.itemKey, val: valid.constraintsVal)
+                        dicError.addDicArrVal(key: HPreviewItemType.fullnameH2.itemKey, val: valid.constraintsVal)
                     case "birthday", "genderId":
-                        dicError = ValidateManager.addDicArrVal(dic: dicError, key: HPreviewItemType.birthGenderH2.itemKey, val: valid.constraintsVal)
+                        dicError.addDicArrVal(key: HPreviewItemType.birthGenderH2.itemKey, val: valid.constraintsVal)
                     case "zipCode", "prefectureId", "city", "town":
-                        dicError = ValidateManager.addDicArrVal(dic: dicError, key: HPreviewItemType.adderssH2.itemKey, val: valid.constraintsVal)
+                        dicError.addDicArrVal(key: HPreviewItemType.adderssH2.itemKey, val: valid.constraintsVal)
                     case "email":
-                        dicError = ValidateManager.addDicArrVal(dic: dicError, key: HPreviewItemType.emailH2.itemKey, val: valid.constraintsVal)
+                        dicError.addDicArrVal(key: HPreviewItemType.emailH2.itemKey, val: valid.constraintsVal)
                     default:
                         print("❤️\t[\(valid.property)]\t[\(valid.constraintsKey)] : [\(valid.constraintsVal)]")
                     }
                 }
-                self.dicValidErrMsg = dicError
+                self.dicGrpValidErrMsg = dicError
             default:
                 self.showError(error)
             }
@@ -233,8 +233,8 @@ extension ProfilePreviewVC {
         for itemKey in [
             EditItemMdlProfile.familyName.itemKey,
             EditItemMdlProfile.firstName.itemKey,
-            EditItemMdlProfile.familyNameKana.itemKey,
-            EditItemMdlProfile.firstNameKana.itemKey,
+//            EditItemMdlProfile.familyNameKana.itemKey,
+//            EditItemMdlProfile.firstNameKana.itemKey,
             ]
         {
             if let temp = editableModel.editTempCD[itemKey], let item = editableModel.getItemByKey(itemKey) {

@@ -9,13 +9,21 @@ class CellSeparateLine: UIView {
     }
 }
 extension Dictionary {
-    mutating func update(_ other: Dictionary) {
+    public mutating func update(_ other: Dictionary) {
         for (key, value) in other {
             self.updateValue(value, forKey:key)
         }
     }
+    public mutating func addDicArrVal(key: Key, val: String) {
+        if var vals = self[key] as? [String] {
+            vals.append(val)
+            self.updateValue(vals as! Value, forKey: key)
+        } else {
+            self.updateValue([val] as! Value, forKey: key)
+        }
+    }
 }
-
+    
 //指定した最小値〜最大値の範囲に数値を補正する
 // tmpM = min(12, tmpM); tmpM = max(1, tmpM)
 extension Int {
