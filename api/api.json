@@ -654,6 +654,19 @@
           "jobs"
         ]
       },
+      "CreateSkipRequestDTO": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "example": "1186461",
+            "description": "求人ID"
+          }
+        },
+        "required": [
+          "jobId"
+        ]
+      },
       "UserOldJob3": {
         "type": "object",
         "properties": {
@@ -1331,6 +1344,32 @@
         },
         "tags": [
           "jobs"
+        ]
+      }
+    },
+    "/skip": {
+      "post": {
+        "operationId": "SkipController_create",
+        "summary": "見送りリスト追加",
+        "description": "Api05_見送りリストに追加",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSkipRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "skip"
         ]
       }
     },

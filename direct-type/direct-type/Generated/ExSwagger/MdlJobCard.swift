@@ -38,7 +38,7 @@ class MdlJobCard: Codable {
     
     var userFilter: UserFilterInfo
     
-    init(jobCardCode: String,displayPeriod:EntryFormInfoDisplayPeriod, companyName: String, jobName:String, mainTitle:String, mainPicture: String, salaryMinCode:Int, salaryMaxCode:Int, salaryDisplay:Bool, workPlaceCode:[Int], keepStatus:Bool, skipStatus:Bool, userFilter:UserFilterInfo) {
+    init(jobCardCode: String = "",displayPeriod:EntryFormInfoDisplayPeriod = EntryFormInfoDisplayPeriod.init(startAt: "", endAt: ""), companyName: String = "", jobName:String = "", mainTitle:String = "", mainPicture: String = "", salaryMinCode:Int = 0, salaryMaxCode:Int = 0, salaryDisplay:Bool = false, workPlaceCode:[Int] = [], keepStatus:Bool = false, skipStatus:Bool = false, userFilter:UserFilterInfo = UserFilterInfo(tudKeepStatus: false, tudSkipStatus: false)) {
         self.jobCardCode = jobCardCode
         self.displayPeriod = displayPeriod
         self.companyName = companyName
