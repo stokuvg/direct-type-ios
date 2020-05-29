@@ -20,7 +20,7 @@ class PreviewBaseVC: TmpBasicVC {
     @IBOutlet weak var tableVW: UITableView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
-        print(#line, #function)
+        print(#line, #function, "＊オーバーライドして使う＊")
     }
 
     override func viewDidLoad() {
@@ -39,7 +39,7 @@ class PreviewBaseVC: TmpBasicVC {
     func initData() {
     }
     func dispData() {
-        title = "個人プロフィール"
+        title = "＊プレビュー＊"
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -111,9 +111,9 @@ extension PreviewBaseVC: nameEditableTableBasicDelegate {
         //=== 消し込み対応のため、子項目をなめて変更点を適用する
         if editTempCD.count > 0 {
             for (key, val) in editTempCD {
-                if let item = editItem.childItems.filter { (ei) -> Bool in
+                if let item = editItem.childItems.filter({ (ei) -> Bool in
                     ei.editableItemKey == key
-                }.first {
+                }).first {
                     editableModel.changeTempItem(item, text: val)
                 }
             }

@@ -181,7 +181,7 @@ extension EditableBasicVC: InputItemHDelegate {
         case .selectSpecisl:
             break
         }
-        print("💛[\(tf.itemKey)] 編集終わり💛「[\(tf.tag)] \(#function)」[\(tf.itemKey)][\(tf.text ?? "")] [\(tf.inputAccessoryView)] [\(tf.inputView)]")
+        print("💛[\(tf.itemKey)] 編集終わり💛「[\(tf.tag)] \(#function)」[\(tf.itemKey)][\(tf.text ?? "")] [\(String(describing: tf.inputAccessoryView))] [\(String(describing: tf.inputView))]")
     }
     func changedItem(_ tf: IKTextField, _ item: EditableItemH, text: String) {
         editableModel.changeTempItem(item, text: text)//入力値の反映

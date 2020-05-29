@@ -52,6 +52,7 @@ class EditableTableBasicVC: EditableBasicVC {
                 msg = "\(msg)\(name): \(err)\n"
             }
             self.showConfirm(title: "Validationエラー (\(chkErr.count)件)", message: msg)
+            /* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
             return true
         } else {
             return false
@@ -124,7 +125,7 @@ class EditableTableBasicVC: EditableBasicVC {
     }
     @objc func keyboardDidShow(notification: NSNotification) {
         guard let userInfo = notification.userInfo else { return }
-        let szDevice = UIScreen.main.bounds.size
+        //let szDevice = UIScreen.main.bounds.size
         if let rect = userInfo["UIKeyboardFrameEndUserInfoKey"] as? CGRect {
             let safeAreaT = self.view.safeAreaInsets.top
             let safeAreaB = self.view.safeAreaInsets.bottom
