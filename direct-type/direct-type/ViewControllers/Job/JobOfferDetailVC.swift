@@ -8,6 +8,7 @@
 
 import UIKit
 import SwaggerClient
+import SVProgressHUD
 
 class JobOfferDetailVC: TmpBasicVC {
     
@@ -146,6 +147,8 @@ class JobOfferDetailVC: TmpBasicVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.getJobDetail()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -166,10 +169,42 @@ class JobOfferDetailVC: TmpBasicVC {
     
     // 取材メモ表示フラグ
     private func memoDispFlagCheck(memo: JobCardDetailInterviewMemo) -> Bool {
-        if memo.interviewContent.count > 0 || memo.interviewPhoto1.count > 0 || memo.interviewPhoto2.count > 0 || memo.interviewPhoto3.count > 0{
+        if memo.interviewContent.count > 0 {
             return true
         }
         return false
+    }
+    
+    private func getJobDetail() {
+        SVProgressHUD.show()
+        ApiManager.getJobDetail(Void(), isRetry: true)
+            .done { result in
+                debugLog("ApiManager getJobDetail result:\(result.debugDisp)")
+                
+                self._mdlJobDetail = result
+        }
+        .catch { (error) in
+            Log.selectLog(logLevel: .debug, "error:\(error)")
+            
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            switch myErr.code {
+                case 403:
+                    let message:String = "idTokenを取得していません"
+                    self.showConfirm(title: "通信失敗", message: message)
+                        .done { _ in
+                            
+                    }.catch { (error) in
+                        
+                    }.finally {
+                }
+                default:
+                    break
+            }
+        }
+        .finally {
+            SVProgressHUD.dismiss()
+//            self.dataCheckAction()
+        }
     }
 }
 

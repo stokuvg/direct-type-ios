@@ -38,6 +38,33 @@ extension ApiManager {
     }
 }
 //================================================================
+//=== 仕事詳細取得 ===
+extension ApiManager {
+    class func getJobDetail(_ param: Void, isRetry: Bool = true) -> Promise<MdlJobCardDetail> {
+        if isRetry {
+            return firstly { () -> Promise<MdlJobCardDetail> in
+                retry(args: param, task: getJobDetailFetch) { (error) -> Bool in return true }
+            }
+        } else {
+            return getJobDetailFetch(param: param)
+        }
+    }
+    
+    private class func getJobDetailFetch(param: Void) -> Promise<MdlJobCardDetail> {
+        let (promise, resolver) = Promise<MdlJobCardDetail>.pending()
+        AuthManager.needAuth(true)
+        JobsAPI.jobsControllerGet()
+            .done { result in
+                Log.selectLog(logLevel: .debug, "result:\(result)")
+                resolver.fulfill(MdlJobCardDetail())
+        }.catch { (error) in
+            resolver.reject(error)
+        }.finally {
+        }
+        return promise
+    }
+}
+//================================================================
 extension ApiManager {
     
     class func sendJobSkip(id: String) -> Promise<MdlJobCard>{

@@ -93,7 +93,17 @@ class MdlJobCardDetail: Codable {
     var companyDescription: JobCardDetailCompanyDescription
     var userFilter: UserFilterInfo
 
-    init(jobCardCode: String, jobName: String, salaryMinId:Int, salaryMaxId:Int,isSalaryDisplay:Bool, salaryOffer: String, workPlaceCodes: [Int], companyName: String, displayPeriod: JobCardDetailDisplayPeriod, mainPicture: String, subPictures: [String], mainTitle: String, mainContents: String, prCodes: [Int], salarySample: String, recruitmentReason: String, jobDescription: String, jobExample: String, product: String, scope: String, spotTitle1: String, spotDetail1: String, spotTitle2: String, spotDetail2: String, qualification: String, betterSkill: String, applicationExample: String, suitableUnsuitable: String, employmentType: Int, salary: String, bonusAbout: String, jobtime: String, overtimeCode: Int, overtimeAbout: String, workPlace: String, transport: String, holiday: String, welfare: String, childcare: String, interviewMemo: JobCardDetailInterviewMemo, selectionProcess: JobCardDetailSelectionProcess, contactInfo: JobCardDetailContactInfo, companyDescription: JobCardDetailCompanyDescription, userFilter: UserFilterInfo) {
+    init(jobCardCode: String = "", jobName: String = "", salaryMinId:Int = 0, salaryMaxId:Int = 0,isSalaryDisplay:Bool = true, salaryOffer: String = "", workPlaceCodes: [Int] = [], companyName: String = "",
+         displayPeriod: JobCardDetailDisplayPeriod = JobCardDetailDisplayPeriod.init(startAt: "", endAt: ""), mainPicture: String = "", subPictures: [String] = [], mainTitle: String = "", mainContents: String = "",
+         prCodes: [Int] = [], salarySample: String = "", recruitmentReason: String = "", jobDescription: String = "", jobExample: String = "", product: String = "", scope: String = "",
+         spotTitle1: String = "", spotDetail1: String = "", spotTitle2: String = "", spotDetail2: String = "", qualification: String = "", betterSkill: String = "", applicationExample: String = "",
+         suitableUnsuitable: String = "", employmentType: Int = 0, salary: String = "", bonusAbout: String = "", jobtime: String = "", overtimeCode: Int = 0, overtimeAbout: String = "", workPlace: String = "",
+         transport: String = "", holiday: String = "", welfare: String = "", childcare: String = "",
+         interviewMemo: JobCardDetailInterviewMemo = JobCardDetailInterviewMemo.init(interviewContent: "", interviewPhoto1: "", interviewPhoto2: "", interviewPhoto3: ""),
+         selectionProcess: JobCardDetailSelectionProcess = JobCardDetailSelectionProcess.init(selectionProcess1: "", selectionProcess2: "", selectionProcess3: "", selectionProcess4: "", selectionProcess5: "", selectionProcessDetail: ""),
+         contactInfo: JobCardDetailContactInfo = JobCardDetailContactInfo.init(companyUrl: "", contactZipcode: "", contactAddress: "", contactPhone: "", contactPerson: "", contactMail: ""),
+         companyDescription: JobCardDetailCompanyDescription = JobCardDetailCompanyDescription.init(enterpriseContents: "", mainCustomer: "", mediaCoverage: "", established: "", employeesCount: JobCardDetailCompanyDescriptionEmployeesCount.init(count: "", averageAge: "", genderRatio: "", middleEnter: ""), capital: "", turnover: "", presidentData: JobCardDetailCompanyDescriptionPresidentData.init(presidentName: "", presidentHistory: "")),
+         userFilter: UserFilterInfo = UserFilterInfo.init(tudKeepStatus: false, tudSkipStatus: false)) {
         
         self.jobCardCode = jobCardCode
         self.jobName = jobName
