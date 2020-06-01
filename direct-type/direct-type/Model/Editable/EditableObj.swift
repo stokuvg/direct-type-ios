@@ -17,6 +17,7 @@ protocol EditItemProtocol {
     var dispName: String { get }
     var placeholder: String { get }
     var tsvMaster: SelectItemsManager.TsvMaster { get }
+    var valid: ValidInfo { get }
 }
 
 enum EditType {
@@ -136,14 +137,4 @@ class SortGrpCodeDisp: Codable {
         self.codeDisp = CodeDisp(code, disp)
     }
 }
-
-
-
-//let grp = ""
-//var arrFilter: [CodeDisp] = []
-//for item in arr {
-//    if item.grp == grp {
-//        arrFilter.append(item.codeDisp)
-//    }
-//}
 

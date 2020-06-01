@@ -59,3 +59,108 @@ extension ValidateManager {
         return (dicGrpError, dicError)
     }
 }
+
+extension EditItemMdlProfile {
+    var valid: ValidInfo {
+        switch self {
+        case .familyName:
+            return ValidInfo(required: true, min: nil, max: 8, type: .undefine)
+        case .firstName:
+            return ValidInfo(required: true, min: nil, max: 8, type: .undefine)
+        case .familyNameKana:
+            return ValidInfo(required: true, min: nil, max: 22, type: .undefine)
+        case .firstNameKana:
+            return ValidInfo(required: true, min: nil, max: 22, type: .undefine)
+        case .birthday:
+            return ValidInfo(required: true, min: nil, max: 8, type: .undefine)
+        case .gender:
+            return ValidInfo(required: true, min: nil, max: 8, type: .undefine)
+        case .zipCode:
+            return ValidInfo(required: true, min: nil, max: 8, type: .undefine)
+        case .prefecture:
+            return ValidInfo(required: true, min: nil, max: 8, type: .undefine)
+        case .address1:
+            return ValidInfo(required: true, min: nil, max: 8, type: .undefine)
+        case .address2:
+            return ValidInfo(required: true, min: nil, max: 8, type: .undefine)
+        case .mailAddress:
+            return ValidInfo(required: true, min: nil, max: 8, type: .undefine)
+        case .mobilePhoneNo:
+            return ValidInfo(required: true, min: nil, max: 8, type: .undefine)
+        }
+    }
+
+}
+
+extension EditItemMdlResume {
+    var valid: ValidInfo {
+        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+    }
+}
+extension MdlResumeSchool {
+    var valid: ValidInfo {
+        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+    }
+}
+extension EditItemMdlResumeSkillLanguage {
+    var valid: ValidInfo {
+        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+    }
+}
+extension EditItemMdlResumeLastJobExperiment {
+    var valid: ValidInfo {
+        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+    }
+}
+extension EditItemMdlResumeJobExperiments {
+    var valid: ValidInfo {
+        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+    }
+}
+extension EditItemMdlAppSmoothCareer {
+    var valid: ValidInfo {
+        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+    }
+}
+extension EditItemMdlAppSmoothCareerComponyDescription {
+    var valid: ValidInfo {
+        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+    }
+}
+extension EditItemMdlAppSmoothCareerComponyDescriptionWorkPeriod {
+    var valid: ValidInfo {
+        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+    }
+}
+extension EditItemMdlAppSmoothCareerWorkBackgroundDetail {
+    var valid: ValidInfo {
+        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+    }
+}
+extension EditItemCareerCardWorkPeriod {
+    var valid: ValidInfo {
+        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+    }
+}
+extension EditItemReqEntry {
+    var valid: ValidInfo {
+        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+    }
+}
+extension EditItemCareer {
+    var valid: ValidInfo {
+        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+    }
+}
+extension EditItemCareerCard {
+    var valid: ValidInfo {
+        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+    }
+}
+extension EditItemMdlResumeSchool {
+    var valid: ValidInfo {
+        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+    }
+}
+
+
