@@ -9,17 +9,18 @@
 import Foundation
 
 enum ValidType {
-    case undefine   //全角（特にチェックなし）
-    case katakana   //全角カタカナ
-    case email      //メールアドレス
-    case number     //半角数字
-    case ascii      //半角英数字
-    case code       //コード選択のもの
+    case undefine       //全角（特にチェックなし）
+    case hiraKataKan    //ひらカタ漢字
+    case katakana       //全角カタカナ
+    case email          //メールアドレス
+    case number         //半角数字
+    case password       //type用パスワード（＊半角英数4~20文字）
+    case code           //コード選択のもの
 }
 
 struct ValidInfo {
     var required: Bool = false //true: 必須, false: 任意
-    var keta: Int? = nil //桁数指定（一致のみOK）
+    var keta: Int? = nil //桁数指定（一致のみOK）＊桁指定、min/max指定の両方は不可
     var max: Int? = nil //最大文字長
     var type: ValidType = .undefine
 }
@@ -60,19 +61,7 @@ extension ValidateManager {
                 dicError.addDicArrVal(key: key, val: val)
             }
         }
-        //最大文字長チェック
-        for (key, vals) in subValidateMaxLengtyByKey(editableModel) {
-            for val in vals {
-                dicError.addDicArrVal(key: key, val: val)
-            }
-        }
-        //桁数チェック
-        for (key, vals) in subValidateKetaLengtyByKey(editableModel) {
-            for val in vals {
-                dicError.addDicArrVal(key: key, val: val)
-            }
-        }
-        //文字種チェック
+        //文字種＆桁数・最小〜最大文字数チェック
         for (key, vals) in subValidateTypeLengtyByKey(editableModel) {
             for val in vals {
                 dicError.addDicArrVal(key: key, val: val)
@@ -104,42 +93,6 @@ extension ValidateManager {
         return dicError
     }
     //============================================
-    class func subValidateMaxLengtyByKey(_ editableModel: EditableModel) -> [EditableItemKey: [String]] {
-        var dicError: [EditableItemKey: [String]] = [:]
-        //最大文字長チェック
-        for itemKey in editableModel.arrTextFieldNextDoneKey {
-            if let item = editableModel.getItemByKey(itemKey) {
-                let (isChange, editTemp) = editableModel.makeTempItem(item)
-                let validInfo = editTemp.editItem.valid
-                guard let max = validInfo.max else { continue }
-                if isChange {
-                    if editTemp.curVal.count > max {
-                        dicError.addDicArrVal(key: item.editableItemKey, val: "入力文字数が超過しています")
-                    }
-                }
-            }
-        }
-        return dicError
-    }
-    //============================================
-    class func subValidateKetaLengtyByKey(_ editableModel: EditableModel) -> [EditableItemKey: [String]] {
-        var dicError: [EditableItemKey: [String]] = [:]
-        //桁数チェック（指定桁数のみOKとする）
-        for itemKey in editableModel.arrTextFieldNextDoneKey {
-            if let item = editableModel.getItemByKey(itemKey) {
-                let (isChange, editTemp) = editableModel.makeTempItem(item)
-                let validInfo = editTemp.editItem.valid
-                guard let keta = validInfo.keta else { continue }
-                if isChange {
-                    if editTemp.curVal.count != keta {
-                        dicError.addDicArrVal(key: item.editableItemKey, val: "\(keta)桁の数字で入力してください")
-                    }
-                }
-            }
-        }
-        return dicError
-    }
-    //============================================
     class func subValidateTypeLengtyByKey(_ editableModel: EditableModel) -> [EditableItemKey: [String]] {
         var dicError: [EditableItemKey: [String]] = [:]
         //文字種チェック
@@ -149,21 +102,71 @@ extension ValidateManager {
                 let validInfo = editTemp.editItem.valid
                 let type = validInfo.type
                 if isChange {
+                    var regexp: String = ""
+                    var errMsg: String = ""
+
                     switch type {
+
                     case .undefine:
                         continue
-                    case .katakana:
-                        dicError.addDicArrVal(key: item.editableItemKey, val: "katakanaで入力してください")
-                    case .email:
-                        if let errMsg = chkValidTypeEmail(item) {
-                            dicError.addDicArrVal(key: item.editableItemKey, val: errMsg)
+
+                    case .hiraKataKan:
+                        if let keta = validInfo.keta {
+                            regexp = #"^[\p{Hiragana}\p{Katakana}\p{Han}]{\#(keta)}$"#
+                            errMsg = "\(keta)桁のカタカナで入力してください"
+                        } else {
+                            if let max = validInfo.max {
+                                regexp = #"^[\p{Hiragana}\p{Katakana}\p{Han}]{0,\#(max)}$"#
+                                errMsg = "入力文字数が超過しています! \(max)"
+                            } else {
+                                regexp = #"^[\p{Hiragana}\p{Katakana}\p{Han}]*$"#
+                                errMsg = "カタカナで入力してください"
+                            }
                         }
+
+                    case .katakana:
+                         if let keta = validInfo.keta {
+                            regexp = #"^\p{Katakana}{\#(keta)}$"#
+                            errMsg = "\(keta)桁のカタカナで入力してください"
+                        } else {
+                            if let max = validInfo.max {
+                                regexp = #"^\p{Katakana}{0,\#(max)}$"#
+                                errMsg = "入力文字数が超過しています! \(max)"
+                            } else {
+                                regexp = #"^\p{Katakana}*$"#
+                                errMsg = "カタカナで入力してください"
+                            }
+                        }
+
+                    case .email:
+                        regexp = #"^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"#
+                        errMsg = "メールアドレスが間違っています"
+
                     case .number:
-                        dicError.addDicArrVal(key: item.editableItemKey, val: "numberで入力してください")
-                    case .ascii:
-                        dicError.addDicArrVal(key: item.editableItemKey, val: "asciiで入力してください")
-                    case .code:
-                        dicError.addDicArrVal(key: item.editableItemKey, val: "codeで入力してください")
+                        if let keta = validInfo.keta {
+                            regexp = #"^\d{\#(keta)}$"#
+                            errMsg = "\(keta)桁の数字で入力してください"
+                        } else {
+                            if let max = validInfo.max {
+                                regexp = #"^\d{0,\#(max)}$"#
+                                errMsg = "入力文字数が超過しています"
+                            } else {
+                                regexp = #"^\d+$"#
+                                errMsg = "数字で入力してください"
+                            }
+                        }
+
+                    case .password: //type用パスワード（＊半角英数4~20文字）///^[0-9a-zA-Z]*$/
+                        regexp = #"^[0-9a-zA-Z]{4,20}$"#
+                        errMsg = "ログインできません。入力内容をご確認ください"
+
+                    case .code: //「コード」なものはチェック不要　（＊""or数値かどうかをチェックしえとく？？）
+                        continue
+
+                    } //switch type {
+                    print(#line, item.debugDisp, regexp)
+                    if chkValidErrRegex(item, regexp) {
+                        dicError.addDicArrVal(key: item.editableItemKey, val: errMsg)
                     }
                 }
             }
@@ -172,13 +175,18 @@ extension ValidateManager {
     }
     //============================================
     //============================================
-    class func chkValidTypeEmail(_ item: EditableItemH) -> String? {
+    class func chkValidErrRegex(_ item: EditableItemH, _ pattern: String) -> Bool { //エラーあったらTrue
         let text = item.curVal
         //var pattern = #"^\d{\#(keta)}$"#
-        let pattern = #"^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"#
         let regex = try! NSRegularExpression(pattern: pattern, options: [])
         let matches = regex.matches(in: text, options: [], range: NSMakeRange(0, text.count))
-        return (matches.count > 0) ? nil : "メールアドレスが間違っています"
+
+        print(#line, #function, matches.count)
+        for ma in matches {
+            print(#line, #function, ma)
+        }
+
+        return (matches.count > 0) ? false : true
     }
     //============================================
     //============================================

@@ -63,8 +63,8 @@ extension ValidateManager {
 extension EditItemMdlProfile {
     var valid: ValidInfo {
         switch self {
-        case .familyName:       return ValidInfo(required: true, keta: nil, max: 8, type: .undefine)
-        case .firstName:        return ValidInfo(required: true, keta: nil, max: 8, type: .undefine)
+        case .familyName:       return ValidInfo(required: true, keta: nil, max: 8, type: .hiraKataKan)
+        case .firstName:        return ValidInfo(required: true, keta: nil, max: 8, type: .hiraKataKan)
         case .familyNameKana:   return ValidInfo(required: true, keta: nil, max: 8, type: .katakana)
         case .firstNameKana:    return ValidInfo(required: true, keta: nil, max: 8, type: .katakana)
         case .birthday:         return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)//今日以降の誕生日を許容する？（年齢がマイナスになる）
