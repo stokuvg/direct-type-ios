@@ -38,3 +38,33 @@ extension ApiManager {
     }
 }
 //================================================================
+extension ApiManager {
+    
+    class func sendJobSkip(id: String) -> Promise<MdlJobCard>{
+        let skipRequest = CreateSkipRequestDTO.init(jobId: id)
+        SkipAPI.skipControllerCreate(body: skipRequest)
+            .done { result in
+                Log.selectLog(logLevel: .debug, "result:\(result)")
+        }.catch{ (error) in
+            
+        }.finally {
+            
+        }
+        return sendJobSkipFetch(id: id)
+    }
+    
+    private class func sendJobSkipFetch(id: String) -> Promise<MdlJobCard> {
+        let (promise, resolver) = Promise<MdlJobCard>.pending()
+        AuthManager.needAuth(true)
+        let skipRequest = CreateSkipRequestDTO.init(jobId: id)
+        SkipAPI.skipControllerCreate(body: skipRequest)
+            .done { result in
+                Log.selectLog(logLevel: .debug, "result:\(result)")
+                resolver.fulfill(MdlJobCard())
+        }.catch { (error) in
+            resolver.reject(error)
+        }.finally {
+        }
+        return promise
+    }
+}

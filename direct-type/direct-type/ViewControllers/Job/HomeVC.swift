@@ -8,6 +8,7 @@
 
 import UIKit
 import SwaggerClient
+import SVProgressHUD
 
 enum CardDispType:Int {
     case none   // 何も無い
@@ -24,7 +25,7 @@ class HomeVC: TmpNaviTopVC {
     @IBOutlet weak var homeTableView:UITableView!
     
     var masterJobCards: MdlJobCardList!
-    var dispJobCards: MdlJobCardList = MdlJobCardList.init()
+    var dispJobCards: MdlJobCardList!
     
 //    var dispTableData:[[String: Any]] = []
 //    var masterTableData:[[String:Any]] = []
@@ -58,29 +59,15 @@ class HomeVC: TmpNaviTopVC {
         homeTableView.registerNib(nibName: "JobOfferCardReloadCell", idName: "JobOfferCardReloadCell")// 全求人カード表示/更新
         
         self.makeDummyData()
-        if (masterJobCards.jobCards.count) > 0 {
-//        if masterTableData.count > 0 {
-            homeTableView.isHidden = false
-            dispType = .add
-            self.homeTableView.delegate = self
-            self.homeTableView.dataSource = self
-            self.homeTableView.reloadData()
-        } else {
-            dispType = .none
-            let cardNoView = UINib(nibName: "NoCardView", bundle: nil)
-                .instantiate(withOwner: nil, options: nil)
-                .first as! NoCardView
-            cardNoView.delegate = self
-            noCardBackView.addSubview(cardNoView)
-            
-            homeTableView.isHidden = true
-        }
+        self.dataCheckAction()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         safeAreaTop = self.view.safeAreaInsets.top
+        
+        self.getJobList()
         
         //[Dbg]___
         if Constants.DbgAutoPushVC {
@@ -117,6 +104,59 @@ class HomeVC: TmpNaviTopVC {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
+    }
+    
+    private func dataCheckAction() {
+
+        if (masterJobCards.jobCards.count) > 0 {
+//        if masterTableData.count > 0 {
+            homeTableView.isHidden = false
+            dispType = .add
+            self.homeTableView.delegate = self
+            self.homeTableView.dataSource = self
+            self.homeTableView.reloadData()
+        } else {
+            dispType = .none
+            let cardNoView = UINib(nibName: "NoCardView", bundle: nil)
+                .instantiate(withOwner: nil, options: nil)
+                .first as! NoCardView
+            cardNoView.delegate = self
+            noCardBackView.addSubview(cardNoView)
+            
+            homeTableView.isHidden = true
+        }
+    }
+    
+    private func getJobList() {
+        SVProgressHUD.show()
+        ApiManager.getJobs(Void(), isRetry: true)
+            .done { result in
+                debugLog("ApiManager getJobs result:\(result.debugDisp)")
+                
+                self.masterJobCards = result
+        }
+        .catch { (error) in
+            Log.selectLog(logLevel: .debug, "error:\(error)")
+            
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            switch myErr.code {
+                case 403:
+                    let message:String = "idTokenを取得していません"
+                    self.showConfirm(title: "通信失敗", message: message)
+                        .done { _ in
+                            
+                    }.catch { (error) in
+                        
+                    }.finally {
+                }
+                default:
+                    break
+            }
+        }
+        .finally {
+            SVProgressHUD.dismiss()
+            self.dataCheckAction()
+        }
     }
     
     private func getHomeDisplayFlag() -> Bool {
@@ -171,6 +211,15 @@ class HomeVC: TmpNaviTopVC {
                                                   skipStatus: false,
                                                   userFilter: UserFilterInfo.init(tudKeepStatus: true, tudSkipStatus: true))
         
+        let nowDateString = Date().dispYmdJP()
+        masterJobCards = MdlJobCardList.init(updateAt: nowDateString, jobCards: [
+            mdlData1,mdlData2,mdlData3,
+            mdlData1,mdlData2,mdlData3,
+            mdlData1,mdlData2,mdlData3,
+            mdlData1,mdlData2,mdlData3,
+            mdlData1,mdlData2,mdlData3,
+        ])
+        /*
         masterJobCards = MdlJobCardList.init(jobCards:
             [
                 mdlData1,mdlData2,mdlData3,
@@ -180,12 +229,12 @@ class HomeVC: TmpNaviTopVC {
                 mdlData1,mdlData2,mdlData3,
             ]
         )
+        */
         
+        dispJobCards = MdlJobCardList()
         if masterJobCards.jobCards.count > moreDataCount {
-            for i in 0..<moreDataCount {
-                let jobCardBig = masterJobCards.jobCards[i]
-                dispJobCards.jobCards.append(jobCardBig)
-            }
+            let jobCards = masterJobCards.jobCards
+            dispJobCards.jobCards = jobCards
         } else {
             for i in 0..<masterJobCards.jobCards.count {
                 let data = masterJobCards.jobCards[i]
@@ -414,15 +463,41 @@ extension HomeVC: BaseJobCardCellDelegate {
         
         let row = tag
         
-        // TODO:通信処理
-        
-        //            return (jobCardsCount + 1)
-        self.dispJobCards.jobCards.remove(at: row)
-        
-        let deleteIndex = IndexPath(row: row, section: 0)
-        
-        // TODO:スピードを変えるのは難しい？
-        self.homeTableView.deleteRows(at: [deleteIndex], with: .automatic)
+        let jobCard = dispJobCards.jobCards[row]
+        let jobId = jobCard.jobCardCode
+        ApiManager.sendJobSkip(id: jobId)
+            .done { result in
+            Log.selectLog(logLevel: .debug, "skip send success")
+                Log.selectLog(logLevel: .debug, "見送り成功")
+                // TODO:通信処理
+                
+                //            return (jobCardsCount + 1)
+                self.dispJobCards.jobCards.remove(at: row)
+                
+                let deleteIndex = IndexPath(row: row, section: 0)
+                
+                // TODO:スピードを変えるのは難しい？
+                self.homeTableView.deleteRows(at: [deleteIndex], with: .automatic)
+        }.catch{ (error) in
+            Log.selectLog(logLevel: .debug, "skip send error:\(error)")
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            switch myErr.code {
+            case 404:
+                let message: String = ""
+                self.showConfirm(title: "", message: message)
+                .done { _ in
+                    Log.selectLog(logLevel: .debug, "対応方法の確認")
+                }
+                .catch { (error) in
+                }
+                .finally {
+                }
+            default: break
+            }
+            self.showError(error)
+        }.finally {
+            Log.selectLog(logLevel: .debug, "skip send finally")
+        }
     }
     
     func keepAction(tag: Int) {
