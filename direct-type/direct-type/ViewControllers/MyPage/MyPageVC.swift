@@ -12,32 +12,6 @@ import UIKit
 class MyPageVC: TmpNaviTopVC {
     
     @IBOutlet weak var pageTableView:UITableView!
-
-    //=== ダミーで定義しています
-    //プロフィール
-    @IBOutlet weak var btnButton01: UIButton!
-    @IBAction func actButton01(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "Preview", bundle: nil)
-        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ProfilePreviewVC") as? ProfilePreviewVC{
-            self.navigationController?.pushViewController(nvc, animated: true)
-        }
-    }
-    //履歴書
-    @IBOutlet weak var btnButton02: UIButton!
-    @IBAction func actButton02(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "Preview", bundle: nil)
-        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ResumePreviewVC") as? ResumePreviewVC{
-            self.navigationController?.pushViewController(nvc, animated: true)
-        }
-    }
-    //職務経歴書・スキルシート
-    @IBOutlet weak var btnButton03: UIButton!
-    @IBAction func actButton03(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "Preview", bundle: nil)
-        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_CareerPreviewVC") as? CareerPreviewVC{
-            self.navigationController?.pushViewController(nvc, animated: true)
-        }
-    }
     //さくさく職歴書
     @IBOutlet weak var btnButton04: UIButton!
     @IBAction func actButton04(_ sender: UIButton) {
@@ -78,16 +52,15 @@ class MyPageVC: TmpNaviTopVC {
         // スカウト MVPでは外す
         
         self.pageTableView.registerNib(nibName: "MyPageCarrerStartCell", idName: "MyPageCarrerStartCell") // 職務経歴
+        self.pageTableView.registerNib(nibName: "MyPageEditedCarrerCell", idName: "MyPageEditedCarrerCell")
+        
         self.pageTableView.registerNib(nibName: "MyPageChemistryStartCell", idName: "MyPageChemistryStartCell") // 相性診断
+        self.pageTableView.registerNib(nibName: "MyPageEditedChemistryCell", idName: "MyPageEditedChemistryCell")
         
         self.pageTableView.registerNib(nibName: "MyPageSettingCell", idName: "MyPageSettingCell") // 設定
         
-        btnButton01.setTitle("プロフィール", for: .normal)
-        btnButton02.setTitle("履歴書", for: .normal)
-        btnButton03.setTitle("職務経歴書・スキルシート", for: .normal)
-        btnButton04.setTitle("さくさく職歴書", for: .normal)
-        btnButton05.setTitle("認証", for: .normal)
-        btnButton06.setTitle("API [Get] /jobs", for: .normal)
+//        btnButton05.setTitle("認証", for: .normal)
+//        btnButton06.setTitle("API [Get] /jobs", for: .normal)
     }
 }
 
@@ -121,6 +94,9 @@ extension MyPageVC: UITableViewDelegate {
             case 1:
                 return 15
             case 2:
+                if carrerFlag && chemistryFlag {
+                    return 0
+                }
                 return 15
             default:
                 return 0
@@ -153,9 +129,9 @@ extension MyPageVC: UITableViewDelegate {
             case (0,_):
                 return 68
             case (1,0):
-                return carrerFlag ? 68 : 205
+                return carrerFlag ? 47 : 205
             case (2,0):
-                return chemistryFlag ? 68 : 205
+                return chemistryFlag ? 47 : 205
             case (3,_):
                 return 50
             default:
@@ -219,7 +195,8 @@ extension MyPageVC: UITableViewDataSource {
                 return cell
             case (1,0):
                 if carrerFlag {
-                    return UITableViewCell()
+                    let cell = tableView.loadCell(cellName: "MyPageEditedCarrerCell", indexPath: indexPath) as! MyPageEditedCarrerCell
+                    return cell
                 } else {
                     let cell = tableView.loadCell(cellName: "MyPageCarrerStartCell", indexPath: indexPath) as! MyPageCarrerStartCell
                     cell.delegate = self
@@ -227,7 +204,8 @@ extension MyPageVC: UITableViewDataSource {
                 }
             case (2,0):
                 if chemistryFlag {
-                    return UITableViewCell()
+                    let cell = tableView.loadCell(cellName: "MyPageEditedChemistryCell", indexPath: indexPath) as! MyPageEditedChemistryCell
+                    return cell
                 } else {
                     let cell = tableView.loadCell(cellName: "MyPageChemistryStartCell", indexPath: indexPath) as! MyPageChemistryStartCell
                     cell.delegate = self
@@ -268,8 +246,17 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
     
     // 画面遷移
     func registCarrerAction() {
+        // 職歴書
+        /*
         let storyboard = UIStoryboard(name: "Preview", bundle: nil)
         if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_CareerPreviewVC") as? CareerPreviewVC{
+            self.navigationController?.pushViewController(nvc, animated: true)
+        }
+        */
+        
+        // サクサク
+        let storyboard = UIStoryboard(name: "Preview", bundle: nil)
+        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SmoothCareerPreviewVC") as? SmoothCareerPreviewVC{
             self.navigationController?.pushViewController(nvc, animated: true)
         }
     }

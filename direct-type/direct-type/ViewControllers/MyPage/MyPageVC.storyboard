@@ -17,59 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[H-1]マイページのダミー" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQu-DF-j36">
-                                <rect key="frame" x="7" y="7" width="306" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="3jc-nH-ez8">
-                                <rect key="frame" x="7" y="34.5" width="306" height="526.5"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KIB-j9-wIu">
-                                        <rect key="frame" x="0.0" y="0.0" width="306" height="88"/>
-                                        <state key="normal" title="プロフィール"/>
-                                        <connections>
-                                            <action selector="actButton01:" destination="AEi-ts-bdm" eventType="touchUpInside" id="BUJ-i9-7Tr"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GMn-2f-Oss">
-                                        <rect key="frame" x="0.0" y="88" width="306" height="87.5"/>
-                                        <state key="normal" title="履歴書"/>
-                                        <connections>
-                                            <action selector="actButton02:" destination="AEi-ts-bdm" eventType="touchUpInside" id="o1X-wn-zih"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6DQ-iO-axa">
-                                        <rect key="frame" x="0.0" y="175.5" width="306" height="88"/>
-                                        <state key="normal" title="職務経歴書・スキルシート"/>
-                                        <connections>
-                                            <action selector="actButton03:" destination="AEi-ts-bdm" eventType="touchUpInside" id="Ajx-cU-H6N"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vdW-Qy-b6a">
-                                        <rect key="frame" x="0.0" y="263.5" width="306" height="87.5"/>
-                                        <state key="normal" title="さくさく職歴書"/>
-                                        <connections>
-                                            <action selector="actButton04:" destination="AEi-ts-bdm" eventType="touchUpInside" id="aff-jW-CWX"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vRS-Oe-8No">
-                                        <rect key="frame" x="0.0" y="351" width="306" height="88"/>
-                                        <state key="normal" title="Button"/>
-                                        <connections>
-                                            <action selector="actButton05:" destination="AEi-ts-bdm" eventType="touchUpInside" id="pjI-u3-Qp5"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rNx-Fe-w7y">
-                                        <rect key="frame" x="0.0" y="439" width="306" height="87.5"/>
-                                        <state key="normal" title="Button"/>
-                                        <connections>
-                                            <action selector="actButton06:" destination="AEi-ts-bdm" eventType="touchUpInside" id="06q-h1-3Qg"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AqG-Oh-Z76">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="567"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -89,30 +36,17 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="3jc-nH-ez8" firstAttribute="top" secondItem="BQu-DF-j36" secondAttribute="bottom" constant="7" id="1Kr-KR-g0S"/>
                             <constraint firstItem="AqG-Oh-Z76" firstAttribute="top" secondItem="fam-Ox-1va" secondAttribute="top" id="5lE-Hc-Szl"/>
-                            <constraint firstItem="fam-Ox-1va" firstAttribute="trailing" secondItem="3jc-nH-ez8" secondAttribute="trailing" constant="7" id="EUn-hO-YyB"/>
                             <constraint firstItem="AqG-Oh-Z76" firstAttribute="trailing" secondItem="fam-Ox-1va" secondAttribute="trailing" id="Gkc-6H-UfG"/>
-                            <constraint firstItem="fam-Ox-1va" firstAttribute="bottom" secondItem="3jc-nH-ez8" secondAttribute="bottom" constant="7" id="HlC-WC-aKr"/>
                             <constraint firstItem="fam-Ox-1va" firstAttribute="bottom" secondItem="gFb-Ba-60T" secondAttribute="bottom" id="KEb-rL-Igh"/>
                             <constraint firstItem="gFb-Ba-60T" firstAttribute="top" secondItem="AqG-Oh-Z76" secondAttribute="bottom" id="LgY-mh-evE"/>
                             <constraint firstItem="fam-Ox-1va" firstAttribute="trailing" secondItem="gFb-Ba-60T" secondAttribute="trailing" id="Y3i-cf-VlN"/>
-                            <constraint firstItem="fam-Ox-1va" firstAttribute="trailing" secondItem="BQu-DF-j36" secondAttribute="trailing" constant="7" id="kL7-dj-y3k"/>
-                            <constraint firstItem="BQu-DF-j36" firstAttribute="leading" secondItem="fam-Ox-1va" secondAttribute="leading" constant="7" id="nmI-1N-AEa"/>
-                            <constraint firstItem="BQu-DF-j36" firstAttribute="top" secondItem="fam-Ox-1va" secondAttribute="top" constant="7" id="pC0-Sg-KEN"/>
                             <constraint firstItem="gFb-Ba-60T" firstAttribute="leading" secondItem="fam-Ox-1va" secondAttribute="leading" id="uit-8y-xwo"/>
                             <constraint firstItem="AqG-Oh-Z76" firstAttribute="leading" secondItem="fam-Ox-1va" secondAttribute="leading" id="vnQ-v5-qSG"/>
-                            <constraint firstItem="3jc-nH-ez8" firstAttribute="leading" secondItem="fam-Ox-1va" secondAttribute="leading" constant="7" id="wxq-je-EJh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fam-Ox-1va"/>
                     </view>
                     <connections>
-                        <outlet property="btnButton01" destination="KIB-j9-wIu" id="6mR-29-wFv"/>
-                        <outlet property="btnButton02" destination="GMn-2f-Oss" id="Eto-3v-DWC"/>
-                        <outlet property="btnButton03" destination="6DQ-iO-axa" id="1M0-5j-gNA"/>
-                        <outlet property="btnButton04" destination="vdW-Qy-b6a" id="T0D-DX-tEl"/>
-                        <outlet property="btnButton05" destination="vRS-Oe-8No" id="Km6-gv-Zd0"/>
-                        <outlet property="btnButton06" destination="rNx-Fe-w7y" id="ryn-wB-gcf"/>
                         <outlet property="pageTableView" destination="AqG-Oh-Z76" id="Dmp-dU-EDV"/>
                     </connections>
                 </viewController>

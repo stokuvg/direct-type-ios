@@ -143,6 +143,10 @@
 		06FFA0012484D6850085A3D9 /* MyPageChemistryStartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FF9FFF2484D6850085A3D9 /* MyPageChemistryStartCell.swift */; };
 		06FFA0022484D6850085A3D9 /* MyPageChemistryStartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06FFA0002484D6850085A3D9 /* MyPageChemistryStartCell.xib */; };
 		06FFA0042484E1760085A3D9 /* SettingVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06FFA0032484E1760085A3D9 /* SettingVC.storyboard */; };
+		06FFA0072484E6560085A3D9 /* MyPageEditedCarrerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FFA0052484E6560085A3D9 /* MyPageEditedCarrerCell.swift */; };
+		06FFA0082484E6560085A3D9 /* MyPageEditedCarrerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06FFA0062484E6560085A3D9 /* MyPageEditedCarrerCell.xib */; };
+		06FFA00B2484E66C0085A3D9 /* MyPageEditedChemistryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FFA0092484E66C0085A3D9 /* MyPageEditedChemistryCell.swift */; };
+		06FFA00C2484E66C0085A3D9 /* MyPageEditedChemistryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06FFA00A2484E66C0085A3D9 /* MyPageEditedChemistryCell.xib */; };
 		260BBFDC2465171D003D163A /* MdlProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260BBFDB2465171D003D163A /* MdlProfile.swift */; };
 		260BBFE024651732003D163A /* HPreviewTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260BBFDD24651732003D163A /* HPreviewTBCell.swift */; };
 		260BBFE124651732003D163A /* Preview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 260BBFDE24651732003D163A /* Preview.storyboard */; };
@@ -374,6 +378,10 @@
 		06FF9FFF2484D6850085A3D9 /* MyPageChemistryStartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageChemistryStartCell.swift; sourceTree = "<group>"; };
 		06FFA0002484D6850085A3D9 /* MyPageChemistryStartCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyPageChemistryStartCell.xib; sourceTree = "<group>"; };
 		06FFA0032484E1760085A3D9 /* SettingVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingVC.storyboard; sourceTree = "<group>"; };
+		06FFA0052484E6560085A3D9 /* MyPageEditedCarrerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageEditedCarrerCell.swift; sourceTree = "<group>"; };
+		06FFA0062484E6560085A3D9 /* MyPageEditedCarrerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyPageEditedCarrerCell.xib; sourceTree = "<group>"; };
+		06FFA0092484E66C0085A3D9 /* MyPageEditedChemistryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageEditedChemistryCell.swift; sourceTree = "<group>"; };
+		06FFA00A2484E66C0085A3D9 /* MyPageEditedChemistryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyPageEditedChemistryCell.xib; sourceTree = "<group>"; };
 		260BBFDB2465171D003D163A /* MdlProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MdlProfile.swift; sourceTree = "<group>"; };
 		260BBFDD24651732003D163A /* HPreviewTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HPreviewTBCell.swift; sourceTree = "<group>"; };
 		260BBFDE24651732003D163A /* Preview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preview.storyboard; sourceTree = "<group>"; };
@@ -677,6 +685,10 @@
 				06AA8C632484D2DA001733FA /* MyPageCarrerStartCell.xib */,
 				06FF9FFF2484D6850085A3D9 /* MyPageChemistryStartCell.swift */,
 				06FFA0002484D6850085A3D9 /* MyPageChemistryStartCell.xib */,
+				06FFA0052484E6560085A3D9 /* MyPageEditedCarrerCell.swift */,
+				06FFA0062484E6560085A3D9 /* MyPageEditedCarrerCell.xib */,
+				06FFA0092484E66C0085A3D9 /* MyPageEditedChemistryCell.swift */,
+				06FFA00A2484E66C0085A3D9 /* MyPageEditedChemistryCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1109,6 +1121,7 @@
 				068FFAA324725F4B0083E130 /* JobDetailFooterApplicationCell.xib in Resources */,
 				066BC829246CF40C00FE607F /* JobDetailItemAttentionView.xib in Resources */,
 				06BE18F82484A15900FAE476 /* MyPageSettingCell.xib in Resources */,
+				06FFA00C2484E66C0085A3D9 /* MyPageEditedChemistryCell.xib in Resources */,
 				066763782457B0A700AC5039 /* KeepListVC.storyboard in Resources */,
 				26BF48E624639D2B00E00215 /* MstK8_qualification.tsv in Resources */,
 				26BF48E424639D2B00E00215 /* MstL2_prCode.tsv in Resources */,
@@ -1157,6 +1170,7 @@
 				066B2D872468DD0D00355E03 /* JobOfferCardReloadCell.xib in Resources */,
 				064EF6FC24654FDB00853ADD /* JobDetailArticleCell.xib in Resources */,
 				26BF48DD24639D2B00E00215 /* MstK25_gender.tsv in Resources */,
+				06FFA0082484E6560085A3D9 /* MyPageEditedCarrerCell.xib in Resources */,
 				06FFA0042484E1760085A3D9 /* SettingVC.storyboard in Resources */,
 				066CC17E24735DE6009A123A /* JobDetailTextView.xib in Resources */,
 			);
@@ -1270,6 +1284,7 @@
 				06E519A42457DC7B004E4B7A /* InitialInputCompleteVC.swift in Sources */,
 				0667636C2457B02200AC5039 /* KeepListVC.swift in Sources */,
 				26B491DE247E394900B58AD4 /* ApiManager+Jobs.swift in Sources */,
+				06FFA0072484E6560085A3D9 /* MyPageEditedCarrerCell.swift in Sources */,
 				068501802473CE43009770A3 /* HomeTitleView.swift in Sources */,
 				06E5198A2457D6C1004E4B7A /* JobOfferDetailVC.swift in Sources */,
 				26F2A827246D23800037D47F /* MdlResumeSkillLanguage.swift in Sources */,
@@ -1329,6 +1344,7 @@
 				066EF6C8245BBA1100E15AD2 /* BaseJobCardCell.swift in Sources */,
 				26F2A82B246D2EE90037D47F /* EditableTableBasicVC.swift in Sources */,
 				06E519B7245814D4004E4B7A /* SubEditBaseVC.swift in Sources */,
+				06FFA00B2484E66C0085A3D9 /* MyPageEditedChemistryCell.swift in Sources */,
 				06E519AB245813CA004E4B7A /* InitialInputListVC.swift in Sources */,
 				066BD9EC2456B3A2009E610B /* R.generated.swift in Sources */,
 				0645DE02246BB6A100592572 /* JobDetailSalaryExampleCell.swift in Sources */,

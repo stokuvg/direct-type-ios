@@ -1117,7 +1117,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 38 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 40 nibs.
   struct nib {
     /// Nib `BasePercentageCompletionCell`.
     static let basePercentageCompletionCell = _R.nib._BasePercentageCompletionCell()
@@ -1181,6 +1181,10 @@ struct R: Rswift.Validatable {
     static let myPageCarrerStartCell = _R.nib._MyPageCarrerStartCell()
     /// Nib `MyPageChemistryStartCell`.
     static let myPageChemistryStartCell = _R.nib._MyPageChemistryStartCell()
+    /// Nib `MyPageEditedCarrerCell`.
+    static let myPageEditedCarrerCell = _R.nib._MyPageEditedCarrerCell()
+    /// Nib `MyPageEditedChemistryCell`.
+    static let myPageEditedChemistryCell = _R.nib._MyPageEditedChemistryCell()
     /// Nib `MyPageNameCell`.
     static let myPageNameCell = _R.nib._MyPageNameCell()
     /// Nib `MyPageSettingCell`.
@@ -1445,6 +1449,22 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
+    /// `UINib(name: "MyPageEditedCarrerCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.myPageEditedCarrerCell) instead")
+    static func myPageEditedCarrerCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.myPageEditedCarrerCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "MyPageEditedChemistryCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.myPageEditedChemistryCell) instead")
+    static func myPageEditedChemistryCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.myPageEditedChemistryCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
     /// `UINib(name: "MyPageNameCell", in: bundle)`
     @available(*, deprecated, message: "Use UINib(resource: R.nib.myPageNameCell) instead")
     static func myPageNameCell(_: Void = ()) -> UIKit.UINib {
@@ -1624,6 +1644,14 @@ struct R: Rswift.Validatable {
       return R.nib.myPageChemistryStartCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? MyPageChemistryStartCell
     }
 
+    static func myPageEditedCarrerCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> MyPageEditedCarrerCell? {
+      return R.nib.myPageEditedCarrerCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? MyPageEditedCarrerCell
+    }
+
+    static func myPageEditedChemistryCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> MyPageEditedChemistryCell? {
+      return R.nib.myPageEditedChemistryCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? MyPageEditedChemistryCell
+    }
+
     static func myPageNameCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> MyPageNameCell? {
       return R.nib.myPageNameCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? MyPageNameCell
     }
@@ -1709,6 +1737,8 @@ struct _R: Rswift.Validatable {
       try _KeepCardCell.validate()
       try _MyPageCarrerStartCell.validate()
       try _MyPageChemistryStartCell.validate()
+      try _MyPageEditedCarrerCell.validate()
+      try _MyPageEditedChemistryCell.validate()
       try _MyPageNameCell.validate()
       try _MyPageSettingCell.validate()
       try _NoCardView.validate()
@@ -2147,6 +2177,44 @@ struct _R: Rswift.Validatable {
           if UIKit.UIColor(named: "color-base", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-base' is used in storyboard 'MyPageChemistryStartCell', but couldn't be loaded.") }
           if UIKit.UIColor(named: "color-button", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-button' is used in storyboard 'MyPageChemistryStartCell', but couldn't be loaded.") }
           if UIKit.UIColor(named: "color-white", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-white' is used in storyboard 'MyPageChemistryStartCell', but couldn't be loaded.") }
+        }
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _MyPageEditedCarrerCell: Rswift.NibResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "MyPageEditedCarrerCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> MyPageEditedCarrerCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? MyPageEditedCarrerCell
+      }
+
+      static func validate() throws {
+        if UIKit.UIImage(named: "ar", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'ar' is used in nib 'MyPageEditedCarrerCell', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "resumeSelected", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'resumeSelected' is used in nib 'MyPageEditedCarrerCell', but couldn't be loaded.") }
+        if #available(iOS 11.0, tvOS 11.0, *) {
+          if UIKit.UIColor(named: "color-white", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-white' is used in storyboard 'MyPageEditedCarrerCell', but couldn't be loaded.") }
+        }
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _MyPageEditedChemistryCell: Rswift.NibResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "MyPageEditedChemistryCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> MyPageEditedChemistryCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? MyPageEditedChemistryCell
+      }
+
+      static func validate() throws {
+        if UIKit.UIImage(named: "ar", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'ar' is used in nib 'MyPageEditedChemistryCell', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "diagnosisSelected", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'diagnosisSelected' is used in nib 'MyPageEditedChemistryCell', but couldn't be loaded.") }
+        if #available(iOS 11.0, tvOS 11.0, *) {
+          if UIKit.UIColor(named: "color-white", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-white' is used in storyboard 'MyPageEditedChemistryCell', but couldn't be loaded.") }
         }
       }
 
