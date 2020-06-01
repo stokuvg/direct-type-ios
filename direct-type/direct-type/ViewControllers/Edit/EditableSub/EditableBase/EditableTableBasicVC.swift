@@ -30,10 +30,10 @@ class EditableTableBasicVC: EditableBasicVC {
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
         ValidateManager.dbgDispCurrentItems(editableModel: editableModel) //[Dbg: 状態確認]
-//        if chkValidateError() {
-//            tableVW.reloadData()
-//            return
-//        }
+        if chkValidateError() {
+            tableVW.reloadData()
+            return
+        }
         //編集画面でのeditTempCDを、そのまま前の画面に渡しても良い気がする
         self.delegate?.changedSelect(editItem: itemGrp, editTempCD: editableModel.editTempCD) //フィードバックしておく
         self.dismiss(animated: true) {}
@@ -52,10 +52,11 @@ class EditableTableBasicVC: EditableBasicVC {
                     dicValidErrMsg.addDicArrVal(key: key, val: err)
                 }
                 let name = editableModel.getItemByKey(key)?.dispName ?? ""
-                msg = "\(msg)\(name): \(errs.joined(separator: "\n"))\n"
+//                msg = "\(msg)\(name): \(errs.joined(separator: "\n"))\n"
+                msg = "\(msg)\(errs.joined(separator: "\n"))\n"
             }
-            self.showConfirm(title: "Validationエラー (\(chkErr.count)件)", message: msg)
-            /* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
+            self.showValidationError(title: "Validationエラー (\(chkErr.count)件)", message: msg)
+//            /* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
             return true
         } else {
             return false

@@ -5,6 +5,18 @@
 //  Created by ms-mb014 on 2020/05/28.
 //  Copyright © 2020 ms-mb015. All rights reserved.
 //
+enum ValidType {
+    case undefine
+    case number
+    case ascii
+}
+
+struct ValidInfo {
+    var required: Bool = false //true: 必須, false: 任意
+    var min: Int? = nil //最小文字長
+    var max: Int? = nil //最大文字長
+    var type: ValidType = .undefine
+}
 
 final public class ValidateManager {
     public static let shared = ValidateManager()
@@ -42,6 +54,12 @@ extension ValidateManager {
                 dicError.addDicArrVal(key: key, val: val)
             }
         }
+        //最大文字長チェック
+        for (key, vals) in subValidateMaxLengtyByKey(editableModel) {
+            for val in vals {
+                dicError.addDicArrVal(key: key, val: val)
+            }
+        }
         return dicError
     }
     //============================================
@@ -53,7 +71,7 @@ extension ValidateManager {
                 let (isChange, editTemp) = editableModel.makeTempItem(item)
                 if isChange {
                     if editTemp.curVal == "" {
-                        dicError.addDicArrVal(key: item.editableItemKey, val: "\(item.dispName)は必須項目です")
+                        dicError.addDicArrVal(key: item.editableItemKey, val: "「\(item.dispName)」は必須項目です")
                     }
                 }
             }
@@ -61,6 +79,22 @@ extension ValidateManager {
         return dicError
     }
     //============================================
+    class func subValidateMaxLengtyByKey(_ editableModel: EditableModel) -> [EditableItemKey: [String]] {
+        var dicError: [EditableItemKey: [String]] = [:]
+        //最大文字長チェック
+        for itemKey in editableModel.arrTextFieldNextDoneKey {
+            if let item = editableModel.getItemByKey(itemKey) {
+                let (isChange, editTemp) = editableModel.makeTempItem(item)
+                if isChange {
+                    let max: Int = 8
+                    if editTemp.curVal.count > max {
+                        dicError.addDicArrVal(key: item.editableItemKey, val: "「\(item.dispName)」は\(max)文字までです")
+                    }
+                }
+            }
+        }
+        return dicError
+    }
     //============================================
     //============================================
     
