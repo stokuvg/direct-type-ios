@@ -89,7 +89,7 @@ struct R: Rswift.Validatable {
   }
 
   #if os(iOS) || os(tvOS)
-  /// This `R.storyboard` struct is generated, and contains static references to 13 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 14 storyboards.
   struct storyboard {
     /// Storyboard `Auth`.
     static let auth = _R.storyboard.auth()
@@ -115,6 +115,8 @@ struct R: Rswift.Validatable {
     static let myPageVC = _R.storyboard.myPageVC()
     /// Storyboard `Preview`.
     static let preview = _R.storyboard.preview()
+    /// Storyboard `SettingVC`.
+    static let settingVC = _R.storyboard.settingVC()
     /// Storyboard `SplashVC`.
     static let splashVC = _R.storyboard.splashVC()
 
@@ -203,6 +205,13 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "SettingVC", bundle: ...)`
+    static func settingVC(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.settingVC)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
     /// `UIStoryboard(name: "SplashVC", bundle: ...)`
     static func splashVC(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.splashVC)
@@ -213,7 +222,7 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.color` struct is generated, and contains static references to 12 colors.
+  /// This `R.color` struct is generated, and contains static references to 13 colors.
   struct color {
     /// Color `color-alart`.
     static let colorAlart = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-alart")
@@ -237,6 +246,8 @@ struct R: Rswift.Validatable {
     static let colorSub2 = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-sub2")
     /// Color `color-sub`.
     static let colorSub = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-sub")
+    /// Color `color-tab-line`.
+    static let colorTabLine = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-tab-line")
     /// Color `color-white`.
     static let colorWhite = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-white")
 
@@ -336,6 +347,15 @@ struct R: Rswift.Validatable {
     @available(iOS 11.0, *)
     static func colorSub2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
       return UIKit.UIColor(resource: R.color.colorSub2, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "color-tab-line", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorTabLine(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorTabLine, compatibleWith: traitCollection)
     }
     #endif
 
@@ -1097,8 +1117,10 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 33 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 38 nibs.
   struct nib {
+    /// Nib `BasePercentageCompletionCell`.
+    static let basePercentageCompletionCell = _R.nib._BasePercentageCompletionCell()
     /// Nib `HEditDrumTBCell`.
     static let hEditDrumTBCell = _R.nib._HEditDrumTBCell()
     /// Nib `HEditTextTBCell`.
@@ -1155,6 +1177,14 @@ struct R: Rswift.Validatable {
     static let jobOfferCardReloadCell = _R.nib._JobOfferCardReloadCell()
     /// Nib `KeepCardCell`.
     static let keepCardCell = _R.nib._KeepCardCell()
+    /// Nib `MyPageCarrerStartCell`.
+    static let myPageCarrerStartCell = _R.nib._MyPageCarrerStartCell()
+    /// Nib `MyPageChemistryStartCell`.
+    static let myPageChemistryStartCell = _R.nib._MyPageChemistryStartCell()
+    /// Nib `MyPageNameCell`.
+    static let myPageNameCell = _R.nib._MyPageNameCell()
+    /// Nib `MyPageSettingCell`.
+    static let myPageSettingCell = _R.nib._MyPageSettingCell()
     /// Nib `NaviButtonsView`.
     static let naviButtonsView = _R.nib._NaviButtonsView()
     /// Nib `NoCardView`.
@@ -1165,6 +1195,14 @@ struct R: Rswift.Validatable {
     static let subSelectSyouTBCell = _R.nib._SubSelectSyouTBCell()
     /// Nib `SubSelectTBCell`.
     static let subSelectTBCell = _R.nib._SubSelectTBCell()
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "BasePercentageCompletionCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.basePercentageCompletionCell) instead")
+    static func basePercentageCompletionCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.basePercentageCompletionCell)
+    }
+    #endif
 
     #if os(iOS) || os(tvOS)
     /// `UINib(name: "HEditDrumTBCell", in: bundle)`
@@ -1391,6 +1429,38 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
+    /// `UINib(name: "MyPageCarrerStartCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.myPageCarrerStartCell) instead")
+    static func myPageCarrerStartCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.myPageCarrerStartCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "MyPageChemistryStartCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.myPageChemistryStartCell) instead")
+    static func myPageChemistryStartCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.myPageChemistryStartCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "MyPageNameCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.myPageNameCell) instead")
+    static func myPageNameCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.myPageNameCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "MyPageSettingCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.myPageSettingCell) instead")
+    static func myPageSettingCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.myPageSettingCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
     /// `UINib(name: "NaviButtonsView", in: bundle)`
     @available(*, deprecated, message: "Use UINib(resource: R.nib.naviButtonsView) instead")
     static func naviButtonsView(_: Void = ()) -> UIKit.UINib {
@@ -1429,6 +1499,10 @@ struct R: Rswift.Validatable {
       return UIKit.UINib(resource: R.nib.subSelectTBCell)
     }
     #endif
+
+    static func basePercentageCompletionCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> BasePercentageCompletionCell? {
+      return R.nib.basePercentageCompletionCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? BasePercentageCompletionCell
+    }
 
     static func hEditDrumTBCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HEditDrumTBCell? {
       return R.nib.hEditDrumTBCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HEditDrumTBCell
@@ -1542,6 +1616,22 @@ struct R: Rswift.Validatable {
       return R.nib.keepCardCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? KeepCardCell
     }
 
+    static func myPageCarrerStartCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> MyPageCarrerStartCell? {
+      return R.nib.myPageCarrerStartCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? MyPageCarrerStartCell
+    }
+
+    static func myPageChemistryStartCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> MyPageChemistryStartCell? {
+      return R.nib.myPageChemistryStartCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? MyPageChemistryStartCell
+    }
+
+    static func myPageNameCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> MyPageNameCell? {
+      return R.nib.myPageNameCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? MyPageNameCell
+    }
+
+    static func myPageSettingCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> MyPageSettingCell? {
+      return R.nib.myPageSettingCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? MyPageSettingCell
+    }
+
     static func naviButtonsView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> NaviButtonsView? {
       return R.nib.naviButtonsView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? NaviButtonsView
     }
@@ -1611,12 +1701,37 @@ struct _R: Rswift.Validatable {
   #if os(iOS) || os(tvOS)
   struct nib: Rswift.Validatable {
     static func validate() throws {
+      try _BasePercentageCompletionCell.validate()
       try _JobDetailDataCell.validate()
       try _JobDetailFooterApplicationCell.validate()
       try _JobDetailItemCell.validate()
       try _JobOfferBigCardCell.validate()
       try _KeepCardCell.validate()
+      try _MyPageCarrerStartCell.validate()
+      try _MyPageChemistryStartCell.validate()
+      try _MyPageNameCell.validate()
+      try _MyPageSettingCell.validate()
       try _NoCardView.validate()
+    }
+
+    struct _BasePercentageCompletionCell: Rswift.NibResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "BasePercentageCompletionCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> BasePercentageCompletionCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? BasePercentageCompletionCell
+      }
+
+      static func validate() throws {
+        if UIKit.UIImage(named: "editSelected", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'editSelected' is used in nib 'BasePercentageCompletionCell', but couldn't be loaded.") }
+        if #available(iOS 11.0, tvOS 11.0, *) {
+          if UIKit.UIColor(named: "color-slider-gray", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-slider-gray' is used in storyboard 'BasePercentageCompletionCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "color-slider-sub", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-slider-sub' is used in storyboard 'BasePercentageCompletionCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "color-white", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-white' is used in storyboard 'BasePercentageCompletionCell', but couldn't be loaded.") }
+        }
+      }
+
+      fileprivate init() {}
     }
 
     struct _HEditDrumTBCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
@@ -1998,6 +2113,82 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
 
+    struct _MyPageCarrerStartCell: Rswift.NibResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "MyPageCarrerStartCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> MyPageCarrerStartCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? MyPageCarrerStartCell
+      }
+
+      static func validate() throws {
+        if UIKit.UIImage(named: "resume_gray", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'resume_gray' is used in nib 'MyPageCarrerStartCell', but couldn't be loaded.") }
+        if #available(iOS 11.0, tvOS 11.0, *) {
+          if UIKit.UIColor(named: "color-base", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-base' is used in storyboard 'MyPageCarrerStartCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "color-button", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-button' is used in storyboard 'MyPageCarrerStartCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "color-white", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-white' is used in storyboard 'MyPageCarrerStartCell', but couldn't be loaded.") }
+        }
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _MyPageChemistryStartCell: Rswift.NibResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "MyPageChemistryStartCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> MyPageChemistryStartCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? MyPageChemistryStartCell
+      }
+
+      static func validate() throws {
+        if UIKit.UIImage(named: "diagnosis_gray", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'diagnosis_gray' is used in nib 'MyPageChemistryStartCell', but couldn't be loaded.") }
+        if #available(iOS 11.0, tvOS 11.0, *) {
+          if UIKit.UIColor(named: "color-base", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-base' is used in storyboard 'MyPageChemistryStartCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "color-button", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-button' is used in storyboard 'MyPageChemistryStartCell', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "color-white", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-white' is used in storyboard 'MyPageChemistryStartCell', but couldn't be loaded.") }
+        }
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _MyPageNameCell: Rswift.NibResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "MyPageNameCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> MyPageNameCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? MyPageNameCell
+      }
+
+      static func validate() throws {
+        if UIKit.UIImage(named: "editSelected", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'editSelected' is used in nib 'MyPageNameCell', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "mypageDefault_GN", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'mypageDefault_GN' is used in nib 'MyPageNameCell', but couldn't be loaded.") }
+        if #available(iOS 11.0, tvOS 11.0, *) {
+          if UIKit.UIColor(named: "color-line", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-line' is used in storyboard 'MyPageNameCell', but couldn't be loaded.") }
+        }
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _MyPageSettingCell: Rswift.NibResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "MyPageSettingCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> MyPageSettingCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? MyPageSettingCell
+      }
+
+      static func validate() throws {
+        if UIKit.UIImage(named: "ar", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'ar' is used in nib 'MyPageSettingCell', but couldn't be loaded.") }
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+      }
+
+      fileprivate init() {}
+    }
+
     struct _NaviButtonsView: Rswift.NibResourceType {
       let bundle = R.hostingBundle
       let name = "NaviButtonsView"
@@ -2109,6 +2300,9 @@ struct _R: Rswift.Validatable {
       #endif
       #if os(iOS) || os(tvOS)
       try preview.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
+      try settingVC.validate()
       #endif
       #if os(iOS) || os(tvOS)
       try splashVC.validate()
@@ -2364,6 +2558,7 @@ struct _R: Rswift.Validatable {
 
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
+          if UIKit.UIColor(named: "color-tab-line", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-tab-line' is used in storyboard 'MyPageVC', but couldn't be loaded.") }
         }
         if _R.storyboard.myPageVC().sbid_MyPageVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_MyPageVC' could not be loaded from storyboard 'MyPageVC' as 'MyPageVC'.") }
       }
@@ -2404,6 +2599,26 @@ struct _R: Rswift.Validatable {
         if _R.storyboard.preview().sbid_ProfilePreviewVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_ProfilePreviewVC' could not be loaded from storyboard 'Preview' as 'ProfilePreviewVC'.") }
         if _R.storyboard.preview().sbid_ResumePreviewVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_ResumePreviewVC' could not be loaded from storyboard 'Preview' as 'ResumePreviewVC'.") }
         if _R.storyboard.preview().sbid_SmoothCareerPreviewVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_SmoothCareerPreviewVC' could not be loaded from storyboard 'Preview' as 'SmoothCareerPreviewVC'.") }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    struct settingVC: Rswift.StoryboardResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "SettingVC"
+      let sbid_SettingVC = StoryboardViewControllerResource<SettingVC>(identifier: "Sbid_SettingVC")
+
+      func sbid_SettingVC(_: Void = ()) -> SettingVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_SettingVC)
+      }
+
+      static func validate() throws {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+        if _R.storyboard.settingVC().sbid_SettingVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_SettingVC' could not be loaded from storyboard 'SettingVC' as 'SettingVC'.") }
       }
 
       fileprivate init() {}

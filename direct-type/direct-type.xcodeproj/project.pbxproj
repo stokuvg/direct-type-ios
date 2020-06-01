@@ -85,8 +85,17 @@
 		068FFAA324725F4B0083E130 /* JobDetailFooterApplicationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068FFAA124725F4B0083E130 /* JobDetailFooterApplicationCell.xib */; };
 		068FFAA924727A810083E130 /* JobDetailStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068FFAA824727A810083E130 /* JobDetailStepView.swift */; };
 		068FFAAB24727A8B0083E130 /* JobDetailStepView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068FFAAA24727A8B0083E130 /* JobDetailStepView.xib */; };
+		06AA8C602484B46B001733FA /* MyPageProfileCompletionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AA8C5E2484B46B001733FA /* MyPageProfileCompletionCell.swift */; };
+		06AA8C612484B46B001733FA /* BasePercentageCompletionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06AA8C5F2484B46B001733FA /* BasePercentageCompletionCell.xib */; };
+		06AA8C642484D2DA001733FA /* MyPageCarrerStartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AA8C622484D2DA001733FA /* MyPageCarrerStartCell.swift */; };
+		06AA8C652484D2DA001733FA /* MyPageCarrerStartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06AA8C632484D2DA001733FA /* MyPageCarrerStartCell.xib */; };
 		06B94F64246BE38E002FEDDC /* JobDetailItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B94F62246BE38E002FEDDC /* JobDetailItemCell.swift */; };
 		06B94F65246BE38E002FEDDC /* JobDetailItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06B94F63246BE38E002FEDDC /* JobDetailItemCell.xib */; };
+		06BE18F72484A15900FAE476 /* MyPageSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BE18F52484A15900FAE476 /* MyPageSettingCell.swift */; };
+		06BE18F82484A15900FAE476 /* MyPageSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06BE18F62484A15900FAE476 /* MyPageSettingCell.xib */; };
+		06BE18FB2484A55000FAE476 /* MyPageNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BE18F92484A55000FAE476 /* MyPageNameCell.swift */; };
+		06BE18FC2484A55000FAE476 /* MyPageNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06BE18FA2484A55000FAE476 /* MyPageNameCell.xib */; };
+		06BE18FE2484B10B00FAE476 /* BasePercentageCompletionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BE18FD2484B10B00FAE476 /* BasePercentageCompletionCell.swift */; };
 		06C347242463A595000FB4DA /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C347232463A595000FB4DA /* UIButton+Extensions.swift */; };
 		06CDF6BF247643200075370F /* MdlJobCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CDF6BE247643200075370F /* MdlJobCard.swift */; };
 		06CDF6C1247648730075370F /* MdlJobCardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CDF6C0247648730075370F /* MdlJobCardList.swift */; };
@@ -131,6 +140,9 @@
 		06E519D324581684004E4B7A /* ContentsEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519D224581684004E4B7A /* ContentsEditVC.swift */; };
 		06E519D6245816A5004E4B7A /* WebTemplateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519D5245816A5004E4B7A /* WebTemplateVC.swift */; };
 		06EA78A5247B69CA0087C660 /* MdlJobCardDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EA78A4247B69CA0087C660 /* MdlJobCardDetail.swift */; };
+		06FFA0012484D6850085A3D9 /* MyPageChemistryStartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FF9FFF2484D6850085A3D9 /* MyPageChemistryStartCell.swift */; };
+		06FFA0022484D6850085A3D9 /* MyPageChemistryStartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06FFA0002484D6850085A3D9 /* MyPageChemistryStartCell.xib */; };
+		06FFA0042484E1760085A3D9 /* SettingVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06FFA0032484E1760085A3D9 /* SettingVC.storyboard */; };
 		260BBFDC2465171D003D163A /* MdlProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260BBFDB2465171D003D163A /* MdlProfile.swift */; };
 		260BBFE024651732003D163A /* HPreviewTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260BBFDD24651732003D163A /* HPreviewTBCell.swift */; };
 		260BBFE124651732003D163A /* Preview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 260BBFDE24651732003D163A /* Preview.storyboard */; };
@@ -304,8 +316,17 @@
 		068FFAA124725F4B0083E130 /* JobDetailFooterApplicationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailFooterApplicationCell.xib; sourceTree = "<group>"; };
 		068FFAA824727A810083E130 /* JobDetailStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailStepView.swift; sourceTree = "<group>"; };
 		068FFAAA24727A8B0083E130 /* JobDetailStepView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailStepView.xib; sourceTree = "<group>"; };
+		06AA8C5E2484B46B001733FA /* MyPageProfileCompletionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageProfileCompletionCell.swift; sourceTree = "<group>"; };
+		06AA8C5F2484B46B001733FA /* BasePercentageCompletionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BasePercentageCompletionCell.xib; sourceTree = "<group>"; };
+		06AA8C622484D2DA001733FA /* MyPageCarrerStartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCarrerStartCell.swift; sourceTree = "<group>"; };
+		06AA8C632484D2DA001733FA /* MyPageCarrerStartCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyPageCarrerStartCell.xib; sourceTree = "<group>"; };
 		06B94F62246BE38E002FEDDC /* JobDetailItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailItemCell.swift; sourceTree = "<group>"; };
 		06B94F63246BE38E002FEDDC /* JobDetailItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailItemCell.xib; sourceTree = "<group>"; };
+		06BE18F52484A15900FAE476 /* MyPageSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSettingCell.swift; sourceTree = "<group>"; };
+		06BE18F62484A15900FAE476 /* MyPageSettingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyPageSettingCell.xib; sourceTree = "<group>"; };
+		06BE18F92484A55000FAE476 /* MyPageNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageNameCell.swift; sourceTree = "<group>"; };
+		06BE18FA2484A55000FAE476 /* MyPageNameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyPageNameCell.xib; sourceTree = "<group>"; };
+		06BE18FD2484B10B00FAE476 /* BasePercentageCompletionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePercentageCompletionCell.swift; sourceTree = "<group>"; };
 		06C347232463A595000FB4DA /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		06CDF6BE247643200075370F /* MdlJobCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlJobCard.swift; sourceTree = "<group>"; };
 		06CDF6C0247648730075370F /* MdlJobCardList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlJobCardList.swift; sourceTree = "<group>"; };
@@ -350,6 +371,9 @@
 		06E519D224581684004E4B7A /* ContentsEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsEditVC.swift; sourceTree = "<group>"; };
 		06E519D5245816A5004E4B7A /* WebTemplateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebTemplateVC.swift; sourceTree = "<group>"; };
 		06EA78A4247B69CA0087C660 /* MdlJobCardDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlJobCardDetail.swift; sourceTree = "<group>"; };
+		06FF9FFF2484D6850085A3D9 /* MyPageChemistryStartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageChemistryStartCell.swift; sourceTree = "<group>"; };
+		06FFA0002484D6850085A3D9 /* MyPageChemistryStartCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyPageChemistryStartCell.xib; sourceTree = "<group>"; };
+		06FFA0032484E1760085A3D9 /* SettingVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingVC.storyboard; sourceTree = "<group>"; };
 		260BBFDB2465171D003D163A /* MdlProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MdlProfile.swift; sourceTree = "<group>"; };
 		260BBFDD24651732003D163A /* HPreviewTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HPreviewTBCell.swift; sourceTree = "<group>"; };
 		260BBFDE24651732003D163A /* Preview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preview.storyboard; sourceTree = "<group>"; };
@@ -505,6 +529,7 @@
 		066763652457AEF900AC5039 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				06BE18F42484A13C00FAE476 /* Cell */,
 				066763662457AF2400AC5039 /* MyPageVC.swift */,
 				066763682457AF3100AC5039 /* MyPageVC.storyboard */,
 			);
@@ -640,6 +665,22 @@
 			path = Tools;
 			sourceTree = "<group>";
 		};
+		06BE18F42484A13C00FAE476 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				06BE18F52484A15900FAE476 /* MyPageSettingCell.swift */,
+				06BE18F62484A15900FAE476 /* MyPageSettingCell.xib */,
+				06BE18F92484A55000FAE476 /* MyPageNameCell.swift */,
+				06BE18FA2484A55000FAE476 /* MyPageNameCell.xib */,
+				06AA8C5E2484B46B001733FA /* MyPageProfileCompletionCell.swift */,
+				06AA8C622484D2DA001733FA /* MyPageCarrerStartCell.swift */,
+				06AA8C632484D2DA001733FA /* MyPageCarrerStartCell.xib */,
+				06FF9FFF2484D6850085A3D9 /* MyPageChemistryStartCell.swift */,
+				06FFA0002484D6850085A3D9 /* MyPageChemistryStartCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		06D700342456CB7300E55FC8 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -658,6 +699,8 @@
 				066EF6C7245BBA1100E15AD2 /* BaseJobCardCell.swift */,
 				0645DE04246BDE8600592572 /* BaseJobDetailCell.swift */,
 				06409C70246D386A00EA6BBB /* BaseFoldingHeaderView.swift */,
+				06AA8C5F2484B46B001733FA /* BasePercentageCompletionCell.xib */,
+				06BE18FD2484B10B00FAE476 /* BasePercentageCompletionCell.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -723,6 +766,7 @@
 				06E5199B2457DA2D004E4B7A /* AccountChangeCompleteVC.swift */,
 				06E5199D2457DABE004E4B7A /* WithDrawal.swift */,
 				06E5199F2457DAD7004E4B7A /* WithDrawalCompleteVC.swift */,
+				06FFA0032484E1760085A3D9 /* SettingVC.storyboard */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -1045,6 +1089,7 @@
 				066EF6C6245BB9C400E15AD2 /* KeepCardCell.xib in Resources */,
 				26BF48E924639D2B00E00215 /* MstK7_skillEnglish.tsv in Resources */,
 				064EF6F824654A7300853ADD /* JobDetailDataCell.xib in Resources */,
+				06FFA0022484D6850085A3D9 /* MyPageChemistryStartCell.xib in Resources */,
 				26147F36247267F9009B30B5 /* MstF22_pcSkillWord.tsv in Resources */,
 				06E519842457CF90004E4B7A /* JobOfferBigCardCell.xib in Resources */,
 				066EF6CC245C119000E15AD2 /* JobOfferCardMoreCell.xib in Resources */,
@@ -1054,6 +1099,7 @@
 				06B94F65246BE38E002FEDDC /* JobDetailItemCell.xib in Resources */,
 				26BF48E224639D2B00E00215 /* MstK4_jobType.tsv in Resources */,
 				066F2719246E81A10040BDC1 /* JobDetailFoldingPhoneNumberCell.xib in Resources */,
+				06AA8C612484B46B001733FA /* BasePercentageCompletionCell.xib in Resources */,
 				269AFFCA246A929300DB364B /* SubSelectDaiTBCell.xib in Resources */,
 				064570642465427000F3B015 /* JobDetailGuideBookHeaderView.xib in Resources */,
 				0645DE03246BB6A100592572 /* JobDetailSalaryExampleCell.xib in Resources */,
@@ -1062,6 +1108,7 @@
 				26CFC4682469496D00E458E2 /* HEditZipcodeTBCell.xib in Resources */,
 				068FFAA324725F4B0083E130 /* JobDetailFooterApplicationCell.xib in Resources */,
 				066BC829246CF40C00FE607F /* JobDetailItemAttentionView.xib in Resources */,
+				06BE18F82484A15900FAE476 /* MyPageSettingCell.xib in Resources */,
 				066763782457B0A700AC5039 /* KeepListVC.storyboard in Resources */,
 				26BF48E624639D2B00E00215 /* MstK8_qualification.tsv in Resources */,
 				26BF48E424639D2B00E00215 /* MstL2_prCode.tsv in Resources */,
@@ -1075,6 +1122,7 @@
 				0645DDFD246B907000592572 /* JobDetailPRCodeTagsCell.xib in Resources */,
 				26BF48E324639D2B00E00215 /* MstK10_salary.tsv in Resources */,
 				063350E12463FB3F00AF90F3 /* JobOfferDetailVC.storyboard in Resources */,
+				06AA8C652484D2DA001733FA /* MyPageCarrerStartCell.xib in Resources */,
 				064EF7002465551D00853ADD /* JobDetailArticleHeaderView.xib in Resources */,
 				269AFFC6246A929300DB364B /* SubSelectSyouTBCell.xib in Resources */,
 				063350DF2463EC5800AF90F3 /* NoCardView.xib in Resources */,
@@ -1093,6 +1141,7 @@
 				26BF48DB24639D2B00E00215 /* MstK11_entryPlace.tsv in Resources */,
 				066763742457B08F00AC5039 /* EntryVC.storyboard in Resources */,
 				26BF48D924639D2B00E00215 /* MstK25_employmentStatus.tsv in Resources */,
+				06BE18FC2484A55000FAE476 /* MyPageNameCell.xib in Resources */,
 				066BC825246CD0C100FE607F /* JobDetailItemOptionalView.xib in Resources */,
 				26CFC4692469496D00E458E2 /* HEditTextTBCell.xib in Resources */,
 				260BBFE224651732003D163A /* HPreviewTBCell.xib in Resources */,
@@ -1108,6 +1157,7 @@
 				066B2D872468DD0D00355E03 /* JobOfferCardReloadCell.xib in Resources */,
 				064EF6FC24654FDB00853ADD /* JobDetailArticleCell.xib in Resources */,
 				26BF48DD24639D2B00E00215 /* MstK25_gender.tsv in Resources */,
+				06FFA0042484E1760085A3D9 /* SettingVC.storyboard in Resources */,
 				066CC17E24735DE6009A123A /* JobDetailTextView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1192,6 +1242,7 @@
 				06E519862457D2C1004E4B7A /* UIView+Extensions.swift in Sources */,
 				066763622457AB7200AC5039 /* BaseTabBC.swift in Sources */,
 				06E519B1245814B2004E4B7A /* EntryConfirmVC.swift in Sources */,
+				06BE18FE2484B10B00FAE476 /* BasePercentageCompletionCell.swift in Sources */,
 				26A1F57E247FB28B00834213 /* Validate+Profile.swift in Sources */,
 				066763672457AF2400AC5039 /* MyPageVC.swift in Sources */,
 				06E5199E2457DABE004E4B7A /* WithDrawal.swift in Sources */,
@@ -1237,12 +1288,14 @@
 				268BFF60246E8FF8004B2640 /* MdlAppSmoothCareerWorkBackgroundDetail.swift in Sources */,
 				0645705D2464F77700F3B015 /* Logs.swift in Sources */,
 				06E519C7245815B0004E4B7A /* CareerPreviewVC.swift in Sources */,
+				06AA8C642484D2DA001733FA /* MyPageCarrerStartCell.swift in Sources */,
 				06409C73246D3A6800EA6BBB /* JobDetailFoldingHeaderView.swift in Sources */,
 				26A1F5842480F23100834213 /* MyCmnDialogVC.swift in Sources */,
 				06E519982457DA0D004E4B7A /* ApproachSettingVC.swift in Sources */,
 				06DCAEAB245A7616008FE9FA /* UILabel+Extensions.swift in Sources */,
 				26147F30247258E9009B30B5 /* HPreviewTBCell+dispCellValue.swift in Sources */,
 				26F2A81B246D10C30037D47F /* MdlResume.swift in Sources */,
+				06BE18FB2484A55000FAE476 /* MyPageNameCell.swift in Sources */,
 				26B491E0247E3CB100B58AD4 /* ApiManager+Entry.swift in Sources */,
 				06E519932457D750004E4B7A /* OwnPRVC.swift in Sources */,
 				26989F80246A5E520050AC40 /* HEditDrumTBCell.swift in Sources */,
@@ -1263,6 +1316,7 @@
 				26133A56246B9D48001802BB /* EditableBasicVC+Picker.swift in Sources */,
 				269AFFC8246A929300DB364B /* SubSelectMultiVC.swift in Sources */,
 				066BC823246CD0B100FE607F /* JobDetailItemOptionalView.swift in Sources */,
+				06BE18F72484A15900FAE476 /* MyPageSettingCell.swift in Sources */,
 				0685017D24738D98009770A3 /* JobDetailImageCell.swift in Sources */,
 				066BD9D72456ACB4009E610B /* AppDelegate.swift in Sources */,
 				06E519D6245816A5004E4B7A /* WebTemplateVC.swift in Sources */,
@@ -1298,6 +1352,7 @@
 				26BF48EE24639DEE00E00215 /* EditableObj.swift in Sources */,
 				26A1F57C247F5D3300834213 /* ValidateManager.swift in Sources */,
 				269AFFC5246A929300DB364B /* SubSelectSingleVC.swift in Sources */,
+				06FFA0012484D6850085A3D9 /* MyPageChemistryStartCell.swift in Sources */,
 				06E519B3245814BD004E4B7A /* EntryLoginVC.swift in Sources */,
 				066BC827246CF3CA00FE607F /* JobDetailItemAttentionView.swift in Sources */,
 				26CFC46B2469496D00E458E2 /* EditableItemH.swift in Sources */,
@@ -1313,6 +1368,7 @@
 				066F271C246E81B60040BDC1 /* JobDetailFoldingOutlineCell.swift in Sources */,
 				067F28E52456D05F000AAD69 /* TmpWebVC.swift in Sources */,
 				06E519832457CF90004E4B7A /* JobOfferBigCardCell.swift in Sources */,
+				06AA8C602484B46B001733FA /* MyPageProfileCompletionCell.swift in Sources */,
 				26CFC4662469496D00E458E2 /* HEditZipcodeTBCell.swift in Sources */,
 				06E5198D2457D6FF004E4B7A /* ChemistryStart.swift in Sources */,
 				26F2A81D246D10DA0037D47F /* MdlCareer.swift in Sources */,

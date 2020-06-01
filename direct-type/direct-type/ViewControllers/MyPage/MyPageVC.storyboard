@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -69,15 +70,38 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AqG-Oh-Z76">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="567"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="AEi-ts-bdm" id="I8F-Wv-GME"/>
+                                    <outlet property="delegate" destination="AEi-ts-bdm" id="XOW-jn-eHu"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gFb-Ba-60T">
+                                <rect key="frame" x="0.0" y="567" width="320" height="1"/>
+                                <color key="backgroundColor" name="color-tab-line"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="njK-hr-ZNv"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="3jc-nH-ez8" firstAttribute="top" secondItem="BQu-DF-j36" secondAttribute="bottom" constant="7" id="1Kr-KR-g0S"/>
+                            <constraint firstItem="AqG-Oh-Z76" firstAttribute="top" secondItem="fam-Ox-1va" secondAttribute="top" id="5lE-Hc-Szl"/>
                             <constraint firstItem="fam-Ox-1va" firstAttribute="trailing" secondItem="3jc-nH-ez8" secondAttribute="trailing" constant="7" id="EUn-hO-YyB"/>
+                            <constraint firstItem="AqG-Oh-Z76" firstAttribute="trailing" secondItem="fam-Ox-1va" secondAttribute="trailing" id="Gkc-6H-UfG"/>
                             <constraint firstItem="fam-Ox-1va" firstAttribute="bottom" secondItem="3jc-nH-ez8" secondAttribute="bottom" constant="7" id="HlC-WC-aKr"/>
+                            <constraint firstItem="fam-Ox-1va" firstAttribute="bottom" secondItem="gFb-Ba-60T" secondAttribute="bottom" id="KEb-rL-Igh"/>
+                            <constraint firstItem="gFb-Ba-60T" firstAttribute="top" secondItem="AqG-Oh-Z76" secondAttribute="bottom" id="LgY-mh-evE"/>
+                            <constraint firstItem="fam-Ox-1va" firstAttribute="trailing" secondItem="gFb-Ba-60T" secondAttribute="trailing" id="Y3i-cf-VlN"/>
                             <constraint firstItem="fam-Ox-1va" firstAttribute="trailing" secondItem="BQu-DF-j36" secondAttribute="trailing" constant="7" id="kL7-dj-y3k"/>
                             <constraint firstItem="BQu-DF-j36" firstAttribute="leading" secondItem="fam-Ox-1va" secondAttribute="leading" constant="7" id="nmI-1N-AEa"/>
                             <constraint firstItem="BQu-DF-j36" firstAttribute="top" secondItem="fam-Ox-1va" secondAttribute="top" constant="7" id="pC0-Sg-KEN"/>
+                            <constraint firstItem="gFb-Ba-60T" firstAttribute="leading" secondItem="fam-Ox-1va" secondAttribute="leading" id="uit-8y-xwo"/>
+                            <constraint firstItem="AqG-Oh-Z76" firstAttribute="leading" secondItem="fam-Ox-1va" secondAttribute="leading" id="vnQ-v5-qSG"/>
                             <constraint firstItem="3jc-nH-ez8" firstAttribute="leading" secondItem="fam-Ox-1va" secondAttribute="leading" constant="7" id="wxq-je-EJh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fam-Ox-1va"/>
@@ -89,6 +113,7 @@
                         <outlet property="btnButton04" destination="vdW-Qy-b6a" id="T0D-DX-tEl"/>
                         <outlet property="btnButton05" destination="vRS-Oe-8No" id="Km6-gv-Zd0"/>
                         <outlet property="btnButton06" destination="rNx-Fe-w7y" id="ryn-wB-gcf"/>
+                        <outlet property="pageTableView" destination="AqG-Oh-Z76" id="Dmp-dU-EDV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vtR-eP-OXc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -96,4 +121,9 @@
             <point key="canvasLocation" x="-220" y="29"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="color-tab-line">
+            <color red="0.6705882352941176" green="0.6705882352941176" blue="0.6705882352941176" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
