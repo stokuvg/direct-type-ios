@@ -5,15 +5,21 @@
 //  Created by ms-mb014 on 2020/05/28.
 //  Copyright © 2020 ms-mb015. All rights reserved.
 //
+
+import Foundation
+
 enum ValidType {
-    case undefine
-    case number
-    case ascii
+    case undefine   //全角（特にチェックなし）
+    case katakana   //全角カタカナ
+    case email      //メールアドレス
+    case number     //半角数字
+    case ascii      //半角英数字
+    case code       //コード選択のもの
 }
 
 struct ValidInfo {
     var required: Bool = false //true: 必須, false: 任意
-    var min: Int? = nil //最小文字長
+    var keta: Int? = nil //桁数指定（一致のみOK）
     var max: Int? = nil //最大文字長
     var type: ValidType = .undefine
 }
@@ -60,6 +66,19 @@ extension ValidateManager {
                 dicError.addDicArrVal(key: key, val: val)
             }
         }
+        //桁数チェック
+        for (key, vals) in subValidateKetaLengtyByKey(editableModel) {
+            for val in vals {
+                dicError.addDicArrVal(key: key, val: val)
+            }
+        }
+        //文字種チェック
+        for (key, vals) in subValidateTypeLengtyByKey(editableModel) {
+            for val in vals {
+                dicError.addDicArrVal(key: key, val: val)
+            }
+        }
+
         return dicError
     }
     //============================================
@@ -69,9 +88,15 @@ extension ValidateManager {
         for itemKey in editableModel.arrTextFieldNextDoneKey {
             if let item = editableModel.getItemByKey(itemKey) {
                 let (isChange, editTemp) = editableModel.makeTempItem(item)
+                let validInfo = editTemp.editItem.valid
+                guard validInfo.required == true else { continue }
                 if isChange {
                     if editTemp.curVal == "" {
-                        dicError.addDicArrVal(key: item.editableItemKey, val: "「\(item.dispName)」は必須項目です")
+                        if validInfo.type == .code {
+                            dicError.addDicArrVal(key: item.editableItemKey, val: "選択してください")
+                        } else {
+                            dicError.addDicArrVal(key: item.editableItemKey, val: "未入力です。入力してください")
+                        }
                     }
                 }
             }
@@ -85,10 +110,60 @@ extension ValidateManager {
         for itemKey in editableModel.arrTextFieldNextDoneKey {
             if let item = editableModel.getItemByKey(itemKey) {
                 let (isChange, editTemp) = editableModel.makeTempItem(item)
+                let validInfo = editTemp.editItem.valid
+                guard let max = validInfo.max else { continue }
                 if isChange {
-                    let max: Int = 8
                     if editTemp.curVal.count > max {
-                        dicError.addDicArrVal(key: item.editableItemKey, val: "「\(item.dispName)」は\(max)文字までです")
+                        dicError.addDicArrVal(key: item.editableItemKey, val: "入力文字数が超過しています")
+                    }
+                }
+            }
+        }
+        return dicError
+    }
+    //============================================
+    class func subValidateKetaLengtyByKey(_ editableModel: EditableModel) -> [EditableItemKey: [String]] {
+        var dicError: [EditableItemKey: [String]] = [:]
+        //桁数チェック（指定桁数のみOKとする）
+        for itemKey in editableModel.arrTextFieldNextDoneKey {
+            if let item = editableModel.getItemByKey(itemKey) {
+                let (isChange, editTemp) = editableModel.makeTempItem(item)
+                let validInfo = editTemp.editItem.valid
+                guard let keta = validInfo.keta else { continue }
+                if isChange {
+                    if editTemp.curVal.count != keta {
+                        dicError.addDicArrVal(key: item.editableItemKey, val: "\(keta)桁の数字で入力してください")
+                    }
+                }
+            }
+        }
+        return dicError
+    }
+    //============================================
+    class func subValidateTypeLengtyByKey(_ editableModel: EditableModel) -> [EditableItemKey: [String]] {
+        var dicError: [EditableItemKey: [String]] = [:]
+        //文字種チェック
+        for itemKey in editableModel.arrTextFieldNextDoneKey {
+            if let item = editableModel.getItemByKey(itemKey) {
+                let (isChange, editTemp) = editableModel.makeTempItem(item)
+                let validInfo = editTemp.editItem.valid
+                let type = validInfo.type
+                if isChange {
+                    switch type {
+                    case .undefine:
+                        continue
+                    case .katakana:
+                        dicError.addDicArrVal(key: item.editableItemKey, val: "katakanaで入力してください")
+                    case .email:
+                        if let errMsg = chkValidTypeEmail(item) {
+                            dicError.addDicArrVal(key: item.editableItemKey, val: errMsg)
+                        }
+                    case .number:
+                        dicError.addDicArrVal(key: item.editableItemKey, val: "numberで入力してください")
+                    case .ascii:
+                        dicError.addDicArrVal(key: item.editableItemKey, val: "asciiで入力してください")
+                    case .code:
+                        dicError.addDicArrVal(key: item.editableItemKey, val: "codeで入力してください")
                     }
                 }
             }
@@ -97,5 +172,15 @@ extension ValidateManager {
     }
     //============================================
     //============================================
-    
+    class func chkValidTypeEmail(_ item: EditableItemH) -> String? {
+        let text = item.curVal
+        //var pattern = #"^\d{\#(keta)}$"#
+        let pattern = #"^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"#
+        let regex = try! NSRegularExpression(pattern: pattern, options: [])
+        let matches = regex.matches(in: text, options: [], range: NSMakeRange(0, text.count))
+        return (matches.count > 0) ? nil : "メールアドレスが間違っています"
+    }
+    //============================================
+    //============================================
+    //============================================
 }
