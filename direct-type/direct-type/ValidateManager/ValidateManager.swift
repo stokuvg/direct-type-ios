@@ -111,74 +111,65 @@ extension ValidateManager {
                         continue
 
                     case .hiraKataKan:
-                        if let keta = validInfo.keta {
-                            regexp = #"^[\p{Hiragana}\p{Katakana}\p{Han}]{\#(keta)}$"#
-                            errMsg = "\(keta)桁のカタカナで入力してください"
-                            if chkValidErrRegex(item, regexp) {
-                                dicError.addDicArrVal(key: item.editableItemKey, val: errMsg)
+                        regexp = #"^[\p{Hiragana}\p{Katakana}\p{Han}]*$"#
+                        if let bufMatch = getRegexMatchString(editTemp, regexp) {
+                            if let keta = validInfo.keta {
+                                errMsg = "\(keta)桁の漢字・カナ・かなで入力してください"
                             }
-                            continue
-                        } else {
-                            regexp = #"^[\p{Hiragana}\p{Katakana}\p{Han}]*$"#
+                            if let max = validInfo.max, bufMatch.count > max {
+                                errMsg = "入力文字数が超過しています (\(max))"
+                            }
+                        } else {//正規表現にマッチしない（＝形式エラー）
                             errMsg = "漢字・カナ・かなで入力してください"
-//                            if let max = validInfo.max {
-//                                regexp = #"^[\p{Hiragana}\p{Katakana}\p{Han}]{0,\#(max)}$"#
-//                                errMsg = "入力文字数が超過しています! \(max)"
-//                            } else {
-//                            }
                         }
 
                     case .katakana:
-                         if let keta = validInfo.keta {
-                            regexp = #"^\p{Katakana}{\#(keta)}$"#
-                            errMsg = "\(keta)桁のカタカナで入力してください"
-                            if chkValidErrRegex(item, regexp) {
-                                dicError.addDicArrVal(key: item.editableItemKey, val: errMsg)
+                        regexp = #"^\p{Katakana}*$"#
+                        if let bufMatch = getRegexMatchString(editTemp, regexp) {
+                            if let keta = validInfo.keta {
+                                errMsg = "\(keta)桁のカタカナで入力してください"
                             }
-                            continue
-                        } else {
-                            //文字種が違う or 文字種は良いけど文字長オーバー or　両方NG
-                            if let max = validInfo.max {
-                                regexp = #"^\p{Katakana}{0,\#(max)}$"#
-                                errMsg = "入力文字数が超過しています! \(max)"
-                            } else {
-                                regexp = #"^\p{Katakana}*$"#
-                                errMsg = "カタカナで入力してください"
+                            if let max = validInfo.max, bufMatch.count > max {
+                                errMsg = "入力文字数が超過しています (\(max))"
                             }
+                        } else {//正規表現にマッチしない（＝形式エラー）
+                            errMsg = "カタカナで入力してください"
                         }
 
                     case .email:
                         regexp = #"^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"#
-                        errMsg = "メールアドレスが間違っています"
+                        if let bufMatch = getRegexMatchString(editTemp, regexp) {
+                        } else {//正規表現にマッチしない（＝形式エラー）
+                            errMsg = "メールアドレスが間違っています"
+                        }
 
                     case .number:
-                        if let keta = validInfo.keta {
-                            regexp = #"^\d{\#(keta)}$"#
-                            errMsg = "\(keta)桁の数字で入力してください"
-                            if chkValidErrRegex(item, regexp) {
-                                dicError.addDicArrVal(key: item.editableItemKey, val: errMsg)
+                        regexp = #"^\d*$"#
+                        if let bufMatch = getRegexMatchString(editTemp, regexp) {
+                            if let keta = validInfo.keta {
+                                errMsg = "\(keta)桁の数字で入力してください"
                             }
-                            continue
-                        } else {
-                            if let max = validInfo.max {
-                                regexp = #"^\d{0,\#(max)}$"#
-                                errMsg = "入力文字数が超過しています"
-                            } else {
-                                regexp = #"^\d+$"#
-                                errMsg = "数字で入力してください"
+                            if let max = validInfo.max, bufMatch.count > max {
+                                errMsg = "入力文字数が超過しています (\(max))"
                             }
+                        } else {//正規表現にマッチしない（＝形式エラー）
+                            errMsg = "数字で入力してください"
                         }
 
                     case .password: //type用パスワード（＊半角英数4~20文字）///^[0-9a-zA-Z]*$/
                         regexp = #"^[0-9a-zA-Z]{4,20}$"#
-                        errMsg = "ログインできません。入力内容をご確認ください"
+                        if let bufMatch = getRegexMatchString(editTemp, regexp) {
+                        } else {//正規表現にマッチしない（＝形式エラー）
+                            errMsg = "ログインできません。入力内容をご確認ください"
+                        }
 
                     case .code: //「コード」なものはチェック不要　（＊""or数値かどうかをチェックしえとく？？）
                         continue
 
                     } //switch type {
-                    print(#line, item.debugDisp, regexp)
-                    if chkValidErrRegex(item, regexp) {
+
+                    print(#line, editTemp.debugDisp, regexp)
+                    if errMsg.count > 0 {
                         dicError.addDicArrVal(key: item.editableItemKey, val: errMsg)
                     }
                 }
@@ -188,20 +179,35 @@ extension ValidateManager {
     }
     //============================================
     //============================================
-    //マッチングした文字列を返却し、それを使って戻り先でチェックする。。。
-    class func chkValidErrRegex(_ item: EditableItemH, _ pattern: String) -> Bool { //エラーあったらTrue
+//    class func chkValidErrRegex(_ item: EditableItemH, _ pattern: String) -> Bool { //エラーあったらTrue
+//        let text = item.curVal
+//        //var pattern = #"^\d{\#(keta)}$"#
+//        let regex = try! NSRegularExpression(pattern: pattern, options: [])
+//        let matches = regex.matches(in: text, options: [], range: NSMakeRange(0, text.count))
+//        print(#line, #function, matches.count)
+//        for ma in matches {
+//            print(#line, #function, ma)
+//        }
+//
+//        return (matches.count > 0) ? false : true
+//    }
+    //============================================
+    //マッチングした文字列を返却し、それを使って戻り先でチェックする
+    class func getRegexMatchString(_ item: EditableItemH, _ pattern: String) -> String? {
         let text = item.curVal
-        //var pattern = #"^\d{\#(keta)}$"#
         let regex = try! NSRegularExpression(pattern: pattern, options: [])
         let matches = regex.matches(in: text, options: [], range: NSMakeRange(0, text.count))
-        print(#line, #function, matches.count)
-        for ma in matches {
-            print(#line, #function, ma)
+        if matches.count == 0 { return nil }
+        //基本的に ^$　マッチングさせるので、matchesは 1つとして処理する
+        for match in matches {
+            for index in 0 ..< match.numberOfRanges {
+                let nsRange = match.range(at: index)
+                if let range = Range(nsRange, in: text) {
+                    return String(text[range])
+                }
+            }
         }
-
-        return (matches.count > 0) ? false : true
+        return ""
     }
-    //============================================
-    //============================================
     //============================================
 }
