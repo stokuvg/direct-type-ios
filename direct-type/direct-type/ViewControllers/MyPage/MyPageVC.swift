@@ -59,6 +59,8 @@ class MyPageVC: TmpNaviTopVC {
         
         self.pageTableView.registerNib(nibName: "MyPageSettingCell", idName: "MyPageSettingCell") // 設定
         
+        setDebugButtonForDiagnosis()
+        
 //        btnButton05.setTitle("認証", for: .normal)
 //        btnButton06.setTitle("API [Get] /jobs", for: .normal)
     }
@@ -267,5 +269,21 @@ extension MyPageVC: MyPageChemistryStartCellDelegate {
     
     // 画面遷移
     func registChemistryAction() {
+    }
+}
+
+// 相性診断へのテスト導線用
+private extension MyPageVC {
+    func setDebugButtonForDiagnosis() {
+        var pushButtonItem: UIBarButtonItem!
+        pushButtonItem = UIBarButtonItem(title: "相性", style: .done, target: self, action: #selector(pushToDiagnosis))
+        navigationItem.rightBarButtonItem = pushButtonItem
+    }
+    
+    @objc
+    func pushToDiagnosis() {
+        let vc = UIStoryboard(name: "StartDiagnosisVC", bundle: nil)
+            .instantiateInitialViewController() as! StartDiagnosisVC
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -89,7 +89,7 @@ struct R: Rswift.Validatable {
   }
 
   #if os(iOS) || os(tvOS)
-  /// This `R.storyboard` struct is generated, and contains static references to 14 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 15 storyboards.
   struct storyboard {
     /// Storyboard `Auth`.
     static let auth = _R.storyboard.auth()
@@ -119,6 +119,8 @@ struct R: Rswift.Validatable {
     static let settingVC = _R.storyboard.settingVC()
     /// Storyboard `SplashVC`.
     static let splashVC = _R.storyboard.splashVC()
+    /// Storyboard `StartDiagnosisVC`.
+    static let startDiagnosisVC = _R.storyboard.startDiagnosisVC()
 
     #if os(iOS) || os(tvOS)
     /// `UIStoryboard(name: "Auth", bundle: ...)`
@@ -215,6 +217,13 @@ struct R: Rswift.Validatable {
     /// `UIStoryboard(name: "SplashVC", bundle: ...)`
     static func splashVC(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.splashVC)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "StartDiagnosisVC", bundle: ...)`
+    static func startDiagnosisVC(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.startDiagnosisVC)
     }
     #endif
 
@@ -2375,6 +2384,9 @@ struct _R: Rswift.Validatable {
       #if os(iOS) || os(tvOS)
       try splashVC.validate()
       #endif
+      #if os(iOS) || os(tvOS)
+      try startDiagnosisVC.validate()
+      #endif
     }
 
     #if os(iOS) || os(tvOS)
@@ -2699,6 +2711,22 @@ struct _R: Rswift.Validatable {
 
       let bundle = R.hostingBundle
       let name = "SplashVC"
+
+      static func validate() throws {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    struct startDiagnosisVC: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = StartDiagnosisVC
+
+      let bundle = R.hostingBundle
+      let name = "StartDiagnosisVC"
 
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
