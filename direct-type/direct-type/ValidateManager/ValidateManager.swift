@@ -114,21 +114,30 @@ extension ValidateManager {
                         if let keta = validInfo.keta {
                             regexp = #"^[\p{Hiragana}\p{Katakana}\p{Han}]{\#(keta)}$"#
                             errMsg = "\(keta)桁のカタカナで入力してください"
-                        } else {
-                            if let max = validInfo.max {
-                                regexp = #"^[\p{Hiragana}\p{Katakana}\p{Han}]{0,\#(max)}$"#
-                                errMsg = "入力文字数が超過しています! \(max)"
-                            } else {
-                                regexp = #"^[\p{Hiragana}\p{Katakana}\p{Han}]*$"#
-                                errMsg = "カタカナで入力してください"
+                            if chkValidErrRegex(item, regexp) {
+                                dicError.addDicArrVal(key: item.editableItemKey, val: errMsg)
                             }
+                            continue
+                        } else {
+                            regexp = #"^[\p{Hiragana}\p{Katakana}\p{Han}]*$"#
+                            errMsg = "漢字・カナ・かなで入力してください"
+//                            if let max = validInfo.max {
+//                                regexp = #"^[\p{Hiragana}\p{Katakana}\p{Han}]{0,\#(max)}$"#
+//                                errMsg = "入力文字数が超過しています! \(max)"
+//                            } else {
+//                            }
                         }
 
                     case .katakana:
                          if let keta = validInfo.keta {
                             regexp = #"^\p{Katakana}{\#(keta)}$"#
                             errMsg = "\(keta)桁のカタカナで入力してください"
+                            if chkValidErrRegex(item, regexp) {
+                                dicError.addDicArrVal(key: item.editableItemKey, val: errMsg)
+                            }
+                            continue
                         } else {
+                            //文字種が違う or 文字種は良いけど文字長オーバー or　両方NG
                             if let max = validInfo.max {
                                 regexp = #"^\p{Katakana}{0,\#(max)}$"#
                                 errMsg = "入力文字数が超過しています! \(max)"
@@ -146,6 +155,10 @@ extension ValidateManager {
                         if let keta = validInfo.keta {
                             regexp = #"^\d{\#(keta)}$"#
                             errMsg = "\(keta)桁の数字で入力してください"
+                            if chkValidErrRegex(item, regexp) {
+                                dicError.addDicArrVal(key: item.editableItemKey, val: errMsg)
+                            }
+                            continue
                         } else {
                             if let max = validInfo.max {
                                 regexp = #"^\d{0,\#(max)}$"#
@@ -175,12 +188,12 @@ extension ValidateManager {
     }
     //============================================
     //============================================
+    //マッチングした文字列を返却し、それを使って戻り先でチェックする。。。
     class func chkValidErrRegex(_ item: EditableItemH, _ pattern: String) -> Bool { //エラーあったらTrue
         let text = item.curVal
         //var pattern = #"^\d{\#(keta)}$"#
         let regex = try! NSRegularExpression(pattern: pattern, options: [])
         let matches = regex.matches(in: text, options: [], range: NSMakeRange(0, text.count))
-
         print(#line, #function, matches.count)
         for ma in matches {
             print(#line, #function, ma)
