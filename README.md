@@ -7,6 +7,5 @@ direct type のiOSアプリ
 $ cd api/
 $ sh gen.sh
 $ cd ../direct-type/
-$ pod install
+$ bundle exec pod install
 ```
-
