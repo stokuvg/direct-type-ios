@@ -63,30 +63,18 @@ extension ValidateManager {
 extension EditItemMdlProfile {
     var valid: ValidInfo {
         switch self {
-        case .familyName:
-            return ValidInfo(required: true, min: nil, max: 8, type: .undefine)
-        case .firstName:
-            return ValidInfo(required: true, min: nil, max: 8, type: .undefine)
-        case .familyNameKana:
-            return ValidInfo(required: true, min: nil, max: 22, type: .undefine)
-        case .firstNameKana:
-            return ValidInfo(required: true, min: nil, max: 22, type: .undefine)
-        case .birthday:
-            return ValidInfo(required: true, min: nil, max: 8, type: .undefine)
-        case .gender:
-            return ValidInfo(required: true, min: nil, max: 8, type: .undefine)
-        case .zipCode:
-            return ValidInfo(required: true, min: nil, max: 8, type: .undefine)
-        case .prefecture:
-            return ValidInfo(required: true, min: nil, max: 8, type: .undefine)
-        case .address1:
-            return ValidInfo(required: true, min: nil, max: 8, type: .undefine)
-        case .address2:
-            return ValidInfo(required: true, min: nil, max: 8, type: .undefine)
-        case .mailAddress:
-            return ValidInfo(required: true, min: nil, max: 8, type: .undefine)
-        case .mobilePhoneNo:
-            return ValidInfo(required: true, min: nil, max: 8, type: .undefine)
+        case .familyName:       return ValidInfo(required: true, keta: nil, max: 8, type: .hiraKataKan)
+        case .firstName:        return ValidInfo(required: true, keta: nil, max: 8, type: .hiraKataKan)
+        case .familyNameKana:   return ValidInfo(required: true, keta: nil, max: 8, type: .katakana)
+        case .firstNameKana:    return ValidInfo(required: true, keta: nil, max: 8, type: .katakana)
+        case .birthday:         return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)//今日以降の誕生日を許容する？（年齢がマイナスになる）
+        case .gender:           return ValidInfo(required: true, keta: nil, max: nil, type: .code)//結局、男女の選択のみ？
+        case .zipCode:          return ValidInfo(required: true, keta: 7, max: nil, type: .number)
+        case .prefecture:       return ValidInfo(required: true, keta: nil, max: nil, type: .code)
+        case .address1:         return ValidInfo(required: true, keta: nil, max: 100, type: .undefine)
+        case .address2:         return ValidInfo(required: true, keta: nil, max: 100, type: .undefine)
+        case .mailAddress:      return ValidInfo(required: true, keta: nil, max: nil, type: .email)
+        case .mobilePhoneNo:    return ValidInfo(required: true, keta: nil, max: nil, type: .number)
         }
     }
 
@@ -94,72 +82,72 @@ extension EditItemMdlProfile {
 
 extension EditItemMdlResume {
     var valid: ValidInfo {
-        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
     }
 }
 extension MdlResumeSchool {
     var valid: ValidInfo {
-        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
     }
 }
 extension EditItemMdlResumeSkillLanguage {
     var valid: ValidInfo {
-        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
     }
 }
 extension EditItemMdlResumeLastJobExperiment {
     var valid: ValidInfo {
-        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
     }
 }
 extension EditItemMdlResumeJobExperiments {
     var valid: ValidInfo {
-        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
     }
 }
 extension EditItemMdlAppSmoothCareer {
     var valid: ValidInfo {
-        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
     }
 }
 extension EditItemMdlAppSmoothCareerComponyDescription {
     var valid: ValidInfo {
-        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
     }
 }
 extension EditItemMdlAppSmoothCareerComponyDescriptionWorkPeriod {
     var valid: ValidInfo {
-        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
     }
 }
 extension EditItemMdlAppSmoothCareerWorkBackgroundDetail {
     var valid: ValidInfo {
-        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
     }
 }
 extension EditItemCareerCardWorkPeriod {
     var valid: ValidInfo {
-        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
     }
 }
 extension EditItemReqEntry {
     var valid: ValidInfo {
-        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
     }
 }
 extension EditItemCareer {
     var valid: ValidInfo {
-        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
     }
 }
 extension EditItemCareerCard {
     var valid: ValidInfo {
-        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
     }
 }
 extension EditItemMdlResumeSchool {
     var valid: ValidInfo {
-        return ValidInfo(required: true, min: nil, max: nil, type: .undefine)
+        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
     }
 }
 
