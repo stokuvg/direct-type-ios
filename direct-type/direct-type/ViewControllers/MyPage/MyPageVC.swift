@@ -284,6 +284,8 @@ private extension MyPageVC {
     func pushToDiagnosis() {
         let vc = UIStoryboard(name: "StartDiagnosisVC", bundle: nil)
             .instantiateInitialViewController() as! StartDiagnosisVC
+        hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
+        hidesBottomBarWhenPushed = false
     }
 }

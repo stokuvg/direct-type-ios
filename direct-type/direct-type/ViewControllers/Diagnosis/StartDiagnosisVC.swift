@@ -9,5 +9,21 @@
 import UIKit
 
 final class StartDiagnosisVC: UIViewController {
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavigationBar()
+    }
+}
+
+private extension StartDiagnosisVC {
+    func setNavigationBar() {
+        if #available(iOS 13.0, *) {
+            navigationController?.navigationBar.standardAppearance.backgroundColor = UIColor.init(colorType: .color_sub)!
+            navigationController?.navigationBar.standardAppearance.shadowColor = .clear
+        } else {
+            self.navigationController?.navigationBar.barTintColor = UIColor.init(colorType: .color_sub)
+            navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            navigationController?.navigationBar.shadowImage = UIImage()
+        }
+    }
 }
