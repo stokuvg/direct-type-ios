@@ -67,8 +67,6 @@ class HomeVC: TmpNaviTopVC {
         
         safeAreaTop = self.view.safeAreaInsets.top
         
-        self.getJobList()
-        
         //[Dbg]___
         if Constants.DbgAutoPushVC {
             let storyboard = UIStoryboard(name: "Preview", bundle: nil)

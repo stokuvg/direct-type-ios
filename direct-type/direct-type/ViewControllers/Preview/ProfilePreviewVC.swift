@@ -146,6 +146,9 @@ extension ProfilePreviewVC {
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
+            case 403:
+                print("なんでこれ？")
+                break
             case 404:
                 let message: String = "本来は初回登録でProfileやResumeの一部データが登録され作成されているはず\n\n代わりにダミーの初期投入をしておく"
                 self.showConfirm(title: "特殊対応", message: message)
@@ -158,8 +161,7 @@ extension ProfilePreviewVC {
                 }
             default: break
             }
-
-            self.showError(error)
+            self.showError(myErr)
         }
         .finally {
             self.dispData()

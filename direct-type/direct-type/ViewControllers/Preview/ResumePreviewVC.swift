@@ -44,8 +44,7 @@ class ResumePreviewVC: PreviewBaseVC {
         ]))
         //===(3b)転職回数
         arrData.append(MdlItemH(.changeCountH3, "", childItems: [
-//!!!            EditableItemH(type: .selectSingle, editItem: EditItemMdlResume.changeCount, val: _detail.changeCount),
-        EditableItemH(type: .selectMulti, editItem: EditItemMdlResume.changeCount, val: _detail.changeCount),
+        EditableItemH(type: .selectSingle, editItem: EditItemMdlResume.changeCount, val: _detail.changeCount),
         ]))
         //===(3c)直近の経験職種
         let _jobType: String = "\(_detail.lastJobExperiment.jobType)"
