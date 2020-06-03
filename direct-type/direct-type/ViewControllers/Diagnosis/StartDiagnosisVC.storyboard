@@ -144,6 +144,9 @@
                                                 <real key="value" value="20"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="startDiagnosisButton:" destination="VWq-1x-SgO" eventType="touchUpInside" id="YXo-HK-jUs"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fom-Rl-lez" userLabel="BigSpaceView">
                                         <rect key="frame" x="0.0" y="418" width="320" height="50"/>
@@ -171,6 +174,9 @@
                         <viewLayoutGuide key="safeArea" id="y1O-HE-ZRE"/>
                     </view>
                     <navigationItem key="navigationItem" id="2DJ-uq-Xcz"/>
+                    <connections>
+                        <outlet property="iconCarouselView" destination="5tm-rM-Hgr" id="Brh-Dj-aNC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wQN-kj-uGv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

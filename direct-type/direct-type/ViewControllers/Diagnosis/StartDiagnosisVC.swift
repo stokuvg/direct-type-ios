@@ -9,6 +9,15 @@
 import UIKit
 
 final class StartDiagnosisVC: UIViewController {
+    @IBOutlet private weak var iconCarouselView: IconCarouselView!
+    @IBAction private func startDiagnosisButton(_ sender: UIButton) {
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        iconCarouselView.startAnimation()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationBar()
