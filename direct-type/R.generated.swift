@@ -231,7 +231,7 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.color` struct is generated, and contains static references to 13 colors.
+  /// This `R.color` struct is generated, and contains static references to 14 colors.
   struct color {
     /// Color `color-alart`.
     static let colorAlart = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-alart")
@@ -241,6 +241,8 @@ struct R: Rswift.Validatable {
     static let colorBlack = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-black")
     /// Color `color-button`.
     static let colorButton = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-button")
+    /// Color `color-close`.
+    static let colorClose = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-close")
     /// Color `color-line`.
     static let colorLine = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-line")
     /// Color `color-main`.
@@ -293,6 +295,15 @@ struct R: Rswift.Validatable {
     @available(iOS 11.0, *)
     static func colorButton(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
       return UIKit.UIColor(resource: R.color.colorButton, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "color-close", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorClose(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorClose, compatibleWith: traitCollection)
     }
     #endif
 
@@ -2791,9 +2802,15 @@ struct _R: Rswift.Validatable {
     struct settingVC: Rswift.StoryboardResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "SettingVC"
+      let sbid_AccountChangeCompleteVC = StoryboardViewControllerResource<AccountChangeCompleteVC>(identifier: "Sbid_AccountChangeCompleteVC")
       let sbid_AccountChangeVC = StoryboardViewControllerResource<AccountChangeVC>(identifier: "Sbid_AccountChangeVC")
       let sbid_ApproachSettingVC = StoryboardViewControllerResource<ApproachSettingVC>(identifier: "Sbid_ApproachSettingVC")
       let sbid_SettingVC = StoryboardViewControllerResource<SettingVC>(identifier: "Sbid_SettingVC")
+      let sbid_WithDrawalVC = StoryboardViewControllerResource<WithDrawalVC>(identifier: "Sbid_WithDrawalVC")
+
+      func sbid_AccountChangeCompleteVC(_: Void = ()) -> AccountChangeCompleteVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_AccountChangeCompleteVC)
+      }
 
       func sbid_AccountChangeVC(_: Void = ()) -> AccountChangeVC? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_AccountChangeVC)
@@ -2807,14 +2824,23 @@ struct _R: Rswift.Validatable {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_SettingVC)
       }
 
+      func sbid_WithDrawalVC(_: Void = ()) -> WithDrawalVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_WithDrawalVC)
+      }
+
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
+          if UIKit.UIColor(named: "color-base", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-base' is used in storyboard 'SettingVC', but couldn't be loaded.") }
           if UIKit.UIColor(named: "color-button", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-button' is used in storyboard 'SettingVC', but couldn't be loaded.") }
           if UIKit.UIColor(named: "color-slider-gray", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-slider-gray' is used in storyboard 'SettingVC', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "color-sub", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-sub' is used in storyboard 'SettingVC', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "color-white", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-white' is used in storyboard 'SettingVC', but couldn't be loaded.") }
         }
+        if _R.storyboard.settingVC().sbid_AccountChangeCompleteVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_AccountChangeCompleteVC' could not be loaded from storyboard 'SettingVC' as 'AccountChangeCompleteVC'.") }
         if _R.storyboard.settingVC().sbid_AccountChangeVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_AccountChangeVC' could not be loaded from storyboard 'SettingVC' as 'AccountChangeVC'.") }
         if _R.storyboard.settingVC().sbid_ApproachSettingVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_ApproachSettingVC' could not be loaded from storyboard 'SettingVC' as 'ApproachSettingVC'.") }
         if _R.storyboard.settingVC().sbid_SettingVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_SettingVC' could not be loaded from storyboard 'SettingVC' as 'SettingVC'.") }
+        if _R.storyboard.settingVC().sbid_WithDrawalVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_WithDrawalVC' could not be loaded from storyboard 'SettingVC' as 'WithDrawalVC'.") }
       }
 
       fileprivate init() {}

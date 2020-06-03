@@ -125,7 +125,7 @@
 		06E519982457DA0D004E4B7A /* ApproachSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519972457DA0D004E4B7A /* ApproachSettingVC.swift */; };
 		06E5199A2457DA18004E4B7A /* AccountChangeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519992457DA18004E4B7A /* AccountChangeVC.swift */; };
 		06E5199C2457DA2D004E4B7A /* AccountChangeCompleteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5199B2457DA2D004E4B7A /* AccountChangeCompleteVC.swift */; };
-		06E5199E2457DABE004E4B7A /* WithDrawal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5199D2457DABE004E4B7A /* WithDrawal.swift */; };
+		06E5199E2457DABE004E4B7A /* WithDrawalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5199D2457DABE004E4B7A /* WithDrawalVC.swift */; };
 		06E519A02457DAD7004E4B7A /* WithDrawalCompleteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5199F2457DAD7004E4B7A /* WithDrawalCompleteVC.swift */; };
 		06E519A22457DC44004E4B7A /* InitialInputRegistVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519A12457DC44004E4B7A /* InitialInputRegistVC.swift */; };
 		06E519A42457DC7B004E4B7A /* InitialInputCompleteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519A32457DC7B004E4B7A /* InitialInputCompleteVC.swift */; };
@@ -368,7 +368,7 @@
 		06E519972457DA0D004E4B7A /* ApproachSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproachSettingVC.swift; sourceTree = "<group>"; };
 		06E519992457DA18004E4B7A /* AccountChangeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountChangeVC.swift; sourceTree = "<group>"; };
 		06E5199B2457DA2D004E4B7A /* AccountChangeCompleteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountChangeCompleteVC.swift; sourceTree = "<group>"; };
-		06E5199D2457DABE004E4B7A /* WithDrawal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithDrawal.swift; sourceTree = "<group>"; };
+		06E5199D2457DABE004E4B7A /* WithDrawalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithDrawalVC.swift; sourceTree = "<group>"; };
 		06E5199F2457DAD7004E4B7A /* WithDrawalCompleteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithDrawalCompleteVC.swift; sourceTree = "<group>"; };
 		06E519A12457DC44004E4B7A /* InitialInputRegistVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialInputRegistVC.swift; sourceTree = "<group>"; };
 		06E519A32457DC7B004E4B7A /* InitialInputCompleteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialInputCompleteVC.swift; sourceTree = "<group>"; };
@@ -807,7 +807,7 @@
 				06E519972457DA0D004E4B7A /* ApproachSettingVC.swift */,
 				06E519992457DA18004E4B7A /* AccountChangeVC.swift */,
 				06E5199B2457DA2D004E4B7A /* AccountChangeCompleteVC.swift */,
-				06E5199D2457DABE004E4B7A /* WithDrawal.swift */,
+				06E5199D2457DABE004E4B7A /* WithDrawalVC.swift */,
 				06E5199F2457DAD7004E4B7A /* WithDrawalCompleteVC.swift */,
 				06FFA0032484E1760085A3D9 /* SettingVC.storyboard */,
 				066938222485EA220064030F /* SettingWebVC.swift */,
@@ -1296,7 +1296,7 @@
 				26A1F57E247FB28B00834213 /* Validate+Profile.swift in Sources */,
 				0669380C2485D1030064030F /* SettingAccountCell.swift in Sources */,
 				066763672457AF2400AC5039 /* MyPageVC.swift in Sources */,
-				06E5199E2457DABE004E4B7A /* WithDrawal.swift in Sources */,
+				06E5199E2457DABE004E4B7A /* WithDrawalVC.swift in Sources */,
 				268BFF5A246E8F18004B2640 /* MdlAppSmoothCareer.swift in Sources */,
 				066938102485D5010064030F /* SettingApproachCell.swift in Sources */,
 				26BF48EB24639D6500E00215 /* SelectItemsManager.swift in Sources */,

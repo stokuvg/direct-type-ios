@@ -35,10 +35,14 @@ class SettingWebVC: TmpWebVC {
     
     private func itemSetting() {
         self.backItem.isEnabled = false
-        self.backItem.tintColor = UIColor.init(colorType: .color_white)!
+        self.backItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.init(colorType: .color_base)!], for: .normal)
+        self.backItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.init(colorType: .color_main)!], for: .disabled)
+        self.backItem.tintColor = UIColor.init(colorType: .color_base)!
         self.backItem.action = #selector(webBackAction)
         self.forwardItem.isEnabled = false
-        self.forwardItem.tintColor = UIColor.init(colorType: .color_white)!
+        self.forwardItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.init(colorType: .color_base)!], for: .normal)
+        self.forwardItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.init(colorType: .color_main)!], for: .disabled)
+        self.forwardItem.tintColor = UIColor.init(colorType: .color_base)!
         self.forwardItem.action = #selector(webForwardAction)
     }
     

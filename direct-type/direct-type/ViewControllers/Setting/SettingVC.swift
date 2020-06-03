@@ -100,7 +100,9 @@ extension SettingVC: UITableViewDelegate {
                 self.dispLogoutAlert()
             case 5:
                 // 退会
-                break
+                let vc = getVC(sbName: "SettingVC", vcName: "WithDrawalVC") as! WithDrawalVC
+                vc.modalPresentationStyle = .fullScreen
+                self.navigationController?.pushViewController(vc, animated: true)
             default:
                 break
         }

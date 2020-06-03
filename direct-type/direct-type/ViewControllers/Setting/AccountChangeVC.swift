@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum inputTelphoneErrorType {
+    case none
+    case empty
+    case sameNumber
+}
+
 class AccountChangeVC: TmpBasicVC {
     
     @IBOutlet weak var cautionLabel:UILabel!
@@ -16,17 +22,18 @@ class AccountChangeVC: TmpBasicVC {
     
     @IBOutlet weak var nextBtn:UIButton!
     @IBAction func nextBtnAction() {
-        
+        self.telephoneNumberCheck()
     }
 
     var telNoString:String = ""
+    var displayTelNo:String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.title = "アカウント変更"
         
-        nextBtn.setTitle(text: "次へ", fontType: .font_Sb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        nextBtn.setTitle(text: "次へ", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         
         let cautionText = self.makeCautionText(text:telNoString)
         
@@ -49,7 +56,8 @@ class AccountChangeVC: TmpBasicVC {
     func setup(data:[String:Any]) {
         let telNo = data["telNo"] as! String
         
-        telNoString = telNo
+        displayTelNo = telNo
+        telNoString = self.changeTelephoneNumber()
     }
     
     private func makeCautionText(text:String) -> NSMutableAttributedString {
@@ -79,6 +87,63 @@ class AccountChangeVC: TmpBasicVC {
         cautionText.append(text2)
         
         return cautionText
+    }
+    
+    private func changeTelephoneNumber() -> String {
+        let tel:NSMutableString = NSMutableString.init()
+        let cutArray = displayTelNo.components(separatedBy: "-")
+        for i in 0..<cutArray.count {
+            let item = cutArray[i]
+            tel.append(item)
+        }
+        return tel as String
+    }
+    
+    private func makeErrorMessage(errorType: inputTelphoneErrorType) -> String {
+        var errorMessage:String = ""
+        
+        switch errorType {
+            case .none:
+                errorMessage = ""
+            case .empty:
+                errorMessage = "電話番号が入力されていません"
+            case .sameNumber:
+                errorMessage = "入力された番号が変わっていません"
+        }
+        
+        return errorMessage
+    }
+    
+    private func telephoneNumberCheck() {
+        var errorType:inputTelphoneErrorType = .none
+        if inputField.text?.count == 0 {
+            // 空入力チェック
+            errorType = .empty
+        } else if inputField.text == telNoString {
+            // 電話番号変更チェック
+            errorType = .sameNumber
+        } else {
+            errorType = .none
+        }
+        
+        // エラーがある場合アラートを表示
+        if errorType == .empty {
+            let errorMessage = self.makeErrorMessage(errorType:errorType)
+            let errorAlert = UIAlertController.init(title: "エラー", message: errorMessage, preferredStyle: .alert)
+            let okAction = UIAlertAction.init(title: "OK", style: .default) { (_) in
+            }
+            errorAlert.addAction(okAction)
+            self.navigationController?.present(errorAlert, animated: true, completion: nil)
+        } else if errorType == .sameNumber {
+            // TODO:ニックネームを保存して設定Topへ
+            self.navigationController?.popViewController(animated: true)
+        } else if errorType == .none {
+            // エラーが無い場合通信処理
+            // SMS認証
+            let vc = getVC(sbName: "SettingVC", vcName: "AccountChangeCompleteVC") as! AccountChangeCompleteVC
+            vc.telPhone = telNoString
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 
 }
