@@ -57,9 +57,12 @@ private extension IconCarouselView {
 }
 
 extension IconCarouselView: UICollectionViewDelegate {
+    private var contentOffsetResetThreshold: CGFloat {
+        return 2.0
+    }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentWidth = floor(scrollView.contentSize.width / CGFloat(bulkingValueForCellCount))
-        if (scrollView.contentOffset.x <= 0.0) || (scrollView.contentOffset.x > contentWidth * 2.0) {
+        if (scrollView.contentOffset.x <= CGFloat.zero) || (scrollView.contentOffset.x > contentWidth * contentOffsetResetThreshold) {
             scrollView.contentOffset.x = contentWidth
         }
     }
