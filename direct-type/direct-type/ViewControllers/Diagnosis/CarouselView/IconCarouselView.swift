@@ -12,6 +12,10 @@ final class IconCarouselView: UICollectionView {
     
     private var contents = [UIImageView]()
     private var carouselTimer: Timer?
+    private let autoScrollringTimeInterval: TimeInterval = 0.01
+    private let autoScrollringDistance: CGFloat = 0.3
+    // このかさ増しの閾値を超えるとcontentOffsetがリセットされる
+    private let bulkingValueForCellCount: Int = 100
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -32,7 +36,7 @@ final class IconCarouselView: UICollectionView {
     }
     
     func startAnimation() {
-        carouselTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self,
+        carouselTimer = Timer.scheduledTimer(timeInterval: autoScrollringTimeInterval, target: self,
                                              selector: #selector(self.sctollToNext),
                                              userInfo: nil, repeats: true)
     }
@@ -56,11 +60,6 @@ private extension IconCarouselView {
         return Int(contentOffset.x) % Int(contentWidth)
     }
     
-    var bulkingValueForCellCount: Int {
-        // このかさ増しの閾値を超えるとcontentOffsetとIndexがリセットされる
-        return 100
-    }
-    
     func setup() {
         showsHorizontalScrollIndicator = false
         delegate = self
@@ -70,9 +69,9 @@ private extension IconCarouselView {
     
     @objc
     func sctollToNext() {
-        UIView.animate(withDuration: 0, delay: 0, animations: { [weak self] in
+        UIView.animate(withDuration: .zero, delay: .zero, animations: { [weak self] in
             guard let `self` = self else { return }
-            self.contentOffset.x += 0.3
+            self.contentOffset.x += self.autoScrollringDistance
         })
     }
 }
