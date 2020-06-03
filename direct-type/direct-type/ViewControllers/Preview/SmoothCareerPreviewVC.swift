@@ -35,7 +35,7 @@ class SmoothCareerPreviewVC: PreviewBaseVC {
         //◆F-12入力（在籍企業の業種）
         //・「在籍企業の業種」を入力する：大分類→小分類で選択する・マスタ選択入力：「K6：業種マスタ」
         arrData.append(MdlItemH(.businessTypesF12, "", childItems: [
-            EditableItemH(type: .selectDrum, editItem: EditItemMdlAppSmoothCareerWorkBackgroundDetail.businessType, val: _detail.workBackgroundDetail.businessType),
+            EditableItemH(type: .selectSpecisl, editItem: EditItemMdlAppSmoothCareerWorkBackgroundDetail.businessType, val: _detail.workBackgroundDetail.businessType),
         ]))
         //◆F-13入力（社員数）
         //・「社員数」の入力をする・数値入力：「8桁以上はエラー（従業員数の最大が230万人）」
@@ -51,7 +51,7 @@ class SmoothCareerPreviewVC: PreviewBaseVC {
         //◆F-15入力（雇用形態）
         //・「雇用形態」の入力をする・マスタ選択入力：「雇用形態マスタ」
         arrData.append(MdlItemH(.employmentTypeF15, "", childItems: [
-            EditableItemH(type: .selectDrum, editItem: EditItemMdlAppSmoothCareerComponyDescription.employmentType, val: _detail.componyDescription.employmentType),
+            EditableItemH(type: .selectSingle, editItem: EditItemMdlAppSmoothCareerComponyDescription.employmentType, val: _detail.componyDescription.employmentType),
         ]))
         //◆F-16入力（マネジメント経験）
         //・「マネジメント経験」の入力をする・単一選択で即遷移する
@@ -61,14 +61,14 @@ class SmoothCareerPreviewVC: PreviewBaseVC {
         //ある（6～10人）
         //ある（11人～）
         arrData.append(MdlItemH(.managementsF16, "", childItems: [
-            EditableItemH(type: .selectDrum, editItem: EditItemMdlAppSmoothCareerWorkBackgroundDetail.experienceManagement, val: _detail.workBackgroundDetail.experienceManagement),
+            EditableItemH(type: .selectSingle, editItem: EditItemMdlAppSmoothCareerWorkBackgroundDetail.experienceManagement, val: _detail.workBackgroundDetail.experienceManagement),
         ]))
         //◆F-22職種別入力（PCスキル）
         //・「PCスキル」の入力をする：「Excel」「Word」「PowerPoint」・それぞれドラム選択
         arrData.append(MdlItemH(.pcSkillF22, "", childItems: [
-            EditableItemH(type: .selectDrum, editItem: EditItemMdlAppSmoothCareerWorkBackgroundDetail.skillExcel, val: _detail.workBackgroundDetail.skillExcel),
-            EditableItemH(type: .selectDrum, editItem: EditItemMdlAppSmoothCareerWorkBackgroundDetail.skillWord, val: _detail.workBackgroundDetail.skillWord),
-            EditableItemH(type: .selectDrum, editItem: EditItemMdlAppSmoothCareerWorkBackgroundDetail.skillPowerPoint, val: _detail.workBackgroundDetail.skillPowerPoint),
+            EditableItemH(type: .selectSingle, editItem: EditItemMdlAppSmoothCareerWorkBackgroundDetail.skillExcel, val: _detail.workBackgroundDetail.skillExcel),
+            EditableItemH(type: .selectSingle, editItem: EditItemMdlAppSmoothCareerWorkBackgroundDetail.skillWord, val: _detail.workBackgroundDetail.skillWord),
+            EditableItemH(type: .selectSingle, editItem: EditItemMdlAppSmoothCareerWorkBackgroundDetail.skillPowerPoint, val: _detail.workBackgroundDetail.skillPowerPoint),
         ]))
     }
     override func dispData() {

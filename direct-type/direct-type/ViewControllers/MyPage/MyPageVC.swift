@@ -145,8 +145,9 @@ extension MyPageVC: UITableViewDelegate {
         
         switch (section,row) {
             case (3,_):
-                let vc = getVC(sbName: "SettingVC", vcName: "SettingVC") as! SettingVC
-                self.navigationController?.pushViewController(vc, animated: true)
+                actButton05(UIButton())//[Dbg: 仮認証]
+                //[Dbg: 仮認証] let vc = getVC(sbName: "SettingVC", vcName: "SettingVC") as! SettingVC
+                //[Dbg: 仮認証] self.navigationController?.pushViewController(vc, animated: true)
             default:
                 break
         }
