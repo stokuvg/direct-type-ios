@@ -30,7 +30,8 @@ enum EditType {
     case selectDrum         //一覧からの選択（Drumで表示）
     case selectSingle       //一覧からの選択（単体選択）
     case selectMulti        //一覧からの選択（複数選択）
-    case selectSpecisl      //一覧からの選択（大分類→小分類→年数）
+    case selectSpecisl      //一覧からの選択（大分類→小分類）
+    case selectSpecislYear  //一覧からの選択（大分類→小分類→年数）
 }
 protocol EditableObj: Codable {
     //JSON変換して保存など

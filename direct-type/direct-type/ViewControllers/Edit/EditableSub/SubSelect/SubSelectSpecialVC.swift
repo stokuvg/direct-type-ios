@@ -15,7 +15,11 @@ protocol SubSelectSpecialDelegate {
 }
 
 class SubSelectSpecialVC: BaseVC {
-    let selectYearMode: Bool = false
+    //年数選択が必要か、即選択できるか
+    var selectYearMode: Bool = true
+    //選択数のMAX（1つなら即確定して前画面の可能性も？）
+    var selectMaxCount: Int = 3
+    
     var editableItem: EditableItemH!
     var arrDataGrp: [[CodeDisp]] = []
     var arrSelected: [Bool] = []
@@ -68,6 +72,10 @@ class SubSelectSpecialVC: BaseVC {
         self.tableVW.register(UINib(nibName: "SubSelectSyouTBCell", bundle: nil), forCellReuseIdentifier: "Cell_SubSelectSyouTBCell")
     }
     func initData(editableItem: EditableItemH, selectingCodes: String) {
+        
+        print("✳️✳️✳️✳️タイプとか確認")
+        
+        
         self.editableItem = editableItem
         self.mainTsvMaster = editableItem.editItem.tsvMaster
         switch editableItem.editItem.tsvMaster {

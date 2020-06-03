@@ -50,6 +50,16 @@ struct EditableItemH {
                 obj.code == _val
             }.first?.disp ?? Constants.SelectItemsUndefine.disp
             return "\(buf)"
+
+        case .selectSpecislYear:
+//            let selectionItems = SelectItemsManager.getSelectItems(type: self.editItem, grpCodeFilter: nil)
+            print(#line, #function, "✳️✳️✳️✳️ [_val: \(_val)] ✳️✳️✳️✳️ 複数種類を結合して保持させるお程")
+            let selectionItems: [CodeDisp] = SelectItemsManager.getMaster(self.editItem.tsvMaster)
+            let buf = selectionItems.filter { (obj) -> Bool in
+                obj.code == _val
+            }.first?.disp ?? Constants.SelectItemsUndefine.disp
+            return "\(buf)"
+
         }
     }
     var debugDisp: String {

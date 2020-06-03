@@ -45,7 +45,7 @@ class EditableModel {
                     isSelectable = true
                 case .selectDrum:
                     isSelectable = true //これ、どうしようか？（選択適用した後にnextCell処理を入れるなら含めてもOK）
-                case .selectSingle, .selectMulti, .selectSpecisl:
+                case .selectSingle, .selectMulti, .selectSpecisl, .selectSpecislYear:
                     isSelectable = true
                 case .inputZipcode:
                     isSelectable = true
