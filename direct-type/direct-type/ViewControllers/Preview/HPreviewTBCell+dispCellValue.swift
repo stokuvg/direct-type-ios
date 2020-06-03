@@ -48,8 +48,9 @@ extension HPreviewTBCell {
         case .lastJobExperimentH3:
             let tmp0: String = _item.childItems[0].curVal
             let buf0: String = SelectItemsManager.getCodeDispSyou(.jobType, code: tmp0)?.disp ?? ""
-            let tmp1: String = _item.childItems[1].curVal
-            let buf1: String = SelectItemsManager.getCodeDisp(.jobExperimentYear, code: tmp1)?.disp ?? ""
+//            let tmp1: String = _item.childItems[1].curVal
+//            let buf1: String = SelectItemsManager.getCodeDisp(.jobExperimentYear, code: tmp1)?.disp ?? ""
+            let buf1: String = "＊複数選択値保持対応予定"
             let bufExperiment = "\(buf0) \(buf1)"
             return bufExperiment
         case .jobExperimentsH3:
