@@ -13,8 +13,11 @@ final class StartDiagnosisVC: UIViewController {
     @IBAction private func startDiagnosisButton(_ sender: UIButton) {
     }
     
+    private let carouselIconFrame = CGRect(x: .zero, y: .zero, width: 100, height: 100)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        iconCarouselView.configure(with: generateCarouselIconView())
         iconCarouselView.startAnimation()
     }
     
@@ -34,5 +37,16 @@ private extension StartDiagnosisVC {
             navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
             navigationController?.navigationBar.shadowImage = UIImage()
         }
+    }
+    
+    func generateCarouselIconView() -> [UIImageView]{
+        var imageViews = [UIImageView]()
+        DiagnosisResult.PersonalityType.allCases.forEach({ type in
+            let image = UIImage(named: type.imageName)
+            let imageView = UIImageView(frame: carouselIconFrame)
+            imageView.image = image
+            imageViews.append(imageView)
+        })
+        return imageViews
     }
 }

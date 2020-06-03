@@ -10,11 +10,8 @@ import UIKit
 
 final class IconCarouselView: UICollectionView {
     
-    private var contents = [UIView]()
-    private var contentItemSize = CGSize.zero
+    private var contents = [UIImageView]()
     private var carouselTimer: Timer?
-    // FIXME: デバッグ用なので後から削除
-    private let colors: [UIColor] = [.blue, .yellow, .red, .green, .gray]
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -26,9 +23,12 @@ final class IconCarouselView: UICollectionView {
         setup()
     }
     
-    func configure(with contents: [UIView]) {
+    func configure(with contents: [UIImageView]) {
         self.contents = contents
-        contentItemSize = contents.first!.frame.size
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = contents.first!.frame.size
+        layout.scrollDirection = .horizontal
+        collectionViewLayout = layout
     }
     
     func startAnimation() {
@@ -58,22 +58,14 @@ private extension IconCarouselView {
     
     var bulkingValueForCellCount: Int {
         // このかさ増しの閾値を超えるとcontentOffsetとIndexがリセットされる
-        return 1000
+        return 100
     }
     
     func setup() {
-        let layout = UICollectionViewFlowLayout()
-        // FIXME: デバッグ用なので後から削除
-        contentItemSize = CGSize(width: 100, height: 100)
-        layout.itemSize = contentItemSize
-        layout.scrollDirection = .horizontal
-        collectionViewLayout = layout
         showsHorizontalScrollIndicator = false
         delegate = self
         dataSource = self
         register(CarouselCell.self, forCellWithReuseIdentifier: CarouselCell.id)
-        // FIXME: デバッグ用なので後から削除
-        inputDummyData()
     }
     
     @objc
@@ -82,14 +74,6 @@ private extension IconCarouselView {
             guard let `self` = self else { return }
             self.contentOffset.x += 0.3
         })
-    }
-    
-    // FIXME: デバッグ用なので後から削除
-    func inputDummyData() {
-        for _ in 0..<colors.count {
-            let contentView = UIView()
-            contents.append(contentView)
-        }
     }
 }
 
@@ -112,8 +96,8 @@ extension IconCarouselView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = dequeueReusableCell(withReuseIdentifier: CarouselCell.id, for: indexPath)
-        let colorIndex = indexPath.row % contents.count
-        cell.backgroundColor = colors[colorIndex]
+        let fixedIndex = indexPath.row % contents.count
+        cell.addSubview(contents[fixedIndex])
         return cell
     }
 }
