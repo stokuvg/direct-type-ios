@@ -17,12 +17,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zmu-eo-Xt5">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5tm-rM-Hgr" customClass="IconCarouselView" customModule="direct_type" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                                <color key="backgroundColor" name="color-sub"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="XPw-Ej-SMY"/>
+                                    <constraint firstAttribute="height" constant="100" id="o6I-lV-unU"/>
                                 </constraints>
-                            </view>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1Ac-eY-iiI">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="6dd-Uc-URe">
                                 <rect key="frame" x="0.0" y="100" width="320" height="468"/>
                                 <subviews>
@@ -153,12 +161,12 @@
                         <color key="backgroundColor" name="color-sub"/>
                         <constraints>
                             <constraint firstItem="6dd-Uc-URe" firstAttribute="trailing" secondItem="y1O-HE-ZRE" secondAttribute="trailing" id="9iU-Uv-B88"/>
+                            <constraint firstItem="5tm-rM-Hgr" firstAttribute="top" secondItem="y1O-HE-ZRE" secondAttribute="top" id="Fsg-GK-mSj"/>
+                            <constraint firstItem="6dd-Uc-URe" firstAttribute="top" secondItem="5tm-rM-Hgr" secondAttribute="bottom" id="IaZ-Ez-rRR"/>
                             <constraint firstItem="6dd-Uc-URe" firstAttribute="leading" secondItem="y1O-HE-ZRE" secondAttribute="leading" id="Lak-Bf-CnV"/>
-                            <constraint firstItem="Zmu-eo-Xt5" firstAttribute="trailing" secondItem="y1O-HE-ZRE" secondAttribute="trailing" id="PwB-N8-CJI"/>
-                            <constraint firstItem="Zmu-eo-Xt5" firstAttribute="leading" secondItem="y1O-HE-ZRE" secondAttribute="leading" id="V46-ac-VLf"/>
-                            <constraint firstItem="6dd-Uc-URe" firstAttribute="top" secondItem="Zmu-eo-Xt5" secondAttribute="bottom" id="Y66-hI-tJA"/>
                             <constraint firstItem="6dd-Uc-URe" firstAttribute="bottom" secondItem="y1O-HE-ZRE" secondAttribute="bottom" id="hZ2-kS-H0d"/>
-                            <constraint firstItem="Zmu-eo-Xt5" firstAttribute="top" secondItem="y1O-HE-ZRE" secondAttribute="top" id="iQW-Wk-V3m"/>
+                            <constraint firstItem="5tm-rM-Hgr" firstAttribute="leading" secondItem="y1O-HE-ZRE" secondAttribute="leading" id="rLM-1f-i9d"/>
+                            <constraint firstItem="5tm-rM-Hgr" firstAttribute="trailing" secondItem="y1O-HE-ZRE" secondAttribute="trailing" id="vZD-al-bnx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="y1O-HE-ZRE"/>
                     </view>
