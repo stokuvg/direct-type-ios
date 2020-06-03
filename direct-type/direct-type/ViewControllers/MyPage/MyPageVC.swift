@@ -58,9 +58,6 @@ class MyPageVC: TmpNaviTopVC {
         self.pageTableView.registerNib(nibName: "MyPageEditedChemistryCell", idName: "MyPageEditedChemistryCell")
         
         self.pageTableView.registerNib(nibName: "MyPageSettingCell", idName: "MyPageSettingCell") // 設定
-        
-//        btnButton05.setTitle("認証", for: .normal)
-//        btnButton06.setTitle("API [Get] /jobs", for: .normal)
     }
 }
 
@@ -145,9 +142,9 @@ extension MyPageVC: UITableViewDelegate {
         
         switch (section,row) {
             case (3,_):
-                actButton05(UIButton())//[Dbg: 仮認証]
-                //[Dbg: 仮認証] let vc = getVC(sbName: "SettingVC", vcName: "SettingVC") as! SettingVC
-                //[Dbg: 仮認証] self.navigationController?.pushViewController(vc, animated: true)
+//                actButton05(UIButton())//[Dbg: 仮認証]
+                let vc = getVC(sbName: "SettingVC", vcName: "SettingVC") as! SettingVC
+                self.navigationController?.pushViewController(vc, animated: true)
             default:
                 break
         }
@@ -265,7 +262,7 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
 
 extension MyPageVC: MyPageChemistryStartCellDelegate {
     
-    // 画面遷移
+    // 相性診断画面遷移
     func registChemistryAction() {
     }
 }

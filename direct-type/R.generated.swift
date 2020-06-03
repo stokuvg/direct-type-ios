@@ -89,7 +89,7 @@ struct R: Rswift.Validatable {
   }
 
   #if os(iOS) || os(tvOS)
-  /// This `R.storyboard` struct is generated, and contains static references to 14 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 15 storyboards.
   struct storyboard {
     /// Storyboard `Auth`.
     static let auth = _R.storyboard.auth()
@@ -119,6 +119,8 @@ struct R: Rswift.Validatable {
     static let settingVC = _R.storyboard.settingVC()
     /// Storyboard `SplashVC`.
     static let splashVC = _R.storyboard.splashVC()
+    /// Storyboard `Web`.
+    static let web = _R.storyboard.web()
 
     #if os(iOS) || os(tvOS)
     /// `UIStoryboard(name: "Auth", bundle: ...)`
@@ -218,11 +220,18 @@ struct R: Rswift.Validatable {
     }
     #endif
 
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "Web", bundle: ...)`
+    static func web(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.web)
+    }
+    #endif
+
     fileprivate init() {}
   }
   #endif
 
-  /// This `R.color` struct is generated, and contains static references to 13 colors.
+  /// This `R.color` struct is generated, and contains static references to 14 colors.
   struct color {
     /// Color `color-alart`.
     static let colorAlart = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-alart")
@@ -232,6 +241,8 @@ struct R: Rswift.Validatable {
     static let colorBlack = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-black")
     /// Color `color-button`.
     static let colorButton = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-button")
+    /// Color `color-close`.
+    static let colorClose = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-close")
     /// Color `color-line`.
     static let colorLine = Rswift.ColorResource(bundle: R.hostingBundle, name: "color-line")
     /// Color `color-main`.
@@ -284,6 +295,15 @@ struct R: Rswift.Validatable {
     @available(iOS 11.0, *)
     static func colorButton(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
       return UIKit.UIColor(resource: R.color.colorButton, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "color-close", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorClose(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorClose, compatibleWith: traitCollection)
     }
     #endif
 
@@ -553,7 +573,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.image` struct is generated, and contains static references to 62 images.
+  /// This `R.image` struct is generated, and contains static references to 65 images.
   struct image {
     /// Image `arBtm_2`.
     static let arBtm_2 = Rswift.ImageResource(bundle: R.hostingBundle, name: "arBtm_2")
@@ -679,6 +699,12 @@ struct R: Rswift.Validatable {
     static let sortDefaultWhiteBase = Rswift.ImageResource(bundle: R.hostingBundle, name: "sortDefaultWhiteBase")
     /// Image `upcoming`.
     static let upcoming = Rswift.ImageResource(bundle: R.hostingBundle, name: "upcoming")
+    /// Image `webBack`.
+    static let webBack = Rswift.ImageResource(bundle: R.hostingBundle, name: "webBack")
+    /// Image `webClose`.
+    static let webClose = Rswift.ImageResource(bundle: R.hostingBundle, name: "webClose")
+    /// Image `webForward`.
+    static let webForward = Rswift.ImageResource(bundle: R.hostingBundle, name: "webForward")
 
     #if os(iOS) || os(tvOS)
     /// `UIImage(named: "ar", bundle: ..., traitCollection: ...)`
@@ -1114,10 +1140,31 @@ struct R: Rswift.Validatable {
     }
     #endif
 
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "webBack", bundle: ..., traitCollection: ...)`
+    static func webBack(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.webBack, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "webClose", bundle: ..., traitCollection: ...)`
+    static func webClose(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.webClose, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "webForward", bundle: ..., traitCollection: ...)`
+    static func webForward(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.webForward, compatibleWith: traitCollection)
+    }
+    #endif
+
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 40 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 43 nibs.
   struct nib {
     /// Nib `BasePercentageCompletionCell`.
     static let basePercentageCompletionCell = _R.nib._BasePercentageCompletionCell()
@@ -1193,6 +1240,12 @@ struct R: Rswift.Validatable {
     static let naviButtonsView = _R.nib._NaviButtonsView()
     /// Nib `NoCardView`.
     static let noCardView = _R.nib._NoCardView()
+    /// Nib `SettingAccountCell`.
+    static let settingAccountCell = _R.nib._SettingAccountCell()
+    /// Nib `SettingApproachCell`.
+    static let settingApproachCell = _R.nib._SettingApproachCell()
+    /// Nib `SettingBaseCell`.
+    static let settingBaseCell = _R.nib._SettingBaseCell()
     /// Nib `SubSelectDaiTBCell`.
     static let subSelectDaiTBCell = _R.nib._SubSelectDaiTBCell()
     /// Nib `SubSelectSyouTBCell`.
@@ -1497,6 +1550,30 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
+    /// `UINib(name: "SettingAccountCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.settingAccountCell) instead")
+    static func settingAccountCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.settingAccountCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "SettingApproachCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.settingApproachCell) instead")
+    static func settingApproachCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.settingApproachCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "SettingBaseCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.settingBaseCell) instead")
+    static func settingBaseCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.settingBaseCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
     /// `UINib(name: "SubSelectDaiTBCell", in: bundle)`
     @available(*, deprecated, message: "Use UINib(resource: R.nib.subSelectDaiTBCell) instead")
     static func subSelectDaiTBCell(_: Void = ()) -> UIKit.UINib {
@@ -1666,6 +1743,18 @@ struct R: Rswift.Validatable {
 
     static func noCardView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> NoCardView? {
       return R.nib.noCardView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? NoCardView
+    }
+
+    static func settingAccountCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SettingAccountCell? {
+      return R.nib.settingAccountCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SettingAccountCell
+    }
+
+    static func settingApproachCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SettingApproachCell? {
+      return R.nib.settingApproachCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SettingApproachCell
+    }
+
+    static func settingBaseCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SettingBaseCell? {
+      return R.nib.settingBaseCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SettingBaseCell
     }
 
     static func subSelectDaiTBCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SubSelectDaiTBCell? {
@@ -2287,6 +2376,39 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
 
+    struct _SettingAccountCell: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "SettingAccountCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SettingAccountCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SettingAccountCell
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _SettingApproachCell: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "SettingApproachCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SettingApproachCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SettingApproachCell
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _SettingBaseCell: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "SettingBaseCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> SettingBaseCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SettingBaseCell
+      }
+
+      fileprivate init() {}
+    }
+
     struct _SubSelectDaiTBCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
       typealias ReusableType = SubSelectDaiTBCell
 
@@ -2374,6 +2496,9 @@ struct _R: Rswift.Validatable {
       #endif
       #if os(iOS) || os(tvOS)
       try splashVC.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
+      try web.validate()
       #endif
     }
 
@@ -2677,16 +2802,45 @@ struct _R: Rswift.Validatable {
     struct settingVC: Rswift.StoryboardResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "SettingVC"
+      let sbid_AccountChangeCompleteVC = StoryboardViewControllerResource<AccountChangeCompleteVC>(identifier: "Sbid_AccountChangeCompleteVC")
+      let sbid_AccountChangeVC = StoryboardViewControllerResource<AccountChangeVC>(identifier: "Sbid_AccountChangeVC")
+      let sbid_ApproachSettingVC = StoryboardViewControllerResource<ApproachSettingVC>(identifier: "Sbid_ApproachSettingVC")
       let sbid_SettingVC = StoryboardViewControllerResource<SettingVC>(identifier: "Sbid_SettingVC")
+      let sbid_WithDrawalVC = StoryboardViewControllerResource<WithDrawalVC>(identifier: "Sbid_WithDrawalVC")
+
+      func sbid_AccountChangeCompleteVC(_: Void = ()) -> AccountChangeCompleteVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_AccountChangeCompleteVC)
+      }
+
+      func sbid_AccountChangeVC(_: Void = ()) -> AccountChangeVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_AccountChangeVC)
+      }
+
+      func sbid_ApproachSettingVC(_: Void = ()) -> ApproachSettingVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_ApproachSettingVC)
+      }
 
       func sbid_SettingVC(_: Void = ()) -> SettingVC? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_SettingVC)
       }
 
+      func sbid_WithDrawalVC(_: Void = ()) -> WithDrawalVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_WithDrawalVC)
+      }
+
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
+          if UIKit.UIColor(named: "color-base", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-base' is used in storyboard 'SettingVC', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "color-button", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-button' is used in storyboard 'SettingVC', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "color-slider-gray", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-slider-gray' is used in storyboard 'SettingVC', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "color-sub", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-sub' is used in storyboard 'SettingVC', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "color-white", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-white' is used in storyboard 'SettingVC', but couldn't be loaded.") }
         }
+        if _R.storyboard.settingVC().sbid_AccountChangeCompleteVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_AccountChangeCompleteVC' could not be loaded from storyboard 'SettingVC' as 'AccountChangeCompleteVC'.") }
+        if _R.storyboard.settingVC().sbid_AccountChangeVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_AccountChangeVC' could not be loaded from storyboard 'SettingVC' as 'AccountChangeVC'.") }
+        if _R.storyboard.settingVC().sbid_ApproachSettingVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_ApproachSettingVC' could not be loaded from storyboard 'SettingVC' as 'ApproachSettingVC'.") }
         if _R.storyboard.settingVC().sbid_SettingVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_SettingVC' could not be loaded from storyboard 'SettingVC' as 'SettingVC'.") }
+        if _R.storyboard.settingVC().sbid_WithDrawalVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_WithDrawalVC' could not be loaded from storyboard 'SettingVC' as 'WithDrawalVC'.") }
       }
 
       fileprivate init() {}
@@ -2703,6 +2857,28 @@ struct _R: Rswift.Validatable {
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    struct web: Rswift.StoryboardResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "Web"
+      let sbid_SettingWebVC = StoryboardViewControllerResource<SettingWebVC>(identifier: "Sbid_SettingWebVC")
+
+      func sbid_SettingWebVC(_: Void = ()) -> SettingWebVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_SettingWebVC)
+      }
+
+      static func validate() throws {
+        if UIKit.UIImage(named: "webBack", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'webBack' is used in storyboard 'Web', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "webForward", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'webForward' is used in storyboard 'Web', but couldn't be loaded.") }
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+        if _R.storyboard.web().sbid_SettingWebVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_SettingWebVC' could not be loaded from storyboard 'Web' as 'SettingWebVC'.") }
       }
 
       fileprivate init() {}
