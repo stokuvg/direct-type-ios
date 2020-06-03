@@ -31,6 +31,19 @@ class SettingVC: TmpBasicVC {
         self.tableView.registerNib(nibName: "SettingBaseCell", idName: "SettingBaseCell")
     }
     
+    private func dispLogoutAlert() {
+        let logoutAlert = UIAlertController.init(title: "ログアウト確認", message: "ログアウトしますか", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: { (action:UIAlertAction!) -> Void in
+            
+        })
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action:UIAlertAction!) -> Void in
+            
+        })
+        logoutAlert.addAction(cancelAction)
+        logoutAlert.addAction(okAction)
+        
+        self.navigationController?.present(logoutAlert, animated: true, completion: nil)
+    }
 
 }
 
@@ -40,8 +53,10 @@ extension SettingVC: UITableViewDelegate {
         switch row {
             case 0:
                 return 68
+            /*
             case 1:
                 return 68
+            */
             default:
                 return 54
         }
@@ -53,32 +68,37 @@ extension SettingVC: UITableViewDelegate {
         switch row {
             case 0:
                 // H-10 修正画面へ遷移
-                break
+                let vc = getVC(sbName: "SettingVC", vcName: "AccountChangeVC") as! AccountChangeVC
+                let telephoneData = ["telNo":"090-1234-5678"]
+                vc.setup(data: telephoneData)
+                self.navigationController?.pushViewController(vc, animated: true)
+            /*
             case 1:
                 // H-9 アプローチ設定へ遷移
                 break
-            case 2:
+            */
+            case 1:
                 // Web(よくある質問・ヘルプ)を表示
                 let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
                 vc.setup(type: .Help)
                 vc.modalPresentationStyle = .fullScreen
                 self.navigationController?.present(vc, animated: true, completion: nil)
-            case 3:
+            case 2:
                 // Web(プライバシーポリシー)を表示
                 let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
                 vc.setup(type: .Privacy)
                 vc.modalPresentationStyle = .fullScreen
                 self.navigationController?.present(vc, animated: true, completion: nil)
-            case 4:
+            case 3:
                 // Web(利用規約)を表示
                 let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
                 vc.setup(type: .Term)
                 vc.modalPresentationStyle = .fullScreen
                 self.navigationController?.present(vc, animated: true, completion: nil)
-            case 5:
+            case 4:
                 // ログアウト
-                break
-            case 6:
+                self.dispLogoutAlert()
+            case 5:
                 // 退会
                 break
             default:
@@ -89,7 +109,7 @@ extension SettingVC: UITableViewDelegate {
 
 extension SettingVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return 6
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -99,24 +119,26 @@ extension SettingVC: UITableViewDataSource {
                 let cell = tableView.loadCell(cellName: "SettingAccountCell", indexPath: indexPath) as! SettingAccountCell
                 cell.setup(telNo: "090-1234-5678")
                 return cell
+            /*
             case 1:
                 let cell = tableView.loadCell(cellName: "SettingApproachCell", indexPath: indexPath) as! SettingApproachCell
                 let data:[String:Any] = [:]
                 cell.setup(data: data)
                 return cell
+            */
             default:
                 let cell = tableView.loadCell(cellName: "SettingBaseCell", indexPath: indexPath) as! SettingBaseCell
                 var titleStirng = ""
                 switch row {
-                    case 2:
+                    case 1:
                         titleStirng = "よくある質問・ヘルプ"
-                    case 3:
+                    case 2:
                         titleStirng = "プライバシーポリシー"
-                    case 4:
+                    case 3:
                         titleStirng = "利用規約"
-                    case 5:
+                    case 4:
                         titleStirng = "ログアウト"
-                    case 6:
+                    case 5:
                         titleStirng = "退会"
                     default:
                         titleStirng = ""

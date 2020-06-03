@@ -2791,7 +2791,17 @@ struct _R: Rswift.Validatable {
     struct settingVC: Rswift.StoryboardResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "SettingVC"
+      let sbid_AccountChangeVC = StoryboardViewControllerResource<AccountChangeVC>(identifier: "Sbid_AccountChangeVC")
+      let sbid_ApproachSettingVC = StoryboardViewControllerResource<ApproachSettingVC>(identifier: "Sbid_ApproachSettingVC")
       let sbid_SettingVC = StoryboardViewControllerResource<SettingVC>(identifier: "Sbid_SettingVC")
+
+      func sbid_AccountChangeVC(_: Void = ()) -> AccountChangeVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_AccountChangeVC)
+      }
+
+      func sbid_ApproachSettingVC(_: Void = ()) -> ApproachSettingVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_ApproachSettingVC)
+      }
 
       func sbid_SettingVC(_: Void = ()) -> SettingVC? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_SettingVC)
@@ -2799,7 +2809,11 @@ struct _R: Rswift.Validatable {
 
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
+          if UIKit.UIColor(named: "color-button", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-button' is used in storyboard 'SettingVC', but couldn't be loaded.") }
+          if UIKit.UIColor(named: "color-slider-gray", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-slider-gray' is used in storyboard 'SettingVC', but couldn't be loaded.") }
         }
+        if _R.storyboard.settingVC().sbid_AccountChangeVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_AccountChangeVC' could not be loaded from storyboard 'SettingVC' as 'AccountChangeVC'.") }
+        if _R.storyboard.settingVC().sbid_ApproachSettingVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_ApproachSettingVC' could not be loaded from storyboard 'SettingVC' as 'ApproachSettingVC'.") }
         if _R.storyboard.settingVC().sbid_SettingVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_SettingVC' could not be loaded from storyboard 'SettingVC' as 'SettingVC'.") }
       }
 
