@@ -89,7 +89,7 @@ struct R: Rswift.Validatable {
   }
 
   #if os(iOS) || os(tvOS)
-  /// This `R.storyboard` struct is generated, and contains static references to 15 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 16 storyboards.
   struct storyboard {
     /// Storyboard `Auth`.
     static let auth = _R.storyboard.auth()
@@ -119,13 +119,10 @@ struct R: Rswift.Validatable {
     static let settingVC = _R.storyboard.settingVC()
     /// Storyboard `SplashVC`.
     static let splashVC = _R.storyboard.splashVC()
-<<<<<<< HEAD
     /// Storyboard `StartDiagnosisVC`.
     static let startDiagnosisVC = _R.storyboard.startDiagnosisVC()
-=======
     /// Storyboard `Web`.
     static let web = _R.storyboard.web()
->>>>>>> 5197f400cc9f2dd1b5d422100553bc7188cca736
 
     #if os(iOS) || os(tvOS)
     /// `UIStoryboard(name: "Auth", bundle: ...)`
@@ -226,15 +223,16 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
-<<<<<<< HEAD
     /// `UIStoryboard(name: "StartDiagnosisVC", bundle: ...)`
     static func startDiagnosisVC(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.startDiagnosisVC)
-=======
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
     /// `UIStoryboard(name: "Web", bundle: ...)`
     static func web(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.web)
->>>>>>> 5197f400cc9f2dd1b5d422100553bc7188cca736
     }
     #endif
 
@@ -2509,11 +2507,10 @@ struct _R: Rswift.Validatable {
       try splashVC.validate()
       #endif
       #if os(iOS) || os(tvOS)
-<<<<<<< HEAD
       try startDiagnosisVC.validate()
-=======
+      #endif
+      #if os(iOS) || os(tvOS)
       try web.validate()
->>>>>>> 5197f400cc9f2dd1b5d422100553bc7188cca736
       #endif
     }
 
@@ -2879,7 +2876,6 @@ struct _R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
-<<<<<<< HEAD
     struct startDiagnosisVC: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
       typealias InitialController = StartDiagnosisVC
 
@@ -2890,7 +2886,13 @@ struct _R: Rswift.Validatable {
         if #available(iOS 11.0, tvOS 11.0, *) {
           if UIKit.UIColor(named: "color-sub", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-sub' is used in storyboard 'StartDiagnosisVC', but couldn't be loaded.") }
         }
-=======
+      }
+
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
     struct web: Rswift.StoryboardResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "Web"
@@ -2906,7 +2908,6 @@ struct _R: Rswift.Validatable {
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
         if _R.storyboard.web().sbid_SettingWebVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_SettingWebVC' could not be loaded from storyboard 'Web' as 'SettingWebVC'.") }
->>>>>>> 5197f400cc9f2dd1b5d422100553bc7188cca736
       }
 
       fileprivate init() {}
