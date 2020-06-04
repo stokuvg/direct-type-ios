@@ -54,6 +54,7 @@ private extension ChemistryStart {
     func transitionToChemisrortSelect() {
         let vc = UIStoryboard(name: "ChemistrySelect", bundle: nil)
             .instantiateInitialViewController() as! ChemistrySelect
+        hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
 }
