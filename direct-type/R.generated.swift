@@ -95,6 +95,8 @@ struct R: Rswift.Validatable {
     static let auth = _R.storyboard.auth()
     /// Storyboard `BaseTabBC`.
     static let baseTabBC = _R.storyboard.baseTabBC()
+    /// Storyboard `ChemistryStart`.
+    static let chemistryStart = _R.storyboard.chemistryStart()
     /// Storyboard `Dialog`.
     static let dialog = _R.storyboard.dialog()
     /// Storyboard `Edit`.
@@ -119,8 +121,6 @@ struct R: Rswift.Validatable {
     static let settingVC = _R.storyboard.settingVC()
     /// Storyboard `SplashVC`.
     static let splashVC = _R.storyboard.splashVC()
-    /// Storyboard `StartDiagnosisVC`.
-    static let startDiagnosisVC = _R.storyboard.startDiagnosisVC()
     /// Storyboard `Web`.
     static let web = _R.storyboard.web()
 
@@ -135,6 +135,13 @@ struct R: Rswift.Validatable {
     /// `UIStoryboard(name: "BaseTabBC", bundle: ...)`
     static func baseTabBC(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.baseTabBC)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "ChemistryStart", bundle: ...)`
+    static func chemistryStart(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.chemistryStart)
     }
     #endif
 
@@ -219,13 +226,6 @@ struct R: Rswift.Validatable {
     /// `UIStoryboard(name: "SplashVC", bundle: ...)`
     static func splashVC(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.splashVC)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIStoryboard(name: "StartDiagnosisVC", bundle: ...)`
-    static func startDiagnosisVC(_: Void = ()) -> UIKit.UIStoryboard {
-      return UIKit.UIStoryboard(resource: R.storyboard.startDiagnosisVC)
     }
     #endif
 
@@ -2471,6 +2471,9 @@ struct _R: Rswift.Validatable {
       try baseTabBC.validate()
       #endif
       #if os(iOS) || os(tvOS)
+      try chemistryStart.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
       try dialog.validate()
       #endif
       #if os(iOS) || os(tvOS)
@@ -2505,9 +2508,6 @@ struct _R: Rswift.Validatable {
       #endif
       #if os(iOS) || os(tvOS)
       try splashVC.validate()
-      #endif
-      #if os(iOS) || os(tvOS)
-      try startDiagnosisVC.validate()
       #endif
       #if os(iOS) || os(tvOS)
       try web.validate()
@@ -2556,6 +2556,23 @@ struct _R: Rswift.Validatable {
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
         if _R.storyboard.baseTabBC().sbid_BaseTabBC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_BaseTabBC' could not be loaded from storyboard 'BaseTabBC' as 'BaseTabBC'.") }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    struct chemistryStart: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = ChemistryStart
+
+      let bundle = R.hostingBundle
+      let name = "ChemistryStart"
+
+      static func validate() throws {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+          if UIKit.UIColor(named: "color-sub", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-sub' is used in storyboard 'ChemistryStart', but couldn't be loaded.") }
+        }
       }
 
       fileprivate init() {}
@@ -2868,23 +2885,6 @@ struct _R: Rswift.Validatable {
 
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
-        }
-      }
-
-      fileprivate init() {}
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    struct startDiagnosisVC: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
-      typealias InitialController = StartDiagnosisVC
-
-      let bundle = R.hostingBundle
-      let name = "StartDiagnosisVC"
-
-      static func validate() throws {
-        if #available(iOS 11.0, tvOS 11.0, *) {
-          if UIKit.UIColor(named: "color-sub", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-sub' is used in storyboard 'StartDiagnosisVC', but couldn't be loaded.") }
         }
       }
 

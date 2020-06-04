@@ -156,8 +156,7 @@
 		06FFA00B2484E66C0085A3D9 /* MyPageEditedChemistryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FFA0092484E66C0085A3D9 /* MyPageEditedChemistryCell.swift */; };
 		06FFA00C2484E66C0085A3D9 /* MyPageEditedChemistryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06FFA00A2484E66C0085A3D9 /* MyPageEditedChemistryCell.xib */; };
 		0E9B8B3324877BA60049CFCC /* DiagnosisResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9B8B3224877BA60049CFCC /* DiagnosisResult.swift */; };
-		0EE36F172486256F0098A2AF /* StartDiagnosisVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EE36F162486256F0098A2AF /* StartDiagnosisVC.storyboard */; };
-		0EE36F192486258D0098A2AF /* StartDiagnosisVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE36F182486258D0098A2AF /* StartDiagnosisVC.swift */; };
+		0EE36F172486256F0098A2AF /* ChemistryStart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EE36F162486256F0098A2AF /* ChemistryStart.storyboard */; };
 		0EE36F1B24872E280098A2AF /* IconCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE36F1A24872E280098A2AF /* IconCarouselView.swift */; };
 		0EE36F1E248737AB0098A2AF /* CarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE36F1D248737AB0098A2AF /* CarouselCell.swift */; };
 		260BBFDC2465171D003D163A /* MdlProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260BBFDB2465171D003D163A /* MdlProfile.swift */; };
@@ -404,8 +403,7 @@
 		06FFA0092484E66C0085A3D9 /* MyPageEditedChemistryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageEditedChemistryCell.swift; sourceTree = "<group>"; };
 		06FFA00A2484E66C0085A3D9 /* MyPageEditedChemistryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyPageEditedChemistryCell.xib; sourceTree = "<group>"; };
 		0E9B8B3224877BA60049CFCC /* DiagnosisResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisResult.swift; sourceTree = "<group>"; };
-		0EE36F162486256F0098A2AF /* StartDiagnosisVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StartDiagnosisVC.storyboard; sourceTree = "<group>"; };
-		0EE36F182486258D0098A2AF /* StartDiagnosisVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDiagnosisVC.swift; sourceTree = "<group>"; };
+		0EE36F162486256F0098A2AF /* ChemistryStart.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChemistryStart.storyboard; sourceTree = "<group>"; };
 		0EE36F1A24872E280098A2AF /* IconCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconCarouselView.swift; sourceTree = "<group>"; };
 		0EE36F1D248737AB0098A2AF /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
 		260BBFDB2465171D003D163A /* MdlProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MdlProfile.swift; sourceTree = "<group>"; };
@@ -677,7 +675,6 @@
 		067F28D62456CEBF000AAD69 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				0EE36F15248625200098A2AF /* Diagnosis */,
 				06E519D424581691004E4B7A /* WebView */,
 				06E519D124581667004E4B7A /* Edit */,
 				06E519CA24581622004E4B7A /* Preview */,
@@ -803,6 +800,8 @@
 		06E5198B2457D6EF004E4B7A /* Chemistry */ = {
 			isa = PBXGroup;
 			children = (
+				0EE36F1C248737970098A2AF /* CarouselView */,
+				0EE36F162486256F0098A2AF /* ChemistryStart.storyboard */,
 				06E5198C2457D6FF004E4B7A /* ChemistryStart.swift */,
 				06E5198E2457D70B004E4B7A /* ChemistrySelect.swift */,
 				06E519902457D742004E4B7A /* ChemistryResult.swift */,
@@ -894,16 +893,6 @@
 			isa = PBXGroup;
 			children = (
 				0E9B8B3224877BA60049CFCC /* DiagnosisResult.swift */,
-			);
-			path = Diagnosis;
-			sourceTree = "<group>";
-		};
-		0EE36F15248625200098A2AF /* Diagnosis */ = {
-			isa = PBXGroup;
-			children = (
-				0EE36F1C248737970098A2AF /* CarouselView */,
-				0EE36F162486256F0098A2AF /* StartDiagnosisVC.storyboard */,
-				0EE36F182486258D0098A2AF /* StartDiagnosisVC.swift */,
 			);
 			path = Diagnosis;
 			sourceTree = "<group>";
@@ -1189,7 +1178,7 @@
 				064570642465427000F3B015 /* JobDetailGuideBookHeaderView.xib in Resources */,
 				0645DE03246BB6A100592572 /* JobDetailSalaryExampleCell.xib in Resources */,
 				068FFAAB24727A8B0083E130 /* JobDetailStepView.xib in Resources */,
-				0EE36F172486256F0098A2AF /* StartDiagnosisVC.storyboard in Resources */,
+				0EE36F172486256F0098A2AF /* ChemistryStart.storyboard in Resources */,
 				068501822473CE4D009770A3 /* HomeTitleView.xib in Resources */,
 				26CFC4682469496D00E458E2 /* HEditZipcodeTBCell.xib in Resources */,
 				068FFAA324725F4B0083E130 /* JobDetailFooterApplicationCell.xib in Resources */,
@@ -1420,7 +1409,6 @@
 				06E519A22457DC44004E4B7A /* InitialInputRegistVC.swift in Sources */,
 				269AFFC3246A929300DB364B /* SubSelectTBCell.swift in Sources */,
 				06E519AF245813E9004E4B7A /* LoginConfirmVC.swift in Sources */,
-				0EE36F192486258D0098A2AF /* StartDiagnosisVC.swift in Sources */,
 				066EF6C8245BBA1100E15AD2 /* BaseJobCardCell.swift in Sources */,
 				26F2A82B246D2EE90037D47F /* EditableTableBasicVC.swift in Sources */,
 				06E519B7245814D4004E4B7A /* SubEditBaseVC.swift in Sources */,
