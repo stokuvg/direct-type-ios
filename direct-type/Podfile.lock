@@ -32,7 +32,7 @@ PODS:
   - SwaggerClient (0.20.4.30):
     - Alamofire (~> 4.9.0)
     - PromiseKit (~> 6.8)
-  - TudApi (0.20.5.22):
+  - TudApi (0.20.6.4):
     - Alamofire (~> 4.9.0)
     - PromiseKit (~> 6.8)
 
@@ -83,7 +83,7 @@ SPEC CHECKSUMS:
   R.swift.Library: fa85ce1e0d0b7e818cd9e080df910ba54d2776cc
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwaggerClient: deb4a616e282c99b0e89519fd3fa3e0c4ddd8d67
-  TudApi: 49586ab5ad3ec19eed37679a33566a929b6e451f
+  TudApi: 5a956e970242dd6cebc5e8c26b5c3a7cf611c614
 
 PODFILE CHECKSUM: 8d2c926a95887a964848fbafb80b2888d7599732
 

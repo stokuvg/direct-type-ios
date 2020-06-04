@@ -97,7 +97,14 @@ extension SettingVC: UITableViewDelegate {
                 self.navigationController?.present(vc, animated: true, completion: nil)
             case 4:
                 // ログアウト
-                self.dispLogoutAlert()
+                //self.dispLogoutAlert()
+                //[Dbg: 仮認証画面]
+                let storyboard = UIStoryboard(name: "Auth", bundle: nil)
+                if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_CognitoAuthVC") as? CognitoAuthVC{
+                    self.navigationController?.pushViewController(nvc, animated: true)
+                }
+
+            
             case 5:
                 // 退会
                 let vc = getVC(sbName: "SettingVC", vcName: "WithDrawalVC") as! WithDrawalVC
