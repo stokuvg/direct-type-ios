@@ -1,9 +1,15 @@
 # direct-type-ios
 direct type のiOSアプリ
 
-## 環境
+##  環境構築
 
-- Xcode 11.4.1
+基本的に、以下の環境を対象とする
+
+- Xcode 11.4.x
+    - 対象iOSバージョン: 「iOS 12」以上
+    - Swift Language Version: 「Swift 5」
+    - UserInterface:「Storyboard」
+- Cocoapod 1.8.4
 
 
 ## プロジェクト組み込み
