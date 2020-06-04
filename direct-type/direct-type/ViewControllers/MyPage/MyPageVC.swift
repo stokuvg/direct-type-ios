@@ -10,7 +10,7 @@ import UIKit
 
 //[H-1]
 class MyPageVC: TmpNaviTopVC {
-    
+
     @IBOutlet weak var pageTableView:UITableView!
     //さくさく職歴書
     @IBOutlet weak var btnButton04: UIButton!
@@ -34,30 +34,35 @@ class MyPageVC: TmpNaviTopVC {
     @IBAction func actButton06(_ sender: UIButton) {
         fetchGetJobList()
     }
-    
+
     var carrerFlag:Bool = false
     var chemistryFlag:Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.title = "マイページ"
-        
+
         self.pageTableView.backgroundColor = UIColor.init(colorType: .color_base)
         self.pageTableView.tableFooterView = UIView()
-        
+
         self.pageTableView.registerNib(nibName: "MyPageNameCell", idName: "MyPageNameCell") // アイコン
         self.pageTableView.registerNib(nibName: "BasePercentageCompletionCell", idName: "BasePercentageCompletionCell")// プロフィール
         // 履歴書
         // スカウト MVPでは外す
-        
+
         self.pageTableView.registerNib(nibName: "MyPageCarrerStartCell", idName: "MyPageCarrerStartCell") // 職務経歴
         self.pageTableView.registerNib(nibName: "MyPageEditedCarrerCell", idName: "MyPageEditedCarrerCell")
-        
+
         self.pageTableView.registerNib(nibName: "MyPageChemistryStartCell", idName: "MyPageChemistryStartCell") // 相性診断
         self.pageTableView.registerNib(nibName: "MyPageEditedChemistryCell", idName: "MyPageEditedChemistryCell")
-        
+
         self.pageTableView.registerNib(nibName: "MyPageSettingCell", idName: "MyPageSettingCell") // 設定
+
+        setDebugButtonForDiagnosis()
+
+//        btnButton05.setTitle("認証", for: .normal)
+//        btnButton06.setTitle("API [Get] /jobs", for: .normal)
     }
 }
 
@@ -79,13 +84,13 @@ extension MyPageVC {
 }
 
 extension MyPageVC: UITableViewDelegate {
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let spaceView = UIView.init()
         spaceView.backgroundColor = UIColor.clear
         return spaceView
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
             case 1:
@@ -99,13 +104,13 @@ extension MyPageVC: UITableViewDelegate {
                 return 0
         }
     }
-    
+
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let spaceView = UIView.init()
         spaceView.backgroundColor = UIColor.clear
         return spaceView
     }
-    
+
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
         case 2:
@@ -116,7 +121,7 @@ extension MyPageVC: UITableViewDelegate {
             return 0
         }
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let section = indexPath.section
         let row = indexPath.row
@@ -135,11 +140,11 @@ extension MyPageVC: UITableViewDelegate {
                 return UITableView.automaticDimension
         }
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let section = indexPath.section
         let row = indexPath.row
-        
+
         switch (section,row) {
             case (3,_):
 //                actButton05(UIButton())//[Dbg: 仮認証]
@@ -152,11 +157,11 @@ extension MyPageVC: UITableViewDelegate {
 }
 
 extension MyPageVC: UITableViewDataSource {
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
             case 0:
@@ -171,11 +176,11 @@ extension MyPageVC: UITableViewDataSource {
                 return 0
         }
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = indexPath.section
         let row = indexPath.row
-        
+
         switch (section,row) {
             case (0,0):
                 return tableView.loadCell(cellName: "MyPageNameCell", indexPath: indexPath) as! MyPageNameCell
@@ -216,8 +221,8 @@ extension MyPageVC: UITableViewDataSource {
                 return UITableViewCell()
         }
     }
-    
-    
+
+
 }
 
 extension MyPageVC: BasePercentageCompletionCellDelegate {
@@ -237,11 +242,11 @@ extension MyPageVC: BasePercentageCompletionCellDelegate {
                 break
         }
     }
-    
+
 }
 
 extension MyPageVC: MyPageCarrerStartCellDelegate {
-    
+
     // 画面遷移
     func registCarrerAction() {
         // 職歴書
@@ -251,7 +256,7 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
             self.navigationController?.pushViewController(nvc, animated: true)
         }
         */
-        
+
         // サクサク
         let storyboard = UIStoryboard(name: "Preview", bundle: nil)
         if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SmoothCareerPreviewVC") as? SmoothCareerPreviewVC{
@@ -261,8 +266,26 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
 }
 
 extension MyPageVC: MyPageChemistryStartCellDelegate {
-    
+
     // 相性診断画面遷移
     func registChemistryAction() {
+    }
+}
+
+// 相性診断へのテスト導線用
+private extension MyPageVC {
+    func setDebugButtonForDiagnosis() {
+        var pushButtonItem: UIBarButtonItem!
+        pushButtonItem = UIBarButtonItem(title: "相性", style: .done, target: self, action: #selector(pushToDiagnosis))
+        navigationItem.rightBarButtonItem = pushButtonItem
+    }
+
+    @objc
+    func pushToDiagnosis() {
+        let vc = UIStoryboard(name: "ChemistryStart", bundle: nil)
+            .instantiateInitialViewController() as! ChemistryStart
+        hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+        hidesBottomBarWhenPushed = false
     }
 }
