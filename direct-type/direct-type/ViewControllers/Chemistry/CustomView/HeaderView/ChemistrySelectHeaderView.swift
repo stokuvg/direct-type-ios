@@ -24,7 +24,7 @@ private extension ChemistrySelectHeaderView {
     func loadNib() {
         guard let view = Bundle.main.loadNibNamed("ChemistrySelectHeaderView",
                                                   owner: self, options: nil)?
-            .first as? ChemistrySelectHeaderView else { return }
+            .first as? UIView else { return }
         view.frame = bounds
         addSubview(view)
     }
