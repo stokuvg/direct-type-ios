@@ -31,286 +31,6 @@
       }
     },
     "schemas": {
-      "GetTodoResponseDTO": {
-        "type": "object",
-        "properties": {
-          "note": {
-            "type": "string",
-            "example": "夕食の献立を考える"
-          },
-          "pushedAt": {
-            "type": "string",
-            "example": "2020-01-22T08:36:08.816Z"
-          },
-          "title": {
-            "type": "string",
-            "example": "買い物"
-          },
-          "priority": {
-            "type": "integer",
-            "example": 1
-          },
-          "tel": {
-            "type": "string",
-            "example": "03-1234-5678"
-          },
-          "email": {
-            "type": "string",
-            "example": "example@test.com"
-          },
-          "done": {
-            "type": "boolean",
-            "example": false
-          },
-          "deadlineAt": {
-            "type": "string",
-            "example": "2012-09-05T15:00:00.000Z"
-          }
-        },
-        "required": [
-          "note",
-          "pushedAt",
-          "title",
-          "priority",
-          "tel",
-          "email",
-          "done",
-          "deadlineAt"
-        ]
-      },
-      "CreateTodoRequestDTO": {
-        "type": "object",
-        "properties": {
-          "note": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 20,
-            "example": "夕食の献立を考える"
-          },
-          "title": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 20,
-            "example": "買い物"
-          },
-          "priority": {
-            "type": "integer",
-            "example": 1
-          },
-          "tel": {
-            "type": "string",
-            "example": "03-1234-5678"
-          },
-          "email": {
-            "type": "string",
-            "example": "example@test.com"
-          },
-          "done": {
-            "type": "boolean",
-            "example": false
-          },
-          "deadlineAt": {
-            "type": "string",
-            "example": "2012-09-05T15:00:00.000Z"
-          }
-        },
-        "required": [
-          "note",
-          "title",
-          "priority",
-          "tel",
-          "email",
-          "done",
-          "deadlineAt"
-        ]
-      },
-      "CreateTodoResponseDTO": {
-        "type": "object",
-        "properties": {
-          "note": {
-            "type": "string",
-            "example": "夕食の献立を考える"
-          },
-          "pushedAt": {
-            "type": "string",
-            "example": "2020-01-22T08:36:08.816Z"
-          },
-          "title": {
-            "type": "string",
-            "example": "買い物"
-          },
-          "priority": {
-            "type": "integer",
-            "example": 1
-          },
-          "tel": {
-            "type": "string",
-            "example": "03-1234-5678"
-          },
-          "email": {
-            "type": "string",
-            "example": "example@test.com"
-          },
-          "done": {
-            "type": "boolean",
-            "example": false
-          },
-          "deadlineAt": {
-            "type": "string",
-            "example": "2012-09-05T15:00:00.000Z"
-          }
-        },
-        "required": [
-          "note",
-          "pushedAt",
-          "title",
-          "priority",
-          "tel",
-          "email",
-          "done",
-          "deadlineAt"
-        ]
-      },
-      "EditTodoRequestDTO": {
-        "type": "object",
-        "properties": {
-          "note": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 20,
-            "example": "夕食の献立を考える"
-          },
-          "title": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 20,
-            "example": "買い物"
-          },
-          "priority": {
-            "type": "integer",
-            "example": 1
-          },
-          "tel": {
-            "type": "string",
-            "example": "03-1234-5678"
-          },
-          "email": {
-            "type": "string",
-            "example": "example@test.com"
-          },
-          "done": {
-            "type": "boolean",
-            "example": false
-          },
-          "deadlineAt": {
-            "type": "string",
-            "example": "2012-09-05T15:00:00.000Z"
-          }
-        },
-        "required": [
-          "note",
-          "title",
-          "priority",
-          "tel",
-          "email",
-          "done",
-          "deadlineAt"
-        ]
-      },
-      "EditTodoResponseDTO": {
-        "type": "object",
-        "properties": {
-          "note": {
-            "type": "string",
-            "example": "夕食の献立を考える"
-          },
-          "pushedAt": {
-            "type": "string",
-            "example": "2020-01-22T08:36:08.816Z"
-          },
-          "title": {
-            "type": "string",
-            "example": "買い物"
-          },
-          "priority": {
-            "type": "integer",
-            "example": 1
-          },
-          "tel": {
-            "type": "string",
-            "example": "03-1234-5678"
-          },
-          "email": {
-            "type": "string",
-            "example": "example@test.com"
-          },
-          "done": {
-            "type": "boolean",
-            "example": false
-          },
-          "deadlineAt": {
-            "type": "string",
-            "example": "2012-09-05T15:00:00.000Z"
-          }
-        },
-        "required": [
-          "note",
-          "pushedAt",
-          "title",
-          "priority",
-          "tel",
-          "email",
-          "done",
-          "deadlineAt"
-        ]
-      },
-      "DeleteTodoResponseDTO": {
-        "type": "object",
-        "properties": {
-          "note": {
-            "type": "string",
-            "example": "夕食の献立を考える"
-          },
-          "pushedAt": {
-            "type": "string",
-            "example": "2020-01-22T08:36:08.816Z"
-          },
-          "title": {
-            "type": "string",
-            "example": "買い物"
-          },
-          "priority": {
-            "type": "integer",
-            "example": 1
-          },
-          "tel": {
-            "type": "string",
-            "example": "03-1234-5678"
-          },
-          "email": {
-            "type": "string",
-            "example": "example@test.com"
-          },
-          "done": {
-            "type": "boolean",
-            "example": false
-          },
-          "deadlineAt": {
-            "type": "string",
-            "example": "2012-09-05T15:00:00.000Z"
-          }
-        },
-        "required": [
-          "note",
-          "pushedAt",
-          "title",
-          "priority",
-          "tel",
-          "email",
-          "done",
-          "deadlineAt"
-        ]
-      },
       "GetProfileResponseDTO": {
         "type": "object",
         "properties": {
@@ -550,6 +270,368 @@
           }
         }
       },
+      "WorkHistoryDTO": {
+        "type": "object",
+        "properties": {
+          "job3Id": {
+            "type": "string",
+            "example": "1",
+            "description": "職種小分類ID"
+          },
+          "experienceYears": {
+            "type": "string",
+            "example": "1",
+            "description": "経験年数"
+          }
+        },
+        "required": [
+          "job3Id",
+          "experienceYears"
+        ]
+      },
+      "FinalEducationDTO": {
+        "type": "object",
+        "properties": {
+          "schoolName": {
+            "type": "string",
+            "example": "スマ澤大学",
+            "description": "学校名",
+            "maxLength": 60
+          },
+          "faculty": {
+            "type": "string",
+            "example": "スマ澤学部",
+            "description": "学部",
+            "maxLength": 30
+          },
+          "department": {
+            "type": "string",
+            "example": "スマ澤学科",
+            "description": "学科/専攻",
+            "maxLength": 30
+          },
+          "guraduationYearMonth": {
+            "type": "string",
+            "example": "2020-03",
+            "description": "卒業年月"
+          }
+        },
+        "required": [
+          "schoolName",
+          "faculty",
+          "department",
+          "guraduationYearMonth"
+        ]
+      },
+      "GetResumeResponseDTO": {
+        "type": "object",
+        "properties": {
+          "isEmployed": {
+            "type": "boolean",
+            "example": true,
+            "description": "就業状況"
+          },
+          "changeJobCount": {
+            "type": "integer",
+            "example": 1,
+            "description": "転職回数"
+          },
+          "workHistory": {
+            "description": "経験職種リスト",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkHistoryDTO"
+            }
+          },
+          "experienceIndustryId": {
+            "type": "string",
+            "example": "1",
+            "description": "経験業種ID"
+          },
+          "finalEducation": {
+            "$ref": "#/components/schemas/FinalEducationDTO"
+          },
+          "toeic": {
+            "type": "integer",
+            "example": 990,
+            "description": "TOEICスコア",
+            "maximum": 999
+          },
+          "toefl": {
+            "type": "integer",
+            "example": 990,
+            "description": "TOEFLスコア",
+            "maximum": 999
+          },
+          "englishSkillId": {
+            "type": "string",
+            "example": "1",
+            "description": "英語スキルID"
+          },
+          "otherLanguageSkillId": {
+            "type": "string",
+            "example": "1",
+            "description": "その他言語スキルID"
+          },
+          "licenseIds": {
+            "example": [
+              "1",
+              "2",
+              "3"
+            ],
+            "description": "保有資格IDリスト",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "CreateResumeRequestDTO": {
+        "type": "object",
+        "properties": {
+          "isEmployed": {
+            "type": "boolean",
+            "example": true,
+            "description": "就業状況"
+          },
+          "changeJobCount": {
+            "type": "integer",
+            "example": 1,
+            "description": "転職回数"
+          },
+          "workHistory": {
+            "description": "経験職種リスト",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkHistoryDTO"
+            }
+          },
+          "experienceIndustryId": {
+            "type": "string",
+            "example": "1",
+            "description": "経験業種ID"
+          },
+          "finalEducation": {
+            "$ref": "#/components/schemas/FinalEducationDTO"
+          },
+          "toeic": {
+            "type": "integer",
+            "example": 990,
+            "description": "TOEICスコア",
+            "maximum": 999
+          },
+          "toefl": {
+            "type": "integer",
+            "example": 990,
+            "description": "TOEFLスコア",
+            "maximum": 999
+          },
+          "englishSkillId": {
+            "type": "string",
+            "example": "1",
+            "description": "英語スキルID"
+          },
+          "otherLanguageSkillId": {
+            "type": "string",
+            "example": "1",
+            "description": "その他言語スキルID"
+          },
+          "licenseIds": {
+            "example": [
+              "1",
+              "2",
+              "3"
+            ],
+            "description": "保有資格IDリスト",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "isEmployed",
+          "changeJobCount",
+          "workHistory",
+          "experienceIndustryId",
+          "finalEducation",
+          "toeic",
+          "toefl",
+          "englishSkillId",
+          "otherLanguageSkillId",
+          "licenseIds"
+        ]
+      },
+      "UpdateResumeRequestDTO": {
+        "type": "object",
+        "properties": {
+          "isEmployed": {
+            "type": "boolean",
+            "example": true,
+            "description": "就業状況"
+          },
+          "changeJobCount": {
+            "type": "integer",
+            "example": 1,
+            "description": "転職回数"
+          },
+          "workHistory": {
+            "description": "経験職種リスト",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkHistoryDTO"
+            }
+          },
+          "experienceIndustryId": {
+            "type": "string",
+            "example": "1",
+            "description": "経験業種ID"
+          },
+          "finalEducation": {
+            "$ref": "#/components/schemas/FinalEducationDTO"
+          },
+          "toeic": {
+            "type": "integer",
+            "example": 990,
+            "description": "TOEICスコア",
+            "maximum": 999
+          },
+          "toefl": {
+            "type": "integer",
+            "example": 990,
+            "description": "TOEFLスコア",
+            "maximum": 999
+          },
+          "englishSkillId": {
+            "type": "string",
+            "example": "1",
+            "description": "英語スキルID"
+          },
+          "otherLanguageSkillId": {
+            "type": "string",
+            "example": "1",
+            "description": "その他言語スキルID"
+          },
+          "licenseIds": {
+            "example": [
+              "1",
+              "2",
+              "3"
+            ],
+            "description": "保有資格IDリスト",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "CareerHistoryDTO": {
+        "type": "object",
+        "properties": {
+          "startWorkPeriod": {
+            "type": "string",
+            "example": "2015-10",
+            "description": "勤務開始年月（ISO8601[YYYY-MM]）"
+          },
+          "endWorkPeriod": {
+            "type": "string",
+            "example": "9999-12",
+            "description": "勤務終了年月（ISO8601[YYYY-MM]）※就業中の場合は9999-12とする。"
+          },
+          "companyName": {
+            "type": "string",
+            "example": "株式会社キャリアデザインセンター",
+            "description": "企業名"
+          },
+          "employmentId": {
+            "type": "string",
+            "example": "1",
+            "description": "雇用形態マスタの値"
+          },
+          "employees": {
+            "type": "integer",
+            "example": 100,
+            "description": "従業員数"
+          },
+          "salary": {
+            "type": "integer",
+            "example": 999,
+            "description": "年収"
+          },
+          "workNote": {
+            "type": "string",
+            "example": "入社後半年間、研修を受けた後、半年間は主にサイトの更新・ページ作成を担当。その後、リーダーに昇格。新規のwebサイトの企画、デザイン、コーディング等を一環して行う。",
+            "description": "職務内容本文",
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "startWorkPeriod",
+          "endWorkPeriod",
+          "companyName",
+          "employmentId",
+          "employees",
+          "salary",
+          "workNote"
+        ]
+      },
+      "GetCareerResponseDTO": {
+        "type": "object",
+        "properties": {
+          "careerHistory": {
+            "description": "職務経歴",
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CareerHistoryDTO"
+            }
+          }
+        }
+      },
+      "CreateCareerRequestDTO": {
+        "type": "object",
+        "properties": {
+          "careerHistory": {
+            "description": "職務経歴",
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CareerHistoryDTO"
+            }
+          }
+        },
+        "required": [
+          "careerHistory"
+        ]
+      },
+      "UpdateCareerRequestDTO": {
+        "type": "object",
+        "properties": {
+          "careerHistory": {
+            "description": "職務経歴",
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CareerHistoryDTO"
+            }
+          }
+        }
+      },
+      "CreateSkipRequestDTO": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "example": "1186461",
+            "description": "求人ID"
+          }
+        },
+        "required": [
+          "jobId"
+        ]
+      },
       "Job": {
         "type": "object",
         "properties": {
@@ -561,30 +643,22 @@
           "jobName": {
             "type": "string",
             "example": "ITソリューション企画・営業",
-            "description": "外部表示用職種名",
-            "minLength": 1,
-            "maxLength": 50
+            "description": "外部表示用職種名"
           },
           "pressStartDate": {
             "type": "string",
             "example": "2020-11-01",
-            "description": "掲載開始日（ISO8601[YYYY-MM-DD]）",
-            "minLength": 10,
-            "maxLength": 10
+            "description": "掲載開始日（ISO8601[YYYY-MM-DD]）"
           },
           "pressEndDate": {
             "type": "string",
             "example": "2020-11-15",
-            "description": "掲載終了日（ISO8601[YYYY-MM-DD]）",
-            "minLength": 10,
-            "maxLength": 10
+            "description": "掲載終了日（ISO8601[YYYY-MM-DD]）"
           },
           "mainTitle": {
             "type": "string",
             "example": "【急募】部長候補！高待遇で活躍できる。「東証一部上場」へ向けた急成長企業の経理財務業務",
-            "description": "メイン記事メインタイトル",
-            "minLength": 1,
-            "maxLength": 50
+            "description": "メイン記事メインタイトル"
           },
           "minSalaryId": {
             "type": "string",
@@ -599,19 +673,17 @@
           "isSalaryDisplay": {
             "type": "boolean",
             "example": true,
-            "description": "ture: 年収公開, false: 年収非公開"
+            "description": "true: 年収公開, false: 年収非公開"
           },
           "companyName": {
             "type": "string",
             "example": "株式会社スマ澤",
-            "description": "企業名",
-            "minLength": 1,
-            "maxLength": 50
+            "description": "企業名"
           },
           "isKeep": {
             "type": "boolean",
             "example": true,
-            "description": "ture: キープしている, false: キープしていない"
+            "description": "true: キープしている, false: キープしていない"
           }
         },
         "required": [
@@ -633,7 +705,7 @@
           "hasNext": {
             "type": "boolean",
             "example": true,
-            "description": "ture: 次ページあり, false: 次ページなし"
+            "description": "true: 次ページあり, false: 次ページなし"
           },
           "recommendedAt": {
             "type": "string",
@@ -652,19 +724,6 @@
           "hasNext",
           "recommendedAt",
           "jobs"
-        ]
-      },
-      "CreateSkipRequestDTO": {
-        "type": "object",
-        "properties": {
-          "jobId": {
-            "type": "string",
-            "example": "1186461",
-            "description": "求人ID"
-          }
-        },
-        "required": [
-          "jobId"
         ]
       },
       "UserOldJob3": {
@@ -1064,195 +1123,6 @@
     }
   },
   "paths": {
-    "/todos": {
-      "get": {
-        "operationId": "TodosController_findAll",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/GetTodoResponseDTO"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "todos"
-        ],
-        "security": [
-          {
-            "bearer": []
-          }
-        ]
-      },
-      "post": {
-        "operationId": "TodosController_createTodo",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateTodoRequestDTO"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateTodoResponseDTO"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request."
-          }
-        },
-        "tags": [
-          "todos"
-        ],
-        "security": [
-          {
-            "bearer": []
-          }
-        ]
-      }
-    },
-    "/todos/{pushedAt}": {
-      "get": {
-        "operationId": "TodosController_find",
-        "parameters": [
-          {
-            "name": "pushedAt",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetTodoResponseDTO"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found."
-          }
-        },
-        "tags": [
-          "todos"
-        ],
-        "security": [
-          {
-            "bearer": []
-          }
-        ]
-      },
-      "patch": {
-        "operationId": "TodosController_editTodo",
-        "parameters": [
-          {
-            "name": "pushedAt",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/EditTodoRequestDTO"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/EditTodoResponseDTO"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request."
-          },
-          "404": {
-            "description": "Not Found."
-          }
-        },
-        "tags": [
-          "todos"
-        ],
-        "security": [
-          {
-            "bearer": []
-          }
-        ]
-      },
-      "delete": {
-        "operationId": "TodosController_deleteTodo",
-        "parameters": [
-          {
-            "name": "pushedAt",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeleteTodoResponseDTO"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found."
-          }
-        },
-        "tags": [
-          "todos"
-        ],
-        "security": [
-          {
-            "bearer": []
-          }
-        ]
-      }
-    },
     "/profile": {
       "get": {
         "operationId": "ProfileController_get",
@@ -1324,11 +1194,11 @@
         ]
       }
     },
-    "/jobs": {
+    "/resume": {
       "get": {
-        "operationId": "JobsController_get",
-        "summary": "求人一覧",
-        "description": "求人一覧",
+        "operationId": "ResumeController_get",
+        "summary": "履歴書取得",
+        "description": "Api11_履歴書の取得",
         "parameters": [],
         "responses": {
           "200": {
@@ -1336,14 +1206,133 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetJobsResponseDTO"
+                  "$ref": "#/components/schemas/GetResumeResponseDTO"
                 }
               }
             }
           }
         },
         "tags": [
-          "jobs"
+          "resume"
+        ]
+      },
+      "post": {
+        "operationId": "ResumeController_register",
+        "summary": "履歴書作成",
+        "description": "Api15_履歴書の作成・更新",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateResumeRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "resume"
+        ]
+      },
+      "patch": {
+        "operationId": "ResumeController_update",
+        "summary": "履歴書更新",
+        "description": "Api15_履歴書の作成・更新",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateResumeRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "resume"
+        ]
+      }
+    },
+    "/career": {
+      "get": {
+        "operationId": "CareerController_get",
+        "summary": "職務経歴書取得",
+        "description": "Api12_職務経歴書の取得",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCareerResponseDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "career"
+        ]
+      },
+      "post": {
+        "operationId": "CareerController_create",
+        "summary": "職務経歴書作成",
+        "description": "Api16_職務経歴書の作成・更新",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCareerRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "career"
+        ]
+      },
+      "patch": {
+        "operationId": "CareerController_update",
+        "summary": "職務経歴書更新",
+        "description": "Api16_職務経歴書の作成・更新",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCareerRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "career"
         ]
       }
     },
@@ -1370,6 +1359,48 @@
         },
         "tags": [
           "skip"
+        ]
+      }
+    },
+    "/jobs": {
+      "get": {
+        "operationId": "JobsController_get",
+        "parameters": [
+          {
+            "name": "mode",
+            "required": true,
+            "in": "query",
+            "description": "検索モード",
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "page",
+            "required": true,
+            "in": "query",
+            "description": "ページ",
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "undefined": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetJobsResponseDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "jobs"
         ]
       }
     },
