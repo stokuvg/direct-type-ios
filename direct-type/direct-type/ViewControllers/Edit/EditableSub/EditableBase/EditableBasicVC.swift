@@ -119,7 +119,7 @@ extension EditableBasicVC: InputItemHDelegate {
                     self.present(nvc, animated: true) {}
                 }
             })
-        case .selectSpecisl:
+        case .selectSpecisl, .selectSpecislYear:
             //さらに子ナビさせたいので
             DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
                 tf.resignFirstResponder()//自分を解除しておかないと、戻ってきたときにまた遷移してしまうため
@@ -179,7 +179,7 @@ extension EditableBasicVC: InputItemHDelegate {
             break
         case .selectMulti:
             break
-        case .selectSpecisl:
+        case .selectSpecisl, .selectSpecislYear:
             break
         }
         print("💛[\(tf.itemKey)] 編集終わり💛「[\(tf.tag)] \(#function)」[\(tf.itemKey)][\(tf.text ?? "")] [\(String(describing: tf.inputAccessoryView))] [\(String(describing: tf.inputView))]")

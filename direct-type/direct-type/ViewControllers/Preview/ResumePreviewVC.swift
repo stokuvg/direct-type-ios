@@ -15,6 +15,7 @@ class ResumePreviewVC: PreviewBaseVC {
 
     //共通プレビューをOverrideして利用する
     override func initData() {
+
         //ダミーデータ投入しておく
         let resume: Resume = Resume(
             employment: 1,
@@ -32,6 +33,7 @@ class ResumePreviewVC: PreviewBaseVC {
             qualifications: [1, 2, 3, 4],
             ownPr: String(repeating: "自己PRのテキストが入ります。", count: 38) )
         detail = MdlResume(dto: resume)
+
         //========
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
         guard let _detail = detail else { return }
@@ -49,20 +51,21 @@ class ResumePreviewVC: PreviewBaseVC {
         //===(3c)直近の経験職種
         let _jobType: String = "\(_detail.lastJobExperiment.jobType)"
         arrData.append(MdlItemH(.lastJobExperimentH3, "11", childItems: [
-            EditableItemH(type: .selectSpecisl, editItem: EditItemMdlResumeLastJobExperiment.jobType, val: _jobType),
-            EditableItemH(type: .selectSingle, editItem: EditItemMdlResumeLastJobExperiment.jobExperimentYear, val: _detail.lastJobExperiment.jobExperimentYear),
+            EditableItemH(type: .selectSpecislYear, editItem: EditItemMdlResumeLastJobExperiment.jobType, val: _jobType),
+            //[jobTypeで合わせて設定するので、表示はすれども編集では不要]
+            //EditableItemH(type: .readonly, editItem: EditItemMdlResumeLastJobExperiment.jobExperimentYear, val: _detail.lastJobExperiment.jobExperimentYear),
         ]))
         //===(3d)その他の経験職種
         var _jobExperiments: [EditableItemH] = []
         for jobExperiment in _detail.jobExperiments {
-            _jobExperiments.append(EditableItemH(type: .selectSingle, editItem: EditItemMdlResumeJobExperiments.jobType, val: jobExperiment.jobType))
-            _jobExperiments.append(EditableItemH(type: .selectSingle, editItem: EditItemMdlResumeJobExperiments.jobExperimentYear, val: jobExperiment.jobExperimentYear))
+            _jobExperiments.append(EditableItemH(type: .selectSpecislYear, editItem: EditItemMdlResumeJobExperiments.jobType, val: jobExperiment.jobType))
+            //_jobExperiments.append(EditableItemH(type: .selectSingle, editItem: EditItemMdlResumeJobExperiments.jobExperimentYear, val: jobExperiment.jobExperimentYear))
         }
         arrData.append(MdlItemH(.jobExperimentsH3, "", childItems: _jobExperiments))
         //===(3e)経験業種
         var _businessTypes: [EditableItemH] = []
         for businessType in _detail.businessTypes {
-            _businessTypes.append(EditableItemH(type: .selectSingle, editItem: EditItemMdlResume.businessTypes, val: businessType))
+            _businessTypes.append(EditableItemH(type: .selectSpecisl, editItem: EditItemMdlResume.businessTypes, val: businessType))
         }
         arrData.append(MdlItemH(.businessTypesH3, "", childItems: _businessTypes))
         //===(3f)最終学歴
