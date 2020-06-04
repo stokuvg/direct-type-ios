@@ -24,14 +24,16 @@ struct Constants {
     
     //選択しなどでマスタからの選択だった場合の文言
     static let SelectItemsUndefine: CodeDisp = CodeDisp("", "<未選択>")  //未定義な値だった場合
+    //プレビュ・編集などでの未設定時（初期値）での表示文字列
+    static let SelectItemsValEmpty: CodeDisp = CodeDisp("", "<未入力>")
     
     static let SelectItemsNotSelect: String = "選択しない"   //ユーザが「選択しない」を選んだ場合
 
     //[Debug] Debug時以外はfalseにすべきフラグで設定しておく
     static let DbgAutoSelTabVC: Bool = false
     static let DbgAutoPushVC: Bool = false
-    static let DbgAutoPushVCNum: Int = 2  //0:なし, 1:プロフィール, 2:履歴書, 3:職歴, 4:サクサク職歴
-    static let DbgOfflineMode: Bool = true
+    static let DbgAutoPushVCNum: Int = 2 //0:なし, 1:プロフィール, 2:履歴書, 3:職歴, 4:サクサク職歴
+    static let DbgOfflineMode: Bool = false
     
     static let DbgDispStatus: Bool = false
     static let DbgSkipLocalValidate: Bool = false
