@@ -30,6 +30,8 @@ final class ChemistryStart: UIViewController {
 
 private extension ChemistryStart {
     func setNavigationBar() {
+        navigationItem.title = ""
+        
         if #available(iOS 13.0, *) {
             navigationController?.navigationBar.standardAppearance.backgroundColor = UIColor.init(colorType: .color_sub)!
             navigationController?.navigationBar.standardAppearance.shadowColor = .clear
