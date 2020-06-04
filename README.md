@@ -1,6 +1,11 @@
 # direct-type-ios
 direct type のiOSアプリ
 
+## 環境
+
+- Xcode 11.4.1
+
+
 ## プロジェクト組み込み
 
 ```
