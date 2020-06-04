@@ -89,12 +89,14 @@ struct R: Rswift.Validatable {
   }
 
   #if os(iOS) || os(tvOS)
-  /// This `R.storyboard` struct is generated, and contains static references to 16 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 17 storyboards.
   struct storyboard {
     /// Storyboard `Auth`.
     static let auth = _R.storyboard.auth()
     /// Storyboard `BaseTabBC`.
     static let baseTabBC = _R.storyboard.baseTabBC()
+    /// Storyboard `ChemistrySelect`.
+    static let chemistrySelect = _R.storyboard.chemistrySelect()
     /// Storyboard `ChemistryStart`.
     static let chemistryStart = _R.storyboard.chemistryStart()
     /// Storyboard `Dialog`.
@@ -135,6 +137,13 @@ struct R: Rswift.Validatable {
     /// `UIStoryboard(name: "BaseTabBC", bundle: ...)`
     static func baseTabBC(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.baseTabBC)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "ChemistrySelect", bundle: ...)`
+    static func chemistrySelect(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.chemistrySelect)
     }
     #endif
 
@@ -1173,10 +1182,12 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 43 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 44 nibs.
   struct nib {
     /// Nib `BasePercentageCompletionCell`.
     static let basePercentageCompletionCell = _R.nib._BasePercentageCompletionCell()
+    /// Nib `ChemistrySelectHeaderView`.
+    static let chemistrySelectHeaderView = _R.nib._ChemistrySelectHeaderView()
     /// Nib `HEditDrumTBCell`.
     static let hEditDrumTBCell = _R.nib._HEditDrumTBCell()
     /// Nib `HEditTextTBCell`.
@@ -1267,6 +1278,14 @@ struct R: Rswift.Validatable {
     @available(*, deprecated, message: "Use UINib(resource: R.nib.basePercentageCompletionCell) instead")
     static func basePercentageCompletionCell(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.basePercentageCompletionCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "ChemistrySelectHeaderView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.chemistrySelectHeaderView) instead")
+    static func chemistrySelectHeaderView(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.chemistrySelectHeaderView)
     }
     #endif
 
@@ -1610,6 +1629,10 @@ struct R: Rswift.Validatable {
       return R.nib.basePercentageCompletionCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? BasePercentageCompletionCell
     }
 
+    static func chemistrySelectHeaderView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.chemistrySelectHeaderView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+
     static func hEditDrumTBCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HEditDrumTBCell? {
       return R.nib.hEditDrumTBCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HEditDrumTBCell
     }
@@ -1857,6 +1880,17 @@ struct _R: Rswift.Validatable {
           if UIKit.UIColor(named: "color-slider-sub", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-slider-sub' is used in storyboard 'BasePercentageCompletionCell', but couldn't be loaded.") }
           if UIKit.UIColor(named: "color-white", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-white' is used in storyboard 'BasePercentageCompletionCell', but couldn't be loaded.") }
         }
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _ChemistrySelectHeaderView: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "ChemistrySelectHeaderView"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
 
       fileprivate init() {}
@@ -2471,6 +2505,9 @@ struct _R: Rswift.Validatable {
       try baseTabBC.validate()
       #endif
       #if os(iOS) || os(tvOS)
+      try chemistrySelect.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
       try chemistryStart.validate()
       #endif
       #if os(iOS) || os(tvOS)
@@ -2556,6 +2593,22 @@ struct _R: Rswift.Validatable {
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
         if _R.storyboard.baseTabBC().sbid_BaseTabBC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_BaseTabBC' could not be loaded from storyboard 'BaseTabBC' as 'BaseTabBC'.") }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    struct chemistrySelect: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = ChemistrySelect
+
+      let bundle = R.hostingBundle
+      let name = "ChemistrySelect"
+
+      static func validate() throws {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
       }
 
       fileprivate init() {}

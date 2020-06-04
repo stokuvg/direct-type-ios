@@ -16,3 +16,5 @@ class ChemistrySelect: UIViewController {
         super.viewDidLoad()
     }
 }
+
+private extension ChemistrySelect {}
