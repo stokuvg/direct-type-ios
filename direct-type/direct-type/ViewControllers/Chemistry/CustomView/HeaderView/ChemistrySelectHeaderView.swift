@@ -9,6 +9,9 @@
 import UIKit
 
 final class ChemistrySelectHeaderView: UIView {
+    
+    static let height: CGFloat = 230
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadNib()
