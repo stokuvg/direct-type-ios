@@ -1182,10 +1182,12 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 44 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 45 nibs.
   struct nib {
     /// Nib `BasePercentageCompletionCell`.
     static let basePercentageCompletionCell = _R.nib._BasePercentageCompletionCell()
+    /// Nib `ChemistrySelectCell`.
+    static let chemistrySelectCell = _R.nib._ChemistrySelectCell()
     /// Nib `ChemistrySelectHeaderView`.
     static let chemistrySelectHeaderView = _R.nib._ChemistrySelectHeaderView()
     /// Nib `HEditDrumTBCell`.
@@ -1278,6 +1280,14 @@ struct R: Rswift.Validatable {
     @available(*, deprecated, message: "Use UINib(resource: R.nib.basePercentageCompletionCell) instead")
     static func basePercentageCompletionCell(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.basePercentageCompletionCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "ChemistrySelectCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.chemistrySelectCell) instead")
+    static func chemistrySelectCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.chemistrySelectCell)
     }
     #endif
 
@@ -1629,6 +1639,10 @@ struct R: Rswift.Validatable {
       return R.nib.basePercentageCompletionCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? BasePercentageCompletionCell
     }
 
+    static func chemistrySelectCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> ChemistrySelectCell? {
+      return R.nib.chemistrySelectCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? ChemistrySelectCell
+    }
+
     static func chemistrySelectHeaderView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
       return R.nib.chemistrySelectHeaderView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
     }
@@ -1880,6 +1894,17 @@ struct _R: Rswift.Validatable {
           if UIKit.UIColor(named: "color-slider-sub", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-slider-sub' is used in storyboard 'BasePercentageCompletionCell', but couldn't be loaded.") }
           if UIKit.UIColor(named: "color-white", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-white' is used in storyboard 'BasePercentageCompletionCell', but couldn't be loaded.") }
         }
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _ChemistrySelectCell: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "ChemistrySelectCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> ChemistrySelectCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? ChemistrySelectCell
       }
 
       fileprivate init() {}

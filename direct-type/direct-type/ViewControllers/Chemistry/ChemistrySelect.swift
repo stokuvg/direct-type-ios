@@ -22,6 +22,7 @@ private extension ChemistrySelect {
     func setup() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.registerNib(nibName: "ChemistrySelectCell", idName: "ChemistrySelectCell")
     }
 }
 
@@ -42,6 +43,7 @@ extension ChemistrySelect: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.loadCell(cellName: "ChemistrySelectCell", indexPath: indexPath) as! ChemistrySelectCell
+        return cell
     }
 }
