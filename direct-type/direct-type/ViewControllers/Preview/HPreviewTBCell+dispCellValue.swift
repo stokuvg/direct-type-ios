@@ -11,6 +11,10 @@ import UIKit
 
 extension HPreviewTBCell {
     func dispCellValue(_ _item: MdlItemH) -> String {
+        //あたいがない場合の表示、すべて同じになって良いか？
+        if _item.childItems.count == 0 {
+            return Constants.SelectItemsValEmpty.disp
+        }
         switch _item.type {
         case .undefine:
             return "<未定義>"
@@ -40,23 +44,25 @@ extension HPreviewTBCell {
         case .employmentH3:
             let tmp0: String = _item.childItems[0].curVal
             let buf0: String = SelectItemsManager.getCodeDisp(.employmentStatus, code: tmp0)?.disp ?? ""
-            return "\(buf0)"
+            return buf0.isEmpty ? Constants.SelectItemsUndefine.disp : "\(buf0)"
         case .changeCountH3:
+            //===単一選択の場合
+//            let tmp0: String = _item.childItems[0].curVal
+//            let buf0: String = SelectItemsManager.getCodeDisp(.changeCount, code: tmp0)?.disp ?? ""
+//            return "\(buf0)"
+            //[Dbg: 複数選択の場合
             let tmp0: String = _item.childItems[0].curVal
-            let buf0: String = SelectItemsManager.getCodeDisp(.changeCount, code: tmp0)?.disp ?? ""
-            return "\(buf0)"
+            var arr0: [String] = []
+            for code in tmp0.split(separator: "_").sorted() { //コード順ソートしておく
+                let buf: String = SelectItemsManager.getCodeDisp(.changeCount, code: String(code))?.disp ?? ""
+                arr0.append(buf)
+            }
+            let buf0: String = arr0.joined(separator: " ")
+            return buf0.isEmpty ? Constants.SelectItemsValEmpty.disp : "\(buf0)"
         case .lastJobExperimentH3:
             let tmp0: String = _item.childItems[0].curVal
-            let buf0: String = SelectItemsManager.getCodeDispSyou(.jobType, code: tmp0)?.disp ?? ""
-//            let tmp1: String = _item.childItems[1].curVal
-//            let buf1: String = SelectItemsManager.getCodeDisp(.jobExperimentYear, code: tmp1)?.disp ?? ""
-            let buf1: String = "＊複数選択値保持対応予定"
-            let bufExperiment = "\(buf0) \(buf1)"
-            return bufExperiment
-        case .jobExperimentsH3:
-            let val: String = "3:2_5:3_55:4_9:5_11:6_13:7_11"
             var disp: [String] = []
-            for job in val.split(separator: "_") {
+            for job in tmp0.split(separator: "_") {
                 let buf = String(job).split(separator: ":")
                 guard buf.count == 2 else { continue }
                 let tmp0 = String(buf[0])
@@ -66,7 +72,21 @@ extension HPreviewTBCell {
                 let bufExperiment: String = "\(buf0) \(buf1)"
                 disp.append(bufExperiment)
             }
-            return disp.joined(separator: "\n")
+            return disp.count == 0 ? Constants.SelectItemsValEmpty.disp : disp.joined(separator: "\n")
+        case .jobExperimentsH3:
+            let tmp0: String = _item.childItems[0].curVal
+            var disp: [String] = []
+            for job in tmp0.split(separator: "_") {
+                let buf = String(job).split(separator: ":")
+                guard buf.count == 2 else { continue }
+                let tmp0 = String(buf[0])
+                let tmp1 = String(buf[1])
+                let buf0: String = SelectItemsManager.getCodeDispSyou(.jobType, code: tmp0)?.disp ?? ""
+                let buf1: String = SelectItemsManager.getCodeDisp(.jobExperimentYear, code: tmp1)?.disp ?? ""
+                let bufExperiment: String = "\(buf0) \(buf1)"
+                disp.append(bufExperiment)
+            }
+            return disp.count == 0 ? Constants.SelectItemsValEmpty.disp : disp.joined(separator: "\n")
         case .businessTypesH3:
             var disp: [String] = []
             for businessType in _item.childItems {
@@ -74,13 +94,17 @@ extension HPreviewTBCell {
                 let buf0: String = SelectItemsManager.getCodeDispSyou(.businessType, code: tmp0)?.disp ?? ""
                 disp.append(buf0)
             }
-            return disp.joined(separator: "\n")
+            return disp.count == 0 ? Constants.SelectItemsValEmpty.disp : disp.joined(separator: "\n")
         case .schoolH3:
+            var disp: [String] = []
             let buf0: String = _item.childItems[0].curVal
             let buf1: String = _item.childItems[1].curVal
             let buf2: String = _item.childItems[2].curVal
             let buf3: String = _item.childItems[3].curVal
-            return "\(buf0)\n\(buf1)\(buf2)\n\(buf3)"
+            if !buf0.isEmpty { disp.append(buf0) }
+            if !"\(buf1)\(buf2)".isEmpty { disp.append("\(buf1)\(buf2)") }
+            if !buf3.isEmpty { disp.append(buf3) }
+            return disp.count == 0 ? Constants.SelectItemsValEmpty.disp : disp.joined(separator: "\n")
         case .skillLanguageH3:
             let tmp0: String = _item.childItems[0].curVal
             let tmp1: String = _item.childItems[1].curVal

@@ -1173,12 +1173,14 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.nib` struct is generated, and contains static references to 43 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 44 nibs.
   struct nib {
     /// Nib `BasePercentageCompletionCell`.
     static let basePercentageCompletionCell = _R.nib._BasePercentageCompletionCell()
     /// Nib `HEditDrumTBCell`.
     static let hEditDrumTBCell = _R.nib._HEditDrumTBCell()
+    /// Nib `HEditSpecialTBCell`.
+    static let hEditSpecialTBCell = _R.nib._HEditSpecialTBCell()
     /// Nib `HEditTextTBCell`.
     static let hEditTextTBCell = _R.nib._HEditTextTBCell()
     /// Nib `HEditZipcodeTBCell`.
@@ -1275,6 +1277,14 @@ struct R: Rswift.Validatable {
     @available(*, deprecated, message: "Use UINib(resource: R.nib.hEditDrumTBCell) instead")
     static func hEditDrumTBCell(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.hEditDrumTBCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "HEditSpecialTBCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.hEditSpecialTBCell) instead")
+    static func hEditSpecialTBCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.hEditSpecialTBCell)
     }
     #endif
 
@@ -1614,6 +1624,10 @@ struct R: Rswift.Validatable {
       return R.nib.hEditDrumTBCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HEditDrumTBCell
     }
 
+    static func hEditSpecialTBCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HEditSpecialTBCell? {
+      return R.nib.hEditSpecialTBCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HEditSpecialTBCell
+    }
+
     static func hEditTextTBCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HEditTextTBCell? {
       return R.nib.hEditTextTBCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HEditTextTBCell
     }
@@ -1781,10 +1795,12 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.reuseIdentifier` struct is generated, and contains static references to 7 reuse identifiers.
+  /// This `R.reuseIdentifier` struct is generated, and contains static references to 8 reuse identifiers.
   struct reuseIdentifier {
     /// Reuse identifier `Cell_HEditDrumTBCell`.
     static let cell_HEditDrumTBCell: Rswift.ReuseIdentifier<HEditDrumTBCell> = Rswift.ReuseIdentifier(identifier: "Cell_HEditDrumTBCell")
+    /// Reuse identifier `Cell_HEditSpecialTBCell`.
+    static let cell_HEditSpecialTBCell: Rswift.ReuseIdentifier<HEditSpecialTBCell> = Rswift.ReuseIdentifier(identifier: "Cell_HEditSpecialTBCell")
     /// Reuse identifier `Cell_HEditTextTBCell`.
     static let cell_HEditTextTBCell: Rswift.ReuseIdentifier<HEditTextTBCell> = Rswift.ReuseIdentifier(identifier: "Cell_HEditTextTBCell")
     /// Reuse identifier `Cell_HEditZipcodeTBCell`.
@@ -1871,6 +1887,20 @@ struct _R: Rswift.Validatable {
 
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HEditDrumTBCell? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HEditDrumTBCell
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _HEditSpecialTBCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
+      typealias ReusableType = HEditSpecialTBCell
+
+      let bundle = R.hostingBundle
+      let identifier = "Cell_HEditSpecialTBCell"
+      let name = "HEditSpecialTBCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HEditSpecialTBCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HEditSpecialTBCell
       }
 
       fileprivate init() {}
@@ -2604,10 +2634,15 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "Edit"
       let sbid_SubEditBaseVC = StoryboardViewControllerResource<SubEditBaseVC>(identifier: "Sbid_SubEditBaseVC")
+      let sbid_SubEditSpecialVC = StoryboardViewControllerResource<SubEditSpecialVC>(identifier: "Sbid_SubEditSpecialVC")
       let sbid_SubInputMemoVC = StoryboardViewControllerResource<SubInputMemoVC>(identifier: "Sbid_SubInputMemoVC")
 
       func sbid_SubEditBaseVC(_: Void = ()) -> SubEditBaseVC? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_SubEditBaseVC)
+      }
+
+      func sbid_SubEditSpecialVC(_: Void = ()) -> SubEditSpecialVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_SubEditSpecialVC)
       }
 
       func sbid_SubInputMemoVC(_: Void = ()) -> SubInputMemoVC? {
@@ -2620,6 +2655,7 @@ struct _R: Rswift.Validatable {
           if UIKit.UIColor(named: "color-black", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-black' is used in storyboard 'Edit', but couldn't be loaded.") }
         }
         if _R.storyboard.edit().sbid_SubEditBaseVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_SubEditBaseVC' could not be loaded from storyboard 'Edit' as 'SubEditBaseVC'.") }
+        if _R.storyboard.edit().sbid_SubEditSpecialVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_SubEditSpecialVC' could not be loaded from storyboard 'Edit' as 'SubEditSpecialVC'.") }
         if _R.storyboard.edit().sbid_SubInputMemoVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_SubInputMemoVC' could not be loaded from storyboard 'Edit' as 'SubInputMemoVC'.") }
       }
 

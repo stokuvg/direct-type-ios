@@ -35,7 +35,7 @@ class SmoothCareerPreviewVC: PreviewBaseVC {
         //◆F-12入力（在籍企業の業種）
         //・「在籍企業の業種」を入力する：大分類→小分類で選択する・マスタ選択入力：「K6：業種マスタ」
         arrData.append(MdlItemH(.businessTypesF12, "", childItems: [
-            EditableItemH(type: .selectSpecisl, editItem: EditItemMdlAppSmoothCareerWorkBackgroundDetail.businessType, val: _detail.workBackgroundDetail.businessType),
+            EditableItemH(type: .selectSpecial, editItem: EditItemMdlAppSmoothCareerWorkBackgroundDetail.businessType, val: _detail.workBackgroundDetail.businessType),
         ]))
         //◆F-13入力（社員数）
         //・「社員数」の入力をする・数値入力：「8桁以上はエラー（従業員数の最大が230万人）」
