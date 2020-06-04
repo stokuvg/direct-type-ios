@@ -8,11 +8,11 @@
 
 import UIKit
 
-class ChemistrySelect: TmpBasicVC {
+class ChemistrySelect: UIViewController {
 
+    @IBOutlet private weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 }
