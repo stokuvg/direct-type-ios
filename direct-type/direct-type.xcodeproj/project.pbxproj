@@ -164,6 +164,7 @@
 		0EE861982488B79F003C5242 /* ChemistrySelectHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EE861972488B79F003C5242 /* ChemistrySelectHeaderView.xib */; };
 		0EE8619B2488C9B3003C5242 /* ChemistrySelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EE8619A2488C9B3003C5242 /* ChemistrySelectCell.xib */; };
 		0EE8619D2488C9BF003C5242 /* ChemistrySelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8619C2488C9BF003C5242 /* ChemistrySelectCell.swift */; };
+		0EE8619F2488D50B003C5242 /* ChemistryAnswerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8619E2488D50B003C5242 /* ChemistryAnswerButton.swift */; };
 		260BBFDC2465171D003D163A /* MdlProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260BBFDB2465171D003D163A /* MdlProfile.swift */; };
 		260BBFE024651732003D163A /* HPreviewTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260BBFDD24651732003D163A /* HPreviewTBCell.swift */; };
 		260BBFE124651732003D163A /* Preview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 260BBFDE24651732003D163A /* Preview.storyboard */; };
@@ -416,6 +417,7 @@
 		0EE861972488B79F003C5242 /* ChemistrySelectHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChemistrySelectHeaderView.xib; sourceTree = "<group>"; };
 		0EE8619A2488C9B3003C5242 /* ChemistrySelectCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChemistrySelectCell.xib; sourceTree = "<group>"; };
 		0EE8619C2488C9BF003C5242 /* ChemistrySelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistrySelectCell.swift; sourceTree = "<group>"; };
+		0EE8619E2488D50B003C5242 /* ChemistryAnswerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryAnswerButton.swift; sourceTree = "<group>"; };
 		260BBFDB2465171D003D163A /* MdlProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MdlProfile.swift; sourceTree = "<group>"; };
 		260BBFDD24651732003D163A /* HPreviewTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HPreviewTBCell.swift; sourceTree = "<group>"; };
 		260BBFDE24651732003D163A /* Preview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preview.storyboard; sourceTree = "<group>"; };
@@ -923,6 +925,7 @@
 			children = (
 				0EE861922488B0CD003C5242 /* HeaderView */,
 				0EE36F1C248737970098A2AF /* CarouselView */,
+				0EE8619E2488D50B003C5242 /* ChemistryAnswerButton.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -1436,6 +1439,7 @@
 				2636075F2477AB4900032880 /* BaseVC+ShowDialog.swift in Sources */,
 				26CFC45F2469495800E458E2 /* ConstantsPreview.swift in Sources */,
 				06E519AD245813DC004E4B7A /* LoginVC.swift in Sources */,
+				0EE8619F2488D50B003C5242 /* ChemistryAnswerButton.swift in Sources */,
 				06409C71246D386A00EA6BBB /* BaseFoldingHeaderView.swift in Sources */,
 				268BFF58246E8D25004B2640 /* SmoothCareerPreviewVC.swift in Sources */,
 				26FC4EE02477C775003B56C3 /* AuthManager.swift in Sources */,

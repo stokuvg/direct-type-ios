@@ -12,10 +12,10 @@ final class ChemistrySelectCell: UITableViewCell {
     @IBOutlet private weak var questionNumberLabel: UILabel!
     @IBOutlet private weak var questionLabel: UILabel!
     // 回答ボタン
-    @IBOutlet private weak var noButton: UIButton!
-    @IBOutlet private weak var IfAnythingNoButton: UIButton!
-    @IBOutlet private weak var IfAnythingYes: UIButton!
-    @IBOutlet private weak var yesButton: UIButton!
+    @IBOutlet private weak var noButton: ChemistryAnswerButton!
+    @IBOutlet private weak var IfAnythingNoButton: ChemistryAnswerButton!
+    @IBOutlet private weak var IfAnythingYes: ChemistryAnswerButton!
+    @IBOutlet private weak var yesButton: ChemistryAnswerButton!
     @IBAction func noButton(_ sender: UIButton) {
         selectedAnswer = .no
     }
@@ -39,7 +39,10 @@ final class ChemistrySelectCell: UITableViewCell {
     
     private var selectedAnswer = AnswerType.unanswered {
         didSet {
-            
+            noButton.isAnswerSelected = selectedAnswer == .no
+            IfAnythingNoButton.isAnswerSelected = selectedAnswer == .ifAnythingsNo
+            IfAnythingYes.isAnswerSelected = selectedAnswer == .ifAnythingsYes
+            yesButton.isAnswerSelected = selectedAnswer == .yes
         }
     }
     

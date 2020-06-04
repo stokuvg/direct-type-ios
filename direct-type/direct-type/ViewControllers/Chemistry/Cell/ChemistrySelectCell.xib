@@ -48,11 +48,15 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lup-vX-bxj">
                                         <rect key="frame" x="0.0" y="0.0" width="79" height="100"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="79W-fe-Wv6">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="79W-fe-Wv6" customClass="ChemistryAnswerButton" customModule="direct_type" customModuleProvider="target">
                                                 <rect key="frame" x="5" y="0.0" width="69" height="69"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="79W-fe-Wv6" secondAttribute="height" multiplier="1:1" id="JJg-oX-E0F"/>
                                                 </constraints>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="noButton:" destination="gGS-sb-D9C" eventType="touchUpInside" id="iiA-kI-hkz"/>
                                                 </connections>
@@ -78,7 +82,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T0N-zU-fOz">
                                         <rect key="frame" x="79.5" y="0.0" width="78.5" height="100"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fh8-QL-Tgi">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fh8-QL-Tgi" customClass="ChemistryAnswerButton" customModule="direct_type" customModuleProvider="target">
                                                 <rect key="frame" x="5" y="0.0" width="68.5" height="69"/>
                                                 <connections>
                                                     <action selector="IfAnythingNoButton:" destination="gGS-sb-D9C" eventType="touchUpInside" id="2Kj-lk-Lgf"/>
@@ -108,7 +112,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i16-hd-xzV">
                                         <rect key="frame" x="158.5" y="0.0" width="77.5" height="100"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WPK-Li-9Pc">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WPK-Li-9Pc" customClass="ChemistryAnswerButton" customModule="direct_type" customModuleProvider="target">
                                                 <rect key="frame" x="5" y="0.0" width="67.5" height="67.5"/>
                                                 <connections>
                                                     <action selector="IfAnythingYes:" destination="gGS-sb-D9C" eventType="touchUpInside" id="rWD-fm-vjc"/>
@@ -138,7 +142,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tvx-br-HRW">
                                         <rect key="frame" x="236.5" y="0.0" width="78.5" height="100"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="taM-Mi-BGh">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="taM-Mi-BGh" customClass="ChemistryAnswerButton" customModule="direct_type" customModuleProvider="target">
                                                 <rect key="frame" x="5" y="0.0" width="68.5" height="68.5"/>
                                                 <connections>
                                                     <action selector="yesButton:" destination="gGS-sb-D9C" eventType="touchUpInside" id="hpg-4r-gef"/>
