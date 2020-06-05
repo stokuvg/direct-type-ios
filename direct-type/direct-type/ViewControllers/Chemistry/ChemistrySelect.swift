@@ -9,8 +9,10 @@
 import UIKit
 
 class ChemistrySelect: UIViewController {
-
     @IBOutlet private weak var tableView: UITableView!
+    
+    typealias Score = (number: Int, score: ChemistryAnswerType)
+    private var questionScores = [Score]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +25,17 @@ private extension ChemistrySelect {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNib(nibName: "ChemistrySelectCell", idName: "ChemistrySelectCell")
+        questionScores = ChemistryQuestionMasterData.questions.enumerated().map({
+            Score(number: $0.offset, score: .unanswered)
+        })
+    }
+    
+    func getNumber(from indexRow: Int) -> Int {
+        return indexRow + 1
+    }
+    
+    func getIndex(from number: Int) -> Int {
+        return number - 1
     }
 }
 
@@ -39,11 +52,22 @@ extension ChemistrySelect: UITableViewDelegate {
 
 extension ChemistrySelect: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return ChemistryQuestionMasterData.questions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.loadCell(cellName: "ChemistrySelectCell", indexPath: indexPath) as! ChemistrySelectCell
+        let question = ChemistryQuestionMasterData.questions[indexPath.row]
+        let number = getNumber(from: indexPath.row)
+        let questionDataSet = ChemistrySelectCell.QuestionDataSet(number: number, question: question)
+        cell.configure(with: questionDataSet, selectedAnswer: questionScores[indexPath.row].score, delegate: self)
         return cell
+    }
+}
+
+extension ChemistrySelect: ChemistrySelectCellDelegate {
+    func didSelectedAnswer(number: Int, type: ChemistryAnswerType) {
+        let index = getIndex(from: number)
+        questionScores[index].score = type
     }
 }

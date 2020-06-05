@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ChemistrySelectCellDelegate: class {
+    func didSelectedAnswer(number: Int, type: ChemistryAnswerType)
+}
+
 final class ChemistrySelectCell: UITableViewCell {
     @IBOutlet private weak var questionNumberLabel: UILabel!
     @IBOutlet private weak var questionLabel: UILabel!
@@ -29,21 +33,35 @@ final class ChemistrySelectCell: UITableViewCell {
         selectedAnswer = .yes
     }
     
-    enum AnswerType {
-        case no
-        case ifAnythingsNo
-        case ifAnythingsYes
-        case yes
-        case unanswered
-    }
+    typealias QuestionDataSet = (number: Int, question: ChemistryQuestion)
     
-    private var selectedAnswer = AnswerType.unanswered {
+    private var selectedAnswer = ChemistryAnswerType.unanswered {
         didSet {
             noButton.isAnswerSelected = selectedAnswer == .no
             IfAnythingNoButton.isAnswerSelected = selectedAnswer == .ifAnythingsNo
             IfAnythingYes.isAnswerSelected = selectedAnswer == .ifAnythingsYes
             yesButton.isAnswerSelected = selectedAnswer == .yes
+            delegate?.didSelectedAnswer(number: number!, type: selectedAnswer)
         }
+    }
+    
+    private weak var delegate: ChemistrySelectCellDelegate?
+    private var number: Int? = nil {
+        didSet {
+            questionNumberLabel.text = String(number!)
+        }
+    }
+    private var question: ChemistryQuestion? = nil {
+        didSet {
+            questionLabel.text = question!.contentText
+        }
+    }
+
+    func configure(with dataSet: QuestionDataSet, selectedAnswer: ChemistryAnswerType, delegate: ChemistrySelectCellDelegate) {
+        number = dataSet.number
+        question = dataSet.question
+        self.delegate = delegate
+        self.selectedAnswer = selectedAnswer
     }
     
     override func awakeFromNib() {
