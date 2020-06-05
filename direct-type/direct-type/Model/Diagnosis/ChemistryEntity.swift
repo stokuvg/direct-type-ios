@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class DiagnosisResult {
+final class ChemistryEntity {
     enum PersonalityType: String, CaseIterable {
         case reformer = "改革する人"
         case helper = "人を助ける人"

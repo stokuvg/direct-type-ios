@@ -44,7 +44,7 @@ private extension ChemistryStart {
     
     func generateCarouselIconView() -> [UIImageView]{
         var imageViews = [UIImageView]()
-        DiagnosisResult.PersonalityType.allCases.forEach({ type in
+        ChemistryEntity.PersonalityType.allCases.forEach({ type in
             let image = UIImage(named: type.imageName)
             let imageView = UIImageView(frame: carouselIconFrame)
             imageView.image = image
