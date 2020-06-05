@@ -22,15 +22,19 @@ final class ChemistrySelectCell: UITableViewCell {
     @IBOutlet private weak var yesButton: ChemistryAnswerButton!
     @IBAction func noButton(_ sender: UIButton) {
         selectedAnswer = .no
+        delegate?.didSelectedAnswer(number: number!, type: selectedAnswer)
     }
     @IBAction func IfAnythingNoButton(_ sender: UIButton) {
         selectedAnswer = .ifAnythingsNo
+        delegate?.didSelectedAnswer(number: number!, type: selectedAnswer)
     }
     @IBAction func IfAnythingYes(_ sender: UIButton) {
         selectedAnswer = .ifAnythingsYes
+        delegate?.didSelectedAnswer(number: number!, type: selectedAnswer)
     }
     @IBAction func yesButton(_ sender: UIButton) {
         selectedAnswer = .yes
+        delegate?.didSelectedAnswer(number: number!, type: selectedAnswer)
     }
     
     typealias QuestionDataSet = (number: Int, question: ChemistryQuestion)
@@ -41,7 +45,6 @@ final class ChemistrySelectCell: UITableViewCell {
             IfAnythingNoButton.isAnswerSelected = selectedAnswer == .ifAnythingsNo
             IfAnythingYes.isAnswerSelected = selectedAnswer == .ifAnythingsYes
             yesButton.isAnswerSelected = selectedAnswer == .yes
-            delegate?.didSelectedAnswer(number: number!, type: selectedAnswer)
         }
     }
     

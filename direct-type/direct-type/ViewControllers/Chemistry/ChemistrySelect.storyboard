@@ -21,23 +21,49 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" name="color-sub"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vK9-C7-UOT">
+                                <rect key="frame" x="40" y="597" width="295" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="QF0-Xa-H3f"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aq0-ab-s6D">
+                                <rect key="frame" x="40" y="597" width="295" height="50"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="nextButton:" destination="J48-1e-uCU" eventType="touchUpInside" id="9vb-OR-IYR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" name="color-base"/>
                         <constraints>
                             <constraint firstItem="4Tb-MV-2ik" firstAttribute="top" secondItem="x6Q-hR-9rW" secondAttribute="top" id="8Nd-fD-0SQ"/>
                             <constraint firstItem="4Tb-MV-2ik" firstAttribute="trailing" secondItem="x6Q-hR-9rW" secondAttribute="trailing" id="8fs-2V-GPg"/>
-                            <constraint firstAttribute="bottom" secondItem="4Tb-MV-2ik" secondAttribute="bottom" id="AgI-DP-76N"/>
+                            <constraint firstItem="4Tb-MV-2ik" firstAttribute="bottom" secondItem="x6Q-hR-9rW" secondAttribute="bottom" id="ATt-k9-D8q"/>
                             <constraint firstItem="4Tb-MV-2ik" firstAttribute="leading" secondItem="x6Q-hR-9rW" secondAttribute="leading" id="Ia6-2Y-4yH"/>
+                            <constraint firstItem="vK9-C7-UOT" firstAttribute="leading" secondItem="aq0-ab-s6D" secondAttribute="leading" id="Lxm-LG-9yi"/>
+                            <constraint firstItem="x6Q-hR-9rW" firstAttribute="trailing" secondItem="vK9-C7-UOT" secondAttribute="trailing" constant="40" id="Rfd-Ql-hRh"/>
+                            <constraint firstItem="vK9-C7-UOT" firstAttribute="leading" secondItem="x6Q-hR-9rW" secondAttribute="leading" constant="40" id="fXn-5r-4Q6"/>
+                            <constraint firstItem="x6Q-hR-9rW" firstAttribute="bottom" secondItem="vK9-C7-UOT" secondAttribute="bottom" constant="20" id="kEa-PZ-MzJ"/>
+                            <constraint firstItem="vK9-C7-UOT" firstAttribute="bottom" secondItem="aq0-ab-s6D" secondAttribute="bottom" id="nfj-VU-F35"/>
+                            <constraint firstItem="vK9-C7-UOT" firstAttribute="top" secondItem="aq0-ab-s6D" secondAttribute="top" id="ssh-tz-kiz"/>
+                            <constraint firstItem="vK9-C7-UOT" firstAttribute="trailing" secondItem="aq0-ab-s6D" secondAttribute="trailing" id="uG6-Wx-b8O"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="x6Q-hR-9rW"/>
                     </view>
                     <connections>
+                        <outlet property="buttonBackgroundView" destination="vK9-C7-UOT" id="rwf-Ua-qhi"/>
+                        <outlet property="nextButton" destination="aq0-ab-s6D" id="taj-3Z-bUx"/>
                         <outlet property="tableView" destination="4Tb-MV-2ik" id="BzS-cz-tuD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jo0-MZ-PdE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="128.57142857142856"/>
+            <point key="canvasLocation" x="136.80000000000001" y="128.18590704647679"/>
         </scene>
     </scenes>
     <resources>

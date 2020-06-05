@@ -697,7 +697,7 @@
 			isa = PBXGroup;
 			children = (
 				0E6951AD248A05A100D58E6E /* MasterData */,
-				0E9B8B3124877B510049CFCC /* Diagnosis */,
+				0E9B8B3124877B510049CFCC /* Chemistry */,
 				26BF48EC24639DD200E00215 /* Editable */,
 			);
 			path = Model;
@@ -941,14 +941,14 @@
 			path = FooterView;
 			sourceTree = "<group>";
 		};
-		0E9B8B3124877B510049CFCC /* Diagnosis */ = {
+		0E9B8B3124877B510049CFCC /* Chemistry */ = {
 			isa = PBXGroup;
 			children = (
 				0E9B8B3224877BA60049CFCC /* ChemistryQuestion.swift */,
 				0E6951AB248A050000D58E6E /* ChemistryPersonalityType.swift */,
 				0E6951B0248A11A000D58E6E /* ChemistryAnswerType.swift */,
 			);
-			path = Diagnosis;
+			path = Chemistry;
 			sourceTree = "<group>";
 		};
 		0EE36F1C248737970098A2AF /* CarouselView */ = {
