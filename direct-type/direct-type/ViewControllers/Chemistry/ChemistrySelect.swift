@@ -48,6 +48,15 @@ extension ChemistrySelect: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return ChemistrySelectHeaderView.height
     }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footer = ChemistrySelectFooterView()
+        return footer
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return ChemistrySelectFooterView.height
+    }
 }
 
 extension ChemistrySelect: UITableViewDataSource {
