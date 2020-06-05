@@ -7,25 +7,65 @@
 //
 
 import UIKit
-import SwaggerClient
+//import SwaggerClient
+import TudApi
+import SVProgressHUD
 
 //===[C-15]「職務経歴書確認」＊単独
 class CareerPreviewVC: PreviewBaseVC {
     var detail: MdlCareerCard? = nil
+
+    override func actCommit(_ sender: UIButton) {
+        print(#line, #function, "ボタン押下でAPIフェッチ確認")
+        if validateUpdateCareer() {
+            tableVW.reloadData()
+            return
+        }
+        fetchCreateCareerList()
+    }
+    
+    func validateUpdateCareer() -> Bool {
+        if Constants.DbgSkipLocalValidate { return false }//[Dbg: ローカルValidationスキップ]
+        ValidateManager.dbgDispCurrentItems(editableModel: editableModel) //[Dbg: 状態確認]
+        let chkErr = ValidateManager.chkValidationErr(editableModel)
+        if chkErr.count > 0 {
+            print("＊＊＊　Validationエラー発生: \(chkErr.count)件　＊＊＊")
+            var msg: String = ""
+            for err in chkErr {
+                msg = "\(msg)\(err.value)\n"
+            }
+            self.showValidationError(title: "Validationエラー (\(chkErr.count)件)", message: msg)
+//            /* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
+            return true
+        } else {
+            print("＊＊＊　Validationエラーなし　＊＊＊")
+            return false
+        }
+    }
+    
     //共通プレビューをOverrideして利用する
     override func initData() {
-        //ダミーデータ投入しておく
-        let careerCard: CareerCard =
-            CareerCard(workPeriod: CareerCardWorkPeriod(startYear: "2016", startMonth: "04", endYear: "2020", endMonth: "03"),
-                       companyName: "ほにゃらら産業合資会社",
-                       employmentType: 2,
-                       employeesCount: 256,
-                       salary: 8,
-                       contents: String(repeating: "職業経歴本文が入ります。",  count: 13) )
-        detail = MdlCareerCard(dto: careerCard)
-        //========
+        title = "[C-15]「職務経歴書確認」"
+//        if Constants.DbgOfflineMode {
+            let careerCard: CareerHistoryDTO = CareerHistoryDTO(
+                startWorkPeriod: "2006/04/01",
+                endWorkPeriod: "2014/03/01",
+                companyName: "企業名",
+                employmentId: "2",
+                employees: 1234,
+                salary: 9,
+                workNote: "おぼえがきもろもろ")
+            self.detail = MdlCareerCard(dto: careerCard)
+//        }
+        print(self.detail?.debugDisp)
+    }
+    
+    override func dispData() {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
         guard let _detail = detail else { return }
+        self.arrData.removeAll()//いったん全件を削除しておく
+        editableModel.arrData.removeAll()//こちらで管理させる？！
+
         //・項目見出し部分に「〇社目（{勤務開始年月}～{勤務終了年月}）」と表示
         //・情報の置き方
         //    ｛企業名｝（｛雇用形態｝）
@@ -58,8 +98,96 @@ class CareerPreviewVC: PreviewBaseVC {
         arrData.append(MdlItemH(.contentsC15, "", childItems: [
             EditableItemH(type: .inputMemo, editItem: EditItemCareerCard.contents, val: _detail.contents),
         ]))
+        
+        //=== editableModelで管理させる
+        editableModel.arrData.removeAll()
+        for items in arrData { editableModel.arrData.append(items.childItems) }//editableModelに登録
+        editableModel.chkTableCellAll()//これ実施しておくと、getItemByKeyが利用可能になる
+        tableVW.reloadData()//描画しなおし
     }
-    override func dispData() {
-        title = "[C-15]「職務経歴書確認」"
+    //========================================
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        fetchGetCareerList()
+    }
+}
+
+//=== APIフェッチ
+extension CareerPreviewVC {
+    private func fetchGetCareerList() {
+        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
+        SVProgressHUD.show(withStatus: "職務経歴書情報の取得")
+        ApiManager.getCareer(Void(), isRetry: true)
+        .done { result in
+            print(result.debugDisp)
+            self.detail = result.businessTypes.first
+        }
+        .catch { (error) in
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            self.showError(myErr)
+        }
+        .finally {
+            self.dispData()
+            SVProgressHUD.dismiss()
+        }
+    }
+//    private func fetchUpdateCareer() {
+//        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
+//        let card = CareerHistoryDTO(editableModel.editTempCD)
+//        print(card)
+//        let param = UpdateCareerRequestDTO(careerHistory: [card])
+//              print(param)
+//        self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
+//        self.dicValidErrMsg.removeAll()//状態をクリアしておく
+//        SVProgressHUD.show(withStatus: "職務経歴書情報の更新")
+//        ApiManager.updateCareer(param, isRetry: true)
+//        .done { result in
+//            self.fetchGetCareerList()//成功したらフェッチしておく
+//        }
+//        .catch { (error) in
+//            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+//            switch myErr.code {
+//            case 400:
+//                let (dicGrpError, dicError) = ValidateManager.canvValidErrMsgCareer(myErr.arrValidErrMsg)
+//                self.dicGrpValidErrMsg = dicGrpError
+//                self.dicValidErrMsg = dicError
+//            default:
+//                self.showError(error)
+//            }
+//        }
+//        .finally {
+//            self.dispData()
+//            SVProgressHUD.dismiss()
+//        }
+//    }
+//}
+    private func fetchCreateCareerList() {
+        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
+        let card = CareerHistoryDTO(startWorkPeriod: "2020-04", endWorkPeriod: "2022-02", companyName: "dummyCompany 2", employmentId: "6", employees: 2345, salary: 13, workNote: "わーくのーとてきとう")
+        let param = CreateCareerRequestDTO(careerHistory: [card])
+        print(param)
+        SVProgressHUD.show(withStatus: "職務経歴書情報の作成")
+        ApiManager.createCareer(param, isRetry: true)
+        .done { result in
+            self.fetchGetCareerList()
+        }
+        .catch { (error) in
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            switch myErr.code {
+            case 400:
+                let (dicGrpError, dicError) = ValidateManager.canvValidErrMsgProfile(myErr.arrValidErrMsg)
+                self.dicGrpValidErrMsg = dicGrpError
+                self.dicValidErrMsg = dicError
+            default:
+                self.showError(error)
+            }
+        }
+        .finally {
+            self.dispData()
+            SVProgressHUD.dismiss()
+        }
     }
 }

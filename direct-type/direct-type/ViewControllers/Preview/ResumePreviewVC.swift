@@ -7,7 +7,9 @@
 //
 
 import UIKit
-import SwaggerClient
+//import SwaggerClient
+import TudApi
+import SVProgressHUD
 
 //===[H-3]「履歴書確認」
 class ResumePreviewVC: PreviewBaseVC {
@@ -28,7 +30,8 @@ class ResumePreviewVC: PreviewBaseVC {
 //                                               languageEnglish: "1", languageStudySkill: "その他、スペイン語など"),
 //            qualifications: [],
 //            ownPr: String(repeating: "自己PRのテキストが入ります。", count: 38) )
-        let resume: Resume = Resume(employment: 0, changeCount: 0, lastJobExperiment: ResumeLastJobExperiment(jobType: 0, jobExperimentYear: 0), jobExperiments: [], businessTypes: [], school: ResumeSchool(schoolName: "", department: "", subject: "", graduationYear: ""), skillLanguage: ResumeSkillLanguage(languageToeicScore: nil, languageToeflScore: nil, languageEnglish: "", languageStudySkill: ""), qualifications: [], ownPr: "")
+//        let resume: Resume = Resume(employment: 0, changeCount: 0, lastJobExperiment: ResumeLastJobExperiment(jobType: 0, jobExperimentYear: 0), jobExperiments: [], businessTypes: [], school: ResumeSchool(schoolName: "", department: "", subject: "", graduationYear: ""), skillLanguage: ResumeSkillLanguage(languageToeicScore: nil, languageToeflScore: nil, languageEnglish: "", languageStudySkill: ""), qualifications: [], ownPr: "")
+        let resume: GetResumeResponseDTO = GetResumeResponseDTO(isEmployed: nil, changeJobCount: nil, workHistory: [], experienceIndustryId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: [])
         detail = MdlResume(dto: resume)
 
         //========

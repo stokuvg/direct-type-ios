@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SwaggerClient
+import TudApi
 
 /** 職務経歴書 */
 class MdlCareer: Codable {
@@ -17,15 +17,19 @@ class MdlCareer: Codable {
         self.businessTypes = businessTypes
     }
     //ApiモデルをAppモデルに変換して保持させる
-    convenience init(dto: Career) {
+    convenience init(dto: GetCareerResponseDTO) {
+        print(#line, #function, dto)
         var _businessTypes: [MdlCareerCard] = []
-        if let items = dto.businessTypes {
+        if let items = dto.careerHistory {
             for item in items {
+                print(item.companyName, item.endWorkPeriod)
                 _businessTypes.append(MdlCareerCard(dto: item))
             }
         }
         self.init(businessTypes: _businessTypes)
     }
+    //=== 作成・更新のモデルは、アプリ=>APIなので不要だな ===
+
     var debugDisp: String {
         return "[businessTypes: \(businessTypes.count)件]"
     }
