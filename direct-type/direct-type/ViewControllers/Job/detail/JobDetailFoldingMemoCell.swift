@@ -33,8 +33,8 @@ class JobDetailFoldingMemoCell: BaseTableViewCell {
         let memoText = data.interviewContent
         self.memoLabel.text(text: memoText, fontType: .C_font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         
-        let memoImageUrlString1 = data.interviewPhoto1
-        let memoImageUrlString2 = data.interviewPhoto2
-        let memoImageUrlString3 = data.interviewPhoto3
+//        let memoImageUrlString1 = data.interviewPhoto1
+//        let memoImageUrlString2 = data.interviewPhoto2
+//        let memoImageUrlString3 = data.interviewPhoto3
     }
 }

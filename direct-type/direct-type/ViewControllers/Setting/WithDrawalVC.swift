@@ -100,7 +100,8 @@ class WithDrawalVC: TmpBasicVC {
         }
         let okAction = UIAlertAction.init(title: "はい", style: .default) { (_) in
             // TODO:退会処理
-            
+            let vc = self.getVC(sbName: "SettingVC", vcName: "WithDrawalCompleteVC") as! WithDrawalCompleteVC
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         withdrawalConfirmAlertController.addAction(cancelAction)
         withdrawalConfirmAlertController.addAction(okAction)

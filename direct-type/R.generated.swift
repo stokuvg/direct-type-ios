@@ -89,7 +89,7 @@ struct R: Rswift.Validatable {
   }
 
   #if os(iOS) || os(tvOS)
-  /// This `R.storyboard` struct is generated, and contains static references to 16 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 17 storyboards.
   struct storyboard {
     /// Storyboard `Auth`.
     static let auth = _R.storyboard.auth()
@@ -107,6 +107,8 @@ struct R: Rswift.Validatable {
     static let entryVC = _R.storyboard.entryVC()
     /// Storyboard `HomeVC`.
     static let homeVC = _R.storyboard.homeVC()
+    /// Storyboard `InitialInput`.
+    static let initialInput = _R.storyboard.initialInput()
     /// Storyboard `JobOfferDetailVC`.
     static let jobOfferDetailVC = _R.storyboard.jobOfferDetailVC()
     /// Storyboard `KeepListVC`.
@@ -177,6 +179,13 @@ struct R: Rswift.Validatable {
     /// `UIStoryboard(name: "HomeVC", bundle: ...)`
     static func homeVC(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.homeVC)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "InitialInput", bundle: ...)`
+    static func initialInput(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.initialInput)
     }
     #endif
 
@@ -2519,6 +2528,9 @@ struct _R: Rswift.Validatable {
       try homeVC.validate()
       #endif
       #if os(iOS) || os(tvOS)
+      try initialInput.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
       try jobOfferDetailVC.validate()
       #endif
       #if os(iOS) || os(tvOS)
@@ -2743,6 +2755,26 @@ struct _R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
+    struct initialInput: Rswift.StoryboardResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "InitialInput"
+      let sbid_InitialInputListVC = StoryboardViewControllerResource<InitialInputListVC>(identifier: "Sbid_InitialInputListVC")
+
+      func sbid_InitialInputListVC(_: Void = ()) -> InitialInputListVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_InitialInputListVC)
+      }
+
+      static func validate() throws {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+        if _R.storyboard.initialInput().sbid_InitialInputListVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_InitialInputListVC' could not be loaded from storyboard 'InitialInput' as 'InitialInputListVC'.") }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
     struct jobOfferDetailVC: Rswift.StoryboardResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "JobOfferDetailVC"
@@ -2871,6 +2903,7 @@ struct _R: Rswift.Validatable {
       let sbid_AccountChangeVC = StoryboardViewControllerResource<AccountChangeVC>(identifier: "Sbid_AccountChangeVC")
       let sbid_ApproachSettingVC = StoryboardViewControllerResource<ApproachSettingVC>(identifier: "Sbid_ApproachSettingVC")
       let sbid_SettingVC = StoryboardViewControllerResource<SettingVC>(identifier: "Sbid_SettingVC")
+      let sbid_WithDrawalCompleteVC = StoryboardViewControllerResource<WithDrawalCompleteVC>(identifier: "Sbid_WithDrawalCompleteVC")
       let sbid_WithDrawalVC = StoryboardViewControllerResource<WithDrawalVC>(identifier: "Sbid_WithDrawalVC")
 
       func sbid_AccountChangeCompleteVC(_: Void = ()) -> AccountChangeCompleteVC? {
@@ -2889,6 +2922,10 @@ struct _R: Rswift.Validatable {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_SettingVC)
       }
 
+      func sbid_WithDrawalCompleteVC(_: Void = ()) -> WithDrawalCompleteVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_WithDrawalCompleteVC)
+      }
+
       func sbid_WithDrawalVC(_: Void = ()) -> WithDrawalVC? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_WithDrawalVC)
       }
@@ -2905,6 +2942,7 @@ struct _R: Rswift.Validatable {
         if _R.storyboard.settingVC().sbid_AccountChangeVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_AccountChangeVC' could not be loaded from storyboard 'SettingVC' as 'AccountChangeVC'.") }
         if _R.storyboard.settingVC().sbid_ApproachSettingVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_ApproachSettingVC' could not be loaded from storyboard 'SettingVC' as 'ApproachSettingVC'.") }
         if _R.storyboard.settingVC().sbid_SettingVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_SettingVC' could not be loaded from storyboard 'SettingVC' as 'SettingVC'.") }
+        if _R.storyboard.settingVC().sbid_WithDrawalCompleteVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_WithDrawalCompleteVC' could not be loaded from storyboard 'SettingVC' as 'WithDrawalCompleteVC'.") }
         if _R.storyboard.settingVC().sbid_WithDrawalVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_WithDrawalVC' could not be loaded from storyboard 'SettingVC' as 'WithDrawalVC'.") }
       }
 
