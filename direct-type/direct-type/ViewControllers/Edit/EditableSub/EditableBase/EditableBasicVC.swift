@@ -12,8 +12,24 @@ import SVProgressHUD
 //=== 編集可能項目の対応
 class EditableBasicVC: TmpBasicVC, SubSelectFeedbackDelegate {
     func changedSelect(editItem: EditableItemH, codes: String) {
-        editableModel.changeTempItem(editItem, text: codes)//入力値の反映
-        dispEditableItemByKey(editItem.editableItemKey)//対象の表示を更新する
+        switch editItem.editType {
+        case .selectSpecial:
+            editableModel.changeTempItem(editItem, text: codes)//入力値の反映
+            dispEditableItemAll()//対象の表示を更新する
+            print("❤️❤️[\(editItem.editType)]]❤️❤️", editItem.debugDisp)
+            print(#line, #function, editItem.editType, editItem.debugDisp, codes)
+        case .selectSpecialYear:
+//            editableModel.changeTempItem(editItem, text: "2_3_4_5")//入力値の反映
+            editableModel.changeTempItem(editItem, text: codes)//入力値の反映
+            dispEditableItemAll()//対象の表示を更新する
+            print("❤️❤️[\(editItem.editType)]]❤️❤️", editItem.debugDisp)
+            print(#line, #function, editItem.editType, editItem.debugDisp, codes)
+        default:
+            editableModel.changeTempItem(editItem, text: codes)//入力値の反映
+            dispEditableItemByKey(editItem.editableItemKey)//対象の表示を更新する
+            print("❤️❤️[\(editItem.editType)]]❤️❤️", editItem.debugDisp)
+            print(editItem.debugDisp)
+        }
     }
     
     //編集中の情報
@@ -119,13 +135,13 @@ extension EditableBasicVC: InputItemHDelegate {
                     self.present(nvc, animated: true) {}
                 }
             })
-        case .selectSpecisl, .selectSpecislYear:
+        case .selectSpecial, .selectSpecialYear:
             //さらに子ナビさせたいので
             DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
                 tf.resignFirstResponder()//自分を解除しておかないと、戻ってきたときにまた遷移してしまうため
                 let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSpecialVC") as? SubSelectSpecialVC{
-                    nvc.initData(editableItem: item, selectingCodes: "") // jobType | skill
+                    nvc.initData(self, editableItem: item, selectingCodes: "") // jobType | skill
                     //遷移アニメーション関連
                     nvc.modalTransitionStyle = .crossDissolve
                     self.present(nvc, animated: true) {}
@@ -179,7 +195,7 @@ extension EditableBasicVC: InputItemHDelegate {
             break
         case .selectMulti:
             break
-        case .selectSpecisl, .selectSpecislYear:
+        case .selectSpecial, .selectSpecialYear:
             break
         }
         print("💛[\(tf.itemKey)] 編集終わり💛「[\(tf.tag)] \(#function)」[\(tf.itemKey)][\(tf.text ?? "")] [\(String(describing: tf.inputAccessoryView))] [\(String(describing: tf.inputView))]")

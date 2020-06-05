@@ -282,6 +282,37 @@
             </objects>
             <point key="canvasLocation" x="823" y="1256"/>
         </scene>
+        <!--With Drawal CompleteVC-->
+        <scene sceneID="37y-at-uzj">
+            <objects>
+                <viewController storyboardIdentifier="Sbid_WithDrawalCompleteVC" hidesBottomBarWhenPushed="YES" id="IPM-YY-ffN" customClass="WithDrawalCompleteVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CRL-hR-iem">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gny-mo-gy8">
+                                <rect key="frame" x="44" y="48" width="232" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ovl-iz-9H4" firstAttribute="trailing" secondItem="gny-mo-gy8" secondAttribute="trailing" constant="44" id="C3y-Fb-waM"/>
+                            <constraint firstItem="gny-mo-gy8" firstAttribute="top" secondItem="ovl-iz-9H4" secondAttribute="top" constant="48" id="Vrl-MX-fn1"/>
+                            <constraint firstItem="gny-mo-gy8" firstAttribute="leading" secondItem="ovl-iz-9H4" secondAttribute="leading" constant="44" id="n4D-LB-dDL"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ovl-iz-9H4"/>
+                    </view>
+                    <connections>
+                        <outlet property="infomationLabel" destination="gny-mo-gy8" id="usQ-FA-r1w"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4FG-rM-IkO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1515" y="1256"/>
+        </scene>
         <!--Approach SettingVC-->
         <scene sceneID="bIf-eb-jnI">
             <objects>

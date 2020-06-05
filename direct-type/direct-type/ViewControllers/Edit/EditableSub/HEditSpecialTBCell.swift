@@ -1,16 +1,17 @@
 //
-//  HEditTextTBCell.swift
+//  HEditSpecialTBCell.swift
 //  direct-type
 //
-//  Created by ms-mb014 on 2020/05/08.
+//  Created by ms-mb014 on 2020/06/03.
 //  Copyright © 2020 ms-mb015. All rights reserved.
 //
 
 import UIKit
 
-class HEditTextTBCell: UITableViewCell {
+class HEditSpecialTBCell: UITableViewCell {
     var delegate: InputItemHDelegate!
     var item: EditableItemH? = nil
+    var item2: EditableItemH? = nil
     var errMsg: String = ""
     var returnKeyType: UIReturnKeyType = .next
     
@@ -24,9 +25,10 @@ class HEditTextTBCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-    func initCell(_ delegate: InputItemHDelegate, _ item: EditableItemH,  errMsg: String, _ returnKeyType: UIReturnKeyType) {
+    func initCell(_ delegate: InputItemHDelegate, _ item: EditableItemH, _ item2: EditableItemH?,  errMsg: String, _ returnKeyType: UIReturnKeyType) {
         self.delegate = delegate
         self.item = item
+        self.item2 = item2
         self.errMsg = errMsg
         self.returnKeyType = returnKeyType
         tfValue.itemKey = item.editableItemKey
@@ -40,14 +42,15 @@ class HEditTextTBCell: UITableViewCell {
         lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
         var bufVal: String = ""
         switch _item.editType {
-        case .selectDrumYMD:
-            bufVal = _item.valDisp
-        case .selectDrum, .selectSingle:
-            bufVal = _item.valDisp
-        case .selectMulti:
-            bufVal = _item.valDisp
         case .selectSpecial:
             bufVal = _item.valDisp
+            print(#line, #function, _item.debugDisp)
+        case .selectSpecialYear:
+            bufVal = _item.valDisp
+            if let _item2 = item2 {
+                print(#line, #function, _item2.debugDisp)
+                bufVal = "!?\(_item.valDisp)：\(_item2.valDisp)"
+            }
         default:
             bufVal = _item.curVal
         }
@@ -79,7 +82,7 @@ class HEditTextTBCell: UITableViewCell {
 
 
 //=== 文字入力に伴うTextField関連の通知
-extension HEditTextTBCell {
+extension HEditSpecialTBCell {
     @IBAction func actEditingDidBegin(_ sender: IKTextField) {
         guard let _item = item else { return }
         delegate?.editingDidBegin(sender, _item)
@@ -91,36 +94,5 @@ extension HEditTextTBCell {
     @IBAction func actEditingChanged(_ sender: IKTextField) {
         guard let _item = item else { return }
         delegate?.changedItem(sender, _item, text: sender.text ?? "")
-    }
-}
-
-
-extension HEditTextTBCell: UITextFieldDelegate {
-    //=== ピッカーで選択させる場合の処理 ===
-    //===元のTextFieldの直接編集は却下したい
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let textField = textField as? IKTextField else { return true }
-        if let tfiv = textField.inputView as? UIPickerView {
-            print("❤️[\(textField.itemKey)][\(tfiv.description)] [\(#function)]❤️ ❤️[Pickerのため編集抑止]❤️")
-            return false //Pickerに結びついていたら編集却下とする
-        }
-        return true
-    }
-    //今はTextField使い捨てなので無理ですが、ちゃんと画面定義してすべて保持するようにしておけば、Nextでの移動も可能になる
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let textField = textField as? IKTextField else { return true }
-        print("❤️[\(textField.itemKey)] [\(#function)]❤️ ❤️[Return押された]❤️")
-        if let delegate = delegate {
-            return delegate.textFieldShouldReturn(textField, item!)
-        }
-       return true
-    }
-    func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        guard let textField = textField as? IKTextField else { return true }
-        print("❤️[\(textField.itemKey)] [\(#function)]❤️ ❤️[Clear押された]❤️")
-        if let delegate = delegate {
-            return delegate.textFieldShouldClear(textField, item!)
-        }
-        return true
     }
 }

@@ -36,28 +36,38 @@ struct EditableItemH {
             return "\(buf)"
         //=== 選択肢一覧を取得し、指定項目の表示名を求めて表示するもの
         case .selectDrum:
-//            let selectionItems = SelectItemsManager.getSelectItems(type: self.editItem, grpCodeFilter: nil)
-            let selectionItems: [CodeDisp] = SelectItemsManager.getMaster(self.editItem.tsvMaster)
-            let buf = selectionItems.filter { (obj) -> Bool in
-                obj.code == _val
-            }.first?.disp ?? Constants.SelectItemsUndefine.disp
+            let buf: String = SelectItemsManager.getCodeDisp(self.editItem.tsvMaster, code: _val)?.disp ?? Constants.SelectItemsUndefine.disp
             return "\(buf)"
 
-        case .selectSingle, .selectMulti, .selectSpecisl:
-//            let selectionItems = SelectItemsManager.getSelectItems(type: self.editItem, grpCodeFilter: nil)
-            let selectionItems: [CodeDisp] = SelectItemsManager.getMaster(self.editItem.tsvMaster)
-            let buf = selectionItems.filter { (obj) -> Bool in
-                obj.code == _val
-            }.first?.disp ?? Constants.SelectItemsUndefine.disp
+        case .selectSingle:
+            let buf: String = SelectItemsManager.getCodeDisp(self.editItem.tsvMaster, code: _val)?.disp ?? Constants.SelectItemsUndefine.disp
             return "\(buf)"
 
-        case .selectSpecislYear:
-//            let selectionItems = SelectItemsManager.getSelectItems(type: self.editItem, grpCodeFilter: nil)
+        case .selectMulti:
+            let tmp0: String = _val
+            var arr0: [String] = []
+            for code in tmp0.split(separator: "_").sorted() { //コード順ソートしておく
+                let buf: String = SelectItemsManager.getCodeDisp(self.editItem.tsvMaster, code: String(code))?.disp ?? Constants.SelectItemsUndefine.disp
+                arr0.append(buf)
+            }
+            let buf0: String = arr0.joined(separator: " ")
+            return "\(buf0)"
+            
+        case .selectSpecial:
+            let tmp0: String = _val
+            var arr0: [String] = []
+            for code in tmp0.split(separator: "_").sorted() { //コード順ソートしておく
+                let buf: String = SelectItemsManager.getCodeDispSyou(self.editItem.tsvMaster, code: String(code))?.disp ?? Constants.SelectItemsUndefine.disp
+                arr0.append(buf)
+            }
+            let buf0: String = arr0.joined(separator: " ")
+            return "\(buf0)"
+            
+        case .selectSpecialYear:
             print(#line, #function, "✳️✳️✳️✳️ [_val: \(_val)] ✳️✳️✳️✳️ 複数種類を結合して保持させるお程")
-            let selectionItems: [CodeDisp] = SelectItemsManager.getMaster(self.editItem.tsvMaster)
-            let buf = selectionItems.filter { (obj) -> Bool in
-                obj.code == _val
-            }.first?.disp ?? Constants.SelectItemsUndefine.disp
+            let (dai, syou): ([CodeDisp], [GrpCodeDisp]) = SelectItemsManager.getMaster(editItem.tsvMaster)
+            let buf = dai.description
+
             return "\(buf)"
 
         }

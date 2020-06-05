@@ -78,6 +78,7 @@ class EditableTableBasicVC: EditableBasicVC {
         self.tableVW.register(UINib(nibName: "HEditTextTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HEditTextTBCell")
         self.tableVW.register(UINib(nibName: "HEditDrumTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HEditDrumTBCell")
         self.tableVW.register(UINib(nibName: "HEditZipcodeTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HEditZipcodeTBCell")
+        self.tableVW.register(UINib(nibName: "HEditSpecialTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HEditSpecialTBCell")
         //=== Keyboard制御
         vwKbTapArea.backgroundColor = .black
         vwKbTapArea.alpha = 0.0
@@ -202,6 +203,7 @@ extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
         let (isChange, editTemp) = editableModel.makeTempItem(_item)
         let item: EditableItemH! = isChange ? editTemp : _item
         switch item.editType {
+            
         case .inputText:
             let returnKeyType: UIReturnKeyType = (item.editableItemKey == editableModel.lastEditableItemKey) ? .done : .next
             let cell: HEditTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditTextTBCell", for: indexPath) as! HEditTextTBCell

@@ -23,8 +23,10 @@ extension ApiManager {
     }
     private class func getJobsFetch(param: Void) -> Promise<MdlJobCardList> {
         let (promise, resolver) = Promise<MdlJobCardList>.pending()
+        let mode: Int = 0 //（仮）
+        let page: Int = 0 //（仮）
         AuthManager.needAuth(true)
-        JobsAPI.jobsControllerGet()
+        JobsAPI.jobsControllerGet(mode: mode, page: page)
         .done { result in
             print(result)
             resolver.fulfill(MdlJobCardList()) //変換しておく
@@ -52,8 +54,10 @@ extension ApiManager {
     
     private class func getJobDetailFetch(param: Void) -> Promise<MdlJobCardDetail> {
         let (promise, resolver) = Promise<MdlJobCardDetail>.pending()
+        let mode: Int = 0 //（仮）
+        let page: Int = 0 //（仮）
         AuthManager.needAuth(true)
-        JobsAPI.jobsControllerGet()
+        JobsAPI.jobsControllerGet(mode: mode, page: page)
             .done { result in
                 Log.selectLog(logLevel: .debug, "result:\(result)")
                 resolver.fulfill(MdlJobCardDetail())

@@ -109,6 +109,8 @@ struct R: Rswift.Validatable {
     static let entryVC = _R.storyboard.entryVC()
     /// Storyboard `HomeVC`.
     static let homeVC = _R.storyboard.homeVC()
+    /// Storyboard `InitialInput`.
+    static let initialInput = _R.storyboard.initialInput()
     /// Storyboard `JobOfferDetailVC`.
     static let jobOfferDetailVC = _R.storyboard.jobOfferDetailVC()
     /// Storyboard `KeepListVC`.
@@ -186,6 +188,13 @@ struct R: Rswift.Validatable {
     /// `UIStoryboard(name: "HomeVC", bundle: ...)`
     static func homeVC(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.homeVC)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "InitialInput", bundle: ...)`
+    static func initialInput(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.initialInput)
     }
     #endif
 
@@ -1192,6 +1201,8 @@ struct R: Rswift.Validatable {
     static let chemistrySelectHeaderView = _R.nib._ChemistrySelectHeaderView()
     /// Nib `HEditDrumTBCell`.
     static let hEditDrumTBCell = _R.nib._HEditDrumTBCell()
+    /// Nib `HEditSpecialTBCell`.
+    static let hEditSpecialTBCell = _R.nib._HEditSpecialTBCell()
     /// Nib `HEditTextTBCell`.
     static let hEditTextTBCell = _R.nib._HEditTextTBCell()
     /// Nib `HEditZipcodeTBCell`.
@@ -1304,6 +1315,14 @@ struct R: Rswift.Validatable {
     @available(*, deprecated, message: "Use UINib(resource: R.nib.hEditDrumTBCell) instead")
     static func hEditDrumTBCell(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.hEditDrumTBCell)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UINib(name: "HEditSpecialTBCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.hEditSpecialTBCell) instead")
+    static func hEditSpecialTBCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.hEditSpecialTBCell)
     }
     #endif
 
@@ -1651,6 +1670,10 @@ struct R: Rswift.Validatable {
       return R.nib.hEditDrumTBCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HEditDrumTBCell
     }
 
+    static func hEditSpecialTBCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HEditSpecialTBCell? {
+      return R.nib.hEditSpecialTBCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HEditSpecialTBCell
+    }
+
     static func hEditTextTBCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HEditTextTBCell? {
       return R.nib.hEditTextTBCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HEditTextTBCell
     }
@@ -1818,10 +1841,12 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.reuseIdentifier` struct is generated, and contains static references to 7 reuse identifiers.
+  /// This `R.reuseIdentifier` struct is generated, and contains static references to 8 reuse identifiers.
   struct reuseIdentifier {
     /// Reuse identifier `Cell_HEditDrumTBCell`.
     static let cell_HEditDrumTBCell: Rswift.ReuseIdentifier<HEditDrumTBCell> = Rswift.ReuseIdentifier(identifier: "Cell_HEditDrumTBCell")
+    /// Reuse identifier `Cell_HEditSpecialTBCell`.
+    static let cell_HEditSpecialTBCell: Rswift.ReuseIdentifier<HEditSpecialTBCell> = Rswift.ReuseIdentifier(identifier: "Cell_HEditSpecialTBCell")
     /// Reuse identifier `Cell_HEditTextTBCell`.
     static let cell_HEditTextTBCell: Rswift.ReuseIdentifier<HEditTextTBCell> = Rswift.ReuseIdentifier(identifier: "Cell_HEditTextTBCell")
     /// Reuse identifier `Cell_HEditZipcodeTBCell`.
@@ -1930,6 +1955,20 @@ struct _R: Rswift.Validatable {
 
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HEditDrumTBCell? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HEditDrumTBCell
+      }
+
+      fileprivate init() {}
+    }
+
+    struct _HEditSpecialTBCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
+      typealias ReusableType = HEditSpecialTBCell
+
+      let bundle = R.hostingBundle
+      let identifier = "Cell_HEditSpecialTBCell"
+      let name = "HEditSpecialTBCell"
+
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HEditSpecialTBCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HEditSpecialTBCell
       }
 
       fileprivate init() {}
@@ -2551,6 +2590,9 @@ struct _R: Rswift.Validatable {
       try homeVC.validate()
       #endif
       #if os(iOS) || os(tvOS)
+      try initialInput.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
       try jobOfferDetailVC.validate()
       #endif
       #if os(iOS) || os(tvOS)
@@ -2684,10 +2726,15 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "Edit"
       let sbid_SubEditBaseVC = StoryboardViewControllerResource<SubEditBaseVC>(identifier: "Sbid_SubEditBaseVC")
+      let sbid_SubEditSpecialVC = StoryboardViewControllerResource<SubEditSpecialVC>(identifier: "Sbid_SubEditSpecialVC")
       let sbid_SubInputMemoVC = StoryboardViewControllerResource<SubInputMemoVC>(identifier: "Sbid_SubInputMemoVC")
 
       func sbid_SubEditBaseVC(_: Void = ()) -> SubEditBaseVC? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_SubEditBaseVC)
+      }
+
+      func sbid_SubEditSpecialVC(_: Void = ()) -> SubEditSpecialVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_SubEditSpecialVC)
       }
 
       func sbid_SubInputMemoVC(_: Void = ()) -> SubInputMemoVC? {
@@ -2700,6 +2747,7 @@ struct _R: Rswift.Validatable {
           if UIKit.UIColor(named: "color-black", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-black' is used in storyboard 'Edit', but couldn't be loaded.") }
         }
         if _R.storyboard.edit().sbid_SubEditBaseVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_SubEditBaseVC' could not be loaded from storyboard 'Edit' as 'SubEditBaseVC'.") }
+        if _R.storyboard.edit().sbid_SubEditSpecialVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_SubEditSpecialVC' could not be loaded from storyboard 'Edit' as 'SubEditSpecialVC'.") }
         if _R.storyboard.edit().sbid_SubInputMemoVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_SubInputMemoVC' could not be loaded from storyboard 'Edit' as 'SubInputMemoVC'.") }
       }
 
@@ -2780,6 +2828,26 @@ struct _R: Rswift.Validatable {
           if UIKit.UIColor(named: "color-base", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'color-base' is used in storyboard 'HomeVC', but couldn't be loaded.") }
         }
         if _R.storyboard.homeVC().sbid_HomeVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_HomeVC' could not be loaded from storyboard 'HomeVC' as 'HomeVC'.") }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    struct initialInput: Rswift.StoryboardResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "InitialInput"
+      let sbid_InitialInputListVC = StoryboardViewControllerResource<InitialInputListVC>(identifier: "Sbid_InitialInputListVC")
+
+      func sbid_InitialInputListVC(_: Void = ()) -> InitialInputListVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_InitialInputListVC)
+      }
+
+      static func validate() throws {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+        if _R.storyboard.initialInput().sbid_InitialInputListVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_InitialInputListVC' could not be loaded from storyboard 'InitialInput' as 'InitialInputListVC'.") }
       }
 
       fileprivate init() {}
@@ -2915,6 +2983,7 @@ struct _R: Rswift.Validatable {
       let sbid_AccountChangeVC = StoryboardViewControllerResource<AccountChangeVC>(identifier: "Sbid_AccountChangeVC")
       let sbid_ApproachSettingVC = StoryboardViewControllerResource<ApproachSettingVC>(identifier: "Sbid_ApproachSettingVC")
       let sbid_SettingVC = StoryboardViewControllerResource<SettingVC>(identifier: "Sbid_SettingVC")
+      let sbid_WithDrawalCompleteVC = StoryboardViewControllerResource<WithDrawalCompleteVC>(identifier: "Sbid_WithDrawalCompleteVC")
       let sbid_WithDrawalVC = StoryboardViewControllerResource<WithDrawalVC>(identifier: "Sbid_WithDrawalVC")
 
       func sbid_AccountChangeCompleteVC(_: Void = ()) -> AccountChangeCompleteVC? {
@@ -2933,6 +3002,10 @@ struct _R: Rswift.Validatable {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_SettingVC)
       }
 
+      func sbid_WithDrawalCompleteVC(_: Void = ()) -> WithDrawalCompleteVC? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_WithDrawalCompleteVC)
+      }
+
       func sbid_WithDrawalVC(_: Void = ()) -> WithDrawalVC? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: sbid_WithDrawalVC)
       }
@@ -2949,6 +3022,7 @@ struct _R: Rswift.Validatable {
         if _R.storyboard.settingVC().sbid_AccountChangeVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_AccountChangeVC' could not be loaded from storyboard 'SettingVC' as 'AccountChangeVC'.") }
         if _R.storyboard.settingVC().sbid_ApproachSettingVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_ApproachSettingVC' could not be loaded from storyboard 'SettingVC' as 'ApproachSettingVC'.") }
         if _R.storyboard.settingVC().sbid_SettingVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_SettingVC' could not be loaded from storyboard 'SettingVC' as 'SettingVC'.") }
+        if _R.storyboard.settingVC().sbid_WithDrawalCompleteVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_WithDrawalCompleteVC' could not be loaded from storyboard 'SettingVC' as 'WithDrawalCompleteVC'.") }
         if _R.storyboard.settingVC().sbid_WithDrawalVC() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'sbid_WithDrawalVC' could not be loaded from storyboard 'SettingVC' as 'WithDrawalVC'.") }
       }
 

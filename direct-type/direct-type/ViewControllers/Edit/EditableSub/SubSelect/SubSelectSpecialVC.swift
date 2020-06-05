@@ -15,6 +15,7 @@ protocol SubSelectSpecialDelegate {
 }
 
 class SubSelectSpecialVC: BaseVC {
+    var delegate: SubSelectFeedbackDelegate? = nil
     //年数選択が必要か、即選択できるか
     var selectYearMode: Bool = true
     //選択数のMAX（1つなら即確定して前画面の可能性も？）
@@ -71,10 +72,18 @@ class SubSelectSpecialVC: BaseVC {
         self.tableVW.register(UINib(nibName: "SubSelectDaiTBCell", bundle: nil), forCellReuseIdentifier: "Cell_SubSelectDaiTBCell")
         self.tableVW.register(UINib(nibName: "SubSelectSyouTBCell", bundle: nil), forCellReuseIdentifier: "Cell_SubSelectSyouTBCell")
     }
-    func initData(editableItem: EditableItemH, selectingCodes: String) {
-        
-        print("✳️✳️✳️✳️タイプとか確認")
-        
+    func initData(_ delegate: SubSelectFeedbackDelegate, editableItem: EditableItemH, selectingCodes: String) {
+        print("✳️✳️[\(editableItem.debugDisp)]✳️[\(selectingCodes)]✳️タイプとか確認")
+        self.delegate = delegate
+        switch editableItem.editType {
+        case .selectSpecial:
+            selectYearMode = false
+        case .selectSpecialYear:
+            selectYearMode = true
+        default:
+            break
+        }
+        selectMaxCount = 1        
         
         self.editableItem = editableItem
         self.mainTsvMaster = editableItem.editItem.tsvMaster
@@ -95,7 +104,7 @@ class SubSelectSpecialVC: BaseVC {
             }.map { (item) -> CodeDisp in
                 item.codeDisp
             }
-            print(" * \(itemDai.debugDisp) - \(hoge.count)件")
+//            print(" * \(itemDai.debugDisp) - \(hoge.count)件")
             arrDataGrp.append(hoge)
             arrSelected.append(true)//該当セクションが展開されているか否か
         }
@@ -177,21 +186,22 @@ extension SubSelectSpecialVC: SubSelectProtocol {
 }
 
 //=== 複数選択ポップアップで選択させる場合の処理 ===
-extension SubSelectSpecialVC: SubSelectSpecialDelegate {
+extension SubSelectSpecialVC: SubSelectBaseDelegate {
     func actPopupSelect(selectedItemsCode: String) {
-        //___選択状態の確認
-        print("\t🐼🐼[\(selectedItemsCode)]🐼これが選択されました🐼🐼")//編集中の値の保持（と描画）
-        if selectYearMode {
-            for item in SelectItemsManager.convCodeDisp(mainTsvMaster, subTsvMaster, selectedItemsCode) {
-                print(item.0.debugDisp, item.1.debugDisp)
-            }
-        } else {
-            for item in SelectItemsManager.convCodeDisp(mainTsvMaster, selectedItemsCode) {
-                print(item.debugDisp)
-            }
-        }
-        //^^^選択状態の確認
-        //        self.dismiss(animated: true) { }
+//        //___選択状態の確認
+        print("\t🐼🐼[\(selectedItemsCode)]🐼これが選択されました🐼Special🐼")//編集中の値の保持（と描画）
+//        if selectYearMode {
+//            for item in SelectItemsManager.convCodeDisp(mainTsvMaster, subTsvMaster, selectedItemsCode) {
+//                print(item.0.debugDisp, item.1.debugDisp)
+//            }
+//        } else {
+//            for item in SelectItemsManager.convCodeDisp(mainTsvMaster, selectedItemsCode) {
+//                print(item.debugDisp)
+//            }
+//        }
+//        //^^^選択状態の確認
+        self.delegate?.changedSelect(editItem: self.editableItem, codes: selectedItemsCode) //フィードバックしておく
+        self.dismiss(animated: true) { }
     }
     func actPopupCancel() {
         self.dismiss(animated: true) { }

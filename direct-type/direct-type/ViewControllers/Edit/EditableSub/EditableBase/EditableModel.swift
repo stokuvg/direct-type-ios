@@ -45,7 +45,7 @@ class EditableModel {
                     isSelectable = true
                 case .selectDrum:
                     isSelectable = true //これ、どうしようか？（選択適用した後にnextCell処理を入れるなら含めてもOK）
-                case .selectSingle, .selectMulti, .selectSpecisl, .selectSpecislYear:
+                case .selectSingle, .selectMulti, .selectSpecial, .selectSpecialYear:
                     isSelectable = true
                 case .inputZipcode:
                     isSelectable = true
@@ -62,9 +62,10 @@ class EditableModel {
     //=== 編集中の値の保持
     func changeTempItem(_ item: EditableItemH, text: String) {
         editTempCD[item.editableItemKey] = text
-        if item.orgVal == text {
-            editTempCD.removeValue(forKey: item.editableItemKey)
-        }
+        //!!!このオリジナルと同値なら編集中の値を削除する処理を入れてる場合、フェッチ後に初期値を変えずに設定した場合など、〔クリア〕ボタンでの動作に矛盾がでる
+//        if item.orgVal == text {
+//            editTempCD.removeValue(forKey: item.editableItemKey)
+//        }
     }
     //=== EditableItemKeyを渡すと、現在の編集適用したEditableItemHを返す
     func getItemByKey(_ itemKey: EditableItemKey) -> EditableItemH? {

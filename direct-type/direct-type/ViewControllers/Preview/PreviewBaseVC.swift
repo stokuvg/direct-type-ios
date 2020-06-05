@@ -96,6 +96,30 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
                 break
             }
         }
+        switch item.type {
+        case .lastJobExperimentH3, .jobExperimentsH3, .businessTypesH3:
+            let storyboard = UIStoryboard(name: "Edit", bundle: nil)
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubEditSpecialVC") as? SubEditSpecialVC{
+                var arrErrMsg: [EditableItemKey: [ValidationErrMsg]] = [:] //子画面に引き渡すエラー
+                arrErrMsg = dicValidErrMsg //抜粋せずに、まるっと渡しておく
+                nvc.initData(self, item, arrErrMsg)
+                //遷移アニメーション関連
+                nvc.modalTransitionStyle = .coverVertical
+                self.present(nvc, animated: true) {
+                }
+            }
+        default:
+            let storyboard = UIStoryboard(name: "Edit", bundle: nil)
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubEditBaseVC") as? SubEditBaseVC{
+                var arrErrMsg: [EditableItemKey: [ValidationErrMsg]] = [:] //子画面に引き渡すエラー
+                arrErrMsg = dicValidErrMsg //抜粋せずに、まるっと渡しておく
+                nvc.initData(self, item, arrErrMsg)
+                //遷移アニメーション関連
+                nvc.modalTransitionStyle = .coverVertical
+                self.present(nvc, animated: true) {
+                }
+            }
+        }
         //通常の複数編集画面
         let storyboard = UIStoryboard(name: "Edit", bundle: nil)
         if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubEditBaseVC") as? SubEditBaseVC{
