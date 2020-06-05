@@ -166,9 +166,8 @@ extension CareerPreviewVC {
 //}
     private func fetchCreateCareerList() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-        let card = CareerHistoryDTO(startWorkPeriod: "2020-04", endWorkPeriod: "2022-02", companyName: "dummyCompany 2", employmentId: "6", employees: 2345, salary: 13, workNote: "わーくのーとてきとう")
+        let card = CareerHistoryDTO(editableModel.editTempCD)
         let param = CreateCareerRequestDTO(careerHistory: [card])
-        print(param)
         SVProgressHUD.show(withStatus: "職務経歴書情報の作成")
         ApiManager.createCareer(param, isRetry: true)
         .done { result in
@@ -178,7 +177,7 @@ extension CareerPreviewVC {
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
             case 400:
-                let (dicGrpError, dicError) = ValidateManager.canvValidErrMsgProfile(myErr.arrValidErrMsg)
+                let (dicGrpError, dicError) = ValidateManager.canvValidErrMsgCareer(myErr.arrValidErrMsg)
                 self.dicGrpValidErrMsg = dicGrpError
                 self.dicValidErrMsg = dicError
             default:
