@@ -55,6 +55,7 @@ class MdlProfile: Codable {
     convenience init(dto: GetProfileResponseDTO) {
         let bufDate = dto.birthday
         let _date = DateHelper.convStr2Date(bufDate)
+        
         self.init(familyName: dto.familyName, firstName: dto.firstName, familyNameKana: dto.familyNameKana, firstNameKana: dto.firstNameKana, birthday: _date, gender: dto.genderId, zipCode: dto.zipCode, prefecture: dto.prefectureId, address1: dto.city, address2: dto.town, mailAddress: dto.email, mobilePhoneNo: dto.phoneNumber)
     }
     //=== 作成・更新のモデルは、アプリ=>APIなので不要だな ===

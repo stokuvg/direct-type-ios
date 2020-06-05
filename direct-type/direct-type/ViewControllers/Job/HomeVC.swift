@@ -58,7 +58,7 @@ class HomeVC: TmpNaviTopVC {
         homeTableView.registerNib(nibName: "JobOfferCardMoreCell", idName: "JobOfferCardMoreCell")      // もっと見る
         homeTableView.registerNib(nibName: "JobOfferCardReloadCell", idName: "JobOfferCardReloadCell")// 全求人カード表示/更新
         
-        self.makeDummyData()
+//        self.makeDummyData()
         self.dataCheckAction()
     }
     
@@ -66,6 +66,8 @@ class HomeVC: TmpNaviTopVC {
         super.viewWillAppear(animated)
         
         safeAreaTop = self.view.safeAreaInsets.top
+        
+        self.getJobList()
         
         //[Dbg]___
         if Constants.DbgAutoPushVC {
@@ -162,7 +164,8 @@ class HomeVC: TmpNaviTopVC {
         let homeFlag = ud.bool(forKey: "home")
         return homeFlag
     }
-    
+
+    #if false
     private func makeDummyData() {
         
         let mdlData1:MdlJobCard = MdlJobCard.init(jobCardCode: "1",
@@ -312,7 +315,7 @@ class HomeVC: TmpNaviTopVC {
         }
         */
     }
-
+    #endif
 }
 
 extension HomeVC: UITableViewDelegate {

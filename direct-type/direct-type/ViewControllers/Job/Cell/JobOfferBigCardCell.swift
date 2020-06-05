@@ -8,6 +8,7 @@
 
 import UIKit
 import AlamofireImage
+import TudApi
 
 enum LimitedType {
     case none
@@ -62,8 +63,10 @@ class JobOfferBigCardCell: BaseJobCardCell {
         // Configure the view for the selected state
     }
     
-    func setup(data:MdlJobCard) {
+    func setup(data:Job) {
+//    func setup(data:MdlJobCard) {
     
+        /*
         // サムネイル画像
         let imageUrlString:String = data.mainPicture
         thumnailImageView.af_setImage(withURL: URL(string: imageUrlString)!)
@@ -95,19 +98,20 @@ class JobOfferBigCardCell: BaseJobCardCell {
                 limitedType = LimitedType.none
         }
         self.limitedMarkSetting(type: limitedType)
+        */
         
         // 職業
         let job:String = data.jobName
         jobLabel.text(text: job, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
 
         // 給与
-        let displayFlag = data.salaryDisplay
+        let displayFlag = data.isSalaryDisplay
         if displayFlag {
             
-            let minPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.salaryMinCode)?.disp
+            let minPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.minSalaryId)?.disp
 //            Log.selectLog(logLevel: .debug, "minPriceLabel:\(String(describing: minPriceLabel))")
             let minPrice = self.cutText(defaultText: minPriceLabel!,cutString: "万円")
-            let maxPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.salaryMaxCode)?.disp
+            let maxPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.maxSalaryId)?.disp
             let maxPrice = self.cutText(defaultText: maxPriceLabel!,cutString: "万円")
 //            Log.selectLog(logLevel: .debug, "maxPriceLabel:\(String(describing: maxPriceLabel))")
             
@@ -126,9 +130,8 @@ class JobOfferBigCardCell: BaseJobCardCell {
 //        cautionView.isHidden = true
         
         // 勤務地
-        let areaText = self.makeAreaNames(codes: data.workPlaceCode)
-//        Log.selectLog(logLevel: .debug, "areaText:\(String(describing: areaText))")
-        areaLabel.text(text: areaText, fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+//        let areaText = self.makeAreaNames(codes: data.workPlaceCode)
+//        areaLabel.text(text: areaText, fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         
         // 社名
         let companyName = data.companyName
@@ -141,65 +144,14 @@ class JobOfferBigCardCell: BaseJobCardCell {
         catchLabel.text(text: mainText, fontType: .C_font_SS , textColor: UIColor.init(colorType: .color_parts_gray)!, alignment: .left)
         
         // 見送りボタン
-        let skip = data.skipStatus
-//        Log.selectLog(logLevel: .debug, "skip:\(String(describing: skip))")
-        self.skipSetting(flag:skip)
+//        let skip = data.skipStatus
+//        self.skipSetting(flag:skip)
         
         // キープボタン
-        let keep = data.keepStatus
-//        Log.selectLog(logLevel: .debug, "keep:\(String(describing: keep))")
-        keepFlag = keep
-        self.keepBtnSetting(flag: keep)
+//        let keep = data.keepStatus
+//        keepFlag = keep
+//        self.keepBtnSetting(flag: keep)
         
-        /*
-        if data.count > 0 {
-            let endFlag:Bool = (data["end"] as! Bool)
-            if endFlag {
-                self.limitedMarkView.isHidden = true
-                self.stackView.removeArrangedSubview(self.limitedMarkBackView)
-            }
-            
-            let imageUrlString:String = (data["image"] as! String)
-            thumnailImageView.af_setImage(withURL: URL(string: imageUrlString)!)
-            
-            let job:String = (data["job"] as! String)
-            jobLabel.text(text: job, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
-            
-            let price:String = (data["price"] as! String)
-            let priceText = (price + "万円")
-            saralyLabel.text(text: priceText, fontType: .C_font_M , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
-            
-            //TODO:初回は非表示
-            saralySpecialLabel.isHidden = true
-            saralySpecialMarkLabel.isHidden = true
-            cautionView.isHidden = true
-            /*
-            let special:String = (data["special"] as! String)
-            if special.count > 0 && Int(special)! > 0 {
-                saralySpecialLabel.text(text: special, fontType: .C_font_L , textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
-                saralySpecialMarkLabel.text(text: "万円", fontType: .C_font_M , textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
-                saralySpecialLabel.isHidden = true
-                saralySpecialMarkLabel.isHidden = true
-                saralyCautionLabel.text(text: "通常よりも", fontType: .C_font_S, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
-            } else {
-                cautionView.isHidden = true
-                
-                saralySpecialLabel.text(text: special, fontType: .C_font_M , textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
-                saralySpecialLabel.isHidden = true
-                saralySpecialMarkLabel.isHidden = true
-            }
-            */
-            
-            let area:String = (data["area"] as! String)
-            areaLabel.text(text: area, fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
-            
-            let company:String = (data["company"] as! String)
-            companyNameLabel.text(text: company, fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
-            
-            let main:String = (data["main"] as! String)
-            catchLabel.text(text: main, fontType: .C_font_SS , textColor: UIColor.init(colorType: .color_parts_gray)!, alignment: .left)
-        }
-        */
     }
     
     private func limitedMarkSetting(type:LimitedType) {
