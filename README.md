@@ -24,6 +24,7 @@ direct type のiOSアプリ
 - Swagger Codegen 3.0.16
 
 ~~~
+$ sudo gem install cocoapods
 $ brew install swagger-codegen@3
 ~~~
 
