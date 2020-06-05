@@ -52,6 +52,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+    // 初期入力画面を表示
+    func displayInitialInputVC() {
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let initialSB = UIStoryboard(name: "InitialInput", bundle: nil)
+        
+        let initialVC = initialSB.instantiateViewController(withIdentifier: "Sbid_InitialInputListVC") as! InitialInputListVC
+        
+        self.window?.rootViewController = initialVC
+        
+        self.window?.makeKeyAndVisible()
+        
+    }
 
 
 }
