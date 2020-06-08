@@ -41,4 +41,27 @@ enum ChemistryPersonalityType: String, CaseIterable {
             return "illust01"
         }
     }
+    
+    var priority: Int {
+        switch self {
+        case .reformer:
+            return 1
+        case .toAchieve:
+            return 2
+        case .challenger:
+            return 3
+        case .enthusiastic:
+            return 4
+        case .faithful:
+            return 5
+        case .toExamine:
+            return 6
+        case .peaceful:
+            return 7
+        case .helper:
+            return 8
+        case .unique:
+            return 9
+        }
+    }
 }

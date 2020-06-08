@@ -10,10 +10,15 @@ import UIKit
 
 final class ChemistryResult: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
+    private var questionScores = [ChemistryScore]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+    }
+    
+    func configure(with scores: [ChemistryScore]) {
+        questionScores = scores
     }
 }
 
@@ -21,6 +26,12 @@ private extension ChemistryResult {
     func setup() {
         tableView.delegate = self
         tableView.dataSource = self
+        
+        let ranking = AbilityCalculation(questionScores: questionScores).abilityRanking
+        ranking.forEach({ rank in
+            print("👀Ranking: \(rank.rank)位、 スコア: \(rank.score), タイプ: \(rank.personalType.rawValue)")
+            
+        })
     }
 }
 

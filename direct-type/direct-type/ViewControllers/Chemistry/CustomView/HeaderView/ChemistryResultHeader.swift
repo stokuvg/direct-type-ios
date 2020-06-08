@@ -25,6 +25,8 @@ final class ChemistryResultHeader: UIView {
         loadNib()
         setCornerRadius()
     }
+    
+    func configure() {}
 }
 
 private extension ChemistryResultHeader {
