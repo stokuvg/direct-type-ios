@@ -13,6 +13,8 @@ class ChemistrySelect: UIViewController {
     @IBOutlet private weak var buttonBackgroundView: UIView!
     @IBOutlet private weak var nextButton: UIButton!
     @IBAction func nextButton(_ sender: UIButton) {
+        //FIXME: デバッグ用にバリデーションを返さずに画面遷移させる
+        transitionToChemisrortResult()
         guard currnetAnswerState == .complete else { return }
     }
     
@@ -86,6 +88,13 @@ private extension ChemistrySelect {
             buttonBackgroundView.backgroundColor = .white
         }
         
+    }
+    
+    func transitionToChemisrortResult() {
+        let vc = UIStoryboard(name: "ChemistryResult", bundle: nil)
+            .instantiateInitialViewController() as! ChemistryResult
+        hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
