@@ -8,8 +8,6 @@
 
 import UIKit
 
-typealias BigDecimal = Double
-
 struct Constants {
     static let Auth_username: String = "+819001234567" //安全なダミー番号: https://stabucky.com/wp/archives/6180
     static let Auth_password: String = "Abcd123$"

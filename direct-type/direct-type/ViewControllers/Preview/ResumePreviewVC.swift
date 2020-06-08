@@ -37,7 +37,6 @@ class ResumePreviewVC: PreviewBaseVC {
         //========
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
         guard let _detail = detail else { return }
-        print(_detail.debugDisp)
 
         //=== [H-3]履歴書編集
         //===(3a)就業状況
