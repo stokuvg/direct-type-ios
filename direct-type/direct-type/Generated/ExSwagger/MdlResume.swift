@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import SwaggerClient
+//import SwaggerClient
+import TudApi
 /** 履歴書 (H3) */
 class MdlResume: Codable {
     /** 就業状況 */
@@ -35,27 +36,77 @@ class MdlResume: Codable {
         self.ownPr = ownPr
     }
     //ApiモデルをAppモデルに変換して保持させる
-    convenience init(dto: Resume) {
-        let _employment = "\(dto.employment)"
-        let _changeCount = "\(dto.changeCount)"
+    convenience init(dto: GetResumeResponseDTO) {
+        let _employment = (dto.isEmployed ?? false) ? "1" : "2"//!!!employmentStatus
+        let _changeCount: String!
+        if let tmp = dto.changeJobCount {
+            _changeCount = "\(tmp)"
+        } else {
+            _changeCount = ""
+        }
         var _businessTypes: [Code] = []
-        for item in dto.businessTypes {
-            _businessTypes.append("\(item)")
+        if let codes = dto.experienceIndustryId { //!!!配列じゃないです
+            _businessTypes.append(codes)
         }
-        let _lastJobExperiment = MdlResumeLastJobExperiment(dto: dto.lastJobExperiment)
+        //===
+        var _lastJobExperiments: MdlResumeLastJobExperiment = MdlResumeLastJobExperiment(jobType: "", jobExperimentYear: "")
         var _jobExperiments: [MdlResumeJobExperiments] = []
-        for item in dto.jobExperiments {
-            _jobExperiments.append(MdlResumeJobExperiments(dto: item))
+        if let workHistorys = dto.workHistory {
+            for (num, workHistory) in workHistorys.enumerated() {
+                if num == 0 {
+                    _lastJobExperiments = MdlResumeLastJobExperiment(jobType: workHistory.job3Id, jobExperimentYear: workHistory.experienceYears)
+                } else {
+                    _jobExperiments.append(MdlResumeJobExperiments(jobType: workHistory.job3Id, jobExperimentYear: workHistory.experienceYears))
+                }
+            }
         }
-        let _school = MdlResumeSchool(dto: dto.school)
-        let _skillLanguage = MdlResumeSkillLanguage(dto: dto.skillLanguage)
+        let _school = MdlResumeSchool(schoolName: dto.finalEducation?.schoolName ?? "",
+                                      department: dto.finalEducation?.department ?? "",
+                                      subject: dto.finalEducation?.faculty ?? "",
+                                      graduationYear: dto.finalEducation?.guraduationYearMonth ?? "2001/02")
+        let _skillLanguage = MdlResumeSkillLanguage(languageToeicScore: "\(dto.toeic ?? 0)",
+                                                    languageToeflScore: "\(dto.toefl ?? 0)",
+                                                    languageEnglish: dto.englishSkillId ?? "",
+                                                    languageStudySkill: dto.otherLanguageSkillId ?? "" )
         var _qualifications: [Code] = []
-        for item in dto.qualifications {
-            _qualifications.append("\(item)")
+        if let _licenseIds = dto.licenseIds {
+            for item in _licenseIds {
+                _qualifications.append("\(item)")
+            }
         }
-
-        self.init(employmentStatus: _employment, changeCount: _changeCount, lastJobExperiment: _lastJobExperiment, jobExperiments: _jobExperiments, businessTypes: _businessTypes, school: _school, skillLanguage: _skillLanguage, qualifications: _qualifications, ownPr: dto.ownPr)
+        let _ownPr: String = ""
+        self.init(employmentStatus: _employment,
+                  changeCount: _changeCount,
+                  lastJobExperiment: MdlResumeLastJobExperiment(jobType: "", jobExperimentYear: ""),
+                  jobExperiments: _jobExperiments,
+                  businessTypes: _businessTypes,
+                  school: _school,
+                  skillLanguage: _skillLanguage,
+                  qualifications: _qualifications,
+                  ownPr: _ownPr)
     }
+//    //ApiモデルをAppモデルに変換して保持させる
+//    convenience init(dto: Resume) {
+//        let _employment = "\(dto.employment)"
+//        let _changeCount = "\(dto.changeCount)"
+//        var _businessTypes: [Code] = []
+//        for item in dto.businessTypes {
+//            _businessTypes.append("\(item)")
+//        }
+//        let _lastJobExperiment = MdlResumeLastJobExperiment(dto: dto.lastJobExperiment)
+//        var _jobExperiments: [MdlResumeJobExperiments] = []
+//        for item in dto.jobExperiments {
+//            _jobExperiments.append(MdlResumeJobExperiments(dto: item))
+//        }
+//        let _school = MdlResumeSchool(dto: dto.school)
+//        let _skillLanguage = MdlResumeSkillLanguage(dto: dto.skillLanguage)
+//        var _qualifications: [Code] = []
+//        for item in dto.qualifications {
+//            _qualifications.append("\(item)")
+//        }
+//
+//        self.init(employmentStatus: _employment, changeCount: _changeCount, lastJobExperiment: _lastJobExperiment, jobExperiments: _jobExperiments, businessTypes: _businessTypes, school: _school, skillLanguage: _skillLanguage, qualifications: _qualifications, ownPr: dto.ownPr)
+//    }
     var debugDisp: String {
         return "[employmentStatus: \(employmentStatus)] [changeCount: \(changeCount)]"
     }
