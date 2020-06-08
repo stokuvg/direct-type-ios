@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChemistrySelectHeaderView" customModule="direct_type" customModuleProvider="target">
+            <connections>
+                <outlet property="whiteBackgroundView" destination="fj5-8D-Hpm" id="RkP-pt-mjj"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="ChemistrySelectHeaderView" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="4Na-VT-fLr">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="その求人、あなたの正確にあってる？" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kHV-4y-e7C">
+                            <rect key="frame" x="92" y="0.0" width="191.5" height="12"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="12" id="TYF-9D-70N"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="性格としごとの" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oAk-c4-aYk">
+                            <rect key="frame" x="74.5" y="17" width="226.5" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="36" id="k2Q-XF-WGU"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="「相性診断」" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Haq-7o-uss">
+                            <rect key="frame" x="90.5" y="58" width="194" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="36" id="6Ps-eg-xOR"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日本エニアグラム学会監修" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pDG-mC-el0">
+                            <rect key="frame" x="120" y="99" width="135" height="12"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="12" id="Qc8-Ar-d68"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CG6-tT-XMH" userLabel="BigSpaceView">
+                            <rect key="frame" x="27.5" y="116" width="320" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="p7Q-kY-f22"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fj5-8D-Hpm">
+                            <rect key="frame" x="20" y="165" width="335" height="65"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="次の設問に自分の普段の考えがあてはまるか、" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ciA-6a-T70">
+                                    <rect key="frame" x="0.0" y="15" width="335" height="14"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="14" id="6KT-MQ-gCE"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="あてはまらないかを選択式で答えてください。" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T46-lx-zNM">
+                                    <rect key="frame" x="0.0" y="39" width="335" height="14"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="14" id="GTU-8f-jnS"/>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="14" id="aVN-HS-oAY"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <constraints>
+                                <constraint firstItem="ciA-6a-T70" firstAttribute="top" secondItem="fj5-8D-Hpm" secondAttribute="top" constant="15" id="1bF-fD-mr2"/>
+                                <constraint firstItem="ciA-6a-T70" firstAttribute="leading" secondItem="fj5-8D-Hpm" secondAttribute="leading" id="1lR-dn-T1u"/>
+                                <constraint firstAttribute="trailing" secondItem="ciA-6a-T70" secondAttribute="trailing" id="FkF-8m-oeE"/>
+                                <constraint firstItem="T46-lx-zNM" firstAttribute="leading" secondItem="fj5-8D-Hpm" secondAttribute="leading" id="HZi-TW-9bn"/>
+                                <constraint firstItem="T46-lx-zNM" firstAttribute="top" secondItem="ciA-6a-T70" secondAttribute="bottom" constant="10" id="icw-Af-ATh"/>
+                                <constraint firstAttribute="height" constant="65" id="izG-kp-J16">
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layerMinXMinYCorner">
+                                            <integer key="value" value="20"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layerMaxXMinYCorner">
+                                            <integer key="value" value="20"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </constraint>
+                                <constraint firstAttribute="trailing" secondItem="T46-lx-zNM" secondAttribute="trailing" id="r8a-5F-LEv"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="fj5-8D-Hpm" secondAttribute="trailing" constant="20" id="hIV-zz-FPb"/>
+                        <constraint firstItem="fj5-8D-Hpm" firstAttribute="leading" secondItem="4Na-VT-fLr" secondAttribute="leading" constant="20" id="xxh-Gu-qm5"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" name="color-sub"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="4Na-VT-fLr" secondAttribute="trailing" id="6eC-bA-nza"/>
+                <constraint firstAttribute="bottom" secondItem="4Na-VT-fLr" secondAttribute="bottom" id="AQZ-AQ-iFR"/>
+                <constraint firstItem="4Na-VT-fLr" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Li7-AD-DLp"/>
+                <constraint firstItem="4Na-VT-fLr" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="fiH-vX-3Ed"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="139.85507246376812" y="349.55357142857139"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="color-sub">
+            <color red="1" green="0.35294117647058826" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
