@@ -156,6 +156,7 @@
 		06FFA0082484E6560085A3D9 /* MyPageEditedCarrerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06FFA0062484E6560085A3D9 /* MyPageEditedCarrerCell.xib */; };
 		06FFA00B2484E66C0085A3D9 /* MyPageEditedChemistryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FFA0092484E66C0085A3D9 /* MyPageEditedChemistryCell.swift */; };
 		06FFA00C2484E66C0085A3D9 /* MyPageEditedChemistryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06FFA00A2484E66C0085A3D9 /* MyPageEditedChemistryCell.xib */; };
+		0E144D8F248DC876005A659F /* ChemistryResult.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E144D8E248DC876005A659F /* ChemistryResult.storyboard */; };
 		0E6951AC248A050000D58E6E /* ChemistryPersonalityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6951AB248A050000D58E6E /* ChemistryPersonalityType.swift */; };
 		0E6951AF248A05EA00D58E6E /* ChemistryQuestionMasterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6951AE248A05EA00D58E6E /* ChemistryQuestionMasterData.swift */; };
 		0E6951B1248A11A000D58E6E /* ChemistryAnswerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6951B0248A11A000D58E6E /* ChemistryAnswerType.swift */; };
@@ -418,6 +419,7 @@
 		06FFA0062484E6560085A3D9 /* MyPageEditedCarrerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyPageEditedCarrerCell.xib; sourceTree = "<group>"; };
 		06FFA0092484E66C0085A3D9 /* MyPageEditedChemistryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageEditedChemistryCell.swift; sourceTree = "<group>"; };
 		06FFA00A2484E66C0085A3D9 /* MyPageEditedChemistryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyPageEditedChemistryCell.xib; sourceTree = "<group>"; };
+		0E144D8E248DC876005A659F /* ChemistryResult.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChemistryResult.storyboard; sourceTree = "<group>"; };
 		0E6951AB248A050000D58E6E /* ChemistryPersonalityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryPersonalityType.swift; sourceTree = "<group>"; };
 		0E6951AE248A05EA00D58E6E /* ChemistryQuestionMasterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryQuestionMasterData.swift; sourceTree = "<group>"; };
 		0E6951B0248A11A000D58E6E /* ChemistryAnswerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryAnswerType.swift; sourceTree = "<group>"; };
@@ -840,6 +842,7 @@
 				06E5198E2457D70B004E4B7A /* ChemistrySelect.swift */,
 				06E519902457D742004E4B7A /* ChemistryResult.swift */,
 				06E519922457D750004E4B7A /* OwnPRVC.swift */,
+				0E144D8E248DC876005A659F /* ChemistryResult.storyboard */,
 			);
 			path = Chemistry;
 			sourceTree = "<group>";
@@ -1310,6 +1313,7 @@
 				26BF48D924639D2B00E00215 /* MstK25_employmentStatus.tsv in Resources */,
 				06BE18FC2484A55000FAE476 /* MyPageNameCell.xib in Resources */,
 				066BC825246CD0C100FE607F /* JobDetailItemOptionalView.xib in Resources */,
+				0E144D8F248DC876005A659F /* ChemistryResult.storyboard in Resources */,
 				26CFC4692469496D00E458E2 /* HEditTextTBCell.xib in Resources */,
 				260BBFE224651732003D163A /* HPreviewTBCell.xib in Resources */,
 				066F2715246E818A0040BDC1 /* JobDetailFoldingProcessCell.xib in Resources */,
