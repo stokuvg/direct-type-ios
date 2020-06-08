@@ -27,7 +27,7 @@ private extension ChemistryResult {
         tableView.delegate = self
         tableView.dataSource = self
         
-        let ranking = AbilityCalculation(questionScores: questionScores).abilityRanking
+        let ranking = ChemistryScoreCalculation(questionScores: questionScores).ranking
         ranking.forEach({ rank in
             print("👀Ranking: \(rank.rank)位、 スコア: \(rank.score), タイプ: \(rank.personalType.rawValue)")
             
@@ -38,6 +38,8 @@ private extension ChemistryResult {
 extension ChemistryResult: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ChemistryResultHeader()
+        let ranking = ChemistryScoreCalculation(questionScores: questionScores).ranking
+        header.configure(with: ranking)
         return header
     }
     

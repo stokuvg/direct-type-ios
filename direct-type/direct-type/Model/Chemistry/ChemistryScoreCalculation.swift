@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct AbilityCalculation {
+struct ChemistryScoreCalculation {
     private var questionScores: [ChemistryScore]
     
     init(questionScores: [ChemistryScore]) {
@@ -16,7 +16,7 @@ struct AbilityCalculation {
     }
     
     typealias RankDataSet = (rank: Int, score: Int, personalType: ChemistryPersonalityType)
-    var abilityRanking: [RankDataSet] {
+    var ranking: [RankDataSet] {
         var rank = [RankDataSet]()
         
         ChemistryPersonalityType.allCases.forEach({
@@ -38,7 +38,7 @@ struct AbilityCalculation {
     }
 }
 
-private extension AbilityCalculation {
+private extension ChemistryScoreCalculation {
     func getTotalScore(type: ChemistryPersonalityType) -> Int {
         var totalScore = 0
         let targetScores = questionScores.filter({ $0.personalType == type })
