@@ -39,8 +39,8 @@ extension ApiManager {
 //================================================================
 //=== プロフィール更新 ===
 extension UpdateProfileRequestDTO {
-    init() {
-        self.init(familyName: nil, firstName: nil, familyNameKana: nil, firstNameKana: nil, birthday: nil, genderId: nil, zipCode: nil, prefectureId: nil, city: nil, town: nil, email: nil)
+    public init() {
+        self.init(nickname: nil, hopeJobPlaceIds: nil, salaryId: nil, familyName: nil, firstName: nil, familyNameKana: nil, firstNameKana: nil, birthday: nil, genderId: nil, zipCode: nil, prefectureId: nil, city: nil, town: nil, email: nil)
     }
     init(_ editTempCD: [EditableItemKey: EditableItemCurVal]) {
         self.init()
@@ -91,21 +91,14 @@ extension ApiManager {
 //=== プロフィール作成 ===
 extension CreateProfileRequestDTO {
     init() {
-        self.init(familyName: "", firstName: "", familyNameKana: "", firstNameKana: "", birthday: "", genderId: "", zipCode: "", prefectureId: "", city: "", town: "", email: "")
+        self.init(nickname: "", hopeJobPlaceIds: [], salaryId: "", birthday: "", genderId: "")
     }
     init(_ profile: MdlProfile) {
         self.init()
-        self.familyName = profile.familyName
-        self.firstName = profile.firstName
-        self.familyNameKana = profile.familyNameKana
-        self.firstNameKana = profile.firstNameKana
+        self.nickname = profile.nickname
+        self.hopeJobPlaceIds = profile.hopeJobPlaceIds
         self.birthday = profile.birthday.dispYmd()
         self.genderId = profile.gender
-        self.zipCode = profile.zipCode
-        self.prefectureId = profile.prefecture
-        self.city = profile.address1
-        self.town = profile.address2
-        self.email = profile.mailAddress
     }
 
 }
