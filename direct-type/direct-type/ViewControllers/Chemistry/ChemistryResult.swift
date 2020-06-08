@@ -13,7 +13,7 @@ final class ChemistryResult: UIViewController {
     private var questionScores = [ChemistryScore]()
     private let secondPlaceCellIndex = 1
     private let thirdPlaceCellIndex = 2
-    private let tableViewEstimateCellHeight: CGFloat = 320
+    private let tableViewEstimateCellHeight: CGFloat = 330
     private var resultCellCount: Int {
         let topThree = ChemistryScoreCalculation(questionScores: questionScores).topThree
         // 1位のセルとビジネスアビリティセルはデフォルト表示
