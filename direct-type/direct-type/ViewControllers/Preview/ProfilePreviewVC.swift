@@ -47,7 +47,7 @@ class ProfilePreviewVC: PreviewBaseVC {
         title = "個人プロフィール"
         
         if Constants.DbgOfflineMode {
-            self.detail = MdlProfile(familyName: "スマ澤", firstName: "花子", familyNameKana: "スマザワ", firstNameKana: "ハナコ", birthday: DateHelper.convStr2Date("1996-04-01"), gender: "2", zipCode: "1234567", prefecture: "22", address1: "千代田区", address2: "有楽町1-2-3　ネオ新橋ビル", mailAddress: "sumahana@example.com", mobilePhoneNo: Constants.Auth_username)
+            self.detail = MdlProfile(nickname: "にっくねーむ：おふらいん", hopeJobPlaceIds: ["13", "14"], salaryId: "8", familyName: "スマ澤", firstName: "花子", familyNameKana: "スマザワ", firstNameKana: "ハナコ", birthday: DateHelper.convStr2Date("1996-04-01"), gender: "2", zipCode: "1234567", prefecture: "22", address1: "千代田区", address2: "有楽町1-2-3　ネオ新橋ビル", mailAddress: "sumahana@example.com", mobilePhoneNo: Constants.Auth_username)
         }
     }
     
@@ -197,7 +197,7 @@ extension ProfilePreviewVC {
     }
     private func fetchCreateProfile() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-        let profile = MdlProfile(familyName: "スマ澤", firstName: "花子", familyNameKana: "スマザワ", firstNameKana: "ハナコ", birthday: DateHelper.convStr2Date("1996-04-01"), gender: "2", zipCode: "1234567", prefecture: "22", address1: "千代田区", address2: "有楽町1-2-3　ネオ新橋ビル", mailAddress: "sumahana@example.com", mobilePhoneNo: Constants.Auth_username)
+        let profile = MdlProfile(nickname: "にっくねーむ", hopeJobPlaceIds: ["14", "13"], salaryId: "", familyName: "スマ澤", firstName: "花子", familyNameKana: "スマザワ", firstNameKana: "ハナコ", birthday: DateHelper.convStr2Date("1996-04-01"), gender: "2", zipCode: "1234567", prefecture: "22", address1: "千代田区", address2: "有楽町1-2-3　ネオ新橋ビル", mailAddress: "sumahana@example.com", mobilePhoneNo: Constants.Auth_username)
         let param = CreateProfileRequestDTO(profile)
         SVProgressHUD.show(withStatus: "プロフィール情報の作成")
         ApiManager.createProfile(param, isRetry: true)
