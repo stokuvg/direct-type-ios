@@ -140,7 +140,6 @@ extension ProfilePreviewVC {
         SVProgressHUD.show(withStatus: "プロフィール情報の取得")
         ApiManager.getProfile(Void(), isRetry: true)
         .done { result in
-            print(result.debugDisp)
             self.detail = result
         }
         .catch { (error) in

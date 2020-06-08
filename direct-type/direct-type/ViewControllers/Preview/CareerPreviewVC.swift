@@ -47,7 +47,7 @@ class CareerPreviewVC: PreviewBaseVC {
     //共通プレビューをOverrideして利用する
     override func initData() {
         title = "[C-15]「職務経歴書確認」"
-//        if Constants.DbgOfflineMode {
+        if Constants.DbgOfflineMode {
             let careerCard: CareerHistoryDTO = CareerHistoryDTO(
                 startWorkPeriod: "2006/04/01",
                 endWorkPeriod: "2014/03/01",
@@ -55,10 +55,9 @@ class CareerPreviewVC: PreviewBaseVC {
                 employmentId: "2",
                 employees: 1234,
                 salary: 9,
-                workNote: "おぼえがきもろもろ")
+                workNote: "おぼえがきもろもろ：オフライン")
             self.detail = MdlCareerCard(dto: careerCard)
-//        }
-        print(self.detail?.debugDisp)
+        }
     }
     
     override func dispData() {
@@ -127,7 +126,6 @@ extension CareerPreviewVC {
                 if num == self.targetCardNum { //とりあえず最初(0)のものを対象とする
                     self.detail = result.businessTypes.first
                 }
-                print(#line, num, item.debugDisp)
             }
         }
         .catch { (error) in

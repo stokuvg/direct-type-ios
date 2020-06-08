@@ -81,12 +81,14 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
 
         //プレビューから直接編集へ行ってよし
         if let skipEditMemoItem = item.childItems.first {
+            let (isChange, editTemp) = editableModel.makeTempItem(skipEditMemoItem)
+            let item: EditableItemH! = isChange ? editTemp : skipEditMemoItem
             switch skipEditMemoItem.editType {
             case .inputMemo:
                 //さらに子ナビさせたいので
                 let storyboard = UIStoryboard(name: "Edit", bundle: nil)
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubInputMemoVC") as? SubInputMemoVC{
-                    nvc.initData(editableItem: skipEditMemoItem)
+                    nvc.initData(self, editableItem: item)
                     //遷移アニメーション関連
                     nvc.modalTransitionStyle = .coverVertical
                     self.present(nvc, animated: true) {}
@@ -149,4 +151,14 @@ extension PreviewBaseVC: nameEditableTableBasicDelegate {
         chkButtonEnable()//ボタン死活チェック
         tableVW.reloadData()
     }
+}
+
+extension PreviewBaseVC: SubSelectFeedbackDelegate {
+    func changedSelect(editItem: EditableItemH, codes: String) {
+        editableModel.changeTempItem(editItem, text: codes)
+        chkButtonEnable()//ボタン死活チェック
+        tableVW.reloadData()
+    }
+    
+    
 }
