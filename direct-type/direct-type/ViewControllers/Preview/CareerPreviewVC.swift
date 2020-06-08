@@ -13,6 +13,7 @@ import SVProgressHUD
 
 //===[C-15]「職務経歴書確認」＊単独
 class CareerPreviewVC: PreviewBaseVC {
+    var targetCardNum: Int = 0 //編集対象のカード番号
     var detail: MdlCareerCard? = nil
 
     override func actCommit(_ sender: UIButton) {
@@ -122,8 +123,12 @@ extension CareerPreviewVC {
         SVProgressHUD.show(withStatus: "職務経歴書情報の取得")
         ApiManager.getCareer(Void(), isRetry: true)
         .done { result in
-            print(result.debugDisp)
-            self.detail = result.businessTypes.first
+            for (num, item) in result.businessTypes.enumerated() {
+                if num == self.targetCardNum { //とりあえず最初(0)のものを対象とする
+                    self.detail = result.businessTypes.first
+                }
+                print(#line, num, item.debugDisp)
+            }
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -134,40 +139,39 @@ extension CareerPreviewVC {
             SVProgressHUD.dismiss()
         }
     }
-//    private func fetchUpdateCareer() {
-//        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-//        let card = CareerHistoryDTO(editableModel.editTempCD)
-//        print(card)
-//        let param = UpdateCareerRequestDTO(careerHistory: [card])
-//              print(param)
-//        self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
-//        self.dicValidErrMsg.removeAll()//状態をクリアしておく
-//        SVProgressHUD.show(withStatus: "職務経歴書情報の更新")
-//        ApiManager.updateCareer(param, isRetry: true)
-//        .done { result in
-//            self.fetchGetCareerList()//成功したらフェッチしておく
-//        }
-//        .catch { (error) in
-//            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-//            switch myErr.code {
-//            case 400:
-//                let (dicGrpError, dicError) = ValidateManager.canvValidErrMsgCareer(myErr.arrValidErrMsg)
-//                self.dicGrpValidErrMsg = dicGrpError
-//                self.dicValidErrMsg = dicError
-//            default:
-//                self.showError(error)
-//            }
-//        }
-//        .finally {
-//            self.dispData()
-//            SVProgressHUD.dismiss()
-//        }
-//    }
-//}
     private func fetchCreateCareerList() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-        let card = CareerHistoryDTO(editableModel.editTempCD)
+        let card = CareerHistoryDTO(self.detail!, editableModel.editTempCD) //変更部分を適用した更新用モデルを生成
         let param = CreateCareerRequestDTO(careerHistory: [card])
+        self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
+        self.dicValidErrMsg.removeAll()//状態をクリアしておく
+        SVProgressHUD.show(withStatus: "職務経歴書情報の作成")
+        ApiManager.createCareer(param, isRetry: true)
+        .done { result in
+            self.fetchGetCareerList()
+        }
+        .catch { (error) in
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            switch myErr.code {
+            case 400:
+                let (dicGrpError, dicError) = ValidateManager.canvValidErrMsgCareer(myErr.arrValidErrMsg)
+                self.dicGrpValidErrMsg = dicGrpError
+                self.dicValidErrMsg = dicError
+            default:
+                self.showError(error)
+            }
+        }
+        .finally {
+            self.dispData()
+            SVProgressHUD.dismiss()
+        }
+    }
+    private func fetchUpdateCareerList() {
+        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
+        let card = CareerHistoryDTO(self.detail!, editableModel.editTempCD) //変更部分を適用した更新用モデルを生成
+        let param = CreateCareerRequestDTO(careerHistory: [card])
+        self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
+        self.dicValidErrMsg.removeAll()//状態をクリアしておく
         SVProgressHUD.show(withStatus: "職務経歴書情報の作成")
         ApiManager.createCareer(param, isRetry: true)
         .done { result in

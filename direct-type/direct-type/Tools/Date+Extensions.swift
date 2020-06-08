@@ -28,6 +28,13 @@ class DateHelper {
          dateTimeFormatter.timeZone = TimeZone(secondsFromGMT: 0)
          return dateTimeFormatter
      }
+    class func dateTimeFormatterYmJP() -> DateFormatter {
+         let dateTimeFormatter = DateFormatter()
+         dateTimeFormatter.locale = Locale(identifier: "en_US_POSIX")
+         dateTimeFormatter.dateFormat = "YYYY年M月"
+         dateTimeFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+         return dateTimeFormatter
+     }
 }
 
 extension Date {
@@ -51,7 +58,20 @@ extension Date {
         print("\t[\(self.description)]\t[\(buf)]")
         return buf
     }
-    
+    func dispYmJP() -> String {
+        let dateFormat = DateHelper.dateTimeFormatterYmJP()
+        let buf = dateFormat.string(from: self)
+        return buf
+    }
+    func dispYm() -> String {
+        let formatter = ISO8601DateFormatter()
+        //formatter.formatOptions = [.withFullDate]
+        formatter.formatOptions = [.withYear, .withMonth, .withDashSeparatorInDate]
+        let buf: String = formatter.string(from: self)
+        print("\t[\(self.description)]\t[\(buf)]")
+        return buf
+    }
+
     func dispHomeDate() -> String {
         
         let formatter:DateFormatter = DateFormatter()

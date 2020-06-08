@@ -39,30 +39,35 @@ extension ApiManager {
 }
 //================================================================
 //=== Api16_職務経歴書の作成・更新 ===
+extension CreateCareerRequestDTO {
+    init() {
+        self.init(careerHistory: [])
+    }
+}
 extension CareerHistoryDTO {
     init() {
         self.init(startWorkPeriod: "", endWorkPeriod: "", companyName: "", employmentId: "", employees: 0, salary: 0, workNote: "")
     }
     init(_ career: MdlCareerCard) {
         self.init()
-        self.startWorkPeriod = career.workPeriod.startDate.dispYmd()//勤務開始年月（ISO8601[YYYY-MM]）
-        self.endWorkPeriod = career.workPeriod.endDate.dispYmd()//勤務終了年月（ISO8601[YYYY-MM]）※就業中の場合は9999-12とする
+        self.startWorkPeriod = career.workPeriod.startDate.dispYm()//勤務開始年月（ISO8601[YYYY-MM]）
+        self.endWorkPeriod = career.workPeriod.endDate.dispYm()//勤務終了年月（ISO8601[YYYY-MM]）※就業中の場合は9999-12とする
         self.companyName = career.companyName//企業名
         self.employmentId = career.employmentType//雇用形態マスタの値
-        self.employees = career.employeesCount.intValue ?? 0 //従業員数 //!!!型が違うのでとりあえず
-        self.salary = career.salary.intValue ?? 0 //年収 //!!!型が違うのでとりあえず
+        self.employees = Int(career.employeesCount) ?? 0 //従業員数 //!!!型が違うのでとりあえず
+        self.salary = Int(career.salary) ?? 0 //年収 //!!!型が違うのでとりあえず
         self.workNote = career.contents//職務内容本文
     }
-    init(_ editTempCD: [EditableItemKey: EditableItemCurVal]) {
-        self.init()
+    init(_ career: MdlCareerCard, _ editTempCD: [EditableItemKey: EditableItemCurVal]) {
+        self.init(career)
         for (key, val) in editTempCD {
             switch key {
             case EditItemCareerCardWorkPeriod.startDate.itemKey: self.startWorkPeriod = val
             case EditItemCareerCardWorkPeriod.endDate.itemKey: self.endWorkPeriod = val
             case EditItemCareerCard.companyName.itemKey: self.companyName = val
             case EditItemCareerCard.employmentType.itemKey: self.employmentId = val
-            case EditItemCareerCard.employeesCount.itemKey: self.employees = val.intValue ?? 0
-            case EditItemCareerCard.salary.itemKey: self.salary = val.intValue ?? 0
+            case EditItemCareerCard.employeesCount.itemKey: self.employees = Int(val) ?? 0
+            case EditItemCareerCard.salary.itemKey: self.salary = Int(val) ?? 0
             case EditItemCareerCard.contents.itemKey: self.workNote = val
             default: break
             }
@@ -83,6 +88,39 @@ extension ApiManager {
         let (promise, resolver) = Promise<Void>.pending()
         AuthManager.needAuth(true)
         CareerAPI.careerControllerCreate(body: param)
+        .done { result in
+            resolver.fulfill(Void())
+        }
+        .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
+            resolver.reject(error)
+        }
+        .finally {
+        }
+        return promise
+    }
+}
+//================================================================
+//=== Api16_職務経歴書の作成・更新 ===
+extension UpdateCareerRequestDTO {
+    init() {
+        self.init(careerHistory: nil)
+    }
+}
+//extension CareerHistoryDTO これはCreate/Updateで同じ定義だ。。。CareerHistoryDTO単独の更新とかは非対応になってる
+extension ApiManager {
+    class func updateCareer(_ param: UpdateCareerRequestDTO, isRetry: Bool = true) -> Promise<Void> {
+        if isRetry {
+            return firstly { () -> Promise<Void> in
+                retry(args: param, task: updateCareerFetch) { (error) -> Bool in return true }
+            }
+        } else {
+            return updateCareerFetch(param: param)
+        }
+    }
+    private class func updateCareerFetch(param: UpdateCareerRequestDTO) -> Promise<Void> {
+        let (promise, resolver) = Promise<Void>.pending()
+        AuthManager.needAuth(true)
+        CareerAPI.careerControllerUpdate(body: param)
         .done { result in
             resolver.fulfill(Void())
         }

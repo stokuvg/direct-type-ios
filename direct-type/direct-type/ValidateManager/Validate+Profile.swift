@@ -60,7 +60,13 @@ extension ValidateManager {
     }
     class func canvValidErrMsgCareer(_ arrValidErrMsg: [SwaValidErrMsg]) -> ([MdlItemHTypeKey: [String]],
         [EditableItemKey: [String]]) {
-        var dicGrpError: [MdlItemHTypeKey: [String]] = [:]
+            
+            
+            
+            print(arrValidErrMsg.description)
+
+            
+            var dicGrpError: [MdlItemHTypeKey: [String]] = [:]
         var dicError: [EditableItemKey: [String]] = [:]
         for valid in arrValidErrMsg {
             //===グループ側のエラー
