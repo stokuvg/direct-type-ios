@@ -37,6 +37,7 @@ class HomeVC: TmpNaviTopVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        Log.selectLog(logLevel: .debug, "HomeVC viewDidLoad start")
 
         // Do any additional setup after loading the view.
         
@@ -59,15 +60,16 @@ class HomeVC: TmpNaviTopVC {
         homeTableView.registerNib(nibName: "JobOfferCardReloadCell", idName: "JobOfferCardReloadCell")// 全求人カード表示/更新
         
 //        self.makeDummyData()
-        self.dataCheckAction()
+//        self.dataCheckAction()
+
+//        self.getJobList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        Log.selectLog(logLevel: .debug, "HomeVC viewWillAppear start")
         
         safeAreaTop = self.view.safeAreaInsets.top
-        
-        self.getJobList()
         
         //[Dbg]___
         if Constants.DbgAutoPushVC {
@@ -93,6 +95,8 @@ class HomeVC: TmpNaviTopVC {
             }
         }
         //[Dbg]^^^
+        
+        self.getJobList()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -106,12 +110,29 @@ class HomeVC: TmpNaviTopVC {
 
     }
     
+    private func firstDispJobCardsAdd() {
+        
+        dispJobCards = MdlJobCardList()
+        if masterJobCards.jobCards.count > moreDataCount {
+            let jobCards = masterJobCards.jobCards
+            dispJobCards.jobCards = jobCards
+        } else {
+            for i in 0..<masterJobCards.jobCards.count {
+                let data = masterJobCards.jobCards[i]
+                dispJobCards.jobCards.append(data)
+            }
+        }
+    }
+    
     private func dataCheckAction() {
-
+        Log.selectLog(logLevel: .debug, "HomeVC dataCheckAction start")
         if (masterJobCards.jobCards.count) > 0 {
 //        if masterTableData.count > 0 {
             homeTableView.isHidden = false
             dispType = .add
+            
+            self.firstDispJobCardsAdd()
+            
             self.homeTableView.delegate = self
             self.homeTableView.dataSource = self
             self.homeTableView.reloadData()
@@ -132,6 +153,7 @@ class HomeVC: TmpNaviTopVC {
         ApiManager.getJobs(Void(), isRetry: true)
             .done { result in
                 debugLog("ApiManager getJobs result:\(result.debugDisp)")
+                debugLog("ApiManager getJobs result.jobCards:\(result.jobCards)")
                 
                 self.masterJobCards = result
         }

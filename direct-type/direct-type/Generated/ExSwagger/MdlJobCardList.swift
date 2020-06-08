@@ -14,39 +14,30 @@ import TudApi
 class MdlJobCardList: Codable {
     var nextPage: Bool
     var updateAt: String
-    var jobCards: [Job]
+    var jobCards: [MdlJobCard]
     
-    init(updateAt:String, hasNext:Bool,jobs:[Job]) {
+    init(updateAt:String = "", hasNext:Bool = false, jobList:[MdlJobCard] = []) {
         self.updateAt = updateAt
         self.nextPage = hasNext
-        self.jobCards = jobs
+        self.jobCards = jobList
     }
-    /*
-    init(updateAt:String, hasNext:Bool, jobs:[Job]) {
-        self.nextPage = hasNext
-        self.updateAt = updateAt
-        
-        var _mdlJobCards:[MdlJobCard] = []
-        for _job in jobs {
-            let mdlJobCard = MdlJobCard.init(dto: _job)
-            _mdlJobCards.append(mdlJobCard)
-        }
-        
-        self.jobCards = _mdlJobCards
-    }
-    */
     
     convenience init(dto: GetJobsResponseDTO) {
         let updateAt = dto.recommendedAt
         let hasNext = dto.hasNext
-        let jobs = dto.jobs
+//        let jobs = dto.jobs
+        var lists:[MdlJobCard] = []
+        for i in 0..<dto.jobs.count {
+            let _job = dto.jobs[i]
+            lists.append(MdlJobCard(dto: _job))
+        }
         
-        self.init(updateAt: updateAt, hasNext:hasNext, jobs:jobs)
+        self.init(updateAt: updateAt, hasNext:hasNext, jobList:lists)
     }
     
     //ApiモデルをAppモデルに変換して保持させる
     /*
-    convenience init(dto: JobCardList) {
+    convenience init(dto: MdlJobCardList) {
         let updateAt = dto.updateAt
         var _jobCards: [MdlJobCard] = []
         if let items = dto.jobCards {

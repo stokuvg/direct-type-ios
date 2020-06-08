@@ -1388,7 +1388,7 @@
           }
         ],
         "responses": {
-          "undefined": {
+          "200": {
             "description": "",
             "content": {
               "application/json": {

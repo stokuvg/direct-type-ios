@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwaggerClient
 
 protocol BaseJobCardCellDelegate {
     func skipAction(tag:Int)
@@ -49,6 +50,8 @@ class BaseJobCardCell: BaseTableViewCell {
     }
     
     var delegate:BaseJobCardCellDelegate!
+    
+    var jobCardData:MdlJobCard!
 
     override func awakeFromNib() {
         super.awakeFromNib()

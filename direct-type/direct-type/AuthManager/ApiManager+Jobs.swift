@@ -21,6 +21,7 @@ extension ApiManager {
             return getJobsFetch(param: param)
         }
     }
+    
     private class func getJobsFetch(param: Void) -> Promise<MdlJobCardList> {
         let (promise, resolver) = Promise<MdlJobCardList>.pending()
         let mode: Int = 1 //（仮）
@@ -28,8 +29,9 @@ extension ApiManager {
         AuthManager.needAuth(true)
         JobsAPI.jobsControllerGet(mode: mode, page: page)
         .done { result in
-            Log.selectLog(logLevel: .debug, "ApiManager getJobsFetch result:\(String(describing: result))")
+            print(#line, #function, result)
             resolver.fulfill(MdlJobCardList(dto: result)) //変換しておく
+//            resolver.fulfill(MdlJobCardList())
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
             resolver.reject(error)
@@ -76,11 +78,11 @@ extension ApiManager {
         SkipAPI.skipControllerCreate(body: skipRequest)
             .done { result in
                 Log.selectLog(logLevel: .debug, "result:\(result)")
-        }.catch{ (error) in
-            
-        }.finally {
-            
-        }
+            }.catch{ (error) in
+                
+            }.finally {
+                
+            }
         return sendJobSkipFetch(id: id)
     }
     

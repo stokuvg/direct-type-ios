@@ -63,13 +63,13 @@ class JobOfferBigCardCell: BaseJobCardCell {
         // Configure the view for the selected state
     }
     
-    func setup(data:Job) {
-//    func setup(data:MdlJobCard) {
-    
+    func setup(data:MdlJobCard) {
+        self.jobCardData = data
         /*
         // サムネイル画像
         let imageUrlString:String = data.mainPicture
         thumnailImageView.af_setImage(withURL: URL(string: imageUrlString)!)
+         */
         
         let nowDate = Date()
         // NEWマーク 表示チェック
@@ -98,20 +98,19 @@ class JobOfferBigCardCell: BaseJobCardCell {
                 limitedType = LimitedType.none
         }
         self.limitedMarkSetting(type: limitedType)
-        */
         
         // 職業
         let job:String = data.jobName
         jobLabel.text(text: job, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
 
         // 給与
-        let displayFlag = data.isSalaryDisplay
+        let displayFlag = data.salaryDisplay
         if displayFlag {
             
-            let minPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.minSalaryId)?.disp
+            let minPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.salaryMinCode)?.disp
 //            Log.selectLog(logLevel: .debug, "minPriceLabel:\(String(describing: minPriceLabel))")
             let minPrice = self.cutText(defaultText: minPriceLabel!,cutString: "万円")
-            let maxPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.maxSalaryId)?.disp
+            let maxPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.salaryMaxCode)?.disp
             let maxPrice = self.cutText(defaultText: maxPriceLabel!,cutString: "万円")
 //            Log.selectLog(logLevel: .debug, "maxPriceLabel:\(String(describing: maxPriceLabel))")
             
