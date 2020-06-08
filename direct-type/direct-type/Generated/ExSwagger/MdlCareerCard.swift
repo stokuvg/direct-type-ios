@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import SwaggerClient
+//import SwaggerClient
+import TudApi
 
 /** 職務経歴書（1社ごと） */
 class MdlCareerCard: Codable {
@@ -33,13 +34,27 @@ class MdlCareerCard: Codable {
         self.contents = contents
     }
     //ApiモデルをAppモデルに変換して保持させる
-    convenience init(dto: CareerCard) {
-        let _workPeriod: MdlCareerCardWorkPeriod = MdlCareerCardWorkPeriod.init(dto: dto.workPeriod)
-        let _employmentType = "\(dto.employmentType)"
-        let _employeesCount = "\(dto.employeesCount)"
+    convenience init(dto: CareerHistoryDTO) {
+        let _workPeriod: MdlCareerCardWorkPeriod =
+            MdlCareerCardWorkPeriod(startDate: DateHelper.convStr2Date(dto.startWorkPeriod),
+                                    endDate: DateHelper.convStr2Date(dto.endWorkPeriod) )
+        let _employmentType = dto.employmentId
+        let _employeesCount = "\(dto.employees)"
         let _salary = "\(dto.salary)"
-        self.init(workPeriod: _workPeriod, companyName: dto.companyName, employmentType: _employmentType, employeesCount: _employeesCount, salary: _salary, contents: dto.contents)
+        self.init(workPeriod: _workPeriod,
+                  companyName: dto.companyName,
+                  employmentType: _employmentType,
+                  employeesCount: _employeesCount,
+                  salary: _salary,
+                  contents: dto.workNote)
     }
+//    convenience init(dto: CareerCard) {
+//        let _workPeriod: MdlCareerCardWorkPeriod = MdlCareerCardWorkPeriod.init(dto: dto.workPeriod)
+//        let _employmentType = "\(dto.employmentType)"
+//        let _employeesCount = "\(dto.employeesCount)"
+//        let _salary = "\(dto.salary)"
+//        self.init(workPeriod: _workPeriod, companyName: dto.companyName, employmentType: _employmentType, employeesCount: _employeesCount, salary: _salary, contents: dto.contents)
+//    }
     var debugDisp: String {
         return "[workPeriod: \(workPeriod.debugDisp)] [companyName: \(companyName)] [employmentType: \(employmentType)] [employeesCount: \(employeesCount)] [salary: \(salary)] [contents: \(contents)]"
     }
