@@ -38,8 +38,8 @@ private extension ChemistryResult {
 extension ChemistryResult: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ChemistryResultHeader()
-        let ranking = ChemistryScoreCalculation(questionScores: questionScores).ranking
-        header.configure(with: ranking)
+        let topThree = ChemistryScoreCalculation(questionScores: questionScores).topThree
+        header.configure(with: topThree)
         return header
     }
     

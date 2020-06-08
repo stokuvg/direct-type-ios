@@ -10,14 +10,13 @@ import Foundation
 
 struct ChemistryScoreCalculation {
     private var questionScores: [ChemistryScore]
-    private let acceptedScoreDistance: Int = 3
     
     init(questionScores: [ChemistryScore]) {
         self.questionScores = questionScores
     }
     
     typealias RankDataSet = (rank: Int, score: Int, personalType: ChemistryPersonalityType)
-    var ranking: [RankDataSet] {
+    var abilityRanking: [RankDataSet] {
         var rank = [RankDataSet]()
         
         ChemistryPersonalityType.allCases.forEach({
@@ -36,20 +35,6 @@ struct ChemistryScoreCalculation {
         return rank.enumerated().map({
             RankDataSet(rank: getRank(from: $0), score: $1.score, personalType: $1.personalType)
         })
-    }
-    
-    typealias TopRanker = (first: ChemistryPersonalityType, second: ChemistryPersonalityType?, third: ChemistryPersonalityType?)
-    var topThree: TopRanker {
-        let firstPlace = ranking[0]
-        let secondPlace = ranking[1]
-        let thirdPlace = ranking[2]
-        guard firstPlace.score.distance(to: secondPlace.score) < acceptedScoreDistance else {
-            return TopRanker(first: firstPlace.personalType, second: nil, third: nil)
-        }
-        guard secondPlace.score.distance(to: thirdPlace.score) < acceptedScoreDistance else {
-            return TopRanker(first: firstPlace.personalType, second: secondPlace.personalType, third: nil)
-        }
-        return TopRanker(first: firstPlace.personalType, second: secondPlace.personalType, third: thirdPlace.personalType)
     }
 }
 

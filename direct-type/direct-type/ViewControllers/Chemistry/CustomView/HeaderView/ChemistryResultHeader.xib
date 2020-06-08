@@ -11,6 +11,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChemistryResultHeader" customModule="direct_type" customModuleProvider="target">
             <connections>
+                <outlet property="firstAndLabel" destination="AGc-Yl-MJH" id="yfb-cK-rQW"/>
+                <outlet property="firstPlaceImageView" destination="avh-IU-wnD" id="MPt-rf-hNt"/>
+                <outlet property="firstPlaceLabel" destination="Q33-5Y-ess" id="tM3-IA-f6L"/>
+                <outlet property="secondAndLabel" destination="Ut5-WG-w9q" id="KG1-U6-FdU"/>
+                <outlet property="secondPlaceImageView" destination="m25-AO-7Dr" id="YE3-dH-7eT"/>
+                <outlet property="secondPlaceLabel" destination="Ytb-BF-RJU" id="GVx-SV-nLh"/>
+                <outlet property="secondPlaceView" destination="Zyx-0L-N1Q" id="0gs-XF-KLc"/>
+                <outlet property="thirdPlaceImageView" destination="C27-af-jdy" id="bt5-6K-zVv"/>
+                <outlet property="thirdPlaceLabel" destination="CfK-y0-eg1" id="WG0-4M-DVf"/>
+                <outlet property="thirdPlaceView" destination="9e7-Iy-mhY" id="uU1-bW-d0D"/>
                 <outlet property="whiteBackgroundView" destination="P9D-Ed-MtI" id="W2d-Gl-ns5"/>
             </connections>
         </placeholder>
