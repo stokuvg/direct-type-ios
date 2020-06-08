@@ -11,6 +11,17 @@ import UIKit
 final class ChemistryResult: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     private var questionScores = [ChemistryScore]()
+    private let secondPlaceCellIndex = 1
+    private let thirdPlaceCellIndex = 2
+    private let tableViewEstimateCellHeight: CGFloat = 320
+    private var resultCellCount: Int {
+        let topThree = ChemistryScoreCalculation(questionScores: questionScores).topThree
+        // 1位のセルとビジネスアビリティセルはデフォルト表示
+        var cellCount = 2
+        cellCount += topThree.second == nil ? 0 : 1
+        cellCount += topThree.third == nil ? 0 : 1
+        return cellCount
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +37,9 @@ private extension ChemistryResult {
     func setup() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.registerNib(nibName: "ChemistryResultPersonalTypeCell", idName: "ChemistryResultPersonalTypeCell")
+        tableView.estimatedRowHeight = tableViewEstimateCellHeight
+        tableView.rowHeight = UITableView.automaticDimension
         
         let ranking = ChemistryScoreCalculation(questionScores: questionScores).ranking
         ranking.forEach({ rank in
@@ -59,10 +73,20 @@ extension ChemistryResult: UITableViewDelegate {
 
 extension ChemistryResult: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return resultCellCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.loadCell(cellName: "ChemistryResultPersonalTypeCell", indexPath: indexPath) as! ChemistryResultPersonalTypeCell
+        let topThree = ChemistryScoreCalculation(questionScores: questionScores).topThree
+        switch indexPath.row {
+        case secondPlaceCellIndex:
+            cell.configure(with: topThree.second)
+        case thirdPlaceCellIndex:
+            cell.configure(with: topThree.third)
+        default:
+            cell.configure(with: topThree.first)
+        }
+        return cell
     }
 }
