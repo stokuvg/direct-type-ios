@@ -11,6 +11,7 @@ import UIKit
 final class ChemistryStart: UIViewController {
     @IBOutlet private weak var iconCarouselView: IconCarouselView!
     @IBAction private func startDiagnosisButton(_ sender: UIButton) {
+        transitionToChemisrortSelect()
     }
     
     private let carouselIconFrame = CGRect(x: .zero, y: .zero, width: 100, height: 100)
@@ -29,6 +30,8 @@ final class ChemistryStart: UIViewController {
 
 private extension ChemistryStart {
     func setNavigationBar() {
+        navigationItem.title = ""
+        
         if #available(iOS 13.0, *) {
             navigationController?.navigationBar.standardAppearance.backgroundColor = UIColor.init(colorType: .color_sub)!
             navigationController?.navigationBar.standardAppearance.shadowColor = .clear
@@ -41,12 +44,19 @@ private extension ChemistryStart {
     
     func generateCarouselIconView() -> [UIImageView]{
         var imageViews = [UIImageView]()
-        DiagnosisResult.PersonalityType.allCases.forEach({ type in
+        ChemistryPersonalityType.allCases.forEach({ type in
             let image = UIImage(named: type.imageName)
             let imageView = UIImageView(frame: carouselIconFrame)
             imageView.image = image
             imageViews.append(imageView)
         })
         return imageViews
+    }
+    
+    func transitionToChemisrortSelect() {
+        let vc = UIStoryboard(name: "ChemistrySelect", bundle: nil)
+            .instantiateInitialViewController() as! ChemistrySelect
+        hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
