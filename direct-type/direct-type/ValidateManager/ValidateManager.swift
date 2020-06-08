@@ -9,7 +9,8 @@
 import Foundation
 
 enum ValidType {
-    case undefine       //全角（特にチェックなし）
+    case undefine       //特にチェックなし
+    case zenkaku        //全角(改行などOK)
     case hiraKataKan    //ひらカタ漢字
     case katakana       //全角カタカナ
     case email          //メールアドレス
@@ -109,6 +110,19 @@ extension ValidateManager {
 
                     case .undefine:
                         continue
+                        
+                    case .zenkaku:
+                        regexp = #"^[ー\p{Hiragana}\p{Katakana}\p{Han}\n]*$"#
+                        if let bufMatch = getRegexMatchString(editTemp, regexp) {
+                            if let keta = validInfo.keta {
+                                errMsg = "\(keta)桁の全角文字で入力してください"
+                            }
+                            if let max = validInfo.max, bufMatch.count > max {
+                                errMsg = "入力文字数が超過しています (\(max))"
+                            }
+                        } else {//正規表現にマッチしない（＝形式エラー）
+                            errMsg = "全角文字で入力してください [\(regexp)]"
+                        }
 
                     case .hiraKataKan:
                         regexp = #"^[\p{Hiragana}\p{Katakana}\p{Han}]*$"#

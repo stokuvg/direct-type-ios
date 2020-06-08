@@ -10,6 +10,7 @@ import UIKit
 
 class SubInputMemoVC: BaseVC {
     var editableItem: EditableItemH!
+    var delegate: SubSelectFeedbackDelegate? = nil
 
     @IBOutlet weak var vwHead: UIView!
     @IBOutlet weak var lblTitle: UILabel!
@@ -37,12 +38,14 @@ class SubInputMemoVC: BaseVC {
         btnCommit.setTitle(text: "選択", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
     }
-    func initData(editableItem: EditableItemH) {
+    func initData(_ delegate: SubSelectFeedbackDelegate, editableItem: EditableItemH) {
+        self.delegate = delegate
         self.editableItem = editableItem
     }
     func dispData() {
         let bufTitle: String = "\(editableItem.dispName)"
         lblTitle.text(text: bufTitle, fontType: .font_L, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        textVW.text = editableItem.curVal
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -53,6 +56,8 @@ class SubInputMemoVC: BaseVC {
 //=== テキスト入力したものの確定処理 ===
 extension SubInputMemoVC {
     func actPopupSelect(text: String) {
+        print(#line, #function, text)
+        self.delegate?.changedSelect(editItem: self.editableItem, codes: text)
         self.dismiss(animated: true) { }
     }
     func actPopupCancel() {

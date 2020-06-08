@@ -44,6 +44,11 @@ class MyCmnDialogVC: BaseVC {
         lblTitle.text = dlgItem.title
         lblMessage.text = dlgItem.message
         lblMessageDmy.text = dlgItem.message
+        if UITraitCollection.isDarkMode == true { //白背景固定なので、文字も黒固定
+            lblTitle.textColor = .black
+            lblMessage.textColor = .black
+            lblMessageDmy.textColor = .black
+        }
         // 既存ボタンを削除してから
         for asv in stackActionArea.arrangedSubviews {
             stackActionArea.removeArrangedSubview(asv)

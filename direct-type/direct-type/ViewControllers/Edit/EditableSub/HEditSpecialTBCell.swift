@@ -44,11 +44,9 @@ class HEditSpecialTBCell: UITableViewCell {
         switch _item.editType {
         case .selectSpecial:
             bufVal = _item.valDisp
-            print(#line, #function, _item.debugDisp)
         case .selectSpecialYear:
             bufVal = _item.valDisp
             if let _item2 = item2 {
-                print(#line, #function, _item2.debugDisp)
                 bufVal = "!?\(_item.valDisp)：\(_item2.valDisp)"
             }
         default:

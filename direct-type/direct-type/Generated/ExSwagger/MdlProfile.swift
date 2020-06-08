@@ -12,6 +12,11 @@ import UIKit
 import TudApi
 
 class MdlProfile: Codable {
+    //===プロフィール作成は初期入力でのもののみ...
+    var nickname: String = ""
+    var hopeJobPlaceIds: [Code] = []
+    var salaryId: Code = ""
+    //===プロフィール更新
     /** 氏 */
      var familyName: String = ""
     /** 名 */
@@ -37,7 +42,11 @@ class MdlProfile: Codable {
     /** 携帯電話番号（変更不可：認証アカウントと同一） */
      var mobilePhoneNo: String = ""
 
-    init(familyName: String, firstName: String, familyNameKana: String, firstNameKana: String, birthday: Date, gender: Code, zipCode: String, prefecture: Code, address1: String, address2: String, mailAddress: String, mobilePhoneNo: String) {
+    init(nickname: Code, hopeJobPlaceIds: [Code], salaryId: String,
+         familyName: String, firstName: String, familyNameKana: String, firstNameKana: String, birthday: Date, gender: Code, zipCode: String, prefecture: Code, address1: String, address2: String, mailAddress: String, mobilePhoneNo: String) {
+        self.nickname = nickname
+        self.hopeJobPlaceIds = hopeJobPlaceIds
+        self.salaryId = salaryId
         self.familyName = familyName
         self.firstName = firstName
         self.familyNameKana = familyNameKana
@@ -53,29 +62,38 @@ class MdlProfile: Codable {
     }
     //ApiモデルをAppモデルに変換して保持させる
     convenience init(dto: GetProfileResponseDTO) {
-        let bufDate = dto.birthday
-        let _date = DateHelper.convStr2Date(bufDate)
-        
-        self.init(familyName: dto.familyName, firstName: dto.firstName, familyNameKana: dto.familyNameKana, firstNameKana: dto.firstNameKana, birthday: _date, gender: dto.genderId, zipCode: dto.zipCode, prefecture: dto.prefectureId, address1: dto.city, address2: dto.town, mailAddress: dto.email, mobilePhoneNo: dto.phoneNumber)
-    }
+        var _hopeJobPlaceIds: [Code] = []
+        if let codes = dto.hopeJobPlaceIds {
+            for code in codes {
+                _hopeJobPlaceIds.append(String(code))
+            }
+        }
+        var _birthday: Date!
+        if let bufDate = dto.birthday {
+            print(bufDate)
+            let _tmp = DateHelper.convStr2Date(bufDate)
+            _birthday = _tmp
+        } else {
+            _birthday = Date()
+        }
+        self.init(
+            nickname: dto.nickname ?? "",
+            hopeJobPlaceIds: [],
+            salaryId: dto.salaryId ?? "",
+            familyName: dto.familyName ?? "",
+            firstName: dto.firstName ?? "",
+            familyNameKana: dto.familyNameKana ?? "",
+            firstNameKana: dto.firstNameKana ?? "",
+            birthday: _birthday,
+            gender: dto.genderId ?? "",
+            zipCode: dto.zipCode ?? "",
+            prefecture: dto.prefectureId ?? "",
+            address1: dto.city ?? "",
+            address2: dto.town ?? "",
+            mailAddress: dto.email ?? "",
+            mobilePhoneNo: dto.phoneNumber ?? "")
+        }
     //=== 作成・更新のモデルは、アプリ=>APIなので不要だな ===
-    //convenience init(dto: CreateProfileRequestDTO) {
-    //    let bufDate = dto.birthday ?? ""
-    //    let _date = DateHelper.convStr2Date(bufDate)
-    //    self.init(familyName: dto.familyName, firstName: dto.firstName, familyNameKana: dto.familyNameKana, firstNameKana: dto.firstNameKana, birthday: _date, gender: dto.genderId, zipCode: dto.zipCode, prefecture: dto.prefectureId, address1: dto.city, address2: dto.town, mailAddress: dto.email, mobilePhoneNo: "")
-    //}
-    //convenience init(dto: UpdateProfileRequestDTO) {
-    //    let bufDate = dto.birthday ?? ""
-    //    let _date = DateHelper.convStr2Date(bufDate)
-    //    self.init(familyName: dto.familyName ?? "", firstName: dto.firstName ?? "", familyNameKana: dto.familyNameKana ?? "", firstNameKana: dto.firstNameKana ?? "", birthday: _date, gender: dto.genderId ?? "", zipCode: dto.zipCode ?? "", prefecture: dto.prefectureId ?? "", address1: dto.city ?? "", address2: dto.town ?? "", mailAddress: dto.email ?? "", mobilePhoneNo: "")
-    //}
-//    convenience init(dto: Profile) {
-//        let bufDate = dto.birthday.dispYmd
-//        let _date = DateHelper.convStr2Date(bufDate)
-//        let _gender = "\(dto.gender)"
-//        let _prefecture = "\(dto.prefecture)"
-//        self.init(familyName: dto.familyName, firstName: dto.firstName, familyNameKana: dto.familyNameKana, firstNameKana: dto.firstNameKana, birthday: _date, gender: _gender, zipCode: dto.zipCode, prefecture: _prefecture, address1: dto.address1, address2: dto.address2, mailAddress: dto.mailAddress, mobilePhoneNo: dto.mobilePhoneNo)
-//    }
 
     var debugDisp: String {
         let _gender = SelectItemsManager.getCodeDisp(.gender, code: gender)?.debugDisp ?? ""
@@ -83,22 +101,6 @@ class MdlProfile: Codable {
        return "[\(familyName) \(firstName)（\(familyNameKana) \(firstNameKana)）] [\(_gender)] [\(zipCode)] [\(_prefecture)] [\(address1)] [\(address2)] [\(mailAddress)] [\(mobilePhoneNo)]"
     }
 }
-
-var birthday: Date = Date(timeIntervalSince1970: 0)
-/** 性別 */
- var gender: Code = ""
-/** 郵便番号 */
- var zipCode: String = ""
-/** 都道府県 */
- var prefecture: Code = ""
-/** 市区町村 */
- var address1: String = ""
-/** 丁目・番地・建物名など */
- var address2: String = ""
-/** メールアドレス */
- var mailAddress: String = ""
-/** 携帯電話番号（変更不可：認証アカウントと同一） */
- var mobilePhoneNo: String = ""
 
 //=== 編集用の項目と定義など
 enum EditItemMdlProfile: String, EditItemProtocol {
