@@ -18,32 +18,12 @@ class CareerPreviewVC: PreviewBaseVC {
 
     override func actCommit(_ sender: UIButton) {
         print(#line, #function, "ボタン押下でAPIフェッチ確認")
-        if validateUpdateCareer() {
+        if validateLocalModel() {
             tableVW.reloadData()
             return
         }
         fetchCreateCareerList()
     }
-    
-    func validateUpdateCareer() -> Bool {
-        if Constants.DbgSkipLocalValidate { return false }//[Dbg: ローカルValidationスキップ]
-        ValidateManager.dbgDispCurrentItems(editableModel: editableModel) //[Dbg: 状態確認]
-        let chkErr = ValidateManager.chkValidationErr(editableModel)
-        if chkErr.count > 0 {
-            print("＊＊＊　Validationエラー発生: \(chkErr.count)件　＊＊＊")
-            var msg: String = ""
-            for err in chkErr {
-                msg = "\(msg)\(err.value)\n"
-            }
-            self.showValidationError(title: "Validationエラー (\(chkErr.count)件)", message: msg)
-//            /* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
-            return true
-        } else {
-            print("＊＊＊　Validationエラーなし　＊＊＊")
-            return false
-        }
-    }
-    
     //共通プレビューをOverrideして利用する
     override func initData() {
         title = "[C-15]「職務経歴書確認」"
@@ -66,6 +46,7 @@ class CareerPreviewVC: PreviewBaseVC {
         self.arrData.removeAll()//いったん全件を削除しておく
         editableModel.arrData.removeAll()//こちらで管理させる？！
 
+        //================================================================================
         //・項目見出し部分に「〇社目（{勤務開始年月}～{勤務終了年月}）」と表示
         //・情報の置き方
         //    ｛企業名｝（｛雇用形態｝）

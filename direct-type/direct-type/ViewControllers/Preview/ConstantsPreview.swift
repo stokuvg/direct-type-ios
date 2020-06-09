@@ -69,6 +69,16 @@ enum HPreviewItemType: String {
     case employmentTypeF15  //=== [F-15] 入力（雇用形態）
     case managementsF16     //=== [F-16] 入力（マネジメント経験）
     case pcSkillF22         //=== [F-22] 職種別入力（PCスキル）
+    //[A系統]初回入力
+    case nicknameA6             //=== [A-5/6] 入力（ニックネーム）
+    case genderA7               //=== [A-7] 入力（性別）
+    case birthdayA8             //=== [A-8] 入力（生年月日）
+    case hopeAreaA9             //=== [A-9] 入力（希望勤務地）
+    case schoolA10              //=== [A-10] 入力（最終学歴）
+    case employmentStatusA21    //=== [A-21] 入力（就業状況）
+    case lastJobExperimentA11   //=== [A-11] 入力（直近経験職種）[A-12] 入力（直近の職種の経験年数）
+    case salaryA13              //=== [A-13] 入力（現在の年収）
+    case jobExperimentsA14      //=== [A-14] 入力（追加経験職種）
 
     var dispTitle: String {
         switch self {
@@ -104,6 +114,16 @@ enum HPreviewItemType: String {
         case .employmentTypeF15:    return "雇用形態"
         case .managementsF16:       return "マネジメント経験"
         case .pcSkillF22:           return "PCスキル"
+        //[A系統]初回入力
+        case .nicknameA6:           return "ニックネーム"
+        case .genderA7:             return "性別"
+        case .birthdayA8:           return "生年月日"
+        case .hopeAreaA9:           return "希望勤務地"
+        case .schoolA10:            return "最終学歴"
+        case .employmentStatusA21:  return "就業状況"
+        case .lastJobExperimentA11: return "直近の経験職種"//& "直近の職種の経験年数"
+        case .salaryA13:            return "現在の年収"
+        case .jobExperimentsA14:    return "追加の経験職種"
         }
     }
     var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" }
