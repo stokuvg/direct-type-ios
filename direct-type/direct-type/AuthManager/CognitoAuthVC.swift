@@ -111,6 +111,13 @@ class CognitoAuthVC: BaseVC {
             case .adminNoSRPAuth:           buf = "adminNoSRPAuth"
             case .newPasswordRequired:      buf = "newPasswordRequired"
             case .signedIn:                 buf = "signedIn"
+                DispatchQueue.main.async {
+                    self.showConfirm(title: "認証手順", message: "ログインしました", onlyOK: true)
+                    /* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
+                    self.checkAuthStatus()
+                }
+                DispatchQueue.main.async { print(#line, #function, buf); self.lblStatus.text = "\(Date())\n\(buf)" }
+
             }
             DispatchQueue.main.async { print(#line, #function, buf); self.lblStatus.text = "\(Date())\n\(buf)" }
         }

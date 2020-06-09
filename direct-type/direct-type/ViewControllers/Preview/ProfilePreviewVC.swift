@@ -16,49 +16,26 @@ class ProfilePreviewVC: PreviewBaseVC {
     var detail: MdlProfile? = nil
     
     override func actCommit(_ sender: UIButton) {
-        print(#line, #function, "ボタン押下でAPIフェッチ確認")
-        if validateUpdateProfile() {
+        if validateLocalModel() {
             tableVW.reloadData()
             return
         }
         fetchUpdateProfile()
     }
-    
-    func validateUpdateProfile() -> Bool {
-        if Constants.DbgSkipLocalValidate { return false }//[Dbg: ローカルValidationスキップ]
-        ValidateManager.dbgDispCurrentItems(editableModel: editableModel) //[Dbg: 状態確認]
-        let chkErr = ValidateManager.chkValidationErr(editableModel)
-        self.dicValidErrMsg = chkErr
-        self.dicGrpValidErrMsg = ValidateManager.mageGrpErrByItemErr(chkErr)
-        if chkErr.count > 0 {
-            print("＊＊＊　Validationエラー発生: \(chkErr.count)件　＊＊＊")
-            var msg: String = ""
-            for err in chkErr {
-                msg = "\(msg)\(err.value)\n"
-//                print("\t[\(err.key)] [\(err.value.joined(separator: "‘n\t"))]")
-            }
-//            self.showValidationError(title: "Validationエラー (\(chkErr.count)件)", message: msg)
-//            /* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
-            return true
-        } else {
-            print("＊＊＊　Validationエラーなし　＊＊＊")
-            return false
-        }
-    }
-    
+    //共通プレビューをOverrideして利用する
     override func initData() {
         title = "個人プロフィール"
-        
         if Constants.DbgOfflineMode {
             self.detail = MdlProfile(nickname: "にっくねーむ：おふらいん", hopeJobPlaceIds: ["13", "14"], salaryId: "8", familyName: "スマ澤", firstName: "花子", familyNameKana: "スマザワ", firstNameKana: "ハナコ", birthday: DateHelper.convStr2Date("1996-04-01"), gender: "2", zipCode: "1234567", prefecture: "22", address1: "千代田区", address2: "有楽町1-2-3　ネオ新橋ビル", mailAddress: "sumahana@example.com", mobilePhoneNo: Constants.Auth_username)
         }
     }
-    
     override func dispData() {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
         guard let _detail = detail else { return }
         self.arrData.removeAll()//いったん全件を削除しておく
         editableModel.arrData.removeAll()//こちらで管理させる？！
+        
+        //================================================================================
         //===４．氏名（必須）
         //    ・未記入時は「未入力（必須）」と表示
         //    ・表記形式は「{氏} {名} （{氏(カナ)} {名(カナ)}」
@@ -125,7 +102,6 @@ class ProfilePreviewVC: PreviewBaseVC {
         editableModel.chkTableCellAll()//これ実施しておくと、getItemByKeyが利用可能になる
         tableVW.reloadData()//描画しなおし
     }
-    
     //========================================
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -201,7 +177,7 @@ extension ProfilePreviewVC {
     private func fetchCreateProfile() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         //===初回入力で実施されたものとする
-        let param = CreateProfileRequestDTO(nickname: "初期ニックネーム", hopeJobPlaceIds: ["13", "14"], salaryId: "8", birthday: "2000-01-01", genderId: "1")
+        let param = CreateProfileRequestDTO(nickname: "初期ニックネーム", hopeJobPlaceIds: ["13", "14"], salaryId: "8", birthday: "2000-01-01", genderId: "")
         SVProgressHUD.show(withStatus: "プロフィール情報の作成")
         ApiManager.createProfile(param, isRetry: true)
         .done { result in

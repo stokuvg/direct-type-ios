@@ -221,6 +221,7 @@
 		26A4C1CB247B4A81008D8E68 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A4C1CA247B4A81008D8E68 /* ApiManager.swift */; };
 		26A5DD642475028E0035267A /* SubSelectSpecialVC+Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5DD632475028E0035267A /* SubSelectSpecialVC+Picker.swift */; };
 		26A5DD662476547D0035267A /* SubSelectBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5DD652476547D0035267A /* SubSelectBaseVC.swift */; };
+		26AF3237248F538300AA78FD /* Validate+Resume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF3236248F538300AA78FD /* Validate+Resume.swift */; };
 		26B491DC247E2F4E00B58AD4 /* ApiManager+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B491DB247E2F4E00B58AD4 /* ApiManager+Profile.swift */; };
 		26B491DE247E394900B58AD4 /* ApiManager+Jobs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B491DD247E394900B58AD4 /* ApiManager+Jobs.swift */; };
 		26B491E0247E3CB100B58AD4 /* ApiManager+Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B491DF247E3CB100B58AD4 /* ApiManager+Entry.swift */; };
@@ -486,6 +487,7 @@
 		26A4C1CA247B4A81008D8E68 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		26A5DD632475028E0035267A /* SubSelectSpecialVC+Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubSelectSpecialVC+Picker.swift"; sourceTree = "<group>"; };
 		26A5DD652476547D0035267A /* SubSelectBaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSelectBaseVC.swift; sourceTree = "<group>"; };
+		26AF3236248F538300AA78FD /* Validate+Resume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validate+Resume.swift"; sourceTree = "<group>"; };
 		26B491DB247E2F4E00B58AD4 /* ApiManager+Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Profile.swift"; sourceTree = "<group>"; };
 		26B491DD247E394900B58AD4 /* ApiManager+Jobs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Jobs.swift"; sourceTree = "<group>"; };
 		26B491DF247E3CB100B58AD4 /* ApiManager+Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Entry.swift"; sourceTree = "<group>"; };
@@ -1094,6 +1096,7 @@
 				26A1F57B247F5D3300834213 /* ValidateManager.swift */,
 				26A1F57D247FB28B00834213 /* Validate+Profile.swift */,
 				260DD26A248E179000BFB9FE /* Validate+Career.swift */,
+				26AF3236248F538300AA78FD /* Validate+Resume.swift */,
 			);
 			path = ValidateManager;
 			sourceTree = "<group>";
@@ -1480,6 +1483,7 @@
 				06AA8C642484D2DA001733FA /* MyPageCarrerStartCell.swift in Sources */,
 				06409C73246D3A6800EA6BBB /* JobDetailFoldingHeaderView.swift in Sources */,
 				26A1F5842480F23100834213 /* MyCmnDialogVC.swift in Sources */,
+				26AF3237248F538300AA78FD /* Validate+Resume.swift in Sources */,
 				06E519982457DA0D004E4B7A /* ApproachSettingVC.swift in Sources */,
 				06DCAEAB245A7616008FE9FA /* UILabel+Extensions.swift in Sources */,
 				26147F30247258E9009B30B5 /* HPreviewTBCell+dispCellValue.swift in Sources */,

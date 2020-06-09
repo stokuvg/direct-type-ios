@@ -26,6 +26,27 @@ class PreviewBaseVC: TmpBasicVC {
         print(#line, #function, "＊オーバーライドして使う＊")
     }
 
+    func validateLocalModel() -> Bool {
+        if Constants.DbgSkipLocalValidate { return false }//[Dbg: ローカルValidationスキップ]
+        ValidateManager.dbgDispCurrentItems(editableModel: editableModel) //[Dbg: 状態確認]
+        let chkErr = ValidateManager.chkValidationErr(editableModel)
+        self.dicValidErrMsg = chkErr
+        self.dicGrpValidErrMsg = ValidateManager.makeGrpErrByItemErr(chkErr)
+        if chkErr.count > 0 {
+            print("＊＊＊　Validationエラー発生: \(chkErr.count)件　＊＊＊")
+            var msg: String = ""
+            for err in chkErr {
+                msg = "\(msg)\(err.value)\n"
+            }
+//            self.showValidationError(title: "Validationエラー (\(chkErr.count)件)", message: msg)
+//            /* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
+            return true
+        } else {
+            print("＊＊＊　Validationエラーなし　＊＊＊")
+            return false
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -72,11 +93,6 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
         let item = arrData[indexPath.row]
         let cell: HPreviewTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HPreviewTBCell", for: indexPath) as! HPreviewTBCell
         let errMsg = dicGrpValidErrMsg[item.type.itemKey]?.joined(separator: "\n") ?? ""
-
-    
-        print(#line, dicGrpValidErrMsg.description)
-        print(#line, dicValidErrMsg.description)
-        
         cell.initCell(item, editTempCD: editableModel.editTempCD, errMsg: errMsg)//編集中の値を表示適用させるためeditTempCDを渡す
         cell.dispCell()
         return cell

@@ -35,7 +35,7 @@ extension HPreviewTBCell {
             let tmp0: String = _item.childItems[0].valDisp.zeroUme(7)
             let buf0: String = _item.childItems[0].curVal.isEmpty ? "" : "〒\(String.substr(tmp0, 1, 3))-\(String.substr(tmp0, 4, 4))"
             let tmp1: String = _item.childItems[1].curVal
-            let buf1: String = SelectItemsManager.getCodeDisp(.place, code: tmp1)?.disp ?? "--"
+            let buf1: String = SelectItemsManager.getCodeDisp(.place, code: tmp1)?.disp ?? ""
             let buf2: String = _item.childItems[2].valDisp
             let buf3: String = _item.childItems[3].valDisp
             let bufAddress: String = "\(buf1)\(buf2)\(buf3)"
