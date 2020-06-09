@@ -87,4 +87,27 @@ enum ChemistryPersonalityType: String, CaseIterable {
             return "このタイプの人は、寛大で偏見がなく聞き上手です。受容力に富んでおり、物事を深く受け入れることができます。そのため、長く安定して力を発揮します。争い事を好まないマイペースな人です。地味に頑張っていて、うまくいかない時はふて寝します。"
         }
     }
+    
+    var avilityScore: BusinessAvilityScore {
+        switch self {
+        case .reformer:
+            return BusinessAvilityScore(quickAction: 6, toughness: 8, spiritOfChallenge: 8, logical: 7, leadership: 7, dedicationAndSupport: 6, cooperativeness: 6, initiative: 6, creativityAndIdea: 5, responsibilityAndSteadiness: 9)
+        case .helper:
+            return BusinessAvilityScore(quickAction: 6, toughness: 7, spiritOfChallenge: 7, logical: 6, leadership: 6, dedicationAndSupport: 9, cooperativeness: 9, initiative: 6, creativityAndIdea: 5, responsibilityAndSteadiness: 7)
+        case .toAchieve:
+            return BusinessAvilityScore(quickAction: 9, toughness: 6, spiritOfChallenge: 7, logical: 8, leadership: 9, dedicationAndSupport: 5, cooperativeness: 5, initiative: 7, creativityAndIdea: 7, responsibilityAndSteadiness: 5)
+        case .unique:
+            return BusinessAvilityScore(quickAction: 8, toughness: 6, spiritOfChallenge: 9, logical: 6, leadership: 6, dedicationAndSupport: 5, cooperativeness: 5, initiative: 9, creativityAndIdea: 9, responsibilityAndSteadiness: 5)
+        case .toExamine:
+            return BusinessAvilityScore(quickAction: 5, toughness: 9, spiritOfChallenge: 6, logical: 9, leadership: 6, dedicationAndSupport: 5, cooperativeness: 6, initiative: 5, creativityAndIdea: 9, responsibilityAndSteadiness: 8)
+        case .faithful:
+            return BusinessAvilityScore(quickAction: 6, toughness: 9, spiritOfChallenge: 5, logical: 6, leadership: 5, dedicationAndSupport: 8, cooperativeness: 8, initiative: 6, creativityAndIdea: 6, responsibilityAndSteadiness: 9)
+        case .enthusiastic:
+            return BusinessAvilityScore(quickAction: 9, toughness: 5, spiritOfChallenge: 9, logical: 5, leadership: 8, dedicationAndSupport: 5, cooperativeness: 6, initiative: 8, creativityAndIdea: 8, responsibilityAndSteadiness: 5)
+        case .challenger:
+            return BusinessAvilityScore(quickAction: 7, toughness: 7, spiritOfChallenge: 9, logical: 8, leadership: 8, dedicationAndSupport: 5, cooperativeness: 5, initiative: 8, creativityAndIdea: 5, responsibilityAndSteadiness: 6)
+        case .peaceful:
+            return BusinessAvilityScore(quickAction: 5, toughness: 7, spiritOfChallenge: 5, logical: 7, leadership: 6, dedicationAndSupport: 9, cooperativeness: 9, initiative: 7, creativityAndIdea: 5, responsibilityAndSteadiness: 8)
+        }
+    }
 }
