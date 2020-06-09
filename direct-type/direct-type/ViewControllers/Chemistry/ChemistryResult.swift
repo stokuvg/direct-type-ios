@@ -43,8 +43,31 @@ private extension ChemistryResult {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNib(nibName: "ChemistryResultPersonalTypeCell", idName: "ChemistryResultPersonalTypeCell")
+        tableView.registerNib(nibName: "ChemistryBusinessAbilityCell", idName: "ChemistryBusinessAbilityCell")
         tableView.estimatedRowHeight = tableViewEstimateCellHeight
         tableView.rowHeight = UITableView.automaticDimension
+    }
+    
+    func getAvarageAvilityScore() -> BusinessAvilityScore {
+        let topThree = ChemistryScoreCalculation(questionScores: questionScores).topThree
+        let topScore = [topThree.first, topThree.second, topThree.third].compactMap({$0})
+        let quickAction = getAvarage(from: topScore.map({ $0.avilityScore.quickAction }))
+        let toughness = getAvarage(from: topScore.map({ $0.avilityScore.quickAction }))
+        let spiritOfChallenge = getAvarage(from: topScore.map({ $0.avilityScore.quickAction }))
+        let logical = getAvarage(from: topScore.map({ $0.avilityScore.quickAction }))
+        let leadership = getAvarage(from: topScore.map({ $0.avilityScore.quickAction }))
+        let dedicationAndSupport = getAvarage(from: topScore.map({ $0.avilityScore.quickAction }))
+        let cooperativeness = getAvarage(from: topScore.map({ $0.avilityScore.quickAction }))
+        let initiative = getAvarage(from: topScore.map({ $0.avilityScore.quickAction }))
+        let creativityAndIdea = getAvarage(from: topScore.map({ $0.avilityScore.quickAction }))
+        let responsibilityAndSteadiness = getAvarage(from: topScore.map({ $0.avilityScore.quickAction }))
+        return BusinessAvilityScore(quickAction: quickAction, toughness: toughness, spiritOfChallenge: spiritOfChallenge, logical: logical, leadership: leadership, dedicationAndSupport: dedicationAndSupport, cooperativeness: cooperativeness, initiative: initiative, creativityAndIdea: creativityAndIdea, responsibilityAndSteadiness: responsibilityAndSteadiness)
+    }
+    
+    func getAvarage(from array: [Double]) -> Double {
+        let molecule = array.reduce(0, +)
+        let denominator = Double(array.count)
+        return molecule / denominator
     }
 }
 
@@ -76,19 +99,25 @@ extension ChemistryResult: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.loadCell(cellName: "ChemistryResultPersonalTypeCell", indexPath: indexPath) as! ChemistryResultPersonalTypeCell
         let topThree = ChemistryScoreCalculation(questionScores: questionScores).topThree
         let indicateCellType = IndicateCellType(rawValue: indexPath.row)!
         switch indicateCellType {
         case .firstPlaceResult:
+            let cell = tableView.loadCell(cellName: "ChemistryResultPersonalTypeCell", indexPath: indexPath) as! ChemistryResultPersonalTypeCell
             cell.configure(with: topThree.first)
+            return cell
         case .secondPlaceResult:
+            let cell = tableView.loadCell(cellName: "ChemistryResultPersonalTypeCell", indexPath: indexPath) as! ChemistryResultPersonalTypeCell
             cell.configure(with: topThree.second)
+            return cell
         case .thirdPlaceResult:
+            let cell = tableView.loadCell(cellName: "ChemistryResultPersonalTypeCell", indexPath: indexPath) as! ChemistryResultPersonalTypeCell
             cell.configure(with: topThree.third)
+            return cell
         case .businessAbility:
-            cell.configure(with: topThree.first)
+            let cell = tableView.loadCell(cellName: "ChemistryBusinessAbilityCell", indexPath: indexPath) as! ChemistryBusinessAbilityCell
+            cell.configure(with: getAvarageAvilityScore())
+            return cell
         }
-        return cell
     }
 }
