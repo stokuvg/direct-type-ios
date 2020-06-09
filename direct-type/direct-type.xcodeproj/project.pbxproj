@@ -222,6 +222,8 @@
 		26A5DD642475028E0035267A /* SubSelectSpecialVC+Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5DD632475028E0035267A /* SubSelectSpecialVC+Picker.swift */; };
 		26A5DD662476547D0035267A /* SubSelectBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5DD652476547D0035267A /* SubSelectBaseVC.swift */; };
 		26AF3237248F538300AA78FD /* Validate+Resume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF3236248F538300AA78FD /* Validate+Resume.swift */; };
+		26AF3239248F68BD00AA78FD /* FirstInputPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF3238248F68BD00AA78FD /* FirstInputPreviewVC.swift */; };
+		26AF323B248F698E00AA78FD /* MdlFirstInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF323A248F698E00AA78FD /* MdlFirstInput.swift */; };
 		26B491DC247E2F4E00B58AD4 /* ApiManager+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B491DB247E2F4E00B58AD4 /* ApiManager+Profile.swift */; };
 		26B491DE247E394900B58AD4 /* ApiManager+Jobs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B491DD247E394900B58AD4 /* ApiManager+Jobs.swift */; };
 		26B491E0247E3CB100B58AD4 /* ApiManager+Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B491DF247E3CB100B58AD4 /* ApiManager+Entry.swift */; };
@@ -488,6 +490,8 @@
 		26A5DD632475028E0035267A /* SubSelectSpecialVC+Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubSelectSpecialVC+Picker.swift"; sourceTree = "<group>"; };
 		26A5DD652476547D0035267A /* SubSelectBaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSelectBaseVC.swift; sourceTree = "<group>"; };
 		26AF3236248F538300AA78FD /* Validate+Resume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validate+Resume.swift"; sourceTree = "<group>"; };
+		26AF3238248F68BD00AA78FD /* FirstInputPreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstInputPreviewVC.swift; sourceTree = "<group>"; };
+		26AF323A248F698E00AA78FD /* MdlFirstInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlFirstInput.swift; sourceTree = "<group>"; };
 		26B491DB247E2F4E00B58AD4 /* ApiManager+Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Profile.swift"; sourceTree = "<group>"; };
 		26B491DD247E394900B58AD4 /* ApiManager+Jobs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Jobs.swift"; sourceTree = "<group>"; };
 		26B491DF247E3CB100B58AD4 /* ApiManager+Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Entry.swift"; sourceTree = "<group>"; };
@@ -905,6 +909,7 @@
 				26F2A82C246D31020037D47F /* PreviewBaseVC.swift */,
 				06E519CB24581634004E4B7A /* ProfilePreviewVC.swift */,
 				06E519C6245815B0004E4B7A /* CareerPreviewVC.swift */,
+				26AF3238248F68BD00AA78FD /* FirstInputPreviewVC.swift */,
 				06E519CD2458163F004E4B7A /* ResumePreviewVC.swift */,
 				268BFF57246E8D25004B2640 /* SmoothCareerPreviewVC.swift */,
 				06E519CF2458164B004E4B7A /* ScoutPreview.swift */,
@@ -1001,6 +1006,7 @@
 			isa = PBXGroup;
 			children = (
 				260BBFDB2465171D003D163A /* MdlProfile.swift */,
+				26AF323A248F698E00AA78FD /* MdlFirstInput.swift */,
 				26F2A818246D0CE90037D47F /* MdlReqEntry.swift */,
 				26F2A81A246D10C30037D47F /* MdlResume.swift */,
 				26F2A824246D23660037D47F /* MdlResumeSchool.swift */,
@@ -1415,6 +1421,7 @@
 				06E5197D2457BFBE004E4B7A /* BaseNaviController.swift in Sources */,
 				26133A54246B7A00001802BB /* EditableBasicVC.swift in Sources */,
 				269AFFCB246A929300DB364B /* SubSelectSpecialVC.swift in Sources */,
+				26AF323B248F698E00AA78FD /* MdlFirstInput.swift in Sources */,
 				26F2A82D246D31020037D47F /* PreviewBaseVC.swift in Sources */,
 				0E6951AF248A05EA00D58E6E /* ChemistryQuestionMasterData.swift in Sources */,
 				0662C60324722E280053CAD9 /* JobDetailFoldingOptionalView.swift in Sources */,
@@ -1491,6 +1498,7 @@
 				06BE18FB2484A55000FAE476 /* MyPageNameCell.swift in Sources */,
 				0E6951B1248A11A000D58E6E /* ChemistryAnswerType.swift in Sources */,
 				26B491E0247E3CB100B58AD4 /* ApiManager+Entry.swift in Sources */,
+				26AF3239248F68BD00AA78FD /* FirstInputPreviewVC.swift in Sources */,
 				06E519932457D750004E4B7A /* OwnPRVC.swift in Sources */,
 				26989F80246A5E520050AC40 /* HEditDrumTBCell.swift in Sources */,
 				067F28DF2456D013000AAD69 /* TmpNaviTopVC.swift in Sources */,
