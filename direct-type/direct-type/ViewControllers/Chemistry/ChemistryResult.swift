@@ -11,8 +11,6 @@ import UIKit
 final class ChemistryResult: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     private var questionScores = [ChemistryScore]()
-    private let secondPlaceCellIndex = 1
-    private let thirdPlaceCellIndex = 2
     private let tableViewEstimateCellHeight: CGFloat = 330
     private var resultCellCount: Int {
         let topThree = ChemistryScoreCalculation(questionScores: questionScores).topThree
@@ -21,6 +19,13 @@ final class ChemistryResult: UIViewController {
         cellCount += topThree.second == nil ? 0 : 1
         cellCount += topThree.third == nil ? 0 : 1
         return cellCount
+    }
+    
+    private enum IndicateCellType: Int {
+        case firstPlaceResult
+        case secondPlaceResult
+        case thirdPlaceResult
+        case businessAbility
     }
     
     override func viewDidLoad() {
@@ -73,12 +78,15 @@ extension ChemistryResult: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.loadCell(cellName: "ChemistryResultPersonalTypeCell", indexPath: indexPath) as! ChemistryResultPersonalTypeCell
         let topThree = ChemistryScoreCalculation(questionScores: questionScores).topThree
-        switch indexPath.row {
-        case secondPlaceCellIndex:
+        let indicateCellType = IndicateCellType(rawValue: indexPath.row)!
+        switch indicateCellType {
+        case .firstPlaceResult:
+            cell.configure(with: topThree.first)
+        case .secondPlaceResult:
             cell.configure(with: topThree.second)
-        case thirdPlaceCellIndex:
+        case .thirdPlaceResult:
             cell.configure(with: topThree.third)
-        default:
+        case .businessAbility:
             cell.configure(with: topThree.first)
         }
         return cell
