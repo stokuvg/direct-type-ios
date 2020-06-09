@@ -173,7 +173,7 @@ extension ProfilePreviewVC {
     private func fetchUpdateProfile() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         let param = UpdateProfileRequestDTO(editableModel.editTempCD)
-//        let param = UpdateProfileRequestDTO(familyName: "", firstName: "", familyNameKana: "", firstNameKana: "", birthday: "", genderId: "", zipCode: "", prefectureId: "", city: "", town: "", email: "")
+//        let param = UpdateProfileRequestDTO(nickname: nil, hopeJobPlaceIds: nil, salaryId: nil, familyName: "", firstName: "", familyNameKana: "", firstNameKana: "", birthday: "", genderId: "", zipCode: "", prefectureId: "", city: "", town: "", email: "")//強制的にエラー発生させるため
         
         self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
         self.dicValidErrMsg.removeAll()//状態をクリアしておく

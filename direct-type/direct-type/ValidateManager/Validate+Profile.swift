@@ -56,6 +56,7 @@ extension ValidateManager {
                 print("❤️\t[\(valid.property)]\t[\(valid.constraintsKey)] : [\(valid.constraintsVal)]")
             }
         }
+//        dicGrpError = mageGrpErrByItemErr(dicError)//これだと配列の足し込み非対応なのでメッセージ減る
         return (dicGrpError, dicError)
     }
         
@@ -96,7 +97,7 @@ extension EditItemMdlProfile {
         case .address1:         return ValidInfo(required: false, keta: nil, max: 100, type: .undefine)
         case .address2:         return ValidInfo(required: false, keta: nil, max: 100, type: .undefine)
         case .mailAddress:      return ValidInfo(required: true, keta: nil, max: nil, type: .email)
-        case .mobilePhoneNo:    return ValidInfo(required: true, keta: nil, max: nil, type: .number)
+        case .mobilePhoneNo:    return ValidInfo(required: false, keta: nil, max: nil, type: .number)//編集不可
         }
     }
 }
