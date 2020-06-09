@@ -224,6 +224,7 @@
 		26AF3237248F538300AA78FD /* Validate+Resume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF3236248F538300AA78FD /* Validate+Resume.swift */; };
 		26AF3239248F68BD00AA78FD /* FirstInputPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF3238248F68BD00AA78FD /* FirstInputPreviewVC.swift */; };
 		26AF323B248F698E00AA78FD /* MdlFirstInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF323A248F698E00AA78FD /* MdlFirstInput.swift */; };
+		26AF323D248F7F6B00AA78FD /* Validate+FirstInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF323C248F7F6B00AA78FD /* Validate+FirstInput.swift */; };
 		26B491DC247E2F4E00B58AD4 /* ApiManager+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B491DB247E2F4E00B58AD4 /* ApiManager+Profile.swift */; };
 		26B491DE247E394900B58AD4 /* ApiManager+Jobs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B491DD247E394900B58AD4 /* ApiManager+Jobs.swift */; };
 		26B491E0247E3CB100B58AD4 /* ApiManager+Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B491DF247E3CB100B58AD4 /* ApiManager+Entry.swift */; };
@@ -492,6 +493,7 @@
 		26AF3236248F538300AA78FD /* Validate+Resume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validate+Resume.swift"; sourceTree = "<group>"; };
 		26AF3238248F68BD00AA78FD /* FirstInputPreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstInputPreviewVC.swift; sourceTree = "<group>"; };
 		26AF323A248F698E00AA78FD /* MdlFirstInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlFirstInput.swift; sourceTree = "<group>"; };
+		26AF323C248F7F6B00AA78FD /* Validate+FirstInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validate+FirstInput.swift"; sourceTree = "<group>"; };
 		26B491DB247E2F4E00B58AD4 /* ApiManager+Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Profile.swift"; sourceTree = "<group>"; };
 		26B491DD247E394900B58AD4 /* ApiManager+Jobs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Jobs.swift"; sourceTree = "<group>"; };
 		26B491DF247E3CB100B58AD4 /* ApiManager+Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Entry.swift"; sourceTree = "<group>"; };
@@ -1101,6 +1103,7 @@
 			children = (
 				26A1F57B247F5D3300834213 /* ValidateManager.swift */,
 				26A1F57D247FB28B00834213 /* Validate+Profile.swift */,
+				26AF323C248F7F6B00AA78FD /* Validate+FirstInput.swift */,
 				260DD26A248E179000BFB9FE /* Validate+Career.swift */,
 				26AF3236248F538300AA78FD /* Validate+Resume.swift */,
 			);
@@ -1531,6 +1534,7 @@
 				06E519A22457DC44004E4B7A /* InitialInputRegistVC.swift in Sources */,
 				269AFFC3246A929300DB364B /* SubSelectTBCell.swift in Sources */,
 				06E519AF245813E9004E4B7A /* LoginConfirmVC.swift in Sources */,
+				26AF323D248F7F6B00AA78FD /* Validate+FirstInput.swift in Sources */,
 				066EF6C8245BBA1100E15AD2 /* BaseJobCardCell.swift in Sources */,
 				26F2A82B246D2EE90037D47F /* EditableTableBasicVC.swift in Sources */,
 				06E519B7245814D4004E4B7A /* SubEditBaseVC.swift in Sources */,

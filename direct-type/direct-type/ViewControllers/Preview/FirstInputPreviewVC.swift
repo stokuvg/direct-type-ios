@@ -38,23 +38,49 @@ class FirstInputPreviewVC: PreviewBaseVC {
 
         //================================================================================
         //===(3a)就業状況
-        arrData.append(MdlItemH(.employmentH3, "", childItems: [
-            EditableItemH(type: .selectSingle, editItem: EditItemMdlResume.employmentStatus, val: _detail.employmentStatus),
+        //[A系統]初回入力
+        //=== [A-5/6] 入力（ニックネーム）
+        arrData.append(MdlItemH(.nicknameA6, "", childItems: [
+            EditableItemH(type: .inputText, editItem: EditItemMdlFirstInput.nickname, val: _detail.nickname),
         ]))
-        //===(3c)直近の経験職種
+        //=== [A-7] 入力（性別）
+        arrData.append(MdlItemH(.genderA7, "", childItems: [
+            EditableItemH(type: .selectSingle, editItem: EditItemMdlFirstInput.gender, val: _detail.gender),
+        ]))
+        //=== [A-8] 入力（生年月日）
+        arrData.append(MdlItemH(.birthdayA8, "", childItems: [
+            EditableItemH(type: .selectDrumYMD, editItem: EditItemMdlFirstInput.birthday, val: _detail.birthday.dispYmd()),
+        ]))
+        //=== [A-9] 入力（希望勤務地）
+        arrData.append(MdlItemH(.hopeAreaA9, "", childItems: [
+            EditableItemH(type: .selectMulti, editItem: EditItemMdlFirstInput.hopeArea, val: _detail.hopeArea.joined(separator: "_")),
+        ]))
+        //=== [A-10] 入力（最終学歴）
+        arrData.append(MdlItemH(.schoolA10, "", childItems: [
+            EditableItemH(type: .selectSingle, editItem: EditItemMdlFirstInput.school, val: _detail.school),
+        ]))
+        //=== [A-21] 入力（就業状況）
+        arrData.append(MdlItemH(.employmentStatusA21, "", childItems: [
+            EditableItemH(type: .selectSingle, editItem: EditItemMdlFirstInput.employmentStatus, val: _detail.employmentStatus),
+        ]))
+        //=== [A-11] 入力（直近経験職種）[A-12] 入力（直近の職種の経験年数）
         let _jobType: String = "\(_detail.lastJobExperiment.jobType)"
-        arrData.append(MdlItemH(.lastJobExperimentH3, "", childItems: [
-            EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlResumeLastJobExperiment.jobType, val: _jobType),
+        arrData.append(MdlItemH(.lastJobExperimentA11, "", childItems: [
+            EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlFirstInputLastJobExperiments.jobType, val: _jobType),
             //[jobTypeで合わせて設定するので、表示はすれども編集では不要]
-            EditableItemH(type: .selectDrum, editItem: EditItemMdlResumeLastJobExperiment.jobExperimentYear, val: _detail.lastJobExperiment.jobExperimentYear),
+            EditableItemH(type: .selectDrum, editItem: EditItemMdlFirstInputLastJobExperiments.jobExperimentYear, val: _detail.lastJobExperiment.jobExperimentYear),
         ]))
-        //===(3d)その他の経験職種
+        //=== [A-13] 入力（現在の年収）
+        arrData.append(MdlItemH(.salaryA13, "", childItems: [
+            EditableItemH(type: .selectSingle, editItem: EditItemMdlFirstInput.salary, val: _detail.salary),
+        ]))
+        //=== [A-14] 入力（追加経験職種）
         var _jobExperiments: [EditableItemH] = []
         for jobExperiment in _detail.jobExperiments {
-            _jobExperiments.append(EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlResumeJobExperiments.jobType, val: jobExperiment.jobType))
-            _jobExperiments.append(EditableItemH(type: .selectDrum, editItem: EditItemMdlResumeJobExperiments.jobExperimentYear, val: jobExperiment.jobExperimentYear))
+            _jobExperiments.append(EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlFirstInputJobExperiments.jobType, val: jobExperiment.jobType))
+            _jobExperiments.append(EditableItemH(type: .selectDrum, editItem: EditItemMdlFirstInputJobExperiments.jobExperimentYear, val: jobExperiment.jobExperimentYear))
         }
-        arrData.append(MdlItemH(.jobExperimentsH3, "", childItems: _jobExperiments))
+        arrData.append(MdlItemH(.jobExperimentsA14, "", childItems: _jobExperiments))
 
         
         print(arrData.description)

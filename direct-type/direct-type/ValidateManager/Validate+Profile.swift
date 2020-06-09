@@ -16,28 +16,17 @@ extension ValidateManager {
         var dicError: [EditableItemKey: [String]] = [:]
         for valid in arrValidErrMsg {
             switch valid.property { //これで対応する項目に結びつける
-            case "familyName":
-                dicError.addDicArrVal(key: EditItemMdlProfile.familyName.itemKey, val: valid.constraintsVal)
-            case "firstName":
-                dicError.addDicArrVal(key: EditItemMdlProfile.firstName.itemKey, val: valid.constraintsVal)
-            case "familyNameKana":
-                dicError.addDicArrVal(key: EditItemMdlProfile.familyNameKana.itemKey, val: valid.constraintsVal)
-            case "firstNameKana":
-                dicError.addDicArrVal(key: EditItemMdlProfile.firstNameKana.itemKey, val: valid.constraintsVal)
-            case "birthday":
-                dicError.addDicArrVal(key: EditItemMdlProfile.birthday.itemKey, val: valid.constraintsVal)
-            case "genderId":
-                dicError.addDicArrVal(key: EditItemMdlProfile.gender.itemKey, val: valid.constraintsVal)
-            case "zipCode":
-                dicError.addDicArrVal(key: EditItemMdlProfile.zipCode.itemKey, val: valid.constraintsVal)
-            case "prefectureId":
-                dicError.addDicArrVal(key: EditItemMdlProfile.prefecture.itemKey, val: valid.constraintsVal)
-            case "city":
-                dicError.addDicArrVal(key: EditItemMdlProfile.address1.itemKey, val: valid.constraintsVal)
-            case "town":
-                dicError.addDicArrVal(key: EditItemMdlProfile.address2.itemKey, val: valid.constraintsVal)
-            case "email":
-                dicError.addDicArrVal(key: EditItemMdlProfile.mailAddress.itemKey, val: valid.constraintsVal)
+            case "familyName":      dicError.addDicArrVal(key: EditItemMdlProfile.familyName.itemKey, val: valid.constraintsVal)
+            case "firstName":       dicError.addDicArrVal(key: EditItemMdlProfile.firstName.itemKey, val: valid.constraintsVal)
+            case "familyNameKana":  dicError.addDicArrVal(key: EditItemMdlProfile.familyNameKana.itemKey, val: valid.constraintsVal)
+            case "firstNameKana":   dicError.addDicArrVal(key: EditItemMdlProfile.firstNameKana.itemKey, val: valid.constraintsVal)
+            case "birthday":        dicError.addDicArrVal(key: EditItemMdlProfile.birthday.itemKey, val: valid.constraintsVal)
+            case "genderId":        dicError.addDicArrVal(key: EditItemMdlProfile.gender.itemKey, val: valid.constraintsVal)
+            case "zipCode":         dicError.addDicArrVal(key: EditItemMdlProfile.zipCode.itemKey, val: valid.constraintsVal)
+            case "prefectureId":    dicError.addDicArrVal(key: EditItemMdlProfile.prefecture.itemKey, val: valid.constraintsVal)
+            case "city":            dicError.addDicArrVal(key: EditItemMdlProfile.address1.itemKey, val: valid.constraintsVal)
+            case "town":            dicError.addDicArrVal(key: EditItemMdlProfile.address2.itemKey, val: valid.constraintsVal)
+            case "email":           dicError.addDicArrVal(key: EditItemMdlProfile.mailAddress.itemKey, val: valid.constraintsVal)
             default:
                 print("❤️\t[\(valid.property)]\t[\(valid.constraintsKey)] : [\(valid.constraintsVal)]")
             }
@@ -50,6 +39,7 @@ extension ValidateManager {
         var dicGrpError: [MdlItemHTypeKey: [String]] = [:]
         for (key, val) in dicError {
             switch key {
+            //===プロフィール
             case EditItemMdlProfile.familyName.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.fullnameH2.itemKey, val: val)
             case EditItemMdlProfile.firstName.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.fullnameH2.itemKey, val: val)
             case EditItemMdlProfile.familyNameKana.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.fullnameH2.itemKey, val: val)
@@ -62,6 +52,20 @@ extension ValidateManager {
             case EditItemMdlProfile.address2.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.adderssH2.itemKey, val: val)
             case EditItemMdlProfile.mailAddress.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.emailH2.itemKey, val: val)
             case EditItemMdlProfile.mobilePhoneNo.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.mobilephoneH2.itemKey, val: val)
+            //===[A系統]初期入力
+            case EditItemMdlFirstInput.nickname.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.nicknameA6.itemKey, val: val)
+            case EditItemMdlFirstInput.gender.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.genderA7.itemKey, val: val)
+            case EditItemMdlFirstInput.birthday.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.birthdayA8.itemKey, val: val)
+            case EditItemMdlFirstInput.hopeArea.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.hopeAreaA9.itemKey, val: val)
+            case EditItemMdlFirstInput.school.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.schoolA10.itemKey, val: val)
+            case EditItemMdlFirstInput.employmentStatus.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.employmentStatusA21.itemKey, val: val)
+            case EditItemMdlFirstInput.lastJobExperiment.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.lastJobExperimentA11.itemKey, val: val)
+            case EditItemMdlFirstInputLastJobExperiments.jobType.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.jobExperimentsA14.itemKey, val: val)
+            case EditItemMdlFirstInputLastJobExperiments.jobExperimentYear.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.jobExperimentsA14.itemKey, val: val)
+            case EditItemMdlFirstInput.salary.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.salaryA13.itemKey, val: val)
+            case EditItemMdlFirstInput.jobExperiments.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.jobExperimentsA14.itemKey, val: val)
+            case EditItemMdlFirstInputJobExperiments.jobType.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.jobExperimentsA14.itemKey, val: val)
+            case EditItemMdlFirstInputJobExperiments.jobExperimentYear.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.jobExperimentsA14.itemKey, val: val)
             default:
                 print("\t☠️割り当てエラー☠️[\(key): \(val)]☠️")
             }

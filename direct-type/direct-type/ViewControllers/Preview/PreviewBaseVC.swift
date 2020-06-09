@@ -74,7 +74,7 @@ class PreviewBaseVC: TmpBasicVC {
         super.viewWillDisappear(animated)
     }
     func chkButtonEnable() {
-        btnCommit.isEnabled = true ; return //!!!
+//        btnCommit.isEnabled = true ; return //!!!
         //=== 変更なければフェッチ不要
         if editableModel.editTempCD.count > 0 {
             btnCommit.isEnabled = true
@@ -121,7 +121,7 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
             }
         }
         switch item.type {
-        case .lastJobExperimentH3, .jobExperimentsH3, .businessTypesH3:
+        case .lastJobExperimentH3, .jobExperimentsH3, .businessTypesH3, .lastJobExperimentA11, .jobExperimentsA14:
             let storyboard = UIStoryboard(name: "Edit", bundle: nil)
             if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubEditSpecialVC") as? SubEditSpecialVC{
                 var arrErrMsg: [EditableItemKey: [ValidationErrMsg]] = [:] //子画面に引き渡すエラー
