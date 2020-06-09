@@ -126,6 +126,7 @@ class HomeVC: TmpNaviTopVC {
     
     private func dataCheckAction() {
         Log.selectLog(logLevel: .debug, "HomeVC dataCheckAction start")
+        
         if (masterJobCards.jobCards.count) > 0 {
 //        if masterTableData.count > 0 {
             homeTableView.isHidden = false
@@ -141,6 +142,9 @@ class HomeVC: TmpNaviTopVC {
             let cardNoView = UINib(nibName: "NoCardView", bundle: nil)
                 .instantiate(withOwner: nil, options: nil)
                 .first as! NoCardView
+            var cardFrame = cardNoView.frame
+            cardFrame = noCardBackView.frame
+            cardNoView.frame = cardFrame
             cardNoView.delegate = self
             noCardBackView.addSubview(cardNoView)
             
@@ -150,6 +154,8 @@ class HomeVC: TmpNaviTopVC {
     
     private func getJobList() {
         SVProgressHUD.show()
+        masterJobCards = MdlJobCardList()
+        dispJobCards = MdlJobCardList()
         ApiManager.getJobs(Void(), isRetry: true)
             .done { result in
                 debugLog("ApiManager getJobs result:\(result.debugDisp)")
@@ -469,6 +475,8 @@ extension HomeVC: JobOfferCardMoreCellDelegate {
 
 extension HomeVC: NoCardViewDelegate {
     func registEditAction() {
+        // マイページへ移動
+        self.tabBarController?.selectedIndex = 3
     }
 }
 

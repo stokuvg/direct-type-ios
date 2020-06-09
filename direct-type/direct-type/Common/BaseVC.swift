@@ -20,7 +20,7 @@ enum NaviType {
 
 class BaseVC: UIViewController {
     
-    var moreDataCount:Int = 5 // もっと見る 件数
+    var moreDataCount:Int = 20 // もっと見る 件数
     
     private var statusBarStyle: UIStatusBarStyle = .default
 
