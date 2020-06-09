@@ -40,12 +40,6 @@ private extension ChemistryResult {
         tableView.registerNib(nibName: "ChemistryResultPersonalTypeCell", idName: "ChemistryResultPersonalTypeCell")
         tableView.estimatedRowHeight = tableViewEstimateCellHeight
         tableView.rowHeight = UITableView.automaticDimension
-        
-        let ranking = ChemistryScoreCalculation(questionScores: questionScores).ranking
-        ranking.forEach({ rank in
-            print("👀Ranking: \(rank.rank)位、 スコア: \(rank.score), タイプ: \(rank.personalType.rawValue)")
-            
-        })
     }
 }
 
@@ -62,12 +56,12 @@ extension ChemistryResult: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footer = ChemistrySelectFooterView()
+        let footer = ChemistryResultFooterView()
         return footer
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return ChemistrySelectFooterView.height
+        return ChemistryResultFooterView.height
     }
 }
 

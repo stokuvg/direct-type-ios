@@ -169,6 +169,8 @@
 		0E9B8B3324877BA60049CFCC /* ChemistryQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9B8B3224877BA60049CFCC /* ChemistryQuestion.swift */; };
 		0EAE764F248E2FFD009A8F4B /* ChemistryResultPersonalTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EAE764E248E2FFD009A8F4B /* ChemistryResultPersonalTypeCell.xib */; };
 		0EAE7651248E300E009A8F4B /* ChemistryResultPersonalTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAE7650248E300E009A8F4B /* ChemistryResultPersonalTypeCell.swift */; };
+		0EAE7653248F1F75009A8F4B /* ChemistryResultFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAE7652248F1F75009A8F4B /* ChemistryResultFooterView.swift */; };
+		0EAE7655248F1F90009A8F4B /* ChemistryResultFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EAE7654248F1F90009A8F4B /* ChemistryResultFooterView.xib */; };
 		0EE36F172486256F0098A2AF /* ChemistryStart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EE36F162486256F0098A2AF /* ChemistryStart.storyboard */; };
 		0EE36F1B24872E280098A2AF /* IconCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE36F1A24872E280098A2AF /* IconCarouselView.swift */; };
 		0EE36F1E248737AB0098A2AF /* CarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE36F1D248737AB0098A2AF /* CarouselCell.swift */; };
@@ -438,6 +440,8 @@
 		0E9B8B3224877BA60049CFCC /* ChemistryQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryQuestion.swift; sourceTree = "<group>"; };
 		0EAE764E248E2FFD009A8F4B /* ChemistryResultPersonalTypeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChemistryResultPersonalTypeCell.xib; sourceTree = "<group>"; };
 		0EAE7650248E300E009A8F4B /* ChemistryResultPersonalTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryResultPersonalTypeCell.swift; sourceTree = "<group>"; };
+		0EAE7652248F1F75009A8F4B /* ChemistryResultFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryResultFooterView.swift; sourceTree = "<group>"; };
+		0EAE7654248F1F90009A8F4B /* ChemistryResultFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChemistryResultFooterView.xib; sourceTree = "<group>"; };
 		0EE36F162486256F0098A2AF /* ChemistryStart.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChemistryStart.storyboard; sourceTree = "<group>"; };
 		0EE36F1A24872E280098A2AF /* IconCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconCarouselView.swift; sourceTree = "<group>"; };
 		0EE36F1D248737AB0098A2AF /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
@@ -952,6 +956,8 @@
 			children = (
 				0E6951B4248A1FC600D58E6E /* ChemistrySelectFooterView.swift */,
 				0E6951B6248A204C00D58E6E /* ChemistrySelectFooterView.xib */,
+				0EAE7652248F1F75009A8F4B /* ChemistryResultFooterView.swift */,
+				0EAE7654248F1F90009A8F4B /* ChemistryResultFooterView.xib */,
 			);
 			path = FooterView;
 			sourceTree = "<group>";
@@ -1300,6 +1306,7 @@
 				26BF48E424639D2B00E00215 /* MstL2_prCode.tsv in Resources */,
 				26BF48E124639D2B00E00215 /* MstL_skillYear.tsv in Resources */,
 				26147F37247267F9009B30B5 /* MstF22_pcSkillExcel.tsv in Resources */,
+				0EAE7655248F1F90009A8F4B /* ChemistryResultFooterView.xib in Resources */,
 				26BF48E024639D2B00E00215 /* MstK3_changeCount.tsv in Resources */,
 				066763762457B09F00AC5039 /* HomeVC.storyboard in Resources */,
 				26989F7F246A5E520050AC40 /* HEditDrumTBCell.xib in Resources */,
@@ -1583,6 +1590,7 @@
 				066F271C246E81B60040BDC1 /* JobDetailFoldingOutlineCell.swift in Sources */,
 				067F28E52456D05F000AAD69 /* TmpWebVC.swift in Sources */,
 				06E519832457CF90004E4B7A /* JobOfferBigCardCell.swift in Sources */,
+				0EAE7653248F1F75009A8F4B /* ChemistryResultFooterView.swift in Sources */,
 				06AA8C602484B46B001733FA /* MyPageProfileCompletionCell.swift in Sources */,
 				26CFC4662469496D00E458E2 /* HEditZipcodeTBCell.swift in Sources */,
 				06E5198D2457D6FF004E4B7A /* ChemistryStart.swift in Sources */,
