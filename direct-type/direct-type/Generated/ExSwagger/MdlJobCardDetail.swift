@@ -8,6 +8,7 @@
 
 import UIKit
 import SwaggerClient
+import TudApi
 
 class MdlJobCardDetail: Codable {
 
@@ -26,7 +27,9 @@ class MdlJobCardDetail: Codable {
     var workPlaceCodes: [Int]
     /** ９．社名＊外部表示用職種名＊ */
     var companyName: String
-    var displayPeriod: JobCardDetailDisplayPeriod
+    // 日付
+    var start_date: String
+    var end_date: String
     /** １１．求人メイン画像＊メイン記事写真＊ */
     var mainPicture: String
     /** サブ画像 **/
@@ -64,6 +67,7 @@ class MdlJobCardDetail: Codable {
     var applicationExample: String
     /** ２４．この仕事の向き・不向き（任意） */
     var suitableUnsuitable: String
+    var notSuitableUnsuitable: String
     /** ２５．雇用形態コード（必須） */
     var employmentType: Int
     /** ２6．給与（必須）＊「想定給与」＊ */
@@ -87,19 +91,19 @@ class MdlJobCardDetail: Codable {
     /** ３４．産休・育休取得状況（任意） */
     var childcare: String
     
-    var interviewMemo: JobCardDetailInterviewMemo
+    var interviewMemo: String
     var selectionProcess: JobCardDetailSelectionProcess
     var contactInfo: JobCardDetailContactInfo
     var companyDescription: JobCardDetailCompanyDescription
     var userFilter: UserFilterInfo
 
     init(jobCardCode: String = "", jobName: String = "", salaryMinId:Int = 0, salaryMaxId:Int = 0,isSalaryDisplay:Bool = true, salaryOffer: String = "", workPlaceCodes: [Int] = [], companyName: String = "",
-         displayPeriod: JobCardDetailDisplayPeriod = JobCardDetailDisplayPeriod.init(startAt: "", endAt: ""), mainPicture: String = "", subPictures: [String] = [], mainTitle: String = "", mainContents: String = "",
+         start_date:String = "", end_date:String = "", mainPicture: String = "", subPictures: [String] = [], mainTitle: String = "", mainContents: String = "",
          prCodes: [Int] = [], salarySample: String = "", recruitmentReason: String = "", jobDescription: String = "", jobExample: String = "", product: String = "", scope: String = "",
          spotTitle1: String = "", spotDetail1: String = "", spotTitle2: String = "", spotDetail2: String = "", qualification: String = "", betterSkill: String = "", applicationExample: String = "",
-         suitableUnsuitable: String = "", employmentType: Int = 0, salary: String = "", bonusAbout: String = "", jobtime: String = "", overtimeCode: Int = 0, overtimeAbout: String = "", workPlace: String = "",
+         suitableUnsuitable: String = "", notSuitableUnsuitable:String = "", employmentType: Int = 0, salary: String = "", bonusAbout: String = "", jobtime: String = "", overtimeCode: Int = 0, overtimeAbout: String = "", workPlace: String = "",
          transport: String = "", holiday: String = "", welfare: String = "", childcare: String = "",
-         interviewMemo: JobCardDetailInterviewMemo = JobCardDetailInterviewMemo.init(interviewContent: "", interviewPhoto1: "", interviewPhoto2: "", interviewPhoto3: ""),
+         interviewMemo: String = "",
          selectionProcess: JobCardDetailSelectionProcess = JobCardDetailSelectionProcess.init(selectionProcess1: "", selectionProcess2: "", selectionProcess3: "", selectionProcess4: "", selectionProcess5: "", selectionProcessDetail: ""),
          contactInfo: JobCardDetailContactInfo = JobCardDetailContactInfo.init(companyUrl: "", contactZipcode: "", contactAddress: "", contactPhone: "", contactPerson: "", contactMail: ""),
          companyDescription: JobCardDetailCompanyDescription = JobCardDetailCompanyDescription.init(enterpriseContents: "", mainCustomer: "", mediaCoverage: "", established: "", employeesCount: JobCardDetailCompanyDescriptionEmployeesCount.init(count: "", averageAge: "", genderRatio: "", middleEnter: ""), capital: "", turnover: "", presidentData: JobCardDetailCompanyDescriptionPresidentData.init(presidentName: "", presidentHistory: "")),
@@ -113,7 +117,9 @@ class MdlJobCardDetail: Codable {
         self.salaryOffer = salaryOffer
         self.workPlaceCodes = workPlaceCodes
         self.companyName = companyName
-        self.displayPeriod = displayPeriod
+//        self.displayPeriod = displayPeriod
+        self.start_date = start_date
+        self.end_date = end_date
         self.mainPicture = mainPicture
         self.subPictures = subPictures
         self.mainTitle = mainTitle
@@ -133,6 +139,7 @@ class MdlJobCardDetail: Codable {
         self.betterSkill = betterSkill
         self.applicationExample = applicationExample
         self.suitableUnsuitable = suitableUnsuitable
+        self.notSuitableUnsuitable = notSuitableUnsuitable
         self.employmentType = employmentType
         self.salary = salary
         self.bonusAbout = bonusAbout
@@ -152,27 +159,199 @@ class MdlJobCardDetail: Codable {
     }
     
     //ApiモデルをAppモデルに変換して保持させる
-    convenience init(dto: JobCardDetail) {
+    convenience init(dto: JobDetailDTO) {
+        /*
+         /** 求人ID */
+         public var jobId: String
+         /** 外部表示用職種名 */
+         public var jobName: String
+         /** 年収マスタ値 */
+         public var minSalaryId: String
+         /** 年収マスタ値 */
+         public var maxSalaryId: String
+         /** true: 年収公開, false: 年収非公開 */
+         public var isSalaryDisplay: Bool
+         /** スカウトによる提示年収＊初回は未使用＊ */
+         public var salaryOffer: String
+         /** ．勤務地 */
+         public var place2Ids: [String]
+         /** 企業名 */
+         public var companyName: String
+         /** 掲載開始日（ISO8601[YYYY-MM-DD]） */
+         public var pressStartDate: String
+         /** 掲載終了日（ISO8601[YYYY-MM-DD]） */
+         public var pressEndDate: String
+         /** メイン記事メインタイトル */
+         public var mainTitle: String
+         /** メイン記事本文 */
+         public var mainBody: String
+         /** ．勤務地 */
+         public var jobPrIds: [String]
+         /** 給与例 */
+         public var salaryExample: String
+         /** 募集背景 */
+         public var background: String
+         /** 仕事内容 */
+         public var jobContents: String
+         /** 案件例 */
+         public var projectsDealing: String
+         /** 手がける商品・サービス */
+         public var commodity: String
+         /** 開発環境・業務範囲 */
+         public var scopeJob: String
+         /** 注目ポイント見出し１ */
+         public var attentionPointCaption1: String
+         /** 注目ポイント本文１ */
+         public var attentionPointBody1: String
+         /** 注目ポイント見出し２ */
+         public var attentionPointCaption2: String
+         /** 注目ポイント本文２ */
+         public var attentionPointBody2: String
+         /** 応募資格 */
+         public var applicationSkill: String
+         /** 歓迎する経験・スキル */
+         public var desirableCapability: String
+         /** 過去の採用例 */
+         public var adoptionExample: String
+         /** この仕事の向き */
+         public var suitableForThisJob: String
+         /** この仕事の不向き */
+         public var notSuitableForThisJob: String
+         /** 雇用形態コード */
+         public var employmentId: String
+         /** 給与 */
+         public var salary: String
+         /** 賞与について */
+         public var bonus: String
+         /** 勤務時間 */
+         public var officeHours: String
+         /** 目安残業時間コード */
+         public var indicationOvertimeId: String
+         /** 残業について */
+         public var overtime: String
+         /** 勤務地 */
+         public var jobPlace: String
+         /** 交通・詳細 */
+         public var transportation: String
+         /** 休日休暇 */
+         public var vacation: String
+         /** 待遇・福利厚生 */
+         public var jobCondition: String
+         /** 産休・育休取得状況 */
+         public var maternityChildcare: String
+         /** 取材メモ */
+         public var interviewBody: String
+         /** 選考プロセス１ */
+         public var selectionProcessStep1: String
+         /** 選考プロセス２ */
+         public var selectionProcessStep2: String
+         /** 選考プロセス３ */
+         public var selectionProcessStep3: String
+         /** 選考プロセス４ */
+         public var selectionProcessStep4: String
+         /** 選考プロセス５ */
+         public var selectionProcessStep5: String
+         /** 選考プロセス詳細 */
+         public var selectionProcess: String
+         public var contact: Contact
+         /** 事業内容 */
+         public var enterpriseContents: String
+         /** 主要取引先 */
+         public var mainCustomer: String
+         /** 事業・サービスのメディア掲載実績 */
+         public var mediaCoverageResult: String
+         /** 設立 */
+         public var established: String
+         public var employees: Employees
+         /** 資本金 */
+         public var capital: String
+         /** 売上高 */
+         public var turnover: String
+         /** 代表者 */
+         public var presidentName: String
+         /** 代表者略歴 */
+         public var presidentHistory: String
+         /** true: キープしている, false: キープしていない */
+         public var isKeep: Bool
+         */
         
-        let _jobDescription = dto.jobDescription!
-        let _jobExample = dto.jobExample!
-        let _product = dto.product
+        let _jobDescription = dto.jobContents
+        let _jobExample = dto.projectsDealing
+        let _product = dto.commodity
         
-        let _spotTitle1 = dto.spotTitle1
-        let _spotTitle2 = dto.spotTitle2
-        let _spotDetail1 = dto.spotDetail1
-        let _spotDetail2 = dto.spotDetail2
+        let _spotTitle1 = dto.attentionPointCaption1
+        let _spotTitle2 = dto.attentionPointCaption2
+        let _spotDetail1 = dto.attentionPointBody1
+        let _spotDetail2 = dto.attentionPointBody2
         
-        let _scope = dto.scope
+        let _scope = dto.scopeJob
         
-        let _bonusAbout = dto.bonusAbout
-        let _childcare = dto.childcare
-        let _interviewMemo = dto.interviewMemo
+        let _bonusAbout = dto.bonus
+        let _childcare = dto.maternityChildcare
+        let _interviewMemo = dto.interviewBody
         
-        let _suitableUnsuitable = dto.suitableUnsuitable
-        let _companyDescription = dto.companyDescription
+        let _suitableUnsuitable = dto.suitableForThisJob
+        let _notSuitableUnsuitable = dto.notSuitableForThisJob
         
-        self.init(jobCardCode: dto.jobCardCode, jobName: dto.jobName, salaryMinId: dto.salaryMinId, salaryMaxId: dto.salaryMaxId, isSalaryDisplay: dto.isSalaryDisplay!, salaryOffer: dto.salaryOffer,                  workPlaceCodes: dto.workPlaceCodes, companyName: dto.companyName, displayPeriod: dto.displayPeriod, mainPicture: dto.mainPicture, subPictures: dto.subPictures,                  mainTitle: dto.mainTitle, mainContents: dto.mainContents, prCodes: dto.prCodes, salarySample: dto.salarySample, recruitmentReason: dto.recruitmentReason, jobDescription: _jobDescription, jobExample: _jobExample, product: _product,                  scope: _scope, spotTitle1: _spotTitle1, spotDetail1: _spotDetail1, spotTitle2: _spotTitle2, spotDetail2: _spotDetail2,                  qualification: dto.qualification, betterSkill: dto.betterSkill, applicationExample: dto.applicationExample, suitableUnsuitable: _suitableUnsuitable,                  employmentType: dto.employmentType, salary: dto.salary, bonusAbout: _bonusAbout, jobtime: dto.jobtime, overtimeCode: dto.overtimeCode,                  overtimeAbout: dto.overtimeAbout, workPlace: dto.workPlace, transport: dto.transport, holiday: dto.holiday, welfare: dto.welfare,                  childcare: _childcare, interviewMemo: _interviewMemo, selectionProcess: dto.selectionProcess, contactInfo: dto.contactInfo,                  companyDescription: _companyDescription!, userFilter: dto.userFilter)
+//        let _companyDescription = dto.companyDescription
+        
+        let _emplyees = JobCardDetailCompanyDescriptionEmployeesCount.init(count: dto.employees.employeesAll, averageAge: dto.employees.averageAge, genderRatio: dto.employees.genderRatio, middleEnter: dto.employees.middleEnter)
+        let _presidentData = JobCardDetailCompanyDescriptionPresidentData.init(presidentName: dto.presidentName, presidentHistory: dto.presidentHistory)
+        
+        let _companyDescription = JobCardDetailCompanyDescription.init(
+            enterpriseContents: dto.enterpriseContents,
+            mainCustomer: dto.mainCustomer,
+            mediaCoverage: dto.mediaCoverageResult,
+            established: dto.established,
+            employeesCount: _emplyees,
+            capital: dto.capital,
+            turnover: dto.turnover,
+            presidentData: _presidentData)
+        
+        var _place2Ids:[Int] = []
+        for i in 0..<dto.place2Ids.count {
+            let place2Id = Int(dto.place2Ids[i])
+            _place2Ids.append(place2Id!)
+        }
+        
+        var _prIds:[Int] = []
+        for i in 0..<dto.jobPrIds.count {
+            let prId = Int(dto.jobPrIds[i])
+            _prIds.append(prId!)
+        }
+        
+        let _mainPicture = ""
+        let _subPictures:[String] = []
+        
+        let _employmentId = Int(dto.employmentId)
+        let _overtimeCode = Int(dto.indicationOvertimeId)
+        
+        let _selectionProcess = JobCardDetailSelectionProcess.init(selectionProcess1: dto.selectionProcessStep1, selectionProcess2: dto.selectionProcessStep2, selectionProcess3: dto.selectionProcessStep3, selectionProcess4: dto.selectionProcessStep4, selectionProcess5: dto.selectionProcessStep5, selectionProcessDetail: dto.selectionProcess)
+        
+        let _contactInfo = JobCardDetailContactInfo.init(companyUrl: dto.contact.homepageUrl, contactZipcode: dto.contact.zip, contactAddress: dto.contact.address, contactPhone: dto.contact.tel, contactPerson: dto.contact.person, contactMail: dto.contact.email)
+        
+        let _userFileter = UserFilterInfo.init(tudKeepStatus: dto.isKeep, tudSkipStatus: false)
+        
+        self.init(
+            jobCardCode: dto.jobId,
+            jobName: dto.jobName,
+            salaryMinId: Int(dto.minSalaryId)!, salaryMaxId: Int(dto.maxSalaryId)!, isSalaryDisplay: dto.isSalaryDisplay,
+            salaryOffer: dto.salaryOffer,
+            workPlaceCodes: _place2Ids,
+            companyName: dto.companyName,
+            start_date: dto.pressStartDate, end_date: dto.pressEndDate,
+            mainPicture: _mainPicture, subPictures: _subPictures,
+            mainTitle: dto.mainTitle, mainContents: dto.mainBody,
+            prCodes: _prIds, salarySample: dto.salaryExample,
+            recruitmentReason: dto.background, jobDescription: _jobDescription,
+            jobExample: _jobExample, product: _product, scope: _scope, spotTitle1: _spotTitle1, spotDetail1: _spotDetail1, spotTitle2: _spotTitle2, spotDetail2: _spotDetail2,
+            qualification: dto.applicationSkill, betterSkill: dto.desirableCapability, applicationExample: dto.adoptionExample,
+            suitableUnsuitable: _suitableUnsuitable, notSuitableUnsuitable: _notSuitableUnsuitable,
+            employmentType: _employmentId!, salary: dto.salary, bonusAbout: _bonusAbout, jobtime: dto.officeHours,
+            overtimeCode: _overtimeCode!, overtimeAbout: dto.overtime, workPlace: dto.jobPlace,
+            transport: dto.transportation, holiday: dto.vacation, welfare: dto.jobCondition,
+            childcare: _childcare, interviewMemo: _interviewMemo, selectionProcess: _selectionProcess,
+            contactInfo: _contactInfo, companyDescription: _companyDescription, userFilter: _userFileter)
     }
 
     var debugDisp: String {

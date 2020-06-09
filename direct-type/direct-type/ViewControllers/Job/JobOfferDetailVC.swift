@@ -14,8 +14,11 @@ class JobOfferDetailVC: TmpBasicVC {
     
     @IBOutlet weak var detailTableView:UITableView!
     
+    var jobId:String = ""
     var buttonsView:NaviButtonsView!
     
+    var _mdlJobDetail:MdlJobCardDetail!
+    /*
     var _mdlJobDetail:MdlJobCardDetail! = MdlJobCardDetail.init(
         jobCardCode: "1",
         jobName: "SE/RPAやAI,loT関連案件など",
@@ -70,6 +73,7 @@ class JobOfferDetailVC: TmpBasicVC {
             turnover: "14億円(2018年11月実績)",
             presidentData: JobCardDetailCompanyDescriptionPresidentData.init(presidentName: "代表取締役社長　峯岸 正積", presidentHistory: "1979年11月5日生まれ。2002年コニカミノルタ株式会社に入社。")),
         userFilter: UserFilterInfo.init(tudKeepStatus: false, tudSkipStatus: false))
+    */
     
     var articleOpenFlag:Bool = false
     var memoDispFlag:Bool = false
@@ -85,8 +89,6 @@ class JobOfferDetailVC: TmpBasicVC {
         self.setNaviButtons()
         
         self.detailTableView.backgroundColor = UIColor.init(colorType: .color_base)
-        
-        memoDispFlag = self.memoDispFlagCheck(memo: _mdlJobDetail.interviewMemo)
         
         /// section 0
         // 終了間近,スカウト
@@ -168,8 +170,9 @@ class JobOfferDetailVC: TmpBasicVC {
     }
     
     // 取材メモ表示フラグ
-    private func memoDispFlagCheck(memo: JobCardDetailInterviewMemo) -> Bool {
-        if memo.interviewContent.count > 0 {
+    private func memoDispFlagCheck(memo: String) -> Bool {
+        if memo.count > 0 {
+//        if memo.interviewContent.count > 0 {
             return true
         }
         return false
@@ -177,11 +180,15 @@ class JobOfferDetailVC: TmpBasicVC {
     
     private func getJobDetail() {
         SVProgressHUD.show()
-        ApiManager.getJobDetail(Void(), isRetry: true)
+        self._mdlJobDetail = MdlJobCardDetail()
+        Log.selectLog(logLevel: .debug, "jobId:\(jobId)")
+        ApiManager.getJobDetail(jobId)
+//        ApiManager.getJobDetail(Void(), isRetry: true)
             .done { result in
                 debugLog("ApiManager getJobDetail result:\(result.debugDisp)")
                 
                 self._mdlJobDetail = result
+                
         }
         .catch { (error) in
             Log.selectLog(logLevel: .debug, "error:\(error)")
@@ -203,7 +210,19 @@ class JobOfferDetailVC: TmpBasicVC {
         }
         .finally {
             SVProgressHUD.dismiss()
-//            self.dataCheckAction()
+
+            self.tableViewSettingAction()
+        }
+    }
+    
+    // データがセットされた後にtableViewの表示を開始
+    private func tableViewSettingAction() {
+        if _mdlJobDetail != nil {
+            memoDispFlag = self.memoDispFlagCheck(memo: _mdlJobDetail.interviewMemo)
+
+            self.detailTableView.delegate = self
+            self.detailTableView.dataSource = self
+            self.detailTableView.reloadData()
         }
     }
 }
@@ -416,6 +435,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                     
                     let memoData = _mdlJobDetail.interviewMemo
                     cell.setup(data: memoData)
+//                    cell.setup(data: memoData)
 //                    let foldingDatas = dummyData["folding"] as! [String: Any]
 //                    let foldingData = foldingDatas["memo"] as! [String: Any]
 //                    let memoText = foldingData["text"] as! String

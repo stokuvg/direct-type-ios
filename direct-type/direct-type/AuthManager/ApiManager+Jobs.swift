@@ -44,25 +44,27 @@ extension ApiManager {
 //================================================================
 //=== 仕事詳細取得 ===
 extension ApiManager {
-    class func getJobDetail(_ param: Void, isRetry: Bool = true) -> Promise<MdlJobCardDetail> {
+//    class func getJobDetail(_ param: Void, isRetry: Bool = true) -> Promise<MdlJobCardDetail> {
+    class func getJobDetail(_ jobId: String, isRetry: Bool = true) -> Promise<MdlJobCardDetail> {
         if isRetry {
             return firstly { () -> Promise<MdlJobCardDetail> in
-                retry(args: param, task: getJobDetailFetch) { (error) -> Bool in return true }
+//                retry(args: param, task: getJobDetailFetch) { (error) -> Bool in return true }
+                retry(args: jobId, task: getJobDetailFetch) { (error) -> Bool in return true }
             }
         } else {
-            return getJobDetailFetch(param: param)
+            return getJobDetailFetch(jobId: jobId)
+//            return getJobDetailFetch(param: param)
         }
     }
     
-    private class func getJobDetailFetch(param: Void) -> Promise<MdlJobCardDetail> {
+    private class func getJobDetailFetch(jobId: String) -> Promise<MdlJobCardDetail> {
+//    private class func getJobDetailFetch(param: Void) -> Promise<MdlJobCardDetail> {
         let (promise, resolver) = Promise<MdlJobCardDetail>.pending()
-        let mode: Int = 1 //（仮）
-        let page: Int = 1 //（仮）
         AuthManager.needAuth(true)
-        JobsAPI.jobsControllerGet(mode: mode, page: page)
+        JobsAPI.jobsControllerDetail(jobId: jobId)
+//        JobsAPI.jobsControllerGet(mode: mode, page: page)
             .done { result in
-                Log.selectLog(logLevel: .debug, "result:\(result)")
-                resolver.fulfill(MdlJobCardDetail())
+                resolver.fulfill(MdlJobCardDetail(dto: result))
         }.catch { (error) in
             resolver.reject(error)
         }.finally {

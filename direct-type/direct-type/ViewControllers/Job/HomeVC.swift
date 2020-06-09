@@ -365,8 +365,11 @@ extension HomeVC: UITableViewDelegate {
 //        if row == dispTableData.count {
             return
         }
+        let selectedJobData = dispJobCards.jobCards[row]
+        let jobId = selectedJobData.jobCardCode
         
         let vc = getVC(sbName: "JobOfferDetailVC", vcName: "JobOfferDetailVC") as! JobOfferDetailVC
+        vc.jobId = jobId
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

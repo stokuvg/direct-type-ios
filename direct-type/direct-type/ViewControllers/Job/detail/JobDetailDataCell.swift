@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TudApi
 
 class JobDetailDataCell: BaseTableViewCell {
     
@@ -58,10 +59,12 @@ class JobDetailDataCell: BaseTableViewCell {
         
         let nowDate = Date()
         // NEWマーク 表示チェック
-        let start_date_string = data.displayPeriod.startAt
+//        let start_date_string = data.displayPeriod.startAt
+        let start_date_string = data.start_date
         let startFlag = newMarkFlagCheck(startDateString: start_date_string, nowDate: nowDate)
         // 終了マーク 表示チェック
-        let end_date_string = data.displayPeriod.endAt
+//        let end_date_string = data.displayPeriod.endAt
+        let end_date_string = data.end_date
         let endFlag = endFlagHiddenCheck(endDateString:end_date_string, nowDate:nowDate)
                 
         var limitedType:LimitedType!
@@ -92,6 +95,8 @@ class JobDetailDataCell: BaseTableViewCell {
         let salaryDisplay = data.isSalaryDisplay
         if salaryDisplay {
             let minPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.salaryMinId)?.disp
+            Log.selectLog(logLevel: .debug, "minPriceLabel:\(String(describing: minPriceLabel))")
+            
 //            Log.selectLog(logLevel: .debug, "minPriceLabel:\(String(describing: minPriceLabel))")
             let minPrice = self.cutText(defaultText: minPriceLabel!,cutString: "万円")
             let maxPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.salaryMaxId)?.disp

@@ -73,8 +73,9 @@ class JobDetailImageCell: BaseTableViewCell {
         // 画像セット
         
         let mainImageUrlString:String = data.mainPicture
-        var subImageUrlStrings:[String] = []
-//        let subImageUrlStrings:[String] = data.subPictures
+//        var subImageUrlStrings:[String] = []
+        let subImageUrlStrings:[String] = data.subPictures
+        /*
         if data.interviewMemo.interviewPhoto1.count > 0 {
             subImageUrlStrings.append(data.interviewMemo.interviewPhoto1)
         }
@@ -84,6 +85,7 @@ class JobDetailImageCell: BaseTableViewCell {
         if data.interviewMemo.interviewPhoto3.count > 0 {
             subImageUrlStrings.append(data.interviewMemo.interviewPhoto3)
         }
+        */
         
         var imageUrlStrings:[String] = [mainImageUrlString]
         if subImageUrlStrings.count > 0 {

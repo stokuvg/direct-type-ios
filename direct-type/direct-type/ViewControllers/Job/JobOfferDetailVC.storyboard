@@ -21,10 +21,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" name="color-base"/>
                                 <color key="separatorColor" name="color-line"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="RrC-bJ-AAi" id="Jul-rR-Fq5"/>
-                                    <outlet property="delegate" destination="RrC-bJ-AAi" id="Hbm-28-ePB"/>
-                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
