@@ -28,13 +28,16 @@ class ProfilePreviewVC: PreviewBaseVC {
         if Constants.DbgSkipLocalValidate { return false }//[Dbg: ローカルValidationスキップ]
         ValidateManager.dbgDispCurrentItems(editableModel: editableModel) //[Dbg: 状態確認]
         let chkErr = ValidateManager.chkValidationErr(editableModel)
+        self.dicValidErrMsg = chkErr
+        self.dicGrpValidErrMsg = ValidateManager.mageGrpErrByItemErr(chkErr)
         if chkErr.count > 0 {
             print("＊＊＊　Validationエラー発生: \(chkErr.count)件　＊＊＊")
             var msg: String = ""
             for err in chkErr {
                 msg = "\(msg)\(err.value)\n"
+//                print("\t[\(err.key)] [\(err.value.joined(separator: "‘n\t"))]")
             }
-            self.showValidationError(title: "Validationエラー (\(chkErr.count)件)", message: msg)
+//            self.showValidationError(title: "Validationエラー (\(chkErr.count)件)", message: msg)
 //            /* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
             return true
         } else {
@@ -170,7 +173,7 @@ extension ProfilePreviewVC {
     private func fetchUpdateProfile() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         let param = UpdateProfileRequestDTO(editableModel.editTempCD)
-//        let param = UpdateProfileRequestDTO(familyName: "", firstName: "", familyNameKana: "", firstNameKana: "", birthday: "", genderId: "", zipCode: "", prefectureId: "", city: "", town: "", email: "")
+//        let param = UpdateProfileRequestDTO(nickname: nil, hopeJobPlaceIds: nil, salaryId: nil, familyName: "", firstName: "", familyNameKana: "", firstNameKana: "", birthday: "", genderId: "", zipCode: "", prefectureId: "", city: "", town: "", email: "")//強制的にエラー発生させるため
         
         self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
         self.dicValidErrMsg.removeAll()//状態をクリアしておく
@@ -197,8 +200,8 @@ extension ProfilePreviewVC {
     }
     private func fetchCreateProfile() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-        let profile = MdlProfile(nickname: "にっくねーむ", hopeJobPlaceIds: ["14", "13"], salaryId: "", familyName: "スマ澤", firstName: "花子", familyNameKana: "スマザワ", firstNameKana: "ハナコ", birthday: DateHelper.convStr2Date("1996-04-01"), gender: "2", zipCode: "1234567", prefecture: "22", address1: "千代田区", address2: "有楽町1-2-3　ネオ新橋ビル", mailAddress: "sumahana@example.com", mobilePhoneNo: Constants.Auth_username)
-        let param = CreateProfileRequestDTO(profile)
+        //===初回入力で実施されたものとする
+        let param = CreateProfileRequestDTO(nickname: "初期ニックネーム", hopeJobPlaceIds: ["13", "14"], salaryId: "8", birthday: "2000-01-01", genderId: "1")
         SVProgressHUD.show(withStatus: "プロフィール情報の作成")
         ApiManager.createProfile(param, isRetry: true)
         .done { result in

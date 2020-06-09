@@ -56,7 +56,30 @@ extension ValidateManager {
                 print("❤️\t[\(valid.property)]\t[\(valid.constraintsKey)] : [\(valid.constraintsVal)]")
             }
         }
+//        dicGrpError = mageGrpErrByItemErr(dicError)//これだと配列の足し込み非対応なのでメッセージ減る
         return (dicGrpError, dicError)
+    }
+        
+    class func mageGrpErrByItemErr(_ dicError: [EditableItemKey: [String]]) -> ([MdlItemHTypeKey: [String]]) {
+        var dicGrpError: [MdlItemHTypeKey: [String]] = [:]
+        for (key, val) in dicError {
+            switch key {
+            case EditItemMdlProfile.familyName.itemKey: dicGrpError[HPreviewItemType.fullnameH2.itemKey] = val
+            case EditItemMdlProfile.firstName.itemKey: dicGrpError[HPreviewItemType.fullnameH2.itemKey] = val
+            case EditItemMdlProfile.familyNameKana.itemKey: dicGrpError[HPreviewItemType.fullnameH2.itemKey] = val
+            case EditItemMdlProfile.firstNameKana.itemKey: dicGrpError[HPreviewItemType.fullnameH2.itemKey] = val
+            case EditItemMdlProfile.birthday.itemKey: dicGrpError[HPreviewItemType.birthGenderH2.itemKey] = val
+            case EditItemMdlProfile.gender.itemKey: dicGrpError[HPreviewItemType.birthGenderH2.itemKey] = val
+            case EditItemMdlProfile.zipCode.itemKey: dicGrpError[HPreviewItemType.adderssH2.itemKey] = val
+            case EditItemMdlProfile.prefecture.itemKey: dicGrpError[HPreviewItemType.adderssH2.itemKey] = val
+            case EditItemMdlProfile.address1.itemKey: dicGrpError[HPreviewItemType.adderssH2.itemKey] = val
+            case EditItemMdlProfile.address2.itemKey: dicGrpError[HPreviewItemType.adderssH2.itemKey] = val
+            case EditItemMdlProfile.mailAddress.itemKey: dicGrpError[HPreviewItemType.emailH2.itemKey] = val
+            default:
+                print("\t☠️割り当てエラー☠️[\(key): \(val)]☠️")
+            }
+        }
+        return dicGrpError
     }
 }
 
@@ -68,13 +91,13 @@ extension EditItemMdlProfile {
         case .familyNameKana:   return ValidInfo(required: true, keta: nil, max: 8, type: .katakana)
         case .firstNameKana:    return ValidInfo(required: true, keta: nil, max: 8, type: .katakana)
         case .birthday:         return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)//今日以降の誕生日を許容する？（年齢がマイナスになる）
-        case .gender:           return ValidInfo(required: true, keta: nil, max: nil, type: .code)//結局、男女の選択のみ？
-        case .zipCode:          return ValidInfo(required: true, keta: 7, max: nil, type: .number)
-        case .prefecture:       return ValidInfo(required: true, keta: nil, max: nil, type: .code)
-        case .address1:         return ValidInfo(required: true, keta: nil, max: 100, type: .undefine)
-        case .address2:         return ValidInfo(required: true, keta: nil, max: 100, type: .undefine)
+        case .gender:           return ValidInfo(required: false, keta: nil, max: nil, type: .code)//結局、男女の選択のみ？
+        case .zipCode:          return ValidInfo(required: false, keta: 7, max: nil, type: .number)
+        case .prefecture:       return ValidInfo(required: false, keta: nil, max: nil, type: .code)
+        case .address1:         return ValidInfo(required: false, keta: nil, max: 100, type: .undefine)
+        case .address2:         return ValidInfo(required: false, keta: nil, max: 100, type: .undefine)
         case .mailAddress:      return ValidInfo(required: true, keta: nil, max: nil, type: .email)
-        case .mobilePhoneNo:    return ValidInfo(required: true, keta: nil, max: nil, type: .number)
+        case .mobilePhoneNo:    return ValidInfo(required: false, keta: nil, max: nil, type: .number)//編集不可
         }
     }
 }
