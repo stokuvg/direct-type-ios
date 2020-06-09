@@ -56,24 +56,18 @@ extension ValidateManager {
 extension ValidateManager {
     class func chkValidationErr(_ editableModel: EditableModel) -> [EditableItemKey: [String]] {
         var dicError: [EditableItemKey: [String]] = [:]
-        print(#line, String(repeating: "=", count: 44))
-        print(#line, dicError.count)
         //必須チェック
         for (key, vals) in subValidateNotEmntyByKey(editableModel) {
             for val in vals {
                 dicError.addDicArrVal(key: key, val: val)
             }
         }
-        print(#line, dicError.count)
         //文字種＆桁数・最小〜最大文字数チェック
         for (key, vals) in subValidateTypeLengtyByKey(editableModel) {
             for val in vals {
                 dicError.addDicArrVal(key: key, val: val)
             }
         }
-        print(#line, dicError.count)
-        print(#line, String(repeating: "=", count: 44))
-
         return dicError
     }
     //============================================
@@ -161,7 +155,6 @@ extension ValidateManager {
                 case .number:
                     regexp = #"^\d*$"#
                     if let bufMatch = getRegexMatchString(editTemp, regexp) {
-                        print(bufMatch.count, bufMatch)
                         if let keta = validInfo.keta, bufMatch.count != keta {
                             if bufMatch.isEmpty && validInfo.required == false { continue } //桁指定あっても必須じゃなければ0桁は許される
                             errMsg = "\(keta)桁の数字で入力してください"
@@ -185,7 +178,6 @@ extension ValidateManager {
 
                 } //switch type {
 
-                print(#line, editTemp.debugDisp, regexp)
                 if errMsg.count > 0 {
                     dicError.addDicArrVal(key: item.editableItemKey, val: errMsg)
                 }
@@ -193,20 +185,6 @@ extension ValidateManager {
         }
         return dicError
     }
-    //============================================
-    //============================================
-//    class func chkValidErrRegex(_ item: EditableItemH, _ pattern: String) -> Bool { //エラーあったらTrue
-//        let text = item.curVal
-//        //var pattern = #"^\d{\#(keta)}$"#
-//        let regex = try! NSRegularExpression(pattern: pattern, options: [])
-//        let matches = regex.matches(in: text, options: [], range: NSMakeRange(0, text.count))
-//        print(#line, #function, matches.count)
-//        for ma in matches {
-//            print(#line, #function, ma)
-//        }
-//
-//        return (matches.count > 0) ? false : true
-//    }
     //============================================
     //マッチングした文字列を返却し、それを使って戻り先でチェックする
     class func getRegexMatchString(_ item: EditableItemH, _ pattern: String) -> String? {
@@ -216,11 +194,9 @@ extension ValidateManager {
         if matches.count == 0 { return nil }
         //基本的に ^$　マッチングさせるので、matchesは 1つとして処理する
         for match in matches {
-            print(match.description)
             for index in 0 ..< match.numberOfRanges {
                 let nsRange = match.range(at: index)
                 if let range = Range(nsRange, in: text) {
-print(String(text[range]))
                     return String(text[range])
                 }
             }

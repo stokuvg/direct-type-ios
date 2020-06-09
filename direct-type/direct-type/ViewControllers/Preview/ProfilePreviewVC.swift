@@ -33,8 +33,9 @@ class ProfilePreviewVC: PreviewBaseVC {
             var msg: String = ""
             for err in chkErr {
                 msg = "\(msg)\(err.value)\n"
+//                print("\t[\(err.key)] [\(err.value.joined(separator: "‘n\t"))]")
             }
-            self.showValidationError(title: "Validationエラー (\(chkErr.count)件)", message: msg)
+//            self.showValidationError(title: "Validationエラー (\(chkErr.count)件)", message: msg)
 //            /* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
             return true
         } else {
