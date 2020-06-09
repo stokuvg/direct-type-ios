@@ -58,6 +58,28 @@ extension ValidateManager {
         }
         return (dicGrpError, dicError)
     }
+        
+    class func mageGrpErrByItemErr(_ dicError: [EditableItemKey: [String]]) -> ([MdlItemHTypeKey: [String]]) {
+        var dicGrpError: [MdlItemHTypeKey: [String]] = [:]
+        for (key, val) in dicError {
+            switch key {
+            case EditItemMdlProfile.familyName.itemKey: dicGrpError[HPreviewItemType.fullnameH2.itemKey] = val
+            case EditItemMdlProfile.firstName.itemKey: dicGrpError[HPreviewItemType.fullnameH2.itemKey] = val
+            case EditItemMdlProfile.familyNameKana.itemKey: dicGrpError[HPreviewItemType.fullnameH2.itemKey] = val
+            case EditItemMdlProfile.firstNameKana.itemKey: dicGrpError[HPreviewItemType.fullnameH2.itemKey] = val
+            case EditItemMdlProfile.birthday.itemKey: dicGrpError[HPreviewItemType.birthGenderH2.itemKey] = val
+            case EditItemMdlProfile.gender.itemKey: dicGrpError[HPreviewItemType.birthGenderH2.itemKey] = val
+            case EditItemMdlProfile.zipCode.itemKey: dicGrpError[HPreviewItemType.adderssH2.itemKey] = val
+            case EditItemMdlProfile.prefecture.itemKey: dicGrpError[HPreviewItemType.adderssH2.itemKey] = val
+            case EditItemMdlProfile.address1.itemKey: dicGrpError[HPreviewItemType.adderssH2.itemKey] = val
+            case EditItemMdlProfile.address2.itemKey: dicGrpError[HPreviewItemType.adderssH2.itemKey] = val
+            case EditItemMdlProfile.mailAddress.itemKey: dicGrpError[HPreviewItemType.emailH2.itemKey] = val
+            default:
+                print("\t☠️割り当てエラー☠️[\(key): \(val)]☠️")
+            }
+        }
+        return dicGrpError
+    }
 }
 
 extension EditItemMdlProfile {

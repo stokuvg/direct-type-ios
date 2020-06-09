@@ -28,6 +28,8 @@ class ProfilePreviewVC: PreviewBaseVC {
         if Constants.DbgSkipLocalValidate { return false }//[Dbg: ローカルValidationスキップ]
         ValidateManager.dbgDispCurrentItems(editableModel: editableModel) //[Dbg: 状態確認]
         let chkErr = ValidateManager.chkValidationErr(editableModel)
+        self.dicValidErrMsg = chkErr
+        self.dicGrpValidErrMsg = ValidateManager.mageGrpErrByItemErr(chkErr)
         if chkErr.count > 0 {
             print("＊＊＊　Validationエラー発生: \(chkErr.count)件　＊＊＊")
             var msg: String = ""
