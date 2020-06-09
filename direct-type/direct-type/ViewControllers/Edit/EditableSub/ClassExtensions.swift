@@ -14,6 +14,11 @@ extension Dictionary {
             self.updateValue(value, forKey:key)
         }
     }
+    public mutating func addDicArrVal(key: Key, val: [String]) {
+        for _val in val {
+            self.addDicArrVal(key: key, val: _val)
+        }
+    }
     public mutating func addDicArrVal(key: Key, val: String) {
         if var vals = self[key] as? [String] {
             vals.append(val)

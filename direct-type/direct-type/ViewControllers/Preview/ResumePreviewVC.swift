@@ -15,29 +15,29 @@ import SVProgressHUD
 class ResumePreviewVC: PreviewBaseVC {
     var detail: MdlResume? = nil
 
+    override func actCommit(_ sender: UIButton) {
+        print(#line, #function, "ボタン押下でAPIフェッチ確認")
+        if validateLocalModel() {
+            tableVW.reloadData()
+            return
+        }
+        fetchGetResume()
+    }
     //共通プレビューをOverrideして利用する
     override func initData() {
-
-        //ダミーデータ投入しておく
-//        let resume: Resume = Resume(
-//            employment: 2,
-//            changeCount: 2,
-//            lastJobExperiment: ResumeLastJobExperiment(jobType: 3, jobExperimentYear: 4),
-//            jobExperiments: [],
-//            businessTypes: [],
-//            school: ResumeSchool(schoolName: "情報大学", department: "情報学部", subject: "情報学科", graduationYear: "1996-12"),
-//            skillLanguage: ResumeSkillLanguage(languageToeicScore: nil, languageToeflScore: "431",
-//                                               languageEnglish: "1", languageStudySkill: "その他、スペイン語など"),
-//            qualifications: [],
-//            ownPr: String(repeating: "自己PRのテキストが入ります。", count: 38) )
-//        let resume: Resume = Resume(employment: 0, changeCount: 0, lastJobExperiment: ResumeLastJobExperiment(jobType: 0, jobExperimentYear: 0), jobExperiments: [], businessTypes: [], school: ResumeSchool(schoolName: "", department: "", subject: "", graduationYear: ""), skillLanguage: ResumeSkillLanguage(languageToeicScore: nil, languageToeflScore: nil, languageEnglish: "", languageStudySkill: ""), qualifications: [], ownPr: "")
-        let resume: GetResumeResponseDTO = GetResumeResponseDTO(isEmployed: nil, changeJobCount: nil, workHistory: [], experienceIndustryId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: [])
-        detail = MdlResume(dto: resume)
-
-        //========
+        title = "[H-3] 履歴書"
+        if Constants.DbgOfflineMode {
+            let resume: GetResumeResponseDTO = GetResumeResponseDTO(isEmployed: nil, changeJobCount: nil, workHistory: nil, experienceIndustryId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil)
+            self.detail = MdlResume(dto: resume)
+        }
+    }
+    override func dispData() {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
         guard let _detail = detail else { return }
+        self.arrData.removeAll()//いったん全件を削除しておく
+        editableModel.arrData.removeAll()//こちらで管理させる？！
 
+        //================================================================================
         //=== [H-3]履歴書編集
         //===(3a)就業状況
         arrData.append(MdlItemH(.employmentH3, "", childItems: [
@@ -94,9 +94,49 @@ class ResumePreviewVC: PreviewBaseVC {
         arrData.append(MdlItemH(.ownPr, "", childItems: [
             EditableItemH(type: .inputMemo, editItem: EditItemMdlResume.ownPr, val: _detail.ownPr),
         ]))
+
+        //=== editableModelで管理させる
+        editableModel.arrData.removeAll()
+        for items in arrData { editableModel.arrData.append(items.childItems) }//editableModelに登録
+        editableModel.chkTableCellAll()//これ実施しておくと、getItemByKeyが利用可能になる
+        tableVW.reloadData()//描画しなおし
     }
-    override func dispData() {
-        title = "履歴書"
+    //========================================
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        fetchGetResume()
     }
 }
+
+//=== APIフェッチ
+
+extension ResumePreviewVC {
+    private func fetchGetResume() {
+        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
+        let resume: GetResumeResponseDTO = GetResumeResponseDTO(isEmployed: nil, changeJobCount: nil, workHistory: nil, experienceIndustryId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil)
+        self.detail = MdlResume(dto: resume)
+        self.dispData()
+    }
+}
+//    SVProgressHUD.show(withStatus: "職務経歴書情報の取得")
+//    ApiManager.getCareer(Void(), isRetry: true)
+//    .done { result in
+//        for (num, item) in result.businessTypes.enumerated() {
+//            if num == self.targetCardNum { //とりあえず最初(0)のものを対象とする
+//                self.detail = result.businessTypes.first
+//            }
+//        }
+//    }
+//    .catch { (error) in
+//        let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+//        self.showError(myErr)
+//    }
+//    .finally {
+//        self.dispData()
+//        SVProgressHUD.dismiss()
+//    }
+//}
 

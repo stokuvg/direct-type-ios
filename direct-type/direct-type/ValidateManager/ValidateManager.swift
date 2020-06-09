@@ -35,7 +35,7 @@ final public class ValidateManager {
 //==========================================================================================
 extension ValidateManager {
     class func dbgDispCurrentItems(editableModel: EditableModel) {
-//        return//!!!
+        return//!!!
         //===変更内容の確認
         print(#line, String(repeating: "=", count: 44))
         for (y, items) in editableModel.arrData.enumerated() {
@@ -68,7 +68,6 @@ extension ValidateManager {
                 dicError.addDicArrVal(key: key, val: val)
             }
         }
-
         return dicError
     }
     //============================================
@@ -77,17 +76,11 @@ extension ValidateManager {
         //必須チェック
         for itemKey in editableModel.arrTextFieldNextDoneKey {
             if let item = editableModel.getItemByKey(itemKey) {
-                let (isChange, editTemp) = editableModel.makeTempItem(item)
-                let validInfo = editTemp.editItem.valid
+                let validInfo = item.editItem.valid
                 guard validInfo.required == true else { continue }
-                if isChange {
-                    if editTemp.curVal == "" {
-                        if validInfo.type == .code {
-                            dicError.addDicArrVal(key: item.editableItemKey, val: "選択してください")
-                        } else {
-                            dicError.addDicArrVal(key: item.editableItemKey, val: "未入力です。入力してください")
-                        }
-                    }
+                let (_, editTemp) = editableModel.makeTempItem(item)
+                if editTemp.curVal == "" {
+                    dicError.addDicArrVal(key: item.editableItemKey, val: (validInfo.type == .code) ? "選択してください" : "未入力です。入力してください")
                 }
             }
         }
@@ -99,112 +92,99 @@ extension ValidateManager {
         //文字種チェック
         for itemKey in editableModel.arrTextFieldNextDoneKey {
             if let item = editableModel.getItemByKey(itemKey) {
-                let (isChange, editTemp) = editableModel.makeTempItem(item)
-                let validInfo = editTemp.editItem.valid
+                let validInfo = item.editItem.valid
+                let (_, editTemp) = editableModel.makeTempItem(item)
                 let type = validInfo.type
-                if isChange {
-                    var regexp: String = ""
-                    var errMsg: String = ""
+                var regexp: String = ""
+                var errMsg: String = ""
 
-                    switch type {
+                switch type {
 
-                    case .undefine:
-                        continue
-                        
-                    case .zenkaku:
-                        regexp = #"^[ー\p{Hiragana}\p{Katakana}\p{Han}\n]*$"#
-                        if let bufMatch = getRegexMatchString(editTemp, regexp) {
-                            if let keta = validInfo.keta {
-                                errMsg = "\(keta)桁の全角文字で入力してください"
-                            }
-                            if let max = validInfo.max, bufMatch.count > max {
-                                errMsg = "入力文字数が超過しています (\(max))"
-                            }
-                        } else {//正規表現にマッチしない（＝形式エラー）
-                            errMsg = "全角文字で入力してください [\(regexp)]"
+                case .undefine:
+                    continue
+                    
+                case .zenkaku:
+                    regexp = #"^[ー\p{Hiragana}\p{Katakana}\p{Han}\n]*$"#
+                    if let bufMatch = getRegexMatchString(editTemp, regexp) {
+                        if let keta = validInfo.keta, bufMatch.count != keta {
+                            if bufMatch.isEmpty && validInfo.required == false { continue } //桁指定あっても必須じゃなければ0桁は許される
+                            errMsg = "\(keta)桁の全角文字で入力してください"
                         }
-
-                    case .hiraKataKan:
-                        regexp = #"^[\p{Hiragana}\p{Katakana}\p{Han}]*$"#
-                        if let bufMatch = getRegexMatchString(editTemp, regexp) {
-                            if let keta = validInfo.keta {
-                                errMsg = "\(keta)桁の漢字・カナ・かなで入力してください"
-                            }
-                            if let max = validInfo.max, bufMatch.count > max {
-                                errMsg = "入力文字数が超過しています (\(max))"
-                            }
-                        } else {//正規表現にマッチしない（＝形式エラー）
-                            errMsg = "漢字・カナ・かなで入力してください"
+                        if let max = validInfo.max, bufMatch.count > max {
+                            errMsg = "入力文字数が超過しています (\(max))"
                         }
-
-                    case .katakana:
-                        regexp = #"^\p{Katakana}*$"#
-                        if let bufMatch = getRegexMatchString(editTemp, regexp) {
-                            if let keta = validInfo.keta {
-                                errMsg = "\(keta)桁のカタカナで入力してください"
-                            }
-                            if let max = validInfo.max, bufMatch.count > max {
-                                errMsg = "入力文字数が超過しています (\(max))"
-                            }
-                        } else {//正規表現にマッチしない（＝形式エラー）
-                            errMsg = "カタカナで入力してください"
-                        }
-
-                    case .email:
-                        regexp = #"^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"#
-                        if let bufMatch = getRegexMatchString(editTemp, regexp) {
-                        } else {//正規表現にマッチしない（＝形式エラー）
-                            errMsg = "メールアドレスが間違っています"
-                        }
-
-                    case .number:
-                        regexp = #"^\d*$"#
-                        if let bufMatch = getRegexMatchString(editTemp, regexp) {
-                            if let keta = validInfo.keta {
-                                errMsg = "\(keta)桁の数字で入力してください"
-                            }
-                            if let max = validInfo.max, bufMatch.count > max {
-                                errMsg = "入力文字数が超過しています (\(max))"
-                            }
-                        } else {//正規表現にマッチしない（＝形式エラー）
-                            errMsg = "数字で入力してください"
-                        }
-
-                    case .password: //type用パスワード（＊半角英数4~20文字）///^[0-9a-zA-Z]*$/
-                        regexp = #"^[0-9a-zA-Z]{4,20}$"#
-                        if let bufMatch = getRegexMatchString(editTemp, regexp) {
-                        } else {//正規表現にマッチしない（＝形式エラー）
-                            errMsg = "ログインできません。入力内容をご確認ください"
-                        }
-
-                    case .code: //「コード」なものはチェック不要　（＊""or数値かどうかをチェックしえとく？？）
-                        continue
-
-                    } //switch type {
-
-                    print(#line, editTemp.debugDisp, regexp)
-                    if errMsg.count > 0 {
-                        dicError.addDicArrVal(key: item.editableItemKey, val: errMsg)
+                    } else {//正規表現にマッチしない（＝形式エラー）
+                        errMsg = "全角文字で入力してください [\(regexp)]"
                     }
+
+                case .hiraKataKan:
+                    regexp = #"^[\p{Hiragana}\p{Katakana}\p{Han}]*$"#
+                    if let bufMatch = getRegexMatchString(editTemp, regexp) {
+                        if let keta = validInfo.keta, bufMatch.count != keta {
+                            if bufMatch.isEmpty && validInfo.required == false { continue } //桁指定あっても必須じゃなければ0桁は許される
+                            errMsg = "\(keta)桁の漢字・カナ・かなで入力してください"
+                        }
+                        if let max = validInfo.max, bufMatch.count > max {
+                            errMsg = "入力文字数が超過しています (\(max))"
+                        }
+                    } else {//正規表現にマッチしない（＝形式エラー）
+                        errMsg = "漢字・カナ・かなで入力してください"
+                    }
+
+                case .katakana:
+                    regexp = #"^\p{Katakana}*$"#
+                    if let bufMatch = getRegexMatchString(editTemp, regexp) {
+                        if let keta = validInfo.keta, bufMatch.count != keta {
+                            if bufMatch.isEmpty && validInfo.required == false { continue } //桁指定あっても必須じゃなければ0桁は許される
+                            errMsg = "\(keta)桁のカタカナで入力してください"
+                        }
+                        if let max = validInfo.max, bufMatch.count > max {
+                            errMsg = "入力文字数が超過しています (\(max))"
+                        }
+                    } else {//正規表現にマッチしない（＝形式エラー）
+                        errMsg = "カタカナで入力してください"
+                    }
+
+                case .email:
+                    regexp = #"^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"#
+                    if let bufMatch = getRegexMatchString(editTemp, regexp) {
+                    } else {//正規表現にマッチしない（＝形式エラー）
+                        errMsg = "メールアドレスが間違っています"
+                    }
+
+                case .number:
+                    regexp = #"^\d*$"#
+                    if let bufMatch = getRegexMatchString(editTemp, regexp) {
+                        if let keta = validInfo.keta, bufMatch.count != keta {
+                            if bufMatch.isEmpty && validInfo.required == false { continue } //桁指定あっても必須じゃなければ0桁は許される
+                            errMsg = "\(keta)桁の数字で入力してください"
+                        }
+                        if let max = validInfo.max, bufMatch.count > max {
+                            errMsg = "入力文字数が超過しています (\(max))"
+                        }
+                    } else {//正規表現にマッチしない（＝形式エラー）
+                        errMsg = "数字で入力してください"
+                    }
+
+                case .password: //type用パスワード（＊半角英数4~20文字）///^[0-9a-zA-Z]*$/
+                    regexp = #"^[0-9a-zA-Z]{4,20}$"#
+                    if let bufMatch = getRegexMatchString(editTemp, regexp) {
+                    } else {//正規表現にマッチしない（＝形式エラー）
+                        errMsg = "ログインできません。入力内容をご確認ください"
+                    }
+
+                case .code: //「コード」なものはチェック不要　（＊""or数値かどうかをチェックしえとく？？）
+                    continue
+
+                } //switch type {
+
+                if errMsg.count > 0 {
+                    dicError.addDicArrVal(key: item.editableItemKey, val: errMsg)
                 }
             }
         }
         return dicError
     }
-    //============================================
-    //============================================
-//    class func chkValidErrRegex(_ item: EditableItemH, _ pattern: String) -> Bool { //エラーあったらTrue
-//        let text = item.curVal
-//        //var pattern = #"^\d{\#(keta)}$"#
-//        let regex = try! NSRegularExpression(pattern: pattern, options: [])
-//        let matches = regex.matches(in: text, options: [], range: NSMakeRange(0, text.count))
-//        print(#line, #function, matches.count)
-//        for ma in matches {
-//            print(#line, #function, ma)
-//        }
-//
-//        return (matches.count > 0) ? false : true
-//    }
     //============================================
     //マッチングした文字列を返却し、それを使って戻り先でチェックする
     class func getRegexMatchString(_ item: EditableItemH, _ pattern: String) -> String? {

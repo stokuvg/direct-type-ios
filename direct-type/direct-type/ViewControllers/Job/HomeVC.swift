@@ -91,6 +91,10 @@ class HomeVC: TmpNaviTopVC {
             if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SmoothCareerPreviewVC") as? SmoothCareerPreviewVC{
                 self.navigationController?.pushViewController(nvc, animated: true)
             }
+            case 5:
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_FirstInputPreviewVC") as? FirstInputPreviewVC{
+                self.navigationController?.pushViewController(nvc, animated: true)
+            }
             default: break
             }
         }
