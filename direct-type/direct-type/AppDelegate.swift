@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         UINavigationBar.appearance().isTranslucent = false
         UITabBar.appearance().isTranslucent = false
+        
+        var loginFlag:Bool = false
 
         //=== Cognito認証の初期化処理を組み込む
         // Amazon Cognito 認証情報プロバイダーを初期化します
@@ -34,8 +36,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AWSMobileClient.default().initialize { (userState, error) in
             if let userState = userState {
                 print("UserState: \(userState.rawValue)")
+                loginFlag = false
             } else if let error = error {
                 print("error: \(error.localizedDescription)")
+                loginFlag = false
             }
         }
 
@@ -43,10 +47,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
-        let tabSB = UIStoryboard(name: "BaseTabBC", bundle: nil)
-        let tabBC = tabSB.instantiateViewController(withIdentifier: "Sbid_BaseTabBC")
-        
-        self.window?.rootViewController = tabBC
+        if loginFlag {
+            let tabSB = UIStoryboard(name: "BaseTabBC", bundle: nil)
+            let tabBC = tabSB.instantiateViewController(withIdentifier: "Sbid_BaseTabBC")
+            
+            self.window?.rootViewController = tabBC
+        } else {
+            let inputSB = UIStoryboard(name: "InitialInput", bundle: nil)
+            let startNavi = inputSB.instantiateViewController(withIdentifier: "Sbid_InitialInputNavi") as! UINavigationController
+            
+            self.window?.rootViewController = startNavi
+        }
         
         self.window?.makeKeyAndVisible()
         
