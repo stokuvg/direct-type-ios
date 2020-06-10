@@ -59,13 +59,15 @@ extension ValidateManager {
             case EditItemMdlFirstInput.hopeArea.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.hopeAreaA9.itemKey, val: val)
             case EditItemMdlFirstInput.school.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.schoolA10.itemKey, val: val)
             case EditItemMdlFirstInput.employmentStatus.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.employmentStatusA21.itemKey, val: val)
-            case EditItemMdlFirstInput.lastJobExperiment.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.lastJobExperimentA11.itemKey, val: val)
-            case EditItemMdlFirstInputLastJobExperiments.jobType.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.jobExperimentsA14.itemKey, val: val)
-            case EditItemMdlFirstInputLastJobExperiments.jobExperimentYear.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.jobExperimentsA14.itemKey, val: val)
+            //セットで扱うので片方で良い
+            //case EditItemMdlFirstInput.lastJobExperiment.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.lastJobExperimentA11.itemKey, val: val)
+            case EditItemMdlFirstInputLastJobExperiments.jobType.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.lastJobExperimentA11.itemKey, val: val)
+            //case EditItemMdlFirstInputLastJobExperiments.jobExperimentYear.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.lastJobExperimentA11.itemKey, val: val)
             case EditItemMdlFirstInput.salary.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.salaryA13.itemKey, val: val)
-            case EditItemMdlFirstInput.jobExperiments.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.jobExperimentsA14.itemKey, val: val)
+            //セットで扱うので片方で良い
+            //case EditItemMdlFirstInput.jobExperiments.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.jobExperimentsA14.itemKey, val: val)
             case EditItemMdlFirstInputJobExperiments.jobType.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.jobExperimentsA14.itemKey, val: val)
-            case EditItemMdlFirstInputJobExperiments.jobExperimentYear.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.jobExperimentsA14.itemKey, val: val)
+            //case EditItemMdlFirstInputJobExperiments.jobExperimentYear.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.jobExperimentsA14.itemKey, val: val)
             default:
                 print("\t☠️割り当てエラー☠️[\(key): \(val)]☠️")
             }
@@ -93,31 +95,6 @@ extension EditItemMdlProfile {
     }
 }
 
-extension EditItemMdlResume {
-    var valid: ValidInfo {
-        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
-    }
-}
-extension MdlResumeSchool {
-    var valid: ValidInfo {
-        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
-    }
-}
-extension EditItemMdlResumeSkillLanguage {
-    var valid: ValidInfo {
-        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
-    }
-}
-extension EditItemMdlResumeLastJobExperiment {
-    var valid: ValidInfo {
-        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
-    }
-}
-extension EditItemMdlResumeJobExperiments {
-    var valid: ValidInfo {
-        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
-    }
-}
 extension EditItemMdlAppSmoothCareer {
     var valid: ValidInfo {
         return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)

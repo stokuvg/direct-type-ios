@@ -53,7 +53,7 @@ enum HPreviewItemType: String {
     case schoolH3               //===(3f)最終学歴
     case skillLanguageH3        //===(3g)語学
     case qualificationsH3       //===(3h)資格
-    case ownPr                  //===(3i)自己PR
+    case ownPrH3                //===(3i)自己PR
     //[C-15]職務経歴書編集
     case workPeriodC15      //===雇用期間
     case companyNameC15     //===企業名
@@ -98,7 +98,7 @@ enum HPreviewItemType: String {
         case .schoolH3:             return "最終学歴"
         case .skillLanguageH3:      return "語学"
         case .qualificationsH3:     return "資格"
-        case .ownPr:                return "自己PR"
+        case .ownPrH3:                return "自己PR"
         //[C-15]職務経歴書編集
         case .workPeriodC15:        return "雇用期間"
         case .companyNameC15:       return "企業名"

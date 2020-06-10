@@ -11,9 +11,9 @@ import SwaggerClient
 
 class MdlCareerCardWorkPeriod: Codable {
     /** 勤務開始年月 */
-    var startDate: Date = Date(timeIntervalSince1970: 0)
+    var startDate: Date = Constants.SelectItemsUndefineDate
     /** 勤務終了年月 */
-    var endDate: Date = Date(timeIntervalSince1970: 0)
+    var endDate: Date = Constants.SelectItemsUndefineDate
 
     init(startDate: Date, endDate: Date) {
         self.startDate = startDate

@@ -35,6 +35,7 @@ class HEditDrumTBCell: UITableViewCell {
         self.delegate = delegate
         self.item = item
         tfValue.itemKey = item.editableItemKey
+        tfValue.clearButtonMode = .never //クリアボタンの表示制御
     }
     
     func dispCell() {

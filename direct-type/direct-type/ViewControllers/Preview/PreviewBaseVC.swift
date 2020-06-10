@@ -101,25 +101,65 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true) //ハイライトの解除
         let item = arrData[indexPath.row]
 
-        //プレビューから直接編集へ行ってよし
-        if let skipEditMemoItem = item.childItems.first {
-            let (isChange, editTemp) = editableModel.makeTempItem(skipEditMemoItem)
-            let item: EditableItemH! = isChange ? editTemp : skipEditMemoItem
-            switch skipEditMemoItem.editType {
+        //================================================
+        //子項目が1つの場合には、直接編集へ移動させる場合：
+        let items = item.childItems
+        switch items.count {
+        case 0: break
+        case 1: //プレビューから直接編集へ行ってよし
+            let _item = items.first!
+            let (_, editTemp) = editableModel.makeTempItem(_item)
+            switch editTemp.editType {
+            case .readonly:
+                break
+            case .inputText:
+                break
             case .inputMemo:
-                //さらに子ナビさせたいので
                 let storyboard = UIStoryboard(name: "Edit", bundle: nil)
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubInputMemoVC") as? SubInputMemoVC{
-                    nvc.initData(self, editableItem: item)
+                    nvc.initData(self, editableItem: editTemp)
                     //遷移アニメーション関連
                     nvc.modalTransitionStyle = .coverVertical
                     self.present(nvc, animated: true) {}
                 }
-                return
-            default:
+            case .inputZipcode:
                 break
+            case .inputTextSecret:
+                break
+            case .selectDrumYMD:
+                break
+            case .selectDrum:
+                break
+            case .selectSingle:
+                let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
+                if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSingleVC") as? SubSelectSingleVC{
+                    nvc.initData(self, editableItem: editTemp, selectingCodes: editTemp.curVal)
+                    //遷移アニメーション関連
+                    nvc.modalTransitionStyle = .crossDissolve
+                    self.present(nvc, animated: true) {}
+                }
+            case .selectMulti:
+                let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
+                if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectMultiVC") as? SubSelectMultiVC{
+                    nvc.initData(self, editableItem: editTemp, selectingCodes: editTemp.curVal)
+                    //遷移アニメーション関連
+                    nvc.modalTransitionStyle = .crossDissolve
+                    self.present(nvc, animated: true) {}
+                }
+            case .selectSpecial: fallthrough
+            case .selectSpecialYear:
+                let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
+                if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSpecialVC") as? SubSelectSpecialVC{
+                    nvc.initData(self, editableItem: editTemp, selectingCodes: editTemp.curVal)
+                    //遷移アニメーション関連
+                    nvc.modalTransitionStyle = .crossDissolve
+                    self.present(nvc, animated: true) {}
+                }
             }
+        default:
+            break
         }
+        //================================================
         switch item.type {
         case .lastJobExperimentH3, .jobExperimentsH3, .businessTypesH3, .lastJobExperimentA11, .jobExperimentsA14:
             let storyboard = UIStoryboard(name: "Edit", bundle: nil)
@@ -177,6 +217,7 @@ extension PreviewBaseVC: nameEditableTableBasicDelegate {
 
 extension PreviewBaseVC: SubSelectFeedbackDelegate {
     func changedSelect(editItem: EditableItemH, codes: String) {
+        print("\t🐼1🐼[\(editItem.debugDisp)]🐼FBです🐼Single/Multi🐼")//編集中の値の保持（と描画）
         editableModel.changeTempItem(editItem, text: codes)
         chkButtonEnable()//ボタン死活チェック
         tableVW.reloadData()

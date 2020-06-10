@@ -64,12 +64,18 @@ struct EditableItemH {
             return "\(buf0)"
             
         case .selectSpecialYear:
-            print(#line, #function, "✳️✳️✳️✳️ [_val: \(_val)] ✳️✳️✳️✳️ 複数種類を結合して保持させるお程")
-            let (dai, syou): ([CodeDisp], [GrpCodeDisp]) = SelectItemsManager.getMaster(editItem.tsvMaster)
-            let buf = dai.description
-
-            return "\(buf)"
-
+            var disp: [String] = []
+            for job in _val.split(separator: "_") {
+                let buf = String(job).split(separator: ":")
+                guard buf.count == 2 else { continue }
+                let tmp0 = String(buf[0])
+                let tmp1 = String(buf[1])
+                let buf0: String = SelectItemsManager.getCodeDispSyou(.jobType, code: tmp0)?.disp ?? ""
+                let buf1: String = SelectItemsManager.getCodeDisp(.jobExperimentYear, code: tmp1)?.disp ?? ""
+                let bufExperiment: String = "[\(buf0) \(buf1)]"
+                disp.append(bufExperiment)
+            }
+            return disp.count == 0 ? Constants.SelectItemsValEmpty.disp : disp.joined(separator: "\n")
         }
     }
     var debugDisp: String {

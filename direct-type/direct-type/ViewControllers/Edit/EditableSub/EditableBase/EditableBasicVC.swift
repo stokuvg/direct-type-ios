@@ -149,17 +149,17 @@ extension EditableBasicVC: InputItemHDelegate {
                 }
             })
         case .inputMemo:
-//            //さらに子ナビさせたいので
-//            DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
-//                tf.resignFirstResponder()//自分を解除しておかないと、戻ってきたときにまた遷移してしまうため
-//                let storyboard = UIStoryboard(name: "Edit", bundle: nil)
-//                if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubInputMemoVC") as? SubInputMemoVC{
-//                    nvc.initData(editableItem: item)
-//                    //遷移アニメーション関連
-//                    nvc.modalTransitionStyle = .crossDissolve
-//                    self.present(nvc, animated: true) {}
-//                }
-//            })
+            //さらに子ナビさせたいので//!!!
+            DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+                tf.resignFirstResponder()//自分を解除しておかないと、戻ってきたときにまた遷移してしまうため
+                let storyboard = UIStoryboard(name: "Edit", bundle: nil)
+                if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubInputMemoVC") as? SubInputMemoVC{
+                    nvc.initData(self, editableItem: item)
+                    //遷移アニメーション関連
+                    nvc.modalTransitionStyle = .crossDissolve
+                    self.present(nvc, animated: true) {}
+                }
+            })
             break
 
         case .readonly:

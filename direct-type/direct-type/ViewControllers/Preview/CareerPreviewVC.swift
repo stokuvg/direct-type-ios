@@ -39,7 +39,18 @@ class CareerPreviewVC: PreviewBaseVC {
             self.detail = MdlCareerCard(dto: careerCard)
         }
     }
-    
+    func initFirstData() {
+        let careerCard: CareerHistoryDTO = CareerHistoryDTO(
+            startWorkPeriod: "",
+            endWorkPeriod: "",
+            companyName: "",
+            employmentId: "",
+            employees: 0,
+            salary: 0,
+            workNote: "")
+        self.detail = MdlCareerCard(dto: careerCard)
+        self.dispData()
+    }
     override func dispData() {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
         guard let _detail = detail else { return }
@@ -111,7 +122,12 @@ extension CareerPreviewVC {
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-            self.showError(myErr)
+            switch myErr.code {
+            case 404:
+                self.initFirstData()//空の値を設定して編集させる
+            default:
+                self.showError(error)
+            }
         }
         .finally {
             self.dispData()

@@ -34,6 +34,7 @@ class HEditSpecialTBCell: UITableViewCell {
         tfValue.itemKey = item.editableItemKey
         tfValue.returnKeyType = returnKeyType
         tfValue.placeholder = item.placeholder
+        tfValue.clearButtonMode = .never //クリアボタンの表示制御
     }
     
     func dispCell() {
@@ -45,9 +46,12 @@ class HEditSpecialTBCell: UITableViewCell {
         case .selectSpecial:
             bufVal = _item.valDisp
         case .selectSpecialYear:
-            bufVal = _item.valDisp
-            if let _item2 = item2 {
-                bufVal = "!?\(_item.valDisp)：\(_item2.valDisp)"
+            if _item.curVal.isEmpty {
+                bufVal = ""
+            } else {
+                if let _item2 = item2 {
+                    bufVal = "\(_item.valDisp)：\(_item2.valDisp)"
+                }
             }
         default:
             bufVal = _item.curVal
