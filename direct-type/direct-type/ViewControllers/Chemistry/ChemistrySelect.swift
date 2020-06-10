@@ -14,6 +14,7 @@ class ChemistrySelect: UIViewController {
     @IBOutlet private weak var nextButton: UIButton!
     @IBAction func nextButton(_ sender: UIButton) {
         guard currnetAnswerState == .complete else { return }
+        transitionToChemisrortResult()
     }
     
     enum SelectedAnswerType {
@@ -22,14 +23,13 @@ class ChemistrySelect: UIViewController {
         case allNo
     }
     
-    typealias Score = (number: Int, score: ChemistryAnswerType)
-    private var questionScores = [Score]()
+    private var questionScores = [ChemistryScore]()
     
     private var currnetAnswerState: SelectedAnswerType {
-        if questionScores.filter({ $0.score == .no }).count == questionScores.count {
+        if questionScores.filter({ $0.selectedAnswer == .no }).count == questionScores.count {
             return .allNo
         }
-        if questionScores.filter({ $0.score != .unanswered }).count == questionScores.count  {
+        if questionScores.filter({ $0.selectedAnswer != .unanswered }).count == questionScores.count  {
             return .complete
         }
         return .incomplete
@@ -47,7 +47,7 @@ private extension ChemistrySelect {
         tableView.dataSource = self
         tableView.registerNib(nibName: "ChemistrySelectCell", idName: "ChemistrySelectCell")
         questionScores = ChemistryQuestionMasterData.questions.enumerated().map({
-            Score(number: $0.offset, score: .unanswered)
+            ChemistryScore(questionNumber: $0.offset, personalType: $0.element.type, selectedAnswer: .unanswered)
         })
         setShadowAndRadius()
         changeButtonImage()
@@ -72,7 +72,7 @@ private extension ChemistrySelect {
     func changeButtonImage() {
         switch currnetAnswerState {
         case .incomplete:
-            let remainingCount = questionScores.filter({ $0.score == .unanswered }).count
+            let remainingCount = questionScores.filter({ $0.selectedAnswer == .unanswered }).count
             nextButton.setTitle("残り\(remainingCount)問", for: .normal)
             nextButton.setTitleColor(.lightGray, for: .normal)
             buttonBackgroundView.backgroundColor = .white
@@ -86,6 +86,14 @@ private extension ChemistrySelect {
             buttonBackgroundView.backgroundColor = .white
         }
         
+    }
+    
+    func transitionToChemisrortResult() {
+        let vc = UIStoryboard(name: "ChemistryResult", bundle: nil)
+            .instantiateInitialViewController() as! ChemistryResult
+        vc.configure(with: questionScores)
+        hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -119,7 +127,7 @@ extension ChemistrySelect: UITableViewDataSource {
         let question = ChemistryQuestionMasterData.questions[indexPath.row]
         let number = getNumber(from: indexPath.row)
         let questionDataSet = ChemistrySelectCell.QuestionDataSet(number: number, question: question)
-        cell.configure(with: questionDataSet, selectedAnswer: questionScores[indexPath.row].score, delegate: self)
+        cell.configure(with: questionDataSet, selectedAnswer: questionScores[indexPath.row].selectedAnswer, delegate: self)
         return cell
     }
 }
@@ -127,7 +135,7 @@ extension ChemistrySelect: UITableViewDataSource {
 extension ChemistrySelect: ChemistrySelectCellDelegate {
     func didSelectedAnswer(number: Int, type: ChemistryAnswerType) {
         let index = getIndex(from: number)
-        questionScores[index].score = type
+        questionScores[index].selectedAnswer = type
         changeButtonImage()
     }
 }

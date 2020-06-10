@@ -26,7 +26,7 @@ class MdlProfile: Codable {
     /** 名（カナ） */
      var firstNameKana: String = ""
 
-    var birthday: Date = Date(timeIntervalSince1970: 0)
+    var birthday: Date = Constants.SelectItemsUndefineDate
     /** 性別 */
      var gender: Code = ""
     /** 郵便番号 */
@@ -74,7 +74,7 @@ class MdlProfile: Codable {
             let _tmp = DateHelper.convStr2Date(bufDate)
             _birthday = _tmp
         } else {
-            _birthday = Date()
+            _birthday = Constants.SelectItemsUndefineBirthday//未設定時の誕生日初期値
         }
         self.init(
             nickname: dto.nickname ?? "",

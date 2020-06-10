@@ -73,7 +73,6 @@ class SubSelectSpecialVC: BaseVC {
         self.tableVW.register(UINib(nibName: "SubSelectSyouTBCell", bundle: nil), forCellReuseIdentifier: "Cell_SubSelectSyouTBCell")
     }
     func initData(_ delegate: SubSelectFeedbackDelegate, editableItem: EditableItemH, selectingCodes: String) {
-        print("✳️✳️[\(editableItem.debugDisp)]✳️[\(selectingCodes)]✳️タイプとか確認")
         self.delegate = delegate
         switch editableItem.editType {
         case .selectSpecial:
@@ -83,8 +82,22 @@ class SubSelectSpecialVC: BaseVC {
         default:
             break
         }
-        selectMaxCount = 1        
         
+        
+        
+        switch editableItem.editableItemKey {
+        case EditItemMdlResumeLastJobExperiment.jobType.itemKey:
+            selectMaxCount = 1
+        case EditItemMdlFirstInputLastJobExperiments.jobType.itemKey:
+            selectMaxCount = 1
+        default:
+            selectMaxCount = 5 //とりあえず
+        }
+
+        selectMaxCount = 1
+        print("\t\(editableItem.debugDisp) これに応じて、選択最大を設定する [\(selectMaxCount)]")
+
+
         self.editableItem = editableItem
         self.mainTsvMaster = editableItem.editItem.tsvMaster
         switch editableItem.editItem.tsvMaster {
@@ -104,13 +117,16 @@ class SubSelectSpecialVC: BaseVC {
             }.map { (item) -> CodeDisp in
                 item.codeDisp
             }
-//            print(" * \(itemDai.debugDisp) - \(hoge.count)件")
             arrDataGrp.append(hoge)
-            arrSelected.append(true)//該当セクションが展開されているか否か
+            arrSelected.append(false)//該当セクションが展開されているか否か
+            if Constants.DbgDispStatus {
+                arrSelected.append(true)//すべて展開しておく
+            }
         }
     }
     func dispData() {
-        let bufTitle: String = "\(editableItem.dispName) \(dicSelectedCode.count)件選択"
+//        let bufTitle: String = "\(editableItem.dispName) \(dicSelectedCode.count)件選択"
+        let bufTitle: String = "\(editableItem.dispName)"
         lblTitle.text(text: bufTitle, fontType: .font_L, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -167,6 +183,11 @@ extension SubSelectSpecialVC: UITableViewDataSource, UITableViewDelegate {
                 tableView.reloadRows(at: [indexPath], with: .none) //該当セルの描画しなおし
                 dispData()
             } else { //選択されてない
+                //選択数の最大を超えるかのチェック
+                if dicSelectedCode.count >= selectMaxCount {
+                    showConfirm(title: "", message: "合計\(selectMaxCount)個までしか選択できません", onlyOK: true)
+                    return
+                }
                 if selectYearMode {//年数選択が必要か、そのまま選択可能か
                     tfSubDummy.text = item.code
                     curSubItem = (item.code, indexPath)
@@ -188,18 +209,18 @@ extension SubSelectSpecialVC: SubSelectProtocol {
 //=== 複数選択ポップアップで選択させる場合の処理 ===
 extension SubSelectSpecialVC: SubSelectBaseDelegate {
     func actPopupSelect(selectedItemsCode: String) {
-//        //___選択状態の確認
-        print("\t🐼🐼[\(selectedItemsCode)]🐼これが選択されました🐼Special🐼")//編集中の値の保持（と描画）
-//        if selectYearMode {
-//            for item in SelectItemsManager.convCodeDisp(mainTsvMaster, subTsvMaster, selectedItemsCode) {
-//                print(item.0.debugDisp, item.1.debugDisp)
-//            }
-//        } else {
-//            for item in SelectItemsManager.convCodeDisp(mainTsvMaster, selectedItemsCode) {
-//                print(item.debugDisp)
-//            }
-//        }
-//        //^^^選択状態の確認
+        //___選択状態の確認
+        print("\t🐼1🐼[\(selectedItemsCode)]🐼これが選択されました🐼Special🐼")//編集中の値の保持（と描画）
+        if selectYearMode {
+            for item in SelectItemsManager.convCodeDisp(mainTsvMaster, subTsvMaster, selectedItemsCode) {
+                print(#line, "\t🐼1a🐼\t", item.0.debugDisp, item.1.debugDisp)
+            }
+        } else {
+            for item in SelectItemsManager.convCodeDisp(mainTsvMaster, selectedItemsCode) {
+                print(#line, "\t🐼1b🐼\t", item.debugDisp)
+            }
+        }
+        //^^^選択状態の確認
         self.delegate?.changedSelect(editItem: self.editableItem, codes: selectedItemsCode) //フィードバックしておく
         self.dismiss(animated: true) { }
     }

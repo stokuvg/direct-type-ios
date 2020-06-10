@@ -62,13 +62,13 @@ extension CareerHistoryDTO {
         self.init(career)
         for (key, val) in editTempCD {
             switch key {
-            case EditItemCareerCardWorkPeriod.startDate.itemKey: self.startWorkPeriod = val
-            case EditItemCareerCardWorkPeriod.endDate.itemKey: self.endWorkPeriod = val
-            case EditItemCareerCard.companyName.itemKey: self.companyName = val
-            case EditItemCareerCard.employmentType.itemKey: self.employmentId = val
-            case EditItemCareerCard.employeesCount.itemKey: self.employees = Int(val) ?? 0
-            case EditItemCareerCard.salary.itemKey: self.salary = Int(val) ?? 0
-            case EditItemCareerCard.contents.itemKey: self.workNote = val
+            case EditItemMdlCareerCardWorkPeriod.startDate.itemKey: self.startWorkPeriod = val
+            case EditItemMdlCareerCardWorkPeriod.endDate.itemKey: self.endWorkPeriod = val
+            case EditItemMdlCareerCard.companyName.itemKey: self.companyName = val
+            case EditItemMdlCareerCard.employmentType.itemKey: self.employmentId = val
+            case EditItemMdlCareerCard.employeesCount.itemKey: self.employees = Int(val) ?? 0
+            case EditItemMdlCareerCard.salary.itemKey: self.salary = Int(val) ?? 0
+            case EditItemMdlCareerCard.contents.itemKey: self.workNote = val
             default: break
             }
         }

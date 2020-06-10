@@ -56,7 +56,6 @@ class SubInputMemoVC: BaseVC {
 //=== テキスト入力したものの確定処理 ===
 extension SubInputMemoVC {
     func actPopupSelect(text: String) {
-        print(#line, #function, text)
         self.delegate?.changedSelect(editItem: self.editableItem, codes: text)
         self.dismiss(animated: true) { }
     }

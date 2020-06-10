@@ -14,4 +14,19 @@ enum ChemistryAnswerType {
     case ifAnythingsYes
     case yes
     case unanswered
+    
+    var score: Int? {
+        switch self {
+        case .no:
+            return 0
+        case .ifAnythingsNo:
+            return 1
+        case .ifAnythingsYes:
+            return 2
+        case .yes:
+            return 3
+        case .unanswered:
+            return nil
+        }
+    }
 }

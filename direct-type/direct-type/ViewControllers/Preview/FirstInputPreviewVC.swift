@@ -26,7 +26,7 @@ class FirstInputPreviewVC: PreviewBaseVC {
     override func initData() {
         title = "[A系統] 初期入力"
         
-        let firstInput = MdlFirstInput(nickname: "", gender: "", birthday: Date(), hopeArea: [], school: "", employmentStatus: "", lastJobExperiment: MdlResumeLastJobExperiment(jobType: "", jobExperimentYear: ""), salary: "", jobExperiments: [])
+        let firstInput = MdlFirstInput(nickname: "", gender: "", birthday: Constants.SelectItemsUndefineBirthday, hopeArea: [], school: "", employmentStatus: "", lastJobExperiment: MdlJobExperiment(jobType: "", jobExperimentYear: ""), salary: "", jobExperiments: [])
         self.detail = firstInput
         dispData()
     }
