@@ -71,7 +71,8 @@ class SubSelectBaseVC: BaseVC {
         editableModel.initItemEditable([editableItem])//単独だけど共通化のため
     }
     func dispData() {
-        let bufTitle: String = "\(editableItem.dispName) \(arrData.count)件"
+//        let bufTitle: String = "\(editableItem.dispName) \(arrData.count)件"
+        let bufTitle: String = "\(editableItem.dispName)"
         lblTitle.text(text: bufTitle, fontType: .font_L, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
     }
     override func viewWillAppear(_ animated: Bool) {

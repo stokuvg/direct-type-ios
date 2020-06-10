@@ -15,8 +15,8 @@ class MdlResume: Codable {
     var employmentStatus: Code
     /** 転職回数 */
     var changeCount: Code
-    var lastJobExperiment: MdlResumeLastJobExperiment
-    var jobExperiments: [MdlResumeJobExperiments]
+    var lastJobExperiment: MdlJobExperiment
+    var jobExperiments: [MdlJobExperiment]
     var businessTypes: [Code]
     var school: MdlResumeSchool
     var skillLanguage: MdlResumeSkillLanguage
@@ -24,7 +24,7 @@ class MdlResume: Codable {
     /** 自己PR */
     var ownPr: String
 
-    init(employmentStatus: Code, changeCount: Code, lastJobExperiment: MdlResumeLastJobExperiment, jobExperiments: [MdlResumeJobExperiments], businessTypes: [Code], school: MdlResumeSchool, skillLanguage: MdlResumeSkillLanguage, qualifications: [Code], ownPr: String) {
+    init(employmentStatus: Code, changeCount: Code, lastJobExperiment: MdlJobExperiment, jobExperiments: [MdlJobExperiment], businessTypes: [Code], school: MdlResumeSchool, skillLanguage: MdlResumeSkillLanguage, qualifications: [Code], ownPr: String) {
         self.employmentStatus = employmentStatus
         self.changeCount = changeCount
         self.lastJobExperiment = lastJobExperiment
@@ -49,14 +49,14 @@ class MdlResume: Codable {
             _businessTypes.append(codes)
         }
         //===
-        var _lastJobExperiments: MdlResumeLastJobExperiment = MdlResumeLastJobExperiment(jobType: "", jobExperimentYear: "")
-        var _jobExperiments: [MdlResumeJobExperiments] = []
+        var _lastJobExperiments: MdlJobExperiment = MdlJobExperiment(jobType: "", jobExperimentYear: "")
+        var _jobExperiments: [MdlJobExperiment] = []
         if let workHistorys = dto.workHistory {
             for (num, workHistory) in workHistorys.enumerated() {
                 if num == 0 {
-                    _lastJobExperiments = MdlResumeLastJobExperiment(jobType: workHistory.job3Id, jobExperimentYear: workHistory.experienceYears)
+                    _lastJobExperiments = MdlJobExperiment(jobType: workHistory.job3Id, jobExperimentYear: workHistory.experienceYears)
                 } else {
-                    _jobExperiments.append(MdlResumeJobExperiments(jobType: workHistory.job3Id, jobExperimentYear: workHistory.experienceYears))
+                    _jobExperiments.append(MdlJobExperiment(jobType: workHistory.job3Id, jobExperimentYear: workHistory.experienceYears))
                 }
             }
         }
@@ -77,7 +77,7 @@ class MdlResume: Codable {
         let _ownPr: String = ""
         self.init(employmentStatus: _employment,
                   changeCount: _changeCount,
-                  lastJobExperiment: MdlResumeLastJobExperiment(jobType: "", jobExperimentYear: ""),
+                  lastJobExperiment: MdlJobExperiment(jobType: "", jobExperimentYear: ""),
                   jobExperiments: _jobExperiments,
                   businessTypes: _businessTypes,
                   school: _school,

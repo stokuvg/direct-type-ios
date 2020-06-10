@@ -24,14 +24,14 @@ class MdlFirstInput: Codable {
     var employmentStatus: Code = ""
     //case .jobExperimentsA11:        return "直近経験職種"
     //case .jobExperimentsYearA12:    return "直近の職種の経験年数"
-    var lastJobExperiment: MdlResumeLastJobExperiment
+    var lastJobExperiment: MdlJobExperiment
     //case .salaryA13:            return "現在の年収"
     var salary: Code = ""
     //case .jobExperimentsA14:    return "追加経験職種"
-    var jobExperiments: [MdlResumeJobExperiments]
+    var jobExperiments: [MdlJobExperiment]
 
     
-    init(nickname: String, gender: Code, birthday: Date, hopeArea: [Code], school: Code, employmentStatus: Code, lastJobExperiment: MdlResumeLastJobExperiment, salary: Code, jobExperiments: [MdlResumeJobExperiments]) {
+    init(nickname: String, gender: Code, birthday: Date, hopeArea: [Code], school: Code, employmentStatus: Code, lastJobExperiment: MdlJobExperiment, salary: Code, jobExperiments: [MdlJobExperiment]) {
         self.nickname = nickname
         self.gender = gender
         self.birthday = birthday

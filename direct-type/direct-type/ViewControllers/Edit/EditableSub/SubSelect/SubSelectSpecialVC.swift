@@ -104,7 +104,6 @@ class SubSelectSpecialVC: BaseVC {
             }.map { (item) -> CodeDisp in
                 item.codeDisp
             }
-//            print(" * \(itemDai.debugDisp) - \(hoge.count)件")
             arrDataGrp.append(hoge)
             arrSelected.append(true)//該当セクションが展開されているか否か
         }
