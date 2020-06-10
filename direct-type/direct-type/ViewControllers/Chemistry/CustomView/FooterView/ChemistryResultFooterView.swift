@@ -8,11 +8,20 @@
 
 import UIKit
 
+protocol ChemistryResultFooterViewDelegate: class {
+    func didTapCompleteButton()
+}
+
 final class ChemistryResultFooterView: UIView {
     @IBOutlet private weak var whiteBackgroundView: UIView!
+    @IBAction func completeButton(_ sender: UIButton) {
+        delegate?.didTapCompleteButton()
+    }
+    
+    private let whiteBackgroundViewCornerRadius: CGFloat = 10
     
     static let height: CGFloat = 120
-    private let whiteBackgroundViewCornerRadius: CGFloat = 10
+    weak var delegate: ChemistryResultFooterViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)

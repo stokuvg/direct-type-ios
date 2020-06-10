@@ -53,6 +53,9 @@
                             <real key="value" value="25"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="completeButton:" destination="-1" eventType="touchUpInside" id="y6n-gs-cG3"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" name="color-base"/>

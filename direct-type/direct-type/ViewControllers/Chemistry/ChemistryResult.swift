@@ -85,6 +85,7 @@ extension ChemistryResult: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footer = ChemistryResultFooterView()
+        footer.delegate = self
         return footer
     }
     
@@ -125,5 +126,11 @@ extension ChemistryResult: UITableViewDataSource {
             cell.configure(with: getAvarageAvilityScore())
             return cell
         }
+    }
+}
+
+extension ChemistryResult: ChemistryResultFooterViewDelegate {
+    func didTapCompleteButton() {
+        navigationController?.popToRootViewController(animated: true)
     }
 }
