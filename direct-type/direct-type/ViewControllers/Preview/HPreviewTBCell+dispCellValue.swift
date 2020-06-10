@@ -201,7 +201,9 @@ extension HPreviewTBCell {
             return disp.joined(separator: "\n")
         //========================
         //[A系統]初回入力
-        //case .nicknameA6:             //=== [A-5/6] 入力（ニックネーム）
+        case .nicknameA6:             //=== [A-5/6] 入力（ニックネーム）
+            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
+            return _item.childItems[0].curVal
         case .genderA7:               //=== [A-7] 入力（性別）
             let tmpGender: String = _item.childItems[0].curVal
             let bufGender: String = SelectItemsManager.getCodeDisp(.gender, code: tmpGender)?.disp ?? "--"

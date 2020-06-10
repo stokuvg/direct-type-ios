@@ -48,6 +48,14 @@ class HEditTextTBCell: UITableViewCell {
             bufVal = _item.valDisp
         case .selectSpecial:
             bufVal = _item.valDisp
+        case .inputText:
+            if _item.editItem.valid.type == .number {
+                if _item.curVal == "0" {
+                    bufVal = ""
+                    break
+                }
+            }
+            bufVal = _item.curVal
         default:
             bufVal = _item.curVal
         }

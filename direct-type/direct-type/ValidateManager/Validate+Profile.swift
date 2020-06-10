@@ -95,31 +95,6 @@ extension EditItemMdlProfile {
     }
 }
 
-extension EditItemMdlResume {
-    var valid: ValidInfo {
-        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
-    }
-}
-extension MdlResumeSchool {
-    var valid: ValidInfo {
-        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
-    }
-}
-extension EditItemMdlResumeSkillLanguage {
-    var valid: ValidInfo {
-        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
-    }
-}
-extension EditItemMdlResumeLastJobExperiment {
-    var valid: ValidInfo {
-        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
-    }
-}
-extension EditItemMdlResumeJobExperiments {
-    var valid: ValidInfo {
-        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
-    }
-}
 extension EditItemMdlAppSmoothCareer {
     var valid: ValidInfo {
         return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
