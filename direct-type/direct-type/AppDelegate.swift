@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AWSMobileClient.default().initialize { (userState, error) in
             if let userState = userState {
                 print("UserState: \(userState.rawValue)")
-                loginFlag = false
+                loginFlag = true
             } else if let error = error {
                 print("error: \(error.localizedDescription)")
                 loginFlag = false
