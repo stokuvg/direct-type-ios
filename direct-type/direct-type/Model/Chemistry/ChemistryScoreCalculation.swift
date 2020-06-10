@@ -1,5 +1,5 @@
 //
-//  AbilityCalculation.swift
+//  ChemistryScoreCalculation.swift
 //  direct-type
 //
 //  Created by yamataku on 2020/06/08.
