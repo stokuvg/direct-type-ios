@@ -10,7 +10,7 @@ import UIKit
 
 extension ValidateManager {
 
-    class func canvValidErrMsgProfile(_ arrValidErrMsg: [SwaValidErrMsg]) -> ([MdlItemHTypeKey: [String]],
+    class func convValidErrMsgProfile(_ arrValidErrMsg: [SwaValidErrMsg]) -> ([MdlItemHTypeKey: [String]],
         [EditableItemKey: [String]]) {
         var dicGrpError: [MdlItemHTypeKey: [String]] = [:]
         var dicError: [EditableItemKey: [String]] = [:]
@@ -33,46 +33,6 @@ extension ValidateManager {
         }
         dicGrpError = makeGrpErrByItemErr(dicError)//これだと配列の足し込み非対応なのでメッセージ減る
         return (dicGrpError, dicError)
-    }
-        
-    class func makeGrpErrByItemErr(_ dicError: [EditableItemKey: [String]]) -> ([MdlItemHTypeKey: [String]]) {
-        var dicGrpError: [MdlItemHTypeKey: [String]] = [:]
-        for (key, val) in dicError {
-            switch key {
-            //===プロフィール
-            case EditItemMdlProfile.familyName.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.fullnameH2.itemKey, val: val)
-            case EditItemMdlProfile.firstName.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.fullnameH2.itemKey, val: val)
-            case EditItemMdlProfile.familyNameKana.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.fullnameH2.itemKey, val: val)
-            case EditItemMdlProfile.firstNameKana.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.fullnameH2.itemKey, val: val)
-            case EditItemMdlProfile.birthday.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.birthGenderH2.itemKey, val: val)
-            case EditItemMdlProfile.gender.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.birthGenderH2.itemKey, val: val)
-            case EditItemMdlProfile.zipCode.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.adderssH2.itemKey, val: val)
-            case EditItemMdlProfile.prefecture.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.adderssH2.itemKey, val: val)
-            case EditItemMdlProfile.address1.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.adderssH2.itemKey, val: val)
-            case EditItemMdlProfile.address2.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.adderssH2.itemKey, val: val)
-            case EditItemMdlProfile.mailAddress.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.emailH2.itemKey, val: val)
-            case EditItemMdlProfile.mobilePhoneNo.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.mobilephoneH2.itemKey, val: val)
-            //===[A系統]初期入力
-            case EditItemMdlFirstInput.nickname.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.nicknameA6.itemKey, val: val)
-            case EditItemMdlFirstInput.gender.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.genderA7.itemKey, val: val)
-            case EditItemMdlFirstInput.birthday.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.birthdayA8.itemKey, val: val)
-            case EditItemMdlFirstInput.hopeArea.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.hopeAreaA9.itemKey, val: val)
-            case EditItemMdlFirstInput.school.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.schoolA10.itemKey, val: val)
-            case EditItemMdlFirstInput.employmentStatus.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.employmentStatusA21.itemKey, val: val)
-            //セットで扱うので片方で良い
-            //case EditItemMdlFirstInput.lastJobExperiment.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.lastJobExperimentA11.itemKey, val: val)
-            case EditItemMdlFirstInputLastJobExperiments.jobType.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.lastJobExperimentA11.itemKey, val: val)
-            //case EditItemMdlFirstInputLastJobExperiments.jobExperimentYear.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.lastJobExperimentA11.itemKey, val: val)
-            case EditItemMdlFirstInput.salary.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.salaryA13.itemKey, val: val)
-            //セットで扱うので片方で良い
-            //case EditItemMdlFirstInput.jobExperiments.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.jobExperimentsA14.itemKey, val: val)
-            case EditItemMdlFirstInputJobExperiments.jobType.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.jobExperimentsA14.itemKey, val: val)
-            //case EditItemMdlFirstInputJobExperiments.jobExperimentYear.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.jobExperimentsA14.itemKey, val: val)
-            default:
-                print("\t☠️割り当てエラー☠️[\(key): \(val)]☠️")
-            }
-        }
-        return dicGrpError
     }
 }
 
@@ -115,7 +75,7 @@ extension EditItemMdlAppSmoothCareerWorkBackgroundDetail {
         return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
     }
 }
-extension EditItemCareerCardWorkPeriod {
+extension EditItemMdlCareerCardWorkPeriod {
     var valid: ValidInfo {
         return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
     }
@@ -125,10 +85,4 @@ extension EditItemReqEntry {
         return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
     }
 }
-extension EditItemMdlResumeSchool {
-    var valid: ValidInfo {
-        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
-    }
-}
-
 

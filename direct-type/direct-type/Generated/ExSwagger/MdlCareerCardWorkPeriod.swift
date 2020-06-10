@@ -33,7 +33,7 @@ class MdlCareerCardWorkPeriod: Codable {
 }
 
 //=== 編集用の項目と定義など
-enum EditItemCareerCardWorkPeriod: String, EditItemProtocol {
+enum EditItemMdlCareerCardWorkPeriod: String, EditItemProtocol {
     case startDate
     case endDate
     //表示名

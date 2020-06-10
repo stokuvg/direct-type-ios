@@ -61,7 +61,7 @@ class MdlCareerCard: Codable {
 }
 
 //=== 編集用の項目と定義など
-enum EditItemCareerCard: String, EditItemProtocol {
+enum EditItemMdlCareerCard: String, EditItemProtocol {
     case workPeriod
     case companyName
     case employmentType

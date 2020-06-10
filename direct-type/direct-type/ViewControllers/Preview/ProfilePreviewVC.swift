@@ -162,7 +162,7 @@ extension ProfilePreviewVC {
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
             case 400:
-                let (dicGrpError, dicError) = ValidateManager.canvValidErrMsgProfile(myErr.arrValidErrMsg)
+                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
                 self.dicGrpValidErrMsg = dicGrpError
                 self.dicValidErrMsg = dicError
             default:
@@ -187,7 +187,7 @@ extension ProfilePreviewVC {
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
             case 400:
-                let (dicGrpError, dicError) = ValidateManager.canvValidErrMsgProfile(myErr.arrValidErrMsg)
+                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
                 self.dicGrpValidErrMsg = dicGrpError
                 self.dicValidErrMsg = dicError
             default:

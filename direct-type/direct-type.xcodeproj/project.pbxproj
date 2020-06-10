@@ -265,6 +265,7 @@
 		26BF48EB24639D6500E00215 /* SelectItemsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF48EA24639D6500E00215 /* SelectItemsManager.swift */; };
 		26BF48EE24639DEE00E00215 /* EditableObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF48ED24639DED00E00215 /* EditableObj.swift */; };
 		26BF48F024639E7100E00215 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF48EF24639E7100E00215 /* Constants.swift */; };
+		26C8A6C32490D22600D6B96C /* Validate+Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C8A6C22490D22600D6B96C /* Validate+Base.swift */; };
 		26CFC45F2469495800E458E2 /* ConstantsPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFC45E2469495800E458E2 /* ConstantsPreview.swift */; };
 		26CFC4662469496D00E458E2 /* HEditZipcodeTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFC4602469496D00E458E2 /* HEditZipcodeTBCell.swift */; };
 		26CFC4672469496D00E458E2 /* Edit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26CFC4612469496D00E458E2 /* Edit.storyboard */; };
@@ -551,6 +552,7 @@
 		26BF48EA24639D6500E00215 /* SelectItemsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectItemsManager.swift; sourceTree = "<group>"; };
 		26BF48ED24639DED00E00215 /* EditableObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableObj.swift; sourceTree = "<group>"; };
 		26BF48EF24639E7100E00215 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		26C8A6C22490D22600D6B96C /* Validate+Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validate+Base.swift"; sourceTree = "<group>"; };
 		26CFC45E2469495800E458E2 /* ConstantsPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsPreview.swift; sourceTree = "<group>"; };
 		26CFC4602469496D00E458E2 /* HEditZipcodeTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HEditZipcodeTBCell.swift; sourceTree = "<group>"; };
 		26CFC4612469496D00E458E2 /* Edit.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Edit.storyboard; sourceTree = "<group>"; };
@@ -1166,6 +1168,7 @@
 			isa = PBXGroup;
 			children = (
 				26A1F57B247F5D3300834213 /* ValidateManager.swift */,
+				26C8A6C22490D22600D6B96C /* Validate+Base.swift */,
 				26A1F57D247FB28B00834213 /* Validate+Profile.swift */,
 				26AF323C248F7F6B00AA78FD /* Validate+FirstInput.swift */,
 				260DD26A248E179000BFB9FE /* Validate+Career.swift */,
@@ -1666,6 +1669,7 @@
 				06AA8C602484B46B001733FA /* MyPageProfileCompletionCell.swift in Sources */,
 				26CFC4662469496D00E458E2 /* HEditZipcodeTBCell.swift in Sources */,
 				06E5198D2457D6FF004E4B7A /* ChemistryStart.swift in Sources */,
+				26C8A6C32490D22600D6B96C /* Validate+Base.swift in Sources */,
 				0E6951B5248A1FC600D58E6E /* ChemistrySelectFooterView.swift in Sources */,
 				26F2A81D246D10DA0037D47F /* MdlCareer.swift in Sources */,
 				268BFF5E246E8FF8004B2640 /* MdlAppSmoothCareerComponyDescriptionWorkPeriod.swift in Sources */,

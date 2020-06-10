@@ -23,6 +23,17 @@ extension EditItemMdlResume {
         }
     }
 }
+extension EditItemMdlResumeSchool {
+    var valid: ValidInfo {
+        switch self {
+        case .schoolName:       return ValidInfo(required: false, keta: nil, max: nil, type: .zenkaku)
+        case .department:       return ValidInfo(required: false, keta: nil, max: nil, type: .zenkaku)
+        case .subject:          return ValidInfo(required: false, keta: nil, max: nil, type: .zenkaku)
+        case .graduationYear:   return ValidInfo(required: false, keta: nil, max: nil, type: .code)
+        }
+    }
+}
+
 extension EditItemMdlResumeSkillLanguage {
     var valid: ValidInfo {
         switch self {
@@ -35,11 +46,17 @@ extension EditItemMdlResumeSkillLanguage {
 }
 extension EditItemMdlResumeLastJobExperiment {
     var valid: ValidInfo {
-        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
+        switch self {
+        case .jobType:              return ValidInfo(required: false, keta: nil, max: nil, type: .code)
+        case .jobExperimentYear:    return ValidInfo(required: false, keta: nil, max: nil, type: .code)
+        }
     }
 }
 extension EditItemMdlResumeJobExperiments {
     var valid: ValidInfo {
-        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
+        switch self {
+        case .jobType:              return ValidInfo(required: false, keta: nil, max: nil, type: .code)
+        case .jobExperimentYear:    return ValidInfo(required: false, keta: nil, max: nil, type: .code)
+        }
     }
 }

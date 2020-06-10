@@ -10,7 +10,7 @@ import UIKit
 
 extension ValidateManager {
 
-    class func canvValidErrMsgCareer(_ arrValidErrMsg: [SwaValidErrMsg]) -> ([MdlItemHTypeKey: [String]],
+    class func convValidErrMsgCareer(_ arrValidErrMsg: [SwaValidErrMsg]) -> ([MdlItemHTypeKey: [String]],
         [EditableItemKey: [String]]) {
         var dicGrpError: [MdlItemHTypeKey: [String]] = [:]
         var dicError: [EditableItemKey: [String]] = [:]
@@ -35,19 +35,19 @@ extension ValidateManager {
             //===個別のエラー
             switch valid.property { //これで対応する項目に結びつける
             case "startWorkPeriod":
-                dicError.addDicArrVal(key: EditItemCareerCardWorkPeriod.startDate.itemKey, val: valid.constraintsVal)
+                dicError.addDicArrVal(key: EditItemMdlCareerCardWorkPeriod.startDate.itemKey, val: valid.constraintsVal)
             case "endWorkPeriod":
-                dicError.addDicArrVal(key: EditItemCareerCardWorkPeriod.endDate.itemKey, val: valid.constraintsVal)
+                dicError.addDicArrVal(key: EditItemMdlCareerCardWorkPeriod.endDate.itemKey, val: valid.constraintsVal)
             case "companyName":
-                dicError.addDicArrVal(key: EditItemCareerCard.companyName.itemKey, val: valid.constraintsVal)
+                dicError.addDicArrVal(key: EditItemMdlCareerCard.companyName.itemKey, val: valid.constraintsVal)
             case "employmentId":
-                dicError.addDicArrVal(key: EditItemCareerCard.employmentType.itemKey, val: valid.constraintsVal)
+                dicError.addDicArrVal(key: EditItemMdlCareerCard.employmentType.itemKey, val: valid.constraintsVal)
             case "employees":
-                dicError.addDicArrVal(key: EditItemCareerCard.employeesCount.itemKey, val: valid.constraintsVal)
+                dicError.addDicArrVal(key: EditItemMdlCareerCard.employeesCount.itemKey, val: valid.constraintsVal)
             case "salary":
-                dicError.addDicArrVal(key: EditItemCareerCard.salary.itemKey, val: valid.constraintsVal)
+                dicError.addDicArrVal(key: EditItemMdlCareerCard.salary.itemKey, val: valid.constraintsVal)
             case "workNote":
-                dicError.addDicArrVal(key: EditItemCareerCard.contents.itemKey, val: valid.constraintsVal)
+                dicError.addDicArrVal(key: EditItemMdlCareerCard.contents.itemKey, val: valid.constraintsVal)
             default:
                 print("❤️\t[\(valid.property)]\t[\(valid.constraintsKey)] : [\(valid.constraintsVal)]")
             }
@@ -61,7 +61,7 @@ extension EditItemCareer {
         return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
     }
 }
-extension EditItemCareerCard {
+extension EditItemMdlCareerCard {
     var valid: ValidInfo {
         switch self {
         case .workPeriod:       return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
