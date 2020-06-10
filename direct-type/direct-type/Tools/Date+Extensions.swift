@@ -12,7 +12,7 @@ class DateHelper {
     class func convStr2Date(_ buf: String) -> Date {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withFullDate]
-        let date = formatter.date(from: buf) ?? Date(timeIntervalSince1970: 0)
+        let date = formatter.date(from: buf) ?? Constants.SelectItemsUndefineDate
         return date
     }
     class func convDate2Str(_ date: Date) -> String {

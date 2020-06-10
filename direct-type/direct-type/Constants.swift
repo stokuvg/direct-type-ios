@@ -20,7 +20,11 @@ struct Constants {
     //=== 認証関連 (これと、【awsconfiguration.json】に設定しておく)
     static let CognitoIdentityPoolId: String = "ap-northeast-1:4da204bb-c86f-419d-9879-8744af15248f"
     
-    //選択しなどでマスタからの選択だった場合の文言
+
+    //無指定だったときの日時
+    static let SelectItemsUndefineDate: Date = DateHelper.convStr2Date("1900-01-01")
+    static let SelectItemsUndefineBirthday: Date = DateHelper.convStr2Date("1996-01-01")//誕生日の場合の初期値
+    //選択肢などでマスタからの選択だった場合の文言
     static let SelectItemsUndefine: CodeDisp = CodeDisp("", "<未選択>")  //未定義な値だった場合
     //プレビュ・編集などでの未設定時（初期値）での表示文字列
     static let SelectItemsValEmpty: CodeDisp = CodeDisp("", "<未入力>")
@@ -30,7 +34,7 @@ struct Constants {
     //[Debug] Debug時以外はfalseにすべきフラグで設定しておく
     static let DbgAutoSelTabVC: Bool = false
     static let DbgAutoPushVC: Bool = true
-    static let DbgAutoPushVCNum: Int = 1 //0:なし, 1:プロフィール, 2:履歴書, 3:職歴, 4:サクサク職歴, 5:初回入力
+    static let DbgAutoPushVCNum: Int = 5 //0:なし, 1:プロフィール, 2:履歴書, 3:職歴, 4:サクサク職歴, 5:初回入力
     static let DbgOfflineMode: Bool = false
     static let DbgDispStatus: Bool = false
     static let DbgSkipLocalValidate: Bool = false

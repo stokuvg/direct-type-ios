@@ -80,6 +80,7 @@ extension ValidateManager {
                 guard validInfo.required == true else { continue }
                 let (_, editTemp) = editableModel.makeTempItem(item)
                 if editTemp.curVal == "" {
+                    print(item.debugDisp)
                     dicError.addDicArrVal(key: item.editableItemKey, val: (validInfo.type == .code) ? "選択してください" : "未入力です。入力してください")
                 }
             }
