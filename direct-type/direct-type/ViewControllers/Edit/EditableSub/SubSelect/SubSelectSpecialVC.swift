@@ -82,8 +82,22 @@ class SubSelectSpecialVC: BaseVC {
         default:
             break
         }
-        selectMaxCount = 1        
         
+        
+        
+        switch editableItem.editableItemKey {
+        case EditItemMdlResumeLastJobExperiment.jobType.itemKey:
+            selectMaxCount = 1
+        case EditItemMdlFirstInputLastJobExperiments.jobType.itemKey:
+            selectMaxCount = 1
+        default:
+            selectMaxCount = 5 //とりあえず
+        }
+
+        selectMaxCount = 1
+        print("\t\(editableItem.debugDisp) これに応じて、選択最大を設定する [\(selectMaxCount)]")
+
+
         self.editableItem = editableItem
         self.mainTsvMaster = editableItem.editItem.tsvMaster
         switch editableItem.editItem.tsvMaster {
@@ -104,12 +118,15 @@ class SubSelectSpecialVC: BaseVC {
                 item.codeDisp
             }
             arrDataGrp.append(hoge)
-            arrSelected.append(true)//該当セクションが展開されているか否か
+            arrSelected.append(false)//該当セクションが展開されているか否か
+            if Constants.DbgDispStatus {
+                arrSelected.append(true)//すべて展開しておく
+            }
         }
     }
     func dispData() {
 //        let bufTitle: String = "\(editableItem.dispName) \(dicSelectedCode.count)件選択"
-        let bufTitle: String = "\(editableItem.dispName) \(dicSelectedCode.count)件選択"
+        let bufTitle: String = "\(editableItem.dispName)"
         lblTitle.text(text: bufTitle, fontType: .font_L, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -166,6 +183,11 @@ extension SubSelectSpecialVC: UITableViewDataSource, UITableViewDelegate {
                 tableView.reloadRows(at: [indexPath], with: .none) //該当セルの描画しなおし
                 dispData()
             } else { //選択されてない
+                //選択数の最大を超えるかのチェック
+                if dicSelectedCode.count >= selectMaxCount {
+                    showConfirm(title: "", message: "合計\(selectMaxCount)個までしか選択できません", onlyOK: true)
+                    return
+                }
                 if selectYearMode {//年数選択が必要か、そのまま選択可能か
                     tfSubDummy.text = item.code
                     curSubItem = (item.code, indexPath)

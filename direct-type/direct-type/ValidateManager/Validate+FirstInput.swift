@@ -10,7 +10,7 @@ import UIKit
 
 extension ValidateManager {
 
-    class func canvValidErrMsgFirstInput(_ arrValidErrMsg: [SwaValidErrMsg]) -> ([MdlItemHTypeKey: [String]],
+    class func convValidErrMsgFirstInput(_ arrValidErrMsg: [SwaValidErrMsg]) -> ([MdlItemHTypeKey: [String]],
         [EditableItemKey: [String]]) {
         var dicGrpError: [MdlItemHTypeKey: [String]] = [:]
         var dicError: [EditableItemKey: [String]] = [:]

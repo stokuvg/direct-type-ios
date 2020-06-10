@@ -162,16 +162,31 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
         //================================================
         switch item.type {
         case .lastJobExperimentH3, .jobExperimentsH3, .businessTypesH3, .lastJobExperimentA11, .jobExperimentsA14:
-            let storyboard = UIStoryboard(name: "Edit", bundle: nil)
-            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubEditSpecialVC") as? SubEditSpecialVC{
-                var arrErrMsg: [EditableItemKey: [ValidationErrMsg]] = [:] //子画面に引き渡すエラー
-                arrErrMsg = dicValidErrMsg //抜粋せずに、まるっと渡しておく
-                nvc.initData(self, item, arrErrMsg)
-                //遷移アニメーション関連
-                nvc.modalTransitionStyle = .coverVertical
-                self.present(nvc, animated: true) {
+//            let storyboard = UIStoryboard(name: "Edit", bundle: nil)
+//            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubEditSpecialVC") as? SubEditSpecialVC{
+//                var arrErrMsg: [EditableItemKey: [ValidationErrMsg]] = [:] //子画面に引き渡すエラー
+//                arrErrMsg = dicValidErrMsg //抜粋せずに、まるっと渡しておく
+//                nvc.initData(self, item, arrErrMsg)
+//                //遷移アニメーション関連
+//                nvc.modalTransitionStyle = .coverVertical
+//                self.present(nvc, animated: true) {
+//                }
+//            }
+            print("\t💙💙💙\(item.debugDisp)💙💙💙")
+            let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
+            if let _item = item.childItems.first {
+                if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSpecialVC") as? SubSelectSpecialVC{
+                    nvc.initData(self, editableItem: _item, selectingCodes: _item.curVal)
+                    //遷移アニメーション関連
+                    nvc.modalTransitionStyle = .crossDissolve
+                    self.present(nvc, animated: true) {}
                 }
             }
+            //直接、特殊選択画面へ遷移させる
+
+            break
+
+            
         default:
             let storyboard = UIStoryboard(name: "Edit", bundle: nil)
             if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubEditBaseVC") as? SubEditBaseVC{

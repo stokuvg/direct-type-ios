@@ -67,28 +67,28 @@ class CareerPreviewVC: PreviewBaseVC {
         //[C-15]職務経歴書編集
         //case .workPeriod:       return "雇用期間"
         arrData.append(MdlItemH(.workPeriodC15, "", childItems: [
-            EditableItemH(type: .selectDrumYMD, editItem: EditItemCareerCardWorkPeriod.startDate, val: _detail.workPeriod.startDate.dispYmd()),
-            EditableItemH(type: .selectDrumYMD, editItem: EditItemCareerCardWorkPeriod.endDate, val: _detail.workPeriod.endDate.dispYmd()),
+            EditableItemH(type: .selectDrumYMD, editItem: EditItemMdlCareerCardWorkPeriod.startDate, val: _detail.workPeriod.startDate.dispYmd()),
+            EditableItemH(type: .selectDrumYMD, editItem: EditItemMdlCareerCardWorkPeriod.endDate, val: _detail.workPeriod.endDate.dispYmd()),
         ]))
         //case .companyName:      return "企業名"
         arrData.append(MdlItemH(.companyNameC15, "", childItems: [
-            EditableItemH(type: .inputText, editItem: EditItemCareerCard.companyName, val: _detail.companyName),
+            EditableItemH(type: .inputText, editItem: EditItemMdlCareerCard.companyName, val: _detail.companyName),
         ]))
         //case .employmentType:   return "雇用形態"
         arrData.append(MdlItemH(.employmentTypeC15, "", childItems: [
-            EditableItemH(type: .selectSingle, editItem: EditItemCareerCard.employmentType, val: _detail.employmentType),
+            EditableItemH(type: .selectSingle, editItem: EditItemMdlCareerCard.employmentType, val: _detail.employmentType),
         ]))
         //case .employeesCount:   return "従業員数"
         arrData.append(MdlItemH(.employeesCountC15, "", childItems: [
-            EditableItemH(type: .inputText, editItem: EditItemCareerCard.employeesCount, val: _detail.employeesCount),
+            EditableItemH(type: .inputText, editItem: EditItemMdlCareerCard.employeesCount, val: _detail.employeesCount),
         ]))
         //case .salary:           return "年収"
         arrData.append(MdlItemH(.salaryC15, "", childItems: [
-            EditableItemH(type: .selectSingle, editItem: EditItemCareerCard.salary, val: _detail.salary),
+            EditableItemH(type: .selectSingle, editItem: EditItemMdlCareerCard.salary, val: _detail.salary),
         ]))
         //case .contents:         return "職務内容本文"
         arrData.append(MdlItemH(.contentsC15, "", childItems: [
-            EditableItemH(type: .inputMemo, editItem: EditItemCareerCard.contents, val: _detail.contents),
+            EditableItemH(type: .inputMemo, editItem: EditItemMdlCareerCard.contents, val: _detail.contents),
         ]))
         
         //=== editableModelで管理させる
@@ -149,7 +149,7 @@ extension CareerPreviewVC {
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
             case 400:
-                let (dicGrpError, dicError) = ValidateManager.canvValidErrMsgCareer(myErr.arrValidErrMsg)
+                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgCareer(myErr.arrValidErrMsg)
                 self.dicGrpValidErrMsg = dicGrpError
                 self.dicValidErrMsg = dicError
             default:
@@ -176,7 +176,7 @@ extension CareerPreviewVC {
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
             case 400:
-                let (dicGrpError, dicError) = ValidateManager.canvValidErrMsgCareer(myErr.arrValidErrMsg)
+                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgCareer(myErr.arrValidErrMsg)
                 self.dicGrpValidErrMsg = dicGrpError
                 self.dicValidErrMsg = dicError
             default:
