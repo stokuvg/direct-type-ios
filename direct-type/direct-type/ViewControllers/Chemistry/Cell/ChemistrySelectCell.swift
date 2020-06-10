@@ -51,7 +51,7 @@ final class ChemistrySelectCell: UITableViewCell {
     private weak var delegate: ChemistrySelectCellDelegate?
     private var number: Int? = nil {
         didSet {
-            questionNumberLabel.text = String(number!)
+            questionNumberLabel.text = String(number!) + "."
         }
     }
     private var question: ChemistryQuestion? = nil {
