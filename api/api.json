@@ -657,6 +657,11 @@
             "example": "【急募】部長候補！高待遇で活躍できる。「東証一部上場」へ向けた急成長企業の経理財務業務",
             "description": "メイン記事メインタイトル"
           },
+          "mainPhotoURL": {
+            "type": "string",
+            "example": "https://type.jp/noindex-image?id=666666",
+            "description": "求人メイン画像URL"
+          },
           "minSalaryId": {
             "type": "string",
             "example": "1",
@@ -689,6 +694,7 @@
           "pressStartDate",
           "pressEndDate",
           "mainTitle",
+          "mainPhotoURL",
           "minSalaryId",
           "maxSalaryId",
           "isSalaryDisplay",
@@ -1174,6 +1180,11 @@
             "example": "【急募】部長候補！高待遇で活躍できる。「東証一部上場」へ向けた急成長企業の経理財務業務",
             "description": "メイン記事メインタイトル"
           },
+          "mainPhotoURL": {
+            "type": "string",
+            "example": "https://type.jp/noindex-image?id=666666",
+            "description": "求人メイン画像URL"
+          },
           "minSalaryId": {
             "type": "string",
             "example": "1",
@@ -1201,6 +1212,7 @@
           "pressStartDate",
           "pressEndDate",
           "mainTitle",
+          "mainPhotoURL",
           "minSalaryId",
           "maxSalaryId",
           "isSalaryDisplay",
@@ -1967,7 +1979,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "undefined": {
             "description": "",
             "content": {
               "application/json": {

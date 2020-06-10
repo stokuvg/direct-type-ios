@@ -65,11 +65,9 @@ class JobOfferBigCardCell: BaseJobCardCell {
     
     func setup(data:MdlJobCard) {
         self.jobCardData = data
-        /*
         // サムネイル画像
         let imageUrlString:String = data.mainPicture
         thumnailImageView.af_setImage(withURL: URL(string: imageUrlString)!)
-         */
         
         let nowDate = Date()
         // NEWマーク 表示チェック
@@ -147,9 +145,9 @@ class JobOfferBigCardCell: BaseJobCardCell {
 //        self.skipSetting(flag:skip)
         
         // キープボタン
-//        let keep = data.keepStatus
-//        keepFlag = keep
-//        self.keepBtnSetting(flag: keep)
+        let keep = data.keepStatus
+        keepFlag = keep
+        self.keepBtnSetting(flag: keep)
         
     }
     

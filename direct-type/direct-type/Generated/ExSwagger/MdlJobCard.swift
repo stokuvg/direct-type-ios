@@ -47,7 +47,7 @@ class MdlJobCard: Codable {
     /** メイン記事メインタイトル */
     var mainTitle: String
     /** メイン記事写真 */
-//    var mainPicture: String
+    var mainPicture: String
     /** 年収下限例コード */
     var salaryMinCode: Int
     /** 年収下限例コード */
@@ -80,13 +80,13 @@ class MdlJobCard: Codable {
         self.userFilter = userFilter
     }
     */
-    init(jobCardCode: String = "",displayPeriod:EntryFormInfoDisplayPeriod = EntryFormInfoDisplayPeriod.init(startAt: "", endAt: ""), companyName: String = "", jobName:String = "", mainTitle:String = "", salaryMinCode:Int = 0, salaryMaxCode:Int = 0, salaryDisplay:Bool = false, workPlaceCode:[Int] = [], keepStatus:Bool = false) {
+    init(jobCardCode: String = "",displayPeriod:EntryFormInfoDisplayPeriod = EntryFormInfoDisplayPeriod.init(startAt: "", endAt: ""), companyName: String = "", jobName:String = "", mainTitle:String = "", mainPicture: String = "", salaryMinCode:Int = 0, salaryMaxCode:Int = 0, salaryDisplay:Bool = false, workPlaceCode:[Int] = [], keepStatus:Bool = false) {
         self.jobCardCode = jobCardCode
         self.displayPeriod = displayPeriod
         self.companyName = companyName
         self.jobName = jobName
         self.mainTitle = mainTitle
-//        self.mainPicture = mainPicture
+        self.mainPicture = mainPicture
         self.salaryMinCode = salaryMinCode
         self.salaryMaxCode = salaryMaxCode
         self.salaryDisplay = salaryDisplay
@@ -146,7 +146,7 @@ class MdlJobCard: Codable {
          
 //         self.init(jobCardCode: dto.jobCardCode, displayPeriod: _displayPeriod, companyName: dto.companyName, jobName: dto.jobName, mainTitle:dto.mainTitle, mainPicture: dto.mainPicture, salaryMinCode: minCode, salaryMaxCode: maxCode, salaryDisplay: salaryDisplay, workPlaceCode: dto.workPlaceCode, keepStatus: keep, skipStatus: skip, userFilter: _userFilter)
 
-        self.init(jobCardCode: jobCardCode, displayPeriod: _displayPeriod, companyName: dto.companyName, jobName: dto.jobName, mainTitle:dto.mainTitle, salaryMinCode: minCode!, salaryMaxCode: maxCode!, salaryDisplay: dto.isSalaryDisplay, keepStatus: dto.isKeep)
+        self.init(jobCardCode: jobCardCode, displayPeriod: _displayPeriod, companyName: dto.companyName, jobName: dto.jobName, mainTitle:dto.mainTitle,mainPicture: dto.mainPhotoURL , salaryMinCode: minCode!, salaryMaxCode: maxCode!, salaryDisplay: dto.isSalaryDisplay, keepStatus: dto.isKeep)
     }
 
     var debugDisp: String {

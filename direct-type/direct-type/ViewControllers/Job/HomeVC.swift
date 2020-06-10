@@ -541,6 +541,35 @@ extension HomeVC: BaseJobCardCellDelegate {
     func keepAction(tag: Int) {
         Log.selectLog(logLevel: .debug, "keepAction tag:\(tag)")
         // TODO:通信処理
+        let row = tag
+        let jobCard = dispJobCards.jobCards[row]
+        let jobId = jobCard.jobCardCode
+        let flag = jobCard.keepStatus
+        ApiManager.sendJobKeep(id: jobId, flag: flag)
+            .done { result in
+            Log.selectLog(logLevel: .debug, "keep send success")
+                Log.selectLog(logLevel: .debug, "keep成功")
+                
+        }.catch{ (error) in
+            Log.selectLog(logLevel: .debug, "skip send error:\(error)")
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            switch myErr.code {
+            case 404:
+                let message: String = ""
+                self.showConfirm(title: "", message: message)
+                .done { _ in
+                    Log.selectLog(logLevel: .debug, "対応方法の確認")
+                }
+                .catch { (error) in
+                }
+                .finally {
+                }
+            default: break
+            }
+            self.showError(error)
+        }.finally {
+            Log.selectLog(logLevel: .debug, "keep send finally")
+        }
     }
     
     
