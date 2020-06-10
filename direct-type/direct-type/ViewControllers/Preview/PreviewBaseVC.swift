@@ -217,6 +217,7 @@ extension PreviewBaseVC: nameEditableTableBasicDelegate {
 
 extension PreviewBaseVC: SubSelectFeedbackDelegate {
     func changedSelect(editItem: EditableItemH, codes: String) {
+        print("\t🐼1🐼[\(editItem.debugDisp)]🐼FBです🐼Single/Multi🐼")//編集中の値の保持（と描画）
         editableModel.changeTempItem(editItem, text: codes)
         chkButtonEnable()//ボタン死活チェック
         tableVW.reloadData()

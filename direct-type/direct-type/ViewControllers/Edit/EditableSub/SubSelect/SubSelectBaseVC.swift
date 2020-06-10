@@ -84,10 +84,6 @@ class SubSelectBaseVC: BaseVC {
 //=== 単一・複数選択ポップアップで選択させる場合の処理 ===
 extension SubSelectBaseVC: SubSelectBaseDelegate {
     func actPopupSelect(selectedItemsCode: String) {
-        print("\t🐼[\(selectedItemsCode)]🐼これが選択されました🐼🐼")//編集中の値の保持（と描画）
-        for item in SelectItemsManager.convCodeDisp(mainTsvMaster, selectedItemsCode) {
-            print(item.debugDisp)
-        }
         self.delegate?.changedSelect(editItem: self.editableItem, codes: selectedItemsCode) //フィードバックしておく
         self.dismiss(animated: true) {}
     }

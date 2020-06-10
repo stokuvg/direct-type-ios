@@ -64,33 +64,18 @@ struct EditableItemH {
             return "\(buf0)"
             
         case .selectSpecialYear:
-            let tmp0: String = _val
-            var arr0: [String] = []
-            print("\t🐼[\(tmp0)]🐼これが選択されました🐼🐼")//編集中の値の保持（と描画）
-            
             var disp: [String] = []
-            for job in tmp0.split(separator: "_") {
+            for job in _val.split(separator: "_") {
                 let buf = String(job).split(separator: ":")
                 guard buf.count == 2 else { continue }
                 let tmp0 = String(buf[0])
                 let tmp1 = String(buf[1])
                 let buf0: String = SelectItemsManager.getCodeDispSyou(.jobType, code: tmp0)?.disp ?? ""
                 let buf1: String = SelectItemsManager.getCodeDisp(.jobExperimentYear, code: tmp1)?.disp ?? ""
-                let bufExperiment: String = "\(buf0) \(buf1)"
+                let bufExperiment: String = "[\(buf0) \(buf1)]"
                 disp.append(bufExperiment)
             }
             return disp.count == 0 ? Constants.SelectItemsValEmpty.disp : disp.joined(separator: "\n")
-
-            
-//            for item in SelectItemsManager.convCodeDisp(editItem.tsvMaster, tmp0) {
-//                print(item.debugDisp)
-//            }
-//            print(#line, #function, "✳️✳️✳️✳️ [_val: \(_val)] ✳️✳️✳️✳️ 複数種類を結合して保持させるお程")
-//            let (dai, syou): ([CodeDisp], [GrpCodeDisp]) = SelectItemsManager.getMaster(editItem.tsvMaster)
-//            let buf = dai.description
-
-//            return "\(buf)"
-
         }
     }
     var debugDisp: String {

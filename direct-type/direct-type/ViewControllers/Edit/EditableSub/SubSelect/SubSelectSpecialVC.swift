@@ -73,7 +73,6 @@ class SubSelectSpecialVC: BaseVC {
         self.tableVW.register(UINib(nibName: "SubSelectSyouTBCell", bundle: nil), forCellReuseIdentifier: "Cell_SubSelectSyouTBCell")
     }
     func initData(_ delegate: SubSelectFeedbackDelegate, editableItem: EditableItemH, selectingCodes: String) {
-        print("✳️✳️[\(editableItem.debugDisp)]✳️[\(selectingCodes)]✳️タイプとか確認")
         self.delegate = delegate
         switch editableItem.editType {
         case .selectSpecial:
@@ -109,6 +108,7 @@ class SubSelectSpecialVC: BaseVC {
         }
     }
     func dispData() {
+//        let bufTitle: String = "\(editableItem.dispName) \(dicSelectedCode.count)件選択"
         let bufTitle: String = "\(editableItem.dispName) \(dicSelectedCode.count)件選択"
         lblTitle.text(text: bufTitle, fontType: .font_L, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
     }
@@ -187,18 +187,18 @@ extension SubSelectSpecialVC: SubSelectProtocol {
 //=== 複数選択ポップアップで選択させる場合の処理 ===
 extension SubSelectSpecialVC: SubSelectBaseDelegate {
     func actPopupSelect(selectedItemsCode: String) {
-//        //___選択状態の確認
-        print("\t🐼🐼[\(selectedItemsCode)]🐼これが選択されました🐼Special🐼")//編集中の値の保持（と描画）
-//        if selectYearMode {
-//            for item in SelectItemsManager.convCodeDisp(mainTsvMaster, subTsvMaster, selectedItemsCode) {
-//                print(item.0.debugDisp, item.1.debugDisp)
-//            }
-//        } else {
-//            for item in SelectItemsManager.convCodeDisp(mainTsvMaster, selectedItemsCode) {
-//                print(item.debugDisp)
-//            }
-//        }
-//        //^^^選択状態の確認
+        //___選択状態の確認
+        print("\t🐼1🐼[\(selectedItemsCode)]🐼これが選択されました🐼Special🐼")//編集中の値の保持（と描画）
+        if selectYearMode {
+            for item in SelectItemsManager.convCodeDisp(mainTsvMaster, subTsvMaster, selectedItemsCode) {
+                print(#line, "\t🐼1a🐼\t", item.0.debugDisp, item.1.debugDisp)
+            }
+        } else {
+            for item in SelectItemsManager.convCodeDisp(mainTsvMaster, selectedItemsCode) {
+                print(#line, "\t🐼1b🐼\t", item.debugDisp)
+            }
+        }
+        //^^^選択状態の確認
         self.delegate?.changedSelect(editItem: self.editableItem, codes: selectedItemsCode) //フィードバックしておく
         self.dismiss(animated: true) { }
     }

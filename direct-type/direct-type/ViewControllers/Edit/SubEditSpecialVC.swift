@@ -31,9 +31,8 @@ extension SubEditSpecialVC {
             let num = indexPath.row + 1
             if itemGrp.childItems.count > num {
                 let _item2 = itemGrp.childItems[num]
-                let (isChange2, editTemp2) = editableModel.makeTempItem(_item2)
-                let item2: EditableItemH! = isChange2 ? editTemp2 : _item2
-                cell.initCell(self, item, item2, errMsg: errMsg, returnKeyType)
+                let (_, editTemp2) = editableModel.makeTempItem(_item2)
+                cell.initCell(self, item, editTemp2, errMsg: errMsg, returnKeyType)
             } else {
                 cell.initCell(self, item, nil, errMsg: errMsg, returnKeyType)
             }

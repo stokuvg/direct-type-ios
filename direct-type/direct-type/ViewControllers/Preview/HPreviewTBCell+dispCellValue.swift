@@ -224,7 +224,7 @@ extension HPreviewTBCell {
                 let buf: String = SelectItemsManager.getCodeDisp(.entryPlace, code: String(code))?.disp ?? ""
                 arr0.append(buf)
             }
-            let buf0: String = arr0.joined(separator: " ")
+            let buf0: String = arr0.joined(separator: " / ")
             return buf0.isEmpty ? Constants.SelectItemsValEmpty.disp : "\(buf0)"
         case .schoolA10:              //=== [A-10] 入力（最終学歴）
             if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
