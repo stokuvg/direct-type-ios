@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "box.png",
+      "filename" : "start_back.png",
       "idiom" : "iphone",
       "scale" : "1x"
     },
     {
-      "filename" : "box@2x.png",
+      "filename" : "start_back@2x.png",
       "idiom" : "iphone",
       "scale" : "2x"
     },
     {
-      "filename" : "box@3x.png",
+      "filename" : "start_back@3x.png",
       "idiom" : "iphone",
       "scale" : "3x"
     }
