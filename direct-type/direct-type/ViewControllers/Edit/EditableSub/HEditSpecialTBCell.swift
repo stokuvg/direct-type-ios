@@ -34,6 +34,7 @@ class HEditSpecialTBCell: UITableViewCell {
         tfValue.itemKey = item.editableItemKey
         tfValue.returnKeyType = returnKeyType
         tfValue.placeholder = item.placeholder
+        tfValue.clearButtonMode = .never //クリアボタンの表示制御
     }
     
     func dispCell() {

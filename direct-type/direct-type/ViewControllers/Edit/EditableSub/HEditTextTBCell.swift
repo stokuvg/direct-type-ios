@@ -32,6 +32,13 @@ class HEditTextTBCell: UITableViewCell {
         tfValue.itemKey = item.editableItemKey
         tfValue.returnKeyType = returnKeyType
         tfValue.placeholder = item.placeholder
+        //クリアボタンの表示制御
+        switch item.editType {
+        case .inputText, .inputTextSecret:
+            tfValue.clearButtonMode = .always
+        default:
+            tfValue.clearButtonMode = .never
+        }
     }
     
     func dispCell() {

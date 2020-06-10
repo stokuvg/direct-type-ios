@@ -64,6 +64,14 @@ struct EditableItemH {
             return "\(buf0)"
             
         case .selectSpecialYear:
+            let tmp0: String = _val
+            var arr0: [String] = []
+            print("\t🐼[\(tmp0)]🐼これが選択されました🐼🐼")//編集中の値の保持（と描画）
+            for item in SelectItemsManager.convCodeDisp(editItem.tsvMaster, tmp0) {
+                print(item.debugDisp)
+            }
+
+
             print(#line, #function, "✳️✳️✳️✳️ [_val: \(_val)] ✳️✳️✳️✳️ 複数種類を結合して保持させるお程")
             let (dai, syou): ([CodeDisp], [GrpCodeDisp]) = SelectItemsManager.getMaster(editItem.tsvMaster)
             let buf = dai.description

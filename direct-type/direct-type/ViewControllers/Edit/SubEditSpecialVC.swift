@@ -19,11 +19,7 @@ extension SubEditSpecialVC {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let items = self.itemGrp?.childItems, items.count > 0 else { return UITableViewCell() }
-        print(#line, #function, itemGrp.debugDisp)
-        print(#line, #function, itemGrp.childItems.count)
-        print(#line, #function, itemGrp.childItems.description)
         let _item = items[indexPath.row]
-        
         let (isChange, editTemp) = editableModel.makeTempItem(_item)
         let item: EditableItemH! = isChange ? editTemp : _item
         switch item.editType {
