@@ -9,4 +9,4 @@ cd api
 sh gen.sh
 cd ../
 cd direct-type
-pod install
+bundle exec pod install
