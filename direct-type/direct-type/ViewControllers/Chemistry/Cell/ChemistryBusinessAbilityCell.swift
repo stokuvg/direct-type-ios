@@ -10,12 +10,19 @@ import UIKit
 
 final class ChemistryBusinessAbilityCell: UITableViewCell {
     @IBOutlet private weak var avilityStackView: UIStackView!
+    private var avilityScore: BusinessAvilityScore?
     
     func configure(with avilityScore: BusinessAvilityScore) {
-        guard avilityStackView.subviews.first(where: { $0 is ChemistryBusinessAvilityView }) == nil else { return }
+        self.avilityScore = avilityScore
+    }
+    
+    func setLayout() {
+        guard let avilityScore = avilityScore else { return }
+        avilityStackView.subviews.forEach({ $0.removeFromSuperview() })
         BusinessAvilityType.allCases.forEach({ type in
             let avilityViewFrame = CGRect(x: .zero, y: .zero, width: frame.width, height: ChemistryBusinessAvilityView.height)
-            let avilityView = ChemistryBusinessAvilityView(frame: avilityViewFrame)
+            let avilityView = ChemistryBusinessAvilityView()
+            avilityView.baseView.bounds = avilityViewFrame
             switch type {
             case .quickAction:
                 let scoreSet = ChemistryBusinessAvilityView.ScoreSet(type: type, ratio: avilityScore.quickAction)
@@ -48,7 +55,7 @@ final class ChemistryBusinessAbilityCell: UITableViewCell {
                 let scoreSet = ChemistryBusinessAvilityView.ScoreSet(type: type, ratio: avilityScore.responsibilityAndSteadiness)
                 avilityView.configure(with: scoreSet)
             }
-            avilityStackView.addArrangedSubview(avilityView)
+            avilityStackView.addArrangedSubview(avilityView.baseView)
         })
     }
 }

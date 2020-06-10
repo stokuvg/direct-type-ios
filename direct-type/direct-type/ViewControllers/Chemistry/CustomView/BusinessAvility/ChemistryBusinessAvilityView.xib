@@ -31,16 +31,17 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QBb-Ae-j48" customClass="ProportionBarView" customModule="direct_type" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="22.5" width="160" height="5"/>
+                            <rect key="frame" x="0.0" y="22.5" width="191" height="5"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <constraints>
-                                <constraint firstAttribute="width" priority="750" constant="160" id="Mxz-jz-uYx"/>
-                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="Yzk-Im-qTj"/>
                                 <constraint firstAttribute="height" constant="5" id="aGb-7u-Tg7"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OCc-jz-KBU">
-                            <rect key="frame" x="180" y="15" width="55" height="20.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OCc-jz-KBU">
+                            <rect key="frame" x="211" y="15" width="24" height="20.5"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="24" id="DR2-c5-4JZ"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" name="color-sub"/>
                             <nil key="highlightedColor"/>

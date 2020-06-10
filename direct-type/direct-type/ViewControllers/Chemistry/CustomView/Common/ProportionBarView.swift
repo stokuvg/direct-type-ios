@@ -19,17 +19,17 @@ final class ProportionBarView: UIView {
         setup()
     }
     
-    var valueRatio: Double = 0 {
-        didSet {
-            resetValueBar()
-        }
+    var valueRatio: Double = 0
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        resetValueBar()
     }
 }
 
 private extension ProportionBarView {
     var valueBarFrame: CGRect {
-        // FIXME: 検証用に固定比率にしているので後で直す
-        let valueWidth = bounds.width * 0.5//CGFloat(valueRatio)
+        let valueWidth = bounds.width * CGFloat(valueRatio)
         return CGRect(x: .zero, y: .zero, width: valueWidth, height: bounds.height)
     }
     
@@ -38,8 +38,6 @@ private extension ProportionBarView {
     }
     
     func setup() {
-        let valueBar = ProportionValueBarView(frame: valueBarFrame)
-        addSubview(valueBar)
         layer.cornerRadius = halfHeight
         backgroundColor = .gray
     }

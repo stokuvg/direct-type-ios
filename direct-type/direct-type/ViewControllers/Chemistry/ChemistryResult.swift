@@ -91,6 +91,12 @@ extension ChemistryResult: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return ChemistryResultFooterView.height
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let avilityCell = cell as? ChemistryBusinessAbilityCell {
+            avilityCell.setLayout()
+        }
+    }
 }
 
 extension ChemistryResult: UITableViewDataSource {
