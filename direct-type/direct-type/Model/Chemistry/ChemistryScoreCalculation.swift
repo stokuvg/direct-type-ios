@@ -27,6 +27,7 @@ struct ChemistryScoreCalculation {
         })
         
         rank.sort(by: {
+            // スコアは基本降順にするが、同一順位だった場合には優先度を考慮する
             guard $0.score != $1.score else {
                 return $0.personalType.priority < $1.personalType.priority
             }
