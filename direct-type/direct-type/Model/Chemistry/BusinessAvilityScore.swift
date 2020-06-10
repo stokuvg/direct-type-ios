@@ -33,6 +33,31 @@ enum BusinessAvilityType: String, CaseIterable {
     case creativityAndIdea = "創造性・アイデア力"
     case responsibilityAndSteadiness = "責任感・着実性"
     
+    var title: String {
+        switch self {
+        case .quickAction:
+            return "迅速な行動力"
+        case .toughness:
+            return "粘り強さ"
+        case .spiritOfChallenge:
+            return "チャレンジ精神"
+        case .logical:
+            return "論理性"
+        case .leadership:
+            return "リーダーシップ"
+        case .dedicationAndSupport:
+            return "献身性・サポート力"
+        case .cooperativeness:
+            return "協調性"
+        case .initiative:
+            return "主体性"
+        case .creativityAndIdea:
+            return "創造性・アイデア力"
+        case .responsibilityAndSteadiness:
+            return "責任感・着実性"
+        }
+    }
+    
     var nameLineBlakable: String {
         switch self {
         case .quickAction:
