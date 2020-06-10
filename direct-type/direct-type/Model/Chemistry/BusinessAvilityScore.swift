@@ -21,17 +21,17 @@ struct BusinessAvilityScore {
     let responsibilityAndSteadiness: Double
 }
 
-enum BusinessAvilityType: String, CaseIterable {
-    case quickAction = "迅速な行動力"
-    case toughness = "粘り強さ"
-    case spiritOfChallenge = "チャレンジ精神"
-    case logical = "論理性"
-    case leadership = "リーダーシップ"
-    case dedicationAndSupport = "献身性・サポート力"
-    case cooperativeness = "協調性"
-    case initiative = "主体性"
-    case creativityAndIdea = "創造性・アイデア力"
-    case responsibilityAndSteadiness = "責任感・着実性"
+enum BusinessAvilityType: CaseIterable {
+    case quickAction
+    case toughness
+    case spiritOfChallenge
+    case logical
+    case leadership
+    case dedicationAndSupport
+    case cooperativeness
+    case initiative
+    case creativityAndIdea
+    case responsibilityAndSteadiness
     
     var title: String {
         switch self {
