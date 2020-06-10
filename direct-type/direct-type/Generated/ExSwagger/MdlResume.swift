@@ -63,7 +63,7 @@ class MdlResume: Codable {
         let _school = MdlResumeSchool(schoolName: dto.finalEducation?.schoolName ?? "",
                                       department: dto.finalEducation?.department ?? "",
                                       subject: dto.finalEducation?.faculty ?? "",
-                                      graduationYear: dto.finalEducation?.guraduationYearMonth ?? "2001/02")
+                                      graduationYear: dto.finalEducation?.guraduationYearMonth ?? "2020-03-31")
         let _skillLanguage = MdlResumeSkillLanguage(languageToeicScore: "\(dto.toeic ?? 0)",
                                                     languageToeflScore: "\(dto.toefl ?? 0)",
                                                     languageEnglish: dto.englishSkillId ?? "",

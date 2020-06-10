@@ -111,8 +111,10 @@ extension HPreviewTBCell {
             if !buf3.isEmpty { disp.append(buf3) }
             return disp.count == 0 ? Constants.SelectItemsValEmpty.disp : disp.joined(separator: "\n")
         case .skillLanguageH3:        //===(3g)語学
-            let tmp0: String = _item.childItems[0].curVal
-            let tmp1: String = _item.childItems[1].curVal
+            var tmp0: String = _item.childItems[0].curVal
+            var tmp1: String = _item.childItems[1].curVal
+            tmp0 = (tmp0 == "0" ? "" : tmp0)
+            tmp1 = (tmp1 == "0" ? "" : tmp1)
             let buf0: String = tmp0.isEmpty ? "--" : tmp0
             let buf1: String = tmp1.isEmpty ? "--" : tmp1
             let bufToeicToefl: String = "TOEIC：\(buf0) / TOEFL：\(buf1)"
@@ -127,13 +129,12 @@ extension HPreviewTBCell {
         case .qualificationsH3:       //===(3h)資格
             if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
             var disp: [String] = []
-            for businessType in _item.childItems {
-                let tmp0: String = businessType.curVal
-                let buf0: String = SelectItemsManager.getCodeDisp(.qualification, code: tmp0)?.disp ?? ""
+            for item in SelectItemsManager.convCodeDisp(.qualification, _item.childItems[0].curVal) {
+                let buf0: String = item.disp
                 disp.append(buf0)
             }
-            return disp.joined(separator: "\n")
-        case .ownPr:                  //===(3i)自己PR
+            return disp.joined(separator: " / ")
+        case .ownPrH3:                  //===(3i)自己PR
             if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
             return _item.childItems[0].curVal
 
