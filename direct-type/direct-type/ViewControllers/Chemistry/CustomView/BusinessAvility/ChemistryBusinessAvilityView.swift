@@ -35,6 +35,7 @@ private extension ChemistryBusinessAvilityView {
     }
     
     func getOptimizedScoreText(from oldValue: Double) -> String {
+        // 小数点以下第二位を四捨五入し、その結果小数点以下第一位が0だった場合は整数を表示する
         let rounded = round(oldValue*10)/10
         return rounded.truncatingRemainder(dividingBy: 1.0) == 0.0 ?
             String(Int(rounded)) : String(rounded)
