@@ -10,6 +10,8 @@ import UIKit
 
 final class ChemistrySelectHeaderView: UIView {
     @IBOutlet private weak var whiteBackgroundView: UIView!
+    @IBOutlet private weak var hukidashiLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel!
     
     static let height: CGFloat = 230
     private let whiteBackgroundViewCornerRadius: CGFloat = 10
@@ -18,12 +20,14 @@ final class ChemistrySelectHeaderView: UIView {
         super.init(frame: frame)
         loadNib()
         setCornerRadius()
+        setFont()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadNib()
         setCornerRadius()
+        setFont()
     }
 }
 
@@ -34,6 +38,12 @@ private extension ChemistrySelectHeaderView {
             .first as? UIView else { return }
         view.frame = bounds
         addSubview(view)
+    }
+    
+    func setFont() {
+        // TODO: font-SSSの定義確認後に適用する
+        // hukidashiLabel.font = UIFont(fontType: .font_SS)
+        titleLabel.font = UIFont(fontType: .font_L)
     }
     
     func setCornerRadius() {
