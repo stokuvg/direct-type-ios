@@ -16,7 +16,7 @@ class MyPageVC: TmpNaviTopVC {
     @IBOutlet weak var btnButton04: UIButton!
     @IBAction func actButton04(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Preview", bundle: nil)
-        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SmoothCareerPreviewVC") as? SmoothCareerPreviewVC{
+        if let nvc = storyboard.instantiateViewController(withIdentifier: "ç") as? SmoothCareerPreviewVC{
             self.navigationController?.pushViewController(nvc, animated: true)
         }
     }
@@ -257,11 +257,49 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
         }
         */
 
-        // サクサク
+        
+        //[Dbg:遷移先画面の選択]___
         let storyboard = UIStoryboard(name: "Preview", bundle: nil)
-        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SmoothCareerPreviewVC") as? SmoothCareerPreviewVC{
-            self.navigationController?.pushViewController(nvc, animated: true)
+        let alert: UIAlertController = UIAlertController(title: "[Dbg: 開発)中]", message: "遷移先画面の選択", preferredStyle:  .alert)
+        let action01: UIAlertAction = UIAlertAction(title: "[H-2] 個人プロフィール確認", style: .default, handler: { action in
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ProfilePreviewVC") as? ProfilePreviewVC{
+                self.navigationController?.pushViewController(nvc, animated: true)
+            }
+        })
+        let action02: UIAlertAction = UIAlertAction(title: "[H-3] 履歴書確認", style: .default, handler: { action in
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ResumePreviewVC") as? ResumePreviewVC{
+                self.navigationController?.pushViewController(nvc, animated: true)
+            }
+        })
+        let action03: UIAlertAction = UIAlertAction(title: "[C-15] 職務経歴書確認", style: .default, handler: { action in
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_CareerPreviewVC") as? CareerPreviewVC{
+                self.navigationController?.pushViewController(nvc, animated: true)
+            }
+        })
+        let action04: UIAlertAction = UIAlertAction(title: "[F-11] サクサク職歴", style: .default, handler: { action in
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SmoothCareerPreviewVC") as? SmoothCareerPreviewVC{
+                self.navigationController?.pushViewController(nvc, animated: true)
+            }
+        })
+        let action05: UIAlertAction = UIAlertAction(title: "A[系統] 初期入力", style: .default, handler: { action in
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_FirstInputPreviewVC") as? FirstInputPreviewVC{
+                self.navigationController?.pushViewController(nvc, animated: true)
+            }
+        })
+        let cancel: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+        })
+        alert.addAction(action01)
+        alert.addAction(action02)
+        alert.addAction(action03)
+        alert.addAction(action04)
+        alert.addAction(action05)
+        alert.addAction(cancel)
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
         }
+        //[Dbg:遷移先画面の選択]^^^
+        
+        
     }
 }
 

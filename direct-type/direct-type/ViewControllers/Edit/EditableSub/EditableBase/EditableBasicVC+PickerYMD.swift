@@ -47,7 +47,7 @@ extension EditableBasicVC {
         btnClose.parentPicker = picker
         toolbar.setItems([btnClose, separator1, barLbl, separator2, btnSelect], animated: true)
         textField.inputAccessoryView = toolbar
-        textField.inputAccessoryView?.backgroundColor = .green
+//        textField.inputAccessoryView?.backgroundColor = .green
     }
     
     //ピッカーにつけた〔選択〕〔Cancel〕ボタン
