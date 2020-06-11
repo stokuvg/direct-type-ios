@@ -545,30 +545,58 @@ extension HomeVC: BaseJobCardCellDelegate {
         let jobCard = dispJobCards.jobCards[row]
         let jobId = jobCard.jobCardCode
         let flag = jobCard.keepStatus
-        ApiManager.sendJobKeep(id: jobId, flag: flag)
-            .done { result in
-            Log.selectLog(logLevel: .debug, "keep send success")
-                Log.selectLog(logLevel: .debug, "keep成功")
-                
-        }.catch{ (error) in
-            Log.selectLog(logLevel: .debug, "skip send error:\(error)")
-            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-            switch myErr.code {
-            case 404:
-                let message: String = ""
-                self.showConfirm(title: "", message: message)
-                .done { _ in
-                    Log.selectLog(logLevel: .debug, "対応方法の確認")
+        if flag == true {
+            ApiManager.sendJobKeep(id: jobId)
+                .done { result in
+                Log.selectLog(logLevel: .debug, "keep send success")
+                    Log.selectLog(logLevel: .debug, "keep成功")
+                    
+            }.catch{ (error) in
+                Log.selectLog(logLevel: .debug, "skip send error:\(error)")
+                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+                switch myErr.code {
+                case 404:
+                    let message: String = ""
+                    self.showConfirm(title: "", message: message)
+                    .done { _ in
+                        Log.selectLog(logLevel: .debug, "対応方法の確認")
+                    }
+                    .catch { (error) in
+                    }
+                    .finally {
+                    }
+                default: break
                 }
-                .catch { (error) in
-                }
-                .finally {
-                }
-            default: break
+                self.showError(error)
+            }.finally {
+                Log.selectLog(logLevel: .debug, "keep send finally")
             }
-            self.showError(error)
-        }.finally {
-            Log.selectLog(logLevel: .debug, "keep send finally")
+        } else {
+            ApiManager.sendJobDeleteKeep(id: jobId)
+                .done { result in
+                Log.selectLog(logLevel: .debug, "keep delete success")
+                    Log.selectLog(logLevel: .debug, "delete成功")
+                    
+            }.catch{ (error) in
+                Log.selectLog(logLevel: .debug, "skip send error:\(error)")
+                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+                switch myErr.code {
+                case 404:
+                    let message: String = ""
+                    self.showConfirm(title: "", message: message)
+                    .done { _ in
+                        Log.selectLog(logLevel: .debug, "対応方法の確認")
+                    }
+                    .catch { (error) in
+                    }
+                    .finally {
+                    }
+                default: break
+                }
+                self.showError(error)
+            }.finally {
+                Log.selectLog(logLevel: .debug, "keep send finally")
+            }
         }
     }
     

@@ -607,7 +607,60 @@ extension JobOfferDetailVC: JobDetailFooterApplicationCellDelegate {
         // TODO:応募フォームに遷移
     }
     
-    func footerKeepBtnAction() {
+    func footerKeepBtnAction(keepStatus: Bool) {
         // キープ情報送信
+        if keepStatus == true {
+            ApiManager.sendJobKeep(id: jobId)
+                .done { result in
+                Log.selectLog(logLevel: .debug, "keep send success")
+                    Log.selectLog(logLevel: .debug, "keep成功")
+                    
+            }.catch{ (error) in
+                Log.selectLog(logLevel: .debug, "skip send error:\(error)")
+                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+                switch myErr.code {
+                case 404:
+                    let message: String = ""
+                    self.showConfirm(title: "", message: message)
+                    .done { _ in
+                        Log.selectLog(logLevel: .debug, "対応方法の確認")
+                    }
+                    .catch { (error) in
+                    }
+                    .finally {
+                    }
+                default: break
+                }
+                self.showError(error)
+            }.finally {
+                Log.selectLog(logLevel: .debug, "keep send finally")
+            }
+        } else {
+            ApiManager.sendJobDeleteKeep(id: jobId)
+                .done { result in
+                Log.selectLog(logLevel: .debug, "keep delete success")
+                    Log.selectLog(logLevel: .debug, "delete成功")
+                    
+            }.catch{ (error) in
+                Log.selectLog(logLevel: .debug, "skip send error:\(error)")
+                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+                switch myErr.code {
+                case 404:
+                    let message: String = ""
+                    self.showConfirm(title: "", message: message)
+                    .done { _ in
+                        Log.selectLog(logLevel: .debug, "対応方法の確認")
+                    }
+                    .catch { (error) in
+                    }
+                    .finally {
+                    }
+                default: break
+                }
+                self.showError(error)
+            }.finally {
+                Log.selectLog(logLevel: .debug, "keep send finally")
+            }
+        }
     }
 }

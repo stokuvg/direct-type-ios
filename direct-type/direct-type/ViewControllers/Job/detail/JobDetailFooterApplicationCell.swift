@@ -10,7 +10,7 @@ import UIKit
 
 protocol JobDetailFooterApplicationCellDelegate {
     func footerApplicationBtnAction()
-    func footerKeepBtnAction()
+    func footerKeepBtnAction(keepStatus: Bool)
 }
 
 class JobDetailFooterApplicationCell: BaseTableViewCell {
@@ -23,9 +23,8 @@ class JobDetailFooterApplicationCell: BaseTableViewCell {
     var keepFlag:Bool!
     @IBOutlet weak var keepBtn:UIButton!
     @IBAction func keepBtnAction() {
-        self.delegate.footerKeepBtnAction()
-        
-        keepFlag = !keepFlag        
+        keepFlag = !keepFlag
+        self.delegate.footerKeepBtnAction(keepStatus: keepFlag)
         self.keepDataSetting(flag: keepFlag)
     }
     

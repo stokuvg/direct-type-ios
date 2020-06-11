@@ -108,29 +108,17 @@ extension ApiManager {
 
 //================================================================
 extension ApiManager {
-    class func sendJobKeep(id: String, flag: Bool) -> Promise<MdlJobCard> {
+    class func sendJobKeep(id: String) -> Promise<MdlJobCard> {
         // true:キープ追加,false:キープ削除
-        if flag == true {
-            let keepRequest = CreateKeepRequestDTO.init(jobId: id)
-            KeepsAPI.keepsControllerCreate(body: keepRequest)
-                .done { result in
-                    Log.selectLog(logLevel: .debug, "keep create result:\(result)")
-                }.catch{ (error) in
-                    
-                }.finally {
-                }
-            return sendCreateJobKeepFetch(id: id)
-        } else {
-            KeepsAPI.keepsControllerDelete(jobId: id)
+        let keepRequest = CreateKeepRequestDTO.init(jobId: id)
+        KeepsAPI.keepsControllerCreate(body: keepRequest)
             .done { result in
-                Log.selectLog(logLevel: .debug, "keep delete result:\(result)")
+                Log.selectLog(logLevel: .debug, "keep create result:\(result)")
             }.catch{ (error) in
                 
             }.finally {
-                
             }
-            return sendDeleteJobKeepFetch(id: id)
-        }
+        return sendCreateJobKeepFetch(id: id)
     }
 
     private class func sendCreateJobKeepFetch(id: String) -> Promise<MdlJobCard> {
@@ -139,7 +127,7 @@ extension ApiManager {
         let keepRequest = CreateKeepRequestDTO.init(jobId: id)
         KeepsAPI.keepsControllerCreate(body: keepRequest)
             .done { result in
-                Log.selectLog(logLevel: .debug, "result:\(result)")
+                Log.selectLog(logLevel: .debug, "sendCreateJobKeepFetch result:\(result)")
                 resolver.fulfill(MdlJobCard())
         }.catch { (error) in
             resolver.reject(error)
@@ -148,14 +136,25 @@ extension ApiManager {
         
         return promise
     }
+    class func sendJobDeleteKeep(id: String) -> Promise<Void> {
+        KeepsAPI.keepsControllerDelete(jobId: id)
+        .done { result in
+            Log.selectLog(logLevel: .debug, "keep delete result:\(result)")
+        }.catch{ (error) in
+            
+        }.finally {
+            
+        }
+        return sendDeleteJobKeepFetch(id: id)
+    }
 
-    private class func sendDeleteJobKeepFetch(id: String) -> Promise<MdlJobCard> {
-        let (promise, resolver) = Promise<MdlJobCard>.pending()
+    private class func sendDeleteJobKeepFetch(id: String) -> Promise<Void> {
+        let (promise, resolver) = Promise<Void>.pending()
         AuthManager.needAuth(true)
         KeepsAPI.keepsControllerDelete(jobId: id)
             .done { result in
-                Log.selectLog(logLevel: .debug, "result:\(result)")
-                resolver.fulfill(MdlJobCard())
+                Log.selectLog(logLevel: .debug, "sendDeleteJobKeepFetch result:\(result)")
+                resolver.fulfill(Void())
         }.catch { (error) in
             resolver.reject(error)
         }.finally {
