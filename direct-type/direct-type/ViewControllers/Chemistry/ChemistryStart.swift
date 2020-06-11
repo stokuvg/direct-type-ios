@@ -10,6 +10,8 @@ import UIKit
 
 final class ChemistryStart: UIViewController {
     @IBOutlet private weak var iconCarouselView: IconCarouselView!
+    @IBOutlet private weak var hukidashiLabel: UILabel!
+    @IBOutlet private weak var descriptionLabel: UILabel!
     @IBAction private func startDiagnosisButton(_ sender: UIButton) {
         transitionToChemisrortSelect()
     }
@@ -20,6 +22,7 @@ final class ChemistryStart: UIViewController {
         super.viewDidLoad()
         iconCarouselView.configure(with: generateCarouselIconView())
         iconCarouselView.startAnimation()
+        setFont()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,6 +32,11 @@ final class ChemistryStart: UIViewController {
 }
 
 private extension ChemistryStart {
+    func setFont() {
+        hukidashiLabel.font = UIFont(fontType: .font_SS)
+        descriptionLabel.font = UIFont(fontType: .font_S)
+    }
+    
     func setNavigationBar() {
         navigationItem.title = ""
         
