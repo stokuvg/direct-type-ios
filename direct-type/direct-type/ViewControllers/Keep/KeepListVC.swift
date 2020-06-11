@@ -11,8 +11,36 @@ import SVProgressHUD
 import TudApi
 import SwaggerClient
 
+protocol KeepNoViewDelegate {
+    func btnAction()
+}
+
+class KeepNoView: UIView {
+    
+    @IBOutlet weak var imageView:UIImageView!
+    @IBOutlet weak var textLabel:UILabel!
+    @IBOutlet weak var chemistryLabel:UILabel!
+    @IBOutlet weak var chemistryBtn:UIButton!
+    @IBAction func chemistryBtnAction() {
+        self.delegate.btnAction()
+    }
+    
+    var delegate:KeepNoViewDelegate!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        textLabel.text(text: "現在キープ中の求人は\nありません。\n本日のおすすめから\nきになる求人を探しましょう", fontType: .font_L, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
+        chemistryLabel.text(text: "相性診断を受けると、キープした求人との相性が表示できるようになります。", fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
+        
+        chemistryBtn.setTitle(text: "相性診断をやってみる", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+    }
+}
+
 class KeepListVC: TmpBasicVC {
     @IBOutlet weak var keepTableView:UITableView!
+    
+    @IBOutlet weak var keepNoView:KeepNoView!
     
     var lists:MdlKeepList!
     var pageNo:Int = 1
@@ -65,16 +93,31 @@ class KeepListVC: TmpBasicVC {
     }
     
     private func dataDisplay() {
+        Log.selectLog(logLevel: .debug, "KeepListVC dataDisplay start")
         if self.lists.keepJobs.count > 0 {
+            self.keepNoView.isHidden = true
+            self.keepNoView.delegate = nil
             //
             self.keepTableView.delegate = self
             self.keepTableView.dataSource = self
             self.keepTableView.reloadData()
         } else {
+            self.keepNoView.isHidden = false
             // 0件
+            self.keepNoView.delegate = self
         }
     }
 
+}
+extension KeepListVC: KeepNoViewDelegate {
+    func btnAction() {
+//        self.tabBarController?.selectedIndex = 3
+        
+        Log.selectLog(logLevel: .debug, "navigationController:\(String(describing: self.navigationController))")
+        
+        let vc = getVC(sbName: "ChemistryStart", vcName: "ChemistryStart") as! ChemistryStart
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension KeepListVC: UITableViewDelegate {
