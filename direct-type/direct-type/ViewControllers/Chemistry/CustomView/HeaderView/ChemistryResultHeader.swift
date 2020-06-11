@@ -63,8 +63,7 @@ private extension ChemistryResultHeader {
         [firstAndLabel, secondAndLabel].forEach({ label in
             label.font = UIFont(fontType: .font_SSS)
         })
-        // TODO: font-XLの定義確認後に適用する
-        // resultTitleLabel.font = UIFont(fontType: .font_SS)
+        resultTitleLabel.font = UIFont(fontType: .font_XL)
     }
     
     func setCornerRadius() {
