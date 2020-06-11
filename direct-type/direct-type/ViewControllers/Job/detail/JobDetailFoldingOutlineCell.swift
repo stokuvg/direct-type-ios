@@ -56,6 +56,8 @@ class JobDetailFoldingOutlineCell: BaseTableViewCell {
         let establishment = data.established
         self.makeEstablishmentView(data: establishment)
         
+        Log.selectLog(logLevel: .debug, "employeesCount:\(data.employeesCount)")
+        
         let employees = data.employeesCount
         self.makeEmployeesView(data: employees)
         
@@ -120,34 +122,32 @@ class JobDetailFoldingOutlineCell: BaseTableViewCell {
     private func makeEmployeesView(data: JobCardDetailCompanyDescriptionEmployeesCount){
         Log.selectLog(logLevel: .debug, "makeEmployeesView start")
         let title = "従業員"
-        let employees = Int(data.count!)
+        Log.selectLog(logLevel: .debug, "data:\(data)")
         
-        if title.count > 0 && employees! > 0 {
-            var text = data.count
-            
-            let average = data.averageAge!
-            let ratio = data.genderRatio!
-            let halfway = data.middleEnter!
-            
-            if average.count > 0 {
-                text = text! + "\n" + "平均年齢／" + average
-            }
-            
-            if ratio.count > 0 {
-                text = text! + "\n" + "男女比／" + average
-            }
-            
-            if halfway.count > 0 {
-                text = text! + "\n" + "中途入社者の割合／" + halfway
-            }
-            
-            let view = UINib.init(nibName: "JobDetailFoldingOptionalView", bundle: nil)
-            .instantiate(withOwner: self, options: nil)
-            .first as! JobDetailFoldingOptionalView
-            view.setup(title: title, item: text!)
-            
-            self.stackView.addArrangedSubview(view)
+        var text = data.count
+        
+        let average = data.averageAge!
+        let ratio = data.genderRatio!
+        let halfway = data.middleEnter!
+        
+        if average.count > 0 {
+            text = text! + "\n" + "平均年齢／" + average
         }
+        
+        if ratio.count > 0 {
+            text = text! + "\n" + "男女比／" + average
+        }
+        
+        if halfway.count > 0 {
+            text = text! + "\n" + "中途入社者の割合／" + halfway
+        }
+        
+        let view = UINib.init(nibName: "JobDetailFoldingOptionalView", bundle: nil)
+        .instantiate(withOwner: self, options: nil)
+        .first as! JobDetailFoldingOptionalView
+        view.setup(title: title, item: text!)
+        
+        self.stackView.addArrangedSubview(view)
     }
     // 資本金
     private func makeCapitalView(data: String) {

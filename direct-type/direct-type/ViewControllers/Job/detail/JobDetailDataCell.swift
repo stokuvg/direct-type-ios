@@ -94,6 +94,7 @@ class JobDetailDataCell: BaseTableViewCell {
         // 年収
         let salaryDisplay = data.isSalaryDisplay
         if salaryDisplay {
+            Log.selectLog(logLevel: .debug, "data.salaryMinId:\(data.salaryMinId)")
             let minPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.salaryMinId)?.disp
             Log.selectLog(logLevel: .debug, "minPriceLabel:\(String(describing: minPriceLabel))")
             

@@ -76,7 +76,7 @@
                                 </subviews>
                                 <color key="backgroundColor" name="color-white"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="7OH-wm-w8Y"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="7OH-wm-w8Y"/>
                                     <constraint firstItem="pXm-6K-Dqu" firstAttribute="leading" secondItem="e7C-ve-Djh" secondAttribute="leading" constant="15" id="C0s-qE-XJe"/>
                                     <constraint firstAttribute="bottom" secondItem="pXm-6K-Dqu" secondAttribute="bottom" constant="3" id="c2V-U7-mkd"/>
                                     <constraint firstItem="pXm-6K-Dqu" firstAttribute="top" secondItem="e7C-ve-Djh" secondAttribute="top" constant="3" id="ei7-DH-Jc0"/>

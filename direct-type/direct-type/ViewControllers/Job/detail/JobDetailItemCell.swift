@@ -73,7 +73,7 @@ class JobDetailItemCell: BaseJobDetailCell {
             case 5:
                 // 勤務地
 //                title = data.workPlace.title!
-                title = "勤務時間"
+                title = "勤務地"
                 text = data.workPlace
             case 6:
                 // 休日休暇
@@ -132,11 +132,20 @@ class JobDetailItemCell: BaseJobDetailCell {
                     optionalDatas.append(applicationExampleData)
                 }
                 // この仕事の向き・不向き
-                if data.suitableUnsuitable.count > 0 {
-//                    let title = data.suitableUnsuitable.title!
-                    let text = data.suitableUnsuitable
+                let _suitableUnsuitable = data.suitableUnsuitable
+                let _notSuitableUnsuitable = data.notSuitableUnsuitable
+                Log.selectLog(logLevel: .debug, "_suitableUnsuitable:\(_suitableUnsuitable)")
+                Log.selectLog(logLevel: .debug, "_notSuitableUnsuitable:\(_notSuitableUnsuitable)")
+                
+                if _suitableUnsuitable.count > 0 && _notSuitableUnsuitable.count > 0 {
+                    var sumText:String = "向いている人\n"
+                    sumText += _suitableUnsuitable
+                    sumText += "\n"
+                    sumText += "向いていない人\n"
+                    sumText += _notSuitableUnsuitable
+//                    let text = data.suitableUnsuitable
 //                    let suitableUnsuitableData = ["title": title, "text": text]
-                    let suitableUnsuitableData = ["title": "この仕事の向き・不向き", "text": text]
+                    let suitableUnsuitableData = ["title": "この仕事の向き・不向き", "text": sumText]
                     optionalDatas.append(suitableUnsuitableData)
                 }
             case 3:
@@ -207,7 +216,7 @@ class JobDetailItemCell: BaseJobDetailCell {
                 self.itemStackView.addArrangedSubview(optionalView)
             }
         } else {
-            Log.selectLog(logLevel: .debug, "任意用Viewは他は入らない")
+//            Log.selectLog(logLevel: .debug, "任意用Viewは他は入らない")
         }
         
         // 注目
@@ -242,7 +251,7 @@ class JobDetailItemCell: BaseJobDetailCell {
                 self.itemStackView.addArrangedSubview(attentionView)
             }
         } else {
-            Log.selectLog(logLevel: .debug, "注目用Viewは他は入らない")
+//            Log.selectLog(logLevel: .debug, "注目用Viewは他は入らない")
         }
         
     }

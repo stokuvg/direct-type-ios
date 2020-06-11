@@ -194,6 +194,8 @@ class JobOfferDetailVC: TmpBasicVC {
             Log.selectLog(logLevel: .debug, "error:\(error)")
             
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            Log.selectLog(logLevel: .debug, "myErr:\(myErr.debugDisp)")
+            
             switch myErr.code {
                 case 403:
                     let message:String = "idTokenを取得していません"

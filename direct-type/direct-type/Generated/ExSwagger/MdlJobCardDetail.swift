@@ -275,6 +275,9 @@ class MdlJobCardDetail: Codable {
          public var isKeep: Bool
          */
         
+        let _salaryOffer = dto.salaryOffer
+        Log.selectLog(logLevel: .debug, "_salaryOffer:\(String(describing: _salaryOffer))")
+        
         let _jobDescription = dto.jobContents
         let _jobExample = dto.projectsDealing
         let _product = dto.commodity
@@ -293,7 +296,13 @@ class MdlJobCardDetail: Codable {
         let _suitableUnsuitable = dto.suitableForThisJob
         let _notSuitableUnsuitable = dto.notSuitableForThisJob
         
+        Log.selectLog(logLevel: .debug, "_suitableUnsuitable:\(_suitableUnsuitable),_notSuitableUnsuitable:\(_notSuitableUnsuitable)")
+        
 //        let _companyDescription = dto.companyDescription
+        Log.selectLog(logLevel: .debug, "employeesAll:\(dto.employees.employeesAll)")
+        Log.selectLog(logLevel: .debug, "averageAge:\(dto.employees.averageAge)")
+        Log.selectLog(logLevel: .debug, "genderRatio:\(dto.employees.genderRatio)")
+        Log.selectLog(logLevel: .debug, "middleEnter:\(dto.employees.middleEnter)")
         
         let _emplyees = JobCardDetailCompanyDescriptionEmployeesCount.init(count: dto.employees.employeesAll, averageAge: dto.employees.averageAge, genderRatio: dto.employees.genderRatio, middleEnter: dto.employees.middleEnter)
         let _presidentData = JobCardDetailCompanyDescriptionPresidentData.init(presidentName: dto.presidentName, presidentHistory: dto.presidentHistory)
@@ -336,7 +345,7 @@ class MdlJobCardDetail: Codable {
             jobCardCode: dto.jobId,
             jobName: dto.jobName,
             salaryMinId: Int(dto.minSalaryId)!, salaryMaxId: Int(dto.maxSalaryId)!, isSalaryDisplay: dto.isSalaryDisplay,
-            salaryOffer: dto.salaryOffer,
+//            salaryOffer: _salaryOffer,
             workPlaceCodes: _place2Ids,
             companyName: dto.companyName,
             start_date: dto.pressStartDate, end_date: dto.pressEndDate,
