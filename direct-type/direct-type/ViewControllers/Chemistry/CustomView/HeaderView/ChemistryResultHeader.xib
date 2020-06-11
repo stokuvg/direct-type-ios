@@ -22,7 +22,6 @@
                 <outlet property="thirdPlaceImageView" destination="C27-af-jdy" id="bt5-6K-zVv"/>
                 <outlet property="thirdPlaceLabel" destination="CfK-y0-eg1" id="WG0-4M-DVf"/>
                 <outlet property="thirdPlaceView" destination="9e7-Iy-mhY" id="uU1-bW-d0D"/>
-                <outlet property="titleLabel" destination="H4D-Ah-fTJ" id="wAv-uF-Hno"/>
                 <outlet property="whiteBackgroundView" destination="P9D-Ed-MtI" id="W2d-Gl-ns5"/>
             </connections>
         </placeholder>

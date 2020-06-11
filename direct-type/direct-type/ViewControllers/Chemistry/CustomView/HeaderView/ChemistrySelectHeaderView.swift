@@ -13,7 +13,7 @@ final class ChemistrySelectHeaderView: UIView {
     @IBOutlet private weak var hukidashiLabel: UILabel!
     @IBOutlet private weak var titleLabel: UILabel!
     
-    static let height: CGFloat = 230
+    static let height: CGFloat = 200
     private let whiteBackgroundViewCornerRadius: CGFloat = 10
     
     override init(frame: CGRect) {

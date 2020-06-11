@@ -17,11 +17,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" restorationIdentifier="ChemistrySelectHeaderView" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="4Na-VT-fLr">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kJn-om-e6g">
                             <rect key="frame" x="54.5" y="0.0" width="266" height="30"/>
@@ -51,7 +51,7 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oAk-c4-aYk">
-                            <rect key="frame" x="74.5" y="36" width="226.5" height="80"/>
+                            <rect key="frame" x="74.5" y="35" width="226.5" height="80"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="80" id="k2Q-XF-WGU"/>
                             </constraints>
@@ -62,13 +62,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CG6-tT-XMH" userLabel="BigSpaceView">
-                            <rect key="frame" x="27.5" y="121.5" width="320" height="30"/>
+                            <rect key="frame" x="27.5" y="126" width="320" height="15"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="30" id="p7Q-kY-f22"/>
+                                <constraint firstAttribute="height" constant="15" id="p7Q-kY-f22"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fj5-8D-Hpm">
-                            <rect key="frame" x="20" y="165" width="335" height="65"/>
+                            <rect key="frame" x="20" y="146" width="335" height="65"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="次の設問に自分の普段の考えがあてはまるか、" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ciA-6a-T70">
                                     <rect key="frame" x="0.0" y="15" width="335" height="14"/>
@@ -125,7 +125,7 @@
                 <constraint firstItem="4Na-VT-fLr" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="fiH-vX-3Ed"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="139.85507246376812" y="349.55357142857139"/>
+            <point key="canvasLocation" x="139.85507246376812" y="343.19196428571428"/>
         </view>
     </objects>
     <resources>
