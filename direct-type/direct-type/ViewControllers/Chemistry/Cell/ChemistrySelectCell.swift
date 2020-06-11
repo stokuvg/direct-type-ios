@@ -79,8 +79,7 @@ private extension ChemistrySelectCell {
         questionNumberLabel.font = UIFont(fontType: .font_Sb)
         questionLabel.font = UIFont(fontType: .font_Sb)
         answerTitleLabels.forEach({ label in
-            // TODO: font-SSSの定義確認後に適用する
-            // label.font = UIFont(fontType: .font_SS)
+            label.font = UIFont(fontType: .font_SSS)
         })
     }
 }

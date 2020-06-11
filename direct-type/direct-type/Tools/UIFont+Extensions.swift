@@ -17,6 +17,7 @@ enum FontType {
     case font_S
     case font_SSb
     case font_SS
+    case font_SSS
     // 求人系
     case C_font_XL
     case C_font_L
@@ -42,6 +43,8 @@ enum FontType {
                 return 3
             case .font_SS:
                 return 3
+            case .font_SSS:
+                return 4
             case .C_font_XL:
                 return 4
             case .C_font_L:
@@ -89,7 +92,9 @@ extension UIFont {
             case .font_SS:
                 fontName = "HiraginoSans-W3"
                 fontSize = 11.0
-            
+            case .font_SSS:
+                fontName = "HiraginoSans-W3"
+                fontSize = 10.0
             case .C_font_XL:
                 fontName = "HiraginoSans-W6"
                 fontSize = 30.0

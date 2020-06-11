@@ -35,8 +35,7 @@ private extension ChemistryBusinessAvilityView {
     }
     
     func setFont() {
-        // TODO: font-SSSの定義確認後に適用する
-        // titleLabel.font = UIFont(fontType: .font_SS)
+        titleLabel.font = UIFont(fontType: .font_SSS)
         avilityScoreLabel.font = UIFont(fontType: .font_Sb)
     }
     

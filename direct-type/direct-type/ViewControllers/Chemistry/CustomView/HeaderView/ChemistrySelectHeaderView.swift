@@ -41,8 +41,7 @@ private extension ChemistrySelectHeaderView {
     }
     
     func setFont() {
-        // TODO: font-SSSの定義確認後に適用する
-        // hukidashiLabel.font = UIFont(fontType: .font_SS)
+        hukidashiLabel.font = UIFont(fontType: .font_SSS)
         titleLabel.font = UIFont(fontType: .font_L)
     }
     

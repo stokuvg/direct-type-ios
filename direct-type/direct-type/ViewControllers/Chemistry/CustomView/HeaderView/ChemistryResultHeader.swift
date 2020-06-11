@@ -61,8 +61,7 @@ private extension ChemistryResultHeader {
             label.font = UIFont(fontType: .font_Sb)
         })
         [firstAndLabel, secondAndLabel].forEach({ label in
-            // TODO: font-SSSの定義確認後に適用する
-            // label.font = UIFont(fontType: .font_Sb)
+            label.font = UIFont(fontType: .font_SSS)
         })
         // TODO: font-XLの定義確認後に適用する
         // resultTitleLabel.font = UIFont(fontType: .font_SS)
