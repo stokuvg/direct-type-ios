@@ -18,6 +18,7 @@ final class ChemistryResultPersonalTypeCell: UITableViewCell {
     func configure(with personalType: ChemistryPersonalityType?) {
         self.personalType = personalType
         setup()
+        setFont()
     }
 }
 
@@ -27,5 +28,10 @@ private extension ChemistryResultPersonalTypeCell {
         iconImageView.image = UIImage(named: personalType.imageName)
         personalTypeLabel.text = personalType.rawValue
         descriptionLabel.text = personalType.description
+    }
+    
+    func setFont() {
+        personalTypeLabel.font = UIFont(fontType: .font_M)
+        descriptionLabel.font = UIFont(fontType: .font_S)
     }
 }

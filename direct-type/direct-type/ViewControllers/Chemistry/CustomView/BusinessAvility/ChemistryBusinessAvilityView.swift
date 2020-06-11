@@ -9,7 +9,7 @@
 import UIKit
 
 final class ChemistryBusinessAvilityView: NSObject {
-    @IBOutlet weak var proportionBar: ProportionBarView!
+    @IBOutlet private weak var proportionBar: ProportionBarView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var avilityScoreLabel: UILabel!
     
@@ -32,6 +32,12 @@ final class ChemistryBusinessAvilityView: NSObject {
 private extension ChemistryBusinessAvilityView {
     func loadNib() {
         baseView = UINib(nibName: "ChemistryBusinessAvilityView", bundle: Bundle.main).instantiate(withOwner: self, options: nil).first as? UIView
+    }
+    
+    func setFont() {
+        // TODO: font-SSSの定義確認後に適用する
+        // titleLabel.font = UIFont(fontType: .font_SS)
+        avilityScoreLabel.font = UIFont(fontType: .font_Sb)
     }
     
     func getOptimizedScoreText(from oldValue: Double) -> String {

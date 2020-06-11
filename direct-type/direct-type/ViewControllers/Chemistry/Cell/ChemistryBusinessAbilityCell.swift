@@ -9,11 +9,13 @@
 import UIKit
 
 final class ChemistryBusinessAbilityCell: UITableViewCell {
+    @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var avilityStackView: UIStackView!
     private var avilityScore: BusinessAvilityScore?
     
     func configure(with avilityScore: BusinessAvilityScore) {
         self.avilityScore = avilityScore
+        setFont()
     }
     
     func setLayout() {
@@ -57,5 +59,11 @@ final class ChemistryBusinessAbilityCell: UITableViewCell {
             }
             avilityStackView.addArrangedSubview(avilityView.baseView)
         })
+    }
+}
+
+private extension ChemistryBusinessAbilityCell {
+    func setFont() {
+        titleLabel.font = UIFont(fontType: .font_L)
     }
 }
