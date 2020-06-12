@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwaggerClient
 import TudApi
 
 class MdlKeepJob: Codable {
@@ -24,29 +25,32 @@ class MdlKeepJob: Codable {
     /** 求人メイン画像URL */
     var mainPhotoURL: String
     /** 年収マスタ値 */
-    var minSalaryId: String
+    var salaryMinCode: Int
     /** 年収マスタ値 */
-    var maxSalaryId: String
+    var salaryMaxCode: Int
     /** true: 年収公開, false: 年収非公開 */
     var isSalaryDisplay: Bool
     /** 企業名 */
     var companyName: String
 
-    init(jobId: String, jobName: String, pressStartDate: String, pressEndDate: String, mainTitle: String, mainPhotoURL: String, minSalaryId: String, maxSalaryId: String, isSalaryDisplay: Bool, companyName: String) {
+    init(jobId: String = "", jobName: String = "", pressStartDate: String = "", pressEndDate: String = "", mainTitle: String = "", mainPhotoURL: String = "", salaryMinCode: Int = 0, salaryMaxCode: Int = 0, isSalaryDisplay: Bool = false, companyName: String = "") {
         self.jobId = jobId
         self.jobName = jobName
         self.pressStartDate = pressStartDate
         self.pressEndDate = pressEndDate
         self.mainTitle = mainTitle
         self.mainPhotoURL = mainPhotoURL
-        self.minSalaryId = minSalaryId
-        self.maxSalaryId = maxSalaryId
+        self.salaryMinCode = salaryMinCode
+        self.salaryMaxCode = salaryMaxCode
         self.isSalaryDisplay = isSalaryDisplay
         self.companyName = companyName
     }
     // TudApiのデータを変換して保持
     convenience init(dto: KeepJob) {
         
-        self.init(jobId: dto.jobId, jobName: dto.jobName,pressStartDate:dto.pressStartDate,pressEndDate:dto.pressEndDate, mainTitle:dto.mainTitle,mainPhotoURL: dto.mainPhotoURL , minSalaryId: dto.minSalaryId, maxSalaryId: dto.maxSalaryId, isSalaryDisplay: dto.isSalaryDisplay, companyName: dto.companyName)
+        let _minSalaryId = Int(dto.minSalaryId)
+        let _maxSalaryId = Int(dto.maxSalaryId)
+        
+        self.init(jobId: dto.jobId, jobName: dto.jobName,pressStartDate:dto.pressStartDate,pressEndDate:dto.pressEndDate, mainTitle:dto.mainTitle,mainPhotoURL: dto.mainPhotoURL , salaryMinCode: _minSalaryId!, salaryMaxCode: _maxSalaryId!, isSalaryDisplay: dto.isSalaryDisplay, companyName: dto.companyName)
     }
 }

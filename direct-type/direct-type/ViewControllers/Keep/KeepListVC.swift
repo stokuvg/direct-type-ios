@@ -8,8 +8,8 @@
 
 import UIKit
 import SVProgressHUD
+//import SwaggerClient
 import TudApi
-import SwaggerClient
 
 protocol KeepNoViewDelegate {
     func btnAction()
@@ -50,12 +50,17 @@ class KeepListVC: TmpBasicVC {
 
         // Do any additional setup after loading the view.
         self.title = "キープリスト"
+        self.keepTableView.backgroundColor = UIColor.init(colorType: .color_base)
+        
+        self.keepTableView.registerNib(nibName: "KeepCardCell", idName: "KeepCardCell")
+        
+        self.makeDummyData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.getKeepList()
+//        self.getKeepList()
     }
     
     private func getKeepList() {
@@ -76,7 +81,8 @@ class KeepListVC: TmpBasicVC {
                     let message:String = "idTokenを取得していません"
                     self.showConfirm(title: "通信失敗", message: message)
                         .done { _ in
-                            
+
+                            self.dataDisplay()
                     }.catch { (error) in
                         
                     }.finally {
@@ -88,7 +94,6 @@ class KeepListVC: TmpBasicVC {
         .finally {
             SVProgressHUD.dismiss()
 //            self.dataCheckAction()
-            self.dataDisplay()
         }
     }
     
@@ -105,7 +110,39 @@ class KeepListVC: TmpBasicVC {
             self.keepNoView.isHidden = false
             // 0件
             self.keepNoView.delegate = self
+            
+            self.makeDummyData()
         }
+    }
+    
+    private func makeDummyData() {
+        
+        let _dummy1 = MdlKeepJob.init(jobId: "1234567", jobName: "キープリスト一覧職業名１", pressStartDate: "2020/06/12", pressEndDate: "2020/06/19", mainTitle: "", mainPhotoURL: "https://type.jp/s/img_banner/top_pc_side_number1.jpg", salaryMinCode: 7, salaryMaxCode: 11, isSalaryDisplay: true, companyName: "会社名１")
+        let _dummy2 = MdlKeepJob.init(jobId: "234567", jobName: "キープリスト一覧職業名２", pressStartDate: "2020/06/05", pressEndDate: "2020/06/19", mainTitle: "", mainPhotoURL: "https://type.jp/s/img_banner/top_pc_side_number1.jpg", salaryMinCode: 8, salaryMaxCode: 12, isSalaryDisplay: false, companyName: "会社名２")
+        let _dummy3 = MdlKeepJob.init(jobId: "34567", jobName: "キープリスト一覧職業名３", pressStartDate: "2020/06/01", pressEndDate: "2020/06/12", mainTitle: "", mainPhotoURL: "", salaryMinCode: 9, salaryMaxCode: 13, isSalaryDisplay: true, companyName: "会社名３")
+        
+        let _dummyData:[MdlKeepJob] = [
+            _dummy1,
+            _dummy2,
+            _dummy3,
+            _dummy1,
+            _dummy2,
+            _dummy3,
+            _dummy1,
+            _dummy2,
+            _dummy3,
+            _dummy1,
+            _dummy2,
+            _dummy3,
+        ]
+        self.lists = MdlKeepList.init(hasNext: true, keepJobs: _dummyData)
+
+        self.keepNoView.isHidden = true
+        self.keepNoView.delegate = nil
+        //
+        self.keepTableView.delegate = self
+        self.keepTableView.dataSource = self
+        self.keepTableView.reloadData()
     }
 
 }
@@ -121,7 +158,9 @@ extension KeepListVC: KeepNoViewDelegate {
 }
 
 extension KeepListVC: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 300
+    }
 }
 
 extension KeepListVC: UITableViewDataSource {
@@ -132,8 +171,77 @@ extension KeepListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = indexPath.row
         let _keepData = self.lists.keepJobs[row]
-        Log.selectLog(logLevel: .debug, "_keepData:\(_keepData.jobId)")
-        return UITableViewCell()
+        let cell = tableView.loadCell(cellName: "KeepCardCell", indexPath: indexPath) as! KeepCardCell
+        cell.tag = row
+        cell.delegate = self
+        cell.setup(data: _keepData)
+        return cell
+    }
+}
+
+extension KeepListVC: BaseJobCardCellDelegate {
+    func skipAction(tag: Int) {
+    }
+    
+    func keepAction(tag: Int) {
+        Log.selectLog(logLevel: .debug, "KeepListVC delegate keepAction tag:\(tag)")
+        let jobCard = self.lists.keepJobs[tag]
+        let jobId = jobCard.jobId
+        let keepStatus = false
+        
+        if keepStatus == true {
+            ApiManager.sendJobKeep(id: jobId)
+                .done { result in
+                Log.selectLog(logLevel: .debug, "keep send success")
+                    Log.selectLog(logLevel: .debug, "keep成功")
+                    
+            }.catch{ (error) in
+                Log.selectLog(logLevel: .debug, "skip send error:\(error)")
+                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+                switch myErr.code {
+                case 404:
+                    let message: String = ""
+                    self.showConfirm(title: "", message: message)
+                    .done { _ in
+                        Log.selectLog(logLevel: .debug, "対応方法の確認")
+                    }
+                    .catch { (error) in
+                    }
+                    .finally {
+                    }
+                default: break
+                }
+                self.showError(error)
+            }.finally {
+                Log.selectLog(logLevel: .debug, "keep send finally")
+            }
+        } else {
+            ApiManager.sendJobDeleteKeep(id: jobId)
+                .done { result in
+                Log.selectLog(logLevel: .debug, "keep delete success")
+                    Log.selectLog(logLevel: .debug, "delete成功")
+                    
+            }.catch{ (error) in
+                Log.selectLog(logLevel: .debug, "skip send error:\(error)")
+                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+                switch myErr.code {
+                case 404:
+                    let message: String = ""
+                    self.showConfirm(title: "", message: message)
+                    .done { _ in
+                        Log.selectLog(logLevel: .debug, "対応方法の確認")
+                    }
+                    .catch { (error) in
+                    }
+                    .finally {
+                    }
+                default: break
+                }
+                self.showError(error)
+            }.finally {
+                Log.selectLog(logLevel: .debug, "keep send finally")
+            }
+        }
     }
     
     

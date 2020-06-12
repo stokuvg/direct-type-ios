@@ -27,8 +27,6 @@ class JobOfferBigCardCell: BaseJobCardCell {
         
         self.delegate.keepAction(tag: self.tag)
     }
-    
-    var keepFlag:Bool!
 
     override func awakeFromNib() {
         super.awakeFromNib()
