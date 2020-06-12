@@ -24,7 +24,7 @@ direct type のiOSアプリ
 - Cocoapod 1.8.4
     - AWSMobileClient 2.12.6
     - PromiseKit 6.13.1
-- Swagger Codegen 3.0.16
+- Swagger Codegen 3.0.20
 
 ~~~
 $ sudo gem install cocoapods
