@@ -67,6 +67,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="avilityStackView" destination="qxf-3M-W4B" id="NfV-bL-F17"/>
+                <outlet property="titleLabel" destination="4VC-vG-0XA" id="ICz-Ye-baU"/>
             </connections>
             <point key="canvasLocation" x="105.79710144927537" y="289.95535714285711"/>
         </tableViewCell>

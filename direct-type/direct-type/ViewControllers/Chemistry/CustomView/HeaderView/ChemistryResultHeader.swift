@@ -20,6 +20,7 @@ final class ChemistryResultHeader: UIView {
     @IBOutlet private weak var thirdPlaceLabel: UILabel!
     @IBOutlet private weak var firstAndLabel: UILabel!
     @IBOutlet private weak var secondAndLabel: UILabel!
+    @IBOutlet private weak var resultTitleLabel: UILabel!
     
     
     static let height: CGFloat = 230
@@ -29,12 +30,14 @@ final class ChemistryResultHeader: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadNib()
+        setFont()
         setCornerRadius()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadNib()
+        setFont()
         setCornerRadius()
     }
     
@@ -51,6 +54,16 @@ private extension ChemistryResultHeader {
             .first as? UIView else { return }
         view.frame = bounds
         addSubview(view)
+    }
+    
+    func setFont() {
+        [firstPlaceLabel, secondPlaceLabel, thirdPlaceLabel].forEach({ label in
+            label.font = UIFont(fontType: .font_Sb)
+        })
+        [firstAndLabel, secondAndLabel].forEach({ label in
+            label.font = UIFont(fontType: .font_SSS)
+        })
+        resultTitleLabel.font = UIFont(fontType: .font_XL)
     }
     
     func setCornerRadius() {
