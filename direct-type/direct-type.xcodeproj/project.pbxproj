@@ -230,6 +230,10 @@
 		269AFFC9246A929300DB364B /* SubSelectTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269AFFBF246A929200DB364B /* SubSelectTBCell.xib */; };
 		269AFFCA246A929300DB364B /* SubSelectDaiTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269AFFC0246A929200DB364B /* SubSelectDaiTBCell.xib */; };
 		269AFFCB246A929300DB364B /* SubSelectSpecialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269AFFC1246A929200DB364B /* SubSelectSpecialVC.swift */; };
+		269B29A02496F40100B33FBD /* CareerListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269B299F2496F40100B33FBD /* CareerListVC.swift */; };
+		269B29A32496F63200B33FBD /* CareerCardTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269B29A12496F63200B33FBD /* CareerCardTBCell.swift */; };
+		269B29A42496F63200B33FBD /* CareerCardTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 269B29A22496F63200B33FBD /* CareerCardTBCell.xib */; };
+		269B29A6249708C300B33FBD /* Career.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 269B29A5249708C300B33FBD /* Career.storyboard */; };
 		26A1F57C247F5D3300834213 /* ValidateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1F57B247F5D3300834213 /* ValidateManager.swift */; };
 		26A1F57E247FB28B00834213 /* Validate+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1F57D247FB28B00834213 /* Validate+Profile.swift */; };
 		26A1F5832480F23100834213 /* DlgStackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1F5802480F23100834213 /* DlgStackButton.swift */; };
@@ -516,6 +520,10 @@
 		269AFFBF246A929200DB364B /* SubSelectTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubSelectTBCell.xib; sourceTree = "<group>"; };
 		269AFFC0246A929200DB364B /* SubSelectDaiTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubSelectDaiTBCell.xib; sourceTree = "<group>"; };
 		269AFFC1246A929200DB364B /* SubSelectSpecialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubSelectSpecialVC.swift; sourceTree = "<group>"; };
+		269B299F2496F40100B33FBD /* CareerListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CareerListVC.swift; path = "direct-type/ValidateManager/CareerListVC.swift"; sourceTree = SOURCE_ROOT; };
+		269B29A12496F63200B33FBD /* CareerCardTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerCardTBCell.swift; sourceTree = "<group>"; };
+		269B29A22496F63200B33FBD /* CareerCardTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CareerCardTBCell.xib; sourceTree = "<group>"; };
+		269B29A5249708C300B33FBD /* Career.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Career.storyboard; sourceTree = "<group>"; };
 		26A1F57B247F5D3300834213 /* ValidateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateManager.swift; sourceTree = "<group>"; };
 		26A1F57D247FB28B00834213 /* Validate+Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validate+Profile.swift"; sourceTree = "<group>"; };
 		26A1F5802480F23100834213 /* DlgStackButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DlgStackButton.swift; sourceTree = "<group>"; };
@@ -933,6 +941,11 @@
 		06E519C324581584004E4B7A /* Career */ = {
 			isa = PBXGroup;
 			children = (
+				269B299F2496F40100B33FBD /* CareerListVC.swift */,
+				269B29A5249708C300B33FBD /* Career.storyboard */,
+				269B29A12496F63200B33FBD /* CareerCardTBCell.swift */,
+				269B29A22496F63200B33FBD /* CareerCardTBCell.xib */,
+				06E519C6245815B0004E4B7A /* CareerPreviewVC.swift */,
 			);
 			path = Career;
 			sourceTree = "<group>";
@@ -947,7 +960,6 @@
 				260BBFDE24651732003D163A /* Preview.storyboard */,
 				26F2A82C246D31020037D47F /* PreviewBaseVC.swift */,
 				06E519CB24581634004E4B7A /* ProfilePreviewVC.swift */,
-				06E519C6245815B0004E4B7A /* CareerPreviewVC.swift */,
 				26AF3238248F68BD00AA78FD /* FirstInputPreviewVC.swift */,
 				06E519CD2458163F004E4B7A /* ResumePreviewVC.swift */,
 				268BFF57246E8D25004B2640 /* SmoothCareerPreviewVC.swift */,
@@ -1338,6 +1350,7 @@
 				26BF48E924639D2B00E00215 /* MstK7_skillEnglish.tsv in Resources */,
 				066A8A72249066E8004C25D8 /* Login.storyboard in Resources */,
 				064EF6F824654A7300853ADD /* JobDetailDataCell.xib in Resources */,
+				269B29A6249708C300B33FBD /* Career.storyboard in Resources */,
 				06FFA0022484D6850085A3D9 /* MyPageChemistryStartCell.xib in Resources */,
 				26147F36247267F9009B30B5 /* MstF22_pcSkillWord.tsv in Resources */,
 				06E519842457CF90004E4B7A /* JobOfferBigCardCell.xib in Resources */,
@@ -1355,6 +1368,7 @@
 				0645DE03246BB6A100592572 /* JobDetailSalaryExampleCell.xib in Resources */,
 				068FFAAB24727A8B0083E130 /* JobDetailStepView.xib in Resources */,
 				0EE36F172486256F0098A2AF /* ChemistryStart.storyboard in Resources */,
+				269B29A42496F63200B33FBD /* CareerCardTBCell.xib in Resources */,
 				068501822473CE4D009770A3 /* HomeTitleView.xib in Resources */,
 				26CFC4682469496D00E458E2 /* HEditZipcodeTBCell.xib in Resources */,
 				068FFAA324725F4B0083E130 /* JobDetailFooterApplicationCell.xib in Resources */,
@@ -1514,6 +1528,7 @@
 				260DD26B248E179000BFB9FE /* Validate+Career.swift in Sources */,
 				26A1F57E247FB28B00834213 /* Validate+Profile.swift in Sources */,
 				0669380C2485D1030064030F /* SettingAccountCell.swift in Sources */,
+				269B29A02496F40100B33FBD /* CareerListVC.swift in Sources */,
 				066763672457AF2400AC5039 /* MyPageVC.swift in Sources */,
 				06E5199E2457DABE004E4B7A /* WithDrawalVC.swift in Sources */,
 				268BFF5A246E8F18004B2640 /* MdlAppSmoothCareer.swift in Sources */,
@@ -1617,6 +1632,7 @@
 				06E519AF245813E9004E4B7A /* LoginConfirmVC.swift in Sources */,
 				26AF323D248F7F6B00AA78FD /* Validate+FirstInput.swift in Sources */,
 				066EF6C8245BBA1100E15AD2 /* BaseJobCardCell.swift in Sources */,
+				269B29A32496F63200B33FBD /* CareerCardTBCell.swift in Sources */,
 				26F2A82B246D2EE90037D47F /* EditableTableBasicVC.swift in Sources */,
 				06E519B7245814D4004E4B7A /* SubEditBaseVC.swift in Sources */,
 				06FFA00B2484E66C0085A3D9 /* MyPageEditedChemistryCell.swift in Sources */,

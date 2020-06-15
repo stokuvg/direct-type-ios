@@ -286,10 +286,19 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
                 self.navigationController?.pushViewController(nvc, animated: true)
             }
         })
+        let action06: UIAlertAction = UIAlertAction(title: "C[仮] 職歴一覧", style: .default, handler: { action in
+            let storyboard2 = UIStoryboard(name: "Career", bundle: nil)
+            if let nvc = storyboard2.instantiateViewController(withIdentifier: "Sbid_CareerListVC") as? CareerListVC{
+                self.navigationController?.pushViewController(nvc, animated: true)
+            }
+        })
+
+
         let cancel: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
         })
         alert.addAction(action01)
         alert.addAction(action02)
+        alert.addAction(action06)
         alert.addAction(action03)
         alert.addAction(action04)
         alert.addAction(action05)

@@ -95,6 +95,11 @@ class HomeVC: TmpNaviTopVC {
             if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_FirstInputPreviewVC") as? FirstInputPreviewVC{
                 self.navigationController?.pushViewController(nvc, animated: true)
             }
+            case 6:
+            let storyboard2 = UIStoryboard(name: "Career", bundle: nil)
+            if let nvc = storyboard2.instantiateViewController(withIdentifier: "Sbid_CareerListVC") as? CareerListVC{
+                self.navigationController?.pushViewController(nvc, animated: true)
+            }
             default: break
             }
         }
@@ -171,14 +176,15 @@ class HomeVC: TmpNaviTopVC {
             Log.selectLog(logLevel: .debug, "error:\(error)")
             
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            self.showError(myErr)
             switch myErr.code {
                 case 403:
                     let message:String = "idTokenを取得していません"
                     self.showConfirm(title: "通信失敗", message: message)
                         .done { _ in
-                            
+
                     }.catch { (error) in
-                        
+
                     }.finally {
                 }
                 default:
