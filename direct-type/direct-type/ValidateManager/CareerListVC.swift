@@ -19,6 +19,16 @@ class CareerListVC: TmpBasicVC {
     //===職歴書カードを追加する
     @IBOutlet weak var btnAddCard: UIButton!
     @IBAction func actAddCard(_ sender: UIButton) {
+        print(#line, #function, "新規カードを追加する")
+        let newCard = MdlCareerCard()
+//        self.arrData.append(newCard)
+//        dispData()
+        let storyboard = UIStoryboard(name: "Preview", bundle: nil)
+        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_CareerPreviewVC") as? CareerPreviewVC{
+            nvc.initData(self, self.arrData.count, newCard)
+            self.navigationController?.pushViewController(nvc, animated: true)
+        }
+
     }
 //    //===職歴書カードを削除する（これはカードごとにボタンつける？）
 //    @IBOutlet weak var btnDelCard: UIButton!
@@ -46,14 +56,30 @@ class CareerListVC: TmpBasicVC {
     }
     func dispData() {
         title = "職歴書カード一覧"
+        //表示用にソートしておく
+        arrDisp.removeAll()
+        for item in arrData.sorted(by: { (lv, rv) -> Bool in
+            lv.workPeriod.startDate > rv.workPeriod.startDate
+        }) {
+            arrDisp.append(item)
+        }
+        tableVW.reloadData()
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         dispData()
         chkButtonEnable()//ボタン死活チェック
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        fetchGetCareerList()
+    }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
     }
     func chkButtonEnable() {
         if arrDisp.count <= 5 { //5つ以下なら追加可能
@@ -84,7 +110,13 @@ extension CareerListVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true) //ハイライトの解除
         let item = arrDisp[indexPath.row]
-        print(item.debugDisp)
+
+        let storyboard = UIStoryboard(name: "Preview", bundle: nil)
+        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_CareerPreviewVC") as? CareerPreviewVC{
+            nvc.initData(self, indexPath.row, item)
+            self.navigationController?.pushViewController(nvc, animated: true)
+        }
+
     }
 }
 
@@ -96,4 +128,41 @@ extension CareerListVC: CareerCardTBCellDelegate {
         print(#line, #function, "#\(num): [\(card.debugDisp)]が削除指定されました")
     }
 
+}
+
+
+//=== APIフェッチ
+extension CareerListVC {
+    private func fetchGetCareerList() {
+        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
+        SVProgressHUD.show(withStatus: "職務経歴書情報の取得")
+        ApiManager.getCareer(Void(), isRetry: true)
+        .done { result in
+            self.arrData.removeAll()
+            for (num, item) in result.businessTypes.enumerated() {
+                self.arrData.append(item)
+            }
+        }
+        .catch { (error) in
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            self.showError(error)
+        }
+        .finally {
+            self.dispData()
+            SVProgressHUD.dismiss()
+        }
+    }
+}
+
+
+
+extension CareerListVC: CareerListProtocol {
+    func changedCard(num: Int, item: MdlCareerCard) {
+        print(#line, #function, "変更あった")
+    }
+    
+    func cancelCard(num: Int, item: MdlCareerCard) {
+        print(#line, #function, "変更なし")
+    }
+    
 }

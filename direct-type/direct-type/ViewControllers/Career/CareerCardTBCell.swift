@@ -31,6 +31,8 @@ class CareerCardTBCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        btnDelCard.setTitle(text: "削除", fontType: .font_Sb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        btnDelCard.backgroundColor = UIColor.init(colorType: .color_alart)
     }
     
     func initCell(_ delegate: CareerCardTBCellDelegate, pos: Int, _ item: MdlCareerCard) {
@@ -45,8 +47,8 @@ class CareerCardTBCell: UITableViewCell {
         let bufTitle: String = "職歴書カード\(targetCardNum + 1)"
         let bufDetail: String = _item.debugDisp
         //===表示させる
-        lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
-        lblDetail.text(text: bufDetail, fontType: .font_S, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
+        lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        lblDetail.text(text: bufDetail, fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

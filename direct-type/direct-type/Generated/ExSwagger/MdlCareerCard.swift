@@ -33,6 +33,10 @@ class MdlCareerCard: Codable {
         self.salary = salary
         self.contents = contents
     }
+    convenience init() {
+        self.init(workPeriod: MdlCareerCardWorkPeriod(startDate: Constants.SelectItemsUndefineDate, endDate: Constants.SelectItemsUndefineDate), companyName: "", employmentType: "", employeesCount: "", salary: "", contents: "")
+    }
+
     //ApiモデルをAppモデルに変換して保持させる
     convenience init(dto: CareerHistoryDTO) {
         let _workPeriod: MdlCareerCardWorkPeriod =
