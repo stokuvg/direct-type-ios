@@ -33,7 +33,14 @@ class JobDetailPRCodeTagsCell: BaseTableViewCell {
         for i in 0..<prcodeNos.count {
             let prCodeNo = prcodeNos[i]
             let prCode:String = (SelectItemsManager.getCodeDisp(.prCode, code: prCodeNo)?.disp)!
-            let prCodeString = "#" + prCode
+            Log.selectLog(logLevel: .debug, "prCode:\(prCode)")
+            
+            var prCodeString:String = ""
+            if prCode.hasPrefix("#") {
+                prCodeString = prCode.replacingOccurrences(of: "#", with: "")
+            } else {
+                prCodeString = prCode
+            }
             datas.append(prCodeString)
         }
         

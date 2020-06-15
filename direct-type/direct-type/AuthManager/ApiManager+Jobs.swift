@@ -61,7 +61,6 @@ extension ApiManager {
         let (promise, resolver) = Promise<MdlJobCardDetail>.pending()
         AuthManager.needAuth(true)
         JobsAPI.jobsControllerDetail(jobId: jobId)
-//        JobsAPI.jobsControllerGet(mode: mode, page: page)
             .done { result in
                 resolver.fulfill(MdlJobCardDetail(dto: result))
         }.catch { (error) in

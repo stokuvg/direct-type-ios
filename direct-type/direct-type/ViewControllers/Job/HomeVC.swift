@@ -201,7 +201,6 @@ class HomeVC: TmpNaviTopVC {
         ApiManager.getJobs(pageNo, isRetry: true)
             .done { result in
                 debugLog("ApiManager getJobs result:\(result.debugDisp)")
-                debugLog("ApiManager getJobs result.jobCards:\(result.jobCards)")
                 
                 self.pageJobCards = result
         }
