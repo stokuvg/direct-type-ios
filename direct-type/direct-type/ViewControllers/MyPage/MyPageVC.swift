@@ -299,7 +299,7 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
         alert.addAction(action01)
         alert.addAction(action02)
         alert.addAction(action06)
-        alert.addAction(action03)
+        //alert.addAction(action03)
         alert.addAction(action04)
         alert.addAction(action05)
         alert.addAction(cancel)

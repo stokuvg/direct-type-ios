@@ -21,6 +21,9 @@ struct Constants {
     static let CognitoIdentityPoolId: String = "ap-northeast-1:4da204bb-c86f-419d-9879-8744af15248f"
     
 
+    //制限値の定数定義
+    static let CareerCardMax: Int = 10 //職務経歴書カードの登録際台数
+
     //無指定だったときの日時
     static let SelectItemsUndefineDate: Date = DateHelper.convStr2Date("1900-01-01")
     static let SelectItemsUndefineBirthday: Date = DateHelper.convStr2Date("1996-01-01")//誕生日の場合の初期値
@@ -34,7 +37,7 @@ struct Constants {
     //[Debug] Debug時以外はfalseにすべきフラグで設定しておく
     static let DbgAutoSelTabVC: Bool = false
     static let DbgAutoPushVC: Bool = false
-    static let DbgAutoPushVCNum: Int = 2 //0:なし, 1:プロフィール, 2:履歴書, 3:職歴, 4:サクサク職歴, 5:初回入力
+    static let DbgAutoPushVCNum: Int = 6 //0:なし, 1:プロフィール, 2:履歴書, 3:職歴, 4:サクサク職歴, 5:初回入力, 職歴一覧
     static let DbgOfflineMode: Bool = false
     static let DbgDispStatus: Bool = false
     static let DbgSkipLocalValidate: Bool = false
