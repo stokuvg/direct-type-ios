@@ -26,7 +26,6 @@ extension ApiManager {
         AuthManager.needAuth(true)
         CareerAPI.careerControllerGet()
         .done { result in
-            print(#line, #function, result)
             resolver.fulfill(MdlCareer(dto: result)) //変換しておく
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し

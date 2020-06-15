@@ -11,22 +11,18 @@ import UIKit
 import TudApi
 import SVProgressHUD
 
-
 protocol CareerListProtocol {
     func changedCard(num: Int, item: MdlCareerCard) //変更して戻る
     func cancelCard(num: Int, item: MdlCareerCard) //変更なしで戻る
 }
 
-
-
 //===[C-15]「職務経歴書確認」＊単独
 class CareerPreviewVC: PreviewBaseVC {
     var delegate: CareerListProtocol? = nil
     var targetCardNum: Int = 0 //編集対象のカード番号
-    var detail: MdlCareerCard? = nil
+    var arrDetail: [MdlCareerCard] = []
 
     override func actCommit(_ sender: UIButton) {
-        print(#line, #function, "ボタン押下でAPIフェッチ確認")
         if validateLocalModel() {
             tableVW.reloadData()
             return
@@ -35,24 +31,14 @@ class CareerPreviewVC: PreviewBaseVC {
     }
     //共通プレビューをOverrideして利用する
     override func initData() {
-        title = "[C-15]「職務経歴書確認」"
+        title = "職務経歴書"
         title = "[C-15] 職歴書 #\(targetCardNum + 1)"
     }
-//    func initFirstData() {
-//        let careerCard: CareerHistoryDTO = CareerHistoryDTO(
-//            startWorkPeriod: "",
-//            endWorkPeriod: "",
-//            companyName: "",
-//            employmentId: "",
-//            employees: 0,
-//            salary: 0,
-//            workNote: "")
-//        self.detail = MdlCareerCard(dto: careerCard)
-//        self.dispData()
-//    }
     override func dispData() {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
-        guard let _detail = detail else { return }
+        guard arrDetail.count > targetCardNum else { return }
+        let _detail = arrDetail[targetCardNum]
+
         self.arrData.removeAll()//いったん全件を削除しておく
         editableModel.arrData.removeAll()//こちらで管理させる？！
 
@@ -105,10 +91,10 @@ class CareerPreviewVC: PreviewBaseVC {
 //        fetchGetCareerList()
     }
     //========================================
-    func initData(_ delegate: CareerListProtocol, _ num: Int, _ detail: MdlCareerCard) {
+    func initData(_ delegate: CareerListProtocol, _ num: Int, _ details: [MdlCareerCard]) {
         self.delegate = delegate
         self.targetCardNum = num
-        self.detail = detail
+        self.arrDetail = details
     }
 }
 
@@ -116,42 +102,29 @@ class CareerPreviewVC: PreviewBaseVC {
 extension CareerPreviewVC {
     private func fetchCreateCareerList() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-        let card = CareerHistoryDTO(self.detail!, editableModel.editTempCD) //変更部分を適用した更新用モデルを生成
-        let param = CreateCareerRequestDTO(careerHistory: [card])
+        guard arrDetail.count > targetCardNum else { return }
+        let _detail = arrDetail[targetCardNum]
+        let card = CareerHistoryDTO(_detail, editableModel.editTempCD) //変更部分を適用した更新用モデルを生成
+        var tempCards: [CareerHistoryDTO] = []
+        for (num, item) in arrDetail.enumerated() {
+            if num == targetCardNum {
+                //print("💙編集対象 #\(num) [\(item.debugDisp)]")
+                tempCards.append(card)
+            } else {
+                //print("💙そのまま #\(num) [\(item.debugDisp)]")
+                tempCards.append(CareerHistoryDTO(item))
+            }
+        }
+        let _tempCards = tempCards.sorted { (lv, rv) -> Bool in
+            lv.startWorkPeriod > rv.endWorkPeriod
+        }
+        let param = CreateCareerRequestDTO(careerHistory: _tempCards)
         self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
         self.dicValidErrMsg.removeAll()//状態をクリアしておく
         SVProgressHUD.show(withStatus: "職務経歴書情報の作成")
         ApiManager.createCareer(param, isRetry: true)
         .done { result in
             //self.fetchGetCareerList()
-            self.navigationController?.popViewController(animated: true)
-        }
-        .catch { (error) in
-            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-            switch myErr.code {
-            case 400:
-                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgCareer(myErr.arrValidErrMsg)
-                self.dicGrpValidErrMsg = dicGrpError
-                self.dicValidErrMsg = dicError
-            default:
-                self.showError(error)
-            }
-        }
-        .finally {
-            self.dispData()
-            SVProgressHUD.dismiss()
-        }
-    }
-    private func fetchUpdateCareerList() {
-        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-        let card = CareerHistoryDTO(self.detail!, editableModel.editTempCD) //変更部分を適用した更新用モデルを生成
-        let param = CreateCareerRequestDTO(careerHistory: [card])
-        self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
-        self.dicValidErrMsg.removeAll()//状態をクリアしておく
-        SVProgressHUD.show(withStatus: "職務経歴書情報の作成")
-        ApiManager.createCareer(param, isRetry: true)
-        .done { result in
-//            self.fetchGetCareerList()
             self.navigationController?.popViewController(animated: true)
         }
         .catch { (error) in

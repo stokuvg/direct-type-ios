@@ -60,7 +60,8 @@ class MdlCareerCard: Codable {
 //        self.init(workPeriod: _workPeriod, companyName: dto.companyName, employmentType: _employmentType, employeesCount: _employeesCount, salary: _salary, contents: dto.contents)
 //    }
     var debugDisp: String {
-        return "[workPeriod: \(workPeriod.debugDisp)] [companyName: \(companyName)] [employmentType: \(employmentType)] [employeesCount: \(employeesCount)] [salary: \(salary)] [contents: \(contents)]"
+        let _workPeriod: String = workPeriod.debugDisp
+        return "[workPeriod: \(_workPeriod)] [companyName: \(companyName)] [employmentType: \(employmentType)] [employeesCount: \(employeesCount)] [salary: \(salary)] [contents: \(contents)]"
     }
 }
 
