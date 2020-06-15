@@ -27,8 +27,6 @@ class JobOfferBigCardCell: BaseJobCardCell {
         
         self.delegate.keepAction(tag: self.tag)
     }
-    
-    var keepFlag:Bool!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -147,7 +145,7 @@ class JobOfferBigCardCell: BaseJobCardCell {
         // キープボタン
         let keep = data.keepStatus
         keepFlag = keep
-        self.keepBtnSetting(flag: keep)
+        self.keepBtnSetting(flag: keepFlag)
         
     }
     

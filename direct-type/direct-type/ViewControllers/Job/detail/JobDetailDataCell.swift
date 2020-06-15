@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 import TudApi
 
 class JobDetailDataCell: BaseTableViewCell {
