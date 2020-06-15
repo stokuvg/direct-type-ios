@@ -686,6 +686,16 @@
             "type": "boolean",
             "example": true,
             "description": "true: キープしている, false: キープしていない"
+          },
+          "place2Ids": {
+            "example": [
+              "23"
+            ],
+            "description": "勤務地",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         },
         "required": [
@@ -699,7 +709,8 @@
           "maxSalaryId",
           "isSalaryDisplay",
           "companyName",
-          "isKeep"
+          "isKeep",
+          "place2Ids"
         ]
       },
       "GetJobsResponseDTO": {
@@ -803,7 +814,7 @@
           "middleEnter"
         ]
       },
-      "JobDetailDTO": {
+      "GetJobDetailResponseDTO": {
         "type": "object",
         "properties": {
           "jobId": {
@@ -837,7 +848,10 @@
             "description": "スカウトによる提示年収＊初回は未使用＊"
           },
           "place2Ids": {
-            "description": "．勤務地",
+            "example": [
+              "23"
+            ],
+            "description": "勤務地",
             "type": "array",
             "items": {
               "type": "string"
@@ -1098,6 +1112,7 @@
           "minSalaryId",
           "maxSalaryId",
           "isSalaryDisplay",
+          "salaryOffer",
           "place2Ids",
           "companyName",
           "pressStartDate",
@@ -1203,6 +1218,16 @@
             "type": "string",
             "example": "株式会社スマ澤",
             "description": "企業名"
+          },
+          "place2Ids": {
+            "example": [
+              "23"
+            ],
+            "description": "勤務地",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         },
         "required": [
@@ -1215,7 +1240,8 @@
           "minSalaryId",
           "maxSalaryId",
           "isSalaryDisplay",
-          "companyName"
+          "companyName",
+          "place2Ids"
         ]
       },
       "GetKeepsResponseDTO": {
@@ -1893,16 +1919,6 @@
         "operationId": "JobsController_get",
         "parameters": [
           {
-            "name": "mode",
-            "required": true,
-            "in": "query",
-            "description": "検索モード",
-            "example": "1",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
             "name": "page",
             "required": true,
             "in": "query",
@@ -1930,6 +1946,31 @@
         ]
       }
     },
+    "/jobs/recommended": {
+      "get": {
+        "operationId": "JobsController_recommended",
+        "parameters": [
+          {
+            "name": "page",
+            "required": true,
+            "in": "query",
+            "description": "ページ",
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "jobs"
+        ]
+      }
+    },
     "/jobs/{jobId}/detail": {
       "get": {
         "operationId": "JobsController_detail",
@@ -1949,7 +1990,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/JobDetailDTO"
+                  "$ref": "#/components/schemas/GetJobDetailResponseDTO"
                 }
               }
             }

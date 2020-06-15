@@ -125,8 +125,8 @@ class JobOfferBigCardCell: BaseJobCardCell {
 //        cautionView.isHidden = true
         
         // 勤務地
-//        let areaText = self.makeAreaNames(codes: data.workPlaceCode)
-//        areaLabel.text(text: areaText, fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        let areaText = self.makeAreaNames(codes: data.workPlaceCode)
+        areaLabel.text(text: areaText, fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         
         // 社名
         let companyName = data.companyName
@@ -174,7 +174,7 @@ class JobOfferBigCardCell: BaseJobCardCell {
         var text:String = ""
         for i in 0..<codes.count {
             let code = codes[i]
-            let placeText = (SelectItemsManager.getCodeDisp(.place, code: code)?.disp)!
+            let placeText = (SelectItemsManager.getCodeDisp(.entryPlace, code: code)?.disp)!
             text = text + placeText
             if (codes.count - 1) > i {
                 text += ","

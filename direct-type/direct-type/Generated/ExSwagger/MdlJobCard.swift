@@ -63,23 +63,6 @@ class MdlJobCard: Codable {
     
 //    var userFilter: UserFilterInfo
     
-    /*
-    init(jobCardCode: String = "",displayPeriod:EntryFormInfoDisplayPeriod = EntryFormInfoDisplayPeriod.init(startAt: "", endAt: ""), companyName: String = "", jobName:String = "", mainTitle:String = "", mainPicture: String = "", salaryMinCode:Int = 0, salaryMaxCode:Int = 0, salaryDisplay:Bool = false, workPlaceCode:[Int] = [], keepStatus:Bool = false, skipStatus:Bool = false, userFilter:UserFilterInfo = UserFilterInfo(tudKeepStatus: false, tudSkipStatus: false)) {
-        self.jobCardCode = jobCardCode
-        self.displayPeriod = displayPeriod
-        self.companyName = companyName
-        self.jobName = jobName
-        self.mainTitle = mainTitle
-        self.mainPicture = mainPicture
-        self.salaryMinCode = salaryMinCode
-        self.salaryMaxCode = salaryMaxCode
-        self.salaryDisplay = salaryDisplay
-        self.workPlaceCode = workPlaceCode
-        self.keepStatus = keepStatus
-        self.skipStatus = skipStatus
-        self.userFilter = userFilter
-    }
-    */
     init(jobCardCode: String = "",displayPeriod:EntryFormInfoDisplayPeriod = EntryFormInfoDisplayPeriod.init(startAt: "", endAt: ""), companyName: String = "", jobName:String = "", mainTitle:String = "", mainPicture: String = "", salaryMinCode:Int = 0, salaryMaxCode:Int = 0, salaryDisplay:Bool = false, workPlaceCode:[Int] = [], keepStatus:Bool = false) {
         self.jobCardCode = jobCardCode
         self.displayPeriod = displayPeriod
@@ -95,24 +78,6 @@ class MdlJobCard: Codable {
 //        self.skipStatus = skipStatus
 //        self.userFilter = userFilter
     }
-    
-    //ApiモデルをAppモデルに変換して保持
-    
-    /*
-    convenience init(dto: JobCardBig) {
-        
-        let _displayPeriod = dto.displayPeriod
-        let _userFilter = dto.userFilter
-        
-        let minCode = dto.minSalaryId!
-        let maxCode = dto.maxSalaryId!
-        let salaryDisplay = dto.isSalaryDisplay!
-        let keep = dto.keepStatus
-        let skip = dto.skipStatus
-        
-        self.init(jobCardCode: dto.jobCardCode, displayPeriod: _displayPeriod, companyName: dto.companyName, jobName: dto.jobName, mainTitle:dto.mainTitle, mainPicture: dto.mainPicture, salaryMinCode: minCode, salaryMaxCode: maxCode, salaryDisplay: salaryDisplay, workPlaceCode: dto.workPlaceCode, keepStatus: keep, skipStatus: skip, userFilter: _userFilter)
-    }
-    */
     
     // TudApiのデータを変換して保持
     convenience init(dto: Job) {
@@ -143,10 +108,14 @@ class MdlJobCard: Codable {
         let _displayPeriod = EntryFormInfoDisplayPeriod.init(startAt: dto.pressStartDate, endAt: dto.pressEndDate)
         let minCode = Int(dto.minSalaryId)
         let maxCode = Int(dto.maxSalaryId)
-         
-//         self.init(jobCardCode: dto.jobCardCode, displayPeriod: _displayPeriod, companyName: dto.companyName, jobName: dto.jobName, mainTitle:dto.mainTitle, mainPicture: dto.mainPicture, salaryMinCode: minCode, salaryMaxCode: maxCode, salaryDisplay: salaryDisplay, workPlaceCode: dto.workPlaceCode, keepStatus: keep, skipStatus: skip, userFilter: _userFilter)
+        
+        var placeCodes:[Int] = []
+        for i in 0..<dto.place2Ids.count {
+            let code = Int(dto.place2Ids[i])
+            placeCodes.append(code!)
+        }
 
-        self.init(jobCardCode: jobCardCode, displayPeriod: _displayPeriod, companyName: dto.companyName, jobName: dto.jobName, mainTitle:dto.mainTitle,mainPicture: dto.mainPhotoURL , salaryMinCode: minCode!, salaryMaxCode: maxCode!, salaryDisplay: dto.isSalaryDisplay, keepStatus: dto.isKeep)
+        self.init(jobCardCode: jobCardCode, displayPeriod: _displayPeriod, companyName: dto.companyName, jobName: dto.jobName, mainTitle:dto.mainTitle,mainPicture: dto.mainPhotoURL , salaryMinCode: minCode!, salaryMaxCode: maxCode!, salaryDisplay: dto.isSalaryDisplay,workPlaceCode:placeCodes, keepStatus: dto.isKeep)
     }
 
     var debugDisp: String {

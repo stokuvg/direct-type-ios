@@ -12,22 +12,21 @@ import TudApi
 //================================================================
 //=== 仕事一覧取得 ===
 extension ApiManager {
-    class func getJobs(_ param: Void, isRetry: Bool = true) -> Promise<MdlJobCardList> {
+    class func getJobs(_ pageNo: Int, isRetry: Bool = true) -> Promise<MdlJobCardList> {
+//    class func getJobs(_ param: Void, isRetry: Bool = true) -> Promise<MdlJobCardList> {
         if isRetry {
             return firstly { () -> Promise<MdlJobCardList> in
-                retry(args: param, task: getJobsFetch) { (error) -> Bool in return true }
+                retry(args: pageNo, task: getJobsFetch) { (error) -> Bool in return true }
             }
         } else {
-            return getJobsFetch(param: param)
+            return getJobsFetch(pageNo: pageNo)
         }
     }
     
-    private class func getJobsFetch(param: Void) -> Promise<MdlJobCardList> {
+    private class func getJobsFetch(pageNo: Int) -> Promise<MdlJobCardList> {
         let (promise, resolver) = Promise<MdlJobCardList>.pending()
-        let mode: Int = 1 //（仮）
-        let page: Int = 1 //（仮）
         AuthManager.needAuth(true)
-        JobsAPI.jobsControllerGet(mode: mode, page: page)
+        JobsAPI.jobsControllerGet(page: pageNo)
         .done { result in
 //            print(#line, #function, result)
             resolver.fulfill(MdlJobCardList(dto: result)) //変換しておく
