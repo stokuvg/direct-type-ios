@@ -1,0 +1,60 @@
+openapi: 3.0.0
+info:
+  title: レコメンドAPI
+  description: SilverEggレコメンドIF生成用
+  version: '0.1'
+  contact: {}
+servers:
+  - url: 'https://directtype.silveregg.net'
+    description: 本番環境
+  - url: 'https://directtype-test.silveregg.net'
+    description: テスト環境
+paths:
+  /dummpycre5/click:
+    get:
+      tags:
+        - recomend
+      summary: レコメンドクリック通知
+      description: 求人詳細を表示させるときに叩く
+      parameters:
+        - in: query
+          name: prod
+          required: true
+          description: クリックした案件ID（求人カードID）
+          schema:
+            type: string
+            default: 0
+            example: jobID
+        - in: query
+          name: merch
+          required: true
+          description: 固定値
+          schema:
+            type: string
+            default: directtype
+            example: directtype
+        - in: query
+          name: cookie
+          required: true
+          description: subの値をcookieIDとして指定
+          schema:
+            type: string
+            default: 'sub'
+        - in: query
+          name: spec
+          required: false
+          description: クリックしたレコメンド枠specID
+          schema:
+            type: string
+            default: 'sub'
+        - in: query
+          name: cref
+          required: false
+          description: クリックしたレコメンドレスポンスのrqidもしくはcref要素の値
+          schema:
+            type: string
+            default: 'sub'
+      responses:
+        200:
+          description: 成功
+###==============================================###

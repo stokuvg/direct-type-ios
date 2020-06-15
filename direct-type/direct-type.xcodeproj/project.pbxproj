@@ -214,6 +214,7 @@
 		26859E242488E62A000109D1 /* SubEditSpecialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26859E232488E62A000109D1 /* SubEditSpecialVC.swift */; };
 		26859E272488E636000109D1 /* HEditSpecialTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26859E252488E636000109D1 /* HEditSpecialTBCell.swift */; };
 		26859E282488E636000109D1 /* HEditSpecialTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26859E262488E636000109D1 /* HEditSpecialTBCell.xib */; };
+		2688B568249768DA001975AC /* RecommendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2688B567249768DA001975AC /* RecommendManager.swift */; };
 		268BFF56246E8292004B2640 /* SubInputMemoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BFF55246E8292004B2640 /* SubInputMemoVC.swift */; };
 		268BFF58246E8D25004B2640 /* SmoothCareerPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BFF57246E8D25004B2640 /* SmoothCareerPreviewVC.swift */; };
 		268BFF5A246E8F18004B2640 /* MdlAppSmoothCareer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BFF59246E8F18004B2640 /* MdlAppSmoothCareer.swift */; };
@@ -507,6 +508,7 @@
 		26859E232488E62A000109D1 /* SubEditSpecialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubEditSpecialVC.swift; sourceTree = "<group>"; };
 		26859E252488E636000109D1 /* HEditSpecialTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HEditSpecialTBCell.swift; sourceTree = "<group>"; };
 		26859E262488E636000109D1 /* HEditSpecialTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HEditSpecialTBCell.xib; sourceTree = "<group>"; };
+		2688B567249768DA001975AC /* RecommendManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendManager.swift; sourceTree = "<group>"; };
 		268BFF55246E8292004B2640 /* SubInputMemoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubInputMemoVC.swift; sourceTree = "<group>"; };
 		268BFF57246E8D25004B2640 /* SmoothCareerPreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmoothCareerPreviewVC.swift; sourceTree = "<group>"; };
 		268BFF59246E8F18004B2640 /* MdlAppSmoothCareer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlAppSmoothCareer.swift; sourceTree = "<group>"; };
@@ -738,6 +740,7 @@
 		066BD9D52456ACB4009E610B /* direct-type */ = {
 			isa = PBXGroup;
 			children = (
+				2688B56624976888001975AC /* RecommendManager */,
 				26A1F57A247F5D1000834213 /* ValidateManager */,
 				263607592477A35E00032880 /* AuthManager */,
 				26BF48EF24639E7100E00215 /* Constants.swift */,
@@ -1167,6 +1170,14 @@
 			path = EditableSub;
 			sourceTree = "<group>";
 		};
+		2688B56624976888001975AC /* RecommendManager */ = {
+			isa = PBXGroup;
+			children = (
+				2688B567249768DA001975AC /* RecommendManager.swift */,
+			);
+			path = RecommendManager;
+			sourceTree = "<group>";
+		};
 		269AFFB7246A929200DB364B /* SubSelect */ = {
 			isa = PBXGroup;
 			children = (
@@ -1564,6 +1575,7 @@
 				06CDF6BF247643200075370F /* MdlJobCard.swift in Sources */,
 				06E519CC24581634004E4B7A /* ProfilePreviewVC.swift in Sources */,
 				06CDF6C1247648730075370F /* MdlJobCardList.swift in Sources */,
+				2688B568249768DA001975AC /* RecommendManager.swift in Sources */,
 				0670F4662491FCBB00E60FDC /* ApiManager+Keeps.swift in Sources */,
 				066763722457B08300AC5039 /* EntryVC.swift in Sources */,
 				06E519A42457DC7B004E4B7A /* InitialInputCompleteVC.swift in Sources */,
@@ -1851,6 +1863,7 @@
 			baseConfigurationReference = B8C351EB920291E353136BB9 /* Pods-direct-type.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEFINES_MODULE = NO;
@@ -1863,6 +1876,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.ms-mb015.direct-type";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1874,6 +1888,7 @@
 			baseConfigurationReference = F6660969F9095E20D9CE432A /* Pods-direct-type.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEFINES_MODULE = NO;
@@ -1886,6 +1901,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.ms-mb015.direct-type";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
