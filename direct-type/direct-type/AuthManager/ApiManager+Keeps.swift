@@ -27,6 +27,8 @@ extension ApiManager {
         AuthManager.needAuth(true)
         KeepsAPI.keepsControllerGet(page: pageNo)
         .done { result in
+//            Log.selectLog(logLevel: .debug, "result:\(result)")
+            
             resolver.fulfill(MdlKeepList(dto: result)) //変換しておく
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し

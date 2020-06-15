@@ -145,7 +145,7 @@ class JobOfferBigCardCell: BaseJobCardCell {
         // キープボタン
         let keep = data.keepStatus
         keepFlag = keep
-        self.keepBtnSetting(flag: keep)
+        self.keepBtnSetting(flag: keepFlag)
         
     }
     

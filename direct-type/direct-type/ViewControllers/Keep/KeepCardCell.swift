@@ -105,14 +105,31 @@ class KeepCardCell: BaseJobCardCell {
         }
         
         // 勤務地
-//        let areaCodes = data.
+        let areaCodes = data.areaNames
+        let areaNames = self.makeAreaNames(codes: areaCodes)
 //        let area:String = (data["area"] as! String)
 //        areaLabel.text(text: area, fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        self.areaLabel.text(text: areaNames, fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        
         
         // 社名
         let company = data.companyName
         companyNameLabel.text(text: company, fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         
+    }
+    
+    private func makeAreaNames(codes: [String]) -> String {
+        var text:String = ""
+        for i in 0..<codes.count {
+            let code = Int(codes[i])
+            let areaString:String = (SelectItemsManager.getCodeDisp(.place, code: code!)?.disp)!
+            text += areaString
+            if i < (codes.count - 1) {
+                text += ","
+            }
+        }
+        
+        return text
     }
     
     private func cutText(defaultText: String, cutString: String) -> String {

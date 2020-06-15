@@ -23,7 +23,6 @@ class MdlKeepList: Codable {
         
     convenience init(dto: GetKeepsResponseDTO) {
         let hasNext = dto.hasNext
-//        let jobs = dto.jobs
         var lists:[MdlKeepJob] = []
         for i in 0..<dto.keepJobs.count {
             let keep = dto.keepJobs[i]
@@ -34,7 +33,7 @@ class MdlKeepList: Codable {
     }
 
     var debugDisp: String {
-        return ""
+        return "[keepDatas: \(keepJobs.count)件]"
     }
         
 }
