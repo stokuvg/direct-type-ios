@@ -2087,6 +2087,51 @@
           "entry"
         ]
       }
+    },
+    "/approach": {
+      "get": {
+        "operationId": "ApproachController_get",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetApproachResponseDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "entry"
+        ]
+      },
+      "get": {
+        "operationId": "ApproachController_get",
+        "summary": "アプローチ設定取得",
+        "description": "アプローチ設定内容を取得",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetKeepsResponseDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "approach"
+        ]
+      }
     }
   }
 }
