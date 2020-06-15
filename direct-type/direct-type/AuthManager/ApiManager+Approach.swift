@@ -8,34 +8,35 @@
 
 import PromiseKit
 import Foundation
+import TudApi
 
 //================================================================
 //=== アプローチ取得 ===
-//extension ApiManager {
-//    class func getProfile(_ param: Void, isRetry: Bool = true) -> Promise<MdlApproach> {
-//        if isRetry {
-//            return firstly { () -> Promise<MdlProfile> in
-//                retry(args: param, task: getApproachFetch) { (error) -> Bool in return true }
-//            }
-//        } else {
-//            return getProfileFetch(param: param)
-//        }
-//    }
-//    private class func getApproachFetch(param: Void) -> Promise<MdlApproach> {
-//        let (promise, resolver) = Promise<MdlApproach>.pending()
-//        AuthManager.needAuth(true)
-//        ApproachAPI.profileControllerGet()
-//        .done { result in
-//            resolver.fulfill(MdlProfile(dto: result)) //変換しておく
-//        }
-//        .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
-//            resolver.reject(error)
-//        }
-//        .finally {
-//        }
-//        return promise
-//    }
-//}
+extension ApiManager {
+    class func getApproach(_ param: Void, isRetry: Bool = true) -> Promise<MdlApproach> {
+        if isRetry {
+            return firstly { () -> Promise<MdlApproach> in
+                retry(args: param, task: getApproachFetch) { (error) -> Bool in return true }
+            }
+        } else {
+            return getApproachFetch(param: param)
+        }
+    }
+    private class func getApproachFetch(param: Void) -> Promise<MdlApproach> {
+        let (promise, resolver) = Promise<MdlApproach>.pending()
+        AuthManager.needAuth(true)
+        UserStatusAPI.approachControllerGet()
+        .done { result in
+            resolver.fulfill(MdlApproach(dto: result)) //変換しておく
+        }
+        .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
+            resolver.reject(error)
+        }
+        .finally {
+        }
+        return promise
+    }
+}
 //================================================================
 //=== アプローチ更新 ===
 //extension UpdateProfileRequestDTO {
