@@ -24,8 +24,9 @@ class HomeVC: TmpNaviTopVC {
 //    @IBOutlet weak var homeNaviHeight:NSLayoutConstraint!
     @IBOutlet weak var homeTableView:UITableView!
     
-    var masterJobCards: MdlJobCardList!
-    var dispJobCards: MdlJobCardList!
+    var pageJobCards: MdlJobCardList!   // nページを取得
+//    var masterJobCards: MdlJobCardList!
+    var dispJobCards: MdlJobCardList!   // 取得したページを全て表示
     
 //    var dispTableData:[[String: Any]] = []
 //    var masterTableData:[[String:Any]] = []
@@ -34,6 +35,8 @@ class HomeVC: TmpNaviTopVC {
     var dispType:CardDispType = .none
     
     var safeAreaTop:CGFloat!
+    
+    var pageNo:Int = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,29 +122,25 @@ class HomeVC: TmpNaviTopVC {
 
     }
     
-    private func firstDispJobCardsAdd() {
-        
-        dispJobCards = MdlJobCardList()
-        if masterJobCards.jobCards.count > moreDataCount {
-            let jobCards = masterJobCards.jobCards
-            dispJobCards.jobCards = jobCards
-        } else {
-            for i in 0..<masterJobCards.jobCards.count {
-                let data = masterJobCards.jobCards[i]
-                dispJobCards.jobCards.append(data)
-            }
+    private func dataAddAction() {
+        Log.selectLog(logLevel: .debug, "HomeVC dataAddAction start")
+        var _jobs:[MdlJobCard] = dispJobCards.jobCards
+        for i in 0..<pageJobCards.jobCards.count {
+            let addJob:MdlJobCard = pageJobCards.jobCards[i]
+            _jobs.append(addJob)
         }
+        dispJobCards.jobCards = _jobs
     }
     
     private func dataCheckAction() {
         Log.selectLog(logLevel: .debug, "HomeVC dataCheckAction start")
         
-        if (masterJobCards.jobCards.count) > 0 {
+        if (pageJobCards.jobCards.count) > 0 {
 //        if masterTableData.count > 0 {
             homeTableView.isHidden = false
             dispType = .add
             
-            self.firstDispJobCardsAdd()
+            self.dispJobCards = self.pageJobCards
             
             self.homeTableView.delegate = self
             self.homeTableView.dataSource = self
@@ -161,16 +160,50 @@ class HomeVC: TmpNaviTopVC {
         }
     }
     
+    private func getJobAddList() {
+        SVProgressHUD.show()
+        pageNo += 1
+        pageJobCards = MdlJobCardList()
+        ApiManager.getJobs(pageNo, isRetry: true)
+            .done { result in
+                self.pageJobCards = result
+        }
+        .catch { (error) in
+            Log.selectLog(logLevel: .debug, "error:\(error)")
+            
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            self.showError(myErr)
+            switch myErr.code {
+                case 403:
+                    let message:String = "idTokenを取得していません"
+                    self.showConfirm(title: "通信失敗", message: message)
+                        .done { _ in
+
+                    }.catch { (error) in
+
+                    }.finally {
+                }
+                default:
+                    break
+            }
+        }
+        .finally {
+            SVProgressHUD.dismiss()
+//            self.dataCheckAction()
+            self.dataAddAction()
+        }
+    }
+    
     private func getJobList() {
         SVProgressHUD.show()
-        masterJobCards = MdlJobCardList()
+        pageJobCards = MdlJobCardList()
         dispJobCards = MdlJobCardList()
-        ApiManager.getJobs(Void(), isRetry: true)
+        ApiManager.getJobs(pageNo, isRetry: true)
             .done { result in
                 debugLog("ApiManager getJobs result:\(result.debugDisp)")
                 debugLog("ApiManager getJobs result.jobCards:\(result.jobCards)")
                 
-                self.masterJobCards = result
+                self.pageJobCards = result
         }
         .catch { (error) in
             Log.selectLog(logLevel: .debug, "error:\(error)")
@@ -388,19 +421,15 @@ extension HomeVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        // 表示可能なデータの数と現在表示している数が同じ
         let jobCardsCount = dispJobCards.jobCards.count
         
-        if masterJobCards.jobCards.count == dispJobCards.jobCards.count {
-//        if masterTableData.count == dispTableData.count {
+        // 次に表示できるページが無い場合
+        if pageJobCards.nextPage == false{
             dispType = .end
-            return (jobCardsCount + 1)
-//            return (dispTableData.count + 1)
         } else {
             dispType = .add
-            return (jobCardsCount + 1)
-//            return (dispTableData.count + 1)
         }
+        return (jobCardsCount + 1)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -447,42 +476,8 @@ extension HomeVC: UITableViewDataSource {
 
 extension HomeVC: JobOfferCardMoreCellDelegate {
     func moreDataAdd() {
-        // 現在の数とマスタの数を比較
-        let masterCount = masterJobCards.jobCards.count
-        let dispCount = dispJobCards.jobCards.count
-        let checkCount = (masterCount - dispCount)
-//        let checkCount = masterTableData.count - dispTableData.count
-        // パターン 同じ:0 マスタの方が多い:1 表示の方が多い:これは無いはず
-        if checkCount == 0 {
-            // 同じ数
-        } else if checkCount > 0 {
-            // マスタの方が多い
-            
-            // 追加で表示する数より、残りの表示する数の方が多い
-            if checkCount == moreDataCount {
-                for i in 0..<moreDataCount {
-                    let cnt = i+(moreCnt*10)
-                    let jobCard = masterJobCards.jobCards[cnt]
-//                    let data = masterTableData[cnt]
-                    dispJobCards.jobCards.append(jobCard)
-//                    dispTableData.append(data)
-                }
-                self.homeTableView.reloadData()
-            } else if checkCount > moreDataCount {
-                for i in 0..<moreDataCount {
-                    let cnt = i+(moreCnt*10)
-                    let jobCard = masterJobCards.jobCards[cnt]
-                    dispJobCards.jobCards.append(jobCard)
-//                    let data = masterTableData[cnt]
-//                    dispTableData.append(data)
-                }
-                self.homeTableView.reloadData()
-            } else {
-                
-            }
-        } else {
-            
-        }
+        // 次ページの求人情報を取得
+        self.getJobAddList()
     }
 }
 
@@ -550,58 +545,50 @@ extension HomeVC: BaseJobCardCellDelegate {
         let row = tag
         let jobCard = dispJobCards.jobCards[row]
         let jobId = jobCard.jobCardCode
-        let flag = jobCard.keepStatus
+        let flag = !jobCard.keepStatus
+        jobCard.keepStatus = flag
         if flag == true {
+            Log.selectLog(logLevel: .debug, "キープ追加:jobId:\(jobId)")
             ApiManager.sendJobKeep(id: jobId)
                 .done { result in
                 Log.selectLog(logLevel: .debug, "keep send success")
                     Log.selectLog(logLevel: .debug, "keep成功")
                     
             }.catch{ (error) in
-                Log.selectLog(logLevel: .debug, "skip send error:\(error)")
+                Log.selectLog(logLevel: .debug, "keep send error:\(error)")
+                
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 switch myErr.code {
-                case 404:
-                    let message: String = ""
-                    self.showConfirm(title: "", message: message)
-                    .done { _ in
-                        Log.selectLog(logLevel: .debug, "対応方法の確認")
-                    }
-                    .catch { (error) in
-                    }
-                    .finally {
-                    }
-                default: break
+                    case 404:
+                        self.showError(error)
+                    default:
+                        self.showError(error)
                 }
-                self.showError(error)
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep send finally")
+                self.dispJobCards.jobCards[tag] = jobCard
+                let updateIndex = IndexPath.init(row: tag, section: 0)
+                self.homeTableView.reloadRows(at: [updateIndex], with: .automatic)
             }
         } else {
+            Log.selectLog(logLevel: .debug, "キープ削除:jobId:\(jobId)")
             ApiManager.sendJobDeleteKeep(id: jobId)
                 .done { result in
                 Log.selectLog(logLevel: .debug, "keep delete success")
                     Log.selectLog(logLevel: .debug, "delete成功")
                     
             }.catch{ (error) in
-                Log.selectLog(logLevel: .debug, "skip send error:\(error)")
+                Log.selectLog(logLevel: .debug, "keep delete error:\(error)")
+                
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 switch myErr.code {
-                case 404:
-                    let message: String = ""
-                    self.showConfirm(title: "", message: message)
-                    .done { _ in
-                        Log.selectLog(logLevel: .debug, "対応方法の確認")
-                    }
-                    .catch { (error) in
-                    }
-                    .finally {
-                    }
-                default: break
+                    case 404:
+                        self.showError(error)
+                    default:
+                        self.showError(error)
                 }
-                self.showError(error)
             }.finally {
-                Log.selectLog(logLevel: .debug, "keep send finally")
+                Log.selectLog(logLevel: .debug, "keep delete finally")
             }
         }
     }

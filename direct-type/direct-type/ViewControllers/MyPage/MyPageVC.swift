@@ -37,6 +37,8 @@ class MyPageVC: TmpNaviTopVC {
 
     var carrerFlag:Bool = false
     var chemistryFlag:Bool = false
+    
+    var pageNo:Int = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +73,7 @@ class MyPageVC: TmpNaviTopVC {
 extension MyPageVC {
     private func fetchGetJobList() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-        ApiManager.getJobs(Void(), isRetry: true)
+        ApiManager.getJobs(pageNo, isRetry: true)
         .done { result in
             print(result.debugDisp)
         }
