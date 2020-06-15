@@ -424,7 +424,7 @@ extension HomeVC: UITableViewDataSource {
         let jobCardsCount = dispJobCards.jobCards.count
         
         // 次に表示できるページが無い場合
-        if pageJobCards.nextPage == false {
+        if pageJobCards.nextPage == false{
             dispType = .end
         } else {
             dispType = .add
@@ -545,58 +545,50 @@ extension HomeVC: BaseJobCardCellDelegate {
         let row = tag
         let jobCard = dispJobCards.jobCards[row]
         let jobId = jobCard.jobCardCode
-        let flag = jobCard.keepStatus
+        let flag = !jobCard.keepStatus
+        jobCard.keepStatus = flag
         if flag == true {
+            Log.selectLog(logLevel: .debug, "キープ追加:jobId:\(jobId)")
             ApiManager.sendJobKeep(id: jobId)
                 .done { result in
                 Log.selectLog(logLevel: .debug, "keep send success")
                     Log.selectLog(logLevel: .debug, "keep成功")
                     
             }.catch{ (error) in
-                Log.selectLog(logLevel: .debug, "skip send error:\(error)")
+                Log.selectLog(logLevel: .debug, "keep send error:\(error)")
+                
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 switch myErr.code {
-                case 404:
-                    let message: String = ""
-                    self.showConfirm(title: "", message: message)
-                    .done { _ in
-                        Log.selectLog(logLevel: .debug, "対応方法の確認")
-                    }
-                    .catch { (error) in
-                    }
-                    .finally {
-                    }
-                default: break
+                    case 404:
+                        self.showError(error)
+                    default:
+                        self.showError(error)
                 }
-                self.showError(error)
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep send finally")
+                self.dispJobCards.jobCards[tag] = jobCard
+                let updateIndex = IndexPath.init(row: tag, section: 0)
+                self.homeTableView.reloadRows(at: [updateIndex], with: .automatic)
             }
         } else {
+            Log.selectLog(logLevel: .debug, "キープ削除:jobId:\(jobId)")
             ApiManager.sendJobDeleteKeep(id: jobId)
                 .done { result in
                 Log.selectLog(logLevel: .debug, "keep delete success")
                     Log.selectLog(logLevel: .debug, "delete成功")
                     
             }.catch{ (error) in
-                Log.selectLog(logLevel: .debug, "skip send error:\(error)")
+                Log.selectLog(logLevel: .debug, "keep delete error:\(error)")
+                
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 switch myErr.code {
-                case 404:
-                    let message: String = ""
-                    self.showConfirm(title: "", message: message)
-                    .done { _ in
-                        Log.selectLog(logLevel: .debug, "対応方法の確認")
-                    }
-                    .catch { (error) in
-                    }
-                    .finally {
-                    }
-                default: break
+                    case 404:
+                        self.showError(error)
+                    default:
+                        self.showError(error)
                 }
-                self.showError(error)
             }.finally {
-                Log.selectLog(logLevel: .debug, "keep send finally")
+                Log.selectLog(logLevel: .debug, "keep delete finally")
             }
         }
     }

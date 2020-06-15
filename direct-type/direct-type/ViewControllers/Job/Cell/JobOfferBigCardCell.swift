@@ -20,10 +20,6 @@ class JobOfferBigCardCell: BaseJobCardCell {
 
     @IBOutlet weak var keepBtn:UIButton!
     @IBAction func keepBtnAction() {
-//        Log.selectLog(logLevel: .debug, "keepBtnAction start")
-        
-        keepFlag = !keepFlag
-        self.keepBtnSetting(flag: keepFlag)
         
         self.delegate.keepAction(tag: self.tag)
     }
