@@ -49,7 +49,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="bottom" secondItem="ibi-66-pdQ" secondAttribute="bottom" id="3ID-z5-qMf"/>
                                                                     <constraint firstAttribute="bottom" secondItem="LbM-VG-Vh6" secondAttribute="bottom" id="5TJ-7I-ZJy"/>
@@ -255,9 +255,9 @@
                                                                                         <rect key="frame" x="16" y="0.0" width="104.5" height="60"/>
                                                                                         <subviews>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tYW-pQ-dnT">
-                                                                                                <rect key="frame" x="0.0" y="5" width="104.5" height="20.5"/>
+                                                                                                <rect key="frame" x="0.0" y="5" width="104.5" height="16"/>
                                                                                                 <constraints>
-                                                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20.5" id="zVz-S8-QXj"/>
+                                                                                                    <constraint firstAttribute="height" constant="16" id="RTM-7V-snq"/>
                                                                                                 </constraints>
                                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                 <nil key="textColor"/>
@@ -265,9 +265,9 @@
                                                                                             </label>
                                                                                         </subviews>
                                                                                         <constraints>
-                                                                                            <constraint firstItem="tYW-pQ-dnT" firstAttribute="top" secondItem="pxd-7z-fx4" secondAttribute="top" constant="5" id="7YI-Fy-tNP"/>
-                                                                                            <constraint firstAttribute="trailing" secondItem="tYW-pQ-dnT" secondAttribute="trailing" id="iKg-j1-rPP"/>
-                                                                                            <constraint firstItem="tYW-pQ-dnT" firstAttribute="leading" secondItem="pxd-7z-fx4" secondAttribute="leading" id="mRR-w3-q2F"/>
+                                                                                            <constraint firstItem="tYW-pQ-dnT" firstAttribute="leading" secondItem="pxd-7z-fx4" secondAttribute="leading" id="gfV-et-ZaN"/>
+                                                                                            <constraint firstAttribute="trailing" secondItem="tYW-pQ-dnT" secondAttribute="trailing" id="iVp-zU-LjW"/>
+                                                                                            <constraint firstItem="tYW-pQ-dnT" firstAttribute="top" secondItem="pxd-7z-fx4" secondAttribute="top" constant="5" id="lE0-pk-cSw"/>
                                                                                         </constraints>
                                                                                     </view>
                                                                                 </subviews>

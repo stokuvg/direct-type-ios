@@ -117,7 +117,7 @@ class KeepListVC: TmpBasicVC {
     
     private func makeDummyData() {
         
-        let _dummy1 = MdlKeepJob.init(jobId: "1234567", jobName: "キープリスト一覧職業名１", pressStartDate: "2020/06/12", pressEndDate: "2020/06/19", mainTitle: "", mainPhotoURL: "https://type.jp/s/img_banner/top_pc_side_number1.jpg", salaryMinCode: 7, salaryMaxCode: 11, isSalaryDisplay: true, companyName: "会社名１")
+        let _dummy1 = MdlKeepJob.init(jobId: "1234567", jobName: "キープリスト一覧職業名１", pressStartDate: "2020/06/12", pressEndDate: "2020/06/30", mainTitle: "", mainPhotoURL: "https://type.jp/s/img_banner/top_pc_side_number1.jpg", salaryMinCode: 7, salaryMaxCode: 11, isSalaryDisplay: true, companyName: "会社名１")
         let _dummy2 = MdlKeepJob.init(jobId: "234567", jobName: "キープリスト一覧職業名２", pressStartDate: "2020/06/05", pressEndDate: "2020/06/19", mainTitle: "", mainPhotoURL: "https://type.jp/s/img_banner/top_pc_side_number1.jpg", salaryMinCode: 8, salaryMaxCode: 12, isSalaryDisplay: false, companyName: "会社名２")
         let _dummy3 = MdlKeepJob.init(jobId: "34567", jobName: "キープリスト一覧職業名３", pressStartDate: "2020/06/01", pressEndDate: "2020/06/12", mainTitle: "", mainPhotoURL: "", salaryMinCode: 9, salaryMaxCode: 13, isSalaryDisplay: true, companyName: "会社名３")
         
@@ -187,7 +187,7 @@ extension KeepListVC: BaseJobCardCellDelegate {
         Log.selectLog(logLevel: .debug, "KeepListVC delegate keepAction tag:\(tag)")
         let jobCard = self.lists.keepJobs[tag]
         let jobId = jobCard.jobId
-        let keepStatus = false
+        let keepStatus = jobCard.keepStatus
         
         if keepStatus == true {
             ApiManager.sendJobKeep(id: jobId)

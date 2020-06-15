@@ -32,6 +32,12 @@ class MdlKeepJob: Codable {
     var isSalaryDisplay: Bool
     /** 企業名 */
     var companyName: String
+    
+    // 勤務地一覧
+    var areaNames:[String]
+    
+    // キープフラグ
+    var keepStatus:Bool
 
     init(jobId: String = "", jobName: String = "", pressStartDate: String = "", pressEndDate: String = "", mainTitle: String = "", mainPhotoURL: String = "", salaryMinCode: Int = 0, salaryMaxCode: Int = 0, isSalaryDisplay: Bool = false, companyName: String = "") {
         self.jobId = jobId
@@ -44,6 +50,10 @@ class MdlKeepJob: Codable {
         self.salaryMaxCode = salaryMaxCode
         self.isSalaryDisplay = isSalaryDisplay
         self.companyName = companyName
+        
+        self.areaNames = []
+        
+        self.keepStatus = true
     }
     // TudApiのデータを変換して保持
     convenience init(dto: KeepJob) {
