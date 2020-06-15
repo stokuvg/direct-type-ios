@@ -2087,6 +2087,29 @@
           "entry"
         ]
       }
+    },
+    "/userStatus": {
+      "get": {
+        "operationId": "ApproachController_get",
+        "summary": "アプローチ設定取得",
+        "description": "Api31_アプローチ設定を取得",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetApproachResponseDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "userStatus"
+        ]
+      }
     }
   }
 }
