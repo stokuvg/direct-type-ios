@@ -7,3 +7,26 @@
 //
 
 import Foundation
+import TudApi
+
+/** アプローチ設定 */
+class MdlApproach: Codable {
+    /** スカウト可否フラグ */
+    var isScoutEnable: Bool
+    /** レコメンド可否フラグ */
+    var isRecommendationEnable: Bool
+    
+    init(isScoutEnable: Bool, isRecommendationEnable: Bool) {
+        self.isScoutEnable = isScoutEnable
+        self.isRecommendationEnable = isRecommendationEnable
+    }
+
+    //ApiモデルをAppモデルに変換して保持させる
+    convenience init(dto: GetApproachResponseDTO) {
+        self.init(isScoutEnable: dto.isScoutEnable, isRecommendationEnable: dto.isRecommendationEnable)
+    }
+
+    var debugDisp: String {
+        return "[isScoutEnable: \(isScoutEnable)] [isRecommendationEnable: \(isRecommendationEnable)]"
+    }
+}
