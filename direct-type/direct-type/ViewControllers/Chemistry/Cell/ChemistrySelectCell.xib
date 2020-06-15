@@ -37,19 +37,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="私は、自分を個性的だと思う。自分を平凡な人間だと思いたくない。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hCt-iQ-AUV">
-                                <rect key="frame" x="60" y="26" width="255" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="WfR-m6-Hw3"/>
-                                </constraints>
+                                <rect key="frame" x="60" y="26" width="255" height="33.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="EwF-rW-fWc">
-                                <rect key="frame" x="10" y="80" width="315" height="110"/>
+                                <rect key="frame" x="10" y="69.5" width="315" height="120.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lup-vX-bxj">
-                                        <rect key="frame" x="0.0" y="0.0" width="79" height="110"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="79" height="120.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="79W-fe-Wv6" customClass="ChemistryAnswerButton" customModule="direct_type" customModuleProvider="target">
                                                 <rect key="frame" x="5" y="0.0" width="69" height="69"/>
@@ -83,7 +80,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T0N-zU-fOz">
-                                        <rect key="frame" x="79.5" y="0.0" width="79" height="110"/>
+                                        <rect key="frame" x="79.5" y="0.0" width="79" height="120.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fh8-QL-Tgi" customClass="ChemistryAnswerButton" customModule="direct_type" customModuleProvider="target">
                                                 <rect key="frame" x="5" y="0.0" width="69" height="69"/>
@@ -113,7 +110,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i16-hd-xzV">
-                                        <rect key="frame" x="159" y="0.0" width="79" height="110"/>
+                                        <rect key="frame" x="159" y="0.0" width="79" height="120.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WPK-Li-9Pc" customClass="ChemistryAnswerButton" customModule="direct_type" customModuleProvider="target">
                                                 <rect key="frame" x="5" y="0.0" width="69" height="69"/>
@@ -143,7 +140,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tvx-br-HRW">
-                                        <rect key="frame" x="236" y="0.0" width="79" height="110"/>
+                                        <rect key="frame" x="236" y="0.0" width="79" height="120.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="taM-Mi-BGh" customClass="ChemistryAnswerButton" customModule="direct_type" customModuleProvider="target">
                                                 <rect key="frame" x="5" y="0.0" width="69" height="69"/>
@@ -187,11 +184,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="EwF-rW-fWc" secondAttribute="bottom" constant="10" id="2an-B7-fOn"/>
+                            <constraint firstItem="EwF-rW-fWc" firstAttribute="top" relation="greaterThanOrEqual" secondItem="hCt-iQ-AUV" secondAttribute="bottom" constant="10" id="8Wg-iJ-f2d"/>
                             <constraint firstItem="keP-Tx-uM4" firstAttribute="leading" secondItem="F6m-2W-I0E" secondAttribute="leading" constant="20" id="CzP-zq-lfj"/>
                             <constraint firstItem="keP-Tx-uM4" firstAttribute="top" secondItem="rq0-je-bfc" secondAttribute="bottom" constant="20" id="DyR-m6-BaN"/>
                             <constraint firstAttribute="trailing" secondItem="hCt-iQ-AUV" secondAttribute="trailing" constant="20" id="EpM-aE-68F"/>
                             <constraint firstItem="hCt-iQ-AUV" firstAttribute="leading" secondItem="keP-Tx-uM4" secondAttribute="trailing" id="GKo-kM-Pq4"/>
-                            <constraint firstItem="EwF-rW-fWc" firstAttribute="top" secondItem="hCt-iQ-AUV" secondAttribute="bottom" constant="20" id="IBF-dS-jKM"/>
                             <constraint firstItem="rq0-je-bfc" firstAttribute="leading" secondItem="F6m-2W-I0E" secondAttribute="leading" constant="20" id="J3R-FL-5H2"/>
                             <constraint firstAttribute="trailing" secondItem="EwF-rW-fWc" secondAttribute="trailing" constant="10" id="dcT-IJ-di3"/>
                             <constraint firstAttribute="trailing" secondItem="rq0-je-bfc" secondAttribute="trailing" constant="20" id="h7k-Ig-ZG0"/>
@@ -216,6 +213,10 @@
                 <outlet property="questionLabel" destination="hCt-iQ-AUV" id="VoY-z2-q1j"/>
                 <outlet property="questionNumberLabel" destination="keP-Tx-uM4" id="txU-3b-BK0"/>
                 <outlet property="yesButton" destination="taM-Mi-BGh" id="2RI-vk-wqq"/>
+                <outletCollection property="answerTitleLabels" destination="8Z1-g2-J36" collectionClass="NSMutableArray" id="Pl8-Jp-vT9"/>
+                <outletCollection property="answerTitleLabels" destination="3Xy-3B-WIG" collectionClass="NSMutableArray" id="hvn-TF-cO4"/>
+                <outletCollection property="answerTitleLabels" destination="d9P-3D-6ge" collectionClass="NSMutableArray" id="sRq-k7-4vv"/>
+                <outletCollection property="answerTitleLabels" destination="81N-TR-wwR" collectionClass="NSMutableArray" id="JYD-h3-uvj"/>
             </connections>
             <point key="canvasLocation" x="48.550724637681164" y="64.955357142857139"/>
         </tableViewCell>

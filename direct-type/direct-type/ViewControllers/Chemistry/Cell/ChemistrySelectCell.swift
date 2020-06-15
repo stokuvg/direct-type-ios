@@ -20,6 +20,7 @@ final class ChemistrySelectCell: UITableViewCell {
     @IBOutlet private weak var IfAnythingNoButton: ChemistryAnswerButton!
     @IBOutlet private weak var IfAnythingYes: ChemistryAnswerButton!
     @IBOutlet private weak var yesButton: ChemistryAnswerButton!
+    @IBOutlet var answerTitleLabels: [UILabel]!
     @IBAction func noButton(_ sender: UIButton) {
         selectedAnswer = .no
         delegate?.didSelectedAnswer(number: number!, type: selectedAnswer)
@@ -65,9 +66,20 @@ final class ChemistrySelectCell: UITableViewCell {
         question = dataSet.question
         self.delegate = delegate
         self.selectedAnswer = selectedAnswer
+        setFont()
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
+}
+
+private extension ChemistrySelectCell {
+    func setFont() {
+        questionNumberLabel.font = UIFont(fontType: .font_Sb)
+        questionLabel.font = UIFont(fontType: .font_Sb)
+        answerTitleLabels.forEach({ label in
+            label.font = UIFont(fontType: .font_SSS)
+        })
     }
 }
