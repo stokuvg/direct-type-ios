@@ -14,6 +14,7 @@ enum SettingWebType {
     case Help
     case Privacy
     case Term
+    case approachExplanation
 }
 
 class SettingWebVC: TmpWebVC {
@@ -50,19 +51,23 @@ class SettingWebVC: TmpWebVC {
         
         var title = ""
         var urlString:String = ""
+        guard let _type = _type else { return }
         switch _type {
-            case .Help:
-                title = "よくある質問・ヘルプ"
-                urlString = "https://type.jp/help/index.html"
-            case .Privacy:
-                title = "プライバシーポリシー"
-                urlString = "https://type.jp/s/kojin/"
-            case .Term:
-                title = "利用規約"
-                urlString = "https://type.jp/help/category_14.html"
-            default:
-                title = ""
-                urlString = ""
+        case .Help:
+            title = "よくある質問・ヘルプ"
+            urlString = "https://type.jp/help/index.html"
+        case .Privacy:
+            title = "プライバシーポリシー"
+            urlString = "https://type.jp/s/kojin/"
+        case .Term:
+            title = "利用規約"
+            urlString = "https://type.jp/help/category_14.html"
+        case .none:
+            title = ""
+            urlString = ""
+        case .approachExplanation:
+            title = ""
+            urlString = ""
         }
         
         self.tmpNavigationBar.topItem?.title = title
