@@ -10,16 +10,16 @@ servers:
   - url: 'https://directtype-test.silveregg.net'
     description: テスト環境
 paths:
-  /dummpycre5/click:
+  /pycre5/json/recommend:
     get:
       tags:
-        - recomend
+        - recommend
       summary: レコメンドクリック通知
       description: 求人詳細を表示させるときに叩く
       parameters:
         - in: query
           name: prod
-          required: true
+          required: false
           description: クリックした案件ID（求人カードID）
           schema:
             type: string
@@ -42,18 +42,18 @@ paths:
             default: 'sub'
         - in: query
           name: spec
-          required: false
+          required: true
           description: クリックしたレコメンド枠specID
           schema:
             type: string
             default: 'sub'
         - in: query
-          name: cref
+          name: num
           required: false
-          description: クリックしたレコメンドレスポンスのrqidもしくはcref要素の値
+          description: 要求数
           schema:
-            type: string
-            default: 'sub'
+            type: integer
+            default: 100
       responses:
         200:
           description: 成功

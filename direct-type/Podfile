@@ -20,7 +20,7 @@ target 'direct-type' do
   pod 'SwaggerClient', :path => '../generated/promise'
 
   ##=== Swagger ===（シルバーエッグレコメンド叩くIF）
-  pod 'RecommendApi', :path => '../generatedRecommend/promise'
+  pod 'SERecommend', :path => '../generatedRecommend/promise'
   
   ##=== Swagger ===（最終的なサーバ側API）
   pod 'TudApi', :path => '../generatedSvr/promise'
