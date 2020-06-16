@@ -12,6 +12,15 @@ struct Constants {
     static let Auth_username: String = "+819001234567" //安全なダミー番号: https://stabucky.com/wp/archives/6180
     static let Auth_password: String = "Abcd123$"
 
+    
+    //=== レコメンド通信の定義
+    //      - url: 'https://directtype.silveregg.net'
+    //        description: 本番環境
+    //      - url: 'https://directtype-test.silveregg.net'
+    //        description: テスト環境
+    static let RecommendServer: String = "https://directtype-test.silveregg.net"
+
+    
     //=== 通信関連の設定値
     static let FetchIntervalSecond: TimeInterval = 10 * 60 // 10minutes経つまで、フェッチを抑止する(APIError.noFetchを返す)
     static let ApiAutoRetryMax: Int = 2 // 自動リトライ回数（初回含めているので、2以上じゃないとidTokenリフレッシュができない）

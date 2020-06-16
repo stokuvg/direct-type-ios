@@ -2,5 +2,6 @@
 *.swp
 generated/*
 generatedSvr/*
+generatedRecommend/*
 UserInterfaceState.xcuserstate
 direct-type/R.generated.swift

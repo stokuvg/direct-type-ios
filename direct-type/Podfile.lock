@@ -28,6 +28,9 @@ PODS:
   - R.swift (5.1.0):
     - R.swift.Library (~> 5.1.0)
   - R.swift.Library (5.1.0)
+  - SERecommend (0.20.6.15):
+    - Alamofire (~> 4.9.0)
+    - PromiseKit (~> 6.8)
   - SVProgressHUD (2.2.5)
   - SwaggerClient (0.20.4.30):
     - Alamofire (~> 4.9.0)
@@ -42,6 +45,7 @@ DEPENDENCIES:
   - Charts
   - MBCircularProgressBar
   - R.swift
+  - SERecommend (from `../generatedRecommend/promise`)
   - SVProgressHUD
   - SwaggerClient (from `../generated/promise`)
   - TudApi (from `../generatedSvr/promise`)
@@ -63,6 +67,8 @@ SPEC REPOS:
     - SVProgressHUD
 
 EXTERNAL SOURCES:
+  SERecommend:
+    :path: "../generatedRecommend/promise"
   SwaggerClient:
     :path: "../generated/promise"
   TudApi:
@@ -81,10 +87,11 @@ SPEC CHECKSUMS:
   PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
   R.swift: 8cbc4fc69b740305b6a17c8a8ed968eb788962d9
   R.swift.Library: fa85ce1e0d0b7e818cd9e080df910ba54d2776cc
+  SERecommend: 693c9167d256a8072535f634692c2add93b90443
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwaggerClient: deb4a616e282c99b0e89519fd3fa3e0c4ddd8d67
   TudApi: 5a956e970242dd6cebc5e8c26b5c3a7cf611c614
 
-PODFILE CHECKSUM: 8d2c926a95887a964848fbafb80b2888d7599732
+PODFILE CHECKSUM: 242c471fda4b28f3ff86cfe7b284046ea96fc2f2
 
 COCOAPODS: 1.8.4
