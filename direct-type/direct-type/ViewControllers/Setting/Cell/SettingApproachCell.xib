@@ -39,27 +39,42 @@
                                     <constraint firstItem="aer-Hf-8vw" firstAttribute="leading" secondItem="DIF-er-Rp4" secondAttribute="leading" id="okU-ro-Iit"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qNG-hJ-s5D">
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="nrc-mw-aGL">
                                 <rect key="frame" x="0.0" y="24" width="300" height="24"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHn-8g-R0c">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="スカウト" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubn-8o-GFe">
+                                        <rect key="frame" x="0.0" y="2" width="69.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VPv-2F-w2t">
+                                        <rect key="frame" x="74.5" y="2" width="0.0" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="プロのおすすめ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzw-3L-yLW">
+                                        <rect key="frame" x="79.5" y="2" width="0.0" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="利用中のアプローチはありません" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TJF-Zo-Euw">
+                                        <rect key="frame" x="84.5" y="2" width="210.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eBa-Kx-SFs">
+                                        <rect key="frame" x="300" y="0.0" width="0.0" height="24"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="rHn-8g-R0c" secondAttribute="bottom" id="7oc-ye-hfo"/>
-                                    <constraint firstAttribute="trailing" secondItem="rHn-8g-R0c" secondAttribute="trailing" id="F6K-Au-lxO"/>
-                                    <constraint firstItem="rHn-8g-R0c" firstAttribute="leading" secondItem="qNG-hJ-s5D" secondAttribute="leading" id="okF-YH-hW4"/>
-                                    <constraint firstItem="rHn-8g-R0c" firstAttribute="top" secondItem="qNG-hJ-s5D" secondAttribute="top" id="qWX-N8-2Cp"/>
-                                </constraints>
-                            </view>
+                            </stackView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="qNG-hJ-s5D" firstAttribute="height" secondItem="DIF-er-Rp4" secondAttribute="height" id="Rq7-W3-AIC"/>
+                            <constraint firstItem="nrc-mw-aGL" firstAttribute="height" secondItem="DIF-er-Rp4" secondAttribute="height" id="joB-LD-7Ru"/>
                         </constraints>
                     </stackView>
                 </subviews>
@@ -73,7 +88,10 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="approachLabel" destination="rHn-8g-R0c" id="Nqb-Hr-665"/>
+                <outlet property="notInUseApproachLabel" destination="TJF-Zo-Euw" id="rmk-4a-bAZ"/>
+                <outlet property="perLabel" destination="VPv-2F-w2t" id="HOP-fH-sI2"/>
+                <outlet property="recommendLabel" destination="vzw-3L-yLW" id="tbT-Ju-xJO"/>
+                <outlet property="scoutLabel" destination="ubn-8o-GFe" id="PSs-bM-Xqb"/>
                 <outlet property="titleLabel" destination="aer-Hf-8vw" id="vh5-XU-CMb"/>
             </connections>
             <point key="canvasLocation" x="132" y="153"/>

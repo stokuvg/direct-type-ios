@@ -10,39 +10,35 @@ import UIKit
 
 class SettingApproachCell: BaseTableViewCell {
     
-    @IBOutlet weak var titleLabel:UILabel!
-    @IBOutlet weak var approachLabel:UILabel!
-
+    @IBOutlet private weak var titleLabel:UILabel!
+    @IBOutlet private weak var scoutLabel: UILabel!
+    @IBOutlet private weak var perLabel: UILabel!
+    @IBOutlet private weak var recommendLabel: UILabel!
+    @IBOutlet private weak var notInUseApproachLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        titleLabel.text(text: "利用中のアプローチ", fontType: .font_Sb, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        setup()
     }
     
-    func setup(data:[String:Any]) {
-        var text:String = ""
-        if data.count == 0 {
-            text = "利用中のアプローチはありません"
-        } else {
-            let scountFlag = data["scount"] as! Bool
-            let proFlag = data["pro"] as! Bool
-            if scountFlag == false && proFlag == false {
-                text = "利用中のアプローチはありません"
-            } else if scountFlag == true && proFlag == true {
-                text = "スカウト / プロのおすすめ"
-            } else if scountFlag {
-                text = "スカウト"
-            } else if proFlag {
-                text = "プロのおすすめ"
-            }
-        }
-        approachLabel.text(text: text, fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+    func configure(with data: MdlApproach) {
+        scoutLabel.isHidden = !data.isScoutEnable
+        recommendLabel.isHidden = !data.isRecommendationEnable
+        perLabel.isHidden = (!data.isScoutEnable || !data.isRecommendationEnable) ||
+            (!data.isScoutEnable && !data.isRecommendationEnable)
+        notInUseApproachLabel.isHidden = (data.isScoutEnable || data.isRecommendationEnable)
     }
-    
+}
+
+private extension SettingApproachCell {
+    func setup() {
+        titleLabel.text(text: "利用中のアプローチ", fontType: .font_Sb,
+                        textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
+        
+        [scoutLabel, perLabel, recommendLabel, notInUseApproachLabel].forEach({ label in
+            guard let label = label else { return }
+            label.textColor = UIColor(colorType: .color_black)
+            label.font = UIFont(fontType: .font_S)
+        })
+    }
 }

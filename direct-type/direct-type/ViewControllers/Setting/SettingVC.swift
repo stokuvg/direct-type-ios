@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class SettingVC: TmpBasicVC {
     @IBOutlet weak var tableView:UITableView!
@@ -47,8 +48,11 @@ class SettingVC: TmpBasicVC {
         }
     }
     
+    private var approachSetting = MdlApproach(isScoutEnable: false, isRecommendationEnable: false)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchData()
         setup()
     }
 }
@@ -69,6 +73,23 @@ private extension SettingVC {
         // ログアウト
         // 退会
         tableView.registerNib(nibName: "SettingBaseCell", idName: "SettingBaseCell")
+    }
+    
+    func fetchData() {
+        SVProgressHUD.show(withStatus: "設定情報の取得")
+        ApiManager.getApproach(())
+            .done { result in
+                self.approachSetting = result
+        }
+            .catch { (error) in
+                let myError: MyErrorDisp = AuthManager.convAnyError(error)
+                print("アプローチデータ取得エラー！　コード: \(myError.code)")
+                self.showError(myError)
+        }
+            .finally {
+                self.tableView.reloadData()
+                SVProgressHUD.dismiss()
+        }
     }
     
     func dispLogoutAlert() {
@@ -154,8 +175,7 @@ extension SettingVC: UITableViewDataSource {
             return cell
         case .approach:
             let cell = tableView.loadCell(cellName: "SettingApproachCell", indexPath: indexPath) as! SettingApproachCell
-            let data:[String:Any] = [:]
-            cell.setup(data: data)
+            cell.configure(with: approachSetting)
             return cell
         case .help, .privacyPolicy, .termsOfService, .logout, .withdrawal:
             let cell = tableView.loadCell(cellName: "SettingBaseCell", indexPath: indexPath) as! SettingBaseCell
