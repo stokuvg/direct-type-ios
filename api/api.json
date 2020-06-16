@@ -1277,25 +1277,6 @@
           "jobId"
         ]
       },
-      "GetApproachResponseDTO": {
-        "type": "object",
-        "properties": {
-          "isScoutEnable": {
-            "type": "boolean",
-            "example": true,
-            "description": "スカウト可否"
-          },
-          "isRecommendationEnable": {
-            "type": "boolean",
-            "example": true,
-            "description": "レコメンド可否"
-          }
-        },
-        "required": [
-          "isScoutEnable",
-          "isRecommendationEnable"
-        ]
-      },
       "UserOldJob3": {
         "type": "object",
         "properties": {
