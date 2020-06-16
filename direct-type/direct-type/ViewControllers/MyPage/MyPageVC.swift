@@ -294,7 +294,18 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
                 self.navigationController?.pushViewController(nvc, animated: true)
             }
         })
-
+        let action07: UIAlertAction = UIAlertAction(title: "レコメンド[ap341]", style: .default, handler: { action in
+            RecommendManager.fetchRecommend(type: .ap111, jobID: "123456789")
+            .done { result in
+                print("成功 [\(result)]")
+            }
+            .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
+                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+                print("エラー[\(myErr.debugDisp)]")
+            }
+            .finally {
+            }
+        })
 
         let cancel: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
         })
@@ -304,6 +315,7 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
         //alert.addAction(action03)
         alert.addAction(action04)
         alert.addAction(action05)
+        alert.addAction(action07)
         alert.addAction(cancel)
         DispatchQueue.main.async {
             self.present(alert, animated: true, completion: nil)
