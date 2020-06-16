@@ -58,6 +58,8 @@ class JobOfferBigCardCell: BaseJobCardCell {
     }
     
     func setup(data:MdlJobCard) {
+//        Log.selectLog(logLevel: .debug, "JobOfferBigCardCell setup start")
+//        Log.selectLog(logLevel: .debug, "jobId:\(data.jobCardCode)")
         self.jobCardData = data
         // サムネイル画像
         let imageUrlString:String = data.mainPicture
@@ -167,13 +169,16 @@ class JobOfferBigCardCell: BaseJobCardCell {
     }
     
     private func makeAreaNames(codes:[Int]) -> String {
+//        Log.selectLog(logLevel: .debug, "JobOfferBigCardCell makeAreaNames start")
         var text:String = ""
         for i in 0..<codes.count {
             let code = codes[i]
-            let placeText = (SelectItemsManager.getCodeDisp(.entryPlace, code: code)?.disp)!
-            text = text + placeText
-            if (codes.count - 1) > i {
-                text += ","
+//            Log.selectLog(logLevel: .debug, "code:\(code)")
+            if let placeText = (SelectItemsManager.getCodeDisp(.entryPlace, code: code)?.disp) {
+                text = text + placeText
+                if (codes.count - 1) > i {
+                    text += ","
+                }
             }
         }
         

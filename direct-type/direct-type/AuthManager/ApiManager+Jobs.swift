@@ -30,7 +30,6 @@ extension ApiManager {
         .done { result in
 //            print(#line, #function, result)
             resolver.fulfill(MdlJobCardList(dto: result)) //変換しておく
-//            resolver.fulfill(MdlJobCardList())
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
             resolver.reject(error)
@@ -134,15 +133,8 @@ extension ApiManager {
         
         return promise
     }
+    
     class func sendJobDeleteKeep(id: String) -> Promise<Void> {
-        KeepsAPI.keepsControllerDelete(jobId: id)
-        .done { result in
-            Log.selectLog(logLevel: .debug, "keep delete result:\(result)")
-        }.catch{ (error) in
-            
-        }.finally {
-            
-        }
         return sendDeleteJobKeepFetch(id: id)
     }
 
@@ -154,6 +146,7 @@ extension ApiManager {
                 Log.selectLog(logLevel: .debug, "sendDeleteJobKeepFetch result:\(result)")
                 resolver.fulfill(Void())
         }.catch { (error) in
+            Log.selectLog(logLevel: .debug, "sendDeleteJobKeepFetch error:\(error)")
             resolver.reject(error)
         }.finally {
         }

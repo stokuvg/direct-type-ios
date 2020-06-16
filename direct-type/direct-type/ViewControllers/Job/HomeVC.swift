@@ -130,6 +130,7 @@ class HomeVC: TmpNaviTopVC {
             _jobs.append(addJob)
         }
         dispJobCards.jobCards = _jobs
+        self.homeTableView.reloadData()
     }
     
     private func dataCheckAction() {
@@ -166,6 +167,7 @@ class HomeVC: TmpNaviTopVC {
         pageJobCards = MdlJobCardList()
         ApiManager.getJobs(pageNo, isRetry: true)
             .done { result in
+                Log.selectLog(logLevel: .debug, "getJobAddList result:\(result.debugDisp)")
                 self.pageJobCards = result
         }
         .catch { (error) in
@@ -173,23 +175,9 @@ class HomeVC: TmpNaviTopVC {
             
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             self.showError(myErr)
-            switch myErr.code {
-                case 403:
-                    let message:String = "idTokenを取得していません"
-                    self.showConfirm(title: "通信失敗", message: message)
-                        .done { _ in
-
-                    }.catch { (error) in
-
-                    }.finally {
-                }
-                default:
-                    break
-            }
         }
         .finally {
             SVProgressHUD.dismiss()
-//            self.dataCheckAction()
             self.dataAddAction()
         }
     }
@@ -209,19 +197,6 @@ class HomeVC: TmpNaviTopVC {
             
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             self.showError(myErr)
-            switch myErr.code {
-                case 403:
-                    let message:String = "idTokenを取得していません"
-                    self.showConfirm(title: "通信失敗", message: message)
-                        .done { _ in
-
-                    }.catch { (error) in
-
-                    }.finally {
-                }
-                default:
-                    break
-            }
         }
         .finally {
             SVProgressHUD.dismiss()
@@ -448,6 +423,7 @@ extension HomeVC: UITableViewDataSource {
                 let cell = tableView.loadCell(cellName: "JobOfferBigCardCell", indexPath: indexPath) as! JobOfferBigCardCell
                 cell.delegate = self
                 cell.tag = row
+                Log.selectLog(logLevel: .debug, "data.keepStatus:\(data.keepStatus)")
                 cell.setup(data: data)
                 return cell
             }
@@ -463,6 +439,7 @@ extension HomeVC: UITableViewDataSource {
                 let cell = tableView.loadCell(cellName: "JobOfferBigCardCell", indexPath: indexPath) as! JobOfferBigCardCell
                 cell.delegate = self
                 cell.tag = row
+                Log.selectLog(logLevel: .debug, "data.keepStatus:\(data.keepStatus)")
                 cell.setup(data: data)
                 return cell
             }
@@ -548,6 +525,7 @@ extension HomeVC: BaseJobCardCellDelegate {
         jobCard.keepStatus = flag
         if flag == true {
             Log.selectLog(logLevel: .debug, "キープ追加:jobId:\(jobId)")
+            
             ApiManager.sendJobKeep(id: jobId)
                 .done { result in
                 Log.selectLog(logLevel: .debug, "keep send success")
@@ -557,12 +535,7 @@ extension HomeVC: BaseJobCardCellDelegate {
                 Log.selectLog(logLevel: .debug, "keep send error:\(error)")
                 
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-                switch myErr.code {
-                    case 404:
-                        self.showError(error)
-                    default:
-                        self.showError(error)
-                }
+                self.showError(myErr)
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep send finally")
                 self.dispJobCards.jobCards[tag] = jobCard
@@ -571,6 +544,7 @@ extension HomeVC: BaseJobCardCellDelegate {
             }
         } else {
             Log.selectLog(logLevel: .debug, "キープ削除:jobId:\(jobId)")
+            
             ApiManager.sendJobDeleteKeep(id: jobId)
                 .done { result in
                 Log.selectLog(logLevel: .debug, "keep delete success")
@@ -580,12 +554,7 @@ extension HomeVC: BaseJobCardCellDelegate {
                 Log.selectLog(logLevel: .debug, "keep delete error:\(error)")
                 
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-                switch myErr.code {
-                    case 404:
-                        self.showError(error)
-                    default:
-                        self.showError(error)
-                }
+                self.showError(myErr)
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep delete finally")
             }
