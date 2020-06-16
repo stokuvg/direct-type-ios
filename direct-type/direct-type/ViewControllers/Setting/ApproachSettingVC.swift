@@ -16,11 +16,14 @@ final class ApproachSettingVC: TmpBasicVC {
     @IBOutlet private weak var scoutStateLabel: UILabel!
     @IBOutlet private weak var recommendStateLabel: UILabel!
     @IBOutlet private weak var descriptionTextView: UITextView!
-    @IBAction func scoutButton(_ sender: UIButton) {
+    @IBAction private func scoutButton(_ sender: UIButton) {
         isScoutEnable = !isScoutEnable
     }
-    @IBAction func recommendButton(_ sender: UIButton) {
+    @IBAction private func recommendButton(_ sender: UIButton) {
         isRecommendEnable = !isRecommendEnable
+    }
+    @IBAction private func saveButton(_ sender: UIButton) {
+        saveSetting()
     }
     
     private var isScoutEnable: Bool = false {
@@ -64,6 +67,10 @@ private extension ApproachSettingVC {
         guard let approachSetting = approachSetting else { return }
         isScoutEnable = approachSetting.isScoutEnable
         isRecommendEnable = approachSetting.isRecommendationEnable
+    }
+    
+    func saveSetting() {
+        
     }
     
     var linkedText: String { "こちら" }
