@@ -70,7 +70,8 @@ private extension ApproachSettingVC {
     }
     
     func saveSetting() {
-        
+//        let param = UpdateApproachRequestDTO()
+//        ApiManager.updateApproach(param, isRetry: true)
     }
     
     var linkedText: String { "こちら" }
