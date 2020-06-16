@@ -35,6 +35,31 @@ class DateHelper {
          dateTimeFormatter.timeZone = TimeZone(secondsFromGMT: 0)
          return dateTimeFormatter
      }
+    
+    class func dateStringChangeFormatString(dateString: String) -> String {
+        if dateString.count == 0 {
+            return ""
+        }
+        Log.selectLog(logLevel: .debug, "dateString:\(dateString)")
+        
+        var dateCutArr:[String] = []
+        if (dateString.components(separatedBy: "-")).count > 1 {
+            dateCutArr = dateString.components(separatedBy: "-")
+        } else if (dateString.components(separatedBy: "/")).count > 1 {
+            dateCutArr = dateString.components(separatedBy: "/")
+        } else {
+            dateCutArr = []
+        }
+        if dateCutArr.count == 0 {
+            return dateString
+        }
+        
+        return dateCutArr[0] + "年" + dateCutArr[1] + "月" + dateCutArr[2] + "日"
+    }
+    
+    func makeDateArray(dateString: String) -> [String] {
+        return []
+    }
 }
 
 extension Date {

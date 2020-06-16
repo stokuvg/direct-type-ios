@@ -73,6 +73,7 @@ class JobDetailImageCell: BaseTableViewCell {
         // 画像セット
         
         let mainImageUrlString:String = data.mainPicture
+        Log.selectLog(logLevel: .debug, "mainImageUrlString:\(mainImageUrlString)")
 //        var subImageUrlStrings:[String] = []
         let subImageUrlStrings:[String] = data.subPictures
         /*
