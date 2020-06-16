@@ -367,13 +367,12 @@ extension HomeVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let row = indexPath.row
         if row == dispJobCards.jobCards.count && dispType == .add {
-//        if row == dispTableData.count && dispType == .add {
             return 100
         } else if row == dispJobCards.jobCards.count && dispType == .end {
-//        } else if row == dispTableData.count && dispType == .end {
             return 250
         }
-        return UITableView.automaticDimension
+        return 600
+//        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

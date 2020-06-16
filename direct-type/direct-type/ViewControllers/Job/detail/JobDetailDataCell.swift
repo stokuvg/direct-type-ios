@@ -118,7 +118,9 @@ class JobDetailDataCell: BaseTableViewCell {
         self.companyLabel.text(text: company, fontType: .C_font_SSb ,textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
                 
         // 掲載期間
-        let period_string = start_date_string + "〜" + end_date_string
+        let ymdStartDate = DateHelper.dateStringChangeFormatString(dateString: start_date_string)
+        let ymdEndDate = DateHelper.dateStringChangeFormatString(dateString: end_date_string)
+        let period_string = ymdStartDate + "〜" + ymdEndDate
         self.limitLabel.text(text: period_string, fontType: .C_font_SSb ,textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
     }
     

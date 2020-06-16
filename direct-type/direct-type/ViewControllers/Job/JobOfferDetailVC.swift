@@ -250,18 +250,21 @@ extension JobOfferDetailVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        var headerHeight:CGFloat = 0
         switch section {
             case 1:
-                return articleOpenFlag ? 120 : 60
+                headerHeight = articleOpenFlag ? 120 : 60
             case 3:
-                return 60
+                headerHeight = 60
             case 4:
-                return memoDispFlag ? 50 : 0
+                headerHeight = memoDispFlag ? 50 : 0
             case 5,6,7:
-                return 55
+                headerHeight = 55
             default:
-                return 0
+                headerHeight = 0
         }
+        tableView.sectionHeaderHeight = headerHeight
+        return headerHeight
     }
 }
 
@@ -483,8 +486,10 @@ extension JobOfferDetailVC: UITableViewDataSource {
 
 extension JobOfferDetailVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let sectionHeaderHeight = self.detailTableView.sectionHeaderHeight
+        
         let offsetY = scrollView.contentOffset.y
+        // ヘッダーの位置調整
+        let sectionHeaderHeight = self.detailTableView.sectionHeaderHeight                          // ヘッダーの高さ
         
         if offsetY <= sectionHeaderHeight && offsetY >= 0.0 {
             let edgeInset = UIEdgeInsets(top: -offsetY, left: 0.0, bottom: 0.0, right: 0.0)
