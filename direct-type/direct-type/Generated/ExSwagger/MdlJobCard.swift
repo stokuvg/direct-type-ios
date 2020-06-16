@@ -12,30 +12,6 @@ import TudApi
 
 /** 求人カード (1求人ごと) **/
 class MdlJobCard: Codable {
-    
-    /*
-     // TudApi Job
-     /** 求人ID */
-     public var jobId: String
-     /** 外部表示用職種名 */
-     public var jobName: String
-     /** 掲載開始日（ISO8601[YYYY-MM-DD]） */
-     public var pressStartDate: String
-     /** 掲載終了日（ISO8601[YYYY-MM-DD]） */
-     public var pressEndDate: String
-     /** メイン記事メインタイトル */
-     public var mainTitle: String
-     /** 年収マスタ値 */
-     public var minSalaryId: String
-     /** 年収マスタ値 */
-     public var maxSalaryId: String
-     /** true: 年収公開, false: 年収非公開 */
-     public var isSalaryDisplay: Bool
-     /** 企業名 */
-     public var companyName: String
-     /** true: キープしている, false: キープしていない */
-     public var isKeep: Bool
-     */
 
     /** 求人コード */
     var jobCardCode: String
@@ -81,41 +57,23 @@ class MdlJobCard: Codable {
     
     // TudApiのデータを変換して保持
     convenience init(dto: Job) {
-        /*
-         /** 求人ID */
-         public var jobId: String
-         /** 外部表示用職種名 */
-         public var jobName: String
-         /** 掲載開始日（ISO8601[YYYY-MM-DD]） */
-         public var pressStartDate: String
-         /** 掲載終了日（ISO8601[YYYY-MM-DD]） */
-         public var pressEndDate: String
-         /** メイン記事メインタイトル */
-         public var mainTitle: String
-         /** 年収マスタ値 */
-         public var minSalaryId: String
-         /** 年収マスタ値 */
-         public var maxSalaryId: String
-         /** true: 年収公開, false: 年収非公開 */
-         public var isSalaryDisplay: Bool
-         /** 企業名 */
-         public var companyName: String
-         /** true: キープしている, false: キープしていない */
-         public var isKeep: Bool
-         */
+        Log.selectLog(logLevel: .debug, "MdlJobCard con init start")
         
         let jobCardCode = dto.jobId
         let _displayPeriod = EntryFormInfoDisplayPeriod.init(startAt: dto.pressStartDate, endAt: dto.pressEndDate)
-        let minCode = Int(dto.minSalaryId)
-        let maxCode = Int(dto.maxSalaryId)
+        let minCode = Int(dto.minSalaryId) ?? 0
+        let maxCode = Int(dto.maxSalaryId) ?? 0
         
         var placeCodes:[Int] = []
         for i in 0..<dto.place2Ids.count {
             let code = Int(dto.place2Ids[i])
             placeCodes.append(code!)
         }
+        
+        let keepStatus = dto.isKeep
+        Log.selectLog(logLevel: .debug, "keepStatus:\(keepStatus)")
 
-        self.init(jobCardCode: jobCardCode, displayPeriod: _displayPeriod, companyName: dto.companyName, jobName: dto.jobName, mainTitle:dto.mainTitle,mainPicture: dto.mainPhotoURL , salaryMinCode: minCode!, salaryMaxCode: maxCode!, salaryDisplay: dto.isSalaryDisplay,workPlaceCode:placeCodes, keepStatus: dto.isKeep)
+        self.init(jobCardCode: jobCardCode, displayPeriod: _displayPeriod, companyName: dto.companyName, jobName: dto.jobName, mainTitle:dto.mainTitle,mainPicture: dto.mainPhotoURL , salaryMinCode: minCode, salaryMaxCode: maxCode, salaryDisplay: dto.isSalaryDisplay,workPlaceCode:placeCodes, keepStatus: keepStatus)
     }
 
     var debugDisp: String {

@@ -115,7 +115,7 @@ class KeepListVC: TmpBasicVC {
             // 0件
             self.keepNoView.delegate = self
             
-            self.makeDummyData()
+//            self.makeDummyData()
         }
     }
     
