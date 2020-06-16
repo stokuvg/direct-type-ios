@@ -102,8 +102,19 @@ extension ValidateManager {
                 switch type {
 
                 case .undefine:
-                    continue
-                    
+                    regexp = #"^.*$"#
+                    if let bufMatch = getRegexMatchString(editTemp, regexp) {
+                        if let keta = validInfo.keta, bufMatch.count != keta {
+                            if bufMatch.isEmpty && validInfo.required == false { continue } //桁指定あっても必須じゃなければ0桁は許される
+                            errMsg = "\(keta)桁の文字で入力してください"
+                        }
+                        if let max = validInfo.max, bufMatch.count > max {
+                            errMsg = "入力文字数が超過しています (\(max))"
+                        }
+                    } else {//正規表現にマッチしない（＝形式エラー）
+                        errMsg = "入力してください [\(regexp)]"
+                    }
+
                 case .zenkaku:
                     regexp = #"^[ー\p{Hiragana}\p{Katakana}\p{Han}\n]*$"#
                     if let bufMatch = getRegexMatchString(editTemp, regexp) {

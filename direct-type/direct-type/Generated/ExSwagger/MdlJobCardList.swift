@@ -35,20 +35,6 @@ class MdlJobCardList: Codable {
         self.init(updateAt: updateAt, hasNext:hasNext, jobList:lists)
     }
     
-    //ApiモデルをAppモデルに変換して保持させる
-    /*
-    convenience init(dto: MdlJobCardList) {
-        let updateAt = dto.updateAt
-        var _jobCards: [MdlJobCard] = []
-        if let items = dto.jobCards {
-            for item in items {
-                _jobCards.append(MdlJobCard(dto: item))
-            }
-        }
-        self.init(updateAt:updateAt!, jobCards: _jobCards)
-    }
-    */
-    
     var debugDisp: String {
         return "[jobDatas: \(jobCards.count)件]"
     }

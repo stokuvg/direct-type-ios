@@ -37,6 +37,8 @@ class MyPageVC: TmpNaviTopVC {
 
     var carrerFlag:Bool = false
     var chemistryFlag:Bool = false
+    
+    var pageNo:Int = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +73,7 @@ class MyPageVC: TmpNaviTopVC {
 extension MyPageVC {
     private func fetchGetJobList() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-        ApiManager.getJobs(Void(), isRetry: true)
+        ApiManager.getJobs(pageNo, isRetry: true)
         .done { result in
             print(result.debugDisp)
         }
@@ -286,11 +288,20 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
                 self.navigationController?.pushViewController(nvc, animated: true)
             }
         })
+        let action06: UIAlertAction = UIAlertAction(title: "C[仮] 職歴一覧", style: .default, handler: { action in
+            let storyboard2 = UIStoryboard(name: "Career", bundle: nil)
+            if let nvc = storyboard2.instantiateViewController(withIdentifier: "Sbid_CareerListVC") as? CareerListVC{
+                self.navigationController?.pushViewController(nvc, animated: true)
+            }
+        })
+
+
         let cancel: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
         })
         alert.addAction(action01)
         alert.addAction(action02)
-        alert.addAction(action03)
+        alert.addAction(action06)
+        //alert.addAction(action03)
         alert.addAction(action04)
         alert.addAction(action05)
         alert.addAction(cancel)

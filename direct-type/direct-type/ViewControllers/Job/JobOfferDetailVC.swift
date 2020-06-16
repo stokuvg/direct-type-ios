@@ -182,8 +182,7 @@ class JobOfferDetailVC: TmpBasicVC {
         SVProgressHUD.show()
         self._mdlJobDetail = MdlJobCardDetail()
         Log.selectLog(logLevel: .debug, "jobId:\(jobId)")
-        ApiManager.getJobDetail(jobId)
-//        ApiManager.getJobDetail(Void(), isRetry: true)
+        ApiManager.getJobDetail(jobId, isRetry: true)
             .done { result in
                 debugLog("ApiManager getJobDetail result:\(result.debugDisp)")
                 
@@ -192,22 +191,15 @@ class JobOfferDetailVC: TmpBasicVC {
         }
         .catch { (error) in
             Log.selectLog(logLevel: .debug, "error:\(error)")
-            
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             Log.selectLog(logLevel: .debug, "myErr:\(myErr.debugDisp)")
+            self.showError(myErr)
             
             switch myErr.code {
                 case 403:
-                    let message:String = "idTokenを取得していません"
-                    self.showConfirm(title: "通信失敗", message: message)
-                        .done { _ in
-                            
-                    }.catch { (error) in
-                        
-                    }.finally {
-                }
+                    self.showError(myErr)
                 default:
-                    break
+                    self.showError(myErr)
             }
         }
         .finally {

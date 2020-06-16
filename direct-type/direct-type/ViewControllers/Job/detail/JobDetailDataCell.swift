@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 import TudApi
 
 class JobDetailDataCell: BaseTableViewCell {
@@ -96,16 +97,15 @@ class JobDetailDataCell: BaseTableViewCell {
         if salaryDisplay {
             Log.selectLog(logLevel: .debug, "data.salaryMinId:\(data.salaryMinId)")
             let minPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.salaryMinId)?.disp
-            Log.selectLog(logLevel: .debug, "minPriceLabel:\(String(describing: minPriceLabel))")
-            
-//            Log.selectLog(logLevel: .debug, "minPriceLabel:\(String(describing: minPriceLabel))")
-            let minPrice = self.cutText(defaultText: minPriceLabel!,cutString: "万円")
             let maxPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.salaryMaxId)?.disp
-            let maxPrice = self.cutText(defaultText: maxPriceLabel!,cutString: "万円")
+            if minPriceLabel != nil && (maxPriceLabel != nil) {
+                let minPrice = self.cutText(defaultText: minPriceLabel!,cutString: "万円")
+                let maxPrice = self.cutText(defaultText: maxPriceLabel!,cutString: "万円")
 
-            let priceText = minPrice + "〜" + maxPrice
-            self.salaryLabel.text(text: priceText, fontType: .C_font_XL, textColor: UIColor.init(colorType: .color_sub)!, alignment: .center)
-            self.salaryMarkLabel.text(text: "万円", fontType: .C_font_Sb ,textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
+                let priceText = minPrice + "〜" + maxPrice
+                self.salaryLabel.text(text: priceText, fontType: .C_font_XL, textColor: UIColor.init(colorType: .color_sub)!, alignment: .center)
+                self.salaryMarkLabel.text(text: "万円", fontType: .C_font_Sb ,textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
+            }
         } else {
             self.salaryLabel.text(text: "非公開", fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
             self.salaryMarkLabel.text(text: "", fontType: .C_font_M, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
@@ -133,7 +133,7 @@ class JobDetailDataCell: BaseTableViewCell {
         var text:String = ""
         for i in 0..<codes.count {
             let code = codes[i]
-            let placeText = (SelectItemsManager.getCodeDisp(.place, code: code)?.disp)!
+            let placeText = (SelectItemsManager.getCodeDisp(.entryPlace, code: code)?.disp)!
             text = text + placeText
             if (codes.count - 1) > i {
                 text += ","
