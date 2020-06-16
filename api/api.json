@@ -1277,6 +1277,25 @@
           "jobId"
         ]
       },
+      "GetApproachResponseDTO": {
+        "type": "object",
+        "properties": {
+          "isScoutEnable": {
+            "type": "boolean",
+            "example": true,
+            "description": "スカウト可否"
+          },
+          "isRecommendationEnable": {
+            "type": "boolean",
+            "example": true,
+            "description": "レコメンド可否"
+          }
+        },
+        "required": [
+          "isScoutEnable",
+          "isRecommendationEnable"
+        ]
+      },
       "UserOldJob3": {
         "type": "object",
         "properties": {
@@ -2108,6 +2127,30 @@
           "entry"
         ]
       }
+    },
+    "/userStatus": {
+      "get": {
+        "operationId": "ApproachController_get",
+        "summary": "アプローチ設定取得",
+        "description": "Api31_アプローチ設定を取得",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetApproachResponseDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "userStatus"
+        ]
+      }
     }
   }
 }
+
