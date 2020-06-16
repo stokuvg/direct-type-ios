@@ -15,6 +15,7 @@ final class ApproachSettingVC: TmpBasicVC {
     @IBOutlet private weak var recommendBackgroundView: UIView!
     @IBOutlet private weak var scoutStateLabel: UILabel!
     @IBOutlet private weak var recommendStateLabel: UILabel!
+    @IBOutlet private weak var descriptionTextView: UITextView!
     @IBAction func scoutButton(_ sender: UIButton) {
         isScoutEnable = !isScoutEnable
     }
@@ -46,6 +47,7 @@ final class ApproachSettingVC: TmpBasicVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        setAttributedText()
     }
     
     override func viewDidLayoutSubviews() {
@@ -64,11 +66,30 @@ private extension ApproachSettingVC {
         isRecommendEnable = approachSetting.isRecommendationEnable
     }
     
+    var linkedText: String { "こちら" }
+    func setAttributedText() {
+        let attributedText = NSMutableAttributedString(string: descriptionTextView.text!)
+        let range = NSString(string: descriptionTextView.text!).range(of: linkedText)
+        attributedText.addAttribute(.link, value: "", range: range)
+        descriptionTextView.attributedText = attributedText
+        descriptionTextView.linkTextAttributes = [.foregroundColor: UIColor(colorType: .color_sub)!]
+        descriptionTextView.isSelectable = true
+        descriptionTextView.isEditable = false
+        descriptionTextView.delegate = self
+    }
+    
     func setDisableView() {
         guard view.subviews.first(where: { $0 is DisableView }) == nil else { return }
         let disableView = DisableView(frame: recommendBackgroundView.frame)
         view.addSubview(disableView)
         view.bringSubviewToFront(disableView)
+    }
+}
+
+extension ApproachSettingVC: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        // TODO: リンクタップ時の挙動を追加
+        return false
     }
 }
 
