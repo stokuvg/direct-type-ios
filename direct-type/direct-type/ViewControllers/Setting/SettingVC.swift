@@ -127,7 +127,8 @@ extension SettingVC: UITableViewDelegate {
             navigationController?.pushViewController(vc, animated: true)
         case .approach:
             // H-9 アプローチ設定へ遷移
-            break
+            let vc = getVC(sbName: "SettingVC", vcName: "ApproachSettingVC") as! ApproachSettingVC
+            navigationController?.pushViewController(vc, animated: true)
         case .help:
             // Web(よくある質問・ヘルプ)を表示
             let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
