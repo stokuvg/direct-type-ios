@@ -38,18 +38,12 @@ struct EditableItemH {
             return "\(buf)"
         //=== 選択肢一覧を取得し、指定項目の表示名を求めて表示するもの
         case .selectDrumYM:
-            switch editableItemKey {
-            case EditItemMdlCareerCardWorkPeriod.startDate.itemKey: fallthrough
-            case EditItemMdlAppSmoothCareerComponyDescriptionWorkPeriod.workStartDate.itemKey:
-                return Constants.DefaultSelectWorkPeriodStartDate.dispYmJP()
-            case EditItemMdlCareerCardWorkPeriod.endDate.itemKey: fallthrough
-            case EditItemMdlAppSmoothCareerComponyDescriptionWorkPeriod.workEndDate.itemKey:
-                return Constants.DefaultSelectWorkPeriodEndDate.dispYmJP()
-            default:
-                let date = DateHelper.convStrYM2Date(_val)
-                let buf = date.dispYmJP()
-                return "\(buf)"
+            let date = DateHelper.convStrYM2Date(_val)
+            if date == Constants.SelectItemsUndefineDate {
+                return Constants.SelectItemsUndefineDateJP
             }
+            let buf = date.dispYmJP()
+            return "\(buf)"
 
         case .selectSingle:
             let buf: String = SelectItemsManager.getCodeDisp(self.editItem.tsvMaster, code: _val)?.disp ?? Constants.SelectItemsUndefine.disp

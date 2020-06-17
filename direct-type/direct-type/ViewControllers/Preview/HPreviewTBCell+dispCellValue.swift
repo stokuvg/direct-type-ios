@@ -146,9 +146,11 @@ extension HPreviewTBCell {
         case .workPeriodC15:      //===雇用期間
             let tmp0: String = _item.childItems[0].curVal
             let date0 = DateHelper.convStrYM2Date(tmp0)
+            if date0 == Constants.SelectItemsUndefineDate { return "未入力" } //初回未記入対応
             let buf0: String = date0.dispYmJP()
             let tmp1: String = _item.childItems[1].curVal
             let date1 = DateHelper.convStrYM2Date(tmp1)
+            if date1 == Constants.SelectItemsUndefineDate { return "未入力" } //初回未記入対応
             let buf1: String!
             buf1 = date1.dispYmJP()
             return "\(buf0)〜\(buf1!)" //「現在就業中」をどう表す？「直近」の場合で、「開始」はあるが「終了」が未設定の場合か？

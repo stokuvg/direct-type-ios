@@ -50,11 +50,24 @@ extension EditableBasicVC {
         print(#line, #function, "💙💙その他💙", editTemp.curVal, editTemp.valDisp, editTemp.debugDisp)
         var bufYYYY: String = ""
         var bufMM: String = ""
-        let date = DateHelper.convStrYM2Date(editTemp.curVal)
+        var date = DateHelper.convStrYM2Date(editTemp.curVal)
+        //未設定の振り分けを実施したのち、ドラム選択初期値の決定処理を実施
+        if date == Constants.SelectItemsUndefineDate {
+            var _date: Date {
+                switch editTemp.editItem.itemKey {
+                case EditItemMdlCareerCardWorkPeriod.startDate.itemKey: fallthrough
+                case EditItemMdlAppSmoothCareerComponyDescriptionWorkPeriod.workStartDate.itemKey:
+                    return Constants.DefaultSelectWorkPeriodStartDate
+                case EditItemMdlCareerCardWorkPeriod.endDate.itemKey: fallthrough
+                case EditItemMdlAppSmoothCareerComponyDescriptionWorkPeriod.workEndDate.itemKey:
+                    return Constants.DefaultSelectWorkPeriodEndDate
+                default:
+                    return DateHelper.convStrYM2Date(editTemp.curVal)
+                }
+            }
+            date = _date
+        }
         switch date {
-        case Constants.SelectItemsUndefineDate: //開始が未設定の場合にドラムを開いた時の初期値は、「現在の年月」とする
-            bufYYYY = DateHelper.convStrYMD2Date(editTemp.valDisp).dispYear()
-            bufMM = DateHelper.convStrYMD2Date(editTemp.valDisp).dispMonth()
         case Constants.DefaultSelectWorkPeriodEndDate: //終了が就業中の場合にドラムを開いた時の初期値は、「現在の年月」とする
             bufYYYY = Date().dispYear()
             bufMM = Date().dispMonth()

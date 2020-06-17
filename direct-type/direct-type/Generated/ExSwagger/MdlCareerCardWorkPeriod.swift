@@ -28,8 +28,18 @@ class MdlCareerCardWorkPeriod: Codable {
         self.init(startDate: _start, endDate: _end)
     }
     var debugDisp: String {
-        let _startDate: String = startDate.dispYmJP()
-        let _endDate: String = endDate.dispYmJP()
+        var _startDate: String {
+            if startDate == Constants.SelectItemsUndefineDate {
+                return Constants.SelectItemsUndefineDateJP
+            }
+            return startDate.dispYmJP()
+        }
+        var _endDate: String {
+            if startDate == Constants.SelectItemsUndefineDate {
+                return Constants.SelectItemsUndefineDateJP
+            }
+            return endDate.dispYmJP()
+        }
         return "[\(_startDate) 〜 \(_endDate)]"
     }
 }
