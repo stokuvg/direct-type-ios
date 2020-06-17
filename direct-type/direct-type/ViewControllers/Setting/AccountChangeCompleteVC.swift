@@ -8,19 +8,13 @@
 
 import UIKit
 
-enum inputCodeErrorType {
-    case none
-    case empty
-    case few
-}
-
-class AccountChangeCompleteVC: TmpBasicVC {
-    @IBOutlet private weak var infomationLabel: UILabel! // 見出し
-    @IBOutlet private weak var textLabel: UILabel!       // 注釈
+final class AccountChangeCompleteVC: TmpBasicVC {
+    @IBOutlet private weak var infomationLabel: UILabel!
+    @IBOutlet private weak var textLabel: UILabel!
     @IBOutlet private weak var inputCodeField: UITextField!
     @IBOutlet private weak var sendBtn: UIButton!
     @IBAction private func sendBtnAction() {
-        sendCodeAction()
+        validateCode()
     }
     @IBOutlet private weak var reSendBtn: UIButton!
     @IBAction private func reSendBtnAction() {
@@ -30,7 +24,7 @@ class AccountChangeCompleteVC: TmpBasicVC {
     }
     
     private let codeMaxLength: Int = 6
-    private var authCode: Int?
+    private var authCode: String?
     private var sendErrorFlag = false
 
     override func viewDidLoad() {
@@ -42,7 +36,7 @@ class AccountChangeCompleteVC: TmpBasicVC {
         NotificationCenter.default.removeObserver(self)
     }
     
-    func configure(with code: Int) {
+    func configure(with code: String) {
         authCode = code
     }
 }
@@ -79,40 +73,18 @@ private extension AccountChangeCompleteVC {
         inputCodeField.text = inputText.prefix(codeMaxLength).description
     }
     
-    // 送信処理
-    func sendCodeAction() {
-            var errorType: inputCodeErrorType = .none
-            // コード番号 チェック
-            if inputCodeField.text?.count != codeMaxLength {
-                // アラート
-                errorType = .few
-            } else if inputCodeField.text?.count == 0 {
-                errorType = .empty
-            }
-            
-            if errorType != .none {
-                var errorString = ""
-                switch errorType {
-                    case .none:
-                        errorString = ""
-                    case .empty:
-                        errorString = "コード番号が入力されていません。"
-                    case .few:
-                        errorString = "コード番号の桁が違います。"
-                }
-                let sendCodeError = UIAlertController(title: "コードエラー", message: errorString, preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
-                }
-                sendCodeError.addAction(okAction)
-                navigationController?.present(sendCodeError, animated: true, completion: nil)
-            } else {
-                // TODO:変更認証送信
-                // 設定TOPに戻る
-                navigationController?.popToViewController((navigationController?.viewControllers[1])!, animated: true)
-            }
+    func validateCode() {
+        guard let inputText = inputCodeField.text, let authCode = authCode, inputText == authCode else {
+            let invalidCodeAlert = UIAlertController(title: "コードエラー", message: "コードが一致しませんでした", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default)
+            invalidCodeAlert.addAction(okAction)
+            navigationController?.present(invalidCodeAlert, animated: true, completion: nil)
+            return
         }
+        guard let settingTop = navigationController?.viewControllers.first(where: { $0 is SettingVC }) as? SettingVC else { return }
+        navigationController?.popToViewController(settingTop, animated: true)
+    }
     
-    // 再送信処理
     func reSendTelPhoneNumber() {
         // TODO:再送信処理を実行
         // 成功後、アラートを出す。
