@@ -50,7 +50,6 @@ private extension AccountChangeVC {
     func postNewPhoneNumber() {
         // FIXME: プロトタイピング時の動作確認用に強制的に認証画面へ遷移させる
         let vc = getVC(sbName: "SettingVC", vcName: "AccountChangeCompleteVC") as! AccountChangeCompleteVC
-        vc.telPhone = ""
         navigationController?.pushViewController(vc, animated: true)
 
         guard let inputText = inputField.text, inputText != existingPhoneNumber else {
