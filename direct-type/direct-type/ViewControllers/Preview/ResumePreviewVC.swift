@@ -52,13 +52,13 @@ class ResumePreviewVC: PreviewBaseVC {
         arrData.append(MdlItemH(.lastJobExperimentH3, "", childItems: [
             EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlResumeLastJobExperiment.jobType, val: _jobType),
             //[jobTypeで合わせて設定するので、表示はすれども編集では不要]
-            EditableItemH(type: .selectDrum, editItem: EditItemMdlResumeLastJobExperiment.jobExperimentYear, val: _detail.lastJobExperiment.jobExperimentYear),
+            EditableItemH(type: .readonly, editItem: EditItemMdlResumeLastJobExperiment.jobExperimentYear, val: _detail.lastJobExperiment.jobExperimentYear),
         ]))
         //===(3d)その他の経験職種
         var _jobExperiments: [EditableItemH] = []
         for jobExperiment in _detail.jobExperiments {
             _jobExperiments.append(EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlResumeJobExperiments.jobType, val: jobExperiment.jobType))
-            _jobExperiments.append(EditableItemH(type: .selectDrum, editItem: EditItemMdlResumeJobExperiments.jobExperimentYear, val: jobExperiment.jobExperimentYear))
+            _jobExperiments.append(EditableItemH(type: .readonly, editItem: EditItemMdlResumeJobExperiments.jobExperimentYear, val: jobExperiment.jobExperimentYear))
         }
         arrData.append(MdlItemH(.jobExperimentsH3, "", childItems: _jobExperiments))
         //===(3e)経験業種

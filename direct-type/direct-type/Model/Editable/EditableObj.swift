@@ -27,7 +27,7 @@ enum EditType {
     case inputZipcode       //String - String
     case inputTextSecret    //String
     case selectDrumYMD      //一覧からの選択（Drumで表示）
-    case selectDrum         //一覧からの選択（Drumで表示）
+    case selectDrumYM         //一覧からの選択（Drumで表示）
     case selectSingle       //一覧からの選択（単体選択）
     case selectMulti        //一覧からの選択（複数選択）
     case selectSpecial      //一覧からの選択（大分類→小分類）

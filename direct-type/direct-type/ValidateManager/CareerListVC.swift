@@ -24,7 +24,9 @@ class CareerListVC: TmpBasicVC {
         newCard.employeesCount = "\(arc4random_uniform(999))"
         newCard.employmentType = "\(arc4random_uniform(6))"
         newCard.salary = "\(arc4random_uniform(6) + 6)"
-        newCard.workPeriod = MdlCareerCardWorkPeriod(startDate: Date(), endDate: Date())
+        newCard.workPeriod = MdlCareerCardWorkPeriod(
+            startDate: Constants.DefaultSelectWorkPeriodStartDate,
+            endDate: Constants.DefaultSelectWorkPeriodEndDate)
         newCard.contents = String(repeating: "テキスト", count: Int(arc4random_uniform(100)))
         self.arrDisp.append(newCard)
         let storyboard = UIStoryboard(name: "Preview", bundle: nil)

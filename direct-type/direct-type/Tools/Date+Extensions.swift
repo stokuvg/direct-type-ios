@@ -9,17 +9,17 @@
 import UIKit
 
 class DateHelper {
-    class func convStr2Date(_ buf: String) -> Date {
+    class func convStrYMD2Date(_ buf: String) -> Date {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withFullDate]
         let date = formatter.date(from: buf) ?? Constants.SelectItemsUndefineDate
         return date
     }
-    class func convDate2Str(_ date: Date) -> String {
+    class func convStrYM2Date(_ buf: String) -> Date {
         let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withFullDate]
-        let buf = formatter.string(from: date)
-        return buf
+        formatter.formatOptions = [.withYear, .withMonth, .withDashSeparatorInDate]
+        let date = formatter.date(from: buf) ?? Constants.SelectItemsUndefineDate
+        return date
     }
     class func dateTimeFormatterYmdJP() -> DateFormatter {
          let dateTimeFormatter = DateFormatter()
@@ -55,10 +55,12 @@ extension Date {
         //formatter.formatOptions = [.withFullDate]
         formatter.formatOptions = [.withYear, .withMonth, .withDay, .withDashSeparatorInDate]
         let buf: String = formatter.string(from: self)
-        print("\t[\(self.description)]\t[\(buf)]")
         return buf
     }
     func dispYmJP() -> String {
+        if self == Constants.DefaultSelectWorkPeriodEndDate {
+            return Constants.DefaultSelectWorkPeriodEndDateJP
+        }
         let dateFormat = DateHelper.dateTimeFormatterYmJP()
         let buf = dateFormat.string(from: self)
         return buf
@@ -68,7 +70,18 @@ extension Date {
         //formatter.formatOptions = [.withFullDate]
         formatter.formatOptions = [.withYear, .withMonth, .withDashSeparatorInDate]
         let buf: String = formatter.string(from: self)
-        print("\t[\(self.description)]\t[\(buf)]")
+        return buf
+    }
+    func dispYear() -> String {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withYear, .withDashSeparatorInDate]
+        let buf: String = formatter.string(from: self)
+        return buf
+    }
+    func dispMonth() -> String {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withMonth, .withDashSeparatorInDate]
+        let buf: String = formatter.string(from: self)
         return buf
     }
 

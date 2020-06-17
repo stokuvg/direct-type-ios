@@ -49,7 +49,9 @@ class HEditTextTBCell: UITableViewCell {
         switch _item.editType {
         case .selectDrumYMD:
             bufVal = _item.valDisp
-        case .selectDrum, .selectSingle:
+        case .selectDrumYM:
+            bufVal = _item.valDisp
+        case .selectSingle:
             bufVal = _item.valDisp
         case .selectMulti:
             bufVal = _item.valDisp

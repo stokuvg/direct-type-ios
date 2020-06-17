@@ -128,7 +128,7 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
                 break
             case .selectDrumYMD:
                 break
-            case .selectDrum:
+            case .selectDrumYM:
                 break
             case .selectSingle:
                 let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)

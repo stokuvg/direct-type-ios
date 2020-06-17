@@ -71,7 +71,7 @@ class MdlProfile: Codable {
         var _birthday: Date!
         if let bufDate = dto.birthday {
             print(bufDate)
-            let _tmp = DateHelper.convStr2Date(bufDate)
+            let _tmp = DateHelper.convStrYMD2Date(bufDate)
             _birthday = _tmp
         } else {
             _birthday = Constants.SelectItemsUndefineBirthday//未設定時の誕生日初期値

@@ -26,7 +26,7 @@ extension HPreviewTBCell {
             return "\(bufFullname)（\(bufFullnameKana)）"
         case .birthGenderH2:
             let tmpBirthday: String = _item.childItems[0].curVal
-            let date = DateHelper.convStr2Date(tmpBirthday)
+            let date = DateHelper.convStrYMD2Date(tmpBirthday)
             let bufBirthday: String = date.dispYmdJP()
             let bufAge: String = "\(date.age)歳"
             let tmpGender: String = _item.childItems[1].curVal
@@ -140,14 +140,18 @@ extension HPreviewTBCell {
 
         //========================
         //[C-15]職務経歴書編集
+        //※ウィンドウの初期表示は「選択してください」
+        //タップするとドラムが開き、その初期選択値が、開始は{2018/04}、終了は現在の年月を取得して入れる
+        //※退社時期が入社時期より前に設定されている場合はエラー
         case .workPeriodC15:      //===雇用期間
             let tmp0: String = _item.childItems[0].curVal
-            let date0 = DateHelper.convStr2Date(tmp0)
-            let buf0: String = date0.dispYmdJP()
+            let date0 = DateHelper.convStrYM2Date(tmp0)
+            let buf0: String = date0.dispYmJP()
             let tmp1: String = _item.childItems[1].curVal
-            let date1 = DateHelper.convStr2Date(tmp1)
-            let buf1: String = date1.dispYmdJP()
-            return "\(buf0)〜\(buf1)" //「現在就業中」をどう表す？「直近」の場合で、「開始」はあるが「終了」が未設定の場合か？
+            let date1 = DateHelper.convStrYM2Date(tmp1)
+            let buf1: String!
+            buf1 = date1.dispYmJP()
+            return "\(buf0)〜\(buf1!)" //「現在就業中」をどう表す？「直近」の場合で、「開始」はあるが「終了」が未設定の場合か？
         //case .companyNameC15:     //===企業名
         case .employmentTypeC15:  //===雇用形態
             let tmp0: String = _item.childItems[0].curVal
@@ -169,11 +173,11 @@ extension HPreviewTBCell {
         case .workPeriodF14: //◆F-14入力（在籍期間）
             //・「在籍期間」の入力をする：「入社」「退社」の年月を、ドラム選択で入力させる
             let tmp0: String = _item.childItems[0].curVal
-            let date0 = DateHelper.convStr2Date(tmp0)
-            let buf0: String = date0.dispYmdJP()
+            let date0 = DateHelper.convStrYM2Date(tmp0)
+            let buf0: String = date0.dispYmJP()
             let tmp1: String = _item.childItems[1].curVal
-            let date1 = DateHelper.convStr2Date(tmp1)
-            let buf1: String = date1.dispYmdJP()
+            let date1 = DateHelper.convStrYM2Date(tmp1)
+            let buf1: String = date1.dispYmJP()
             return "\(buf0)〜\(buf1)"
         case .employmentTypeF15: //◆F-15入力（雇用形態）
             //・「雇用形態」の入力をする・マスタ選択入力：「雇用形態マスタ」
@@ -212,7 +216,7 @@ extension HPreviewTBCell {
             return "\(bufGender)"
         case .birthdayA8:             //=== [A-8] 入力（生年月日）
             let tmpBirthday: String = _item.childItems[0].curVal
-            let date = DateHelper.convStr2Date(tmpBirthday)
+            let date = DateHelper.convStrYMD2Date(tmpBirthday)
             let bufBirthday: String = date.dispYmdJP()
             let bufAge: String = "\(date.age)歳"
             return "\(bufBirthday)（\(bufAge)）"
