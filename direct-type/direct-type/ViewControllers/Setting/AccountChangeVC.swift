@@ -7,13 +7,15 @@
 //
 
 import UIKit
+import SwaggerClient
+import SVProgressHUD
 
 final class AccountChangeVC: TmpBasicVC {
     @IBOutlet private weak var cautionLabel: UILabel!
     @IBOutlet private weak var inputField: UITextField!
     @IBOutlet private weak var nextBtn: UIButton!
     @IBAction private func nextBtnAction() {
-        phoneNumberCheck()
+        postNewPhoneNumber()
     }
 
     private var existingPhoneNumber = ""
@@ -45,18 +47,34 @@ private extension AccountChangeVC {
         return true
     }
     
-    func phoneNumberCheck() {
-        // このメソッドが実行される時点ではバリデーションを通過しているため、文字列が空では無いことが保証される前提
-        guard inputField.text! != existingPhoneNumber else {
+    func postNewPhoneNumber() {
+        // FIXME: プロトタイピング時の動作確認用に強制的に認証画面へ遷移させる
+        let vc = getVC(sbName: "SettingVC", vcName: "AccountChangeCompleteVC") as! AccountChangeCompleteVC
+        vc.telPhone = ""
+        navigationController?.pushViewController(vc, animated: true)
+
+        guard let inputText = inputField.text, inputText != existingPhoneNumber else {
             // 既存の電話番号と同じだった場合はニックネームを保存して設定Topへ
             // TODO: ニックネームの保存処理を追加
             navigationController?.popViewController(animated: true)
             return
         }
-        // SMS認証
-        let vc = getVC(sbName: "SettingVC", vcName: "AccountChangeCompleteVC") as! AccountChangeCompleteVC
-        vc.telPhone = existingPhoneNumber
-        navigationController?.pushViewController(vc, animated: true)
+        // TODO: サーバー側で電話番号変更API実装後に疎通実装を行う
+//        let param = UpdatePhoneNumberRequestDTO(phoneNumber: inputText)
+//        SVProgressHUD.show()
+//        ApiManager.postPhoneNumber(param)
+//        .done { result in
+//            let vc = getVC(sbName: "SettingVC", vcName: "AccountChangeCompleteVC") as! AccountChangeCompleteVC
+//            vc.telPhone = number
+//            navigationController?.pushViewController(vc, animated: true)
+//        }
+//        .catch { (error) in
+//            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+//            print("電話番号登録エラー コード: \(myErr.code)")
+//        }
+//        .finally {
+//            SVProgressHUD.dismiss()
+//        }
     }
     
     func extractNumbers(from text: String) -> String {
