@@ -18,26 +18,21 @@ final class AccountChangeCompleteVC: TmpBasicVC {
     }
     @IBOutlet private weak var reSendBtn: UIButton!
     @IBAction private func reSendBtnAction() {
-        if sendErrorFlag {
-            reSendTelPhoneNumber()
-        }
+        reSendAuthCode()
     }
     
     private let codeMaxLength: Int = 6
     private var authCode: String?
-    private var sendErrorFlag = false
+    private var phoneNumber = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    func configure(with code: String) {
-        authCode = code
+    func configure(with authCode: String, phoneNumber: String) {
+        self.authCode = authCode
+        self.phoneNumber = phoneNumber
     }
 }
 
@@ -54,7 +49,7 @@ private extension AccountChangeCompleteVC {
         inputCodeField.addTarget(self, action: #selector(changeButtonState), for: .editingChanged)
         
         sendBtn.setTitle(text: "次へ", fontType: .font_M, textColor: UIColor(colorType: .color_white)!, alignment: .center)
-        reSendBtn.setTitle(text: "電話番号の再送信", fontType: .font_SS, textColor: UIColor(colorType: .color_sub)!, alignment: .right)
+        reSendBtn.setTitle(text: "認証コードを再送する", fontType: .font_SS, textColor: UIColor(colorType: .color_sub)!, alignment: .right)
         inputCodeField.becomeFirstResponder()
         
         changeButtonState()
@@ -81,18 +76,29 @@ private extension AccountChangeCompleteVC {
             navigationController?.present(invalidCodeAlert, animated: true, completion: nil)
             return
         }
+        // TODO: 認証コードの確認は恐らくapi40(もしくは25)にて行うことが予想されるため、サーバー側のAPI実装完了後にここで疎通実装をする
         guard let settingTop = navigationController?.viewControllers.first(where: { $0 is SettingVC }) as? SettingVC else { return }
         navigationController?.popToViewController(settingTop, animated: true)
     }
     
-    func reSendTelPhoneNumber() {
-        // TODO:再送信処理を実行
-        // 成功後、アラートを出す。
-        let sendSuccessAlert = UIAlertController.init(title: "認証コード再送信", message: "再送しました。", preferredStyle: .alert)
-        let okAction = UIAlertAction.init(title: "OK", style: .default) { (_) in
-        }
-        sendSuccessAlert.addAction(okAction)
-        
-        navigationController?.present(sendSuccessAlert, animated: true, completion: nil)
+    func reSendAuthCode() {
+        // TODO: サーバー側のAPI実装完了後に疎通実装をする
+//        let param = GetAuthCodeRequestDTO(phoneNumber: phoneNumber)
+//        SVProgressHUD.show()
+//        ApiManager.getAuthCode(param)
+//            .done { result in
+//                authCode = result.confirmCode
+//                let sendSuccessAlert = UIAlertController.init(title: "認証コード再送信", message: "再送しました。", preferredStyle: .alert)
+//                let okAction = UIAlertAction.init(title: "OK", style: .default)
+//                sendSuccessAlert.addAction(okAction)
+//                navigationController?.present(sendSuccessAlert, animated: true, completion: nil)
+//        }
+//            .catch { (error) in
+//                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+//                print("電話番号登録エラー コード: \(myErr.code)")
+//        }
+//            .finally {
+//                SVProgressHUD.dismiss()
+//        }
     }
 }

@@ -51,7 +51,7 @@ private extension AccountChangeVC {
         // FIXME: プロトタイピング時の動作確認用に強制的に認証画面へ遷移させる
         let vc = getVC(sbName: "SettingVC", vcName: "AccountChangeCompleteVC") as! AccountChangeCompleteVC
         // TODO: 電話番号変更APIリクエスト時に認証コードを受け取って遷移先画面に渡す
-        // vc.configure(with: "Please input code")
+        // vc.configure(with: "Please input code", phoneNumber: "Please input phone number")
         navigationController?.pushViewController(vc, animated: true)
 
         guard let inputText = inputField.text, inputText != existingPhoneNumber else {
