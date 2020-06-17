@@ -13,7 +13,7 @@ final class AccountChangeVC: TmpBasicVC {
     @IBOutlet private weak var inputField: UITextField!
     @IBOutlet private weak var nextBtn: UIButton!
     @IBAction private func nextBtnAction() {
-        telephoneNumberCheck()
+        phoneNumberCheck()
     }
 
     private var existingPhoneNumber = ""
@@ -45,7 +45,7 @@ private extension AccountChangeVC {
         return true
     }
     
-    func telephoneNumberCheck() {
+    func phoneNumberCheck() {
         guard let inputText = inputField.text, inputText != existingPhoneNumber else {
             // TODO:ニックネームを保存して設定Topへ
             navigationController?.popViewController(animated: true)
