@@ -123,7 +123,7 @@ extension SettingVC: UITableViewDelegate {
             // H-10 修正画面へ遷移
             let vc = getVC(sbName: "SettingVC", vcName: "AccountChangeVC") as! AccountChangeVC
             let telephoneData = ["telNo":"090-1234-5678"]
-            vc.setup(data: telephoneData)
+            vc.configure(data: telephoneData)
             navigationController?.pushViewController(vc, animated: true)
         case .approach:
             // H-9 アプローチ設定へ遷移
