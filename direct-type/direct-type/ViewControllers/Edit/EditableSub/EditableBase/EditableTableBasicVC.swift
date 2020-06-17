@@ -43,7 +43,54 @@ class EditableTableBasicVC: EditableBasicVC {
         if Constants.DbgSkipLocalValidate { return false }//[Dbg: ローカルValidationスキップ]
         ValidateManager.dbgDispCurrentItems(editableModel: editableModel) //[Dbg: 状態確認]
         dicValidErrMsg.removeAll()//チェック前に、既存のエラーを全削除しておく
-        let chkErr = ValidateManager.chkValidationErr(editableModel)
+        
+        //===共通Validation
+        var chkErr = ValidateManager.chkValidationErr(editableModel)
+        //===複数項目関連Validation
+        switch itemGrp.type {
+        case .birthdayA8:
+            let (_, editTempBirthday) = editableModel.makeTempItem(itemGrp.childItems[0])
+            let dateBirthday = DateHelper.convStrYMD2Date(editTempBirthday.curVal)
+            //===未来は設定できない
+            if dateBirthday > Date() {
+                chkErr.addDicArrVal(key: editTempBirthday.editableItemKey, val: "未来の日付は設定できません")
+            }
+        case .birthGenderH2:
+            let (_, editTempBirthday) = editableModel.makeTempItem(itemGrp.childItems[0])
+            let dateBirthday = DateHelper.convStrYMD2Date(editTempBirthday.curVal)
+            //===未来は設定できない
+            if dateBirthday > Date() {
+                chkErr.addDicArrVal(key: editTempBirthday.editableItemKey, val: "未来の日付は設定できません")
+            }
+
+        case .workPeriodC15: fallthrough //[C-15]職務経歴書編集//===雇用期間
+        case .workPeriodF14: //[F系統]職歴書サクサク//=== [F-14] 入力（在籍期間）
+            let (_, editTempStart) = editableModel.makeTempItem(itemGrp.childItems[0])
+            let (_, editTempEnd) = editableModel.makeTempItem(itemGrp.childItems[1])
+            let dateStart = DateHelper.convStrYM2Date(editTempStart.curVal)
+            let dateEnd = DateHelper.convStrYM2Date(editTempEnd.curVal)
+            //===未来は設定できない
+            if dateStart > Date() {
+                chkErr.addDicArrVal(key: editTempStart.editableItemKey, val: "未来の日付は設定できません")
+            }
+            if dateEnd != Constants.DefaultSelectWorkPeriodEndDate {
+                if dateEnd > Date() {
+                    chkErr.addDicArrVal(key: editTempEnd.editableItemKey, val: "未来の日付は設定できません")
+                }
+            }
+            //===開始は終了以後にできない
+            if dateStart >= dateEnd {
+                chkErr.addDicArrVal(key: editTempStart.editableItemKey, val: "正しい期間を設定してください")
+                chkErr.addDicArrVal(key: editTempEnd.editableItemKey, val: "正しい期間を設定してください")
+
+            }
+
+            break
+        default:
+            break
+        }
+
+
         if chkErr.count > 0 {
             var msg: String = ""
             for (key, errs) in chkErr {
@@ -225,11 +272,13 @@ extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
             return cell
 
         default:
-            print("🌸[\(#function)]🌸[\(#line)]🌸🌸")
             let returnKeyType: UIReturnKeyType = (item.editableItemKey == editableModel.lastEditableItemKey) ? .done : .next
-            print("[returnKeyType: \(returnKeyType.rawValue)]")
+            print("🌸[\(#function)]🌸[\(#line)]🌸[returnKeyType: \(returnKeyType.rawValue)]🌸[\(item.editItem.itemKey)]")
             let cell: HEditTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditTextTBCell", for: indexPath) as! HEditTextTBCell
+            print(#line, dicValidErrMsg.description)
             let errMsg = dicValidErrMsg[item.editableItemKey]?.joined(separator: "\n") ?? ""
+            print(#line, errMsg)
+            
             cell.initCell(self, item, errMsg: errMsg, returnKeyType)
             cell.dispCell()
             return cell

@@ -22,11 +22,19 @@ extension EditableBasicVC {
         picker.parentTF = textField
         textField.inputView = picker //
         //Pickerにボタンをつけておく（Pickerにというか、inputViewに対して付くため、Softwareキーボードなければ最下部に、あればその上につく
-        let rect = CGRect(origin: CGPoint.zero, size: CGSize.init(width: 260, height: 45))
+        let rect = CGRect(origin: CGPoint.zero, size: CGSize.init(width: 60, height: 45))
         let toolbar = UIToolbar(frame: rect)//Autolayout補正かかるけど、そこそこの横幅指定が必要
         let lbl = UILabel(frame: rect)
         lbl.textAlignment = .center
-        lbl.text = "\(item.dispName)を選択してください"
+        lbl.minimumScaleFactor = 0.5
+        lbl.adjustsFontSizeToFitWidth = true
+        switch item.editableItemKey {
+        case EditItemMdlCareerCardWorkPeriod.endDate.itemKey: fallthrough
+        case EditItemMdlAppSmoothCareerComponyDescriptionWorkPeriod.workEndDate.itemKey:
+            lbl.text = "\(item.dispName)を選択"
+        default:
+            lbl.text = "\(item.dispName)を選択してください"
+        }
         let separator1 = IKBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let barLbl = IKBarButtonItem.init(customView: lbl)
         let separator2 = IKBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -39,7 +47,8 @@ extension EditableBasicVC {
         btnReset.parentPicker = picker
         switch item.editableItemKey {
         case EditItemMdlCareerCardWorkPeriod.endDate.itemKey:
-            toolbar.setItems([btnClose, separator1, btnReset, btnSelect], animated: true)
+//            toolbar.setItems([btnClose, separator1, btnReset, btnSelect], animated: true)
+            toolbar.setItems([btnClose, separator1, barLbl, separator2, btnReset, btnSelect], animated: true)
         default:
             toolbar.setItems([btnClose, separator1, barLbl, separator2, btnSelect], animated: true)
         }

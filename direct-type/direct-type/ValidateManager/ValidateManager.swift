@@ -79,9 +79,22 @@ extension ValidateManager {
                 let validInfo = item.editItem.valid
                 guard validInfo.required == true else { continue }
                 let (_, editTemp) = editableModel.makeTempItem(item)
-                if editTemp.curVal == "" {
-                    print(item.debugDisp)
-                    dicError.addDicArrVal(key: item.editableItemKey, val: (validInfo.type == .code) ? "選択してください" : "未入力です。入力してください")
+                //日付タイプの特例
+                switch editTemp.editType {
+                case .selectDrumYM:
+                    let date: Date = DateHelper.convStrYM2Date(editTemp.curVal)
+                    if date == Constants.SelectItemsUndefineDate {
+                        dicError.addDicArrVal(key: item.editableItemKey, val: "選択してください")
+                    }
+                case .selectDrumYMD:
+                    let date: Date = DateHelper.convStrYMD2Date(editTemp.curVal)
+                    if date == Constants.SelectItemsUndefineDate {
+                        dicError.addDicArrVal(key: item.editableItemKey, val: "選択してください")
+                    }
+                default:
+                    if editTemp.curVal == "" {
+                        dicError.addDicArrVal(key: item.editableItemKey, val: (validInfo.type == .code) ? "選択してください" : "未入力です。入力してください")
+                    }
                 }
             }
         }
