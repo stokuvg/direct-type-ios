@@ -45,8 +45,8 @@ class SmoothCareerPreviewVC: PreviewBaseVC {
         //◆F-14入力（在籍期間）
         //・「在籍期間」の入力をする：「入社」「退社」の年月を、ドラム選択で入力させる
         arrData.append(MdlItemH(.workPeriodF14, "", childItems: [
-            EditableItemH(type: .selectDrumYMD, editItem: EditItemMdlAppSmoothCareerComponyDescriptionWorkPeriod.workStartDate, val: _detail.componyDescription.workPeriod.workStartDate.dispYmd()),
-            EditableItemH(type: .selectDrumYMD, editItem: EditItemMdlAppSmoothCareerComponyDescriptionWorkPeriod.workEndDate, val: _detail.componyDescription.workPeriod.workEndDate.dispYmd()),
+            EditableItemH(type: .selectDrumYM, editItem: EditItemMdlAppSmoothCareerComponyDescriptionWorkPeriod.workStartDate, val: _detail.componyDescription.workPeriod.workStartDate.dispYmd()),
+            EditableItemH(type: .selectDrumYM, editItem: EditItemMdlAppSmoothCareerComponyDescriptionWorkPeriod.workEndDate, val: _detail.componyDescription.workPeriod.workEndDate.dispYmd()),
         ]))
         //◆F-15入力（雇用形態）
         //・「雇用形態」の入力をする・マスタ選択入力：「雇用形態マスタ」

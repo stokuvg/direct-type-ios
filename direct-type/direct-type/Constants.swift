@@ -41,7 +41,7 @@ struct Constants {
     static let DefaultSelectWorkPeriodEndDate: Date = DateHelper.convStrYM2Date("9999-12")//就業中の場合は9999-12とする
     static let DefaultSelectWorkPeriodEndDateJP: String = "就業中"//就業中の場合は9999-12とする
 
-    static let SelectItemsUndefineDate: Date = DateHelper.convStrYMD2Date("2030-01-01")
+    static let SelectItemsUndefineDate: Date = DateHelper.convStrYMD2Date("2040-01-01")
     static let SelectItemsUndefineDateJP: String = "未設定"
     static let SelectItemsUndefineBirthday: Date = DateHelper.convStrYMD2Date("1996-01-01")//誕生日の場合の初期値
     //選択肢などでマスタからの選択だった場合の文言
@@ -53,10 +53,10 @@ struct Constants {
 
     //[Debug] Debug時以外はfalseにすべきフラグで設定しておく
     static let DbgAutoSelTabVC: Bool = false
-    static let DbgAutoPushVC: Bool = true
+    static let DbgAutoPushVC: Bool = false
     static let DbgAutoPushVCNum: Int = 6 //0:なし, 1:プロフィール, 2:履歴書, 3:職歴, 4:サクサク職歴, 5:初回入力, 職歴一覧
     static let DbgOfflineMode: Bool = false
-    static let DbgDispStatus: Bool = true
+    static let DbgDispStatus: Bool = false
     static let DbgSkipLocalValidate: Bool = false
     static let DbgCmnInputDefault: Bool = false
 }

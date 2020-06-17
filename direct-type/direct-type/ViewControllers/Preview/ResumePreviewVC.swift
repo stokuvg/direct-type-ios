@@ -72,7 +72,7 @@ class ResumePreviewVC: PreviewBaseVC {
             EditableItemH(type: .inputText, editItem: EditItemMdlResumeSchool.schoolName, val: _detail.school.schoolName),
             EditableItemH(type: .inputText, editItem: EditItemMdlResumeSchool.department, val: _detail.school.department),
             EditableItemH(type: .inputText, editItem: EditItemMdlResumeSchool.subject, val: _detail.school.subject),
-            EditableItemH(type: .selectDrumYMD, editItem: EditItemMdlResumeSchool.graduationYear, val: _detail.school.graduationYear),
+            EditableItemH(type: .selectDrumYM, editItem: EditItemMdlResumeSchool.graduationYear, val: _detail.school.graduationYear),
         ]))
         //===(3g)語学
         arrData.append(MdlItemH(.skillLanguageH3, "", childItems: [

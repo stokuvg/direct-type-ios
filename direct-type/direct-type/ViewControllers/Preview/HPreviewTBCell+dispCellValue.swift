@@ -108,7 +108,11 @@ extension HPreviewTBCell {
             let buf3: String = _item.childItems[3].curVal
             if !buf0.isEmpty { disp.append(buf0) }
             if !"\(buf1)\(buf2)".isEmpty { disp.append("\(buf1)\(buf2)") }
-            if !buf3.isEmpty { disp.append(buf3) }
+            let date3 = DateHelper.convStrYM2Date(buf3)
+            if date3 == Constants.SelectItemsUndefineDate {
+            } else {
+                disp.append(date3.dispYmJP())
+            }
             return disp.count == 0 ? Constants.SelectItemsValEmpty.disp : disp.joined(separator: "\n")
         case .skillLanguageH3:        //===(3g)語学
             var tmp0: String = _item.childItems[0].curVal

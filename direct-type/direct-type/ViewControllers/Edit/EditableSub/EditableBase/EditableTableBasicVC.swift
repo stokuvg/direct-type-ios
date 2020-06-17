@@ -62,6 +62,20 @@ class EditableTableBasicVC: EditableBasicVC {
             if dateBirthday > Date() {
                 chkErr.addDicArrVal(key: editTempBirthday.editableItemKey, val: "未来の日付は設定できません")
             }
+        case .schoolH3:
+            if let _item = itemGrp.childItems.filter { (item) -> Bool in
+                item.editableItemKey == EditItemMdlResumeSchool.graduationYear.itemKey
+                }.first {
+                let (_, editTemp) = editableModel.makeTempItem(_item)
+                let date = DateHelper.convStrYM2Date(editTemp.curVal)
+                //===未来は設定できない
+                if date > Date() {
+                    chkErr.addDicArrVal(key: _item.editableItemKey, val: "未来の日付は設定できません")
+                }
+            }
+            break
+        
+//        .EditItemMdlResumeSchool.graduationYear
 
         case .workPeriodC15: fallthrough //[C-15]職務経歴書編集//===雇用期間
         case .workPeriodF14: //[F系統]職歴書サクサク//=== [F-14] 入力（在籍期間）
@@ -267,7 +281,8 @@ extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
 
         case .selectDrumYMD:
             let cell: HEditDrumTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditDrumTBCell", for: indexPath) as! HEditDrumTBCell
-            cell.initCell(self, item)
+            let errMsg = dicValidErrMsg[item.editableItemKey]?.joined(separator: "\n" ) ?? ""
+            cell.initCell(self, item, errMsg: errMsg)
             cell.dispCell()
             return cell
 

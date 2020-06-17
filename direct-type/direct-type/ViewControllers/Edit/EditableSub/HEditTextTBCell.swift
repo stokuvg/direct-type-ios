@@ -24,7 +24,7 @@ class HEditTextTBCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-    func initCell(_ delegate: InputItemHDelegate, _ item: EditableItemH,  errMsg: String, _ returnKeyType: UIReturnKeyType) {
+    func initCell(_ delegate: InputItemHDelegate, _ item: EditableItemH, errMsg: String, _ returnKeyType: UIReturnKeyType) {
         self.delegate = delegate
         self.item = item
         self.errMsg = errMsg

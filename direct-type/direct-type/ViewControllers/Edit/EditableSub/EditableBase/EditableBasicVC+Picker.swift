@@ -64,6 +64,8 @@ extension EditableBasicVC {
         if date == Constants.SelectItemsUndefineDate {
             var _date: Date {
                 switch editTemp.editItem.itemKey {
+                case EditItemMdlResumeSchool.graduationYear.itemKey:
+                    return Date()
                 case EditItemMdlCareerCardWorkPeriod.startDate.itemKey: fallthrough
                 case EditItemMdlAppSmoothCareerComponyDescriptionWorkPeriod.workStartDate.itemKey:
                     return Constants.DefaultSelectWorkPeriodStartDate
