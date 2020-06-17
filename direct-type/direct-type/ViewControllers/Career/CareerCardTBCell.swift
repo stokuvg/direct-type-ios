@@ -39,6 +39,8 @@ class CareerCardTBCell: UITableViewCell {
         self.delegate = delegate
         self.targetCardNum = pos
         self.item = item
+        //===ひとつめは削除不可
+        self.btnDelCard.isHidden = (pos == 0) ? true : false
     }
     
     func dispCell() {

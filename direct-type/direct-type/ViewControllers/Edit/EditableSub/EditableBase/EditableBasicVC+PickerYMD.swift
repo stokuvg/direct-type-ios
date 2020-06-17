@@ -23,7 +23,7 @@ extension EditableBasicVC {
         //Pickerを表示する
         let picker = IKDatePicker()
         let bufDate = editTemp.curVal
-        let date = DateHelper.convStr2Date(bufDate)
+        let date = DateHelper.convStrYMD2Date(bufDate)
         picker.date = date
         picker.datePickerMode = .date
         picker.calendar = date.calendarJP

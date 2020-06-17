@@ -33,9 +33,17 @@ struct Constants {
     //制限値の定数定義
     static let CareerCardMax: Int = 10 //職務経歴書カードの登録際台数
 
+    //「年」「月」選択Picker用定義
+    static let years: [Int] = (1900...2100).map { $0 }
+    static let months: [Int] = (1...12).map { $0 }
     //無指定だったときの日時
-    static let SelectItemsUndefineDate: Date = DateHelper.convStr2Date("1900-01-01")
-    static let SelectItemsUndefineBirthday: Date = DateHelper.convStr2Date("1996-01-01")//誕生日の場合の初期値
+    static let DefaultSelectWorkPeriodStartDate: Date = DateHelper.convStrYM2Date("2018-04")//初期選択値
+    static let DefaultSelectWorkPeriodEndDate: Date = DateHelper.convStrYM2Date("9999-12")//就業中の場合は9999-12とする
+    static let DefaultSelectWorkPeriodEndDateJP: String = "就業中"//就業中の場合は9999-12とする
+
+    static let SelectItemsUndefineDate: Date = DateHelper.convStrYMD2Date("2040-01-01")
+    static let SelectItemsUndefineDateJP: String = "未設定"
+    static let SelectItemsUndefineBirthday: Date = DateHelper.convStrYMD2Date("1996-01-01")//誕生日の場合の初期値
     //選択肢などでマスタからの選択だった場合の文言
     static let SelectItemsUndefine: CodeDisp = CodeDisp("", "<未選択>")  //未定義な値だった場合
     //プレビュ・編集などでの未設定時（初期値）での表示文字列

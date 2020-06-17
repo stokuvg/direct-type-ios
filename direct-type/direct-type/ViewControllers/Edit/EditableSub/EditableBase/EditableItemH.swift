@@ -32,11 +32,17 @@ struct EditableItemH {
             return "\(_val)"
         //=== 選択肢一覧を取得し、指定項目の表示名を求めて表示するもの
         case .selectDrumYMD:
-            let buf = _val//???Dateを表示ように変換
+//            let buf = _val//???Dateを表示ように変換
+            let date = DateHelper.convStrYMD2Date(_val)
+            let buf = date.dispYmJP()
             return "\(buf)"
         //=== 選択肢一覧を取得し、指定項目の表示名を求めて表示するもの
-        case .selectDrum:
-            let buf: String = SelectItemsManager.getCodeDisp(self.editItem.tsvMaster, code: _val)?.disp ?? Constants.SelectItemsUndefine.disp
+        case .selectDrumYM:
+            let date = DateHelper.convStrYM2Date(_val)
+            if date == Constants.SelectItemsUndefineDate {
+                return Constants.SelectItemsUndefineDateJP
+            }
+            let buf = date.dispYmJP()
             return "\(buf)"
 
         case .selectSingle:

@@ -26,7 +26,7 @@ class ProfilePreviewVC: PreviewBaseVC {
     override func initData() {
         title = "個人プロフィール"
         if Constants.DbgOfflineMode {
-            self.detail = MdlProfile(nickname: "にっくねーむ：おふらいん", hopeJobPlaceIds: ["13", "14"], salaryId: "8", familyName: "スマ澤", firstName: "花子", familyNameKana: "スマザワ", firstNameKana: "ハナコ", birthday: DateHelper.convStr2Date("1996-04-01"), gender: "2", zipCode: "1234567", prefecture: "22", address1: "千代田区", address2: "有楽町1-2-3　ネオ新橋ビル", mailAddress: "sumahana@example.com", mobilePhoneNo: Constants.Auth_username)
+            self.detail = MdlProfile(nickname: "にっくねーむ：おふらいん", hopeJobPlaceIds: ["13", "14"], salaryId: "8", familyName: "スマ澤", firstName: "花子", familyNameKana: "スマザワ", firstNameKana: "ハナコ", birthday: Constants.SelectItemsUndefineBirthday, gender: "2", zipCode: "1234567", prefecture: "22", address1: "千代田区", address2: "有楽町1-2-3　ネオ新橋ビル", mailAddress: "sumahana@example.com", mobilePhoneNo: Constants.Auth_username)
         }
     }
     override func dispData() {
@@ -52,7 +52,7 @@ class ProfilePreviewVC: PreviewBaseVC {
         //    ・性別は初回入力時「選択しない」の場合「--」
         //    ・表記形式は「{生年}年{生月}月{生日} ({年齢}歳) / {性別}」
         let tmpBirthday: String = _detail.birthday.dispYmd()
-        let date = DateHelper.convStr2Date(tmpBirthday)
+        let date = DateHelper.convStrYMD2Date(tmpBirthday)
         let bufBirthday: String = date.dispYmdJP()
         let bufAge: String = "\(date.age)歳"
         let bufGender: String = SelectItemsManager.getCodeDisp(.gender, code: _detail.gender)?.disp ?? "--"
@@ -177,7 +177,7 @@ extension ProfilePreviewVC {
     private func fetchCreateProfile() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         //===初回入力で実施されたものとする
-        let param = CreateProfileRequestDTO(nickname: "初期ニックネーム", hopeJobPlaceIds: ["13", "14"], salaryId: "8", birthday: "2000-01-01", genderId: "")
+        let param = CreateProfileRequestDTO(nickname: "初期ニックネーム", hopeJobPlaceIds: ["13", "14"], salaryId: "8", birthday: Constants.SelectItemsUndefineBirthday.dispYmd(), genderId: "")
         SVProgressHUD.show(withStatus: "プロフィール情報の作成")
         ApiManager.createProfile(param, isRetry: true)
         .done { result in

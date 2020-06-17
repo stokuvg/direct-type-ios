@@ -11,9 +11,9 @@ import SwaggerClient
 
 class MdlCareerCardWorkPeriod: Codable {
     /** 勤務開始年月 */
-    var startDate: Date = Constants.SelectItemsUndefineDate
+    var startDate: Date = Constants.DefaultSelectWorkPeriodStartDate
     /** 勤務終了年月 */
-    var endDate: Date = Constants.SelectItemsUndefineDate
+    var endDate: Date = Constants.DefaultSelectWorkPeriodEndDate
 
     init(startDate: Date, endDate: Date) {
         self.startDate = startDate
@@ -21,15 +21,25 @@ class MdlCareerCardWorkPeriod: Codable {
     }
     //ApiモデルをAppモデルに変換して保持させる
     convenience init(dto: CareerCardWorkPeriod) {
-        let bufStart: String = "\(dto.startYear.zeroUme(4))-\(dto.endMonth.zeroUme(2))-01"
-        let _start = DateHelper.convStr2Date(bufStart)
-        let bufEnd: String = "\(dto.endYear.zeroUme(4))-\(dto.endMonth.zeroUme(2))-01"
-        let _end = DateHelper.convStr2Date(bufEnd)
+        let bufStart: String = "\(dto.startYear.zeroUme(4))-\(dto.endMonth.zeroUme(2))"
+        let _start = DateHelper.convStrYM2Date(bufStart)
+        let bufEnd: String = "\(dto.endYear.zeroUme(4))-\(dto.endMonth.zeroUme(2))"
+        let _end = DateHelper.convStrYM2Date(bufEnd)
         self.init(startDate: _start, endDate: _end)
     }
     var debugDisp: String {
-        let _startDate: String = startDate.dispYmJP()
-        let _endDate: String = endDate.dispYmJP()
+        var _startDate: String {
+            if startDate == Constants.SelectItemsUndefineDate {
+                return Constants.SelectItemsUndefineDateJP
+            }
+            return startDate.dispYmJP()
+        }
+        var _endDate: String {
+            if startDate == Constants.SelectItemsUndefineDate {
+                return Constants.SelectItemsUndefineDateJP
+            }
+            return endDate.dispYmJP()
+        }
         return "[\(_startDate) 〜 \(_endDate)]"
     }
 }

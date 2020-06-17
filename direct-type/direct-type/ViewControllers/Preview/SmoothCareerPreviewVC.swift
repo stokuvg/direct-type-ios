@@ -16,9 +16,9 @@ class SmoothCareerPreviewVC: PreviewBaseVC {
     override func initData() {
         //ダミーデータ投入しておく
         let tmpStartDate: String = "2015-04-01"
-        let dateStartDate = DateHelper.convStr2Date(tmpStartDate)
+        let dateStartDate = DateHelper.convStrYMD2Date(tmpStartDate)
         let tmpEndDate: String = "2020-05-01"
-        let dateEndDate = DateHelper.convStr2Date(tmpEndDate)
+        let dateEndDate = DateHelper.convStrYMD2Date(tmpEndDate)
         let bufWorkBackgroundDetail: MdlAppSmoothCareerWorkBackgroundDetail =
         MdlAppSmoothCareerWorkBackgroundDetail(businessType: "2", experienceManagement: "3", skillExcel: "4", skillWord: "4", skillPowerPoint: "4")
         let smoothCareer: MdlAppSmoothCareer =
@@ -45,8 +45,8 @@ class SmoothCareerPreviewVC: PreviewBaseVC {
         //◆F-14入力（在籍期間）
         //・「在籍期間」の入力をする：「入社」「退社」の年月を、ドラム選択で入力させる
         arrData.append(MdlItemH(.workPeriodF14, "", childItems: [
-            EditableItemH(type: .selectDrumYMD, editItem: EditItemMdlAppSmoothCareerComponyDescriptionWorkPeriod.workStartDate, val: _detail.componyDescription.workPeriod.workStartDate.dispYmd()),
-            EditableItemH(type: .selectDrumYMD, editItem: EditItemMdlAppSmoothCareerComponyDescriptionWorkPeriod.workEndDate, val: _detail.componyDescription.workPeriod.workEndDate.dispYmd()),
+            EditableItemH(type: .selectDrumYM, editItem: EditItemMdlAppSmoothCareerComponyDescriptionWorkPeriod.workStartDate, val: _detail.componyDescription.workPeriod.workStartDate.dispYmd()),
+            EditableItemH(type: .selectDrumYM, editItem: EditItemMdlAppSmoothCareerComponyDescriptionWorkPeriod.workEndDate, val: _detail.componyDescription.workPeriod.workEndDate.dispYmd()),
         ]))
         //◆F-15入力（雇用形態）
         //・「雇用形態」の入力をする・マスタ選択入力：「雇用形態マスタ」

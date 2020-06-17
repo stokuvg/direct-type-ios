@@ -295,7 +295,7 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
             }
         })
         let action07: UIAlertAction = UIAlertAction(title: "レコメンド[ap341]", style: .default, handler: { action in
-            RecommendManager.fetchRecommend(type: .ap111, jobID: "123456789")
+            RecommendManager.fetchRecommend(type: .ap341, jobID: "123456789")
             .done { result in
                 print("成功 [\(result)]")
             }

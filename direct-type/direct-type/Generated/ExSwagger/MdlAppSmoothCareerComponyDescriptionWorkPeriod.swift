@@ -12,9 +12,9 @@ import SwaggerClient
 class MdlAppSmoothCareerComponyDescriptionWorkPeriod: Codable {
 
     /** 在籍期間：開始年月 */
-    var workStartDate: Date = Constants.SelectItemsUndefineDate
+    var workStartDate: Date = Constants.DefaultSelectWorkPeriodStartDate
     /** 在籍期間：終了年月 */
-    var workEndDate: Date = Constants.SelectItemsUndefineDate
+    var workEndDate: Date = Constants.DefaultSelectWorkPeriodEndDate
 
     init(workStartDate: Date, workEndDate: Date) {
         self.workStartDate = workStartDate

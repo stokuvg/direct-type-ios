@@ -25,7 +25,7 @@ class BaseTableViewCell: UITableViewCell {
     func newMarkFlagCheck(startDateString: String, nowDate:Date) -> Bool {
         var retInterval:Double!
         
-        let startDate = DateHelper.convStr2Date(startDateString)
+        let startDate = DateHelper.convStrYMD2Date(startDateString)
     //        Log.selectLog(logLevel: .debug, "startDate:\(startDate)")
         
         retInterval = nowDate.timeIntervalSince(startDate)
@@ -42,7 +42,7 @@ class BaseTableViewCell: UITableViewCell {
     func endFlagHiddenCheck(endDateString: String, nowDate:Date) -> Bool {
         var retInterval:Double!
         
-        let endDate = DateHelper.convStr2Date(endDateString)
+        let endDate = DateHelper.convStrYMD2Date(endDateString)
 //        Log.selectLog(logLevel: .debug, "endDate:\(endDate)")
         
         retInterval = endDate.timeIntervalSince(nowDate)

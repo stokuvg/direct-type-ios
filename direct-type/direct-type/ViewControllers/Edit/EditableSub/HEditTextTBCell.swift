@@ -24,7 +24,7 @@ class HEditTextTBCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-    func initCell(_ delegate: InputItemHDelegate, _ item: EditableItemH,  errMsg: String, _ returnKeyType: UIReturnKeyType) {
+    func initCell(_ delegate: InputItemHDelegate, _ item: EditableItemH, errMsg: String, _ returnKeyType: UIReturnKeyType) {
         self.delegate = delegate
         self.item = item
         self.errMsg = errMsg
@@ -49,7 +49,9 @@ class HEditTextTBCell: UITableViewCell {
         switch _item.editType {
         case .selectDrumYMD:
             bufVal = _item.valDisp
-        case .selectDrum, .selectSingle:
+        case .selectDrumYM:
+            bufVal = _item.valDisp
+        case .selectSingle:
             bufVal = _item.valDisp
         case .selectMulti:
             bufVal = _item.valDisp

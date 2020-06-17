@@ -20,20 +20,24 @@ protocol InputItemHDelegate {
 }
 
 class HEditDrumTBCell: UITableViewCell {
-    var item: EditableItemH? = nil
     var delegate: InputItemHDelegate!
+    var item: EditableItemH? = nil
+    var errMsg: String = ""
 
+    @IBOutlet weak var vwMainArea: UIView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var tfValue: IKTextField!
     @IBOutlet weak var lblDebug: UILabel!
+    @IBOutlet weak var lblErrorMsg: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
     }
 
-    func initCell(_ delegate: InputItemHDelegate, _ item: EditableItemH) {
+    func initCell(_ delegate: InputItemHDelegate, _ item: EditableItemH, errMsg: String) {
         self.delegate = delegate
         self.item = item
+        self.errMsg = errMsg
         tfValue.itemKey = item.editableItemKey
         tfValue.clearButtonMode = .never //クリアボタンの表示制御
     }
@@ -42,12 +46,24 @@ class HEditDrumTBCell: UITableViewCell {
         guard let _item = item else { return }
         let bufTitle = _item.dispName //_item.type.dispTitle
         lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
-        let date: Date = DateHelper.convStr2Date(_item.curVal)
+        let date: Date = DateHelper.convStrYMD2Date(_item.curVal)
         tfValue.text = date.dispYmdJP()
         lblDebug.text = ""
         if Constants.DbgDispStatus {
             let bufDebug = _item.debugDisp
             lblDebug.text = bufDebug
+        }
+        //Validationエラー発生時の表示
+        if errMsg != "" {
+            lblErrorMsg.text = errMsg
+            if UITraitCollection.isDarkMode == true {
+                vwMainArea.backgroundColor = UIColor.init(red: 0.3, green: 0.1, blue: 0.1, alpha: 1.0)
+            } else {
+                vwMainArea.backgroundColor = UIColor.init(red: 1.0, green: 0.8, blue: 0.8, alpha: 1.0)
+            }
+        } else {
+            lblErrorMsg.text = ""
+            vwMainArea.backgroundColor = self.backgroundColor
         }
     }
     

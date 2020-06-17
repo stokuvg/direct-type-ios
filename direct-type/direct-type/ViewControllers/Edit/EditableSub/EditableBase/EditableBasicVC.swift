@@ -104,7 +104,7 @@ extension EditableBasicVC: InputItemHDelegate {
         let (_, editTemp) = editableModel.makeTempItem(item)
         //=== タイプによって割り込み処理
         switch item.editType {
-        case .selectDrum: //Pickerを生成する
+        case .selectDrumYM: //Pickerを生成する
             print("Picker開く時の処理 [\(item.editableItemKey): \(item.dispName)]")
             showPicker(tf, item)
         case .selectDrumYMD: //Pickerを生成する
@@ -178,7 +178,7 @@ extension EditableBasicVC: InputItemHDelegate {
         switch item.editType {
         case .inputMemo:
             print("テキストビューでの大量文字入力時")
-        case .selectDrum:
+        case .selectDrumYM:
             print("Picker閉じる時の処理 [\(item.editableItemKey): \(item.dispName)] [\(tf.description)]")
             hidePicker(tf)
         case .selectDrumYMD:
