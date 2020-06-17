@@ -46,8 +46,10 @@ private extension AccountChangeVC {
     }
     
     func phoneNumberCheck() {
-        guard let inputText = inputField.text, inputText != existingPhoneNumber else {
-            // TODO:ニックネームを保存して設定Topへ
+        // このメソッドが実行される時点ではバリデーションを通過しているため、文字列が空では無いことが保証される前提
+        guard inputField.text! != existingPhoneNumber else {
+            // 既存の電話番号と同じだった場合はニックネームを保存して設定Topへ
+            // TODO: ニックネームの保存処理を追加
             navigationController?.popViewController(animated: true)
             return
         }
