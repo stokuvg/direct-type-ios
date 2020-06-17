@@ -8,117 +8,97 @@
 
 import UIKit
 
-enum inputCodeErrorType {
-    case none
-    case empty
-    case few
-}
-
-class AccountChangeCompleteVC: TmpBasicVC, UITextFieldDelegate {
-    
-    @IBOutlet weak var infomationLabel:UILabel! // 見出し
-    @IBOutlet weak var textLabel:UILabel!       // 注釈
-    
-    @IBOutlet weak var inputCodeField:UITextField!
-    
-    @IBOutlet weak var sendBtn:UIButton!
-    @IBAction func sendBtnAction() {
-        self.sendCodeAction()
+final class AccountChangeCompleteVC: TmpBasicVC {
+    @IBOutlet private weak var infomationLabel: UILabel!
+    @IBOutlet private weak var textLabel: UILabel!
+    @IBOutlet private weak var inputCodeField: UITextField!
+    @IBOutlet private weak var sendBtn: UIButton!
+    @IBAction private func sendBtnAction() {
+        validateCode()
     }
-    @IBOutlet weak var reSendBtn:UIButton!
-    @IBAction func reSendBtnAction() {
-        if sendErrorFlag {
-            self.reSendTelPhoneNumber()
-        }
+    @IBOutlet private weak var reSendBtn: UIButton!
+    @IBAction private func reSendBtnAction() {
+        reSendAuthCode()
     }
     
-    var telPhone:String = ""
-    
-    var maxLength: Int = 6
-    
-    var sendErrorFlag:Bool = false
+    private let codeMaxLength: Int = 6
+    private var authCode: String?
+    private var phoneNumber = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
+    }
+    
+    func configure(with authCode: String, phoneNumber: String) {
+        self.authCode = authCode
+        self.phoneNumber = phoneNumber
+    }
+}
 
-        // Do any additional setup after loading the view.
-        self.title = "認証コード入力"
+private extension AccountChangeCompleteVC {
+    func setup() {
+        title = "認証コード入力"
         
-        infomationLabel.text(text: "６桁のコードを入力してください", fontType: .font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
-        textLabel.text(text: "入力いただいた電話番号に確認コードをお送りいたしました。\n送信された６桁のコードを入力してください。", fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
+        infomationLabel.text(text: "６桁のコードを入力してください", fontType: .font_M, textColor: UIColor(colorType: .color_black)!, alignment: .center)
+        textLabel.text(text: "入力いただいた電話番号に確認コードをお送りいたしました。\n送信された６桁のコードを入力してください。", fontType: .font_S, textColor: UIColor(colorType: .color_black)!, alignment: .center)
         
-        inputCodeField.textColor = UIColor.init(colorType: .color_black)
-        inputCodeField.font = UIFont.init(fontType: .font_M)
-        inputCodeField.attributedPlaceholder = NSAttributedString(string: "コードを入力", attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(colorType: .color_parts_gray)!])
-        inputCodeField.delegate = self
-        NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChangeSelection(notification:)), name: UITextField.textDidChangeNotification, object: inputCodeField)
+        inputCodeField.textColor = UIColor(colorType: .color_black)
+        inputCodeField.font = UIFont(fontType: .font_M)
+        inputCodeField.attributedPlaceholder = NSAttributedString(string: "コードを入力", attributes: [NSAttributedString.Key.foregroundColor : UIColor(colorType: .color_parts_gray)!])
+        inputCodeField.addTarget(self, action: #selector(changeButtonState), for: .editingChanged)
         
-        sendBtn.setTitle(text: "次へ", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
-        
-        reSendBtn.setTitle(text: "電話番号の再送信", fontType: .font_SS, textColor: UIColor.init(colorType: .color_sub)!, alignment: .right)
-        
+        sendBtn.setTitle(text: "次へ", fontType: .font_M, textColor: UIColor(colorType: .color_white)!, alignment: .center)
+        reSendBtn.setTitle(text: "認証コードを再送する", fontType: .font_SS, textColor: UIColor(colorType: .color_sub)!, alignment: .right)
         inputCodeField.becomeFirstResponder()
+        
+        changeButtonState()
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
-    @objc private func textFieldDidChangeSelection(notification: NSNotification) {
-        let textField = notification.object as! UITextField
-        if let text = textField.text {
-            if textField.markedTextRange == nil && text.count > maxLength {
-                textField.text = text.prefix(maxLength).description
-            }
-        }
+    var isValidInputText: Bool {
+        guard let inputText = inputCodeField.text, inputCodeField.markedTextRange == nil, inputText.count == codeMaxLength else { return false }
+        return true
     }
     
-    // 送信処理
-    private func sendCodeAction() {
-        
-        var errorType:inputCodeErrorType = .none
-        // コード番号 チェック
-        if inputCodeField.text?.count != maxLength {
-            // アラート
-            errorType = .few
-        } else if inputCodeField.text?.count == 0 {
-            errorType = .empty
-        }
-        
-        if errorType != .none {
-            var errorString = ""
-            switch errorType {
-                case .none:
-                    errorString = ""
-                case .empty:
-                    errorString = "コード番号が入力されていません。"
-                case .few:
-                    errorString = "コード番号の桁が違います。"
-            }
-            let sendCodeError = UIAlertController.init(title: "コードエラー", message: errorString, preferredStyle: .alert)
-            let okAction = UIAlertAction.init(title: "OK", style: .default) { (_) in
-            }
-            sendCodeError.addAction(okAction)
-            
-            self.navigationController?.present(sendCodeError, animated: true, completion: nil)
-        } else {
-            // TODO:変更認証送信
-            
-            // 設定TOPに戻る
-//            Log.selectLog(logLevel: .debug, "viewControllers:\(String(describing: self.navigationController?.viewControllers))")
-            self.navigationController?.popToViewController((self.navigationController?.viewControllers[1])!, animated: true)
-        }
+    @objc
+    func changeButtonState() {
+        sendBtn.backgroundColor = UIColor(colorType: isValidInputText ? .color_sub : .color_line)
+        sendBtn.isEnabled = isValidInputText
+        guard let inputText = inputCodeField.text, isValidInputText else { return }
+        inputCodeField.text = inputText.prefix(codeMaxLength).description
     }
     
-    // 再送信処理
-    private func reSendTelPhoneNumber() {
-        // TODO:再送信処理を実行
-        // 成功後、アラートを出す。
-        let sendSuccessAlert = UIAlertController.init(title: "認証コード再送信", message: "再送しました。", preferredStyle: .alert)
-        let okAction = UIAlertAction.init(title: "OK", style: .default) { (_) in
+    func validateCode() {
+        guard let inputText = inputCodeField.text, let authCode = authCode, inputText == authCode else {
+            let invalidCodeAlert = UIAlertController(title: "コードエラー", message: "コードが一致しませんでした", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default)
+            invalidCodeAlert.addAction(okAction)
+            navigationController?.present(invalidCodeAlert, animated: true, completion: nil)
+            return
         }
-        sendSuccessAlert.addAction(okAction)
-        
-        self.navigationController?.present(sendSuccessAlert, animated: true, completion: nil)
+        // TODO: 認証コードの確認は恐らくapi40(もしくは25)にて行うことが予想されるため、サーバー側のAPI実装完了後にここで疎通実装をする
+        guard let settingTop = navigationController?.viewControllers.first(where: { $0 is SettingVC }) as? SettingVC else { return }
+        navigationController?.popToViewController(settingTop, animated: true)
+    }
+    
+    func reSendAuthCode() {
+        // TODO: サーバー側のAPI実装完了後に疎通実装をする
+//        let param = GetAuthCodeRequestDTO(phoneNumber: phoneNumber)
+//        SVProgressHUD.show()
+//        ApiManager.getAuthCode(param)
+//            .done { result in
+//                authCode = result.confirmCode
+//                let sendSuccessAlert = UIAlertController.init(title: "認証コード再送信", message: "再送しました。", preferredStyle: .alert)
+//                let okAction = UIAlertAction.init(title: "OK", style: .default)
+//                sendSuccessAlert.addAction(okAction)
+//                navigationController?.present(sendSuccessAlert, animated: true, completion: nil)
+//        }
+//            .catch { (error) in
+//                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+//                print("電話番号登録エラー コード: \(myErr.code)")
+//        }
+//            .finally {
+//                SVProgressHUD.dismiss()
+//        }
     }
 }

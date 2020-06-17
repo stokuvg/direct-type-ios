@@ -172,6 +172,7 @@
 		0E6951B5248A1FC600D58E6E /* ChemistrySelectFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6951B4248A1FC600D58E6E /* ChemistrySelectFooterView.swift */; };
 		0E6951B7248A204C00D58E6E /* ChemistrySelectFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E6951B6248A204C00D58E6E /* ChemistrySelectFooterView.xib */; };
 		0E7372DD2499EE1C00358EFA /* ApiManager+PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7372DC2499EE1C00358EFA /* ApiManager+PhoneNumber.swift */; };
+		0E7372DF249A089D00358EFA /* ApiManager+AuthCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7372DE249A089D00358EFA /* ApiManager+AuthCode.swift */; };
 		0E74739F24972A9800928644 /* ApiManager+Approach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E74739E24972A9800928644 /* ApiManager+Approach.swift */; };
 		0E8775A5249778E700C82736 /* MdlApproach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8775A4249778E700C82736 /* MdlApproach.swift */; };
 		0E9B8B3324877BA60049CFCC /* ChemistryQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9B8B3224877BA60049CFCC /* ChemistryQuestion.swift */; };
@@ -469,6 +470,7 @@
 		0E6951B4248A1FC600D58E6E /* ChemistrySelectFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistrySelectFooterView.swift; sourceTree = "<group>"; };
 		0E6951B6248A204C00D58E6E /* ChemistrySelectFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChemistrySelectFooterView.xib; sourceTree = "<group>"; };
 		0E7372DC2499EE1C00358EFA /* ApiManager+PhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+PhoneNumber.swift"; sourceTree = "<group>"; };
+		0E7372DE249A089D00358EFA /* ApiManager+AuthCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+AuthCode.swift"; sourceTree = "<group>"; };
 		0E74739E24972A9800928644 /* ApiManager+Approach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Approach.swift"; sourceTree = "<group>"; };
 		0E8775A4249778E700C82736 /* MdlApproach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlApproach.swift; sourceTree = "<group>"; };
 		0E9B8B3224877BA60049CFCC /* ChemistryQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryQuestion.swift; sourceTree = "<group>"; };
@@ -1156,6 +1158,7 @@
 				26B491DF247E3CB100B58AD4 /* ApiManager+Entry.swift */,
 				0E74739E24972A9800928644 /* ApiManager+Approach.swift */,
 				0E7372DC2499EE1C00358EFA /* ApiManager+PhoneNumber.swift */,
+				0E7372DE249A089D00358EFA /* ApiManager+AuthCode.swift */,
 			);
 			path = AuthManager;
 			sourceTree = "<group>";
@@ -1543,6 +1546,7 @@
 				269AFFCB246A929300DB364B /* SubSelectSpecialVC.swift in Sources */,
 				26AF323B248F698E00AA78FD /* MdlFirstInput.swift in Sources */,
 				26F2A82D246D31020037D47F /* PreviewBaseVC.swift in Sources */,
+				0E7372DF249A089D00358EFA /* ApiManager+AuthCode.swift in Sources */,
 				0E6951AF248A05EA00D58E6E /* ChemistryQuestionMasterData.swift in Sources */,
 				0662C60324722E280053CAD9 /* JobDetailFoldingOptionalView.swift in Sources */,
 				066F2710246E811F0040BDC1 /* JobDetailFoldingMemoCell.swift in Sources */,
