@@ -39,41 +39,32 @@ extension ApiManager {
 }
 //================================================================
 //=== アプローチ更新 ===
-//extension UpdateProfileRequestDTO {
+//extension UpdateApproachRequestDTO {
 //    public init() {
-//        self.init(nickname: nil, hopeJobPlaceIds: nil, salaryId: nil, familyName: nil, firstName: nil, familyNameKana: nil, firstNameKana: nil, birthday: nil, genderId: nil, zipCode: nil, prefectureId: nil, city: nil, town: nil, email: nil)
+//        self.init(isScoutEnable: nil, isRecommendationEnable: nil)
 //    }
 //    init(_ editTempCD: [EditableItemKey: EditableItemCurVal]) {
 //        self.init()
 //        for (key, val) in editTempCD {
 //            switch key {
-//            case EditItemMdlProfile.familyName.itemKey: self.familyName = val
-//            case EditItemMdlProfile.firstName.itemKey: self.firstName = val
-//            case EditItemMdlProfile.familyNameKana.itemKey: self.familyNameKana = val
-//            case EditItemMdlProfile.firstNameKana.itemKey: self.firstNameKana = val
-//            case EditItemMdlProfile.birthday.itemKey: self.birthday = val
-//            case EditItemMdlProfile.gender.itemKey: self.genderId = val
-//            case EditItemMdlProfile.zipCode.itemKey: self.zipCode = val
-//            case EditItemMdlProfile.prefecture.itemKey: self.prefectureId = val
-//            case EditItemMdlProfile.address1.itemKey: self.city = val
-//            case EditItemMdlProfile.address2.itemKey: self.town = val
-//            case EditItemMdlProfile.mailAddress.itemKey: self.email = val
+//            case EditItemMdlApproach.isScoutEnable.itemKey: self.isScoutEnable = val
+//            case EditItemMdlApproach.isRecommendationEnable.itemKey: self.isRecommendationEnable = val
 //            default: break
 //            }
 //        }
 //    }
 //}
 //extension ApiManager {
-//    class func updateProfile(_ param: UpdateProfileRequestDTO, isRetry: Bool = true) -> Promise<Void> {
+//    class func updateApproach(_ param: UpdateApproachRequestDTO, isRetry: Bool = true) -> Promise<Void> {
 //        if isRetry {
 //            return firstly { () -> Promise<Void> in
-//                retry(args: param, task: updateProfileFetch) { (error) -> Bool in return true }
+//                retry(args: param, task: updateApproachFetch) { (error) -> Bool in return true }
 //            }
 //        } else {
-//            return updateProfileFetch(param: param)
+//            return updateApproachFetch(param: param)
 //        }
 //    }
-//    private class func updateProfileFetch(param: UpdateProfileRequestDTO) -> Promise<Void> {
+//    private class func updateApproachFetch(param: UpdateApproachRequestDTO) -> Promise<Void> {
 //        let (promise, resolver) = Promise<Void>.pending()
 //        AuthManager.needAuth(true)
 //        ProfileAPI.profileControllerUpdate(body: param)
