@@ -34,15 +34,12 @@ extension ValidateManager {
             case EditItemMdlFirstInput.hopeArea.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.hopeAreaA9.itemKey, val: val)
             case EditItemMdlFirstInput.school.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.schoolA10.itemKey, val: val)
             case EditItemMdlFirstInput.employmentStatus.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.employmentStatusA21.itemKey, val: val)
-            //セットで扱うので片方で良い
-            //case EditItemMdlFirstInput.lastJobExperiment.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.lastJobExperimentA11.itemKey, val: val)
-            case EditItemMdlFirstInputLastJobExperiments.jobType.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.lastJobExperimentA11.itemKey, val: val)
-            //case EditItemMdlFirstInputLastJobExperiments.jobExperimentYear.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.lastJobExperimentA11.itemKey, val: val)
+            //表示項目としてはセットで扱うのでまとめて定義
+            case EditItemMdlFirstInputLastJobExperiments.jobTypeAndJobExperimentYear.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.lastJobExperimentA11.itemKey, val: val)
+
             case EditItemMdlFirstInput.salary.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.salaryA13.itemKey, val: val)
-            //セットで扱うので片方で良い
-            //case EditItemMdlFirstInput.jobExperiments.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.jobExperimentsA14.itemKey, val: val)
-            case EditItemMdlFirstInputJobExperiments.jobType.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.jobExperimentsA14.itemKey, val: val)
-            //case EditItemMdlFirstInputJobExperiments.jobExperimentYear.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.jobExperimentsA14.itemKey, val: val)
+            //表示項目としてはセットで扱うのでまとめて定義
+            case EditItemMdlFirstInputJobExperiments.jobTypeAndJobExperimentYear.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.jobExperimentsA14.itemKey, val: val)
 
             //===[C-15]「職務経歴書確認」＊単独
             case EditItemMdlCareerCardWorkPeriod.startDate.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.workPeriodC15.itemKey, val: val)
@@ -60,12 +57,10 @@ extension ValidateManager {
             case EditItemMdlResume.changeCount.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.changeCountH3.itemKey, val: val)
             //case lastJobExperimentH3    //===(3c)直近の経験職種
             case EditItemMdlResume.lastJobExperiment.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.lastJobExperimentH3.itemKey, val: val)
-            case EditItemMdlResumeLastJobExperiment.jobType.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.lastJobExperimentH3.itemKey, val: val)
-            case EditItemMdlResumeLastJobExperiment.jobExperimentYear.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.lastJobExperimentH3.itemKey, val: val)
+            case EditItemMdlResumeLastJobExperiment.jobTypeAndJobExperimentYear.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.lastJobExperimentH3.itemKey, val: val)
             //case jobExperimentsH3       //===(3d)その他の経験職種
             case EditItemMdlResume.jobExperiments.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.jobExperimentsH3.itemKey, val: val)
-            case EditItemMdlResumeJobExperiments.jobType.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.jobExperimentsH3.itemKey, val: val)
-            case EditItemMdlResumeJobExperiments.jobExperimentYear.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.jobExperimentsH3.itemKey, val: val)
+            case EditItemMdlResumeJobExperiments.jobTypeAndJobExperimentYear.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.jobExperimentsH3.itemKey, val: val)
             //case businessTypesH3        //===(3e)経験業種
             case EditItemMdlResume.businessTypes.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.businessTypesH3.itemKey, val: val)
             //case schoolH3               //===(3f)最終学歴
@@ -84,7 +79,6 @@ extension ValidateManager {
             case EditItemMdlResume.qualifications.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.qualificationsH3.itemKey, val: val)
             //case ownPrH3                //===(3i)自己PR
             case EditItemMdlResume.ownPr.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.ownPrH3.itemKey, val: val)
-
 
             default:
                 print("\t☠️割り当てエラー☠️[\(key): \(val)]☠️")

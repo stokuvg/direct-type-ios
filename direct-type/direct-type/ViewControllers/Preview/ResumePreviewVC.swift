@@ -49,18 +49,16 @@ class ResumePreviewVC: PreviewBaseVC {
         ]))
         //===(3c)直近の経験職種
         let _jobType: String = "\(_detail.lastJobExperiment.jobType)"
+        let bufLastJobExperimentTypeAndYear: String = "7:8"
+        print("[H-3：(3c)直近の経験職種] [_jobType: \(_jobType)] [bufJobExperimentTypeAndYear: \(bufLastJobExperimentTypeAndYear)]")
         arrData.append(MdlItemH(.lastJobExperimentH3, "", childItems: [
-            EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlResumeLastJobExperiment.jobType, val: _jobType),
-            //[jobTypeで合わせて設定するので、表示はすれども編集では不要]
-            EditableItemH(type: .readonly, editItem: EditItemMdlResumeLastJobExperiment.jobExperimentYear, val: _detail.lastJobExperiment.jobExperimentYear),
+            EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlResumeLastJobExperiment.jobTypeAndJobExperimentYear, val: _jobType),
         ]))
         //===(3d)その他の経験職種
-        var _jobExperiments: [EditableItemH] = []
-        for jobExperiment in _detail.jobExperiments {
-            _jobExperiments.append(EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlResumeJobExperiments.jobType, val: jobExperiment.jobType))
-            _jobExperiments.append(EditableItemH(type: .readonly, editItem: EditItemMdlResumeJobExperiments.jobExperimentYear, val: jobExperiment.jobExperimentYear))
-        }
-        arrData.append(MdlItemH(.jobExperimentsH3, "", childItems: _jobExperiments))
+        let bufJobExperimentTypeAndYear: String = "1:2_3:4_5:6"
+        arrData.append(MdlItemH(.jobExperimentsH3, "", childItems: [
+            EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlResumeJobExperiments.jobTypeAndJobExperimentYear, val: bufJobExperimentTypeAndYear),
+        ]))
         //===(3e)経験業種
         var _businessTypes: [EditableItemH] = []
         for businessType in _detail.businessTypes {

@@ -19,7 +19,7 @@ class SubSelectSpecialVC: BaseVC {
     //年数選択が必要か、即選択できるか
     var selectYearMode: Bool = false
     //選択数のMAX（1つなら即確定して前画面の可能性も？）
-    var selectMaxCount: Int = 3
+    var selectMaxCount: Int = 5
     
     var editableItem: EditableItemH!
     var arrDataGrp: [[CodeDisp]] = []
@@ -73,7 +73,7 @@ class SubSelectSpecialVC: BaseVC {
         self.tableVW.register(UINib(nibName: "SubSelectSyouTBCell", bundle: nil), forCellReuseIdentifier: "Cell_SubSelectSyouTBCell")
     }
     func initData(_ delegate: SubSelectFeedbackDelegate, editableItem: EditableItemH, selectingCodes: String) {
-        print(#line, #function, "\t💜初期化💜[selectingCodes: \(selectingCodes)]💜\(editableItem.debugDisp)")
+        print(#line, #function, "\t💜初期化💜[selectingCodes: \(selectingCodes)]💜\(editableItem.editableItemKey)")
         //=== 2段回目の年数選択を実施するか
         self.delegate = delegate
         switch editableItem.editType {
@@ -83,16 +83,27 @@ class SubSelectSpecialVC: BaseVC {
         }
         //=== 選択数の最大数を項目定義に応じて設定する
         switch editableItem.editableItemKey {
-        case EditItemMdlResumeLastJobExperiment.jobType.itemKey: fallthrough
-        case EditItemMdlFirstInputLastJobExperiments.jobType.itemKey:
+        case EditItemMdlResumeLastJobExperiment.jobTypeAndJobExperimentYear.itemKey: fallthrough
+        case EditItemMdlFirstInputLastJobExperiments.jobTypeAndJobExperimentYear.itemKey:
             selectMaxCount = 1
-        case EditItemMdlResumeJobExperiments.jobType.itemKey: fallthrough
-        case EditItemMdlFirstInputJobExperiments.jobType.itemKey:
+        case EditItemMdlResumeJobExperiments.jobTypeAndJobExperimentYear.itemKey: fallthrough
+        case EditItemMdlFirstInputJobExperiments.jobTypeAndJobExperimentYear.itemKey:
             selectMaxCount = 9 //10-1 最新と合わせて10件。Validationメッセージがキモくなる...
-        default:
-            selectMaxCount = 5 //とりあえず
+        default: selectMaxCount = 10
+        }
+        //=== 遷移時点での選択情報をばらして保持する
+        if selectYearMode {
+            for job in selectingCodes.split(separator: "_") {
+                let buf = String(job).split(separator: ":")
+                guard buf.count == 2 else { continue }
+                let tmp0 = String(buf[0])
+                let tmp1 = String(buf[1])
+                let buf1: String = SelectItemsManager.getCodeDisp(.jobExperimentYear, code: tmp1)?.disp ?? ""
+                dicSelectedCode[tmp0] = CodeDisp(tmp1, buf1)
+            }
         }
 
+        //=== 表示アイテムを設定する
         self.editableItem = editableItem
         self.mainTsvMaster = editableItem.editItem.tsvMaster
         switch editableItem.editItem.tsvMaster {
@@ -112,11 +123,13 @@ class SubSelectSpecialVC: BaseVC {
             }.map { (item) -> CodeDisp in
                 item.codeDisp
             }
-            arrDataGrp.append(hoge)
-            arrSelected.append(false)//該当セクションが展開されているか否か
-            if Constants.DbgDispStatus {
-                arrSelected.append(true)//すべて展開しておく
+            //=== 選択されてるのが含まれたら、それは展開しておく場合：
+            var isOpen: Bool = false
+            for item in hoge {
+                if dicSelectedCode.keys.contains(item.code) { isOpen = true }
             }
+            arrDataGrp.append(hoge)
+            arrSelected.append(isOpen)//該当セクションが展開されているか否か
         }
     }
     func dispData() {
@@ -210,18 +223,18 @@ extension SubSelectSpecialVC: SubSelectProtocol {
 //=== 複数選択ポップアップで選択させる場合の処理 ===
 extension SubSelectSpecialVC: SubSelectBaseDelegate {
     func actPopupSelect(selectedItemsCode: String) {
-        //___選択状態の確認
-        print("\t🐼1🐼[\(selectedItemsCode)]🐼これが選択されました🐼Special🐼")//編集中の値の保持（と描画）
-        if selectYearMode {
-            for item in SelectItemsManager.convCodeDisp(mainTsvMaster, subTsvMaster, selectedItemsCode) {
-                print(#line, "\t🐼1a🐼\t", item.0.debugDisp, item.1.debugDisp)
-            }
-        } else {
-            for item in SelectItemsManager.convCodeDisp(mainTsvMaster, selectedItemsCode) {
-                print(#line, "\t🐼1b🐼\t", item.debugDisp)
-            }
-        }
-        //^^^選択状態の確認
+//        //___選択状態の確認
+//        print("\t🐼1🐼[\(selectedItemsCode)]🐼これが選択されました🐼Special🐼")//編集中の値の保持（と描画）
+//        if selectYearMode {
+//            for item in SelectItemsManager.convCodeDisp(mainTsvMaster, subTsvMaster, selectedItemsCode) {
+//                print(#line, "\t🐼1a🐼\t", item.0.debugDisp, item.1.debugDisp)
+//            }
+//        } else {
+//            for item in SelectItemsManager.convCodeDisp(mainTsvMaster, selectedItemsCode) {
+//                print(#line, "\t🐼1b🐼\t", item.debugDisp)
+//            }
+//        }
+//        //^^^選択状態の確認
         self.delegate?.changedSelect(editItem: self.editableItem, codes: selectedItemsCode) //フィードバックしておく
         self.dismiss(animated: true) { }
     }

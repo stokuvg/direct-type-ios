@@ -153,7 +153,6 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
             case .selectSpecialYear:
                 let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSpecialVC") as? SubSelectSpecialVC{
-                    print(#line, #function, "\t💙💙[editTemp: \(editTemp.debugDisp)]💙💙")
                     nvc.initData(self, editableItem: editTemp, selectingCodes: editTemp.curVal)
                     //遷移アニメーション関連
                     nvc.modalTransitionStyle = .crossDissolve
@@ -166,17 +165,6 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
         //================================================
         switch item.type {
         case .lastJobExperimentH3, .jobExperimentsH3, .businessTypesH3, .lastJobExperimentA11, .jobExperimentsA14:
-//            let storyboard = UIStoryboard(name: "Edit", bundle: nil)
-//            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubEditSpecialVC") as? SubEditSpecialVC{
-//                var arrErrMsg: [EditableItemKey: [ValidationErrMsg]] = [:] //子画面に引き渡すエラー
-//                arrErrMsg = dicValidErrMsg //抜粋せずに、まるっと渡しておく
-//                nvc.initData(self, item, arrErrMsg)
-//                //遷移アニメーション関連
-//                nvc.modalTransitionStyle = .coverVertical
-//                self.present(nvc, animated: true) {
-//                }
-//            }
-            print("\t💙💙💙\(item.debugDisp)💙💙💙")
             let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
             if let _item = item.childItems.first {
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSpecialVC") as? SubSelectSpecialVC{
@@ -236,7 +224,7 @@ extension PreviewBaseVC: nameEditableTableBasicDelegate {
 
 extension PreviewBaseVC: SubSelectFeedbackDelegate {
     func changedSelect(editItem: EditableItemH, codes: String) {
-        print("\t🐼1🐼[\(editItem.debugDisp)]🐼FBです🐼Single/Multi🐼")//編集中の値の保持（と描画）
+        print("\t🐼1🐼[\(editItem.debugDisp)]🐼FBです🐼Single/Multi/Special🐼")//編集中の値の保持（と描画）
         editableModel.changeTempItem(editItem, text: codes)
         chkButtonEnable()//ボタン死活チェック
         tableVW.reloadData()

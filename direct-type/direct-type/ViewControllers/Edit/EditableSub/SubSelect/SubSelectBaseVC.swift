@@ -19,6 +19,8 @@ protocol SubSelectFeedbackDelegate {
 class SubSelectBaseVC: BaseVC {
     var delegate: SubSelectFeedbackDelegate? = nil
     var singleMode: Bool = true
+    //選択数のMAX（1つなら即確定して前画面の可能性も？）
+    var selectMaxCount: Int = 5
     var editableModel: EditableModel = EditableModel() //画面編集項目のモデルと管理//???
 
     var editableItem: EditableItemH!
@@ -61,6 +63,13 @@ class SubSelectBaseVC: BaseVC {
         self.mainTsvMaster = editableItem.editItem.tsvMaster
         for key in selectingCodes.split(separator: "_") {
             self.dicChange[String(key)] = true
+        }
+        //=== 選択数の最大数を項目定義に応じて設定する
+        switch editableItem.editableItemKey {
+        case EditItemMdlFirstInput.hopeArea.itemKey:
+            selectMaxCount = 5
+        default:
+            selectMaxCount = 1
         }
         //選択肢一覧を取得する（グループタイプはSpecialを利用するため来ない想定ではある）
         let cd: [CodeDisp] = SelectItemsManager.getMaster(self.mainTsvMaster)
@@ -109,10 +118,19 @@ extension SubSelectBaseVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true) //ハイライトの解除
         let item = arrData[indexPath.row]
+        let select: Bool = dicChange[item.code] ?? false  //差分情報優先
+        //選択数の最大を超えるかのチェック
+        if select == false { //タップ対象が非選択の時には、選択MAXチェックを実施
+            if dicChange.filter { (dic) -> Bool in
+                dic.value == true
+            }.count >= selectMaxCount {
+                showConfirm(title: "", message: "合計\(selectMaxCount)個までしか選択できません", onlyOK: true)
+                return
+            }
+        }
         if (singleMode) { //=== Single
             dicChange.removeAll() //Single選択の場合は、まるっと削除してから追加
         }
-        let select: Bool = dicChange[item.code] ?? false  //差分情報優先
         dicChange[item.code] = !select
         //該当セルの描画しなおし
         if (singleMode) { //=== Single
