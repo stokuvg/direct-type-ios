@@ -91,28 +91,32 @@ class SubSelectSpecialVC: BaseVC {
             selectMaxCount = 9 //10-1 最新と合わせて10件。Validationメッセージがキモくなる...
         default: selectMaxCount = 10
         }
+        //=== 使用するマスタを設定する
+        self.editableItem = editableItem
+        self.mainTsvMaster = editableItem.editItem.tsvMaster //メインは指定されている
+        switch editableItem.editItem.tsvMaster { //サブ（2段回目)は、メインにしたがって定義される
+        case .jobType:  self.subTsvMaster = .jobExperimentYear
+        case .skill:    self.subTsvMaster = .skillYear
+        default:        self.subTsvMaster = .undefine
+        }
         //=== 遷移時点での選択情報をばらして保持する
         if selectYearMode {
-            for job in selectingCodes.split(separator: "_") {
-                let buf = String(job).split(separator: ":")
+            for item in selectingCodes.split(separator: "_") {
+                let buf = String(item).split(separator: ":")
                 guard buf.count == 2 else { continue }
                 let tmp0 = String(buf[0])
                 let tmp1 = String(buf[1])
-                let buf1: String = SelectItemsManager.getCodeDisp(.jobExperimentYear, code: tmp1)?.disp ?? ""
+                let buf1: String = SelectItemsManager.getCodeDisp(subTsvMaster, code: tmp1)?.disp ?? ""
                 dicSelectedCode[tmp0] = CodeDisp(tmp1, buf1)
             }
+        } else {
+            for item in selectingCodes.split(separator: "_") {
+                let tmp = String(item)
+                let buf: String = SelectItemsManager.getCodeDisp(mainTsvMaster, code: tmp)?.disp ?? ""
+                dicSelectedCode[tmp] = CodeDisp(tmp, buf)
+            }
         }
-
         //=== 表示アイテムを設定する
-        self.editableItem = editableItem
-        self.mainTsvMaster = editableItem.editItem.tsvMaster
-        switch editableItem.editItem.tsvMaster {
-        case .jobType:
-            self.subTsvMaster = .jobExperimentYear
-        case .skill:
-            self.subTsvMaster = .skillYear
-        default: break
-        }
         self.arrSubData = SelectItemsManager.getMaster(self.subTsvMaster)
         let (dai, syou): ([CodeDisp], [GrpCodeDisp]) = SelectItemsManager.getMaster(self.mainTsvMaster)
         for itemDai in dai {

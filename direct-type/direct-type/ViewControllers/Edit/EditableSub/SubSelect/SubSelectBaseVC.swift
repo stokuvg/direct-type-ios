@@ -68,6 +68,8 @@ class SubSelectBaseVC: BaseVC {
         switch editableItem.editableItemKey {
         case EditItemMdlFirstInput.hopeArea.itemKey:
             selectMaxCount = 5
+        case EditItemMdlResume.qualifications.itemKey:
+            selectMaxCount = 9999 //選択上限なし？
         default:
             selectMaxCount = 1
         }
@@ -118,18 +120,20 @@ extension SubSelectBaseVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true) //ハイライトの解除
         let item = arrData[indexPath.row]
+        if (singleMode) { //=== Single
+            dicChange.removeAll() //Single選択の場合は、まるっと削除してから追加
+        }
         let select: Bool = dicChange[item.code] ?? false  //差分情報優先
-        //選択数の最大を超えるかのチェック
-        if select == false { //タップ対象が非選択の時には、選択MAXチェックを実施
+        if select {
+            //選択解除の時には最大チェックは不要
+        } else {
+            //選択数の最大を超えるかのチェック
             if dicChange.filter { (dic) -> Bool in
                 dic.value == true
             }.count >= selectMaxCount {
                 showConfirm(title: "", message: "合計\(selectMaxCount)個までしか選択できません", onlyOK: true)
                 return
             }
-        }
-        if (singleMode) { //=== Single
-            dicChange.removeAll() //Single選択の場合は、まるっと削除してから追加
         }
         dicChange[item.code] = !select
         //該当セルの描画しなおし

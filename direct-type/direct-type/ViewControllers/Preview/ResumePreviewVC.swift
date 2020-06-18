@@ -48,23 +48,29 @@ class ResumePreviewVC: PreviewBaseVC {
         EditableItemH(type: .selectSingle, editItem: EditItemMdlResume.changeCount, val: _detail.changeCount),
         ]))
         //===(3c)直近の経験職種
-        let _jobType: String = "\(_detail.lastJobExperiment.jobType)"
-        let bufLastJobExperimentTypeAndYear: String = "7:8"
-        print("[H-3：(3c)直近の経験職種] [_jobType: \(_jobType)] [bufJobExperimentTypeAndYear: \(bufLastJobExperimentTypeAndYear)]")
+        let lastJobType = _detail.lastJobExperiment.jobType
+        let lastJobExperimentYear = _detail.lastJobExperiment.jobExperimentYear
+        let bufLastJobExperimentTypeAndYear: String = [lastJobType, lastJobExperimentYear].joined(separator: ":")
         arrData.append(MdlItemH(.lastJobExperimentH3, "", childItems: [
-            EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlResumeLastJobExperiment.jobTypeAndJobExperimentYear, val: _jobType),
+            EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlResumeLastJobExperiment.jobTypeAndJobExperimentYear, val: bufLastJobExperimentTypeAndYear),
         ]))
         //===(3d)その他の経験職種
-        let bufJobExperimentTypeAndYear: String = "1:2_3:4_5:6"
+        var arrJobExperiments: [String] = []
+        for item in _detail.jobExperiments {
+            let jobType = item.jobType
+            let jobExperimentYear = item.jobExperimentYear
+            let buf: String = [jobType, jobExperimentYear].joined(separator: ":")
+            arrJobExperiments.append(buf)
+        }
+        let bufJobTypeAndYear: String = arrJobExperiments.joined(separator: "_")
         arrData.append(MdlItemH(.jobExperimentsH3, "", childItems: [
-            EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlResumeJobExperiments.jobTypeAndJobExperimentYear, val: bufJobExperimentTypeAndYear),
+            EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlResumeJobExperiments.jobTypeAndJobExperimentYear, val: bufJobTypeAndYear),
         ]))
         //===(3e)経験業種
-        var _businessTypes: [EditableItemH] = []
-        for businessType in _detail.businessTypes {
-            _businessTypes.append(EditableItemH(type: .selectSpecial, editItem: EditItemMdlResume.businessTypes, val: businessType))
-        }
-        arrData.append(MdlItemH(.businessTypesH3, "", childItems: _businessTypes))
+        let businessType: String = _detail.businessTypes.joined(separator: "_")
+        arrData.append(MdlItemH(.businessTypesH3, "", childItems: [
+            EditableItemH(type: .selectSpecial, editItem: EditItemMdlResume.businessTypes, val: businessType),
+        ]))
         //===(3f)最終学歴
         arrData.append(MdlItemH(.schoolH3, "", childItems: [
             EditableItemH(type: .inputText, editItem: EditItemMdlResumeSchool.schoolName, val: _detail.school.schoolName),
@@ -114,7 +120,12 @@ class ResumePreviewVC: PreviewBaseVC {
 extension ResumePreviewVC {
     private func fetchGetResume() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-        let resume: GetResumeResponseDTO = GetResumeResponseDTO(isEmployed: nil, changeJobCount: nil, workHistory: nil, experienceIndustryId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil)
+//        let resume: GetResumeResponseDTO = GetResumeResponseDTO(isEmployed: nil, changeJobCount: nil, workHistory: nil, experienceIndustryId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil)
+        var workHistory: [WorkHistoryDTO] = []
+        workHistory.append(WorkHistoryDTO(job3Id: "130", experienceYears: "7"))
+        workHistory.append(WorkHistoryDTO(job3Id: "5", experienceYears: "3"))
+        workHistory.append(WorkHistoryDTO(job3Id: "3", experienceYears: "2"))
+        let resume: GetResumeResponseDTO = GetResumeResponseDTO(isEmployed: nil, changeJobCount: nil, workHistory: workHistory, experienceIndustryId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil)
         self.detail = MdlResume(dto: resume)
         self.dispData()
     }
