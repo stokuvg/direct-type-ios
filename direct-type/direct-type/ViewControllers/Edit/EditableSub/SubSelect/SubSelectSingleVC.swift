@@ -12,5 +12,7 @@ class SubSelectSingleVC: SubSelectBaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.singleMode = true //単一選択モード
+        self.vwFoot.isHidden = true
+        self.lcFootHeight.constant = 0
     }
 }

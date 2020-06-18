@@ -39,6 +39,8 @@ class SubSelectBaseVC: BaseVC {
     @IBOutlet weak var tableVW: UITableView!
     
     @IBOutlet weak var vwFoot: UIView!
+    @IBOutlet weak var lcFootHeight: NSLayoutConstraint!
+
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
         var arrResult: [String] = []

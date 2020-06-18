@@ -44,6 +44,7 @@ class SubSelectSpecialVC: BaseVC {
     @IBOutlet weak var tableVW: UITableView!
     
     @IBOutlet weak var vwFoot: UIView!
+    @IBOutlet weak var lcFootHeight: NSLayoutConstraint!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
         var arrResult: [String] = []
@@ -140,6 +141,9 @@ class SubSelectSpecialVC: BaseVC {
 //        let bufTitle: String = "\(editableItem.dispName) \(dicSelectedCode.count)件選択"
         let bufTitle: String = "\(editableItem.dispName)"
         lblTitle.text(text: bufTitle, fontType: .font_L, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        if selectMaxCount == 1 {
+            lcFootHeight.constant = 0 //選択即反映にするため、下部尾選択ボタンも非表示とする
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
