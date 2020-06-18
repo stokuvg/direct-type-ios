@@ -61,6 +61,10 @@ extension HPreviewTBCell {
             return "\(buf0)"
         case .lastJobExperimentA11: fallthrough
         case .lastJobExperimentH3:    //===(3c)直近の経験職種
+            for (n, item) in _item.childItems.enumerated() {
+                print(#line, "🐶", n, item.debugDisp)
+            }
+            
             if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
             var disp: [String] = []
@@ -77,6 +81,10 @@ extension HPreviewTBCell {
             return disp.count == 0 ? Constants.SelectItemsValEmpty.disp : disp.joined(separator: "\n")
         case .jobExperimentsA14: fallthrough
         case .jobExperimentsH3:       //===(3d)その他の経験職種
+            for (n, item) in _item.childItems.enumerated() {
+                print(#line, "🐶", n, item.debugDisp)
+            }
+
             if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
             var disp: [String] = []

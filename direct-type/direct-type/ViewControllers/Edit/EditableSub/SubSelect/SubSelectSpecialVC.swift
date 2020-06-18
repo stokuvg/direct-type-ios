@@ -17,7 +17,7 @@ protocol SubSelectSpecialDelegate {
 class SubSelectSpecialVC: BaseVC {
     var delegate: SubSelectFeedbackDelegate? = nil
     //年数選択が必要か、即選択できるか
-    var selectYearMode: Bool = true
+    var selectYearMode: Bool = false
     //選択数のMAX（1つなら即確定して前画面の可能性も？）
     var selectMaxCount: Int = 3
     
@@ -73,30 +73,25 @@ class SubSelectSpecialVC: BaseVC {
         self.tableVW.register(UINib(nibName: "SubSelectSyouTBCell", bundle: nil), forCellReuseIdentifier: "Cell_SubSelectSyouTBCell")
     }
     func initData(_ delegate: SubSelectFeedbackDelegate, editableItem: EditableItemH, selectingCodes: String) {
+        print(#line, #function, "\t💜初期化💜[selectingCodes: \(selectingCodes)]💜\(editableItem.debugDisp)")
+        //=== 2段回目の年数選択を実施するか
         self.delegate = delegate
         switch editableItem.editType {
-        case .selectSpecial:
-            selectYearMode = false
-        case .selectSpecialYear:
-            selectYearMode = true
-        default:
-            break
+        case .selectSpecial:        selectYearMode = false
+        case .selectSpecialYear:    selectYearMode = true
+        default:                    selectYearMode = false
         }
-        
-        
-        
+        //=== 選択数の最大数を項目定義に応じて設定する
         switch editableItem.editableItemKey {
-        case EditItemMdlResumeLastJobExperiment.jobType.itemKey:
-            selectMaxCount = 1
+        case EditItemMdlResumeLastJobExperiment.jobType.itemKey: fallthrough
         case EditItemMdlFirstInputLastJobExperiments.jobType.itemKey:
             selectMaxCount = 1
+        case EditItemMdlResumeJobExperiments.jobType.itemKey: fallthrough
+        case EditItemMdlFirstInputJobExperiments.jobType.itemKey:
+            selectMaxCount = 9 //10-1 最新と合わせて10件。Validationメッセージがキモくなる...
         default:
             selectMaxCount = 5 //とりあえず
         }
-
-        selectMaxCount = 1
-        print("\t\(editableItem.debugDisp) これに応じて、選択最大を設定する [\(selectMaxCount)]")
-
 
         self.editableItem = editableItem
         self.mainTsvMaster = editableItem.editItem.tsvMaster
@@ -197,8 +192,14 @@ extension SubSelectSpecialVC: UITableViewDataSource, UITableViewDelegate {
                     dicSelectedCode[item.code] = item
                     tableView.reloadRows(at: [indexPath], with: .none) //該当セルの描画しなおし
                     dispData()
+                    selectAndCloseIfSingle()//===選択と同時に閉じて良いかのチェック
                 }
             }
+        }
+    }
+    func selectAndCloseIfSingle() {
+        if selectMaxCount == 1 {
+            actCommit(UIButton())
         }
     }
 }

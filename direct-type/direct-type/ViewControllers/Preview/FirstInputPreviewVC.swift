@@ -68,19 +68,25 @@ class FirstInputPreviewVC: PreviewBaseVC {
         arrData.append(MdlItemH(.lastJobExperimentA11, "", childItems: [
             EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlFirstInputLastJobExperiments.jobType, val: _jobType),
             //[jobTypeで合わせて設定するので、表示はすれども編集では不要]
-            EditableItemH(type: .readonly, editItem: EditItemMdlFirstInputLastJobExperiments.jobExperimentYear, val: _detail.lastJobExperiment.jobExperimentYear),
+//            EditableItemH(type: .readonly, editItem: EditItemMdlFirstInputLastJobExperiments.jobExperimentYear, val: _detail.lastJobExperiment.jobExperimentYear),
         ]))
         //=== [A-13] 入力（現在の年収）
         arrData.append(MdlItemH(.salaryA13, "", childItems: [
             EditableItemH(type: .selectSingle, editItem: EditItemMdlFirstInput.salary, val: _detail.salary),
         ]))
         //=== [A-14] 入力（追加経験職種）
-        var _jobExperiments: [EditableItemH] = []
-        for jobExperiment in _detail.jobExperiments {
-            _jobExperiments.append(EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlFirstInputJobExperiments.jobType, val: jobExperiment.jobType))
-            _jobExperiments.append(EditableItemH(type: .readonly, editItem: EditItemMdlFirstInputJobExperiments.jobExperimentYear, val: jobExperiment.jobExperimentYear))
-        }
-        arrData.append(MdlItemH(.jobExperimentsA14, "", childItems: _jobExperiments))
+//        let _jobType: String = "\(_detail.lastJobExperiment.jobType)"
+        arrData.append(MdlItemH(.jobExperimentsA14, "", childItems: [
+            EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlFirstInputJobExperiments.jobType, val: _jobType),
+            //[jobTypeで合わせて設定するので、表示はすれども編集では不要]
+//            EditableItemH(type: .readonly, editItem: EditItemMdlFirstInputJobExperiments.jobExperimentYear, val: _detail.lastJobExperiment.jobExperimentYear),
+        ]))
+//        var _jobExperiments: [EditableItemH] = []
+//        for jobExperiment in _detail.jobExperiments {
+//            _jobExperiments.append(EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlFirstInputJobExperiments.jobType, val: jobExperiment.jobType))
+//            _jobExperiments.append(EditableItemH(type: .readonly, editItem: EditItemMdlFirstInputJobExperiments.jobExperimentYear, val: jobExperiment.jobExperimentYear))
+//        }
+//        arrData.append(MdlItemH(.jobExperimentsA14, "", childItems: _jobExperiments))
 
         
         print(arrData.description)

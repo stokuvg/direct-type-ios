@@ -76,7 +76,6 @@ class HomeVC: TmpNaviTopVC {
         
         //[Dbg]___
         if Constants.DbgAutoPushVC {
-            let storyboard = UIStoryboard(name: "Preview", bundle: nil)
             switch Constants.DbgAutoPushVCNum {
             case 1: pushViewController(.profilePreviewH2)
             case 2: pushViewController(.resumePreviewH3)

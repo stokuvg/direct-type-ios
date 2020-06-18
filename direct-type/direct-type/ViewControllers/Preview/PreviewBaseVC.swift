@@ -153,6 +153,7 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
             case .selectSpecialYear:
                 let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSpecialVC") as? SubSelectSpecialVC{
+                    print(#line, #function, "\t💙💙[editTemp: \(editTemp.debugDisp)]💙💙")
                     nvc.initData(self, editableItem: editTemp, selectingCodes: editTemp.curVal)
                     //遷移アニメーション関連
                     nvc.modalTransitionStyle = .crossDissolve
