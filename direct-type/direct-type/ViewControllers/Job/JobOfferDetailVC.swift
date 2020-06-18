@@ -404,11 +404,13 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 cell.setup(data: _mdlJobDetail)
                 return cell
             case (0,1):
+                // 求人画像
                 let cell = tableView.loadCell(cellName: "JobDetailImageCell", indexPath: indexPath) as! JobDetailImageCell
                 cell.setCellWidth(width: self.detailTableView.frame.size.width)
                 cell.setup(data: _mdlJobDetail)
                 return cell
             case (1,0):
+                //
                 if articleOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailArticleCell", indexPath: indexPath) as! JobDetailArticleCell
                     cell.delegate = self
@@ -424,25 +426,28 @@ extension JobOfferDetailVC: UITableViewDataSource {
                     return UITableViewCell()
                 }
             case (2,0):
+                // 求人PRコード
                 let cell = tableView.loadCell(cellName: "JobDetailPRCodeTagsCell", indexPath: indexPath) as! JobDetailPRCodeTagsCell
                 let datas = _mdlJobDetail.prCodes
 //                let datas = dummyData["tags"] as! [String]
                 cell.setup(prcodeNos: datas)
                 return cell
             case (2,1):
+                // 給与サンプル
                 let cell = tableView.loadCell(cellName: "JobDetailSalaryExampleCell", indexPath: indexPath) as! JobDetailSalaryExampleCell
                 let examples = _mdlJobDetail.salarySample
 //                let examples = dummyData["salary_example"] as! String
                 cell.setup(data: examples)
                 return cell
             case (3,_):
+                // 仕事内容
 //                let guideBookData = dummyData["guidebook"] as! [[String:Any]]
 //                let itemData = guideBookData[row]
                 let cell = tableView.loadCell(cellName: "JobDetailItemCell", indexPath: indexPath) as! JobDetailItemCell
                 cell.setup(data: _mdlJobDetail,row:row)
 //                cell.setup(data: itemData)
                 return cell
-            case (4,_):
+            case (4,_): // メモ
                 if coverageMemoOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailFoldingMemoCell", indexPath: indexPath) as! JobDetailFoldingMemoCell
                     
@@ -457,7 +462,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 } else {
                     return UITableViewCell()
                 }
-            case (5, _):
+            case (5, _):    // プロセス
                 if selectionProcessOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailFoldingProcessCell", indexPath: indexPath) as! JobDetailFoldingProcessCell
                     
@@ -468,6 +473,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                     return UITableViewCell()
                 }
             case (6, _):
+                // 連絡先
                 if phoneNumberOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailFoldingPhoneNumberCell", indexPath: indexPath) as! JobDetailFoldingPhoneNumberCell
                     
@@ -477,7 +483,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 } else {
                     return UITableViewCell()
                 }
-        case (7, _):    // 会社概要
+            case (7, _):    // 会社概要
                 if companyOutlineOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailFoldingOutlineCell", indexPath: indexPath) as! JobDetailFoldingOutlineCell
                     
