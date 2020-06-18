@@ -57,7 +57,7 @@ class MdlJobCard: Codable {
     
     // TudApiのデータを変換して保持
     convenience init(dto: Job) {
-        Log.selectLog(logLevel: .debug, "MdlJobCard con init start")
+//        Log.selectLog(logLevel: .debug, "MdlJobCard con init start")
         
         let jobCardCode = dto.jobId
         let _displayPeriod = EntryFormInfoDisplayPeriod.init(startAt: dto.pressStartDate, endAt: dto.pressEndDate)
@@ -71,7 +71,7 @@ class MdlJobCard: Codable {
         }
         
         let keepStatus = dto.isKeep
-        Log.selectLog(logLevel: .debug, "keepStatus:\(keepStatus)")
+//        Log.selectLog(logLevel: .debug, "keepStatus:\(keepStatus)")
 
         self.init(jobCardCode: jobCardCode, displayPeriod: _displayPeriod, companyName: dto.companyName, jobName: dto.jobName, mainTitle:dto.mainTitle,mainPicture: dto.mainPhotoURL , salaryMinCode: minCode, salaryMaxCode: maxCode, salaryDisplay: dto.isSalaryDisplay,workPlaceCode:placeCodes, keepStatus: keepStatus)
     }

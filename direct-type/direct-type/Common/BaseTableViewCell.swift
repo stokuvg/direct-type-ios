@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum PeriodType {
+    case inside     // 期間内
+    case outside    // 期間外
+}
+
 class BaseTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
@@ -31,8 +36,8 @@ class BaseTableViewCell: UITableViewCell {
         retInterval = nowDate.timeIntervalSince(startDate)
         
         let ret = retInterval/86400
-    //        Log.selectLog(logLevel: .debug, "ret:\(ret)")
-        if ret > 7 {
+//        Log.selectLog(logLevel: .debug, "ret:\(ret)")
+        if ret < 7 {
             return true
         }
         return false

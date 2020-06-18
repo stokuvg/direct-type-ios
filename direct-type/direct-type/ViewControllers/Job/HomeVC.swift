@@ -37,6 +37,8 @@ class HomeVC: TmpNaviTopVC {
     var safeAreaTop:CGFloat!
     
     var pageNo:Int = 1
+    
+    var defaultCellHeight:CGFloat = 550
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +58,7 @@ class HomeVC: TmpNaviTopVC {
 //        self.setRightSearchBtn()
         
         homeTableView.backgroundColor = UIColor.init(colorType: .color_base)
-        homeTableView.rowHeight = 600
+        homeTableView.rowHeight = defaultCellHeight
         
         homeTableView.registerNib(nibName: "JobOfferBigCardCell", idName: "JobOfferBigCardCell")        // 求人カード
         homeTableView.registerNib(nibName: "JobOfferCardMoreCell", idName: "JobOfferCardMoreCell")      // もっと見る
@@ -371,7 +373,7 @@ extension HomeVC: UITableViewDelegate {
         } else if row == dispJobCards.jobCards.count && dispType == .end {
             return 250
         }
-        return 600
+        return defaultCellHeight
 //        return UITableView.automaticDimension
     }
     

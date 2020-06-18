@@ -68,17 +68,19 @@ class JobOfferBigCardCell: BaseJobCardCell {
         let nowDate = Date()
         // NEWマーク 表示チェック
         let start_date_string = data.displayPeriod.startAt
-        let startFlag = newMarkFlagCheck(startDateString: start_date_string, nowDate: nowDate)
+//        Log.selectLog(logLevel: .debug, "start_date_string:\(start_date_string)")
+        let startPeriod = newMarkFlagCheck(startDateString: start_date_string, nowDate: nowDate)
         // 終了マーク 表示チェック
         let end_date_string = data.displayPeriod.endAt
-        let endFlag = endFlagHiddenCheck(endDateString:end_date_string, nowDate:nowDate)
+//        Log.selectLog(logLevel: .debug, "end_date_string:\(end_date_string)")
+        let endPeriod = endFlagHiddenCheck(endDateString:end_date_string, nowDate:nowDate)
         
         var limitedType:LimitedType!
-        switch (startFlag,endFlag) {
+        switch (startPeriod,endPeriod) {
             case (false,false):
 //                Log.selectLog(logLevel: .debug, "両方当たる")
                 // 終了マークのみ表示
-                limitedType = .end
+                limitedType = LimitedType.none
             case (false,true):
 //                Log.selectLog(logLevel: .debug, "掲載開始から７日以内")
                 // NEWマークのみ表示
@@ -118,8 +120,8 @@ class JobOfferBigCardCell: BaseJobCardCell {
         // 特別年収 TODO:初回は非表示
         saralySpecialLabel.isHidden = true
         saralySpecialMarkLabel.isHidden = true
-        cautionView.isHidden = true
-        self.stackView.addArrangedSubview(cautionView)
+//        cautionView.isHidden = true
+//        self.stackView.addArrangedSubview(cautionView)
 //        cautionView.isHidden = true
         
         // 勤務地
