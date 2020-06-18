@@ -9,6 +9,7 @@
 import UIKit
 import SwaggerClient
 import SVProgressHUD
+import PromiseKit
 
 class JobOfferDetailVC: TmpBasicVC {
     
@@ -204,6 +205,8 @@ class JobOfferDetailVC: TmpBasicVC {
         }
         .finally {
             SVProgressHUD.dismiss()
+            
+            self.recommendAction()
 
             self.tableViewSettingAction()
         }
@@ -217,6 +220,19 @@ class JobOfferDetailVC: TmpBasicVC {
             self.detailTableView.delegate = self
             self.detailTableView.dataSource = self
             self.detailTableView.reloadData()
+        }
+    }
+    
+    private func recommendAction() {
+        RecommendManager.fetchRecommend(type: .ap341, jobID: self.jobId)
+        .done { result in
+            Log.selectLog(logLevel: .debug, "求人詳細のレコメンド 成功:\(result)")
+        }
+        .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            Log.selectLog(logLevel: .debug, "求人詳細のレコメンド エラー:\(myErr.debugDisp)")
+        }
+        .finally {
         }
     }
 }
