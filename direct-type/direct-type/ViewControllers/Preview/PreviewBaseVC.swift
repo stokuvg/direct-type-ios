@@ -49,7 +49,7 @@ class PreviewBaseVC: TmpBasicVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         btnCommit.setTitle(text: "完了する", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
 
@@ -69,9 +69,12 @@ class PreviewBaseVC: TmpBasicVC {
         super.viewWillAppear(animated)
         dispData()
         chkButtonEnable()//ボタン死活チェック
+//        self.tabBarController?.tabBar.isHidden = true
+//        self.tabBarController?.hidesBottomBarWhenPushed = true
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+//        self.tabBarController?.tabBar.isHidden = false
     }
     func chkButtonEnable() {
 //        btnCommit.isEnabled = true ; return //!!!

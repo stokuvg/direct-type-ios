@@ -247,6 +247,7 @@
 		26A1F5832480F23100834213 /* DlgStackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1F5802480F23100834213 /* DlgStackButton.swift */; };
 		26A1F5842480F23100834213 /* MyCmnDialogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A1F5812480F23100834213 /* MyCmnDialogVC.swift */; };
 		26A1F5852480F23100834213 /* Dialog.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26A1F5822480F23100834213 /* Dialog.storyboard */; };
+		26A397F7249AEF0200FED62E /* BaseVC+PushViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A397F6249AEF0200FED62E /* BaseVC+PushViewController.swift */; };
 		26A4C1CB247B4A81008D8E68 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A4C1CA247B4A81008D8E68 /* ApiManager.swift */; };
 		26A5DD642475028E0035267A /* SubSelectSpecialVC+Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5DD632475028E0035267A /* SubSelectSpecialVC+Picker.swift */; };
 		26A5DD662476547D0035267A /* SubSelectBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5DD652476547D0035267A /* SubSelectBaseVC.swift */; };
@@ -545,6 +546,7 @@
 		26A1F5802480F23100834213 /* DlgStackButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DlgStackButton.swift; sourceTree = "<group>"; };
 		26A1F5812480F23100834213 /* MyCmnDialogVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCmnDialogVC.swift; sourceTree = "<group>"; };
 		26A1F5822480F23100834213 /* Dialog.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Dialog.storyboard; sourceTree = "<group>"; };
+		26A397F6249AEF0200FED62E /* BaseVC+PushViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseVC+PushViewController.swift"; sourceTree = "<group>"; };
 		26A4C1CA247B4A81008D8E68 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		26A5DD632475028E0035267A /* SubSelectSpecialVC+Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubSelectSpecialVC+Picker.swift"; sourceTree = "<group>"; };
 		26A5DD652476547D0035267A /* SubSelectBaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSelectBaseVC.swift; sourceTree = "<group>"; };
@@ -840,6 +842,7 @@
 			children = (
 				26A1F57F2480F23100834213 /* Dialog */,
 				067F28CF2456CCB8000AAD69 /* BaseVC.swift */,
+				26A397F6249AEF0200FED62E /* BaseVC+PushViewController.swift */,
 				2636075E2477AB4900032880 /* BaseVC+ShowDialog.swift */,
 				067F28D12456CE39000AAD69 /* TmpBasicVC.swift */,
 				067F28DE2456D013000AAD69 /* TmpNaviTopVC.swift */,
@@ -1705,6 +1708,7 @@
 				0EAE7661248F2CCD009A8F4B /* ChemistryBusinessAvilityView.swift in Sources */,
 				06FFA0012484D6850085A3D9 /* MyPageChemistryStartCell.swift in Sources */,
 				06E519B3245814BD004E4B7A /* EntryLoginVC.swift in Sources */,
+				26A397F7249AEF0200FED62E /* BaseVC+PushViewController.swift in Sources */,
 				066BC827246CF3CA00FE607F /* JobDetailItemAttentionView.swift in Sources */,
 				26CFC46B2469496D00E458E2 /* EditableItemH.swift in Sources */,
 				066938232485EA220064030F /* SettingWebVC.swift in Sources */,
