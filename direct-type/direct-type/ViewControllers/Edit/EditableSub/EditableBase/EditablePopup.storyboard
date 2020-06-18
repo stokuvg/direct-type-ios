@@ -180,6 +180,7 @@
                         <outlet property="btnBack" destination="tiR-ys-sSH" id="K65-Ja-lbw"/>
                         <outlet property="btnCommit" destination="3f0-8W-5eh" id="g8Z-Uf-tlo"/>
                         <outlet property="lblTitle" destination="gnS-yA-ZjW" id="DyP-B4-WTx"/>
+                        <outlet property="lcFootHeight" destination="2bA-sq-x5d" id="Bw2-jG-d9o"/>
                         <outlet property="tableVW" destination="Kbe-JS-eGe" id="26n-Q0-vkI"/>
                         <outlet property="vwFoot" destination="J1U-TS-Gq6" id="qf5-2r-Ls5"/>
                         <outlet property="vwHead" destination="FBL-Lb-4mR" id="9wY-dV-Kiy"/>
@@ -361,6 +362,7 @@
                         <outlet property="btnBack" destination="Pyq-bs-4od" id="oZ5-Ei-NeG"/>
                         <outlet property="btnCommit" destination="HDg-ET-b9l" id="352-zv-Ta6"/>
                         <outlet property="lblTitle" destination="JYD-4p-mwO" id="uFN-Hq-R8A"/>
+                        <outlet property="lcFootHeight" destination="tSI-XY-fpa" id="RdG-hJ-YKK"/>
                         <outlet property="tableVW" destination="ycb-EB-Mke" id="z56-p4-en5"/>
                         <outlet property="vwFoot" destination="Bky-Sn-q1M" id="Xaj-sp-Wd9"/>
                         <outlet property="vwHead" destination="yWH-6R-JsX" id="tVv-uY-j1a"/>
@@ -553,6 +555,7 @@
                         <outlet property="btnBack" destination="TvK-7k-fTr" id="AkD-WA-fio"/>
                         <outlet property="btnCommit" destination="d8y-Uz-3hX" id="ZOp-5J-h4n"/>
                         <outlet property="lblTitle" destination="3uZ-FK-bL9" id="FdG-Kq-ju8"/>
+                        <outlet property="lcFootHeight" destination="RKa-7P-ouj" id="9xd-sr-Jt0"/>
                         <outlet property="tableVW" destination="D2a-Dg-nHP" id="r15-9K-Xz8"/>
                         <outlet property="tfSubDummy" destination="ofo-jY-BB4" id="mMI-3K-KDQ"/>
                         <outlet property="vwFoot" destination="z9K-Q5-Z17" id="XDb-Nv-Wrz"/>

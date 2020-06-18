@@ -77,7 +77,7 @@ class MdlResume: Codable {
         let _ownPr: String = ""
         self.init(employmentStatus: _employment,
                   changeCount: _changeCount,
-                  lastJobExperiment: MdlJobExperiment(jobType: "", jobExperimentYear: ""),
+                  lastJobExperiment: _lastJobExperiments,
                   jobExperiments: _jobExperiments,
                   businessTypes: _businessTypes,
                   school: _school,
@@ -108,7 +108,7 @@ class MdlResume: Codable {
 //        self.init(employmentStatus: _employment, changeCount: _changeCount, lastJobExperiment: _lastJobExperiment, jobExperiments: _jobExperiments, businessTypes: _businessTypes, school: _school, skillLanguage: _skillLanguage, qualifications: _qualifications, ownPr: dto.ownPr)
 //    }
     var debugDisp: String {
-        return "[employmentStatus: \(employmentStatus)] [changeCount: \(changeCount)]"
+        return "[employmentStatus: \(employmentStatus)] [changeCount: \(changeCount)] [lastJobExperiment: \(lastJobExperiment.debugDisp)] [jobExperiments: \(jobExperiments.count)件] [businessTypes: \(businessTypes.count)件] [school: \(school.debugDisp)] [skillLanguage: \(skillLanguage.debugDisp)] [qualifications: \(qualifications.count)件] [ownPr: \(ownPr)文字数]"
     }
 }
 

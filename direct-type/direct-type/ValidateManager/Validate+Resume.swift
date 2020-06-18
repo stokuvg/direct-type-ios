@@ -47,16 +47,14 @@ extension EditItemMdlResumeSkillLanguage {
 extension EditItemMdlResumeLastJobExperiment {
     var valid: ValidInfo {
         switch self {
-        case .jobType:              return ValidInfo(required: false, keta: nil, max: nil, type: .code)
-        case .jobExperimentYear:    return ValidInfo(required: false, keta: nil, max: nil, type: .code)
+        case .jobTypeAndJobExperimentYear:  return ValidInfo(required: false, keta: nil, max: nil, type: .code)
         }
     }
 }
 extension EditItemMdlResumeJobExperiments {
     var valid: ValidInfo {
         switch self {
-        case .jobType:              return ValidInfo(required: false, keta: nil, max: nil, type: .code)
-        case .jobExperimentYear:    return ValidInfo(required: false, keta: nil, max: nil, type: .code)
+        case .jobTypeAndJobExperimentYear:  return ValidInfo(required: false, keta: nil, max: nil, type: .code)
         }
     }
 }

@@ -105,19 +105,22 @@ enum EditItemMdlFirstInput: String, EditItemProtocol {
 }
 //=== 編集用の項目と定義など
 enum EditItemMdlFirstInputJobExperiments: String, EditItemProtocol {
-    case jobType
-    case jobExperimentYear
+    case jobTypeAndJobExperimentYear
+//    case jobType
+//    case jobExperimentYear
     //表示名
     var dispName: String {
         switch self {
-        case .jobType:              return "経験職種"
-        case .jobExperimentYear:    return "経験年数"
+        case .jobTypeAndJobExperimentYear: return "経験職種＆年数"
+//        case .jobType:              return "経験職種"
+//        case .jobExperimentYear:    return "経験年数"
         }
     }
     var tsvMaster: SelectItemsManager.TsvMaster {
         switch self {
-        case .jobType: return .jobType
-        case .jobExperimentYear: return .jobExperimentYear
+        case .jobTypeAndJobExperimentYear: return .jobType
+//        case .jobType: return .jobType
+//        case .jobExperimentYear: return .jobExperimentYear
         }
     }
     //Placeholder Text
@@ -128,19 +131,22 @@ enum EditItemMdlFirstInputJobExperiments: String, EditItemProtocol {
 }
 //=== 編集用の項目と定義など
 enum EditItemMdlFirstInputLastJobExperiments: String, EditItemProtocol {
-    case jobType
-    case jobExperimentYear
+    case jobTypeAndJobExperimentYear
+//    case jobType
+//    case jobExperimentYear
     //表示名
     var dispName: String {
         switch self {
-        case .jobType:              return "直近の経験職種"
-        case .jobExperimentYear:    return "直近の経験年数"
+        case .jobTypeAndJobExperimentYear: return "直近の経験職種＆年数"
+//        case .jobType:              return "直近の経験職種"
+//        case .jobExperimentYear:    return "直近の経験年数"
         }
     }
     var tsvMaster: SelectItemsManager.TsvMaster {
         switch self {
-        case .jobType: return .jobType
-        case .jobExperimentYear: return .jobExperimentYear
+        case .jobTypeAndJobExperimentYear: return .jobType
+//        case .jobType: return .jobType
+//        case .jobExperimentYear: return .jobExperimentYear
         }
     }
     //Placeholder Text

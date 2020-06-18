@@ -290,10 +290,7 @@ extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
             let returnKeyType: UIReturnKeyType = (item.editableItemKey == editableModel.lastEditableItemKey) ? .done : .next
             print("🌸[\(#function)]🌸[\(#line)]🌸[returnKeyType: \(returnKeyType.rawValue)]🌸[\(item.editItem.itemKey)]")
             let cell: HEditTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditTextTBCell", for: indexPath) as! HEditTextTBCell
-            print(#line, dicValidErrMsg.description)
             let errMsg = dicValidErrMsg[item.editableItemKey]?.joined(separator: "\n") ?? ""
-            print(#line, errMsg)
-            
             cell.initCell(self, item, errMsg: errMsg, returnKeyType)
             cell.dispCell()
             return cell

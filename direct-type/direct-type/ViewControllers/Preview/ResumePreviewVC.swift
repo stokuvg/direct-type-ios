@@ -48,25 +48,29 @@ class ResumePreviewVC: PreviewBaseVC {
         EditableItemH(type: .selectSingle, editItem: EditItemMdlResume.changeCount, val: _detail.changeCount),
         ]))
         //===(3c)直近の経験職種
-        let _jobType: String = "\(_detail.lastJobExperiment.jobType)"
+        let lastJobType = _detail.lastJobExperiment.jobType
+        let lastJobExperimentYear = _detail.lastJobExperiment.jobExperimentYear
+        let bufLastJobExperimentTypeAndYear: String = [lastJobType, lastJobExperimentYear].joined(separator: ":")
         arrData.append(MdlItemH(.lastJobExperimentH3, "", childItems: [
-            EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlResumeLastJobExperiment.jobType, val: _jobType),
-            //[jobTypeで合わせて設定するので、表示はすれども編集では不要]
-            EditableItemH(type: .readonly, editItem: EditItemMdlResumeLastJobExperiment.jobExperimentYear, val: _detail.lastJobExperiment.jobExperimentYear),
+            EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlResumeLastJobExperiment.jobTypeAndJobExperimentYear, val: bufLastJobExperimentTypeAndYear),
         ]))
         //===(3d)その他の経験職種
-        var _jobExperiments: [EditableItemH] = []
-        for jobExperiment in _detail.jobExperiments {
-            _jobExperiments.append(EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlResumeJobExperiments.jobType, val: jobExperiment.jobType))
-            _jobExperiments.append(EditableItemH(type: .readonly, editItem: EditItemMdlResumeJobExperiments.jobExperimentYear, val: jobExperiment.jobExperimentYear))
+        var arrJobExperiments: [String] = []
+        for item in _detail.jobExperiments {
+            let jobType = item.jobType
+            let jobExperimentYear = item.jobExperimentYear
+            let buf: String = [jobType, jobExperimentYear].joined(separator: ":")
+            arrJobExperiments.append(buf)
         }
-        arrData.append(MdlItemH(.jobExperimentsH3, "", childItems: _jobExperiments))
+        let bufJobTypeAndYear: String = arrJobExperiments.joined(separator: "_")
+        arrData.append(MdlItemH(.jobExperimentsH3, "", childItems: [
+            EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlResumeJobExperiments.jobTypeAndJobExperimentYear, val: bufJobTypeAndYear),
+        ]))
         //===(3e)経験業種
-        var _businessTypes: [EditableItemH] = []
-        for businessType in _detail.businessTypes {
-            _businessTypes.append(EditableItemH(type: .selectSpecial, editItem: EditItemMdlResume.businessTypes, val: businessType))
-        }
-        arrData.append(MdlItemH(.businessTypesH3, "", childItems: _businessTypes))
+        let businessType: String = _detail.businessTypes.joined(separator: "_")
+        arrData.append(MdlItemH(.businessTypesH3, "", childItems: [
+            EditableItemH(type: .selectSpecial, editItem: EditItemMdlResume.businessTypes, val: businessType),
+        ]))
         //===(3f)最終学歴
         arrData.append(MdlItemH(.schoolH3, "", childItems: [
             EditableItemH(type: .inputText, editItem: EditItemMdlResumeSchool.schoolName, val: _detail.school.schoolName),
@@ -116,7 +120,12 @@ class ResumePreviewVC: PreviewBaseVC {
 extension ResumePreviewVC {
     private func fetchGetResume() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-        let resume: GetResumeResponseDTO = GetResumeResponseDTO(isEmployed: nil, changeJobCount: nil, workHistory: nil, experienceIndustryId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil)
+//        let resume: GetResumeResponseDTO = GetResumeResponseDTO(isEmployed: nil, changeJobCount: nil, workHistory: nil, experienceIndustryId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil)
+        var workHistory: [WorkHistoryDTO] = []
+        workHistory.append(WorkHistoryDTO(job3Id: "130", experienceYears: "7"))
+        workHistory.append(WorkHistoryDTO(job3Id: "5", experienceYears: "3"))
+        workHistory.append(WorkHistoryDTO(job3Id: "3", experienceYears: "2"))
+        let resume: GetResumeResponseDTO = GetResumeResponseDTO(isEmployed: nil, changeJobCount: nil, workHistory: workHistory, experienceIndustryId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil)
         self.detail = MdlResume(dto: resume)
         self.dispData()
     }
