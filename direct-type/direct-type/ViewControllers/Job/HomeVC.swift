@@ -386,6 +386,7 @@ extension HomeVC: UITableViewDelegate {
         
         let vc = getVC(sbName: "JobOfferDetailVC", vcName: "JobOfferDetailVC") as! JobOfferDetailVC
         vc.jobId = jobId
+        
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
