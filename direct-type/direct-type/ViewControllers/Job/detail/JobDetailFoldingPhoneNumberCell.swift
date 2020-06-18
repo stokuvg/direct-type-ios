@@ -87,13 +87,13 @@ class JobDetailFoldingPhoneNumberCell: BaseTableViewCell {
             text.append("\n")
         }
         
-        if person.count > 0 {
+        if email.count > 0 {
             text.append("E-mail / ")
             text.append(email)
             text.append("\n")
         }
         
-        if email.count > 0 {
+        if person.count > 0 {
             text.append(person)
             text.append("\n")
         }

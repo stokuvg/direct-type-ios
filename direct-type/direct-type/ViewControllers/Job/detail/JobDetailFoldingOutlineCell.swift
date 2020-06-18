@@ -15,6 +15,8 @@ class JobDetailFoldingOutlineCell: BaseTableViewCell {
     
     @IBOutlet weak var descriptionTitle:UILabel!
     @IBOutlet weak var descriptionLabel:UILabel!
+    
+    @IBOutlet weak var spaceViewHeight:NSLayoutConstraint!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -69,6 +71,10 @@ class JobDetailFoldingOutlineCell: BaseTableViewCell {
         
         let representative = data.presidentData
         self.makeRepresentativeView(data: representative)
+        
+        self.makeSpaceViews()
+        
+        Log.selectLog(logLevel: .debug, "self.stackView.subviews:\(self.stackView.subviews)")
     }
     
     // 取引先
@@ -121,31 +127,39 @@ class JobDetailFoldingOutlineCell: BaseTableViewCell {
     // 従業員
     private func makeEmployeesView(data: JobCardDetailCompanyDescriptionEmployeesCount){
         Log.selectLog(logLevel: .debug, "makeEmployeesView start")
+        
+        let _count = data.count
+        let _average = data.averageAge
+        let _genderRatio = data.averageAge
+        let _middleEnter = data.middleEnter
+        if _count?.count == 0 && _average?.count == 0 && _genderRatio?.count == 0 && _middleEnter?.count == 0 {
+            return
+        }
+        
         let title = "従業員"
         Log.selectLog(logLevel: .debug, "data:\(data)")
         
-        var text = data.count
-        
-        let average = data.averageAge!
-        let ratio = data.genderRatio!
-        let halfway = data.middleEnter!
-        
-        if average.count > 0 {
-            text = text! + "\n" + "平均年齢／" + average
+        var text = ""
+        if _count!.count > 0 {
+            text = text + _count!
         }
         
-        if ratio.count > 0 {
-            text = text! + "\n" + "男女比／" + average
+        if _average!.count > 0 {
+            text = text + "\n" + "平均年齢／" + _average!
         }
         
-        if halfway.count > 0 {
-            text = text! + "\n" + "中途入社者の割合／" + halfway
+        if _genderRatio!.count > 0 {
+            text = text + "\n" + "男女比／" + _genderRatio!
+        }
+        
+        if _middleEnter!.count > 0 {
+            text = text + "\n" + "中途入社者の割合／" + _middleEnter!
         }
         
         let view = UINib.init(nibName: "JobDetailFoldingOptionalView", bundle: nil)
         .instantiate(withOwner: self, options: nil)
         .first as! JobDetailFoldingOptionalView
-        view.setup(title: title, item: text!)
+        view.setup(title: title, item: text)
         
         self.stackView.addArrangedSubview(view)
     }
@@ -183,14 +197,19 @@ class JobDetailFoldingOutlineCell: BaseTableViewCell {
         let name = data.presidentName!
         let carrer = data.presidentHistory
         
-        if title.count > 0 && name.count > 0 {
+        if carrer.count > 0 || name.count > 0 {
             let view = UINib.init(nibName: "JobDetailFoldingOptionalView", bundle: nil)
             .instantiate(withOwner: self, options: nil)
             .first as! JobDetailFoldingOptionalView
             
-            var text = name
+            var text = ""
+            if name.count > 0 {
+                text = text + name
+                if carrer.count > 0 {
+                    text = text + "\n"
+                }
+            }
             if carrer.count > 0 {
-                text = text + "\n"
                 text = text + "【略歴】" + "\n"
                 text = text + carrer
             }
@@ -199,5 +218,12 @@ class JobDetailFoldingOutlineCell: BaseTableViewCell {
             
             self.stackView.addArrangedSubview(view)
         }
+    }
+    
+    // スペースの作成
+    private func makeSpaceViews() {
+        Log.selectLog(logLevel: .debug, "makeSpaceViews start")
+        
+        self.spaceViewHeight.constant = 20
     }
 }
