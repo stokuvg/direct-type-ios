@@ -31,6 +31,7 @@ private extension WithDrawalCompleteVC {
     func setLeftBarButton() {
         let leftBarButton = UIButton(type: .system)
         leftBarButton.frame = leftBatButtonFrame
+        // TODO: システムデフォルトの左矢印画像を使用していないため、あとからそれっぽい画像を実装した方がデザイン的には良い
         leftBarButton.setTitle(text: "<", fontType: .font_XL, textColor: .white, alignment: .left)
         leftBarButton.addTarget(self, action: #selector(moveToInitialView), for: .touchUpInside)
         
@@ -40,9 +41,7 @@ private extension WithDrawalCompleteVC {
     
     @objc
     func moveToInitialView() {
-        // TODO: 初期画面へ遷移
-        let _appDelegate = UIApplication.shared.delegate as! AppDelegate
-        _appDelegate.displayInitialInputVC()
+        // TODO: どこへ遷移させるべきか確認して画面遷移実装をする
     }
 }
 
