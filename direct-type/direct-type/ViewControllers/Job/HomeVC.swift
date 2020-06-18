@@ -78,31 +78,12 @@ class HomeVC: TmpNaviTopVC {
         if Constants.DbgAutoPushVC {
             let storyboard = UIStoryboard(name: "Preview", bundle: nil)
             switch Constants.DbgAutoPushVCNum {
-            case 1:
-            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ProfilePreviewVC") as? ProfilePreviewVC{
-                self.navigationController?.pushViewController(nvc, animated: true)
-            }
-            case 2:
-            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ResumePreviewVC") as? ResumePreviewVC{
-                self.navigationController?.pushViewController(nvc, animated: true)
-            }
-            case 3:
-            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_CareerPreviewVC") as? CareerPreviewVC{
-                self.navigationController?.pushViewController(nvc, animated: true)
-            }
-            case 4:
-            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SmoothCareerPreviewVC") as? SmoothCareerPreviewVC{
-                self.navigationController?.pushViewController(nvc, animated: true)
-            }
-            case 5:
-            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_FirstInputPreviewVC") as? FirstInputPreviewVC{
-                self.navigationController?.pushViewController(nvc, animated: true)
-            }
-            case 6:
-            let storyboard2 = UIStoryboard(name: "Career", bundle: nil)
-            if let nvc = storyboard2.instantiateViewController(withIdentifier: "Sbid_CareerListVC") as? CareerListVC{
-                self.navigationController?.pushViewController(nvc, animated: true)
-            }
+            case 1: pushViewController(.profilePreviewH2)
+            case 2: pushViewController(.resumePreviewH3)
+            case 3: pushViewController(.careerPreviewC15)
+            case 4: pushViewController(.smoothCareerPreviewF11)
+            case 5: pushViewController(.firstInputPreviewA)
+            case 6: pushViewController(.careerListC)
             default: break
             }
         }
