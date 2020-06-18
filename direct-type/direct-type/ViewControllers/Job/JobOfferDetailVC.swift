@@ -426,7 +426,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 cell.setup(data: _mdlJobDetail,row:row)
 //                cell.setup(data: itemData)
                 return cell
-            case (4,_):
+            case (4,_): // メモ
                 if coverageMemoOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailFoldingMemoCell", indexPath: indexPath) as! JobDetailFoldingMemoCell
                     
@@ -441,7 +441,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 } else {
                     return UITableViewCell()
                 }
-            case (5, _):
+            case (5, _):    // プロセス
                 if selectionProcessOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailFoldingProcessCell", indexPath: indexPath) as! JobDetailFoldingProcessCell
                     
