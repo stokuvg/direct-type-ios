@@ -62,37 +62,14 @@ extension HPreviewTBCell {
         case .lastJobExperimentA11: fallthrough
         case .lastJobExperimentH3:    //===(3c)直近の経験職種
             if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
-            if _item.childItems[0].curVal == ":" { return "未入力（必須）" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
-            var disp: [String] = []
-            if Constants.DbgDispStatus { disp.append("[\(tmp0)]") }
-            for job in tmp0.split(separator: "_") {
-                let buf = String(job).split(separator: ":")
-                guard buf.count == 2 else { continue }
-                let tmp0 = String(buf[0])
-                let tmp1 = String(buf[1])
-                let buf0: String = SelectItemsManager.getCodeDispSyou(.jobType, code: tmp0)?.disp ?? ""
-                let buf1: String = SelectItemsManager.getCodeDisp(.jobExperimentYear, code: tmp1)?.disp ?? ""
-                let bufExperiment: String = "\(buf0) \(buf1)"
-                disp.append(bufExperiment)
-            }
+            let disp = EditItemTool.dispTypeAndYear(codes: tmp0, .jobType, .jobExperimentYear)
             return disp.count == 0 ? Constants.SelectItemsValEmpty.disp : disp.joined(separator: "\n")
         case .jobExperimentsA14: fallthrough
         case .jobExperimentsH3:       //===(3d)その他の経験職種
             if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
-            var disp: [String] = []
-            if Constants.DbgDispStatus { disp.append("[\(tmp0)]") }
-            for job in tmp0.split(separator: "_") {
-                let buf = String(job).split(separator: ":")
-                guard buf.count == 2 else { continue }
-                let tmp0 = String(buf[0])
-                let tmp1 = String(buf[1])
-                let buf0: String = SelectItemsManager.getCodeDispSyou(.jobType, code: tmp0)?.disp ?? ""
-                let buf1: String = SelectItemsManager.getCodeDisp(.jobExperimentYear, code: tmp1)?.disp ?? ""
-                let bufExperiment: String = "\(buf0) \(buf1)"
-                disp.append(bufExperiment)
-            }
+            let disp = EditItemTool.dispTypeAndYear(codes: tmp0, .jobType, .jobExperimentYear)
             return disp.count == 0 ? Constants.SelectItemsValEmpty.disp : disp.joined(separator: "\n")
         case .businessTypesH3:        //===(3e)経験業種
             if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応

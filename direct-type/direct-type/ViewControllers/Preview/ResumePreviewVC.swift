@@ -49,28 +49,19 @@ class ResumePreviewVC: PreviewBaseVC {
         //===(3c)直近の経験職種
         let lastJobType = _detail.lastJobExperiment.jobType
         let lastJobExperimentYear = _detail.lastJobExperiment.jobExperimentYear
-        var bufLastJobExperimentTypeAndYear: String = [lastJobType, lastJobExperimentYear].joined(separator: ":")
-        if bufLastJobExperimentTypeAndYear == ":" { bufLastJobExperimentTypeAndYear = "" }//実際は空データのため補正する
+        let bufLastJobExperimentTypeAndYear = EditItemTool.convTypeAndYear(types: [lastJobType], years: [lastJobExperimentYear])
         arrData.append(MdlItemH(.lastJobExperimentH3, "", childItems: [
             EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlResumeLastJobExperiment.jobTypeAndJobExperimentYear, val: bufLastJobExperimentTypeAndYear),
         ]))
         //===(3d)その他の経験職種
-        var arrJobExperiments: [String] = []
-        for item in _detail.jobExperiments {
-            let jobType = item.jobType
-            let jobExperimentYear = item.jobExperimentYear
-            let buf: String = [jobType, jobExperimentYear].joined(separator: ":")
-            arrJobExperiments.append(buf)
-        }
-        let bufJobTypeAndYear: String = arrJobExperiments.joined(separator: "_")
-        print("✳️✳️✳️[bufJobTypeAndYear: \(bufJobTypeAndYear)]✳️✳️✳️")
-        
-        
+        let types = _detail.jobExperiments.map { $0.jobType }
+        let years = _detail.jobExperiments.map { $0.jobExperimentYear }
+        let bufJobTypeAndYear = EditItemTool.convTypeAndYear(types: types, years: years)
         arrData.append(MdlItemH(.jobExperimentsH3, "", childItems: [
             EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlResumeJobExperiments.jobTypeAndJobExperimentYear, val: bufJobTypeAndYear),
         ]))
         //===(3e)経験業種
-        let businessType: String = _detail.businessTypes.joined(separator: "_")
+        let businessType: String = _detail.businessTypes.joined(separator: EditItemTool.JoinMultiCodeSeparator)
         arrData.append(MdlItemH(.businessTypesH3, "", childItems: [
             EditableItemH(type: .selectSpecial, editItem: EditItemMdlResume.businessTypes, val: businessType),
         ]))
@@ -93,7 +84,7 @@ class ResumePreviewVC: PreviewBaseVC {
         for qualifications in _detail.qualifications {
             arrCode.append(qualifications)
         }
-        let codes: String = arrCode.joined(separator: "_")
+        let codes: String = arrCode.joined(separator: EditItemTool.JoinMultiCodeSeparator)
         arrData.append(MdlItemH(.qualificationsH3, "", childItems: [
             EditableItemH(type: .selectMulti, editItem: EditItemMdlResume.qualifications, val: codes),
         ]))
@@ -129,7 +120,6 @@ extension ResumePreviewVC {
             workHistory.append(WorkHistoryDTO(job3Id: "3", experienceYears: "2"))
             let resume: GetResumeResponseDTO = GetResumeResponseDTO(isEmployed: nil, changeJobCount: nil, workHistory: workHistory, experienceIndustryId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil)
             self.detail = MdlResume(dto: resume)
-            self.dispData()
         return }//[Dbg: フェッチ割愛]
         //========================================================
         SVProgressHUD.show(withStatus: "履歴書の取得")
@@ -142,9 +132,22 @@ extension ResumePreviewVC {
             switch myErr.code {
             case 404://見つからない場合、空データを適用して画面を表示
                 self.detail = MdlResume()
+                //===[Dbg: ダミーデータ投入]___
+                self.detail?.employmentStatus = "1"
+                self.detail?.changeCount = "1"
+                self.detail?.lastJobExperiment = MdlJobExperiment(jobType: "1", jobExperimentYear: "2")
+                self.detail?.jobExperiments = [
+                MdlJobExperiment(jobType: "130", jobExperimentYear: "7"),
+                MdlJobExperiment(jobType: "5", jobExperimentYear: "3"),
+                MdlJobExperiment(jobType: "3", jobExperimentYear: "2"),
+                ]
+                self.detail?.businessTypes = ["19_31_33"]
+                self.detail?.school = MdlResumeSchool(schoolName: "あいうえおあいうえおかきくけこかきくけこさしすせそさしすせそた", department: "医学部", subject: "", graduationYear: "2015-03")
+                //===[Dbg: ダミーデータ投入]^^^
+                self.dispData()
                 return //エラー表示させないため
             default: break
-}
+            }
             self.showError(myErr)
         }
         .finally {

@@ -29,7 +29,7 @@ extension EditItemMdlResumeSchool {
         case .schoolName:       return ValidInfo(required: true, keta: nil, max: nil, type: .zenkaku)
         case .department:       return ValidInfo(required: true, keta: nil, max: nil, type: .zenkaku)
         case .subject:          return ValidInfo(required: false, keta: nil, max: nil, type: .zenkaku)
-        case .graduationYear:   return ValidInfo(required: false, keta: nil, max: nil, type: .code)
+        case .graduationYear:   return ValidInfo(required: true, keta: nil, max: nil, type: .code)
         }
     }
 }
@@ -48,7 +48,6 @@ extension EditItemMdlResumeLastJobExperiment {
     var valid: ValidInfo {
         switch self {
         case .jobTypeAndJobExperimentYear:
-            print( "ここは？？")
             return ValidInfo(required: true, keta: nil, max: nil, type: .code)
         }
     }

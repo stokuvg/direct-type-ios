@@ -55,7 +55,9 @@ class SubSelectSpecialVC: BaseVC {
                 arrResult.append("\(k)")
             }
         }
-        let bufResult: String = arrResult.joined(separator: "_")
+        let bufResult: String = arrResult.joined(separator: EditItemTool.JoinMultiCodeSeparator)
+        
+        
         actPopupSelect(selectedItemsCode: bufResult)
     }
 

@@ -41,7 +41,7 @@ struct Constants {
     static let DefaultSelectWorkPeriodEndDate: Date = DateHelper.convStrYM2Date("9999-12")//就業中の場合は9999-12とする
     static let DefaultSelectWorkPeriodEndDateJP: String = "就業中"//就業中の場合は9999-12とする
 
-    static let SelectItemsUndefineDate: Date = DateHelper.convStrYMD2Date("2040-01-01")
+    static let SelectItemsUndefineDate: Date = DateHelper.convStrYMD2Date("1800-01-01")
     static let SelectItemsUndefineDateJP: String = "未設定"
     static let SelectItemsUndefineBirthday: Date = DateHelper.convStrYMD2Date("1996-01-01")//誕生日の場合の初期値
     //選択肢などでマスタからの選択だった場合の文言

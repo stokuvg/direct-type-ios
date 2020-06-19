@@ -65,7 +65,7 @@ extension EditableBasicVC {
             var _date: Date {
                 switch editTemp.editItem.itemKey {
                 case EditItemMdlResumeSchool.graduationYear.itemKey:
-                    return Date()
+                    return DateHelper.convStrYM2Date("\(Date().dispYear())-03")
                 case EditItemMdlCareerCardWorkPeriod.startDate.itemKey: fallthrough
                 case EditItemMdlAppSmoothCareerComponyDescriptionWorkPeriod.workStartDate.itemKey:
                     return Constants.DefaultSelectWorkPeriodStartDate

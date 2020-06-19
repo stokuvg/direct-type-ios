@@ -12,6 +12,60 @@ typealias EditableItemCurVal = String
 typealias EditableItemKey = String //EditItemProtocol.itemKey
 typealias ValidationErrMsg = String
 
+class EditItemTool {
+    static let SplitMultiCodeSeparator: String.Element = "_"
+    static let SplitTypeYearSeparator: String.Element = ":"
+    static let JoinMultiCodeSeparator: String = "_"
+    static let JoinTypeYearSeparator: String = ":"
+
+    class func convType(type: [Code]) -> String {
+        return type.joined(separator: JoinMultiCodeSeparator)
+    }
+    class func convTypeAndYear(types: [Code], years: [Code]) -> String {
+        let min: Int = (types.count < years.count) ? types.count : years.count
+        var arrResult: [String] = []
+        for (n, type) in types.enumerated() {
+            if n < min {
+                let year: Code = years[n]
+                //片方が不正データなら登録しない
+                if !type.isEmpty && !year.isEmpty {
+                    arrResult.append([type, year].joined(separator: JoinTypeYearSeparator))
+                }
+            }
+        }
+        return arrResult.joined(separator: JoinMultiCodeSeparator)
+    }
+    class func convTypeAndYear(codes: String) -> ([Code], [Code]) {
+        var arrType: [Code] = []
+        var arrYear: [Code] = []
+        for job in codes.split(separator: SplitMultiCodeSeparator) {
+            let buf = String(job).split(separator: SplitTypeYearSeparator)
+            guard buf.count == 2 else { continue }
+            let tmp0 = String(buf[0])
+            let tmp1 = String(buf[1])
+            arrType.append(tmp0)
+            arrYear.append(tmp1)
+        }
+        return (arrType, arrYear)
+    }
+    class func dispTypeAndYear(codes: String, _ tsvMaain: SelectItemsManager.TsvMaster = .jobType, _ tsvSub: SelectItemsManager.TsvMaster = .jobExperimentYear ) -> [String] {
+        var disp: [String] = []
+        if Constants.DbgDispStatus { disp.append("[\(codes)]") }
+        for code in codes.split(separator: "_") {
+            let buf = String(code).split(separator: SplitTypeYearSeparator)
+            guard buf.count == 2 else { continue }
+            let tmp0 = String(buf[0])
+            let tmp1 = String(buf[1])
+            let buf0: String = SelectItemsManager.getCodeDispSyou(tsvMaain, code: tmp0)?.disp ?? ""
+            let buf1: String = SelectItemsManager.getCodeDisp(tsvSub, code: tmp1)?.disp ?? ""
+            let bufExperiment: String = "[\(buf0) \(buf1)]"
+            disp.append(bufExperiment)
+        }
+        return disp
+    }
+}
+
+
 protocol EditItemProtocol {
     var itemKey: String { get }
     var dispName: String { get }

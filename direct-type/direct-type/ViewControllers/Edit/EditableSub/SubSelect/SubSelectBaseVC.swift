@@ -46,7 +46,7 @@ class SubSelectBaseVC: BaseVC {
         var arrResult: [String] = []
         let arr = dicChange.filter { (cb) -> Bool in cb.value }
         for item in arr { arrResult.append(item.key) }
-        let bufResult: String = arrResult.joined(separator: "_")
+        let bufResult: String = arrResult.joined(separator: EditItemTool.JoinMultiCodeSeparator)
         actPopupSelect(selectedItemsCode: bufResult)
     }
 
