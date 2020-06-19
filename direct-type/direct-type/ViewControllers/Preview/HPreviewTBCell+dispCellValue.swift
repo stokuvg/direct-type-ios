@@ -50,18 +50,19 @@ extension HPreviewTBCell {
         //========================
         //=== [H-3]履歴書編集
         case .employmentH3:           //===(3a)就業状況
-            if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
+            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
             let buf0: String = SelectItemsManager.getCodeDisp(.employmentStatus, code: tmp0)?.disp ?? ""
             return buf0.isEmpty ? Constants.SelectItemsUndefine.disp : "\(buf0)"
         case .changeCountH3:          //===(3b)転職回数
-            if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
+            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
             let buf0: String = SelectItemsManager.getCodeDisp(.changeCount, code: tmp0)?.disp ?? ""
             return "\(buf0)"
         case .lastJobExperimentA11: fallthrough
         case .lastJobExperimentH3:    //===(3c)直近の経験職種
             if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
+            if _item.childItems[0].curVal == ":" { return "未入力（必須）" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
             var disp: [String] = []
             if Constants.DbgDispStatus { disp.append("[\(tmp0)]") }
@@ -117,7 +118,9 @@ extension HPreviewTBCell {
             } else {
                 disp.append(date3.dispYmJP())
             }
-            return disp.count == 0 ? Constants.SelectItemsValEmpty.disp : disp.joined(separator: "\n")
+            print(#line, disp.count, disp.debugDescription)
+            
+            return disp.count == 0 ? "未入力（必須）" : disp.joined(separator: "\n")
         case .skillLanguageH3:        //===(3g)語学
             var tmp0: String = _item.childItems[0].curVal
             var tmp1: String = _item.childItems[1].curVal

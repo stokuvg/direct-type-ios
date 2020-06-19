@@ -66,7 +66,8 @@ class FirstInputPreviewVC: PreviewBaseVC {
         //=== [A-11] 入力（直近経験職種）[A-12] 入力（直近の職種の経験年数）
         let lastJobType = _detail.lastJobExperiment.jobType
         let lastJobExperimentYear = _detail.lastJobExperiment.jobExperimentYear
-        let bufLastJobExperimentTypeAndYear: String = [lastJobType, lastJobExperimentYear].joined(separator: ":")
+        var bufLastJobExperimentTypeAndYear: String = [lastJobType, lastJobExperimentYear].joined(separator: ":")
+        if bufLastJobExperimentTypeAndYear == ":" { bufLastJobExperimentTypeAndYear = "" }//実際は空データのため補正する
         arrData.append(MdlItemH(.lastJobExperimentA11, "", childItems: [
             EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlFirstInputLastJobExperiments.jobTypeAndJobExperimentYear, val: bufLastJobExperimentTypeAndYear),
         ]))
