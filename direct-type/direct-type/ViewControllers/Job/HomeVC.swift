@@ -45,6 +45,7 @@ class HomeVC: TmpNaviTopVC {
         // Do any additional setup after loading the view.
         
         let flag = self.getHomeDisplayFlag()
+        Log.selectLog(logLevel: .debug, "flag:\(flag)")
         if flag {
             self.linesTitle(date: Date().dispHomeDate(), title: "あなたにぴったりの求人")
         } else {
@@ -66,6 +67,7 @@ class HomeVC: TmpNaviTopVC {
 //        self.dataCheckAction()
 
 //        self.getJobList()
+        self.saveHomeDisplayFlag()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,6 +97,12 @@ class HomeVC: TmpNaviTopVC {
         super.viewDidAppear(animated)
         
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.saveHomeDisplayFlag()
     }
     
     override func viewWillLayoutSubviews() {
@@ -188,6 +196,13 @@ class HomeVC: TmpNaviTopVC {
         let ud = UserDefaults.standard
         let homeFlag = ud.bool(forKey: "home")
         return homeFlag
+    }
+    
+    private func saveHomeDisplayFlag() {
+        Log.selectLog(logLevel: .debug, "saveHomeDisplayFlag start")
+        let ud = UserDefaults.standard
+        ud.set(true, forKey: "home")
+        ud.synchronize()
     }
 
     #if false
