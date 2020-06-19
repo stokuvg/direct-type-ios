@@ -16,6 +16,16 @@ enum CardDispType:Int {
     case end    // 最後まで表示
 }
 
+enum SkipSendStatus {
+    case none
+    case sending
+}
+
+enum KeepSendStatus {
+    case none
+    case sending
+}
+
 class HomeVC: TmpNaviTopVC {
     
     @IBOutlet weak var noCardBackView:UIView!
@@ -39,6 +49,9 @@ class HomeVC: TmpNaviTopVC {
     var pageNo:Int = 1
     
     var defaultCellHeight:CGFloat = 550
+    
+    var skipSendStatus:SkipSendStatus = .none
+    var keepSendStatus:KeepSendStatus = .none
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -422,7 +435,7 @@ extension HomeVC: UITableViewDataSource {
                 let cell = tableView.loadCell(cellName: "JobOfferBigCardCell", indexPath: indexPath) as! JobOfferBigCardCell
                 cell.delegate = self
                 cell.tag = row
-                Log.selectLog(logLevel: .debug, "data.keepStatus:\(data.keepStatus)")
+//                Log.selectLog(logLevel: .debug, "data.keepStatus:\(data.keepStatus)")
                 cell.setup(data: data)
                 return cell
             }
@@ -438,7 +451,7 @@ extension HomeVC: UITableViewDataSource {
                 let cell = tableView.loadCell(cellName: "JobOfferBigCardCell", indexPath: indexPath) as! JobOfferBigCardCell
                 cell.delegate = self
                 cell.tag = row
-                Log.selectLog(logLevel: .debug, "data.keepStatus:\(data.keepStatus)")
+//                Log.selectLog(logLevel: .debug, "data.keepStatus:\(data.keepStatus)")
                 cell.setup(data: data)
                 return cell
             }
@@ -475,23 +488,24 @@ extension HomeVC: BaseJobCardCellDelegate {
     func skipAction(tag: Int) {
         Log.selectLog(logLevel: .debug, "skipAction tag:\(tag)")
         
+        if skipSendStatus == .sending { return }
+        
+        self.skipSendStatus = .sending
+        
         let row = tag
         
         let jobCard = dispJobCards.jobCards[row]
         let jobId = jobCard.jobCardCode
+        
+        Log.selectLog(logLevel: .debug, "delete jobid:\(jobId)")
+        
+        var successFlag:Bool = false
         ApiManager.sendJobSkip(id: jobId)
             .done { result in
             Log.selectLog(logLevel: .debug, "skip send success")
                 Log.selectLog(logLevel: .debug, "見送り成功")
-                // TODO:通信処理
                 
-                //            return (jobCardsCount + 1)
-                self.dispJobCards.jobCards.remove(at: row)
-                
-                let deleteIndex = IndexPath(row: row, section: 0)
-                
-                // TODO:スピードを変えるのは難しい？
-                self.homeTableView.deleteRows(at: [deleteIndex], with: .automatic)
+                successFlag = true
         }.catch{ (error) in
             Log.selectLog(logLevel: .debug, "skip send error:\(error)")
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -511,11 +525,23 @@ extension HomeVC: BaseJobCardCellDelegate {
             self.showError(error)
         }.finally {
             Log.selectLog(logLevel: .debug, "skip send finally")
+            if successFlag {
+                successFlag = false
+                self.dispJobCards.jobCards.remove(at: row)
+                let deleteIndex = IndexPath(row: row, section: 0)
+                
+                // TODO:スピードを変えるのは難しい？
+                self.homeTableView.deleteRows(at: [deleteIndex], with: .automatic)
+            }
+            self.skipSendStatus = .none
         }
     }
     
     func keepAction(tag: Int) {
         Log.selectLog(logLevel: .debug, "keepAction tag:\(tag)")
+        if self.keepSendStatus == .sending { return }
+        
+        self.keepSendStatus = .sending
         // TODO:通信処理
         let row = tag
         let jobCard = dispJobCards.jobCards[row]
@@ -540,6 +566,7 @@ extension HomeVC: BaseJobCardCellDelegate {
                 self.dispJobCards.jobCards[tag] = jobCard
                 let updateIndex = IndexPath.init(row: tag, section: 0)
                 self.homeTableView.reloadRows(at: [updateIndex], with: .automatic)
+                self.keepSendStatus = .none
             }
         } else {
             Log.selectLog(logLevel: .debug, "キープ削除:jobId:\(jobId)")
@@ -556,9 +583,9 @@ extension HomeVC: BaseJobCardCellDelegate {
                 self.showError(myErr)
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep delete finally")
+                self.keepSendStatus = .none
             }
         }
     }
-    
     
 }

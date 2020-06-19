@@ -29,8 +29,6 @@ class JobOfferBigCardCell: BaseJobCardCell {
         // Initialization code
         self.backgroundColor = UIColor.init(colorType: .color_base)
         
-        stackView.layer.cornerRadius = 15
-        
         // サムネイル
         thumnailImageView.layer.cornerRadius = 15
         thumnailImageView.layer.maskedCorners = [.layerMinXMinYCorner,.layerMaxXMinYCorner]
