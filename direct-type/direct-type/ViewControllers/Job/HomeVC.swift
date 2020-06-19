@@ -47,6 +47,7 @@ class HomeVC: TmpNaviTopVC {
         // Do any additional setup after loading the view.
         
         let flag = self.getHomeDisplayFlag()
+        Log.selectLog(logLevel: .debug, "flag:\(flag)")
         if flag {
             self.linesTitle(date: Date().dispHomeDate(), title: "あなたにぴったりの求人")
         } else {
@@ -68,6 +69,7 @@ class HomeVC: TmpNaviTopVC {
 //        self.dataCheckAction()
 
 //        self.getJobList()
+        self.saveHomeDisplayFlag()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,33 +80,13 @@ class HomeVC: TmpNaviTopVC {
         
         //[Dbg]___
         if Constants.DbgAutoPushVC {
-            let storyboard = UIStoryboard(name: "Preview", bundle: nil)
             switch Constants.DbgAutoPushVCNum {
-            case 1:
-            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ProfilePreviewVC") as? ProfilePreviewVC{
-                self.navigationController?.pushViewController(nvc, animated: true)
-            }
-            case 2:
-            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ResumePreviewVC") as? ResumePreviewVC{
-                self.navigationController?.pushViewController(nvc, animated: true)
-            }
-            case 3:
-            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_CareerPreviewVC") as? CareerPreviewVC{
-                self.navigationController?.pushViewController(nvc, animated: true)
-            }
-            case 4:
-            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SmoothCareerPreviewVC") as? SmoothCareerPreviewVC{
-                self.navigationController?.pushViewController(nvc, animated: true)
-            }
-            case 5:
-            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_FirstInputPreviewVC") as? FirstInputPreviewVC{
-                self.navigationController?.pushViewController(nvc, animated: true)
-            }
-            case 6:
-            let storyboard2 = UIStoryboard(name: "Career", bundle: nil)
-            if let nvc = storyboard2.instantiateViewController(withIdentifier: "Sbid_CareerListVC") as? CareerListVC{
-                self.navigationController?.pushViewController(nvc, animated: true)
-            }
+            case 1: pushViewController(.profilePreviewH2)
+            case 2: pushViewController(.resumePreviewH3)
+            case 3: pushViewController(.careerPreviewC15)
+            case 4: pushViewController(.smoothCareerPreviewF11)
+            case 5: pushViewController(.firstInputPreviewA)
+            case 6: pushViewController(.careerListC)
             default: break
             }
         }
@@ -117,6 +99,12 @@ class HomeVC: TmpNaviTopVC {
         super.viewDidAppear(animated)
         
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.saveHomeDisplayFlag()
     }
     
     override func viewWillLayoutSubviews() {
@@ -210,6 +198,13 @@ class HomeVC: TmpNaviTopVC {
         let ud = UserDefaults.standard
         let homeFlag = ud.bool(forKey: "home")
         return homeFlag
+    }
+    
+    private func saveHomeDisplayFlag() {
+        Log.selectLog(logLevel: .debug, "saveHomeDisplayFlag start")
+        let ud = UserDefaults.standard
+        ud.set(true, forKey: "home")
+        ud.synchronize()
     }
 
     #if false
@@ -388,6 +383,9 @@ extension HomeVC: UITableViewDelegate {
         
         let vc = getVC(sbName: "JobOfferDetailVC", vcName: "JobOfferDetailVC") as! JobOfferDetailVC
         vc.jobId = jobId
+        
+        vc.hidesBottomBarWhenPushed = true
+        
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

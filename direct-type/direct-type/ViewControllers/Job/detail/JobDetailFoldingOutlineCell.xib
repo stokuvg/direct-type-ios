@@ -60,12 +60,22 @@
                             </view>
                         </subviews>
                     </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SEt-jo-B9w">
+                        <rect key="frame" x="15" y="100" width="290" height="0.0"/>
+                        <color key="backgroundColor" name="color-white"/>
+                        <constraints>
+                            <constraint firstAttribute="height" id="kQp-Pw-TsP"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="aSP-QX-4WR" secondAttribute="bottom" id="F7I-4a-p6R"/>
-                    <constraint firstItem="aSP-QX-4WR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="U6a-p4-HEI"/>
-                    <constraint firstItem="aSP-QX-4WR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="XDk-BQ-mzC"/>
-                    <constraint firstAttribute="trailing" secondItem="aSP-QX-4WR" secondAttribute="trailing" constant="15" id="sPL-8q-eJP"/>
+                    <constraint firstAttribute="trailing" secondItem="SEt-jo-B9w" secondAttribute="trailing" constant="15" id="9LJ-hd-8J6"/>
+                    <constraint firstItem="aSP-QX-4WR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="G15-iA-N2j"/>
+                    <constraint firstItem="aSP-QX-4WR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Nbh-yh-c4Q"/>
+                    <constraint firstAttribute="bottom" secondItem="SEt-jo-B9w" secondAttribute="bottom" id="RHu-LT-klD"/>
+                    <constraint firstItem="SEt-jo-B9w" firstAttribute="top" secondItem="aSP-QX-4WR" secondAttribute="bottom" id="ZUR-ed-SYe"/>
+                    <constraint firstItem="SEt-jo-B9w" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="dfq-zX-eKv"/>
+                    <constraint firstAttribute="trailing" secondItem="aSP-QX-4WR" secondAttribute="trailing" constant="15" id="yxq-vu-qAP"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" name="color-base"/>
@@ -73,6 +83,7 @@
             <connections>
                 <outlet property="descriptionLabel" destination="VXs-ik-A4N" id="78D-eJ-9fO"/>
                 <outlet property="descriptionTitle" destination="2dL-pe-eaX" id="t7l-sO-qpk"/>
+                <outlet property="spaceViewHeight" destination="kQp-Pw-TsP" id="nXR-AO-bKA"/>
                 <outlet property="stackView" destination="aSP-QX-4WR" id="KgL-Qd-5F3"/>
             </connections>
             <point key="canvasLocation" x="132" y="153"/>

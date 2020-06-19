@@ -61,9 +61,10 @@ extension HPreviewTBCell {
             return "\(buf0)"
         case .lastJobExperimentA11: fallthrough
         case .lastJobExperimentH3:    //===(3c)直近の経験職種
-            if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
+            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
             var disp: [String] = []
+            if Constants.DbgDispStatus { disp.append("[\(tmp0)]") }
             for job in tmp0.split(separator: "_") {
                 let buf = String(job).split(separator: ":")
                 guard buf.count == 2 else { continue }
@@ -80,6 +81,7 @@ extension HPreviewTBCell {
             if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
             var disp: [String] = []
+            if Constants.DbgDispStatus { disp.append("[\(tmp0)]") }
             for job in tmp0.split(separator: "_") {
                 let buf = String(job).split(separator: ":")
                 guard buf.count == 2 else { continue }
@@ -93,9 +95,11 @@ extension HPreviewTBCell {
             return disp.count == 0 ? Constants.SelectItemsValEmpty.disp : disp.joined(separator: "\n")
         case .businessTypesH3:        //===(3e)経験業種
             if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
+            let tmp0: String = _item.childItems[0].curVal
             var disp: [String] = []
-            for businessType in _item.childItems {
-                let tmp0: String = businessType.curVal
+            if Constants.DbgDispStatus { disp.append("[\(tmp0)]") }
+            for job in tmp0.split(separator: "_") {
+                let tmp0 = String(job)
                 let buf0: String = SelectItemsManager.getCodeDispSyou(.businessType, code: tmp0)?.disp ?? ""
                 disp.append(buf0)
             }

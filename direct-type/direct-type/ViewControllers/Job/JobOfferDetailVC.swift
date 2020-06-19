@@ -9,6 +9,7 @@
 import UIKit
 import SwaggerClient
 import SVProgressHUD
+import PromiseKit
 
 class JobOfferDetailVC: TmpBasicVC {
     
@@ -81,6 +82,8 @@ class JobOfferDetailVC: TmpBasicVC {
     var selectionProcessOpenFlag:Bool = false
     var phoneNumberOpenFlag:Bool = false
     var companyOutlineOpenFlag:Bool = false
+    
+    var firstOpenFlag:Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -204,6 +207,8 @@ class JobOfferDetailVC: TmpBasicVC {
         }
         .finally {
             SVProgressHUD.dismiss()
+            
+            self.recommendAction()
 
             self.tableViewSettingAction()
         }
@@ -217,6 +222,19 @@ class JobOfferDetailVC: TmpBasicVC {
             self.detailTableView.delegate = self
             self.detailTableView.dataSource = self
             self.detailTableView.reloadData()
+        }
+    }
+    
+    private func recommendAction() {
+        RecommendManager.fetchRecommend(type: .ap341, jobID: self.jobId)
+        .done { result in
+            Log.selectLog(logLevel: .debug, "求人詳細のレコメンド 成功:\(result)")
+        }
+        .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            Log.selectLog(logLevel: .debug, "求人詳細のレコメンド エラー:\(myErr.debugDisp)")
+        }
+        .finally {
         }
     }
 }
@@ -388,11 +406,13 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 cell.setup(data: _mdlJobDetail)
                 return cell
             case (0,1):
+                // 求人画像
                 let cell = tableView.loadCell(cellName: "JobDetailImageCell", indexPath: indexPath) as! JobDetailImageCell
                 cell.setCellWidth(width: self.detailTableView.frame.size.width)
                 cell.setup(data: _mdlJobDetail)
                 return cell
             case (1,0):
+                //
                 if articleOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailArticleCell", indexPath: indexPath) as! JobDetailArticleCell
                     cell.delegate = self
@@ -408,25 +428,28 @@ extension JobOfferDetailVC: UITableViewDataSource {
                     return UITableViewCell()
                 }
             case (2,0):
+                // 求人PRコード
                 let cell = tableView.loadCell(cellName: "JobDetailPRCodeTagsCell", indexPath: indexPath) as! JobDetailPRCodeTagsCell
                 let datas = _mdlJobDetail.prCodes
 //                let datas = dummyData["tags"] as! [String]
                 cell.setup(prcodeNos: datas)
                 return cell
             case (2,1):
+                // 給与サンプル
                 let cell = tableView.loadCell(cellName: "JobDetailSalaryExampleCell", indexPath: indexPath) as! JobDetailSalaryExampleCell
                 let examples = _mdlJobDetail.salarySample
 //                let examples = dummyData["salary_example"] as! String
                 cell.setup(data: examples)
                 return cell
             case (3,_):
+                // 仕事内容
 //                let guideBookData = dummyData["guidebook"] as! [[String:Any]]
 //                let itemData = guideBookData[row]
                 let cell = tableView.loadCell(cellName: "JobDetailItemCell", indexPath: indexPath) as! JobDetailItemCell
                 cell.setup(data: _mdlJobDetail,row:row)
 //                cell.setup(data: itemData)
                 return cell
-            case (4,_):
+            case (4,_): // メモ
                 if coverageMemoOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailFoldingMemoCell", indexPath: indexPath) as! JobDetailFoldingMemoCell
                     
@@ -441,7 +464,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 } else {
                     return UITableViewCell()
                 }
-            case (5, _):
+            case (5, _):    // プロセス
                 if selectionProcessOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailFoldingProcessCell", indexPath: indexPath) as! JobDetailFoldingProcessCell
                     
@@ -452,6 +475,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                     return UITableViewCell()
                 }
             case (6, _):
+                // 連絡先
                 if phoneNumberOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailFoldingPhoneNumberCell", indexPath: indexPath) as! JobDetailFoldingPhoneNumberCell
                     
@@ -461,7 +485,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 } else {
                     return UITableViewCell()
                 }
-        case (7, _):    // 会社概要
+            case (7, _):    // 会社概要
                 if companyOutlineOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailFoldingOutlineCell", indexPath: indexPath) as! JobDetailFoldingOutlineCell
                     
@@ -576,12 +600,12 @@ extension JobOfferDetailVC: JobDetailArticleCellDelegate {
 // 折りたたみヘッダー
 extension JobOfferDetailVC: FoldingHeaderViewDelegate {
     func foldOpenCloseAction(tag: Int) {
-        
 //        let foldingDatas = dummyData["folding"] as! [String: Any]
         
 //        let section = foldingDatas.count + tag
         let section = 4 + tag
         let index = IndexSet(arrayLiteral: section)
+        let _allIndex = IndexSet(arrayLiteral: 4,5,6,7)
         switch tag {
         case 0:
             coverageMemoOpenFlag = !coverageMemoOpenFlag
@@ -594,7 +618,14 @@ extension JobOfferDetailVC: FoldingHeaderViewDelegate {
         default:
             break
         }
-        self.detailTableView.reloadSections(index, with: .automatic)
+        
+//        self.detailTableView.reloadSections(indexes, with: .automatic)
+        if firstOpenFlag == false {
+            firstOpenFlag = true
+            self.detailTableView.reloadSections(_allIndex, with: .automatic)
+        } else {
+            self.detailTableView.reloadSections(index, with: .automatic)
+        }
     }
 }
 

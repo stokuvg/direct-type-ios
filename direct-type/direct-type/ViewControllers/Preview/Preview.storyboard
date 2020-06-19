@@ -82,6 +82,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wY6-Xn-oPj"/>
                     </view>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btnCommit" destination="WdS-GT-DZi" id="KUr-Sm-qyb"/>
                         <outlet property="tableVW" destination="NtB-K7-xq7" id="a5r-uI-Vwr"/>
@@ -152,6 +153,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jua-Bh-BvL"/>
                     </view>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btnCommit" destination="duo-y1-nnL" id="F1g-uP-Xgd"/>
                         <outlet property="tableVW" destination="vWK-NK-w9m" id="NC7-xl-Amp"/>
@@ -222,6 +224,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uRq-f5-Xiz"/>
                     </view>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btnCommit" destination="qFp-6y-imQ" id="Wh4-lW-bDT"/>
                         <outlet property="tableVW" destination="SB1-pN-RBJ" id="2D5-12-ER0"/>
@@ -292,6 +295,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="k2f-21-TUT"/>
                     </view>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btnCommit" destination="WjQ-Vu-mZO" id="ysd-IL-puz"/>
                         <outlet property="tableVW" destination="gQj-aF-cbF" id="XT4-NI-Dgz"/>
@@ -362,6 +366,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lRo-wu-wDM"/>
                     </view>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btnCommit" destination="cDv-Jx-kad" id="Civ-SG-nIr"/>
                         <outlet property="tableVW" destination="Vgx-Wx-eYU" id="TDv-6r-z8m"/>

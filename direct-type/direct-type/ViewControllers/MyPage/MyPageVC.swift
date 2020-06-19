@@ -231,15 +231,9 @@ extension MyPageVC: BasePercentageCompletionCellDelegate {
     func completionEditAction(tagNo: Int) {
         switch tagNo {
             case 1:
-                let storyboard = UIStoryboard(name: "Preview", bundle: nil)
-                if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ProfilePreviewVC") as? ProfilePreviewVC{
-                    self.navigationController?.pushViewController(nvc, animated: true)
-                }
+                self.pushViewController(.profilePreviewH2)
             case 2:
-                let storyboard = UIStoryboard(name: "Preview", bundle: nil)
-                if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ResumePreviewVC") as? ResumePreviewVC{
-                    self.navigationController?.pushViewController(nvc, animated: true)
-                }
+                self.pushViewController(.resumePreviewH3)
             default:
                 break
         }
@@ -264,36 +258,30 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
         let storyboard = UIStoryboard(name: "Preview", bundle: nil)
         let alert: UIAlertController = UIAlertController(title: "[Dbg: 開発)中]", message: "遷移先画面の選択", preferredStyle:  .alert)
         let action01: UIAlertAction = UIAlertAction(title: "[H-2] 個人プロフィール確認", style: .default, handler: { action in
-            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ProfilePreviewVC") as? ProfilePreviewVC{
-                self.navigationController?.pushViewController(nvc, animated: true)
-            }
+            self.pushViewController(.profilePreviewH2)
         })
         let action02: UIAlertAction = UIAlertAction(title: "[H-3] 履歴書確認", style: .default, handler: { action in
-            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ResumePreviewVC") as? ResumePreviewVC{
-                self.navigationController?.pushViewController(nvc, animated: true)
-            }
+            self.pushViewController(.resumePreviewH3)
         })
         let action03: UIAlertAction = UIAlertAction(title: "[C-15] 職務経歴書確認", style: .default, handler: { action in
-            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_CareerPreviewVC") as? CareerPreviewVC{
-                self.navigationController?.pushViewController(nvc, animated: true)
-            }
+            self.pushViewController(.careerPreviewC15)
         })
         let action04: UIAlertAction = UIAlertAction(title: "[F-11] サクサク職歴", style: .default, handler: { action in
-            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SmoothCareerPreviewVC") as? SmoothCareerPreviewVC{
-                self.navigationController?.pushViewController(nvc, animated: true)
-            }
+            self.pushViewController(.smoothCareerPreviewF11)
         })
         let action05: UIAlertAction = UIAlertAction(title: "A[系統] 初期入力", style: .default, handler: { action in
-            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_FirstInputPreviewVC") as? FirstInputPreviewVC{
-                self.navigationController?.pushViewController(nvc, animated: true)
-            }
+            self.pushViewController(.firstInputPreviewA)
         })
         let action06: UIAlertAction = UIAlertAction(title: "C[仮] 職歴一覧", style: .default, handler: { action in
-            let storyboard2 = UIStoryboard(name: "Career", bundle: nil)
-            if let nvc = storyboard2.instantiateViewController(withIdentifier: "Sbid_CareerListVC") as? CareerListVC{
-                self.navigationController?.pushViewController(nvc, animated: true)
-            }
+            self.pushViewController(.careerListC)
         })
+        alert.addAction(action01)
+        alert.addAction(action02)
+        alert.addAction(action06)
+        //alert.addAction(action03)
+        alert.addAction(action04)
+        alert.addAction(action05)
+
         let action07: UIAlertAction = UIAlertAction(title: "レコメンド[ap341]", style: .default, handler: { action in
             RecommendManager.fetchRecommend(type: .ap341, jobID: "123456789")
             .done { result in
@@ -309,13 +297,8 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
 
         let cancel: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
         })
-        alert.addAction(action01)
-        alert.addAction(action02)
-        alert.addAction(action06)
-        //alert.addAction(action03)
-        alert.addAction(action04)
-        alert.addAction(action05)
         alert.addAction(action07)
+
         alert.addAction(cancel)
         DispatchQueue.main.async {
             self.present(alert, animated: true, completion: nil)

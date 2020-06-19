@@ -113,6 +113,7 @@ extension SubSelectSpecialVC {
             dispData()
         }
         self.view.endEditing(false) //forceフラグはどこに効いてくるのか？
+        selectAndCloseIfSingle()//===選択と同時に閉じて良いかのチェック
     }
     @objc func actPickerCancelButton(_ sender: IKBarButtonItem) {
         guard let picker = sender.parentPicker as? IKPickerView else { return }

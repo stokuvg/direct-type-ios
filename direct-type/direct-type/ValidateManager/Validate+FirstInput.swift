@@ -42,7 +42,7 @@ extension EditItemMdlFirstInput {
 }
 extension EditItemMdlFirstInputJobExperiments {
     var valid: ValidInfo {
-        return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
+        return ValidInfo(required: false, keta: nil, max: nil, type: .undefine)
     }
 }
 extension EditItemMdlFirstInputLastJobExperiments {

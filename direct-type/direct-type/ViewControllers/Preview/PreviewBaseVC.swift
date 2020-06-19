@@ -49,7 +49,7 @@ class PreviewBaseVC: TmpBasicVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         btnCommit.setTitle(text: "完了する", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
 
@@ -69,9 +69,12 @@ class PreviewBaseVC: TmpBasicVC {
         super.viewWillAppear(animated)
         dispData()
         chkButtonEnable()//ボタン死活チェック
+//        self.tabBarController?.tabBar.isHidden = true
+//        self.tabBarController?.hidesBottomBarWhenPushed = true
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+//        self.tabBarController?.tabBar.isHidden = false
     }
     func chkButtonEnable() {
 //        btnCommit.isEnabled = true ; return //!!!
@@ -162,17 +165,6 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
         //================================================
         switch item.type {
         case .lastJobExperimentH3, .jobExperimentsH3, .businessTypesH3, .lastJobExperimentA11, .jobExperimentsA14:
-//            let storyboard = UIStoryboard(name: "Edit", bundle: nil)
-//            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubEditSpecialVC") as? SubEditSpecialVC{
-//                var arrErrMsg: [EditableItemKey: [ValidationErrMsg]] = [:] //子画面に引き渡すエラー
-//                arrErrMsg = dicValidErrMsg //抜粋せずに、まるっと渡しておく
-//                nvc.initData(self, item, arrErrMsg)
-//                //遷移アニメーション関連
-//                nvc.modalTransitionStyle = .coverVertical
-//                self.present(nvc, animated: true) {
-//                }
-//            }
-            print("\t💙💙💙\(item.debugDisp)💙💙💙")
             let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
             if let _item = item.childItems.first {
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSpecialVC") as? SubSelectSpecialVC{
@@ -232,7 +224,7 @@ extension PreviewBaseVC: nameEditableTableBasicDelegate {
 
 extension PreviewBaseVC: SubSelectFeedbackDelegate {
     func changedSelect(editItem: EditableItemH, codes: String) {
-        print("\t🐼1🐼[\(editItem.debugDisp)]🐼FBです🐼Single/Multi🐼")//編集中の値の保持（と描画）
+        print("\t🐼1🐼[\(editItem.debugDisp)]🐼FBです🐼Single/Multi/Special🐼")//編集中の値の保持（と描画）
         editableModel.changeTempItem(editItem, text: codes)
         chkButtonEnable()//ボタン死活チェック
         tableVW.reloadData()
