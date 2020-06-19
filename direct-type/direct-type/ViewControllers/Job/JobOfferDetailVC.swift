@@ -82,6 +82,8 @@ class JobOfferDetailVC: TmpBasicVC {
     var selectionProcessOpenFlag:Bool = false
     var phoneNumberOpenFlag:Bool = false
     var companyOutlineOpenFlag:Bool = false
+    
+    var firstOpenFlag:Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -598,12 +600,12 @@ extension JobOfferDetailVC: JobDetailArticleCellDelegate {
 // 折りたたみヘッダー
 extension JobOfferDetailVC: FoldingHeaderViewDelegate {
     func foldOpenCloseAction(tag: Int) {
-        
 //        let foldingDatas = dummyData["folding"] as! [String: Any]
         
 //        let section = foldingDatas.count + tag
         let section = 4 + tag
         let index = IndexSet(arrayLiteral: section)
+        let _allIndex = IndexSet(arrayLiteral: 4,5,6,7)
         switch tag {
         case 0:
             coverageMemoOpenFlag = !coverageMemoOpenFlag
@@ -616,7 +618,14 @@ extension JobOfferDetailVC: FoldingHeaderViewDelegate {
         default:
             break
         }
-        self.detailTableView.reloadSections(index, with: .automatic)
+        
+//        self.detailTableView.reloadSections(indexes, with: .automatic)
+        if firstOpenFlag == false {
+            firstOpenFlag = true
+            self.detailTableView.reloadSections(_allIndex, with: .automatic)
+        } else {
+            self.detailTableView.reloadSections(index, with: .automatic)
+        }
     }
 }
 
