@@ -60,28 +60,12 @@ struct EditableItemH {
             return "\(buf0)"
             
         case .selectSpecial:
-            let tmp0: String = _val
-            var arr0: [String] = []
-            for code in tmp0.split(separator: "_").sorted() { //コード順ソートしておく
-                let buf: String = SelectItemsManager.getCodeDispSyou(self.editItem.tsvMaster, code: String(code))?.disp ?? Constants.SelectItemsUndefine.disp
-                arr0.append(buf)
-            }
-            let buf0: String = arr0.joined(separator: " ")
-            return "\(buf0)"
-            
+            return "selectSpecial表示確認: [\(_val)]"
+
         case .selectSpecialYear:
-            var disp: [String] = []
-            for job in _val.split(separator: "_") {
-                let buf = String(job).split(separator: ":")
-                guard buf.count == 2 else { continue }
-                let tmp0 = String(buf[0])
-                let tmp1 = String(buf[1])
-                let buf0: String = SelectItemsManager.getCodeDispSyou(.jobType, code: tmp0)?.disp ?? ""
-                let buf1: String = SelectItemsManager.getCodeDisp(.jobExperimentYear, code: tmp1)?.disp ?? ""
-                let bufExperiment: String = "[\(buf0) \(buf1)]"
-                disp.append(bufExperiment)
-            }
-            return disp.count == 0 ? Constants.SelectItemsValEmpty.disp : disp.joined(separator: "\n")
+            return "selectSpecialYear表示確認: [\(_val)]"
+//            let disp: [String] = EditItemTool.dispTypeAndYear(codes: _val, .jobType, .jobExperimentYear)
+//            return disp.count == 0 ? Constants.SelectItemsValEmpty.disp : disp.joined(separator: "\n")
         }
     }
     var debugDisp: String {

@@ -69,15 +69,12 @@ class PreviewBaseVC: TmpBasicVC {
         super.viewWillAppear(animated)
         dispData()
         chkButtonEnable()//ボタン死活チェック
-//        self.tabBarController?.tabBar.isHidden = true
-//        self.tabBarController?.hidesBottomBarWhenPushed = true
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-//        self.tabBarController?.tabBar.isHidden = false
     }
     func chkButtonEnable() {
-//        btnCommit.isEnabled = true ; return //!!!
+        btnCommit.isEnabled = true ; return //!!!
         //=== 変更なければフェッチ不要
         if editableModel.editTempCD.count > 0 {
             btnCommit.isEnabled = true

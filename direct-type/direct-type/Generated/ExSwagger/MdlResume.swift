@@ -35,6 +35,19 @@ class MdlResume: Codable {
         self.qualifications = qualifications
         self.ownPr = ownPr
     }
+    //===空モデルを生成する
+    convenience init() {
+        self.init(
+            employmentStatus: "",
+            changeCount: "",
+            lastJobExperiment: MdlJobExperiment(jobType: "", jobExperimentYear: ""),
+            jobExperiments: [],
+            businessTypes: [],
+            school: MdlResumeSchool(schoolName: "", department: "", subject: "", graduationYear: ""),
+            skillLanguage: MdlResumeSkillLanguage(languageToeicScore: "", languageToeflScore: "", languageEnglish: "", languageStudySkill: ""),
+            qualifications: [],
+            ownPr: "" )
+    }
     //ApiモデルをAppモデルに変換して保持させる
     convenience init(dto: GetResumeResponseDTO) {
         let _employment = (dto.isEmployed ?? false) ? "1" : "2"//!!!employmentStatus

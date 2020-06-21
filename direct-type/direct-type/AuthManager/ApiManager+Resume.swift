@@ -1,81 +1,73 @@
-////
-////  ApiManager+Resume.swift
-////  direct-type
-////
-////  Created by ms-mb014 on 2020/06/05.
-////  Copyright © 2020 ms-mb015. All rights reserved.
-////
 //
-//import PromiseKit
-//import TudApi
+//  ApiManager+Resume.swift
+//  direct-type
 //
+//  Created by ms-mb014 on 2020/06/05.
+//  Copyright © 2020 ms-mb015. All rights reserved.
+//
+
+import PromiseKit
+import TudApi
+
+//================================================================
+//=== 履歴書取得 ===
+extension ApiManager {
+    class func getResume(_ param: Void, isRetry: Bool = true) -> Promise<MdlResume> {
+        if isRetry {
+            return firstly { () -> Promise<MdlResume> in
+                retry(args: param, task: getResumeFetch) { (error) -> Bool in return true }
+            }
+        } else {
+            return getResumeFetch(param: param)
+        }
+    }
+    private class func getResumeFetch(param: Void) -> Promise<MdlResume> {
+        let (promise, resolver) = Promise<MdlResume>.pending()
+        AuthManager.needAuth(true)
+        ResumeAPI.resumeControllerGet()
+        .done { result in
+            print(result)
+            let hoge = MdlResume(dto: result)
+            resolver.fulfill(MdlResume(dto: result)) //変換しておく
+        }
+        .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
+            resolver.reject(error)
+        }
+        .finally {
+        }
+        return promise
+    }
+}
 ////================================================================
-////=== プロフィール取得 ===
-//extension ApiManager {
-//    class func getProfile(_ param: Void, isRetry: Bool = true) -> Promise<MdlProfile> {
-//        if isRetry {
-//            return firstly { () -> Promise<MdlProfile> in
-//                retry(args: param, task: getProfileFetch) { (error) -> Bool in return true }
-//            }
-//        } else {
-//            return getProfileFetch(param: param)
-//        }
-//    }
-//    private class func getProfileFetch(param: Void) -> Promise<MdlProfile> {
-//        let (promise, resolver) = Promise<MdlProfile>.pending()
-//        AuthManager.needAuth(true)
-//        ProfileAPI.profileControllerGet()
-//        .done { result in
-//            resolver.fulfill(MdlProfile(dto: result)) //変換しておく
-//        }
-//        .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
-//            resolver.reject(error)
-//        }
-//        .finally {
-//        }
-//        return promise
-//    }
-//}
-////================================================================
-////=== プロフィール更新 ===
-//extension UpdateProfileRequestDTO {
+////=== 履歴書更新 ===
+//extension UpdateResumeRequestDTO {
 //    init() {
-//        self.init(familyName: nil, firstName: nil, familyNameKana: nil, firstNameKana: nil, birthday: nil, genderId: nil, zipCode: nil, prefectureId: nil, city: nil, town: nil, email: nil)
+//        self.init(isEmployed: nil, changeJobCount: nil, workHistory: nil, experienceIndustryId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil)
 //    }
 //    init(_ editTempCD: [EditableItemKey: EditableItemCurVal]) {
 //        self.init()
 //        for (key, val) in editTempCD {
 //            switch key {
-//            case EditItemMdlProfile.familyName.itemKey: self.familyName = val
-//            case EditItemMdlProfile.firstName.itemKey: self.firstName = val
-//            case EditItemMdlProfile.familyNameKana.itemKey: self.familyNameKana = val
-//            case EditItemMdlProfile.firstNameKana.itemKey: self.firstNameKana = val
-//            case EditItemMdlProfile.birthday.itemKey: self.birthday = val
-//            case EditItemMdlProfile.gender.itemKey: self.genderId = val
-//            case EditItemMdlProfile.zipCode.itemKey: self.zipCode = val
-//            case EditItemMdlProfile.prefecture.itemKey: self.prefectureId = val
-//            case EditItemMdlProfile.address1.itemKey: self.city = val
-//            case EditItemMdlProfile.address2.itemKey: self.town = val
-//            case EditItemMdlProfile.mailAddress.itemKey: self.email = val
+//            case EditItemMdlResume.employmentStatus.itemKey:
 //            default: break
 //            }
 //        }
 //    }
 //}
 //extension ApiManager {
-//    class func updateProfile(_ param: UpdateProfileRequestDTO, isRetry: Bool = true) -> Promise<Void> {
+//    class func updateResume(_ param: UpdateResumeRequestDTO, isRetry: Bool = true) -> Promise<Void> {
 //        if isRetry {
 //            return firstly { () -> Promise<Void> in
-//                retry(args: param, task: updateProfileFetch) { (error) -> Bool in return true }
+//                retry(args: param, task: updateResumeFetch) { (error) -> Bool in return true }
 //            }
 //        } else {
-//            return updateProfileFetch(param: param)
+//            return updateResumeFetch(param: param)
 //        }
 //    }
-//    private class func updateProfileFetch(param: UpdateProfileRequestDTO) -> Promise<Void> {
+//    private class func updateResumeFetch(param: UpdateResumeRequestDTO) -> Promise<Void> {
 //        let (promise, resolver) = Promise<Void>.pending()
 //        AuthManager.needAuth(true)
-//        ProfileAPI.profileControllerUpdate(body: param)
+//        ResumeAPI.resumeControllerUpdate(body: param)
 //        .done { result in
 //            resolver.fulfill(Void())
 //        }
@@ -87,56 +79,88 @@
 //        return promise
 //    }
 //}
+//////================================================================
+//================================================================
+//=== 履歴書作成 ===
+extension CreateResumeRequestDTO {
+    init() {
+        self.init(isEmployed: false, changeJobCount: 0, workHistory: []
+            , experienceIndustryId: "", finalEducation: FinalEducationDTO(schoolName: "", faculty: "", department: "", guraduationYearMonth: ""), toeic: 0, toefl: 0, englishSkillId: "", otherLanguageSkillId: "", licenseIds: [])
+    }
+    init(_ model: MdlResume, _ editTempCD: [EditableItemKey: EditableItemCurVal]) {
+        self.init()
+        self.init(isEmployed: true,
+            changeJobCount: Int(model.changeCount) ?? 0,
+            workHistory: [],
+            experienceIndustryId: model.businessTypes.first ?? "",
+            finalEducation: FinalEducationDTO(
+                schoolName: model.school.schoolName,
+                faculty: model.school.department,
+                department: model.school.department,
+                guraduationYearMonth: model.school.graduationYear ),
+            toeic: Int(model.skillLanguage.languageToeicScore) ?? 0,
+            toefl: Int(model.skillLanguage.languageToeflScore) ?? 0,
+            englishSkillId: model.skillLanguage.languageEnglish,
+            otherLanguageSkillId: model.skillLanguage.languageStudySkill,
+            licenseIds: []
+        )
+
+        var _workHistory: [WorkHistoryDTO] = []
+        for (key, val) in editTempCD {
+            print("\t💙💙[\(key): \(val)]💙💙")
+            switch key {
+            case EditItemMdlResume.employmentStatus.itemKey: self.isEmployed = (val == "1") ? true : false //"1": true, "2":false
+            case EditItemMdlResume.changeCount.itemKey: self.changeJobCount = Int(val) ?? 0
+            //* 経験職種リスト
+            case EditItemMdlResume.lastJobExperiment.itemKey:
+                _workHistory.insert(WorkHistoryDTO(job3Id: "1", experienceYears: "3"), at: 0)
+            //case EditItemMdlResume.jobExperiments.itemKey: self.hoge = val
+//            case EditItemMdlResume.jobExperiments.itemKey: self.experienceIndustryId = val//経験業種ID
+
+            //public var : FinalEducationDTO
+            case EditItemMdlResumeSchool.schoolName.itemKey: self.finalEducation.schoolName = val
+            case EditItemMdlResumeSchool.department.itemKey: self.finalEducation.department = val
+            case EditItemMdlResumeSchool.subject.itemKey: self.finalEducation.faculty = val
+            case EditItemMdlResumeSchool.graduationYear.itemKey: self.finalEducation.guraduationYearMonth = val
+            case EditItemMdlResumeSkillLanguage.languageToeicScore.itemKey: self.toeic = Int(val) ?? 0
+            case EditItemMdlResumeSkillLanguage.languageToeflScore.itemKey: self.toefl = Int(val) ?? 0
+            case EditItemMdlResumeSkillLanguage.languageEnglish.itemKey: self.englishSkillId = val
+            case EditItemMdlResumeSkillLanguage.languageStudySkill.itemKey: self.otherLanguageSkillId = val
+//            case EditItemMdlResume.employmentStatus.itemKey: self.licenseIds = val.split(separator: "_") as? [String] ?? []
+
+            default: break
+            }
+        }
+        //===直接補填
+        self.workHistory = _workHistory
+        let finalEducation = FinalEducationDTO(schoolName: "ダミー学校名です", faculty: "医学部", department: "医学科", guraduationYearMonth: "2000-01")
+        self.finalEducation = finalEducation
+        self.workHistory.append(WorkHistoryDTO(job3Id: "1", experienceYears: "3"))
+    }
+}
+extension ApiManager {
+    class func createResume(_ param: CreateResumeRequestDTO, isRetry: Bool = true) -> Promise<Void> {
+        if isRetry {
+            return firstly { () -> Promise<Void> in
+                retry(args: param, task: createResumeFetch) { (error) -> Bool in return true }
+            }
+        } else {
+            return createResumeFetch(param: param)
+        }
+    }
+    private class func createResumeFetch(param: CreateResumeRequestDTO) -> Promise<Void> {
+        let (promise, resolver) = Promise<Void>.pending()
+        AuthManager.needAuth(true)
+        ResumeAPI.resumeControllerRegister(body: param)
+        .done { result in
+            resolver.fulfill(Void())
+        }
+        .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
+            resolver.reject(error)
+        }
+        .finally {
+        }
+        return promise
+    }
+}
 ////================================================================
-////=== プロフィール作成 ===
-//extension CreateProfileRequestDTO {
-//    init() {
-//        self.init(familyName: "", firstName: "", familyNameKana: "", firstNameKana: "", birthday: "", genderId: "", zipCode: "", prefectureId: "", city: "", town: "", email: "")
-//    }
-//    init(_ profile: MdlProfile) {
-//        self.init()
-//        self.familyName = profile.familyName
-//        self.firstName = profile.firstName
-//        self.familyNameKana = profile.familyNameKana
-//        self.firstNameKana = profile.firstNameKana
-//        self.birthday = profile.birthday.dispYmd()
-//        self.genderId = profile.gender
-//        self.zipCode = profile.zipCode
-//        self.prefectureId = profile.prefecture
-//        self.city = profile.address1
-//        self.town = profile.address2
-//        self.email = profile.mailAddress
-//    }
-//
-//}
-//
-//
-//    
-//extension ApiManager {
-//    class func createProfile(_ param: CreateProfileRequestDTO, isRetry: Bool = true) -> Promise<Void> {
-//        if isRetry {
-//            return firstly { () -> Promise<Void> in
-//                retry(args: param, task: createProfileFetch) { (error) -> Bool in return true }
-//            }
-//        } else {
-//            return createProfileFetch(param: param)
-//        }
-//    }
-//    private class func createProfileFetch(param: CreateProfileRequestDTO) -> Promise<Void> {
-//        let (promise, resolver) = Promise<Void>.pending()
-//        AuthManager.needAuth(true)
-//        ProfileAPI.profileControllerCreate(body: param)
-//        .done { result in
-//            resolver.fulfill(Void())
-//        }
-//        .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
-//            resolver.reject(error)
-//        }
-//        .finally {
-//        }
-//        return promise
-//    }
-//}
-//////================================================================
-//////================================================================
-//////================================================================

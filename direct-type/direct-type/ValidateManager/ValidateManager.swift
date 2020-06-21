@@ -35,7 +35,7 @@ final public class ValidateManager {
 //==========================================================================================
 extension ValidateManager {
     class func dbgDispCurrentItems(editableModel: EditableModel) {
-        return//!!!
+//        return//!!!
         //===変更内容の確認
         print(#line, String(repeating: "=", count: 44))
         for (y, items) in editableModel.arrData.enumerated() {

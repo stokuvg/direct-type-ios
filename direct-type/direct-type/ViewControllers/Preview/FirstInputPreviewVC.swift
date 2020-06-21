@@ -53,7 +53,7 @@ class FirstInputPreviewVC: PreviewBaseVC {
         ]))
         //=== [A-9] 入力（希望勤務地）
         arrData.append(MdlItemH(.hopeAreaA9, "", childItems: [
-            EditableItemH(type: .selectMulti, editItem: EditItemMdlFirstInput.hopeArea, val: _detail.hopeArea.joined(separator: "_")),
+            EditableItemH(type: .selectMulti, editItem: EditItemMdlFirstInput.hopeArea, val: _detail.hopeArea.joined(separator: EditItemTool.JoinMultiCodeSeparator)),
         ]))
         //=== [A-10] 入力（最終学歴）
         arrData.append(MdlItemH(.schoolA10, "", childItems: [
@@ -66,7 +66,7 @@ class FirstInputPreviewVC: PreviewBaseVC {
         //=== [A-11] 入力（直近経験職種）[A-12] 入力（直近の職種の経験年数）
         let lastJobType = _detail.lastJobExperiment.jobType
         let lastJobExperimentYear = _detail.lastJobExperiment.jobExperimentYear
-        let bufLastJobExperimentTypeAndYear: String = [lastJobType, lastJobExperimentYear].joined(separator: ":")
+        let bufLastJobExperimentTypeAndYear = EditItemTool.convTypeAndYear(types: [lastJobType], years: [lastJobExperimentYear])
         arrData.append(MdlItemH(.lastJobExperimentA11, "", childItems: [
             EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlFirstInputLastJobExperiments.jobTypeAndJobExperimentYear, val: bufLastJobExperimentTypeAndYear),
         ]))
@@ -75,19 +75,12 @@ class FirstInputPreviewVC: PreviewBaseVC {
             EditableItemH(type: .selectSingle, editItem: EditItemMdlFirstInput.salary, val: _detail.salary),
         ]))
         //=== [A-14] 入力（追加経験職種）
-        var arrJobExperiments: [String] = []
-        for item in _detail.jobExperiments {
-            let jobType = item.jobType
-            let jobExperimentYear = item.jobExperimentYear
-            let buf: String = [jobType, jobExperimentYear].joined(separator: ":")
-            arrJobExperiments.append(buf)
-        }
-        let bufJobTypeAndYear: String = arrJobExperiments.joined(separator: "_")
+        let types = _detail.jobExperiments.map { $0.jobType }
+        let years = _detail.jobExperiments.map { $0.jobExperimentYear }
+        let bufJobTypeAndYear = EditItemTool.convTypeAndYear(types: types, years: years)
         arrData.append(MdlItemH(.jobExperimentsA14, "", childItems: [
             EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlFirstInputJobExperiments.jobTypeAndJobExperimentYear, val: bufJobTypeAndYear),
         ]))
-        
-        print(arrData.description)
         //=== editableModelで管理させる
         editableModel.arrData.removeAll()
         for items in arrData { editableModel.arrData.append(items.childItems) }//editableModelに登録
