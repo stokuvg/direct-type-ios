@@ -113,14 +113,7 @@ class ResumePreviewVC: PreviewBaseVC {
 
 extension ResumePreviewVC {
     private func fetchGetResume() {
-        if Constants.DbgOfflineMode {
-            var workHistory: [WorkHistoryDTO] = []
-            workHistory.append(WorkHistoryDTO(job3Id: "130", experienceYears: "7"))
-            workHistory.append(WorkHistoryDTO(job3Id: "5", experienceYears: "3"))
-            workHistory.append(WorkHistoryDTO(job3Id: "3", experienceYears: "2"))
-            let resume: GetResumeResponseDTO = GetResumeResponseDTO(isEmployed: nil, changeJobCount: nil, workHistory: workHistory, experienceIndustryId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil)
-            self.detail = MdlResume(dto: resume)
-        return }//[Dbg: フェッチ割愛]
+        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         //========================================================
         SVProgressHUD.show(withStatus: "履歴書の取得")
         ApiManager.getResume(Void(), isRetry: true)
@@ -133,16 +126,14 @@ extension ResumePreviewVC {
             case 404://見つからない場合、空データを適用して画面を表示
                 self.detail = MdlResume()
                 //===[Dbg: ダミーデータ投入]___
-                self.detail?.employmentStatus = "1"
-                self.detail?.changeCount = "1"
-                self.detail?.lastJobExperiment = MdlJobExperiment(jobType: "1", jobExperimentYear: "2")
-                self.detail?.jobExperiments = [
-                MdlJobExperiment(jobType: "130", jobExperimentYear: "7"),
-                MdlJobExperiment(jobType: "5", jobExperimentYear: "3"),
-                MdlJobExperiment(jobType: "3", jobExperimentYear: "2"),
-                ]
-                self.detail?.businessTypes = ["19_31_33"]
-                self.detail?.school = MdlResumeSchool(schoolName: "あいうえおあいうえおかきくけこかきくけこさしすせそさしすせそた", department: "医学部", subject: "", graduationYear: "2015-03")
+                self.editableModel.editTempCD[EditItemMdlResume.employmentStatus.itemKey] = "1"
+                self.editableModel.editTempCD[EditItemMdlResume.changeCount.itemKey] = "1"
+                self.editableModel.editTempCD[EditItemMdlResumeLastJobExperiment.jobTypeAndJobExperimentYear.itemKey] = "1:2"
+                self.editableModel.editTempCD[EditItemMdlResume.jobExperiments.itemKey] = "130:7_5:3_3:2"
+                self.editableModel.editTempCD[EditItemMdlResume.businessTypes.itemKey] = "19_31_33"
+                self.editableModel.editTempCD[EditItemMdlResumeSchool.schoolName.itemKey] = "学校名ダミ"
+                self.editableModel.editTempCD[EditItemMdlResumeSchool.department.itemKey] = "法学部"
+                self.editableModel.editTempCD[EditItemMdlResumeSchool.graduationYear.itemKey] = "2014-09"
                 //===[Dbg: ダミーデータ投入]^^^
                 self.dispData()
                 return //エラー表示させないため
@@ -191,26 +182,26 @@ extension ResumePreviewVC {
         
         print(param)
         
-//        SVProgressHUD.show(withStatus: "履歴書情報の更新")
-//        ApiManager.createResume(param, isRetry: true)
-//        .done { result in
-//            self.fetchGetResume()//成功したら取得フェチ
-//        }
-//        .catch { (error) in
-//            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-//            switch myErr.code {
-//            case 400:
-//                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
-//                self.dicGrpValidErrMsg = dicGrpError
-//                self.dicValidErrMsg = dicError
-//            default:
-//                self.showError(error)
-//            }
-//        }
-//        .finally {
-//            self.dispData()
-//            SVProgressHUD.dismiss()
-//        }
+        SVProgressHUD.show(withStatus: "履歴書情報の更新")
+        ApiManager.createResume(param, isRetry: true)
+        .done { result in
+            self.fetchGetResume()//成功したら取得フェチ
+        }
+        .catch { (error) in
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            switch myErr.code {
+            case 400:
+                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
+                self.dicGrpValidErrMsg = dicGrpError
+                self.dicValidErrMsg = dicError
+            default:
+                self.showError(error)
+            }
+        }
+        .finally {
+            self.dispData()
+            SVProgressHUD.dismiss()
+        }
     }
 }
 

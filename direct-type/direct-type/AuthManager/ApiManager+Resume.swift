@@ -49,7 +49,6 @@ extension ApiManager {
 //        for (key, val) in editTempCD {
 //            switch key {
 //            case EditItemMdlResume.employmentStatus.itemKey:
-//                print("\t💙💙[\(key): \(val)]💙💙")
 //            default: break
 //            }
 //        }
@@ -105,15 +104,38 @@ extension CreateResumeRequestDTO {
             otherLanguageSkillId: model.skillLanguage.languageStudySkill,
             licenseIds: []
         )
-0
+
+        var _workHistory: [WorkHistoryDTO] = []
         for (key, val) in editTempCD {
             print("\t💙💙[\(key): \(val)]💙💙")
             switch key {
-            case EditItemMdlResume.employmentStatus.itemKey:
-                print("\t💙💙[\(key): \(val)]💙💙")
+            case EditItemMdlResume.employmentStatus.itemKey: self.isEmployed = (val == "1") ? true : false //"1": true, "2":false
+            case EditItemMdlResume.changeCount.itemKey: self.changeJobCount = Int(val) ?? 0
+            //* 経験職種リスト
+            case EditItemMdlResume.lastJobExperiment.itemKey:
+                _workHistory.insert(WorkHistoryDTO(job3Id: "1", experienceYears: "3"), at: 0)
+            //case EditItemMdlResume.jobExperiments.itemKey: self.hoge = val
+//            case EditItemMdlResume.jobExperiments.itemKey: self.experienceIndustryId = val//経験業種ID
+
+            //public var : FinalEducationDTO
+            case EditItemMdlResumeSchool.schoolName.itemKey: self.finalEducation.schoolName = val
+            case EditItemMdlResumeSchool.department.itemKey: self.finalEducation.department = val
+            case EditItemMdlResumeSchool.subject.itemKey: self.finalEducation.faculty = val
+            case EditItemMdlResumeSchool.graduationYear.itemKey: self.finalEducation.guraduationYearMonth = val
+            case EditItemMdlResumeSkillLanguage.languageToeicScore.itemKey: self.toeic = Int(val) ?? 0
+            case EditItemMdlResumeSkillLanguage.languageToeflScore.itemKey: self.toefl = Int(val) ?? 0
+            case EditItemMdlResumeSkillLanguage.languageEnglish.itemKey: self.englishSkillId = val
+            case EditItemMdlResumeSkillLanguage.languageStudySkill.itemKey: self.otherLanguageSkillId = val
+//            case EditItemMdlResume.employmentStatus.itemKey: self.licenseIds = val.split(separator: "_") as? [String] ?? []
+
             default: break
             }
         }
+        //===直接補填
+        self.workHistory = _workHistory
+        let finalEducation = FinalEducationDTO(schoolName: "ダミー学校名です", faculty: "医学部", department: "医学科", guraduationYearMonth: "2000-01")
+        self.finalEducation = finalEducation
+        self.workHistory.append(WorkHistoryDTO(job3Id: "1", experienceYears: "3"))
     }
 }
 extension ApiManager {
