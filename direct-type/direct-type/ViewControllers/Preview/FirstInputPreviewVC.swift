@@ -29,17 +29,17 @@ class FirstInputPreviewVC: PreviewBaseVC {
         title = "[A系統] 初期入力"
         let firstInput = MdlFirstInput(nickname: "", gender: "", birthday: Constants.SelectItemsUndefineDate, hopeArea: [], school: "", employmentStatus: "", lastJobExperiment: MdlJobExperiment(jobType: "", jobExperimentYear: ""), salary: "", jobExperiments: [])
         self.detail = firstInput
-//        //===___ダミーデータ投入___
-        self.editableModel.editTempCD[EditItemMdlFirstInput.nickname.itemKey] = "あだ名タラ王"
-        self.editableModel.editTempCD[EditItemMdlFirstInput.gender.itemKey] = "2"
-        self.editableModel.editTempCD[EditItemMdlFirstInput.birthday.itemKey] = "1999-12-31"
-        self.editableModel.editTempCD[EditItemMdlFirstInput.hopeArea.itemKey] = "11_13_15"
-        self.editableModel.editTempCD[EditItemMdlFirstInput.school.itemKey] = "3"
-        self.editableModel.editTempCD[EditItemMdlFirstInput.employmentStatus.itemKey] = "2"
-        self.editableModel.editTempCD[EditItemMdlFirstInputLastJobExperiments.jobTypeAndJobExperimentYear.itemKey] = "98:3"
-        self.editableModel.editTempCD[EditItemMdlFirstInput.salary.itemKey] = "1450"
-        self.editableModel.editTempCD[EditItemMdlFirstInputJobExperiments.jobTypeAndJobExperimentYear.itemKey] = "2:2_3:3_4:4_5:5_6:6_7:7_8:8_9:9"
-//        //===^^^ダミーデータ投入^^^
+////        //===___ダミーデータ投入___
+//        self.editableModel.editTempCD[EditItemMdlFirstInput.nickname.itemKey] = "あだ名タラ王"
+//        self.editableModel.editTempCD[EditItemMdlFirstInput.gender.itemKey] = "2"
+//        self.editableModel.editTempCD[EditItemMdlFirstInput.birthday.itemKey] = "1999-12-31"
+//        self.editableModel.editTempCD[EditItemMdlFirstInput.hopeArea.itemKey] = "11_13_15"
+//        self.editableModel.editTempCD[EditItemMdlFirstInput.school.itemKey] = "3"
+//        self.editableModel.editTempCD[EditItemMdlFirstInput.employmentStatus.itemKey] = "2"
+//        self.editableModel.editTempCD[EditItemMdlFirstInputLastJobExperiments.jobTypeAndJobExperimentYear.itemKey] = "98:3"
+//        self.editableModel.editTempCD[EditItemMdlFirstInput.salary.itemKey] = "1450"
+//        self.editableModel.editTempCD[EditItemMdlFirstInputJobExperiments.jobTypeAndJobExperimentYear.itemKey] = "2:2_3:3_4:4_5:5_6:6_7:7_8:8_9:9"
+////        //===^^^ダミーデータ投入^^^
         dispData()
     }
     override func dispData() {
