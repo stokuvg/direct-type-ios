@@ -186,6 +186,7 @@
 		0EAE7661248F2CCD009A8F4B /* ChemistryBusinessAvilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAE7660248F2CCD009A8F4B /* ChemistryBusinessAvilityView.swift */; };
 		0EAE7665248F2E5E009A8F4B /* ChemistryBusinessAvilityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EAE7664248F2E5D009A8F4B /* ChemistryBusinessAvilityView.xib */; };
 		0EC5B164248F41B80089670D /* BusinessAvilityScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC5B163248F41B80089670D /* BusinessAvilityScore.swift */; };
+		0ED57E7324A0651C00C1CEBB /* LoginConfirmVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ED57E7224A0651C00C1CEBB /* LoginConfirmVC.storyboard */; };
 		0EE36F172486256F0098A2AF /* ChemistryStart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EE36F162486256F0098A2AF /* ChemistryStart.storyboard */; };
 		0EE36F1B24872E280098A2AF /* IconCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE36F1A24872E280098A2AF /* IconCarouselView.swift */; };
 		0EE36F1E248737AB0098A2AF /* CarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE36F1D248737AB0098A2AF /* CarouselCell.swift */; };
@@ -485,6 +486,7 @@
 		0EAE7660248F2CCD009A8F4B /* ChemistryBusinessAvilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryBusinessAvilityView.swift; sourceTree = "<group>"; };
 		0EAE7664248F2E5D009A8F4B /* ChemistryBusinessAvilityView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChemistryBusinessAvilityView.xib; sourceTree = "<group>"; };
 		0EC5B163248F41B80089670D /* BusinessAvilityScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessAvilityScore.swift; sourceTree = "<group>"; };
+		0ED57E7224A0651C00C1CEBB /* LoginConfirmVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginConfirmVC.storyboard; sourceTree = "<group>"; };
 		0EE36F162486256F0098A2AF /* ChemistryStart.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChemistryStart.storyboard; sourceTree = "<group>"; };
 		0EE36F1A24872E280098A2AF /* IconCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconCarouselView.swift; sourceTree = "<group>"; };
 		0EE36F1D248737AB0098A2AF /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
@@ -878,6 +880,7 @@
 				06E519AC245813DC004E4B7A /* LoginVC.swift */,
 				06E519AE245813E9004E4B7A /* LoginConfirmVC.swift */,
 				066A8A71249066E8004C25D8 /* LoginVC.storyboard */,
+				0ED57E7224A0651C00C1CEBB /* LoginConfirmVC.storyboard */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1399,6 +1402,7 @@
 				066F2719246E81A10040BDC1 /* JobDetailFoldingPhoneNumberCell.xib in Resources */,
 				06AA8C612484B46B001733FA /* BasePercentageCompletionCell.xib in Resources */,
 				269AFFCA246A929300DB364B /* SubSelectDaiTBCell.xib in Resources */,
+				0ED57E7324A0651C00C1CEBB /* LoginConfirmVC.storyboard in Resources */,
 				064570642465427000F3B015 /* JobDetailGuideBookHeaderView.xib in Resources */,
 				0645DE03246BB6A100592572 /* JobDetailSalaryExampleCell.xib in Resources */,
 				068FFAAB24727A8B0083E130 /* JobDetailStepView.xib in Resources */,
