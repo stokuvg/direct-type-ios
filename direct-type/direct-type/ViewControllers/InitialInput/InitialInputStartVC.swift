@@ -110,9 +110,8 @@ class InitialInputStartVC: TmpBasicVC {
     @IBOutlet weak var loginedLabel:UILabel!
     @IBOutlet weak var loginBtn:UIButton!
     @IBAction func loginAction() {
-        // TODO:ログイン画面へ移動
-        let vc = getVC(sbName: "Login", vcName: "LoginVC") as! LoginVC
-        self.navigationController?.pushViewController(vc, animated: true)
+        let vc = getVC(sbName: "LoginVC", vcName: "LoginVC") as! LoginVC
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBOutlet weak var bottomSpaceView:UIView!

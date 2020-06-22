@@ -22,19 +22,6 @@ final class LoginVC: TmpBasicVC {
 private extension LoginVC {
     func setup() {
         title = "初期入力"
-        setLeftBarButton()
-    }
-    
-    var leftBatButtonFrame: CGRect {
-        return CGRect(x: .zero, y: .zero, width: 30, height: 30)
-    }
-    func setLeftBarButton() {
-        let leftBarButton = UIButton(type: .system)
-        leftBarButton.frame = leftBatButtonFrame
-        leftBarButton.setTitle(text: "✗", fontType: .font_XL, textColor: .white, alignment: .left)
-        leftBarButton.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
-        
-        let backButtonItem =  UIBarButtonItem(customView: leftBarButton)
-        navigationItem.leftBarButtonItem = backButtonItem
+        navigationController?.isNavigationBarHidden = false
     }
 }
