@@ -40,12 +40,27 @@ private extension LoginVC {
     }
     
     func sendLoginAuthCode() {
+         // FIXME: 本来であればこの画面ではログイン状態ではないはずなので、後ほどこのif文スコープは後ほど削除する
+        if AWSMobileClient.default().currentUserState == .signedIn {
+            // ログイン状態だった場合はログアウトする
+            AWSMobileClient.default().signOut { (error) in
+                if let error = error {
+                    let buf = AuthManager.convAnyError(error).debugDisp
+                    DispatchQueue.main.async {
+                        self.showConfirm(title: "Error", message: buf, onlyOK: true)
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.showConfirm(title: "認証手順", message: "ログアウトしました", onlyOK: true)
+                }
+            }
+        }
+        
         guard let phoneNumberText = phoneNumberTextField.text else { return }
         AWSMobileClient.default().signIn(username: phoneNumberText, password: password)  { (signInResult, error) in
             if let error = error {
                 let buf = AuthManager.convAnyError(error).debugDisp
                 DispatchQueue.main.async {
-                    print(#line, #function, buf)
                     self.showConfirm(title: "Error", message: buf, onlyOK: true)
                 }
                 return
