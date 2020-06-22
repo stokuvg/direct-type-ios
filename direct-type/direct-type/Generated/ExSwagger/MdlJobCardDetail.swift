@@ -329,8 +329,8 @@ class MdlJobCardDetail: Codable {
             _prIds.append(prId!)
         }
         
-        let _mainPicture = ""
-        let _subPictures:[String] = []
+        let _mainPicture = dto.mainPhotoURL ?? ""
+        let _subPictures:[String] = dto.subPhotoURLs ?? []
         
         let _employmentId = Int(dto.employmentId)
         let _overtimeCode = Int(dto.indicationOvertimeId)

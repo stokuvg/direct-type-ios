@@ -18,6 +18,8 @@ class JobDetailImageCell: BaseTableViewCell {
     @IBOutlet weak var mainImagesPageControlBackView:UIView!
     @IBOutlet weak var mainImagesControl:UIPageControl!
     
+    @IBOutlet weak var pageControlViewHeight:NSLayoutConstraint!
+    
     var viewWidth:CGFloat!
     var viewHeight:CGFloat!
     var imageX:CGFloat!
@@ -45,7 +47,8 @@ class JobDetailImageCell: BaseTableViewCell {
     func setCellWidth(width:CGFloat) {
         
         var mainImageBackFrame = self.mainImageBackView.frame
-        mainImageBackFrame.size.width = self.contentView.frame.size.width
+//        mainImageBackFrame.size.width = self.contentView.frame.size.width
+        mainImageBackFrame.size.width = width
         self.mainImageBackView.frame = mainImageBackFrame
         
         cellWidth = width
@@ -73,22 +76,10 @@ class JobDetailImageCell: BaseTableViewCell {
         // 画像セット
         
         let mainImageUrlString:String = data.mainPicture
-        Log.selectLog(logLevel: .debug, "mainImageUrlString:\(mainImageUrlString)")
-//        var subImageUrlStrings:[String] = []
         let subImageUrlStrings:[String] = data.subPictures
-        /*
-        if data.interviewMemo.interviewPhoto1.count > 0 {
-            subImageUrlStrings.append(data.interviewMemo.interviewPhoto1)
-        }
-        if data.interviewMemo.interviewPhoto2.count > 0 {
-            subImageUrlStrings.append(data.interviewMemo.interviewPhoto2)
-        }
-        if data.interviewMemo.interviewPhoto3.count > 0 {
-            subImageUrlStrings.append(data.interviewMemo.interviewPhoto3)
-        }
-        */
         
         var imageUrlStrings:[String] = [mainImageUrlString]
+        /*
         if subImageUrlStrings.count > 0 {
             for i in 0..<subImageUrlStrings.count {
                 let _subImageUrlString = subImageUrlStrings[i]
@@ -97,12 +88,14 @@ class JobDetailImageCell: BaseTableViewCell {
                 }
             }
         }
+        */
         
         imageCnt = imageUrlStrings.count
         if imageCnt > 1 {
             
             self.mainImagesControl.numberOfPages = imageUrlStrings.count
             
+            // 無限スクロール用
             for i in 0..<(imageUrlStrings.count * 3) {
                 var cnt:Int = 0
                 cnt = i
@@ -114,7 +107,7 @@ class JobDetailImageCell: BaseTableViewCell {
                 let scrollX:CGFloat = (margin + (viewWidth * CGFloat(i)))
 
                 let imageView = UIImageView.init(frame: CGRect(x: scrollX, y: imageY, width: imageW, height: imageH))
-                imageView.backgroundColor = UIColor.init(colorType: .color_black)
+                imageView.backgroundColor = UIColor.init(colorType: .color_white)
                 imageView.contentMode = .scaleAspectFit
                 imageView.af_setImage(withURL: imageUrl!)
                 
@@ -127,7 +120,32 @@ class JobDetailImageCell: BaseTableViewCell {
             self.mainImagesScrollView.contentSize = CGSize(width: (CGFloat(imageUrlStrings.count*3) * viewWidth), height: viewHeight)
             
         } else {
+            for i in 0..<(imageUrlStrings.count) {
+                var cnt:Int = 0
+                cnt = i
+                if i >= imageUrlStrings.count {
+                    cnt = i % imageUrlStrings.count
+                }
+                let imageUrlString = imageUrlStrings[cnt]
+                let imageUrl = URL(string: imageUrlString)
+                let scrollX:CGFloat = (margin + (viewWidth * CGFloat(i)))
+
+                let imageView = UIImageView.init(frame: CGRect(x: scrollX, y: imageY, width: imageW, height: imageH))
+                imageView.backgroundColor = UIColor.init(colorType: .color_white)
+                imageView.contentMode = .scaleAspectFit
+                imageView.af_setImage(withURL: imageUrl!)
+                
+                imageView.layer.cornerRadius = 15
+                imageView.layer.masksToBounds = true
+                imageView.clipsToBounds = true
+                
+                self.mainImagesScrollView.addSubview(imageView)
+            }
+            self.mainImagesScrollView.contentSize = CGSize(width: (CGFloat(imageUrlStrings.count) * viewWidth), height: viewHeight)
             
+            self.mainImagesControl.numberOfPages = 1
+            self.mainImagesControl.isHidden = true
+            self.pageControlViewHeight.constant = 0
         }
     }
     

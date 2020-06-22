@@ -872,6 +872,23 @@
             "example": "2020-11-15",
             "description": "掲載終了日（ISO8601[YYYY-MM-DD]）"
           },
+          "mainPhotoURL": {
+            "type": "string",
+            "example": "https://type.jp/noindex-image?id=666666",
+            "description": "求人メイン画像URL"
+          },
+          "subPhotoURLs": {
+            "example": [
+              "https://type.jp/noindex-image?id=777777",
+              "https://type.jp/noindex-image?id=888888",
+              "https://type.jp/noindex-image?id=999999"
+            ],
+            "description": "求人メイン画像URL",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
           "mainTitle": {
             "type": "string",
             "example": "【急募】部長候補！高待遇で活躍できる。「東証一部上場」へ向けた急成長企業の経理財務業務",

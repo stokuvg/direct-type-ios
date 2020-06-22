@@ -32,16 +32,19 @@ class JobDetailPRCodeTagsCell: BaseTableViewCell {
         var datas:[String] = []
         for i in 0..<prcodeNos.count {
             let prCodeNo = prcodeNos[i]
-            let prCode:String = (SelectItemsManager.getCodeDisp(.prCode, code: prCodeNo)?.disp)!
+//            Log.selectLog(logLevel: .debug, "prCodeNo:\(prCodeNo)")
+            let prCode:String = (SelectItemsManager.getCodeDisp(.prCode, code: prCodeNo)?.disp) ?? ""
 //            Log.selectLog(logLevel: .debug, "prCode:\(prCode)")
             
-            var prCodeString:String = ""
-            if prCode.hasPrefix("#") {
-                prCodeString = prCode.replacingOccurrences(of: "#", with: "")
-            } else {
-                prCodeString = prCode
+            if prCode.count > 0 {
+                var prCodeString:String = ""
+                if prCode.hasPrefix("#") {
+                    prCodeString = prCode.replacingOccurrences(of: "#", with: "")
+                } else {
+                    prCodeString = prCode
+                }
+                datas.append(prCodeString)
             }
-            datas.append(prCodeString)
         }
         
         tagsView.setKind(datas: datas, frame: tagsView.frame)

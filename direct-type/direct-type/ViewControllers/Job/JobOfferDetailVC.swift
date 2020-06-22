@@ -19,62 +19,6 @@ class JobOfferDetailVC: TmpBasicVC {
     var buttonsView:NaviButtonsView!
     
     var _mdlJobDetail:MdlJobCardDetail!
-    /*
-    var _mdlJobDetail:MdlJobCardDetail! = MdlJobCardDetail.init(
-        jobCardCode: "1",
-        jobName: "SE/RPAやAI,loT関連案件など",
-        salaryMinId: 10,
-        salaryMaxId: 14,
-        isSalaryDisplay: true,
-        salaryOffer: "",
-        workPlaceCodes: [10,20,30,40],
-        companyName: "株式会社キャリアデザインITパートナーズ「type IT派遣」※(株)キャリアデザインセンター100%出費",
-        displayPeriod: JobCardDetailDisplayPeriod.init(startAt: "20200525", endAt: "20200601"),
-        mainPicture: "https://type.jp/s/img_banner/top_pc_side_number1.jpg",
-        subPictures: ["https://type.jp/s/campaign83/img/pc/top.png","https://type.jp/s/campaign83/img/scout.png","https://woman-type.jp/s/renewal/pc/img/top/191105_u29.png",""],
-        mainTitle: "RPA,AI,loT関連プロジェクトや、大手メーカのーのR&D・・・\nこれから成長する若手こそ、案件にこだわろう。",
-        mainContents: "◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n◆◆◆◆\n",
-        prCodes: [1,3,5,7,9],
-        salarySample: "■２５歳サブリーダー／年収４００万円\n■２８歳PL／年収４８０万円\n■３０歳PM／年収５５０万円\n■３２歳PM／年収５８０万円\n■３５歳PM／年収６５０万円\n■４０歳マネージャー／年収７４０万円\n■４５歳部長／年収８００万円\n",
-        recruitmentReason: "",
-        jobDescription: "多種多様なプロジェクトの中から、あなたの経験や希望に応じた案件で活躍していただきます。\n",
-        jobExample: "【RPA案件】\n●大手不動産会社:データ入力の自動化\n●メガバンク:生産業務の自動化\nなど",
-        product: "【大手不動産会社:仲介業務を支える期間システム,WEBシステム,物件管理ステム開発】\n◆\n◆\n",
-        scope: "【SI案件】\n●\n◆\n◆\n●\n◆\n◆\n",
-        spotTitle1: "希望を吸い上げる風土だから、理想のキャリアパスを描きやすい",
-        spotDetail1: "当社では、基本的にユニット（チーム体制）でのプロジェクト配属になっており、四半期に1回面談を実施し、ユニット長がここの希望を吸い上げいます。",
-        spotTitle2: "明確な評価制度【充実のインセンティブ/若手も大幅昇給可能】",
-        spotDetail2: "評価を行うのは、ここの頑張りや実力を一番近くで目にしているユニット長なので、納得感のある評価を得られます。",
-        qualification: "◆学歴不問\n◆なんらかの開発経験のある方\n\n",
-        betterSkill: "",
-        applicationExample: "多彩な経験を持った、幅広い年齢層の方が当社に入社し、活躍しています。\n",
-        suitableUnsuitable: "向いている人\n新しいことにチャレンジしながら、理想のキャリアパスを実現したい方には向いてます。\n向いてない人\n現状維持を望む方や、意欲が乏しい方には、合わないかもしれません。",
-        employmentType: 1,
-        salary: "★前職給与保証／想定月収３３万円〜６２万円\n\n年棒４００万円〜７５０万円（１２分割で支給）＋各種手当＋インセンティブ",
-        bonusAbout: "ここにテキストを表示",
-        jobtime: "09:00~18:00(実動８時間)",
-        overtimeCode: 2,
-        overtimeAbout:  "月の平均残業時間は10～20時間程度です。\n1日に換算すると1日30分～１時間程度になります。\n当社は働き方改革が叫ばれる以前から残業を抑える取り組みをしており、\n労務上の観点から20時間以内になるように指示しています。\nその結果、20時以降社内に残る社員はほどんどいません。",
-        workPlace: "★東京本社または株式会社DigiITへの出向、福岡本社勤務\n（首都圏のお客様先での常駐案件もあり）",
-        transport: "・つくばエクスプレス「秋葉原駅」より徒歩1分\n・\n・\n",
-        holiday: "☆年間休日124日☆\n\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n",
-        welfare: "◆\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n◆\n",
-        childcare: "ここにテキストを入れる\nここにテキストを入れる\nここにテキストを入れる\nここにテキストを入れる\n",
-        interviewMemo: JobCardDetailInterviewMemo.init(interviewContent: "ここにテキストを入れる\n\nここにテキストを入れる", interviewPhoto1: "https://cdc.type.jp/images/site_type.gif", interviewPhoto2: "https://cdc.type.jp/images/site_woman.jpg", interviewPhoto3: "https://cdc.type.jp/images/service_site.png"),
-        selectionProcess: JobCardDetailSelectionProcess.init(selectionProcess1: "Web応募による書類選考", selectionProcess2: "面談（１〜２回）※面談は１回のケースが多いですが、場合によって２回になる可能性もあります。", selectionProcess3: "内定", selectionProcess4: "Web応募による書類選考", selectionProcess5: "Web応募による書類選考", selectionProcessDetail: "【type】の専用応募フォームからご応募ください。\n※ご応募については秘密厳守いたします。\n※\n※\n\n----------------------------\n当求人案件は株式会社キャリアデザインセンターが運営する株式会社システムソフト type採用事務局にて応募の受付業務を代行しております。"),
-        contactInfo: JobCardDetailContactInfo.init(companyUrl: "http://www.systemsoft.co.jp/", contactZipcode: "100-0004", contactAddress: "東京都千代田区大手町二丁目６番１号 朝日生命大手町ビル２階", contactPhone: "03-6261-4536", contactPerson: "採用担当", contactMail: "saiyo@systemsoft.co.jp"),
-        
-        companyDescription: JobCardDetailCompanyDescription.init(
-            enterpriseContents: "■WEBアプリの企画・開発・導入支援\n■スマホ・タブレットアプリの企画・開発・導入支援\n■システムコンサルテーション事業\n■ソフトウェアパッケージの開発・販売・導入支援\n■サーバ・ネットワーク設計・構築・運用管理サービスの提供\n■アウトソーシング\n",
-            mainCustomer: "青葉出版(株)\n(株)オープンハウス・ディベロップメント\n(株)CSEビジテック\n(株)\n(株)\n(株)",
-            mediaCoverage: "明治大学博物館\nユニバーサルコンピューター(株)",
-            established: "1996年12月",
-            employeesCount: JobCardDetailCompanyDescriptionEmployeesCount.init(count: "132名(技術者118名)", averageAge: "３２歳", genderRatio: "5/5", middleEnter: "約５割"),
-            capital: "20,000,000円",
-            turnover: "14億円(2018年11月実績)",
-            presidentData: JobCardDetailCompanyDescriptionPresidentData.init(presidentName: "代表取締役社長　峯岸 正積", presidentHistory: "1979年11月5日生まれ。2002年コニカミノルタ株式会社に入社。")),
-        userFilter: UserFilterInfo.init(tudKeepStatus: false, tudSkipStatus: false))
-    */
     
     var articleOpenFlag:Bool = false
     var memoDispFlag:Bool = false
@@ -249,7 +193,8 @@ extension JobOfferDetailVC: UITableViewDelegate {
                 return UITableView.automaticDimension
 //                return 253
             case (0,1):
-                return 290
+//                return 290
+                return UITableView.automaticDimension
             case (1,0):
                 return articleOpenFlag ? UITableView.automaticDimension : 0
             case (4,0):
@@ -388,7 +333,11 @@ extension JobOfferDetailVC: UITableViewDataSource {
             case 0:
                 return 2
             case 2:
-                return 2
+                if _mdlJobDetail.salarySample.count > 0 {
+                    return 2
+                } else {
+                    return 1
+                }
             case 3:
                 return 8
             default:
@@ -408,6 +357,10 @@ extension JobOfferDetailVC: UITableViewDataSource {
             case (0,1):
                 // 求人画像
                 let cell = tableView.loadCell(cellName: "JobDetailImageCell", indexPath: indexPath) as! JobDetailImageCell
+                
+                Log.selectLog(logLevel: .debug, "self.view:\(String(describing: self.view))")
+                Log.selectLog(logLevel: .debug, "self.detailTableView:\(String(describing: self.detailTableView))")
+                
                 cell.setCellWidth(width: self.detailTableView.frame.size.width)
                 cell.setup(data: _mdlJobDetail)
                 return cell

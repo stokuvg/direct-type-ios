@@ -72,8 +72,8 @@ class JobDetailDataCell: BaseTableViewCell {
         switch (startFlag,endFlag) {
             case (false,false):
 //                Log.selectLog(logLevel: .debug, "両方当たる")
-                // 終了マークのみ表示
-                limitedType = .end
+                // 両方とも一致しない
+                limitedType = LimitedType.none
             case (false,true):
 //                Log.selectLog(logLevel: .debug, "掲載開始から７日以内")
                 // NEWマークのみ表示
@@ -96,11 +96,11 @@ class JobDetailDataCell: BaseTableViewCell {
         let salaryDisplay = data.isSalaryDisplay
         if salaryDisplay {
             Log.selectLog(logLevel: .debug, "data.salaryMinId:\(data.salaryMinId)")
-            let minPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.salaryMinId)?.disp
-            let maxPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.salaryMaxId)?.disp
-            if minPriceLabel != nil && (maxPriceLabel != nil) {
-                let minPrice = self.cutText(defaultText: minPriceLabel!,cutString: "万円")
-                let maxPrice = self.cutText(defaultText: maxPriceLabel!,cutString: "万円")
+            let minPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.salaryMinId)?.disp ?? ""
+            let maxPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.salaryMaxId)?.disp ?? ""
+            if minPriceLabel.count > 0 && (maxPriceLabel.count > 0) {
+                let minPrice = self.cutText(defaultText: minPriceLabel,cutString: "万円")
+                let maxPrice = self.cutText(defaultText: maxPriceLabel,cutString: "万円")
 
                 let priceText = minPrice + "〜" + maxPrice
                 self.salaryLabel.text(text: priceText, fontType: .C_font_XL, textColor: UIColor.init(colorType: .color_sub)!, alignment: .center)
@@ -135,7 +135,7 @@ class JobDetailDataCell: BaseTableViewCell {
         var text:String = ""
         for i in 0..<codes.count {
             let code = codes[i]
-            let placeText = (SelectItemsManager.getCodeDisp(.entryPlace, code: code)?.disp)!
+            let placeText = (SelectItemsManager.getCodeDisp(.entryPlace, code: code)?.disp) ?? ""
             text = text + placeText
             if (codes.count - 1) > i {
                 text += ","

@@ -20,7 +20,7 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jiE-R7-6Ox">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="250"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="color-white"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="250" id="qrW-fs-5EJ"/>
                         </constraints>
@@ -38,13 +38,15 @@
                                 <color key="currentPageIndicatorTintColor" name="color-slider-sub"/>
                             </pageControl>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="color-white"/>
                         <constraints>
+                            <constraint firstAttribute="height" constant="40" id="S17-z5-S3x"/>
                             <constraint firstItem="c1I-QX-cwX" firstAttribute="centerY" secondItem="Xu1-P8-SsO" secondAttribute="centerY" id="lSd-xg-nvw"/>
                             <constraint firstItem="c1I-QX-cwX" firstAttribute="centerX" secondItem="Xu1-P8-SsO" secondAttribute="centerX" id="oQU-Hy-gua"/>
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="Xu1-P8-SsO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="N1b-2L-6Gd"/>
                     <constraint firstItem="Xu1-P8-SsO" firstAttribute="top" secondItem="jiE-R7-6Ox" secondAttribute="bottom" id="Yga-66-pHU"/>
@@ -61,6 +63,7 @@
                 <outlet property="mainImageBackView" destination="jiE-R7-6Ox" id="h3p-Kp-jAd"/>
                 <outlet property="mainImagesControl" destination="c1I-QX-cwX" id="tid-mh-gxI"/>
                 <outlet property="mainImagesPageControlBackView" destination="Xu1-P8-SsO" id="vwm-5L-rAb"/>
+                <outlet property="pageControlViewHeight" destination="S17-z5-S3x" id="fx4-Eh-dZO"/>
             </connections>
             <point key="canvasLocation" x="132" y="139"/>
         </tableViewCell>

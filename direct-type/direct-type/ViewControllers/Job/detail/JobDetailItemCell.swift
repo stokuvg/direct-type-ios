@@ -54,12 +54,10 @@ class JobDetailItemCell: BaseJobDetailCell {
                 text = data.qualification
             case 2:
                 // 雇用形態
-//                title = data.employmentType.title!
-//let type = SelectItemsManager.getCodeDisp(.employmentType, code: data.employmentType.type!)?.disp
                 title = "雇用形態"
-                let type = SelectItemsManager.getCodeDisp(.employmentType, code: data.employmentType)?.disp
+                let type = SelectItemsManager.getCodeDisp(.employmentType, code: data.employmentType)?.disp ?? ""
                 
-                text = type!
+                text = type
             case 3:
                 // 給与
 //                title = data.salary.title!
@@ -134,8 +132,8 @@ class JobDetailItemCell: BaseJobDetailCell {
                 // この仕事の向き・不向き
                 let _suitableUnsuitable = data.suitableUnsuitable
                 let _notSuitableUnsuitable = data.notSuitableUnsuitable
-                Log.selectLog(logLevel: .debug, "_suitableUnsuitable:\(_suitableUnsuitable)")
-                Log.selectLog(logLevel: .debug, "_notSuitableUnsuitable:\(_notSuitableUnsuitable)")
+//                Log.selectLog(logLevel: .debug, "_suitableUnsuitable:\(_suitableUnsuitable)")
+//                Log.selectLog(logLevel: .debug, "_notSuitableUnsuitable:\(_notSuitableUnsuitable)")
                 
                 if _suitableUnsuitable.count > 0 && _notSuitableUnsuitable.count > 0 {
                     var sumText:String = "向いている人\n"
@@ -169,7 +167,7 @@ class JobDetailItemCell: BaseJobDetailCell {
                 // 残業時間目安
                 if data.overtimeCode > 0 {
 //                    let title = data.overtimeCode.title
-                    let code = SelectItemsManager.getCodeDisp(.overtime, code: data.overtimeCode)?.disp
+                    let code = SelectItemsManager.getCodeDisp(.overtime, code: data.overtimeCode)?.disp ?? ""
                     let text = code
 //                    let overtimeCodeData = ["title":title, "text":text]
                     let overtimeCodeData = ["title":"残業時間目安", "text":text]

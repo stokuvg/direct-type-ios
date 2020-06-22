@@ -84,12 +84,12 @@ class KeepCardCell: BaseJobCardCell {
         let displayFlag = data.isSalaryDisplay
         if displayFlag {
             let _minSalaryId = data.salaryMinCode
-            let minPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: _minSalaryId)?.disp
-            let minPrice = self.cutText(defaultText: minPriceLabel!,cutString: "万円")
+            let minPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: _minSalaryId)?.disp ?? ""
+            let minPrice = self.cutText(defaultText: minPriceLabel,cutString: "万円")
             
             let _maxSalaryId = data.salaryMaxCode
-            let maxPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: _maxSalaryId)?.disp
-            let maxPrice = self.cutText(defaultText: maxPriceLabel!,cutString: "万円")
+            let maxPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: _maxSalaryId)?.disp ?? ""
+            let maxPrice = self.cutText(defaultText: maxPriceLabel,cutString: "万円")
             
             let priceText = minPrice + "〜" + maxPrice
             
@@ -122,7 +122,7 @@ class KeepCardCell: BaseJobCardCell {
         var text:String = ""
         for i in 0..<codes.count {
             let code = Int(codes[i])
-            let areaString:String = (SelectItemsManager.getCodeDisp(.place, code: code!)?.disp)!
+            let areaString:String = (SelectItemsManager.getCodeDisp(.place, code: code!)?.disp ?? "")
             text += areaString
             if i < (codes.count - 1) {
                 text += ","
