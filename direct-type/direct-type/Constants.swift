@@ -9,7 +9,8 @@
 import UIKit
 
 struct Constants {
-    static let Auth_username: String = "+8180012345687" //安全なダミー番号: https://stabucky.com/wp/archives/6180
+//    static let Auth_username: String = "+8180012345687" //安全なダミー番号: https://stabucky.com/wp/archives/6180
+    static let Auth_username: String = "+8190012345678" //安全なダミー番号: https://stabucky.com/wp/archives/6180
     static let Auth_password: String = "Abcd123$"
 
     
