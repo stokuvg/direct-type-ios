@@ -46,9 +46,9 @@ private extension LoginVC {
             AWSMobileClient.default().signOut { (error) in
                 if let error = error {
                     let buf = AuthManager.convAnyError(error).debugDisp
-                    print("Logout error: \(buf)")
+                    print("ログアウトエラー: \(buf)")
                 }
-                print("Logout completed")
+                print("ログアウト完了")
             }
         }
         
@@ -63,7 +63,7 @@ private extension LoginVC {
             }
             
             guard let signInResult = signInResult else {
-                self.showConfirm(title: "Error", message: "通信が正常に完了しませんでした", onlyOK: true)
+                print("レスポンスがが正常に受け取れませんでした")
                 return
             }
             var buf = ""
