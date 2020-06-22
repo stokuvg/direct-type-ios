@@ -28,6 +28,7 @@ final class LoginVC: TmpBasicVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        changeButtonState()
     }
 }
 
