@@ -86,6 +86,7 @@
                         <viewLayoutGuide key="safeArea" id="uGY-Db-oor"/>
                     </view>
                     <connections>
+                        <outlet property="nextButton" destination="jpp-Ul-Dls" id="dhU-9K-itj"/>
                         <outlet property="phoneNumberTextField" destination="H3I-p9-5hJ" id="Pmm-E3-51n"/>
                     </connections>
                 </viewController>
