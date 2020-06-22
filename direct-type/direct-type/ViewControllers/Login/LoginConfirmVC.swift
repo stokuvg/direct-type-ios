@@ -13,8 +13,10 @@ final class LoginConfirmVC: TmpBasicVC {
     @IBOutlet private weak var nextButton: UIButton!
     
     @IBAction private func resendAuthCodeButton(_ sender: UIButton) {
+        // TODO: 「認証コードを再送信する」ボタンタップ時の実装を追加
     }
     @IBAction private func nextButton(_ sender: UIButton) {
+        validateAuthCode()
     }
     
     private let aithCodeMaxLength: Int = 11
@@ -29,6 +31,10 @@ private extension LoginConfirmVC {
     func setup() {
         title = "認証コード入力"
         authCodeTextField.addTarget(self, action: #selector(changeButtonState), for: .editingChanged)
+    }
+    
+    func validateAuthCode() {
+        // TODO: 入力されたSMS認証コードを使ってAWSMobileClient.default().confirmSignIn(challengeResponse: _)にて検証を行う。
     }
     
     var isValidInputText: Bool {
