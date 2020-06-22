@@ -92,7 +92,7 @@ enum EditItemReqEntry: String, EditItemProtocol {
     var tsvMaster: SelectItemsManager.TsvMaster {
         switch self {
         case .hopeWorkPlace: return .entryPlace
-        case .hopeSalary: return .salaryCode
+        case .hopeSalary: return .salary
         default: return .undefine
         }
     }

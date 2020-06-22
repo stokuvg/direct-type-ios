@@ -150,7 +150,7 @@ extension HPreviewTBCell {
         //case .employeesCountC15:  //===従業員数（数値）*これもマスタじゃないのか？ */
         case .salaryC15:          //===年収
             let tmp0: String = _item.childItems[0].curVal
-            let buf0: String = SelectItemsManager.getCodeDisp(.salaryCode, code: tmp0)?.disp ?? ""
+            let buf0: String = SelectItemsManager.getCodeDisp(.salary, code: tmp0)?.disp ?? ""
             return "\(buf0)"
         //case .contentsC15:        //===職務内容本文
         //========================

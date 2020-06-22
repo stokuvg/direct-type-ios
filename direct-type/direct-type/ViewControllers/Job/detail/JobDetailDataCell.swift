@@ -96,8 +96,8 @@ class JobDetailDataCell: BaseTableViewCell {
         let salaryDisplay = data.isSalaryDisplay
         if salaryDisplay {
             Log.selectLog(logLevel: .debug, "data.salaryMinId:\(data.salaryMinId)")
-            let minPriceLabel = SelectItemsManager.getCodeDisp(.salaryCode, code: data.salaryMinId)?.disp
-            let maxPriceLabel = SelectItemsManager.getCodeDisp(.salaryCode, code: data.salaryMaxId)?.disp
+            let minPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.salaryMinId)?.disp
+            let maxPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.salaryMaxId)?.disp
             if minPriceLabel != nil && (maxPriceLabel != nil) {
                 let minPrice = self.cutText(defaultText: minPriceLabel!,cutString: "万円")
                 let maxPrice = self.cutText(defaultText: maxPriceLabel!,cutString: "万円")
