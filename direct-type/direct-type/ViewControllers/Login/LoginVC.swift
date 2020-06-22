@@ -65,6 +65,8 @@ private extension LoginVC {
                 // FIXME: サーバー側でSMS認証系の実装が完了した際には「customChallenge」が返ってくるので、そちらに処理を移管し直す。
                 DispatchQueue.main.async {
                     let vc = self.getVC(sbName: "LoginConfirmVC", vcName: "LoginConfirmVC") as! LoginConfirmVC
+                    let loginInfo = LoginConfirmVC.LoginInfo(phoneNumberText: phoneNumberText.withCountryCode, password: self.password)
+                    vc.configure(with: loginInfo)
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             case .customChallenge:

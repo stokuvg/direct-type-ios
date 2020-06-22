@@ -7,23 +7,31 @@
 //
 
 import UIKit
+import AWSMobileClient
 
 final class LoginConfirmVC: TmpBasicVC {
     @IBOutlet private weak var authCodeTextField: UITextField!
     @IBOutlet private weak var nextButton: UIButton!
     
     @IBAction private func resendAuthCodeButton(_ sender: UIButton) {
-        // TODO: 「認証コードを再送信する」ボタンタップ時の実装を追加
+        resendAuthCode()
     }
     @IBAction private func nextButton(_ sender: UIButton) {
         validateAuthCode()
     }
     
     private let aithCodeMaxLength: Int = 11
+    typealias LoginInfo = (phoneNumberText: String, password: String)
+    private var loginInfo = LoginInfo(phoneNumberText: "", password: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+    }
+    
+    
+    func configure(with loginInfo: LoginInfo) {
+        self.loginInfo = loginInfo
     }
 }
 
@@ -58,5 +66,31 @@ private extension LoginConfirmVC {
         nextButton.isEnabled = isValidInputText
         guard let inputText = authCodeTextField.text, isValidInputText else { return }
         authCodeTextField.text = inputText.prefix(aithCodeMaxLength).description
+    }
+    
+    func resendAuthCode() {
+        AWSMobileClient.default()
+            .signIn(username: loginInfo.phoneNumberText, password: loginInfo.password)  { (signInResult, error) in
+            if let error = error {
+                let buf = AuthManager.convAnyError(error).debugDisp
+                DispatchQueue.main.async {
+                    self.showConfirm(title: "Error", message: buf, onlyOK: true)
+                }
+                return
+            }
+            
+            guard let signInResult = signInResult else {
+                print("レスポンスがが正常に受け取れませんでした")
+                return
+            }
+            switch signInResult.signInState {
+            case .customChallenge:
+                // TODO: 認証コードを検証するAPIを実行する。
+                break
+            case .unknown, .signedIn, .smsMFA, .passwordVerifier, .deviceSRPAuth,
+                 .devicePasswordVerifier, .adminNoSRPAuth, .newPasswordRequired:
+                break
+            }
+        }
     }
 }
