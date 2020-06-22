@@ -1090,7 +1090,6 @@
           "minSalaryId",
           "maxSalaryId",
           "isSalaryDisplay",
-          "salaryOffer",
           "place2Ids",
           "companyName",
           "pressStartDate",

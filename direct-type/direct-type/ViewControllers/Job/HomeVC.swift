@@ -48,7 +48,7 @@ class HomeVC: TmpNaviTopVC {
     
     var pageNo:Int = 1
     
-    var defaultCellHeight:CGFloat = 550
+    var defaultCellHeight:CGFloat = 525
     
     var skipSendStatus:SkipSendStatus = .none
     var keepSendStatus:KeepSendStatus = .none
@@ -59,15 +59,17 @@ class HomeVC: TmpNaviTopVC {
 
         // Do any additional setup after loading the view.
         
-//        let flag = self.getHomeDisplayFlag()
-        let flag = false
+        /*
+        let flag = self.getHomeDisplayFlag()
+//        let flag = false
         Log.selectLog(logLevel: .debug, "flag:\(flag)")
         if flag {
-            self.linesTitle(date: Date().dispHomeDate(), title: "あなたにぴったりの求人")
+            self.linesTitle(date: "", title: "あなたにぴったりの求人")
         } else {
             self.title(name: "おすすめ求人一覧")
 //            self.linesTitle(date: Date().dispHomeDate(), title: "あなたにぴったりの求人")
         }
+        */
         
         // TODO:初回リリースでは外す
 //        self.setRightSearchBtn()
@@ -203,6 +205,19 @@ class HomeVC: TmpNaviTopVC {
             self.showError(myErr)
         }
         .finally {
+            let flag = self.getHomeDisplayFlag()
+//            let flag = false
+            if flag {
+                let convUpdateDate = DateHelper.convStrYMD2Date(self.pageJobCards.updateAt)
+//                    Log.selectLog(logLevel: .debug, "convUpdateDate:\(String(describing: convUpdateDate))")
+                
+                let updateDateString = DateHelper.mdDateString(date: convUpdateDate)
+//                    Log.selectLog(logLevel: .debug, "updateDateString:\(String(describing: updateDateString))")
+                
+                self.linesTitle(date: updateDateString, title: "あなたにぴったりの求人")
+            } else {
+                self.linesTitle(date: "", title: "おすすめ求人一覧")
+            }
             SVProgressHUD.dismiss()
             self.dataCheckAction()
         }
@@ -577,8 +592,13 @@ extension HomeVC: BaseJobCardCellDelegate {
                 Log.selectLog(logLevel: .debug, "keep send finally")
                 self.dispJobCards.jobCards[tag] = jobCard
                 let updateIndex = IndexPath.init(row: tag, section: 0)
-                self.homeTableView.reloadRows(at: [updateIndex], with: .automatic)
-                self.keepSendStatus = .none
+                self.homeTableView.performBatchUpdates({
+                    self.homeTableView.reloadRows(at: [updateIndex], with: .automatic)
+                }, completion: { finished in
+                    if finished {
+                        self.keepSendStatus = .none
+                    }
+                })
             }
         } else {
             Log.selectLog(logLevel: .debug, "キープ削除:jobId:\(jobId)")
@@ -595,7 +615,16 @@ extension HomeVC: BaseJobCardCellDelegate {
                 self.showError(myErr)
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep delete finally")
-                self.keepSendStatus = .none
+                
+                self.dispJobCards.jobCards[tag] = jobCard
+                let updateIndex = IndexPath.init(row: tag, section: 0)
+                self.homeTableView.performBatchUpdates({
+                    self.homeTableView.reloadRows(at: [updateIndex], with: .automatic)
+                }, completion: { finished in
+                    if finished {
+                        self.keepSendStatus = .none
+                    }
+                })
             }
         }
     }

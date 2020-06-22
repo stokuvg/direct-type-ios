@@ -79,7 +79,6 @@ class JobDetailImageCell: BaseTableViewCell {
         let subImageUrlStrings:[String] = data.subPictures
         
         var imageUrlStrings:[String] = [mainImageUrlString]
-        /*
         if subImageUrlStrings.count > 0 {
             for i in 0..<subImageUrlStrings.count {
                 let _subImageUrlString = subImageUrlStrings[i]
@@ -88,7 +87,6 @@ class JobDetailImageCell: BaseTableViewCell {
                 }
             }
         }
-        */
         
         imageCnt = imageUrlStrings.count
         if imageCnt > 1 {

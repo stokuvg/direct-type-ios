@@ -36,6 +36,6 @@ class MdlJobCardList: Codable {
     }
     
     var debugDisp: String {
-        return "[jobDatas: \(jobCards.count)件]"
+        return "[updatesAt:\(updateAt) jobDatas:\(jobCards.count)件 次ページ:\(nextPage)]"
     }
 }
