@@ -38,13 +38,13 @@
                                         <rect key="frame" x="0.0" y="210" width="280" height="40"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QI1-y5-uJB">
-                                                <rect key="frame" x="24" y="10" width="80" height="20"/>
+                                                <rect key="frame" x="24" y="10" width="55" height="20"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upcoming" translatesAutoresizingMaskIntoConstraints="NO" id="YbH-YK-BG5">
-                                                        <rect key="frame" x="0.0" y="0.0" width="80" height="20"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="55" height="20"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="終了間近" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Prq-JD-0tZ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="80" height="20"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="55" height="20"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -57,7 +57,7 @@
                                                     <constraint firstAttribute="bottom" secondItem="Prq-JD-0tZ" secondAttribute="bottom" id="9XJ-3g-DJx"/>
                                                     <constraint firstItem="YbH-YK-BG5" firstAttribute="leading" secondItem="QI1-y5-uJB" secondAttribute="leading" id="JTN-Me-LME"/>
                                                     <constraint firstItem="YbH-YK-BG5" firstAttribute="top" secondItem="QI1-y5-uJB" secondAttribute="top" id="LYd-Dv-qbQ"/>
-                                                    <constraint firstAttribute="width" constant="80" id="TYU-HY-Tmr"/>
+                                                    <constraint firstAttribute="width" constant="55" id="TYU-HY-Tmr"/>
                                                     <constraint firstAttribute="height" constant="20" id="Zxb-hw-BHN"/>
                                                     <constraint firstAttribute="bottom" secondItem="YbH-YK-BG5" secondAttribute="bottom" id="dNQ-3V-bvA"/>
                                                     <constraint firstItem="Prq-JD-0tZ" firstAttribute="top" secondItem="QI1-y5-uJB" secondAttribute="top" id="doW-0b-cLU"/>

@@ -59,7 +59,8 @@ class HomeVC: TmpNaviTopVC {
 
         // Do any additional setup after loading the view.
         
-        let flag = self.getHomeDisplayFlag()
+//        let flag = self.getHomeDisplayFlag()
+        let flag = false
         Log.selectLog(logLevel: .debug, "flag:\(flag)")
         if flag {
             self.linesTitle(date: Date().dispHomeDate(), title: "あなたにぴったりの求人")
@@ -485,19 +486,27 @@ extension HomeVC: JobOfferCardReloadCellDelegate {
 }
 
 extension HomeVC: BaseJobCardCellDelegate {
-    func skipAction(tag: Int) {
-        Log.selectLog(logLevel: .debug, "skipAction tag:\(tag)")
+    func skipAction(jobId: String) {
+        Log.selectLog(logLevel: .debug, "skipAction jobId:\(jobId)")
         
-        if skipSendStatus == .sending { return }
+        if skipSendStatus == .sending {
+            return
+        }
         
         self.skipSendStatus = .sending
         
-        let row = tag
+        var jobCardIndex:Int = 0
+        for i in 0..<dispJobCards.jobCards.count {
+            let jobCard = dispJobCards.jobCards[i]
+            if jobCard.jobCardCode == jobId {
+                jobCardIndex = i
+                break
+            }
+        }
         
-        let jobCard = dispJobCards.jobCards[row]
-        let jobId = jobCard.jobCardCode
-        
+        Log.selectLog(logLevel: .debug, "delete dispJobCards.jobCards.count:\(dispJobCards.jobCards.count)")
         Log.selectLog(logLevel: .debug, "delete jobid:\(jobId)")
+        Log.selectLog(logLevel: .debug, "delete jobCardIndex:\(jobCardIndex)")
         
         var successFlag:Bool = false
         ApiManager.sendJobSkip(id: jobId)
@@ -509,31 +518,34 @@ extension HomeVC: BaseJobCardCellDelegate {
         }.catch{ (error) in
             Log.selectLog(logLevel: .debug, "skip send error:\(error)")
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-            switch myErr.code {
-            case 404:
-                let message: String = ""
-                self.showConfirm(title: "", message: message)
-                .done { _ in
-                    Log.selectLog(logLevel: .debug, "対応方法の確認")
-                }
-                .catch { (error) in
-                }
-                .finally {
-                }
-            default: break
-            }
-            self.showError(error)
+            self.showError(myErr)
         }.finally {
             Log.selectLog(logLevel: .debug, "skip send finally")
             if successFlag {
                 successFlag = false
-                self.dispJobCards.jobCards.remove(at: row)
-                let deleteIndex = IndexPath(row: row, section: 0)
+                self.dispJobCards.jobCards.remove(at: jobCardIndex)
+                let deleteIndex = IndexPath(row: jobCardIndex, section: 0)
                 
+                /*
                 // TODO:スピードを変えるのは難しい？
-                self.homeTableView.deleteRows(at: [deleteIndex], with: .automatic)
+                UIView.animate(withDuration: 0.0,
+                               animations: {
+                                   self.homeTableView.deleteRows(at: [deleteIndex], with: .automatic)
+                }, completion: { finished in
+                    if finished {
+                        self.skipSendStatus = .none
+                    }
+                })
+                */
+                
+                self.homeTableView.performBatchUpdates({
+                    self.homeTableView.deleteRows(at: [deleteIndex], with: .automatic)
+                }, completion: { finished in
+                    if finished {
+                        self.skipSendStatus = .none
+                    }
+                })
             }
-            self.skipSendStatus = .none
         }
     }
     

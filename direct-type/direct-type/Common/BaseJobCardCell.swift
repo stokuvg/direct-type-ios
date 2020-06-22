@@ -10,7 +10,7 @@ import UIKit
 import SwaggerClient
 
 protocol BaseJobCardCellDelegate {
-    func skipAction(tag:Int)
+    func skipAction(jobId:String)
     func keepAction(tag:Int)
 }
 
@@ -46,7 +46,7 @@ class BaseJobCardCell: BaseTableViewCell {
     @IBOutlet weak var deleteBtn:UIButton!
     @IBAction func deleteBtnAction() {
 //        Log.selectLog(logLevel: .debug, "deleteBtnAction start")
-        self.delegate.skipAction(tag: self.tag)
+        self.delegate.skipAction(jobId: self.jobCardData.jobCardCode)
     }
     
     var delegate:BaseJobCardCellDelegate!
