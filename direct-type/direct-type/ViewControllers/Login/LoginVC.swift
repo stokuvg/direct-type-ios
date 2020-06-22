@@ -24,6 +24,7 @@ final class LoginVC: TmpBasicVC {
     // 参照: https://type.qiita.com/y_kawamata/items/e251d8904820d5b5ceaf
     private let password = "Abcd123$"
     private let phoneNumberMaxLength: Int = 11
+    private let shouldLogOutIfNeeded = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,16 +41,8 @@ private extension LoginVC {
     }
     
     func sendLoginAuthCode() {
-         // FIXME: 本来であればこの画面ではログイン状態ではないはずなので、後ほどこのif文スコープは後ほど削除する
-        if AWSMobileClient.default().currentUserState == .signedIn {
-            // ログイン状態だった場合はログアウトする
-            AWSMobileClient.default().signOut { (error) in
-                if let error = error {
-                    let buf = AuthManager.convAnyError(error).debugDisp
-                    print("ログアウトエラー: \(buf)")
-                }
-                print("ログアウト完了")
-            }
+        if shouldLogOutIfNeeded {
+            logOutIfNeeded()
         }
         
         guard let phoneNumberText = phoneNumberTextField.text else { return }
@@ -66,27 +59,27 @@ private extension LoginVC {
                 print("レスポンスがが正常に受け取れませんでした")
                 return
             }
-            var buf = ""
-            switch (signInResult.signInState) {
-            case .signedIn:                 buf = "signedIn"
-            DispatchQueue.main.async {
-                self.showConfirm(title: "認証手順", message: "ログインしました", onlyOK: true)
+            switch signInResult.signInState {
+            case .signedIn:
+                DispatchQueue.main.async {
+                    self.showConfirm(title: "認証手順", message: "ログインしました", onlyOK: true)
                 }
-            case .unknown:                  buf = "unknown"
-            case .smsMFA:                   buf = "smsMFA"
-            case .passwordVerifier:         buf = "passwordVerifier"
-            case .customChallenge:          buf = "customChallenge"
-            case .deviceSRPAuth:            buf = "deviceSRPAuth"
-            case .devicePasswordVerifier:   buf = "devicePasswordVerifier"
-            case .adminNoSRPAuth:           buf = "adminNoSRPAuth"
-            case .newPasswordRequired:      buf = "newPasswordRequired"
+            case .unknown, .smsMFA, .passwordVerifier, .customChallenge, .deviceSRPAuth,
+                 .devicePasswordVerifier, .adminNoSRPAuth, .newPasswordRequired:
+                break
             }
-            // FIXME: 変数確認後に削除
-            print("👀buf: \(buf)")
-            print("👀signInState: \(signInResult.signInState.rawValue)")
-            print("👀codeDetails: \(signInResult.codeDetails.debugDescription)")
-            print("👀parameters: \(signInResult.parameters.description)")
-            print("👀signInResult: \(signInResult)")
+        }
+    }
+    
+    func logOutIfNeeded() {
+        if AWSMobileClient.default().currentUserState == .signedIn {
+            AWSMobileClient.default().signOut { (error) in
+                if let error = error {
+                    let buf = AuthManager.convAnyError(error).debugDisp
+                    print("ログアウトエラー: \(buf)")
+                }
+                print("ログアウト完了")
+            }
         }
     }
     
