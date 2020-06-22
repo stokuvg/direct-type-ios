@@ -46,18 +46,14 @@ private extension LoginVC {
             AWSMobileClient.default().signOut { (error) in
                 if let error = error {
                     let buf = AuthManager.convAnyError(error).debugDisp
-                    DispatchQueue.main.async {
-                        self.showConfirm(title: "Error", message: buf, onlyOK: true)
-                    }
+                    print("Logout error: \(buf)")
                 }
-                DispatchQueue.main.async {
-                    self.showConfirm(title: "認証手順", message: "ログアウトしました", onlyOK: true)
-                }
+                print("Logout completed")
             }
         }
         
         guard let phoneNumberText = phoneNumberTextField.text else { return }
-        AWSMobileClient.default().signIn(username: phoneNumberText, password: password)  { (signInResult, error) in
+        AWSMobileClient.default().signIn(username: phoneNumberText.withCountryCode, password: password)  { (signInResult, error) in
             if let error = error {
                 let buf = AuthManager.convAnyError(error).debugDisp
                 DispatchQueue.main.async {
@@ -85,8 +81,8 @@ private extension LoginVC {
             case .adminNoSRPAuth:           buf = "adminNoSRPAuth"
             case .newPasswordRequired:      buf = "newPasswordRequired"
             }
-            DispatchQueue.main.async { print(#line, #function, buf); SVProgressHUD.show(withStatus: buf) }
             // FIXME: 変数確認後に削除
+            print("👀buf: \(buf)")
             print("👀signInState: \(signInResult.signInState.rawValue)")
             print("👀codeDetails: \(signInResult.codeDetails.debugDescription)")
             print("👀parameters: \(signInResult.parameters.description)")
@@ -106,5 +102,22 @@ private extension LoginVC {
         nextButton.isEnabled = isValidInputText
         guard let inputText = phoneNumberTextField.text, isValidInputText else { return }
         phoneNumberTextField.text = inputText.prefix(phoneNumberMaxLength).description
+    }
+}
+
+private extension String {
+    enum CountryCode {
+        case japan
+        
+        var text: String {
+            switch self {
+            case .japan:
+                return "+81"
+            }
+        }
+    }
+    
+    var withCountryCode: String {
+        return CountryCode.japan.text + dropFirst()
     }
 }
