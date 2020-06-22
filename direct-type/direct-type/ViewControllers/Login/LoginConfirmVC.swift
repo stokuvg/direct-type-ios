@@ -35,6 +35,15 @@ private extension LoginConfirmVC {
     
     func validateAuthCode() {
         // TODO: 入力されたSMS認証コードを使ってAWSMobileClient.default().confirmSignIn(challengeResponse: _)にて検証を行う。
+        // FIXME: デバッグ時には動作確認のため、そのままベースタブ画面へ遷移させる。
+        transitionToBaseTab()
+    }
+    
+    func transitionToBaseTab() {
+        let tabSB = UIStoryboard(name: "BaseTabBC", bundle: nil)
+        let tabBC = tabSB.instantiateViewController(withIdentifier: "Sbid_BaseTabBC")
+        let newNavigationController = UINavigationController(rootViewController: tabBC)
+        UIApplication.shared.keyWindow?.rootViewController = newNavigationController
     }
     
     var isValidInputText: Bool {
