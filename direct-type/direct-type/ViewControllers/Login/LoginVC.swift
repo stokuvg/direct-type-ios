@@ -73,7 +73,7 @@ private extension LoginVC {
             DispatchQueue.main.async { print(#line, #function, buf); SVProgressHUD.show(withStatus: buf) }
             // FIXME: 変数確認後に削除
             print("👀signInState: \(signInResult.signInState.rawValue)")
-            print("👀codeDetails: \(signInResult.codeDetails)")
+            print("👀codeDetails: \(signInResult.codeDetails.debugDescription)")
             print("👀parameters: \(signInResult.parameters.description)")
             print("👀signInResult: \(signInResult)")
         }
