@@ -214,6 +214,7 @@
 		2636075D2477A39900032880 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2636075C2477A39900032880 /* Auth.storyboard */; };
 		2636075F2477AB4900032880 /* BaseVC+ShowDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2636075E2477AB4900032880 /* BaseVC+ShowDialog.swift */; };
 		2636AEFB247B595000CA1F6D /* Ext_ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2636AEFA247B595000CA1F6D /* Ext_ErrorMessage.swift */; };
+		2642E38F24A04C1F003E6907 /* MstSel_salary.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 2642E38E24A04C1F003E6907 /* MstSel_salary.tsv */; };
 		26800520246A2B440053A7F4 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2680051F246A2B440053A7F4 /* Date+Extensions.swift */; };
 		26859E242488E62A000109D1 /* SubEditSpecialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26859E232488E62A000109D1 /* SubEditSpecialVC.swift */; };
 		26859E272488E636000109D1 /* HEditSpecialTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26859E252488E636000109D1 /* HEditSpecialTBCell.swift */; };
@@ -513,6 +514,7 @@
 		2636075C2477A39900032880 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		2636075E2477AB4900032880 /* BaseVC+ShowDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseVC+ShowDialog.swift"; sourceTree = "<group>"; };
 		2636AEFA247B595000CA1F6D /* Ext_ErrorMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ext_ErrorMessage.swift; sourceTree = "<group>"; };
+		2642E38E24A04C1F003E6907 /* MstSel_salary.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstSel_salary.tsv; sourceTree = "<group>"; };
 		2680051F246A2B440053A7F4 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		26859E232488E62A000109D1 /* SubEditSpecialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubEditSpecialVC.swift; sourceTree = "<group>"; };
 		26859E252488E636000109D1 /* HEditSpecialTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HEditSpecialTBCell.swift; sourceTree = "<group>"; };
@@ -1266,6 +1268,7 @@
 			children = (
 				26BF48CF24639D2A00E00215 /* MstK3_changeCount.tsv */,
 				26BF48D124639D2A00E00215 /* MstK4_jobType.tsv */,
+				2642E38E24A04C1F003E6907 /* MstSel_salary.tsv */,
 				26BF48D724639D2B00E00215 /* MstK5_jobExperimentYear.tsv */,
 				26BF48CE24639D2A00E00215 /* MstK6_businessType.tsv */,
 				26BF48D824639D2B00E00215 /* MstK7_skillEnglish.tsv */,
@@ -1388,6 +1391,7 @@
 				269B29A6249708C300B33FBD /* Career.storyboard in Resources */,
 				06FFA0022484D6850085A3D9 /* MyPageChemistryStartCell.xib in Resources */,
 				26147F36247267F9009B30B5 /* MstF22_pcSkillWord.tsv in Resources */,
+				2642E38F24A04C1F003E6907 /* MstSel_salary.tsv in Resources */,
 				06E519842457CF90004E4B7A /* JobOfferBigCardCell.xib in Resources */,
 				066EF6CC245C119000E15AD2 /* JobOfferCardMoreCell.xib in Resources */,
 				0662C60524722E390053CAD9 /* JobDetailFoldingOptionalView.xib in Resources */,

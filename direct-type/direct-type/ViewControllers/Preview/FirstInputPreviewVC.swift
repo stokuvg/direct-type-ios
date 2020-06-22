@@ -17,21 +17,29 @@ class FirstInputPreviewVC: PreviewBaseVC {
 
     override func actCommit(_ sender: UIButton) {
         print(#line, #function, "ボタン押下でAPIフェッチ確認")
-//        if validateLocalModel() {
-//            tableVW.reloadData()
-//            return
-//        }
-        
-        
+        if validateLocalModel() {
+            tableVW.reloadData()
+            return
+        }
         fetchCreateProfile()
-        
+//        fetchCreateResume()
     }
     //共通プレビューをOverrideして利用する
     override func initData() {
         title = "[A系統] 初期入力"
-        
         let firstInput = MdlFirstInput(nickname: "", gender: "", birthday: Constants.SelectItemsUndefineBirthday, hopeArea: [], school: "", employmentStatus: "", lastJobExperiment: MdlJobExperiment(jobType: "", jobExperimentYear: ""), salary: "", jobExperiments: [])
         self.detail = firstInput
+//        //===___ダミーデータ投入___
+//        self.editableModel.editTempCD[EditItemMdlFirstInput.nickname.itemKey] = "あだ名タラ王"
+//        self.editableModel.editTempCD[EditItemMdlFirstInput.gender.itemKey] = "1"
+//        self.editableModel.editTempCD[EditItemMdlFirstInput.birthday.itemKey] = "1999-12-31"
+//        self.editableModel.editTempCD[EditItemMdlFirstInput.hopeArea.itemKey] = "11_13_15"
+//        self.editableModel.editTempCD[EditItemMdlFirstInput.school.itemKey] = "3"
+//        self.editableModel.editTempCD[EditItemMdlFirstInput.employmentStatus.itemKey] = "2"
+//        self.editableModel.editTempCD[EditItemMdlFirstInputLastJobExperiments.jobTypeAndJobExperimentYear.itemKey] = "98:3"
+//        self.editableModel.editTempCD[EditItemMdlFirstInput.salary.itemKey] = "1450"
+//        self.editableModel.editTempCD[EditItemMdlFirstInputJobExperiments.jobTypeAndJobExperimentYear.itemKey] = "2:2_3:3_4:4_5:5_6:6_7:7_8:8_9:9"
+//        //===^^^ダミーデータ投入^^^
         dispData()
     }
     override func dispData() {
@@ -131,18 +139,13 @@ extension FirstInputPreviewVC {
     }
     private func fetchCreateResume() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-//        let model: MdlResume = MdlResume()
-//        let param = CreateResumeRequestDTO(model, editableModel.editTempCD)
         self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
         self.dicValidErrMsg.removeAll()//状態をクリアしておく
-        //===初回入力で実施されたものとする
-        let param = CreateResumeRequestDTO(isEmployed: true, workHistory: [WorkHistoryDTO(job3Id: "1", experienceYears: "3")], educationId: "2")
-        print(param)
+        let param = CreateResumeRequestDTO(editableModel.editTempCD)
         SVProgressHUD.show(withStatus: "履歴書情報の更新")
         ApiManager.createResume(param, isRetry: true)
         .done { result in
-            print(#line, result)
-            self.showConfirm(title: "ダミーデータ", message: "登録完了しました", onlyOK: true)
+            self.showConfirm(title: "初回入力", message: "登録完了しました", onlyOK: true)
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)

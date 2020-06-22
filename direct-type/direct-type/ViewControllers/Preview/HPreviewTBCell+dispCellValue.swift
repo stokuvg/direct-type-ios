@@ -234,7 +234,7 @@ extension HPreviewTBCell {
         case .salaryA13:              //=== [A-13] 入力（現在の年収）
             if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
-            let buf0: String = SelectItemsManager.getCodeDisp(.salary, code: tmp0)?.disp ?? ""
+            let buf0: String = SelectItemsManager.getCodeDisp(.salarySelect, code: tmp0)?.disp ?? ""
             return "\(buf0)"
         //case jobExperimentsA14      //=== [A-14] 入力（追加経験職種）
         //========================

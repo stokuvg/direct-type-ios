@@ -60,11 +60,6 @@ class MdlResume: Codable {
         } else {
             _changeCount = ""
         }
-        var _businessTypes: [Code] = []
-        if let codes = dto.experienceIndustryId { //!!!配列じゃないです
-            _businessTypes.append(codes)
-        }
-        //===
         var _lastJobExperiments: MdlJobExperiment = MdlJobExperiment(jobType: "", jobExperimentYear: "")
         var _jobExperiments: [MdlJobExperiment] = []
         if let workHistorys = dto.workHistory {
@@ -76,6 +71,12 @@ class MdlResume: Codable {
                 }
             }
         }
+        //___experienceIndustryId ???
+        var _businessTypes: [Code] = []//!!!これは、配列じゃない？
+        if let codes = dto.experienceIndustryId { //!!!配列じゃないです
+            _businessTypes.append(codes)
+        }
+
         let _educationId = dto.educationId ?? ""
         let _school = MdlResumeSchool(schoolName: dto.finalEducation?.schoolName ?? "",
                                       department: dto.finalEducation?.department ?? "",
@@ -91,7 +92,7 @@ class MdlResume: Codable {
                 _qualifications.append("\(item)")
             }
         }
-        let _ownPr: String = ""
+        let _ownPr: String = ""//!!!いま、存在していない
         self.init(employmentStatus: _employment,
                   changeCount: _changeCount,
                   lastJobExperiment: _lastJobExperiments,
@@ -126,7 +127,7 @@ class MdlResume: Codable {
 //        self.init(employmentStatus: _employment, changeCount: _changeCount, lastJobExperiment: _lastJobExperiment, jobExperiments: _jobExperiments, businessTypes: _businessTypes, school: _school, skillLanguage: _skillLanguage, qualifications: _qualifications, ownPr: dto.ownPr)
 //    }
     var debugDisp: String {
-        return "[employmentStatus: \(employmentStatus)] [changeCount: \(changeCount)] [lastJobExperiment: \(lastJobExperiment.debugDisp)] [jobExperiments: \(jobExperiments.count)件] [businessTypes: \(businessTypes.count)件] [school: \(school.debugDisp)] [skillLanguage: \(skillLanguage.debugDisp)] [qualifications: \(qualifications.count)件] [ownPr: \(ownPr)文字数]"
+        return "[employmentStatus: \(employmentStatus)] [changeCount: \(changeCount)] [lastJobExperiment: \(lastJobExperiment.debugDisp)] [jobExperiments: \(jobExperiments.count)件] [businessTypes: \(businessTypes.count)件]  [educationId: \(educationId)] [school: \(school.debugDisp)] [skillLanguage: \(skillLanguage.debugDisp)] [qualifications: \(qualifications.count)件] [ownPr: \(ownPr.count)文字数]"
     }
 }
 

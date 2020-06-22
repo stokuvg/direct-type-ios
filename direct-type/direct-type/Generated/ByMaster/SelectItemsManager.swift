@@ -44,6 +44,7 @@ class SelectItemsManager: NSObject {
         initDependency()
         //===
         loadMaster(type: .salary)
+        loadMaster(type: .salarySelect)
         loadMaster(type: .entryPlace)
         loadMaster(type: .schoolType)
         loadMaster(type: .place)
@@ -146,6 +147,7 @@ extension SelectItemsManager {
         case undefine //コードじゃないでの定義なし
 
         case salary
+        case salarySelect //コードではなく選択させるためのテーブル
         case entryPlace
         case schoolType
         case place
@@ -171,6 +173,7 @@ extension SelectItemsManager {
             switch self {
             case .undefine:             return ""
             case .salary:               return "MstK10_salary"
+            case .salarySelect:         return "MstSel_salary"
             case .entryPlace:           return "MstK11_entryPlace"
             case .schoolType:           return "MstK13_schoolType"
             case .place:                return "MstK14_place"
