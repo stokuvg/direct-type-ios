@@ -102,7 +102,7 @@ class FirstInputPreviewVC: PreviewBaseVC {
 extension ResumePreviewVC {
     private func fetchGetResume() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-        let resume: GetResumeResponseDTO = GetResumeResponseDTO(isEmployed: nil, changeJobCount: nil, workHistory: nil, experienceIndustryId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil)
+        let resume: GetResumeResponseDTO = GetResumeResponseDTO(isEmployed: nil, changeJobCount: nil, workHistory: nil, experienceIndustryId: nil, educationId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil)
         self.detail = MdlResume(dto: resume)
         self.dispData()
     }

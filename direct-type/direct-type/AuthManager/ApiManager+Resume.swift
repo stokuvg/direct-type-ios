@@ -38,73 +38,14 @@ extension ApiManager {
         return promise
     }
 }
-////================================================================
-////=== 履歴書更新 ===
-//extension UpdateResumeRequestDTO {
-//    init() {
-//        self.init(isEmployed: nil, changeJobCount: nil, workHistory: nil, experienceIndustryId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil)
-//    }
-//    init(_ editTempCD: [EditableItemKey: EditableItemCurVal]) {
-//        self.init()
-//        for (key, val) in editTempCD {
-//            switch key {
-//            case EditItemMdlResume.employmentStatus.itemKey:
-//            default: break
-//            }
-//        }
-//    }
-//}
-//extension ApiManager {
-//    class func updateResume(_ param: UpdateResumeRequestDTO, isRetry: Bool = true) -> Promise<Void> {
-//        if isRetry {
-//            return firstly { () -> Promise<Void> in
-//                retry(args: param, task: updateResumeFetch) { (error) -> Bool in return true }
-//            }
-//        } else {
-//            return updateResumeFetch(param: param)
-//        }
-//    }
-//    private class func updateResumeFetch(param: UpdateResumeRequestDTO) -> Promise<Void> {
-//        let (promise, resolver) = Promise<Void>.pending()
-//        AuthManager.needAuth(true)
-//        ResumeAPI.resumeControllerUpdate(body: param)
-//        .done { result in
-//            resolver.fulfill(Void())
-//        }
-//        .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
-//            resolver.reject(error)
-//        }
-//        .finally {
-//        }
-//        return promise
-//    }
-//}
-//////================================================================
 //================================================================
-//=== 履歴書作成 ===
-extension CreateResumeRequestDTO {
+//=== 履歴書更新 ===
+extension UpdateResumeRequestDTO {
     init() {
-        self.init(isEmployed: false, changeJobCount: 0, workHistory: []
-            , experienceIndustryId: "", finalEducation: FinalEducationDTO(schoolName: "", faculty: "", department: "", guraduationYearMonth: ""), toeic: 0, toefl: 0, englishSkillId: "", otherLanguageSkillId: "", licenseIds: [])
+        self.init(isEmployed: nil, changeJobCount: nil, workHistory: nil, experienceIndustryId: nil, educationId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil)
     }
-    init(_ model: MdlResume, _ editTempCD: [EditableItemKey: EditableItemCurVal]) {
+    init(_ editTempCD: [EditableItemKey: EditableItemCurVal]) {
         self.init()
-        self.init(isEmployed: true,
-            changeJobCount: Int(model.changeCount) ?? 0,
-            workHistory: [],
-            experienceIndustryId: model.businessTypes.first ?? "",
-            finalEducation: FinalEducationDTO(
-                schoolName: model.school.schoolName,
-                faculty: model.school.department,
-                department: model.school.department,
-                guraduationYearMonth: model.school.graduationYear ),
-            toeic: Int(model.skillLanguage.languageToeicScore) ?? 0,
-            toefl: Int(model.skillLanguage.languageToeflScore) ?? 0,
-            englishSkillId: model.skillLanguage.languageEnglish,
-            otherLanguageSkillId: model.skillLanguage.languageStudySkill,
-            licenseIds: []
-        )
-
         var _workHistory: [WorkHistoryDTO] = []
         for (key, val) in editTempCD {
             print("\t💙💙[\(key): \(val)]💙💙")
@@ -118,10 +59,10 @@ extension CreateResumeRequestDTO {
 //            case EditItemMdlResume.jobExperiments.itemKey: self.experienceIndustryId = val//経験業種ID
 
             //public var : FinalEducationDTO
-            case EditItemMdlResumeSchool.schoolName.itemKey: self.finalEducation.schoolName = val
-            case EditItemMdlResumeSchool.department.itemKey: self.finalEducation.department = val
-            case EditItemMdlResumeSchool.subject.itemKey: self.finalEducation.faculty = val
-            case EditItemMdlResumeSchool.graduationYear.itemKey: self.finalEducation.guraduationYearMonth = val
+//            case EditItemMdlResumeSchool.schoolName.itemKey: self.finalEducation.schoolName = val
+//            case EditItemMdlResumeSchool.department.itemKey: self.finalEducation.department = val
+//            case EditItemMdlResumeSchool.subject.itemKey: self.finalEducation.faculty = val
+//            case EditItemMdlResumeSchool.graduationYear.itemKey: self.finalEducation.guraduationYearMonth = val
             case EditItemMdlResumeSkillLanguage.languageToeicScore.itemKey: self.toeic = Int(val) ?? 0
             case EditItemMdlResumeSkillLanguage.languageToeflScore.itemKey: self.toefl = Int(val) ?? 0
             case EditItemMdlResumeSkillLanguage.languageEnglish.itemKey: self.englishSkillId = val
@@ -135,7 +76,48 @@ extension CreateResumeRequestDTO {
         self.workHistory = _workHistory
         let finalEducation = FinalEducationDTO(schoolName: "ダミー学校名です", faculty: "医学部", department: "医学科", guraduationYearMonth: "2000-01")
         self.finalEducation = finalEducation
-        self.workHistory.append(WorkHistoryDTO(job3Id: "1", experienceYears: "3"))
+//        self.workHistory.append(WorkHistoryDTO(job3Id: "1", experienceYears: "3"))
+    }
+}
+extension ApiManager {
+    class func updateResume(_ param: UpdateResumeRequestDTO, isRetry: Bool = true) -> Promise<Void> {
+        if isRetry {
+            return firstly { () -> Promise<Void> in
+                retry(args: param, task: updateResumeFetch) { (error) -> Bool in return true }
+            }
+        } else {
+            return updateResumeFetch(param: param)
+        }
+    }
+    private class func updateResumeFetch(param: UpdateResumeRequestDTO) -> Promise<Void> {
+        let (promise, resolver) = Promise<Void>.pending()
+        AuthManager.needAuth(true)
+        ResumeAPI.resumeControllerUpdate(body: param)
+        .done { result in
+            resolver.fulfill(Void())
+        }
+        .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
+            resolver.reject(error)
+        }
+        .finally {
+        }
+        return promise
+    }
+}
+//================================================================
+//================================================================
+//=== 履歴書作成 ===
+extension CreateResumeRequestDTO {
+    init() {
+        self.init(isEmployed: false, workHistory: [], educationId: "")
+    }
+    init(_ model: MdlResume, _ editTempCD: [EditableItemKey: EditableItemCurVal]) {
+        self.init()
+        self.init(isEmployed: true,
+            workHistory: [],
+            educationId: ""
+        )
+
     }
 }
 extension ApiManager {
