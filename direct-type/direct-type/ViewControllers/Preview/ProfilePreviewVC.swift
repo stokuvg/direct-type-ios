@@ -25,9 +25,6 @@ class ProfilePreviewVC: PreviewBaseVC {
     //共通プレビューをOverrideして利用する
     override func initData() {
         title = "個人プロフィール"
-        if Constants.DbgOfflineMode {
-            self.detail = MdlProfile(nickname: "にっくねーむ：おふらいん", hopeJobPlaceIds: ["13", "14"], salaryId: "8", familyName: "スマ澤", firstName: "花子", familyNameKana: "スマザワ", firstNameKana: "ハナコ", birthday: Constants.SelectItemsUndefineBirthday, gender: "2", zipCode: "1234567", prefecture: "22", address1: "千代田区", address2: "有楽町1-2-3　ネオ新橋ビル", mailAddress: "sumahana@example.com", mobilePhoneNo: Constants.Auth_username)
-        }
     }
     override func dispData() {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
@@ -125,19 +122,11 @@ extension ProfilePreviewVC {
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
             case 403:
-                print("なんでこれ？")
                 break
             case 404:
                 let message: String = "[A系統]初期入力画面でProfileやResumeの一部データが登録されているはず\n"
-                self.showConfirm(title: "特殊対応", message: message)
-                .done { _ in
-//                    self.fetchCreateProfile()
-                }
-                .catch { (error) in
-                }
-                .finally {
-                }
-            default: break
+                self.showError(MyErrorDisp(code: 9999, title: "特殊処理", message: message, orgErr: nil, arrValidErrMsg: []))
+                default: break
             }
             self.showError(myErr)
         }

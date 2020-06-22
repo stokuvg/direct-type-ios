@@ -27,18 +27,18 @@ class FirstInputPreviewVC: PreviewBaseVC {
     //共通プレビューをOverrideして利用する
     override func initData() {
         title = "[A系統] 初期入力"
-        let firstInput = MdlFirstInput(nickname: "", gender: "", birthday: Constants.SelectItemsUndefineBirthday, hopeArea: [], school: "", employmentStatus: "", lastJobExperiment: MdlJobExperiment(jobType: "", jobExperimentYear: ""), salary: "", jobExperiments: [])
+        let firstInput = MdlFirstInput(nickname: "", gender: "", birthday: Constants.SelectItemsUndefineDate, hopeArea: [], school: "", employmentStatus: "", lastJobExperiment: MdlJobExperiment(jobType: "", jobExperimentYear: ""), salary: "", jobExperiments: [])
         self.detail = firstInput
 //        //===___ダミーデータ投入___
-//        self.editableModel.editTempCD[EditItemMdlFirstInput.nickname.itemKey] = "あだ名タラ王"
-//        self.editableModel.editTempCD[EditItemMdlFirstInput.gender.itemKey] = "1"
-//        self.editableModel.editTempCD[EditItemMdlFirstInput.birthday.itemKey] = "1999-12-31"
-//        self.editableModel.editTempCD[EditItemMdlFirstInput.hopeArea.itemKey] = "11_13_15"
-//        self.editableModel.editTempCD[EditItemMdlFirstInput.school.itemKey] = "3"
-//        self.editableModel.editTempCD[EditItemMdlFirstInput.employmentStatus.itemKey] = "2"
-//        self.editableModel.editTempCD[EditItemMdlFirstInputLastJobExperiments.jobTypeAndJobExperimentYear.itemKey] = "98:3"
-//        self.editableModel.editTempCD[EditItemMdlFirstInput.salary.itemKey] = "1450"
-//        self.editableModel.editTempCD[EditItemMdlFirstInputJobExperiments.jobTypeAndJobExperimentYear.itemKey] = "2:2_3:3_4:4_5:5_6:6_7:7_8:8_9:9"
+        self.editableModel.editTempCD[EditItemMdlFirstInput.nickname.itemKey] = "あだ名タラ王"
+        self.editableModel.editTempCD[EditItemMdlFirstInput.gender.itemKey] = "2"
+        self.editableModel.editTempCD[EditItemMdlFirstInput.birthday.itemKey] = "1999-12-31"
+        self.editableModel.editTempCD[EditItemMdlFirstInput.hopeArea.itemKey] = "11_13_15"
+        self.editableModel.editTempCD[EditItemMdlFirstInput.school.itemKey] = "3"
+        self.editableModel.editTempCD[EditItemMdlFirstInput.employmentStatus.itemKey] = "2"
+        self.editableModel.editTempCD[EditItemMdlFirstInputLastJobExperiments.jobTypeAndJobExperimentYear.itemKey] = "98:3"
+        self.editableModel.editTempCD[EditItemMdlFirstInput.salary.itemKey] = "1450"
+        self.editableModel.editTempCD[EditItemMdlFirstInputJobExperiments.jobTypeAndJobExperimentYear.itemKey] = "2:2_3:3_4:4_5:5_6:6_7:7_8:8_9:9"
 //        //===^^^ダミーデータ投入^^^
         dispData()
     }
@@ -114,8 +114,7 @@ extension FirstInputPreviewVC {
     //プロフィールと履歴書を叩くため
     private func fetchCreateProfile() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-        //===初回入力で実施されたものとする
-        let param = CreateProfileRequestDTO(nickname: "初期ニックネーム", hopeJobPlaceIds: ["13", "14"], salaryId: "8", birthday: Constants.SelectItemsUndefineBirthday.dispYmd(), genderId: "2")
+        let param = CreateProfileRequestDTO(editableModel.editTempCD)
         SVProgressHUD.show(withStatus: "プロフィール情報の作成")
         ApiManager.createProfile(param, isRetry: true)
         .done { result in
@@ -128,6 +127,7 @@ extension FirstInputPreviewVC {
                 let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
                 self.dicGrpValidErrMsg = dicGrpError
                 self.dicValidErrMsg = dicError
+                self.showError(myErr)//!!!
             default:
                 self.showError(error)
             }

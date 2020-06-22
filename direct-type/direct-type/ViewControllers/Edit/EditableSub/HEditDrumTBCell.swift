@@ -47,7 +47,11 @@ class HEditDrumTBCell: UITableViewCell {
         let bufTitle = _item.dispName //_item.type.dispTitle
         lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
         let date: Date = DateHelper.convStrYMD2Date(_item.curVal)
-        tfValue.text = date.dispYmdJP()
+        if date == Constants.SelectItemsUndefineDate {
+            tfValue.text = Constants.SelectItemsUndefineDateJP
+        } else {
+            tfValue.text = date.dispYmdJP()
+        }
         lblDebug.text = ""
         if Constants.DbgDispStatus {
             let bufDebug = _item.debugDisp
