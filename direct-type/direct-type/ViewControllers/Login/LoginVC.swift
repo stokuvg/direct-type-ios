@@ -8,18 +8,33 @@
 
 import UIKit
 
-class LoginVC: TmpBasicVC {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+final class LoginVC: TmpBasicVC {
+    
+    @IBAction func reasonOfConfirmPhoneButton(_ sender: UIButton) {
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.navigationController?.isNavigationBarHidden = false
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setup()
     }
+}
 
+private extension LoginVC {
+    func setup() {
+        title = "初期入力"
+        setLeftBarButton()
+    }
+    
+    var leftBatButtonFrame: CGRect {
+        return CGRect(x: .zero, y: .zero, width: 30, height: 30)
+    }
+    func setLeftBarButton() {
+        let leftBarButton = UIButton(type: .system)
+        leftBarButton.frame = leftBatButtonFrame
+        leftBarButton.setTitle(text: "✗", fontType: .font_XL, textColor: .white, alignment: .left)
+        leftBarButton.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
+        
+        let backButtonItem =  UIBarButtonItem(customView: leftBarButton)
+        navigationItem.leftBarButtonItem = backButtonItem
+    }
 }

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VNP-xz-G4D">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +16,72 @@
                     <view key="view" contentMode="scaleToFill" id="88B-Zq-UDi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="09001234567" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H3I-p9-5hJ">
+                                <rect key="frame" x="40" y="199" width="240" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Jvh-0Z-lYb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yqF-xL-OJs">
+                                <rect key="frame" x="30" y="126" width="260" height="53"/>
+                                <string key="text">本人確認のため、携帯電話のSMS(ショートメッセージサービス)を利用して認証を行います。
+電話番号が他のお客様に公開されることはありません。</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="電話番号を入力してください" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1aj-xu-sSO">
+                                <rect key="frame" x="30" y="88" width="260" height="18"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ajJ-eq-OMz">
+                                <rect key="frame" x="147" y="249" width="133" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <state key="normal" title="電話番号の確認が必要な理由">
+                                    <color key="titleColor" name="color-sub"/>
+                                </state>
+                                <connections>
+                                    <action selector="reasonOfConfirmPhoneButton:" destination="VNP-xz-G4D" eventType="touchUpInside" id="0EX-IC-Rr5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jpp-Ul-Dls">
+                                <rect key="frame" x="40" y="293" width="240" height="40"/>
+                                <color key="backgroundColor" name="color-sub"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="yVR-Ij-i97"/>
+                                </constraints>
+                                <state key="normal" title="次へ">
+                                    <color key="titleColor" name="color-white"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="uGY-Db-oor" firstAttribute="trailing" secondItem="H3I-p9-5hJ" secondAttribute="trailing" constant="40" id="5yk-ds-NZM"/>
+                            <constraint firstItem="jpp-Ul-Dls" firstAttribute="top" secondItem="ajJ-eq-OMz" secondAttribute="bottom" constant="20" id="7bg-Cl-yke"/>
+                            <constraint firstItem="ajJ-eq-OMz" firstAttribute="trailing" secondItem="H3I-p9-5hJ" secondAttribute="trailing" id="H8E-2I-ozf"/>
+                            <constraint firstItem="uGY-Db-oor" firstAttribute="trailing" secondItem="jpp-Ul-Dls" secondAttribute="trailing" constant="40" id="HNf-e9-04O"/>
+                            <constraint firstItem="H3I-p9-5hJ" firstAttribute="centerY" secondItem="88B-Zq-UDi" secondAttribute="centerY" constant="-60" id="PGp-yE-LGt"/>
+                            <constraint firstItem="H3I-p9-5hJ" firstAttribute="top" secondItem="yqF-xL-OJs" secondAttribute="bottom" constant="20" id="SLW-gT-u7h"/>
+                            <constraint firstItem="1aj-xu-sSO" firstAttribute="leading" secondItem="uGY-Db-oor" secondAttribute="leading" constant="30" id="c9x-nF-n1M"/>
+                            <constraint firstItem="uGY-Db-oor" firstAttribute="trailing" secondItem="yqF-xL-OJs" secondAttribute="trailing" constant="30" id="eCz-rz-RFW"/>
+                            <constraint firstItem="jpp-Ul-Dls" firstAttribute="leading" secondItem="uGY-Db-oor" secondAttribute="leading" constant="40" id="fG5-qL-6Ab"/>
+                            <constraint firstItem="uGY-Db-oor" firstAttribute="trailing" secondItem="1aj-xu-sSO" secondAttribute="trailing" constant="30" id="kI5-PQ-Fn8"/>
+                            <constraint firstItem="H3I-p9-5hJ" firstAttribute="leading" secondItem="uGY-Db-oor" secondAttribute="leading" constant="40" id="meP-e0-WzG"/>
+                            <constraint firstItem="ajJ-eq-OMz" firstAttribute="top" secondItem="H3I-p9-5hJ" secondAttribute="bottom" id="or4-E5-wex"/>
+                            <constraint firstItem="yqF-xL-OJs" firstAttribute="top" secondItem="1aj-xu-sSO" secondAttribute="bottom" constant="20" id="sl6-Ob-0Ub"/>
+                            <constraint firstItem="yqF-xL-OJs" firstAttribute="leading" secondItem="uGY-Db-oor" secondAttribute="leading" constant="30" id="yrn-9l-VYP"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="uGY-Db-oor"/>
                     </view>
                 </viewController>
@@ -24,4 +90,12 @@
             <point key="canvasLocation" x="-100" y="-50"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="color-sub">
+            <color red="1" green="0.35294117647058826" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="color-white">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
