@@ -27,14 +27,21 @@ class DateHelper {
          dateTimeFormatter.dateFormat = "YYYY年M月d日"
          dateTimeFormatter.timeZone = TimeZone(secondsFromGMT: 0)
          return dateTimeFormatter
-     }
+    }
     class func dateTimeFormatterYmJP() -> DateFormatter {
          let dateTimeFormatter = DateFormatter()
          dateTimeFormatter.locale = Locale(identifier: "en_US_POSIX")
          dateTimeFormatter.dateFormat = "YYYY年M月"
          dateTimeFormatter.timeZone = TimeZone(secondsFromGMT: 0)
          return dateTimeFormatter
-     }
+    }
+    class func dateTimeFormatterMdJP() -> DateFormatter {
+         let dateTimeFormatter = DateFormatter()
+         dateTimeFormatter.locale = Locale(identifier: "en_US_POSIX")
+         dateTimeFormatter.dateFormat = "M月d日"
+         dateTimeFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+         return dateTimeFormatter
+    }
     
     class func dateStringChangeFormatString(dateString: String) -> String {
         if dateString.count == 0 {
@@ -55,6 +62,13 @@ class DateHelper {
         }
         
         return dateCutArr[0] + "年" + dateCutArr[1] + "月" + dateCutArr[2] + "日"
+    }
+    
+    // 月,日を表示
+    class func mdDateString(date: Date) -> String {
+        let dateFormat = dateTimeFormatterMdJP()
+        let dateString = dateFormat.string(from: date)
+        return dateString
     }
     
     func makeDateArray(dateString: String) -> [String] {

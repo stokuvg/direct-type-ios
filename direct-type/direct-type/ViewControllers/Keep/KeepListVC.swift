@@ -197,7 +197,8 @@ extension KeepListVC: UITableViewDataSource {
 }
 
 extension KeepListVC: BaseJobCardCellDelegate {
-    func skipAction(tag: Int) {
+    
+    func skipAction(jobId: String) {
     }
     
     func keepAction(tag: Int) {

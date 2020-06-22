@@ -27,10 +27,9 @@ class JobOfferCardMoreCell: BaseTableViewCell {
         //        deleteBtn.titleLabel?.text(text: "見送り", fontType: .C_font_M, textColor: textColor, alignment: .center)
         self.backgroundColor = UIColor.init(colorType: .color_base)
         
-        moreBtn.setTitle("もっと見る", for: .normal)
-        
+        moreBtn.setTitle("もっと見る", for: .normal)        
         moreBtn.setTitle(text: "もっと見る", fontType: .C_font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
-        moreBtn.backgroundColor = UIColor.init(colorType: .color_sub)
+        moreBtn.backgroundColor = UIColor.init(colorType: .color_button)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
