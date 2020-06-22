@@ -14,7 +14,7 @@ final class LoginVC: TmpBasicVC {
     @IBOutlet private weak var phoneNumberTextField: UITextField!
     @IBOutlet private weak var nextButton: UIButton!
     @IBAction private func reasonOfConfirmPhoneButton(_ sender: UIButton) {
-        // TODO: 「電話番号の確認が必要な理由」ボタンタップ時の実装を追加
+        openReasonOfConfirmPhone()
     }
     @IBAction private func nextButton(_ sender: UIButton) {
         sendLoginAuthCode()
@@ -78,6 +78,13 @@ private extension LoginVC {
                 break
             }
         }
+    }
+    
+    func openReasonOfConfirmPhone() {
+        let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
+        vc.setup(type: .reasonOfConfirmPhone)
+        vc.modalPresentationStyle = .fullScreen
+        navigationController?.present(vc, animated: true, completion: nil)
     }
     
     func logOutIfNeeded() {
