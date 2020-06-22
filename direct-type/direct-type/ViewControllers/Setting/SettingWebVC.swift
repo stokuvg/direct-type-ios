@@ -15,6 +15,7 @@ enum SettingWebType {
     case Privacy
     case Term
     case approachExplanation
+    case reasonOfConfirmPhone
 }
 
 class SettingWebVC: TmpWebVC {
@@ -66,6 +67,9 @@ class SettingWebVC: TmpWebVC {
             title = ""
             urlString = ""
         case .approachExplanation:
+            title = ""
+            urlString = ""
+        case .reasonOfConfirmPhone:
             title = ""
             urlString = ""
         }

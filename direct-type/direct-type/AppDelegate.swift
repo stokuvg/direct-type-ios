@@ -36,7 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AWSMobileClient.default().initialize { (userState, error) in
             if let userState = userState {
                 print("UserState: \(userState.rawValue)")
-                loginFlag = true
+                // FIXME: デバッグのために強制的に初期登録動線を表示
+                loginFlag = false
             } else if let error = error {
                 print("error: \(error.localizedDescription)")
                 loginFlag = false
@@ -78,7 +79,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         
     }
-
-
 }
-

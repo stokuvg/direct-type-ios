@@ -15,6 +15,7 @@ extension BaseVC {
         case resumeLater
     }
 
+    @discardableResult
     internal func showConfirm(title: String, message: String, onlyOK: Bool = false) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
 

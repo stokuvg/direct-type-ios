@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SFi-WS-gi4">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Login ConfirmVC-->
+        <scene sceneID="SRa-BL-jz4">
+            <objects>
+                <viewController storyboardIdentifier="Sbid_LoginConfirmVC" id="SFi-WS-gi4" customClass="LoginConfirmVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fOM-f3-mMe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="コードを入力" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dsr-d4-1ZA">
+                                <rect key="frame" x="40" y="363" width="334" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="uCl-zc-1co"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yRs-Pg-PEg">
+                                <rect key="frame" x="30" y="296.5" width="354" height="26.5"/>
+                                <string key="text">入力いただいた電話番号に確認コードを送りました。
+送信された６桁のコードを入力してください。</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="６桁のコードを入力してください" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RGI-ZL-XyS">
+                                <rect key="frame" x="20" y="258.5" width="374" height="18"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DkR-za-VZ9">
+                                <rect key="frame" x="261" y="413" width="113" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <state key="normal" title="認証コードを再送信する">
+                                    <color key="titleColor" name="color-sub"/>
+                                </state>
+                                <connections>
+                                    <action selector="resendAuthCodeButton:" destination="SFi-WS-gi4" eventType="touchUpInside" id="P2d-cV-pfl"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JRg-mF-yg5">
+                                <rect key="frame" x="40" y="457" width="334" height="40"/>
+                                <color key="backgroundColor" name="color-sub"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="MzL-4e-XEP"/>
+                                </constraints>
+                                <state key="normal" title="次へ">
+                                    <color key="titleColor" name="color-white"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="nextButton:" destination="SFi-WS-gi4" eventType="touchUpInside" id="FTk-nT-CmN"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="DkR-za-VZ9" firstAttribute="trailing" secondItem="Dsr-d4-1ZA" secondAttribute="trailing" id="3lM-jA-juC"/>
+                            <constraint firstItem="RGI-ZL-XyS" firstAttribute="leading" secondItem="8sz-GB-6p2" secondAttribute="leading" constant="20" id="7dx-Lg-b7j"/>
+                            <constraint firstItem="Dsr-d4-1ZA" firstAttribute="leading" secondItem="8sz-GB-6p2" secondAttribute="leading" constant="40" id="BJv-q8-50V"/>
+                            <constraint firstItem="8sz-GB-6p2" firstAttribute="trailing" secondItem="JRg-mF-yg5" secondAttribute="trailing" constant="40" id="O39-tc-zN4"/>
+                            <constraint firstItem="Dsr-d4-1ZA" firstAttribute="centerY" secondItem="fOM-f3-mMe" secondAttribute="centerY" constant="-60" id="OXM-0g-mKp"/>
+                            <constraint firstItem="Dsr-d4-1ZA" firstAttribute="top" secondItem="yRs-Pg-PEg" secondAttribute="bottom" constant="40" id="Qdv-uu-QaM"/>
+                            <constraint firstItem="8sz-GB-6p2" firstAttribute="trailing" secondItem="Dsr-d4-1ZA" secondAttribute="trailing" constant="40" id="RxD-RG-yux"/>
+                            <constraint firstItem="yRs-Pg-PEg" firstAttribute="leading" secondItem="8sz-GB-6p2" secondAttribute="leading" constant="30" id="Vws-DD-YZW"/>
+                            <constraint firstItem="JRg-mF-yg5" firstAttribute="top" secondItem="DkR-za-VZ9" secondAttribute="bottom" constant="20" id="hX2-bZ-Eid"/>
+                            <constraint firstItem="8sz-GB-6p2" firstAttribute="trailing" secondItem="yRs-Pg-PEg" secondAttribute="trailing" constant="30" id="o2Z-hp-ExS"/>
+                            <constraint firstItem="JRg-mF-yg5" firstAttribute="leading" secondItem="8sz-GB-6p2" secondAttribute="leading" constant="40" id="ueJ-em-eIM"/>
+                            <constraint firstItem="DkR-za-VZ9" firstAttribute="top" secondItem="Dsr-d4-1ZA" secondAttribute="bottom" id="y1T-Ts-HTP"/>
+                            <constraint firstItem="8sz-GB-6p2" firstAttribute="trailing" secondItem="RGI-ZL-XyS" secondAttribute="trailing" constant="20" id="y9V-PC-V6l"/>
+                            <constraint firstItem="yRs-Pg-PEg" firstAttribute="top" secondItem="RGI-ZL-XyS" secondAttribute="bottom" constant="20" id="yTR-WJ-xqG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="8sz-GB-6p2"/>
+                    </view>
+                    <connections>
+                        <outlet property="authCodeTextField" destination="Dsr-d4-1ZA" id="ec5-rC-qB4"/>
+                        <outlet property="nextButton" destination="JRg-mF-yg5" id="nK1-R8-e5S"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0vc-SF-Dy7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="51" y="21"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="color-sub">
+            <color red="1" green="0.35294117647058826" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="color-white">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
