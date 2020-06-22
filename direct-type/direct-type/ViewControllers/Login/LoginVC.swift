@@ -8,6 +8,7 @@
 
 import UIKit
 import AWSMobileClient
+import SVProgressHUD
 
 final class LoginVC: TmpBasicVC {
     @IBOutlet private weak var phoneNumberTextField: UITextField!
@@ -38,9 +39,43 @@ private extension LoginVC {
     }
     
     func sendLoginAuthCode() {
-//        AWSMobileClient.default().signIn(username: username, password: password)  { (signInResult, error) in
-//            
-//        }
+        guard let phoneNumberText = phoneNumberTextField.text else { return }
+        AWSMobileClient.default().signIn(username: phoneNumberText, password: password)  { (signInResult, error) in
+            if let error = error {
+                let buf = AuthManager.convAnyError(error).debugDisp
+                DispatchQueue.main.async {
+                    print(#line, #function, buf)
+                    self.showConfirm(title: "Error", message: buf, onlyOK: true)
+                }
+                return
+            }
+            
+            guard let signInResult = signInResult else {
+                self.showConfirm(title: "Error", message: "通信が正常に完了しませんでした", onlyOK: true)
+                return
+            }
+            var buf = ""
+            switch (signInResult.signInState) {
+            case .signedIn:                 buf = "signedIn"
+            DispatchQueue.main.async {
+                self.showConfirm(title: "認証手順", message: "ログインしました", onlyOK: true)
+                }
+            case .unknown:                  buf = "unknown"
+            case .smsMFA:                   buf = "smsMFA"
+            case .passwordVerifier:         buf = "passwordVerifier"
+            case .customChallenge:          buf = "customChallenge"
+            case .deviceSRPAuth:            buf = "deviceSRPAuth"
+            case .devicePasswordVerifier:   buf = "devicePasswordVerifier"
+            case .adminNoSRPAuth:           buf = "adminNoSRPAuth"
+            case .newPasswordRequired:      buf = "newPasswordRequired"
+            }
+            DispatchQueue.main.async { print(#line, #function, buf); SVProgressHUD.show(withStatus: buf) }
+            // FIXME: 変数確認後に削除
+            print("👀signInState: \(signInResult.signInState.rawValue)")
+            print("👀codeDetails: \(signInResult.codeDetails)")
+            print("👀parameters: \(signInResult.parameters.description)")
+            print("👀signInResult: \(signInResult)")
+        }
     }
     
     var isValidInputText: Bool {
