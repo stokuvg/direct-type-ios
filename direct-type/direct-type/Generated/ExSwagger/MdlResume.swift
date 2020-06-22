@@ -53,13 +53,16 @@ class MdlResume: Codable {
     }
     //ApiモデルをAppモデルに変換して保持させる
     convenience init(dto: GetResumeResponseDTO) {
-        let _employment = (dto.isEmployed ?? false) ? "1" : "2"//!!!employmentStatus
+        let _employment = (dto.isEmployed == true) ? "1" : "0" // 1: 就業中, 0: 就業していない
         let _changeCount: String!
         if let tmp = dto.changeJobCount {
             _changeCount = "\(tmp)"
         } else {
             _changeCount = ""
         }
+        
+        print("💙💙💙💙💙💙💙💙[_changeCount: \(_changeCount)]")
+        
         var _lastJobExperiments: MdlJobExperiment = MdlJobExperiment(jobType: "", jobExperimentYear: "")
         var _jobExperiments: [MdlJobExperiment] = []
         if let workHistorys = dto.workHistory {
@@ -79,8 +82,8 @@ class MdlResume: Codable {
 
         let _educationId = dto.educationId ?? ""
         let _school = MdlResumeSchool(schoolName: dto.finalEducation?.schoolName ?? "",
-                                      department: dto.finalEducation?.department ?? "",
-                                      subject: dto.finalEducation?.faculty ?? "",
+                                      department: dto.finalEducation?.faculty ?? "",
+                                      subject: dto.finalEducation?.department ?? "",
                                       graduationYear: dto.finalEducation?.guraduationYearMonth ?? Constants.SelectItemsUndefineDate.dispYm())
         let _skillLanguage = MdlResumeSkillLanguage(languageToeicScore: "\(dto.toeic ?? 0)",
                                                     languageToeflScore: "\(dto.toefl ?? 0)",

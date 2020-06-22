@@ -26,8 +26,6 @@ extension ApiManager {
         AuthManager.needAuth(true)
         ResumeAPI.resumeControllerGet()
         .done { result in
-            print(result)
-            let hoge = MdlResume(dto: result)
             resolver.fulfill(MdlResume(dto: result)) //変換しておく
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
@@ -41,44 +39,88 @@ extension ApiManager {
 //================================================================
 //=== 履歴書更新 ===
 extension UpdateResumeRequestDTO {
+    private func convTypeAndYear(codes: String) -> ([WorkHistoryDTO]) {
+        var workHistory: [WorkHistoryDTO] = []
+        for job in codes.split(separator: EditItemTool.SplitMultiCodeSeparator) {
+            let buf = String(job).split(separator: EditItemTool.SplitTypeYearSeparator)
+            guard buf.count == 2 else { continue }
+            workHistory.append(WorkHistoryDTO(job3Id: String(buf[0]), experienceYears: String(buf[1])))
+        }
+        return workHistory
+    }
+
     init() {
         self.init(isEmployed: nil, changeJobCount: nil, workHistory: nil, experienceIndustryId: nil, educationId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil)
     }
+
     init(_ editTempCD: [EditableItemKey: EditableItemCurVal]) {
         self.init()
-        var _workHistory: [WorkHistoryDTO] = []
-        for (key, val) in editTempCD {
-            print("\t💙💙[\(key): \(val)]💙💙")
-            switch key {
-            case EditItemMdlResume.employmentStatus.itemKey: self.isEmployed = (val == "1") ? true : false //"1": true, "2":false
-            case EditItemMdlResume.changeCount.itemKey: self.changeJobCount = Int(val) ?? 0
-            //* 経験職種リスト
-            case EditItemMdlResume.lastJobExperiment.itemKey:
-                _workHistory.insert(WorkHistoryDTO(job3Id: "1", experienceYears: "3"), at: 0)
-            //case EditItemMdlResume.jobExperiments.itemKey: self.hoge = val
-//            case EditItemMdlResume.jobExperiments.itemKey: self.experienceIndustryId = val//経験業種ID
+        
+        print("💙💙💙[editTempCD: \(editTempCD.count)件]")
+        print("💙💙💙[editTempCD: \(editTempCD.description)件]")
 
-            //public var : FinalEducationDTO
-//            case EditItemMdlResumeSchool.schoolName.itemKey: self.finalEducation.schoolName = val
-//            case EditItemMdlResumeSchool.department.itemKey: self.finalEducation.department = val
-//            case EditItemMdlResumeSchool.subject.itemKey: self.finalEducation.faculty = val
-//            case EditItemMdlResumeSchool.graduationYear.itemKey: self.finalEducation.guraduationYearMonth = val
-            case EditItemMdlResumeSkillLanguage.languageToeicScore.itemKey: self.toeic = Int(val) ?? 0
-            case EditItemMdlResumeSkillLanguage.languageToeflScore.itemKey: self.toefl = Int(val) ?? 0
-            case EditItemMdlResumeSkillLanguage.languageEnglish.itemKey: self.englishSkillId = val
-            case EditItemMdlResumeSkillLanguage.languageStudySkill.itemKey: self.otherLanguageSkillId = val
-//            case EditItemMdlResume.employmentStatus.itemKey: self.licenseIds = val.split(separator: "_") as? [String] ?? []
-
-            default: break
+        
+        if let tmp = editTempCD[EditItemMdlResume.employmentStatus.itemKey] {//就業状況
+            self.isEmployed = (tmp == "1") ? true : false // 1: 就業中, 0: 就業していない
+        }
+        if let tmp = editTempCD[EditItemMdlResume.employmentStatus.itemKey] {//転職回数
+            self.changeJobCount = Int(tmp)
+        }
+        var _workHistory: [WorkHistoryDTO] = []// 経験職種リスト
+        if let tmp = editTempCD[EditItemMdlResumeLastJobExperiment.jobTypeAndJobExperimentYear.itemKey] {
+            let ty = EditItemTool.convTypeAndYear(codes: tmp)
+            if ty.0.count > 0 && ty.1.count > 0 {
+                _workHistory.append(WorkHistoryDTO(job3Id: ty.0.first!, experienceYears: ty.1.first!))
             }
         }
-        //===直接補填
-        self.workHistory = _workHistory
-        let finalEducation = FinalEducationDTO(schoolName: "ダミー学校名です", faculty: "医学部", department: "医学科", guraduationYearMonth: "2000-01")
-        self.finalEducation = finalEducation
-//        self.workHistory.append(WorkHistoryDTO(job3Id: "1", experienceYears: "3"))
+        if let tmp = editTempCD[EditItemMdlResumeJobExperiments.jobTypeAndJobExperimentYear.itemKey] {
+            for item in convTypeAndYear(codes: tmp) {
+                _workHistory.append(item)
+            }
+        }
+        if _workHistory.count > 0 {
+            self.workHistory = _workHistory
+        } else {
+            self.workHistory = nil
+        }
+
+        print(_workHistory.description)
+        
+        if let tmp = editTempCD[EditItemMdlResume.businessTypes.itemKey] {
+            self.experienceIndustryId = tmp// 経験業種ID
+        }
+        if let tmp = editTempCD[EditItemMdlResume.school.itemKey] {// 学種コード
+            self.educationId = tmp
+        }
+        //===
+        let _schoolName = editTempCD[EditItemMdlResumeSchool.schoolName.itemKey] ?? ""
+        let _faculty = editTempCD[EditItemMdlResumeSchool.department.itemKey] ?? ""
+        let _department = editTempCD[EditItemMdlResumeSchool.subject.itemKey] ?? ""
+        let _guraduationYearMonth = editTempCD[EditItemMdlResumeSchool.graduationYear.itemKey] ?? ""
+        let _finalEducation = FinalEducationDTO(schoolName: _schoolName, faculty: _faculty, department: _department, guraduationYearMonth: _guraduationYearMonth)
+        self.finalEducation = _finalEducation
+        if let tmp = editTempCD[EditItemMdlResumeSkillLanguage.languageToeicScore.itemKey] {//TOEICスコア
+            self.toeic = Int(tmp)
+        }
+        if let tmp = editTempCD[EditItemMdlResumeSkillLanguage.languageToeflScore.itemKey] {//TOEFLスコア
+            self.toefl = Int(tmp)
+        }
+        if let tmp = editTempCD[EditItemMdlResumeSkillLanguage.languageEnglish.itemKey] {//英語スキルID
+            self.englishSkillId = tmp
+        }
+        if let tmp = editTempCD[EditItemMdlResumeSkillLanguage.languageStudySkill.itemKey] {//その他言語スキルID
+            self.otherLanguageSkillId = tmp
+        }
+        var _licenseIds: [Code] = []
+        if let tmp = editTempCD[EditItemMdlResume.qualifications.itemKey] {//保有資格IDリスト
+            for code in tmp.split(separator: EditItemTool.SplitMultiCodeSeparator) {
+                _licenseIds.append(String(code))
+            }
+        }
     }
 }
+
+
 extension ApiManager {
     class func updateResume(_ param: UpdateResumeRequestDTO, isRetry: Bool = true) -> Promise<Void> {
         if isRetry {
@@ -124,7 +166,7 @@ extension CreateResumeRequestDTO {
     init(_ editTempCD: [EditableItemKey: EditableItemCurVal]) {
         self.init()
         if let tmp = editTempCD[EditItemMdlFirstInput.employmentStatus.itemKey] {
-            self.isEmployed = (tmp == "1") ? true : false //"1": true, "2":false
+            self.isEmployed = (tmp == "1") ? true : false // 1: 就業中, 0: 就業していない
         }
         var _workHistory: [WorkHistoryDTO] = []
         if let tmp = editTempCD[EditItemMdlFirstInputLastJobExperiments.jobTypeAndJobExperimentYear.itemKey] {
@@ -134,8 +176,6 @@ extension CreateResumeRequestDTO {
             }
         }
         if let tmp = editTempCD[EditItemMdlFirstInputJobExperiments.jobTypeAndJobExperimentYear.itemKey] {
-            let wh = convTypeAndYear(codes: tmp)
-            print("[JobExperiment: \(tmp)]", wh.description)
             for item in convTypeAndYear(codes: tmp) {
                 _workHistory.append(item)
             }
