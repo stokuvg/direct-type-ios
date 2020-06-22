@@ -17,10 +17,14 @@ class FirstInputPreviewVC: PreviewBaseVC {
 
     override func actCommit(_ sender: UIButton) {
         print(#line, #function, "ボタン押下でAPIフェッチ確認")
-        if validateLocalModel() {
-            tableVW.reloadData()
-            return
-        }
+//        if validateLocalModel() {
+//            tableVW.reloadData()
+//            return
+//        }
+        
+        
+        fetchCreateProfile()
+        
     }
     //共通プレビューをOverrideして利用する
     override func initData() {
@@ -98,31 +102,63 @@ class FirstInputPreviewVC: PreviewBaseVC {
 }
 
 //=== APIフェッチ
-
-extension ResumePreviewVC {
-    private func fetchGetResume() {
+extension FirstInputPreviewVC {
+    //プロフィールと履歴書を叩くため
+    private func fetchCreateProfile() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-        let resume: GetResumeResponseDTO = GetResumeResponseDTO(isEmployed: nil, changeJobCount: nil, workHistory: nil, experienceIndustryId: nil, educationId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil)
-        self.detail = MdlResume(dto: resume)
-        self.dispData()
+        //===初回入力で実施されたものとする
+        let param = CreateProfileRequestDTO(nickname: "初期ニックネーム", hopeJobPlaceIds: ["13", "14"], salaryId: "8", birthday: Constants.SelectItemsUndefineBirthday.dispYmd(), genderId: "2")
+        SVProgressHUD.show(withStatus: "プロフィール情報の作成")
+        ApiManager.createProfile(param, isRetry: true)
+        .done { result in
+            self.fetchCreateResume()
+        }
+        .catch { (error) in
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            switch myErr.code {
+            case 400:
+                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
+                self.dicGrpValidErrMsg = dicGrpError
+                self.dicValidErrMsg = dicError
+            default:
+                self.showError(error)
+            }
+        }
+        .finally {
+            self.dispData()
+            SVProgressHUD.dismiss()
+        }
+    }
+    private func fetchCreateResume() {
+        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
+//        let model: MdlResume = MdlResume()
+//        let param = CreateResumeRequestDTO(model, editableModel.editTempCD)
+        self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
+        self.dicValidErrMsg.removeAll()//状態をクリアしておく
+        //===初回入力で実施されたものとする
+        let param = CreateResumeRequestDTO(isEmployed: true, workHistory: [WorkHistoryDTO(job3Id: "1", experienceYears: "3")], educationId: "2")
+        print(param)
+        SVProgressHUD.show(withStatus: "履歴書情報の更新")
+        ApiManager.createResume(param, isRetry: true)
+        .done { result in
+            print(#line, result)
+            self.showConfirm(title: "ダミーデータ", message: "登録完了しました", onlyOK: true)
+        }
+        .catch { (error) in
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            switch myErr.code {
+            case 400:
+                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
+                self.dicGrpValidErrMsg = dicGrpError
+                self.dicValidErrMsg = dicError
+            default:
+                self.showError(error)
+            }
+        }
+        .finally {
+            self.dispData()
+            SVProgressHUD.dismiss()
+        }
     }
 }
-//    SVProgressHUD.show(withStatus: "職務経歴書情報の取得")
-//    ApiManager.getCareer(Void(), isRetry: true)
-//    .done { result in
-//        for (num, item) in result.businessTypes.enumerated() {
-//            if num == self.targetCardNum { //とりあえず最初(0)のものを対象とする
-//                self.detail = result.businessTypes.first
-//            }
-//        }
-//    }
-//    .catch { (error) in
-//        let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-//        self.showError(myErr)
-//    }
-//    .finally {
-//        self.dispData()
-//        SVProgressHUD.dismiss()
-//    }
-//}
 
