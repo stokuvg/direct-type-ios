@@ -11,9 +11,9 @@ import UIKit
 extension EditItemMdlResume {
     var valid: ValidInfo {
         switch self {
-        case .employmentStatus:     return ValidInfo(required: false, keta: nil, max: nil, type: .code)
-        case .changeCount:          return ValidInfo(required: false, keta: nil, max: nil, type: .code)
-        case .lastJobExperiment:    return ValidInfo(required: false, keta: nil, max: nil, type: .code)
+        case .employmentStatus:     return ValidInfo(required: true, keta: nil, max: nil, type: .code)
+        case .changeCount:          return ValidInfo(required: true, keta: nil, max: nil, type: .code)
+        case .lastJobExperiment:    return ValidInfo(required: true, keta: nil, max: nil, type: .code)
         case .jobExperiments:       return ValidInfo(required: false, keta: nil, max: nil, type: .code)
         case .businessTypes:        return ValidInfo(required: false, keta: nil, max: nil, type: .code)
         case .school:               return ValidInfo(required: false, keta: nil, max: nil, type: .code)
@@ -26,10 +26,10 @@ extension EditItemMdlResume {
 extension EditItemMdlResumeSchool {
     var valid: ValidInfo {
         switch self {
-        case .schoolName:       return ValidInfo(required: false, keta: nil, max: nil, type: .zenkaku)
-        case .department:       return ValidInfo(required: false, keta: nil, max: nil, type: .zenkaku)
+        case .schoolName:       return ValidInfo(required: true, keta: nil, max: nil, type: .zenkaku)
+        case .department:       return ValidInfo(required: true, keta: nil, max: nil, type: .zenkaku)
         case .subject:          return ValidInfo(required: false, keta: nil, max: nil, type: .zenkaku)
-        case .graduationYear:   return ValidInfo(required: false, keta: nil, max: nil, type: .code)
+        case .graduationYear:   return ValidInfo(required: true, keta: nil, max: nil, type: .code)
         }
     }
 }
@@ -47,7 +47,8 @@ extension EditItemMdlResumeSkillLanguage {
 extension EditItemMdlResumeLastJobExperiment {
     var valid: ValidInfo {
         switch self {
-        case .jobTypeAndJobExperimentYear:  return ValidInfo(required: false, keta: nil, max: nil, type: .code)
+        case .jobTypeAndJobExperimentYear:
+            return ValidInfo(required: true, keta: nil, max: nil, type: .code)
         }
     }
 }

@@ -16,12 +16,11 @@ class ResumePreviewVC: PreviewBaseVC {
     var detail: MdlResume? = nil
 
     override func actCommit(_ sender: UIButton) {
-        print(#line, #function, "ボタン押下でAPIフェッチ確認")
         if validateLocalModel() {
             tableVW.reloadData()
             return
         }
-        fetchGetResume()
+        fetchCreateResume()
     }
     //共通プレビューをOverrideして利用する
     override func initData() {
@@ -50,24 +49,19 @@ class ResumePreviewVC: PreviewBaseVC {
         //===(3c)直近の経験職種
         let lastJobType = _detail.lastJobExperiment.jobType
         let lastJobExperimentYear = _detail.lastJobExperiment.jobExperimentYear
-        let bufLastJobExperimentTypeAndYear: String = [lastJobType, lastJobExperimentYear].joined(separator: ":")
+        let bufLastJobExperimentTypeAndYear = EditItemTool.convTypeAndYear(types: [lastJobType], years: [lastJobExperimentYear])
         arrData.append(MdlItemH(.lastJobExperimentH3, "", childItems: [
             EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlResumeLastJobExperiment.jobTypeAndJobExperimentYear, val: bufLastJobExperimentTypeAndYear),
         ]))
         //===(3d)その他の経験職種
-        var arrJobExperiments: [String] = []
-        for item in _detail.jobExperiments {
-            let jobType = item.jobType
-            let jobExperimentYear = item.jobExperimentYear
-            let buf: String = [jobType, jobExperimentYear].joined(separator: ":")
-            arrJobExperiments.append(buf)
-        }
-        let bufJobTypeAndYear: String = arrJobExperiments.joined(separator: "_")
+        let types = _detail.jobExperiments.map { $0.jobType }
+        let years = _detail.jobExperiments.map { $0.jobExperimentYear }
+        let bufJobTypeAndYear = EditItemTool.convTypeAndYear(types: types, years: years)
         arrData.append(MdlItemH(.jobExperimentsH3, "", childItems: [
             EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlResumeJobExperiments.jobTypeAndJobExperimentYear, val: bufJobTypeAndYear),
         ]))
         //===(3e)経験業種
-        let businessType: String = _detail.businessTypes.joined(separator: "_")
+        let businessType: String = _detail.businessTypes.joined(separator: EditItemTool.JoinMultiCodeSeparator)
         arrData.append(MdlItemH(.businessTypesH3, "", childItems: [
             EditableItemH(type: .selectSpecial, editItem: EditItemMdlResume.businessTypes, val: businessType),
         ]))
@@ -90,7 +84,7 @@ class ResumePreviewVC: PreviewBaseVC {
         for qualifications in _detail.qualifications {
             arrCode.append(qualifications)
         }
-        let codes: String = arrCode.joined(separator: "_")
+        let codes: String = arrCode.joined(separator: EditItemTool.JoinMultiCodeSeparator)
         arrData.append(MdlItemH(.qualificationsH3, "", childItems: [
             EditableItemH(type: .selectMulti, editItem: EditItemMdlResume.qualifications, val: codes),
         ]))
@@ -120,32 +114,94 @@ class ResumePreviewVC: PreviewBaseVC {
 extension ResumePreviewVC {
     private func fetchGetResume() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-//        let resume: GetResumeResponseDTO = GetResumeResponseDTO(isEmployed: nil, changeJobCount: nil, workHistory: nil, experienceIndustryId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil)
-        var workHistory: [WorkHistoryDTO] = []
-        workHistory.append(WorkHistoryDTO(job3Id: "130", experienceYears: "7"))
-        workHistory.append(WorkHistoryDTO(job3Id: "5", experienceYears: "3"))
-        workHistory.append(WorkHistoryDTO(job3Id: "3", experienceYears: "2"))
-        let resume: GetResumeResponseDTO = GetResumeResponseDTO(isEmployed: nil, changeJobCount: nil, workHistory: workHistory, experienceIndustryId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil)
-        self.detail = MdlResume(dto: resume)
-        self.dispData()
+        //========================================================
+        SVProgressHUD.show(withStatus: "履歴書の取得")
+        ApiManager.getResume(Void(), isRetry: true)
+        .done { result in
+            print(result.debugDisp)
+        }
+        .catch { (error) in
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            switch myErr.code {
+            case 404://見つからない場合、空データを適用して画面を表示
+                self.detail = MdlResume()
+                //===[Dbg: ダミーデータ投入]___
+                self.editableModel.editTempCD[EditItemMdlResume.employmentStatus.itemKey] = "1"
+                self.editableModel.editTempCD[EditItemMdlResume.changeCount.itemKey] = "1"
+                self.editableModel.editTempCD[EditItemMdlResumeLastJobExperiment.jobTypeAndJobExperimentYear.itemKey] = "1:2"
+                self.editableModel.editTempCD[EditItemMdlResume.jobExperiments.itemKey] = "130:7_5:3_3:2"
+                self.editableModel.editTempCD[EditItemMdlResume.businessTypes.itemKey] = "19_31_33"
+                self.editableModel.editTempCD[EditItemMdlResumeSchool.schoolName.itemKey] = "学校名ダミ"
+                self.editableModel.editTempCD[EditItemMdlResumeSchool.department.itemKey] = "法学部"
+                self.editableModel.editTempCD[EditItemMdlResumeSchool.graduationYear.itemKey] = "2014-09"
+                //===[Dbg: ダミーデータ投入]^^^
+                self.dispData()
+                return //エラー表示させないため
+            default: break
+            }
+            self.showError(myErr)
+        }
+        .finally {
+            self.dispData()
+            SVProgressHUD.dismiss()
+        }
     }
-}
-//    SVProgressHUD.show(withStatus: "職務経歴書情報の取得")
-//    ApiManager.getCareer(Void(), isRetry: true)
-//    .done { result in
-//        for (num, item) in result.businessTypes.enumerated() {
-//            if num == self.targetCardNum { //とりあえず最初(0)のものを対象とする
-//                self.detail = result.businessTypes.first
+//    private func fetchUpdateResume() {
+//        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
+//        let param = UpdateResumeRequestDTO(editableModel.editTempCD)
+//        self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
+//        self.dicValidErrMsg.removeAll()//状態をクリアしておく
+//        SVProgressHUD.show(withStatus: "履歴書情報の更新")
+//        ApiManager.updateResume(param, isRetry: true)
+//        .done { result in
+//            self.fetchGetResume()//成功したら取得フェチ
+//        }
+//        .catch { (error) in
+//            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+//            switch myErr.code {
+//            case 400:
+//                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
+//                self.dicGrpValidErrMsg = dicGrpError
+//                self.dicValidErrMsg = dicError
+//            default:
+//                self.showError(error)
 //            }
 //        }
+//        .finally {
+//            self.dispData()
+//            SVProgressHUD.dismiss()
+//        }
 //    }
-//    .catch { (error) in
-//        let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-//        self.showError(myErr)
-//    }
-//    .finally {
-//        self.dispData()
-//        SVProgressHUD.dismiss()
-//    }
-//}
+    private func fetchCreateResume() {
+        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
+        let model: MdlResume = MdlResume()
+        let param = CreateResumeRequestDTO(model, editableModel.editTempCD)
+        
+        self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
+        self.dicValidErrMsg.removeAll()//状態をクリアしておく
+        
+        print(param)
+        
+        SVProgressHUD.show(withStatus: "履歴書情報の更新")
+        ApiManager.createResume(param, isRetry: true)
+        .done { result in
+            self.fetchGetResume()//成功したら取得フェチ
+        }
+        .catch { (error) in
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            switch myErr.code {
+            case 400:
+                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
+                self.dicGrpValidErrMsg = dicGrpError
+                self.dicValidErrMsg = dicError
+            default:
+                self.showError(error)
+            }
+        }
+        .finally {
+            self.dispData()
+            SVProgressHUD.dismiss()
+        }
+    }
+}
 
