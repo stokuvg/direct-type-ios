@@ -26,7 +26,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yqF-xL-OJs">
-                                <rect key="frame" x="30" y="126" width="260" height="53"/>
+                                <rect key="frame" x="30" y="106" width="260" height="53"/>
                                 <string key="text">本人確認のため、携帯電話のSMS(ショートメッセージサービス)を利用して認証を行います。
 電話番号が他のお客様に公開されることはありません。</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -34,7 +34,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="電話番号を入力してください" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1aj-xu-sSO">
-                                <rect key="frame" x="30" y="88" width="260" height="18"/>
+                                <rect key="frame" x="30" y="68" width="260" height="18"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -72,7 +72,7 @@
                             <constraint firstItem="ajJ-eq-OMz" firstAttribute="trailing" secondItem="H3I-p9-5hJ" secondAttribute="trailing" id="H8E-2I-ozf"/>
                             <constraint firstItem="uGY-Db-oor" firstAttribute="trailing" secondItem="jpp-Ul-Dls" secondAttribute="trailing" constant="40" id="HNf-e9-04O"/>
                             <constraint firstItem="H3I-p9-5hJ" firstAttribute="centerY" secondItem="88B-Zq-UDi" secondAttribute="centerY" constant="-60" id="PGp-yE-LGt"/>
-                            <constraint firstItem="H3I-p9-5hJ" firstAttribute="top" secondItem="yqF-xL-OJs" secondAttribute="bottom" constant="20" id="SLW-gT-u7h"/>
+                            <constraint firstItem="H3I-p9-5hJ" firstAttribute="top" secondItem="yqF-xL-OJs" secondAttribute="bottom" constant="40" id="SLW-gT-u7h"/>
                             <constraint firstItem="1aj-xu-sSO" firstAttribute="leading" secondItem="uGY-Db-oor" secondAttribute="leading" constant="30" id="c9x-nF-n1M"/>
                             <constraint firstItem="uGY-Db-oor" firstAttribute="trailing" secondItem="yqF-xL-OJs" secondAttribute="trailing" constant="30" id="eCz-rz-RFW"/>
                             <constraint firstItem="jpp-Ul-Dls" firstAttribute="leading" secondItem="uGY-Db-oor" secondAttribute="leading" constant="40" id="fG5-qL-6Ab"/>
