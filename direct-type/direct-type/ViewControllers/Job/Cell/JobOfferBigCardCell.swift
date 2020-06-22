@@ -101,10 +101,10 @@ class JobOfferBigCardCell: BaseJobCardCell {
         let displayFlag = data.salaryDisplay
         if displayFlag {
             
-            let minPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.salaryMinCode)?.disp
+            let minPriceLabel = SelectItemsManager.getCodeDisp(.salaryCode, code: data.salaryMinCode)?.disp
 //            Log.selectLog(logLevel: .debug, "minPriceLabel:\(String(describing: minPriceLabel))")
             let minPrice = self.cutText(defaultText: minPriceLabel!,cutString: "万円")
-            let maxPriceLabel = SelectItemsManager.getCodeDisp(.salary, code: data.salaryMaxCode)?.disp
+            let maxPriceLabel = SelectItemsManager.getCodeDisp(.salaryCode, code: data.salaryMaxCode)?.disp
             let maxPrice = self.cutText(defaultText: maxPriceLabel!,cutString: "万円")
 //            Log.selectLog(logLevel: .debug, "maxPriceLabel:\(String(describing: maxPriceLabel))")
             

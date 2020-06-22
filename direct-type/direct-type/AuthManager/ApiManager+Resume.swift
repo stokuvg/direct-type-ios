@@ -108,16 +108,42 @@ extension ApiManager {
 //================================================================
 //=== 履歴書作成 ===
 extension CreateResumeRequestDTO {
+    private func convTypeAndYear(codes: String) -> ([WorkHistoryDTO]) {
+        var workHistory: [WorkHistoryDTO] = []
+        for job in codes.split(separator: EditItemTool.SplitMultiCodeSeparator) {
+            let buf = String(job).split(separator: EditItemTool.SplitTypeYearSeparator)
+            guard buf.count == 2 else { continue }
+            workHistory.append(WorkHistoryDTO(job3Id: String(buf[0]), experienceYears: String(buf[1])))
+        }
+        return workHistory
+    }
+
     init() {
         self.init(isEmployed: false, workHistory: [], educationId: "")
     }
-    init(_ model: MdlResume, _ editTempCD: [EditableItemKey: EditableItemCurVal]) {
+    init(_ editTempCD: [EditableItemKey: EditableItemCurVal]) {
         self.init()
-        self.init(isEmployed: true,
-            workHistory: [],
-            educationId: ""
-        )
-
+        if let tmp = editTempCD[EditItemMdlFirstInput.employmentStatus.itemKey] {
+            self.isEmployed = (tmp == "1") ? true : false //"1": true, "2":false
+        }
+        var _workHistory: [WorkHistoryDTO] = []
+        if let tmp = editTempCD[EditItemMdlFirstInputLastJobExperiments.jobTypeAndJobExperimentYear.itemKey] {
+            let ty = EditItemTool.convTypeAndYear(codes: tmp)
+            if ty.0.count > 0 && ty.1.count > 0 {
+                _workHistory.append(WorkHistoryDTO(job3Id: ty.0.first!, experienceYears: ty.1.first!))
+            }
+        }
+        if let tmp = editTempCD[EditItemMdlFirstInputJobExperiments.jobTypeAndJobExperimentYear.itemKey] {
+            let wh = convTypeAndYear(codes: tmp)
+            print("[JobExperiment: \(tmp)]", wh.description)
+            for item in convTypeAndYear(codes: tmp) {
+                _workHistory.append(item)
+            }
+        }
+        self.workHistory = _workHistory
+        if let tmp = editTempCD[EditItemMdlFirstInput.school.itemKey] {
+            self.educationId = tmp
+        }
     }
 }
 extension ApiManager {

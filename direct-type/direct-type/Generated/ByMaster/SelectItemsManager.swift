@@ -43,7 +43,8 @@ class SelectItemsManager: NSObject {
     func commonInit() {
         initDependency()
         //===
-        loadMaster(type: .salary)
+        loadMaster(type: .salaryCode)
+        loadMaster(type: .salarySelect)
         loadMaster(type: .entryPlace)
         loadMaster(type: .schoolType)
         loadMaster(type: .place)
@@ -145,7 +146,8 @@ extension SelectItemsManager {
     enum TsvMaster {
         case undefine //コードじゃないでの定義なし
 
-        case salary
+        case salaryCode
+        case salarySelect //コードではなく選択させるためのテーブル
         case entryPlace
         case schoolType
         case place
@@ -170,7 +172,8 @@ extension SelectItemsManager {
         var fName: String {
             switch self {
             case .undefine:             return ""
-            case .salary:               return "MstK10_salary"
+            case .salaryCode:               return "MstK10_salary"
+            case .salarySelect:         return "MstSel_salary"
             case .entryPlace:           return "MstK11_entryPlace"
             case .schoolType:           return "MstK13_schoolType"
             case .place:                return "MstK14_place"

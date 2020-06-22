@@ -87,7 +87,7 @@ enum EditItemMdlCareerCard: String, EditItemProtocol {
     var tsvMaster: SelectItemsManager.TsvMaster {
         switch self {
         case .employmentType: return .employmentType
-        case .salary: return .salary
+        case .salary: return .salaryCode
         default: return .undefine
         }
     }
