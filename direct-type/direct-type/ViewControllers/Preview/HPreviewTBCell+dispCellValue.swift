@@ -27,6 +27,7 @@ extension HPreviewTBCell {
         case .birthGenderH2:
             let tmpBirthday: String = _item.childItems[0].curVal
             let date = DateHelper.convStrYMD2Date(tmpBirthday)
+            if date == Constants.SelectItemsUndefineDate { return "未入力（必須）"} //初回未記入対応
             let bufBirthday: String = date.dispYmdJP()
             let bufAge: String = "\(date.age)歳"
             let tmpGender: String = _item.childItems[1].curVal
@@ -207,6 +208,7 @@ extension HPreviewTBCell {
         case .birthdayA8:             //=== [A-8] 入力（生年月日）
             let tmpBirthday: String = _item.childItems[0].curVal
             let date = DateHelper.convStrYMD2Date(tmpBirthday)
+            if date == Constants.SelectItemsUndefineDate { return "未入力（必須）"} //初回未記入対応
             let bufBirthday: String = date.dispYmdJP()
             let bufAge: String = "\(date.age)歳"
             return "\(bufBirthday)（\(bufAge)）"

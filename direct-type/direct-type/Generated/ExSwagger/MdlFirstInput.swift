@@ -15,7 +15,7 @@ class MdlFirstInput: Codable {
     //case .genderA7:             return "性別"
     var gender: Code = ""
     //case .birthdayA8:           return "生年月日"
-    var birthday: Date = Constants.SelectItemsUndefineBirthday
+    var birthday: Date = Constants.SelectItemsUndefineDate
     //case .hopeAreaA9:           return "希望勤務地"
     var hopeArea: [Code] = []
     //case .schoolA10:            return "最終学歴"

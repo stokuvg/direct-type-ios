@@ -93,14 +93,36 @@ extension CreateProfileRequestDTO {
     init() {
         self.init(nickname: "", hopeJobPlaceIds: [], salaryId: "", birthday: "", genderId: "")
     }
-    init(_ profile: MdlProfile) {
+//    init(_ profile: MdlProfile) {
+//        self.init()
+//        self.nickname = profile.nickname
+//        self.hopeJobPlaceIds = profile.hopeJobPlaceIds
+//        self.birthday = profile.birthday.dispYmd()
+//        self.genderId = profile.gender
+//    }
+    init(_ editTempCD: [EditableItemKey: EditableItemCurVal]) {
         self.init()
-        self.nickname = profile.nickname
-        self.hopeJobPlaceIds = profile.hopeJobPlaceIds
-        self.birthday = profile.birthday.dispYmd()
-        self.genderId = profile.gender
+        if let tmp = editTempCD[EditItemMdlFirstInput.nickname.itemKey] {
+            self.nickname = tmp
+        }
+        if let tmp = editTempCD[EditItemMdlFirstInput.birthday.itemKey] {
+            self.birthday = tmp
+        }
+        if let tmp = editTempCD[EditItemMdlFirstInput.gender.itemKey] {
+            self.genderId = tmp
+        }
+        var _hopeJobPlaceIds: [Code] = []
+        if let tmp = editTempCD[EditItemMdlFirstInput.hopeArea.itemKey] {
+            for code in tmp.split(separator: EditItemTool.SplitMultiCodeSeparator) {
+                _hopeJobPlaceIds.append(String(code))
+            }
+        }
+        self.hopeJobPlaceIds = _hopeJobPlaceIds
+        if let tmp = editTempCD[EditItemMdlFirstInput.salary.itemKey] {
+            self.salaryId = tmp
+        }
+        self.hopeJobPlaceIds = _hopeJobPlaceIds
     }
-
 }
 
 

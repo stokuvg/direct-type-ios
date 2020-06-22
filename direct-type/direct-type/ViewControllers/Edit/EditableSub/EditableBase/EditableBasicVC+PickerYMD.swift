@@ -25,6 +25,15 @@ extension EditableBasicVC {
         let bufDate = editTemp.curVal
         let date = DateHelper.convStrYMD2Date(bufDate)
         picker.date = date
+        if date == Constants.SelectItemsUndefineDate { //誕生日の場合の初期値を変更
+            switch editTemp.editableItemKey {
+            case EditItemMdlFirstInput.birthday.itemKey: fallthrough
+            case EditItemMdlProfile.birthday.itemKey:
+                picker.date = Constants.SelectItemsUndefineBirthday
+            default:
+                break
+            }
+        }
         picker.datePickerMode = .date
         picker.calendar = date.calendarJP
         picker.locale = Locale(identifier: "ja_JP")
@@ -55,10 +64,11 @@ extension EditableBasicVC {
         guard let picker = sender.parentPicker as? IKDatePicker else { return }
         picker.parentTF?.text = picker.date.dispYmdJP()
         //guard let editableModel = editableModel else { return }
-        print(picker.itemKey)
-        print(editableModel.arrData.debugDescription)
         guard let item = editableModel.getItemByKey(picker.itemKey) else { return }
         editableModel.changeTempItem(item, text: picker.date.dispYmd())
+        
+        print("✳️✳️[\(#line)]✳️[\(picker.date.dispYmd())]✳️")
+        
         self.view.endEditing(false)
     }
     @objc func actDatePickerCancelButton(_ sender: IKBarButtonItem) {
