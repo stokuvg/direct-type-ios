@@ -12,7 +12,7 @@
         <!--Login ConfirmVC-->
         <scene sceneID="SRa-BL-jz4">
             <objects>
-                <viewController id="SFi-WS-gi4" customClass="LoginConfirmVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Sbid_LoginConfirmVC" id="SFi-WS-gi4" customClass="LoginConfirmVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fOM-f3-mMe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

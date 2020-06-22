@@ -24,7 +24,8 @@ final class LoginVC: TmpBasicVC {
     // 参照: https://type.qiita.com/y_kawamata/items/e251d8904820d5b5ceaf
     private let password = "Abcd123$"
     private let phoneNumberMaxLength: Int = 11
-    private let shouldLogOutIfNeeded = false
+    // この画面ではログアウトがされている前提だが、ログイン処理の時前に強制的なログアウトをしたい場合にフラグを立てる。
+    private let shouldLogOutIfNeeded = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,10 +62,16 @@ private extension LoginVC {
             }
             switch signInResult.signInState {
             case .signedIn:
+                // FIXME: サーバー側でSMS認証系の実装が完了した際には「customChallenge」が返ってくるので、そちらに処理を移管し直す。
                 DispatchQueue.main.async {
-                    self.showConfirm(title: "認証手順", message: "ログインしました", onlyOK: true)
+                    let vc = self.getVC(sbName: "LoginConfirmVC", vcName: "LoginConfirmVC") as! LoginConfirmVC
+                    self.navigationController?.pushViewController(vc, animated: true)
                 }
-            case .unknown, .smsMFA, .passwordVerifier, .customChallenge, .deviceSRPAuth,
+            case .customChallenge:
+                // TODO: 本来は電話番号入力時のサインインAPIでは「customChallenge」が返ってくるが、
+                // 現状は「signedIn」が返ってくる仕様のため、処理をそちらのcaseに移管している。
+                break
+            case .unknown, .smsMFA, .passwordVerifier, .deviceSRPAuth,
                  .devicePasswordVerifier, .adminNoSRPAuth, .newPasswordRequired:
                 break
             }
