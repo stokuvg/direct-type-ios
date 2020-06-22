@@ -60,9 +60,6 @@ class MdlResume: Codable {
         } else {
             _changeCount = ""
         }
-        
-        print("💙💙💙💙💙💙💙💙[_changeCount: \(_changeCount)]")
-        
         var _lastJobExperiments: MdlJobExperiment = MdlJobExperiment(jobType: "", jobExperimentYear: "")
         var _jobExperiments: [MdlJobExperiment] = []
         if let workHistorys = dto.workHistory {

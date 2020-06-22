@@ -28,7 +28,7 @@ class ResumePreviewVC: PreviewBaseVC {
         
         //===[Dbg: ダミーデータ投入]___
 //        self.editableModel.editTempCD[EditItemMdlResume.employmentStatus.itemKey] = "1"
-//        self.editableModel.editTempCD[EditItemMdlResume.changeCount.itemKey] = "1"
+        self.editableModel.editTempCD[EditItemMdlResume.changeCount.itemKey] = "5"
 //        self.editableModel.editTempCD[EditItemMdlResumeLastJobExperiment.jobTypeAndJobExperimentYear.itemKey] = "1:2"
 //        self.editableModel.editTempCD[EditItemMdlResume.jobExperiments.itemKey] = "130:7_5:3_3:2"
 //        self.editableModel.editTempCD[EditItemMdlResume.businessTypes.itemKey] = "19_31_33"
@@ -145,9 +145,8 @@ extension ResumePreviewVC {
     }
     private func fetchUpdateResume() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-        let param = UpdateResumeRequestDTO(editableModel.editTempCD)
-        
-        print(#line, param)
+        guard let resume = self.detail else { return }
+        let param = UpdateResumeRequestDTO(resume ,editableModel.editTempCD)
         self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
         self.dicValidErrMsg.removeAll()//状態をクリアしておく
         SVProgressHUD.show(withStatus: "履歴書情報の更新")

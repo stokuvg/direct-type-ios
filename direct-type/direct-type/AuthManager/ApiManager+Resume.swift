@@ -53,17 +53,12 @@ extension UpdateResumeRequestDTO {
         self.init(isEmployed: nil, changeJobCount: nil, workHistory: nil, experienceIndustryId: nil, educationId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil)
     }
 
-    init(_ editTempCD: [EditableItemKey: EditableItemCurVal]) {
+    init(_ resume: MdlResume, _ editTempCD: [EditableItemKey: EditableItemCurVal]) {
         self.init()
-        
-        print("💙💙💙[editTempCD: \(editTempCD.count)件]")
-        print("💙💙💙[editTempCD: \(editTempCD.description)件]")
-
-        
         if let tmp = editTempCD[EditItemMdlResume.employmentStatus.itemKey] {//就業状況
             self.isEmployed = (tmp == "1") ? true : false // 1: 就業中, 0: 就業していない
         }
-        if let tmp = editTempCD[EditItemMdlResume.employmentStatus.itemKey] {//転職回数
+        if let tmp = editTempCD[EditItemMdlResume.changeCount.itemKey] {//転職回数
             self.changeJobCount = Int(tmp)
         }
         var _workHistory: [WorkHistoryDTO] = []// 経験職種リスト
@@ -93,10 +88,10 @@ extension UpdateResumeRequestDTO {
             self.educationId = tmp
         }
         //===
-        let _schoolName = editTempCD[EditItemMdlResumeSchool.schoolName.itemKey] ?? ""
-        let _faculty = editTempCD[EditItemMdlResumeSchool.department.itemKey] ?? ""
-        let _department = editTempCD[EditItemMdlResumeSchool.subject.itemKey] ?? ""
-        let _guraduationYearMonth = editTempCD[EditItemMdlResumeSchool.graduationYear.itemKey] ?? ""
+        let _schoolName = editTempCD[EditItemMdlResumeSchool.schoolName.itemKey] ?? resume.school.schoolName
+        let _faculty = editTempCD[EditItemMdlResumeSchool.department.itemKey] ?? resume.school.department
+        let _department = editTempCD[EditItemMdlResumeSchool.subject.itemKey] ?? resume.school.subject
+        let _guraduationYearMonth = editTempCD[EditItemMdlResumeSchool.graduationYear.itemKey] ?? resume.school.graduationYear
         let _finalEducation = FinalEducationDTO(schoolName: _schoolName, faculty: _faculty, department: _department, guraduationYearMonth: _guraduationYearMonth)
         self.finalEducation = _finalEducation
         if let tmp = editTempCD[EditItemMdlResumeSkillLanguage.languageToeicScore.itemKey] {//TOEICスコア
