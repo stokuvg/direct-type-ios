@@ -128,10 +128,10 @@ extension ProfilePreviewVC {
                 print("なんでこれ？")
                 break
             case 404:
-                let message: String = "本来は初回登録でProfileやResumeの一部データが登録され作成されているはず\n\n代わりにダミーの初期投入をしておく"
+                let message: String = "[A系統]初期入力画面でProfileやResumeの一部データが登録されているはず\n"
                 self.showConfirm(title: "特殊対応", message: message)
                 .done { _ in
-                    self.fetchCreateProfile()
+//                    self.fetchCreateProfile()
                 }
                 .catch { (error) in
                 }
@@ -154,31 +154,6 @@ extension ProfilePreviewVC {
         self.dicValidErrMsg.removeAll()//状態をクリアしておく
         SVProgressHUD.show(withStatus: "プロフィール情報の更新")
         ApiManager.updateProfile(param, isRetry: true)
-        .done { result in
-            self.fetchGetProfile()
-        }
-        .catch { (error) in
-            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-            switch myErr.code {
-            case 400:
-                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
-                self.dicGrpValidErrMsg = dicGrpError
-                self.dicValidErrMsg = dicError
-            default:
-                self.showError(error)
-            }
-        }
-        .finally {
-            self.dispData()
-            SVProgressHUD.dismiss()
-        }
-    }
-    private func fetchCreateProfile() {
-        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-        //===初回入力で実施されたものとする
-        let param = CreateProfileRequestDTO(nickname: "初期ニックネーム", hopeJobPlaceIds: ["13", "14"], salaryId: "8", birthday: Constants.SelectItemsUndefineBirthday.dispYmd(), genderId: "")
-        SVProgressHUD.show(withStatus: "プロフィール情報の作成")
-        ApiManager.createProfile(param, isRetry: true)
         .done { result in
             self.fetchGetProfile()
         }

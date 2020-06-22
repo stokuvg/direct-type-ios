@@ -18,18 +18,20 @@ class MdlResume: Codable {
     var lastJobExperiment: MdlJobExperiment
     var jobExperiments: [MdlJobExperiment]
     var businessTypes: [Code]
+    var educationId: Code//学種コード
     var school: MdlResumeSchool
     var skillLanguage: MdlResumeSkillLanguage
     var qualifications: [Code]
     /** 自己PR */
     var ownPr: String
 
-    init(employmentStatus: Code, changeCount: Code, lastJobExperiment: MdlJobExperiment, jobExperiments: [MdlJobExperiment], businessTypes: [Code], school: MdlResumeSchool, skillLanguage: MdlResumeSkillLanguage, qualifications: [Code], ownPr: String) {
+    init(employmentStatus: Code, changeCount: Code, lastJobExperiment: MdlJobExperiment, jobExperiments: [MdlJobExperiment], businessTypes: [Code], educationId: Code, school: MdlResumeSchool, skillLanguage: MdlResumeSkillLanguage, qualifications: [Code], ownPr: String) {
         self.employmentStatus = employmentStatus
         self.changeCount = changeCount
         self.lastJobExperiment = lastJobExperiment
         self.jobExperiments = jobExperiments
         self.businessTypes = businessTypes
+        self.educationId = educationId
         self.school = school
         self.skillLanguage = skillLanguage
         self.qualifications = qualifications
@@ -43,6 +45,7 @@ class MdlResume: Codable {
             lastJobExperiment: MdlJobExperiment(jobType: "", jobExperimentYear: ""),
             jobExperiments: [],
             businessTypes: [],
+            educationId: "",
             school: MdlResumeSchool(schoolName: "", department: "", subject: "", graduationYear: ""),
             skillLanguage: MdlResumeSkillLanguage(languageToeicScore: "", languageToeflScore: "", languageEnglish: "", languageStudySkill: ""),
             qualifications: [],
@@ -73,6 +76,7 @@ class MdlResume: Codable {
                 }
             }
         }
+        let _educationId = dto.educationId ?? ""
         let _school = MdlResumeSchool(schoolName: dto.finalEducation?.schoolName ?? "",
                                       department: dto.finalEducation?.department ?? "",
                                       subject: dto.finalEducation?.faculty ?? "",
@@ -93,6 +97,7 @@ class MdlResume: Codable {
                   lastJobExperiment: _lastJobExperiments,
                   jobExperiments: _jobExperiments,
                   businessTypes: _businessTypes,
+                  educationId: _educationId,
                   school: _school,
                   skillLanguage: _skillLanguage,
                   qualifications: _qualifications,

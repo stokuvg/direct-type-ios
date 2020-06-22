@@ -345,6 +345,11 @@
             "example": "1",
             "description": "経験業種ID"
           },
+          "educationId": {
+            "type": "string",
+            "example": "1",
+            "description": "学種コード"
+          },
           "finalEducation": {
             "$ref": "#/components/schemas/FinalEducationDTO"
           },
@@ -392,11 +397,6 @@
             "example": true,
             "description": "就業状況"
           },
-          "changeJobCount": {
-            "type": "integer",
-            "example": 1,
-            "description": "転職回数"
-          },
           "workHistory": {
             "description": "経験職種リスト",
             "type": "array",
@@ -404,60 +404,16 @@
               "$ref": "#/components/schemas/WorkHistoryDTO"
             }
           },
-          "experienceIndustryId": {
+          "educationId": {
             "type": "string",
             "example": "1",
-            "description": "経験業種ID"
-          },
-          "finalEducation": {
-            "$ref": "#/components/schemas/FinalEducationDTO"
-          },
-          "toeic": {
-            "type": "integer",
-            "example": 990,
-            "description": "TOEICスコア",
-            "maximum": 999
-          },
-          "toefl": {
-            "type": "integer",
-            "example": 990,
-            "description": "TOEFLスコア",
-            "maximum": 999
-          },
-          "englishSkillId": {
-            "type": "string",
-            "example": "1",
-            "description": "英語スキルID"
-          },
-          "otherLanguageSkillId": {
-            "type": "string",
-            "example": "1",
-            "description": "その他言語スキルID"
-          },
-          "licenseIds": {
-            "example": [
-              "1",
-              "2",
-              "3"
-            ],
-            "description": "保有資格IDリスト",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+            "description": "学種コード"
           }
         },
         "required": [
           "isEmployed",
-          "changeJobCount",
           "workHistory",
-          "experienceIndustryId",
-          "finalEducation",
-          "toeic",
-          "toefl",
-          "englishSkillId",
-          "otherLanguageSkillId",
-          "licenseIds"
+          "educationId"
         ]
       },
       "UpdateResumeRequestDTO": {
@@ -484,6 +440,11 @@
             "type": "string",
             "example": "1",
             "description": "経験業種ID"
+          },
+          "educationId": {
+            "type": "string",
+            "example": "1",
+            "description": "学種コード"
           },
           "finalEducation": {
             "$ref": "#/components/schemas/FinalEducationDTO"
@@ -1129,10 +1090,13 @@
           "minSalaryId",
           "maxSalaryId",
           "isSalaryDisplay",
+          "salaryOffer",
           "place2Ids",
           "companyName",
           "pressStartDate",
           "pressEndDate",
+          "mainPhotoURL",
+          "subPhotoURLs",
           "mainTitle",
           "mainBody",
           "jobPrIds",
@@ -2170,7 +2134,3 @@
     }
   }
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> feature/c_detail_layout_2020061601
