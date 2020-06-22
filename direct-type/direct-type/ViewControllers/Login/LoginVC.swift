@@ -9,8 +9,10 @@
 import UIKit
 
 final class LoginVC: TmpBasicVC {
-    
-    @IBAction func reasonOfConfirmPhoneButton(_ sender: UIButton) {
+    @IBOutlet private weak var phoneNumberTextField: UITextField!
+    @IBAction private func reasonOfConfirmPhoneButton(_ sender: UIButton) {
+    }
+    @IBAction private func nextButton(_ sender: UIButton) {
     }
     
     override func viewDidLoad() {

@@ -17,24 +17,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="09001234567" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H3I-p9-5hJ">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="携帯電番号入力（ハイフンなし）" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H3I-p9-5hJ">
                                 <rect key="frame" x="40" y="199" width="240" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Jvh-0Z-lYb"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yqF-xL-OJs">
-                                <rect key="frame" x="30" y="106" width="260" height="53"/>
-                                <string key="text">本人確認のため、携帯電話のSMS(ショートメッセージサービス)を利用して認証を行います。
-電話番号が他のお客様に公開されることはありません。</string>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="携帯電話のＳＭＳ（ショートメッセージサービス）で再認証を行います。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yqF-xL-OJs">
+                                <rect key="frame" x="30" y="132.5" width="260" height="26.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="電話番号を入力してください" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1aj-xu-sSO">
-                                <rect key="frame" x="30" y="68" width="260" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登録済みの電話番号を入力してください" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1aj-xu-sSO">
+                                <rect key="frame" x="20" y="94.5" width="280" height="18"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -63,6 +61,9 @@
                                         <real key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="nextButton:" destination="VNP-xz-G4D" eventType="touchUpInside" id="GaW-t1-0ho"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -73,10 +74,10 @@
                             <constraint firstItem="uGY-Db-oor" firstAttribute="trailing" secondItem="jpp-Ul-Dls" secondAttribute="trailing" constant="40" id="HNf-e9-04O"/>
                             <constraint firstItem="H3I-p9-5hJ" firstAttribute="centerY" secondItem="88B-Zq-UDi" secondAttribute="centerY" constant="-60" id="PGp-yE-LGt"/>
                             <constraint firstItem="H3I-p9-5hJ" firstAttribute="top" secondItem="yqF-xL-OJs" secondAttribute="bottom" constant="40" id="SLW-gT-u7h"/>
-                            <constraint firstItem="1aj-xu-sSO" firstAttribute="leading" secondItem="uGY-Db-oor" secondAttribute="leading" constant="30" id="c9x-nF-n1M"/>
+                            <constraint firstItem="1aj-xu-sSO" firstAttribute="leading" secondItem="uGY-Db-oor" secondAttribute="leading" constant="20" id="c9x-nF-n1M"/>
                             <constraint firstItem="uGY-Db-oor" firstAttribute="trailing" secondItem="yqF-xL-OJs" secondAttribute="trailing" constant="30" id="eCz-rz-RFW"/>
                             <constraint firstItem="jpp-Ul-Dls" firstAttribute="leading" secondItem="uGY-Db-oor" secondAttribute="leading" constant="40" id="fG5-qL-6Ab"/>
-                            <constraint firstItem="uGY-Db-oor" firstAttribute="trailing" secondItem="1aj-xu-sSO" secondAttribute="trailing" constant="30" id="kI5-PQ-Fn8"/>
+                            <constraint firstItem="uGY-Db-oor" firstAttribute="trailing" secondItem="1aj-xu-sSO" secondAttribute="trailing" constant="20" id="kI5-PQ-Fn8"/>
                             <constraint firstItem="H3I-p9-5hJ" firstAttribute="leading" secondItem="uGY-Db-oor" secondAttribute="leading" constant="40" id="meP-e0-WzG"/>
                             <constraint firstItem="ajJ-eq-OMz" firstAttribute="top" secondItem="H3I-p9-5hJ" secondAttribute="bottom" id="or4-E5-wex"/>
                             <constraint firstItem="yqF-xL-OJs" firstAttribute="top" secondItem="1aj-xu-sSO" secondAttribute="bottom" constant="20" id="sl6-Ob-0Ub"/>
@@ -84,6 +85,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uGY-Db-oor"/>
                     </view>
+                    <connections>
+                        <outlet property="phoneNumberTextField" destination="H3I-p9-5hJ" id="Pmm-E3-51n"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aWZ-bZ-gG0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
