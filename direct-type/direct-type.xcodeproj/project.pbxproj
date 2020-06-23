@@ -171,6 +171,9 @@
 		0E6951B5248A1FC600D58E6E /* ChemistrySelectFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6951B4248A1FC600D58E6E /* ChemistrySelectFooterView.swift */; };
 		0E6951B7248A204C00D58E6E /* ChemistrySelectFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E6951B6248A204C00D58E6E /* ChemistrySelectFooterView.xib */; };
 		0E6EA6E124A1BB3B00884D07 /* InitialInputRegistVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6EA6E024A1BB3B00884D07 /* InitialInputRegistVC.storyboard */; };
+		0E6EA6E524A1C11000884D07 /* InitialInputConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6EA6E424A1C11000884D07 /* InitialInputConfirmVC.swift */; };
+		0E6EA6E724A1C11A00884D07 /* InitialInputConfirmVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6EA6E624A1C11A00884D07 /* InitialInputConfirmVC.storyboard */; };
+		0E6EA6E924A1C12700884D07 /* InitialInputCompleteVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6EA6E824A1C12600884D07 /* InitialInputCompleteVC.storyboard */; };
 		0E7372DD2499EE1C00358EFA /* ApiManager+PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7372DC2499EE1C00358EFA /* ApiManager+PhoneNumber.swift */; };
 		0E7372DF249A089D00358EFA /* ApiManager+AuthCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7372DE249A089D00358EFA /* ApiManager+AuthCode.swift */; };
 		0E74739F24972A9800928644 /* ApiManager+Approach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E74739E24972A9800928644 /* ApiManager+Approach.swift */; };
@@ -472,6 +475,9 @@
 		0E6951B4248A1FC600D58E6E /* ChemistrySelectFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistrySelectFooterView.swift; sourceTree = "<group>"; };
 		0E6951B6248A204C00D58E6E /* ChemistrySelectFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChemistrySelectFooterView.xib; sourceTree = "<group>"; };
 		0E6EA6E024A1BB3B00884D07 /* InitialInputRegistVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InitialInputRegistVC.storyboard; sourceTree = "<group>"; };
+		0E6EA6E424A1C11000884D07 /* InitialInputConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialInputConfirmVC.swift; sourceTree = "<group>"; };
+		0E6EA6E624A1C11A00884D07 /* InitialInputConfirmVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InitialInputConfirmVC.storyboard; sourceTree = "<group>"; };
+		0E6EA6E824A1C12600884D07 /* InitialInputCompleteVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InitialInputCompleteVC.storyboard; sourceTree = "<group>"; };
 		0E7372DC2499EE1C00358EFA /* ApiManager+PhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+PhoneNumber.swift"; sourceTree = "<group>"; };
 		0E7372DE249A089D00358EFA /* ApiManager+AuthCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+AuthCode.swift"; sourceTree = "<group>"; };
 		0E74739E24972A9800928644 /* ApiManager+Approach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Approach.swift"; sourceTree = "<group>"; };
@@ -907,7 +913,10 @@
 				06AB97C62489D1600003B334 /* InitialInputStartVC.storyboard */,
 				06E519A12457DC44004E4B7A /* InitialInputRegistVC.swift */,
 				0E6EA6E024A1BB3B00884D07 /* InitialInputRegistVC.storyboard */,
+				0E6EA6E424A1C11000884D07 /* InitialInputConfirmVC.swift */,
+				0E6EA6E624A1C11A00884D07 /* InitialInputConfirmVC.storyboard */,
 				06E519A32457DC7B004E4B7A /* InitialInputCompleteVC.swift */,
+				0E6EA6E824A1C12600884D07 /* InitialInputCompleteVC.storyboard */,
 			);
 			path = InitialInput;
 			sourceTree = "<group>";
@@ -1469,6 +1478,7 @@
 				0E144D93248DCC0E005A659F /* ChemistryResultHeader.xib in Resources */,
 				066BD9DE2456ACB4009E610B /* SplashVC.storyboard in Resources */,
 				063350E52463FD9C00AF90F3 /* NaviButtonsView.xib in Resources */,
+				0E6EA6E924A1C12700884D07 /* InitialInputCompleteVC.storyboard in Resources */,
 				26D4CB22247777F1002EE9A9 /* awsconfiguration.json in Resources */,
 				066763642457ABDB00AC5039 /* BaseTabBC.storyboard in Resources */,
 				26BF48E824639D2B00E00215 /* MstK5_jobExperimentYear.tsv in Resources */,
@@ -1481,6 +1491,7 @@
 				06FFA0082484E6560085A3D9 /* MyPageEditedCarrerCell.xib in Resources */,
 				0EAE764F248E2FFD009A8F4B /* ChemistryResultPersonalTypeCell.xib in Resources */,
 				06FFA0042484E1760085A3D9 /* SettingVC.storyboard in Resources */,
+				0E6EA6E724A1C11A00884D07 /* InitialInputConfirmVC.storyboard in Resources */,
 				066CC17E24735DE6009A123A /* JobDetailTextView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1706,6 +1717,7 @@
 				06DCAEA9245A70A8008FE9FA /* UITableView+Extensions.swift in Sources */,
 				26CFC46A2469496D00E458E2 /* HEditTextTBCell.swift in Sources */,
 				0E6951AC248A050000D58E6E /* ChemistryPersonalityType.swift in Sources */,
+				0E6EA6E524A1C11000884D07 /* InitialInputConfirmVC.swift in Sources */,
 				067F28D02456CCB8000AAD69 /* BaseVC.swift in Sources */,
 				0670F4642491F33B00E60FDC /* MdlKeepJob.swift in Sources */,
 				0EE36F1E248737AB0098A2AF /* CarouselCell.swift in Sources */,

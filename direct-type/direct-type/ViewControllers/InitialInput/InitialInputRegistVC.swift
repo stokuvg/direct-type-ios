@@ -63,7 +63,7 @@ private extension InitialInputRegistVC {
             case .signedIn:
                 // FIXME: サーバー側でSMS認証系の実装が完了した際には「customChallenge」が返ってくるので、そちらに処理を移管し直す。
                 DispatchQueue.main.async {
-                    let vc = self.getVC(sbName: "InitialInputCompleteVC", vcName: "InitialInputCompleteVC") as! InitialInputCompleteVC
+                    let vc = self.getVC(sbName: "InitialInputConfirmVC", vcName: "InitialInputConfirmVC") as! InitialInputConfirmVC
                     let loginInfo = LoginConfirmVC.LoginInfo(phoneNumberText: phoneNumberText.withCountryCode, password: self.password)
                     vc.configure(with: loginInfo)
                     self.navigationController?.pushViewController(vc, animated: true)
