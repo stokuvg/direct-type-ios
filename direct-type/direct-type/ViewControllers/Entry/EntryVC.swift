@@ -49,12 +49,11 @@
 
 
 import UIKit
-import SwaggerClient
 import TudApi
 import SVProgressHUD
 
 class EntryVC: PreviewBaseVC {
-    var jobCard: MdlJobCard? = nil//応募への遷移元は、求人カード詳細のみでOK?
+    var jobCard: MdlJobCardDetail? = nil//応募への遷移元は、求人カード詳細のみでOK?
     var profile: MdlProfile? = nil
     var resume: MdlResume? = nil
     var career: MdlCareer? = nil
@@ -72,31 +71,9 @@ class EntryVC: PreviewBaseVC {
         btnCommit.setTitle(text: "応募する", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
     }
-    override func initData() {
+    func initData(_ model: MdlJobCardDetail) {
         title = "[C-9] 応募フォーム"
-
-        //###[Dbg]ダミーデータ投入 ___
-        //いろいろモデル読み込む
-        let entry = MdlEntry(ownPR: "自己PRテキストのダミー", hopeArea: ["13", "18"], hopeSalary: "8", exQuestion1: "拡張質問　その1", exQuestion2: nil, exQuestion3: "拡張質問　その3", exAnswer1: "回答1", exAnswer2: "回答2", exAnswer3: "回答3")
-        self.entry = entry
-        
-//        self.entry?.exQuestion1 = nil
-//        self.entry?.exQuestion2 = nil
-//        self.entry?.exQuestion3 = nil
-        //###[Dbg] ダミーデータ投入 ^^^
-        //###[Dbg]ダミーデータ投入 ___
-        let dp = EntryFormInfoDisplayPeriod(startAt: "", endAt: "")
-        let jobCard = MdlJobCard(jobCardCode: "12345678", displayPeriod: dp, companyName: "会社名", jobName: "じょぶねーむですよ。もろもろ説明だったりとか", mainTitle: "メインタイトル", mainPicture: "", salaryMinCode: 3, salaryMaxCode: 8, salaryDisplay: true, workPlaceCode: [11,22,33], keepStatus: true)
-        self.jobCard = jobCard
-        //###[Dbg] ダミーデータ投入 ^^^
-        //###[Dbg]ダミーデータ投入 ___
-        let profile = MdlProfile(nickname: "ニックネーム", hopeJobPlaceIds: ["13", "44"], salaryId: "8", familyName: "名前", firstName: "太郎", familyNameKana: "ナマエ", firstNameKana: "タロウ", birthday: DateHelper.convStrYMD2Date("1999-12-12"), gender: "1", zipCode: "1234567", prefecture: "13", address1: "千代田区有楽町1-2-3", address2: "ほにゃららビル", mailAddress: "hoge@example.com", mobilePhoneNo: "12345678901")
-        self.profile = profile
-        //###[Dbg] ダミーデータ投入 ^^^
-        //###[Dbg]ダミーデータ投入 ___
-        //###[Dbg] ダミーデータ投入 ^^^
-
-        
+        self.jobCard = model
     }
     override func dispData() {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
