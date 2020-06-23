@@ -102,6 +102,23 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
         let item = arrData[indexPath.row]
 
         //================================================
+        //モデル引き渡しによる画面遷移の得例対応
+        switch item.type {
+        case .jobCardC9:
+            return // 遷移なし
+        case .profileC9:
+            pushViewController(.profilePreviewH2)
+            return
+        case .resumeC9:
+            pushViewController(.resumePreviewH3)
+            return
+        case .careerC9:
+            pushViewController(.careerListC)
+            return
+        default:
+            break
+        }
+        //================================================
         //子項目が1つの場合には、直接編集へ移動させる場合：
         let items = item.childItems
         switch items.count {
@@ -110,6 +127,8 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
             let _item = items.first!
             let (_, editTemp) = editableModel.makeTempItem(_item)
             switch editTemp.editType {
+            case .model:
+                break
             case .readonly:
                 break
             case .inputText:

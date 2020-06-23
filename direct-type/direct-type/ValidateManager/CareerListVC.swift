@@ -130,6 +130,12 @@ extension CareerListVC {
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            switch myErr.code {
+            case 404://見つからない場合、空データを適用して画面を表示
+                return //エラー表示させないため
+            default:
+                break
+            }
             self.showError(error)
         }
         .finally {

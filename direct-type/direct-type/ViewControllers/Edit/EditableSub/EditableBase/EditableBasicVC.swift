@@ -161,7 +161,8 @@ extension EditableBasicVC: InputItemHDelegate {
                 }
             })
             break
-
+        case .model:
+            break
         case .readonly:
             break
         case .inputText:
@@ -184,6 +185,8 @@ extension EditableBasicVC: InputItemHDelegate {
         case .selectDrumYMD:
             print("Picker閉じる時の処理 [\(item.editableItemKey): \(item.dispName)] [\(tf.description)]")
             hidePicker(tf)
+        case .model:
+            break
         case .readonly:
             break
         case .inputText:

@@ -38,6 +38,15 @@ class IKTextField: UITextField {
 
 enum HPreviewItemType: String {
     case undefine
+    //=== [C-9]応募フォーム
+    case jobCardC9      //４．応募先求人
+    case profileC9      //５．プロフィール（一部必須）
+    case resumeC9       //６．履歴書（一部必須）
+    case careerC9       //７．職務経歴書（一部必須）
+    case exQuestionC9   //１２．独自質問（必須）
+    case ownPRC9        //９．自己PR文字カウント
+    case hopeAreaC9     //１０．希望勤務地（任意）
+    case hopeSalaryC9   //１１．希望年収（任意）
     //=== [H-2]個人プロフィール編集
     case fullnameH2       //===４．氏名（必須）
     case birthGenderH2    //===５．生年月日・性別（必須）
@@ -83,6 +92,15 @@ enum HPreviewItemType: String {
     var dispTitle: String {
         switch self {
         case .undefine:     return "<未定義>"
+        //=== [C-9]応募フォーム
+        case .jobCardC9:      return "応募先求人"
+        case .profileC9:      return "プロフィール（一部必須）"
+        case .resumeC9:       return "履歴書（一部必須）"
+        case .careerC9:       return "職務経歴書（一部必須）"
+        case .exQuestionC9:   return "独自質問（必須）"
+        case .ownPRC9:        return "自己PR文字カウント"
+        case .hopeAreaC9:     return "希望勤務地（任意）"
+        case .hopeSalaryC9:   return "希望年収（任意）"
         //=== [H-2]個人プロフィール編集
         case .fullnameH2:     return "氏名"
         case .birthGenderH2:  return "生年月日・性別"

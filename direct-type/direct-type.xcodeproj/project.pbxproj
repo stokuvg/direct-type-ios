@@ -216,6 +216,8 @@
 		2636075F2477AB4900032880 /* BaseVC+ShowDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2636075E2477AB4900032880 /* BaseVC+ShowDialog.swift */; };
 		2636AEFB247B595000CA1F6D /* Ext_ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2636AEFA247B595000CA1F6D /* Ext_ErrorMessage.swift */; };
 		2642E38F24A04C1F003E6907 /* MstSel_salary.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 2642E38E24A04C1F003E6907 /* MstSel_salary.tsv */; };
+		2642E39124A19B0F003E6907 /* MdlEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2642E39024A19B0F003E6907 /* MdlEntry.swift */; };
+		2642E39324A1A6CC003E6907 /* Validate+Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2642E39224A1A6CC003E6907 /* Validate+Entry.swift */; };
 		26800520246A2B440053A7F4 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2680051F246A2B440053A7F4 /* Date+Extensions.swift */; };
 		26859E242488E62A000109D1 /* SubEditSpecialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26859E232488E62A000109D1 /* SubEditSpecialVC.swift */; };
 		26859E272488E636000109D1 /* HEditSpecialTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26859E252488E636000109D1 /* HEditSpecialTBCell.swift */; };
@@ -517,6 +519,8 @@
 		2636075E2477AB4900032880 /* BaseVC+ShowDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseVC+ShowDialog.swift"; sourceTree = "<group>"; };
 		2636AEFA247B595000CA1F6D /* Ext_ErrorMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ext_ErrorMessage.swift; sourceTree = "<group>"; };
 		2642E38E24A04C1F003E6907 /* MstSel_salary.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstSel_salary.tsv; sourceTree = "<group>"; };
+		2642E39024A19B0F003E6907 /* MdlEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlEntry.swift; sourceTree = "<group>"; };
+		2642E39224A1A6CC003E6907 /* Validate+Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validate+Entry.swift"; sourceTree = "<group>"; };
 		2680051F246A2B440053A7F4 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		26859E232488E62A000109D1 /* SubEditSpecialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubEditSpecialVC.swift; sourceTree = "<group>"; };
 		26859E252488E636000109D1 /* HEditSpecialTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HEditSpecialTBCell.swift; sourceTree = "<group>"; };
@@ -1112,6 +1116,7 @@
 			isa = PBXGroup;
 			children = (
 				260BBFDB2465171D003D163A /* MdlProfile.swift */,
+				2642E39024A19B0F003E6907 /* MdlEntry.swift */,
 				26AF323A248F698E00AA78FD /* MdlFirstInput.swift */,
 				26F2A818246D0CE90037D47F /* MdlReqEntry.swift */,
 				26F2A81A246D10C30037D47F /* MdlResume.swift */,
@@ -1225,6 +1230,7 @@
 				26AF323C248F7F6B00AA78FD /* Validate+FirstInput.swift */,
 				260DD26A248E179000BFB9FE /* Validate+Career.swift */,
 				26AF3236248F538300AA78FD /* Validate+Resume.swift */,
+				2642E39224A1A6CC003E6907 /* Validate+Entry.swift */,
 			);
 			path = ValidateManager;
 			sourceTree = "<group>";
@@ -1636,6 +1642,7 @@
 				06AA8C642484D2DA001733FA /* MyPageCarrerStartCell.swift in Sources */,
 				06409C73246D3A6800EA6BBB /* JobDetailFoldingHeaderView.swift in Sources */,
 				26A1F5842480F23100834213 /* MyCmnDialogVC.swift in Sources */,
+				2642E39324A1A6CC003E6907 /* Validate+Entry.swift in Sources */,
 				26AF3237248F538300AA78FD /* Validate+Resume.swift in Sources */,
 				06E519982457DA0D004E4B7A /* ApproachSettingVC.swift in Sources */,
 				06DCAEAB245A7616008FE9FA /* UILabel+Extensions.swift in Sources */,
@@ -1676,6 +1683,7 @@
 				06E519A92458139B004E4B7A /* SignupConfirmVC.swift in Sources */,
 				0645DDFC246B907000592572 /* JobDetailPRCodeTagsCell.swift in Sources */,
 				06E519B5245814C7004E4B7A /* EntryCompleteVC.swift in Sources */,
+				2642E39124A19B0F003E6907 /* MdlEntry.swift in Sources */,
 				06E519A22457DC44004E4B7A /* InitialInputRegistVC.swift in Sources */,
 				269AFFC3246A929300DB364B /* SubSelectTBCell.swift in Sources */,
 				06E519AF245813E9004E4B7A /* LoginConfirmVC.swift in Sources */,

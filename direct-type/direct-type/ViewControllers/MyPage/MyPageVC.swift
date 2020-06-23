@@ -285,12 +285,16 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
         let action06: UIAlertAction = UIAlertAction(title: "C[仮] 職歴一覧", style: .default, handler: { action in
             self.pushViewController(.careerListC)
         })
+        let action08: UIAlertAction = UIAlertAction(title: "[C-9] 応募フォーム", style: .default, handler: { action in
+            self.pushViewController(.entryVC)
+        })
         alert.addAction(action01)
         alert.addAction(action02)
         alert.addAction(action06)
         //alert.addAction(action03)
         alert.addAction(action04)
         alert.addAction(action05)
+        alert.addAction(action08)
 
         let action07: UIAlertAction = UIAlertAction(title: "レコメンド[ap341]", style: .default, handler: { action in
             RecommendManager.fetchRecommend(type: .ap341, jobID: "123456789")
