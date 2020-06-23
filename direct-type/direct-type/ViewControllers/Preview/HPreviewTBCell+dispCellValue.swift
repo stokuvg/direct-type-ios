@@ -23,7 +23,7 @@ extension HPreviewTBCell {
         case .jobCardC9:      //４．応募先求人
             if _item.childItems[0].curVal.isEmpty { return "【モデル】" }
             return "【モデル】差し替え"
-        case .profileC0:      //５．プロフィール（一部必須）
+        case .profileC9:      //５．プロフィール（一部必須）
             if _item.childItems[0].curVal.isEmpty { return "【モデル】" }
             return "【モデル】差し替え"
         case .resumeC9:       //６．履歴書（一部必須）

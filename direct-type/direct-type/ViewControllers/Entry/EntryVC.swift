@@ -49,9 +49,12 @@
 
 
 import UIKit
+import SwaggerClient
+import TudApi
+import SVProgressHUD
 
 class EntryVC: PreviewBaseVC {
-    var jobCard: MdlJobCardDetail? = nil//応募への遷移元は、求人カード詳細のみでOK?
+    var jobCard: MdlJobCard? = nil//応募への遷移元は、求人カード詳細のみでOK?
     var profile: MdlProfile? = nil
     var resume: MdlResume? = nil
     var career: MdlCareer? = nil
@@ -81,6 +84,17 @@ class EntryVC: PreviewBaseVC {
 //        self.entry?.exQuestion2 = nil
 //        self.entry?.exQuestion3 = nil
         //###[Dbg] ダミーデータ投入 ^^^
+        //###[Dbg]ダミーデータ投入 ___
+        let dp = EntryFormInfoDisplayPeriod(startAt: "", endAt: "")
+        let jobCard = MdlJobCard(jobCardCode: "12345678", displayPeriod: dp, companyName: "会社名", jobName: "じょぶねーむですよ。もろもろ説明だったりとか", mainTitle: "メインタイトル", mainPicture: "", salaryMinCode: 3, salaryMaxCode: 8, salaryDisplay: true, workPlaceCode: [11,22,33], keepStatus: true)
+        self.jobCard = jobCard
+        //###[Dbg] ダミーデータ投入 ^^^
+        //###[Dbg]ダミーデータ投入 ___
+        let profile = MdlProfile(nickname: "ニックネーム", hopeJobPlaceIds: ["13", "44"], salaryId: "8", familyName: "名前", firstName: "太郎", familyNameKana: "ナマエ", firstNameKana: "タロウ", birthday: DateHelper.convStrYMD2Date("1999-12-12"), gender: "1", zipCode: "1234567", prefecture: "13", address1: "千代田区有楽町1-2-3", address2: "ほにゃららビル", mailAddress: "hoge@example.com", mobilePhoneNo: "12345678901")
+        self.profile = profile
+        //###[Dbg] ダミーデータ投入 ^^^
+        //###[Dbg]ダミーデータ投入 ___
+        //###[Dbg] ダミーデータ投入 ^^^
 
         
     }
@@ -93,19 +107,19 @@ class EntryVC: PreviewBaseVC {
         //===４．応募先求人
         arrData.append(MdlItemH(.jobCardC9, "", childItems: [
             EditableItemH(type: .model, editItem: EditItemMdlEntry.jobCard, val: "【モデルダミー】"),
-        ]))
+        ], model: jobCard))
         //===５．プロフィール（一部必須）
-        arrData.append(MdlItemH(.profileC0, "", childItems: [
+        arrData.append(MdlItemH(.profileC9, "", childItems: [
             EditableItemH(type: .model, editItem: EditItemMdlEntry.profile, val: "【モデルダミー】"),
-        ]))
+        ], model: profile))
         //===６．履歴書（一部必須）
         arrData.append(MdlItemH(.resumeC9, "", childItems: [
             EditableItemH(type: .model, editItem: EditItemMdlEntry.resume, val: "【モデルダミー】"),
-        ]))
+        ], model: resume))
         //===７．職務経歴書（一部必須）
         arrData.append(MdlItemH(.careerC9, "", childItems: [
             EditableItemH(type: .model, editItem: EditItemMdlEntry.career, val: "【モデルダミー】"),
-        ]))
+        ], model: career))
         //===１２．独自質問（必須）
         var exQA: [EditableItemH] = []
         if let exQuestion = entry?.exQuestion1 {
@@ -150,8 +164,61 @@ class EntryVC: PreviewBaseVC {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        fetchGetProfile()
+        fetchGetEntryAll()
     }
 }
 
 //=== APIフェッチ
+extension EntryVC {
+    private func fetchGetEntryAll() {
+        fetchGetProfile()//ここから多段で実施してる
+    }
+    private func fetchGetProfile() {
+        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
+        SVProgressHUD.show(withStatus: "プロフィール情報の取得")
+        ApiManager.getProfile(Void(), isRetry: true)
+        .done { result in
+            self.profile = result
+        }
+        .catch { (error) in
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            print(myErr)
+        }
+        .finally {
+            self.fetchGetResume()
+        }
+    }
+    private func fetchGetResume() {
+        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
+        //========================================================
+        SVProgressHUD.show(withStatus: "履歴書の取得")
+        ApiManager.getResume(Void(), isRetry: true)
+        .done { result in
+            self.resume = result
+        }
+        .catch { (error) in
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            print(myErr)
+        }
+        .finally {
+            SVProgressHUD.dismiss()
+            self.fetchGetCareerList()
+        }
+    }
+    private func fetchGetCareerList() {
+        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
+        SVProgressHUD.show(withStatus: "職務経歴書情報の取得")
+        ApiManager.getCareer(Void(), isRetry: true)
+        .done { result in
+            self.career = result
+        }
+        .catch { (error) in
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            print(myErr)
+        }
+        .finally {
+            self.dispData()
+            SVProgressHUD.dismiss()
+        }
+    }
+}

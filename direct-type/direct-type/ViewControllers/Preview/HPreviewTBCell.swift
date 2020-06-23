@@ -15,18 +15,20 @@ class MdlItemH {
     var notice: String = ""
     var readonly: Bool = false
     var childItems: [EditableItemH] = []
+    var model: Any? = nil
     
-    convenience init(_ type: HPreviewItemType, _ value: String, _ notice: String = "", readonly: Bool = false, childItems: [EditableItemH]) {
+    convenience init(_ type: HPreviewItemType, _ value: String, _ notice: String = "", readonly: Bool = false, childItems: [EditableItemH], model: Any? = nil) {
         self.init()
         self.type = type
         self.value = value
         self.notice = notice
         self.readonly = readonly
         self.childItems = childItems
+        self.model = model
     }
         
     var debugDisp: String {
-        return "[\(type.dispTitle)] [\(value)]（\(childItems.count)件のサブ項目） [\(readonly ? "変更不可" : "")] [\(notice)]"
+        return "[\(type.dispTitle)] [\(value)]（\(childItems.count)件のサブ項目） [\(readonly ? "変更不可" : "")] [\(notice)] [\(model)]"
     }
 }
 
@@ -61,6 +63,9 @@ class HPreviewTBCell: UITableViewCell {
     
     func dispCell() {
         guard let _item = item else { return }
+        
+        if let _model = _item.model { self.backgroundColor = .yellow }//[Dbg: モデルチェック]
+        
         //子項目に値を適用させておく必要ありだ
         for (n, item) in _item.childItems.enumerated() {
             if let temp = editTempCD[item.editableItemKey] {

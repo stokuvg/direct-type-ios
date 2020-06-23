@@ -40,7 +40,7 @@ enum HPreviewItemType: String {
     case undefine
     //=== [C-9]応募フォーム
     case jobCardC9      //４．応募先求人
-    case profileC0      //５．プロフィール（一部必須）
+    case profileC9      //５．プロフィール（一部必須）
     case resumeC9       //６．履歴書（一部必須）
     case careerC9       //７．職務経歴書（一部必須）
     case exQuestionC9   //１２．独自質問（必須）
@@ -94,7 +94,7 @@ enum HPreviewItemType: String {
         case .undefine:     return "<未定義>"
         //=== [C-9]応募フォーム
         case .jobCardC9:      return "応募先求人"
-        case .profileC0:      return "プロフィール（一部必須）"
+        case .profileC9:      return "プロフィール（一部必須）"
         case .resumeC9:       return "履歴書（一部必須）"
         case .careerC9:       return "職務経歴書（一部必須）"
         case .exQuestionC9:   return "独自質問（必須）"

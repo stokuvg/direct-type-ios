@@ -14,7 +14,7 @@ import SwaggerClient
 class MdlEntry: Codable {
     //=== [C-9]応募フォーム
     //    case jobCardC9      //４．応募先求人
-    //    case profileC0      //５．プロフィール（一部必須）
+    //    case profileC9      //５．プロフィール（一部必須）
     //    case resumeC9       //６．履歴書（一部必須）
     //    case careerC9       //７．職務経歴書（一部必須）
     var ownPR: String = ""          //９．自己PR文字カウント
