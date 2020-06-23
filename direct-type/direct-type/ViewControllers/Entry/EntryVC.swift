@@ -50,9 +50,6 @@
 
 import UIKit
 
-class MdlEntry {
-}
-
 class EntryVC: PreviewBaseVC {
     var jobCard: MdlJobCardDetail? = nil//応募への遷移元は、求人カード詳細のみでOK?
     var profile: MdlProfile? = nil
@@ -74,16 +71,65 @@ class EntryVC: PreviewBaseVC {
     }
     override func initData() {
         title = "[C-9] 応募フォーム"
+        
+        //いろいろモデル読み込む
+        let entry = MdlEntry(ownPR: "事故PRテキストのダミー", hopeArea: ["3", "8"], hopeSalary: "8", exQuestion1: "拡張質問　その1", exQuestion2: "拡張質問　その2", exQuestion3: "拡張質問　その3", exAnswer1: "回答1", exAnswer2: "回答2", exAnswer3: "回答3")
+        self.entry = entry
+        
+        
+        
     }
     override func dispData() {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
         self.arrData.removeAll()//いったん全件を削除しておく
         editableModel.arrData.removeAll()//こちらで管理させる？！
         
-        //===７．メールアドレス
-        let bufMailAddress: String = profile?.mailAddress ?? ""
-        arrData.append(MdlItemH(.emailH2, "\(bufMailAddress)", childItems: [
-            EditableItemH(type: .readonly, editItem: EditItemMdlProfile.mailAddress, val: profile?.mailAddress ?? ""),
+        //====== [C-9]応募フォーム
+        //===４．応募先求人
+        arrData.append(MdlItemH(.jobCardC9, "", childItems: [
+            EditableItemH(type: .readonly, editItem: EditItemMdlEntry.jobCard, val: "【モデルダミー】"),
+        ]))
+        //===５．プロフィール（一部必須）
+        arrData.append(MdlItemH(.profileC0, "", childItems: [
+            EditableItemH(type: .readonly, editItem: EditItemMdlEntry.profile, val: "【モデルダミー】"),
+        ]))
+        //===６．履歴書（一部必須）
+        arrData.append(MdlItemH(.resumeC9, "", childItems: [
+            EditableItemH(type: .readonly, editItem: EditItemMdlEntry.resume, val: "【モデルダミー】"),
+        ]))
+        //===７．職務経歴書（一部必須）
+        arrData.append(MdlItemH(.careerC9, "", childItems: [
+            EditableItemH(type: .readonly, editItem: EditItemMdlEntry.career, val: "【モデルダミー】"),
+        ]))
+        //===１２．独自質問（必須）
+        var exQA: [EditableItemH] = []
+        if let exQuestion = entry?.exQuestion1 {
+            exQA.append(EditableItemH(type: .readonly, editItem: EditItemMdlEntry.exQuestionAnswer1, val: exQuestion))
+            exQA.append(EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer1, val: entry?.exAnswer1 ?? ""))
+        }
+        if let exQuestion = entry?.exQuestion2 {
+            exQA.append(EditableItemH(type: .readonly, editItem: EditItemMdlEntry.exQuestionAnswer2, val: exQuestion))
+            exQA.append(EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer2, val: entry?.exAnswer2 ?? ""))
+        }
+        if let exQuestion = entry?.exQuestion3 {
+            exQA.append(EditableItemH(type: .readonly, editItem: EditItemMdlEntry.exQuestionAnswer3, val: exQuestion))
+            exQA.append(EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer3, val: entry?.exAnswer3 ?? ""))
+        }
+        if exQA.count > 0 {
+            arrData.append(MdlItemH(.exQuestionC9, "", childItems: exQA))
+        }
+        //===９．自己PR文字カウント
+        arrData.append(MdlItemH(.ownPRC9, "", childItems: [
+            EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.ownPR, val: entry?.ownPR ?? ""),
+        ]))
+        //===１０．希望勤務地（任意）
+        let _hopeArea = entry?.hopeArea.joined(separator: EditItemTool.JoinMultiCodeSeparator)
+        arrData.append(MdlItemH(.hopeAreaC9, "", childItems: [
+            EditableItemH(type: .selectMulti, editItem: EditItemMdlEntry.hopeArea, val: _hopeArea ?? ""),
+        ]))
+        //===１１．希望年収（任意）
+        arrData.append(MdlItemH(.hopeSalaryC9, "", childItems: [
+            EditableItemH(type: .selectSingle, editItem: EditItemMdlEntry.hopeSalary, val: entry?.hopeSalary ?? ""),
         ]))
 
         //=== editableModelで管理させる

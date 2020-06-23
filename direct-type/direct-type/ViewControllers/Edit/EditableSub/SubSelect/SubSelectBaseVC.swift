@@ -70,6 +70,8 @@ class SubSelectBaseVC: BaseVC {
         switch editableItem.editableItemKey {
         case EditItemMdlFirstInput.hopeArea.itemKey:
             selectMaxCount = 5
+        case EditItemMdlEntry.hopeArea.itemKey:
+            selectMaxCount = 5
         case EditItemMdlResume.qualifications.itemKey:
             selectMaxCount = 9999 //選択上限なし？
         default:
