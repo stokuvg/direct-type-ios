@@ -15,6 +15,7 @@ enum PushVCType {
     case smoothCareerPreviewF11
     case firstInputPreviewA
     case careerListC
+    case entryVC
 }
 
 extension BaseVC {
@@ -53,6 +54,12 @@ extension BaseVC {
         case .careerListC://C[仮] 職歴一覧
             let storyboard2 = UIStoryboard(name: "Career", bundle: nil)
             if let nvc = storyboard2.instantiateViewController(withIdentifier: "Sbid_CareerListVC") as? CareerListVC{
+                nvc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に表示にする
+                self.navigationController?.pushViewController(nvc, animated: true)
+            }
+        case .entryVC://[C-0] 応募フォーム
+            let storyboard = UIStoryboard(name: "Preview", bundle: nil)
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_EntryVC") as? EntryVC{
                 nvc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に表示にする
                 self.navigationController?.pushViewController(nvc, animated: true)
             }
