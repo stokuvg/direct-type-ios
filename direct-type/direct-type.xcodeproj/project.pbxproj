@@ -172,6 +172,7 @@
 		0E6951B5248A1FC600D58E6E /* ChemistrySelectFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6951B4248A1FC600D58E6E /* ChemistrySelectFooterView.swift */; };
 		0E6951B7248A204C00D58E6E /* ChemistrySelectFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E6951B6248A204C00D58E6E /* ChemistrySelectFooterView.xib */; };
 		0E6EA6DF24A1A57900884D07 /* InitialInputListVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6EA6DE24A1A57900884D07 /* InitialInputListVC.storyboard */; };
+		0E6EA6E124A1BB3B00884D07 /* InitialInputRegistVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6EA6E024A1BB3B00884D07 /* InitialInputRegistVC.storyboard */; };
 		0E7372DD2499EE1C00358EFA /* ApiManager+PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7372DC2499EE1C00358EFA /* ApiManager+PhoneNumber.swift */; };
 		0E7372DF249A089D00358EFA /* ApiManager+AuthCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7372DE249A089D00358EFA /* ApiManager+AuthCode.swift */; };
 		0E74739F24972A9800928644 /* ApiManager+Approach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E74739E24972A9800928644 /* ApiManager+Approach.swift */; };
@@ -474,6 +475,7 @@
 		0E6951B4248A1FC600D58E6E /* ChemistrySelectFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistrySelectFooterView.swift; sourceTree = "<group>"; };
 		0E6951B6248A204C00D58E6E /* ChemistrySelectFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChemistrySelectFooterView.xib; sourceTree = "<group>"; };
 		0E6EA6DE24A1A57900884D07 /* InitialInputListVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InitialInputListVC.storyboard; sourceTree = "<group>"; };
+		0E6EA6E024A1BB3B00884D07 /* InitialInputRegistVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InitialInputRegistVC.storyboard; sourceTree = "<group>"; };
 		0E7372DC2499EE1C00358EFA /* ApiManager+PhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+PhoneNumber.swift"; sourceTree = "<group>"; };
 		0E7372DE249A089D00358EFA /* ApiManager+AuthCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+AuthCode.swift"; sourceTree = "<group>"; };
 		0E74739E24972A9800928644 /* ApiManager+Approach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Approach.swift"; sourceTree = "<group>"; };
@@ -910,6 +912,7 @@
 				06E519AA245813CA004E4B7A /* InitialInputListVC.swift */,
 				0E6EA6DE24A1A57900884D07 /* InitialInputListVC.storyboard */,
 				06E519A12457DC44004E4B7A /* InitialInputRegistVC.swift */,
+				0E6EA6E024A1BB3B00884D07 /* InitialInputRegistVC.storyboard */,
 				06E519A32457DC7B004E4B7A /* InitialInputCompleteVC.swift */,
 			);
 			path = InitialInput;
@@ -1389,6 +1392,7 @@
 				066938252485EB450064030F /* Web.storyboard in Resources */,
 				26147F322472630B009B30B5 /* MstF16_management.tsv in Resources */,
 				066BD9E32456ACB5009E610B /* LaunchScreen.storyboard in Resources */,
+				0E6EA6E124A1BB3B00884D07 /* InitialInputRegistVC.storyboard in Resources */,
 				26859E282488E636000109D1 /* HEditSpecialTBCell.xib in Resources */,
 				066EF6C6245BB9C400E15AD2 /* KeepCardCell.xib in Resources */,
 				26BF48E924639D2B00E00215 /* MstK7_skillEnglish.tsv in Resources */,

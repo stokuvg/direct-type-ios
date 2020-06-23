@@ -76,9 +76,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
-        let initialSB = UIStoryboard(name: "InitialInputListVC", bundle: nil)
+        let initialSB = UIStoryboard(name: "InitialInputRegistVC", bundle: nil)
         
-        let initialVC = initialSB.instantiateViewController(withIdentifier: "Sbid_InitialInputListVC") as! InitialInputListVC
+        let initialVC = initialSB.instantiateViewController(withIdentifier: "InitialInputRegistVC") as! InitialInputRegistVC
         
         self.window?.rootViewController = initialVC
         
