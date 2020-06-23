@@ -293,6 +293,10 @@
 		26CFC46E246949B800E458E2 /* MyColorDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFC46C246949B800E458E2 /* MyColorDefine.swift */; };
 		26CFC46F246949B800E458E2 /* ClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFC46D246949B800E458E2 /* ClassExtensions.swift */; };
 		26D4CB22247777F1002EE9A9 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 26D4CB21247777F1002EE9A9 /* awsconfiguration.json */; };
+		26E04ADD24A1E7C600DE8694 /* EntryFormJobCardTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E04ADB24A1E7C600DE8694 /* EntryFormJobCardTBCell.swift */; };
+		26E04ADE24A1E7C600DE8694 /* EntryFormJobCardTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E04ADC24A1E7C600DE8694 /* EntryFormJobCardTBCell.xib */; };
+		26E04AE124A1E80100DE8694 /* EntryFormAnyModelTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E04ADF24A1E80100DE8694 /* EntryFormAnyModelTBCell.swift */; };
+		26E04AE224A1E80100DE8694 /* EntryFormAnyModelTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E04AE024A1E80100DE8694 /* EntryFormAnyModelTBCell.xib */; };
 		26F2A819246D0CE90037D47F /* MdlReqEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A818246D0CE90037D47F /* MdlReqEntry.swift */; };
 		26F2A81B246D10C30037D47F /* MdlResume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A81A246D10C30037D47F /* MdlResume.swift */; };
 		26F2A81D246D10DA0037D47F /* MdlCareer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A81C246D10DA0037D47F /* MdlCareer.swift */; };
@@ -597,6 +601,10 @@
 		26CFC46C246949B800E458E2 /* MyColorDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyColorDefine.swift; sourceTree = "<group>"; };
 		26CFC46D246949B800E458E2 /* ClassExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassExtensions.swift; sourceTree = "<group>"; };
 		26D4CB21247777F1002EE9A9 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+		26E04ADB24A1E7C600DE8694 /* EntryFormJobCardTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryFormJobCardTBCell.swift; sourceTree = "<group>"; };
+		26E04ADC24A1E7C600DE8694 /* EntryFormJobCardTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntryFormJobCardTBCell.xib; sourceTree = "<group>"; };
+		26E04ADF24A1E80100DE8694 /* EntryFormAnyModelTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryFormAnyModelTBCell.swift; sourceTree = "<group>"; };
+		26E04AE024A1E80100DE8694 /* EntryFormAnyModelTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntryFormAnyModelTBCell.xib; sourceTree = "<group>"; };
 		26F2A818246D0CE90037D47F /* MdlReqEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlReqEntry.swift; sourceTree = "<group>"; };
 		26F2A81A246D10C30037D47F /* MdlResume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlResume.swift; sourceTree = "<group>"; };
 		26F2A81C246D10DA0037D47F /* MdlCareer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlCareer.swift; sourceTree = "<group>"; };
@@ -718,6 +726,10 @@
 				06E519B0245814B2004E4B7A /* EntryConfirmVC.swift */,
 				06E519B2245814BD004E4B7A /* EntryLoginVC.swift */,
 				06E519B4245814C7004E4B7A /* EntryCompleteVC.swift */,
+				26E04ADF24A1E80100DE8694 /* EntryFormAnyModelTBCell.swift */,
+				26E04AE024A1E80100DE8694 /* EntryFormAnyModelTBCell.xib */,
+				26E04ADB24A1E7C600DE8694 /* EntryFormJobCardTBCell.swift */,
+				26E04ADC24A1E7C600DE8694 /* EntryFormJobCardTBCell.xib */,
 			);
 			path = Entry;
 			sourceTree = "<group>";
@@ -1448,6 +1460,7 @@
 				063350DF2463EC5800AF90F3 /* NoCardView.xib in Resources */,
 				066763692457AF3100AC5039 /* MyPageVC.storyboard in Resources */,
 				0685017E24738D98009770A3 /* JobDetailImageCell.xib in Resources */,
+				26E04ADE24A1E7C600DE8694 /* EntryFormJobCardTBCell.xib in Resources */,
 				26147F38247267F9009B30B5 /* MstF22_pcSkillPowerPoint.tsv in Resources */,
 				26A1F5852480F23100834213 /* Dialog.storyboard in Resources */,
 				2636075D2477A39900032880 /* Auth.storyboard in Resources */,
@@ -1467,6 +1480,7 @@
 				066BC825246CD0C100FE607F /* JobDetailItemOptionalView.xib in Resources */,
 				0E144D8F248DC876005A659F /* ChemistryResult.storyboard in Resources */,
 				26CFC4692469496D00E458E2 /* HEditTextTBCell.xib in Resources */,
+				26E04AE224A1E80100DE8694 /* EntryFormAnyModelTBCell.xib in Resources */,
 				260BBFE224651732003D163A /* HPreviewTBCell.xib in Resources */,
 				066F2715246E818A0040BDC1 /* JobDetailFoldingProcessCell.xib in Resources */,
 				06409C75246D3ACB00EA6BBB /* JobDetailFoldingHeaderView.xib in Resources */,
@@ -1650,6 +1664,7 @@
 				26F2A81B246D10C30037D47F /* MdlResume.swift in Sources */,
 				06BE18FB2484A55000FAE476 /* MyPageNameCell.swift in Sources */,
 				0EC5B164248F41B80089670D /* BusinessAvilityScore.swift in Sources */,
+				26E04AE124A1E80100DE8694 /* EntryFormAnyModelTBCell.swift in Sources */,
 				0E6951B1248A11A000D58E6E /* ChemistryAnswerType.swift in Sources */,
 				26B491E0247E3CB100B58AD4 /* ApiManager+Entry.swift in Sources */,
 				26AF3239248F68BD00AA78FD /* FirstInputPreviewVC.swift in Sources */,
@@ -1668,6 +1683,7 @@
 				06E519AD245813DC004E4B7A /* LoginVC.swift in Sources */,
 				0EE8619F2488D50B003C5242 /* ChemistryAnswerButton.swift in Sources */,
 				06409C71246D386A00EA6BBB /* BaseFoldingHeaderView.swift in Sources */,
+				26E04ADD24A1E7C600DE8694 /* EntryFormJobCardTBCell.swift in Sources */,
 				268BFF58246E8D25004B2640 /* SmoothCareerPreviewVC.swift in Sources */,
 				26FC4EE02477C775003B56C3 /* AuthManager.swift in Sources */,
 				26CFC46F246949B800E458E2 /* ClassExtensions.swift in Sources */,
