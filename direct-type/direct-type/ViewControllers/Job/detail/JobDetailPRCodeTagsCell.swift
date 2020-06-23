@@ -47,7 +47,9 @@ class JobDetailPRCodeTagsCell: BaseTableViewCell {
             }
         }
         
-        tagsView.setKind(datas: datas, frame: tagsView.frame)
+        let tagFont = UIFont.init(fontType: .font_SS) ?? UIFont()
+        
+        tagsView.setKind(datas: datas, frame: tagsView.frame, tagFont: tagFont)
     }
         
     private func subViewsRemove() {

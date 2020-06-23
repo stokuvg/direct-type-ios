@@ -15,6 +15,77 @@ class JobOfferDetailVC: TmpBasicVC {
     
     @IBOutlet weak var detailTableView:UITableView!
     
+    @IBOutlet weak var applicationFooterView:UIView!
+    
+    @IBOutlet weak var applicationBtn:UIButton!
+    @IBAction func applicationBtnAction() {
+        // 応募フォームに遷移
+//        self.delegate.footerApplicationBtnAction()
+    }
+    
+    var keepFlag:Bool!
+    @IBOutlet weak var keepBtn:UIButton!
+    @IBAction func keepBtnAction() {
+        keepFlag = !keepFlag
+        
+        // キープ情報送信
+        if keepFlag == true {
+            ApiManager.sendJobKeep(id: jobId)
+                .done { result in
+                Log.selectLog(logLevel: .debug, "keep send success")
+                    Log.selectLog(logLevel: .debug, "keep成功")
+                    
+            }.catch{ (error) in
+                Log.selectLog(logLevel: .debug, "skip send error:\(error)")
+                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+                switch myErr.code {
+                case 404:
+                    let message: String = ""
+                    self.showConfirm(title: "", message: message)
+                    .done { _ in
+                        Log.selectLog(logLevel: .debug, "対応方法の確認")
+                    }
+                    .catch { (error) in
+                    }
+                    .finally {
+                    }
+                default: break
+                }
+                self.showError(error)
+            }.finally {
+                Log.selectLog(logLevel: .debug, "keep send finally")
+            }
+        } else {
+            ApiManager.sendJobDeleteKeep(id: jobId)
+                .done { result in
+                Log.selectLog(logLevel: .debug, "keep delete success")
+                    Log.selectLog(logLevel: .debug, "delete成功")
+                    
+            }.catch{ (error) in
+                Log.selectLog(logLevel: .debug, "skip send error:\(error)")
+                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+                switch myErr.code {
+                case 404:
+                    let message: String = ""
+                    self.showConfirm(title: "", message: message)
+                    .done { _ in
+                        Log.selectLog(logLevel: .debug, "対応方法の確認")
+                    }
+                    .catch { (error) in
+                    }
+                    .finally {
+                    }
+                default: break
+                }
+                self.showError(error)
+            }.finally {
+                Log.selectLog(logLevel: .debug, "keep send finally")
+            }
+        }
+        
+        self.keepDataSetting(flag: keepFlag)
+    }
+    
     var jobId:String = ""
     var buttonsView:NaviButtonsView!
     
@@ -28,6 +99,13 @@ class JobOfferDetailVC: TmpBasicVC {
     var companyOutlineOpenFlag:Bool = false
     
     var firstOpenFlag:Bool = false
+    
+    var articleHeaderMaxSize:CGFloat = 0
+    var articleHeaderMinSize:CGFloat = 0
+    
+    var articleCellMaxSize:CGFloat = 0
+    
+    var prcodesCellMaxSize:CGFloat = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,7 +169,14 @@ class JobOfferDetailVC: TmpBasicVC {
         self.detailTableView.registerNib(nibName: "JobDetailFoldingOutlineCell", idName: "JobDetailFoldingOutlineCell")
         /// section 8
         // 応募ボタン/キープのボタン
-        self.detailTableView.registerNib(nibName: "JobDetailFooterApplicationCell", idName: "JobDetailFooterApplicationCell")
+//        self.detailTableView.registerNib(nibName: "JobDetailFooterApplicationCell", idName: "JobDetailFooterApplicationCell")
+        
+        applicationBtn.setTitle(text: "応募する", fontType: .C_font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        
+        keepBtn.setTitle(text: "", fontType: .C_font_M, textColor: UIColor.clear, alignment: .center)
+        
+        keepFlag = false
+        self.keepDataSetting(flag: keepFlag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -116,6 +201,69 @@ class JobOfferDetailVC: TmpBasicVC {
         buttonsView = titleView
     }
     
+    // メイン記事タイトルサイズ
+    private func makeArticleHeaderSize() {
+        articleHeaderMinSize = 80
+        
+        let spaceW:CGFloat = 15
+        let width = self.detailTableView.frame.size.width - (spaceW * 2)
+        let label:UILabel = UILabel()
+        
+        let text = self._mdlJobDetail.mainTitle
+        label.text(text: text, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        label.numberOfLines = 0
+        
+        let labelSize = label.sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
+        
+        articleHeaderMaxSize = (labelSize.height + 10)
+    }
+    
+    // メイン記事サイズ
+    private func makeArticleCellSize() {
+        
+        let spaceW:CGFloat = 15
+        let width = self.detailTableView.frame.size.width - (spaceW * 2)
+        let label:UILabel = UILabel()
+        
+        let text = self._mdlJobDetail.mainContents
+        label.text(text: text, fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        label.numberOfLines = 0
+        
+        let labelSize = label.sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
+        
+        articleCellMaxSize = (labelSize.height + 40)
+    }
+    
+    // PRコードの表示サイズ 最大３行
+    private func makePrCodesCellSize() {
+        
+        let spaceW:CGFloat = 15
+        let width = self.detailTableView.frame.size.width - (spaceW * 2)
+        let label:UILabel = UILabel()
+        
+        let prCodes = self._mdlJobDetail.prCodes
+        
+        var allText:String = ""
+//        for i in 0..<dummyDatas.count {
+        for i in 0..<prCodes.count {
+            let codeNo = prCodes[i]
+            let prCode:String = (SelectItemsManager.getCodeDisp(.prCode, code: codeNo)?.disp) ?? ""
+//            let prCode:String = dummyDatas[i]
+            let tagText = "#" + prCode
+            allText += tagText
+            if i < (prCode.count-1) {
+                allText += " "
+            }
+        }
+        label.lineBreakMode = .byClipping
+        label.text(text: allText, fontType: .font_SS, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        label.numberOfLines = 3
+        
+        let labelSize = label.sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
+//        Log.selectLog(logLevel: .debug, "labelSize:\(labelSize)")
+        prcodesCellMaxSize = (labelSize.height + 30)
+    }
+    
     // 取材メモ表示フラグ
     private func memoDispFlagCheck(memo: String) -> Bool {
         if memo.count > 0 {
@@ -135,6 +283,10 @@ class JobOfferDetailVC: TmpBasicVC {
                 
                 self._mdlJobDetail = result
                 
+                self.makeArticleHeaderSize()
+                self.makeArticleCellSize()
+                
+                self.makePrCodesCellSize()
         }
         .catch { (error) in
             Log.selectLog(logLevel: .debug, "error:\(error)")
@@ -181,6 +333,15 @@ class JobOfferDetailVC: TmpBasicVC {
         .finally {
         }
     }
+    
+    private func keepDataSetting(flag:Bool) {
+        let imageName:String = flag ? "btn_keep" : "btn_keepclose"
+        let btnImage = UIImage(named: imageName)
+        keepBtn.setImage(btnImage, for: .normal)
+        keepBtn.imageView?.contentMode = .scaleAspectFit
+        keepBtn.contentHorizontalAlignment = .fill
+        keepBtn.contentVerticalAlignment = .fill
+    }
 }
 
 extension JobOfferDetailVC: UITableViewDelegate {
@@ -196,7 +357,9 @@ extension JobOfferDetailVC: UITableViewDelegate {
 //                return 290
                 return UITableView.automaticDimension
             case (1,0):
-                return articleOpenFlag ? UITableView.automaticDimension : 0
+                return articleOpenFlag ? articleCellMaxSize : 0
+            case (2,0):
+                return prcodesCellMaxSize
             case (4,0):
                 return coverageMemoOpenFlag ? UITableView.automaticDimension : 0
             case (5,0):
@@ -205,8 +368,8 @@ extension JobOfferDetailVC: UITableViewDelegate {
                 return phoneNumberOpenFlag ? UITableView.automaticDimension : 0
             case (7,0):
                 return companyOutlineOpenFlag ? UITableView.automaticDimension : 0
-            case (8,0):
-                return 120
+//            case (8,0):
+//                return 120
             default:
                 return UITableView.automaticDimension
         }
@@ -216,7 +379,7 @@ extension JobOfferDetailVC: UITableViewDelegate {
         var headerHeight:CGFloat = 0
         switch section {
             case 1:
-                headerHeight = articleOpenFlag ? 120 : 60
+                headerHeight = articleOpenFlag ? articleHeaderMaxSize : articleHeaderMinSize
             case 3:
                 headerHeight = 60
             case 4:
@@ -325,7 +488,8 @@ extension JobOfferDetailVC: UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 9
+//        return 9
+        return 8
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -357,9 +521,6 @@ extension JobOfferDetailVC: UITableViewDataSource {
             case (0,1):
                 // 求人画像
                 let cell = tableView.loadCell(cellName: "JobDetailImageCell", indexPath: indexPath) as! JobDetailImageCell
-                
-                Log.selectLog(logLevel: .debug, "self.view:\(String(describing: self.view))")
-                Log.selectLog(logLevel: .debug, "self.detailTableView:\(String(describing: self.detailTableView))")
                 
                 cell.setCellWidth(width: self.detailTableView.frame.size.width)
                 cell.setup(data: _mdlJobDetail)
@@ -448,10 +609,12 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 } else {
                     return UITableViewCell()
                 }
+            /*
             case (8, _):
                 let cell = tableView.loadCell(cellName: "JobDetailFooterApplicationCell", indexPath: indexPath) as! JobDetailFooterApplicationCell
                 cell.delegate = self
                 return cell
+            */
             default:
                 let cell = UITableViewCell()
                 cell.backgroundColor = UIColor.init(colorType: .color_base)

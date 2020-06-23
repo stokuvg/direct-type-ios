@@ -14,7 +14,10 @@ protocol JobDetailArticleHeaderViewDelegate {
 
 class JobDetailArticleHeaderView: UIView {
     
+    @IBOutlet weak var titleBackView:UIView!
     @IBOutlet weak var titleLabel:UILabel!
+    
+    @IBOutlet weak var btnBackView:UIView!
     @IBOutlet weak var headerOpenBtn:UIButton!
     @IBAction func headerOpenAction() {
         self.delegate.articleHeaderAction()
@@ -32,6 +35,11 @@ class JobDetailArticleHeaderView: UIView {
         self.titleLabel.text(text: string, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         
         headerOpenBtn.isHidden = openFlag
+        if openFlag {
+            titleLabel.numberOfLines = 0
+        } else {
+            titleLabel.numberOfLines = 2
+        }
     }
 
 }

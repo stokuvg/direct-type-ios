@@ -36,8 +36,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AWSMobileClient.default().initialize { (userState, error) in
             if let userState = userState {
                 print("UserState: \(userState.rawValue)")
+<<<<<<< HEAD
 //                // FIXME: デバッグのために強制的に初期登録動線を表示
 //                loginFlag = true
+=======
+                // FIXME: デバッグのために強制的に初期登録動線を表示
+                loginFlag = true
+>>>>>>> feature/c_detail_layout_2020062301
             } else if let error = error {
                 print("error: \(error.localizedDescription)")
 //                loginFlag = false
