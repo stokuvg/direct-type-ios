@@ -46,7 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // ログイン済み情報があればタブ表示,無ければ初期値入力,ログイン画面へ
         if AWSMobileClient.default().currentUserState == .signedIn {
-            loginFlag = true
+            // FIXME: このPR提出時に元に戻す
+            loginFlag = false
         } else {
             loginFlag = false
         }
