@@ -20,13 +20,14 @@ final class LoginConfirmVC: TmpBasicVC {
         validateAuthCode()
     }
     
-    private let aithCodeMaxLength: Int = 11
+    private let aithCodeMaxLength: Int = 6
     typealias LoginInfo = (phoneNumberText: String, password: String)
     private var loginInfo = LoginInfo(phoneNumberText: "", password: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        changeButtonState()
     }
     
     
