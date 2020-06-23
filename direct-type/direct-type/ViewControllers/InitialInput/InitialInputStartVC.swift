@@ -102,7 +102,7 @@ class InitialInputStartVC: TmpBasicVC {
     @IBOutlet weak var registBtn:UIButton!
     @IBAction func registAction() {
         // TODO: 登録画面へ移動
-        let vc = getVC(sbName: "InitialInput", vcName: "InitialInputListVC") as! InitialInputListVC
+        let vc = getVC(sbName: "InitialInputListVC", vcName: "InitialInputListVC") as! InitialInputListVC
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
