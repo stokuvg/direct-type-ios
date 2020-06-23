@@ -43,6 +43,10 @@ private extension LoginConfirmVC {
     }
     
     func validateAuthCode() {
+        guard let inputText = authCodeTextField.text, inputText.isNumeric else {
+            showConfirm(title: "フォーマットエラー", message: "数字6桁を入力してください", onlyOK: true)
+            return
+        }
         // TODO: 入力されたSMS認証コードを使ってAWSMobileClient.default().confirmSignIn(challengeResponse: _)にて検証を行う。
         // FIXME: デバッグ時には動作確認のため、そのままベースタブ画面へ遷移させる。
         transitionToBaseTab()
@@ -93,5 +97,11 @@ private extension LoginConfirmVC {
                 break
             }
         }
+    }
+}
+
+private extension String {
+    var isNumeric: Bool {
+        return NSPredicate(format: "SELF MATCHES %@", "[0-9]+").evaluate(with: self)
     }
 }
