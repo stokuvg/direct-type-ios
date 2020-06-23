@@ -20,7 +20,7 @@ final class LoginConfirmVC: TmpBasicVC {
         validateAuthCode()
     }
     
-    private let aithCodeMaxLength: Int = 6
+    private let confirmCodeMaxLength: Int = 6
     typealias LoginInfo = (phoneNumberText: String, password: String)
     private var loginInfo = LoginInfo(phoneNumberText: "", password: "")
     
@@ -57,7 +57,7 @@ private extension LoginConfirmVC {
     
     var isValidInputText: Bool {
         guard let inputText = authCodeTextField.text, authCodeTextField.markedTextRange == nil,
-            inputText.count == aithCodeMaxLength else { return false }
+            inputText.count == confirmCodeMaxLength else { return false }
         return true
     }
     
@@ -66,7 +66,7 @@ private extension LoginConfirmVC {
         nextButton.backgroundColor = UIColor(colorType: isValidInputText ? .color_sub : .color_line)
         nextButton.isEnabled = isValidInputText
         guard let inputText = authCodeTextField.text, isValidInputText else { return }
-        authCodeTextField.text = inputText.prefix(aithCodeMaxLength).description
+        authCodeTextField.text = inputText.prefix(confirmCodeMaxLength).description
     }
     
     func resendAuthCode() {
