@@ -15,6 +15,77 @@ class JobOfferDetailVC: TmpBasicVC {
     
     @IBOutlet weak var detailTableView:UITableView!
     
+    @IBOutlet weak var applicationFooterView:UIView!
+    
+    @IBOutlet weak var applicationBtn:UIButton!
+    @IBAction func applicationBtnAction() {
+        // 応募フォームに遷移
+//        self.delegate.footerApplicationBtnAction()
+    }
+    
+    var keepFlag:Bool!
+    @IBOutlet weak var keepBtn:UIButton!
+    @IBAction func keepBtnAction() {
+        keepFlag = !keepFlag
+        
+        // キープ情報送信
+        if keepFlag == true {
+            ApiManager.sendJobKeep(id: jobId)
+                .done { result in
+                Log.selectLog(logLevel: .debug, "keep send success")
+                    Log.selectLog(logLevel: .debug, "keep成功")
+                    
+            }.catch{ (error) in
+                Log.selectLog(logLevel: .debug, "skip send error:\(error)")
+                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+                switch myErr.code {
+                case 404:
+                    let message: String = ""
+                    self.showConfirm(title: "", message: message)
+                    .done { _ in
+                        Log.selectLog(logLevel: .debug, "対応方法の確認")
+                    }
+                    .catch { (error) in
+                    }
+                    .finally {
+                    }
+                default: break
+                }
+                self.showError(error)
+            }.finally {
+                Log.selectLog(logLevel: .debug, "keep send finally")
+            }
+        } else {
+            ApiManager.sendJobDeleteKeep(id: jobId)
+                .done { result in
+                Log.selectLog(logLevel: .debug, "keep delete success")
+                    Log.selectLog(logLevel: .debug, "delete成功")
+                    
+            }.catch{ (error) in
+                Log.selectLog(logLevel: .debug, "skip send error:\(error)")
+                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+                switch myErr.code {
+                case 404:
+                    let message: String = ""
+                    self.showConfirm(title: "", message: message)
+                    .done { _ in
+                        Log.selectLog(logLevel: .debug, "対応方法の確認")
+                    }
+                    .catch { (error) in
+                    }
+                    .finally {
+                    }
+                default: break
+                }
+                self.showError(error)
+            }.finally {
+                Log.selectLog(logLevel: .debug, "keep send finally")
+            }
+        }
+        
+        self.keepDataSetting(flag: keepFlag)
+    }
+    
     var jobId:String = ""
     var buttonsView:NaviButtonsView!
     
@@ -98,7 +169,14 @@ class JobOfferDetailVC: TmpBasicVC {
         self.detailTableView.registerNib(nibName: "JobDetailFoldingOutlineCell", idName: "JobDetailFoldingOutlineCell")
         /// section 8
         // 応募ボタン/キープのボタン
-        self.detailTableView.registerNib(nibName: "JobDetailFooterApplicationCell", idName: "JobDetailFooterApplicationCell")
+//        self.detailTableView.registerNib(nibName: "JobDetailFooterApplicationCell", idName: "JobDetailFooterApplicationCell")
+        
+        applicationBtn.setTitle(text: "応募する", fontType: .C_font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        
+        keepBtn.setTitle(text: "", fontType: .C_font_M, textColor: UIColor.clear, alignment: .center)
+        
+        keepFlag = false
+        self.keepDataSetting(flag: keepFlag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -182,7 +260,7 @@ class JobOfferDetailVC: TmpBasicVC {
         label.numberOfLines = 3
         
         let labelSize = label.sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
-        Log.selectLog(logLevel: .debug, "labelSize:\(labelSize)")
+//        Log.selectLog(logLevel: .debug, "labelSize:\(labelSize)")
         prcodesCellMaxSize = (labelSize.height + 30)
     }
     
@@ -255,6 +333,15 @@ class JobOfferDetailVC: TmpBasicVC {
         .finally {
         }
     }
+    
+    private func keepDataSetting(flag:Bool) {
+        let imageName:String = flag ? "btn_keep" : "btn_keepclose"
+        let btnImage = UIImage(named: imageName)
+        keepBtn.setImage(btnImage, for: .normal)
+        keepBtn.imageView?.contentMode = .scaleAspectFit
+        keepBtn.contentHorizontalAlignment = .fill
+        keepBtn.contentVerticalAlignment = .fill
+    }
 }
 
 extension JobOfferDetailVC: UITableViewDelegate {
@@ -281,8 +368,8 @@ extension JobOfferDetailVC: UITableViewDelegate {
                 return phoneNumberOpenFlag ? UITableView.automaticDimension : 0
             case (7,0):
                 return companyOutlineOpenFlag ? UITableView.automaticDimension : 0
-            case (8,0):
-                return 120
+//            case (8,0):
+//                return 120
             default:
                 return UITableView.automaticDimension
         }
@@ -401,7 +488,8 @@ extension JobOfferDetailVC: UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 9
+//        return 9
+        return 8
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -521,10 +609,12 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 } else {
                     return UITableViewCell()
                 }
+            /*
             case (8, _):
                 let cell = tableView.loadCell(cellName: "JobDetailFooterApplicationCell", indexPath: indexPath) as! JobDetailFooterApplicationCell
                 cell.delegate = self
                 return cell
+            */
             default:
                 let cell = UITableViewCell()
                 cell.backgroundColor = UIColor.init(colorType: .color_base)

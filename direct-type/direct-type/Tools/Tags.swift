@@ -67,6 +67,7 @@ class TagsView: UIView {
         
 //        Log.selectLog(logLevel: .debug, "datas:\(datas)")
         
+        /*
         let dummyDatas:[String] = [
             "採用予定人数5名以上",
             "ワーキングマザーが在籍",
@@ -74,13 +75,14 @@ class TagsView: UIView {
             "新規事業・スタートアップメンバー",
             "設立5年以内",
         ]
+        */
         
         var addEndFlag:Bool = false
         
-//        for i in 0..<datas.count {
-        for i in 0..<dummyDatas.count {
-            let tagText = "#" + dummyDatas[i]
-//            let tagText = "#" + datas[i]
+        for i in 0..<datas.count {
+//        for i in 0..<dummyDatas.count {
+//            let tagText = "#" + dummyDatas[i]
+            let tagText = "#" + datas[i]
             var tagWidth = tagKindTextWidth(text: tagText, font: tagFont!, height: tagHeight)
             
             if tagWidth > areaWidth {
@@ -90,6 +92,10 @@ class TagsView: UIView {
             if areaWidth - tagOriginX < tagWidth {
                 tagOriginX = 0
                 tagOriginY += tagHeight + tagMargin
+                
+//                Log.selectLog(logLevel: .debug, "tagOriginY:\(tagOriginY)")
+//                Log.selectLog(logLevel: .debug, "frame:\(frame)")
+                
                 if tagOriginY >= frame.size.height {
                     addEndFlag = true
                 }
@@ -103,9 +109,12 @@ class TagsView: UIView {
                 let label = TagLabel(frame: CGRect(x: tagOriginX, y: tagOriginY, width: tagWidth, height: tagHeight))
                 
                 label.setKindDesign(text: tagText, tagFont: tagFont!)
-                self.addSubview(label)
-                
-                tagOriginX += tagWidth + tagMargin
+                if addEndFlag {
+                    break
+                } else {
+                    self.addSubview(label)
+                    tagOriginX += tagWidth + tagMargin
+                }
             }
         }
     }
