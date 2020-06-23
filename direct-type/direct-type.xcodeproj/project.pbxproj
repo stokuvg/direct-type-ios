@@ -137,7 +137,6 @@
 		06E519A42457DC7B004E4B7A /* InitialInputCompleteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519A32457DC7B004E4B7A /* InitialInputCompleteVC.swift */; };
 		06E519A72458138E004E4B7A /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519A62458138E004E4B7A /* SignupVC.swift */; };
 		06E519A92458139B004E4B7A /* SignupConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519A82458139B004E4B7A /* SignupConfirmVC.swift */; };
-		06E519AB245813CA004E4B7A /* InitialInputListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519AA245813CA004E4B7A /* InitialInputListVC.swift */; };
 		06E519AD245813DC004E4B7A /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519AC245813DC004E4B7A /* LoginVC.swift */; };
 		06E519AF245813E9004E4B7A /* LoginConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519AE245813E9004E4B7A /* LoginConfirmVC.swift */; };
 		06E519B1245814B2004E4B7A /* EntryConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519B0245814B2004E4B7A /* EntryConfirmVC.swift */; };
@@ -171,7 +170,6 @@
 		0E6951B1248A11A000D58E6E /* ChemistryAnswerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6951B0248A11A000D58E6E /* ChemistryAnswerType.swift */; };
 		0E6951B5248A1FC600D58E6E /* ChemistrySelectFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6951B4248A1FC600D58E6E /* ChemistrySelectFooterView.swift */; };
 		0E6951B7248A204C00D58E6E /* ChemistrySelectFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E6951B6248A204C00D58E6E /* ChemistrySelectFooterView.xib */; };
-		0E6EA6DF24A1A57900884D07 /* InitialInputListVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6EA6DE24A1A57900884D07 /* InitialInputListVC.storyboard */; };
 		0E6EA6E124A1BB3B00884D07 /* InitialInputRegistVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6EA6E024A1BB3B00884D07 /* InitialInputRegistVC.storyboard */; };
 		0E7372DD2499EE1C00358EFA /* ApiManager+PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7372DC2499EE1C00358EFA /* ApiManager+PhoneNumber.swift */; };
 		0E7372DF249A089D00358EFA /* ApiManager+AuthCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7372DE249A089D00358EFA /* ApiManager+AuthCode.swift */; };
@@ -440,7 +438,6 @@
 		06E519A32457DC7B004E4B7A /* InitialInputCompleteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialInputCompleteVC.swift; sourceTree = "<group>"; };
 		06E519A62458138E004E4B7A /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		06E519A82458139B004E4B7A /* SignupConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupConfirmVC.swift; sourceTree = "<group>"; };
-		06E519AA245813CA004E4B7A /* InitialInputListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialInputListVC.swift; sourceTree = "<group>"; };
 		06E519AC245813DC004E4B7A /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		06E519AE245813E9004E4B7A /* LoginConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginConfirmVC.swift; sourceTree = "<group>"; };
 		06E519B0245814B2004E4B7A /* EntryConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryConfirmVC.swift; sourceTree = "<group>"; };
@@ -474,7 +471,6 @@
 		0E6951B0248A11A000D58E6E /* ChemistryAnswerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryAnswerType.swift; sourceTree = "<group>"; };
 		0E6951B4248A1FC600D58E6E /* ChemistrySelectFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistrySelectFooterView.swift; sourceTree = "<group>"; };
 		0E6951B6248A204C00D58E6E /* ChemistrySelectFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChemistrySelectFooterView.xib; sourceTree = "<group>"; };
-		0E6EA6DE24A1A57900884D07 /* InitialInputListVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InitialInputListVC.storyboard; sourceTree = "<group>"; };
 		0E6EA6E024A1BB3B00884D07 /* InitialInputRegistVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InitialInputRegistVC.storyboard; sourceTree = "<group>"; };
 		0E7372DC2499EE1C00358EFA /* ApiManager+PhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+PhoneNumber.swift"; sourceTree = "<group>"; };
 		0E7372DE249A089D00358EFA /* ApiManager+AuthCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+AuthCode.swift"; sourceTree = "<group>"; };
@@ -909,8 +905,6 @@
 			children = (
 				066A8A6F249056E2004C25D8 /* InitialInputStartVC.swift */,
 				06AB97C62489D1600003B334 /* InitialInputStartVC.storyboard */,
-				06E519AA245813CA004E4B7A /* InitialInputListVC.swift */,
-				0E6EA6DE24A1A57900884D07 /* InitialInputListVC.storyboard */,
 				06E519A12457DC44004E4B7A /* InitialInputRegistVC.swift */,
 				0E6EA6E024A1BB3B00884D07 /* InitialInputRegistVC.storyboard */,
 				06E519A32457DC7B004E4B7A /* InitialInputCompleteVC.swift */,
@@ -1436,7 +1430,6 @@
 				26BF48E024639D2B00E00215 /* MstK3_changeCount.tsv in Resources */,
 				066763762457B09F00AC5039 /* HomeVC.storyboard in Resources */,
 				26989F7F246A5E520050AC40 /* HEditDrumTBCell.xib in Resources */,
-				0E6EA6DF24A1A57900884D07 /* InitialInputListVC.storyboard in Resources */,
 				066938112485D5010064030F /* SettingApproachCell.xib in Resources */,
 				26BF48DC24639D2B00E00215 /* MstL_skill.tsv in Resources */,
 				26BF48E524639D2B00E00215 /* MstL3_overtime.tsv in Resources */,
@@ -1693,7 +1686,6 @@
 				26F2A82B246D2EE90037D47F /* EditableTableBasicVC.swift in Sources */,
 				06E519B7245814D4004E4B7A /* SubEditBaseVC.swift in Sources */,
 				06FFA00B2484E66C0085A3D9 /* MyPageEditedChemistryCell.swift in Sources */,
-				06E519AB245813CA004E4B7A /* InitialInputListVC.swift in Sources */,
 				066BD9EC2456B3A2009E610B /* R.generated.swift in Sources */,
 				0645DE02246BB6A100592572 /* JobDetailSalaryExampleCell.swift in Sources */,
 				066EF6CB245C119000E15AD2 /* JobOfferCardMoreCell.swift in Sources */,

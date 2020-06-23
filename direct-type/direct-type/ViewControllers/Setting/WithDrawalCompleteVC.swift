@@ -49,7 +49,7 @@ extension WithDrawalCompleteVC: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         if viewController is WithDrawalCompleteVC {
             Log.selectLog(logLevel: .debug, "この画面と一致")
-            let vc = getVC(sbName: "InitialInputListVC", vcName: "InitialInputListVC") as! InitialInputListVC
+            let vc = getVC(sbName: "InitialInputStartVC", vcName: "InitialInputStartVC") as! InitialInputStartVC
             let viewControllers = self.navigationController?.viewControllers
             var newVCs = [UIViewController]()
             newVCs.append(vc)
