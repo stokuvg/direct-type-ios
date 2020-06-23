@@ -36,16 +36,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AWSMobileClient.default().initialize { (userState, error) in
             if let userState = userState {
                 print("UserState: \(userState.rawValue)")
-                // FIXME: デバッグのために強制的に初期登録動線を表示
-                loginFlag = false
+//                // FIXME: デバッグのために強制的に初期登録動線を表示
+//                loginFlag = true
             } else if let error = error {
                 print("error: \(error.localizedDescription)")
-                loginFlag = false
+//                loginFlag = false
             }
         }
 
         // ログイン済み情報があればタブ表示,無ければ初期値入力,ログイン画面へ
-        
+        if AWSMobileClient.default().currentUserState == .signedIn {
+            loginFlag = true
+        } else {
+            loginFlag = false
+        }
+
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
         if loginFlag {
