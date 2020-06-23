@@ -23,6 +23,9 @@ struct EditableItemH {
     var valDisp: String {
         let _val = curVal
         switch editType {
+        //=== モデル一塊のもの
+        case .model:
+            return "**モデルひとかたまり表示**"
         //=== そのまま値を表示してよいもの
         case .readonly, .inputText, .inputTextSecret:
             return "\(_val)"

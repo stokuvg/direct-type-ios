@@ -75,6 +75,7 @@ protocol EditItemProtocol {
 }
 
 enum EditType {
+    case model              //応募フォームでのモデルひとかたまり
     case readonly           //String
     case inputText          //String(TextField)
     case inputMemo          //String(TextView)

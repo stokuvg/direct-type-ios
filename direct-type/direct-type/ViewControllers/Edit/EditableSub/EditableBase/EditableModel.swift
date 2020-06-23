@@ -37,6 +37,8 @@ class EditableModel {
                 dicTextFieldIndexPath[item.editableItemKey] = idxPath //対応項目に対応するセルのIndexPathを求めて保持しておく
                 var isSelectable: Bool = true
                 switch item.editType {
+                case .model:
+                    isSelectable = false
                 case .readonly:
                     isSelectable = false
                 case .inputText, .inputTextSecret:

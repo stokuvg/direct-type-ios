@@ -19,6 +19,46 @@ extension HPreviewTBCell {
         case .undefine:
             return "<未定義>"
         //========================
+        //=== [C-9]応募フォーム
+        case .jobCardC9:      //４．応募先求人
+            if _item.childItems[0].curVal.isEmpty { return "【モデル】" }
+            return "【モデル】差し替え"
+        case .profileC0:      //５．プロフィール（一部必須）
+            if _item.childItems[0].curVal.isEmpty { return "【モデル】" }
+            return "【モデル】差し替え"
+        case .resumeC9:       //６．履歴書（一部必須）
+            if _item.childItems[0].curVal.isEmpty { return "【モデル】" }
+            return "【モデル】差し替え"
+        case .careerC9:       //７．職務経歴書（一部必須）
+            if _item.childItems[0].curVal.isEmpty { return "【モデル】" }
+            return "【モデル】差し替え"
+        case .exQuestionC9:   //１２．独自質問（必須）
+            var disp: [String] = []
+            for item in _item.childItems {
+                disp.append(item.curVal)
+            }
+            return disp.count == 0 ? "非表示にすべきもの" : disp.joined(separator: "\n")
+        case .ownPRC9:        //９．自己PR文字カウント
+            if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
+            return _item.childItems[0].curVal
+        case .hopeAreaC9:     //１０．希望勤務地（任意）
+            if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
+            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
+            let tmp0: String = _item.childItems[0].curVal
+            var arr0: [String] = []
+            for code in tmp0.split(separator: "_").sorted() { //コード順ソートしておく
+                let buf: String = SelectItemsManager.getCodeDisp(.entryPlace, code: String(code))?.disp ?? ""
+                arr0.append(buf)
+            }
+            let buf0: String = arr0.joined(separator: " / ")
+            return buf0.isEmpty ? Constants.SelectItemsValEmpty.disp : "\(buf0)"
+        case .hopeSalaryC9:   //１１．希望年収（任意）
+            if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
+            let tmp0: String = _item.childItems[0].curVal
+            let buf0: String = SelectItemsManager.getCodeDisp(.salary, code: tmp0)?.disp ?? ""
+            return "\(buf0)"
+
+        //========================
         case .fullnameH2:
             if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
             let bufFullname: String = "\(_item.childItems[0].valDisp) \(_item.childItems[1].valDisp)"

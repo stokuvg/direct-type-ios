@@ -71,12 +71,17 @@ class EntryVC: PreviewBaseVC {
     }
     override func initData() {
         title = "[C-9] 応募フォーム"
-        
+
+        //###[Dbg]ダミーデータ投入 ___
         //いろいろモデル読み込む
-        let entry = MdlEntry(ownPR: "事故PRテキストのダミー", hopeArea: ["3", "8"], hopeSalary: "8", exQuestion1: "拡張質問　その1", exQuestion2: "拡張質問　その2", exQuestion3: "拡張質問　その3", exAnswer1: "回答1", exAnswer2: "回答2", exAnswer3: "回答3")
+        let entry = MdlEntry(ownPR: "自己PRテキストのダミー", hopeArea: ["13", "18"], hopeSalary: "8", exQuestion1: "拡張質問　その1", exQuestion2: nil, exQuestion3: "拡張質問　その3", exAnswer1: "回答1", exAnswer2: "回答2", exAnswer3: "回答3")
         self.entry = entry
         
-        
+//        self.entry?.exQuestion1 = nil
+//        self.entry?.exQuestion2 = nil
+//        self.entry?.exQuestion3 = nil
+        //###[Dbg] ダミーデータ投入 ^^^
+
         
     }
     override func dispData() {
@@ -87,19 +92,19 @@ class EntryVC: PreviewBaseVC {
         //====== [C-9]応募フォーム
         //===４．応募先求人
         arrData.append(MdlItemH(.jobCardC9, "", childItems: [
-            EditableItemH(type: .readonly, editItem: EditItemMdlEntry.jobCard, val: "【モデルダミー】"),
+            EditableItemH(type: .model, editItem: EditItemMdlEntry.jobCard, val: "【モデルダミー】"),
         ]))
         //===５．プロフィール（一部必須）
         arrData.append(MdlItemH(.profileC0, "", childItems: [
-            EditableItemH(type: .readonly, editItem: EditItemMdlEntry.profile, val: "【モデルダミー】"),
+            EditableItemH(type: .model, editItem: EditItemMdlEntry.profile, val: "【モデルダミー】"),
         ]))
         //===６．履歴書（一部必須）
         arrData.append(MdlItemH(.resumeC9, "", childItems: [
-            EditableItemH(type: .readonly, editItem: EditItemMdlEntry.resume, val: "【モデルダミー】"),
+            EditableItemH(type: .model, editItem: EditItemMdlEntry.resume, val: "【モデルダミー】"),
         ]))
         //===７．職務経歴書（一部必須）
         arrData.append(MdlItemH(.careerC9, "", childItems: [
-            EditableItemH(type: .readonly, editItem: EditItemMdlEntry.career, val: "【モデルダミー】"),
+            EditableItemH(type: .model, editItem: EditItemMdlEntry.career, val: "【モデルダミー】"),
         ]))
         //===１２．独自質問（必須）
         var exQA: [EditableItemH] = []

@@ -110,6 +110,8 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
             let _item = items.first!
             let (_, editTemp) = editableModel.makeTempItem(_item)
             switch editTemp.editType {
+            case .model:
+                break
             case .readonly:
                 break
             case .inputText:
