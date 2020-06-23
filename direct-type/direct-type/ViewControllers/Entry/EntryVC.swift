@@ -51,6 +51,7 @@
 import UIKit
 import TudApi
 import SVProgressHUD
+import SwaggerClient
 
 class EntryVC: PreviewBaseVC {
     var jobCard: MdlJobCardDetail? = nil//応募への遷移元は、求人カード詳細のみでOK?
@@ -70,6 +71,35 @@ class EntryVC: PreviewBaseVC {
         super.viewDidLoad()
         btnCommit.setTitle(text: "応募する", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
+    }
+    override func initData() {
+        super.initData()
+        title = "[C-9] 応募フォーム【直接】"
+        let jobCard: MdlJobCardDetail = MdlJobCardDetail(
+            jobCardCode: "12345678", jobName: "",
+            salaryMinId: 3, salaryMaxId: 8,
+            isSalaryDisplay: true, salaryOffer: "",
+            workPlaceCodes: [13, 22, 33], companyName: "会社名",
+            start_date: "", end_date: "",
+            mainPicture: "", subPictures: [],
+            mainTitle: "めいんたいとるもろもろ", mainContents: "メインコンテンツ",
+            prCodes: [1,3,5], salarySample: "",
+            recruitmentReason: "", jobDescription: "",
+            jobExample: "", product: "", scope: "",
+            spotTitle1: "", spotDetail1: "", spotTitle2: "", spotDetail2: "",
+            qualification: "", betterSkill: "", applicationExample: "",
+            suitableUnsuitable: "", notSuitableUnsuitable: "",
+            employmentType: 2, salary: "", bonusAbout: "", jobtime: "",
+            overtimeCode: 1, overtimeAbout: "", workPlace: "", transport: "",
+            holiday: "", welfare: "", childcare: "", interviewMemo: "",
+            selectionProcess: JobCardDetailSelectionProcess(selectionProcess1: "", selectionProcess2: "", selectionProcess3: "", selectionProcess4: "", selectionProcess5: "", selectionProcessDetail: ""),
+            contactInfo: JobCardDetailContactInfo(companyUrl: "", contactZipcode: "", contactAddress: "", contactPhone: "", contactPerson: "", contactMail: ""),
+            companyDescription: JobCardDetailCompanyDescription(enterpriseContents: "", mainCustomer: "", mediaCoverage: "", established: "", employeesCount: JobCardDetailCompanyDescriptionEmployeesCount(count: nil, averageAge: nil, genderRatio: nil, middleEnter: nil)
+                , capital: nil, turnover: nil, presidentData: JobCardDetailCompanyDescriptionPresidentData(presidentName: "", presidentHistory: "")),
+            userFilter: UserFilterInfo(tudKeepStatus: false, tudSkipStatus: false))
+        if self.jobCard == nil {
+            self.jobCard = jobCard
+        }
     }
     func initData(_ model: MdlJobCardDetail) {
         title = "[C-9] 応募フォーム"
@@ -196,6 +226,47 @@ extension EntryVC {
         .finally {
             self.dispData()
             SVProgressHUD.dismiss()
+        }
+    }
+}
+
+
+
+extension EntryVC {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let item = arrData[indexPath.row]
+        switch item.type {
+
+        case .jobCardC9:
+            let cell: EntryFormJobCardTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormJobCardTBCell", for: indexPath) as! EntryFormJobCardTBCell
+            cell.initCell(self.jobCard)
+            cell.dispCell()
+            return cell
+
+        case .profileC9:
+            let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
+            cell.initCell(.profileC9, model: self.profile)
+            cell.dispCell()
+            return cell
+
+        case .resumeC9:
+            let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
+            cell.initCell(.resumeC9, model: self.resume)
+            cell.dispCell()
+            return cell
+
+        case .careerC9:
+            let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
+            cell.initCell(.careerC9, model: self.career)
+            cell.dispCell()
+            return cell
+
+        default:
+            let cell: HPreviewTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HPreviewTBCell", for: indexPath) as! HPreviewTBCell
+            let errMsg = dicGrpValidErrMsg[item.type.itemKey]?.joined(separator: "\n") ?? ""
+            cell.initCell(item, editTempCD: editableModel.editTempCD, errMsg: errMsg)//編集中の値を表示適用させるためeditTempCDを渡す
+            cell.dispCell()
+            return cell
         }
     }
 }
