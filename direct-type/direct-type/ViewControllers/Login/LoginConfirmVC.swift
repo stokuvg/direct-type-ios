@@ -20,13 +20,14 @@ final class LoginConfirmVC: TmpBasicVC {
         validateAuthCode()
     }
     
-    private let aithCodeMaxLength: Int = 11
+    private let confirmCodeMaxLength: Int = 6
     typealias LoginInfo = (phoneNumberText: String, password: String)
     private var loginInfo = LoginInfo(phoneNumberText: "", password: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        changeButtonState()
     }
     
     
@@ -42,6 +43,10 @@ private extension LoginConfirmVC {
     }
     
     func validateAuthCode() {
+        guard let inputText = authCodeTextField.text, inputText.isNumeric else {
+            showConfirm(title: "フォーマットエラー", message: "数字6桁を入力してください", onlyOK: true)
+            return
+        }
         // TODO: 入力されたSMS認証コードを使ってAWSMobileClient.default().confirmSignIn(challengeResponse: _)にて検証を行う。
         // FIXME: デバッグ時には動作確認のため、そのままベースタブ画面へ遷移させる。
         transitionToBaseTab()
@@ -56,7 +61,7 @@ private extension LoginConfirmVC {
     
     var isValidInputText: Bool {
         guard let inputText = authCodeTextField.text, authCodeTextField.markedTextRange == nil,
-            inputText.count == aithCodeMaxLength else { return false }
+            inputText.count == confirmCodeMaxLength else { return false }
         return true
     }
     
@@ -65,7 +70,7 @@ private extension LoginConfirmVC {
         nextButton.backgroundColor = UIColor(colorType: isValidInputText ? .color_sub : .color_line)
         nextButton.isEnabled = isValidInputText
         guard let inputText = authCodeTextField.text, isValidInputText else { return }
-        authCodeTextField.text = inputText.prefix(aithCodeMaxLength).description
+        authCodeTextField.text = inputText.prefix(confirmCodeMaxLength).description
     }
     
     func resendAuthCode() {
@@ -92,5 +97,11 @@ private extension LoginConfirmVC {
                 break
             }
         }
+    }
+}
+
+private extension String {
+    var isNumeric: Bool {
+        return NSPredicate(format: "SELF MATCHES %@", "[0-9]+").evaluate(with: self)
     }
 }
