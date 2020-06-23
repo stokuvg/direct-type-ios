@@ -28,7 +28,7 @@ direct type のiOSアプリ
 
 ~~~
 $ sudo gem install bundler -v 1.17.2 -n /usr/local/bin
-$ sudo gem install cocoapods -v 1.8.4
+## $ sudo gem install cocoapods -v 1.8.4 ＊こちらGem管理にしたため手作業管理は不要
 $ brew install swagger-codegen@3
 ~~~
 
