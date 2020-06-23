@@ -585,7 +585,8 @@ extension JobOfferDetailVC: FoldingHeaderViewDelegate {
 extension JobOfferDetailVC: JobDetailFooterApplicationCellDelegate {
     
     func footerApplicationBtnAction() {
-        // TODO:応募フォームに遷移
+        //応募フォームに遷移
+        self.pushViewController(.entryVC, model: _mdlJobDetail)
     }
     
     func footerKeepBtnAction(keepStatus: Bool) {
