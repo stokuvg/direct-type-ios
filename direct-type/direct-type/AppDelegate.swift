@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let userState = userState {
                 print("UserState: \(userState.rawValue)")
                 // FIXME: デバッグのために強制的に初期登録動線を表示
-                loginFlag = false
+                loginFlag = true
             } else if let error = error {
                 print("error: \(error.localizedDescription)")
                 loginFlag = false

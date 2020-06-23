@@ -28,6 +28,13 @@ class JobOfferDetailVC: TmpBasicVC {
     var companyOutlineOpenFlag:Bool = false
     
     var firstOpenFlag:Bool = false
+    
+    var articleHeaderMaxSize:CGFloat = 0
+    var articleHeaderMinSize:CGFloat = 0
+    
+    var articleCellMaxSize:CGFloat = 0
+    
+    var prcodesCellMaxSize:CGFloat = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,6 +123,69 @@ class JobOfferDetailVC: TmpBasicVC {
         buttonsView = titleView
     }
     
+    // メイン記事タイトルサイズ
+    private func makeArticleHeaderSize() {
+        articleHeaderMinSize = 80
+        
+        let spaceW:CGFloat = 15
+        let width = self.detailTableView.frame.size.width - (spaceW * 2)
+        let label:UILabel = UILabel()
+        
+        let text = self._mdlJobDetail.mainTitle
+        label.text(text: text, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        label.numberOfLines = 0
+        
+        let labelSize = label.sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
+        
+        articleHeaderMaxSize = (labelSize.height + 10)
+    }
+    
+    // メイン記事サイズ
+    private func makeArticleCellSize() {
+        
+        let spaceW:CGFloat = 15
+        let width = self.detailTableView.frame.size.width - (spaceW * 2)
+        let label:UILabel = UILabel()
+        
+        let text = self._mdlJobDetail.mainContents
+        label.text(text: text, fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        label.numberOfLines = 0
+        
+        let labelSize = label.sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
+        
+        articleCellMaxSize = (labelSize.height + 40)
+    }
+    
+    // PRコードの表示サイズ 最大３行
+    private func makePrCodesCellSize() {
+        
+        let spaceW:CGFloat = 15
+        let width = self.detailTableView.frame.size.width - (spaceW * 2)
+        let label:UILabel = UILabel()
+        
+        let prCodes = self._mdlJobDetail.prCodes
+        
+        var allText:String = ""
+//        for i in 0..<dummyDatas.count {
+        for i in 0..<prCodes.count {
+            let codeNo = prCodes[i]
+            let prCode:String = (SelectItemsManager.getCodeDisp(.prCode, code: codeNo)?.disp) ?? ""
+//            let prCode:String = dummyDatas[i]
+            let tagText = "#" + prCode
+            allText += tagText
+            if i < (prCode.count-1) {
+                allText += " "
+            }
+        }
+        label.lineBreakMode = .byClipping
+        label.text(text: allText, fontType: .font_SS, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        label.numberOfLines = 3
+        
+        let labelSize = label.sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
+        Log.selectLog(logLevel: .debug, "labelSize:\(labelSize)")
+        prcodesCellMaxSize = (labelSize.height + 30)
+    }
+    
     // 取材メモ表示フラグ
     private func memoDispFlagCheck(memo: String) -> Bool {
         if memo.count > 0 {
@@ -135,6 +205,10 @@ class JobOfferDetailVC: TmpBasicVC {
                 
                 self._mdlJobDetail = result
                 
+                self.makeArticleHeaderSize()
+                self.makeArticleCellSize()
+                
+                self.makePrCodesCellSize()
         }
         .catch { (error) in
             Log.selectLog(logLevel: .debug, "error:\(error)")
@@ -196,7 +270,9 @@ extension JobOfferDetailVC: UITableViewDelegate {
 //                return 290
                 return UITableView.automaticDimension
             case (1,0):
-                return articleOpenFlag ? UITableView.automaticDimension : 0
+                return articleOpenFlag ? articleCellMaxSize : 0
+            case (2,0):
+                return prcodesCellMaxSize
             case (4,0):
                 return coverageMemoOpenFlag ? UITableView.automaticDimension : 0
             case (5,0):
@@ -216,7 +292,7 @@ extension JobOfferDetailVC: UITableViewDelegate {
         var headerHeight:CGFloat = 0
         switch section {
             case 1:
-                headerHeight = articleOpenFlag ? 120 : 60
+                headerHeight = articleOpenFlag ? articleHeaderMaxSize : articleHeaderMinSize
             case 3:
                 headerHeight = 60
             case 4:
@@ -357,9 +433,6 @@ extension JobOfferDetailVC: UITableViewDataSource {
             case (0,1):
                 // 求人画像
                 let cell = tableView.loadCell(cellName: "JobDetailImageCell", indexPath: indexPath) as! JobDetailImageCell
-                
-                Log.selectLog(logLevel: .debug, "self.view:\(String(describing: self.view))")
-                Log.selectLog(logLevel: .debug, "self.detailTableView:\(String(describing: self.detailTableView))")
                 
                 cell.setCellWidth(width: self.detailTableView.frame.size.width)
                 cell.setup(data: _mdlJobDetail)

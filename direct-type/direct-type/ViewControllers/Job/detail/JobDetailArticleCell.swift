@@ -14,7 +14,9 @@ protocol JobDetailArticleCellDelegate {
 
 class JobDetailArticleCell: BaseTableViewCell {
     
+    @IBOutlet weak var articleMainBackView:UIView!
     @IBOutlet weak var articleMainLabel:UILabel!
+    @IBOutlet weak var articleCloseBackView:UIView!
     @IBOutlet weak var articleCloseBtn:UIButton!
     @IBAction func articleCloseBtnAction() {
         self.delegate.articleCellCloseAction()

@@ -296,13 +296,7 @@ class MdlJobCardDetail: Codable {
         let _suitableUnsuitable = dto.suitableForThisJob
         let _notSuitableUnsuitable = dto.notSuitableForThisJob
         
-        Log.selectLog(logLevel: .debug, "_suitableUnsuitable:\(_suitableUnsuitable),_notSuitableUnsuitable:\(_notSuitableUnsuitable)")
-        
 //        let _companyDescription = dto.companyDescription
-        Log.selectLog(logLevel: .debug, "employeesAll:\(dto.employees.employeesAll)")
-        Log.selectLog(logLevel: .debug, "averageAge:\(dto.employees.averageAge)")
-        Log.selectLog(logLevel: .debug, "genderRatio:\(dto.employees.genderRatio)")
-        Log.selectLog(logLevel: .debug, "middleEnter:\(dto.employees.middleEnter)")
         
         let _emplyees = JobCardDetailCompanyDescriptionEmployeesCount.init(count: dto.employees.employeesAll, averageAge: dto.employees.averageAge, genderRatio: dto.employees.genderRatio, middleEnter: dto.employees.middleEnter)
         let _presidentData = JobCardDetailCompanyDescriptionPresidentData.init(presidentName: dto.presidentName, presidentHistory: dto.presidentHistory)
@@ -329,10 +323,10 @@ class MdlJobCardDetail: Codable {
             _prIds.append(prId!)
         }
         
-        let _mainPicture = dto.mainPhotoURL ?? ""
-        let _subPictures:[String] = dto.subPhotoURLs ?? []
+        let _mainPicture = dto.mainPhotoURL 
+        let _subPictures:[String] = dto.subPhotoURLs 
         
-        let _employmentId = Int(dto.employmentId)
+        let _employmentId = Int(dto.employmentId) ?? 0
         let _overtimeCode = Int(dto.indicationOvertimeId)
         
         let _selectionProcess = JobCardDetailSelectionProcess.init(selectionProcess1: dto.selectionProcessStep1, selectionProcess2: dto.selectionProcessStep2, selectionProcess3: dto.selectionProcessStep3, selectionProcess4: dto.selectionProcessStep4, selectionProcess5: dto.selectionProcessStep5, selectionProcessDetail: dto.selectionProcess)
@@ -356,7 +350,7 @@ class MdlJobCardDetail: Codable {
             jobExample: _jobExample, product: _product, scope: _scope, spotTitle1: _spotTitle1, spotDetail1: _spotDetail1, spotTitle2: _spotTitle2, spotDetail2: _spotDetail2,
             qualification: dto.applicationSkill, betterSkill: dto.desirableCapability, applicationExample: dto.adoptionExample,
             suitableUnsuitable: _suitableUnsuitable, notSuitableUnsuitable: _notSuitableUnsuitable,
-            employmentType: _employmentId!, salary: dto.salary, bonusAbout: _bonusAbout, jobtime: dto.officeHours,
+            employmentType: _employmentId, salary: dto.salary, bonusAbout: _bonusAbout, jobtime: dto.officeHours,
             overtimeCode: _overtimeCode!, overtimeAbout: dto.overtime, workPlace: dto.jobPlace,
             transport: dto.transportation, holiday: dto.vacation, welfare: dto.jobCondition,
             childcare: _childcare, interviewMemo: _interviewMemo, selectionProcess: _selectionProcess,
