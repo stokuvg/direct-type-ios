@@ -35,11 +35,7 @@ class HomeVC: TmpNaviTopVC {
     @IBOutlet weak var homeTableView:UITableView!
     
     var pageJobCards: MdlJobCardList!   // nページを取得
-//    var masterJobCards: MdlJobCardList!
     var dispJobCards: MdlJobCardList!   // 取得したページを全て表示
-    
-//    var dispTableData:[[String: Any]] = []
-//    var masterTableData:[[String:Any]] = []
     
     var moreCnt:Int = 1
     var dispType:CardDispType = .none
@@ -388,6 +384,26 @@ class HomeVC: TmpNaviTopVC {
         */
     }
     #endif
+    
+    private func recommendLoad() {
+        SVProgressHUD.show()
+        pageJobCards = MdlJobCardList()
+        dispJobCards = MdlJobCardList()
+        RecommendManager.fetchRecommend(type: .ap112, jobID: "")
+        .done { result in
+            Log.selectLog(logLevel: .debug, "求人一覧のレコメンド 成功:\(result)")
+            
+//            self.pageJobCards = result
+        }
+        .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            Log.selectLog(logLevel: .debug, "求人一覧のレコメンド エラー:\(myErr.debugDisp)")
+        }
+        .finally {
+            SVProgressHUD.dismiss()
+            self.homeTableView.reloadData()
+        }
+    }
 }
 
 extension HomeVC: UITableViewDelegate {
@@ -476,7 +492,6 @@ extension HomeVC: UITableViewDataSource {
             return UITableViewCell()
         }
     }
-    
 }
 
 extension HomeVC: JobOfferCardMoreCellDelegate {
@@ -497,7 +512,8 @@ extension HomeVC: JobOfferCardReloadCellDelegate {
     func allTableReloadAction() {
         Log.selectLog(logLevel: .debug, "allTableReloadAction start")
         // 精度の高い求人を受け取る
-        self.homeTableView.reloadData()
+//        self.homeTableView.reloadData()
+        self.recommendLoad()
     }
 }
 

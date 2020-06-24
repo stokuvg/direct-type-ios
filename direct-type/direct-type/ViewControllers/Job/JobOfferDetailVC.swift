@@ -173,7 +173,7 @@ class JobOfferDetailVC: TmpBasicVC {
         
         applicationBtn.setTitle(text: "応募する", fontType: .C_font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         
-        keepBtn.setTitle(text: "", fontType: .C_font_M, textColor: UIColor.clear, alignment: .center)
+//        keepBtn.setTitle(text: "", fontType: .C_font_M, textColor: UIColor.clear, alignment: .center)
         
         keepFlag = false
         self.keepDataSetting(flag: keepFlag)
@@ -337,10 +337,13 @@ class JobOfferDetailVC: TmpBasicVC {
     private func keepDataSetting(flag:Bool) {
         let imageName:String = flag ? "btn_keep" : "btn_keepclose"
         let btnImage = UIImage(named: imageName)
-        keepBtn.setImage(btnImage, for: .normal)
         keepBtn.imageView?.contentMode = .scaleAspectFit
         keepBtn.contentHorizontalAlignment = .fill
         keepBtn.contentVerticalAlignment = .fill
+        keepBtn.setImage(btnImage, for: .normal)
+        keepBtn.setImage(btnImage, for: .highlighted)
+        keepBtn.setImage(btnImage, for: .selected)
+        keepBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 }
 
