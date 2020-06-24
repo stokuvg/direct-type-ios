@@ -15,6 +15,21 @@ struct DeepLinkHierarchy {
         case entry
         case myPage
         case none
+        
+        var index: Int? {
+            switch self {
+            case .home:
+                return 0
+            case .keep:
+                return 1
+            case .entry:
+                return 2
+            case .myPage:
+                return 3
+            case .none:
+                return nil
+            }
+        }
     }
     
     enum ScreenNameType: String {

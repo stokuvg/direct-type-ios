@@ -62,18 +62,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 想定されるURL形式: direct-type://myPage/vacanciesDetail?vacanciesId=123&keepId=456&searchText=hoge&campainText=fuga
         let deepLinkHierarchy = DeepLinkHierarchy(host: url.host ?? "", path: url.path , query: url.query ?? "")
         guard let rootTabBarController = window?.rootViewController as? UITabBarController else { return true }
-        switch deepLinkHierarchy.tabType {
-        case .home:
-            rootTabBarController.selectedIndex = 0
-        case .keep:
-            rootTabBarController.selectedIndex = 1
-        case .entry:
-            rootTabBarController.selectedIndex = 2
-        case .myPage:
-            rootTabBarController.selectedIndex = 3
-        case .none:
-            break
-        }
+        guard let tabIndex = deepLinkHierarchy.tabType.index else { return true }
+        rootTabBarController.selectedIndex = tabIndex
         return true
     }
 }
