@@ -57,19 +57,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         return true
     }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        // 想定されるURL形式: direct-type://myPage/vacanciesDetail?vacanciesId=123&keepId=456&searchText=hoge&campainText=fuga
+        let deepLinkHierarchy = DeepLinkHierarchy(host: url.host ?? "", path: url.path , query: url.query ?? "")
+        guard let rootTabBarController = window?.rootViewController as? UITabBarController else { return true }
+        guard let tabIndex = deepLinkHierarchy.tabType.index else { return true }
+        rootTabBarController.selectedIndex = tabIndex
+        return true
+    }
+}
 
+private extension AppDelegate {
     // 初期入力画面を表示
     func displayInitialInputVC() {
-
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-
+        window = UIWindow(frame: UIScreen.main.bounds)
         let initialSB = UIStoryboard(name: "InitialInputRegistVC", bundle: nil)
-
         let initialVC = initialSB.instantiateViewController(withIdentifier: "InitialInputRegistVC") as! InitialInputRegistVC
-
-        self.window?.rootViewController = initialVC
-
-        self.window?.makeKeyAndVisible()
-
+        window?.rootViewController = initialVC
+        window?.makeKeyAndVisible()
     }
 }
