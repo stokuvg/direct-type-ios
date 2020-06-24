@@ -72,21 +72,23 @@ private extension InitialInputConfirmVC {
     }
     
     func resendAuthCode() {
-        AWSMobileClient.default()
-            .signUp(username: loginInfo.phoneNumberText, password: loginInfo.password)  { (signInResult, error) in
-            if let error = error {
-                let buf = AuthManager.convAnyError(error).debugDisp
-                DispatchQueue.main.async {
-                    self.showConfirm(title: "Error", message: buf, onlyOK: true)
-                }
+        AWSMobileClient.default().signUp(username: loginInfo.phoneNumberText, password: loginInfo.password) { (signUpResult, error) in
+            if let _error = error {
+                let buf = AuthManager.convAnyError(_error).debugDisp
+                DispatchQueue.main.async { print(#line, #function, buf) }
                 return
             }
-            
-            guard signInResult != nil else {
-                print("レスポンスがが正常に受け取れませんでした")
-                return
+            guard let signUpResult = signUpResult else { return }
+            print(signUpResult.signUpConfirmationState)
+            print(signUpResult.codeDeliveryDetails.debugDescription)
+            var buf: String = ""
+            switch signUpResult.signUpConfirmationState {
+            case .confirmed:    buf = "confirmed"
+//[簡易認証Skip]            self.actLogin(sender)//続けてログインも実施してしまう
+            case .unconfirmed:  buf = "unconfirmed"
+            case .unknown:      buf = "unknown"
             }
-            // TODO: 認証コードを検証するAPIを実行する。
+            DispatchQueue.main.async { print(#line, #function, buf) }
         }
     }
 }
