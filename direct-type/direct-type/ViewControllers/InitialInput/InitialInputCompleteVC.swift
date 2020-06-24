@@ -12,6 +12,7 @@ final class InitialInputCompleteVC: TmpBasicVC {
     @IBOutlet private weak var imageView: UIImageView!
     
     @IBAction private func nextButton(_ sender: UIButton) {
+        pushViewController(.firstInputPreviewA)
     }
     
     private let closeMouseImage = UIImage(named: "suma_normal1")!
