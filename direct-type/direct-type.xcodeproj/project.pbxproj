@@ -79,6 +79,8 @@
 		066F2719246E81A10040BDC1 /* JobDetailFoldingPhoneNumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 066F2717246E81A10040BDC1 /* JobDetailFoldingPhoneNumberCell.xib */; };
 		066F271C246E81B60040BDC1 /* JobDetailFoldingOutlineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066F271A246E81B60040BDC1 /* JobDetailFoldingOutlineCell.swift */; };
 		066F271D246E81B60040BDC1 /* JobDetailFoldingOutlineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 066F271B246E81B60040BDC1 /* JobDetailFoldingOutlineCell.xib */; };
+		066FE3AE24A3163C006AB2B4 /* Device+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066FE3AD24A3163C006AB2B4 /* Device+Extensions.swift */; };
+		066FE3B024A3347E006AB2B4 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066FE3AF24A3347D006AB2B4 /* String+Extensions.swift */; };
 		0670F4622491E14400E60FDC /* MdlKeepList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0670F4612491E14400E60FDC /* MdlKeepList.swift */; };
 		0670F4642491F33B00E60FDC /* MdlKeepJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0670F4632491F33B00E60FDC /* MdlKeepJob.swift */; };
 		0670F4662491FCBB00E60FDC /* ApiManager+Keeps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0670F4652491FCBB00E60FDC /* ApiManager+Keeps.swift */; };
@@ -389,6 +391,8 @@
 		066F2717246E81A10040BDC1 /* JobDetailFoldingPhoneNumberCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailFoldingPhoneNumberCell.xib; sourceTree = "<group>"; };
 		066F271A246E81B60040BDC1 /* JobDetailFoldingOutlineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailFoldingOutlineCell.swift; sourceTree = "<group>"; };
 		066F271B246E81B60040BDC1 /* JobDetailFoldingOutlineCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailFoldingOutlineCell.xib; sourceTree = "<group>"; };
+		066FE3AD24A3163C006AB2B4 /* Device+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Device+Extensions.swift"; sourceTree = "<group>"; };
+		066FE3AF24A3347D006AB2B4 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		0670F4612491E14400E60FDC /* MdlKeepList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlKeepList.swift; sourceTree = "<group>"; };
 		0670F4632491F33B00E60FDC /* MdlKeepJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlKeepJob.swift; sourceTree = "<group>"; };
 		0670F4652491FCBB00E60FDC /* ApiManager+Keeps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Keeps.swift"; sourceTree = "<group>"; };
@@ -839,6 +843,8 @@
 				0645705C2464F77700F3B015 /* Logs.swift */,
 				0645DDFE246B969000592572 /* Tags.swift */,
 				066F270C246E6B820040BDC1 /* UITextView+Extensions.swift */,
+				066FE3AD24A3163C006AB2B4 /* Device+Extensions.swift */,
+				066FE3AF24A3347D006AB2B4 /* String+Extensions.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1677,6 +1683,7 @@
 				06BE18FB2484A55000FAE476 /* MyPageNameCell.swift in Sources */,
 				0EC5B164248F41B80089670D /* BusinessAvilityScore.swift in Sources */,
 				26E04AE124A1E80100DE8694 /* EntryFormAnyModelTBCell.swift in Sources */,
+				066FE3AE24A3163C006AB2B4 /* Device+Extensions.swift in Sources */,
 				0E6951B1248A11A000D58E6E /* ChemistryAnswerType.swift in Sources */,
 				26B491E0247E3CB100B58AD4 /* ApiManager+Entry.swift in Sources */,
 				26AF3239248F68BD00AA78FD /* FirstInputPreviewVC.swift in Sources */,
@@ -1758,6 +1765,7 @@
 				066938232485EA220064030F /* SettingWebVC.swift in Sources */,
 				066B2D862468DD0D00355E03 /* JobOfferCardReloadCell.swift in Sources */,
 				268BFF5F246E8FF8004B2640 /* MdlAppSmoothCareerComponyDescription.swift in Sources */,
+				066FE3B024A3347E006AB2B4 /* String+Extensions.swift in Sources */,
 				26F2A819246D0CE90037D47F /* MdlReqEntry.swift in Sources */,
 				0E144D99248DDBE2005A659F /* ChemistryScoreCalculation.swift in Sources */,
 				26BF48F024639E7100E00215 /* Constants.swift in Sources */,

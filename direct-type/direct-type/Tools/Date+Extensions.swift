@@ -74,6 +74,39 @@ class DateHelper {
     func makeDateArray(dateString: String) -> [String] {
         return []
     }
+        
+    class func newMarkFlagCheck(startDateString: String, nowDate:Date) -> Bool {
+        var retInterval:Double!
+        
+        let startDate = DateHelper.convStrYMD2Date(startDateString)
+    //        Log.selectLog(logLevel: .debug, "startDate:\(startDate)")
+        
+        retInterval = nowDate.timeIntervalSince(startDate)
+        
+        let ret = retInterval/86400
+//        Log.selectLog(logLevel: .debug, "ret:\(ret)")
+        if ret < 7 {
+            return true
+        }
+        return false
+        
+    }
+    
+    class func endFlagHiddenCheck(endDateString: String, nowDate:Date) -> Bool {
+            var retInterval:Double!
+            
+            let endDate = DateHelper.convStrYMD2Date(endDateString)
+    //        Log.selectLog(logLevel: .debug, "endDate:\(endDate)")
+            
+            retInterval = endDate.timeIntervalSince(nowDate)
+            
+            let ret = retInterval/86400
+    //        Log.selectLog(logLevel: .debug, "ret:\(ret)")
+            if ret > 7 {
+                return true
+            }
+            return false
+        }
 }
 
 extension Date {

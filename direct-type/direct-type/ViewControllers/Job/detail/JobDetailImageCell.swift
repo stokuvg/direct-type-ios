@@ -68,6 +68,8 @@ class JobDetailImageCell: BaseTableViewCell {
         
         self.mainImagesScrollView = UIScrollView.init(frame: CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight))
         self.mainImagesScrollView.isPagingEnabled = true
+        self.mainImagesScrollView.showsVerticalScrollIndicator = false
+        self.mainImagesScrollView.showsHorizontalScrollIndicator = false
         self.mainImagesScrollView.delegate = self
         self.mainImageBackView.addSubview(self.mainImagesScrollView)
     }
