@@ -162,7 +162,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <color key="backgroundColor" name="color-white"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="65" id="D99-BQ-PMh">
                                     <userDefinedRuntimeAttributes>

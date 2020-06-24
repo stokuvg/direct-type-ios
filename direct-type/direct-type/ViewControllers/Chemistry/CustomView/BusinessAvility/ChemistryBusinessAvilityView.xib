@@ -47,7 +47,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" name="color-white"/>
                     <constraints>
                         <constraint firstItem="QBb-Ae-j48" firstAttribute="centerY" secondItem="hjv-dr-ypH" secondAttribute="centerY" id="2fV-Xg-xqv"/>
                         <constraint firstItem="OCc-jz-KBU" firstAttribute="centerY" secondItem="hjv-dr-ypH" secondAttribute="centerY" id="KzU-SW-oTG"/>
@@ -67,7 +67,7 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <color key="backgroundColor" name="color-white"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="hjv-dr-ypH" secondAttribute="trailing" id="Bdl-EX-c6R"/>
                 <constraint firstItem="hjv-dr-ypH" firstAttribute="leading" secondItem="MAE-SI-JUp" secondAttribute="trailing" constant="10" id="E5c-Fl-ACO"/>
@@ -87,6 +87,9 @@
     <resources>
         <namedColor name="color-sub">
             <color red="1" green="0.35294117647058826" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="color-white">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
