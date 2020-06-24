@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,13 +16,85 @@
                     <view key="view" contentMode="scaleToFill" id="hiv-Bm-MBX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="suma_normal2" translatesAutoresizingMaskIntoConstraints="NO" id="dvn-p5-e9u">
+                                <rect key="frame" x="132" y="84" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="950-iP-ACp"/>
+                                    <constraint firstAttribute="height" constant="150" id="Yo5-Tv-SlM"/>
+                                </constraints>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vVX-g2-lv6">
+                                <rect key="frame" x="40" y="254" width="334" height="508"/>
+                                <string key="text">はじめまして。
+ＡＩキャリアアドバイザーのスマ澤と申します。
+あなた専属のアドバイザーとして転職活動をサポートします。
+
+よろしくお願いいたします。
+
+早速ですがあなたのことを教えてください。
+
+これからいくつか質問をさせていただきます。
+だいたい3分程度かかる見込みです。
+
+入力いただいた内容から
+あなたに合った求人を探していきますね。</string>
+                                <color key="textColor" name="color-black"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CY3-Mz-cac">
+                                <rect key="frame" x="40" y="782" width="334" height="40"/>
+                                <color key="backgroundColor" name="color-sub"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="chz-oj-Tjv"/>
+                                </constraints>
+                                <state key="normal" title="次へ">
+                                    <color key="titleColor" name="color-white"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="nextButton:" destination="ddc-4g-WsH" eventType="touchUpInside" id="CPo-yY-LkW"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="CY3-Mz-cac" firstAttribute="leading" secondItem="Teh-ej-TNP" secondAttribute="leading" constant="40" id="C4t-U1-gYw"/>
+                            <constraint firstItem="Teh-ej-TNP" firstAttribute="trailing" secondItem="vVX-g2-lv6" secondAttribute="trailing" constant="40" id="COS-L4-ZYM"/>
+                            <constraint firstItem="vVX-g2-lv6" firstAttribute="top" secondItem="dvn-p5-e9u" secondAttribute="bottom" constant="20" id="Et3-j2-cWo"/>
+                            <constraint firstItem="vVX-g2-lv6" firstAttribute="leading" secondItem="Teh-ej-TNP" secondAttribute="leading" constant="40" id="GVU-y2-tdE"/>
+                            <constraint firstItem="dvn-p5-e9u" firstAttribute="centerX" secondItem="hiv-Bm-MBX" secondAttribute="centerX" id="M38-K3-OLB"/>
+                            <constraint firstItem="CY3-Mz-cac" firstAttribute="top" secondItem="vVX-g2-lv6" secondAttribute="bottom" constant="20" id="azd-0G-K2g"/>
+                            <constraint firstItem="Teh-ej-TNP" firstAttribute="trailing" secondItem="CY3-Mz-cac" secondAttribute="trailing" constant="40" id="fsm-wC-xAF"/>
+                            <constraint firstItem="Teh-ej-TNP" firstAttribute="bottom" secondItem="CY3-Mz-cac" secondAttribute="bottom" constant="40" id="j6b-wV-BUm"/>
+                            <constraint firstItem="dvn-p5-e9u" firstAttribute="top" secondItem="Teh-ej-TNP" secondAttribute="top" constant="40" id="pGM-mY-LkA"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Teh-ej-TNP"/>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="dvn-p5-e9u" id="eBs-Y6-wws"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k0K-lQ-xHZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="143" y="132"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="suma_normal2" width="175" height="175"/>
+        <namedColor name="color-black">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="color-sub">
+            <color red="1" green="0.35294117647058826" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="color-white">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
