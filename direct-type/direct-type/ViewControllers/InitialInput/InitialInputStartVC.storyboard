@@ -218,22 +218,6 @@
             </objects>
             <point key="canvasLocation" x="-1849" y="-108"/>
         </scene>
-        <!--Initial Input ListVC-->
-        <scene sceneID="VHb-JF-3do">
-            <objects>
-                <viewController storyboardIdentifier="Sbid_InitialInputListVC" id="Rfm-ra-zPY" customClass="InitialInputListVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="2KI-3C-LEO">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="RBI-U7-ct1"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="KnW-4C-jia"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ekn-MC-tkS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-773" y="-117"/>
-        </scene>
     </scenes>
     <resources>
         <image name="rogin" width="88" height="36"/>

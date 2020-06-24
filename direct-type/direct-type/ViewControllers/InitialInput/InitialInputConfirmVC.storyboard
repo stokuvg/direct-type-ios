@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Initial Input ConfirmVC-->
+        <scene sceneID="zIL-nF-3N0">
+            <objects>
+                <viewController storyboardIdentifier="Sbid_InitialInputConfirmVC" id="MOW-qK-40g" customClass="InitialInputConfirmVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="I4b-pe-g05">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="コードを入力" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3un-bl-J0I">
+                                <rect key="frame" x="40" y="363" width="334" height="50"/>
+                                <color key="backgroundColor" name="color-white"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Uzu-sW-brB"/>
+                                </constraints>
+                                <color key="textColor" name="color-black"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oxr-Pd-vtm">
+                                <rect key="frame" x="30" y="296.5" width="354" height="26.5"/>
+                                <string key="text">入力いただいた電話番号に確認コードを送りました。
+送信された６桁のコードを入力してください。</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="６桁のコードを入力してください" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P9T-Z7-rsh">
+                                <rect key="frame" x="20" y="258.5" width="374" height="18"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <color key="textColor" name="color-black"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KQp-Dz-Qya">
+                                <rect key="frame" x="261" y="413" width="113" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <state key="normal" title="認証コードを再送信する">
+                                    <color key="titleColor" name="color-sub"/>
+                                </state>
+                                <connections>
+                                    <action selector="resendAuthCodeButton:" destination="MOW-qK-40g" eventType="touchUpInside" id="LnE-MW-efQ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qph-yq-9eJ">
+                                <rect key="frame" x="40" y="457" width="334" height="40"/>
+                                <color key="backgroundColor" name="color-sub"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="16z-zr-YWG"/>
+                                </constraints>
+                                <state key="normal" title="次へ">
+                                    <color key="titleColor" name="color-white"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="nextButton:" destination="MOW-qK-40g" eventType="touchUpInside" id="T9u-jb-7E7"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="qph-yq-9eJ" firstAttribute="leading" secondItem="SzV-G9-6rA" secondAttribute="leading" constant="40" id="DCR-u7-TFO"/>
+                            <constraint firstItem="Oxr-Pd-vtm" firstAttribute="leading" secondItem="SzV-G9-6rA" secondAttribute="leading" constant="30" id="DXV-ZI-NAB"/>
+                            <constraint firstItem="SzV-G9-6rA" firstAttribute="trailing" secondItem="qph-yq-9eJ" secondAttribute="trailing" constant="40" id="Dh7-JE-jma"/>
+                            <constraint firstItem="3un-bl-J0I" firstAttribute="top" secondItem="Oxr-Pd-vtm" secondAttribute="bottom" constant="40" id="GtD-Vz-31J"/>
+                            <constraint firstItem="SzV-G9-6rA" firstAttribute="trailing" secondItem="3un-bl-J0I" secondAttribute="trailing" constant="40" id="KZj-Vo-Zxp"/>
+                            <constraint firstItem="KQp-Dz-Qya" firstAttribute="top" secondItem="3un-bl-J0I" secondAttribute="bottom" id="PYi-4D-vb0"/>
+                            <constraint firstItem="SzV-G9-6rA" firstAttribute="trailing" secondItem="P9T-Z7-rsh" secondAttribute="trailing" constant="20" id="QoS-xt-Vgo"/>
+                            <constraint firstItem="P9T-Z7-rsh" firstAttribute="leading" secondItem="SzV-G9-6rA" secondAttribute="leading" constant="20" id="YeZ-2d-IxF"/>
+                            <constraint firstItem="qph-yq-9eJ" firstAttribute="top" secondItem="KQp-Dz-Qya" secondAttribute="bottom" constant="20" id="ZJ5-cU-4UX"/>
+                            <constraint firstItem="KQp-Dz-Qya" firstAttribute="trailing" secondItem="3un-bl-J0I" secondAttribute="trailing" id="aMF-o1-aLn"/>
+                            <constraint firstItem="Oxr-Pd-vtm" firstAttribute="top" secondItem="P9T-Z7-rsh" secondAttribute="bottom" constant="20" id="aXZ-ZX-DD7"/>
+                            <constraint firstItem="3un-bl-J0I" firstAttribute="centerY" secondItem="I4b-pe-g05" secondAttribute="centerY" constant="-60" id="t3m-ii-bUP"/>
+                            <constraint firstItem="3un-bl-J0I" firstAttribute="leading" secondItem="SzV-G9-6rA" secondAttribute="leading" constant="40" id="wee-Y0-2As"/>
+                            <constraint firstItem="SzV-G9-6rA" firstAttribute="trailing" secondItem="Oxr-Pd-vtm" secondAttribute="trailing" constant="30" id="yUx-ox-fKc"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="SzV-G9-6rA"/>
+                    </view>
+                    <connections>
+                        <outlet property="authCodeTextField" destination="3un-bl-J0I" id="l48-bE-V52"/>
+                        <outlet property="nextButton" destination="qph-yq-9eJ" id="mu8-m1-Cqk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ibb-zO-mOt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="51" y="21"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="color-black">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="color-sub">
+            <color red="1" green="0.35294117647058826" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="color-white">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

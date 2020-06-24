@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7G8-ao-tWJ">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Initial Input RegistVC-->
+        <scene sceneID="lyr-m7-dkt">
+            <objects>
+                <viewController storyboardIdentifier="Sbid_InitialInputRegistVC" id="7G8-ao-tWJ" customClass="InitialInputRegistVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zEt-4o-qFa">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="携帯電番号入力（ハイフンなし）" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qTh-BW-Ty8">
+                                <rect key="frame" x="40" y="363" width="334" height="50"/>
+                                <color key="backgroundColor" name="color-white"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="9Q3-oR-E75"/>
+                                </constraints>
+                                <color key="textColor" name="color-black"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="本人確認のため、携帯電話のＳＭＳ（ショートメッセージサービス）を利用して認証を行います。電話番号が同意なく第三者に公開されることはありません。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LR5-aW-sXL">
+                                <rect key="frame" x="30" y="283.5" width="354" height="39.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="電話番号を入力してください" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPm-7i-O1B">
+                                <rect key="frame" x="20" y="245.5" width="374" height="18"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <color key="textColor" name="color-black"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oty-O0-I6b">
+                                <rect key="frame" x="241" y="413" width="133" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <state key="normal" title="電話番号の確認が必要な理由">
+                                    <color key="titleColor" name="color-sub"/>
+                                </state>
+                                <connections>
+                                    <action selector="reasonOfConfirmPhoneButton:" destination="7G8-ao-tWJ" eventType="touchUpInside" id="Jbs-93-N7D"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0r-iX-nRl">
+                                <rect key="frame" x="40" y="457" width="334" height="40"/>
+                                <color key="backgroundColor" name="color-sub"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="d6l-wy-ueG"/>
+                                </constraints>
+                                <state key="normal" title="次へ">
+                                    <color key="titleColor" name="color-white"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="nextButton:" destination="7G8-ao-tWJ" eventType="touchUpInside" id="zkM-IH-osx"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Oty-O0-I6b" firstAttribute="trailing" secondItem="qTh-BW-Ty8" secondAttribute="trailing" id="37s-Kj-e2m"/>
+                            <constraint firstItem="fPm-7i-O1B" firstAttribute="leading" secondItem="o4X-mO-AyH" secondAttribute="leading" constant="20" id="3jW-SN-OaG"/>
+                            <constraint firstItem="o4X-mO-AyH" firstAttribute="trailing" secondItem="fPm-7i-O1B" secondAttribute="trailing" constant="20" id="4KG-PH-vSz"/>
+                            <constraint firstItem="o4X-mO-AyH" firstAttribute="trailing" secondItem="b0r-iX-nRl" secondAttribute="trailing" constant="40" id="Ei9-PB-6Vt"/>
+                            <constraint firstItem="b0r-iX-nRl" firstAttribute="top" secondItem="Oty-O0-I6b" secondAttribute="bottom" constant="20" id="Sgp-bP-48g"/>
+                            <constraint firstItem="Oty-O0-I6b" firstAttribute="top" secondItem="qTh-BW-Ty8" secondAttribute="bottom" id="Vr2-cv-jRb"/>
+                            <constraint firstItem="LR5-aW-sXL" firstAttribute="top" secondItem="fPm-7i-O1B" secondAttribute="bottom" constant="20" id="afn-zd-WUM"/>
+                            <constraint firstItem="qTh-BW-Ty8" firstAttribute="top" secondItem="LR5-aW-sXL" secondAttribute="bottom" constant="40" id="ckh-RT-x7v"/>
+                            <constraint firstItem="o4X-mO-AyH" firstAttribute="trailing" secondItem="LR5-aW-sXL" secondAttribute="trailing" constant="30" id="fOx-8Y-q1r"/>
+                            <constraint firstItem="qTh-BW-Ty8" firstAttribute="centerY" secondItem="zEt-4o-qFa" secondAttribute="centerY" constant="-60" id="hDc-6I-2rZ"/>
+                            <constraint firstItem="qTh-BW-Ty8" firstAttribute="leading" secondItem="o4X-mO-AyH" secondAttribute="leading" constant="40" id="iHo-hB-rTX"/>
+                            <constraint firstItem="LR5-aW-sXL" firstAttribute="leading" secondItem="o4X-mO-AyH" secondAttribute="leading" constant="30" id="jt7-Jl-FfU"/>
+                            <constraint firstItem="o4X-mO-AyH" firstAttribute="trailing" secondItem="qTh-BW-Ty8" secondAttribute="trailing" constant="40" id="oW3-tB-esB"/>
+                            <constraint firstItem="b0r-iX-nRl" firstAttribute="leading" secondItem="o4X-mO-AyH" secondAttribute="leading" constant="40" id="uoB-Tq-ATI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="o4X-mO-AyH"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ccp-0v-shq"/>
+                    <connections>
+                        <outlet property="nextButton" destination="b0r-iX-nRl" id="beU-R7-6In"/>
+                        <outlet property="phoneNumberTextField" destination="qTh-BW-Ty8" id="dgY-QS-P0s"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r6g-JV-GZj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-773" y="-117"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="color-black">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="color-sub">
+            <color red="1" green="0.35294117647058826" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="color-white">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

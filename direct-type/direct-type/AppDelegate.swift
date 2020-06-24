@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             self.window?.rootViewController = tabBC
         } else {
-            let inputSB = UIStoryboard(name: "InitialInput", bundle: nil)
+            let inputSB = UIStoryboard(name: "InitialInputStartVC", bundle: nil)
             let startNavi = inputSB.instantiateViewController(withIdentifier: "Sbid_InitialInputNavi") as! UINavigationController
             
             self.window?.rootViewController = startNavi
@@ -75,9 +75,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
-        let initialSB = UIStoryboard(name: "InitialInput", bundle: nil)
+        let initialSB = UIStoryboard(name: "InitialInputRegistVC", bundle: nil)
         
-        let initialVC = initialSB.instantiateViewController(withIdentifier: "Sbid_InitialInputListVC") as! InitialInputListVC
+        let initialVC = initialSB.instantiateViewController(withIdentifier: "InitialInputRegistVC") as! InitialInputRegistVC
         
         self.window?.rootViewController = initialVC
         
