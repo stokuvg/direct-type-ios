@@ -20,7 +20,7 @@ class JobOfferDetailVC: TmpBasicVC {
     @IBOutlet weak var applicationBtn:UIButton!
     @IBAction func applicationBtnAction() {
         // 応募フォームに遷移
-//        self.delegate.footerApplicationBtnAction()
+        self.pushViewController(.entryVC, model: _mdlJobDetail)
     }
     
     var keepFlag:Bool!
@@ -745,6 +745,8 @@ extension JobOfferDetailVC: FoldingHeaderViewDelegate {
     }
 }
 
+// TODO:仕様変わりを考えて残しておく。
+/*
 extension JobOfferDetailVC: JobDetailFooterApplicationCellDelegate {
     
     func footerApplicationBtnAction() {
@@ -809,3 +811,4 @@ extension JobOfferDetailVC: JobDetailFooterApplicationCellDelegate {
         }
     }
 }
+*/
