@@ -86,20 +86,49 @@ class EntryFormAnyModelTBCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
 }
 
 //TODO: 入力済かのチェック（初回入力で生成されるも、必須項目が全て入っていないケースに対応させる必要あり）
 extension EntryFormAnyModelTBCell {
     private func chkProgressProfile() -> Bool {
-        return true
+        //=== チェック対象の項目の確認
+        //必須なもの：氏名、性別、住所（address2以外）、メアド
+        var dicExist: [EditableItemKey: Bool] = [:]   //登録済の項目をカウントしておく
+        if let model = self.detail as? MdlProfile {
+            dicExist[EditItemMdlProfile.familyName.itemKey] = (model.familyName.isEmpty) ? false : true
+            dicExist[EditItemMdlProfile.firstName.itemKey] = (model.firstName.isEmpty) ? false : true
+            dicExist[EditItemMdlProfile.familyNameKana.itemKey] = (model.familyNameKana.isEmpty) ? false : true
+            dicExist[EditItemMdlProfile.firstNameKana.itemKey] = (model.firstNameKana.isEmpty) ? false : true
+            dicExist[EditItemMdlProfile.birthday.itemKey] = (model.birthday == Constants.SelectItemsUndefineDate) ? false : true
+            dicExist[EditItemMdlProfile.gender.itemKey] = (model.gender.isEmpty) ? false : true
+            dicExist[EditItemMdlProfile.zipCode.itemKey] = (model.zipCode.isEmpty) ? false : true
+            dicExist[EditItemMdlProfile.prefecture.itemKey] = (model.prefecture.isEmpty) ? false : true
+            dicExist[EditItemMdlProfile.address1.itemKey] = (model.address1.isEmpty) ? false : true
+            dicExist[EditItemMdlProfile.mailAddress.itemKey] = (model.mailAddress.isEmpty) ? false : true
+        }
+        let cntExist = dicExist.filter { (k, v) -> Bool in v == true }.count
+        print("#lien, #function, [\(cntExist) / \(dicExist.count)]")
+        return (cntExist == dicExist.count) ? true : false //すべてチェックされていればTrueになる
     }
     private func chkProgressResumee() -> Bool {
-        return true
+        //=== チェック対象の項目の確認
+        //必須なもの：
+        var dicExist: [EditableItemKey: Bool] = [:]   //登録済の項目をカウントしておく
+        if let model = self.detail as? MdlResume {
+        }
+        let cntExist = dicExist.filter { (k, v) -> Bool in v == true }.count
+        print("#lien, #function, [\(cntExist) / \(dicExist.count)]")
+        return (cntExist == dicExist.count) ? true : false //すべてチェックされていればTrueになる
     }
     private func chkProgressCareer() -> Bool {
-        return true
+        //=== チェック対象の項目の確認
+        //必須なもの：
+        var dicExist: [EditableItemKey: Bool] = [:]   //登録済の項目をカウントしておく
+        if let model = self.detail as? MdlCareer {
+            if model.businessTypes.count > 0 { //1つ以上の登録があればOK
+                return true
+            }
+        }
+        return false
     }
-
 }
-

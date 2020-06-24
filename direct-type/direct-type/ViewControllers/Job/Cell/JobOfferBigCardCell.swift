@@ -10,12 +10,6 @@ import UIKit
 import AlamofireImage
 import TudApi
 
-enum LimitedType {
-    case none
-    case new
-    case end
-}
-
 class JobOfferBigCardCell: BaseJobCardCell {
 
     @IBOutlet weak var keepBtn:UIButton!
@@ -67,17 +61,16 @@ class JobOfferBigCardCell: BaseJobCardCell {
         // NEWマーク 表示チェック
         let start_date_string = data.displayPeriod.startAt
 //        Log.selectLog(logLevel: .debug, "start_date_string:\(start_date_string)")
-        let startPeriod = newMarkFlagCheck(startDateString: start_date_string, nowDate: nowDate)
+        let startPeriod = DateHelper.newMarkFlagCheck(startDateString: start_date_string, nowDate: nowDate)
         // 終了マーク 表示チェック
         let end_date_string = data.displayPeriod.endAt
 //        Log.selectLog(logLevel: .debug, "end_date_string:\(end_date_string)")
-        let endPeriod = endFlagHiddenCheck(endDateString:end_date_string, nowDate:nowDate)
+        let endPeriod = DateHelper.endFlagHiddenCheck(endDateString:end_date_string, nowDate:nowDate)
         
         var limitedType:LimitedType!
         switch (startPeriod,endPeriod) {
             case (false,false):
 //                Log.selectLog(logLevel: .debug, "両方当たる")
-                // 終了マークのみ表示
                 limitedType = LimitedType.none
             case (false,true):
 //                Log.selectLog(logLevel: .debug, "掲載開始から７日以内")
@@ -130,9 +123,9 @@ class JobOfferBigCardCell: BaseJobCardCell {
         companyNameLabel.text(text: companyName, fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         
         // メイン
-        let mainText = data.mainTitle
-//        Log.selectLog(logLevel: .debug, "mainText:\(String(describing: mainText))")
+        let mainText = data.mainTitle.paragraphElimination()
         catchLabel.text(text: mainText, fontType: .C_font_SS , textColor: UIColor.init(colorType: .color_parts_gray)!, alignment: .left)
+        catchLabel.lineBreakMode = .byClipping
         
         // 見送りボタン
 //        let skip = data.skipStatus
@@ -151,9 +144,11 @@ class JobOfferBigCardCell: BaseJobCardCell {
                 self.limitedMarkView.isHidden = true
                 self.stackView.removeArrangedSubview(self.limitedMarkBackView)
             case .new:
+                self.limitedMarkView.isHidden = false
                 self.limitedLabel.text(text: "", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
                 self.limitedImageView.image = UIImage(named: "new")
             case .end:
+                self.limitedMarkView.isHidden = false
                 limitedLabel.text(text: "終了間近", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
                 self.limitedImageView.image = UIImage(named: "upcoming")
         }

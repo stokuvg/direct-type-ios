@@ -146,7 +146,7 @@ enum EditItemMdlProfile: String, EditItemProtocol {
         case .zipCode:
             return "ハイフンなしで入力してください"
         default:
-            return "[\(self.itemKey) PlaceHolder]"
+            return ""//return "[\(self.itemKey) PlaceHolder]"
         }
     }
     var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" } //画面内でUniqになるようなキーを定義（配列利用時は除く）

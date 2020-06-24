@@ -41,10 +41,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kVe-V4-kpV" userLabel="vwTitleArea">
-                                <rect key="frame" x="2" y="42" width="280" height="37"/>
+                                <rect key="frame" x="2" y="42" width="280" height="31"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="応募先" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMY-JV-lg2">
-                                        <rect key="frame" x="2" y="2" width="276" height="33"/>
+                                        <rect key="frame" x="2" y="2" width="276" height="27"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -59,7 +59,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rTd-wK-vYh" userLabel="vwComnaneNameArea">
-                                <rect key="frame" x="0.0" y="81" width="280" height="30.5"/>
+                                <rect key="frame" x="0.0" y="75" width="280" height="30.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pee-bV-NbC">
                                         <rect key="frame" x="2" y="8" width="276" height="20.5"/>
@@ -77,10 +77,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6fR-Lh-UZX" userLabel="vwJobTitleArea">
-                                <rect key="frame" x="0.0" y="113.5" width="280" height="30.5"/>
+                                <rect key="frame" x="0.0" y="107.5" width="280" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79E-pE-VOf">
-                                        <rect key="frame" x="2" y="8" width="276" height="20.5"/>
+                                        <rect key="frame" x="2" y="8" width="276" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -95,10 +95,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hUL-5N-hMC" userLabel="vwDateArea">
-                                <rect key="frame" x="0.0" y="146" width="280" height="50"/>
+                                <rect key="frame" x="0.0" y="159.5" width="280" height="36.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F56-nR-sf5">
-                                        <rect key="frame" x="0.0" y="8" width="280" height="34"/>
+                                        <rect key="frame" x="0.0" y="8" width="280" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>

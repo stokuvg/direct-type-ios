@@ -20,6 +20,7 @@ class EntryFormJobCardTBCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.isUserInteractionEnabled = false //表示のみでタップ不可
         //===デザイン適用
         self.backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
         vwMainArea.backgroundColor = UIColor(colorType: .color_base)
