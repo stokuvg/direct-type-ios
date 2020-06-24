@@ -315,8 +315,11 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
 }
 
 extension MyPageVC: MyPageChemistryStartCellDelegate {
-
     // 相性診断画面遷移
     func registChemistryAction() {
+        let vc = UIStoryboard(name: "ChemistryStart", bundle: nil).instantiateInitialViewController() as! ChemistryStart
+        hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+        hidesBottomBarWhenPushed = false
     }
 }
