@@ -90,7 +90,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <color key="backgroundColor" name="color-white"/>
                             <constraints>
                                 <constraint firstItem="ciA-6a-T70" firstAttribute="top" secondItem="fj5-8D-Hpm" secondAttribute="top" constant="15" id="1bF-fD-mr2"/>
                                 <constraint firstItem="ciA-6a-T70" firstAttribute="leading" secondItem="fj5-8D-Hpm" secondAttribute="leading" id="1lR-dn-T1u"/>
@@ -132,6 +132,9 @@
         <image name="hukidashi" width="266" height="39"/>
         <namedColor name="color-sub">
             <color red="1" green="0.35294117647058826" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="color-white">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
