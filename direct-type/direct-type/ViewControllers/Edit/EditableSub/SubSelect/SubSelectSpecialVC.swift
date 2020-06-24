@@ -64,8 +64,9 @@ class SubSelectSpecialVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         //====デザイン適用
+        view.backgroundColor = UIColor(colorType: .color_base)!
         vwHead.backgroundColor = UIColor.init(colorType: .color_main)!
-        vwMain.backgroundColor = UIColor.init(colorType: .color_white)!
+        vwMain.backgroundColor = UIColor.init(colorType: .color_base)!
         vwFoot.backgroundColor = UIColor.init(colorType: .color_main)!
         btnCommit.setTitle(text: "選択", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)

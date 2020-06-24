@@ -23,7 +23,9 @@ class SubSelectTBCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        //===デザイン適用
+        backgroundColor = .green//UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
+        vwCellArea.backgroundColor = .red//UIColor(colorType: .color_base)
     }
     //== セルの初期化と初期表示
     func initCell(_ delegate: SubSelectProtocol, _ item: CodeDisp, _ selected: Bool = false) {

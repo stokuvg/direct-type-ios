@@ -32,6 +32,9 @@ class HEditDrumTBCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        //===デザイン適用
+        backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
+        vwMainArea.backgroundColor = UIColor(colorType: .color_base)
     }
 
     func initCell(_ delegate: InputItemHDelegate, _ item: EditableItemH, errMsg: String) {
@@ -45,7 +48,7 @@ class HEditDrumTBCell: UITableViewCell {
     func dispCell() {
         guard let _item = item else { return }
         let bufTitle = _item.dispName //_item.type.dispTitle
-        lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
+        lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_main)!, alignment: .left)
         let date: Date = DateHelper.convStrYMD2Date(_item.curVal)
         if date == Constants.SelectItemsUndefineDate {
             tfValue.text = Constants.SelectItemsUndefineDateJP

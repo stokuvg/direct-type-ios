@@ -22,6 +22,9 @@ class HEditTextTBCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        //===デザイン適用
+        backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
+        vwMainArea.backgroundColor = UIColor(colorType: .color_base)
     }
 
     func initCell(_ delegate: InputItemHDelegate, _ item: EditableItemH, errMsg: String, _ returnKeyType: UIReturnKeyType) {
