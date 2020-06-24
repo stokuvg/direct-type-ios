@@ -107,7 +107,7 @@ private extension SettingVC {
                     return
                 }
                 DispatchQueue.main.async {
-                    self.showConfirm(title: "認証手順", message: "ログアウトしました")
+                    self.showConfirm(title: "認証手順", message: "ログアウトしました", onlyOK: true)
                     .done { _ in
                         self.transitionToInitial()
                     }
