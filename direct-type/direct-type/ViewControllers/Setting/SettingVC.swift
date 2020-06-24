@@ -8,6 +8,7 @@
 
 import UIKit
 import SVProgressHUD
+import AWSMobileClient
 
 class SettingVC: TmpBasicVC {
     @IBOutlet weak var tableView:UITableView!
@@ -96,16 +97,37 @@ private extension SettingVC {
     
     func dispLogoutAlert() {
         let logoutAlert = UIAlertController.init(title: "ログアウト確認", message: "ログアウトしますか", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: { (action:UIAlertAction!) -> Void in
-            
-        })
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action:UIAlertAction!) -> Void in
-            
+            AWSMobileClient.default().signOut { (error) in
+                if let error = error {
+                    DispatchQueue.main.async {
+                        self.showError(error)
+                    }
+                    return
+                }
+                DispatchQueue.main.async {
+                    self.showConfirm(title: "認証手順", message: "ログアウトしました")
+                    .done { _ in
+                        self.transitionToInitial()
+                    }
+                    .catch { _ in
+                    }
+                    .finally {
+                    }
+                }
+            }
         })
         logoutAlert.addAction(cancelAction)
         logoutAlert.addAction(okAction)
         
         navigationController?.present(logoutAlert, animated: true, completion: nil)
+    }
+    
+    func transitionToInitial() {
+        let vc = getVC(sbName: "InitialInputStartVC", vcName: "InitialInputStartVC") as! InitialInputStartVC
+        let newNavigationController = UINavigationController(rootViewController: vc)
+        UIApplication.shared.keyWindow?.rootViewController = newNavigationController
     }
 }
 
@@ -150,12 +172,7 @@ extension SettingVC: UITableViewDelegate {
             navigationController?.present(vc, animated: true, completion: nil)
         case .logout:
             // ログアウト
-            //self.dispLogoutAlert()
-            //[Dbg: 仮認証画面]
-            let storyboard = UIStoryboard(name: "Auth", bundle: nil)
-            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_CognitoAuthVC") as? CognitoAuthVC {
-                navigationController?.pushViewController(nvc, animated: true)
-            }
+            dispLogoutAlert()
         case .withdrawal:
             // 退会
             let vc = getVC(sbName: "SettingVC", vcName: "WithDrawalVC") as! WithDrawalVC
