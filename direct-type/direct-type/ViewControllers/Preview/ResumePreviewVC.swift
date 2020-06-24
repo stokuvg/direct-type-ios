@@ -24,7 +24,7 @@ class ResumePreviewVC: PreviewBaseVC {
     }
     //共通プレビューをOverrideして利用する
     override func initData() {
-        title = "[H-3] 履歴書"
+        title = "履歴書"
         
         //===[Dbg: ダミーデータ投入]___
 //        self.editableModel.editTempCD[EditItemMdlResume.employmentStatus.itemKey] = "1"

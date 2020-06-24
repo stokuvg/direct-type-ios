@@ -72,6 +72,6 @@ class SmoothCareerPreviewVC: PreviewBaseVC {
         ]))
     }
     override func dispData() {
-        title = "[F-11]「サクサク職歴」"
+        title = "サクサク職務経歴書」"
     }
 }
