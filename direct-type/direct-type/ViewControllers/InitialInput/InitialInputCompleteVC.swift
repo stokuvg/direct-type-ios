@@ -15,8 +15,8 @@ final class InitialInputCompleteVC: TmpBasicVC {
         pushViewController(.firstInputPreviewA)
     }
     
-    private let closeMouseImage = UIImage(named: "suma_normal1")!
-    private let openMouseImage = UIImage(named: "suma_normal2")!
+    private let closeMouthImage = UIImage(named: "suma_normal1")!
+    private let openMouthImage = UIImage(named: "suma_normal2")!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,7 @@ final class InitialInputCompleteVC: TmpBasicVC {
 
 private extension InitialInputCompleteVC {
     func startAnimation() {
-        imageView.animationImages = [closeMouseImage, openMouseImage]
+        imageView.animationImages = [closeMouthImage, openMouthImage]
         imageView.animationDuration = 1
         imageView.startAnimating()
     }
