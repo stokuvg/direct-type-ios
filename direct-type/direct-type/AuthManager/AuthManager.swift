@@ -46,6 +46,10 @@ final public class AuthManager {
     private init() {
         AWSMobileClient.default().initialize() {_,_ in }
     }
+    
+    var isLogin: Bool {
+        return userState == .signedIn
+    }
 }
 
 extension AuthManager {
