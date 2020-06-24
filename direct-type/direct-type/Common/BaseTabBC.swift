@@ -16,11 +16,6 @@ class BaseTabBC: UITabBarController {
         UITabBar.appearance().tintColor = UIColor.init(colorType: .color_sub)
         
         self.selectedIndex = 0
-        //[Dbg]___
-        if Constants.DbgAutoSelTabVC {
-            self.selectedIndex = 3
-        }
-        //[Dbg]^^^
 
         /// 赤ポチ
         // 求人        つかない

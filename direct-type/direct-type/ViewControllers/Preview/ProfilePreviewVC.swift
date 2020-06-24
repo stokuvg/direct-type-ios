@@ -145,6 +145,7 @@ extension ProfilePreviewVC {
         ApiManager.updateProfile(param, isRetry: true)
         .done { result in
             self.fetchGetProfile()
+            self.completeUpdate()//===更新完了した場合の処理
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -161,5 +162,9 @@ extension ProfilePreviewVC {
             self.dispData()
             SVProgressHUD.dismiss()
         }
+    }
+    private func completeUpdate() {
+        self.editableModel.editTempCD.removeAll()//編集情報をまるっと削除
+        self.chkButtonEnable()
     }
 }

@@ -152,8 +152,6 @@ class KeepListVC: TmpBasicVC {
 }
 extension KeepListVC: KeepNoViewDelegate {
     func btnAction() {
-//        self.tabBarController?.selectedIndex = 3
-        
         Log.selectLog(logLevel: .debug, "navigationController:\(String(describing: self.navigationController))")
         
         let vc = getVC(sbName: "ChemistryStart", vcName: "ChemistryStart") as! ChemistryStart

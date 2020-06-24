@@ -85,7 +85,7 @@ class PreviewBaseVC: TmpBasicVC {
         super.viewWillDisappear(animated)
     }
     func chkButtonEnable() {
-        btnCommit.isEnabled = true ; return //!!!
+//        btnCommit.isEnabled = true ; return //!!!
         //=== 変更なければフェッチ不要
         if editableModel.editTempCD.count > 0 {
             btnCommit.isEnabled = true
