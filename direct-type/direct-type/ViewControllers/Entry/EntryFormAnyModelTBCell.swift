@@ -31,7 +31,7 @@ class EntryFormAnyModelTBCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         //===デザイン適用
-        self.backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
+        backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
         vwMainArea.backgroundColor = UIColor(colorType: .color_base)
         vwTitleArea.backgroundColor = .clear
         vwMessageArea.backgroundColor = .clear

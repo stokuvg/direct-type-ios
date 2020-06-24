@@ -76,12 +76,8 @@ class HPreviewTBCell: UITableViewCell {
         let bufValue: String = dispCellValue(_item)
         let bufNotice: String = _item.notice
         //===表示させる
-        lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
-        if UITraitCollection.isDarkMode == true {
-            lblValue.text(text: bufValue, fontType: .font_S, textColor: UIColor.init(colorType: .color_white)!, alignment: .left)
-        } else {
-            lblValue.text(text: bufValue, fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
-        }
+        lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_main)!, alignment: .left)
+        lblValue.text(text: bufValue, fontType: .font_S, textColor: UIColor.init(colorType: .color_main)!, alignment: .left)
         lblNotice.text(text: bufNotice, fontType: .font_SS, textColor: UIColor.init(colorType: .color_parts_gray)!, alignment: .left)
         lblNotice.isHidden = (_item.notice == "") ? true : false
         //Validationエラー発生時の表示

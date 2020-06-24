@@ -23,6 +23,9 @@ class HEditSpecialTBCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        //===デザイン適用
+        backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
+        vwMainArea.backgroundColor = UIColor(colorType: .color_base)
     }
 
     func initCell(_ delegate: InputItemHDelegate, _ item: EditableItemH, _ item2: EditableItemH?,  errMsg: String, _ returnKeyType: UIReturnKeyType) {
@@ -40,7 +43,7 @@ class HEditSpecialTBCell: UITableViewCell {
     func dispCell() {
         guard let _item = item else { return }
         let bufTitle = _item.dispName //_item.type.dispTitle
-        lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
+        lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_main)!, alignment: .left)
         var bufVal: String = ""
         switch _item.editType {
         case .selectSpecial:
