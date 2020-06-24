@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "illust02.png",
       "idiom" : "iphone",
       "scale" : "1x"
     },
     {
-      "filename" : "illust02@2x.png",
+      "filename" : "suma_tasukeru.png",
       "idiom" : "iphone",
       "scale" : "2x"
     },
     {
-      "filename" : "illust02@3x.png",
       "idiom" : "iphone",
       "scale" : "3x"
     }

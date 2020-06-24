@@ -22,23 +22,23 @@ enum ChemistryPersonalityType: String, CaseIterable {
     var imageName: String {
         switch self {
         case .reformer:
-            return "illust01"
+            return "suma_kaikaku"
         case .helper:
-            return "illust01"
+            return "suma_tasukeru"
         case .toAchieve:
-            return "illust01"
+            return "suma_tassei"
         case .unique:
-            return "illust01"
+            return "suma_kosei"
         case .toExamine:
-            return "illust01"
+            return "suma_shiraberu"
         case .faithful:
-            return "illust01"
+            return "suma_chuujitu"
         case .enthusiastic:
-            return "illust01"
+            return "suma_necchu"
         case .challenger:
-            return "illust01"
+            return "suma_chousen"
         case .peaceful:
-            return "illust01"
+            return "suma_heiwa"
         }
     }
     
