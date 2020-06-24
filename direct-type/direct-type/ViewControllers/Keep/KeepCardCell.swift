@@ -45,10 +45,10 @@ class KeepCardCell: BaseJobCardCell {
         let nowDate = Date()
         // NEWマーク 表示チェック
         let start_date_string = data.pressStartDate
-        let startFlag = newMarkFlagCheck(startDateString: start_date_string, nowDate: nowDate)
+        let startFlag = DateHelper.newMarkFlagCheck(startDateString: start_date_string, nowDate: nowDate)
         // 終了マーク 表示チェック
         let end_date_string = data.pressEndDate
-        let endFlag = endFlagHiddenCheck(endDateString:end_date_string, nowDate:nowDate)
+        let endFlag = DateHelper.endFlagHiddenCheck(endDateString:end_date_string, nowDate:nowDate)
 
                 
         var limitedType:LimitedType!
@@ -56,7 +56,7 @@ class KeepCardCell: BaseJobCardCell {
             case (false,false):
 //                Log.selectLog(logLevel: .debug, "両方当たる")
                 // 終了マークのみ表示
-                limitedType = .end
+                limitedType = LimitedType.none
             case (false,true):
 //                Log.selectLog(logLevel: .debug, "掲載開始から７日以内")
                 // NEWマークのみ表示

@@ -26,6 +26,12 @@ enum KeepSendStatus {
     case sending
 }
 
+enum LimitedType {
+    case none
+    case new
+    case end
+}
+
 class HomeVC: TmpNaviTopVC {
     
     @IBOutlet weak var noCardBackView:UIView!
@@ -44,7 +50,7 @@ class HomeVC: TmpNaviTopVC {
     
     var pageNo:Int = 1
     
-    var defaultCellHeight:CGFloat = 525
+    var defaultCellHeight:CGFloat = 520
     
     var skipSendStatus:SkipSendStatus = .none
     var keepSendStatus:KeepSendStatus = .none
@@ -71,7 +77,7 @@ class HomeVC: TmpNaviTopVC {
 //        self.setRightSearchBtn()
         
         homeTableView.backgroundColor = UIColor.init(colorType: .color_base)
-        homeTableView.rowHeight = defaultCellHeight
+        homeTableView.rowHeight = UITableView.automaticDimension
         
         homeTableView.registerNib(nibName: "JobOfferBigCardCell", idName: "JobOfferBigCardCell")        // 求人カード
         homeTableView.registerNib(nibName: "JobOfferCardMoreCell", idName: "JobOfferCardMoreCell")      // もっと見る
@@ -404,6 +410,50 @@ class HomeVC: TmpNaviTopVC {
             self.homeTableView.reloadData()
         }
     }
+    
+    private func makeCellHeight(row: Int) -> CGFloat {
+        var rowHeight:CGFloat = defaultCellHeight
+        
+        let jobData = self.pageJobCards.jobCards[row]
+        
+        // NEW・終了間近を確認。あれば heightを追加
+        let nowDate = Date()
+        // NEWマーク 表示チェック
+        let start_date_string = jobData.displayPeriod.startAt
+//        Log.selectLog(logLevel: .debug, "start_date_string:\(start_date_string)")
+        let startPeriod = DateHelper.newMarkFlagCheck(startDateString: start_date_string, nowDate: nowDate)
+        // 終了マーク 表示チェック
+        let end_date_string = jobData.displayPeriod.endAt
+//        Log.selectLog(logLevel: .debug, "end_date_string:\(end_date_string)")
+        let endPeriod = DateHelper.endFlagHiddenCheck(endDateString:end_date_string, nowDate:nowDate)
+        
+        var limitedType:LimitedType!
+        switch (startPeriod,endPeriod) {
+            case (false,false):
+//                Log.selectLog(logLevel: .debug, "両方当たる")
+                // 終了マークのみ表示
+                limitedType = LimitedType.none
+            case (false,true):
+//                Log.selectLog(logLevel: .debug, "掲載開始から７日以内")
+                // NEWマークのみ表示
+                limitedType = .new
+            case (true,false):
+//                Log.selectLog(logLevel: .debug, "掲載終了まで７日以内")
+                // 終了マークのみ表示
+                limitedType = .end
+            default:
+//                Log.selectLog(logLevel: .debug, "それ以外")
+                limitedType = LimitedType.none
+        }
+        
+        if limitedType != LimitedType.none {
+            rowHeight += 40
+        }
+        rowHeight = DeviceHelper.deviceAddHeight(defaultHeight: rowHeight, addHeight: 25)
+        
+        return rowHeight
+//        return UITableView.automaticDimension
+    }
 }
 
 extension HomeVC: UITableViewDelegate {
@@ -414,7 +464,9 @@ extension HomeVC: UITableViewDelegate {
         } else if row == dispJobCards.jobCards.count && dispType == .end {
             return 250
         }
-        return defaultCellHeight
+        
+        return self.makeCellHeight(row: row)
+//        return defaultCellHeight
 //        return UITableView.automaticDimension
     }
     

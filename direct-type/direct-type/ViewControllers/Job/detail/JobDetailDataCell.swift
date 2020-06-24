@@ -62,11 +62,11 @@ class JobDetailDataCell: BaseTableViewCell {
         // NEWマーク 表示チェック
 //        let start_date_string = data.displayPeriod.startAt
         let start_date_string = data.start_date
-        let startFlag = newMarkFlagCheck(startDateString: start_date_string, nowDate: nowDate)
+        let startFlag = DateHelper.newMarkFlagCheck(startDateString: start_date_string, nowDate: nowDate)
         // 終了マーク 表示チェック
 //        let end_date_string = data.displayPeriod.endAt
         let end_date_string = data.end_date
-        let endFlag = endFlagHiddenCheck(endDateString:end_date_string, nowDate:nowDate)
+        let endFlag = DateHelper.endFlagHiddenCheck(endDateString:end_date_string, nowDate:nowDate)
                 
         var limitedType:LimitedType!
         switch (startFlag,endFlag) {
