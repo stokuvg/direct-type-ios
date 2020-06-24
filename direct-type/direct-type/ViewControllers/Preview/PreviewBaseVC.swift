@@ -20,7 +20,10 @@ class PreviewBaseVC: TmpBasicVC {
     var dicGrpValidErrMsg: [MdlItemHTypeKey: [ValidationErrMsg]] = [:]//MdlItemH.type
     var dicValidErrMsg: [EditableItemKey: [ValidationErrMsg]] = [:] //[ItemEditable.item: ErrMsg]　（TODO：これもEditableBaseで管理にするか））
     
+
+    @IBOutlet weak var vwMainArea: UIView!
     @IBOutlet weak var tableVW: UITableView!
+    @IBOutlet weak var vwFootArea: UIView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
         print(#line, #function, "＊オーバーライドして使う＊")
@@ -51,8 +54,10 @@ class PreviewBaseVC: TmpBasicVC {
         super.viewDidLoad()
 
         //===デザイン適用
-        self.view.backgroundColor = .red
-        self.tableVW.backgroundColor = UIColor(colorType: .color_base)//TODO: 下部とセルにも適用
+        self.view.backgroundColor = UIColor(colorType: .color_base)
+        self.vwMainArea.backgroundColor = UIColor(colorType: .color_base)
+        self.vwFootArea.backgroundColor = UIColor(colorType: .color_base)
+        self.tableVW.backgroundColor = UIColor(colorType: .color_base)
         
         btnCommit.setTitle(text: "完了する", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)

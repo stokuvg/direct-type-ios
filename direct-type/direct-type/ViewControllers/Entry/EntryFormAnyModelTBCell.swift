@@ -8,9 +8,17 @@
 
 import UIKit
 
+extension EntryFormAnyModelTBCell {
+    enum EntryFormModelType {
+        case profile
+        case resume
+        case career
+    }
+}
+
 class EntryFormAnyModelTBCell: UITableViewCell {
     var detail: Any? = nil
-    var type: HPreviewItemType = .undefine
+    var type: EntryFormModelType = .profile
     
     @IBOutlet weak var vwMainArea: UIView!
     @IBOutlet weak var vwTitleArea: UIView!
@@ -29,45 +37,36 @@ class EntryFormAnyModelTBCell: UITableViewCell {
         vwMessageArea.backgroundColor = .clear
         vwIconArea.backgroundColor = .clear
     }
-    func initCell(_ type: HPreviewItemType, model: Any?) {
+    func initCell(_ type: EntryFormModelType, model: Any?) {
         self.type = type
         self.detail = model
     }
-    
     func dispCell() {
         switch type {
-        case .profileC9:
+        case .profile:
             lblTitle.text(text: "プロフィール", fontType: .font_Sb, textColor: .black, alignment: .left)
+            lblMessage.text(text: "未入力", fontType: .font_SS, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
             if let model = self.detail as? MdlProfile {
-                //未入力チェック
-                if true {
-                    vwMessageArea.isHidden = false
-                } else {
-                    vwMessageArea.isHidden = true
+                if chkProgressProfile() {
+                    lblMessage.text(text: "入力済み", fontType: .font_SS, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .left)
                 }
             }
-        case .resumeC9:
+        case .resume:
             lblTitle.text(text: "履歴書", fontType: .font_Sb, textColor: .black, alignment: .left)
-            if let model = self.detail as? MdlProfile {
-                //未入力チェック
-                if true {
-                    vwMessageArea.isHidden = false
-                } else {
-                    vwMessageArea.isHidden = true
+            lblMessage.text(text: "未入力", fontType: .font_SS, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
+            if let model = self.detail as? MdlResume {
+                if chkProgressResumee() {
+                    lblMessage.text(text: "入力済み", fontType: .font_SS, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .left)
                 }
             }
-        case .careerC9:
+        case .career:
             lblTitle.text(text: "職務経歴書", fontType: .font_Sb, textColor: .black, alignment: .left)
-            if let model = self.detail as? MdlProfile {
-                //未入力チェック
-                if true {
-                    vwMessageArea.isHidden = false
-                } else {
-                    vwMessageArea.isHidden = true
+            lblMessage.text(text: "未入力", fontType: .font_SS, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
+            if let model = self.detail as? MdlCareer {
+                if chkProgressCareer() {//未入力チェック
+                    lblMessage.text(text: "入力済み", fontType: .font_SS, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .left)
                 }
             }
-        default:
-            lblTitle.text = "【未実装】"
         }
         
 //        ③メインスクリーンエリア
@@ -80,7 +79,7 @@ class EntryFormAnyModelTBCell: UITableViewCell {
 //                    
 //        ⑤注釈文字　※スクリーン単位の仕様書独自の記載がなければ原則
 //            文字：font-SS
-//            色：color-parts-grau
+//            色：color-parts-gray
 //            センタリング、１行で収まらなければ改行
         
     }
@@ -89,3 +88,18 @@ class EntryFormAnyModelTBCell: UITableViewCell {
     }
     
 }
+
+//TODO: 入力済かのチェック（初回入力で生成されるも、必須項目が全て入っていないケースに対応させる必要あり）
+extension EntryFormAnyModelTBCell {
+    private func chkProgressProfile() -> Bool {
+        return true
+    }
+    private func chkProgressResumee() -> Bool {
+        return true
+    }
+    private func chkProgressCareer() -> Bool {
+        return true
+    }
+
+}
+

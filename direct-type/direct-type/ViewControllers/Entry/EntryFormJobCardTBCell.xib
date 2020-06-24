@@ -33,7 +33,7 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="5am-vK-zoU"/>
                                     <constraint firstItem="Agk-Ob-2Ae" firstAttribute="centerX" secondItem="OxZ-hE-i2B" secondAttribute="centerX" id="mH6-au-hil"/>
@@ -41,16 +41,16 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kVe-V4-kpV" userLabel="vwTitleArea">
-                                <rect key="frame" x="2" y="42" width="280" height="50"/>
+                                <rect key="frame" x="2" y="42" width="280" height="37"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="応募先" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMY-JV-lg2">
-                                        <rect key="frame" x="2" y="2" width="276" height="46"/>
+                                        <rect key="frame" x="2" y="2" width="276" height="33"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="uMY-JV-lg2" firstAttribute="leading" secondItem="kVe-V4-kpV" secondAttribute="leading" constant="2" id="6j9-Gy-yb7"/>
                                     <constraint firstAttribute="bottom" secondItem="uMY-JV-lg2" secondAttribute="bottom" constant="2" id="D1x-sE-o2r"/>
@@ -59,57 +59,57 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rTd-wK-vYh" userLabel="vwComnaneNameArea">
-                                <rect key="frame" x="0.0" y="94" width="280" height="24.5"/>
+                                <rect key="frame" x="0.0" y="81" width="280" height="30.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pee-bV-NbC">
-                                        <rect key="frame" x="2" y="2" width="276" height="20.5"/>
+                                        <rect key="frame" x="2" y="8" width="276" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="Pee-bV-NbC" firstAttribute="top" secondItem="rTd-wK-vYh" secondAttribute="top" constant="2" id="Afe-8A-XZS"/>
+                                    <constraint firstItem="Pee-bV-NbC" firstAttribute="top" secondItem="rTd-wK-vYh" secondAttribute="top" constant="8" id="Afe-8A-XZS"/>
                                     <constraint firstAttribute="trailing" secondItem="Pee-bV-NbC" secondAttribute="trailing" constant="2" id="YAF-mP-sDR"/>
                                     <constraint firstAttribute="bottom" secondItem="Pee-bV-NbC" secondAttribute="bottom" constant="2" id="hpC-IZ-bbv"/>
                                     <constraint firstItem="Pee-bV-NbC" firstAttribute="leading" secondItem="rTd-wK-vYh" secondAttribute="leading" constant="2" id="xX1-dn-QtY"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6fR-Lh-UZX" userLabel="vwJobTitleArea">
-                                <rect key="frame" x="0.0" y="120.5" width="280" height="50"/>
+                                <rect key="frame" x="0.0" y="113.5" width="280" height="30.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79E-pE-VOf">
-                                        <rect key="frame" x="2" y="2" width="276" height="46"/>
+                                        <rect key="frame" x="2" y="8" width="276" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="79E-pE-VOf" firstAttribute="leading" secondItem="6fR-Lh-UZX" secondAttribute="leading" constant="2" id="5Z5-FA-dBT"/>
                                     <constraint firstAttribute="bottom" secondItem="79E-pE-VOf" secondAttribute="bottom" constant="2" id="8le-yd-kvx"/>
-                                    <constraint firstItem="79E-pE-VOf" firstAttribute="top" secondItem="6fR-Lh-UZX" secondAttribute="top" constant="2" id="CVd-KP-567"/>
+                                    <constraint firstItem="79E-pE-VOf" firstAttribute="top" secondItem="6fR-Lh-UZX" secondAttribute="top" constant="8" id="CVd-KP-567"/>
                                     <constraint firstAttribute="trailing" secondItem="79E-pE-VOf" secondAttribute="trailing" constant="2" id="tsT-id-hZp"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hUL-5N-hMC" userLabel="vwDateArea">
-                                <rect key="frame" x="0.0" y="172.5" width="280" height="23.5"/>
+                                <rect key="frame" x="0.0" y="146" width="280" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F56-nR-sf5">
-                                        <rect key="frame" x="0.0" y="0.0" width="280" height="23.5"/>
+                                        <rect key="frame" x="0.0" y="8" width="280" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="F56-nR-sf5" secondAttribute="trailing" id="BhA-gj-9pP"/>
-                                    <constraint firstAttribute="bottom" secondItem="F56-nR-sf5" secondAttribute="bottom" id="MGD-Uk-318"/>
+                                    <constraint firstAttribute="bottom" secondItem="F56-nR-sf5" secondAttribute="bottom" constant="8" id="MGD-Uk-318"/>
                                     <constraint firstItem="F56-nR-sf5" firstAttribute="leading" secondItem="hUL-5N-hMC" secondAttribute="leading" id="oYj-XC-haZ"/>
-                                    <constraint firstItem="F56-nR-sf5" firstAttribute="top" secondItem="hUL-5N-hMC" secondAttribute="top" id="p3B-G0-Iz2"/>
+                                    <constraint firstItem="F56-nR-sf5" firstAttribute="top" secondItem="hUL-5N-hMC" secondAttribute="top" constant="8" id="p3B-G0-Iz2"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -130,9 +130,12 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="ivIcon" destination="Agk-Ob-2Ae" id="pmI-Md-HFV"/>
                 <outlet property="lblCompanyName" destination="Pee-bV-NbC" id="n6G-10-9FA"/>
                 <outlet property="lblDate" destination="F56-nR-sf5" id="baz-z0-4wR"/>
                 <outlet property="lblJobTitle" destination="79E-pE-VOf" id="pnx-6M-OCV"/>
+                <outlet property="lblTitle" destination="uMY-JV-lg2" id="PAA-QN-CtX"/>
+                <outlet property="vwMainArea" destination="SwJ-dQ-60M" id="ewt-wP-oyb"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="70.3125"/>
         </tableViewCell>

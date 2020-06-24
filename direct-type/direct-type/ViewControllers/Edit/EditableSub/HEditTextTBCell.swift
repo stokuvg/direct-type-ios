@@ -44,7 +44,7 @@ class HEditTextTBCell: UITableViewCell {
     func dispCell() {
         guard let _item = item else { return }
         let bufTitle = _item.dispName //_item.type.dispTitle
-        lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
+        lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_main)!, alignment: .left)
         var bufVal: String = ""
         switch _item.editType {
         case .selectDrumYMD:
