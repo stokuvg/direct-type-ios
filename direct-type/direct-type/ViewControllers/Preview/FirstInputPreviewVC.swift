@@ -26,7 +26,7 @@ class FirstInputPreviewVC: PreviewBaseVC {
     }
     //共通プレビューをOverrideして利用する
     override func initData() {
-        title = "[A系統] 初期入力"
+        title = "初期入力"
         let firstInput = MdlFirstInput(nickname: "", gender: "", birthday: Constants.SelectItemsUndefineDate, hopeArea: [], school: "", employmentStatus: "", lastJobExperiment: MdlJobExperiment(jobType: "", jobExperimentYear: ""), salary: "", jobExperiments: [])
         self.detail = firstInput
 ////        //===___ダミーデータ投入___

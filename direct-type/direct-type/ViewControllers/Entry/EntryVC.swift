@@ -74,7 +74,7 @@ class EntryVC: PreviewBaseVC {
     }
     override func initData() {
         super.initData()
-        title = "[C-9] 応募フォーム【直接】"
+        title = "応募フォーム"
         let jobCard: MdlJobCardDetail = MdlJobCardDetail(
             jobCardCode: "12345678", jobName: "【PL候補・SE】案件数に絶対的な自信あり！◆月給40万円〜■残業平均月12h",
             salaryMinId: 3, salaryMaxId: 8,
