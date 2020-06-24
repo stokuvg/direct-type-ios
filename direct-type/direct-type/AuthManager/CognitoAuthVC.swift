@@ -173,8 +173,14 @@ class CognitoAuthVC: BaseVC {
             }
             let buf = "User is signed Out."
             DispatchQueue.main.async {
-                self.showConfirm(title: "認証手順", message: "ログアウトしました", onlyOK: true)
-                /* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
+                self.showConfirm(title: "認証手順", message: "ログアウトしました")
+                .done { _ in
+                    self.transitionToInitial()
+                }
+                .catch { _ in
+                }
+                .finally {
+                }
                 self.checkAuthStatus()
             }
             DispatchQueue.main.async { print(#line, #function, buf); self.lblStatus.text = "\(Date())\n\(buf)" }
@@ -202,7 +208,9 @@ class CognitoAuthVC: BaseVC {
         super.viewWillAppear(animated)
         checkAuthStatus()
     }
-    
+}
+
+private extension CognitoAuthVC {
     func checkAuthStatus() {
         var isLogin: Bool = false
         switch( AWSMobileClient.default().currentUserState) {
@@ -225,6 +233,10 @@ class CognitoAuthVC: BaseVC {
             btnLogout.isHidden = true
         }
     }
-
+    
+    func transitionToInitial() {
+        let vc = getVC(sbName: "InitialInputStartVC", vcName: "InitialInputStartVC") as! InitialInputStartVC
+        let newNavigationController = UINavigationController(rootViewController: vc)
+        UIApplication.shared.keyWindow?.rootViewController = newNavigationController
+    }
 }
-
