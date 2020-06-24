@@ -15,18 +15,20 @@ class MdlItemH {
     var notice: String = ""
     var readonly: Bool = false
     var childItems: [EditableItemH] = []
+    var model: Any? = nil
     
-    convenience init(_ type: HPreviewItemType, _ value: String, _ notice: String = "", readonly: Bool = false, childItems: [EditableItemH]) {
+    convenience init(_ type: HPreviewItemType, _ value: String, _ notice: String = "", readonly: Bool = false, childItems: [EditableItemH], model: Any? = nil) {
         self.init()
         self.type = type
         self.value = value
         self.notice = notice
         self.readonly = readonly
         self.childItems = childItems
+        self.model = model
     }
         
     var debugDisp: String {
-        return "[\(type.dispTitle)] [\(value)]（\(childItems.count)件のサブ項目） [\(readonly ? "変更不可" : "")] [\(notice)]"
+        return "[\(type.dispTitle)] [\(value)]（\(childItems.count)件のサブ項目） [\(readonly ? "変更不可" : "")] [\(notice)] [\(model)]"
     }
 }
 
@@ -43,7 +45,9 @@ class HPreviewTBCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        //===デザイン適用
+        backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
+        vwMainArea.backgroundColor = UIColor(colorType: .color_base)
     }
 
     func initCell(_ item: MdlItemH, editTempCD: [EditableItemKey: EditableItemCurVal], errMsg: String) {
@@ -72,7 +76,7 @@ class HPreviewTBCell: UITableViewCell {
         let bufValue: String = dispCellValue(_item)
         let bufNotice: String = _item.notice
         //===表示させる
-        lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
+        lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         if UITraitCollection.isDarkMode == true {
             lblValue.text(text: bufValue, fontType: .font_S, textColor: UIColor.init(colorType: .color_white)!, alignment: .left)
         } else {

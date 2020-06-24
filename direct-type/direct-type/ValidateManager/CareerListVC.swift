@@ -57,12 +57,13 @@ class CareerListVC: TmpBasicVC {
         title = "職歴書カード一覧"
         //表示用にソートしておく
         arrDisp.removeAll()
-        arrDisp = arrData
-//        for item in arrData.sorted(by: { (lv, rv) -> Bool in
-//            lv.workPeriod.startDate > rv.workPeriod.startDate
-//        }) {
-//            arrDisp.append(item)
-//        }
+        for item in arrData.sorted(by: { (lv, rv) -> Bool in
+            lv.workPeriod.endDate > rv.workPeriod.endDate
+        }).sorted(by: { (lv, rv) -> Bool in
+            lv.workPeriod.startDate > rv.workPeriod.startDate
+        }) {
+            arrDisp.append(item)
+        }
         tableVW.reloadData()
         chkButtonEnable()
         
@@ -130,6 +131,12 @@ extension CareerListVC {
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            switch myErr.code {
+            case 404://見つからない場合、空データを適用して画面を表示
+                return //エラー表示させないため
+            default:
+                break
+            }
             self.showError(error)
         }
         .finally {

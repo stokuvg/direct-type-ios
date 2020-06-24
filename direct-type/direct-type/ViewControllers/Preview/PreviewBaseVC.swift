@@ -20,7 +20,10 @@ class PreviewBaseVC: TmpBasicVC {
     var dicGrpValidErrMsg: [MdlItemHTypeKey: [ValidationErrMsg]] = [:]//MdlItemH.type
     var dicValidErrMsg: [EditableItemKey: [ValidationErrMsg]] = [:] //[ItemEditable.item: ErrMsg]　（TODO：これもEditableBaseで管理にするか））
     
+
+    @IBOutlet weak var vwMainArea: UIView!
     @IBOutlet weak var tableVW: UITableView!
+    @IBOutlet weak var vwFootArea: UIView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
         print(#line, #function, "＊オーバーライドして使う＊")
@@ -50,12 +53,20 @@ class PreviewBaseVC: TmpBasicVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //===デザイン適用
+        self.view.backgroundColor = UIColor(colorType: .color_base)
+        self.vwMainArea.backgroundColor = UIColor(colorType: .color_base)
+        self.vwFootArea.backgroundColor = UIColor(colorType: .color_base)
+        self.tableVW.backgroundColor = UIColor(colorType: .color_base)
+        
         btnCommit.setTitle(text: "完了する", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
 
         //=== テーブル初期化
         self.tableVW.estimatedRowHeight = 100
         self.tableVW.rowHeight = UITableView.automaticDimension
+        self.tableVW.register(UINib(nibName: "EntryFormAnyModelTBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryFormAnyModelTBCell")
+        self.tableVW.register(UINib(nibName: "EntryFormJobCardTBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryFormJobCardTBCell")
         self.tableVW.register(UINib(nibName: "HPreviewTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HPreviewTBCell")
         initData()
         chkButtonEnable()//ボタン死活チェック
@@ -91,16 +102,46 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = arrData[indexPath.row]
-        let cell: HPreviewTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HPreviewTBCell", for: indexPath) as! HPreviewTBCell
-        let errMsg = dicGrpValidErrMsg[item.type.itemKey]?.joined(separator: "\n") ?? ""
-        cell.initCell(item, editTempCD: editableModel.editTempCD, errMsg: errMsg)//編集中の値を表示適用させるためeditTempCDを渡す
-        cell.dispCell()
-        return cell
+        switch item.type {
+//        case .jobCardC9:
+        case .profileC9: fallthrough
+        case .resumeC9: fallthrough
+        case .careerC9:
+            let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
+//            cell.initCell()
+//            cell.dispCell()
+            return cell
+
+//        case .exQuestionC9:
+        default:
+            let cell: HPreviewTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HPreviewTBCell", for: indexPath) as! HPreviewTBCell
+            let errMsg = dicGrpValidErrMsg[item.type.itemKey]?.joined(separator: "\n") ?? ""
+            cell.initCell(item, editTempCD: editableModel.editTempCD, errMsg: errMsg)//編集中の値を表示適用させるためeditTempCDを渡す
+            cell.dispCell()
+            return cell
+        }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true) //ハイライトの解除
         let item = arrData[indexPath.row]
 
+        //================================================
+        //モデル引き渡しによる画面遷移の得例対応
+        switch item.type {
+        case .jobCardC9:
+            return // 遷移なし
+        case .profileC9:
+            pushViewController(.profilePreviewH2)
+            return
+        case .resumeC9:
+            pushViewController(.resumePreviewH3)
+            return
+        case .careerC9:
+            pushViewController(.careerListC)
+            return
+        default:
+            break
+        }
         //================================================
         //子項目が1つの場合には、直接編集へ移動させる場合：
         let items = item.childItems
@@ -110,6 +151,8 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
             let _item = items.first!
             let (_, editTemp) = editableModel.makeTempItem(_item)
             switch editTemp.editType {
+            case .model:
+                break
             case .readonly:
                 break
             case .inputText:

@@ -12,47 +12,74 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" restorationIdentifier="Xib_JobDetailArticleHeaderView" id="iN0-l3-epB" customClass="JobDetailArticleHeaderView" customModule="direct_type" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bw-lg-rHa">
-                    <rect key="frame" x="15" y="3" width="290" height="60"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Boe-GJ-MEp">
-                    <rect key="frame" x="225" y="23" width="80" height="34"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="34" id="XxY-qW-la3"/>
-                        <constraint firstAttribute="width" constant="80" id="dIr-uh-HaN"/>
-                    </constraints>
-                    <state key="normal" title="続きを読む">
-                        <color key="titleColor" name="color-sub"/>
-                    </state>
-                    <connections>
-                        <action selector="headerOpenAction" destination="iN0-l3-epB" eventType="touchUpInside" id="Gdh-RN-s4P"/>
-                    </connections>
-                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PHL-jt-1Wt">
+                    <rect key="frame" x="15" y="5" width="290" height="70"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EAq-dV-uXf">
+                            <rect key="frame" x="0.0" y="0.0" width="290" height="50"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bw-lg-rHa">
+                                    <rect key="frame" x="0.0" y="0.0" width="290" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="8bw-lg-rHa" firstAttribute="leading" secondItem="EAq-dV-uXf" secondAttribute="leading" id="V0X-BC-ftU"/>
+                                <constraint firstAttribute="trailing" secondItem="8bw-lg-rHa" secondAttribute="trailing" id="Vae-xQ-bns"/>
+                                <constraint firstItem="8bw-lg-rHa" firstAttribute="top" secondItem="EAq-dV-uXf" secondAttribute="top" id="qQH-Ef-BMV"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G3n-OG-7Jb">
+                            <rect key="frame" x="0.0" y="50" width="290" height="20"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Boe-GJ-MEp">
+                                    <rect key="frame" x="200" y="0.0" width="90" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="90" id="77y-0v-KlR"/>
+                                    </constraints>
+                                    <state key="normal" title="続きを読む">
+                                        <color key="titleColor" name="color-sub"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="headerOpenAction" destination="iN0-l3-epB" eventType="touchUpInside" id="Gdh-RN-s4P"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="Boe-GJ-MEp" secondAttribute="trailing" id="3wQ-6U-gtK"/>
+                                <constraint firstItem="Boe-GJ-MEp" firstAttribute="top" secondItem="G3n-OG-7Jb" secondAttribute="top" id="KQM-vA-YOR"/>
+                                <constraint firstAttribute="bottom" secondItem="Boe-GJ-MEp" secondAttribute="bottom" id="ll0-2v-JLK"/>
+                                <constraint firstAttribute="height" constant="20" id="sfV-Xu-gGs"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                </stackView>
             </subviews>
             <color key="backgroundColor" name="color-white"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Boe-GJ-MEp" secondAttribute="trailing" constant="15" id="1Q1-R7-dfI"/>
-                <constraint firstItem="8bw-lg-rHa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="CFg-o4-67t"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="8bw-lg-rHa" secondAttribute="trailing" constant="15" id="b6j-vK-UTp"/>
-                <constraint firstItem="8bw-lg-rHa" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" constant="3" id="gRN-oG-7Hf"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Boe-GJ-MEp" secondAttribute="bottom" constant="3" id="ieo-Ru-Uac"/>
-                <constraint firstItem="8bw-lg-rHa" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="3" id="tEp-DK-3Fg"/>
+                <constraint firstAttribute="trailing" secondItem="PHL-jt-1Wt" secondAttribute="trailing" constant="15" id="0LG-8R-Pmu"/>
+                <constraint firstItem="PHL-jt-1Wt" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="a6R-mO-i6v"/>
+                <constraint firstAttribute="bottom" secondItem="PHL-jt-1Wt" secondAttribute="bottom" constant="5" id="aYi-Jt-JEy"/>
+                <constraint firstItem="PHL-jt-1Wt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="xeg-C9-Dsu"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="btnBackView" destination="G3n-OG-7Jb" id="36O-6c-LyE"/>
                 <outlet property="headerOpenBtn" destination="Boe-GJ-MEp" id="wXe-PW-Xps"/>
+                <outlet property="titleBackView" destination="EAq-dV-uXf" id="cYN-Yg-Uot"/>
                 <outlet property="titleLabel" destination="8bw-lg-rHa" id="PYW-K5-kEq"/>
             </connections>
-            <point key="canvasLocation" x="132" y="96"/>
+            <point key="canvasLocation" x="131.25" y="95.070422535211264"/>
         </view>
     </objects>
     <resources>

@@ -51,7 +51,7 @@ class TagsView: UIView {
     }
     
 //    func setKind(datas:[String], frame: CGRect, sizeType:SizeType = .normal) {
-    func setKind(datas:[String], frame: CGRect) {
+    func setKind(datas:[String], frame: CGRect, tagFont:UIFont) {
         let areaWidth = frame.size.width
 //        let areaHeight = frame.size.height
         
@@ -65,7 +65,23 @@ class TagsView: UIView {
         var tagOriginX: CGFloat = 0
         var tagOriginY: CGFloat = 0
         
+//        Log.selectLog(logLevel: .debug, "datas:\(datas)")
+        
+        /*
+        let dummyDatas:[String] = [
+            "採用予定人数5名以上",
+            "ワーキングマザーが在籍",
+            "理系出身者歓迎",
+            "新規事業・スタートアップメンバー",
+            "設立5年以内",
+        ]
+        */
+        
+        var addEndFlag:Bool = false
+        
         for i in 0..<datas.count {
+//        for i in 0..<dummyDatas.count {
+//            let tagText = "#" + dummyDatas[i]
             let tagText = "#" + datas[i]
             var tagWidth = tagKindTextWidth(text: tagText, font: tagFont!, height: tagHeight)
             
@@ -76,14 +92,30 @@ class TagsView: UIView {
             if areaWidth - tagOriginX < tagWidth {
                 tagOriginX = 0
                 tagOriginY += tagHeight + tagMargin
+                
+//                Log.selectLog(logLevel: .debug, "tagOriginY:\(tagOriginY)")
+//                Log.selectLog(logLevel: .debug, "frame:\(frame)")
+                
+                if tagOriginY >= frame.size.height {
+                    addEndFlag = true
+                }
             }
             
-            let label = TagLabel(frame: CGRect(x: tagOriginX, y: tagOriginY, width: tagWidth, height: tagHeight))
-            
-            label.setKindDesign(text: tagText, tagFont: tagFont!)
-            self.addSubview(label)
-            
-            tagOriginX += tagWidth + tagMargin
+            if addEndFlag {
+                // 行数より多くなった場合は追加終了
+                break
+            } else {
+                
+                let label = TagLabel(frame: CGRect(x: tagOriginX, y: tagOriginY, width: tagWidth, height: tagHeight))
+                
+                label.setKindDesign(text: tagText, tagFont: tagFont!)
+                if addEndFlag {
+                    break
+                } else {
+                    self.addSubview(label)
+                    tagOriginX += tagWidth + tagMargin
+                }
+            }
         }
     }
     

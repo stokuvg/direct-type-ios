@@ -40,36 +40,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         window = UIWindow(frame: UIScreen.main.bounds)
-        
+
         if AuthManager.shared.isLogin {
             let tabSB = UIStoryboard(name: "BaseTabBC", bundle: nil)
             let tabBC = tabSB.instantiateViewController(withIdentifier: "Sbid_BaseTabBC")
-            
+
             window?.rootViewController = tabBC
         } else {
             let inputSB = UIStoryboard(name: "InitialInputStartVC", bundle: nil)
             let startNavi = inputSB.instantiateViewController(withIdentifier: "Sbid_InitialInputNavi") as! UINavigationController
-            
+
             window?.rootViewController = startNavi
         }
-        
+
         window?.makeKeyAndVisible()
-        
+
         return true
     }
-    
+
     // 初期入力画面を表示
     func displayInitialInputVC() {
-        
+
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        
+
         let initialSB = UIStoryboard(name: "InitialInputRegistVC", bundle: nil)
-        
+
         let initialVC = initialSB.instantiateViewController(withIdentifier: "InitialInputRegistVC") as! InitialInputRegistVC
-        
+
         self.window?.rootViewController = initialVC
-        
+
         self.window?.makeKeyAndVisible()
-        
+
     }
 }
