@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "btn-keep-1.png",
+      "filename" : "btn-keep.png",
       "idiom" : "iphone",
       "scale" : "1x"
     },
     {
-      "filename" : "btn-keep.png",
+      "filename" : "btn-keep@2x.png",
       "idiom" : "iphone",
       "scale" : "2x"
     },
     {
-      "filename" : "btn-keep-2.png",
+      "filename" : "btn-keep@3x.png",
       "idiom" : "iphone",
       "scale" : "3x"
     }
