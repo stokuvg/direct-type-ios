@@ -73,7 +73,7 @@ private extension InitialInputConfirmVC {
     
     func resendAuthCode() {
         AWSMobileClient.default()
-            .signIn(username: loginInfo.phoneNumberText, password: loginInfo.password)  { (signInResult, error) in
+            .signUp(username: loginInfo.phoneNumberText, password: loginInfo.password)  { (signInResult, error) in
             if let error = error {
                 let buf = AuthManager.convAnyError(error).debugDisp
                 DispatchQueue.main.async {
@@ -82,18 +82,11 @@ private extension InitialInputConfirmVC {
                 return
             }
             
-            guard let signInResult = signInResult else {
+            guard signInResult != nil else {
                 print("レスポンスがが正常に受け取れませんでした")
                 return
             }
-            switch signInResult.signInState {
-            case .customChallenge:
-                // TODO: 認証コードを検証するAPIを実行する。
-                break
-            case .unknown, .signedIn, .smsMFA, .passwordVerifier, .deviceSRPAuth,
-                 .devicePasswordVerifier, .adminNoSRPAuth, .newPasswordRequired:
-                break
-            }
+            // TODO: 認証コードを検証するAPIを実行する。
         }
     }
 }

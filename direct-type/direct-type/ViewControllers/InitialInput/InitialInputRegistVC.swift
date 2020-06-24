@@ -46,7 +46,7 @@ private extension InitialInputRegistVC {
         }
         
         guard let phoneNumberText = phoneNumberTextField.text else { return }
-        AWSMobileClient.default().signIn(username: phoneNumberText.withCountryCode, password: password)  { (signInResult, error) in
+        AWSMobileClient.default().signUp(username: phoneNumberText.withCountryCode, password: password)  { (signInResult, error) in
             if let error = error {
                 let buf = AuthManager.convAnyError(error).debugDisp
                 DispatchQueue.main.async {
@@ -55,26 +55,15 @@ private extension InitialInputRegistVC {
                 return
             }
             
-            guard let signInResult = signInResult else {
+            guard signInResult != nil else {
                 print("レスポンスがが正常に受け取れませんでした")
                 return
             }
-            switch signInResult.signInState {
-            case .signedIn:
-                // FIXME: サーバー側でSMS認証系の実装が完了した際には「customChallenge」が返ってくるので、そちらに処理を移管し直す。
-                DispatchQueue.main.async {
-                    let vc = self.getVC(sbName: "InitialInputConfirmVC", vcName: "InitialInputConfirmVC") as! InitialInputConfirmVC
-                    let loginInfo = LoginConfirmVC.LoginInfo(phoneNumberText: phoneNumberText.withCountryCode, password: self.password)
-                    vc.configure(with: loginInfo)
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
-            case .customChallenge:
-                // TODO: 本来は電話番号入力時のサインインAPIでは「customChallenge」が返ってくるが、
-                // 現状は「signedIn」が返ってくる仕様のため、処理をそちらのcaseに移管している。
-                break
-            case .unknown, .smsMFA, .passwordVerifier, .deviceSRPAuth,
-                 .devicePasswordVerifier, .adminNoSRPAuth, .newPasswordRequired:
-                break
+            DispatchQueue.main.async {
+                let vc = self.getVC(sbName: "InitialInputConfirmVC", vcName: "InitialInputConfirmVC") as! InitialInputConfirmVC
+                let loginInfo = LoginConfirmVC.LoginInfo(phoneNumberText: phoneNumberText.withCountryCode, password: self.password)
+                vc.configure(with: loginInfo)
+                self.navigationController?.pushViewController(vc, animated: true)
             }
         }
     }
