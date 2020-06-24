@@ -11,6 +11,8 @@ import SVProgressHUD
 
 //=== 編集可能項目の対応
 class EditableBasicVC: TmpBasicVC, SubSelectFeedbackDelegate {
+    func execDoneAction() {} //末端項目でのDoneされた場合に、actCommit実行させえるなら、Overrideして使わせるため
+    
     func changedSelect(editItem: EditableItemH, codes: String) {
         switch editItem.editType {
         case .selectSpecial:
@@ -86,6 +88,7 @@ extension EditableBasicVC: InputItemHDelegate {
         //現在のTextFieldが最後じゃなければ、次の項目になる項目を取得したい(IndexPath経由にする
         if textField.returnKeyType == .done {
             textField.resignFirstResponder()
+            execDoneAction()//Overrideできるように呼んでおく
         }
        return true
     }

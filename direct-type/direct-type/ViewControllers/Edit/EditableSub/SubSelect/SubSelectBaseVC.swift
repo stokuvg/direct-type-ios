@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 protocol SubSelectBaseDelegate {
     func actPopupSelect(selectedItemsCode: String)
     func actPopupCancel()
@@ -53,9 +52,10 @@ class SubSelectBaseVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         //====デザイン適用
-        vwHead.backgroundColor = UIColor.init(colorType: .color_main)!
-        vwMain.backgroundColor = UIColor.init(colorType: .color_white)!
-        vwFoot.backgroundColor = UIColor.init(colorType: .color_main)!
+        vwHead.backgroundColor = UIColor(colorType: .color_main)!
+        view.backgroundColor = UIColor(colorType: .color_base)!
+        vwMain.backgroundColor = UIColor(colorType: .color_white)!
+        vwFoot.backgroundColor = UIColor(colorType: .color_base)!
         btnCommit.setTitle(text: "選択", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
     }

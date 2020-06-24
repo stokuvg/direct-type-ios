@@ -556,7 +556,7 @@ extension HomeVC: JobOfferCardMoreCellDelegate {
 extension HomeVC: NoCardViewDelegate {
     func registEditAction() {
         // マイページへ移動
-        self.tabBarController?.selectedIndex = 3
+        self.tabBarController?.selectedIndex = 2
     }
 }
 

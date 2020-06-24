@@ -38,7 +38,11 @@ class EditableTableBasicVC: EditableBasicVC {
         self.delegate?.changedSelect(editItem: itemGrp, editTempCD: editableModel.editTempCD) //フィードバックしておく
         self.dismiss(animated: true) {}
     }
-    
+    override func execDoneAction() {
+        //末端項目でのDone押下時に処理させる場合:
+        self.actCommit(UIButton())
+    }
+
     func chkValidateError() -> Bool {
         if Constants.DbgSkipLocalValidate { return false }//[Dbg: ローカルValidationスキップ]
         ValidateManager.dbgDispCurrentItems(editableModel: editableModel) //[Dbg: 状態確認]
@@ -128,9 +132,11 @@ class EditableTableBasicVC: EditableBasicVC {
         super.viewDidLoad()
 
         //====デザイン適用
-        vwHead.backgroundColor = UIColor.init(colorType: .color_main)!
-        vwMain.backgroundColor = UIColor.init(colorType: .color_white)!
-        vwFoot.backgroundColor = UIColor.init(colorType: .color_main)!
+        view.backgroundColor = UIColor(colorType: .color_base)!
+        tableVW.backgroundColor = UIColor(colorType: .color_base)!
+        vwHead.backgroundColor = UIColor(colorType: .color_main)!
+        vwMain.backgroundColor = UIColor(colorType: .color_base)!
+        vwFoot.backgroundColor = UIColor(colorType: .color_base)!
         btnCommit.setTitle(text: "この内容で保存", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
         //=== テーブル初期化
