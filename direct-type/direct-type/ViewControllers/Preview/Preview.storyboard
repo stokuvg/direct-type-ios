@@ -86,6 +86,8 @@
                     <connections>
                         <outlet property="btnCommit" destination="WdS-GT-DZi" id="KUr-Sm-qyb"/>
                         <outlet property="tableVW" destination="NtB-K7-xq7" id="a5r-uI-Vwr"/>
+                        <outlet property="vwFootArea" destination="xff-J5-hrZ" id="7Cr-sf-0j3"/>
+                        <outlet property="vwMainArea" destination="WQt-jE-FSR" id="FIL-o2-HsM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2AW-pJ-zxA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -157,6 +159,8 @@
                     <connections>
                         <outlet property="btnCommit" destination="duo-y1-nnL" id="F1g-uP-Xgd"/>
                         <outlet property="tableVW" destination="vWK-NK-w9m" id="NC7-xl-Amp"/>
+                        <outlet property="vwFootArea" destination="B8t-Cz-hoA" id="kCK-9v-Faq"/>
+                        <outlet property="vwMainArea" destination="Dpu-j0-mLb" id="jXm-qh-ERe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SpB-lM-cXy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -228,6 +232,8 @@
                     <connections>
                         <outlet property="btnCommit" destination="qFp-6y-imQ" id="Wh4-lW-bDT"/>
                         <outlet property="tableVW" destination="SB1-pN-RBJ" id="2D5-12-ER0"/>
+                        <outlet property="vwFootArea" destination="tUN-LT-lDW" id="Otq-jk-fbE"/>
+                        <outlet property="vwMainArea" destination="loX-Ju-B1I" id="gmU-cQ-gQ0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cf0-JF-X7z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -299,6 +305,8 @@
                     <connections>
                         <outlet property="btnCommit" destination="WjQ-Vu-mZO" id="ysd-IL-puz"/>
                         <outlet property="tableVW" destination="gQj-aF-cbF" id="XT4-NI-Dgz"/>
+                        <outlet property="vwFootArea" destination="5gz-ZX-rzI" id="Bhw-g2-p0A"/>
+                        <outlet property="vwMainArea" destination="8qK-Ka-IvM" id="YsR-Co-Jpb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Brd-hZ-VqH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -370,6 +378,8 @@
                     <connections>
                         <outlet property="btnCommit" destination="cDv-Jx-kad" id="Civ-SG-nIr"/>
                         <outlet property="tableVW" destination="Vgx-Wx-eYU" id="TDv-6r-z8m"/>
+                        <outlet property="vwFootArea" destination="01S-qp-gee" id="4Kx-Of-uYq"/>
+                        <outlet property="vwMainArea" destination="fPN-Oa-CuQ" id="Kew-S7-jDQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gcV-03-Etw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -441,6 +451,8 @@
                     <connections>
                         <outlet property="btnCommit" destination="bdY-ld-Enz" id="Vfb-8z-cR3"/>
                         <outlet property="tableVW" destination="ESk-i1-JaT" id="nOc-EU-fLp"/>
+                        <outlet property="vwFootArea" destination="bH1-9S-6Cz" id="V1Y-7j-WcY"/>
+                        <outlet property="vwMainArea" destination="7Cr-CC-u0A" id="65F-0v-yE4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aah-Hu-cXr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -76,13 +76,13 @@ class EntryVC: PreviewBaseVC {
         super.initData()
         title = "[C-9] 応募フォーム【直接】"
         let jobCard: MdlJobCardDetail = MdlJobCardDetail(
-            jobCardCode: "12345678", jobName: "",
+            jobCardCode: "12345678", jobName: "【PL候補・SE】案件数に絶対的な自信あり！◆月給40万円〜■残業平均月12h",
             salaryMinId: 3, salaryMaxId: 8,
             isSalaryDisplay: true, salaryOffer: "",
-            workPlaceCodes: [13, 22, 33], companyName: "会社名",
+            workPlaceCodes: [11, 22, 33], companyName: "株式会社プレーンナレッジシステムズ（ヒューマンクリエイショングループ）",
             start_date: "", end_date: "",
             mainPicture: "", subPictures: [],
-            mainTitle: "めいんたいとるもろもろ", mainContents: "メインコンテンツ",
+            mainTitle: "", mainContents: "",
             prCodes: [1,3,5], salarySample: "",
             recruitmentReason: "", jobDescription: "",
             jobExample: "", product: "", scope: "",
@@ -245,19 +245,19 @@ extension EntryVC {
 
         case .profileC9:
             let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
-            cell.initCell(.profileC9, model: self.profile)
+            cell.initCell(.profile, model: self.profile)
             cell.dispCell()
             return cell
 
         case .resumeC9:
             let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
-            cell.initCell(.resumeC9, model: self.resume)
+            cell.initCell(.resume, model: self.resume)
             cell.dispCell()
             return cell
 
         case .careerC9:
             let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
-            cell.initCell(.careerC9, model: self.career)
+            cell.initCell(.career, model: self.career)
             cell.dispCell()
             return cell
 

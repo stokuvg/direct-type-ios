@@ -11,6 +11,9 @@ import UIKit
 class EntryFormJobCardTBCell: UITableViewCell {
     var model: MdlJobCardDetail? = nil
     
+    @IBOutlet weak var vwMainArea: UIView!
+    @IBOutlet weak var ivIcon: UIImageView!
+    @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblCompanyName: UILabel!
     @IBOutlet weak var lblJobTitle: UILabel!
     @IBOutlet weak var lblDate: UILabel!
@@ -19,23 +22,18 @@ class EntryFormJobCardTBCell: UITableViewCell {
         super.awakeFromNib()
         //===デザイン適用
         self.backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
-//        vwMainArea.backgroundColor = UIColor(colorType: .color_base)
-//        vwTitleArea.backgroundColor = .clear
-//        vwMessageArea.backgroundColor = .clear
-//        vwIconArea.backgroundColor = .clear
+        vwMainArea.backgroundColor = UIColor(colorType: .color_base)
     }
     func initCell(_ model: MdlJobCardDetail?) {
         self.model = model
     }
     
     func dispCell() {
-        print("これだ", self.model)
         guard let _model = self.model else { return }
         let bufCompanyName = _model.companyName
         let bufJobName = _model.jobName
         let bufDate = Date().dispYmdJP()
-        print("これだ", bufCompanyName, bufJobName, bufDate)
-
+        lblTitle.text(text: "応募先", fontType: .font_Sb, textColor: .black, alignment: .center)
         lblCompanyName.text(text: bufCompanyName, fontType: .font_Sb, textColor: .black, alignment: .left)
         lblJobTitle.text(text: bufJobName, fontType: .font_Sb, textColor: .black, alignment: .left)
         lblDate.text(text: bufDate, fontType: .font_SS, textColor: .black, alignment: .right)

@@ -45,7 +45,9 @@ class HPreviewTBCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        //===デザイン適用
+        backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
+        vwMainArea.backgroundColor = UIColor(colorType: .color_base)
     }
 
     func initCell(_ item: MdlItemH, editTempCD: [EditableItemKey: EditableItemCurVal], errMsg: String) {
@@ -63,9 +65,6 @@ class HPreviewTBCell: UITableViewCell {
     
     func dispCell() {
         guard let _item = item else { return }
-        
-        if let _model = _item.model { self.backgroundColor = .yellow }//[Dbg: モデルチェック]
-        
         //子項目に値を適用させておく必要ありだ
         for (n, item) in _item.childItems.enumerated() {
             if let temp = editTempCD[item.editableItemKey] {
@@ -77,7 +76,7 @@ class HPreviewTBCell: UITableViewCell {
         let bufValue: String = dispCellValue(_item)
         let bufNotice: String = _item.notice
         //===表示させる
-        lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
+        lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         if UITraitCollection.isDarkMode == true {
             lblValue.text(text: bufValue, fontType: .font_S, textColor: UIColor.init(colorType: .color_white)!, alignment: .left)
         } else {

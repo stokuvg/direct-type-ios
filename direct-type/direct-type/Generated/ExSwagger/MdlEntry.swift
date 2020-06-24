@@ -78,7 +78,7 @@ case hopeSalary         //１１．希望年収（任意）
     }
     var tsvMaster: SelectItemsManager.TsvMaster {
         switch self {
-        case .hopeArea: return .place
+        case .hopeArea: return .entryPlace
         case .hopeSalary: return .salary
         default: return .undefine
         }
