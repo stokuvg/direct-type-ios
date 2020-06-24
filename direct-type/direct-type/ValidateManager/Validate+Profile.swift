@@ -45,9 +45,9 @@ extension EditItemMdlProfile {
         case .firstNameKana:    return ValidInfo(required: true, keta: nil, max: 8, type: .katakana)
         case .birthday:         return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)//今日以降の誕生日を許容する？（年齢がマイナスになる）
         case .gender:           return ValidInfo(required: false, keta: nil, max: nil, type: .code)//結局、男女の選択のみ？
-        case .zipCode:          return ValidInfo(required: false, keta: 7, max: nil, type: .number)
-        case .prefecture:       return ValidInfo(required: false, keta: nil, max: nil, type: .code)
-        case .address1:         return ValidInfo(required: false, keta: nil, max: 100, type: .undefine)
+        case .zipCode:          return ValidInfo(required: true, keta: 7, max: nil, type: .number)
+        case .prefecture:       return ValidInfo(required: true, keta: nil, max: nil, type: .code)
+        case .address1:         return ValidInfo(required: true, keta: nil, max: 100, type: .undefine)
         case .address2:         return ValidInfo(required: false, keta: nil, max: 100, type: .undefine)
         case .mailAddress:      return ValidInfo(required: true, keta: nil, max: nil, type: .email)
         case .mobilePhoneNo:    return ValidInfo(required: true, keta: nil, max: nil, type: .number)//編集不可（requiredはtrueの方が良いか）
