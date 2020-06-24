@@ -21,8 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         UINavigationBar.appearance().isTranslucent = false
         UITabBar.appearance().isTranslucent = false
-        
-        var loginFlag:Bool = false
 
         //=== Cognito認証の初期化処理を組み込む
         // Amazon Cognito 認証情報プロバイダーを初期化します
@@ -36,52 +34,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AWSMobileClient.default().initialize { (userState, error) in
             if let userState = userState {
                 print("UserState: \(userState.rawValue)")
-                // FIXME: デバッグのために強制的に初期登録動線を表示
-                loginFlag = true
             } else if let error = error {
                 print("error: \(error.localizedDescription)")
-//                loginFlag = false
             }
         }
 
-        // ログイン済み情報があればタブ表示,無ければ初期値入力,ログイン画面へ
-        if AWSMobileClient.default().currentUserState == .signedIn {
-            loginFlag = true
-        } else {
-            loginFlag = false
-        }
+        window = UIWindow(frame: UIScreen.main.bounds)
 
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        
-        if loginFlag {
+        if AuthManager.shared.isLogin {
             let tabSB = UIStoryboard(name: "BaseTabBC", bundle: nil)
             let tabBC = tabSB.instantiateViewController(withIdentifier: "Sbid_BaseTabBC")
-            
-            self.window?.rootViewController = tabBC
+
+            window?.rootViewController = tabBC
         } else {
             let inputSB = UIStoryboard(name: "InitialInputStartVC", bundle: nil)
             let startNavi = inputSB.instantiateViewController(withIdentifier: "Sbid_InitialInputNavi") as! UINavigationController
-            
-            self.window?.rootViewController = startNavi
+
+            window?.rootViewController = startNavi
         }
-        
-        self.window?.makeKeyAndVisible()
-        
+
+        window?.makeKeyAndVisible()
+
         return true
     }
-    
+
     // 初期入力画面を表示
     func displayInitialInputVC() {
-        
+
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        
+
         let initialSB = UIStoryboard(name: "InitialInputRegistVC", bundle: nil)
-        
+
         let initialVC = initialSB.instantiateViewController(withIdentifier: "InitialInputRegistVC") as! InitialInputRegistVC
-        
+
         self.window?.rootViewController = initialVC
-        
+
         self.window?.makeKeyAndVisible()
-        
+
     }
 }
