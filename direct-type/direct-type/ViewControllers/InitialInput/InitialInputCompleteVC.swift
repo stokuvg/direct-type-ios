@@ -8,23 +8,26 @@
 
 import UIKit
 
-class InitialInputCompleteVC: TmpBasicVC {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+final class InitialInputCompleteVC: TmpBasicVC {
+    @IBOutlet private weak var imageView: UIImageView!
+    
+    @IBAction private func nextButton(_ sender: UIButton) {
+        pushViewController(.firstInputPreviewA)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private let closeMouthImage = UIImage(named: "suma_normal1")!
+    private let openMouthImage = UIImage(named: "suma_normal2")!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        startAnimation()
     }
-    */
+}
 
+private extension InitialInputCompleteVC {
+    func startAnimation() {
+        imageView.animationImages = [closeMouthImage, openMouthImage]
+        imageView.animationDuration = 1
+        imageView.startAnimating()
+    }
 }
