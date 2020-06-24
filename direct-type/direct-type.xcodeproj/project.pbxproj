@@ -721,15 +721,15 @@
 		066763702457B06200AC5039 /* Entry */ = {
 			isa = PBXGroup;
 			children = (
-				066763712457B08300AC5039 /* EntryVC.swift */,
 				066763732457B08F00AC5039 /* EntryVC.storyboard */,
+				066763712457B08300AC5039 /* EntryVC.swift */,
+				26E04ADB24A1E7C600DE8694 /* EntryFormJobCardTBCell.swift */,
+				26E04ADC24A1E7C600DE8694 /* EntryFormJobCardTBCell.xib */,
+				26E04ADF24A1E80100DE8694 /* EntryFormAnyModelTBCell.swift */,
+				26E04AE024A1E80100DE8694 /* EntryFormAnyModelTBCell.xib */,
 				06E519B0245814B2004E4B7A /* EntryConfirmVC.swift */,
 				06E519B2245814BD004E4B7A /* EntryLoginVC.swift */,
 				06E519B4245814C7004E4B7A /* EntryCompleteVC.swift */,
-				26E04ADF24A1E80100DE8694 /* EntryFormAnyModelTBCell.swift */,
-				26E04AE024A1E80100DE8694 /* EntryFormAnyModelTBCell.xib */,
-				26E04ADB24A1E7C600DE8694 /* EntryFormJobCardTBCell.swift */,
-				26E04ADC24A1E7C600DE8694 /* EntryFormJobCardTBCell.xib */,
 			);
 			path = Entry;
 			sourceTree = "<group>";
