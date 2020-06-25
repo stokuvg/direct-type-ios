@@ -104,11 +104,11 @@ private extension MyPageVC {
             result.chemistryTypeIds.enumerated().forEach { (index, typeIdText) in
                 switch index {
                 case 0:
-                    firstRanker = ChemistryPersonalityType(typeId: Int(typeIdText)!)
+                    firstRanker = ChemistryPersonalityType(rawValue: Int(typeIdText)!)
                 case 1:
-                    secondRanker = ChemistryPersonalityType(typeId: Int(typeIdText)!)
+                    secondRanker = ChemistryPersonalityType(rawValue: Int(typeIdText)!)
                 case 2:
-                    thirdRanker = ChemistryPersonalityType(typeId: Int(typeIdText)!)
+                    thirdRanker = ChemistryPersonalityType(rawValue: Int(typeIdText)!)
                 default:
                     break
                 }

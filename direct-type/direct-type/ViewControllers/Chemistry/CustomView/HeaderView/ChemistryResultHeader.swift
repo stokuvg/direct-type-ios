@@ -79,16 +79,16 @@ private extension ChemistryResultHeader {
         secondAndLabel.isHidden = topThree.third == nil
         
         firstPlaceImageView.image = UIImage(named: topThree.first.imageName)
-        firstPlaceLabel.text = topThree.first.rawValue
+        firstPlaceLabel.text = topThree.first.title
         
         if let secondPlace = topThree.second {
             secondPlaceImageView.image = UIImage(named: secondPlace.imageName)
-            secondPlaceLabel.text = secondPlace.rawValue
+            secondPlaceLabel.text = secondPlace.title
         }
         
         if let thirdPlace = topThree.third {
             thirdPlaceImageView.image = UIImage(named: thirdPlace.imageName)
-            thirdPlaceLabel.text = thirdPlace.rawValue
+            thirdPlaceLabel.text = thirdPlace.title
         }
     }
 }
