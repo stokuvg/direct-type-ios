@@ -70,6 +70,11 @@ class MyPageVC: TmpNaviTopVC {
         fetchChemistryData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchChemistryData()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         print(EditItemTool.convTypeAndYear(types: ["1"], years: ["4", "5", "6"]))
