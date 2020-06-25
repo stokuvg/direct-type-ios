@@ -1090,6 +1090,7 @@
           "minSalaryId",
           "maxSalaryId",
           "isSalaryDisplay",
+          "salaryOffer",
           "place2Ids",
           "companyName",
           "pressStartDate",
@@ -1255,6 +1256,69 @@
         },
         "required": [
           "jobId"
+        ]
+      },
+      "GetChemistryResponseDTO": {
+        "type": "object",
+        "properties": {
+          "chemistryTypeIds": {
+            "example": [
+              "1",
+              "2",
+              "3"
+            ],
+            "maxItems": 3,
+            "description": "相性診断コード",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "chemistryTypeIds"
+        ]
+      },
+      "CreateChemistryRequestDTO": {
+        "type": "object",
+        "properties": {
+          "chemistryTypeIds": {
+            "example": [
+              "1",
+              "2",
+              "3"
+            ],
+            "maxItems": 3,
+            "description": "相性診断コード",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "chemistryTypeIds"
+        ]
+      },
+      "UpdateChemistryRequestDTO": {
+        "type": "object",
+        "properties": {
+          "chemistryTypeIds": {
+            "example": [
+              "1",
+              "2",
+              "3"
+            ],
+            "maxItems": 3,
+            "description": "相性診断コード",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "chemistryTypeIds"
         ]
       },
       "GetApproachResponseDTO": {
@@ -1693,6 +1757,11 @@
         },
         "tags": [
           "profile"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
         ]
       },
       "post": {
@@ -1717,6 +1786,11 @@
         },
         "tags": [
           "profile"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
         ]
       },
       "patch": {
@@ -1741,6 +1815,11 @@
         },
         "tags": [
           "profile"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
         ]
       }
     },
@@ -1764,6 +1843,11 @@
         },
         "tags": [
           "resume"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
         ]
       },
       "post": {
@@ -1788,6 +1872,11 @@
         },
         "tags": [
           "resume"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
         ]
       },
       "patch": {
@@ -1812,6 +1901,11 @@
         },
         "tags": [
           "resume"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
         ]
       }
     },
@@ -1835,6 +1929,11 @@
         },
         "tags": [
           "career"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
         ]
       },
       "post": {
@@ -1859,6 +1958,11 @@
         },
         "tags": [
           "career"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
         ]
       },
       "patch": {
@@ -1883,6 +1987,11 @@
         },
         "tags": [
           "career"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
         ]
       }
     },
@@ -1909,6 +2018,11 @@
         },
         "tags": [
           "skip"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
         ]
       }
     },
@@ -1941,6 +2055,11 @@
         },
         "tags": [
           "jobs"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
         ]
       }
     },
@@ -1966,6 +2085,11 @@
         },
         "tags": [
           "jobs"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
         ]
       }
     },
@@ -1996,6 +2120,11 @@
         },
         "tags": [
           "jobs"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
         ]
       }
     },
@@ -2030,6 +2159,11 @@
         },
         "tags": [
           "keeps"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
         ]
       },
       "post": {
@@ -2054,6 +2188,11 @@
         },
         "tags": [
           "keeps"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
         ]
       }
     },
@@ -2081,6 +2220,97 @@
         },
         "tags": [
           "keeps"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/chemistry": {
+      "get": {
+        "operationId": "ChemistryController_get",
+        "summary": "相性診断取得",
+        "description": "Api48_相性診断の取得",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetChemistryResponseDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "chemistry"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "ChemistryController_create",
+        "summary": "相性診断作成・更新",
+        "description": "Api37_相性診断の作成・更新",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateChemistryRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "chemistry"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "ChemistryController_update",
+        "summary": "相性診断作成・更新",
+        "description": "Api37_相性診断の作成・更新",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateChemistryRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "chemistry"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
         ]
       }
     },
@@ -2105,6 +2335,11 @@
         },
         "tags": [
           "entry"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
         ]
       }
     },
