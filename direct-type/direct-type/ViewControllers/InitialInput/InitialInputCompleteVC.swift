@@ -14,7 +14,7 @@ final class InitialInputCompleteVC: TmpBasicVC {
     
     @IBAction private func nextButton(_ sender: UIButton) {
         switch transitionDestination {
-        case .firstInpute:
+        case .firstInput:
             pushViewController(.firstInputPreviewA)
         case .homeTab:
             transitionToBaseTab()
@@ -22,7 +22,7 @@ final class InitialInputCompleteVC: TmpBasicVC {
     }
     
     enum TransitionDestinationTypr {
-        case firstInpute
+        case firstInput
         case homeTab
     }
     
@@ -30,7 +30,7 @@ final class InitialInputCompleteVC: TmpBasicVC {
     private let openMouthImage = UIImage(named: "suma_normal2")!
     
     private var replaceText: String?
-    private var transitionDestination = TransitionDestinationTypr.firstInpute
+    private var transitionDestination = TransitionDestinationTypr.firstInput
     
     override func viewDidLoad() {
         super.viewDidLoad()
