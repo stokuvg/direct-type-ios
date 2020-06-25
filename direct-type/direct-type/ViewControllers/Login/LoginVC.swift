@@ -47,7 +47,7 @@ private extension LoginVC {
         }
         
         guard let phoneNumberText = phoneNumberTextField.text else { return }
-        AWSMobileClient.default().signIn(username: phoneNumberText.withCountryCode, password: password)  { (signInResult, error) in
+        AWSMobileClient.default().signIn(username: phoneNumberText.addCountryCode(type: .japan), password: password)  { (signInResult, error) in
             if let error = error {
                 let buf = AuthManager.convAnyError(error).debugDisp
                 DispatchQueue.main.async {
@@ -65,7 +65,7 @@ private extension LoginVC {
                 // FIXME: サーバー側でSMS認証系の実装が完了した際には「customChallenge」が返ってくるので、そちらに処理を移管し直す。
                 DispatchQueue.main.async {
                     let vc = self.getVC(sbName: "LoginConfirmVC", vcName: "LoginConfirmVC") as! LoginConfirmVC
-                    let loginInfo = LoginConfirmVC.LoginInfo(phoneNumberText: phoneNumberText.withCountryCode, password: self.password)
+                    let loginInfo = LoginConfirmVC.LoginInfo(phoneNumberText: phoneNumberText.addCountryCode(type: .japan), password: self.password)
                     vc.configure(with: loginInfo)
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
@@ -111,22 +111,5 @@ private extension LoginVC {
         nextButton.isEnabled = isValidInputText
         guard let inputText = phoneNumberTextField.text, isValidInputText else { return }
         phoneNumberTextField.text = inputText.prefix(phoneNumberMaxLength).description
-    }
-}
-
-private extension String {
-    enum CountryCode {
-        case japan
-        
-        var text: String {
-            switch self {
-            case .japan:
-                return "+81"
-            }
-        }
-    }
-    
-    var withCountryCode: String {
-        return CountryCode.japan.text + dropFirst()
     }
 }

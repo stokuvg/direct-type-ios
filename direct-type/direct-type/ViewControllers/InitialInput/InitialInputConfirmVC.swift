@@ -48,8 +48,40 @@ private extension InitialInputConfirmVC {
             return
         }
         // TODO: 入力されたSMS認証コードを使ってAWSMobileClient.default().confirmSignIn(challengeResponse: _)にて検証を行う。
-        // FIXME: デバッグ時には動作確認のため、そのままベースタブ画面へ遷移させる。
-        transitionToComplete()
+        // FIXME: デバッグ環境においては、電話番号登録→AWS管理画面上で手動認証→サインインというフローを踏んで
+        // 新規登録させる必要があるため、SMS認証コード入力画面で無理やりサインイン処理をしているので、後から削除する
+        signIn()
+    }
+    
+    func signIn() {
+        AWSMobileClient.default()
+            .signIn(username: loginInfo.phoneNumberText.addCountryCode(type: .japan), password: loginInfo.password)  { (signInResult, error) in
+                if let error = error {
+                    let buf = AuthManager.convAnyError(error).debugDisp
+                    DispatchQueue.main.async { self.showConfirm(title: "Error", message: buf, onlyOK: true) }
+                    return
+                }
+                
+                guard let signInResult = signInResult else {
+                    print("レスポンスがが正常に受け取れませんでした")
+                    return
+                }
+                
+                switch signInResult.signInState {
+                case .signedIn:
+                    // FIXME: サーバー側でSMS認証系の実装が完了した際には「customChallenge」が返ってくるので、そちらに処理を移管し直す。
+                    DispatchQueue.main.async {
+                        self.transitionToComplete()
+                    }
+                case .customChallenge:
+                    // TODO: 本来は電話番号入力時のサインインAPIでは「customChallenge」が返ってくるが、
+                    // 現状は「signedIn」が返ってくる仕様のため、処理をそちらのcaseに移管している。
+                    break
+                case .unknown, .smsMFA, .passwordVerifier, .deviceSRPAuth,
+                     .devicePasswordVerifier, .adminNoSRPAuth, .newPasswordRequired:
+                    break
+                }
+        }
     }
     
     func transitionToComplete() {

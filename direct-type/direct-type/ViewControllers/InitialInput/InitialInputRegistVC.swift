@@ -46,7 +46,7 @@ private extension InitialInputRegistVC {
         }
         
         guard let phoneNumberText = phoneNumberTextField.text else { return }
-        AWSMobileClient.default().signUp(username: phoneNumberText, password: password) { (signUpResult, error) in
+        AWSMobileClient.default().signUp(username: phoneNumberText.addCountryCode(type: .japan), password: password) { (signUpResult, error) in
                     if let _error = error {
                         let buf = AuthManager.convAnyError(_error).debugDisp
                         DispatchQueue.main.async { print(#line, #function, buf) }
@@ -59,11 +59,22 @@ private extension InitialInputRegistVC {
                     switch signUpResult.signUpConfirmationState {
                     case .confirmed:    buf = "confirmed"
 //[簡易認証Skip]            self.actLogin(sender)//続けてログインも実施してしまう
-                    case .unconfirmed:  buf = "unconfirmed"
+                    case .unconfirmed:
+                        buf = "unconfirmed"
+                        // FIXME: デモ環境においては電話番号登録時に必ずunconfirmedになってしまうために強制的にコード認証画面に飛ばしているので、後ほど削除する。
+                        DispatchQueue.main.async { self.transitionToComfirm() }
                     case .unknown:      buf = "unknown"
                     }
                     DispatchQueue.main.async { print(#line, #function, buf) }
+            
                 }
+    }
+    
+    func transitionToComfirm() {
+        guard let phoneNumberText = phoneNumberTextField.text else { return }
+        let vc = getVC(sbName: "InitialInputConfirmVC", vcName: "InitialInputConfirmVC") as! InitialInputConfirmVC
+        vc.configure(with: InitialInputConfirmVC.LoginInfo(phoneNumberText: phoneNumberText, password: password))
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func openReasonOfConfirmPhone() {
