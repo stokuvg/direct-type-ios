@@ -80,9 +80,8 @@ class MyPageVC: TmpNaviTopVC {
     }
 }
 
-//=== APIフェッチ
-extension MyPageVC {
-    private func fetchGetJobList() {
+private extension MyPageVC {
+    func fetchGetJobList() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         ApiManager.getJobs(pageNo, isRetry: true)
         .done { result in
@@ -95,7 +94,7 @@ extension MyPageVC {
         }
     }
     
-    private func fetchChemistryData() {
+    func fetchChemistryData() {
         SVProgressHUD.show(withStatus: "データ取得中")
         ChemistryAPI.chemistryControllerGet()
         .done { result -> Void in
@@ -123,6 +122,19 @@ extension MyPageVC {
             self.pageTableView.reloadData()
             SVProgressHUD.dismiss()
         }
+    }
+    
+    func transitionToChemistry() {
+        var vc = UIViewController()
+        vc = UIStoryboard(name: "ChemistryStart", bundle: nil).instantiateInitialViewController() as! ChemistryStart
+        if let topRanker = topRanker {
+            vc = getVC(sbName: "ChemistryResult", vcName: "ChemistryResult") as! ChemistryResult
+            (vc as! ChemistryResult).configure(with: topRanker)
+        }
+        
+        hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+        hidesBottomBarWhenPushed = false
     }
 }
 
@@ -189,12 +201,15 @@ extension MyPageVC: UITableViewDelegate {
         let row = indexPath.row
 
         switch (section,row) {
-            case (3,_):
-//                actButton05(UIButton())//[Dbg: 仮認証]
-                let vc = getVC(sbName: "SettingVC", vcName: "SettingVC") as! SettingVC
-                self.navigationController?.pushViewController(vc, animated: true)
-            default:
-                break
+        case (2, 1):
+            // TODO: 相性診断結果画面へ遷移
+            transitionToChemistry()
+        case (3,_):
+            //                actButton05(UIButton())//[Dbg: 仮認証]
+            let vc = getVC(sbName: "SettingVC", vcName: "SettingVC") as! SettingVC
+            navigationController?.pushViewController(vc, animated: true)
+        default:
+            break
         }
     }
 }
@@ -357,9 +372,6 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
 extension MyPageVC: MyPageChemistryStartCellDelegate {
     // 相性診断画面遷移
     func registChemistryAction() {
-        let vc = UIStoryboard(name: "ChemistryStart", bundle: nil).instantiateInitialViewController() as! ChemistryStart
-        hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(vc, animated: true)
-        hidesBottomBarWhenPushed = false
+        transitionToChemistry()
     }
 }

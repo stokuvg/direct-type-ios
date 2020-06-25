@@ -36,6 +36,10 @@ final class ChemistryResult: UIViewController {
     func configure(with scores: [ChemistryScore]) {
         topRanker = ChemistryScoreCalculation(questionScores: scores).topThree
     }
+    
+    func configure(with topRanker: ChemistryScoreCalculation.TopRanker) {
+        self.topRanker = topRanker
+    }
 }
 
 private extension ChemistryResult {
