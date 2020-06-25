@@ -9,9 +9,44 @@
 import UIKit
 import SwaggerClient
 
+class HomePageUrlView: UIView {
+    
+    @IBOutlet weak var urlTextView:UITextView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.urlTextView.textColor = UIColor.init(colorType: .color_black)
+        self.urlTextView.font = UIFont.init(fontType: .C_font_S)
+        self.urlTextView.linkTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.init(colorType: .color_sub) as Any
+        ]
+        self.urlTextView.dataDetectorTypes = .link
+        self.urlTextView.isEditable = false
+        self.urlTextView.isSelectable = true
+        self.urlTextView.delegate = self
+        
+        self.urlTextView.isUserInteractionEnabled = true
+    }
+    
+    func setup(urlString: String) {
+        let style = NSMutableParagraphStyle()
+        style.lineSpacing = FontType.C_font_S.lineSpacing
+        let attributes = [
+            NSAttributedString.Key.foregroundColor : UIColor.init(colorType: .color_black) as Any,
+            NSAttributedString.Key.paragraphStyle : style,
+//            NSAttributedString.Key.foregroundColor : UIColor.init(colorType: .color_sub)
+        ]
+        let attributedString = NSMutableAttributedString(string: urlString)
+        
+        self.urlTextView.attributedText = NSAttributedString(string: attributedString.string, attributes: attributes)
+    }
+}
+
 class JobDetailFoldingPhoneNumberCell: BaseTableViewCell {
     
+    @IBOutlet weak var stackView:UIStackView!
     @IBOutlet weak var textView:UITextView!
+    @IBOutlet weak var homePageView:HomePageUrlView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,7 +78,11 @@ class JobDetailFoldingPhoneNumberCell: BaseTableViewCell {
         
         let style = NSMutableParagraphStyle()
         style.lineSpacing = FontType.C_font_S.lineSpacing
-        let attributes = [NSAttributedString.Key.paragraphStyle : style]
+        let attributes = [
+            NSAttributedString.Key.foregroundColor : UIColor.init(colorType: .color_black) as Any,
+            NSAttributedString.Key.paragraphStyle : style,
+//            NSAttributedString.Key.foregroundColor : UIColor.init(colorType: .color_sub)
+        ]
         
         let urlString = data.companyUrl
         let zipCodeString = data.contactZipcode
@@ -52,20 +91,16 @@ class JobDetailFoldingPhoneNumberCell: BaseTableViewCell {
         let personString = data.contactPerson
         let emailString = data.contactMail
         
-        let text = self.makeAdoptionText(url: urlString, zipCode: zipCodeString, address: addressString, tel: telString, person: personString, email: emailString)
+        let text = self.makeAdoptionText(zipCode: zipCodeString, address: addressString, tel: telString, person: personString, email: emailString)
 
         let attributedString = NSMutableAttributedString(string: text)
-
-        let range = attributedString.mutableString.range(of: urlString)
-
-        attributedString.addAttribute(.link,
-        value: urlString,
-        range: range)
         
         self.textView.attributedText = NSAttributedString(string: attributedString.string, attributes: attributes)
+
+        homePageView.setup(urlString: urlString)
     }
     
-    private func makeAdoptionText(url:String,zipCode:String,address:String,tel:String,person:String,email:String) -> String {
+    private func makeAdoptionText(zipCode:String,address:String,tel:String,person:String,email:String) -> String {
         let text = NSMutableString()
         
         // 郵便番号         必須
@@ -95,11 +130,6 @@ class JobDetailFoldingPhoneNumberCell: BaseTableViewCell {
         
         if person.count > 0 {
             text.append(person)
-            text.append("\n")
-        }
-        
-        if url.count > 0 {
-            text.append(url)
         }
         
         return text as String
@@ -112,9 +142,25 @@ extension JobDetailFoldingPhoneNumberCell: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
 //        Log.selectLog(logLevel: .debug, "JobDetailFoldingPhoneNumberCell shouldInteractWith start")
         
+        /*
+        if textView == urlTextView {
 //        Log.selectLog(logLevel: .debug, "URL:\(URL)")
-        UIApplication.shared.open(URL, options: [:], completionHandler: nil)
+            UIApplication.shared.open(URL, options: [:], completionHandler: nil)
+            return true
+        }
+        */
         
         return false
+    }
+}
+
+extension HomePageUrlView: UITextViewDelegate {
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+//        Log.selectLog(logLevel: .debug, "JobDetailFoldingPhoneNumberCell shouldInteractWith start")
+        
+//        Log.selectLog(logLevel: .debug, "URL:\(URL)")
+        UIApplication.shared.open(URL, options: [:], completionHandler: nil)
+        return true
     }
 }

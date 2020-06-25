@@ -414,7 +414,7 @@ class HomeVC: TmpNaviTopVC {
     private func makeCellHeight(row: Int) -> CGFloat {
         var rowHeight:CGFloat = defaultCellHeight
         
-        let jobData = self.pageJobCards.jobCards[row]
+        let jobData = self.dispJobCards.jobCards[row]
         
         // NEW・終了間近を確認。あれば heightを追加
         let nowDate = Date()
