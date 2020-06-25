@@ -7,12 +7,11 @@
 //
 
 import UIKit
-//import SwaggerClient
 import TudApi
 import SVProgressHUD
 
 //===[A系統]「初回入力」
-class FirstInputPreviewVC: PreviewBaseVC {
+final class FirstInputPreviewVC: PreviewBaseVC {
     var detail: MdlFirstInput? = nil
 
     override func actCommit(_ sender: UIButton) {
@@ -110,9 +109,9 @@ class FirstInputPreviewVC: PreviewBaseVC {
 }
 
 //=== APIフェッチ
-extension FirstInputPreviewVC {
+private extension FirstInputPreviewVC {
     //プロフィールと履歴書を叩くため
-    private func fetchCreateProfile() {
+    func fetchCreateProfile() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         let param = CreateProfileRequestDTO(editableModel.editTempCD)
         SVProgressHUD.show(withStatus: "プロフィール情報の作成")
@@ -137,7 +136,8 @@ extension FirstInputPreviewVC {
             SVProgressHUD.dismiss()
         }
     }
-    private func fetchCreateResume() {
+    
+    func fetchCreateResume() {
         if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
         self.dicValidErrMsg.removeAll()//状態をクリアしておく
@@ -146,6 +146,10 @@ extension FirstInputPreviewVC {
         ApiManager.createResume(param, isRetry: true)
         .done { result in
             self.showConfirm(title: "初回入力", message: "登録完了しました", onlyOK: true)
+            .done { _ in
+                self.transitionToComplete()
+            }
+            .catch {_ in } .finally {}
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -162,6 +166,19 @@ extension FirstInputPreviewVC {
             self.dispData()
             SVProgressHUD.dismiss()
         }
+    }
+    
+    var descriptipon: String {
+        return """
+        入力お疲れ様でした！
+        さっそくホームを開いて求人を見てみましょう
+        """
+    }
+    func transitionToComplete() {
+        let complete = getVC(sbName: "InitialInputCompleteVC", vcName: "InitialInputCompleteVC") as! InitialInputCompleteVC
+        complete.replaceDescription(by: descriptipon)
+        complete.changeTransitionDestination(type: .homeTab)
+        navigationController?.pushViewController(complete, animated: true)
     }
 }
 
