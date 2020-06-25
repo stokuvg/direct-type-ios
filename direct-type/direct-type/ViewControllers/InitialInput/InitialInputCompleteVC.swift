@@ -35,6 +35,7 @@ final class InitialInputCompleteVC: TmpBasicVC {
 private extension InitialInputCompleteVC {
     func setup() {
         textView.text = replaceText ?? textView.text
+        navigationItem.hidesBackButton = true
     }
     
     func startAnimation() {
