@@ -10,14 +10,14 @@ import UIKit
 
 final class ChemistryResult: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
-    private var questionScores = [ChemistryScore]()
+    
+    private var topRanker: ChemistryScoreCalculation.TopRanker?
     private let tableViewEstimateCellHeight: CGFloat = 330
     private var resultCellCount: Int {
-        let topThree = ChemistryScoreCalculation(questionScores: questionScores).topThree
         // 1位のセルとビジネスアビリティセルはデフォルト表示
         var cellCount = 2
-        cellCount += topThree.second == nil ? 0 : 1
-        cellCount += topThree.third == nil ? 0 : 1
+        cellCount += topRanker!.second == nil ? 0 : 1
+        cellCount += topRanker!.third == nil ? 0 : 1
         return cellCount
     }
     
@@ -34,7 +34,7 @@ final class ChemistryResult: UIViewController {
     }
     
     func configure(with scores: [ChemistryScore]) {
-        questionScores = scores
+        topRanker = ChemistryScoreCalculation(questionScores: scores).topThree
     }
 }
 
@@ -49,8 +49,7 @@ private extension ChemistryResult {
     }
     
     func getAvarageAvilityScore() -> BusinessAvilityScore {
-        let topThree = ChemistryScoreCalculation(questionScores: questionScores).topThree
-        let topScore = [topThree.first, topThree.second, topThree.third].compactMap({$0})
+        let topScore = [topRanker!.first, topRanker!.second, topRanker!.third].compactMap({$0})
         let quickAction = getAvarage(from: topScore.map({ $0.avilityScore.quickAction }))
         let toughness = getAvarage(from: topScore.map({ $0.avilityScore.toughness }))
         let spiritOfChallenge = getAvarage(from: topScore.map({ $0.avilityScore.spiritOfChallenge }))
@@ -74,8 +73,7 @@ private extension ChemistryResult {
 extension ChemistryResult: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ChemistryResultHeader()
-        let topThree = ChemistryScoreCalculation(questionScores: questionScores).topThree
-        header.configure(with: topThree)
+        header.configure(with: topRanker!)
         return header
     }
     
@@ -106,20 +104,19 @@ extension ChemistryResult: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let topThree = ChemistryScoreCalculation(questionScores: questionScores).topThree
         let indicateCellType = IndicateCellType(rawValue: indexPath.row)!
         switch indicateCellType {
         case .firstPlaceResult:
             let cell = tableView.loadCell(cellName: "ChemistryResultPersonalTypeCell", indexPath: indexPath) as! ChemistryResultPersonalTypeCell
-            cell.configure(with: topThree.first)
+            cell.configure(with: topRanker!.first)
             return cell
         case .secondPlaceResult:
             let cell = tableView.loadCell(cellName: "ChemistryResultPersonalTypeCell", indexPath: indexPath) as! ChemistryResultPersonalTypeCell
-            cell.configure(with: topThree.second)
+            cell.configure(with: topRanker!.second)
             return cell
         case .thirdPlaceResult:
             let cell = tableView.loadCell(cellName: "ChemistryResultPersonalTypeCell", indexPath: indexPath) as! ChemistryResultPersonalTypeCell
-            cell.configure(with: topThree.third)
+            cell.configure(with: topRanker!.third)
             return cell
         case .businessAbility:
             let cell = tableView.loadCell(cellName: "ChemistryBusinessAbilityCell", indexPath: indexPath) as! ChemistryBusinessAbilityCell

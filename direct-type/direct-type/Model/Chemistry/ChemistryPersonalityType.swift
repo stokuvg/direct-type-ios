@@ -19,6 +19,31 @@ enum ChemistryPersonalityType: String, CaseIterable {
     case challenger = "挑戦する人"
     case peaceful = "平和をもたらす人"
     
+    init(typeId: Int) {
+        switch typeId {
+        case 1:
+            self = .reformer
+        case 2:
+            self = .helper
+        case 3:
+            self = .toAchieve
+        case 4:
+            self = .unique
+        case 5:
+            self = .toExamine
+        case 6:
+            self = .faithful
+        case 7:
+            self = .enthusiastic
+        case 8:
+            self = .challenger
+        case 9:
+            self = .peaceful
+        default:
+            self = .reformer
+        }
+    }
+    
     var imageName: String {
         switch self {
         case .reformer:
