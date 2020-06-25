@@ -204,10 +204,9 @@ extension MyPageVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let section = indexPath.section
         let row = indexPath.row
-
+        
         switch (section,row) {
-        case (2, 1):
-            // TODO: 相性診断結果画面へ遷移
+        case (2, 0):
             transitionToChemistry()
         case (3,_):
             //                actButton05(UIButton())//[Dbg: 仮認証]
