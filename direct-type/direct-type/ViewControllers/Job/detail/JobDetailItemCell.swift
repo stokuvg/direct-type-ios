@@ -229,7 +229,13 @@ class JobDetailItemCell: BaseJobDetailCell {
             let spot1 = ["title":spotTitle1,"text":spotDetail1]
             let spot2 = ["title":spotTitle2,"text":spotDetail2]
             
-            attentionDatas = [spot1,spot2]
+            if spotTitle1.count > 0 && spotDetail1.count > 0 {
+                attentionDatas.append(spot1)
+            }
+            
+            if spotTitle2.count > 0 && spotDetail2.count > 0 {
+                attentionDatas.append(spot2)
+            }
             
             let attentionFrameWidth = self.itemBackView.frame.size.width
             for i in 0..<attentionDatas.count {

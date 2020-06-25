@@ -47,9 +47,9 @@
                                             <constraint firstAttribute="height" constant="27" id="QyL-um-LWg"/>
                                             <constraint firstAttribute="width" constant="70" id="udV-2u-cXZ"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="12"/>
                                         <state key="normal" title="▲ 閉じる">
-                                            <color key="titleColor" name="color-line"/>
+                                            <color key="titleColor" name="color-sub"/>
                                         </state>
                                         <connections>
                                             <action selector="articleCloseBtnAction" destination="KGk-i7-Jjw" eventType="touchUpInside" id="vG8-rn-lmc"/>
@@ -85,8 +85,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <namedColor name="color-line">
-            <color red="0.82352941176470584" green="0.82352941176470584" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="color-sub">
+            <color red="1" green="0.35294117647058826" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="color-white">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
