@@ -10,6 +10,7 @@ import UIKit
 
 final class InitialInputCompleteVC: TmpBasicVC {
     @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var textView: UITextView!
     
     @IBAction private func nextButton(_ sender: UIButton) {
         pushViewController(.firstInputPreviewA)
@@ -18,13 +19,24 @@ final class InitialInputCompleteVC: TmpBasicVC {
     private let closeMouthImage = UIImage(named: "suma_normal1")!
     private let openMouthImage = UIImage(named: "suma_normal2")!
     
+    private var replaceText: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
         startAnimation()
+    }
+    
+    func replaceDescription(by text: String) {
+        replaceText = text
     }
 }
 
 private extension InitialInputCompleteVC {
+    func setup() {
+        textView.text = replaceText ?? textView.text
+    }
+    
     func startAnimation() {
         imageView.animationImages = [closeMouthImage, openMouthImage]
         imageView.animationDuration = 1

@@ -78,6 +78,7 @@
                     </view>
                     <connections>
                         <outlet property="imageView" destination="dvn-p5-e9u" id="eBs-Y6-wws"/>
+                        <outlet property="textView" destination="vVX-g2-lv6" id="eG2-vb-Rpy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k0K-lQ-xHZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
