@@ -107,8 +107,8 @@ class JobOfferBigCardCell: BaseJobCardCell {
             saralyMarkLabel.text(text: "", fontType: .C_font_M, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
         }
         // 特別年収 TODO:初回は非表示
-        saralySpecialLabel.isHidden = true
-        saralySpecialMarkLabel.isHidden = true
+//        saralySpecialLabel.isHidden = true
+//        saralySpecialMarkLabel.isHidden = true
 //        cautionView.isHidden = true
 //        self.stackView.addArrangedSubview(cautionView)
 //        cautionView.isHidden = true
@@ -142,15 +142,23 @@ class JobOfferBigCardCell: BaseJobCardCell {
         switch type {
             case .none:
                 self.limitedMarkView.isHidden = true
-                self.stackView.removeArrangedSubview(self.limitedMarkBackView)
+                self.limitedImageView.isHidden = true
+                self.limitedLabel.isHidden = true
+                self.limitedMarkBackView.isHidden = true
+//                self.stackView.removeArrangedSubview(self.limitedMarkBackView)
             case .new:
                 self.limitedMarkView.isHidden = false
-                self.limitedLabel.text(text: "", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+                self.limitedImageView.isHidden = false
+                self.limitedLabel.isHidden = true
                 self.limitedImageView.image = UIImage(named: "new")
+                self.limitedMarkBackView.isHidden = false
             case .end:
                 self.limitedMarkView.isHidden = false
+                self.limitedImageView.isHidden = false
+                self.limitedLabel.isHidden = false
                 limitedLabel.text(text: "終了間近", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
                 self.limitedImageView.image = UIImage(named: "upcoming")
+                self.limitedMarkBackView.isHidden = false
         }
     }
     
