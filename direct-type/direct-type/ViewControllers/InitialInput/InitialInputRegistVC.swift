@@ -47,27 +47,32 @@ private extension InitialInputRegistVC {
         
         guard let phoneNumberText = phoneNumberTextField.text else { return }
         AWSMobileClient.default().signUp(username: phoneNumberText.addCountryCode(type: .japan), password: password) { (signUpResult, error) in
-                    if let _error = error {
-                        let buf = AuthManager.convAnyError(_error).debugDisp
-                        DispatchQueue.main.async { print(#line, #function, buf) }
-                        return
-                    }
-                    guard let signUpResult = signUpResult else { return }
-                    print(signUpResult.signUpConfirmationState)
-                    print(signUpResult.codeDeliveryDetails.debugDescription)
-                    var buf: String = ""
-                    switch signUpResult.signUpConfirmationState {
-                    case .confirmed:    buf = "confirmed"
-//[簡易認証Skip]            self.actLogin(sender)//続けてログインも実施してしまう
-                    case .unconfirmed:
-                        buf = "unconfirmed"
-                        // FIXME: デモ環境においては電話番号登録時に必ずunconfirmedになってしまうために強制的にコード認証画面に飛ばしているので、後ほど削除する。
-                        DispatchQueue.main.async { self.transitionToComfirm() }
-                    case .unknown:      buf = "unknown"
-                    }
-                    DispatchQueue.main.async { print(#line, #function, buf) }
-            
+            if let error = error {
+                let buf = AuthManager.convAnyError(error).debugDisp
+                DispatchQueue.main.async {
+                    self.showConfirm(title: "Error", message: buf, onlyOK: true)
+                        .done { _ in
+                            DispatchQueue.main.async { self.transitionToComfirm() }
+                    } .catch { (error) in } .finally { } //Warning回避
                 }
+                return
+            }
+            guard let signUpResult = signUpResult else { return }
+            print(signUpResult.signUpConfirmationState)
+            print(signUpResult.codeDeliveryDetails.debugDescription)
+            var buf: String = ""
+            switch signUpResult.signUpConfirmationState {
+            case .confirmed:    buf = "confirmed"
+            //[簡易認証Skip]            self.actLogin(sender)//続けてログインも実施してしまう
+            case .unconfirmed:
+                buf = "unconfirmed"
+                // FIXME: デモ環境においては電話番号登録時に必ずunconfirmedになってしまうために強制的にコード認証画面に飛ばしているので、後ほど削除する。
+                DispatchQueue.main.async { self.transitionToComfirm() }
+            case .unknown:      buf = "unknown"
+            }
+            DispatchQueue.main.async { print(#line, #function, buf) }
+            
+        }
     }
     
     func transitionToComfirm() {
