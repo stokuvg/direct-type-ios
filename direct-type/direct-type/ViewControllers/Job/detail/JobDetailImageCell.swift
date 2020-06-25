@@ -183,7 +183,8 @@ class JobDetailImageCell: BaseTableViewCell {
             
             self.mainImagesControl.numberOfPages = 1
             self.mainImagesControl.isHidden = true
-            self.pageControlViewHeight.constant = 0
+            self.pageControlViewHeight.constant = 40
+            self.mainImagesPageControlBackView.isHidden = true
         }
     }
     
