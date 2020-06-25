@@ -30,7 +30,6 @@ class PreviewBaseVC: TmpBasicVC {
     }
 
     func validateLocalModel() -> Bool {
-        if Constants.DbgSkipLocalValidate { return false }//[Dbg: ローカルValidationスキップ]
         ValidateManager.dbgDispCurrentItems(editableModel: editableModel) //[Dbg: 状態確認]
         let chkErr = ValidateManager.chkValidationErr(editableModel)
         self.dicValidErrMsg = chkErr

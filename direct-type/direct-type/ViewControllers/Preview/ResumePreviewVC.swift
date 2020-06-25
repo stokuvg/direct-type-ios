@@ -75,8 +75,8 @@ class ResumePreviewVC: PreviewBaseVC {
         //===(3f)最終学歴
         arrData.append(MdlItemH(.schoolH3, "", childItems: [
             EditableItemH(type: .inputText, editItem: EditItemMdlResumeSchool.schoolName, val: _detail.school.schoolName),
+            EditableItemH(type: .inputText, editItem: EditItemMdlResumeSchool.faculty, val: _detail.school.faculty),
             EditableItemH(type: .inputText, editItem: EditItemMdlResumeSchool.department, val: _detail.school.department),
-            EditableItemH(type: .inputText, editItem: EditItemMdlResumeSchool.subject, val: _detail.school.subject),
             EditableItemH(type: .selectDrumYM, editItem: EditItemMdlResumeSchool.graduationYear, val: _detail.school.graduationYear),
         ]))
         //===(3g)語学
@@ -114,14 +114,16 @@ class ResumePreviewVC: PreviewBaseVC {
         super.viewDidAppear(animated)
         fetchGetResume()
     }
+    private func completeUpdate() {
+        self.editableModel.editTempCD.removeAll()//編集情報をまるっと削除
+        self.chkButtonEnable()
+    }
 }
 
 //=== APIフェッチ
 
 extension ResumePreviewVC {
     private func fetchGetResume() {
-        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-        //========================================================
         SVProgressHUD.show(withStatus: "履歴書の取得")
         ApiManager.getResume(Void(), isRetry: true)
         .done { result in
@@ -144,7 +146,6 @@ extension ResumePreviewVC {
         }
     }
     private func fetchUpdateResume() {
-        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         guard let resume = self.detail else { return }
         let param = UpdateResumeRequestDTO(resume ,editableModel.editTempCD)
         self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
@@ -153,6 +154,7 @@ extension ResumePreviewVC {
         ApiManager.updateResume(param, isRetry: true)
         .done { result in
             self.fetchGetResume()//成功したら取得フェチ
+            self.completeUpdate()//===更新完了した場合の処理
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)

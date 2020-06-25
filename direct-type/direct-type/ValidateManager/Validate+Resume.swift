@@ -27,8 +27,8 @@ extension EditItemMdlResumeSchool {
     var valid: ValidInfo {
         switch self {
         case .schoolName:       return ValidInfo(required: true, keta: nil, max: nil, type: .zenkaku)
-        case .department:       return ValidInfo(required: true, keta: nil, max: nil, type: .zenkaku)
-        case .subject:          return ValidInfo(required: false, keta: nil, max: nil, type: .zenkaku)
+        case .faculty:       return ValidInfo(required: true, keta: nil, max: nil, type: .zenkaku)
+        case .department:          return ValidInfo(required: false, keta: nil, max: nil, type: .zenkaku)
         case .graduationYear:   return ValidInfo(required: true, keta: nil, max: nil, type: .code)
         }
     }

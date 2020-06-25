@@ -77,7 +77,6 @@ class MyPageVC: TmpNaviTopVC {
 //=== APIフェッチ
 extension MyPageVC {
     private func fetchGetJobList() {
-        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         ApiManager.getJobs(pageNo, isRetry: true)
         .done { result in
             print(result.debugDisp)

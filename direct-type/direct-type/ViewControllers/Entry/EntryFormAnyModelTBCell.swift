@@ -115,6 +115,9 @@ extension EntryFormAnyModelTBCell {
         //必須なもの：
         var dicExist: [EditableItemKey: Bool] = [:]   //登録済の項目をカウントしておく
         if let model = self.detail as? MdlResume {
+            dicExist[EditItemMdlResumeSchool.schoolName.itemKey] = (model.school.schoolName.isEmpty) ? false : true
+            dicExist[EditItemMdlResumeSchool.faculty.itemKey] = (model.school.faculty.isEmpty) ? false : true
+            dicExist[EditItemMdlResumeSchool.graduationYear.itemKey] = (model.school.graduationYear.isEmpty) ? false : true
         }
         let cntExist = dicExist.filter { (k, v) -> Bool in v == true }.count
         print("#lien, #function, [\(cntExist) / \(dicExist.count)]")

@@ -89,8 +89,8 @@ extension UpdateResumeRequestDTO {
         }
         //===
         let _schoolName = editTempCD[EditItemMdlResumeSchool.schoolName.itemKey] ?? resume.school.schoolName
-        let _faculty = editTempCD[EditItemMdlResumeSchool.department.itemKey] ?? resume.school.department
-        let _department = editTempCD[EditItemMdlResumeSchool.subject.itemKey] ?? resume.school.subject
+        let _faculty = editTempCD[EditItemMdlResumeSchool.faculty.itemKey] ?? resume.school.faculty
+        let _department = editTempCD[EditItemMdlResumeSchool.department.itemKey] ?? resume.school.department
         let _guraduationYearMonth = editTempCD[EditItemMdlResumeSchool.graduationYear.itemKey] ?? resume.school.graduationYear
         let _finalEducation = FinalEducationDTO(schoolName: _schoolName, faculty: _faculty, department: _department, guraduationYearMonth: _guraduationYearMonth)
         self.finalEducation = _finalEducation
