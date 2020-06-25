@@ -36,6 +36,7 @@ class JobDetailImageCell: BaseTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+//        Log.selectLog(logLevel: .debug, "JobDetailImageCell awakeFromNib start")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -43,9 +44,13 @@ class JobDetailImageCell: BaseTableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+    }
         
     func setCellWidth(width:CGFloat) {
-        
+//        Log.selectLog(logLevel: .debug, "JobDetailImageCell setCellWidth start")
         var mainImageBackFrame = self.mainImageBackView.frame
 //        mainImageBackFrame.size.width = self.contentView.frame.size.width
         mainImageBackFrame.size.width = width
@@ -66,15 +71,44 @@ class JobDetailImageCell: BaseTableViewCell {
         
         margin = imageX
         
-        self.mainImagesScrollView = UIScrollView.init(frame: CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight))
-        self.mainImagesScrollView.isPagingEnabled = true
-        self.mainImagesScrollView.showsVerticalScrollIndicator = false
-        self.mainImagesScrollView.showsHorizontalScrollIndicator = false
-        self.mainImagesScrollView.delegate = self
-        self.mainImageBackView.addSubview(self.mainImagesScrollView)
+        if addImageScrollViewCheck() {
+            
+            self.mainImagesScrollView = UIScrollView.init(frame: CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight))
+            self.mainImagesScrollView.isPagingEnabled = true
+            self.mainImagesScrollView.showsVerticalScrollIndicator = false
+            self.mainImagesScrollView.showsHorizontalScrollIndicator = false
+            self.mainImagesScrollView.delegate = self
+            self.mainImageBackView.addSubview(self.mainImagesScrollView)
+        }
+    }
+    
+    private func addImageScrollViewCheck() -> Bool {
+//        Log.selectLog(logLevel: .debug, "JobDetailImageCell addImageScrollViewCheck start")
+        var addFlag:Bool = true
+        for _subView in self.mainImageBackView.subviews {
+//            Log.selectLog(logLevel: .debug, "_subView:\(_subView)")
+            if _subView is UIScrollView {
+                addFlag = false
+                break
+            }
+        }
+        return addFlag
+    }
+    private func addImageScrollCheck() -> Bool {
+//        Log.selectLog(logLevel: .debug, "JobDetailImageCell addImageScrollCheck start")
+        var addFlag:Bool = true
+        for _subView in self.mainImagesScrollView.subviews {
+//            Log.selectLog(logLevel: .debug, "_subView:\(_subView)")
+            if _subView is UIImageView {
+                addFlag = false
+                break
+            }
+        }
+        return addFlag
     }
     
     func setup(data: MdlJobCardDetail) {
+        Log.selectLog(logLevel: .debug, "JobDetailImageCell setup start")
         // 画像セット
         
         let mainImageUrlString:String = data.mainPicture
@@ -95,29 +129,31 @@ class JobDetailImageCell: BaseTableViewCell {
             
             self.mainImagesControl.numberOfPages = imageUrlStrings.count
             
-            // 無限スクロール用
-            for i in 0..<(imageUrlStrings.count * 3) {
-                var cnt:Int = 0
-                cnt = i
-                if i >= imageUrlStrings.count {
-                    cnt = i % imageUrlStrings.count
-                }
-                let imageUrlString = imageUrlStrings[cnt]
-                let imageUrl = URL(string: imageUrlString)
-                let scrollX:CGFloat = (margin + (viewWidth * CGFloat(i)))
+            if addImageScrollCheck() {
+                // 無限スクロール用
+                for i in 0..<(imageUrlStrings.count * 3) {
+                    var cnt:Int = 0
+                    cnt = i
+                    if i >= imageUrlStrings.count {
+                        cnt = i % imageUrlStrings.count
+                    }
+                    let imageUrlString = imageUrlStrings[cnt]
+                    let imageUrl = URL(string: imageUrlString)
+                    let scrollX:CGFloat = (margin + (viewWidth * CGFloat(i)))
 
-                let imageView = UIImageView.init(frame: CGRect(x: scrollX, y: imageY, width: imageW, height: imageH))
-                imageView.backgroundColor = UIColor.init(colorType: .color_white)
-                imageView.contentMode = .scaleAspectFit
-                imageView.af_setImage(withURL: imageUrl!)
-                
-                imageView.layer.cornerRadius = 15
-                imageView.layer.masksToBounds = true
-                imageView.clipsToBounds = true
-                
-                self.mainImagesScrollView.addSubview(imageView)
+                    let imageView = UIImageView.init(frame: CGRect(x: scrollX, y: imageY, width: imageW, height: imageH))
+                    imageView.backgroundColor = UIColor.init(colorType: .color_white)
+                    imageView.contentMode = .scaleAspectFit
+                    imageView.af_setImage(withURL: imageUrl!)
+                    
+                    imageView.layer.cornerRadius = 15
+                    imageView.layer.masksToBounds = true
+                    imageView.clipsToBounds = true
+                    
+                    self.mainImagesScrollView.addSubview(imageView)
+                }
+                self.mainImagesScrollView.contentSize = CGSize(width: (CGFloat(imageUrlStrings.count*3) * viewWidth), height: viewHeight)
             }
-            self.mainImagesScrollView.contentSize = CGSize(width: (CGFloat(imageUrlStrings.count*3) * viewWidth), height: viewHeight)
             
         } else {
             for i in 0..<(imageUrlStrings.count) {

@@ -14,6 +14,7 @@ class JobDetailItemAttentionView: UIView {
     @IBOutlet weak var markTopConstraint:NSLayoutConstraint!
     @IBOutlet weak var markLabel:UILabel!
     @IBOutlet weak var titleLabel:UILabel!
+    @IBOutlet weak var titleLabelTop:NSLayoutConstraint!
     @IBOutlet weak var titleLabelHeight:NSLayoutConstraint!
     @IBOutlet weak var textLabel:UILabel!
 
@@ -37,8 +38,9 @@ class JobDetailItemAttentionView: UIView {
         
         if textSize > singleWidth {
             markTopConstraint.constant = 9
-            titleLabelHeight.constant = 45
-            titleBackHeight.constant = 50
+            titleLabelTop.constant = 1
+            titleLabelHeight.constant = 50
+            titleBackHeight.constant = 60
         }
         
         let text = datas["text"] as! String
