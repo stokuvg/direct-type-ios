@@ -13,13 +13,24 @@ final class InitialInputCompleteVC: TmpBasicVC {
     @IBOutlet private weak var textView: UITextView!
     
     @IBAction private func nextButton(_ sender: UIButton) {
-        pushViewController(.firstInputPreviewA)
+        switch transitionDestination {
+        case .firstInpute:
+            pushViewController(.firstInputPreviewA)
+        case .homeTab:
+            transitionToBaseTab()
+        }
+    }
+    
+    enum TransitionDestinationTypr {
+        case firstInpute
+        case homeTab
     }
     
     private let closeMouthImage = UIImage(named: "suma_normal1")!
     private let openMouthImage = UIImage(named: "suma_normal2")!
     
     private var replaceText: String?
+    private var transitionDestination = TransitionDestinationTypr.firstInpute
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +40,10 @@ final class InitialInputCompleteVC: TmpBasicVC {
     
     func replaceDescription(by text: String) {
         replaceText = text
+    }
+    
+    func changeTransitionDestination(type: TransitionDestinationTypr) {
+        transitionDestination = type
     }
 }
 
@@ -42,5 +57,12 @@ private extension InitialInputCompleteVC {
         imageView.animationImages = [closeMouthImage, openMouthImage]
         imageView.animationDuration = 1
         imageView.startAnimating()
+    }
+    
+    func transitionToBaseTab() {
+        let tabSB = UIStoryboard(name: "BaseTabBC", bundle: nil)
+        let tabBC = tabSB.instantiateViewController(withIdentifier: "Sbid_BaseTabBC")
+        let newNavigationController = UINavigationController(rootViewController: tabBC)
+        UIApplication.shared.keyWindow?.rootViewController = newNavigationController
     }
 }

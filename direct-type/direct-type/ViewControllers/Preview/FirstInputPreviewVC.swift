@@ -177,6 +177,7 @@ private extension FirstInputPreviewVC {
     func transitionToComplete() {
         let complete = getVC(sbName: "InitialInputCompleteVC", vcName: "InitialInputCompleteVC") as! InitialInputCompleteVC
         complete.replaceDescription(by: descriptipon)
+        complete.changeTransitionDestination(type: .homeTab)
         navigationController?.pushViewController(complete, animated: true)
     }
 }
