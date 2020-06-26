@@ -676,7 +676,7 @@ extension HomeVC: BaseJobCardCellDelegate {
     }
     
     func keepAction(tag: Int) {
-        Log.selectLog(logLevel: .debug, "keepAction tag:\(tag)")
+//        Log.selectLog(logLevel: .debug, "keepAction tag:\(tag)")
         if self.keepSendStatus == .sending { return }
         
         self.keepSendStatus = .sending
@@ -687,20 +687,20 @@ extension HomeVC: BaseJobCardCellDelegate {
         let flag = !jobCard.keepStatus
         jobCard.keepStatus = flag
         if flag == true {
-            Log.selectLog(logLevel: .debug, "キープ追加:jobId:\(jobId)")
+//            Log.selectLog(logLevel: .debug, "キープ追加:jobId:\(jobId)")
             
             ApiManager.sendJobKeep(id: jobId)
                 .done { result in
-                Log.selectLog(logLevel: .debug, "keep send success")
-                    Log.selectLog(logLevel: .debug, "keep成功")
+//                    Log.selectLog(logLevel: .debug, "keep send success")
+//                    Log.selectLog(logLevel: .debug, "keep成功")
                     
             }.catch{ (error) in
-                Log.selectLog(logLevel: .debug, "keep send error:\(error)")
+//                Log.selectLog(logLevel: .debug, "keep send error:\(error)")
                 
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 self.showError(myErr)
             }.finally {
-                Log.selectLog(logLevel: .debug, "keep send finally")
+//                Log.selectLog(logLevel: .debug, "keep send finally")
                 self.dispJobCards.jobCards[tag] = jobCard
                 let updateIndex = IndexPath.init(row: tag, section: 0)
                 self.homeTableView.performBatchUpdates({
@@ -712,20 +712,20 @@ extension HomeVC: BaseJobCardCellDelegate {
                 })
             }
         } else {
-            Log.selectLog(logLevel: .debug, "キープ削除:jobId:\(jobId)")
+//            Log.selectLog(logLevel: .debug, "キープ削除:jobId:\(jobId)")
             
             ApiManager.sendJobDeleteKeep(id: jobId)
                 .done { result in
-                Log.selectLog(logLevel: .debug, "keep delete success")
-                    Log.selectLog(logLevel: .debug, "delete成功")
+//                    Log.selectLog(logLevel: .debug, "keep delete success")
+//                    Log.selectLog(logLevel: .debug, "delete成功")
                     
             }.catch{ (error) in
-                Log.selectLog(logLevel: .debug, "keep delete error:\(error)")
+//                Log.selectLog(logLevel: .debug, "keep delete error:\(error)")
                 
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 self.showError(myErr)
             }.finally {
-                Log.selectLog(logLevel: .debug, "keep delete finally")
+//                Log.selectLog(logLevel: .debug, "keep delete finally")
                 
                 self.dispJobCards.jobCards[tag] = jobCard
                 let updateIndex = IndexPath.init(row: tag, section: 0)
