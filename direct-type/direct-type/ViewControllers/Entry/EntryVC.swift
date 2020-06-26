@@ -173,6 +173,10 @@ class EntryVC: PreviewBaseVC {
         super.viewDidAppear(animated)
         fetchGetEntryAll()
     }
+    override func chkButtonEnable() {
+        btnCommit.isEnabled = true
+    }
+
 }
 
 //=== APIフェッチ
