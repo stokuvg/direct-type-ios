@@ -144,11 +144,7 @@ private extension FirstInputPreviewVC {
         SVProgressHUD.show(withStatus: "履歴書情報の更新")
         ApiManager.createResume(param, isRetry: true)
         .done { result in
-            self.showConfirm(title: "初回入力", message: "登録完了しました", onlyOK: true)
-            .done { _ in
-                self.transitionToComplete()
-            }
-            .catch {_ in } .finally {}
+            self.transitionToComplete()
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
