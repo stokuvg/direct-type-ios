@@ -98,9 +98,9 @@ enum HPreviewItemType: String {
         case .resumeC9:       return "履歴書（一部必須）"
         case .careerC9:       return "職務経歴書（一部必須）"
         case .exQuestionC9:   return "独自質問（必須）"
-        case .ownPRC9:        return "自己PR文字カウント"
-        case .hopeAreaC9:     return "希望勤務地（任意）"
-        case .hopeSalaryC9:   return "希望年収（任意）"
+        case .ownPRC9:        return "自己PR"
+        case .hopeAreaC9:     return "希望勤務地"
+        case .hopeSalaryC9:   return "希望年収"
         //=== [H-2]個人プロフィール編集
         case .fullnameH2:     return "氏名"
         case .birthGenderH2:  return "生年月日・性別"
