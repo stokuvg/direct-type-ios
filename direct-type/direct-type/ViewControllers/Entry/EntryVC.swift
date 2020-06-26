@@ -269,9 +269,12 @@ extension EntryVC {
         }
     }
     private func fetchPostEntry() {
-        let param: WebAPIEntryUserDto = WebAPIEntryUserDto(editableModel.editTempCD)
+        guard let _jobCard = self.jobCard else { return }
+        guard let _profile = self.profile else { return }
+        guard let _resume = self.resume else { return }
+        guard let _career = self.career else { return }
+        let param: WebAPIEntryUserDto = WebAPIEntryUserDto(_jobCard.jobCardCode, _profile, _resume, _career, editableModel.editTempCD)
         print(param)
-        
             
         SVProgressHUD.show(withStatus: "応募処理")
         ApiManager.postEntry(param, isRetry: true)

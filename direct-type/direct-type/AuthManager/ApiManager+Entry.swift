@@ -13,137 +13,98 @@ import TudApi
 //=== 応募 ===
 extension WebAPIEntryUserDto {
     init() {
-        self.init(password: "Dummy123$", lastname: "", firstname: "", lastnameKana: "", firstnameKana: "", sex: "", email: "", emailMobile: "", birthday: "", zip: "", areaValue: "", address: "", tel: "", mobile: "", educationValue: "", educationName: "", educationDivision: "", graduationY: "", graduationM: "", educationNote: nil, workStatus: "", changeJobCount: "", userOldJob3List: [], userOldIndustryList: [], toeic: nil, toefl: nil, englishSkillValue: nil, otherLanguage: nil, license: nil, jobId: "", experienceCompanyList: [], userSkillList: nil, userLicenseList: nil, skillsheetFreeword: nil, entryEtc: nil, entryPlaceList: nil, salaryId: nil, changeTimeId: nil, entryContactList: nil, entryAnswer1: "", entryAnswer2: "", entryAnswer3: "")
+        self.init(password: "Dummy1234", lastname: "", firstname: "", lastnameKana: "", firstnameKana: "", sex: "", email: "", emailMobile: "", birthday: "", zip: "", areaValue: "", address: "", tel: "", mobile: "", educationValue: "", educationName: "", educationDivision: "", graduationY: "", graduationM: "", educationNote: nil, workStatus: "", changeJobCount: "", userOldJob3List: [], userOldIndustryList: [], toeic: nil, toefl: nil, englishSkillValue: nil, otherLanguage: nil, license: nil, jobId: "", experienceCompanyList: [], userSkillList: nil, userLicenseList: nil, skillsheetFreeword: nil, entryEtc: nil, entryPlaceList: nil, salaryId: nil, changeTimeId: nil, entryContactList: nil, entryAnswer1: "", entryAnswer2: "", entryAnswer3: "")
     }
-    init(_ editTempCD: [EditableItemKey: EditableItemCurVal]) {
+    init(_ jobCardCode: String, _ profile: MdlProfile, _ resume: MdlResume, _ career: MdlCareer, _ editTempCD: [EditableItemKey: EditableItemCurVal]) {
         self.init()
         
-        if let tmp = editTempCD[EditItemMdlProfile.familyName.itemKey] {
-            self.lastname = tmp
+        self.lastname = profile.familyName
+        self.firstname = profile.firstName
+        self.lastnameKana = profile.familyNameKana
+        self.firstnameKana = profile.firstNameKana
+        self.sex = profile.gender
+        self.email = profile.mailAddress
+//        self.emailMobile = XXX
+        self.birthday = profile.birthday.dispYmd()
+        if profile.zipCode.count == 7 {
+            let zip3: String = String.substr(profile.zipCode, 1, 3)
+            let zip4: String = String.substr(profile.zipCode, 4, 4)
+            self.zip = "\(zip3)-\(zip4)"
         }
-        if let tmp = editTempCD[EditItemMdlProfile.firstName.itemKey] {
-            self.firstname = tmp
+        self.areaValue = profile.prefecture
+        self.address = "\(profile.address1)\(profile.address2)"
+//        self.tel = XXX
+        self.mobile = profile.mobilePhoneNo
+        self.educationValue = resume.educationId //これはFirstInputで入力
+        self.educationName = resume.school.schoolName
+        self.educationDivision = "\(resume.school.faculty)\(resume.school.department)"
+        let graduationYM: Date = DateHelper.convStrYM2Date(resume.school.graduationYear)
+        self.graduationY = graduationYM.dispYear()
+        self.graduationM = graduationYM.dispMonth() //0埋め不要
+//        self.educationNote = XXX
+        self.workStatus = resume.employmentStatus
+        self.changeJobCount = resume.changeCount
+        /** 経験職種(userOldJob3)を参照 */
+        var _userOldJob3List: [UserOldJob3] = []
+        _userOldJob3List.append(UserOldJob3(job3Id: resume.lastJobExperiment.jobType, experienceYears: resume.lastJobExperiment.jobExperimentYear))
+        //!!!: 2つ目以降
+        self.userOldJob3List = _userOldJob3List
+        /** 経験業種(userOldIndustry)を参照 */
+        var _userOldIndustryList: [UserOldIndustry] = []
+        _userOldIndustryList.append(UserOldIndustry(industryId: "1"))//!!![Dummy]
+        self.userOldIndustryList = _userOldIndustryList
+        self.toeic = resume.skillLanguage.languageToeicScore
+        self.toefl = resume.skillLanguage.languageToeflScore
+        self.englishSkillValue = resume.skillLanguage.languageEnglish
+        self.otherLanguage = resume.skillLanguage.languageStudySkill
+//        public var license: String?
+//        self.license = "tmp"
+//        self.jobId = jobCardCode
+        self.jobId = "1170847"
+        /** 職務経歴書(experienceCompany)を参照 */
+        var _experienceCompanyList: [ExperienceCompany] = []//!!!
+        for item in career.businessTypes {
+            let expCompany = ExperienceCompany(company: item.companyName, startworkY: item.workPeriod.startDate.dispYear(), startworkM: item.workPeriod.startDate.dispMonth(), endworkY: item.workPeriod.endDate.dispYear(), endworkM: item.workPeriod.endDate.dispMonth(), employees: item.employeesCount, employmentId: item.employmentType, salary: item.salary, workNote: item.contents)
+            _experienceCompanyList.append(expCompany)
         }
-        if let tmp = editTempCD[EditItemMdlProfile.familyNameKana.itemKey] {
-            self.lastnameKana = tmp
+        self.experienceCompanyList = _experienceCompanyList
+//        /** スキルシート(userSkill)を参照 */
+//        var _userSkillList: [UserSkill] = []
+//        self.userSkillList = _userSkillList
+//        /** ライセンス(userLicense)を参照 */
+//        var _userLicenseList: [UserLicense] = []
+//        self.userLicenseList = _userLicenseList
+//        self.skillsheetFreeword = XXX
+        if let tmp = editTempCD[EditItemMdlEntry.ownPR.itemKey] {
+            self.entryEtc = tmp
         }
-        if let tmp = editTempCD[EditItemMdlProfile.firstNameKana.itemKey] {
-            self.firstnameKana = tmp
+        var _entryPlaceList: [EntryPlace] = []
+        if let tmp = editTempCD[EditItemMdlEntry.hopeArea.itemKey] {
+            for code in tmp.split(separator: EditItemTool.SplitMultiCodeSeparator) {
+                _entryPlaceList.append(EntryPlace(placeId: String(code)))
+            }
         }
-        if let tmp = editTempCD[EditItemMdlProfile.gender.itemKey] {
-            self.sex = tmp
+        _entryPlaceList.append(EntryPlace(placeId: "33"))//!!!
+        
+        self.entryPlaceList = _entryPlaceList
+        if let tmp = editTempCD[EditItemMdlEntry.hopeSalary.itemKey] {
+            self.salaryId = tmp
         }
-        if let tmp = editTempCD[EditItemMdlProfile.mailAddress.itemKey] {
-            self.email = tmp
+//        /** 転職時期マスタより選択。 */
+//        public var changeTimeId: String?
+//        self.changeTimeId = XXX
+//        /** 希望連絡先(entryContact)を参照 */
+//        public var entryContactList: [EntryContact]?
+//        self.entryContactList = XXX
+        if let tmp = editTempCD[EditItemMdlEntry.exQuestionAnswer1.itemKey] {
+            self.entryAnswer1 = tmp
         }
-//        if let tmp = editTempCD[EditItemMdlProfile.XXX.itemKey] {
-//            self.emailMobile = tmp
-//        }
-        if let tmp = editTempCD[EditItemMdlProfile.birthday.itemKey] {
-            self.birthday = tmp
+        if let tmp = editTempCD[EditItemMdlEntry.exQuestionAnswer2.itemKey] {
+            self.entryAnswer2 = tmp
         }
-        if let tmp = editTempCD[EditItemMdlProfile.zipCode.itemKey] {
-            self.zip = tmp
+        if let tmp = editTempCD[EditItemMdlEntry.exQuestionAnswer3.itemKey] {
+            self.entryAnswer3 = tmp
         }
-        if let tmp = editTempCD[EditItemMdlProfile.prefecture.itemKey] {
-            self.areaValue = tmp
-        }
-        let _address1: String = editTempCD[EditItemMdlProfile.address1.itemKey] ?? ""
-        let _address2: String = editTempCD[EditItemMdlProfile.address2.itemKey] ?? ""
-        let _address: String = "\(_address1)\(_address2)"
-        self.address = _address
-//        if let tmp = editTempCD[EditItemMdlProfile.XXX.itemKey] {
-//            self.tel = tmp
-//        }
-        if let tmp = editTempCD[EditItemMdlProfile.mobilePhoneNo.itemKey] {
-            self.mobile = tmp
-        }
-        if let tmp = editTempCD[EditItemMdlFirstInput.school.itemKey] {//!!!
-            self.educationValue = tmp //これはProfileモデルより（FirstInputで入力
-        }
-        if let tmp = editTempCD[EditItemMdlResumeSchool.schoolName.itemKey] {
-            self.educationName = tmp
-        }
-        if let tmp = editTempCD[EditItemMdlResumeSchool.faculty.itemKey] {
-            let tmp2 = editTempCD[EditItemMdlResumeSchool.department.itemKey] ?? ""
-            self.educationDivision = "\(tmp)\(tmp2)っっx"
-        }
-        if let tmp = editTempCD[EditItemMdlResumeSchool.graduationYear.itemKey] {
-            let tmpY = "2000"//!!!
-            let tmpM = "04"
-            self.graduationY = tmpY
-            self.graduationM = tmpM //0埋め不要
-        }
-//        if let tmp = editTempCD[EditItemMdlProfile.XXX.itemKey] {
-//            self.educationNote = tmp
-//        }
-        if let tmp = editTempCD[EditItemMdlResume.employmentStatus.itemKey] {
-            self.workStatus = tmp
-        }
-        if let tmp = editTempCD[EditItemMdlResume.changeCount.itemKey] {
-            self.changeJobCount = tmp
-        }
-//        public var userOldJob3List: [UserOldJob3]
-
-//        if let tmp = editTempCD[EditItemMdlResume.userOldJob3List[].itemKey] {
-//            self.userOldJob3List = tmp
-//        }
-//        if let tmp = editTempCD[EditItemMdlProfile.userOldIndustryList[].itemKey] {
-//            self.userOldIndustryList = tmp
-//        }
-//        if let tmp = editTempCD[EditItemMdlResume.toeic.itemKey] {
-//            self.toeic = tmp
-//        }
-//        if let tmp = editTempCD[EditItemMdlProfile.toefl.itemKey] {
-//            self.toefl = tmp
-//        }
-//        if let tmp = editTempCD[EditItemMdlProfile.englishSkillValue.itemKey] {
-//            self.englishSkillValue = tmp
-//        }
-//        if let tmp = editTempCD[EditItemMdlProfile.otherLanguage.itemKey] {
-//            self.otherLanguage = tmp
-//        }
-//        if let tmp = editTempCD[EditItemMdlProfile.license.itemKey] {
-//            self.license = tmp
-//            if let tmp = editTempCD[EditItemMdlProfile.jobId.itemKey] {
-//                self.jobId = tmp
-//            }
-//            if let tmp = editTempCD[EditItemMdlProfile.experienceCompanyList[].itemKey] {
-//                self.experienceCompanyList = tmp
-//            }
-//            if let tmp = editTempCD[EditItemMdlProfile.userSkillList[].itemKey] {
-//                self.userSkillList = tmp
-//            }
-//            if let tmp = editTempCD[EditItemMdlProfile.userLicenseList[].itemKey] {
-//                self.userLicenseList = tmp
-//            }
-//            if let tmp = editTempCD[EditItemMdlProfile.skillsheetFreeword.itemKey] {
-//                self.skillsheetFreeword = tmp
-//            }
-//            if let tmp = editTempCD[EditItemMdlProfile.entryEtc.itemKey] {
-//                self.entryEtc = tmp
-//            }
-//            if let tmp = editTempCD[EditItemMdlProfile.entryPlaceList.itemKey] {
-//                self.entryPlaceList = tmp
-//            }
-//            if let tmp = editTempCD[EditItemMdlProfile.salaryId.itemKey] {
-//                self.salaryId = tmp
-//            }
-//            if let tmp = editTempCD[EditItemMdlProfile.changeTimeId.itemKey] {
-//                self.changeTimeId = tmp
-//            }
-//            if let tmp = editTempCD[EditItemMdlProfile.entryContactList.itemKey] {
-//                self.entryContactList = tmp
-//            }
-//            if let tmp = editTempCD[EditItemMdlProfile.entryAnswer1.itemKey] {
-//                self.entryAnswer1 = tmp
-//            }
-//            if let tmp = editTempCD[EditItemMdlProfile.entryAnswer2.itemKey] {
-//                self.entryAnswer2 = tmp
-//            }
-//            if let tmp = editTempCD[EditItemMdlProfile.entryAnswer3.itemKey] {
-//                self.entryAnswer3 = tmp
-//            }
     }
 }
 extension ApiManager {
