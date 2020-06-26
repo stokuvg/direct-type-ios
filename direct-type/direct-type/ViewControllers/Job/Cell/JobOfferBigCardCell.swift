@@ -125,7 +125,7 @@ class JobOfferBigCardCell: BaseJobCardCell {
         // メイン
         let mainText = data.mainTitle.paragraphElimination()
         catchLabel.text(text: mainText, fontType: .C_font_SS , textColor: UIColor.init(colorType: .color_parts_gray)!, alignment: .left)
-        catchLabel.lineBreakMode = .byClipping
+        catchLabel.lineBreakMode = .byTruncatingTail
         
         // 見送りボタン
 //        let skip = data.skipStatus
