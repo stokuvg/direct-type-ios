@@ -26,7 +26,7 @@ private extension ChemistryResultPersonalTypeCell {
     func setup() {
         guard let personalType = personalType else { return }
         iconImageView.image = UIImage(named: personalType.imageName)
-        personalTypeLabel.text = personalType.rawValue
+        personalTypeLabel.text = personalType.title
         descriptionLabel.text = personalType.description
     }
     
