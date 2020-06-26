@@ -35,6 +35,18 @@ class MdlJobCardList: Codable {
         self.init(updateAt: updateAt, hasNext:hasNext, jobList:lists)
     }
     
+    convenience init(recommend: GetJobsRecommendResponseDTO) {
+        let updateAt = recommend.recommendedAt
+        let hasNext = recommend.hasNext
+        var lists:[MdlJobCard] = []
+        for i in 0..<recommend.jobs.count {
+            let _job = recommend.jobs[i]
+            lists.append(MdlJobCard(dto: _job))
+        }
+        
+        self.init(updateAt: updateAt, hasNext:hasNext, jobList:lists)
+    }
+    
     var debugDisp: String {
         return "[updatesAt:\(updateAt) jobDatas:\(jobCards.count)件 次ページ:\(nextPage)]"
     }

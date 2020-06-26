@@ -384,23 +384,43 @@ class HomeVC: TmpNaviTopVC {
     }
     #endif
     
-    private func recommendLoad() {
+    private func recommendSend() {
         SVProgressHUD.show()
-        pageJobCards = MdlJobCardList()
-        dispJobCards = MdlJobCardList()
         RecommendManager.fetchRecommend(type: .ap112, jobID: "")
         .done { result in
             Log.selectLog(logLevel: .debug, "求人一覧のレコメンド 成功:\(result)")
             
 //            self.pageJobCards = result
+            self.recommendLoad()
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
+            SVProgressHUD.dismiss()
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             Log.selectLog(logLevel: .debug, "求人一覧のレコメンド エラー:\(myErr.debugDisp)")
         }
         .finally {
-            SVProgressHUD.dismiss()
             self.homeTableView.reloadData()
+        }
+    }
+    private func recommendLoad() {
+        pageJobCards = MdlJobCardList()
+        dispJobCards = MdlJobCardList()
+        pageNo = 1
+        ApiManager.getRecommendJobs(pageNo, isRetry: true)
+            .done { result in
+                debugLog("ApiManager getRecommendJobs result:\(result.debugDisp)")
+                
+                self.pageJobCards = result
+        }
+        .catch { (error) in
+            Log.selectLog(logLevel: .debug, "error:\(error)")
+            
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            self.showError(myErr)
+        }
+        .finally {
+            SVProgressHUD.dismiss()
+            self.dataCheckAction()
         }
     }
     
@@ -558,7 +578,7 @@ extension HomeVC: JobOfferCardReloadCellDelegate {
         Log.selectLog(logLevel: .debug, "allTableReloadAction start")
         // 精度の高い求人を受け取る
 //        self.homeTableView.reloadData()
-        self.recommendLoad()
+        self.recommendSend()
     }
 }
 

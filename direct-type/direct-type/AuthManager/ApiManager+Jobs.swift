@@ -10,6 +10,37 @@ import PromiseKit
 import TudApi
 
 //================================================================
+//=== レコメンド 仕事一覧取得 ===
+extension ApiManager {
+    class func getRecommendJobs(_ pageNo: Int, isRetry: Bool = true) -> Promise<MdlJobCardList> {
+//    class func getJobs(_ param: Void, isRetry: Bool = true) -> Promise<MdlJobCardList> {
+        if isRetry {
+            return firstly { () -> Promise<MdlJobCardList> in
+                retry(args: pageNo, task: getRecommendJobsFetch) { (error) -> Bool in return true }
+            }
+        } else {
+            return getRecommendJobsFetch(pageNo: pageNo)
+        }
+    }
+    
+    private class func getRecommendJobsFetch(pageNo: Int) -> Promise<MdlJobCardList> {
+        let (promise, resolver) = Promise<MdlJobCardList>.pending()
+        AuthManager.needAuth(true)
+        JobsAPI.jobsControllerGet(page: pageNo)
+        .done { result in
+//            print(#line, #function, result)
+            resolver.fulfill(MdlJobCardList(dto: result)) //変換しておく
+        }
+        .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
+            resolver.reject(error)
+        }
+        .finally {
+        }
+        return promise
+    }
+}
+
+//================================================================
 //=== 仕事一覧取得 ===
 extension ApiManager {
     class func getJobs(_ pageNo: Int, isRetry: Bool = true) -> Promise<MdlJobCardList> {

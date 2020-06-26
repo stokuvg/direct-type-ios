@@ -701,6 +701,33 @@
           "jobs"
         ]
       },
+      "GetJobsRecommendResponseDTO": {
+        "type": "object",
+        "properties": {
+          "hasNext": {
+            "type": "boolean",
+            "example": true,
+            "description": "true: 次ページあり, false: 次ページなし"
+          },
+          "recommendedAt": {
+            "type": "string",
+            "example": "2020-01-22T08:36:08.816Z",
+            "description": "おすすめ一覧作成日（RFC3339）"
+          },
+          "jobs": {
+            "description": "求人一覧",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Job"
+            }
+          }
+        },
+        "required": [
+          "hasNext",
+          "recommendedAt",
+          "jobs"
+        ]
+      },
       "Contact": {
         "type": "object",
         "properties": {
@@ -2080,7 +2107,14 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+                "application/json": {
+                  "schema": {
+                      "$ref": "#/components/schemas/GetJobsRecommendResponseDTO"
+                  }
+                }
+            }
           }
         },
         "tags": [
