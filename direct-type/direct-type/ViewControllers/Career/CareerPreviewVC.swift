@@ -100,7 +100,6 @@ class CareerPreviewVC: PreviewBaseVC {
 //=== APIフェッチ
 extension CareerPreviewVC {
     private func fetchCreateCareerList() {
-        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         guard arrDetail.count > targetCardNum else { return }
         let _detail = arrDetail[targetCardNum]
         let card = CareerHistoryDTO(_detail, editableModel.editTempCD) //変更部分を適用した更新用モデルを生成

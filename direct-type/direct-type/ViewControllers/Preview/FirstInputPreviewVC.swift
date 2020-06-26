@@ -15,13 +15,11 @@ final class FirstInputPreviewVC: PreviewBaseVC {
     var detail: MdlFirstInput? = nil
 
     override func actCommit(_ sender: UIButton) {
-        print(#line, #function, "ボタン押下でAPIフェッチ確認")
         if validateLocalModel() {
             tableVW.reloadData()
             return
         }
         fetchCreateProfile()
-//        fetchCreateResume()
     }
     //共通プレビューをOverrideして利用する
     override func initData() {
@@ -104,7 +102,10 @@ final class FirstInputPreviewVC: PreviewBaseVC {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        fetchGetResume()
+    }
+    private func completeUpdate() {
+        self.editableModel.editTempCD.removeAll()//編集情報をまるっと削除
+        self.chkButtonEnable()
     }
 }
 
@@ -112,7 +113,6 @@ final class FirstInputPreviewVC: PreviewBaseVC {
 private extension FirstInputPreviewVC {
     //プロフィールと履歴書を叩くため
     func fetchCreateProfile() {
-        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         let param = CreateProfileRequestDTO(editableModel.editTempCD)
         SVProgressHUD.show(withStatus: "プロフィール情報の作成")
         ApiManager.createProfile(param, isRetry: true)
@@ -138,7 +138,6 @@ private extension FirstInputPreviewVC {
     }
     
     func fetchCreateResume() {
-        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
         self.dicValidErrMsg.removeAll()//状態をクリアしておく
         let param = CreateResumeRequestDTO(editableModel.editTempCD)

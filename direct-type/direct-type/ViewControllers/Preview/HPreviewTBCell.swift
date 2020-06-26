@@ -59,7 +59,7 @@ class HPreviewTBCell: UITableViewCell {
             self.accessoryType = .none
         } else {
             self.isUserInteractionEnabled = true
-            self.accessoryType = .disclosureIndicator
+            self.accessoryType = .none // .disclosureIndicator 遷移マーク不要
         }
     }
     

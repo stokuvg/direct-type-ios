@@ -120,7 +120,6 @@ extension CareerListVC: UITableViewDataSource, UITableViewDelegate {
 //=== APIフェッチ
 extension CareerListVC {
     private func fetchGetCareerList() {
-        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         SVProgressHUD.show(withStatus: "職務経歴書情報の取得")
         ApiManager.getCareer(Void(), isRetry: true)
         .done { result in
@@ -145,7 +144,6 @@ extension CareerListVC {
         }
     }
     private func fetchUpdateCareerList() {
-        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         var tempCards: [CareerHistoryDTO] = []
         for (num, item) in arrDisp.enumerated() {
             tempCards.append(CareerHistoryDTO(item))

@@ -109,7 +109,7 @@ class EntryVC: PreviewBaseVC {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
         self.arrData.removeAll()//いったん全件を削除しておく
         editableModel.arrData.removeAll()//こちらで管理させる？！
-        
+
         //====== [C-9]応募フォーム
         //===４．応募先求人
         arrData.append(MdlItemH(.jobCardC9, "", childItems: [
@@ -181,7 +181,6 @@ extension EntryVC {
         fetchGetProfile()//ここから多段で実施してる
     }
     private func fetchGetProfile() {
-        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         SVProgressHUD.show(withStatus: "プロフィール情報の取得")
         ApiManager.getProfile(Void(), isRetry: true)
         .done { result in
@@ -196,8 +195,6 @@ extension EntryVC {
         }
     }
     private func fetchGetResume() {
-        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
-        //========================================================
         SVProgressHUD.show(withStatus: "履歴書の取得")
         ApiManager.getResume(Void(), isRetry: true)
         .done { result in
@@ -213,7 +210,6 @@ extension EntryVC {
         }
     }
     private func fetchGetCareerList() {
-        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         SVProgressHUD.show(withStatus: "職務経歴書情報の取得")
         ApiManager.getCareer(Void(), isRetry: true)
         .done { result in

@@ -119,7 +119,6 @@ extension EditableBasicVC: InputItemHDelegate {
                 tf.resignFirstResponder()//自分を解除しておかないと、戻ってきたときにまた遷移してしまうため
                 let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSingleVC") as? SubSelectSingleVC{
-                    print("\t🌸🌸[\(item.curVal)] -> [\(editTemp.curVal)]🌸🌸")
                     nvc.initData(self, editableItem: item, selectingCodes: editTemp.curVal)
                     //遷移アニメーション関連
                     nvc.modalTransitionStyle = .crossDissolve
@@ -132,7 +131,6 @@ extension EditableBasicVC: InputItemHDelegate {
                 tf.resignFirstResponder()//自分を解除しておかないと、戻ってきたときにまた遷移してしまうため
                 let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectMultiVC") as? SubSelectMultiVC{
-                    print("\t🌸🌸[\(item.curVal)] -> [\(editTemp.curVal)]🌸🌸")
                     nvc.initData(self, editableItem: item, selectingCodes: editTemp.curVal)
                     //遷移アニメーション関連
                     nvc.modalTransitionStyle = .crossDissolve
