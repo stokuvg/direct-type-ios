@@ -109,7 +109,7 @@ class EntryVC: PreviewBaseVC {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
         self.arrData.removeAll()//いったん全件を削除しておく
         editableModel.arrData.removeAll()//こちらで管理させる？！
-        
+
         //====== [C-9]応募フォーム
         //===４．応募先求人
         arrData.append(MdlItemH(.jobCardC9, "", childItems: [

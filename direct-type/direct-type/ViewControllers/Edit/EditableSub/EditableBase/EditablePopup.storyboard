@@ -26,8 +26,8 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O3Q-09-Lsa" userLabel="左">
                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="44"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tiR-ys-sSH">
-                                                        <rect key="frame" x="14" y="6" width="24" height="24"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tiR-ys-sSH">
+                                                        <rect key="frame" x="18" y="10" width="24" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="24" id="Ejz-fV-O5V"/>
                                                             <constraint firstAttribute="width" constant="24" id="Iqr-lF-CTH"/>
@@ -84,10 +84,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R5o-c1-lHi" userLabel="メイン">
-                                <rect key="frame" x="0.0" y="88" width="414" height="684"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Kbe-JS-eGe">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="684"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell_SubSelectTBCell" id="sqb-2N-GVf" customClass="SubSelectTBCell" customModule="direct_type" customModuleProvider="target">
@@ -166,8 +166,8 @@
                             <constraint firstItem="J1U-TS-Gq6" firstAttribute="trailing" secondItem="cOa-Qa-W4d" secondAttribute="trailing" id="6mu-3C-Faa"/>
                             <constraint firstItem="cOa-Qa-W4d" firstAttribute="trailing" secondItem="R5o-c1-lHi" secondAttribute="trailing" id="7zt-SW-Geq"/>
                             <constraint firstItem="FBL-Lb-4mR" firstAttribute="top" secondItem="cOa-Qa-W4d" secondAttribute="top" id="ENB-X9-OCo"/>
+                            <constraint firstItem="cOa-Qa-W4d" firstAttribute="bottom" secondItem="R5o-c1-lHi" secondAttribute="bottom" id="Efz-m5-yUz"/>
                             <constraint firstItem="FBL-Lb-4mR" firstAttribute="leading" secondItem="cOa-Qa-W4d" secondAttribute="leading" id="GkW-Jg-86S"/>
-                            <constraint firstItem="J1U-TS-Gq6" firstAttribute="top" secondItem="R5o-c1-lHi" secondAttribute="bottom" id="Jhd-RR-92m"/>
                             <constraint firstItem="FBL-Lb-4mR" firstAttribute="trailing" secondItem="cOa-Qa-W4d" secondAttribute="trailing" id="X7P-SP-2nY"/>
                             <constraint firstItem="R5o-c1-lHi" firstAttribute="leading" secondItem="cOa-Qa-W4d" secondAttribute="leading" id="b0A-C1-oeB"/>
                             <constraint firstItem="J1U-TS-Gq6" firstAttribute="leading" secondItem="cOa-Qa-W4d" secondAttribute="leading" id="bhX-A5-N77"/>
@@ -180,6 +180,7 @@
                         <outlet property="btnCommit" destination="3f0-8W-5eh" id="g8Z-Uf-tlo"/>
                         <outlet property="lblTitle" destination="gnS-yA-ZjW" id="DyP-B4-WTx"/>
                         <outlet property="lcFootHeight" destination="2bA-sq-x5d" id="Bw2-jG-d9o"/>
+                        <outlet property="lcMainFootSpace" destination="7zt-SW-Geq" id="CQx-Sx-CKt"/>
                         <outlet property="tableVW" destination="Kbe-JS-eGe" id="26n-Q0-vkI"/>
                         <outlet property="vwFoot" destination="J1U-TS-Gq6" id="qf5-2r-Ls5"/>
                         <outlet property="vwHead" destination="FBL-Lb-4mR" id="9wY-dV-Kiy"/>
@@ -227,11 +228,11 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nIf-TF-ZAk" userLabel="左">
                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="44"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pyq-bs-4od">
-                                                        <rect key="frame" x="14" y="6" width="24" height="24"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pyq-bs-4od">
+                                                        <rect key="frame" x="18" y="10" width="24" height="24"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="32" id="Udv-g1-sXT"/>
-                                                            <constraint firstAttribute="height" constant="32" id="giG-9L-4cS"/>
+                                                            <constraint firstAttribute="width" constant="24" id="Udv-g1-sXT"/>
+                                                            <constraint firstAttribute="height" constant="24" id="giG-9L-4cS"/>
                                                         </constraints>
                                                         <state key="normal" title="Button" image="close"/>
                                                         <connections>
@@ -285,10 +286,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b1P-aH-p1F" userLabel="メイン">
-                                <rect key="frame" x="0.0" y="88" width="414" height="684"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ycb-EB-Mke">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="684"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell_SubSelectTBCell" id="vFP-aD-boO" customClass="SubSelectTBCell" customModule="direct_type" customModuleProvider="target">
@@ -344,7 +345,6 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="Bky-Sn-q1M" firstAttribute="trailing" secondItem="klL-xb-uaJ" secondAttribute="trailing" id="50n-vr-0qh"/>
-                            <constraint firstItem="Bky-Sn-q1M" firstAttribute="top" secondItem="b1P-aH-p1F" secondAttribute="bottom" id="6Sp-Bh-23m"/>
                             <constraint firstItem="yWH-6R-JsX" firstAttribute="leading" secondItem="klL-xb-uaJ" secondAttribute="leading" id="EiT-hl-rky"/>
                             <constraint firstItem="b1P-aH-p1F" firstAttribute="top" secondItem="yWH-6R-JsX" secondAttribute="bottom" id="KPg-Lo-wEh"/>
                             <constraint firstItem="klL-xb-uaJ" firstAttribute="trailing" secondItem="b1P-aH-p1F" secondAttribute="trailing" id="MHf-s7-RtT"/>
@@ -353,6 +353,7 @@
                             <constraint firstItem="yWH-6R-JsX" firstAttribute="trailing" secondItem="klL-xb-uaJ" secondAttribute="trailing" id="eec-LQ-YEF"/>
                             <constraint firstItem="klL-xb-uaJ" firstAttribute="bottom" secondItem="Bky-Sn-q1M" secondAttribute="bottom" id="qJY-Mt-YZR"/>
                             <constraint firstItem="b1P-aH-p1F" firstAttribute="leading" secondItem="klL-xb-uaJ" secondAttribute="leading" id="sI6-Zy-nGu"/>
+                            <constraint firstItem="klL-xb-uaJ" firstAttribute="bottom" secondItem="b1P-aH-p1F" secondAttribute="bottom" id="tsj-gX-Bul"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="klL-xb-uaJ"/>
                     </view>
@@ -361,6 +362,7 @@
                         <outlet property="btnCommit" destination="HDg-ET-b9l" id="352-zv-Ta6"/>
                         <outlet property="lblTitle" destination="JYD-4p-mwO" id="uFN-Hq-R8A"/>
                         <outlet property="lcFootHeight" destination="tSI-XY-fpa" id="RdG-hJ-YKK"/>
+                        <outlet property="lcMainFootSpace" destination="tsj-gX-Bul" id="gqr-3x-vOG"/>
                         <outlet property="tableVW" destination="ycb-EB-Mke" id="z56-p4-en5"/>
                         <outlet property="vwFoot" destination="Bky-Sn-q1M" id="Xaj-sp-Wd9"/>
                         <outlet property="vwHead" destination="yWH-6R-JsX" id="tVv-uY-j1a"/>
@@ -534,11 +536,11 @@
                             </view>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="z9K-Q5-Z17" firstAttribute="top" secondItem="Ix6-gA-edR" secondAttribute="bottom" id="7QZ-fV-kZD"/>
                             <constraint firstItem="0Cd-TF-wYY" firstAttribute="leading" secondItem="CCy-P7-WaP" secondAttribute="leading" id="AMw-Yh-gDa"/>
                             <constraint firstItem="Ix6-gA-edR" firstAttribute="top" secondItem="0Cd-TF-wYY" secondAttribute="bottom" id="KvK-B9-T5d"/>
                             <constraint firstItem="z9K-Q5-Z17" firstAttribute="leading" secondItem="uCT-a4-ogP" secondAttribute="leading" id="Nqk-LC-FPs"/>
                             <constraint firstItem="uCT-a4-ogP" firstAttribute="bottom" secondItem="z9K-Q5-Z17" secondAttribute="bottom" id="Nz2-Ot-vtz"/>
-                            <constraint firstItem="z9K-Q5-Z17" firstAttribute="top" secondItem="Ix6-gA-edR" secondAttribute="bottom" id="RAx-yg-oaj"/>
                             <constraint firstItem="uCT-a4-ogP" firstAttribute="trailing" secondItem="0Cd-TF-wYY" secondAttribute="trailing" id="WL6-Bd-85X"/>
                             <constraint firstItem="z9K-Q5-Z17" firstAttribute="trailing" secondItem="uCT-a4-ogP" secondAttribute="trailing" id="WTQ-3f-TA8"/>
                             <constraint firstItem="uCT-a4-ogP" firstAttribute="trailing" secondItem="Ix6-gA-edR" secondAttribute="trailing" id="aOL-mG-Xxl"/>

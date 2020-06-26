@@ -15,7 +15,6 @@ final class FirstInputPreviewVC: PreviewBaseVC {
     var detail: MdlFirstInput? = nil
 
     override func actCommit(_ sender: UIButton) {
-        print(#line, #function, "ボタン押下でAPIフェッチ確認")
         if validateLocalModel() {
             tableVW.reloadData()
             return

@@ -107,7 +107,6 @@ extension EntryFormAnyModelTBCell {
             dicExist[EditItemMdlProfile.mailAddress.itemKey] = (model.mailAddress.isEmpty) ? false : true
         }
         let cntExist = dicExist.filter { (k, v) -> Bool in v == true }.count
-        print("#lien, #function, [\(cntExist) / \(dicExist.count)]")
         return (cntExist == dicExist.count) ? true : false //すべてチェックされていればTrueになる
     }
     private func chkProgressResumee() -> Bool {
@@ -120,7 +119,6 @@ extension EntryFormAnyModelTBCell {
             dicExist[EditItemMdlResumeSchool.graduationYear.itemKey] = (model.school.graduationYear.isEmpty) ? false : true
         }
         let cntExist = dicExist.filter { (k, v) -> Bool in v == true }.count
-        print("#lien, #function, [\(cntExist) / \(dicExist.count)]")
         return (cntExist == dicExist.count) ? true : false //すべてチェックされていればTrueになる
     }
     private func chkProgressCareer() -> Bool {
