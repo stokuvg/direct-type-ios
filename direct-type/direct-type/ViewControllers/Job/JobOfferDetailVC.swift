@@ -194,6 +194,7 @@ class JobOfferDetailVC: TmpBasicVC {
         let titleView = UINib(nibName: "NaviButtonsView", bundle: nil)
         .instantiate(withOwner: nil, options: nil)
             .first as! NaviButtonsView
+        
         titleView.delegate = self
         
         self.navigationItem.titleView = titleView
@@ -463,10 +464,13 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 view.delegate = self
                 view.tag = (section - 4)
                 
+                view.topLineView.isHidden = false
+                
                 var openFlag:Bool = false
                 var title:String = ""
                 switch section {
                     case 4:
+                    view.topLineView.isHidden = true
                         openFlag = coverageMemoOpenFlag
                         title = "取材メモ"
                     case 5:

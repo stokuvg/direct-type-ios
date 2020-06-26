@@ -17,6 +17,13 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6qs-Dw-tgU">
                     <rect key="frame" x="15" y="0.0" width="384" height="55"/>
                     <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="92s-Rb-FCo">
+                            <rect key="frame" x="0.0" y="0.0" width="384" height="1"/>
+                            <color key="backgroundColor" name="color-line"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="ofz-Oh-Jpg"/>
+                            </constraints>
+                        </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="------" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvo-xy-BlD">
                             <rect key="frame" x="15" y="12" width="46" height="31"/>
                             <constraints>
@@ -44,9 +51,11 @@
                     </subviews>
                     <color key="backgroundColor" name="color-white"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="92s-Rb-FCo" secondAttribute="trailing" id="7Od-ml-CXP"/>
                         <constraint firstAttribute="trailing" secondItem="MX1-8e-9NG" secondAttribute="trailing" id="IbC-uR-9ss"/>
                         <constraint firstItem="cvo-xy-BlD" firstAttribute="leading" secondItem="6qs-Dw-tgU" secondAttribute="leading" constant="15" id="PiQ-hV-GDj"/>
                         <constraint firstItem="cvo-xy-BlD" firstAttribute="top" secondItem="6qs-Dw-tgU" secondAttribute="top" constant="12" id="R6d-Oz-LpH"/>
+                        <constraint firstItem="92s-Rb-FCo" firstAttribute="leading" secondItem="6qs-Dw-tgU" secondAttribute="leading" id="RNg-0I-dit"/>
                         <constraint firstItem="0Wa-R6-4Fi" firstAttribute="top" secondItem="6qs-Dw-tgU" secondAttribute="top" constant="12" id="S2P-Xj-6G6"/>
                         <constraint firstAttribute="trailing" secondItem="0Wa-R6-4Fi" secondAttribute="trailing" constant="15" id="VoD-46-a62"/>
                         <constraint firstItem="MX1-8e-9NG" firstAttribute="leading" secondItem="6qs-Dw-tgU" secondAttribute="leading" id="aaW-aJ-NON"/>
@@ -54,6 +63,7 @@
                         <constraint firstItem="MX1-8e-9NG" firstAttribute="top" secondItem="6qs-Dw-tgU" secondAttribute="top" id="esD-UI-ltf"/>
                         <constraint firstAttribute="bottom" secondItem="cvo-xy-BlD" secondAttribute="bottom" constant="12" id="foa-IX-mFl"/>
                         <constraint firstAttribute="bottom" secondItem="0Wa-R6-4Fi" secondAttribute="bottom" constant="12" id="t4g-0o-HQF"/>
+                        <constraint firstItem="92s-Rb-FCo" firstAttribute="top" secondItem="6qs-Dw-tgU" secondAttribute="top" id="uKh-1M-g5U"/>
                     </constraints>
                 </view>
             </subviews>
@@ -71,6 +81,7 @@
                 <outlet property="foldingMarkLabel" destination="0Wa-R6-4Fi" id="RhW-0C-N2Q"/>
                 <outlet property="headerFoldBtn" destination="MX1-8e-9NG" id="A52-5d-oo4"/>
                 <outlet property="titleLabel" destination="cvo-xy-BlD" id="iYU-Gy-DHd"/>
+                <outlet property="topLineView" destination="92s-Rb-FCo" id="q4A-lU-QGY"/>
             </connections>
             <point key="canvasLocation" x="132" y="79"/>
         </view>
@@ -78,6 +89,9 @@
     <resources>
         <namedColor name="color-base">
             <color red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="color-line">
+            <color red="0.82352941176470584" green="0.82352941176470584" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="color-white">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

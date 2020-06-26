@@ -832,7 +832,7 @@
           },
           "salaryOffer": {
             "type": "string",
-            "example": "",
+            "example": "1",
             "description": "スカウトによる提示年収＊初回は未使用＊"
           },
           "place2Ids": {
@@ -1117,7 +1117,6 @@
           "minSalaryId",
           "maxSalaryId",
           "isSalaryDisplay",
-          "salaryOffer",
           "place2Ids",
           "companyName",
           "pressStartDate",

@@ -54,6 +54,9 @@ class HomeVC: TmpNaviTopVC {
     
     var skipSendStatus:SkipSendStatus = .none
     var keepSendStatus:KeepSendStatus = .none
+    
+    // おすすめ求人を更新を使用しているか true:使用ずみ,false:未使用
+    var recommendUseFlag:Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -157,6 +160,27 @@ class HomeVC: TmpNaviTopVC {
         }
     }
     
+    private func getJobRecommendAddList() {
+        SVProgressHUD.show()
+        pageNo += 1
+        pageJobCards = MdlJobCardList()
+        ApiManager.getRecommendJobs(pageNo, isRetry: true)
+            .done { result in
+                Log.selectLog(logLevel: .debug, "getJobRecommendAddList result:\(result.debugDisp)")
+                self.pageJobCards = result
+        }
+        .catch { (error) in
+            Log.selectLog(logLevel: .debug, "error:\(error)")
+            
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            self.showError(myErr)
+        }
+        .finally {
+            SVProgressHUD.dismiss()
+            self.dataAddAction()
+        }
+    }
+    
     private func getJobAddList() {
         SVProgressHUD.show()
         pageNo += 1
@@ -177,11 +201,33 @@ class HomeVC: TmpNaviTopVC {
             self.dataAddAction()
         }
     }
+    private func recommendLoad() {
+        pageJobCards = MdlJobCardList()
+        dispJobCards = MdlJobCardList()
+        pageNo = 1
+        ApiManager.getRecommendJobs(pageNo, isRetry: true)
+            .done { result in
+                debugLog("ApiManager getRecommendJobs result:\(result.debugDisp)")
+                
+                self.pageJobCards = result
+        }
+        .catch { (error) in
+            Log.selectLog(logLevel: .debug, "error:\(error)")
+            
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            self.showError(myErr)
+        }
+        .finally {
+            SVProgressHUD.dismiss()
+            self.dataCheckAction()
+        }
+    }
     
     private func getJobList() {
         SVProgressHUD.show()
         pageJobCards = MdlJobCardList()
         dispJobCards = MdlJobCardList()
+        pageNo = 1
         ApiManager.getJobs(pageNo, isRetry: true)
             .done { result in
                 debugLog("ApiManager getJobs result:\(result.debugDisp)")
@@ -402,27 +448,6 @@ class HomeVC: TmpNaviTopVC {
             self.homeTableView.reloadData()
         }
     }
-    private func recommendLoad() {
-        pageJobCards = MdlJobCardList()
-        dispJobCards = MdlJobCardList()
-        pageNo = 1
-        ApiManager.getRecommendJobs(pageNo, isRetry: true)
-            .done { result in
-                debugLog("ApiManager getRecommendJobs result:\(result.debugDisp)")
-                
-                self.pageJobCards = result
-        }
-        .catch { (error) in
-            Log.selectLog(logLevel: .debug, "error:\(error)")
-            
-            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-            self.showError(myErr)
-        }
-        .finally {
-            SVProgressHUD.dismiss()
-            self.dataCheckAction()
-        }
-    }
     
     private func makeCellHeight(row: Int) -> CGFloat {
         var rowHeight:CGFloat = defaultCellHeight
@@ -562,7 +587,11 @@ extension HomeVC: UITableViewDataSource {
 extension HomeVC: JobOfferCardMoreCellDelegate {
     func moreDataAdd() {
         // 次ページの求人情報を取得
-        self.getJobAddList()
+        if recommendUseFlag {
+            self.getJobRecommendAddList()
+        } else {
+            self.getJobAddList()
+        }
     }
 }
 
@@ -577,7 +606,7 @@ extension HomeVC: JobOfferCardReloadCellDelegate {
     func allTableReloadAction() {
         Log.selectLog(logLevel: .debug, "allTableReloadAction start")
         // 精度の高い求人を受け取る
-//        self.homeTableView.reloadData()
+        self.recommendUseFlag = true
         self.recommendSend()
     }
 }

@@ -42,6 +42,10 @@ class NaviButtonsView: UIView {
     
     var delegate:NaviButtonsViewDelegate!
     
+    override var intrinsicContentSize: CGSize {
+        return UIView.layoutFittingExpandedSize
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         

@@ -53,11 +53,11 @@ enum FontType {
             case .C_font_L:
                 return 4
             case .C_font_M:
-                return 6
+                return 9
             case .C_font_Sb:
                 return 8
             case .C_font_S:
-                return 2
+                return 7
             case .C_font_SSb:
                 return 2
             case .C_font_SS:

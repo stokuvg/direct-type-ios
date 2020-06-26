@@ -14,6 +14,8 @@ protocol FoldingHeaderViewDelegate {
 
 class BaseFoldingHeaderView: UIView {
     
+    @IBOutlet weak var topLineView:UIView!
+    
     @IBOutlet weak var titleLabel:UILabel!
     @IBOutlet weak var foldingMarkLabel:UILabel!
     @IBOutlet weak var headerFoldBtn:UIButton!

@@ -94,7 +94,7 @@ extension ApiManager {
             .done { result in
                 resolver.fulfill(MdlJobCardDetail(dto: result))
         }.catch { (error) in
-            Log.selectLog(logLevel: .debug, "error:\(error.localizedDescription)")
+            Log.selectLog(logLevel: .debug, "getJobDetailFetch error:\(error.localizedDescription)")
             
             resolver.reject(error)
         }.finally {
