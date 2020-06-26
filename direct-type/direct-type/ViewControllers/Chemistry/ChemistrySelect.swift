@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import TudApi
+import PromiseKit
+import SVProgressHUD
 
-class ChemistrySelect: UIViewController {
+class ChemistrySelect: BaseVC {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var buttonBackgroundView: UIView!
     @IBOutlet private weak var nextButton: UIButton!
     @IBAction func nextButton(_ sender: UIButton) {
         guard currnetAnswerState == .complete else { return }
-        transitionToChemisrortResult()
+        postChemistryData()
     }
     
     enum SelectedAnswerType {
@@ -86,6 +89,24 @@ private extension ChemistrySelect {
             buttonBackgroundView.backgroundColor = .white
         }
         
+    }
+    
+    func postChemistryData() {
+        SVProgressHUD.show()
+        let topRanker = ChemistryScoreCalculation(questionScores: questionScores).topThree
+        let ids = [topRanker.first, topRanker.second, topRanker.third].compactMap({ $0 }).map({ String($0.rawValue) })
+        let parameter = CreateChemistryRequestDTO(chemistryTypeIds: ids)
+        
+        ChemistryAPI.chemistryControllerCreate(body: parameter)
+            .done { result -> Void in
+        }
+        .catch { error in
+            self.showConfirm(title: "データ送信エラー", message: error.localizedDescription, onlyOK: true)
+        }
+        .finally {
+            self.transitionToChemisrortResult()
+            SVProgressHUD.dismiss()
+        }
     }
     
     func transitionToChemisrortResult() {

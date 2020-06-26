@@ -20,6 +20,9 @@ class JobDetailDataCell: BaseTableViewCell {
     @IBOutlet weak var limitedImageView:UIImageView!
     @IBOutlet weak var limitedLabel:UILabel!
     
+    @IBOutlet weak var topSpaceView:UIView!
+    @IBOutlet weak var topSpaceHeight:NSLayoutConstraint!
+    
     // 職種名
     @IBOutlet weak var jobCategoryBackView:UIView!
     @IBOutlet weak var jobCategoryLabel:UILabel!
@@ -149,14 +152,23 @@ class JobDetailDataCell: BaseTableViewCell {
     private func limitedMarkSetting(type:LimitedType) {
         switch type {
             case .none:
+                self.limitedLabel.isHidden = true
                 self.limitedAndScountBackView.isHidden = true
-                self.dataStackView.removeArrangedSubview(self.limitedAndScountBackView)
+//                self.dataStackView.removeArrangedSubview(self.limitedAndScountBackView)
+                self.topSpaceHeight.constant = 12
             case .new:
-                self.limitedLabel.text(text: "", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+                self.limitedAndScountBackView.isHidden = false
+                self.limitedBackView.backgroundColor = UIColor.clear
+                self.limitedLabel.isHidden = true
                 self.limitedImageView.image = UIImage(named: "new")
+                self.topSpaceHeight.constant = 0
             case .end:
+                self.limitedAndScountBackView.isHidden = false
+                self.limitedBackView.backgroundColor = UIColor.init(colorType: .color_black)
+                self.limitedLabel.isHidden = false
                 limitedLabel.text(text: "終了間近", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
                 self.limitedImageView.image = UIImage(named: "upcoming")
+                self.topSpaceHeight.constant = 12
         }
     }
     

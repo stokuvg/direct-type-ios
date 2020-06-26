@@ -41,7 +41,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gE1-uo-ky4">
-                                                <rect key="frame" x="44" y="12" width="234" height="20"/>
+                                                <rect key="frame" x="40" y="12" width="238" height="20"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -54,7 +54,7 @@
                                             <constraint firstItem="zww-D7-0pH" firstAttribute="top" secondItem="gE1-uo-ky4" secondAttribute="bottom" constant="12" id="5AQ-Wf-HOT"/>
                                             <constraint firstItem="fPg-p0-Qk4" firstAttribute="centerY" secondItem="Ba1-tb-qRm" secondAttribute="centerY" id="FSD-e5-CbS"/>
                                             <constraint firstAttribute="bottom" secondItem="zww-D7-0pH" secondAttribute="bottom" id="Gg6-WS-43C"/>
-                                            <constraint firstItem="gE1-uo-ky4" firstAttribute="leading" secondItem="fPg-p0-Qk4" secondAttribute="trailing" constant="12" id="Hc1-bL-q6n"/>
+                                            <constraint firstItem="gE1-uo-ky4" firstAttribute="leading" secondItem="fPg-p0-Qk4" secondAttribute="trailing" constant="8" id="Hc1-bL-q6n"/>
                                             <constraint firstItem="zww-D7-0pH" firstAttribute="leading" secondItem="Ba1-tb-qRm" secondAttribute="leading" constant="12" id="REK-Yo-9At"/>
                                             <constraint firstAttribute="height" priority="999" constant="45" id="Zge-ls-nO1"/>
                                             <constraint firstItem="fPg-p0-Qk4" firstAttribute="leading" secondItem="Ba1-tb-qRm" secondAttribute="leading" constant="12" id="imA-r3-kvd"/>

@@ -61,18 +61,6 @@ class HomeVC: TmpNaviTopVC {
 
         // Do any additional setup after loading the view.
         
-        /*
-        let flag = self.getHomeDisplayFlag()
-//        let flag = false
-        Log.selectLog(logLevel: .debug, "flag:\(flag)")
-        if flag {
-            self.linesTitle(date: "", title: "あなたにぴったりの求人")
-        } else {
-            self.title(name: "おすすめ求人一覧")
-//            self.linesTitle(date: Date().dispHomeDate(), title: "あなたにぴったりの求人")
-        }
-        */
-        
         // TODO:初回リリースでは外す
 //        self.setRightSearchBtn()
         
@@ -87,7 +75,7 @@ class HomeVC: TmpNaviTopVC {
 //        self.dataCheckAction()
 
 //        self.getJobList()
-        self.saveHomeDisplayFlag()
+//        self.saveHomeDisplayFlag()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -123,7 +111,6 @@ class HomeVC: TmpNaviTopVC {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        self.saveHomeDisplayFlag()
     }
     
     override func viewWillLayoutSubviews() {
@@ -208,9 +195,11 @@ class HomeVC: TmpNaviTopVC {
             self.showError(myErr)
         }
         .finally {
-            let flag = self.getHomeDisplayFlag()
+            let (homeFlag,pushFlag) = self.getHomeDisplayFlag()
+            Log.selectLog(logLevel: .debug, "homeFlag:\(homeFlag)")
+            Log.selectLog(logLevel: .debug, "pushFlag:\(pushFlag)")
 //            let flag = false
-            if flag {
+            if homeFlag == true, pushFlag == false {
                 let convUpdateDate = DateHelper.convStrYMD2Date(self.pageJobCards.updateAt)
 //                    Log.selectLog(logLevel: .debug, "convUpdateDate:\(String(describing: convUpdateDate))")
                 
@@ -223,19 +212,23 @@ class HomeVC: TmpNaviTopVC {
             }
             SVProgressHUD.dismiss()
             self.dataCheckAction()
+
+            self.saveHomeDisplayFlag()
         }
     }
     
-    private func getHomeDisplayFlag() -> Bool {
+    private func getHomeDisplayFlag() -> (Bool,Bool) {
         let ud = UserDefaults.standard
         let homeFlag = ud.bool(forKey: "home")
-        return homeFlag
+        let pushFlag = ud.bool(forKey: "pushTab")
+        return (homeFlag,pushFlag)
     }
     
     private func saveHomeDisplayFlag() {
         Log.selectLog(logLevel: .debug, "saveHomeDisplayFlag start")
         let ud = UserDefaults.standard
         ud.set(true, forKey: "home")
+        ud.set(false, forKey: "pushTab")
         ud.synchronize()
     }
 

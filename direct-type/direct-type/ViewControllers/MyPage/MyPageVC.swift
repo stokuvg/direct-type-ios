@@ -7,22 +7,25 @@
 //
 
 import UIKit
+import TudApi
+import PromiseKit
+import SVProgressHUD
 
 //[H-1]
 class MyPageVC: TmpNaviTopVC {
 
-    @IBOutlet weak var pageTableView:UITableView!
+    @IBOutlet private weak var pageTableView: UITableView!
     //さくさく職歴書
-    @IBOutlet weak var btnButton04: UIButton!
-    @IBAction func actButton04(_ sender: UIButton) {
+    @IBOutlet private weak var btnButton04: UIButton!
+    @IBAction private func actButton04(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Preview", bundle: nil)
         if let nvc = storyboard.instantiateViewController(withIdentifier: "ç") as? SmoothCareerPreviewVC{
             self.navigationController?.pushViewController(nvc, animated: true)
         }
     }
     //認証
-    @IBOutlet weak var btnButton05: UIButton!
-    @IBAction func actButton05(_ sender: UIButton) {
+    @IBOutlet private weak var btnButton05: UIButton!
+    @IBAction private func actButton05(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Auth", bundle: nil)
         if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_CognitoAuthVC") as? CognitoAuthVC{
             self.navigationController?.pushViewController(nvc, animated: true)
@@ -30,15 +33,18 @@ class MyPageVC: TmpNaviTopVC {
     }
 
     //Get Jobs
-    @IBOutlet weak var btnButton06: UIButton!
-    @IBAction func actButton06(_ sender: UIButton) {
+    @IBOutlet private weak var btnButton06: UIButton!
+    @IBAction private func actButton06(_ sender: UIButton) {
         fetchGetJobList()
     }
 
-    var carrerFlag:Bool = false
-    var chemistryFlag:Bool = false
+    private var carrerFlag: Bool = false
+    private var isExistsChemistry: Bool {
+        return topRanker != nil
+    }
+    private var topRanker: ChemistryScoreCalculation.TopRanker?
     
-    var pageNo:Int = 1
+    private var pageNo: Int = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,18 +66,23 @@ class MyPageVC: TmpNaviTopVC {
         self.pageTableView.registerNib(nibName: "MyPageEditedChemistryCell", idName: "MyPageEditedChemistryCell")
 
         self.pageTableView.registerNib(nibName: "MyPageSettingCell", idName: "MyPageSettingCell") // 設定
+        
+        fetchChemistryData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchChemistryData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
-    
 }
 
-
 //=== APIフェッチ
-extension MyPageVC {
-    private func fetchGetJobList() {
+private extension MyPageVC {
+    func fetchGetJobList() {
         ApiManager.getJobs(pageNo, isRetry: true)
         .done { result in
             print(result.debugDisp)
@@ -81,6 +92,49 @@ extension MyPageVC {
         }
         .finally {
         }
+    }
+    
+    func fetchChemistryData() {
+        SVProgressHUD.show(withStatus: "データ取得中")
+        ChemistryAPI.chemistryControllerGet()
+        .done { result -> Void in
+            var firstRanker: ChemistryPersonalityType! = nil
+            var secondRanker: ChemistryPersonalityType? = nil
+            var thirdRanker: ChemistryPersonalityType? = nil
+            result.chemistryTypeIds.enumerated().forEach { (index, typeIdText) in
+                switch index {
+                case 0:
+                    firstRanker = ChemistryPersonalityType(rawValue: Int(typeIdText)!)
+                case 1:
+                    secondRanker = ChemistryPersonalityType(rawValue: Int(typeIdText)!)
+                case 2:
+                    thirdRanker = ChemistryPersonalityType(rawValue: Int(typeIdText)!)
+                default:
+                    break
+                }
+            }
+            self.topRanker = ChemistryScoreCalculation.TopRanker(first: firstRanker, second: secondRanker, third: thirdRanker)
+        }
+        .catch { error in
+            
+        }
+        .finally {
+            self.pageTableView.reloadData()
+            SVProgressHUD.dismiss()
+        }
+    }
+    
+    func transitionToChemistry() {
+        var vc = UIViewController()
+        vc = UIStoryboard(name: "ChemistryStart", bundle: nil).instantiateInitialViewController() as! ChemistryStart
+        if let topRanker = topRanker {
+            vc = getVC(sbName: "ChemistryResult", vcName: "ChemistryResult") as! ChemistryResult
+            (vc as! ChemistryResult).configure(with: topRanker)
+        }
+        
+        hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+        hidesBottomBarWhenPushed = false
     }
 }
 
@@ -97,7 +151,7 @@ extension MyPageVC: UITableViewDelegate {
             case 1:
                 return 15
             case 2:
-                if carrerFlag && chemistryFlag {
+                if carrerFlag && isExistsChemistry {
                     return 0
                 }
                 return 15
@@ -134,7 +188,7 @@ extension MyPageVC: UITableViewDelegate {
             case (1,0):
                 return carrerFlag ? 47 : 205
             case (2,0):
-                return chemistryFlag ? 47 : 205
+                return isExistsChemistry ? 47 : 205
             case (3,_):
                 return 50
             default:
@@ -145,14 +199,16 @@ extension MyPageVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let section = indexPath.section
         let row = indexPath.row
-
+        
         switch (section,row) {
-            case (3,_):
-//                actButton05(UIButton())//[Dbg: 仮認証]
-                let vc = getVC(sbName: "SettingVC", vcName: "SettingVC") as! SettingVC
-                self.navigationController?.pushViewController(vc, animated: true)
-            default:
-                break
+        case (2, 0):
+            transitionToChemistry()
+        case (3,_):
+            //                actButton05(UIButton())//[Dbg: 仮認証]
+            let vc = getVC(sbName: "SettingVC", vcName: "SettingVC") as! SettingVC
+            navigationController?.pushViewController(vc, animated: true)
+        default:
+            break
         }
     }
 }
@@ -207,7 +263,7 @@ extension MyPageVC: UITableViewDataSource {
                     return cell
                 }
             case (2,0):
-                if chemistryFlag {
+                if isExistsChemistry {
                     let cell = tableView.loadCell(cellName: "MyPageEditedChemistryCell", indexPath: indexPath) as! MyPageEditedChemistryCell
                     return cell
                 } else {
@@ -315,9 +371,6 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
 extension MyPageVC: MyPageChemistryStartCellDelegate {
     // 相性診断画面遷移
     func registChemistryAction() {
-        let vc = UIStoryboard(name: "ChemistryStart", bundle: nil).instantiateInitialViewController() as! ChemistryStart
-        hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(vc, animated: true)
-        hidesBottomBarWhenPushed = false
+        transitionToChemistry()
     }
 }
