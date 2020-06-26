@@ -136,8 +136,6 @@ extension HPreviewTBCell {
             } else {
                 disp.append(date3.dispYmJP())
             }
-            print(#line, disp.count, disp.debugDescription)
-            
             return disp.count == 0 ? "未入力（必須）" : disp.joined(separator: "\n")
         case .skillLanguageH3:        //===(3g)語学
             var tmp0: String = _item.childItems[0].curVal

@@ -36,7 +36,8 @@ class SubSelectBaseVC: BaseVC {
 
     @IBOutlet weak var vwMain: UIView!
     @IBOutlet weak var tableVW: UITableView!
-    
+    @IBOutlet weak var lcMainFootSpace: NSLayoutConstraint!
+
     @IBOutlet weak var vwFoot: UIView!
     @IBOutlet weak var lcFootHeight: NSLayoutConstraint!
 

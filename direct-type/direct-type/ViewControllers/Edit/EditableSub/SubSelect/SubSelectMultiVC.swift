@@ -11,6 +11,8 @@ import UIKit
 class SubSelectMultiVC: SubSelectBaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.singleMode = false //複数選択モード
+        singleMode = false //複数選択モード
+        vwFoot.isHidden = false
+        lcMainFootSpace.constant = lcFootHeight.constant
     }
 }

@@ -46,7 +46,7 @@ class MdlResume: Codable {
             jobExperiments: [],
             businessTypes: [],
             educationId: "",
-            school: MdlResumeSchool(schoolName: "", department: "", subject: "", graduationYear: ""),
+            school: MdlResumeSchool(schoolName: "", faculty: "", department: "", graduationYear: ""),
             skillLanguage: MdlResumeSkillLanguage(languageToeicScore: "", languageToeflScore: "", languageEnglish: "", languageStudySkill: ""),
             qualifications: [],
             ownPr: "" )
@@ -79,8 +79,8 @@ class MdlResume: Codable {
 
         let _educationId = dto.educationId ?? ""
         let _school = MdlResumeSchool(schoolName: dto.finalEducation?.schoolName ?? "",
-                                      department: dto.finalEducation?.faculty ?? "",
-                                      subject: dto.finalEducation?.department ?? "",
+                                      faculty: dto.finalEducation?.faculty ?? "",
+                                      department: dto.finalEducation?.department ?? "",
                                       graduationYear: dto.finalEducation?.guraduationYearMonth ?? Constants.SelectItemsUndefineDate.dispYm())
         let _skillLanguage = MdlResumeSkillLanguage(languageToeicScore: "\(dto.toeic ?? 0)",
                                                     languageToeflScore: "\(dto.toefl ?? 0)",

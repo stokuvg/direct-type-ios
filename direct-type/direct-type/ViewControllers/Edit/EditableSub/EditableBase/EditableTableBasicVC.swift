@@ -44,7 +44,6 @@ class EditableTableBasicVC: EditableBasicVC {
     }
 
     func chkValidateError() -> Bool {
-        if Constants.DbgSkipLocalValidate { return false }//[Dbg: ローカルValidationスキップ]
         ValidateManager.dbgDispCurrentItems(editableModel: editableModel) //[Dbg: 状態確認]
         dicValidErrMsg.removeAll()//チェック前に、既存のエラーを全削除しておく
         
@@ -294,7 +293,6 @@ extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
 
         default:
             let returnKeyType: UIReturnKeyType = (item.editableItemKey == editableModel.lastEditableItemKey) ? .done : .next
-            print("🌸[\(#function)]🌸[\(#line)]🌸[returnKeyType: \(returnKeyType.rawValue)]🌸[\(item.editItem.itemKey)]")
             let cell: HEditTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditTextTBCell", for: indexPath) as! HEditTextTBCell
             let errMsg = dicValidErrMsg[item.editableItemKey]?.joined(separator: "\n") ?? ""
             cell.initCell(self, item, errMsg: errMsg, returnKeyType)

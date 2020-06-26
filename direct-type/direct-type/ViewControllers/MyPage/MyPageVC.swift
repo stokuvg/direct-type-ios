@@ -77,17 +77,12 @@ class MyPageVC: TmpNaviTopVC {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print(EditItemTool.convTypeAndYear(types: ["1"], years: ["4", "5", "6"]))
-        print(EditItemTool.convTypeAndYear(types: ["1", "2", "3"], years: ["4", "5"]))
-        print(EditItemTool.convTypeAndYear(types: [], years: []))
-        print(EditItemTool.convTypeAndYear(types: ["1", "2", "3", "1", "2", "3"], years: ["9", "", "8", "7"]))
-
     }
 }
 
+//=== APIフェッチ
 private extension MyPageVC {
     func fetchGetJobList() {
-        if Constants.DbgOfflineMode { return }//[Dbg: フェッチ割愛]
         ApiManager.getJobs(pageNo, isRetry: true)
         .done { result in
             print(result.debugDisp)

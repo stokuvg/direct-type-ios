@@ -234,18 +234,6 @@ extension SubSelectSpecialVC: SubSelectProtocol {
 //=== 複数選択ポップアップで選択させる場合の処理 ===
 extension SubSelectSpecialVC: SubSelectBaseDelegate {
     func actPopupSelect(selectedItemsCode: String) {
-//        //___選択状態の確認
-//        print("\t🐼1🐼[\(selectedItemsCode)]🐼これが選択されました🐼Special🐼")//編集中の値の保持（と描画）
-//        if selectYearMode {
-//            for item in SelectItemsManager.convCodeDisp(mainTsvMaster, subTsvMaster, selectedItemsCode) {
-//                print(#line, "\t🐼1a🐼\t", item.0.debugDisp, item.1.debugDisp)
-//            }
-//        } else {
-//            for item in SelectItemsManager.convCodeDisp(mainTsvMaster, selectedItemsCode) {
-//                print(#line, "\t🐼1b🐼\t", item.debugDisp)
-//            }
-//        }
-//        //^^^選択状態の確認
         self.delegate?.changedSelect(editItem: self.editableItem, codes: selectedItemsCode) //フィードバックしておく
         self.dismiss(animated: true) { }
     }

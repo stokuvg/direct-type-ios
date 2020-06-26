@@ -70,7 +70,6 @@ class MdlProfile: Codable {
         }
         var _birthday: Date!
         if let bufDate = dto.birthday {
-            print(bufDate)
             let _tmp = DateHelper.convStrYMD2Date(bufDate)
             _birthday = _tmp
         } else {

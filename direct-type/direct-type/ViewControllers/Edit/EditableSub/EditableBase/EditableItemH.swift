@@ -69,12 +69,9 @@ struct EditableItemH {
 
         case .selectSpecialYear:
             return "selectSpecialYear表示確認: [\(_val)]"
-//            let disp: [String] = EditItemTool.dispTypeAndYear(codes: _val, .jobType, .jobExperimentYear)
-//            return disp.count == 0 ? Constants.SelectItemsValEmpty.disp : disp.joined(separator: "\n")
         }
     }
     var debugDisp: String {
-//        let selectionItems = SelectItemsManager.getSelectItems(type: self.editItem, grpCodeFilter: nil)
         let selectionItems: [CodeDisp] = SelectItemsManager.getMaster(self.editItem.tsvMaster)
         let cnt = selectionItems.count
         return "[\(editableItemKey)]\t[\(editType)] [\(dispName)] ... [\(orgVal!)] -> [\(curVal)] / (\(cnt)件)"

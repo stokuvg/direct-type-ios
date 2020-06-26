@@ -66,8 +66,8 @@ extension ValidateManager {
             //case schoolH3               //===(3f)最終学歴
             case EditItemMdlResume.school.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.schoolH3.itemKey, val: val)
             case EditItemMdlResumeSchool.schoolName.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.schoolH3.itemKey, val: val)
+            case EditItemMdlResumeSchool.faculty.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.schoolH3.itemKey, val: val)
             case EditItemMdlResumeSchool.department.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.schoolH3.itemKey, val: val)
-            case EditItemMdlResumeSchool.subject.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.schoolH3.itemKey, val: val)
             case EditItemMdlResumeSchool.graduationYear.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.schoolH3.itemKey, val: val)
             //case skillLanguageH3        //===(3g)語学
             case EditItemMdlResume.skillLanguage.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.skillLanguageH3.itemKey, val: val)
