@@ -45,7 +45,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="lblTitle" destination="Nd9-FF-IiX" id="IiT-A8-dBs"/>
+                <outlet property="lblTitle" destination="Nd9-FF-IiX" id="CUL-hf-wKL"/>
                 <outlet property="vwMainArea" destination="H2p-sc-9uM" id="GYs-pn-j1d"/>
                 <outlet property="vwTitleArea" destination="zG6-fu-cXY" id="slN-Os-bJ9"/>
             </connections>

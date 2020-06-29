@@ -86,6 +86,10 @@ case hopeSalary         //１１．希望年収（任意）
     //Placeholder Text
     var placeholder: String {
         switch self {
+        case .exQuestionAnswer1: return "回答を入力してください"
+        case .exQuestionAnswer2: return "回答を入力してください"
+        case .exQuestionAnswer3: return "回答を入力してください"
+        case .ownPR: return "回答を入力してください"
         default:
             return ""//return "[\(self.itemKey) PlaceHolder]"
         }

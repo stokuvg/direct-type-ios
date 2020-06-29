@@ -19,7 +19,7 @@ class MyPageVC: TmpNaviTopVC {
     @IBOutlet private weak var btnButton04: UIButton!
     @IBAction private func actButton04(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Preview", bundle: nil)
-        if let nvc = storyboard.instantiateViewController(withIdentifier: "ç") as? SmoothCareerPreviewVC{
+        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SmoothCareerPreviewVC") as? SmoothCareerPreviewVC{
             self.navigationController?.pushViewController(nvc, animated: true)
         }
     }
@@ -337,7 +337,7 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
         alert.addAction(action02)
         alert.addAction(action06)
         //alert.addAction(action03)
-        alert.addAction(action04)
+        //alert.addAction(action04)
         alert.addAction(action05)
         alert.addAction(action08)
 
