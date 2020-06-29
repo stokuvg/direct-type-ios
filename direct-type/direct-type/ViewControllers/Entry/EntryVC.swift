@@ -108,11 +108,13 @@ class EntryVC: PreviewBaseVC {
         }
         
         //###[Dbg: ダミーデータ投入]___
+        self.entry = MdlEntry(ownPR: "", hopeArea: [], hopeSalary: "", exQuestion1: "", exQuestion2: "", exQuestion3: "", exAnswer1: "", exAnswer2: "", exAnswer3: "")
         editableModel.editTempCD[EditItemMdlEntry.hopeArea.itemKey] = "28_29_30"
         editableModel.editTempCD[EditItemMdlEntry.hopeSalary.itemKey] = "8"
         editableModel.editTempCD[EditItemMdlEntry.ownPR.itemKey] = "自己PRのテキストのダミーで"
-        
         entry?.exQuestion1 = "企業独自の質問テキストが設定されています。答えてください。"
+        entry?.exQuestion2 = "自の質問テキスト設定 2\n答えてください。"
+        entry?.exQuestion3 = "企業独自質問3"
         //###[Dbg: ダミーデータ投入]^^^
     }
     func initData(_ model: MdlJobCardDetail) {
@@ -141,6 +143,10 @@ class EntryVC: PreviewBaseVC {
         arrData.append(MdlItemH(.careerC9, "", childItems: [
             EditableItemH(type: .model, editItem: EditItemMdlEntry.career, val: "【モデルダミー】"),
         ], model: career))
+        
+        //===XX. 固定文言
+        arrData.append(MdlItemH(.fixedInfoC9, "", childItems: [] ))
+        
         //===１２．独自質問（必須）
         var exQA: [EditableItemH] = []
         if let exQuestion = entry?.exQuestion1 {
@@ -218,6 +224,18 @@ extension EntryVC {
         case .careerC9:
             let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
             cell.initCell(.career, model: self.career)
+            cell.dispCell()
+            return cell
+
+        case .fixedInfoC9:
+            let cell: EntryFormInfoTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormInfoTextTBCell", for: indexPath) as! EntryFormInfoTextTBCell
+            cell.initCell(title: item.type.dispTitle)
+            cell.dispCell()
+            return cell
+
+        case .exQuestionC9:
+            let cell: EntryFormExQuestionsHeadTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormExQuestionsHeadTBCell", for: indexPath) as! EntryFormExQuestionsHeadTBCell
+            cell.initCell(title: item.type.dispTitle)
             cell.dispCell()
             return cell
 
