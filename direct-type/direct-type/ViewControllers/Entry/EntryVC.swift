@@ -54,6 +54,11 @@ import SVProgressHUD
 import SwaggerClient
 
 class EntryVC: PreviewBaseVC {
+    enum EntryPrevMode {
+        case edit       //[C-9]『応募フォーム』
+        case preview    //[C-12]『応募確認画面』
+    }
+    var mode: EntryPrevMode = .edit
     var jobCard: MdlJobCardDetail? = nil//応募への遷移元は、求人カード詳細のみでOK?
     var profile: MdlProfile? = nil
     var resume: MdlResume? = nil
@@ -70,7 +75,7 @@ class EntryVC: PreviewBaseVC {
     //共通プレビューをOverrideして利用する
     override func viewDidLoad() {
         super.viewDidLoad()
-        btnCommit.setTitle(text: "応募する", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        btnCommit.setTitle(text: "応募確認画面へ", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
     }
     override func initData() {
@@ -101,6 +106,16 @@ class EntryVC: PreviewBaseVC {
         if self.jobCard == nil {
             self.jobCard = jobCard
         }
+        
+        //###[Dbg: ダミーデータ投入]___
+        self.entry = MdlEntry(ownPR: "", hopeArea: [], hopeSalary: "", exQuestion1: "", exQuestion2: "", exQuestion3: "", exAnswer1: "", exAnswer2: "", exAnswer3: "")
+        editableModel.editTempCD[EditItemMdlEntry.hopeArea.itemKey] = "28_29_30"
+        editableModel.editTempCD[EditItemMdlEntry.hopeSalary.itemKey] = "8"
+        editableModel.editTempCD[EditItemMdlEntry.ownPR.itemKey] = "自己PRのテキストのダミーで"
+        entry?.exQuestion1 = "企業独自の質問テキストが設定されています。答えてください。"
+        entry?.exQuestion2 = nil
+        entry?.exQuestion3 = "企業独自質問3"
+        //###[Dbg: ダミーデータ投入]^^^
     }
     func initData(_ model: MdlJobCardDetail) {
         title = "[C-9] 応募フォーム"
@@ -128,22 +143,30 @@ class EntryVC: PreviewBaseVC {
         arrData.append(MdlItemH(.careerC9, "", childItems: [
             EditableItemH(type: .model, editItem: EditItemMdlEntry.career, val: "【モデルダミー】"),
         ], model: career))
+        
+        //===XX. 固定文言
+        arrData.append(MdlItemH(.fixedInfoC9, "", childItems: [] ))
+        
         //===１２．独自質問（必須）
-        var exQA: [EditableItemH] = []
+        var exQA: [MdlItemH] = []
         if let exQuestion = entry?.exQuestion1 {
-            exQA.append(EditableItemH(type: .readonly, editItem: EditItemMdlEntry.exQuestionAnswer1, val: exQuestion))
-            exQA.append(EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer1, val: entry?.exAnswer1 ?? ""))
+            exQA.append(MdlItemH(.exQAItem1C9, exQuestion, childItems: [
+                EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer1, val: entry?.exAnswer1 ?? ""),
+            ], model: career))
         }
         if let exQuestion = entry?.exQuestion2 {
-            exQA.append(EditableItemH(type: .readonly, editItem: EditItemMdlEntry.exQuestionAnswer2, val: exQuestion))
-            exQA.append(EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer2, val: entry?.exAnswer2 ?? ""))
+            exQA.append(MdlItemH(.exQAItem2C9, exQuestion, childItems: [
+                EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer2, val: entry?.exAnswer2 ?? ""),
+            ], model: career))
         }
         if let exQuestion = entry?.exQuestion3 {
-            exQA.append(EditableItemH(type: .readonly, editItem: EditItemMdlEntry.exQuestionAnswer3, val: exQuestion))
-            exQA.append(EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer3, val: entry?.exAnswer3 ?? ""))
+            exQA.append(MdlItemH(.exQAItem3C9, exQuestion, childItems: [
+                EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer3, val: entry?.exAnswer3 ?? ""),
+            ], model: career))
         }
         if exQA.count > 0 {
-            arrData.append(MdlItemH(.exQuestionC9, "", childItems: exQA))
+            arrData.append(MdlItemH(.exQuestionC9, "", childItems: []))
+            for qa in exQA { arrData.append(qa) }
         }
         //===９．自己PR文字カウント
         arrData.append(MdlItemH(.ownPRC9, "", childItems: [
@@ -205,6 +228,25 @@ extension EntryVC {
         case .careerC9:
             let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
             cell.initCell(.career, model: self.career)
+            cell.dispCell()
+            return cell
+
+        case .fixedInfoC9:
+            let cell: EntryFormInfoTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormInfoTextTBCell", for: indexPath) as! EntryFormInfoTextTBCell
+            cell.initCell(title: item.type.dispTitle)
+            cell.dispCell()
+            return cell
+
+        case .exQuestionC9:
+            let cell: EntryFormExQuestionsHeadTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormExQuestionsHeadTBCell", for: indexPath) as! EntryFormExQuestionsHeadTBCell
+            cell.initCell(title: item.type.dispTitle)
+            cell.dispCell()
+            return cell
+
+        case .exQAItem1C9, .exQAItem2C9, .exQAItem3C9:
+            let cell: EntryFormExQuestionsItemTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormExQuestionsItemTBCell", for: indexPath) as! EntryFormExQuestionsItemTBCell
+            let errMsg = dicGrpValidErrMsg[item.type.itemKey]?.joined(separator: "\n") ?? ""
+            cell.initCell(item, editTempCD: editableModel.editTempCD, errMsg: errMsg)//編集中の値を表示適用させるためeditTempCDを渡す
             cell.dispCell()
             return cell
 
@@ -273,29 +315,33 @@ extension EntryVC {
         guard let _profile = self.profile else { return }
         guard let _resume = self.resume else { return }
         guard let _career = self.career else { return }
+        
+        
         let param: WebAPIEntryUserDto = WebAPIEntryUserDto(_jobCard.jobCardCode, _profile, _resume, _career, editableModel.editTempCD)
         print(param)
-            
-        SVProgressHUD.show(withStatus: "応募処理")
-        ApiManager.postEntry(param, isRetry: true)
-        .done { result in
-            print(result)
-        }
-        .catch { (error) in
-            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-            switch myErr.code {
-            case 400:
-                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
-                self.dicGrpValidErrMsg = dicGrpError
-                self.dicValidErrMsg = dicError
-            default:
-                self.showError(error)
-            }
-        }
-        .finally {
-            self.dispData()
-            SVProgressHUD.dismiss()
-        }
+        
+        showConfirm(title: "", message: "\(param)", onlyOK: true)
+        
+//        SVProgressHUD.show(withStatus: "応募処理")
+//        ApiManager.postEntry(param, isRetry: true)
+//        .done { result in
+//            print(result)
+//        }
+//        .catch { (error) in
+//            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+//            switch myErr.code {
+//            case 400:
+//                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
+//                self.dicGrpValidErrMsg = dicGrpError
+//                self.dicValidErrMsg = dicError
+//            default:
+//                self.showError(error)
+//            }
+//        }
+//        .finally {
+//            self.dispData()
+//            SVProgressHUD.dismiss()
+//        }
 
 
     }

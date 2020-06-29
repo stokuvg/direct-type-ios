@@ -8,30 +8,6 @@
 
 import UIKit
 
-typealias MdlItemHTypeKey = String //EditItemProtocol.itemKey
-class MdlItemH {
-    var type: HPreviewItemType = .undefine
-    var value: String = ""
-    var notice: String = ""
-    var readonly: Bool = false
-    var childItems: [EditableItemH] = []
-    var model: Any? = nil
-    
-    convenience init(_ type: HPreviewItemType, _ value: String, _ notice: String = "", readonly: Bool = false, childItems: [EditableItemH], model: Any? = nil) {
-        self.init()
-        self.type = type
-        self.value = value
-        self.notice = notice
-        self.readonly = readonly
-        self.childItems = childItems
-        self.model = model
-    }
-        
-    var debugDisp: String {
-        return "[\(type.dispTitle)] [\(value)]（\(childItems.count)件のサブ項目） [\(readonly ? "変更不可" : "")] [\(notice)] [\(model)]"
-    }
-}
-
 class HPreviewTBCell: UITableViewCell {
     var item: MdlItemH? = nil
     var errMsg: String = ""
@@ -39,7 +15,7 @@ class HPreviewTBCell: UITableViewCell {
     
     @IBOutlet weak var vwMainArea: UIView!
     @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var lblValue: UILabel!
+    @IBOutlet weak var lblValue: ExItemLabel!
     @IBOutlet weak var lblNotice: UILabel!
     @IBOutlet weak var lblErrorMsg: UILabel!
 
@@ -76,13 +52,14 @@ class HPreviewTBCell: UITableViewCell {
         let bufValue: String = dispCellValue(_item)
         let bufNotice: String = _item.notice
         //===表示させる
-        lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_main)!, alignment: .left)
-        lblValue.text(text: bufValue, fontType: .font_S, textColor: UIColor.init(colorType: .color_main)!, alignment: .left)
-        lblNotice.text(text: bufNotice, fontType: .font_SS, textColor: UIColor.init(colorType: .color_parts_gray)!, alignment: .left)
+        lblTitle.text(text: bufTitle, fontType: .font_SSb, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        lblValue.text(text: bufValue, fontType: .font_SS, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        lblNotice.text(text: bufNotice, fontType: .font_SSS, textColor: UIColor.init(colorType: .color_parts_gray)!, alignment: .left)
         lblNotice.isHidden = (_item.notice == "") ? true : false
         //Validationエラー発生時の表示
         if errMsg != "" {
-            lblErrorMsg.text = errMsg
+            //lblErrorMsg.text = errMsg
+            lblErrorMsg.text(text: errMsg, fontType: .font_SSS, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
             if UITraitCollection.isDarkMode == true {
                 vwMainArea.backgroundColor = UIColor.init(red: 0.3, green: 0.1, blue: 0.1, alpha: 1.0)
             } else {

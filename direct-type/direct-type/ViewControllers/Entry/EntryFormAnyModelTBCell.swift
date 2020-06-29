@@ -44,24 +44,24 @@ class EntryFormAnyModelTBCell: UITableViewCell {
     func dispCell() {
         switch type {
         case .profile:
-            lblTitle.text(text: "プロフィール", fontType: .font_Sb, textColor: .black, alignment: .left)
-            lblMessage.text(text: "未入力", fontType: .font_SS, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
+            lblTitle.text(text: "プロフィール", fontType: .font_SSb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
+            lblMessage.text(text: "未入力", fontType: .font_SSSb, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
             if let model = self.detail as? MdlProfile {
                 if chkProgressProfile() {
                     lblMessage.text(text: "入力済み", fontType: .font_SS, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .left)
                 }
             }
         case .resume:
-            lblTitle.text(text: "履歴書", fontType: .font_Sb, textColor: .black, alignment: .left)
-            lblMessage.text(text: "未入力", fontType: .font_SS, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
+            lblTitle.text(text: "履歴書", fontType: .font_SSb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
+            lblMessage.text(text: "未入力", fontType: .font_SSSb, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
             if let model = self.detail as? MdlResume {
                 if chkProgressResumee() {
                     lblMessage.text(text: "入力済み", fontType: .font_SS, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .left)
                 }
             }
         case .career:
-            lblTitle.text(text: "職務経歴書", fontType: .font_Sb, textColor: .black, alignment: .left)
-            lblMessage.text(text: "未入力", fontType: .font_SS, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
+            lblTitle.text(text: "職務経歴書", fontType: .font_SSb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
+            lblMessage.text(text: "未入力", fontType: .font_SSSb, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
             if let model = self.detail as? MdlCareer {
                 if chkProgressCareer() {//未入力チェック
                     lblMessage.text(text: "入力済み", fontType: .font_SS, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .left)

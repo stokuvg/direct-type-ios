@@ -43,7 +43,11 @@ enum HPreviewItemType: String {
     case profileC9      //５．プロフィール（一部必須）
     case resumeC9       //６．履歴書（一部必須）
     case careerC9       //７．職務経歴書（一部必須）
+    case fixedInfoC9    //XX．固定文言
     case exQuestionC9   //１２．独自質問（必須）
+    case exQAItem1C9
+    case exQAItem2C9
+    case exQAItem3C9
     case ownPRC9        //９．自己PR文字カウント
     case hopeAreaC9     //１０．希望勤務地（任意）
     case hopeSalaryC9   //１１．希望年収（任意）
@@ -97,7 +101,11 @@ enum HPreviewItemType: String {
         case .profileC9:      return "プロフィール（一部必須）"
         case .resumeC9:       return "履歴書（一部必須）"
         case .careerC9:       return "職務経歴書（一部必須）"
-        case .exQuestionC9:   return "独自質問（必須）"
+        case .fixedInfoC9:    return "以下は企業向けに送る情報です"
+        case .exQuestionC9:   return "企業からの質問項目"
+        case .exQAItem1C9:    return " - 独自質問1"
+        case .exQAItem2C9:    return " - 独自質問2"
+        case .exQAItem3C9:    return " - 独自質問3"
         case .ownPRC9:        return "自己PR"
         case .hopeAreaC9:     return "希望勤務地"
         case .hopeSalaryC9:   return "希望年収"

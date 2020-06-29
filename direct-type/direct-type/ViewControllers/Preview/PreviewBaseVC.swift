@@ -64,6 +64,9 @@ class PreviewBaseVC: TmpBasicVC {
         //=== テーブル初期化
         self.tableVW.estimatedRowHeight = 100
         self.tableVW.rowHeight = UITableView.automaticDimension
+        self.tableVW.register(UINib(nibName: "EntryFormInfoTextTBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryFormInfoTextTBCell")
+        self.tableVW.register(UINib(nibName: "EntryFormExQuestionsHeadTBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryFormExQuestionsHeadTBCell")
+        self.tableVW.register(UINib(nibName: "EntryFormExQuestionsItemTBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryFormExQuestionsItemTBCell")
         self.tableVW.register(UINib(nibName: "EntryFormAnyModelTBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryFormAnyModelTBCell")
         self.tableVW.register(UINib(nibName: "EntryFormJobCardTBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryFormJobCardTBCell")
         self.tableVW.register(UINib(nibName: "HPreviewTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HPreviewTBCell")
