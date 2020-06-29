@@ -65,6 +65,7 @@ class EntryVC: PreviewBaseVC {
             tableVW.reloadData()
             return
         }
+        fetchPostEntry()
     }
     //共通プレビューをOverrideして利用する
     override func viewDidLoad() {
@@ -173,7 +174,50 @@ class EntryVC: PreviewBaseVC {
         super.viewDidAppear(animated)
         fetchGetEntryAll()
     }
+    override func chkButtonEnable() {
+        btnCommit.isEnabled = true
+    }
 }
+
+extension EntryVC {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let item = arrData[indexPath.row]
+        switch item.type {
+
+        case .jobCardC9:
+            let cell: EntryFormJobCardTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormJobCardTBCell", for: indexPath) as! EntryFormJobCardTBCell
+            cell.initCell(self.jobCard)
+            cell.dispCell()
+            return cell
+
+        case .profileC9:
+            let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
+            cell.initCell(.profile, model: self.profile)
+            cell.dispCell()
+            return cell
+
+        case .resumeC9:
+            let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
+            cell.initCell(.resume, model: self.resume)
+            cell.dispCell()
+            return cell
+
+        case .careerC9:
+            let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
+            cell.initCell(.career, model: self.career)
+            cell.dispCell()
+            return cell
+
+        default:
+            let cell: HPreviewTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HPreviewTBCell", for: indexPath) as! HPreviewTBCell
+            let errMsg = dicGrpValidErrMsg[item.type.itemKey]?.joined(separator: "\n") ?? ""
+            cell.initCell(item, editTempCD: editableModel.editTempCD, errMsg: errMsg)//編集中の値を表示適用させるためeditTempCDを渡す
+            cell.dispCell()
+            return cell
+        }
+    }
+}
+
 
 //=== APIフェッチ
 extension EntryVC {
@@ -224,45 +268,37 @@ extension EntryVC {
             SVProgressHUD.dismiss()
         }
     }
-}
-
-
-
-extension EntryVC {
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = arrData[indexPath.row]
-        switch item.type {
-
-        case .jobCardC9:
-            let cell: EntryFormJobCardTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormJobCardTBCell", for: indexPath) as! EntryFormJobCardTBCell
-            cell.initCell(self.jobCard)
-            cell.dispCell()
-            return cell
-
-        case .profileC9:
-            let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
-            cell.initCell(.profile, model: self.profile)
-            cell.dispCell()
-            return cell
-
-        case .resumeC9:
-            let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
-            cell.initCell(.resume, model: self.resume)
-            cell.dispCell()
-            return cell
-
-        case .careerC9:
-            let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
-            cell.initCell(.career, model: self.career)
-            cell.dispCell()
-            return cell
-
-        default:
-            let cell: HPreviewTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HPreviewTBCell", for: indexPath) as! HPreviewTBCell
-            let errMsg = dicGrpValidErrMsg[item.type.itemKey]?.joined(separator: "\n") ?? ""
-            cell.initCell(item, editTempCD: editableModel.editTempCD, errMsg: errMsg)//編集中の値を表示適用させるためeditTempCDを渡す
-            cell.dispCell()
-            return cell
+    private func fetchPostEntry() {
+        guard let _jobCard = self.jobCard else { return }
+        guard let _profile = self.profile else { return }
+        guard let _resume = self.resume else { return }
+        guard let _career = self.career else { return }
+        let param: WebAPIEntryUserDto = WebAPIEntryUserDto(_jobCard.jobCardCode, _profile, _resume, _career, editableModel.editTempCD)
+        print(param)
+            
+        SVProgressHUD.show(withStatus: "応募処理")
+        ApiManager.postEntry(param, isRetry: true)
+        .done { result in
+            print(result)
         }
+        .catch { (error) in
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            switch myErr.code {
+            case 400:
+                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
+                self.dicGrpValidErrMsg = dicGrpError
+                self.dicValidErrMsg = dicError
+            default:
+                self.showError(error)
+            }
+        }
+        .finally {
+            self.dispData()
+            SVProgressHUD.dismiss()
+        }
+
+
     }
+
 }
+

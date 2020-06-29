@@ -80,6 +80,13 @@ extension ValidateManager {
             //case ownPrH3                //===(3i)自己PR
             case EditItemMdlResume.ownPr.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.ownPrH3.itemKey, val: val)
 
+            //======応募フォーム
+            case EditItemMdlEntry.ownPR.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.ownPRC9.itemKey, val: val)
+            case EditItemMdlEntry.hopeArea.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.hopeAreaC9.itemKey, val: val)
+            case EditItemMdlEntry.hopeSalary.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.hopeSalaryC9.itemKey, val: val)
+
+                
+                
             default:
                 print("\t☠️割り当てエラー☠️[\(key): \(val)]☠️")
             }

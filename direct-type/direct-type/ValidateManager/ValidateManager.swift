@@ -74,7 +74,7 @@ extension ValidateManager {
     class func subValidateNotEmntyByKey(_ editableModel: EditableModel) -> [EditableItemKey: [String]] {
         var dicError: [EditableItemKey: [String]] = [:]
         //必須チェック
-        for itemKey in editableModel.arrTextFieldNextDoneKey {
+        for itemKey in editableModel.dicTextFieldIndexPath.keys {
             if let item = editableModel.getItemByKey(itemKey) {
                 let validInfo = item.editItem.valid
                 guard validInfo.required == true else { continue }
@@ -104,7 +104,7 @@ extension ValidateManager {
     class func subValidateTypeLengtyByKey(_ editableModel: EditableModel) -> [EditableItemKey: [String]] {
         var dicError: [EditableItemKey: [String]] = [:]
         //文字種チェック
-        for itemKey in editableModel.arrTextFieldNextDoneKey {
+        for itemKey in editableModel.dicTextFieldIndexPath.keys {
             if let item = editableModel.getItemByKey(itemKey) {
                 let validInfo = item.editItem.valid
                 let (_, editTemp) = editableModel.makeTempItem(item)

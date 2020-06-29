@@ -65,12 +65,12 @@ case hopeSalary         //１１．希望年収（任意）
     var dispName: String {
         switch self {
         case .jobCard:      return "応募先求人"
-        case .profile:      return "プロフィール（一部必須）"
-        case .resume:       return "履歴書（一部必須）"
-        case .career:       return "職務経歴書（一部必須）"
-        case .ownPR:        return "自己PR文字カウント"
-        case .hopeArea:     return "希望勤務地（任意）"
-        case .hopeSalary:   return "希望年収（任意）"
+        case .profile:      return "プロフィール"
+        case .resume:       return "履歴書"
+        case .career:       return "職務経歴書"
+        case .ownPR:        return "自己PR"
+        case .hopeArea:     return "希望勤務地"
+        case .hopeSalary:   return "希望年収"
         case .exQuestionAnswer1:   return "独自質問 1（必須）"
         case .exQuestionAnswer2:   return "独自質問 2（必須）"
         case .exQuestionAnswer3:   return "独自質問 3（必須）"

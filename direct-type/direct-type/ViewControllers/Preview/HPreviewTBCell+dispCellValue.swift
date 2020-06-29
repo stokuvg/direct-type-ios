@@ -240,6 +240,7 @@ extension HPreviewTBCell {
             if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
             return _item.childItems[0].curVal
         case .genderA7:               //=== [A-7] 入力（性別）
+            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応（スキップ可能から必須になった）
             let tmpGender: String = _item.childItems[0].curVal
             let bufGender: String = SelectItemsManager.getCodeDisp(.gender, code: tmpGender)?.disp ?? "--"
             return "\(bufGender)"
