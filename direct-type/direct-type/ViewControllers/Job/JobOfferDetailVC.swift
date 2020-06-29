@@ -20,7 +20,7 @@ class JobOfferDetailVC: TmpBasicVC {
     @IBOutlet weak var applicationBtn:UIButton!
     @IBAction func applicationBtnAction() {
         // 応募フォームに遷移
-        self.pushViewController(.entryVC, model: _mdlJobDetail)
+        self.pushViewController(.entryForm, model: _mdlJobDetail)
     }
     
     var keepFlag:Bool!

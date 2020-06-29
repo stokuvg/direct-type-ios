@@ -70,7 +70,12 @@ class EntryVC: PreviewBaseVC {
             tableVW.reloadData()
             return
         }
-        fetchPostEntry()
+        switch mode {
+        case .edit:
+            pushViewController(.entryConfirm, model: (jobCard, profile, resume, career, entry))
+        case .preview:
+            fetchPostEntry()
+        }
     }
     //共通プレビューをOverrideして利用する
     override func viewDidLoad() {
@@ -80,7 +85,9 @@ class EntryVC: PreviewBaseVC {
     }
     override func initData() {
         super.initData()
-        title = "応募フォーム"
+        if mode == .preview { return }
+
+//        title = "応募フォーム"
         let jobCard: MdlJobCardDetail = MdlJobCardDetail(
             jobCardCode: "12345678", jobName: "【PL候補・SE】案件数に絶対的な自信あり！◆月給40万円〜■残業平均月12h",
             salaryMinId: 3, salaryMaxId: 8,
@@ -108,17 +115,22 @@ class EntryVC: PreviewBaseVC {
         }
         
         //###[Dbg: ダミーデータ投入]___
-        self.entry = MdlEntry(ownPR: "", hopeArea: [], hopeSalary: "", exQuestion1: "", exQuestion2: "", exQuestion3: "", exAnswer1: "", exAnswer2: "", exAnswer3: "")
+        self.entry = MdlEntry(ownPR: "", hopeArea: [], hopeSalary: "", exQuestion1: nil, exQuestion2: nil, exQuestion3: nil, exAnswer1: "", exAnswer2: "", exAnswer3: "")
         editableModel.editTempCD[EditItemMdlEntry.hopeArea.itemKey] = "28_29_30"
         editableModel.editTempCD[EditItemMdlEntry.hopeSalary.itemKey] = "8"
         editableModel.editTempCD[EditItemMdlEntry.ownPR.itemKey] = "自己PRのテキストのダミーで"
-        entry?.exQuestion1 = "企業独自の質問テキストが設定されています。答えてください。"
-        entry?.exQuestion2 = nil
-        entry?.exQuestion3 = "企業独自質問3"
+//        entry?.exQuestion1 = "企業独自の質問テキストが設定されています。答えてください。"
+//        entry?.exQuestion3 = "企業独自質問3"
         //###[Dbg: ダミーデータ投入]^^^
     }
-    func initData(_ model: MdlJobCardDetail) {
-        title = "[C-9] 応募フォーム"
+    func initData(_ mode: EntryPrevMode, _ model: MdlJobCardDetail) {
+        switch mode {
+        case .edit:
+            title = "[C-9] 応募フォーム"
+        case .preview:
+            title = "[C-12] 応募確認"
+        }
+        self.mode = mode
         self.jobCard = model
     }
     override func dispData() {
@@ -195,7 +207,12 @@ class EntryVC: PreviewBaseVC {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        fetchGetEntryAll()
+        switch mode {
+        case .edit:
+            fetchGetEntryAll()
+        case .preview:
+            break //フェッチ不要
+        }
     }
     override func chkButtonEnable() {
         btnCommit.isEnabled = true

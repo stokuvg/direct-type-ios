@@ -331,7 +331,7 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
             self.pushViewController(.careerListC)
         })
         let action08: UIAlertAction = UIAlertAction(title: "[C-9] 応募フォーム", style: .default, handler: { action in
-            self.pushViewController(.entryVC)
+            self.pushViewController(.entryForm)
         })
         alert.addAction(action01)
         alert.addAction(action02)

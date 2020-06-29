@@ -15,7 +15,8 @@ enum PushVCType {
     case smoothCareerPreviewF11
     case firstInputPreviewA
     case careerListC
-    case entryVC
+    case entryForm
+    case entryConfirm
 }
 
 extension BaseVC {
@@ -57,15 +58,25 @@ extension BaseVC {
                 nvc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に表示にする
                 self.navigationController?.pushViewController(nvc, animated: true)
             }
-        case .entryVC://[C-0] 応募フォーム
+        case .entryForm://[C-0] 応募フォーム
             let storyboard = UIStoryboard(name: "Preview", bundle: nil)
             if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_EntryVC") as? EntryVC{
                 nvc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に表示にする
                 if let model = model as? MdlJobCardDetail {
-                    nvc.initData(model) //求人カード詳細のデータを横流す
+                    nvc.initData(.edit, model) //求人カード詳細のデータを横流す
                 }
                 self.navigationController?.pushViewController(nvc, animated: true)
             }
+            case .entryConfirm://[C-0] 応募フォーム
+                let storyboard = UIStoryboard(name: "Preview", bundle: nil)
+                if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_EntryVC") as? EntryVC{
+                    nvc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に表示にする
+                    print(model)
+                    if let (jobCard, profile, resume, career, entrt) = model as? (MdlJobCardDetail, MdlProfile, MdlResume, MdlCareer, MdlEntry) {
+                        nvc.initData(.preview, jobCard) //求人カード詳細のデータを横流す
+                    }
+                    self.navigationController?.pushViewController(nvc, animated: true)
+                }
 
         }
     }
