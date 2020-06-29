@@ -101,6 +101,13 @@ class EntryVC: PreviewBaseVC {
         if self.jobCard == nil {
             self.jobCard = jobCard
         }
+        
+        
+        //###[Dbg: ダミーデータ投入]___
+        editableModel.editTempCD[EditItemMdlEntry.hopeArea.itemKey] = "28_29_30"
+        editableModel.editTempCD[EditItemMdlEntry.hopeSalary.itemKey] = "8"
+        editableModel.editTempCD[EditItemMdlEntry.ownPR.itemKey] = "自己PRのテキストのダミーで"
+        //###[Dbg: ダミーデータ投入]^^^
     }
     func initData(_ model: MdlJobCardDetail) {
         title = "[C-9] 応募フォーム"
@@ -273,6 +280,8 @@ extension EntryVC {
         guard let _profile = self.profile else { return }
         guard let _resume = self.resume else { return }
         guard let _career = self.career else { return }
+        
+        
         let param: WebAPIEntryUserDto = WebAPIEntryUserDto(_jobCard.jobCardCode, _profile, _resume, _career, editableModel.editTempCD)
         print(param)
             
