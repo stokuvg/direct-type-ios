@@ -231,6 +231,7 @@
 		267E636024A9865E004169ED /* EntryFormExQuestionsHeadTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 267E635E24A9865E004169ED /* EntryFormExQuestionsHeadTBCell.xib */; };
 		267E636324A98EF7004169ED /* EntryFormExQuestionsItemTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267E636124A98EF7004169ED /* EntryFormExQuestionsItemTBCell.swift */; };
 		267E636424A98EF7004169ED /* EntryFormExQuestionsItemTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 267E636224A98EF7004169ED /* EntryFormExQuestionsItemTBCell.xib */; };
+		267E636624A9D183004169ED /* HPreviewTBCellTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267E636524A9D183004169ED /* HPreviewTBCellTool.swift */; };
 		26800520246A2B440053A7F4 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2680051F246A2B440053A7F4 /* Date+Extensions.swift */; };
 		26859E242488E62A000109D1 /* SubEditSpecialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26859E232488E62A000109D1 /* SubEditSpecialVC.swift */; };
 		26859E272488E636000109D1 /* HEditSpecialTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26859E252488E636000109D1 /* HEditSpecialTBCell.swift */; };
@@ -551,6 +552,7 @@
 		267E635E24A9865E004169ED /* EntryFormExQuestionsHeadTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntryFormExQuestionsHeadTBCell.xib; sourceTree = "<group>"; };
 		267E636124A98EF7004169ED /* EntryFormExQuestionsItemTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryFormExQuestionsItemTBCell.swift; sourceTree = "<group>"; };
 		267E636224A98EF7004169ED /* EntryFormExQuestionsItemTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntryFormExQuestionsItemTBCell.xib; sourceTree = "<group>"; };
+		267E636524A9D183004169ED /* HPreviewTBCellTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPreviewTBCellTool.swift; sourceTree = "<group>"; };
 		2680051F246A2B440053A7F4 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		26859E232488E62A000109D1 /* SubEditSpecialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubEditSpecialVC.swift; sourceTree = "<group>"; };
 		26859E252488E636000109D1 /* HEditSpecialTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HEditSpecialTBCell.swift; sourceTree = "<group>"; };
@@ -1051,6 +1053,7 @@
 		06E519D124581667004E4B7A /* Edit */ = {
 			isa = PBXGroup;
 			children = (
+				267E636524A9D183004169ED /* HPreviewTBCellTool.swift */,
 				2680051E246A29D50053A7F4 /* EditableSub */,
 				06E519B6245814D4004E4B7A /* SubEditBaseVC.swift */,
 				268BFF55246E8292004B2640 /* SubInputMemoVC.swift */,
@@ -1700,6 +1703,7 @@
 				0670F4622491E14400E60FDC /* MdlKeepList.swift in Sources */,
 				0645DDFF246B969000592572 /* Tags.swift in Sources */,
 				0667636F2457B04500AC5039 /* HomeVC.swift in Sources */,
+				267E636624A9D183004169ED /* HPreviewTBCellTool.swift in Sources */,
 				06E519A02457DAD7004E4B7A /* WithDrawalCompleteVC.swift in Sources */,
 				26A4C1CB247B4A81008D8E68 /* ApiManager.swift in Sources */,
 				06E5199C2457DA2D004E4B7A /* AccountChangeCompleteVC.swift in Sources */,

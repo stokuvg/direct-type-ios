@@ -17,7 +17,7 @@ class EntryFormExQuestionsItemTBCell: UITableViewCell {
     @IBOutlet weak var vwQuestionArea: UIView!
     @IBOutlet weak var lblQuestion: UILabel!
     @IBOutlet weak var vwAnswerArea: UIView!
-    @IBOutlet weak var lblAnswaer: UILabel!
+    @IBOutlet weak var lblAnswaer: ExItemLabel!
     @IBOutlet weak var lblErrorMsg: UILabel!
     @IBOutlet weak var vwCountArea: UIView!
     @IBOutlet weak var lblCount: UILabel!
@@ -55,7 +55,7 @@ class EntryFormExQuestionsItemTBCell: UITableViewCell {
         let answer: String = _child.curVal
         let cnt: Int = answer.count
         let max: Int = _child.editItem.valid.max ?? 0
-        lblQuestion.text(text: question, fontType: .font_SSb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
+        lblQuestion.text(text: question, fontType: .font_SS, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         if answer.isEmpty {
             lblAnswaer.text(text: _child.placeholder, fontType: .font_SS, textColor: UIColor(colorType: .color_line)!, alignment: .left)
         } else {
