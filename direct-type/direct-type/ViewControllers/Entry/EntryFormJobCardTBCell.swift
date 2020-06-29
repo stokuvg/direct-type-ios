@@ -11,7 +11,7 @@ import UIKit
 class EntryFormJobCardTBCell: UITableViewCell {
     var model: MdlJobCardDetail? = nil
     
-    @IBOutlet weak var vwMainArea: UIView!
+    @IBOutlet weak 	var vwMainArea: UIView!
     @IBOutlet weak var ivIcon: UIImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblCompanyName: UILabel!
@@ -33,11 +33,12 @@ class EntryFormJobCardTBCell: UITableViewCell {
         guard let _model = self.model else { return }
         let bufCompanyName = _model.companyName
         let bufJobName = _model.jobName
-        let bufDate = Date().dispYmdJP()
-        lblTitle.text(text: "応募先", fontType: .font_Sb, textColor: .black, alignment: .center)
-        lblCompanyName.text(text: bufCompanyName, fontType: .font_Sb, textColor: .black, alignment: .left)
-        lblJobTitle.text(text: bufJobName, fontType: .font_Sb, textColor: .black, alignment: .left)
-        lblDate.text(text: bufDate, fontType: .font_SS, textColor: .black, alignment: .right)
+        let endDate = DateHelper.convStrYMD2Date(_model.end_date)
+        let bufDate = "応募期限：〜\(endDate.dispYmdJP())"
+        lblTitle.text(text: "応募先", fontType: .font_M, textColor: UIColor(colorType: .color_black)!, alignment: .center)
+        lblCompanyName.text(text: bufCompanyName, fontType: .font_SSSb, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .left)
+        lblJobTitle.text(text: bufJobName, fontType: .font_Sb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
+        lblDate.text(text: bufDate, fontType: .font_SSS, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .right)
     }
             
             

@@ -54,6 +54,11 @@ import SVProgressHUD
 import SwaggerClient
 
 class EntryVC: PreviewBaseVC {
+    enum EntryPrevMode {
+        case edit       //[C-9]『応募フォーム』
+        case preview    //[C-12]『応募確認画面』
+    }
+    var mode: EntryPrevMode = .edit
     var jobCard: MdlJobCardDetail? = nil//応募への遷移元は、求人カード詳細のみでOK?
     var profile: MdlProfile? = nil
     var resume: MdlResume? = nil
@@ -70,7 +75,7 @@ class EntryVC: PreviewBaseVC {
     //共通プレビューをOverrideして利用する
     override func viewDidLoad() {
         super.viewDidLoad()
-        btnCommit.setTitle(text: "応募する", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        btnCommit.setTitle(text: "応募確認画面へ", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
     }
     override func initData() {
@@ -102,11 +107,12 @@ class EntryVC: PreviewBaseVC {
             self.jobCard = jobCard
         }
         
-        
         //###[Dbg: ダミーデータ投入]___
         editableModel.editTempCD[EditItemMdlEntry.hopeArea.itemKey] = "28_29_30"
         editableModel.editTempCD[EditItemMdlEntry.hopeSalary.itemKey] = "8"
         editableModel.editTempCD[EditItemMdlEntry.ownPR.itemKey] = "自己PRのテキストのダミーで"
+        
+        entry?.exQuestion1 = "企業独自の質問テキストが設定されています。答えてください。"
         //###[Dbg: ダミーデータ投入]^^^
     }
     func initData(_ model: MdlJobCardDetail) {
@@ -284,27 +290,29 @@ extension EntryVC {
         
         let param: WebAPIEntryUserDto = WebAPIEntryUserDto(_jobCard.jobCardCode, _profile, _resume, _career, editableModel.editTempCD)
         print(param)
-            
-        SVProgressHUD.show(withStatus: "応募処理")
-        ApiManager.postEntry(param, isRetry: true)
-        .done { result in
-            print(result)
-        }
-        .catch { (error) in
-            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-            switch myErr.code {
-            case 400:
-                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
-                self.dicGrpValidErrMsg = dicGrpError
-                self.dicValidErrMsg = dicError
-            default:
-                self.showError(error)
-            }
-        }
-        .finally {
-            self.dispData()
-            SVProgressHUD.dismiss()
-        }
+        
+        showConfirm(title: "", message: "\(param)", onlyOK: true)
+        
+//        SVProgressHUD.show(withStatus: "応募処理")
+//        ApiManager.postEntry(param, isRetry: true)
+//        .done { result in
+//            print(result)
+//        }
+//        .catch { (error) in
+//            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+//            switch myErr.code {
+//            case 400:
+//                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
+//                self.dicGrpValidErrMsg = dicGrpError
+//                self.dicValidErrMsg = dicError
+//            default:
+//                self.showError(error)
+//            }
+//        }
+//        .finally {
+//            self.dispData()
+//            SVProgressHUD.dismiss()
+//        }
 
 
     }
