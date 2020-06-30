@@ -154,7 +154,8 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
         //子項目が1つの場合には、直接編集へ移動させる場合：
         let items = item.childItems
         switch items.count {
-        case 0: break
+        case 0:
+            break
         case 1: //プレビューから直接編集へ行ってよし
             let _item = items.first!
             let (_, editTemp) = editableModel.makeTempItem(_item)
@@ -212,6 +213,9 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
         }
         //================================================
         switch item.type {
+        case .notifyEntry1C12, .notifyEntry2C12, .passwordC12: //それぞれで実施するので遷移はなし
+            return
+
         case .lastJobExperimentH3, .jobExperimentsH3, .businessTypesH3, .lastJobExperimentA11, .jobExperimentsA14:
             let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
             if let _item = item.childItems.first {
@@ -223,10 +227,8 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
                 }
             }
             //直接、特殊選択画面へ遷移させる
+            return
 
-            break
-
-            
         default:
             let storyboard = UIStoryboard(name: "Edit", bundle: nil)
             if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubEditBaseVC") as? SubEditBaseVC{

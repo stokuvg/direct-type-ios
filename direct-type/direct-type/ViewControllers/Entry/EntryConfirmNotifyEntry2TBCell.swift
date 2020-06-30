@@ -9,22 +9,42 @@
 import UIKit
 
 class EntryConfirmNotifyEntry2TBCell: UITableViewCell {
+    var isAccept: Bool = false
+
     @IBOutlet weak var vwMainArea: UIView!
 
     @IBOutlet weak var vwAcceptArea: UIView!
     @IBOutlet weak var lblAccept: UILabel!
+    @IBOutlet weak var ivAccept: UIImageView!
     @IBOutlet weak var btnAccept: UIButton!
+    @IBAction func actAccept(_ sender: Any) {
+        isAccept = !isAccept
+        ivAccept.image = isAccept ? R.image.checkOn() : R.image.checkOff()
+        print(#line, #function)
+    }
+
     @IBOutlet weak var vwMessageArea: UIView!
     @IBOutlet weak var lblMessage: UILabel!
 
     @IBOutlet weak var vwLinkText1Area: UIView!
     @IBOutlet weak var lblLinkText1: UILabel!
+    @IBOutlet weak var btnLinkText1: UIButton!
+    @IBAction func actLinkText1(_ sender: Any) {
+        print(#line, #function)
+    }
     @IBOutlet weak var vwLinkText2Area: UIView!
     @IBOutlet weak var lblLinkText2: UILabel!
+    @IBOutlet weak var btnLinkText2: UIButton!
+    @IBAction func actLinkText2(_ sender: Any) {
+        print(#line, #function)
+    }
     @IBOutlet weak var vwLinkText3Area: UIView!
     @IBOutlet weak var lblLinkText3: UILabel!
+    @IBOutlet weak var btnLinkText3: UIButton!
+    @IBAction func actLinkText3(_ sender: Any) {
+        print(#line, #function)
+    }
 
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         //===デザイン適用
@@ -34,7 +54,7 @@ class EntryConfirmNotifyEntry2TBCell: UITableViewCell {
     func initCell() {
     }
     func dispCell() {
-        var isAccept: Bool = false
+        ivAccept.image = isAccept ? R.image.checkOn() : R.image.checkOff()
         let bufAccept: String = "転職typeの会員規約・個人情報方針に同意する"
         let bufMessage: String = "※type未登録のメールアドレスの場合、typeに登録の上応募手続きを行います。"
         let bufLink1: String = "> typeに登録済みパスワードがわからない場合"
