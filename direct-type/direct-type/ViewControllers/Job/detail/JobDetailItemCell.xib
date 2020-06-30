@@ -11,17 +11,17 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" restorationIdentifier="Xib_JobDetailItemCell" selectionStyle="default" indentationWidth="10" rowHeight="44" id="KGk-i7-Jjw" customClass="JobDetailItemCell" customModule="direct_type" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ex-Ke-4GU">
-                        <rect key="frame" x="15" y="0.0" width="290" height="85"/>
+                        <rect key="frame" x="15" y="0.0" width="290" height="95"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="lnU-Mr-MQB">
-                                <rect key="frame" x="0.0" y="0.0" width="290" height="85"/>
+                                <rect key="frame" x="0.0" y="0.0" width="290" height="95"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ba1-tb-qRm">
                                         <rect key="frame" x="0.0" y="0.0" width="290" height="45"/>
@@ -77,6 +77,13 @@
                                             <constraint firstItem="WvO-9K-Rsa" firstAttribute="leading" secondItem="68e-yd-CcM" secondAttribute="leading" constant="15" id="QUu-5h-c7b"/>
                                             <constraint firstAttribute="bottom" secondItem="WvO-9K-Rsa" secondAttribute="bottom" constant="12" id="RSo-cp-EWb"/>
                                             <constraint firstAttribute="trailing" secondItem="WvO-9K-Rsa" secondAttribute="trailing" constant="15" id="jHL-dt-xHR"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="chL-n1-G1s">
+                                        <rect key="frame" x="0.0" y="85" width="290" height="10"/>
+                                        <color key="backgroundColor" name="color-white"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="10" id="csr-aa-0Qe"/>
                                         </constraints>
                                     </view>
                                 </subviews>

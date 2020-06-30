@@ -77,8 +77,7 @@ class HomeVC: TmpNaviTopVC {
 //        self.makeDummyData()
 //        self.dataCheckAction()
 
-//        self.getJobList()
-//        self.saveHomeDisplayFlag()
+        self.getJobList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -101,8 +100,6 @@ class HomeVC: TmpNaviTopVC {
             }
         }
         //[Dbg]^^^
-        
-        self.getJobList()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -202,6 +199,7 @@ class HomeVC: TmpNaviTopVC {
         }
     }
     private func recommendLoad() {
+        Log.selectLog(logLevel: .debug, "HomeVC recommendLoad start")
         pageJobCards = MdlJobCardList()
         dispJobCards = MdlJobCardList()
         pageNo = 1
@@ -224,6 +222,7 @@ class HomeVC: TmpNaviTopVC {
     }
     
     private func getJobList() {
+        Log.selectLog(logLevel: .debug, "HomeVC getJobList start")
         SVProgressHUD.show()
         pageJobCards = MdlJobCardList()
         dispJobCards = MdlJobCardList()
@@ -281,8 +280,8 @@ class HomeVC: TmpNaviTopVC {
     #if false
     private func makeDummyData() {
         
-        let mdlData1:MdlJobCard = MdlJobCard.init(jobCardCode: "1",
-                                                  displayPeriod: EntryFormInfoDisplayPeriod.init(startAt: "2020/05/16", endAt: "2020/05/28"),
+        let mdlData1:MdlJobCard = MdlJobCard.init(jobCardCode: "1000000",
+                                                  displayPeriod: EntryFormInfoDisplayPeriod.init(startAt: "2020/06/30", endAt: "2020/07/11"),
                                                   companyName: "株式会社キャリアデザインITパートナーズ「type」",
                                                   jobName: "PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
                                                   mainTitle: "メディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！",
@@ -291,9 +290,7 @@ class HomeVC: TmpNaviTopVC {
                                                   salaryMaxCode: 11,
                                                   salaryDisplay: true,
                                                   workPlaceCode: [1,2,3,4,5,6],
-                                                  keepStatus: false,
-                                                  skipStatus: false,
-                                                  userFilter: UserFilterInfo.init(tudKeepStatus: true, tudSkipStatus: true))
+                                                  keepStatus: true)
         
         
         let mdlData2:MdlJobCard = MdlJobCard.init(jobCardCode: "2",
@@ -306,9 +303,7 @@ class HomeVC: TmpNaviTopVC {
                                                   salaryMaxCode: 10,
                                                   salaryDisplay: false,
                                                   workPlaceCode: [8,9,10,11,12,13,15],
-                                                  keepStatus: false,
-                                                  skipStatus: false,
-                                                  userFilter: UserFilterInfo.init(tudKeepStatus: true, tudSkipStatus: true))
+                                                  keepStatus: false)
         
         
         let mdlData3:MdlJobCard = MdlJobCard.init(jobCardCode: "3",
@@ -321,112 +316,28 @@ class HomeVC: TmpNaviTopVC {
                                                   salaryMaxCode: 24,
                                                   salaryDisplay: true,
                                                   workPlaceCode: [44,45,46,47,48,49,50],
-                                                  keepStatus: false,
-                                                  skipStatus: false,
-                                                  userFilter: UserFilterInfo.init(tudKeepStatus: true, tudSkipStatus: true))
+                                                  keepStatus: false)
         
         let nowDateString = Date().dispYmdJP()
-        masterJobCards = MdlJobCardList.init(updateAt: nowDateString, jobCards: [
+        pageJobCards = MdlJobCardList.init(updateAt: nowDateString,
+                                           hasNext: true, jobList: [
             mdlData1,mdlData2,mdlData3,
             mdlData1,mdlData2,mdlData3,
             mdlData1,mdlData2,mdlData3,
             mdlData1,mdlData2,mdlData3,
             mdlData1,mdlData2,mdlData3,
         ])
-        /*
-        masterJobCards = MdlJobCardList.init(jobCards:
-            [
-                mdlData1,mdlData2,mdlData3,
-                mdlData1,mdlData2,mdlData3,
-                mdlData1,mdlData2,mdlData3,
-                mdlData1,mdlData2,mdlData3,
-                mdlData1,mdlData2,mdlData3,
-            ]
-        )
-        */
         
         dispJobCards = MdlJobCardList()
-        if masterJobCards.jobCards.count > moreDataCount {
-            let jobCards = masterJobCards.jobCards
+        if pageJobCards.jobCards.count > moreDataCount {
+            let jobCards = pageJobCards.jobCards
             dispJobCards.jobCards = jobCards
         } else {
-            for i in 0..<masterJobCards.jobCards.count {
-                let data = masterJobCards.jobCards[i]
+            for i in 0..<pageJobCards.jobCards.count {
+                let data = pageJobCards.jobCards[i]
                 dispJobCards.jobCards.append(data)
             }
         }
-        
-        /*
-        if masterTableData.count > moreDataCount {
-            for i in 0..<moreDataCount {
-                let data = masterTableData[i]
-                dispTableData.append(data)
-            }
-        } else {
-            for i in 0..<masterTableData.count {
-                let data = masterTableData[i]
-                dispTableData.append(data)
-            }
-        }
-         
-        let data1:[String:Any] = [
-            "end":true,
-            "image":"https://type.jp/s/img_banner/top_pc_side_number1.jpg",
-            "job":"PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
-            "price":"500~700",
-            "special":"850",
-            "area":"東京都23区内",
-            "company":"株式会社キャリアデザインITパートナーズ「type」",
-            "main":"メディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！",
-        ]
-        let data2:[String:Any] = [
-            "end":false,
-            "image":"https://type.jp/s/img_banner/top_pc_side_number1.jpg",
-            "job":"PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
-            "price":"500~700",
-            "special":"850",
-            "area":"東京都23区内",
-            "company":"株式会社キャリアデザインITパートナーズ「type」",
-            "main":"メディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！\nメディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！",
-        ]
-        let data3:[String:Any] = [
-            "end":false,
-            "image":"https://type.jp/s/img_banner/top_pc_side_number1.jpg",
-            "job":"PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
-            "price":"500~700",
-            "special":"",
-            "area":"東京都23区内",
-            "company":"株式会社キャリアデザインITパートナーズ「type」",
-            "main":"メディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！\nメディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！",
-        ]
-//        for _ in 0..<100 {
-        for i in 0..<15 {
-            let cnt = i % 3
-//            let randomValue = Int.random(in: 1...3)
-            switch cnt {
-                case 0:
-                    masterTableData.append(data1)
-                case 1:
-                    masterTableData.append(data2)
-                case 2:
-                    masterTableData.append(data3)
-                default:
-                    masterTableData.append(data1)
-            }
-        }
-        
-        if masterTableData.count > moreDataCount {
-            for i in 0..<moreDataCount {
-                let data = masterTableData[i]
-                dispTableData.append(data)
-            }
-        } else {
-            for i in 0..<masterTableData.count {
-                let data = masterTableData[i]
-                dispTableData.append(data)
-            }
-        }
-        */
     }
     #endif
     
@@ -533,7 +444,7 @@ extension HomeVC: UITableViewDataSource {
         let jobCardsCount = dispJobCards.jobCards.count
         
         // 次に表示できるページが無い場合
-        if pageJobCards.nextPage == false{
+        if pageJobCards.nextPage == false {
             dispType = .end
         } else {
             dispType = .add
@@ -547,13 +458,11 @@ extension HomeVC: UITableViewDataSource {
         switch dispType {
         case .add:
             if row == jobCardsCount {
-//            if row == dispTableData.count {
                 let cell = tableView.loadCell(cellName: "JobOfferCardMoreCell", indexPath: indexPath) as! JobOfferCardMoreCell
                 cell.delegate = self
                 return cell
             } else {
                 let data = dispJobCards.jobCards[row]
-//                let data = dispTableData[row]
                 
                 let cell = tableView.loadCell(cellName: "JobOfferBigCardCell", indexPath: indexPath) as! JobOfferBigCardCell
                 cell.delegate = self
@@ -564,13 +473,11 @@ extension HomeVC: UITableViewDataSource {
             }
         case .end:
             if row == dispJobCards.jobCards.count {
-//            if row == dispTableData.count {
                 let cell = tableView.loadCell(cellName: "JobOfferCardReloadCell", indexPath: indexPath) as! JobOfferCardReloadCell
                 cell.delegate = self
                 return cell
             } else {
                 let data = dispJobCards.jobCards[row]
-//                let data = dispTableData[row]
                 let cell = tableView.loadCell(cellName: "JobOfferBigCardCell", indexPath: indexPath) as! JobOfferBigCardCell
                 cell.delegate = self
                 cell.tag = row

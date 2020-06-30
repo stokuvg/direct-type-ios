@@ -40,6 +40,9 @@ class KeepCardCell: BaseJobCardCell {
     
     func setup(data:MdlKeepJob) {
         
+        // キープのステータス
+        self.keepFlag = data.keepStatus
+        
         self.changeKeepImage()
         
         let nowDate = Date()
