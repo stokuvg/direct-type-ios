@@ -72,7 +72,31 @@ class EntryVC: PreviewBaseVC {
         }
         switch mode {
         case .edit:
-            pushViewController(.entryConfirm, model: (jobCard, profile, resume, career, entry))
+            //===entryだけは、編集中の値を適用したモデルを生成する必要あり（or editTemp情報も渡すか）
+            var _entry: MdlEntry? = entry
+            if let tmp = editableModel.editTempCD[EditItemMdlEntry.exQuestionAnswer1.itemKey] {
+                _entry?.exAnswer1 = tmp
+            }
+            if let tmp = editableModel.editTempCD[EditItemMdlEntry.exQuestionAnswer2.itemKey] {
+                _entry?.exAnswer2 = tmp
+            }
+            if let tmp = editableModel.editTempCD[EditItemMdlEntry.exQuestionAnswer3.itemKey] {
+                _entry?.exAnswer3 = tmp
+            }
+            if let tmp = editableModel.editTempCD[EditItemMdlEntry.ownPR.itemKey] {
+                _entry?.ownPR = tmp
+            }
+            if let tmp = editableModel.editTempCD[EditItemMdlEntry.hopeSalary.itemKey] {
+                _entry?.hopeSalary = tmp
+            }
+            var _hopeArea: [Code] = []
+            if let tmp = editableModel.editTempCD[EditItemMdlEntry.hopeArea.itemKey] {
+                for code in tmp.split(separator: EditItemTool.SplitMultiCodeSeparator) {
+                    _hopeArea.append(String(code))
+                }
+            }
+            _entry?.hopeArea = _hopeArea
+            pushViewController(.entryConfirm, model: (jobCard, profile, resume, career, _entry))
         case .preview:
             fetchPostEntry()
         }
@@ -83,55 +107,62 @@ class EntryVC: PreviewBaseVC {
         btnCommit.setTitle(text: "応募確認画面へ", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
     }
-    override func initData() {
-        super.initData()
-        if mode == .preview { return }
-
-//        title = "応募フォーム"
-        let jobCard: MdlJobCardDetail = MdlJobCardDetail(
-            jobCardCode: "12345678", jobName: "【PL候補・SE】案件数に絶対的な自信あり！◆月給40万円〜■残業平均月12h",
-            salaryMinId: 3, salaryMaxId: 8,
-            isSalaryDisplay: true, salaryOffer: "",
-            workPlaceCodes: [11, 22, 33], companyName: "株式会社プレーンナレッジシステムズ（ヒューマンクリエイショングループ）",
-            start_date: "", end_date: "",
-            mainPicture: "", subPictures: [],
-            mainTitle: "", mainContents: "",
-            prCodes: [1,3,5], salarySample: "",
-            recruitmentReason: "", jobDescription: "",
-            jobExample: "", product: "", scope: "",
-            spotTitle1: "", spotDetail1: "", spotTitle2: "", spotDetail2: "",
-            qualification: "", betterSkill: "", applicationExample: "",
-            suitableUnsuitable: "", notSuitableUnsuitable: "",
-            employmentType: 2, salary: "", bonusAbout: "", jobtime: "",
-            overtimeCode: 1, overtimeAbout: "", workPlace: "", transport: "",
-            holiday: "", welfare: "", childcare: "", interviewMemo: "",
-            selectionProcess: JobCardDetailSelectionProcess(selectionProcess1: "", selectionProcess2: "", selectionProcess3: "", selectionProcess4: "", selectionProcess5: "", selectionProcessDetail: ""),
-            contactInfo: JobCardDetailContactInfo(companyUrl: "", contactZipcode: "", contactAddress: "", contactPhone: "", contactPerson: "", contactMail: ""),
-            companyDescription: JobCardDetailCompanyDescription(enterpriseContents: "", mainCustomer: "", mediaCoverage: "", established: "", employeesCount: JobCardDetailCompanyDescriptionEmployeesCount(count: nil, averageAge: nil, genderRatio: nil, middleEnter: nil)
-                , capital: nil, turnover: nil, presidentData: JobCardDetailCompanyDescriptionPresidentData(presidentName: "", presidentHistory: "")),
-            userFilter: UserFilterInfo(tudKeepStatus: false, tudSkipStatus: false))
-        if self.jobCard == nil {
-            self.jobCard = jobCard
-        }
-        
-        //###[Dbg: ダミーデータ投入]___
-        self.entry = MdlEntry(ownPR: "", hopeArea: [], hopeSalary: "", exQuestion1: nil, exQuestion2: nil, exQuestion3: nil, exAnswer1: "", exAnswer2: "", exAnswer3: "")
-        editableModel.editTempCD[EditItemMdlEntry.hopeArea.itemKey] = "28_29_30"
-        editableModel.editTempCD[EditItemMdlEntry.hopeSalary.itemKey] = "8"
-        editableModel.editTempCD[EditItemMdlEntry.ownPR.itemKey] = "自己PRのテキストのダミーで"
-//        entry?.exQuestion1 = "企業独自の質問テキストが設定されています。答えてください。"
-//        entry?.exQuestion3 = "企業独自質問3"
-        //###[Dbg: ダミーデータ投入]^^^
-    }
-    func initData(_ mode: EntryPrevMode, _ model: MdlJobCardDetail) {
+//    override func initData() {
+//        super.initData()
+//        if mode == .preview { return }
+//
+////        title = "応募フォーム"
+//        let jobCard: MdlJobCardDetail = MdlJobCardDetail(
+//            jobCardCode: "12345678", jobName: "【PL候補・SE】案件数に絶対的な自信あり！◆月給40万円〜■残業平均月12h",
+//            salaryMinId: 3, salaryMaxId: 8,
+//            isSalaryDisplay: true, salaryOffer: "",
+//            workPlaceCodes: [11, 22, 33], companyName: "株式会社プレーンナレッジシステムズ（ヒューマンクリエイショングループ）",
+//            start_date: "", end_date: "",
+//            mainPicture: "", subPictures: [],
+//            mainTitle: "", mainContents: "",
+//            prCodes: [1,3,5], salarySample: "",
+//            recruitmentReason: "", jobDescription: "",
+//            jobExample: "", product: "", scope: "",
+//            spotTitle1: "", spotDetail1: "", spotTitle2: "", spotDetail2: "",
+//            qualification: "", betterSkill: "", applicationExample: "",
+//            suitableUnsuitable: "", notSuitableUnsuitable: "",
+//            employmentType: 2, salary: "", bonusAbout: "", jobtime: "",
+//            overtimeCode: 1, overtimeAbout: "", workPlace: "", transport: "",
+//            holiday: "", welfare: "", childcare: "", interviewMemo: "",
+//            selectionProcess: JobCardDetailSelectionProcess(selectionProcess1: "", selectionProcess2: "", selectionProcess3: "", selectionProcess4: "", selectionProcess5: "", selectionProcessDetail: ""),
+//            contactInfo: JobCardDetailContactInfo(companyUrl: "", contactZipcode: "", contactAddress: "", contactPhone: "", contactPerson: "", contactMail: ""),
+//            companyDescription: JobCardDetailCompanyDescription(enterpriseContents: "", mainCustomer: "", mediaCoverage: "", established: "", employeesCount: JobCardDetailCompanyDescriptionEmployeesCount(count: nil, averageAge: nil, genderRatio: nil, middleEnter: nil)
+//                , capital: nil, turnover: nil, presidentData: JobCardDetailCompanyDescriptionPresidentData(presidentName: "", presidentHistory: "")),
+//            userFilter: UserFilterInfo(tudKeepStatus: false, tudSkipStatus: false))
+//        if self.jobCard == nil {
+//            self.jobCard = jobCard
+//        }
+//
+//        //###[Dbg: ダミーデータ投入]___
+//        self.entry = MdlEntry(ownPR: "", hopeArea: [], hopeSalary: "", exQuestion1: nil, exQuestion2: nil, exQuestion3: nil, exAnswer1: "", exAnswer2: "", exAnswer3: "")
+//        editableModel.editTempCD[EditItemMdlEntry.hopeArea.itemKey] = "28_29_30"
+//        editableModel.editTempCD[EditItemMdlEntry.hopeSalary.itemKey] = "8"
+//        editableModel.editTempCD[EditItemMdlEntry.ownPR.itemKey] = "自己PRのテキストのダミーで"
+////        entry?.exQuestion1 = "企業独自の質問テキストが設定されています。答えてください。"
+////        entry?.exQuestion3 = "企業独自質問3"
+//        //###[Dbg: ダミーデータ投入]^^^
+//    }
+    func initData(_ mode: EntryPrevMode, _ jobCard: MdlJobCardDetail, _ profile: MdlProfile? = nil, _ resume: MdlResume? = nil, _ career: MdlCareer? = nil, _ entry: MdlEntry? = nil) {
         switch mode {
         case .edit:
             title = "[C-9] 応募フォーム"
+            self.mode = mode
+            self.jobCard = jobCard
+            self.entry = MdlEntry()
         case .preview:
             title = "[C-12] 応募確認"
+            self.mode = mode
+            self.jobCard = jobCard
+            self.profile = profile
+            self.resume = resume
+            self.career = career
+            self.entry = entry
         }
-        self.mode = mode
-        self.jobCard = model
     }
     override func dispData() {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）

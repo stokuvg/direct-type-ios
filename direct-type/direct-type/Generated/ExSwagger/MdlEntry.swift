@@ -40,6 +40,9 @@ class MdlEntry: Codable {
         self.exAnswer2 = exAnswer2
         self.exAnswer3 = exAnswer3
     }
+    convenience init() {
+        self.init(ownPR: "", hopeArea: [], hopeSalary: "", exAnswer1: "", exAnswer2: "", exAnswer3: "" )
+    }
     //ApiモデルをAppモデルに変換して保持させる
     //=== 作成・更新のモデルは、アプリ=>APIなので不要だな ===
 

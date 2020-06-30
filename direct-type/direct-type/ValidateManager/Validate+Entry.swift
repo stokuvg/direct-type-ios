@@ -28,10 +28,10 @@ extension ValidateManager {
 extension EditItemMdlEntry {
     var valid: ValidInfo {
         switch self {
-        case .jobCard:              return ValidInfo(required: false, keta: nil, max: nil, type: .undefine)
-        case .profile:              return ValidInfo(required: false, keta: nil, max: nil, type: .undefine)
-        case .resume:               return ValidInfo(required: false, keta: nil, max: nil, type: .undefine)
-        case .career:               return ValidInfo(required: false, keta: nil, max: nil, type: .undefine)
+        case .jobCard:              return ValidInfo(required: false, keta: nil, max: nil, type: .model)
+        case .profile:              return ValidInfo(required: false, keta: nil, max: nil, type: .model)
+        case .resume:               return ValidInfo(required: false, keta: nil, max: nil, type: .model)
+        case .career:               return ValidInfo(required: false, keta: nil, max: nil, type: .model)
         case .exQuestionAnswer1:    return ValidInfo(required: true, keta: nil, max: 1000, type: .undefine)
         case .exQuestionAnswer2:    return ValidInfo(required: true, keta: nil, max: 1000, type: .undefine)
         case .exQuestionAnswer3:    return ValidInfo(required: true, keta: nil, max: 1000, type: .undefine)

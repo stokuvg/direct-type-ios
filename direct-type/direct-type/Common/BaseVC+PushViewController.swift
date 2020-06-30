@@ -71,9 +71,8 @@ extension BaseVC {
                 let storyboard = UIStoryboard(name: "Preview", bundle: nil)
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_EntryVC") as? EntryVC{
                     nvc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に表示にする
-                    print(model)
-                    if let (jobCard, profile, resume, career, entrt) = model as? (MdlJobCardDetail, MdlProfile, MdlResume, MdlCareer, MdlEntry) {
-                        nvc.initData(.preview, jobCard) //求人カード詳細のデータを横流す
+                    if let (jobCard, profile, resume, career, entry) = model as? (MdlJobCardDetail, MdlProfile, MdlResume, MdlCareer, MdlEntry) {
+                        nvc.initData(.preview, jobCard, profile, resume, career, entry) //求人カード詳細のデータを横流す
                     }
                     self.navigationController?.pushViewController(nvc, animated: true)
                 }
