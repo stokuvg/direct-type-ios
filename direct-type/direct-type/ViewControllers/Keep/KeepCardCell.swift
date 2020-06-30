@@ -39,6 +39,10 @@ class KeepCardCell: BaseJobCardCell {
     }
     
     func setup(data:MdlKeepJob) {
+        Log.selectLog(logLevel: .debug, "KeepCardCell data.keepStatus:\(data.keepStatus)")
+        
+        // キープのステータス
+        self.keepFlag = data.keepStatus
         
         self.changeKeepImage()
         
