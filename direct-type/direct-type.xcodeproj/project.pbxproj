@@ -316,6 +316,8 @@
 		26E04ADE24A1E7C600DE8694 /* EntryFormJobCardTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E04ADC24A1E7C600DE8694 /* EntryFormJobCardTBCell.xib */; };
 		26E04AE124A1E80100DE8694 /* EntryFormAnyModelTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E04ADF24A1E80100DE8694 /* EntryFormAnyModelTBCell.swift */; };
 		26E04AE224A1E80100DE8694 /* EntryFormAnyModelTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E04AE024A1E80100DE8694 /* EntryFormAnyModelTBCell.xib */; };
+		26F18B5224AB0FB6003048AE /* EntryConfirmItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F18B5124AB0FB6003048AE /* EntryConfirmItem.swift */; };
+		26F18B5424AB0FC3003048AE /* EntryConfirmItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F18B5324AB0FC3003048AE /* EntryConfirmItem.xib */; };
 		26F2A819246D0CE90037D47F /* MdlReqEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A818246D0CE90037D47F /* MdlReqEntry.swift */; };
 		26F2A81B246D10C30037D47F /* MdlResume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A81A246D10C30037D47F /* MdlResume.swift */; };
 		26F2A81D246D10DA0037D47F /* MdlCareer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A81C246D10DA0037D47F /* MdlCareer.swift */; };
@@ -643,6 +645,8 @@
 		26E04ADC24A1E7C600DE8694 /* EntryFormJobCardTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntryFormJobCardTBCell.xib; sourceTree = "<group>"; };
 		26E04ADF24A1E80100DE8694 /* EntryFormAnyModelTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryFormAnyModelTBCell.swift; sourceTree = "<group>"; };
 		26E04AE024A1E80100DE8694 /* EntryFormAnyModelTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntryFormAnyModelTBCell.xib; sourceTree = "<group>"; };
+		26F18B5124AB0FB6003048AE /* EntryConfirmItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryConfirmItem.swift; sourceTree = "<group>"; };
+		26F18B5324AB0FC3003048AE /* EntryConfirmItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntryConfirmItem.xib; sourceTree = "<group>"; };
 		26F2A818246D0CE90037D47F /* MdlReqEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlReqEntry.swift; sourceTree = "<group>"; };
 		26F2A81A246D10C30037D47F /* MdlResume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlResume.swift; sourceTree = "<group>"; };
 		26F2A81C246D10DA0037D47F /* MdlCareer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlCareer.swift; sourceTree = "<group>"; };
@@ -1317,6 +1321,8 @@
 				26A2899C24AAD75C000D2926 /* EntryConfirmNotifyEntry2TBCell.xib */,
 				26A289A124AAFB2A000D2926 /* EntryConfirmJobCardTBCell.swift */,
 				26A289A224AAFB2A000D2926 /* EntryConfirmJobCardTBCell.xib */,
+				26F18B5124AB0FB6003048AE /* EntryConfirmItem.swift */,
+				26F18B5324AB0FC3003048AE /* EntryConfirmItem.xib */,
 			);
 			path = EntryConfirmCell;
 			sourceTree = "<group>";
@@ -1547,6 +1553,7 @@
 				066763692457AF3100AC5039 /* MyPageVC.storyboard in Resources */,
 				0685017E24738D98009770A3 /* JobDetailImageCell.xib in Resources */,
 				26E04ADE24A1E7C600DE8694 /* EntryFormJobCardTBCell.xib in Resources */,
+				26F18B5424AB0FC3003048AE /* EntryConfirmItem.xib in Resources */,
 				26147F38247267F9009B30B5 /* MstF22_pcSkillPowerPoint.tsv in Resources */,
 				26A1F5852480F23100834213 /* Dialog.storyboard in Resources */,
 				2636075D2477A39900032880 /* Auth.storyboard in Resources */,
@@ -1751,6 +1758,7 @@
 				0E29E34024A43238006175AE /* String+Extension.swift in Sources */,
 				26AF3237248F538300AA78FD /* Validate+Resume.swift in Sources */,
 				06E519982457DA0D004E4B7A /* ApproachSettingVC.swift in Sources */,
+				26F18B5224AB0FB6003048AE /* EntryConfirmItem.swift in Sources */,
 				06DCAEAB245A7616008FE9FA /* UILabel+Extensions.swift in Sources */,
 				26147F30247258E9009B30B5 /* HPreviewTBCell+dispCellValue.swift in Sources */,
 				26F2A81B246D10C30037D47F /* MdlResume.swift in Sources */,

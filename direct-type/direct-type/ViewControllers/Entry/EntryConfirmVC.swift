@@ -139,9 +139,8 @@ extension EntryConfirmVC {
             cell.dispCell()
             return cell
 
-
         case .jobCardC9:
-            let cell: EntryFormJobCardTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormJobCardTBCell", for: indexPath) as! EntryFormJobCardTBCell
+            let cell: EntryConfirmJobCardTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryConfirmJobCardTBCell", for: indexPath) as! EntryConfirmJobCardTBCell
             cell.initCell(self.jobCard)
             cell.dispCell()
             return cell
