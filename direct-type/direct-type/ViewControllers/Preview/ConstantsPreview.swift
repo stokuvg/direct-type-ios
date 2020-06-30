@@ -51,6 +51,10 @@ enum HPreviewItemType: String {
     case ownPRC9        //９．自己PR文字カウント
     case hopeAreaC9     //１０．希望勤務地（任意）
     case hopeSalaryC9   //１１．希望年収（任意）
+    //=== [C-12]応募確認（[C-9]のもにに加えて表示されるものを定義）
+    case notifyEntry1C12    //２．応募前の確認事項
+    case passwordC12
+    case notifyEntry2C12    //３．応募時に同時登録になる旨を説明
     //=== [H-2]個人プロフィール編集
     case fullnameH2       //===４．氏名（必須）
     case birthGenderH2    //===５．生年月日・性別（必須）
@@ -109,6 +113,10 @@ enum HPreviewItemType: String {
         case .ownPRC9:        return "自己PR"
         case .hopeAreaC9:     return "希望勤務地"
         case .hopeSalaryC9:   return "希望年収"
+        //=== [C-12]応募確認（[C-9]のもにに加えて表示されるものを定義）
+        case .notifyEntry1C12:  return "応募前の確認事項"
+        case .passwordC12:      return "typeパスワード"
+        case .notifyEntry2C12:  return "応募時に同時登録になる旨を説明"
         //=== [H-2]個人プロフィール編集
         case .fullnameH2:     return "氏名"
         case .birthGenderH2:  return "生年月日・性別"

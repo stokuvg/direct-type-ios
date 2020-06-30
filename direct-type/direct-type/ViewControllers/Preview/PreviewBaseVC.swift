@@ -70,6 +70,12 @@ class PreviewBaseVC: TmpBasicVC {
         self.tableVW.register(UINib(nibName: "EntryFormAnyModelTBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryFormAnyModelTBCell")
         self.tableVW.register(UINib(nibName: "EntryFormJobCardTBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryFormJobCardTBCell")
         self.tableVW.register(UINib(nibName: "HPreviewTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HPreviewTBCell")
+
+        self.tableVW.register(UINib(nibName: "EntryConfirmNotifyEntry1TBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryConfirmNotifyEntry1TBCell")
+        self.tableVW.register(UINib(nibName: "EntryConfirmNotifyEntry2TBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryConfirmNotifyEntry2TBCell")
+
+
+
         initData()
         chkButtonEnable()//ボタン死活チェック
     }
