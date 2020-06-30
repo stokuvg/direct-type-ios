@@ -54,11 +54,6 @@ import SVProgressHUD
 import SwaggerClient
 
 class EntryVC: PreviewBaseVC {
-    enum EntryPrevMode {
-        case edit       //[C-9]『応募フォーム』
-        case preview    //[C-12]『応募確認画面』
-    }
-    var mode: EntryPrevMode = .edit
     var jobCard: MdlJobCardDetail? = nil//応募への遷移元は、求人カード詳細のみでOK?
     var profile: MdlProfile? = nil
     var resume: MdlResume? = nil
@@ -70,26 +65,21 @@ class EntryVC: PreviewBaseVC {
             tableVW.reloadData()
             return
         }
-        switch mode {
-        case .edit:
-            //===entryだけは、編集中の値を適用したモデルを生成する必要あり（or editTemp情報も渡すか）
-            var _entry: MdlEntry? = entry
-            if let tmp = editableModel.editTempCD[EditItemMdlEntry.exQuestionAnswer1.itemKey] { _entry?.exAnswer1 = tmp }
-            if let tmp = editableModel.editTempCD[EditItemMdlEntry.exQuestionAnswer2.itemKey] { _entry?.exAnswer2 = tmp }
-            if let tmp = editableModel.editTempCD[EditItemMdlEntry.exQuestionAnswer3.itemKey] { _entry?.exAnswer3 = tmp }
-            if let tmp = editableModel.editTempCD[EditItemMdlEntry.ownPR.itemKey] { _entry?.ownPR = tmp }
-            if let tmp = editableModel.editTempCD[EditItemMdlEntry.hopeSalary.itemKey] { _entry?.hopeSalary = tmp }
-            var _hopeArea: [Code] = []
-            if let tmp = editableModel.editTempCD[EditItemMdlEntry.hopeArea.itemKey] {
-                for code in tmp.split(separator: EditItemTool.SplitMultiCodeSeparator) {
-                    _hopeArea.append(String(code))
-                }
+        //===entryだけは、編集中の値を適用したモデルを生成する必要あり（or editTemp情報も渡すか）
+        var _entry: MdlEntry? = entry
+        if let tmp = editableModel.editTempCD[EditItemMdlEntry.exQuestionAnswer1.itemKey] { _entry?.exAnswer1 = tmp }
+        if let tmp = editableModel.editTempCD[EditItemMdlEntry.exQuestionAnswer2.itemKey] { _entry?.exAnswer2 = tmp }
+        if let tmp = editableModel.editTempCD[EditItemMdlEntry.exQuestionAnswer3.itemKey] { _entry?.exAnswer3 = tmp }
+        if let tmp = editableModel.editTempCD[EditItemMdlEntry.ownPR.itemKey] { _entry?.ownPR = tmp }
+        if let tmp = editableModel.editTempCD[EditItemMdlEntry.hopeSalary.itemKey] { _entry?.hopeSalary = tmp }
+        var _hopeArea: [Code] = []
+        if let tmp = editableModel.editTempCD[EditItemMdlEntry.hopeArea.itemKey] {
+            for code in tmp.split(separator: EditItemTool.SplitMultiCodeSeparator) {
+                _hopeArea.append(String(code))
             }
-            _entry?.hopeArea = _hopeArea
-            pushViewController(.entryConfirm, model: (jobCard, profile, resume, career, _entry))
-        case .preview:
-            fetchPostEntry()
         }
+        _entry?.hopeArea = _hopeArea
+        pushViewController(.entryConfirm, model: (jobCard, profile, resume, career, _entry))
     }
     //共通プレビューをOverrideして利用する
     override func viewDidLoad() {
@@ -97,36 +87,16 @@ class EntryVC: PreviewBaseVC {
         btnCommit.setTitle(text: "応募確認画面へ", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
     }
-    func initData(_ mode: EntryPrevMode, _ jobCard: MdlJobCardDetail, _ profile: MdlProfile? = nil, _ resume: MdlResume? = nil, _ career: MdlCareer? = nil, _ entry: MdlEntry? = nil) {
-        switch mode {
-        case .edit:
-            title = "[C-9] 応募フォーム"
-            self.mode = mode
-            self.jobCard = jobCard
-            self.entry = MdlEntry()
-        case .preview:
-            title = "[C-12] 応募確認"
-            self.mode = mode
-            self.jobCard = jobCard
-            self.profile = profile
-            self.resume = resume
-            self.career = career
-            self.entry = entry
-        }
+    func initData(_ jobCard: MdlJobCardDetail) {
+        title = "[C-9] 応募フォーム"
+        self.jobCard = jobCard
+        self.entry = MdlEntry()
     }
     override func dispData() {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
         self.arrData.removeAll()//いったん全件を削除しておく
         editableModel.arrData.removeAll()//こちらで管理させる？！
 
-        //===== [C-12]応募確認での追加分
-        if mode == .preview {
-            arrData.append(MdlItemH(.notifyEntry1C12, "", childItems: []))
-//            arrData.append(MdlItemH(.passwordC12, "", childItems: []))
-            arrData.append(MdlItemH(.notifyEntry2C12, "", childItems: []))
-        }
-        
-        
         //====== [C-9]応募フォーム
         //===４．応募先求人
         arrData.append(MdlItemH(.jobCardC9, "", childItems: [
@@ -196,12 +166,7 @@ class EntryVC: PreviewBaseVC {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        switch mode {
-        case .edit:
-            fetchGetEntryAll()
-        case .preview:
-            break //フェッチ不要
-        }
+        fetchGetEntryAll()
     }
     override func chkButtonEnable() {
         btnCommit.isEnabled = true
@@ -211,129 +176,57 @@ class EntryVC: PreviewBaseVC {
 extension EntryVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = arrData[indexPath.row]
-        switch mode {
-        //####################################################################
-        case .edit:
-            switch item.type {
+        switch item.type {
 
-            case .jobCardC9:
-                let cell: EntryFormJobCardTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormJobCardTBCell", for: indexPath) as! EntryFormJobCardTBCell
-                cell.initCell(self.jobCard)
-                cell.dispCell()
-                return cell
+        case .jobCardC9:
+            let cell: EntryFormJobCardTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormJobCardTBCell", for: indexPath) as! EntryFormJobCardTBCell
+            cell.initCell(self.jobCard)
+            cell.dispCell()
+            return cell
 
-            case .profileC9:
-                let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
-                cell.initCell(.profile, model: self.profile)
-                cell.dispCell()
-                return cell
+        case .profileC9:
+            let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
+            cell.initCell(.profile, model: self.profile)
+            cell.dispCell()
+            return cell
 
-            case .resumeC9:
-                let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
-                cell.initCell(.resume, model: self.resume)
-                cell.dispCell()
-                return cell
+        case .resumeC9:
+            let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
+            cell.initCell(.resume, model: self.resume)
+            cell.dispCell()
+            return cell
 
-            case .careerC9:
-                let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
-                cell.initCell(.career, model: self.career)
-                cell.dispCell()
-                return cell
+        case .careerC9:
+            let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
+            cell.initCell(.career, model: self.career)
+            cell.dispCell()
+            return cell
 
-            case .fixedInfoC9:
-                let cell: EntryFormInfoTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormInfoTextTBCell", for: indexPath) as! EntryFormInfoTextTBCell
-                cell.initCell(title: item.type.dispTitle)
-                cell.dispCell()
-                return cell
+        case .fixedInfoC9:
+            let cell: EntryFormInfoTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormInfoTextTBCell", for: indexPath) as! EntryFormInfoTextTBCell
+            cell.initCell(title: item.type.dispTitle)
+            cell.dispCell()
+            return cell
 
-            case .exQuestionC9:
-                let cell: EntryFormExQuestionsHeadTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormExQuestionsHeadTBCell", for: indexPath) as! EntryFormExQuestionsHeadTBCell
-                cell.initCell(title: item.type.dispTitle)
-                cell.dispCell()
-                return cell
+        case .exQuestionC9:
+            let cell: EntryFormExQuestionsHeadTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormExQuestionsHeadTBCell", for: indexPath) as! EntryFormExQuestionsHeadTBCell
+            cell.initCell(title: item.type.dispTitle)
+            cell.dispCell()
+            return cell
 
-            case .exQAItem1C9, .exQAItem2C9, .exQAItem3C9:
-                let cell: EntryFormExQuestionsItemTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormExQuestionsItemTBCell", for: indexPath) as! EntryFormExQuestionsItemTBCell
-                let errMsg = dicGrpValidErrMsg[item.type.itemKey]?.joined(separator: "\n") ?? ""
-                cell.initCell(item, editTempCD: editableModel.editTempCD, errMsg: errMsg)//編集中の値を表示適用させるためeditTempCDを渡す
-                cell.dispCell()
-                return cell
+        case .exQAItem1C9, .exQAItem2C9, .exQAItem3C9:
+            let cell: EntryFormExQuestionsItemTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormExQuestionsItemTBCell", for: indexPath) as! EntryFormExQuestionsItemTBCell
+            let errMsg = dicGrpValidErrMsg[item.type.itemKey]?.joined(separator: "\n") ?? ""
+            cell.initCell(item, editTempCD: editableModel.editTempCD, errMsg: errMsg)//編集中の値を表示適用させるためeditTempCDを渡す
+            cell.dispCell()
+            return cell
 
-            default:
-                let cell: HPreviewTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HPreviewTBCell", for: indexPath) as! HPreviewTBCell
-                let errMsg = dicGrpValidErrMsg[item.type.itemKey]?.joined(separator: "\n") ?? ""
-                cell.initCell(item, editTempCD: editableModel.editTempCD, errMsg: errMsg)//編集中の値を表示適用させるためeditTempCDを渡す
-                cell.dispCell()
-                return cell
-            }
-        //####################################################################
-        case .preview:
-            switch item.type {
-                
-            case .notifyEntry1C12:
-                let cell: EntryConfirmNotifyEntry1TBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryConfirmNotifyEntry1TBCell", for: indexPath) as! EntryConfirmNotifyEntry1TBCell
-                cell.initCell(email: profile?.mailAddress ?? "")
-                cell.dispCell()
-                return cell
-
-            case .notifyEntry2C12:
-                let cell: EntryConfirmNotifyEntry2TBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryConfirmNotifyEntry2TBCell", for: indexPath) as! EntryConfirmNotifyEntry2TBCell
-                cell.initCell()
-                cell.dispCell()
-                return cell
-
-
-            case .jobCardC9:
-                let cell: EntryFormJobCardTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormJobCardTBCell", for: indexPath) as! EntryFormJobCardTBCell
-                cell.initCell(self.jobCard)
-                cell.dispCell()
-                return cell
-
-            case .profileC9:
-                let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
-                cell.initCell(.profile, model: self.profile)
-                cell.dispCell()
-                return cell
-
-            case .resumeC9:
-                let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
-                cell.initCell(.resume, model: self.resume)
-                cell.dispCell()
-                return cell
-
-            case .careerC9:
-                let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
-                cell.initCell(.career, model: self.career)
-                cell.dispCell()
-                return cell
-
-            case .fixedInfoC9:
-                let cell: EntryFormInfoTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormInfoTextTBCell", for: indexPath) as! EntryFormInfoTextTBCell
-                cell.initCell(title: item.type.dispTitle)
-                cell.dispCell()
-                return cell
-
-            case .exQuestionC9:
-                let cell: EntryFormExQuestionsHeadTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormExQuestionsHeadTBCell", for: indexPath) as! EntryFormExQuestionsHeadTBCell
-                cell.initCell(title: item.type.dispTitle)
-                cell.dispCell()
-                return cell
-
-            case .exQAItem1C9, .exQAItem2C9, .exQAItem3C9:
-                let cell: EntryFormExQuestionsItemTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormExQuestionsItemTBCell", for: indexPath) as! EntryFormExQuestionsItemTBCell
-                let errMsg = dicGrpValidErrMsg[item.type.itemKey]?.joined(separator: "\n") ?? ""
-                cell.initCell(item, editTempCD: editableModel.editTempCD, errMsg: errMsg)//編集中の値を表示適用させるためeditTempCDを渡す
-                cell.dispCell()
-                return cell
-
-            default:
-                let cell: HPreviewTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HPreviewTBCell", for: indexPath) as! HPreviewTBCell
-                let errMsg = dicGrpValidErrMsg[item.type.itemKey]?.joined(separator: "\n") ?? ""
-                cell.initCell(item, editTempCD: editableModel.editTempCD, errMsg: errMsg)//編集中の値を表示適用させるためeditTempCDを渡す
-                cell.dispCell()
-                return cell
-            }
-        //####################################################################
+        default:
+            let cell: HPreviewTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HPreviewTBCell", for: indexPath) as! HPreviewTBCell
+            let errMsg = dicGrpValidErrMsg[item.type.itemKey]?.joined(separator: "\n") ?? ""
+            cell.initCell(item, editTempCD: editableModel.editTempCD, errMsg: errMsg)//編集中の値を表示適用させるためeditTempCDを渡す
+            cell.dispCell()
+            return cell
         }
     }
 }

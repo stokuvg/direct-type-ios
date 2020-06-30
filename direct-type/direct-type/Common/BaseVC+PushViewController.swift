@@ -63,16 +63,16 @@ extension BaseVC {
             if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_EntryVC") as? EntryVC{
                 nvc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に表示にする
                 if let model = model as? MdlJobCardDetail {
-                    nvc.initData(.edit, model) //求人カード詳細のデータを横流す
+                    nvc.initData(model) //求人カード詳細のデータを横流す
                 }
                 self.navigationController?.pushViewController(nvc, animated: true)
             }
             case .entryConfirm://[C-0] 応募フォーム
                 let storyboard = UIStoryboard(name: "Preview", bundle: nil)
-                if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_EntryVC") as? EntryVC{
+                if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_EntryConfirmVC") as? EntryConfirmVC{
                     nvc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に表示にする
                     if let (jobCard, profile, resume, career, entry) = model as? (MdlJobCardDetail, MdlProfile, MdlResume, MdlCareer, MdlEntry) {
-                        nvc.initData(.preview, jobCard, profile, resume, career, entry) //求人カード詳細のデータを横流す
+                        nvc.initData(jobCard, profile, resume, career, entry) //求人カード詳細のデータを横流す
                     }
                     self.navigationController?.pushViewController(nvc, animated: true)
                 }
