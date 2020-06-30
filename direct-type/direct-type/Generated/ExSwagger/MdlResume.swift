@@ -72,9 +72,11 @@ class MdlResume: Codable {
             }
         }
         //___experienceIndustryId ???
-        var _businessTypes: [Code] = []//!!!これは、配列じゃない？
-        if let codes = dto.experienceIndustryId { //!!!配列じゃないです
-            _businessTypes.append(codes)
+        var _businessTypes: [Code] = []
+        if let codes = dto.experienceIndustryIds {
+            for code in codes {
+                _businessTypes.append(code)
+            }
         }
 
         let _educationId = dto.educationId ?? ""
