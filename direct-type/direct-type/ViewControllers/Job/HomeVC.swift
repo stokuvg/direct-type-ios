@@ -79,6 +79,8 @@ class HomeVC: TmpNaviTopVC {
 
 //        self.getJobList()
 //        self.saveHomeDisplayFlag()
+
+        self.getJobList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -101,8 +103,6 @@ class HomeVC: TmpNaviTopVC {
             }
         }
         //[Dbg]^^^
-        
-        self.getJobList()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -202,6 +202,7 @@ class HomeVC: TmpNaviTopVC {
         }
     }
     private func recommendLoad() {
+        Log.selectLog(logLevel: .debug, "HomeVC recommendLoad start")
         pageJobCards = MdlJobCardList()
         dispJobCards = MdlJobCardList()
         pageNo = 1
@@ -224,6 +225,7 @@ class HomeVC: TmpNaviTopVC {
     }
     
     private func getJobList() {
+        Log.selectLog(logLevel: .debug, "HomeVC getJobList start")
         SVProgressHUD.show()
         pageJobCards = MdlJobCardList()
         dispJobCards = MdlJobCardList()
@@ -533,7 +535,7 @@ extension HomeVC: UITableViewDataSource {
         let jobCardsCount = dispJobCards.jobCards.count
         
         // 次に表示できるページが無い場合
-        if pageJobCards.nextPage == false{
+        if pageJobCards.nextPage == false {
             dispType = .end
         } else {
             dispType = .add
@@ -547,13 +549,11 @@ extension HomeVC: UITableViewDataSource {
         switch dispType {
         case .add:
             if row == jobCardsCount {
-//            if row == dispTableData.count {
                 let cell = tableView.loadCell(cellName: "JobOfferCardMoreCell", indexPath: indexPath) as! JobOfferCardMoreCell
                 cell.delegate = self
                 return cell
             } else {
                 let data = dispJobCards.jobCards[row]
-//                let data = dispTableData[row]
                 
                 let cell = tableView.loadCell(cellName: "JobOfferBigCardCell", indexPath: indexPath) as! JobOfferBigCardCell
                 cell.delegate = self
@@ -564,13 +564,11 @@ extension HomeVC: UITableViewDataSource {
             }
         case .end:
             if row == dispJobCards.jobCards.count {
-//            if row == dispTableData.count {
                 let cell = tableView.loadCell(cellName: "JobOfferCardReloadCell", indexPath: indexPath) as! JobOfferCardReloadCell
                 cell.delegate = self
                 return cell
             } else {
                 let data = dispJobCards.jobCards[row]
-//                let data = dispTableData[row]
                 let cell = tableView.loadCell(cellName: "JobOfferBigCardCell", indexPath: indexPath) as! JobOfferBigCardCell
                 cell.delegate = self
                 cell.tag = row

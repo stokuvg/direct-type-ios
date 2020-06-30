@@ -64,7 +64,7 @@
             <objects>
                 <navigationController id="IKQ-cZ-yEe" customClass="BaseNaviController" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="求人情報" image="recommendedDefault_GN" selectedImage="recommendedSelected_GN" id="HJn-Gm-AH2"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="C5Q-xc-ikp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="C5Q-xc-ikp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
