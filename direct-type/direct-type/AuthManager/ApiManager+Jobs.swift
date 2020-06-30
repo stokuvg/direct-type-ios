@@ -109,7 +109,7 @@ extension ApiManager {
         let skipRequest = CreateSkipRequestDTO.init(jobId: id)
         SkipAPI.skipControllerCreate(body: skipRequest)
             .done { result in
-                Log.selectLog(logLevel: .debug, "result:\(result)")
+//                Log.selectLog(logLevel: .debug, "sendJobSkip result:\(result)")
             }.catch{ (error) in
                 
             }.finally {
@@ -124,7 +124,7 @@ extension ApiManager {
         let skipRequest = CreateSkipRequestDTO.init(jobId: id)
         SkipAPI.skipControllerCreate(body: skipRequest)
             .done { result in
-                Log.selectLog(logLevel: .debug, "result:\(result)")
+//                Log.selectLog(logLevel: .debug, "sendJobSkipFetch result:\(result)")
                 resolver.fulfill(MdlJobCard())
         }.catch { (error) in
             resolver.reject(error)
