@@ -23,6 +23,7 @@ class EntryConfirmVC: PreviewBaseVC {
             tableVW.reloadData()
             return
         }
+        fetchPostEntry()
     }
     //共通プレビューをOverrideして利用する
     override func viewDidLoad() {
@@ -190,4 +191,40 @@ extension EntryConfirmVC {
             return cell
         }
     }
+}
+//=== APIフェッチ
+extension EntryConfirmVC {
+    private func fetchPostEntry() {
+        guard let _jobCard = self.jobCard else { return }
+        guard let _profile = self.profile else { return }
+        guard let _resume = self.resume else { return }
+        guard let _career = self.career else { return }
+        
+        
+        let param: WebAPIEntryUserDto = WebAPIEntryUserDto(_jobCard.jobCardCode, _profile, _resume, _career, editableModel.editTempCD)
+        print(param)
+        showConfirm(title: "", message: "\(param)", onlyOK: true)
+
+        SVProgressHUD.show(withStatus: "応募処理")
+        ApiManager.postEntry(param, isRetry: true)
+        .done { result in
+            print(result)
+        }
+        .catch { (error) in
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            switch myErr.code {
+            case 400:
+                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
+                self.dicGrpValidErrMsg = dicGrpError
+                self.dicValidErrMsg = dicError
+            default:
+                self.showError(error)
+            }
+        }
+        .finally {
+            self.dispData()
+            SVProgressHUD.dismiss()
+        }
+    }
+
 }
