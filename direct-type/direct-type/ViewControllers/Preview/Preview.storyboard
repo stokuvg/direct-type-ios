@@ -459,5 +459,78 @@
             </objects>
             <point key="canvasLocation" x="2235" y="94"/>
         </scene>
+        <!--Entry ConfirmVC-->
+        <scene sceneID="pfi-ya-ft2">
+            <objects>
+                <viewController storyboardIdentifier="Sbid_EntryConfirmVC" id="zKJ-Tz-11r" customClass="EntryConfirmVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="K3m-aQ-F4L">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jDQ-Oc-4jM" userLabel="メイン">
+                                <rect key="frame" x="0.0" y="44" width="414" height="728"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Sj-2k-YVl">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="728"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="zKJ-Tz-11r" id="FKX-bQ-nti"/>
+                                            <outlet property="delegate" destination="zKJ-Tz-11r" id="73Y-hA-xIo"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="6Sj-2k-YVl" secondAttribute="trailing" id="C68-5u-L7O"/>
+                                    <constraint firstItem="6Sj-2k-YVl" firstAttribute="leading" secondItem="jDQ-Oc-4jM" secondAttribute="leading" id="OOZ-XL-Fge"/>
+                                    <constraint firstAttribute="bottom" secondItem="6Sj-2k-YVl" secondAttribute="bottom" id="aGv-Bp-oIs"/>
+                                    <constraint firstItem="6Sj-2k-YVl" firstAttribute="top" secondItem="jDQ-Oc-4jM" secondAttribute="top" id="jlJ-9w-dD8"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Prz-jY-biA" userLabel="フッタ">
+                                <rect key="frame" x="0.0" y="772" width="414" height="90"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uBi-f3-5rY">
+                                        <rect key="frame" x="20" y="20" width="374" height="50"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="actCommit:" destination="zKJ-Tz-11r" eventType="touchUpInside" id="hO2-BM-7lT"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="uBi-f3-5rY" secondAttribute="bottom" constant="20" id="5e2-nN-DJn"/>
+                                    <constraint firstItem="uBi-f3-5rY" firstAttribute="leading" secondItem="Prz-jY-biA" secondAttribute="leading" constant="20" id="D3E-Wa-fm1"/>
+                                    <constraint firstAttribute="height" constant="90" id="HNB-ja-YIL"/>
+                                    <constraint firstAttribute="trailing" secondItem="uBi-f3-5rY" secondAttribute="trailing" constant="20" id="eHj-Rx-eRd"/>
+                                    <constraint firstItem="uBi-f3-5rY" firstAttribute="top" secondItem="Prz-jY-biA" secondAttribute="top" constant="20" id="it0-q6-KV7"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="jDQ-Oc-4jM" firstAttribute="top" secondItem="3gD-Wa-3co" secondAttribute="top" id="URJ-6c-syU"/>
+                            <constraint firstItem="jDQ-Oc-4jM" firstAttribute="leading" secondItem="3gD-Wa-3co" secondAttribute="leading" id="UTa-Vc-tzx"/>
+                            <constraint firstItem="3gD-Wa-3co" firstAttribute="bottom" secondItem="Prz-jY-biA" secondAttribute="bottom" id="WL4-H0-4To"/>
+                            <constraint firstItem="3gD-Wa-3co" firstAttribute="trailing" secondItem="Prz-jY-biA" secondAttribute="trailing" id="b0n-11-aML"/>
+                            <constraint firstItem="Prz-jY-biA" firstAttribute="leading" secondItem="3gD-Wa-3co" secondAttribute="leading" id="f1M-pb-KHj"/>
+                            <constraint firstItem="Prz-jY-biA" firstAttribute="top" secondItem="jDQ-Oc-4jM" secondAttribute="bottom" id="fQd-q7-Yd2"/>
+                            <constraint firstItem="3gD-Wa-3co" firstAttribute="trailing" secondItem="jDQ-Oc-4jM" secondAttribute="trailing" id="pPt-IA-p42"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="3gD-Wa-3co"/>
+                    </view>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="btnCommit" destination="uBi-f3-5rY" id="DW7-KG-Nor"/>
+                        <outlet property="tableVW" destination="6Sj-2k-YVl" id="Nq8-j4-lTP"/>
+                        <outlet property="vwFootArea" destination="Prz-jY-biA" id="BnC-Rc-Xqa"/>
+                        <outlet property="vwMainArea" destination="jDQ-Oc-4jM" id="94t-XY-okD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yhX-3u-b1w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2235" y="94"/>
+        </scene>
     </scenes>
 </document>

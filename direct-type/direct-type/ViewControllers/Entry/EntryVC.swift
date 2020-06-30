@@ -54,11 +54,6 @@ import SVProgressHUD
 import SwaggerClient
 
 class EntryVC: PreviewBaseVC {
-    enum EntryPrevMode {
-        case edit       //[C-9]『応募フォーム』
-        case preview    //[C-12]『応募確認画面』
-    }
-    var mode: EntryPrevMode = .edit
     var jobCard: MdlJobCardDetail? = nil//応募への遷移元は、求人カード詳細のみでOK?
     var profile: MdlProfile? = nil
     var resume: MdlResume? = nil
@@ -70,7 +65,21 @@ class EntryVC: PreviewBaseVC {
             tableVW.reloadData()
             return
         }
-        fetchPostEntry()
+        //===entryだけは、編集中の値を適用したモデルを生成する必要あり（or editTemp情報も渡すか）
+        var _entry: MdlEntry? = entry
+        if let tmp = editableModel.editTempCD[EditItemMdlEntry.exQuestionAnswer1.itemKey] { _entry?.exAnswer1 = tmp }
+        if let tmp = editableModel.editTempCD[EditItemMdlEntry.exQuestionAnswer2.itemKey] { _entry?.exAnswer2 = tmp }
+        if let tmp = editableModel.editTempCD[EditItemMdlEntry.exQuestionAnswer3.itemKey] { _entry?.exAnswer3 = tmp }
+        if let tmp = editableModel.editTempCD[EditItemMdlEntry.ownPR.itemKey] { _entry?.ownPR = tmp }
+        if let tmp = editableModel.editTempCD[EditItemMdlEntry.hopeSalary.itemKey] { _entry?.hopeSalary = tmp }
+        var _hopeArea: [Code] = []
+        if let tmp = editableModel.editTempCD[EditItemMdlEntry.hopeArea.itemKey] {
+            for code in tmp.split(separator: EditItemTool.SplitMultiCodeSeparator) {
+                _hopeArea.append(String(code))
+            }
+        }
+        _entry?.hopeArea = _hopeArea
+        pushViewController(.entryConfirm, model: (jobCard, profile, resume, career, _entry))
     }
     //共通プレビューをOverrideして利用する
     override func viewDidLoad() {
@@ -78,48 +87,10 @@ class EntryVC: PreviewBaseVC {
         btnCommit.setTitle(text: "応募確認画面へ", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
     }
-    override func initData() {
-        super.initData()
-        title = "応募フォーム"
-        let jobCard: MdlJobCardDetail = MdlJobCardDetail(
-            jobCardCode: "12345678", jobName: "【PL候補・SE】案件数に絶対的な自信あり！◆月給40万円〜■残業平均月12h",
-            salaryMinId: 3, salaryMaxId: 8,
-            isSalaryDisplay: true, salaryOffer: "",
-            workPlaceCodes: [11, 22, 33], companyName: "株式会社プレーンナレッジシステムズ（ヒューマンクリエイショングループ）",
-            start_date: "", end_date: "",
-            mainPicture: "", subPictures: [],
-            mainTitle: "", mainContents: "",
-            prCodes: [1,3,5], salarySample: "",
-            recruitmentReason: "", jobDescription: "",
-            jobExample: "", product: "", scope: "",
-            spotTitle1: "", spotDetail1: "", spotTitle2: "", spotDetail2: "",
-            qualification: "", betterSkill: "", applicationExample: "",
-            suitableUnsuitable: "", notSuitableUnsuitable: "",
-            employmentType: 2, salary: "", bonusAbout: "", jobtime: "",
-            overtimeCode: 1, overtimeAbout: "", workPlace: "", transport: "",
-            holiday: "", welfare: "", childcare: "", interviewMemo: "",
-            selectionProcess: JobCardDetailSelectionProcess(selectionProcess1: "", selectionProcess2: "", selectionProcess3: "", selectionProcess4: "", selectionProcess5: "", selectionProcessDetail: ""),
-            contactInfo: JobCardDetailContactInfo(companyUrl: "", contactZipcode: "", contactAddress: "", contactPhone: "", contactPerson: "", contactMail: ""),
-            companyDescription: JobCardDetailCompanyDescription(enterpriseContents: "", mainCustomer: "", mediaCoverage: "", established: "", employeesCount: JobCardDetailCompanyDescriptionEmployeesCount(count: nil, averageAge: nil, genderRatio: nil, middleEnter: nil)
-                , capital: nil, turnover: nil, presidentData: JobCardDetailCompanyDescriptionPresidentData(presidentName: "", presidentHistory: "")),
-            userFilter: UserFilterInfo(tudKeepStatus: false, tudSkipStatus: false))
-        if self.jobCard == nil {
-            self.jobCard = jobCard
-        }
-        
-        //###[Dbg: ダミーデータ投入]___
-        self.entry = MdlEntry(ownPR: "", hopeArea: [], hopeSalary: "", exQuestion1: "", exQuestion2: "", exQuestion3: "", exAnswer1: "", exAnswer2: "", exAnswer3: "")
-        editableModel.editTempCD[EditItemMdlEntry.hopeArea.itemKey] = "28_29_30"
-        editableModel.editTempCD[EditItemMdlEntry.hopeSalary.itemKey] = "8"
-        editableModel.editTempCD[EditItemMdlEntry.ownPR.itemKey] = "自己PRのテキストのダミーで"
-        entry?.exQuestion1 = "企業独自の質問テキストが設定されています。答えてください。"
-        entry?.exQuestion2 = nil
-        entry?.exQuestion3 = "企業独自質問3"
-        //###[Dbg: ダミーデータ投入]^^^
-    }
-    func initData(_ model: MdlJobCardDetail) {
+    func initData(_ jobCard: MdlJobCardDetail) {
         title = "[C-9] 応募フォーム"
-        self.jobCard = model
+        self.jobCard = jobCard
+        self.entry = MdlEntry()
     }
     override func dispData() {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
@@ -310,41 +281,5 @@ extension EntryVC {
             SVProgressHUD.dismiss()
         }
     }
-    private func fetchPostEntry() {
-        guard let _jobCard = self.jobCard else { return }
-        guard let _profile = self.profile else { return }
-        guard let _resume = self.resume else { return }
-        guard let _career = self.career else { return }
-        
-        
-        let param: WebAPIEntryUserDto = WebAPIEntryUserDto(_jobCard.jobCardCode, _profile, _resume, _career, editableModel.editTempCD)
-        print(param)
-        
-        showConfirm(title: "", message: "\(param)", onlyOK: true)
-        
-//        SVProgressHUD.show(withStatus: "応募処理")
-//        ApiManager.postEntry(param, isRetry: true)
-//        .done { result in
-//            print(result)
-//        }
-//        .catch { (error) in
-//            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-//            switch myErr.code {
-//            case 400:
-//                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
-//                self.dicGrpValidErrMsg = dicGrpError
-//                self.dicValidErrMsg = dicError
-//            default:
-//                self.showError(error)
-//            }
-//        }
-//        .finally {
-//            self.dispData()
-//            SVProgressHUD.dismiss()
-//        }
-
-
-    }
-
 }
 

@@ -17,6 +17,7 @@ enum ValidType {
     case number         //半角数字
     case password       //type用パスワード（＊半角英数4~20文字）
     case code           //コード選択のもの
+    case model          //モデルなもの（Validate何もしない)
 }
 
 struct ValidInfo {
@@ -35,7 +36,7 @@ final public class ValidateManager {
 //==========================================================================================
 extension ValidateManager {
     class func dbgDispCurrentItems(editableModel: EditableModel) {
-//        return//!!!
+        return//!!!
         //===変更内容の確認
         print(#line, String(repeating: "=", count: 44))
         for (y, items) in editableModel.arrData.enumerated() {
@@ -113,6 +114,7 @@ extension ValidateManager {
                 var errMsg: String = ""
 
                 switch type {
+                case .model: break // 何もチェックしない
 
                 case .undefine:
                     regexp = #"^.*$"#
@@ -214,7 +216,7 @@ extension ValidateManager {
     //マッチングした文字列を返却し、それを使って戻り先でチェックする
     class func getRegexMatchString(_ item: EditableItemH, _ pattern: String) -> String? {
         let text = item.curVal
-        let regex = try! NSRegularExpression(pattern: pattern, options: [])
+        let regex = try! NSRegularExpression(pattern: pattern, options: [.dotMatchesLineSeparators])
         let matches = regex.matches(in: text, options: [], range: NSMakeRange(0, text.count))
         if matches.count == 0 { return nil }
         //基本的に ^$　マッチングさせるので、matchesは 1つとして処理する

@@ -10,6 +10,7 @@ import UIKit
 import TudApi
 import PromiseKit
 import SVProgressHUD
+import SwaggerClient
 
 //[H-1]
 class MyPageVC: TmpNaviTopVC {
@@ -331,7 +332,29 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
             self.pushViewController(.careerListC)
         })
         let action08: UIAlertAction = UIAlertAction(title: "[C-9] 応募フォーム", style: .default, handler: { action in
-            self.pushViewController(.entryVC)
+            let jobCard: MdlJobCardDetail = MdlJobCardDetail(
+                jobCardCode: "12345678", jobName: "【PL候補・SE】案件数に絶対的な自信あり！◆月給40万円〜■残業平均月12h",
+                salaryMinId: 3, salaryMaxId: 8,
+                isSalaryDisplay: true, salaryOffer: "",
+                workPlaceCodes: [11, 22, 33], companyName: "株式会社プレーンナレッジシステムズ（ヒューマンクリエイショングループ）",
+                start_date: "", end_date: "",
+                mainPicture: "", subPictures: [],
+                mainTitle: "", mainContents: "",
+                prCodes: [1,3,5], salarySample: "",
+                recruitmentReason: "", jobDescription: "",
+                jobExample: "", product: "", scope: "",
+                spotTitle1: "", spotDetail1: "", spotTitle2: "", spotDetail2: "",
+                qualification: "", betterSkill: "", applicationExample: "",
+                suitableUnsuitable: "", notSuitableUnsuitable: "",
+                employmentType: 2, salary: "", bonusAbout: "", jobtime: "",
+                overtimeCode: 1, overtimeAbout: "", workPlace: "", transport: "",
+                holiday: "", welfare: "", childcare: "", interviewMemo: "",
+                selectionProcess: JobCardDetailSelectionProcess(selectionProcess1: "", selectionProcess2: "", selectionProcess3: "", selectionProcess4: "", selectionProcess5: "", selectionProcessDetail: ""),
+                contactInfo: JobCardDetailContactInfo(companyUrl: "", contactZipcode: "", contactAddress: "", contactPhone: "", contactPerson: "", contactMail: ""),
+                companyDescription: JobCardDetailCompanyDescription(enterpriseContents: "", mainCustomer: "", mediaCoverage: "", established: "", employeesCount: JobCardDetailCompanyDescriptionEmployeesCount(count: nil, averageAge: nil, genderRatio: nil, middleEnter: nil)
+                    , capital: nil, turnover: nil, presidentData: JobCardDetailCompanyDescriptionPresidentData(presidentName: "", presidentHistory: "")),
+                userFilter: UserFilterInfo(tudKeepStatus: false, tudSkipStatus: false))
+            self.pushViewController(.entryForm, model: jobCard)
         })
         alert.addAction(action01)
         alert.addAction(action02)
