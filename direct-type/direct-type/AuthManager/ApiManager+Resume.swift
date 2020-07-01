@@ -50,7 +50,7 @@ extension UpdateResumeRequestDTO {
     }
 
     init() {
-        self.init(isEmployed: nil, changeJobCount: nil, workHistory: nil, experienceIndustryId: nil, educationId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil)
+        self.init(isEmployed: nil, changeJobCount: nil, workHistory: nil, experienceIndustryIds: nil, educationId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil, selfPR: nil)
     }
 
     init(_ resume: MdlResume, _ editTempCD: [EditableItemKey: EditableItemCurVal]) {
@@ -82,7 +82,11 @@ extension UpdateResumeRequestDTO {
         print(_workHistory.description)
         
         if let tmp = editTempCD[EditItemMdlResume.businessTypes.itemKey] {
-            self.experienceIndustryId = tmp// 経験業種ID
+            var _experienceIndustryIds: [Code] = []
+            for code in tmp.split(separator: EditItemTool.SplitMultiCodeSeparator) {
+                _experienceIndustryIds.append(String(code))
+            }
+            self.experienceIndustryIds = _experienceIndustryIds// 経験業種ID
         }
         if let tmp = editTempCD[EditItemMdlResume.school.itemKey] {// 学種コード
             self.educationId = tmp

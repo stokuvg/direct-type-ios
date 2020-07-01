@@ -340,10 +340,18 @@
               "$ref": "#/components/schemas/WorkHistoryDTO"
             }
           },
-          "experienceIndustryId": {
-            "type": "string",
-            "example": "1",
-            "description": "経験業種ID"
+          "experienceIndustryIds": {
+            "example": [
+              "1",
+              "2",
+              "3"
+            ],
+            "description": "経験業種コード",
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "educationId": {
             "type": "string",
@@ -386,6 +394,12 @@
             "items": {
               "type": "string"
             }
+          },
+          "selfPR": {
+            "type": "string",
+            "example": "私は英語とフランス語が得意です。何でも挑戦します。",
+            "description": "自己PR",
+            "maxLength": 4000
           }
         }
       },
@@ -436,10 +450,18 @@
               "$ref": "#/components/schemas/WorkHistoryDTO"
             }
           },
-          "experienceIndustryId": {
-            "type": "string",
-            "example": "1",
-            "description": "経験業種ID"
+          "experienceIndustryIds": {
+            "example": [
+              "1",
+              "2",
+              "3"
+            ],
+            "description": "経験業種コード",
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "educationId": {
             "type": "string",
@@ -482,6 +504,12 @@
             "items": {
               "type": "string"
             }
+          },
+          "selfPR": {
+            "type": "string",
+            "example": "私は英語とフランス語が得意です。何でも挑戦します。",
+            "description": "自己PR",
+            "maxLength": 4000
           }
         }
       },
@@ -701,33 +729,6 @@
           "jobs"
         ]
       },
-      "GetJobsRecommendResponseDTO": {
-        "type": "object",
-        "properties": {
-          "hasNext": {
-            "type": "boolean",
-            "example": true,
-            "description": "true: 次ページあり, false: 次ページなし"
-          },
-          "recommendedAt": {
-            "type": "string",
-            "example": "2020-01-22T08:36:08.816Z",
-            "description": "おすすめ一覧作成日（RFC3339）"
-          },
-          "jobs": {
-            "description": "求人一覧",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Job"
-            }
-          }
-        },
-        "required": [
-          "hasNext",
-          "recommendedAt",
-          "jobs"
-        ]
-      },
       "Contact": {
         "type": "object",
         "properties": {
@@ -802,7 +803,7 @@
           "middleEnter"
         ]
       },
-      "GetJobDetailResponseDTO": {
+      "GetJobsDetailResponseDTO": {
         "type": "object",
         "properties": {
           "jobId": {
@@ -832,7 +833,7 @@
           },
           "salaryOffer": {
             "type": "string",
-            "example": "1",
+            "example": "",
             "description": "スカウトによる提示年収＊初回は未使用＊"
           },
           "place2Ids": {
@@ -1109,6 +1110,21 @@
             "type": "boolean",
             "example": true,
             "description": "true: キープしている, false: キープしていない"
+          },
+          "entryQuestion1": {
+            "type": "string",
+            "example": "リモート勤務可能ですか？",
+            "description": "１つ目の追加質問の設問テキスト（設問がない場合は空欄）"
+          },
+          "entryQuestion2": {
+            "type": "string",
+            "example": "",
+            "description": "２つ目の追加質問の設問テキスト（設問がない場合は空欄）"
+          },
+          "entryQuestion3": {
+            "type": "string",
+            "example": "",
+            "description": "３つ目の追加質問の設問テキスト（設問がない場合は空欄）"
           }
         },
         "required": [
@@ -1117,6 +1133,7 @@
           "minSalaryId",
           "maxSalaryId",
           "isSalaryDisplay",
+          "salaryOffer",
           "place2Ids",
           "companyName",
           "pressStartDate",
@@ -1169,7 +1186,10 @@
           "turnover",
           "presidentName",
           "presidentHistory",
-          "isKeep"
+          "isKeep",
+          "entryQuestion1",
+          "entryQuestion2",
+          "entryQuestion3"
         ]
       },
       "KeepJob": {
@@ -1346,6 +1366,42 @@
         "required": [
           "chemistryTypeIds"
         ]
+      },
+      "GetSettingsResponseDTO": {
+        "type": "object",
+        "properties": {
+          "scoutEnable": {
+            "type": "boolean",
+            "example": true,
+            "description": "true: スカウト使用中, false: スカウト停止中"
+          }
+        },
+        "required": [
+          "scoutEnable"
+        ]
+      },
+      "CreateSettingsRequestDTO": {
+        "type": "object",
+        "properties": {
+          "scoutEnable": {
+            "type": "boolean",
+            "example": true,
+            "description": "true: スカウト使用中, false: スカウト停止中"
+          }
+        },
+        "required": [
+          "scoutEnable"
+        ]
+      },
+      "UpdateSettingsRequestDTO": {
+        "type": "object",
+        "properties": {
+          "scoutEnable": {
+            "type": "boolean",
+            "example": true,
+            "description": "true: スカウト使用中, false: スカウト停止中"
+          }
+        }
       },
       "GetApproachResponseDTO": {
         "type": "object",
@@ -1763,6 +1819,27 @@
     }
   },
   "paths": {
+    "/activity": {
+      "post": {
+        "operationId": "ActivityController_create",
+        "summary": "最終ログイン日",
+        "description": "最終ログイン日更新",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "activity"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
     "/profile": {
       "get": {
         "operationId": "ProfileController_get",
@@ -2106,14 +2183,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
-            "content": {
-                "application/json": {
-                  "schema": {
-                      "$ref": "#/components/schemas/GetJobsRecommendResponseDTO"
-                  }
-                }
-            }
+            "description": ""
           }
         },
         "tags": [
@@ -2145,7 +2215,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetJobDetailResponseDTO"
+                  "$ref": "#/components/schemas/GetJobsDetailResponseDTO"
                 }
               }
             }
@@ -2347,6 +2417,106 @@
         ]
       }
     },
+    "/settings": {
+      "get": {
+        "operationId": "SettingsController_get",
+        "summary": "アプローチ情報取得",
+        "description": "Api31_アプローチ情報の取得",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSettingsResponseDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "settings"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "SettingsController_create",
+        "summary": "アプローチ情報作成",
+        "description": "Api32_アプローチ情報を作成・更新",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSettingsRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateSettingsRequestDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "settings"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "SettingsController_update",
+        "summary": "アプローチ情報更新",
+        "description": "Api32_アプローチ情報を作成・更新",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSettingsRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateSettingsRequestDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "settings"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
     "/entry": {
       "post": {
         "operationId": "EntryController_entry",
@@ -2374,9 +2544,9 @@
             "bearer": []
           }
         ]
-      }
-    },
-    "/userStatus": {
+    }
+ },
+     "/userStatus": {
       "get": {
         "operationId": "ApproachController_get",
         "summary": "アプローチ設定取得",
