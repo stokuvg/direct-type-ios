@@ -13,6 +13,7 @@ extension EntryConfirmAnyModelTBCell {
         case profile
         case resume
         case career
+        case entry
     }
 }
 
@@ -51,6 +52,7 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
         stackVW.addArrangedSubview(EntryConfirmItem(type.dispTitle, val))
     }
     private func addStackItem(type: HPreviewItemType, val: [String]) {
+        guard val.count > 0 else { return } //0件なら登録しない
         stackVW.addArrangedSubview(EntryConfirmItem(type.dispTitle, val.joined(separator: "\n")))
     }
 
@@ -60,6 +62,7 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
         case .profile:  bufTitle = "プロフィール"
         case .resume:   bufTitle = "履歴書"
         case .career:   bufTitle = "業務経歴書"
+        case .entry:    bufTitle = "企業向けに送る情報"
         }
         lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         lblTitle.updateConstraints()
@@ -76,22 +79,21 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
                 let bufFullname: String = "\(profile.familyName) \(profile.firstName)"
                 let bufFullnameKana: String = "\(profile.familyNameKana) \(profile.firstNameKana)"
                 let dispName = "\(bufFullname)（\(bufFullnameKana)）"
-                stackVW.addArrangedSubview(EntryConfirmItem("名前", "\(dispName)"))
+                addStackItem(type: .fullnameH2, val: dispName)
                 let bufBirthday: String = profile.birthday.dispYmdJP()
                 let bufAge: String = "\(profile.birthday.age)歳"
                 let dispBirthday: String = "\(bufBirthday)（\(bufAge)）"
-                stackVW.addArrangedSubview(EntryConfirmItem("生年月日", "\(dispBirthday)"))
+                addStackItem(type: .birthH2, val: dispBirthday)
                 let tmpGender: String = profile.gender
                 let bufGender: String = SelectItemsManager.getCodeDisp(.gender, code: tmpGender)?.disp ?? "--"
                 let dispGender: String = " \(bufGender)"
-                stackVW.addArrangedSubview(EntryConfirmItem("性別", "\(dispGender)"))
+                addStackItem(type: .genderH2, val: dispGender)
                 let zip: String = profile.zipCode.zeroUme(7)
                 let dispZip: String = "〒\(String.substr(zip, 1, 3))-\(String.substr(zip, 4, 4))"
                 let bufPlace: String = SelectItemsManager.getCodeDisp(.place, code: profile.prefecture)?.disp ?? ""
                 let dispAddress: String = "\(bufPlace)\(profile.address1)\(profile.address2)"
-                stackVW.addArrangedSubview(EntryConfirmItem("住所", "\(dispZip)\n\(dispAddress)"))
-                let dispMail: String = "\(profile.mailAddress)"
-                stackVW.addArrangedSubview(EntryConfirmItem("メールアドレス", "\(dispMail)"))
+                addStackItem(type: .adderssH2, val: "\(dispZip)\n\(dispAddress)")
+                addStackItem(type: .emailH2, val: profile.mailAddress)
             }
         case .resume:
             if let resume = self.detail as? MdlResume {
@@ -203,6 +205,41 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
                     }
                 }
             }
+        case .entry:
+            if let entry = self.detail as? MdlEntry {
+                //=== 企業からの質問項目 ===
+                if let bufQuestion = entry.exQuestion1 {
+                    let bufAnswer = entry.exAnswer1
+                    stackVW.addArrangedSubview(EntryConfirmItem(bufQuestion, bufAnswer))
+                }
+                if let bufQuestion = entry.exQuestion2 {
+                    let bufAnswer = entry.exAnswer2
+                    stackVW.addArrangedSubview(EntryConfirmItem(bufQuestion, bufAnswer))
+                }
+                if let bufQuestion = entry.exQuestion3 {
+                    let bufAnswer = entry.exAnswer3
+                    stackVW.addArrangedSubview(EntryConfirmItem(bufQuestion, bufAnswer))
+                }
+                //=== 希望勤務地
+                var dispHopeArea: [String] = []
+                for val in entry.hopeArea {
+                    if let cd = SelectItemsManager.getCodeDisp(.entryPlace, code: val) {
+                        dispHopeArea.append(cd.disp)
+                    }
+                }
+                addStackItem(type: .hopeAreaA9, val: dispHopeArea)
+                //=== 希望年収
+                if let cd = SelectItemsManager.getCodeDisp(.salary, code: entry.hopeSalary) {
+                    addStackItem(type: .hopeSalaryC9, val: cd.disp)
+                }
+                //=== 自己PR
+                if !entry.ownPR.isEmpty {
+                    addStackItem(type: .ownPRC9, val: entry.ownPR)
+                }
+
+            }
+
+
         }
 
         //すべてを表示させる

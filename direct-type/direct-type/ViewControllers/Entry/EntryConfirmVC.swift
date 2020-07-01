@@ -47,7 +47,6 @@ class EntryConfirmVC: PreviewBaseVC {
         //===== [C-12]応募確認での追加分
         arrData.append(MdlItemH(.notifyEntry1C12, "", childItems: []))
         arrData.append(MdlItemH(.notifyEntry2C12, "", childItems: []))
-
         //====== [C-9]応募フォーム
         //===４．応募先求人
         arrData.append(MdlItemH(.jobCardC9, "", childItems: [
@@ -65,52 +64,11 @@ class EntryConfirmVC: PreviewBaseVC {
         arrData.append(MdlItemH(.careerC9, "", childItems: [
             EditableItemH(type: .model, editItem: EditItemMdlEntry.career, val: "【モデルダミー】"),
         ], model: career))
-        
-        //===XX．応募フォーム
-//        arrData.append(MdlItemH(.careerC9, "", childItems: [
-//            EditableItemH(type: .model, editItem: EditItemMdlEntry.career, val: "【モデルダミー】"),
-//        ], model: career))
+        //===== [C-12]応募フォーム独自追加項目
+        arrData.append(MdlItemH(.entryC12, "", childItems: [
+            EditableItemH(type: .model, editItem: EditItemMdlEntry.entryItems, val: "【モデルダミー】"),
+        ], model: entry))
 
-        
-        
-        //        //===XX. 固定文言
-//        arrData.append(MdlItemH(.fixedInfoC9, "", childItems: [] ))
-//
-//        //===１２．独自質問（必須）
-//        var exQA: [MdlItemH] = []
-//        if let exQuestion = entry?.exQuestion1 {
-//            exQA.append(MdlItemH(.exQAItem1C9, exQuestion, childItems: [
-//                EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer1, val: entry?.exAnswer1 ?? ""),
-//            ], model: career))
-//        }
-//        if let exQuestion = entry?.exQuestion2 {
-//            exQA.append(MdlItemH(.exQAItem2C9, exQuestion, childItems: [
-//                EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer2, val: entry?.exAnswer2 ?? ""),
-//            ], model: career))
-//        }
-//        if let exQuestion = entry?.exQuestion3 {
-//            exQA.append(MdlItemH(.exQAItem3C9, exQuestion, childItems: [
-//                EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer3, val: entry?.exAnswer3 ?? ""),
-//            ], model: career))
-//        }
-//        if exQA.count > 0 {
-//            arrData.append(MdlItemH(.exQuestionC9, "", childItems: []))
-//            for qa in exQA { arrData.append(qa) }
-//        }
-//        //===９．自己PR文字カウント
-//        arrData.append(MdlItemH(.ownPRC9, "", childItems: [
-//            EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.ownPR, val: entry?.ownPR ?? ""),
-//        ]))
-//        //===１０．希望勤務地（任意）
-//        let _hopeArea = entry?.hopeArea.joined(separator: EditItemTool.JoinMultiCodeSeparator)
-//        arrData.append(MdlItemH(.hopeAreaC9, "", childItems: [
-//            EditableItemH(type: .selectMulti, editItem: EditItemMdlEntry.hopeArea, val: _hopeArea ?? ""),
-//        ]))
-//        //===１１．希望年収（任意）
-//        arrData.append(MdlItemH(.hopeSalaryC9, "", childItems: [
-//            EditableItemH(type: .selectSingle, editItem: EditItemMdlEntry.hopeSalary, val: entry?.hopeSalary ?? ""),
-//        ]))
-//
         //=== editableModelで管理させる
         editableModel.arrData.removeAll()
         for items in arrData { editableModel.arrData.append(items.childItems) }//editableModelに登録
@@ -142,7 +100,7 @@ extension EntryConfirmVC {
 
         case .notifyEntry2C12:
             let cell: EntryConfirmNotifyEntry2TBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryConfirmNotifyEntry2TBCell", for: indexPath) as! EntryConfirmNotifyEntry2TBCell
-            cell.initCell()
+            cell.initCell(self)
             cell.dispCell()
             return cell
 
@@ -167,6 +125,12 @@ extension EntryConfirmVC {
         case .careerC9:
             let cell: EntryConfirmAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryConfirmAnyModelTBCell", for: indexPath) as! EntryConfirmAnyModelTBCell
             cell.initCell(.career, model: self.career)
+            cell.dispCell()
+            return cell
+
+        case .entryC12:
+            let cell: EntryConfirmAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryConfirmAnyModelTBCell", for: indexPath) as! EntryConfirmAnyModelTBCell
+            cell.initCell(.entry, model: self.entry)
             cell.dispCell()
             return cell
 
@@ -198,6 +162,32 @@ extension EntryConfirmVC {
         }
     }
 }
+extension EntryConfirmVC: EntryConfirmNotifyEntryDelegate {
+    func actLinkText(type: EntryConfirmLinkTextType) {
+        switch type {
+        case .passwordForgot:
+            //[Dbg:（仮）Web(よくある質問・ヘルプ)を表示
+            let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
+            vc.setup(type: .Help)
+            vc.modalPresentationStyle = .fullScreen
+            navigationController?.present(vc, animated: true, completion: nil)
+        case .personalInfo:
+            //（仮） Web(プライバシーポリシー)を表示
+            let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
+            vc.setup(type: .Privacy)
+            vc.modalPresentationStyle = .fullScreen
+            navigationController?.present(vc, animated: true, completion: nil)
+        case .memberPolicy:
+            //（仮） Web(利用規約)を表示
+            let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
+            vc.setup(type: .Term)
+            vc.modalPresentationStyle = .fullScreen
+            navigationController?.present(vc, animated: true, completion: nil)
+        }
+    }
+    
+}
+
 //=== APIフェッチ
 extension EntryConfirmVC {
     private func fetchPostEntry() {
@@ -206,9 +196,11 @@ extension EntryConfirmVC {
         guard let _resume = self.resume else { return }
         guard let _career = self.career else { return }
         
-        
-        let param: WebAPIEntryUserDto = WebAPIEntryUserDto(_jobCard.jobCardCode, _profile, _resume, _career, editableModel.editTempCD)
-        print(param)
+        //!!!let _jobCardCode: String = _jobCard.jobCardCode
+        let _jobCardCode: String = "1170847" //!!![[Dbg: 固定値で投げている]
+        let _typePassword: String = "Dummy1234" //!!![[Dbg: 固定値で投げている]
+
+        let param: WebAPIEntryUserDto = WebAPIEntryUserDto(_jobCardCode, _profile, _resume, _career, editableModel.editTempCD, _typePassword)
         showConfirm(title: "", message: "\(param)", onlyOK: true)
 
         SVProgressHUD.show(withStatus: "応募処理")
@@ -219,6 +211,10 @@ extension EntryConfirmVC {
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
+            case 404:
+                let myErr404 = MyErrorDisp(code: 404, title: "type応募", message: "この求人情報は掲載が終了しています", orgErr: nil, arrValidErrMsg: [])
+                self.showError(myErr404)
+
             case 400:
                 let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
                 self.dicGrpValidErrMsg = dicGrpError

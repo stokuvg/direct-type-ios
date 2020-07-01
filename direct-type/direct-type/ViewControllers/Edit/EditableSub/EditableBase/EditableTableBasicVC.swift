@@ -58,7 +58,7 @@ class EditableTableBasicVC: EditableBasicVC {
             if dateBirthday > Date() {
                 chkErr.addDicArrVal(key: editTempBirthday.editableItemKey, val: "未来の日付は設定できません")
             }
-        case .birthGenderH2:
+        case .birthH2:
             let (_, editTempBirthday) = editableModel.makeTempItem(itemGrp.childItems[0])
             let dateBirthday = DateHelper.convStrYMD2Date(editTempBirthday.curVal)
             //===未来は設定できない

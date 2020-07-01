@@ -26,6 +26,7 @@ extension ApiManager {
         AuthManager.needAuth(true)
         ResumeAPI.resumeControllerGet()
         .done { result in
+            print(#line, #function, param)
             resolver.fulfill(MdlResume(dto: result)) //変換しておく
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
@@ -77,9 +78,6 @@ extension UpdateResumeRequestDTO {
         } else {
             self.workHistory = nil
         }
-
-        print(_workHistory.description)
-        
         if let tmp = editTempCD[EditItemMdlResume.businessTypes.itemKey] {
             var _experienceIndustryIds: [Code] = []
             for code in tmp.split(separator: EditItemTool.SplitMultiCodeSeparator) {
@@ -90,7 +88,6 @@ extension UpdateResumeRequestDTO {
         if let tmp = editTempCD[EditItemMdlResume.school.itemKey] {// 学種コード
             self.educationId = tmp
         }
-        //===
         let _schoolName = editTempCD[EditItemMdlResumeSchool.schoolName.itemKey] ?? resume.school.schoolName
         let _faculty = editTempCD[EditItemMdlResumeSchool.faculty.itemKey] ?? resume.school.faculty
         let _department = editTempCD[EditItemMdlResumeSchool.department.itemKey] ?? resume.school.department
@@ -114,6 +111,10 @@ extension UpdateResumeRequestDTO {
             for code in tmp.split(separator: EditItemTool.SplitMultiCodeSeparator) {
                 _licenseIds.append(String(code))
             }
+            self.licenseIds = _licenseIds
+        }
+        if let tmp = editTempCD[EditItemMdlResume.ownPr.itemKey] {// 自己PR
+            self.selfPR = tmp
         }
     }
 }
@@ -121,6 +122,7 @@ extension UpdateResumeRequestDTO {
 
 extension ApiManager {
     class func updateResume(_ param: UpdateResumeRequestDTO, isRetry: Bool = true) -> Promise<Void> {
+        print(#line, #function, param)
         if isRetry {
             return firstly { () -> Promise<Void> in
                 retry(args: param, task: updateResumeFetch) { (error) -> Bool in return true }
@@ -181,8 +183,6 @@ extension CreateResumeRequestDTO {
         if let tmp = editTempCD[EditItemMdlFirstInput.school.itemKey] {
             self.educationId = tmp
         }
-            
-        
     }
 }
 extension ApiManager {

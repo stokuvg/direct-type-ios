@@ -19,7 +19,7 @@ extension EditItemMdlResume {
         case .school:               return ValidInfo(required: false, keta: nil, max: nil, type: .code)
         case .skillLanguage:        return ValidInfo(required: false, keta: nil, max: nil, type: .code)
         case .qualifications:       return ValidInfo(required: false, keta: nil, max: nil, type: .code)
-        case .ownPr:                return ValidInfo(required: false, keta: nil, max: nil, type: .undefine)
+        case .ownPr:                return ValidInfo(required: false, keta: nil, max: 2000, type: .undefine)
         }
     }
 }
@@ -27,8 +27,8 @@ extension EditItemMdlResumeSchool {
     var valid: ValidInfo {
         switch self {
         case .schoolName:       return ValidInfo(required: true, keta: nil, max: nil, type: .zenkaku)
-        case .faculty:       return ValidInfo(required: true, keta: nil, max: nil, type: .zenkaku)
-        case .department:          return ValidInfo(required: false, keta: nil, max: nil, type: .zenkaku)
+        case .faculty:          return ValidInfo(required: true, keta: nil, max: nil, type: .zenkaku)
+        case .department:       return ValidInfo(required: false, keta: nil, max: nil, type: .zenkaku)
         case .graduationYear:   return ValidInfo(required: true, keta: nil, max: nil, type: .code)
         }
     }

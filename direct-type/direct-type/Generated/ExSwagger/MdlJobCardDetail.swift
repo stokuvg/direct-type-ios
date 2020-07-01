@@ -96,6 +96,11 @@ class MdlJobCardDetail: Codable {
     var contactInfo: JobCardDetailContactInfo
     var companyDescription: JobCardDetailCompanyDescription
     var userFilter: UserFilterInfo
+    
+    var entryQuestion1: String?
+    var entryQuestion2: String?
+    var entryQuestion3: String?
+
 
     init(jobCardCode: String = "", jobName: String = "", salaryMinId:Int = 0, salaryMaxId:Int = 0,isSalaryDisplay:Bool = true, salaryOffer: String = "", workPlaceCodes: [Int] = [], companyName: String = "",
          start_date:String = "", end_date:String = "", mainPicture: String = "", subPictures: [String] = [], mainTitle: String = "", mainContents: String = "",
@@ -107,7 +112,8 @@ class MdlJobCardDetail: Codable {
          selectionProcess: JobCardDetailSelectionProcess = JobCardDetailSelectionProcess.init(selectionProcess1: "", selectionProcess2: "", selectionProcess3: "", selectionProcess4: "", selectionProcess5: "", selectionProcessDetail: ""),
          contactInfo: JobCardDetailContactInfo = JobCardDetailContactInfo.init(companyUrl: "", contactZipcode: "", contactAddress: "", contactPhone: "", contactPerson: "", contactMail: ""),
          companyDescription: JobCardDetailCompanyDescription = JobCardDetailCompanyDescription.init(enterpriseContents: "", mainCustomer: "", mediaCoverage: "", established: "", employeesCount: JobCardDetailCompanyDescriptionEmployeesCount.init(count: "", averageAge: "", genderRatio: "", middleEnter: ""), capital: "", turnover: "", presidentData: JobCardDetailCompanyDescriptionPresidentData.init(presidentName: "", presidentHistory: "")),
-         userFilter: UserFilterInfo = UserFilterInfo.init(tudKeepStatus: false, tudSkipStatus: false)) {
+         userFilter: UserFilterInfo = UserFilterInfo.init(tudKeepStatus: false, tudSkipStatus: false),
+         entryQuestion1: String? = nil, entryQuestion2: String? = nil, entryQuestion3: String? = nil ) {
         
         self.jobCardCode = jobCardCode
         self.jobName = jobName
@@ -156,6 +162,9 @@ class MdlJobCardDetail: Codable {
         self.contactInfo = contactInfo
         self.companyDescription = companyDescription
         self.userFilter = userFilter
+        self.entryQuestion1 = entryQuestion1
+        self.entryQuestion2 = entryQuestion2
+        self.entryQuestion3 = entryQuestion3
     }
     
     //ApiモデルをAppモデルに変換して保持させる
@@ -335,6 +344,10 @@ class MdlJobCardDetail: Codable {
         
         let _userFileter = UserFilterInfo.init(tudKeepStatus: dto.isKeep, tudSkipStatus: false)
         
+        let _entryQuestion1 = dto.entryQuestion1
+        let _entryQuestion2 = dto.entryQuestion2
+        let _entryQuestion3 = dto.entryQuestion3
+
         self.init(
             jobCardCode: dto.jobId,
             jobName: dto.jobName,
@@ -354,7 +367,8 @@ class MdlJobCardDetail: Codable {
             overtimeCode: _overtimeCode!, overtimeAbout: dto.overtime, workPlace: dto.jobPlace,
             transport: dto.transportation, holiday: dto.vacation, welfare: dto.jobCondition,
             childcare: _childcare, interviewMemo: _interviewMemo, selectionProcess: _selectionProcess,
-            contactInfo: _contactInfo, companyDescription: _companyDescription, userFilter: _userFileter)
+            contactInfo: _contactInfo, companyDescription: _companyDescription, userFilter: _userFileter,
+            entryQuestion1: _entryQuestion1, entryQuestion2: _entryQuestion2, entryQuestion3: _entryQuestion3 )
     }
 
     var debugDisp: String {
