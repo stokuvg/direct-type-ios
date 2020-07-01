@@ -47,7 +47,6 @@ final class InitialInputCompleteVC: TmpBasicVC {
                 return """
                 入力お疲れ様でした！
                 さっそくホームを開いて求人を見てみましょう
-                
                 """
             }
         }
