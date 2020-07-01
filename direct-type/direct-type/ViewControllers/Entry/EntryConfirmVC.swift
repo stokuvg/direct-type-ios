@@ -142,7 +142,7 @@ extension EntryConfirmVC {
 
         case .notifyEntry2C12:
             let cell: EntryConfirmNotifyEntry2TBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryConfirmNotifyEntry2TBCell", for: indexPath) as! EntryConfirmNotifyEntry2TBCell
-            cell.initCell()
+            cell.initCell(self)
             cell.dispCell()
             return cell
 
@@ -198,6 +198,32 @@ extension EntryConfirmVC {
         }
     }
 }
+extension EntryConfirmVC: EntryConfirmNotifyEntryDelegate {
+    func actLinkText(type: EntryConfirmLinkTextType) {
+        switch type {
+        case .passwordForgot:
+            //[Dbg:（仮）Web(よくある質問・ヘルプ)を表示
+            let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
+            vc.setup(type: .Help)
+            vc.modalPresentationStyle = .fullScreen
+            navigationController?.present(vc, animated: true, completion: nil)
+        case .personalInfo:
+            //（仮） Web(プライバシーポリシー)を表示
+            let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
+            vc.setup(type: .Privacy)
+            vc.modalPresentationStyle = .fullScreen
+            navigationController?.present(vc, animated: true, completion: nil)
+        case .memberPolicy:
+            //（仮） Web(利用規約)を表示
+            let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
+            vc.setup(type: .Term)
+            vc.modalPresentationStyle = .fullScreen
+            navigationController?.present(vc, animated: true, completion: nil)
+        }
+    }
+    
+}
+
 //=== APIフェッチ
 extension EntryConfirmVC {
     private func fetchPostEntry() {
@@ -206,9 +232,11 @@ extension EntryConfirmVC {
         guard let _resume = self.resume else { return }
         guard let _career = self.career else { return }
         
-        
-        let param: WebAPIEntryUserDto = WebAPIEntryUserDto(_jobCard.jobCardCode, _profile, _resume, _career, editableModel.editTempCD)
-        print(param)
+        //!!!let _jobCardCode: String = _jobCard.jobCardCode
+        let _jobCardCode: String = "1170847" //!!![[Dbg: 固定値で投げている]
+        let _typePassword: String = "Dummy1234" //!!![[Dbg: 固定値で投げている]
+
+        let param: WebAPIEntryUserDto = WebAPIEntryUserDto(_jobCardCode, _profile, _resume, _career, editableModel.editTempCD, _typePassword)
         showConfirm(title: "", message: "\(param)", onlyOK: true)
 
         SVProgressHUD.show(withStatus: "応募処理")
@@ -219,6 +247,10 @@ extension EntryConfirmVC {
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
+            case 404:
+                let myErr404 = MyErrorDisp(code: 404, title: "type応募", message: "この求人情報は掲載が終了しています", orgErr: nil, arrValidErrMsg: [])
+                self.showError(myErr404)
+
             case 400:
                 let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
                 self.dicGrpValidErrMsg = dicGrpError

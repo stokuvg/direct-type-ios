@@ -148,6 +148,10 @@ extension ResumePreviewVC {
     private func fetchUpdateResume() {
         guard let resume = self.detail else { return }
         let param = UpdateResumeRequestDTO(resume ,editableModel.editTempCD)
+        
+        print(param)
+        
+        
         self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
         self.dicValidErrMsg.removeAll()//状態をクリアしておく
         SVProgressHUD.show(withStatus: "履歴書情報の更新")
