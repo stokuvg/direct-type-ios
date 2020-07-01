@@ -13,6 +13,7 @@ extension EntryConfirmAnyModelTBCell {
         case profile
         case resume
         case career
+        case entry
     }
 }
 
@@ -60,6 +61,7 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
         case .profile:  bufTitle = "プロフィール"
         case .resume:   bufTitle = "履歴書"
         case .career:   bufTitle = "業務経歴書"
+        case .entry:    bufTitle = "企業向けに送る情報"
         }
         lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         lblTitle.updateConstraints()
@@ -203,6 +205,42 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
                     }
                 }
             }
+        case .entry:
+            if let entry = self.detail as? MdlEntry {
+                //=== 企業からの質問項目 ===
+                if let bufQuestion = entry.exQuestion1 {
+                    let bufAnswer = entry.exAnswer1
+                    stackVW.addArrangedSubview(EntryConfirmItem(bufQuestion, bufAnswer))
+                }
+                if let bufQuestion = entry.exQuestion2 {
+                    let bufAnswer = entry.exAnswer2
+                    stackVW.addArrangedSubview(EntryConfirmItem(bufQuestion, bufAnswer))
+                }
+                if let bufQuestion = entry.exQuestion3 {
+                    let bufAnswer = entry.exAnswer3
+                    stackVW.addArrangedSubview(EntryConfirmItem(bufQuestion, bufAnswer))
+                }
+                //=== 希望勤務地
+                var dispHopeArea: [String] = []
+                for val in entry.hopeArea {
+                    if let cd = SelectItemsManager.getCodeDisp(.entryPlace, code: val) {
+                        dispHopeArea.append(cd.disp)
+                    }
+                }
+                print(dispHopeArea)
+                addStackItem(type: .hopeAreaA9, val: dispHopeArea)
+                //=== 希望年収
+                if let cd = SelectItemsManager.getCodeDisp(.salary, code: entry.hopeSalary) {
+                    addStackItem(type: .hopeSalaryC9, val: cd.disp)
+                }
+                //=== 自己PR
+                if !entry.ownPR.isEmpty {
+                    addStackItem(type: .ownPRC9, val: entry.ownPR)
+                }
+
+            }
+
+
         }
 
         //すべてを表示させる

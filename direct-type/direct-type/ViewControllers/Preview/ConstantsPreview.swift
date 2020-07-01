@@ -55,6 +55,7 @@ enum HPreviewItemType: String {
     case notifyEntry1C12    //２．応募前の確認事項
     case passwordC12
     case notifyEntry2C12    //３．応募時に同時登録になる旨を説明
+    case entryC12           //exQAItem1C9〜hopeSalaryC9をまとめたもの
     //=== [H-2]個人プロフィール編集
     case fullnameH2       //===４．氏名（必須）
     case birthGenderH2    //===５．生年月日・性別（必須）
@@ -117,6 +118,7 @@ enum HPreviewItemType: String {
         case .notifyEntry1C12:  return "応募前の確認事項"
         case .passwordC12:      return "typeパスワード"
         case .notifyEntry2C12:  return "応募時に同時登録になる旨を説明"
+        case .entryC12:         return "応募フォーム独自の追加項目"
         //=== [H-2]個人プロフィール編集
         case .fullnameH2:     return "氏名"
         case .birthGenderH2:  return "生年月日・性別"
