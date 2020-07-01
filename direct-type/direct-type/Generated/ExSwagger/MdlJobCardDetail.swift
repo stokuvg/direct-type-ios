@@ -159,7 +159,7 @@ class MdlJobCardDetail: Codable {
     }
     
     //ApiモデルをAppモデルに変換して保持させる
-    convenience init(dto: GetJobDetailResponseDTO) {
+    convenience init(dto: GetJobsDetailResponseDTO) {
         /*
          /** 求人ID */
          public var jobId: String

@@ -35,7 +35,7 @@ class MdlJobCardList: Codable {
         self.init(updateAt: updateAt, hasNext:hasNext, jobList:lists)
     }
     
-    convenience init(recommend: GetJobsRecommendResponseDTO) {
+    convenience init(recommend: GetJobsResponseDTO) {
         let updateAt = recommend.recommendedAt
         let hasNext = recommend.hasNext
         var lists:[MdlJobCard] = []
