@@ -166,12 +166,44 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
                 }
             }
         case .career:
-            if let career = self.detail as? MdlCareer {
+            if let careerList = self.detail as? MdlCareer {
+                for (cnt, career) in careerList.businessTypes.enumerated() {
+                    //[C-15]職務経歴書編集
+                    stackVW.addArrangedSubview(EntryConfirmItem("▼\(cnt + 1)社目", ""))
+                    //===企業名
+                    if !career.companyName.isEmpty {
+                        addStackItem(type: .companyNameC15, val: career.companyName)
+                    }
+                    //===雇用期間
+                    let bufWorkPeriodStart = career.workPeriod.startDate.dispYmJP()
+                    var bufWorkPeriodEnd: String = ""
+                    if career.workPeriod.endDate == Constants.DefaultSelectWorkPeriodEndDate {
+                        bufWorkPeriodEnd = Constants.DefaultSelectWorkPeriodEndDateJP
+                    } else {
+                        bufWorkPeriodEnd = career.workPeriod.endDate.dispYmJP()
+                    }
+                    let bufWorkPeriod: String = "\(bufWorkPeriodStart)〜\(bufWorkPeriodEnd)"
+                    addStackItem(type: .workPeriodC15, val: bufWorkPeriod)
+                    //===雇用形態
+                    if let cd = SelectItemsManager.getCodeDispSyou(.employmentType, code: career.employmentType) {
+                        addStackItem(type: .employmentTypeC15, val: cd.disp)
+                    }
+                    //===従業員数（数値）*これもマスタじゃないのか？ */
+                    let _employeesCount: Int = Int(career.employeesCount) ?? 0
+                    if _employeesCount != 0 {
+                        addStackItem(type: .employeesCountC15, val: "\(_employeesCount)")
+                    }
+                    //===年収
+                    if let cd = SelectItemsManager.getCodeDispSyou(.salary, code: career.salary) {
+                        addStackItem(type: .salaryC15, val: cd.disp)
+                    }
+                    //===職務内容本文
+                    if !career.contents.isEmpty {
+                        addStackItem(type: .contentsC15, val: career.contents)
+                    }
+                }
             }
         }
-//        stackVW.addArrangedSubview(EntryConfirmItem("仕事名", "\(bufJobName)"))
-//        stackVW.addArrangedSubview(EntryConfirmItem("応募期限", "\(bufDate)"))
-
 
         //すべてを表示させる
         for asv in stackVW.arrangedSubviews {
