@@ -14,6 +14,7 @@ class EntryConfirmItem: UIView {
 
     @IBOutlet weak var vwMainArea: UIView!
 
+    @IBOutlet weak var stackVW: UIStackView!
     @IBOutlet weak var vwTitleArea: UIView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var vwMessageArea: UIView!
@@ -34,6 +35,7 @@ class EntryConfirmItem: UIView {
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         self.addSubview(view)
+        stackVW.axis = .vertical
     }
     
     override func awakeFromNib() {
@@ -49,10 +51,6 @@ class EntryConfirmItem: UIView {
     func dispCell() {
         lblTitle.text(text: title, fontType: .font_SSb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         lblMessage.text(text: message, fontType: .font_SS, textColor: UIColor(colorType: .color_black)!, alignment: .left)
-//        lblTitle.setNeedsLayout()
-//        lblMessage.setNeedsLayout()
-//        self.setNeedsLayout()
-        updateConstraints()
     }
 }
 

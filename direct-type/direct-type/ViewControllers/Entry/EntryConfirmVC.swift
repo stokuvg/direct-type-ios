@@ -146,19 +146,19 @@ extension EntryConfirmVC {
             return cell
 
         case .profileC9:
-            let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
+            let cell: EntryConfirmAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryConfirmAnyModelTBCell", for: indexPath) as! EntryConfirmAnyModelTBCell
             cell.initCell(.profile, model: self.profile)
             cell.dispCell()
             return cell
 
         case .resumeC9:
-            let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
+            let cell: EntryConfirmAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryConfirmAnyModelTBCell", for: indexPath) as! EntryConfirmAnyModelTBCell
             cell.initCell(.resume, model: self.resume)
             cell.dispCell()
             return cell
 
         case .careerC9:
-            let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
+            let cell: EntryConfirmAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryConfirmAnyModelTBCell", for: indexPath) as! EntryConfirmAnyModelTBCell
             cell.initCell(.career, model: self.career)
             cell.dispCell()
             return cell

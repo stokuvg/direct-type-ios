@@ -39,7 +39,8 @@ class EntryConfirmJobCardTBCell: UITableViewCell {
     func dispCell() {
         guard let _jobCard = self.jobCard else { return }
         
-        lblTitle.text(text: "", fontType: .font_Sb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
+        lblTitle.text(text: "求人カード", fontType: .font_Sb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
+        lblTitle.updateConstraints()
         //=== 既存部品の全削除
         for asv in stackVW.arrangedSubviews {
             stackVW.removeArrangedSubview(asv)
@@ -51,21 +52,15 @@ class EntryConfirmJobCardTBCell: UITableViewCell {
         let endDate = DateHelper.convStrYMD2Date(_jobCard.end_date)
         let bufDate = "〜\(endDate.dispYmdJP())"
         stackVW.addArrangedSubview(EntryConfirmItem("会社名", "\(bufCompanyName)"))
-        stackVW.addArrangedSubview(EntryConfirmItem("仕事名", "\(bufJobName)\(bufJobName)\(bufJobName)\(bufJobName)\(bufJobName)\(bufJobName)"))
         stackVW.addArrangedSubview(EntryConfirmItem("仕事名", "\(bufJobName)"))
-        stackVW.addArrangedSubview(EntryConfirmItem("仕事名", "\(bufJobName)"))
-        stackVW.addArrangedSubview(EntryConfirmItem("応募期限", "\(bufDate)"))
-        stackVW.addArrangedSubview(EntryConfirmItem("応募期限", "\(bufDate)"))
         stackVW.addArrangedSubview(EntryConfirmItem("応募期限", "\(bufDate)"))
         //すべてを表示させる
         for asv in stackVW.arrangedSubviews {
             if let eci = asv as? EntryConfirmItem {
-                print(eci.bounds)
-                eci.setNeedsLayout()
-                eci.sizeToFit()
                 eci.dispCell()
             }
         }
+        stackVW.sizeToFit()
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

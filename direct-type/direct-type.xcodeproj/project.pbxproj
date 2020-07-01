@@ -217,6 +217,8 @@
 		26147F38247267F9009B30B5 /* MstF22_pcSkillPowerPoint.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26147F35247267F9009B30B5 /* MstF22_pcSkillPowerPoint.tsv */; };
 		26157DC02489CD4B00752C55 /* ApiManager+Resume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26157DBF2489CD4B00752C55 /* ApiManager+Resume.swift */; };
 		26157DC22489CD5F00752C55 /* ApiManager+Career.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26157DC12489CD5F00752C55 /* ApiManager+Career.swift */; };
+		2619D2A524AB2E0600F24624 /* EntryConfirmAnyModelTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619D2A324AB2E0600F24624 /* EntryConfirmAnyModelTBCell.swift */; };
+		2619D2A624AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2619D2A424AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib */; };
 		2636075B2477A37C00032880 /* CognitoAuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2636075A2477A37C00032880 /* CognitoAuthVC.swift */; };
 		2636075D2477A39900032880 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2636075C2477A39900032880 /* Auth.storyboard */; };
 		2636075F2477AB4900032880 /* BaseVC+ShowDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2636075E2477AB4900032880 /* BaseVC+ShowDialog.swift */; };
@@ -545,6 +547,8 @@
 		26147F35247267F9009B30B5 /* MstF22_pcSkillPowerPoint.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstF22_pcSkillPowerPoint.tsv; sourceTree = "<group>"; };
 		26157DBF2489CD4B00752C55 /* ApiManager+Resume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Resume.swift"; sourceTree = "<group>"; };
 		26157DC12489CD5F00752C55 /* ApiManager+Career.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Career.swift"; sourceTree = "<group>"; };
+		2619D2A324AB2E0600F24624 /* EntryConfirmAnyModelTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryConfirmAnyModelTBCell.swift; sourceTree = "<group>"; };
+		2619D2A424AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntryConfirmAnyModelTBCell.xib; sourceTree = "<group>"; };
 		2636075A2477A37C00032880 /* CognitoAuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CognitoAuthVC.swift; sourceTree = "<group>"; };
 		2636075C2477A39900032880 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		2636075E2477AB4900032880 /* BaseVC+ShowDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseVC+ShowDialog.swift"; sourceTree = "<group>"; };
@@ -1321,6 +1325,8 @@
 				26A2899C24AAD75C000D2926 /* EntryConfirmNotifyEntry2TBCell.xib */,
 				26A289A124AAFB2A000D2926 /* EntryConfirmJobCardTBCell.swift */,
 				26A289A224AAFB2A000D2926 /* EntryConfirmJobCardTBCell.xib */,
+				2619D2A324AB2E0600F24624 /* EntryConfirmAnyModelTBCell.swift */,
+				2619D2A424AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib */,
 				26F18B5124AB0FB6003048AE /* EntryConfirmItem.swift */,
 				26F18B5324AB0FC3003048AE /* EntryConfirmItem.xib */,
 			);
@@ -1596,6 +1602,7 @@
 				0EAE764F248E2FFD009A8F4B /* ChemistryResultPersonalTypeCell.xib in Resources */,
 				06FFA0042484E1760085A3D9 /* SettingVC.storyboard in Resources */,
 				0E6EA6E724A1C11A00884D07 /* InitialInputConfirmVC.storyboard in Resources */,
+				2619D2A624AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib in Resources */,
 				066CC17E24735DE6009A123A /* JobDetailTextView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1684,6 +1691,7 @@
 				26157DC22489CD5F00752C55 /* ApiManager+Career.swift in Sources */,
 				066763622457AB7200AC5039 /* BaseTabBC.swift in Sources */,
 				06E519B1245814B2004E4B7A /* EntryConfirmVC.swift in Sources */,
+				2619D2A524AB2E0600F24624 /* EntryConfirmAnyModelTBCell.swift in Sources */,
 				06BE18FE2484B10B00FAE476 /* BasePercentageCompletionCell.swift in Sources */,
 				260DD26B248E179000BFB9FE /* Validate+Career.swift in Sources */,
 				26A1F57E247FB28B00834213 /* Validate+Profile.swift in Sources */,
