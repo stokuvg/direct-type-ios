@@ -8,6 +8,7 @@
 
 import UIKit
 import AWSMobileClient
+import AppsFlyerLib
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().isTranslucent = false
         UITabBar.appearance().isTranslucent = false
 
+        setupAppsFlyer()
+        
         //=== Cognito認証の初期化処理を組み込む
         // Amazon Cognito 認証情報プロバイダーを初期化します
         let credentialsProvider = AWSCognitoCredentialsProvider(
@@ -59,12 +62,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        AppsFlyerTracker.shared().handleOpen(url, options: options)
         // 想定されるURL形式: direct-type://myPage/vacanciesDetail?vacanciesId=123&keepId=456&searchText=hoge&campainText=fuga
         let deepLinkHierarchy = DeepLinkHierarchy(host: url.host ?? "", path: url.path , query: url.query ?? "")
         guard let rootTabBarController = window?.rootViewController as? UITabBarController else { return true }
         guard let tabIndex = deepLinkHierarchy.tabType.index else { return true }
         rootTabBarController.selectedIndex = tabIndex
         return true
+    }
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+      AppsFlyerTracker.shared().handleOpen(url, sourceApplication: sourceApplication, withAnnotation: annotation)
+      return true
+    }
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        AppsFlyerTracker.shared().continue(userActivity, restorationHandler: nil)
+        return true
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        AppsFlyerTracker.shared().handlePushNotification(userInfo)
     }
 }
 
@@ -76,5 +94,33 @@ private extension AppDelegate {
         let initialVC = initialSB.instantiateViewController(withIdentifier: "InitialInputRegistVC") as! InitialInputRegistVC
         window?.rootViewController = initialVC
         window?.makeKeyAndVisible()
+    }
+}
+
+extension AppDelegate: AppsFlyerTrackerDelegate {
+    @objc func sendLaunch(app: Any) {
+        AppsFlyerTracker.shared().trackAppLaunch()
+    }
+    
+    func onConversionDataSuccess(_ conversionInfo: [AnyHashable : Any]) {
+        // Handle Conversion Data (Deferred Deep Link)
+    }
+    
+    func onConversionDataFail(_ error: Error) {
+        // Erroe for handle Conversion Data (Deferred Deep Link)
+    }
+    
+    func setupAppsFlyer() {
+        AppsFlyerTracker.shared().appsFlyerDevKey = ""
+        AppsFlyerTracker.shared().appleAppID = ""
+        AppsFlyerTracker.shared().delegate = self
+        #if DEBUG
+            AppsFlyerTracker.shared().isDebug = true
+        #endif
+        
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(sendLaunch),
+            name: UIApplication.didBecomeActiveNotification, object: nil
+        )
     }
 }
