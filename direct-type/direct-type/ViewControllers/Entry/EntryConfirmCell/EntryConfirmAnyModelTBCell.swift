@@ -46,7 +46,14 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
         self.type = type
         self.detail = model
     }
-    
+
+    private func addStackItem(type: HPreviewItemType, val: String) {
+        stackVW.addArrangedSubview(EntryConfirmItem(type.dispTitle, val))
+    }
+    private func addStackItem(type: HPreviewItemType, val: [String]) {
+        stackVW.addArrangedSubview(EntryConfirmItem(type.dispTitle, val.joined(separator: "\n")))
+    }
+
     func dispCell() {
         var bufTitle: String = ""
         switch type {
@@ -88,13 +95,75 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
             }
         case .resume:
             if let resume = self.detail as? MdlResume {
+                //===(3a)就業状況
                 if let cd = SelectItemsManager.getCodeDisp(.employmentStatus, code: resume.employmentStatus) {
-                    stackVW.addArrangedSubview(EntryConfirmItem(EditItemMdlResume.employmentStatus.dispName, cd.disp))
+                    addStackItem(type: .employmentH3, val: cd.disp)
                 }
-
-
-
-
+                //===(3b)転職回数
+                if let cd = SelectItemsManager.getCodeDisp(.changeCount, code: resume.changeCount) {
+                    addStackItem(type: .changeCountH3, val: cd.disp)
+                }
+                //===(3c)直近の経験職種
+                if let cd = SelectItemsManager.getCodeDispSyou(.jobType, code: resume.lastJobExperiment.jobType),
+                let cd2 = SelectItemsManager.getCodeDisp(.jobExperimentYear, code: resume.lastJobExperiment.jobExperimentYear) {
+                    addStackItem(type: .lastJobExperimentH3, val: "\(cd.disp) \(cd2.disp)")
+                }
+                //===(3d)その他の経験職種
+                var disp3d: [String] = []
+                for jy in resume.jobExperiments {
+                    if let cd = SelectItemsManager.getCodeDispSyou(.jobType, code: jy.jobType),
+                    let cd2 = SelectItemsManager.getCodeDisp(.jobExperimentYear, code: jy.jobExperimentYear) {
+                        disp3d.append("\(cd.disp) \(cd2.disp)")
+                    }
+                }
+                addStackItem(type: .jobExperimentsH3, val: disp3d)
+                //===(3e)経験業種
+                var disp3e: [String] = []
+                for tmp in resume.businessTypes {
+                    if let cd = SelectItemsManager.getCodeDispSyou(.businessType, code: tmp) {
+                        disp3e.append("\(cd.disp)")
+                    }
+                }
+                addStackItem(type: .businessTypesH3, val: disp3e)
+                //===(3f)最終学歴
+                var disp3f: [String] = []
+                if !resume.school.schoolName.isEmpty {
+                    disp3f.append(resume.school.schoolName)
+                }
+                if !(resume.school.faculty.isEmpty && resume.school.department.isEmpty) {
+                    disp3f.append("\(resume.school.faculty)\(resume.school.department)")
+                }
+                let _graduationYear = DateHelper.convStrYM2Date(resume.school.graduationYear)
+                if _graduationYear != Constants.SelectItemsUndefineDate {
+                    disp3f.append(_graduationYear.dispYmJP())
+                }
+                addStackItem(type: .schoolH3, val: disp3f)
+                //===(3g)語学
+                var disp3g: [String] = []
+                let tmpToeic = Int(resume.skillLanguage.languageToeicScore) ?? 0
+                let tmoToefl = Int(resume.skillLanguage.languageToeflScore) ?? 0
+                let bufToeic = (tmpToeic == 0) ? "--" : "\(tmpToeic)"
+                let bufToefl = (tmoToefl == 0) ? "--" : "\(tmoToefl)"
+                disp3g.append("TOEIC：\(bufToeic) / TOEFL：\(bufToefl)")
+                if let cd = SelectItemsManager.getCodeDisp(.skillEnglish, code: resume.skillLanguage.languageEnglish) {
+                    disp3g.append(cd.disp)
+                }
+                if !resume.skillLanguage.languageStudySkill.isEmpty {
+                    disp3f.append(resume.skillLanguage.languageStudySkill)
+                }
+                addStackItem(type: .skillLanguageH3, val: disp3g)
+                //===(3h)資格
+                var disp3h: [String] = []
+                for val in resume.qualifications {
+                    if let cd = SelectItemsManager.getCodeDispSyou(.skill, code: val) {
+                        disp3h.append(cd.disp)
+                    }
+                }
+                addStackItem(type: .jobExperimentsH3, val: disp3h)
+                //===(3i)自己PR
+                if !resume.ownPr.isEmpty {
+                    addStackItem(type: .ownPrH3, val: resume.ownPr)
+                }
             }
         case .career:
             if let career = self.detail as? MdlCareer {

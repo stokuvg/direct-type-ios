@@ -63,9 +63,8 @@ extension UpdateResumeRequestDTO {
         }
         var _workHistory: [WorkHistoryDTO] = []// 経験職種リスト
         if let tmp = editTempCD[EditItemMdlResumeLastJobExperiment.jobTypeAndJobExperimentYear.itemKey] {
-            let ty = EditItemTool.convTypeAndYear(codes: tmp)
-            if ty.0.count > 0 && ty.1.count > 0 {
-                _workHistory.append(WorkHistoryDTO(job3Id: ty.0.first!, experienceYears: ty.1.first!))
+            for item in convTypeAndYear(codes: tmp) {
+                _workHistory.append(item)
             }
         }
         if let tmp = editTempCD[EditItemMdlResumeJobExperiments.jobTypeAndJobExperimentYear.itemKey] {
@@ -165,9 +164,8 @@ extension CreateResumeRequestDTO {
         }
         var _workHistory: [WorkHistoryDTO] = []
         if let tmp = editTempCD[EditItemMdlFirstInputLastJobExperiments.jobTypeAndJobExperimentYear.itemKey] {
-            let ty = EditItemTool.convTypeAndYear(codes: tmp)
-            if ty.0.count > 0 && ty.1.count > 0 {
-                _workHistory.append(WorkHistoryDTO(job3Id: ty.0.first!, experienceYears: ty.1.first!))
+            for item in convTypeAndYear(codes: tmp) {
+                _workHistory.append(item)
             }
         }
         if let tmp = editTempCD[EditItemMdlFirstInputJobExperiments.jobTypeAndJobExperimentYear.itemKey] {
@@ -179,6 +177,8 @@ extension CreateResumeRequestDTO {
         if let tmp = editTempCD[EditItemMdlFirstInput.school.itemKey] {
             self.educationId = tmp
         }
+            
+        
     }
 }
 extension ApiManager {

@@ -35,7 +35,7 @@ class EntryConfirmItem: UIView {
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         self.addSubview(view)
-        stackVW.axis = .vertical
+        stackVW.axis = .horizontal
     }
     
     override func awakeFromNib() {

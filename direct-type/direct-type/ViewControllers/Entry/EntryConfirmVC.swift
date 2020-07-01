@@ -45,18 +45,18 @@ class EntryConfirmVC: PreviewBaseVC {
         editableModel.arrData.removeAll()//こちらで管理させる？！
 
         //===== [C-12]応募確認での追加分
-        arrData.append(MdlItemH(.notifyEntry1C12, "", childItems: []))
-        arrData.append(MdlItemH(.notifyEntry2C12, "", childItems: []))
-        
-        //====== [C-9]応募フォーム
-        //===４．応募先求人
-        arrData.append(MdlItemH(.jobCardC9, "", childItems: [
-            EditableItemH(type: .model, editItem: EditItemMdlEntry.jobCard, val: "【モデルダミー】"),
-        ], model: jobCard))
-        //===５．プロフィール（一部必須）
-        arrData.append(MdlItemH(.profileC9, "", childItems: [
-            EditableItemH(type: .model, editItem: EditItemMdlEntry.profile, val: "【モデルダミー】"),
-        ], model: profile))
+//        arrData.append(MdlItemH(.notifyEntry1C12, "", childItems: []))
+//        arrData.append(MdlItemH(.notifyEntry2C12, "", childItems: []))
+//
+//        //====== [C-9]応募フォーム
+//        //===４．応募先求人
+//        arrData.append(MdlItemH(.jobCardC9, "", childItems: [
+//            EditableItemH(type: .model, editItem: EditItemMdlEntry.jobCard, val: "【モデルダミー】"),
+//        ], model: jobCard))
+//        //===５．プロフィール（一部必須）
+//        arrData.append(MdlItemH(.profileC9, "", childItems: [
+//            EditableItemH(type: .model, editItem: EditItemMdlEntry.profile, val: "【モデルダミー】"),
+//        ], model: profile))
         //===６．履歴書（一部必須）
         arrData.append(MdlItemH(.resumeC9, "", childItems: [
             EditableItemH(type: .model, editItem: EditItemMdlEntry.resume, val: "【モデルダミー】"),
