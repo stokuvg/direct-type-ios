@@ -52,6 +52,7 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
         stackVW.addArrangedSubview(EntryConfirmItem(type.dispTitle, val))
     }
     private func addStackItem(type: HPreviewItemType, val: [String]) {
+        guard val.count > 0 else { return } //0件なら登録しない
         stackVW.addArrangedSubview(EntryConfirmItem(type.dispTitle, val.joined(separator: "\n")))
     }
 
@@ -227,7 +228,6 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
                         dispHopeArea.append(cd.disp)
                     }
                 }
-                print(dispHopeArea)
                 addStackItem(type: .hopeAreaA9, val: dispHopeArea)
                 //=== 希望年収
                 if let cd = SelectItemsManager.getCodeDisp(.salary, code: entry.hopeSalary) {

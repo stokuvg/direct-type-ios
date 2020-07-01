@@ -79,6 +79,10 @@ class EntryVC: PreviewBaseVC {
             }
         }
         _entry?.hopeArea = _hopeArea
+        //===独自質問はjobCardDetailに含まれているので、MdlEntryに持たせておく
+        if let tmp = jobCard?.entryQuestion1 { _entry?.exQuestion1 = tmp }
+        if let tmp = jobCard?.entryQuestion2 { _entry?.exQuestion2 = tmp }
+        if let tmp = jobCard?.entryQuestion3 { _entry?.exQuestion3 = tmp }
         pushViewController(.entryConfirm, model: (jobCard, profile, resume, career, _entry))
     }
     //共通プレビューをOverrideして利用する
