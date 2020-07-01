@@ -53,8 +53,10 @@ class ProfilePreviewVC: PreviewBaseVC {
         let bufBirthday: String = date.dispYmdJP()
         let bufAge: String = "\(date.age)歳"
         let bufGender: String = SelectItemsManager.getCodeDisp(.gender, code: _detail.gender)?.disp ?? "--"
-        arrData.append(MdlItemH(.birthGenderH2, "\(bufBirthday)（\(bufAge)） / \(bufGender)", childItems: [
+        arrData.append(MdlItemH(.birthH2, "\(bufBirthday)（\(bufAge)） / \(bufGender)", childItems: [
             EditableItemH(type: .selectDrumYMD, editItem: EditItemMdlProfile.birthday, val: "\(_detail.birthday.dispYmd())"),
+        ]))
+        arrData.append(MdlItemH(.genderH2, "\(bufBirthday)（\(bufAge)） / \(bufGender)", childItems: [
             EditableItemH(type: .selectSingle, editItem: EditItemMdlProfile.gender, val: "\(_detail.gender)"),
         ]))
 

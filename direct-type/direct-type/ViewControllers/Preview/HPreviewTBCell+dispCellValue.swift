@@ -64,15 +64,17 @@ extension HPreviewTBCell {
             let bufFullname: String = "\(_item.childItems[0].valDisp) \(_item.childItems[1].valDisp)"
             let bufFullnameKana: String = "\(_item.childItems[2].valDisp) \(_item.childItems[3].valDisp)"
             return "\(bufFullname)（\(bufFullnameKana)）"
-        case .birthGenderH2:
+        case .birthH2:
             let tmpBirthday: String = _item.childItems[0].curVal
             let date = DateHelper.convStrYMD2Date(tmpBirthday)
             if date == Constants.SelectItemsUndefineDate { return "未入力（必須）"} //初回未記入対応
             let bufBirthday: String = date.dispYmdJP()
             let bufAge: String = "\(date.age)歳"
-            let tmpGender: String = _item.childItems[1].curVal
+            return "\(bufBirthday)（\(bufAge)）"
+        case .genderH2:
+            let tmpGender: String = _item.childItems[0].curVal
             let bufGender: String = SelectItemsManager.getCodeDisp(.gender, code: tmpGender)?.disp ?? "--"
-            return "\(bufBirthday)（\(bufAge)） / \(bufGender)"
+            return "\(bufGender)"
         case .adderssH2:
             let tmp0: String = _item.childItems[0].valDisp.zeroUme(7)
             let buf0: String = _item.childItems[0].curVal.isEmpty ? "" : "〒\(String.substr(tmp0, 1, 3))-\(String.substr(tmp0, 4, 4))"

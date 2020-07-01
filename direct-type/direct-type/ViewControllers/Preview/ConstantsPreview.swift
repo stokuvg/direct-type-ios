@@ -58,7 +58,8 @@ enum HPreviewItemType: String {
     case entryC12           //exQAItem1C9〜hopeSalaryC9をまとめたもの
     //=== [H-2]個人プロフィール編集
     case fullnameH2       //===４．氏名（必須）
-    case birthGenderH2    //===５．生年月日・性別（必須）
+    case birthH2    //===５．生年月日（必須）
+    case genderH2    //===５．性別（必須）
     case adderssH2        //===６．住所
     case emailH2          //===７．メールアドレス
     case mobilephoneH2    //===８．携帯電話番号
@@ -121,7 +122,8 @@ enum HPreviewItemType: String {
         case .entryC12:         return "応募フォーム独自の追加項目"
         //=== [H-2]個人プロフィール編集
         case .fullnameH2:     return "氏名"
-        case .birthGenderH2:  return "生年月日・性別"
+        case .birthH2:        return "生年月日"
+        case .genderH2:       return "性別"
         case .adderssH2:      return "住所"
         case .emailH2:        return "メールアドレス"
         case .mobilephoneH2:  return "アカウント（認証済み電話番号）"

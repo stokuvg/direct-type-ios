@@ -83,11 +83,11 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
                 let bufBirthday: String = profile.birthday.dispYmdJP()
                 let bufAge: String = "\(profile.birthday.age)歳"
                 let dispBirthday: String = "\(bufBirthday)（\(bufAge)）"
-                addStackItem(type: .birthGenderH2, val: dispBirthday)
+                addStackItem(type: .birthH2, val: dispBirthday)
                 let tmpGender: String = profile.gender
                 let bufGender: String = SelectItemsManager.getCodeDisp(.gender, code: tmpGender)?.disp ?? "--"
                 let dispGender: String = " \(bufGender)"
-                addStackItem(type: .birthGenderH2, val: dispGender)
+                addStackItem(type: .genderH2, val: dispGender)
                 let zip: String = profile.zipCode.zeroUme(7)
                 let dispZip: String = "〒\(String.substr(zip, 1, 3))-\(String.substr(zip, 4, 4))"
                 let bufPlace: String = SelectItemsManager.getCodeDisp(.place, code: profile.prefecture)?.disp ?? ""
