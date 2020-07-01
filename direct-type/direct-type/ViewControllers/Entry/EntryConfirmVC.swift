@@ -47,7 +47,7 @@ class EntryConfirmVC: PreviewBaseVC {
         //===== [C-12]応募確認での追加分
         arrData.append(MdlItemH(.notifyEntry1C12, "", childItems: []))
         arrData.append(MdlItemH(.notifyEntry2C12, "", childItems: []))
-        
+
         //====== [C-9]応募フォーム
         //===４．応募先求人
         arrData.append(MdlItemH(.jobCardC9, "", childItems: [
@@ -66,44 +66,51 @@ class EntryConfirmVC: PreviewBaseVC {
             EditableItemH(type: .model, editItem: EditItemMdlEntry.career, val: "【モデルダミー】"),
         ], model: career))
         
-        //===XX. 固定文言
-        arrData.append(MdlItemH(.fixedInfoC9, "", childItems: [] ))
-        
-        //===１２．独自質問（必須）
-        var exQA: [MdlItemH] = []
-        if let exQuestion = entry?.exQuestion1 {
-            exQA.append(MdlItemH(.exQAItem1C9, exQuestion, childItems: [
-                EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer1, val: entry?.exAnswer1 ?? ""),
-            ], model: career))
-        }
-        if let exQuestion = entry?.exQuestion2 {
-            exQA.append(MdlItemH(.exQAItem2C9, exQuestion, childItems: [
-                EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer2, val: entry?.exAnswer2 ?? ""),
-            ], model: career))
-        }
-        if let exQuestion = entry?.exQuestion3 {
-            exQA.append(MdlItemH(.exQAItem3C9, exQuestion, childItems: [
-                EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer3, val: entry?.exAnswer3 ?? ""),
-            ], model: career))
-        }
-        if exQA.count > 0 {
-            arrData.append(MdlItemH(.exQuestionC9, "", childItems: []))
-            for qa in exQA { arrData.append(qa) }
-        }
-        //===９．自己PR文字カウント
-        arrData.append(MdlItemH(.ownPRC9, "", childItems: [
-            EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.ownPR, val: entry?.ownPR ?? ""),
-        ]))
-        //===１０．希望勤務地（任意）
-        let _hopeArea = entry?.hopeArea.joined(separator: EditItemTool.JoinMultiCodeSeparator)
-        arrData.append(MdlItemH(.hopeAreaC9, "", childItems: [
-            EditableItemH(type: .selectMulti, editItem: EditItemMdlEntry.hopeArea, val: _hopeArea ?? ""),
-        ]))
-        //===１１．希望年収（任意）
-        arrData.append(MdlItemH(.hopeSalaryC9, "", childItems: [
-            EditableItemH(type: .selectSingle, editItem: EditItemMdlEntry.hopeSalary, val: entry?.hopeSalary ?? ""),
-        ]))
+        //===XX．応募フォーム
+//        arrData.append(MdlItemH(.careerC9, "", childItems: [
+//            EditableItemH(type: .model, editItem: EditItemMdlEntry.career, val: "【モデルダミー】"),
+//        ], model: career))
 
+        
+        
+        //        //===XX. 固定文言
+//        arrData.append(MdlItemH(.fixedInfoC9, "", childItems: [] ))
+//
+//        //===１２．独自質問（必須）
+//        var exQA: [MdlItemH] = []
+//        if let exQuestion = entry?.exQuestion1 {
+//            exQA.append(MdlItemH(.exQAItem1C9, exQuestion, childItems: [
+//                EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer1, val: entry?.exAnswer1 ?? ""),
+//            ], model: career))
+//        }
+//        if let exQuestion = entry?.exQuestion2 {
+//            exQA.append(MdlItemH(.exQAItem2C9, exQuestion, childItems: [
+//                EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer2, val: entry?.exAnswer2 ?? ""),
+//            ], model: career))
+//        }
+//        if let exQuestion = entry?.exQuestion3 {
+//            exQA.append(MdlItemH(.exQAItem3C9, exQuestion, childItems: [
+//                EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer3, val: entry?.exAnswer3 ?? ""),
+//            ], model: career))
+//        }
+//        if exQA.count > 0 {
+//            arrData.append(MdlItemH(.exQuestionC9, "", childItems: []))
+//            for qa in exQA { arrData.append(qa) }
+//        }
+//        //===９．自己PR文字カウント
+//        arrData.append(MdlItemH(.ownPRC9, "", childItems: [
+//            EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.ownPR, val: entry?.ownPR ?? ""),
+//        ]))
+//        //===１０．希望勤務地（任意）
+//        let _hopeArea = entry?.hopeArea.joined(separator: EditItemTool.JoinMultiCodeSeparator)
+//        arrData.append(MdlItemH(.hopeAreaC9, "", childItems: [
+//            EditableItemH(type: .selectMulti, editItem: EditItemMdlEntry.hopeArea, val: _hopeArea ?? ""),
+//        ]))
+//        //===１１．希望年収（任意）
+//        arrData.append(MdlItemH(.hopeSalaryC9, "", childItems: [
+//            EditableItemH(type: .selectSingle, editItem: EditItemMdlEntry.hopeSalary, val: entry?.hopeSalary ?? ""),
+//        ]))
+//
         //=== editableModelで管理させる
         editableModel.arrData.removeAll()
         for items in arrData { editableModel.arrData.append(items.childItems) }//editableModelに登録
@@ -139,27 +146,26 @@ extension EntryConfirmVC {
             cell.dispCell()
             return cell
 
-
         case .jobCardC9:
-            let cell: EntryFormJobCardTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormJobCardTBCell", for: indexPath) as! EntryFormJobCardTBCell
+            let cell: EntryConfirmJobCardTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryConfirmJobCardTBCell", for: indexPath) as! EntryConfirmJobCardTBCell
             cell.initCell(self.jobCard)
             cell.dispCell()
             return cell
 
         case .profileC9:
-            let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
+            let cell: EntryConfirmAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryConfirmAnyModelTBCell", for: indexPath) as! EntryConfirmAnyModelTBCell
             cell.initCell(.profile, model: self.profile)
             cell.dispCell()
             return cell
 
         case .resumeC9:
-            let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
+            let cell: EntryConfirmAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryConfirmAnyModelTBCell", for: indexPath) as! EntryConfirmAnyModelTBCell
             cell.initCell(.resume, model: self.resume)
             cell.dispCell()
             return cell
 
         case .careerC9:
-            let cell: EntryFormAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryFormAnyModelTBCell", for: indexPath) as! EntryFormAnyModelTBCell
+            let cell: EntryConfirmAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryConfirmAnyModelTBCell", for: indexPath) as! EntryConfirmAnyModelTBCell
             cell.initCell(.career, model: self.career)
             cell.dispCell()
             return cell
