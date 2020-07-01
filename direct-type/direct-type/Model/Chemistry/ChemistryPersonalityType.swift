@@ -9,6 +9,7 @@
 import Foundation
 
 enum ChemistryPersonalityType: Int, CaseIterable {
+    case undefine
     case reformer
     case helper
     case toAchieve
@@ -21,6 +22,8 @@ enum ChemistryPersonalityType: Int, CaseIterable {
     
     var title: String {
         switch self {
+        case .undefine:
+            return "undefine"
         case .reformer:
             return "改革する人"
         case .helper:
@@ -44,6 +47,8 @@ enum ChemistryPersonalityType: Int, CaseIterable {
     
     var imageName: String {
         switch self {
+        case .undefine:
+            return "undefine"
         case .reformer:
             return "suma_kaikaku"
         case .helper:
@@ -67,6 +72,8 @@ enum ChemistryPersonalityType: Int, CaseIterable {
     
     var priority: Int {
         switch self {
+        case .undefine:
+            return 0
         case .reformer:
             return 1
         case .toAchieve:
@@ -90,6 +97,8 @@ enum ChemistryPersonalityType: Int, CaseIterable {
     
     var description: String {
         switch self {
+        case .undefine:
+            return "undefine"
         case .reformer:
             return "このタイプの人は、自分に厳しく、いつも理想に向かって努力します。社会派で倫理的・現実的な考えのもと、周りを良くしていこう、自分を向上させようと努力を惜しみません。褒められると反論しますが、ホントは褒められるの大好きです。"
         case .helper:
@@ -113,6 +122,8 @@ enum ChemistryPersonalityType: Int, CaseIterable {
     
     var avilityScore: BusinessAvilityScore {
         switch self {
+        case .undefine:
+            return BusinessAvilityScore(quickAction: 0, toughness: 0, spiritOfChallenge: 0, logical: 0, leadership: 0, dedicationAndSupport: 0, cooperativeness: 0, initiative: 0, creativityAndIdea: 0, responsibilityAndSteadiness: 0)
         case .reformer:
             return BusinessAvilityScore(quickAction: 6, toughness: 8, spiritOfChallenge: 8, logical: 7, leadership: 7, dedicationAndSupport: 6, cooperativeness: 6, initiative: 6, creativityAndIdea: 5, responsibilityAndSteadiness: 9)
         case .helper:
