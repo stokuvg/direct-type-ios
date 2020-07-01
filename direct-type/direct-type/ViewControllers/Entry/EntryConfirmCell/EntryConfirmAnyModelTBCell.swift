@@ -79,22 +79,21 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
                 let bufFullname: String = "\(profile.familyName) \(profile.firstName)"
                 let bufFullnameKana: String = "\(profile.familyNameKana) \(profile.firstNameKana)"
                 let dispName = "\(bufFullname)（\(bufFullnameKana)）"
-                stackVW.addArrangedSubview(EntryConfirmItem("名前", "\(dispName)"))
+                addStackItem(type: .fullnameH2, val: dispName)
                 let bufBirthday: String = profile.birthday.dispYmdJP()
                 let bufAge: String = "\(profile.birthday.age)歳"
                 let dispBirthday: String = "\(bufBirthday)（\(bufAge)）"
-                stackVW.addArrangedSubview(EntryConfirmItem("生年月日", "\(dispBirthday)"))
+                addStackItem(type: .birthGenderH2, val: dispBirthday)
                 let tmpGender: String = profile.gender
                 let bufGender: String = SelectItemsManager.getCodeDisp(.gender, code: tmpGender)?.disp ?? "--"
                 let dispGender: String = " \(bufGender)"
-                stackVW.addArrangedSubview(EntryConfirmItem("性別", "\(dispGender)"))
+                addStackItem(type: .birthGenderH2, val: dispGender)
                 let zip: String = profile.zipCode.zeroUme(7)
                 let dispZip: String = "〒\(String.substr(zip, 1, 3))-\(String.substr(zip, 4, 4))"
                 let bufPlace: String = SelectItemsManager.getCodeDisp(.place, code: profile.prefecture)?.disp ?? ""
                 let dispAddress: String = "\(bufPlace)\(profile.address1)\(profile.address2)"
-                stackVW.addArrangedSubview(EntryConfirmItem("住所", "\(dispZip)\n\(dispAddress)"))
-                let dispMail: String = "\(profile.mailAddress)"
-                stackVW.addArrangedSubview(EntryConfirmItem("メールアドレス", "\(dispMail)"))
+                addStackItem(type: .adderssH2, val: "\(dispZip)\n\(dispAddress)")
+                addStackItem(type: .emailH2, val: profile.mailAddress)
             }
         case .resume:
             if let resume = self.detail as? MdlResume {
