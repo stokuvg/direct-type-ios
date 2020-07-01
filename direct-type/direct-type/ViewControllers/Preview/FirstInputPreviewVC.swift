@@ -163,16 +163,9 @@ private extension FirstInputPreviewVC {
         }
     }
     
-    var descriptipon: String {
-        return """
-        入力お疲れ様でした！
-        さっそくホームを開いて求人を見てみましょう
-        """
-    }
     func transitionToComplete() {
         let complete = getVC(sbName: "InitialInputCompleteVC", vcName: "InitialInputCompleteVC") as! InitialInputCompleteVC
-        complete.replaceDescription(by: descriptipon)
-        complete.changeTransitionDestination(type: .homeTab)
+        complete.configure(type: .registeredAll)
         navigationController?.pushViewController(complete, animated: true)
     }
 }
