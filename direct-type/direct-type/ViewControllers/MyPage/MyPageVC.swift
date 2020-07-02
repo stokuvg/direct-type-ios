@@ -185,7 +185,13 @@ extension MyPageVC: UITableViewDataSource {
 
         switch (section,row) {
             case (0,0):
-                return tableView.loadCell(cellName: "MyPageNameCell", indexPath: indexPath) as! MyPageNameCell
+                let cell =  tableView.loadCell(cellName: "MyPageNameCell", indexPath: indexPath) as! MyPageNameCell
+                //=== いったんスコープアウトのため
+//                if let nickname = profile?.nickname {
+//                    cell.initCell(nickname)
+//                    cell.dispCell()
+//                }
+                return cell
             case (0,1):
                 let cell = tableView.loadCell(cellName: "BasePercentageCompletionCell", indexPath: indexPath) as! BasePercentageCompletionCell
                 cell.setup(title: "プロフィールの完成度", percent: "100")
@@ -372,7 +378,7 @@ extension MyPageVC {
     private func fetchGetCareerList() {
         ApiManager.getCareer(Void(), isRetry: true)
         .done { result in
-            //!!!self.career = result
+            self.career = result
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
