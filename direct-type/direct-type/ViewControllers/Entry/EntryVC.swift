@@ -51,7 +51,6 @@
 import UIKit
 import TudApi
 import SVProgressHUD
-import SwaggerClient
 
 class EntryVC: PreviewBaseVC {
     var jobCard: MdlJobCardDetail? = nil//応募への遷移元は、求人カード詳細のみでOK?
