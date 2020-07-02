@@ -22,10 +22,13 @@ enum PushVCType {
 extension BaseVC {
     func pushViewController(_ type: PushVCType, model: Any? = nil) {
         switch type {
-        case .profilePreviewH2://[H-3] 履歴書確認
+        case .profilePreviewH2://[H-2] プロフィール
             let storyboard = UIStoryboard(name: "Preview", bundle: nil)
             if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ProfilePreviewVC") as? ProfilePreviewVC {
                 nvc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に表示にする
+                if let model = model as? MdlProfile {
+                    print("TODO: モデルを引き渡す [\(model.debugDisp)]")
+                }
                 self.navigationController?.pushViewController(nvc, animated: true)
             }
         case .resumePreviewH3://[H-3] 履歴書確認

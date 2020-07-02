@@ -14,17 +14,20 @@ import SwaggerClient
 
 //[H-1]
 class MyPageVC: TmpNaviTopVC {
+    private var profile: MdlProfile? = nil
+    private var resume: MdlResume? = nil
+    private var career: MdlCareer? = nil
+    private var entry: MdlEntry? = nil
+    private var topRanker: ChemistryScoreCalculation.TopRanker?
 
     @IBOutlet private weak var pageTableView: UITableView!
 
-    private var carrerFlag: Bool = false
+    private var carrerFlag: Bool {
+        return career != nil
+    }
     private var isExistsChemistry: Bool {
         return topRanker != nil
     }
-    private var topRanker: ChemistryScoreCalculation.TopRanker?
-    
-//    private var pageNo: Int = 1
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,7 +40,6 @@ class MyPageVC: TmpNaviTopVC {
         self.pageTableView.registerNib(nibName: "BasePercentageCompletionCell", idName: "BasePercentageCompletionCell")// プロフィール
         // 履歴書
         // スカウト MVPでは外す
-
         self.pageTableView.registerNib(nibName: "MyPageCarrerStartCell", idName: "MyPageCarrerStartCell") // 職務経歴
         self.pageTableView.registerNib(nibName: "MyPageEditedCarrerCell", idName: "MyPageEditedCarrerCell")
 
@@ -46,51 +48,18 @@ class MyPageVC: TmpNaviTopVC {
 
         self.pageTableView.registerNib(nibName: "MyPageSettingCell", idName: "MyPageSettingCell") // 設定
         
-        fetchChemistryData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchChemistryData()
+        fetchGetEntryAll()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
 }
-
-//=== APIフェッチ
 private extension MyPageVC {
-    func fetchChemistryData() {
-        SVProgressHUD.show(withStatus: "データ取得中")
-        ChemistryAPI.chemistryControllerGet()
-        .done { result -> Void in
-            var firstRanker: ChemistryPersonalityType! = nil
-            var secondRanker: ChemistryPersonalityType? = nil
-            var thirdRanker: ChemistryPersonalityType? = nil
-            result.chemistryTypeIds.enumerated().forEach { (index, typeIdText) in
-                switch index {
-                case 0:
-                    firstRanker = ChemistryPersonalityType(rawValue: Int(typeIdText)!)
-                case 1:
-                    secondRanker = ChemistryPersonalityType(rawValue: Int(typeIdText)!)
-                case 2:
-                    thirdRanker = ChemistryPersonalityType(rawValue: Int(typeIdText)!)
-                default:
-                    break
-                }
-            }
-            self.topRanker = ChemistryScoreCalculation.TopRanker(first: firstRanker, second: secondRanker, third: thirdRanker)
-        }
-        .catch { error in
-            
-        }
-        .finally {
-            self.pageTableView.reloadData()
-            SVProgressHUD.dismiss()
-        }
-    }
-    
     func transitionToChemistry() {
         var vc = UIViewController()
         vc = UIStoryboard(name: "ChemistryStart", bundle: nil).instantiateInitialViewController() as! ChemistryStart
@@ -98,7 +67,6 @@ private extension MyPageVC {
             vc = getVC(sbName: "ChemistryResult", vcName: "ChemistryResult") as! ChemistryResult
             (vc as! ChemistryResult).configure(with: topRanker)
         }
-        
         hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
         hidesBottomBarWhenPushed = false
@@ -168,13 +136,23 @@ extension MyPageVC: UITableViewDelegate {
         let row = indexPath.row
         
         switch (section,row) {
+        case (0, 1):
+            pushViewController(.profilePreviewH2, model: profile)
+        case (0, 2):
+            pushViewController(.resumePreviewH3, model: resume)
+        case (1, 0):
+            if carrerFlag {
+                pushViewController(.careerListC, model: career)//既存の表示
+            } else {
+                registChemistryAction()//新規作成させる場合
+            }
         case (2, 0):
             transitionToChemistry()
         case (3,_):
-            //                actButton05(UIButton())//[Dbg: 仮認証]
             let vc = getVC(sbName: "SettingVC", vcName: "SettingVC") as! SettingVC
             navigationController?.pushViewController(vc, animated: true)
         default:
+            print(section, row)
             break
         }
     }
@@ -267,15 +245,7 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
 
     // 画面遷移
     func registCarrerAction() {
-        // 職歴書
-        /*
-        let storyboard = UIStoryboard(name: "Preview", bundle: nil)
-        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_CareerPreviewVC") as? CareerPreviewVC{
-            self.navigationController?.pushViewController(nvc, animated: true)
-        }
-        */
-
-        
+        //pushViewController(.careerListC)// 職歴書
         //[Dbg:遷移先画面の選択]___
         let storyboard = UIStoryboard(name: "Preview", bundle: nil)
         let alert: UIAlertController = UIAlertController(title: "[Dbg: 開発)中]", message: "遷移先画面の選択", preferredStyle:  .alert)
@@ -362,5 +332,84 @@ extension MyPageVC: MyPageChemistryStartCellDelegate {
     // 相性診断画面遷移
     func registChemistryAction() {
         transitionToChemistry()
+    }
+}
+
+
+
+//=== APIフェッチ
+extension MyPageVC {
+    private func fetchGetEntryAll() {
+        fetchGetProfile()//ここから多段で実施してる
+    }
+    private func fetchGetProfile() {
+        SVProgressHUD.show(withStatus: "情報の取得")
+        ApiManager.getProfile(Void(), isRetry: true)
+        .done { result in
+            self.profile = result
+        }
+        .catch { (error) in
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            print(myErr)
+        }
+        .finally {
+            self.fetchGetResume()
+        }
+    }
+    private func fetchGetResume() {
+        ApiManager.getResume(Void(), isRetry: true)
+        .done { result in
+            self.resume = result
+        }
+        .catch { (error) in
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            print(myErr)
+        }
+        .finally {
+            self.fetchGetCareerList()
+        }
+    }
+    private func fetchGetCareerList() {
+        ApiManager.getCareer(Void(), isRetry: true)
+        .done { result in
+            //!!!self.career = result
+        }
+        .catch { (error) in
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            print(myErr)
+        }
+        .finally {
+            SVProgressHUD.dismiss()
+            self.fetchGetChemistryData()//別途、読んでおく
+        }
+    }
+    //TODO: APIの呼び出し方NG。ApiManager.getChemistryを作成して実施（これだと認証管理やリトライ管理ができてない）
+    private func fetchGetChemistryData() {
+        //SVProgressHUD.show(withStatus: "データ取得中")
+        ChemistryAPI.chemistryControllerGet()
+        .done { result -> Void in
+            var firstRanker: ChemistryPersonalityType! = nil
+            var secondRanker: ChemistryPersonalityType? = nil
+            var thirdRanker: ChemistryPersonalityType? = nil
+            result.chemistryTypeIds.enumerated().forEach { (index, typeIdText) in
+                switch index {
+                case 0:
+                    firstRanker = ChemistryPersonalityType(rawValue: Int(typeIdText)!)
+                case 1:
+                    secondRanker = ChemistryPersonalityType(rawValue: Int(typeIdText)!)
+                case 2:
+                    thirdRanker = ChemistryPersonalityType(rawValue: Int(typeIdText)!)
+                default:
+                    break
+                }
+            }
+            self.topRanker = ChemistryScoreCalculation.TopRanker(first: firstRanker, second: secondRanker, third: thirdRanker)
+        }
+        .catch { error in
+        }
+        .finally {
+            self.pageTableView.reloadData()
+            SVProgressHUD.dismiss()
+        }
     }
 }
