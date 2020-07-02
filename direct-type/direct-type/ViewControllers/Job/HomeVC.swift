@@ -87,6 +87,7 @@ class HomeVC: TmpNaviTopVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Log.selectLog(logLevel: .debug, "HomeVC viewWillAppear start")
+        AnalyticsEventManager.track(type: .viewHome)
         
         safeAreaTop = self.view.safeAreaInsets.top
         

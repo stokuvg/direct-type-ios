@@ -20,7 +20,7 @@ enum AnalyticsEventType {
     case withdrawal
     case viewHome
     case viewVacancies
-    case viewKeep
+    case viewKeepList
     case toJobDetail
     case toEntryDetail
     
@@ -73,8 +73,8 @@ enum AnalyticsEventType {
             text =  "view_home"
         case .viewVacancies:
             text =  "view_vacancies"
-        case .viewKeep:
-            text =  "view_keep"
+        case .viewKeepList:
+            text =  "view_keep_list"
         case .toJobDetail:
             text = "to_job_detail"
         case .toEntryDetail:

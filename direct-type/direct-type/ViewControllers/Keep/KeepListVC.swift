@@ -64,6 +64,7 @@ class KeepListVC: TmpBasicVC {
         super.viewWillAppear(animated)
         
         self.getKeepList()
+        AnalyticsEventManager.track(type: .viewKeepList)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

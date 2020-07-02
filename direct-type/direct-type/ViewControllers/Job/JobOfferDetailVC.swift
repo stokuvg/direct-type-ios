@@ -188,6 +188,7 @@ class JobOfferDetailVC: TmpBasicVC {
         super.viewWillAppear(animated)
         
         self.getJobDetail()
+        AnalyticsEventManager.track(type: .viewVacancies)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
