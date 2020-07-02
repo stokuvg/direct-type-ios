@@ -37,7 +37,7 @@ extension ValidateManager {
             //表示項目としてはセットで扱うのでまとめて定義
             case EditItemMdlFirstInputLastJobExperiments.jobTypeAndJobExperimentYear.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.lastJobExperimentA11.itemKey, val: val)
 
-            case EditItemMdlFirstInput.salary.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.salaryA13.itemKey, val: val)
+            case EditItemMdlFirstInput.salary.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.currentSalaryA13.itemKey, val: val)
             //表示項目としてはセットで扱うのでまとめて定義
             case EditItemMdlFirstInputJobExperiments.jobTypeAndJobExperimentYear.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.jobExperimentsA14.itemKey, val: val)
 
@@ -53,6 +53,8 @@ extension ValidateManager {
             //===[H-3]「履歴書確認」
             //case employmentH3           //===(3a)就業状況
             case EditItemMdlResume.employmentStatus.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.employmentH3.itemKey, val: val)
+            //case currentSalaryH3        //===現在の年収"
+            case EditItemMdlResume.currentSalary.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.currentSalaryH3.itemKey, val: val)
             //case changeCountH3          //===(3b)転職回数
             case EditItemMdlResume.changeCount.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.changeCountH3.itemKey, val: val)
             //case lastJobExperimentH3    //===(3c)直近の経験職種
