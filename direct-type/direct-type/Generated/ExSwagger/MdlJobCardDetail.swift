@@ -347,12 +347,14 @@ class MdlJobCardDetail: Codable {
         let _entryQuestion1 = dto.entryQuestion1
         let _entryQuestion2 = dto.entryQuestion2
         let _entryQuestion3 = dto.entryQuestion3
+        
+        let _dtoSalaryOffer = dto.salaryOffer ?? ""
 
         self.init(
             jobCardCode: dto.jobId,
             jobName: dto.jobName,
             salaryMinId: Int(dto.minSalaryId)!, salaryMaxId: Int(dto.maxSalaryId)!, isSalaryDisplay: dto.isSalaryDisplay,
-//            salaryOffer: _salaryOffer,
+            salaryOffer: _dtoSalaryOffer,
             workPlaceCodes: _place2Ids,
             companyName: dto.companyName,
             start_date: dto.pressStartDate, end_date: dto.pressEndDate,
