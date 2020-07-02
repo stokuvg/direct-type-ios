@@ -35,6 +35,7 @@ class HEditDrumTBCell: UITableViewCell {
         //===デザイン適用
         backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
         vwMainArea.backgroundColor = UIColor(colorType: .color_base)
+        tfValue.textColor = UIColor(colorType: .color_black)
     }
 
     func initCell(_ delegate: InputItemHDelegate, _ item: EditableItemH, errMsg: String) {

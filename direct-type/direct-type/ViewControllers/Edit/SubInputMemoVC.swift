@@ -36,6 +36,7 @@ class SubInputMemoVC: BaseVC {
         vwHead.backgroundColor = UIColor(colorType: .color_main)!
         vwMain.backgroundColor = UIColor(colorType: .color_base)!
         vwFoot.backgroundColor = UIColor(colorType: .color_base)!
+        textVW.textColor = UIColor(colorType: .color_black)
         btnCommit.setTitle(text: "選択", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
         //===ソフトウェアキーボードに〔閉じる〕ボタン付与
