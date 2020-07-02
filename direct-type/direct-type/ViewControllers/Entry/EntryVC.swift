@@ -241,7 +241,7 @@ extension EntryVC {
         fetchGetProfile()//ここから多段で実施してる
     }
     private func fetchGetProfile() {
-        SVProgressHUD.show(withStatus: "プロフィール情報の取得")
+        SVProgressHUD.show(withStatus: "情報の取得")
         ApiManager.getProfile(Void(), isRetry: true)
         .done { result in
             self.profile = result
@@ -255,7 +255,6 @@ extension EntryVC {
         }
     }
     private func fetchGetResume() {
-        SVProgressHUD.show(withStatus: "履歴書の取得")
         ApiManager.getResume(Void(), isRetry: true)
         .done { result in
             self.resume = result
@@ -265,12 +264,10 @@ extension EntryVC {
             print(myErr)
         }
         .finally {
-            SVProgressHUD.dismiss()
             self.fetchGetCareerList()
         }
     }
     private func fetchGetCareerList() {
-        SVProgressHUD.show(withStatus: "職務経歴書情報の取得")
         ApiManager.getCareer(Void(), isRetry: true)
         .done { result in
             self.career = result

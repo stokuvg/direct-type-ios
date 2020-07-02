@@ -33,9 +33,11 @@ class HPreviewTBCell: UITableViewCell {
         if item.readonly {
             self.isUserInteractionEnabled = false
             self.accessoryType = .none
+            self.lblValue.isReadonly = true
         } else {
             self.isUserInteractionEnabled = true
             self.accessoryType = .none // .disclosureIndicator 遷移マーク不要
+            self.lblValue.isReadonly = false
         }
     }
     

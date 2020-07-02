@@ -38,7 +38,7 @@ class SubSelectSyouTBCell: UITableViewCell {
         }
     }
     func dispCell() {
-        self.lblName.text = item.disp
+        lblName.text(text: item.disp, fontType: .font_S, textColor: UIColor.init(colorType: .color_main)!, alignment: .left)
         if Constants.DbgDispStatus {
             self.lblDebug.text = "\(item.debugDisp): \(subItem?.debugDisp ?? "nil")"
         }

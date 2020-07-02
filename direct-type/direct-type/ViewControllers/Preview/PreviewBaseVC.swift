@@ -99,6 +99,14 @@ class PreviewBaseVC: TmpBasicVC {
             btnCommit.isEnabled = false
         }
     }
+    func fetchCompletePopVC() { //フェッチ完了時に画面を戻す処理
+        self.navigationController?.popViewController(animated: true)
+
+//        showConfirm(title: "登録完了", message: "登録が完了しました", onlyOK: true)
+//        /* Warning回避 */ .done { _ in
+//            self.navigationController?.popViewController(animated: true)
+//        } .catch { (error) in } .finally { } //Warning回避
+    }
 }
 
 extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
@@ -276,6 +284,4 @@ extension PreviewBaseVC: SubSelectFeedbackDelegate {
         chkButtonEnable()//ボタン死活チェック
         tableVW.reloadData()
     }
-    
-    
 }
