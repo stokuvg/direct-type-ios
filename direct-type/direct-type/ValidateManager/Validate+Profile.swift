@@ -50,6 +50,7 @@ extension EditItemMdlProfile {
         case .address1:         return ValidInfo(required: true, keta: nil, max: 100, type: .undefine)
         case .address2:         return ValidInfo(required: false, keta: nil, max: 100, type: .undefine)
         case .mailAddress:      return ValidInfo(required: true, keta: nil, max: nil, type: .email)
+        case .hopeJobArea:      return ValidInfo(required: true, keta: nil, max: nil, type: .code)
         case .mobilePhoneNo:    return ValidInfo(required: true, keta: nil, max: nil, type: .number)//編集不可（requiredはtrueの方が良いか）
         }
     }

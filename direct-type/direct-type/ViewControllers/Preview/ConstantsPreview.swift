@@ -62,6 +62,7 @@ enum HPreviewItemType: String {
     case genderH2    //===５．性別（必須）
     case adderssH2        //===６．住所
     case emailH2          //===７．メールアドレス
+    case hopeAreaH2       //===希望勤務地
     case mobilephoneH2    //===８．携帯電話番号
     //=== [H-3]履歴書編集
     case employmentH3           //===(3a)就業状況
@@ -127,6 +128,7 @@ enum HPreviewItemType: String {
         case .genderH2:       return "性別"
         case .adderssH2:      return "住所"
         case .emailH2:        return "メールアドレス"
+        case .hopeAreaH2:     return "希望勤務地"
         case .mobilephoneH2:  return "アカウント（認証済み電話番号）"
         //=== [H-3]履歴書編集
         case .employmentH3:         return "就業状況"
