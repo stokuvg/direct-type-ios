@@ -40,7 +40,7 @@ extension ApiManager {
 //=== プロフィール更新 ===
 extension UpdateProfileRequestDTO {
     public init() {
-        self.init(nickname: nil, hopeJobPlaceIds: nil, salaryId: nil, familyName: nil, firstName: nil, familyNameKana: nil, firstNameKana: nil, birthday: nil, genderId: nil, zipCode: nil, prefectureId: nil, city: nil, town: nil, email: nil)
+        self.init(nickname: nil, hopeJobPlaceIds: nil, familyName: nil, firstName: nil, familyNameKana: nil, firstNameKana: nil, birthday: nil, genderId: nil, zipCode: nil, prefectureId: nil, city: nil, town: nil, email: nil)
     }
     init(_ editTempCD: [EditableItemKey: EditableItemCurVal]) {
         self.init()
@@ -91,7 +91,7 @@ extension ApiManager {
 //=== プロフィール作成 ===
 extension CreateProfileRequestDTO {
     init() {
-        self.init(nickname: "", hopeJobPlaceIds: [], salaryId: "", birthday: "", genderId: "")
+        self.init(nickname: "", hopeJobPlaceIds: [], birthday: "", genderId: "")
     }
 //    init(_ profile: MdlProfile) {
 //        self.init()
@@ -116,10 +116,6 @@ extension CreateProfileRequestDTO {
             for code in tmp.split(separator: EditItemTool.SplitMultiCodeSeparator) {
                 _hopeJobPlaceIds.append(String(code))
             }
-        }
-        self.hopeJobPlaceIds = _hopeJobPlaceIds
-        if let tmp = editTempCD[EditItemMdlFirstInput.salary.itemKey] {
-            self.salaryId = tmp
         }
         self.hopeJobPlaceIds = _hopeJobPlaceIds
     }

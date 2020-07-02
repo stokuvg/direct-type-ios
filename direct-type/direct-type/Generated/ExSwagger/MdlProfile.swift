@@ -78,7 +78,6 @@ class MdlProfile: Codable {
         self.init(
             nickname: dto.nickname ?? "",
             hopeJobPlaceIds: [],
-            salaryId: dto.salaryId ?? "",
             familyName: dto.familyName ?? "",
             firstName: dto.firstName ?? "",
             familyNameKana: dto.familyNameKana ?? "",
