@@ -64,15 +64,17 @@ extension HPreviewTBCell {
             let bufFullname: String = "\(_item.childItems[0].valDisp) \(_item.childItems[1].valDisp)"
             let bufFullnameKana: String = "\(_item.childItems[2].valDisp) \(_item.childItems[3].valDisp)"
             return "\(bufFullname)（\(bufFullnameKana)）"
-        case .birthGenderH2:
+        case .birthH2:
             let tmpBirthday: String = _item.childItems[0].curVal
             let date = DateHelper.convStrYMD2Date(tmpBirthday)
             if date == Constants.SelectItemsUndefineDate { return "未入力（必須）"} //初回未記入対応
             let bufBirthday: String = date.dispYmdJP()
             let bufAge: String = "\(date.age)歳"
-            let tmpGender: String = _item.childItems[1].curVal
+            return "\(bufBirthday)（\(bufAge)）"
+        case .genderH2:
+            let tmpGender: String = _item.childItems[0].curVal
             let bufGender: String = SelectItemsManager.getCodeDisp(.gender, code: tmpGender)?.disp ?? "--"
-            return "\(bufBirthday)（\(bufAge)） / \(bufGender)"
+            return "\(bufGender)"
         case .adderssH2:
             let tmp0: String = _item.childItems[0].valDisp.zeroUme(7)
             let buf0: String = _item.childItems[0].curVal.isEmpty ? "" : "〒\(String.substr(tmp0, 1, 3))-\(String.substr(tmp0, 4, 4))"
@@ -142,9 +144,9 @@ extension HPreviewTBCell {
             var tmp1: String = _item.childItems[1].curVal
             tmp0 = (tmp0 == "0" ? "" : tmp0)
             tmp1 = (tmp1 == "0" ? "" : tmp1)
-            let buf0: String = tmp0.isEmpty ? "--" : tmp0
-            let buf1: String = tmp1.isEmpty ? "--" : tmp1
-            let bufToeicToefl: String = "TOEIC：\(buf0) / TOEFL：\(buf1)"
+            let buf0: String = tmp0.isEmpty ? "--" : "\(tmp0)点"
+            let buf1: String = tmp1.isEmpty ? "--" : "\(tmp1)点"
+            let bufToeicToefl: String = "TOEIC：\(buf0)、 / TOEFL：\(buf1)"
             let tmp2: String = _item.childItems[2].curVal
             let buf2: String = SelectItemsManager.getCodeDisp(.skillEnglish, code: tmp2)?.disp ?? ""
             let buf3: String = _item.childItems[3].curVal

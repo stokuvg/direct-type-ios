@@ -181,10 +181,8 @@ extension EditableBasicVC: InputItemHDelegate {
         case .inputMemo:
             print("テキストビューでの大量文字入力時")
         case .selectDrumYM:
-            print("Picker閉じる時の処理 [\(item.editableItemKey): \(item.dispName)] [\(tf.description)]")
             hidePicker(tf)
         case .selectDrumYMD:
-            print("Picker閉じる時の処理 [\(item.editableItemKey): \(item.dispName)] [\(tf.description)]")
             hidePicker(tf)
         case .model:
             break

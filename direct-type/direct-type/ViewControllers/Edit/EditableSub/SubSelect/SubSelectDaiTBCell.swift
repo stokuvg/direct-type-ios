@@ -18,7 +18,7 @@ class SubSelectDaiTBCell: UITableViewCell {
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblDebug: UILabel!
 
-    @IBOutlet weak var lblStatus: UILabel!
+    @IBOutlet weak var ivStatus: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,16 +38,15 @@ class SubSelectDaiTBCell: UITableViewCell {
         }
     }
     func dispCell() {
-        self.lblName.text = item.disp
+        lblName.text(text: item.disp, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_main)!, alignment: .left)
         if Constants.DbgDispStatus {
             self.lblDebug.text = "\(selectStatus ? "●" : "・"): \(item.debugDisp)"
         }
-        if selectStatus { //TODO: 選択、非選択、選択不可（非活性）などに状態を増やす
-            lblStatus.text = "▽"
+        if selectStatus {//開いてる
+            ivStatus.image = R.image.arTop()
         } else {
-            lblStatus.text = "▷"
+            ivStatus.image = R.image.arBtm_2()
         }
-        
     }
     //=== 選択時の動作
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -53,8 +53,10 @@ class ProfilePreviewVC: PreviewBaseVC {
         let bufBirthday: String = date.dispYmdJP()
         let bufAge: String = "\(date.age)歳"
         let bufGender: String = SelectItemsManager.getCodeDisp(.gender, code: _detail.gender)?.disp ?? "--"
-        arrData.append(MdlItemH(.birthGenderH2, "\(bufBirthday)（\(bufAge)） / \(bufGender)", childItems: [
+        arrData.append(MdlItemH(.birthH2, "\(bufBirthday)（\(bufAge)） / \(bufGender)", childItems: [
             EditableItemH(type: .selectDrumYMD, editItem: EditItemMdlProfile.birthday, val: "\(_detail.birthday.dispYmd())"),
+        ]))
+        arrData.append(MdlItemH(.genderH2, "\(bufBirthday)（\(bufAge)） / \(bufGender)", childItems: [
             EditableItemH(type: .selectSingle, editItem: EditItemMdlProfile.gender, val: "\(_detail.gender)"),
         ]))
 
@@ -141,8 +143,9 @@ extension ProfilePreviewVC {
         SVProgressHUD.show(withStatus: "プロフィール情報の更新")
         ApiManager.updateProfile(param, isRetry: true)
         .done { result in
-            self.fetchGetProfile()
-            self.completeUpdate()//===更新完了した場合の処理
+            self.fetchCompletePopVC()
+            //self.fetchGetProfile()
+            //self.completeUpdate()//===更新完了した場合の処理
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -160,8 +163,8 @@ extension ProfilePreviewVC {
             SVProgressHUD.dismiss()
         }
     }
-    private func completeUpdate() {
-        self.editableModel.editTempCD.removeAll()//編集情報をまるっと削除
-        self.chkButtonEnable()
-    }
+//    private func completeUpdate() {
+//        self.editableModel.editTempCD.removeAll()//編集情報をまるっと削除
+//        self.chkButtonEnable()
+//    }
 }

@@ -25,7 +25,7 @@ class JobDetailItemAttentionView: UIView {
     
     func setup(datas:[String:Any]) {
         let title = datas["title"] as! String
-        Log.selectLog(logLevel: .debug, "title:\(title)")
+//        Log.selectLog(logLevel: .debug, "title:\(title)")
         
         let titleFont:FontType = .font_Sb
         
@@ -34,8 +34,8 @@ class JobDetailItemAttentionView: UIView {
         let singleWidth = self.titleLabel.frame.size.width
         let textSize = CGFloat(title.count * 14)
         
-        Log.selectLog(logLevel: .debug, "singleWidth:\(singleWidth)")
-        Log.selectLog(logLevel: .debug, "textSize:\(textSize)")
+//        Log.selectLog(logLevel: .debug, "singleWidth:\(singleWidth)")
+//        Log.selectLog(logLevel: .debug, "textSize:\(textSize)")
         
         if textSize > (singleWidth+5) {
             markTopConstraint.constant = 9

@@ -148,13 +148,15 @@ extension ResumePreviewVC {
     private func fetchUpdateResume() {
         guard let resume = self.detail else { return }
         let param = UpdateResumeRequestDTO(resume ,editableModel.editTempCD)
+        print(param)
         self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
         self.dicValidErrMsg.removeAll()//状態をクリアしておく
         SVProgressHUD.show(withStatus: "履歴書情報の更新")
         ApiManager.updateResume(param, isRetry: true)
         .done { result in
-            self.fetchGetResume()//成功したら取得フェチ
-            self.completeUpdate()//===更新完了した場合の処理
+            //self.fetchGetResume()//成功したら取得フェチ
+            //self.completeUpdate()//===更新完了した場合の処理
+            self.fetchCompletePopVC()
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -169,7 +171,6 @@ extension ResumePreviewVC {
         }
         .finally {
             self.dispData()
-            SVProgressHUD.dismiss()
         }
     }
 }

@@ -8,7 +8,17 @@
 
 import UIKit
 
+enum EntryConfirmLinkTextType {
+    case passwordForgot
+    case personalInfo
+    case memberPolicy
+}
+protocol EntryConfirmNotifyEntryDelegate {
+    func actLinkText(type: EntryConfirmLinkTextType)
+}
+
 class EntryConfirmNotifyEntry2TBCell: UITableViewCell {
+    var delegate: EntryConfirmNotifyEntryDelegate? = nil
     var isAccept: Bool = false
 
     @IBOutlet weak var vwMainArea: UIView!
@@ -30,19 +40,19 @@ class EntryConfirmNotifyEntry2TBCell: UITableViewCell {
     @IBOutlet weak var lblLinkText1: UILabel!
     @IBOutlet weak var btnLinkText1: UIButton!
     @IBAction func actLinkText1(_ sender: Any) {
-        print(#line, #function)
+        delegate?.actLinkText(type: .passwordForgot)
     }
     @IBOutlet weak var vwLinkText2Area: UIView!
     @IBOutlet weak var lblLinkText2: UILabel!
     @IBOutlet weak var btnLinkText2: UIButton!
     @IBAction func actLinkText2(_ sender: Any) {
-        print(#line, #function)
+        delegate?.actLinkText(type: .personalInfo)
     }
     @IBOutlet weak var vwLinkText3Area: UIView!
     @IBOutlet weak var lblLinkText3: UILabel!
     @IBOutlet weak var btnLinkText3: UIButton!
     @IBAction func actLinkText3(_ sender: Any) {
-        print(#line, #function)
+        delegate?.actLinkText(type: .memberPolicy)
     }
 
     override func awakeFromNib() {
@@ -51,7 +61,8 @@ class EntryConfirmNotifyEntry2TBCell: UITableViewCell {
         backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
         vwMainArea.backgroundColor = UIColor(colorType: .color_base)
     }
-    func initCell() {
+    func initCell(_ delegate: EntryConfirmNotifyEntryDelegate) {
+        self.delegate = delegate
     }
     func dispCell() {
         ivAccept.image = isAccept ? R.image.checkOn() : R.image.checkOff()
