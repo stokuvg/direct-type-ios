@@ -16,6 +16,7 @@ final class InitialInputRegistVC: TmpBasicVC {
         openReasonOfConfirmPhone()
     }
     @IBAction private func nextButton(_ sender: UIButton) {
+        AnalyticsEventManager.track(type: .createAuthenticationCode)
         sendLoginAuthCode()
     }
     

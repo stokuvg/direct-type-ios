@@ -60,6 +60,7 @@ final class InitialInputCompleteVC: TmpBasicVC {
         super.viewDidLoad()
         setup()
         startAnimation()
+        AnalyticsEventManager.track(type: .confirmAuthCode)
     }
     
     func configure(type: ContextType) {

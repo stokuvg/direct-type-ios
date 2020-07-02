@@ -114,6 +114,7 @@ private extension SettingVC {
                     .catch { _ in
                     }
                     .finally {
+                        AnalyticsEventManager.track(type: .logout)
                     }
                 }
             }

@@ -8,6 +8,7 @@
 
 import UIKit
 import AWSMobileClient
+import AppsFlyerLib
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().isTranslucent = false
         UITabBar.appearance().isTranslucent = false
 
+        setupAppsFlyer()
+        
         //=== Cognito認証の初期化処理を組み込む
         // Amazon Cognito 認証情報プロバイダーを初期化します
         let credentialsProvider = AWSCognitoCredentialsProvider(
@@ -76,5 +79,33 @@ private extension AppDelegate {
         let initialVC = initialSB.instantiateViewController(withIdentifier: "InitialInputRegistVC") as! InitialInputRegistVC
         window?.rootViewController = initialVC
         window?.makeKeyAndVisible()
+    }
+}
+
+extension AppDelegate: AppsFlyerTrackerDelegate {
+    @objc func sendLaunch(app: Any) {
+        AppsFlyerTracker.shared().trackAppLaunch()
+    }
+    
+    func onConversionDataSuccess(_ conversionInfo: [AnyHashable : Any]) {
+        // Handle Conversion Data (Deferred Deep Link)
+    }
+    
+    func onConversionDataFail(_ error: Error) {
+        // Erroe for handle Conversion Data (Deferred Deep Link)
+    }
+    
+    func setupAppsFlyer() {
+        AppsFlyerTracker.shared().appsFlyerDevKey = "hC9KqefECmBi3yLRDofayS"
+        AppsFlyerTracker.shared().appleAppID = "id111113332"
+        AppsFlyerTracker.shared().delegate = self
+        #if DEBUG
+            AppsFlyerTracker.shared().isDebug = true
+        #endif
+        
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(sendLaunch),
+            name: UIApplication.didBecomeActiveNotification, object: nil
+        )
     }
 }
