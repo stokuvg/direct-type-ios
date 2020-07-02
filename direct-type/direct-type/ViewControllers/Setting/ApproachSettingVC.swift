@@ -10,17 +10,11 @@ import UIKit
 
 final class ApproachSettingVC: TmpBasicVC {
     @IBOutlet private weak var scoutTitleLabel: UILabel!
-    @IBOutlet private weak var recommendTitleLabel: UILabel!
     @IBOutlet private weak var scoutBackgroundView: UIView!
-    @IBOutlet private weak var recommendBackgroundView: UIView!
     @IBOutlet private weak var scoutStateLabel: UILabel!
-    @IBOutlet private weak var recommendStateLabel: UILabel!
     @IBOutlet private weak var descriptionTextView: UITextView!
     @IBAction private func scoutButton(_ sender: UIButton) {
         isScoutEnable = !isScoutEnable
-    }
-    @IBAction private func recommendButton(_ sender: UIButton) {
-        isRecommendEnable = !isRecommendEnable
     }
     @IBAction private func saveButton(_ sender: UIButton) {
         saveSetting()
@@ -34,14 +28,6 @@ final class ApproachSettingVC: TmpBasicVC {
             scoutStateLabel.textColor = UIColor(colorType: isScoutEnable ? .color_white : .color_black)
         }
     }
-    private var isRecommendEnable: Bool = false {
-        didSet {
-            recommendTitleLabel.textColor = UIColor(colorType: isScoutEnable ? .color_white : .color_black)
-            recommendBackgroundView.backgroundColor = UIColor(colorType: isScoutEnable ? .color_sub : .color_white)
-            recommendStateLabel.text = isScoutEnable ? inuseTitle : unuseTitle
-            recommendStateLabel.textColor = UIColor(colorType: isScoutEnable ? .color_white : .color_black)
-        }
-    }
     
     private var approachSetting: MdlApproach?
     private let inuseTitle = "利用中"
@@ -53,10 +39,6 @@ final class ApproachSettingVC: TmpBasicVC {
         setAttributedText()
     }
     
-    override func viewDidLayoutSubviews() {
-        setDisableView()
-    }
-    
     func configure(with approachSetting: MdlApproach) {
         self.approachSetting = approachSetting
     }
@@ -66,7 +48,6 @@ private extension ApproachSettingVC {
     func setup() {
         guard let approachSetting = approachSetting else { return }
         isScoutEnable = approachSetting.isScoutEnable
-        isRecommendEnable = approachSetting.isRecommendationEnable
     }
     
     func saveSetting() {
@@ -84,13 +65,6 @@ private extension ApproachSettingVC {
         descriptionTextView.isSelectable = true
         descriptionTextView.isEditable = false
         descriptionTextView.delegate = self
-    }
-    
-    func setDisableView() {
-        guard view.subviews.first(where: { $0 is DisableView }) == nil else { return }
-        let disableView = DisableView(frame: recommendBackgroundView.frame)
-        view.addSubview(disableView)
-        view.bringSubviewToFront(disableView)
     }
 }
 
