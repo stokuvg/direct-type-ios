@@ -10,8 +10,8 @@ import Foundation
 import AppsFlyerLib
 
 class AnalyticsEventManager {
-    static func track(type: AnalyticsEventType) {
-        AppsFlyerTracker.shared().trackEvent(type.log, withValues: nil)
+    static func track(type: AnalyticsEventType, with parameter: [AnyHashable : Any]? = nil) {
+        AppsFlyerTracker.shared().trackEvent(type.log, withValues: parameter)
     }
     
     // 初回リリース時にはユーザーIDの考慮はしない。が今後適用する際にはこのメソッドを利用してユーザーIDをセットする。
