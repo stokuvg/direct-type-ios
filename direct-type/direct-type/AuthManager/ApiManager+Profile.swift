@@ -57,6 +57,12 @@ extension UpdateProfileRequestDTO {
             case EditItemMdlProfile.address1.itemKey: self.city = val
             case EditItemMdlProfile.address2.itemKey: self.town = val
             case EditItemMdlProfile.mailAddress.itemKey: self.email = val
+            case EditItemMdlProfile.hopeJobArea.itemKey:
+                var _hopeJobPlaceIds: [Code] = []
+                for code in val.split(separator: EditItemTool.SplitMultiCodeSeparator) {
+                    _hopeJobPlaceIds.append(String(code))
+                }
+                self.hopeJobPlaceIds = _hopeJobPlaceIds
             default: break
             }
         }

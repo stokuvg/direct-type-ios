@@ -90,6 +90,16 @@ extension HPreviewTBCell {
         case .emailH2:
             if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
             return _item.childItems[0].curVal
+        case .hopeAreaH2:
+            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
+            let tmp0: String = _item.childItems[0].curVal
+            var arr0: [String] = []
+            for code in tmp0.split(separator: "_").sorted() { //コード順ソートしておく
+                let buf: String = SelectItemsManager.getCodeDisp(.entryPlace, code: String(code))?.disp ?? ""
+                arr0.append(buf)
+            }
+            let buf0: String = arr0.joined(separator: " / ")
+            return buf0.isEmpty ? Constants.SelectItemsValEmpty.disp : "\(buf0)"
         //========================
         //=== [H-3]履歴書編集
         case .employmentH3:           //===(3a)就業状況

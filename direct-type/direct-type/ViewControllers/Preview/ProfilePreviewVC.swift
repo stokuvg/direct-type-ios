@@ -83,6 +83,11 @@ class ProfilePreviewVC: PreviewBaseVC {
             EditableItemH(type: .inputText, editItem: EditItemMdlProfile.mailAddress, val: _detail.mailAddress),
         ]))
 
+        //===希望勤務地
+        arrData.append(MdlItemH(.hopeAreaH2, "", childItems: [
+            EditableItemH(type: .selectMulti, editItem: EditItemMdlProfile.hopeJobArea, val: _detail.hopeJobPlaceIds.joined(separator: EditItemTool.JoinMultiCodeSeparator)),
+        ]))
+
         //===８．携帯電話番号
         //    ・認証電話番号を表示
         //    ・未入力は想定しない
