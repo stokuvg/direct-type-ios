@@ -47,9 +47,44 @@ private extension LoginConfirmVC {
             showConfirm(title: "フォーマットエラー", message: "数字6桁を入力してください", onlyOK: true)
             return
         }
-        // TODO: 入力されたSMS認証コードを使ってAWSMobileClient.default().confirmSignIn(challengeResponse: _)にて検証を行う。
-        // FIXME: デバッグ時には動作確認のため、そのままベースタブ画面へ遷移させる。
-        transitionToBaseTab()
+        tryConfirmAuthCode(with: inputText)
+    }
+    
+    func tryConfirmAuthCode(with code: String) {
+        AWSMobileClient.default().confirmSignIn(challengeResponse: code, completionHandler: { (signInResult, error) in
+            if let error = error  {
+                let buf = AuthManager.convAnyError(error).debugDisp
+                DispatchQueue.main.async { print(#line, #function, buf) }
+                return
+            }
+            
+            guard let signInResult = signInResult else { return }
+            var buf: String = ""
+            switch (signInResult.signInState) {
+            case .signedIn:
+                buf = "signedIn"
+                DispatchQueue.main.async {
+                    self.transitionToBaseTab()
+                }
+            case .unknown:
+                buf = "unknown"
+            case .smsMFA:
+                buf = "smsMFA"
+            case .passwordVerifier:
+                buf = "passwordVerifier"
+            case .customChallenge:
+                buf = "customChallenge"
+            case .deviceSRPAuth:
+                buf = "deviceSRPAuth"
+            case .devicePasswordVerifier:
+                buf = "devicePasswordVerifier"
+            case .adminNoSRPAuth:
+                buf = "adminNoSRPAuth"
+            case .newPasswordRequired:
+                buf = "newPasswordRequired"
+            }
+            DispatchQueue.main.async { print(#line, #function, buf) }
+        })
     }
     
     func transitionToBaseTab() {

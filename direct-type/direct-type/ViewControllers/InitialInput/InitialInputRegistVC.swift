@@ -62,16 +62,50 @@ private extension InitialInputRegistVC {
             print(signUpResult.codeDeliveryDetails.debugDescription)
             var buf: String = ""
             switch signUpResult.signUpConfirmationState {
-            case .confirmed:    buf = "confirmed"
-            //[簡易認証Skip]            self.actLogin(sender)//続けてログインも実施してしまう
+            case .confirmed:
+                buf = "confirmed"
+                DispatchQueue.main.async { self.trySignIn() }
             case .unconfirmed:
                 buf = "unconfirmed"
-                // FIXME: デモ環境においては電話番号登録時に必ずunconfirmedになってしまうために強制的にコード認証画面に飛ばしているので、後ほど削除する。
-                DispatchQueue.main.async { self.transitionToComfirm() }
-            case .unknown:      buf = "unknown"
+            case .unknown:
+                buf = "unknown"
             }
             DispatchQueue.main.async { print(#line, #function, buf) }
-            
+        }
+    }
+    
+    func trySignIn() {
+        guard let phoneNumberText = phoneNumberTextField.text else { return }
+        AWSMobileClient.default().signIn(username: phoneNumberText.addCountryCode(type: .japan), password: password) { (signInResult, error) in
+            if let error = error {
+                let buf = AuthManager.convAnyError(error).debugDisp
+                DispatchQueue.main.async { print(#line, #function, buf) }
+                return
+            }
+            guard let signInResult = signInResult else { return }
+            var buf: String = ""
+            switch signInResult.signInState {
+            case .unknown:
+                buf = "unknown"
+            case .smsMFA:
+                buf = "smsMFA"
+            case .passwordVerifier:
+                buf = "passwordVerifier"
+            case .customChallenge:
+                buf = "customChallenge"
+                DispatchQueue.main.async { self.transitionToComfirm() }
+            case .deviceSRPAuth:
+                buf = "deviceSRPAuth"
+            case .devicePasswordVerifier:
+                buf = "devicePasswordVerifier"
+            case .adminNoSRPAuth:
+                buf = "adminNoSRPAuth"
+            case .newPasswordRequired:
+                buf = "newPasswordRequired"
+            case .signedIn:
+                buf = "signedIn"
+            }
+            DispatchQueue.main.async { print(#line, #function, buf) }
         }
     }
     
