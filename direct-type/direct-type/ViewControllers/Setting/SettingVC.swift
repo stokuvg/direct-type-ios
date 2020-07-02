@@ -109,7 +109,6 @@ private extension SettingVC {
                 DispatchQueue.main.async {
                     self.showConfirm(title: "認証手順", message: "ログアウトしました", onlyOK: true)
                     .done { _ in
-                        AnalyticsEventManager.setUser(by: nil)
                         self.transitionToInitial()
                     }
                     .catch { _ in

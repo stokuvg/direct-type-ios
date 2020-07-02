@@ -70,7 +70,6 @@ private extension InitialInputConfirmVC {
                 switch signInResult.signInState {
                 case .signedIn:
                     // FIXME: サーバー側でSMS認証系の実装が完了した際には「customChallenge」が返ってくるので、そちらに処理を移管し直す。
-                    AnalyticsEventManager.setUser(by: AWSMobileClient.default().username)
                     DispatchQueue.main.async {
                         self.transitionToComplete()
                     }
