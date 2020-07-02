@@ -14,6 +14,7 @@ class AnalyticsEventManager {
         AppsFlyerTracker.shared().trackEvent(type.log, withValues: nil)
     }
     
+    // 初回リリース時にはユーザーIDの考慮はしない。が今後適用する際にはこのメソッドを利用してユーザーIDをセットする。
     static func setUser(by id: String?) {
         AppsFlyerTracker.shared().customerUserID = id
     }
