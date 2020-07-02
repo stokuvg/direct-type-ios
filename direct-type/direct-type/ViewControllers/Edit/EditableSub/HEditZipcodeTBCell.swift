@@ -20,6 +20,8 @@ class HEditZipcodeTBCell: UITableViewCell {
         super.awakeFromNib()
         //===デザイン適用
         backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
+        tfValueZip3.textColor = UIColor(colorType: .color_black)
+        tfValueZip4.textColor = UIColor(colorType: .color_black)
     }
 
     func initCell(_ item: EditableItemH) {
