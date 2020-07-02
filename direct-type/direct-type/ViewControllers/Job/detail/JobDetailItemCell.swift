@@ -88,7 +88,7 @@ class JobDetailItemCell: BaseJobDetailCell {
                 text = ""
         }
         titleLabel.text(text: title, fontType: .font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
-        self.indispensableLabel.text(text: text, fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        self.indispensableLabel.text(text: text, fontType: .C_font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         
         // 任意
         var optionalDatas:[[String:Any]] = []

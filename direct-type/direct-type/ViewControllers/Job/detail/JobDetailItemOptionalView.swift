@@ -25,7 +25,7 @@ class JobDetailItemOptionalView: UIView {
         titleLabel.text(text: title, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
         
         let text = datas["text"] as! String
-        itemLabel.text(text: text, fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        itemLabel.text(text: text, fontType: .C_font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
     }
 
 }

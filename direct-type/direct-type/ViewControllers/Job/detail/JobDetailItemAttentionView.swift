@@ -45,7 +45,7 @@ class JobDetailItemAttentionView: UIView {
         }
         
         let text = datas["text"] as! String
-        textLabel.text(text: text, fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        textLabel.text(text: text, fontType: .C_font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
     }
 
 }

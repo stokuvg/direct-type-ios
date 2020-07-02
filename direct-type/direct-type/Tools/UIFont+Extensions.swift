@@ -30,6 +30,8 @@ enum FontType {
     case C_font_SS
     case C_font_SSSb
     case C_font_SSS
+    // タグ系
+    case Tag_font_SS
     
     var lineSpacing:CGFloat {
         switch self {
@@ -69,6 +71,8 @@ enum FontType {
                 return 6
             case .C_font_SSS:
                 return 4
+            case .Tag_font_SS:
+                return 2
         }
     }
 }
@@ -134,6 +138,9 @@ extension UIFont {
             case .C_font_SSS:
                 fontName = "HiraginoSans-W3"
                 fontSize = 10.0
+            case .Tag_font_SS:
+                fontName = "HiraginoSans-W3"
+                fontSize = 11.0
         }
         
         self.init(name: fontName, size: fontSize)

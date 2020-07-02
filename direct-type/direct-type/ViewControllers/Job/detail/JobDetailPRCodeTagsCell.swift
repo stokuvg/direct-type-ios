@@ -47,7 +47,7 @@ class JobDetailPRCodeTagsCell: BaseTableViewCell {
             }
         }
         
-        let tagFont = UIFont.init(fontType: .font_SS) ?? UIFont()
+        let tagFont = UIFont.init(fontType: .Tag_font_SS) ?? UIFont()
         
         tagsView.setKind(datas: datas, frame: tagsView.frame, tagFont: tagFont)
     }
