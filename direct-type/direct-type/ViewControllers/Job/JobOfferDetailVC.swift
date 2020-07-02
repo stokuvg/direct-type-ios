@@ -19,6 +19,7 @@ class JobOfferDetailVC: TmpBasicVC {
     
     @IBOutlet weak var applicationBtn:UIButton!
     @IBAction func applicationBtnAction() {
+        AnalyticsEventManager.track(type: .entryJob)
         // 応募フォームに遷移
         self.pushViewController(.entryForm, model: _mdlJobDetail)
     }
