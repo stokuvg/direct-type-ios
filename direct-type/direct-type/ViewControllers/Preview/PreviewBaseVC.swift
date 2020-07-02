@@ -20,7 +20,6 @@ class PreviewBaseVC: TmpBasicVC {
     var dicGrpValidErrMsg: [MdlItemHTypeKey: [ValidationErrMsg]] = [:]//MdlItemH.type
     var dicValidErrMsg: [EditableItemKey: [ValidationErrMsg]] = [:] //[ItemEditable.item: ErrMsg]　（TODO：これもEditableBaseで管理にするか））
     
-
     @IBOutlet weak var vwMainArea: UIView!
     @IBOutlet weak var tableVW: UITableView!
     @IBOutlet weak var vwFootArea: UIView!
@@ -51,32 +50,29 @@ class PreviewBaseVC: TmpBasicVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         //===デザイン適用
         self.view.backgroundColor = UIColor(colorType: .color_base)
         self.vwMainArea.backgroundColor = UIColor(colorType: .color_base)
         self.vwFootArea.backgroundColor = UIColor(colorType: .color_base)
         self.tableVW.backgroundColor = UIColor(colorType: .color_base)
-        
         btnCommit.setTitle(text: "完了する", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
 
         //=== テーブル初期化
         self.tableVW.estimatedRowHeight = 100
         self.tableVW.rowHeight = UITableView.automaticDimension
+        //[C-9系]
         self.tableVW.register(UINib(nibName: "EntryFormInfoTextTBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryFormInfoTextTBCell")
         self.tableVW.register(UINib(nibName: "EntryFormExQuestionsHeadTBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryFormExQuestionsHeadTBCell")
         self.tableVW.register(UINib(nibName: "EntryFormExQuestionsItemTBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryFormExQuestionsItemTBCell")
         self.tableVW.register(UINib(nibName: "EntryFormAnyModelTBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryFormAnyModelTBCell")
         self.tableVW.register(UINib(nibName: "EntryFormJobCardTBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryFormJobCardTBCell")
         self.tableVW.register(UINib(nibName: "HPreviewTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HPreviewTBCell")
-
+        //[C-12系]
         self.tableVW.register(UINib(nibName: "EntryConfirmNotifyEntry1TBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryConfirmNotifyEntry1TBCell")
         self.tableVW.register(UINib(nibName: "EntryConfirmNotifyEntry2TBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryConfirmNotifyEntry2TBCell")
         self.tableVW.register(UINib(nibName: "EntryConfirmJobCardTBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryConfirmJobCardTBCell")
         self.tableVW.register(UINib(nibName: "EntryConfirmAnyModelTBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryConfirmAnyModelTBCell")
-
-
 
         initData()
         chkButtonEnable()//ボタン死活チェック
@@ -102,6 +98,14 @@ class PreviewBaseVC: TmpBasicVC {
         } else {
             btnCommit.isEnabled = false
         }
+    }
+    func fetchCompletePopVC() { //フェッチ完了時に画面を戻す処理
+        self.navigationController?.popViewController(animated: true)
+
+//        showConfirm(title: "登録完了", message: "登録が完了しました", onlyOK: true)
+//        /* Warning回避 */ .done { _ in
+//            self.navigationController?.popViewController(animated: true)
+//        } .catch { (error) in } .finally { } //Warning回避
     }
 }
 
@@ -139,16 +143,16 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
         //モデル引き渡しによる画面遷移の得例対応
         switch item.type {
         case .jobCardC9:
-            return // 遷移なし
+            return //遷移なし。以後の処理はパス
         case .profileC9:
             pushViewController(.profilePreviewH2)
-            return
+            return //遷移させたので以後の処理はパス
         case .resumeC9:
             pushViewController(.resumePreviewH3)
-            return
+            return //遷移させたので以後の処理はパス
         case .careerC9:
             pushViewController(.careerListC)
-            return
+            return //遷移させたので以後の処理はパス
         default:
             break
         }
@@ -280,6 +284,4 @@ extension PreviewBaseVC: SubSelectFeedbackDelegate {
         chkButtonEnable()//ボタン死活チェック
         tableVW.reloadData()
     }
-    
-    
 }

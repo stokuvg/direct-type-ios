@@ -42,8 +42,18 @@ class HEditTextTBCell: UITableViewCell {
         default:
             tfValue.clearButtonMode = .never
         }
+        //===ソフトウェアキーボードに〔閉じる〕ボタン付与
+        let rect = CGRect(origin: CGPoint.zero, size: CGSize.init(width: 60, height: 45))
+        let toolbar = UIToolbar(frame: rect)//Autolayout補正かかるけど、そこそこの横幅指定が必要
+        let separator1 = IKBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let btnClose = IKBarButtonItem.init(title: "閉じる", style: .done, target: self, action: #selector(actInputCancelButton))
+        toolbar.setItems([btnClose, separator1], animated: true)
+        tfValue.inputAccessoryView = toolbar
     }
-    
+    @objc func actInputCancelButton(_ sender: IKBarButtonItem) {
+        self.endEditing(true)
+    }
+
     func dispCell() {
         guard let _item = item else { return }
         let bufTitle = _item.dispName //_item.type.dispTitle

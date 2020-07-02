@@ -107,7 +107,6 @@ class EditableTableBasicVC: EditableBasicVC {
             break
         }
 
-
         if chkErr.count > 0 {
             var msg: String = ""
             for (key, errs) in chkErr {
@@ -129,7 +128,6 @@ class EditableTableBasicVC: EditableBasicVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         //====デザイン適用
         view.backgroundColor = UIColor(colorType: .color_base)!
         tableVW.backgroundColor = UIColor(colorType: .color_base)!
@@ -172,13 +170,29 @@ class EditableTableBasicVC: EditableBasicVC {
         guard let _item = itemGrp else { return }
         lblTitle.text(text: _item.type.dispTitle, fontType: .font_L, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         dispData()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //最初の編集対象項目にフォーカスを当てる
+        if let firstTextFieldItemKey = editableModel.arrTextFieldNextDoneKey.first {
+            guard let firstIdxPath = editableModel.dicTextFieldIndexPath[firstTextFieldItemKey] else { return }
+            if let cell = tableVW.cellForRow(at: firstIdxPath) as? HEditDrumTBCell {
+                if let next = cell.tfValue {
+                    next.becomeFirstResponder()
+                }
+            }
+            if let cell = tableVW.cellForRow(at: firstIdxPath) as? HEditTextTBCell {
+                if let next = cell.tfValue {
+                    next.becomeFirstResponder()
+                }
+            }
+        }
     }
     //=== Notification通知の登録 ===
     // 画面遷移時にも取り除かないもの（他の画面で変更があった場合の更新のため）
