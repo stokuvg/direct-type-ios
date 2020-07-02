@@ -57,6 +57,9 @@ class HomeVC: TmpNaviTopVC {
     
     // おすすめ求人を更新を使用しているか true:使用ずみ,false:未使用
     var recommendUseFlag:Bool = false
+    // AppsFlyerのイベントトラッキング用にオンメモリでキープ求人リストを保有するプロパティ
+    // キープされた求人をオンメモリ上で保有しておき、この画面が切り替わった際にイベント送信する
+    var storedKeepList: Set<Int> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,7 +113,10 @@ class HomeVC: TmpNaviTopVC {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        storedKeepList.forEach({ _ in
+            AnalyticsEventManager.track(type: .keep)
+        })
+        storedKeepList.removeAll()
     }
     
     override func viewWillLayoutSubviews() {
@@ -583,6 +589,7 @@ extension HomeVC: BaseJobCardCellDelegate {
     }
     
     func keepAction(tag: Int) {
+        storedKeepList.insert(tag)
 //        Log.selectLog(logLevel: .debug, "keepAction tag:\(tag)")
         if self.keepSendStatus == .sending { return }
         

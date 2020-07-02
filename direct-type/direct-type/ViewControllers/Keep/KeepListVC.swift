@@ -44,6 +44,9 @@ class KeepListVC: TmpBasicVC {
     
     var lists:MdlKeepList!
     var pageNo:Int = 1
+    // AppsFlyerのイベントトラッキング用にオンメモリでキープ求人リストを保有するプロパティ
+    // キープされた求人をオンメモリ上で保有しておき、この画面が切り替わった際にイベント送信する
+    var storedKeepList: Set<Int> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +64,14 @@ class KeepListVC: TmpBasicVC {
         super.viewWillAppear(animated)
         
         self.getKeepList()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        storedKeepList.forEach({ _ in
+            AnalyticsEventManager.track(type: .keep)
+        })
+        storedKeepList.removeAll()
     }
     
     private func getKeepList() {
@@ -200,6 +211,7 @@ extension KeepListVC: BaseJobCardCellDelegate {
     }
     
     func keepAction(tag: Int) {
+        storedKeepList.insert(tag)
         Log.selectLog(logLevel: .debug, "KeepListVC delegate keepAction tag:\(tag)")
         let jobCard = self.lists.keepJobs[tag]
         let jobId = jobCard.jobId
