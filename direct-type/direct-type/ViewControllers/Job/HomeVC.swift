@@ -527,6 +527,7 @@ extension HomeVC: JobOfferCardReloadCellDelegate {
 extension HomeVC: BaseJobCardCellDelegate {
     func skipAction(jobId: String) {
         Log.selectLog(logLevel: .debug, "skipAction jobId:\(jobId)")
+        AnalyticsEventManager.track(type: .skipVacancies)
         
         if skipSendStatus == .sending {
             return
