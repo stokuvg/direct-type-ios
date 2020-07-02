@@ -24,8 +24,10 @@ class MdlResume: Codable {
     var qualifications: [Code]
     /** 自己PR */
     var ownPr: String
+    /** 現在の年収 */
+    var currentSalary: String
 
-    init(employmentStatus: Code, changeCount: Code, lastJobExperiment: MdlJobExperiment, jobExperiments: [MdlJobExperiment], businessTypes: [Code], educationId: Code, school: MdlResumeSchool, skillLanguage: MdlResumeSkillLanguage, qualifications: [Code], ownPr: String) {
+    init(employmentStatus: Code, changeCount: Code, lastJobExperiment: MdlJobExperiment, jobExperiments: [MdlJobExperiment], businessTypes: [Code], educationId: Code, school: MdlResumeSchool, skillLanguage: MdlResumeSkillLanguage, qualifications: [Code], ownPr: String, currentSalary: String) {
         self.employmentStatus = employmentStatus
         self.changeCount = changeCount
         self.lastJobExperiment = lastJobExperiment
@@ -36,6 +38,7 @@ class MdlResume: Codable {
         self.skillLanguage = skillLanguage
         self.qualifications = qualifications
         self.ownPr = ownPr
+        self.currentSalary = currentSalary
     }
     //===空モデルを生成する
     convenience init() {
@@ -49,7 +52,8 @@ class MdlResume: Codable {
             school: MdlResumeSchool(schoolName: "", faculty: "", department: "", graduationYear: ""),
             skillLanguage: MdlResumeSkillLanguage(languageToeicScore: "", languageToeflScore: "", languageEnglish: "", languageStudySkill: ""),
             qualifications: [],
-            ownPr: "" )
+            ownPr: "",
+            currentSalary: "" )
     }
     //ApiモデルをAppモデルに変換して保持させる
     convenience init(dto: GetResumeResponseDTO) {
@@ -94,6 +98,7 @@ class MdlResume: Codable {
             }
         }
         let _ownPr: String = dto.selfPR ?? ""
+        let _currentSalary: String = dto.currentSalary ?? ""
 
         self.init(employmentStatus: _employment,
                   changeCount: _changeCount,
@@ -104,11 +109,12 @@ class MdlResume: Codable {
                   school: _school,
                   skillLanguage: _skillLanguage,
                   qualifications: _qualifications,
-                  ownPr: _ownPr)
+                  ownPr: _ownPr,
+                  currentSalary: _currentSalary )
     }
 
     var debugDisp: String {
-        return "[employmentStatus: \(employmentStatus)] [changeCount: \(changeCount)] [lastJobExperiment: \(lastJobExperiment.debugDisp)] [jobExperiments: \(jobExperiments.count)件] [businessTypes: \(businessTypes.count)件]  [educationId: \(educationId)] [school: \(school.debugDisp)] [skillLanguage: \(skillLanguage.debugDisp)] [qualifications: \(qualifications.count)件] [ownPr: \(ownPr.count)文字数]"
+        return "[employmentStatus: \(employmentStatus)] [currentSalary: \(currentSalary)] [changeCount: \(changeCount)] [lastJobExperiment: \(lastJobExperiment.debugDisp)] [jobExperiments: \(jobExperiments.count)件] [businessTypes: \(businessTypes.count)件]  [educationId: \(educationId)] [school: \(school.debugDisp)] [skillLanguage: \(skillLanguage.debugDisp)] [qualifications: \(qualifications.count)件] [ownPr: \(ownPr.count)文字数]"
     }
 }
 
@@ -123,6 +129,7 @@ enum EditItemMdlResume: String, EditItemProtocol {
     case skillLanguage
     case qualifications
     case ownPr
+    case currentSalary
     //表示名
     var dispName: String {
         switch self {
@@ -135,6 +142,7 @@ enum EditItemMdlResume: String, EditItemProtocol {
         case .skillLanguage:        return "語学"
         case .qualifications:       return "資格"
         case .ownPr:                return "自己PR"
+        case .currentSalary:        return "現在の年収"
         }
     }
     var tsvMaster: SelectItemsManager.TsvMaster {
@@ -143,6 +151,7 @@ enum EditItemMdlResume: String, EditItemProtocol {
         case .changeCount: return .changeCount
         case .businessTypes: return .businessType
         case .qualifications: return .qualification
+        case .currentSalary: return .salarySelect//コードではなく選択数値が入るもの
         default: return .undefine
         }
     }
