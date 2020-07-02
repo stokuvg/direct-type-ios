@@ -9,6 +9,7 @@
 import UIKit
 
 class ExItemLabel: UILabel {
+    var isReadonly: Bool = false
     //var padding = UIEdgeInsets.zero
     let padding = UIEdgeInsets(top: 12, left: 8, bottom: 12, right: 4)
     override func drawText(in rect: CGRect) {
@@ -16,8 +17,13 @@ class ExItemLabel: UILabel {
         let rectangle = UIBezierPath(roundedRect: rect, cornerRadius: 8)
         UIColor(colorType: .color_white)!.setFill()
         UIColor(colorType: .color_line)!.setStroke()
-        rectangle.fill()
-        rectangle.stroke()
+        if isReadonly {
+            //rectangle.fill()
+            rectangle.stroke()
+        } else {
+            rectangle.fill()
+            rectangle.stroke()
+        }
         super.drawText(in: rectTmp)
     }
     override var intrinsicContentSize: CGSize {
