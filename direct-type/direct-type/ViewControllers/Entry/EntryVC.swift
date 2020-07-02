@@ -58,6 +58,7 @@ class EntryVC: PreviewBaseVC {
     var resume: MdlResume? = nil
     var career: MdlCareer? = nil
     var entry: MdlEntry? = nil
+    var transitionSource: AnalyticsEventType.RouteType!
 
     override func actCommit(_ sender: UIButton) {
         if validateLocalModel() {
@@ -89,6 +90,8 @@ class EntryVC: PreviewBaseVC {
         super.viewDidLoad()
         btnCommit.setTitle(text: "応募確認画面へ", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
+        
+        AnalyticsEventManager.track(type: .toJobDetail, with: transitionSource.parameter)
     }
     func initData(_ jobCard: MdlJobCardDetail) {
         title = "[C-9] 応募フォーム"

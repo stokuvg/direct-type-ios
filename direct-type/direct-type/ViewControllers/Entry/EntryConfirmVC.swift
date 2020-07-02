@@ -23,7 +23,9 @@ class EntryConfirmVC: PreviewBaseVC {
             tableVW.reloadData()
             return
         }
-        fetchPostEntry()
+        fetchPostEntry(completion: { () in
+            AnalyticsEventManager.track(type: .completeEntry)
+        })
     }
     //共通プレビューをOverrideして利用する
     override func viewDidLoad() {
@@ -190,7 +192,7 @@ extension EntryConfirmVC: EntryConfirmNotifyEntryDelegate {
 
 //=== APIフェッチ
 extension EntryConfirmVC {
-    private func fetchPostEntry() {
+    private func fetchPostEntry(completion: (() -> ())? = nil) {
         guard let _jobCard = self.jobCard else { return }
         guard let _profile = self.profile else { return }
         guard let _resume = self.resume else { return }
@@ -225,6 +227,7 @@ extension EntryConfirmVC {
         }
         .finally {
             self.dispData()
+            completion?()
             SVProgressHUD.dismiss()
         }
     }

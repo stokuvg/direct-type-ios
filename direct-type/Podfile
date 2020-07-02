@@ -38,6 +38,9 @@ target 'direct-type' do
   ##=== Projects
   pod 'R.swift'
 
+  ##=== Analytics
+  pod 'AppsFlyerFramework', '~> 5.4.1'
+
 end
 
 #post_install do | installer |

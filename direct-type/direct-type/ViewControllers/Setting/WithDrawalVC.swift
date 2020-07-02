@@ -90,6 +90,7 @@ private extension WithDrawalVC {
         let cancelAction = UIAlertAction(title: "いいえ", style: .cancel)
         let okAction = UIAlertAction.init(title: "はい", style: .default) { (_) in
             // TODO:退会処理
+            AnalyticsEventManager.track(type: .withdrawal)
             let vc = self.getVC(sbName: "SettingVC", vcName: "WithDrawalCompleteVC") as! WithDrawalCompleteVC
             self.navigationController?.pushViewController(vc, animated: true)
         }

@@ -20,6 +20,7 @@ extension EditItemMdlResume {
         case .skillLanguage:        return ValidInfo(required: false, keta: nil, max: nil, type: .code)
         case .qualifications:       return ValidInfo(required: false, keta: nil, max: nil, type: .code)
         case .ownPr:                return ValidInfo(required: false, keta: nil, max: 2000, type: .undefine)
+        case .currentSalary:        return ValidInfo(required: true, keta: nil, max: nil, type: .code)
         }
     }
 }

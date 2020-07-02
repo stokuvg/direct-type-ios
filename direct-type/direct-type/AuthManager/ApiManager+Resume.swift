@@ -116,6 +116,9 @@ extension UpdateResumeRequestDTO {
         if let tmp = editTempCD[EditItemMdlResume.ownPr.itemKey] {// 自己PR
             self.selfPR = tmp
         }
+        if let tmp = editTempCD[EditItemMdlResume.currentSalary.itemKey] {// 現在の年収
+            self.currentSalary = tmp
+        }
     }
 }
 
@@ -182,6 +185,9 @@ extension CreateResumeRequestDTO {
         self.workHistory = _workHistory
         if let tmp = editTempCD[EditItemMdlFirstInput.school.itemKey] {
             self.educationId = tmp
+        }
+        if let tmp = editTempCD[EditItemMdlFirstInput.salary.itemKey] {
+            self.currentSalary = tmp
         }
     }
 }

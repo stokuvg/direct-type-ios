@@ -9,6 +9,7 @@
 import UIKit
 import SwaggerClient
 import SVProgressHUD
+import AppsFlyerLib
 
 enum CardDispType:Int {
     case none   // 何も無い
@@ -33,59 +34,63 @@ enum LimitedType {
 }
 
 class HomeVC: TmpNaviTopVC {
-    
+
     @IBOutlet weak var noCardBackView:UIView!
-    
+
 //    @IBOutlet weak var homeNaviBackView:UIView!
 //    @IBOutlet weak var homeNaviHeight:NSLayoutConstraint!
     @IBOutlet weak var homeTableView:UITableView!
-    
+
     var pageJobCards: MdlJobCardList!   // nページを取得
     var dispJobCards: MdlJobCardList!   // 取得したページを全て表示
-    
+
     var moreCnt:Int = 1
     var dispType:CardDispType = .none
-    
+
     var safeAreaTop:CGFloat!
-    
+
     var pageNo:Int = 1
-    
+
     var defaultCellHeight:CGFloat = 520
-    
+
     var skipSendStatus:SkipSendStatus = .none
     var keepSendStatus:KeepSendStatus = .none
-    
+
     // おすすめ求人を更新を使用しているか true:使用ずみ,false:未使用
     var recommendUseFlag:Bool = false
+    // AppsFlyerのイベントトラッキング用にオンメモリでキープ求人リストを保有するプロパティ
+    // キープされた求人をオンメモリ上で保有しておき、この画面が切り替わった際にイベント送信する
+    var storedKeepList: Set<Int> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         Log.selectLog(logLevel: .debug, "HomeVC viewDidLoad start")
 
         // Do any additional setup after loading the view.
-        
+
         // TODO:初回リリースでは外す
 //        self.setRightSearchBtn()
-        
+
         homeTableView.backgroundColor = UIColor.init(colorType: .color_base)
         homeTableView.rowHeight = UITableView.automaticDimension
-        
+
         homeTableView.registerNib(nibName: "JobOfferBigCardCell", idName: "JobOfferBigCardCell")        // 求人カード
         homeTableView.registerNib(nibName: "JobOfferCardMoreCell", idName: "JobOfferCardMoreCell")      // もっと見る
         homeTableView.registerNib(nibName: "JobOfferCardReloadCell", idName: "JobOfferCardReloadCell")// 全求人カード表示/更新
-        
+
 //        self.makeDummyData()
 //        self.dataCheckAction()
 
         self.getJobList()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Log.selectLog(logLevel: .debug, "HomeVC viewWillAppear start")
-        
+        AnalyticsEventManager.track(type: .viewHome)
+
         safeAreaTop = self.view.safeAreaInsets.top
-        
+
         //[Dbg]___
         if Constants.DbgAutoPushVC {
             switch Constants.DbgAutoPushVCNum {
@@ -101,23 +106,26 @@ class HomeVC: TmpNaviTopVC {
         }
         //[Dbg]^^^
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
+
+
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        storedKeepList.forEach({ _ in
+            AnalyticsEventManager.track(type: .keep)
+        })
+        storedKeepList.removeAll()
     }
-    
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
     }
-    
+
     private func dataAddAction() {
         Log.selectLog(logLevel: .debug, "HomeVC dataAddAction start")
         var _jobs:[MdlJobCard] = dispJobCards.jobCards
@@ -128,17 +136,17 @@ class HomeVC: TmpNaviTopVC {
         dispJobCards.jobCards = _jobs
         self.homeTableView.reloadData()
     }
-    
+
     private func dataCheckAction() {
         Log.selectLog(logLevel: .debug, "HomeVC dataCheckAction start")
-        
+
         if (pageJobCards.jobCards.count) > 0 {
 //        if masterTableData.count > 0 {
             homeTableView.isHidden = false
             dispType = .add
-            
+
             self.dispJobCards = self.pageJobCards
-            
+
             self.homeTableView.delegate = self
             self.homeTableView.dataSource = self
             self.homeTableView.reloadData()
@@ -152,11 +160,11 @@ class HomeVC: TmpNaviTopVC {
             cardNoView.frame = cardFrame
             cardNoView.delegate = self
             noCardBackView.addSubview(cardNoView)
-            
+
             homeTableView.isHidden = true
         }
     }
-    
+
     private func getJobRecommendAddList() {
         SVProgressHUD.show()
         pageNo += 1
@@ -168,7 +176,7 @@ class HomeVC: TmpNaviTopVC {
         }
         .catch { (error) in
             Log.selectLog(logLevel: .debug, "error:\(error)")
-            
+
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             self.showError(myErr)
         }
@@ -177,7 +185,7 @@ class HomeVC: TmpNaviTopVC {
             self.dataAddAction()
         }
     }
-    
+
     private func getJobAddList() {
         SVProgressHUD.show()
         pageNo += 1
@@ -189,7 +197,7 @@ class HomeVC: TmpNaviTopVC {
         }
         .catch { (error) in
             Log.selectLog(logLevel: .debug, "error:\(error)")
-            
+
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             self.showError(myErr)
         }
@@ -206,12 +214,12 @@ class HomeVC: TmpNaviTopVC {
         ApiManager.getRecommendJobs(pageNo, isRetry: true)
             .done { result in
                 debugLog("ApiManager getRecommendJobs result:\(result.debugDisp)")
-                
+
                 self.pageJobCards = result
         }
         .catch { (error) in
             Log.selectLog(logLevel: .debug, "error:\(error)")
-            
+
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             self.showError(myErr)
         }
@@ -220,7 +228,7 @@ class HomeVC: TmpNaviTopVC {
             self.dataCheckAction()
         }
     }
-    
+
     private func getJobList() {
         Log.selectLog(logLevel: .debug, "HomeVC getJobList start")
         SVProgressHUD.show()
@@ -230,12 +238,12 @@ class HomeVC: TmpNaviTopVC {
         ApiManager.getJobs(pageNo, isRetry: true)
             .done { result in
                 debugLog("ApiManager getJobs result:\(result.debugDisp)")
-                
+
                 self.pageJobCards = result
         }
         .catch { (error) in
             Log.selectLog(logLevel: .debug, "error:\(error)")
-            
+
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             self.showError(myErr)
         }
@@ -247,10 +255,10 @@ class HomeVC: TmpNaviTopVC {
             if homeFlag == true, pushFlag == false {
                 let convUpdateDate = DateHelper.convStrYMD2Date(self.pageJobCards.updateAt)
 //                    Log.selectLog(logLevel: .debug, "convUpdateDate:\(String(describing: convUpdateDate))")
-                
+
                 let updateDateString = DateHelper.mdDateString(date: convUpdateDate)
 //                    Log.selectLog(logLevel: .debug, "updateDateString:\(String(describing: updateDateString))")
-                
+
                 self.linesTitle(date: updateDateString, title: "あなたにぴったりの求人")
             } else {
                 self.linesTitle(date: "", title: "おすすめ求人一覧")
@@ -261,14 +269,14 @@ class HomeVC: TmpNaviTopVC {
             self.saveHomeDisplayFlag()
         }
     }
-    
+
     private func getHomeDisplayFlag() -> (Bool,Bool) {
         let ud = UserDefaults.standard
         let homeFlag = ud.bool(forKey: "home")
         let pushFlag = ud.bool(forKey: "pushTab")
         return (homeFlag,pushFlag)
     }
-    
+
     private func saveHomeDisplayFlag() {
         Log.selectLog(logLevel: .debug, "saveHomeDisplayFlag start")
         let ud = UserDefaults.standard
@@ -279,7 +287,7 @@ class HomeVC: TmpNaviTopVC {
 
     #if true
     private func makeDummyData() {
-        
+
         let mdlData1:MdlJobCard = MdlJobCard.init(jobCardCode: "1000000",
                                                   displayPeriod: EntryFormInfoDisplayPeriod.init(startAt: "2020/06/30", endAt: "2020/07/11"),
                                                   companyName: "株式会社キャリアデザインITパートナーズ「type」",
@@ -291,8 +299,8 @@ class HomeVC: TmpNaviTopVC {
                                                   salaryDisplay: true,
                                                   workPlaceCode: [1,2,3,4,5,6],
                                                   keepStatus: true)
-        
-        
+
+
         let mdlData2:MdlJobCard = MdlJobCard.init(jobCardCode: "2",
                                                   displayPeriod: EntryFormInfoDisplayPeriod.init(startAt: "2020/05/16", endAt: "2020/05/31"),
                                                   companyName: "株式会社キャリアデザインITパートナーズ「type」",
@@ -304,8 +312,8 @@ class HomeVC: TmpNaviTopVC {
                                                   salaryDisplay: false,
                                                   workPlaceCode: [8,9,10,11,12,13,15],
                                                   keepStatus: false)
-        
-        
+
+
         let mdlData3:MdlJobCard = MdlJobCard.init(jobCardCode: "3",
                                                   displayPeriod: EntryFormInfoDisplayPeriod.init(startAt: "2020/05/01", endAt: "2020/05/31"),
                                                   companyName: "株式会社キャリアデザインITパートナーズ「type」",
@@ -317,7 +325,7 @@ class HomeVC: TmpNaviTopVC {
                                                   salaryDisplay: true,
                                                   workPlaceCode: [44,45,46,47,48,49,50],
                                                   keepStatus: false)
-        
+
         let nowDateString = Date().dispYmdJP()
         pageJobCards = MdlJobCardList.init(updateAt: nowDateString,
                                            hasNext: true, jobList: [
@@ -327,7 +335,7 @@ class HomeVC: TmpNaviTopVC {
             mdlData1,mdlData2,mdlData3,
             mdlData1,mdlData2,mdlData3,
         ])
-        
+
         dispJobCards = MdlJobCardList()
         if pageJobCards.jobCards.count > moreDataCount {
             let jobCards = pageJobCards.jobCards
@@ -340,13 +348,13 @@ class HomeVC: TmpNaviTopVC {
         }
     }
     #endif
-    
+
     private func recommendSend() {
         SVProgressHUD.show()
         RecommendManager.fetchRecommend(type: .ap112, jobID: "")
         .done { result in
             Log.selectLog(logLevel: .debug, "求人一覧のレコメンド 成功:\(result)")
-            
+
 //            self.pageJobCards = result
             self.recommendLoad()
         }
@@ -359,12 +367,12 @@ class HomeVC: TmpNaviTopVC {
             self.homeTableView.reloadData()
         }
     }
-    
+
     private func makeCellHeight(row: Int) -> CGFloat {
         var rowHeight:CGFloat = defaultCellHeight
-        
+
         let jobData = self.dispJobCards.jobCards[row]
-        
+
         // NEW・終了間近を確認。あれば heightを追加
         let nowDate = Date()
         // NEWマーク 表示チェック
@@ -375,7 +383,7 @@ class HomeVC: TmpNaviTopVC {
         let end_date_string = jobData.displayPeriod.endAt
 //        Log.selectLog(logLevel: .debug, "end_date_string:\(end_date_string)")
         let endPeriod = DateHelper.endFlagHiddenCheck(endDateString:end_date_string, nowDate:nowDate)
-        
+
         var limitedType:LimitedType!
         switch (startPeriod,endPeriod) {
             case (false,false):
@@ -394,12 +402,12 @@ class HomeVC: TmpNaviTopVC {
 //                Log.selectLog(logLevel: .debug, "それ以外")
                 limitedType = LimitedType.none
         }
-        
+
         if limitedType != LimitedType.none {
             rowHeight += 40
         }
         rowHeight = DeviceHelper.deviceAddHeight(defaultHeight: rowHeight, addHeight: 25)
-        
+
         return rowHeight
 //        return UITableView.automaticDimension
     }
@@ -413,12 +421,12 @@ extension HomeVC: UITableViewDelegate {
         } else if row == dispJobCards.jobCards.count && dispType == .end {
             return 250
         }
-        
+
         return self.makeCellHeight(row: row)
 //        return defaultCellHeight
 //        return UITableView.automaticDimension
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = indexPath.row
         if row == dispJobCards.jobCards.count {
@@ -427,22 +435,23 @@ extension HomeVC: UITableViewDelegate {
         }
         let selectedJobData = dispJobCards.jobCards[row]
         let jobId = selectedJobData.jobCardCode
-        
+
         let vc = getVC(sbName: "JobOfferDetailVC", vcName: "JobOfferDetailVC") as! JobOfferDetailVC
         vc.jobId = jobId
-        
+        vc.transitionSource = .fromHome
+
         vc.hidesBottomBarWhenPushed = true
-        
+
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 extension HomeVC: UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+
         let jobCardsCount = dispJobCards.jobCards.count
-        
+
         // 次に表示できるページが無い場合
         if pageJobCards.nextPage == false {
             dispType = .end
@@ -451,7 +460,7 @@ extension HomeVC: UITableViewDataSource {
         }
         return (jobCardsCount + 1)
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let jobCardsCount = dispJobCards.jobCards.count
         let row = indexPath.row
@@ -463,7 +472,7 @@ extension HomeVC: UITableViewDataSource {
                 return cell
             } else {
                 let data = dispJobCards.jobCards[row]
-                
+
                 let cell = tableView.loadCell(cellName: "JobOfferBigCardCell", indexPath: indexPath) as! JobOfferBigCardCell
                 cell.delegate = self
                 cell.tag = row
@@ -520,14 +529,15 @@ extension HomeVC: JobOfferCardReloadCellDelegate {
 
 extension HomeVC: BaseJobCardCellDelegate {
     func skipAction(jobId: String) {
-//        Log.selectLog(logLevel: .debug, "skipAction jobId:\(jobId)")
+        Log.selectLog(logLevel: .debug, "skipAction jobId:\(jobId)")
+        AnalyticsEventManager.track(type: .skipVacancies)
         
         if skipSendStatus == .sending {
             return
         }
-        
+
         self.skipSendStatus = .sending
-        
+
         var jobCardIndex:Int = 0
         for i in 0..<dispJobCards.jobCards.count {
             let jobCard = dispJobCards.jobCards[i]
@@ -538,17 +548,17 @@ extension HomeVC: BaseJobCardCellDelegate {
                 continue
             }
         }
-        
+
 //        Log.selectLog(logLevel: .debug, "delete dispJobCards.jobCards.count:\(dispJobCards.jobCards.count)")
 //        Log.selectLog(logLevel: .debug, "delete jobid:\(jobId)")
 //        Log.selectLog(logLevel: .debug, "delete jobCardIndex:\(jobCardIndex)")
-        
+
         var successFlag:Bool = false
         ApiManager.sendJobSkip(id: jobId)
             .done { result in
 //              Log.selectLog(logLevel: .debug, "skip send success")
 //                Log.selectLog(logLevel: .debug, "見送り成功")
-                
+
                 successFlag = true
         }.catch{ (error) in
 //            Log.selectLog(logLevel: .debug, "skip send error:\(error)")
@@ -560,7 +570,7 @@ extension HomeVC: BaseJobCardCellDelegate {
                 successFlag = false
                 self.dispJobCards.jobCards.remove(at: jobCardIndex)
                 let deleteIndex = IndexPath(row: jobCardIndex, section: 0)
-                
+
                 self.homeTableView.performBatchUpdates({
 //                    self.homeTableView.deleteRows(at: [deleteIndex], with: .automatic)
                     self.homeTableView.deleteRows(at: [deleteIndex], with: .left)
@@ -572,11 +582,12 @@ extension HomeVC: BaseJobCardCellDelegate {
             }
         }
     }
-    
+
     func keepAction(tag: Int) {
+        storedKeepList.insert(tag)
 //        Log.selectLog(logLevel: .debug, "keepAction tag:\(tag)")
         if self.keepSendStatus == .sending { return }
-        
+
         self.keepSendStatus = .sending
         // TODO:通信処理
         let row = tag
@@ -586,15 +597,15 @@ extension HomeVC: BaseJobCardCellDelegate {
         jobCard.keepStatus = flag
         if flag == true {
 //            Log.selectLog(logLevel: .debug, "キープ追加:jobId:\(jobId)")
-            
+
             ApiManager.sendJobKeep(id: jobId)
                 .done { result in
 //                    Log.selectLog(logLevel: .debug, "keep send success")
 //                    Log.selectLog(logLevel: .debug, "keep成功")
-                    
+
             }.catch{ (error) in
 //                Log.selectLog(logLevel: .debug, "keep send error:\(error)")
-                
+
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 self.showError(myErr)
             }.finally {
@@ -611,20 +622,20 @@ extension HomeVC: BaseJobCardCellDelegate {
             }
         } else {
 //            Log.selectLog(logLevel: .debug, "キープ削除:jobId:\(jobId)")
-            
+
             ApiManager.sendJobDeleteKeep(id: jobId)
                 .done { result in
 //                    Log.selectLog(logLevel: .debug, "keep delete success")
 //                    Log.selectLog(logLevel: .debug, "delete成功")
-                    
+
             }.catch{ (error) in
 //                Log.selectLog(logLevel: .debug, "keep delete error:\(error)")
-                
+
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 self.showError(myErr)
             }.finally {
 //                Log.selectLog(logLevel: .debug, "keep delete finally")
-                
+
                 self.dispJobCards.jobCards[tag] = jobCard
                 let updateIndex = IndexPath.init(row: tag, section: 0)
                 self.homeTableView.performBatchUpdates({
@@ -637,5 +648,5 @@ extension HomeVC: BaseJobCardCellDelegate {
             }
         }
     }
-    
+
 }

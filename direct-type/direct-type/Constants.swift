@@ -8,6 +8,7 @@
 
 import UIKit
 
+// TODO: 今後アプリ内の設定フラグなどは「AppDefine」クラスに徐々に移管していくため、このファイルには新規のプロパティを追加しない
 struct Constants {
     //安全なダミー番号: https://stabucky.com/wp/archives/6180
     static let Auth_username: String = "+8190012345678" //安全なダミー番号: https://stabucky.com/wp/archives/6180
