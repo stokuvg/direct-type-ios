@@ -71,10 +71,11 @@ class MdlResume: Codable {
                 }
             }
         }
-        //___experienceIndustryId ???
-        var _businessTypes: [Code] = []//!!!これは、配列じゃない？
-        if let codes = dto.experienceIndustryId { //!!!配列じゃないです
-            _businessTypes.append(codes)
+        var _businessTypes: [Code] = []
+        if let codes = dto.experienceIndustryIds {
+            for code in codes {
+                _businessTypes.append(code)
+            }
         }
 
         let _educationId = dto.educationId ?? ""
@@ -92,7 +93,8 @@ class MdlResume: Codable {
                 _qualifications.append("\(item)")
             }
         }
-        let _ownPr: String = ""//!!!いま、存在していない
+        let _ownPr: String = dto.selfPR ?? ""
+
         self.init(employmentStatus: _employment,
                   changeCount: _changeCount,
                   lastJobExperiment: _lastJobExperiments,
@@ -104,28 +106,7 @@ class MdlResume: Codable {
                   qualifications: _qualifications,
                   ownPr: _ownPr)
     }
-//    //ApiモデルをAppモデルに変換して保持させる
-//    convenience init(dto: Resume) {
-//        let _employment = "\(dto.employment)"
-//        let _changeCount = "\(dto.changeCount)"
-//        var _businessTypes: [Code] = []
-//        for item in dto.businessTypes {
-//            _businessTypes.append("\(item)")
-//        }
-//        let _lastJobExperiment = MdlResumeLastJobExperiment(dto: dto.lastJobExperiment)
-//        var _jobExperiments: [MdlResumeJobExperiments] = []
-//        for item in dto.jobExperiments {
-//            _jobExperiments.append(MdlResumeJobExperiments(dto: item))
-//        }
-//        let _school = MdlResumeSchool(dto: dto.school)
-//        let _skillLanguage = MdlResumeSkillLanguage(dto: dto.skillLanguage)
-//        var _qualifications: [Code] = []
-//        for item in dto.qualifications {
-//            _qualifications.append("\(item)")
-//        }
-//
-//        self.init(employmentStatus: _employment, changeCount: _changeCount, lastJobExperiment: _lastJobExperiment, jobExperiments: _jobExperiments, businessTypes: _businessTypes, school: _school, skillLanguage: _skillLanguage, qualifications: _qualifications, ownPr: dto.ownPr)
-//    }
+
     var debugDisp: String {
         return "[employmentStatus: \(employmentStatus)] [changeCount: \(changeCount)] [lastJobExperiment: \(lastJobExperiment.debugDisp)] [jobExperiments: \(jobExperiments.count)件] [businessTypes: \(businessTypes.count)件]  [educationId: \(educationId)] [school: \(school.debugDisp)] [skillLanguage: \(skillLanguage.debugDisp)] [qualifications: \(qualifications.count)件] [ownPr: \(ownPr.count)文字数]"
     }

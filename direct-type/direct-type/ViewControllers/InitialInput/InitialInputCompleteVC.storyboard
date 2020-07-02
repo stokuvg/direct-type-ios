@@ -26,19 +26,6 @@
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vVX-g2-lv6">
                                 <rect key="frame" x="40" y="254" width="334" height="508"/>
-                                <string key="text">はじめまして。
-ＡＩキャリアアドバイザーのスマ澤と申します。
-あなた専属のアドバイザーとして転職活動をサポートします。
-
-よろしくお願いいたします。
-
-早速ですがあなたのことを教えてください。
-
-これからいくつか質問をさせていただきます。
-だいたい3分程度かかる見込みです。
-
-入力いただいた内容から
-あなたに合った求人を探していきますね。</string>
                                 <color key="textColor" name="color-black"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>

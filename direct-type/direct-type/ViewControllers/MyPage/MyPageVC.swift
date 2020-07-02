@@ -353,7 +353,8 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
                 contactInfo: JobCardDetailContactInfo(companyUrl: "", contactZipcode: "", contactAddress: "", contactPhone: "", contactPerson: "", contactMail: ""),
                 companyDescription: JobCardDetailCompanyDescription(enterpriseContents: "", mainCustomer: "", mediaCoverage: "", established: "", employeesCount: JobCardDetailCompanyDescriptionEmployeesCount(count: nil, averageAge: nil, genderRatio: nil, middleEnter: nil)
                     , capital: nil, turnover: nil, presidentData: JobCardDetailCompanyDescriptionPresidentData(presidentName: "", presidentHistory: "")),
-                userFilter: UserFilterInfo(tudKeepStatus: false, tudSkipStatus: false))
+                userFilter: UserFilterInfo(tudKeepStatus: false, tudSkipStatus: false),
+                entryQuestion1: "企業独自の質目項目1", entryQuestion2: nil, entryQuestion3: "企業独自質問（歯抜け指定は仕様上は来ない想定になっているようです）" )
             self.pushViewController(.entryForm, model: jobCard)
         })
         alert.addAction(action01)

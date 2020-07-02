@@ -73,6 +73,8 @@ class PreviewBaseVC: TmpBasicVC {
 
         self.tableVW.register(UINib(nibName: "EntryConfirmNotifyEntry1TBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryConfirmNotifyEntry1TBCell")
         self.tableVW.register(UINib(nibName: "EntryConfirmNotifyEntry2TBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryConfirmNotifyEntry2TBCell")
+        self.tableVW.register(UINib(nibName: "EntryConfirmJobCardTBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryConfirmJobCardTBCell")
+        self.tableVW.register(UINib(nibName: "EntryConfirmAnyModelTBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryConfirmAnyModelTBCell")
 
 
 

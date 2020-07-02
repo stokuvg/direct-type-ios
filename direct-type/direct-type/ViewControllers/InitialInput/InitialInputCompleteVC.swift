@@ -13,24 +13,48 @@ final class InitialInputCompleteVC: TmpBasicVC {
     @IBOutlet private weak var textView: UITextView!
     
     @IBAction private func nextButton(_ sender: UIButton) {
-        switch transitionDestination {
-        case .firstInput:
+        switch contextType {
+        case .registeredPhoneNumber:
             pushViewController(.firstInputPreviewA)
-        case .homeTab:
+        case .registeredAll:
             transitionToBaseTab()
         }
     }
     
-    enum TransitionDestinationTypr {
-        case firstInput
-        case homeTab
+    enum ContextType {
+        case registeredPhoneNumber
+        case registeredAll
+        
+        var description: String {
+            switch self {
+            case .registeredPhoneNumber:
+                return """
+                はじめまして。
+                ＡＩキャリアアドバイザーのスマ澤と申します。
+                あなた専属のアドバイザーとして転職活動をサポートします。
+                
+                よろしくお願いいたします。
+                
+                早速ですがあなたのことを教えてください。
+                
+                これからいくつか質問をさせていただきます。
+                だいたい3分程度かかる見込みです。
+                
+                入力いただいた内容から
+                あなたに合った求人を探していきますね。
+                """
+            case .registeredAll:
+                return """
+                入力お疲れ様でした！
+                さっそくホームを開いて求人を見てみましょう
+                """
+            }
+        }
     }
     
     private let closeMouthImage = UIImage(named: "suma_normal1")!
     private let openMouthImage = UIImage(named: "suma_normal2")!
-    
-    private var replaceText: String?
-    private var transitionDestination = TransitionDestinationTypr.firstInput
+    private var contextType: ContextType = .registeredPhoneNumber
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,18 +62,14 @@ final class InitialInputCompleteVC: TmpBasicVC {
         startAnimation()
     }
     
-    func replaceDescription(by text: String) {
-        replaceText = text
-    }
-    
-    func changeTransitionDestination(type: TransitionDestinationTypr) {
-        transitionDestination = type
+    func configure(type: ContextType) {
+        contextType = type
     }
 }
 
 private extension InitialInputCompleteVC {
     func setup() {
-        textView.text = replaceText ?? textView.text
+        textView.text = contextType.description
         navigationItem.hidesBackButton = true
     }
     

@@ -26,6 +26,7 @@ extension ApiManager {
         AuthManager.needAuth(true)
         ResumeAPI.resumeControllerGet()
         .done { result in
+            print(#line, #function, param)
             resolver.fulfill(MdlResume(dto: result)) //変換しておく
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
@@ -50,7 +51,7 @@ extension UpdateResumeRequestDTO {
     }
 
     init() {
-        self.init(isEmployed: nil, changeJobCount: nil, workHistory: nil, experienceIndustryId: nil, educationId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil)
+        self.init(isEmployed: nil, changeJobCount: nil, workHistory: nil, experienceIndustryIds: nil, educationId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil, selfPR: nil)
     }
 
     init(_ resume: MdlResume, _ editTempCD: [EditableItemKey: EditableItemCurVal]) {
@@ -63,9 +64,8 @@ extension UpdateResumeRequestDTO {
         }
         var _workHistory: [WorkHistoryDTO] = []// 経験職種リスト
         if let tmp = editTempCD[EditItemMdlResumeLastJobExperiment.jobTypeAndJobExperimentYear.itemKey] {
-            let ty = EditItemTool.convTypeAndYear(codes: tmp)
-            if ty.0.count > 0 && ty.1.count > 0 {
-                _workHistory.append(WorkHistoryDTO(job3Id: ty.0.first!, experienceYears: ty.1.first!))
+            for item in convTypeAndYear(codes: tmp) {
+                _workHistory.append(item)
             }
         }
         if let tmp = editTempCD[EditItemMdlResumeJobExperiments.jobTypeAndJobExperimentYear.itemKey] {
@@ -78,16 +78,16 @@ extension UpdateResumeRequestDTO {
         } else {
             self.workHistory = nil
         }
-
-        print(_workHistory.description)
-        
         if let tmp = editTempCD[EditItemMdlResume.businessTypes.itemKey] {
-            self.experienceIndustryId = tmp// 経験業種ID
+            var _experienceIndustryIds: [Code] = []
+            for code in tmp.split(separator: EditItemTool.SplitMultiCodeSeparator) {
+                _experienceIndustryIds.append(String(code))
+            }
+            self.experienceIndustryIds = _experienceIndustryIds// 経験業種ID
         }
         if let tmp = editTempCD[EditItemMdlResume.school.itemKey] {// 学種コード
             self.educationId = tmp
         }
-        //===
         let _schoolName = editTempCD[EditItemMdlResumeSchool.schoolName.itemKey] ?? resume.school.schoolName
         let _faculty = editTempCD[EditItemMdlResumeSchool.faculty.itemKey] ?? resume.school.faculty
         let _department = editTempCD[EditItemMdlResumeSchool.department.itemKey] ?? resume.school.department
@@ -111,6 +111,10 @@ extension UpdateResumeRequestDTO {
             for code in tmp.split(separator: EditItemTool.SplitMultiCodeSeparator) {
                 _licenseIds.append(String(code))
             }
+            self.licenseIds = _licenseIds
+        }
+        if let tmp = editTempCD[EditItemMdlResume.ownPr.itemKey] {// 自己PR
+            self.selfPR = tmp
         }
     }
 }
@@ -118,6 +122,7 @@ extension UpdateResumeRequestDTO {
 
 extension ApiManager {
     class func updateResume(_ param: UpdateResumeRequestDTO, isRetry: Bool = true) -> Promise<Void> {
+        print(#line, #function, param)
         if isRetry {
             return firstly { () -> Promise<Void> in
                 retry(args: param, task: updateResumeFetch) { (error) -> Bool in return true }
@@ -165,9 +170,8 @@ extension CreateResumeRequestDTO {
         }
         var _workHistory: [WorkHistoryDTO] = []
         if let tmp = editTempCD[EditItemMdlFirstInputLastJobExperiments.jobTypeAndJobExperimentYear.itemKey] {
-            let ty = EditItemTool.convTypeAndYear(codes: tmp)
-            if ty.0.count > 0 && ty.1.count > 0 {
-                _workHistory.append(WorkHistoryDTO(job3Id: ty.0.first!, experienceYears: ty.1.first!))
+            for item in convTypeAndYear(codes: tmp) {
+                _workHistory.append(item)
             }
         }
         if let tmp = editTempCD[EditItemMdlFirstInputJobExperiments.jobTypeAndJobExperimentYear.itemKey] {

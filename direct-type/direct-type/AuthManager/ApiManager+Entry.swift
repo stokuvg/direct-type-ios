@@ -13,10 +13,12 @@ import TudApi
 //=== 応募 ===
 extension WebAPIEntryUserDto {
     init() {
-        self.init(password: "Dummy1234", lastname: "", firstname: "", lastnameKana: "", firstnameKana: "", sex: "", email: "", emailMobile: "", birthday: "", zip: "", areaValue: "", address: "", tel: "", mobile: "", educationValue: "", educationName: "", educationDivision: "", graduationY: "", graduationM: "", educationNote: nil, workStatus: "", changeJobCount: "", userOldJob3List: [], userOldIndustryList: [], toeic: nil, toefl: nil, englishSkillValue: nil, otherLanguage: nil, license: nil, jobId: "", experienceCompanyList: [], userSkillList: nil, userLicenseList: nil, skillsheetFreeword: nil, entryEtc: nil, entryPlaceList: nil, salaryId: nil, changeTimeId: nil, entryContactList: nil, entryAnswer1: "", entryAnswer2: "", entryAnswer3: "")
+        self.init(password: "", lastname: "", firstname: "", lastnameKana: "", firstnameKana: "", sex: "", email: "", emailMobile: "", birthday: "", zip: "", areaValue: "", address: "", tel: "", mobile: "", educationValue: "", educationName: "", educationDivision: "", graduationY: "", graduationM: "", educationNote: nil, workStatus: "", changeJobCount: "", userOldJob3List: [], userOldIndustryList: [], toeic: nil, toefl: nil, englishSkillValue: nil, otherLanguage: nil, license: nil, jobId: "", experienceCompanyList: [], userSkillList: nil, userLicenseList: nil, skillsheetFreeword: nil, entryEtc: nil, entryPlaceList: nil, salaryId: nil, changeTimeId: nil, entryContactList: nil, entryAnswer1: "", entryAnswer2: "", entryAnswer3: "")
     }
-    init(_ jobCardCode: String, _ profile: MdlProfile, _ resume: MdlResume, _ career: MdlCareer, _ editTempCD: [EditableItemKey: EditableItemCurVal]) {
+    init(_ jobCardCode: String, _ profile: MdlProfile, _ resume: MdlResume, _ career: MdlCareer, _ editTempCD: [EditableItemKey: EditableItemCurVal], _ typePassword: String) {
         self.init()
+        
+        self.password = typePassword //入力させたもの
         
         self.lastname = profile.familyName
         self.firstname = profile.firstName
@@ -26,6 +28,11 @@ extension WebAPIEntryUserDto {
         self.email = profile.mailAddress
 //        self.emailMobile = XXX
         self.birthday = profile.birthday.dispYmd()
+        print(String(repeating: "=", count: 22))
+        print(self.birthday)
+        print(String(repeating: "=", count: 22))
+        
+        
         if profile.zipCode.count == 7 {
             let zip3: String = String.substr(profile.zipCode, 1, 3)
             let zip4: String = String.substr(profile.zipCode, 4, 4)
@@ -47,7 +54,9 @@ extension WebAPIEntryUserDto {
         /** 経験職種(userOldJob3)を参照 */
         var _userOldJob3List: [UserOldJob3] = []
         _userOldJob3List.append(UserOldJob3(job3Id: resume.lastJobExperiment.jobType, experienceYears: resume.lastJobExperiment.jobExperimentYear))
-        //!!!: 2つ目以降
+        for item in resume.jobExperiments {
+            _userOldJob3List.append(UserOldJob3(job3Id: item.jobType, experienceYears: item.jobExperimentYear))
+        }
         self.userOldJob3List = _userOldJob3List
         /** 経験業種(userOldIndustry)を参照 */
         var _userOldIndustryList: [UserOldIndustry] = []
@@ -59,8 +68,7 @@ extension WebAPIEntryUserDto {
         self.otherLanguage = resume.skillLanguage.languageStudySkill
 //        public var license: String?
 //        self.license = "tmp"
-//        self.jobId = jobCardCode
-        self.jobId = "1170847"
+        self.jobId = jobCardCode
         /** 職務経歴書(experienceCompany)を参照 */
         var _experienceCompanyList: [ExperienceCompany] = []//!!!
         for item in career.businessTypes {

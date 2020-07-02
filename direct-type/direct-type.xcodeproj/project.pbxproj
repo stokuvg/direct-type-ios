@@ -217,6 +217,8 @@
 		26147F38247267F9009B30B5 /* MstF22_pcSkillPowerPoint.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26147F35247267F9009B30B5 /* MstF22_pcSkillPowerPoint.tsv */; };
 		26157DC02489CD4B00752C55 /* ApiManager+Resume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26157DBF2489CD4B00752C55 /* ApiManager+Resume.swift */; };
 		26157DC22489CD5F00752C55 /* ApiManager+Career.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26157DC12489CD5F00752C55 /* ApiManager+Career.swift */; };
+		2619D2A524AB2E0600F24624 /* EntryConfirmAnyModelTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619D2A324AB2E0600F24624 /* EntryConfirmAnyModelTBCell.swift */; };
+		2619D2A624AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2619D2A424AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib */; };
 		2636075B2477A37C00032880 /* CognitoAuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2636075A2477A37C00032880 /* CognitoAuthVC.swift */; };
 		2636075D2477A39900032880 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2636075C2477A39900032880 /* Auth.storyboard */; };
 		2636075F2477AB4900032880 /* BaseVC+ShowDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2636075E2477AB4900032880 /* BaseVC+ShowDialog.swift */; };
@@ -316,6 +318,8 @@
 		26E04ADE24A1E7C600DE8694 /* EntryFormJobCardTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E04ADC24A1E7C600DE8694 /* EntryFormJobCardTBCell.xib */; };
 		26E04AE124A1E80100DE8694 /* EntryFormAnyModelTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E04ADF24A1E80100DE8694 /* EntryFormAnyModelTBCell.swift */; };
 		26E04AE224A1E80100DE8694 /* EntryFormAnyModelTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E04AE024A1E80100DE8694 /* EntryFormAnyModelTBCell.xib */; };
+		26F18B5224AB0FB6003048AE /* EntryConfirmItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F18B5124AB0FB6003048AE /* EntryConfirmItem.swift */; };
+		26F18B5424AB0FC3003048AE /* EntryConfirmItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F18B5324AB0FC3003048AE /* EntryConfirmItem.xib */; };
 		26F2A819246D0CE90037D47F /* MdlReqEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A818246D0CE90037D47F /* MdlReqEntry.swift */; };
 		26F2A81B246D10C30037D47F /* MdlResume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A81A246D10C30037D47F /* MdlResume.swift */; };
 		26F2A81D246D10DA0037D47F /* MdlCareer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A81C246D10DA0037D47F /* MdlCareer.swift */; };
@@ -543,6 +547,8 @@
 		26147F35247267F9009B30B5 /* MstF22_pcSkillPowerPoint.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstF22_pcSkillPowerPoint.tsv; sourceTree = "<group>"; };
 		26157DBF2489CD4B00752C55 /* ApiManager+Resume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Resume.swift"; sourceTree = "<group>"; };
 		26157DC12489CD5F00752C55 /* ApiManager+Career.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Career.swift"; sourceTree = "<group>"; };
+		2619D2A324AB2E0600F24624 /* EntryConfirmAnyModelTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryConfirmAnyModelTBCell.swift; sourceTree = "<group>"; };
+		2619D2A424AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntryConfirmAnyModelTBCell.xib; sourceTree = "<group>"; };
 		2636075A2477A37C00032880 /* CognitoAuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CognitoAuthVC.swift; sourceTree = "<group>"; };
 		2636075C2477A39900032880 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		2636075E2477AB4900032880 /* BaseVC+ShowDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseVC+ShowDialog.swift"; sourceTree = "<group>"; };
@@ -643,6 +649,8 @@
 		26E04ADC24A1E7C600DE8694 /* EntryFormJobCardTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntryFormJobCardTBCell.xib; sourceTree = "<group>"; };
 		26E04ADF24A1E80100DE8694 /* EntryFormAnyModelTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryFormAnyModelTBCell.swift; sourceTree = "<group>"; };
 		26E04AE024A1E80100DE8694 /* EntryFormAnyModelTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntryFormAnyModelTBCell.xib; sourceTree = "<group>"; };
+		26F18B5124AB0FB6003048AE /* EntryConfirmItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryConfirmItem.swift; sourceTree = "<group>"; };
+		26F18B5324AB0FC3003048AE /* EntryConfirmItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntryConfirmItem.xib; sourceTree = "<group>"; };
 		26F2A818246D0CE90037D47F /* MdlReqEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlReqEntry.swift; sourceTree = "<group>"; };
 		26F2A81A246D10C30037D47F /* MdlResume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlResume.swift; sourceTree = "<group>"; };
 		26F2A81C246D10DA0037D47F /* MdlCareer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlCareer.swift; sourceTree = "<group>"; };
@@ -1317,6 +1325,10 @@
 				26A2899C24AAD75C000D2926 /* EntryConfirmNotifyEntry2TBCell.xib */,
 				26A289A124AAFB2A000D2926 /* EntryConfirmJobCardTBCell.swift */,
 				26A289A224AAFB2A000D2926 /* EntryConfirmJobCardTBCell.xib */,
+				2619D2A324AB2E0600F24624 /* EntryConfirmAnyModelTBCell.swift */,
+				2619D2A424AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib */,
+				26F18B5124AB0FB6003048AE /* EntryConfirmItem.swift */,
+				26F18B5324AB0FC3003048AE /* EntryConfirmItem.xib */,
 			);
 			path = EntryConfirmCell;
 			sourceTree = "<group>";
@@ -1547,6 +1559,7 @@
 				066763692457AF3100AC5039 /* MyPageVC.storyboard in Resources */,
 				0685017E24738D98009770A3 /* JobDetailImageCell.xib in Resources */,
 				26E04ADE24A1E7C600DE8694 /* EntryFormJobCardTBCell.xib in Resources */,
+				26F18B5424AB0FC3003048AE /* EntryConfirmItem.xib in Resources */,
 				26147F38247267F9009B30B5 /* MstF22_pcSkillPowerPoint.tsv in Resources */,
 				26A1F5852480F23100834213 /* Dialog.storyboard in Resources */,
 				2636075D2477A39900032880 /* Auth.storyboard in Resources */,
@@ -1589,6 +1602,7 @@
 				0EAE764F248E2FFD009A8F4B /* ChemistryResultPersonalTypeCell.xib in Resources */,
 				06FFA0042484E1760085A3D9 /* SettingVC.storyboard in Resources */,
 				0E6EA6E724A1C11A00884D07 /* InitialInputConfirmVC.storyboard in Resources */,
+				2619D2A624AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib in Resources */,
 				066CC17E24735DE6009A123A /* JobDetailTextView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1677,6 +1691,7 @@
 				26157DC22489CD5F00752C55 /* ApiManager+Career.swift in Sources */,
 				066763622457AB7200AC5039 /* BaseTabBC.swift in Sources */,
 				06E519B1245814B2004E4B7A /* EntryConfirmVC.swift in Sources */,
+				2619D2A524AB2E0600F24624 /* EntryConfirmAnyModelTBCell.swift in Sources */,
 				06BE18FE2484B10B00FAE476 /* BasePercentageCompletionCell.swift in Sources */,
 				260DD26B248E179000BFB9FE /* Validate+Career.swift in Sources */,
 				26A1F57E247FB28B00834213 /* Validate+Profile.swift in Sources */,
@@ -1751,6 +1766,7 @@
 				0E29E34024A43238006175AE /* String+Extension.swift in Sources */,
 				26AF3237248F538300AA78FD /* Validate+Resume.swift in Sources */,
 				06E519982457DA0D004E4B7A /* ApproachSettingVC.swift in Sources */,
+				26F18B5224AB0FB6003048AE /* EntryConfirmItem.swift in Sources */,
 				06DCAEAB245A7616008FE9FA /* UILabel+Extensions.swift in Sources */,
 				26147F30247258E9009B30B5 /* HPreviewTBCell+dispCellValue.swift in Sources */,
 				26F2A81B246D10C30037D47F /* MdlResume.swift in Sources */,

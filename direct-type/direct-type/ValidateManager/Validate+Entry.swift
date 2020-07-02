@@ -38,6 +38,7 @@ extension EditItemMdlEntry {
         case .ownPR:                return ValidInfo(required: false, keta: nil, max: 2000, type: .undefine)
         case .hopeArea:             return ValidInfo(required: false, keta: nil, max: nil, type: .code)
         case .hopeSalary:           return ValidInfo(required: false, keta: nil, max: nil, type: .code)
+        case .entryItems:           return ValidInfo(required: false, keta: nil, max: nil, type: .model)
         }
     }
 }

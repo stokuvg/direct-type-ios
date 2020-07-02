@@ -64,6 +64,7 @@ case exQuestionAnswer3  //１２．独自質問（必須）
 case ownPR              //９．自己PR文字カウント
 case hopeArea           //１０．希望勤務地（任意）
 case hopeSalary         //１１．希望年収（任意）
+case entryItems         //9、10、11、12を一括で扱うためのもの
     //表示名
     var dispName: String {
         switch self {
@@ -77,6 +78,7 @@ case hopeSalary         //１１．希望年収（任意）
         case .exQuestionAnswer1:   return "独自質問 1（必須）"
         case .exQuestionAnswer2:   return "独自質問 2（必須）"
         case .exQuestionAnswer3:   return "独自質問 3（必須）"
+        case .entryItems:   return "応募フォーム"
         }
     }
     var tsvMaster: SelectItemsManager.TsvMaster {
