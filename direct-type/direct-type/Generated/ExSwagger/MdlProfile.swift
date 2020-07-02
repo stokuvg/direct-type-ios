@@ -41,7 +41,8 @@ class MdlProfile: Codable {
     /** 携帯電話番号（変更不可：認証アカウントと同一） */
      var mobilePhoneNo: String = ""
 
-    init(nickname: Code, hopeJobPlaceIds: [Code], familyName: String, firstName: String, familyNameKana: String, firstNameKana: String, birthday: Date, gender: Code, zipCode: String, prefecture: Code, address1: String, address2: String, mailAddress: String, mobilePhoneNo: String) {
+    init(nickname: Code, hopeJobPlaceIds: [Code],
+         familyName: String, firstName: String, familyNameKana: String, firstNameKana: String, birthday: Date, gender: Code, zipCode: String, prefecture: Code, address1: String, address2: String, mailAddress: String, mobilePhoneNo: String) {
         self.nickname = nickname
         self.hopeJobPlaceIds = hopeJobPlaceIds
         self.familyName = familyName

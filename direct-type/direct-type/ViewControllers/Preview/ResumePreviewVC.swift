@@ -49,6 +49,10 @@ class ResumePreviewVC: PreviewBaseVC {
         arrData.append(MdlItemH(.employmentH3, "", childItems: [
             EditableItemH(type: .selectSingle, editItem: EditItemMdlResume.employmentStatus, val: _detail.employmentStatus),
         ]))
+        //===(XX)現在の年収
+        arrData.append(MdlItemH(.changeCountH3, "", childItems: [
+            EditableItemH(type: .selectSingle, editItem: EditItemMdlResume.currentSalary, val: _detail.currentSalary),
+        ]))
         //===(3b)転職回数
         arrData.append(MdlItemH(.changeCountH3, "", childItems: [
         EditableItemH(type: .selectSingle, editItem: EditItemMdlResume.changeCount, val: _detail.changeCount),
@@ -135,6 +139,7 @@ extension ResumePreviewVC {
             case 404://見つからない場合、空データを適用して画面を表示
                 let message: String = "[A系統]初期入力画面でProfileやResumeの一部データが登録されているはず\n"
                 self.showError(MyErrorDisp(code: 9999, title: "特殊処理", message: message, orgErr: nil, arrValidErrMsg: []))
+                self.pushViewController(.firstInputPreviewA)
                 return //エラー表示させないため
             default: break
             }
