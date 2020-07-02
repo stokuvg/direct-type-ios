@@ -143,8 +143,9 @@ extension ProfilePreviewVC {
         SVProgressHUD.show(withStatus: "プロフィール情報の更新")
         ApiManager.updateProfile(param, isRetry: true)
         .done { result in
-            self.fetchGetProfile()
-            self.completeUpdate()//===更新完了した場合の処理
+            self.fetchCompletePopVC()
+            //self.fetchGetProfile()
+            //self.completeUpdate()//===更新完了した場合の処理
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -162,8 +163,8 @@ extension ProfilePreviewVC {
             SVProgressHUD.dismiss()
         }
     }
-    private func completeUpdate() {
-        self.editableModel.editTempCD.removeAll()//編集情報をまるっと削除
-        self.chkButtonEnable()
-    }
+//    private func completeUpdate() {
+//        self.editableModel.editTempCD.removeAll()//編集情報をまるっと削除
+//        self.chkButtonEnable()
+//    }
 }

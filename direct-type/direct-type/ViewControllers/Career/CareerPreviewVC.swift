@@ -123,7 +123,7 @@ extension CareerPreviewVC {
         ApiManager.createCareer(param, isRetry: true)
         .done { result in
             //self.fetchGetCareerList()
-            self.navigationController?.popViewController(animated: true)
+            self.fetchCompletePopVC()
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)

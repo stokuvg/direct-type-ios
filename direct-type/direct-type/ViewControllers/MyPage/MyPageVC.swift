@@ -16,28 +16,6 @@ import SwaggerClient
 class MyPageVC: TmpNaviTopVC {
 
     @IBOutlet private weak var pageTableView: UITableView!
-    //さくさく職歴書
-    @IBOutlet private weak var btnButton04: UIButton!
-    @IBAction private func actButton04(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "Preview", bundle: nil)
-        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SmoothCareerPreviewVC") as? SmoothCareerPreviewVC{
-            self.navigationController?.pushViewController(nvc, animated: true)
-        }
-    }
-    //認証
-    @IBOutlet private weak var btnButton05: UIButton!
-    @IBAction private func actButton05(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "Auth", bundle: nil)
-        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_CognitoAuthVC") as? CognitoAuthVC{
-            self.navigationController?.pushViewController(nvc, animated: true)
-        }
-    }
-
-    //Get Jobs
-    @IBOutlet private weak var btnButton06: UIButton!
-    @IBAction private func actButton06(_ sender: UIButton) {
-        fetchGetJobList()
-    }
 
     private var carrerFlag: Bool = false
     private var isExistsChemistry: Bool {
@@ -45,7 +23,7 @@ class MyPageVC: TmpNaviTopVC {
     }
     private var topRanker: ChemistryScoreCalculation.TopRanker?
     
-    private var pageNo: Int = 1
+//    private var pageNo: Int = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,18 +61,6 @@ class MyPageVC: TmpNaviTopVC {
 
 //=== APIフェッチ
 private extension MyPageVC {
-    func fetchGetJobList() {
-        ApiManager.getJobs(pageNo, isRetry: true)
-        .done { result in
-            print(result.debugDisp)
-        }
-        .catch { (error) in
-            self.showError(error)
-        }
-        .finally {
-        }
-    }
-    
     func fetchChemistryData() {
         SVProgressHUD.show(withStatus: "データ取得中")
         ChemistryAPI.chemistryControllerGet()
