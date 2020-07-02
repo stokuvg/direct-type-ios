@@ -15,7 +15,6 @@ class MdlProfile: Codable {
     //===プロフィール作成は初期入力でのもののみ...
     var nickname: String = ""
     var hopeJobPlaceIds: [Code] = []
-    var salaryId: Code = ""
     //===プロフィール更新
     /** 氏 */
      var familyName: String = ""
@@ -42,11 +41,9 @@ class MdlProfile: Codable {
     /** 携帯電話番号（変更不可：認証アカウントと同一） */
      var mobilePhoneNo: String = ""
 
-    init(nickname: Code, hopeJobPlaceIds: [Code], salaryId: String,
-         familyName: String, firstName: String, familyNameKana: String, firstNameKana: String, birthday: Date, gender: Code, zipCode: String, prefecture: Code, address1: String, address2: String, mailAddress: String, mobilePhoneNo: String) {
+    init(nickname: Code, hopeJobPlaceIds: [Code], familyName: String, firstName: String, familyNameKana: String, firstNameKana: String, birthday: Date, gender: Code, zipCode: String, prefecture: Code, address1: String, address2: String, mailAddress: String, mobilePhoneNo: String) {
         self.nickname = nickname
         self.hopeJobPlaceIds = hopeJobPlaceIds
-        self.salaryId = salaryId
         self.familyName = familyName
         self.firstName = firstName
         self.familyNameKana = familyNameKana
@@ -78,7 +75,6 @@ class MdlProfile: Codable {
         self.init(
             nickname: dto.nickname ?? "",
             hopeJobPlaceIds: [],
-            salaryId: dto.salaryId ?? "",
             familyName: dto.familyName ?? "",
             firstName: dto.firstName ?? "",
             familyNameKana: dto.familyNameKana ?? "",

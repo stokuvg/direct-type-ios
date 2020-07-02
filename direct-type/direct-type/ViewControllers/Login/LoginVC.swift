@@ -61,19 +61,15 @@ private extension LoginVC {
                 return
             }
             switch signInResult.signInState {
-            case .signedIn:
-                // FIXME: サーバー側でSMS認証系の実装が完了した際には「customChallenge」が返ってくるので、そちらに処理を移管し直す。
+            case .customChallenge:
                 DispatchQueue.main.async {
                     let vc = self.getVC(sbName: "LoginConfirmVC", vcName: "LoginConfirmVC") as! LoginConfirmVC
                     let loginInfo = LoginConfirmVC.LoginInfo(phoneNumberText: phoneNumberText.addCountryCode(type: .japan), password: self.password)
                     vc.configure(with: loginInfo)
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
-            case .customChallenge:
-                // TODO: 本来は電話番号入力時のサインインAPIでは「customChallenge」が返ってくるが、
-                // 現状は「signedIn」が返ってくる仕様のため、処理をそちらのcaseに移管している。
                 break
-            case .unknown, .smsMFA, .passwordVerifier, .deviceSRPAuth,
+            case .unknown, .signedIn, .smsMFA, .passwordVerifier, .deviceSRPAuth,
                  .devicePasswordVerifier, .adminNoSRPAuth, .newPasswordRequired:
                 break
             }

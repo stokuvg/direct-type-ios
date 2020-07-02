@@ -25,7 +25,7 @@ extension ApiManager {
     private class func getApproachFetch(param: Void) -> Promise<MdlApproach> {
         let (promise, resolver) = Promise<MdlApproach>.pending()
         AuthManager.needAuth(true)
-        UserStatusAPI.approachControllerGet()
+        SettingsAPI.settingsControllerGet()
         .done { result in
             resolver.fulfill(MdlApproach(dto: result)) //変換しておく
         }

@@ -47,41 +47,44 @@ private extension InitialInputConfirmVC {
             showConfirm(title: "フォーマットエラー", message: "数字6桁を入力してください", onlyOK: true)
             return
         }
-        // TODO: 入力されたSMS認証コードを使ってAWSMobileClient.default().confirmSignIn(challengeResponse: _)にて検証を行う。
-        // FIXME: デバッグ環境においては、電話番号登録→AWS管理画面上で手動認証→サインインというフローを踏んで
-        // 新規登録させる必要があるため、SMS認証コード入力画面で無理やりサインイン処理をしているので、後から削除する
-        signIn()
+        tryConfirmAuthCode(with: inputText)
     }
     
-    func signIn() {
-        AWSMobileClient.default()
-            .signIn(username: loginInfo.phoneNumberText.addCountryCode(type: .japan), password: loginInfo.password)  { (signInResult, error) in
-                if let error = error {
-                    let buf = AuthManager.convAnyError(error).debugDisp
-                    DispatchQueue.main.async { self.showConfirm(title: "Error", message: buf, onlyOK: true) }
-                    return
+    func tryConfirmAuthCode(with code: String) {
+        AWSMobileClient.default().confirmSignIn(challengeResponse: code, completionHandler: { (signInResult, error) in
+            if let error = error  {
+                let buf = AuthManager.convAnyError(error).debugDisp
+                DispatchQueue.main.async { print(#line, #function, buf) }
+                return
+            }
+            
+            guard let signInResult = signInResult else { return }
+            var buf: String = ""
+            switch (signInResult.signInState) {
+            case .signedIn:
+                buf = "signedIn"
+                DispatchQueue.main.async {
+                    self.transitionToComplete()
                 }
-                
-                guard let signInResult = signInResult else {
-                    print("レスポンスがが正常に受け取れませんでした")
-                    return
-                }
-                
-                switch signInResult.signInState {
-                case .signedIn:
-                    // FIXME: サーバー側でSMS認証系の実装が完了した際には「customChallenge」が返ってくるので、そちらに処理を移管し直す。
-                    DispatchQueue.main.async {
-                        self.transitionToComplete()
-                    }
-                case .customChallenge:
-                    // TODO: 本来は電話番号入力時のサインインAPIでは「customChallenge」が返ってくるが、
-                    // 現状は「signedIn」が返ってくる仕様のため、処理をそちらのcaseに移管している。
-                    break
-                case .unknown, .smsMFA, .passwordVerifier, .deviceSRPAuth,
-                     .devicePasswordVerifier, .adminNoSRPAuth, .newPasswordRequired:
-                    break
-                }
-        }
+            case .unknown:
+                buf = "unknown"
+            case .smsMFA:
+                buf = "smsMFA"
+            case .passwordVerifier:
+                buf = "passwordVerifier"
+            case .customChallenge:
+                buf = "customChallenge"
+            case .deviceSRPAuth:
+                buf = "deviceSRPAuth"
+            case .devicePasswordVerifier:
+                buf = "devicePasswordVerifier"
+            case .adminNoSRPAuth:
+                buf = "adminNoSRPAuth"
+            case .newPasswordRequired:
+                buf = "newPasswordRequired"
+            }
+            DispatchQueue.main.async { print(#line, #function, buf) }
+        })
     }
     
     func transitionToComplete() {
@@ -116,6 +119,7 @@ private extension InitialInputConfirmVC {
             var buf: String = ""
             switch signUpResult.signUpConfirmationState {
             case .confirmed:    buf = "confirmed"
+                // TODO: SMS認証コードの再送処理を追加
 //[簡易認証Skip]            self.actLogin(sender)//続けてログインも実施してしまう
             case .unconfirmed:  buf = "unconfirmed"
             case .unknown:      buf = "unknown"

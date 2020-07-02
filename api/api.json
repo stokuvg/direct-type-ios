@@ -52,11 +52,6 @@
               "type": "string"
             }
           },
-          "salaryId": {
-            "type": "string",
-            "example": "1",
-            "description": "年収コード"
-          },
           "familyName": {
             "type": "string",
             "example": "須磨澤",
@@ -149,11 +144,6 @@
               "type": "string"
             }
           },
-          "salaryId": {
-            "type": "string",
-            "example": "1",
-            "description": "年収コード"
-          },
           "birthday": {
             "type": "string",
             "example": "1995-11-01",
@@ -170,7 +160,6 @@
         "required": [
           "nickname",
           "hopeJobPlaceIds",
-          "salaryId",
           "birthday",
           "genderId"
         ]
@@ -195,11 +184,6 @@
             "items": {
               "type": "string"
             }
-          },
-          "salaryId": {
-            "type": "string",
-            "example": "1",
-            "description": "年収コード"
           },
           "familyName": {
             "type": "string",
@@ -400,6 +384,11 @@
             "example": "私は英語とフランス語が得意です。何でも挑戦します。",
             "description": "自己PR",
             "maxLength": 4000
+          },
+          "currentSalary": {
+            "type": "string",
+            "example": "500",
+            "description": "現在の年収"
           }
         }
       },
@@ -422,12 +411,18 @@
             "type": "string",
             "example": "1",
             "description": "学種コード"
+          },
+          "currentSalary": {
+            "type": "string",
+            "example": "500",
+            "description": "現在の年収"
           }
         },
         "required": [
           "isEmployed",
           "workHistory",
-          "educationId"
+          "educationId",
+          "currentSalary"
         ]
       },
       "UpdateResumeRequestDTO": {
@@ -510,6 +505,11 @@
             "example": "私は英語とフランス語が得意です。何でも挑戦します。",
             "description": "自己PR",
             "maxLength": 4000
+          },
+          "currentSalary": {
+            "type": "string",
+            "example": "500",
+            "description": "現在の年収"
           }
         }
       },
@@ -832,7 +832,7 @@
             "description": "true: 年収公開, false: 年収非公開"
           },
           "salaryOffer": {
-              "type": "string",
+            "type": "string",
             "example": "",
             "description": "スカウトによる提示年収＊初回は未使用＊"
           },
@@ -1133,6 +1133,7 @@
           "minSalaryId",
           "maxSalaryId",
           "isSalaryDisplay",
+          "salaryOffer",
           "place2Ids",
           "companyName",
           "pressStartDate",
@@ -1401,25 +1402,6 @@
             "description": "true: スカウト使用中, false: スカウト停止中"
           }
         }
-      },
-      "GetApproachResponseDTO": {
-        "type": "object",
-        "properties": {
-          "isScoutEnable": {
-            "type": "boolean",
-            "example": true,
-            "description": "スカウト可否"
-          },
-          "isRecommendationEnable": {
-            "type": "boolean",
-            "example": true,
-            "description": "レコメンド可否"
-          }
-        },
-        "required": [
-          "isScoutEnable",
-          "isRecommendationEnable"
-        ]
       },
       "UserOldJob3": {
         "type": "object",
@@ -2182,7 +2164,14 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetJobsResponseDTO"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -2516,6 +2505,27 @@
         ]
       }
     },
+    "/withdraw": {
+      "delete": {
+        "operationId": "WithdrawController_delete",
+        "summary": "退会処理",
+        "description": "Api36_退会",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "withdraw"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
     "/entry": {
       "post": {
         "operationId": "EntryController_entry",
@@ -2542,29 +2552,6 @@
           {
             "bearer": []
           }
-        ]
-    }
- },
-     "/userStatus": {
-      "get": {
-        "operationId": "ApproachController_get",
-        "summary": "アプローチ設定取得",
-        "description": "Api31_アプローチ設定を取得",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetApproachResponseDTO"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "userStatus"
         ]
       }
     }
