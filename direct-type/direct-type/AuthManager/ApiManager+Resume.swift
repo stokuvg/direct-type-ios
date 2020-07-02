@@ -51,7 +51,7 @@ extension UpdateResumeRequestDTO {
     }
 
     init() {
-        self.init(isEmployed: nil, changeJobCount: nil, workHistory: nil, experienceIndustryIds: nil, educationId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil, selfPR: nil)
+        self.init(isEmployed: nil, changeJobCount: nil, workHistory: nil, experienceIndustryIds: nil, educationId: nil, finalEducation: nil, toeic: nil, toefl: nil, englishSkillId: nil, otherLanguageSkillId: nil, licenseIds: nil, selfPR: nil, currentSalary: nil)
     }
 
     init(_ resume: MdlResume, _ editTempCD: [EditableItemKey: EditableItemCurVal]) {
@@ -161,7 +161,7 @@ extension CreateResumeRequestDTO {
     }
 
     init() {
-        self.init(isEmployed: false, workHistory: [], educationId: "")
+        self.init(isEmployed: false, workHistory: [], educationId: "", currentSalary: "")
     }
     init(_ editTempCD: [EditableItemKey: EditableItemCurVal]) {
         self.init()
