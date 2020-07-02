@@ -14,7 +14,7 @@ class AnalyticsEventManager {
         AppsFlyerTracker.shared().trackEvent(type.log, withValues: nil)
     }
     
-    static func setUser(by id: String) {
+    static func setUser(by id: String?) {
         AppsFlyerTracker.shared().customerUserID = id
     }
 }
