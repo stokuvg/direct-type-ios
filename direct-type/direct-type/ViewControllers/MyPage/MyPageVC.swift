@@ -22,7 +22,7 @@ class MyPageVC: TmpNaviTopVC {
 
     @IBOutlet private weak var pageTableView: UITableView!
 
-    private var carrerFlag: Bool {
+    private var isExistCareer: Bool {
         return career != nil
     }
     private var isExistsChemistry: Bool {
@@ -86,7 +86,7 @@ extension MyPageVC: UITableViewDelegate {
             case 1:
                 return 15
             case 2:
-                if carrerFlag && isExistsChemistry {
+                if isExistCareer && isExistsChemistry {
                     return 0
                 }
                 return 15
@@ -121,7 +121,7 @@ extension MyPageVC: UITableViewDelegate {
             case (0,_):
                 return 68
             case (1,0):
-                return carrerFlag ? 47 : 205
+                return isExistCareer ? 47 : 205
             case (2,0):
                 return isExistsChemistry ? 47 : 205
             case (3,_):
@@ -141,7 +141,7 @@ extension MyPageVC: UITableViewDelegate {
         case (0, 2):
             pushViewController(.resumePreviewH3, model: resume)
         case (1, 0):
-            if carrerFlag {
+            if isExistCareer {
                 pushViewController(.careerListC, model: career)//既存の表示
             } else {
                 registChemistryAction()//新規作成させる場合
@@ -199,7 +199,7 @@ extension MyPageVC: UITableViewDataSource {
                 cell.delegate = self
                 return cell
             case (1,0):
-                if carrerFlag {
+                if isExistCareer {
                     let cell = tableView.loadCell(cellName: "MyPageEditedCarrerCell", indexPath: indexPath) as! MyPageEditedCarrerCell
                     return cell
                 } else {
@@ -245,7 +245,9 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
 
     // 画面遷移
     func registCarrerAction() {
-        //pushViewController(.careerListC)// 職歴書
+        if true { //[Dbg: デバグ用メニュー表示はfalseにする]
+        pushViewController(.careerListC)// 職歴書
+        } else {
         //[Dbg:遷移先画面の選択]___
         let storyboard = UIStoryboard(name: "Preview", bundle: nil)
         let alert: UIAlertController = UIAlertController(title: "[Dbg: 開発)中]", message: "遷移先画面の選択", preferredStyle:  .alert)
@@ -322,9 +324,7 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
         DispatchQueue.main.async {
             self.present(alert, animated: true, completion: nil)
         }
-        //[Dbg:遷移先画面の選択]^^^
-        
-        
+        }//[Dbg:遷移先画面の選択]^^^
     }
 }
 
