@@ -107,6 +107,8 @@ class JobOfferDetailVC: TmpBasicVC {
     var articleCellMaxSize:CGFloat = 0
     
     var prcodesCellMaxSize:CGFloat = 0
+    
+    var transitionSource: AnalyticsEventType.RouteType!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -178,6 +180,8 @@ class JobOfferDetailVC: TmpBasicVC {
         
         keepFlag = false
         self.keepDataSetting(flag: keepFlag)
+        
+        AnalyticsEventManager.track(type: .toJobDetail, with: transitionSource.parameter)
     }
     
     override func viewWillAppear(_ animated: Bool) {

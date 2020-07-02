@@ -9,6 +9,7 @@
 import UIKit
 import SwaggerClient
 import SVProgressHUD
+import AppsFlyerLib
 
 enum CardDispType:Int {
     case none   // 何も無い
@@ -436,6 +437,7 @@ extension HomeVC: UITableViewDelegate {
         
         let vc = getVC(sbName: "JobOfferDetailVC", vcName: "JobOfferDetailVC") as! JobOfferDetailVC
         vc.jobId = jobId
+        vc.transitionSource = .fromHome
         
         vc.hidesBottomBarWhenPushed = true
         

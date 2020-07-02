@@ -21,6 +21,30 @@ enum AnalyticsEventType {
     case viewHome
     case viewVacancies
     case viewKeep
+    case toJobDetail
+    case toEntryDetail
+    
+    enum RouteType {
+        case fromHome
+        case fromKeepList
+        
+        var parameter: [AnyHashable : Any] {
+            return [key : value]
+        }
+        
+        private var key: String {
+            return "route"
+        }
+        
+        private var value: String {
+            switch self {
+            case .fromHome:
+                return "from_home"
+            case .fromKeepList:
+                return "from_keep_list"
+            }
+        }
+    }
     
     private var debugLogSuffix: String {
         return "_test"
@@ -51,6 +75,10 @@ enum AnalyticsEventType {
             text =  "view_vacancies"
         case .viewKeep:
             text =  "view_keep"
+        case .toJobDetail:
+            text = "to_job_detail"
+        case .toEntryDetail:
+            text = "to_entry_detail"
         }
         if AppDefine.isDebugForAppsFlyer {
             text += debugLogSuffix

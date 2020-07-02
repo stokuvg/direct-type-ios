@@ -182,6 +182,7 @@ extension KeepListVC: UITableViewDelegate {
         
         let vc = getVC(sbName: "JobOfferDetailVC", vcName: "JobOfferDetailVC") as! JobOfferDetailVC
         vc.jobId = jobId
+        vc.transitionSource = .fromKeepList
         
         vc.hidesBottomBarWhenPushed = true
         
