@@ -162,6 +162,9 @@ struct MyErrorDisp {
     let orgErr: Error!
     var arrValidErrMsg: [SwaValidErrMsg] = [] // 複合種キーになりかねないから、とりあえず抜粋モデルにしておく
     //var dicParam: [String: String] = [:]//NSErrorにあるやつのために用意したけど、orgErrorにもついてるだろうし、つかわないかな？
+    enum CodeType: Int {
+        case existsUser = 24
+    }
     
     var debugDisp: String {
         var buf: String = ""
