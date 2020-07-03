@@ -208,17 +208,17 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
         case .entry:
             if let entry = self.detail as? MdlEntry {
                 //=== 企業からの質問項目 ===
-                if let bufQuestion = entry.exQuestion1 {
-                    let bufAnswer = entry.exAnswer1
-                    stackVW.addArrangedSubview(EntryConfirmItem(bufQuestion, bufAnswer))
+                if let exQuestion = entry.exQuestion1, !exQuestion.isEmpty {
+                    let exAnswer = entry.exAnswer1
+                    stackVW.addArrangedSubview(EntryConfirmItem(exQuestion, exAnswer))
                 }
-                if let bufQuestion = entry.exQuestion2 {
-                    let bufAnswer = entry.exAnswer2
-                    stackVW.addArrangedSubview(EntryConfirmItem(bufQuestion, bufAnswer))
+                if let exQuestion = entry.exQuestion2, !exQuestion.isEmpty {
+                    let exAnswer = entry.exAnswer2
+                    stackVW.addArrangedSubview(EntryConfirmItem(exQuestion, exAnswer))
                 }
-                if let bufQuestion = entry.exQuestion3 {
-                    let bufAnswer = entry.exAnswer3
-                    stackVW.addArrangedSubview(EntryConfirmItem(bufQuestion, bufAnswer))
+                if let exQuestion = entry.exQuestion3, !exQuestion.isEmpty {
+                    let exAnswer = entry.exAnswer3
+                    stackVW.addArrangedSubview(EntryConfirmItem(exQuestion, exAnswer))
                 }
                 //=== 希望勤務地
                 var dispHopeArea: [String] = []
@@ -236,9 +236,7 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
                 if !entry.ownPR.isEmpty {
                     addStackItem(type: .ownPRC9, val: entry.ownPR)
                 }
-
             }
-
 
         }
 
