@@ -49,7 +49,6 @@ class SettingVC: TmpBasicVC {
         }
     }
     
-    // TODO: サーバー側のAPI実装が完了するまでは、ここのデフォルト値を直に変更して挙動の確認をする想定。(※デフォルトはいずれもfalse)
     private var approachSetting = MdlApproach(isScoutEnable: false)
     
     override func viewDidLoad() {
