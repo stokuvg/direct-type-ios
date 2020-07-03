@@ -21,8 +21,7 @@ class JobOfferDetailVC: TmpBasicVC {
     @IBAction func applicationBtnAction() {
         AnalyticsEventManager.track(type: .entryJob)
         // 応募フォームに遷移
-        self.pushViewController(.entryForm(transit
-            ionSource), model: _mdlJobDetail)
+        self.pushViewController(.entryForm(transitionSource), model: _mdlJobDetail)
     }
     
     var keepFlag:Bool!
