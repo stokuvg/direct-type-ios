@@ -79,7 +79,7 @@ class EntryVC: PreviewBaseVC {
             }
         }
         _entry?.hopeArea = _hopeArea
-        //===独自質問はjobCardDetailに含まれているので、MdlEntryに持たせておく
+        //===独自質問はjobCardDetailに含まれているので、MdlEntryにも持たせておく
         if let tmp = jobCard?.entryQuestion1 { _entry?.exQuestion1 = tmp }
         if let tmp = jobCard?.entryQuestion2 { _entry?.exQuestion2 = tmp }
         if let tmp = jobCard?.entryQuestion3 { _entry?.exQuestion3 = tmp }
@@ -91,12 +91,16 @@ class EntryVC: PreviewBaseVC {
         btnCommit.setTitle(text: "応募確認画面へ", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
         
-        AnalyticsEventManager.track(type: .toJobDetail, with: transitionSource.parameter)
+        //AnalyticsEventManager.track(type: .toJobDetail, with: transitionSource.parameter)
     }
     func initData(_ jobCard: MdlJobCardDetail) {
         title = "[C-9] 応募フォーム"
         self.jobCard = jobCard
         self.entry = MdlEntry()
+        //===独自質問はjobCardDetailに含まれているので、MdlEntryにも持たせておく
+        if let tmp = jobCard.entryQuestion1 { entry?.exQuestion1 = tmp }
+        if let tmp = jobCard.entryQuestion2 { entry?.exQuestion2 = tmp }
+        if let tmp = jobCard.entryQuestion3 { entry?.exQuestion3 = tmp }
     }
     override func dispData() {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
