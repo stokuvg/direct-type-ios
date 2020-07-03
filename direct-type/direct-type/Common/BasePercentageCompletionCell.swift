@@ -12,7 +12,7 @@ protocol BasePercentageCompletionCellDelegate: class {
     func completionEditAction(sender: BaseTableViewCell)
 }
 
-final class BasePercentageCompletionCell: BaseTableViewCell {
+class BasePercentageCompletionCell: BaseTableViewCell {
     @IBOutlet private weak var stackView:UIStackView!
     @IBOutlet private weak var titleLabel:UILabel!
     @IBOutlet private weak var percentLabel:UILabel!
