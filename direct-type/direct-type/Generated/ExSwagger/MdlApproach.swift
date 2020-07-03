@@ -12,18 +12,14 @@ import TudApi
 /** アプローチ設定 */
 class MdlApproach: Codable {
     /** スカウト可否フラグ */
-    var isScoutEnable: Bool
+    var scoutEnable: Bool
     
-    init(isScoutEnable: Bool) {
-        self.isScoutEnable = isScoutEnable
+    init(scoutEnable: Bool) {
+        self.scoutEnable = scoutEnable
     }
 
     //ApiモデルをAppモデルに変換して保持させる
     convenience init(dto: GetSettingsResponseDTO) {
-        self.init(isScoutEnable: dto.scoutEnable)
-    }
-
-    var debugDisp: String {
-        return "[isScoutEnable: \(isScoutEnable)]"
+        self.init(scoutEnable: dto.scoutEnable)
     }
 }

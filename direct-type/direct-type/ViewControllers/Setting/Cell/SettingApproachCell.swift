@@ -22,10 +22,10 @@ class SettingApproachCell: BaseTableViewCell {
     }
     
     func configure(with data: MdlApproach) {
-        scoutLabel.isHidden = !data.isScoutEnable
+        scoutLabel.isHidden = !data.scoutEnable
         perLabel.isHidden = true
         recommendLabel.isHidden = true
-        notInUseApproachLabel.isHidden = data.isScoutEnable
+        notInUseApproachLabel.isHidden = data.scoutEnable
     }
 }
 

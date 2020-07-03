@@ -49,13 +49,16 @@ class SettingVC: TmpBasicVC {
         }
     }
     
-    private var approachSetting = MdlApproach(isScoutEnable: false)
+    private var approachSetting = MdlApproach(scoutEnable: false)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // TODO: サーバー側のAPI実装が完了した後に疎通実装を行う
-        // fetchData()
         setup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchData()
     }
 }
 
@@ -80,17 +83,17 @@ private extension SettingVC {
     func fetchData() {
         SVProgressHUD.show(withStatus: "設定情報の取得")
         ApiManager.getApproach(())
-            .done { result in
-                self.approachSetting = result
+        .done { result in
+            self.approachSetting = result
         }
-            .catch { (error) in
-                let myError: MyErrorDisp = AuthManager.convAnyError(error)
-                print("アプローチデータ取得エラー！　コード: \(myError.code)")
-                self.showError(myError)
+        .catch { (error) in
+            let myError: MyErrorDisp = AuthManager.convAnyError(error)
+            print("アプローチデータ取得エラー！　コード: \(myError.code)")
+            self.showError(myError)
         }
-            .finally {
-                self.tableView.reloadData()
-                SVProgressHUD.dismiss()
+        .finally {
+            self.tableView.reloadData()
+            SVProgressHUD.dismiss()
         }
     }
     

@@ -54,29 +54,29 @@ extension ApiManager {
 //        }
 //    }
 //}
-//extension ApiManager {
-//    class func updateApproach(_ param: UpdateApproachRequestDTO, isRetry: Bool = true) -> Promise<Void> {
-//        if isRetry {
-//            return firstly { () -> Promise<Void> in
-//                retry(args: param, task: updateApproachFetch) { (error) -> Bool in return true }
-//            }
-//        } else {
-//            return updateApproachFetch(param: param)
-//        }
-//    }
-//    private class func updateApproachFetch(param: UpdateApproachRequestDTO) -> Promise<Void> {
-//        let (promise, resolver) = Promise<Void>.pending()
-//        AuthManager.needAuth(true)
-//        ProfileAPI.profileControllerUpdate(body: param)
-//        .done { result in
-//            resolver.fulfill(Void())
-//        }
-//        .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
-//            resolver.reject(error)
-//        }
-//        .finally {
-//        }
-//        return promise
-//    }
-//}
+extension ApiManager {
+    class func updateApproach(_ param: UpdateSettingsRequestDTO, isRetry: Bool = true) -> Promise<Void> {
+        if isRetry {
+            return firstly { () -> Promise<Void> in
+                retry(args: param, task: updateApproachFetch) { (error) -> Bool in return true }
+            }
+        } else {
+            return updateApproachFetch(param: param)
+        }
+    }
+    private class func updateApproachFetch(param: UpdateSettingsRequestDTO) -> Promise<Void> {
+        let (promise, resolver) = Promise<Void>.pending()
+        AuthManager.needAuth(true)
+        SettingsAPI.settingsControllerUpdate(body: param)
+        .done { result in
+            resolver.fulfill(Void())
+        }
+        .catch { (error) in
+            resolver.reject(error)
+        }
+        .finally {
+        }
+        return promise
+    }
+}
 //================================================================
