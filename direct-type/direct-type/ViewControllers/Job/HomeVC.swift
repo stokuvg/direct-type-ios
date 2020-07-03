@@ -100,7 +100,7 @@ class HomeVC: TmpNaviTopVC {
             case 4: pushViewController(.smoothCareerPreviewF11)
             case 5: pushViewController(.firstInputPreviewA)
             case 6: pushViewController(.careerListC)
-            case 7: pushViewController(.entryForm)
+            case 7: pushViewController(.entryForm(.fromHome))
             default: break
             }
         }
