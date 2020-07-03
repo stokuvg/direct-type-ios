@@ -28,6 +28,7 @@ class HEditZipcodeTBCell: UITableViewCell {
         self.item = item
         tfValueZip3.clearButtonMode = .always //クリアボタンの表示制御
         tfValueZip4.clearButtonMode = .always //クリアボタンの表示制御
+        //vwRequiredIconArea.isHidden = !item.editItem.valid.required //必須アイコンの表示制御
     }
     
     func dispCell() {

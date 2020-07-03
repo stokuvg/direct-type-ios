@@ -14,6 +14,7 @@ class HPreviewTBCell: UITableViewCell {
     var editTempCD: [EditableItemKey: EditableItemCurVal] = [:]
     
     @IBOutlet weak var vwMainArea: UIView!
+    @IBOutlet weak var vwRequiredIconArea: UIView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblValue: ExItemLabel!
     @IBOutlet weak var lblNotice: UILabel!
@@ -39,6 +40,14 @@ class HPreviewTBCell: UITableViewCell {
             self.accessoryType = .none // .disclosureIndicator 遷移マーク不要
             self.lblValue.isReadonly = false
         }
+        //必須アイコンの表示制御（子項目に1つでも必須があれば、そのグループは必須）
+        var isRequired: Bool = false
+        for childItem in item.childItems {
+            if childItem.editItem.valid.required == true {
+                isRequired = true
+            }
+        }
+        vwRequiredIconArea.isHidden = !isRequired //必須アイコンの表示制御
     }
     
     func dispCell() {

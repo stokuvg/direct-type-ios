@@ -15,6 +15,7 @@ class HEditTextTBCell: UITableViewCell {
     var returnKeyType: UIReturnKeyType = .next
     
     @IBOutlet weak var vwMainArea: UIView!
+    @IBOutlet weak var vwRequiredIconArea: UIView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var tfValue: IKTextField!
     @IBOutlet weak var lblDebug: UILabel!
@@ -43,6 +44,7 @@ class HEditTextTBCell: UITableViewCell {
         default:
             tfValue.clearButtonMode = .never
         }
+        vwRequiredIconArea.isHidden = !item.editItem.valid.required //必須アイコンの表示制御
         //===ソフトウェアキーボードに〔閉じる〕ボタン付与
         let rect = CGRect(origin: CGPoint.zero, size: CGSize.init(width: 60, height: 45))
         let toolbar = UIToolbar(frame: rect)//Autolayout補正かかるけど、そこそこの横幅指定が必要
