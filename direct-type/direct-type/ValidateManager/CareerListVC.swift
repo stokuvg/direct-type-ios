@@ -20,14 +20,14 @@ class CareerListVC: TmpBasicVC {
     @IBOutlet weak var btnAddCard: UIButton!
     @IBAction func actAddCard(_ sender: UIButton) {
         let newCard = MdlCareerCard()
-        newCard.companyName = "ダミー企業名"
-        newCard.employeesCount = "\(arc4random_uniform(999))"
-        newCard.employmentType = "\(arc4random_uniform(6))"
-        newCard.salary = "\(arc4random_uniform(6) + 6)"
-        newCard.workPeriod = MdlCareerCardWorkPeriod(
-            startDate: Constants.SelectItemsUndefineDate,
-            endDate: Constants.SelectItemsUndefineDate)
-        newCard.contents = String(repeating: "テキスト", count: Int(arc4random_uniform(100)))
+//        newCard.companyName = "ダミー企業名"
+//        newCard.employeesCount = "\(arc4random_uniform(999))"
+//        newCard.employmentType = "\(arc4random_uniform(6))"
+//        newCard.salary = "\(arc4random_uniform(6) + 6)"
+//        newCard.workPeriod = MdlCareerCardWorkPeriod(
+//            startDate: Constants.SelectItemsUndefineDate,
+//            endDate: Constants.SelectItemsUndefineDate)
+//        newCard.contents = String(repeating: "テキスト", count: Int(arc4random_uniform(100)))
         self.arrDisp.append(newCard)
         let storyboard = UIStoryboard(name: "Preview", bundle: nil)
         if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_CareerPreviewVC") as? CareerPreviewVC{
@@ -43,18 +43,13 @@ class CareerListVC: TmpBasicVC {
         btnAddCard.setTitle(text: "追加する", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnAddCard.backgroundColor = UIColor.init(colorType: .color_button)
         self.tableVW.backgroundColor = UIColor.init(colorType: .color_base)
-
         //=== テーブル初期化
         self.tableVW.estimatedRowHeight = 100
         self.tableVW.rowHeight = UITableView.automaticDimension
         self.tableVW.register(UINib(nibName: "CareerCardTBCell", bundle: nil), forCellReuseIdentifier: "Cell_CareerCardTBCell")
-        initData()
-        chkButtonEnable()//ボタン死活チェック
-    }
-    func initData() {
     }
     func dispData() {
-        title = "職歴書カード一覧"
+        title = "職務経歴書情報入力"
         //表示用にソートしておく
         arrDisp.removeAll()
         for item in arrData.sorted(by: { (lv, rv) -> Bool in
@@ -64,14 +59,13 @@ class CareerListVC: TmpBasicVC {
         }) {
             arrDisp.append(item)
         }
-        tableVW.reloadData()
-        chkButtonEnable()
-        
+        DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+            self.tableVW.reloadData()
+            self.chkButtonEnable()
+        })
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        dispData()
-        chkButtonEnable()//ボタン死活チェック
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -159,8 +153,8 @@ extension CareerListVC {
             self.showError(error)
         }
         .finally {
-            self.dispData()
             SVProgressHUD.dismiss()
+            self.dispData()
         }
     }
 }
