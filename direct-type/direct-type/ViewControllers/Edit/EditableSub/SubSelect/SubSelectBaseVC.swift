@@ -57,6 +57,7 @@ class SubSelectBaseVC: BaseVC {
         vwHead.backgroundColor = UIColor(colorType: .color_main)!
         vwMain.backgroundColor = UIColor(colorType: .color_base)!
         vwFoot.backgroundColor = UIColor(colorType: .color_base)!
+        tableVW.backgroundColor = UIColor(colorType: .color_base)!
         btnCommit.setTitle(text: "選択", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
     }

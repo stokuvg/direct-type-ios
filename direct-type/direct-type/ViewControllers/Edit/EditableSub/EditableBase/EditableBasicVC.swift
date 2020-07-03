@@ -121,7 +121,7 @@ extension EditableBasicVC: InputItemHDelegate {
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSingleVC") as? SubSelectSingleVC{
                     nvc.initData(self, editableItem: item, selectingCodes: editTemp.curVal)
                     //遷移アニメーション関連
-                    nvc.modalTransitionStyle = .crossDissolve
+                    nvc.modalTransitionStyle = .coverVertical//.crossDissolve
                     self.present(nvc, animated: true) {}
                 }
             })
@@ -133,7 +133,7 @@ extension EditableBasicVC: InputItemHDelegate {
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectMultiVC") as? SubSelectMultiVC{
                     nvc.initData(self, editableItem: item, selectingCodes: editTemp.curVal)
                     //遷移アニメーション関連
-                    nvc.modalTransitionStyle = .crossDissolve
+                    nvc.modalTransitionStyle = .coverVertical//.crossDissolve
                     self.present(nvc, animated: true) {}
                 }
             })
@@ -145,7 +145,7 @@ extension EditableBasicVC: InputItemHDelegate {
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSpecialVC") as? SubSelectSpecialVC{
                     nvc.initData(self, editableItem: item, selectingCodes: "") // jobType | skill
                     //遷移アニメーション関連
-                    nvc.modalTransitionStyle = .crossDissolve
+                    nvc.modalTransitionStyle = .coverVertical//.crossDissolve
                     self.present(nvc, animated: true) {}
                 }
             })
@@ -157,7 +157,7 @@ extension EditableBasicVC: InputItemHDelegate {
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubInputMemoVC") as? SubInputMemoVC{
                     nvc.initData(self, editableItem: item)
                     //遷移アニメーション関連
-                    nvc.modalTransitionStyle = .crossDissolve
+                    nvc.modalTransitionStyle = .coverVertical//.crossDissolve
                     self.present(nvc, animated: true) {}
                 }
             })

@@ -25,17 +25,6 @@ class ResumePreviewVC: PreviewBaseVC {
     //共通プレビューをOverrideして利用する
     override func initData() {
         title = "履歴書"
-        
-        //===[Dbg: ダミーデータ投入]___
-//        self.editableModel.editTempCD[EditItemMdlResume.employmentStatus.itemKey] = "1"
-        self.editableModel.editTempCD[EditItemMdlResume.changeCount.itemKey] = "5"
-//        self.editableModel.editTempCD[EditItemMdlResumeLastJobExperiment.jobTypeAndJobExperimentYear.itemKey] = "1:2"
-//        self.editableModel.editTempCD[EditItemMdlResume.jobExperiments.itemKey] = "130:7_5:3_3:2"
-//        self.editableModel.editTempCD[EditItemMdlResume.businessTypes.itemKey] = "19_31_33"
-//        self.editableModel.editTempCD[EditItemMdlResumeSchool.schoolName.itemKey] = "学校名ダミ"
-//        self.editableModel.editTempCD[EditItemMdlResumeSchool.department.itemKey] = "法学部"
-//        self.editableModel.editTempCD[EditItemMdlResumeSchool.graduationYear.itemKey] = "2014-09"
-        //===[Dbg: ダミーデータ投入]^^^
     }
     override func dispData() {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
