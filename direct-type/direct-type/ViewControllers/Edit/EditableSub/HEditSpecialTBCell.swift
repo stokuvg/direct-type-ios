@@ -28,6 +28,11 @@ class HEditSpecialTBCell: UITableViewCell {
         backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
         vwMainArea.backgroundColor = UIColor(colorType: .color_base)
         tfValue.textColor = UIColor(colorType: .color_black)
+        tfValue.tintColor = UIColor(colorType: .color_black)
+        tfValue.backgroundColor = UIColor(colorType: .color_white)
+        tfValue.borderColor = UIColor(colorType: .color_line)
+        tfValue.cornerRadius = 8
+        tfValue.borderWidth = 1
     }
 
     func initCell(_ delegate: InputItemHDelegate, _ item: EditableItemH, _ item2: EditableItemH?,  errMsg: String, _ returnKeyType: UIReturnKeyType) {
