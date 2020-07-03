@@ -23,7 +23,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="nzN-Eq-vcd">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="107.5"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ZE-Z1-BR2">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ZE-Z1-BR2" userLabel="必須アイコンエリア">
                                         <rect key="frame" x="0.0" y="0.0" width="30" height="107.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="required" translatesAutoresizingMaskIntoConstraints="NO" id="b6T-Mq-pWp">
@@ -34,7 +34,7 @@
                                                 </constraints>
                                             </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="b6T-Mq-pWp" firstAttribute="leading" secondItem="1ZE-Z1-BR2" secondAttribute="leading" constant="8" id="8pl-N4-Uy1"/>
                                             <constraint firstAttribute="trailing" secondItem="b6T-Mq-pWp" secondAttribute="trailing" constant="-4" id="Dmi-2x-feL"/>

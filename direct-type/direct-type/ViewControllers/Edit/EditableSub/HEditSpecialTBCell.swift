@@ -16,6 +16,7 @@ class HEditSpecialTBCell: UITableViewCell {
     var returnKeyType: UIReturnKeyType = .next
     
     @IBOutlet weak var vwMainArea: UIView!
+    @IBOutlet weak var vwRequiredIconArea: UIView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var tfValue: IKTextField!
     @IBOutlet weak var lblDebug: UILabel!
@@ -39,6 +40,7 @@ class HEditSpecialTBCell: UITableViewCell {
         tfValue.returnKeyType = returnKeyType
         tfValue.placeholder = item.placeholder
         tfValue.clearButtonMode = .never //クリアボタンの表示制御
+        vwRequiredIconArea.isHidden = !item.editItem.valid.required //必須アイコンの表示制御
     }
     
     func dispCell() {

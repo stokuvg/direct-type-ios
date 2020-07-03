@@ -378,7 +378,7 @@ extension MyPageVC {
     private func fetchGetCareerList() {
         ApiManager.getCareer(Void(), isRetry: true)
         .done { result in
-//!!!self.career = result
+            self.career = result
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)

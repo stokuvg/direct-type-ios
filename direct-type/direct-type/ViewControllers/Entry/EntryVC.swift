@@ -91,7 +91,7 @@ class EntryVC: PreviewBaseVC {
         btnCommit.setTitle(text: "応募確認画面へ", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
         
-        //AnalyticsEventManager.track(type: .toJobDetail, with: transitionSource.parameter)
+        AnalyticsEventManager.track(type: .toJobDetail, with: transitionSource.parameter)
     }
     func initData(_ jobCard: MdlJobCardDetail) {
         title = "[C-9] 応募フォーム"
@@ -130,17 +130,17 @@ class EntryVC: PreviewBaseVC {
         
         //===１２．独自質問（必須）
         var exQA: [MdlItemH] = []
-        if let exQuestion = entry?.exQuestion1 {
+        if let exQuestion = entry?.exQuestion1, !exQuestion.isEmpty {
             exQA.append(MdlItemH(.exQAItem1C9, exQuestion, childItems: [
                 EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer1, val: entry?.exAnswer1 ?? ""),
             ], model: career))
         }
-        if let exQuestion = entry?.exQuestion2 {
+        if let exQuestion = entry?.exQuestion2, !exQuestion.isEmpty {
             exQA.append(MdlItemH(.exQAItem2C9, exQuestion, childItems: [
                 EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer2, val: entry?.exAnswer2 ?? ""),
             ], model: career))
         }
-        if let exQuestion = entry?.exQuestion3 {
+        if let exQuestion = entry?.exQuestion3, !exQuestion.isEmpty {
             exQA.append(MdlItemH(.exQAItem3C9, exQuestion, childItems: [
                 EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer3, val: entry?.exAnswer3 ?? ""),
             ], model: career))

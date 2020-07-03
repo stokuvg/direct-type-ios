@@ -60,7 +60,9 @@ extension WebAPIEntryUserDto {
         self.userOldJob3List = _userOldJob3List
         /** 経験業種(userOldIndustry)を参照 */
         var _userOldIndustryList: [UserOldIndustry] = []
-        _userOldIndustryList.append(UserOldIndustry(industryId: "1"))//!!![Dummy]
+        for item in resume.businessTypes {
+            _userOldIndustryList.append(UserOldIndustry(industryId: item))
+        }
         self.userOldIndustryList = _userOldIndustryList
         self.toeic = resume.skillLanguage.languageToeicScore
         self.toefl = resume.skillLanguage.languageToeflScore
@@ -70,7 +72,7 @@ extension WebAPIEntryUserDto {
 //        self.license = "tmp"
         self.jobId = jobCardCode
         /** 職務経歴書(experienceCompany)を参照 */
-        var _experienceCompanyList: [ExperienceCompany] = []//!!!
+        var _experienceCompanyList: [ExperienceCompany] = []
         for item in career.businessTypes {
             let expCompany = ExperienceCompany(company: item.companyName, startworkY: item.workPeriod.startDate.dispYear(), startworkM: item.workPeriod.startDate.dispMonth(), endworkY: item.workPeriod.endDate.dispYear(), endworkM: item.workPeriod.endDate.dispMonth(), employees: item.employeesCount, employmentId: item.employmentType, salary: item.salary, workNote: item.contents)
             _experienceCompanyList.append(expCompany)
@@ -91,9 +93,7 @@ extension WebAPIEntryUserDto {
             for code in tmp.split(separator: EditItemTool.SplitMultiCodeSeparator) {
                 _entryPlaceList.append(EntryPlace(placeId: String(code)))
             }
-        }
-        _entryPlaceList.append(EntryPlace(placeId: "33"))//!!!
-        
+        }        
         self.entryPlaceList = _entryPlaceList
         if let tmp = editTempCD[EditItemMdlEntry.hopeSalary.itemKey] {
             self.salaryId = tmp
