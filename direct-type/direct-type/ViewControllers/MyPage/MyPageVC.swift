@@ -334,10 +334,8 @@ extension MyPageVC {
         }
     }
     
-    //TODO: APIの呼び出し方NG。ApiManager.getChemistryを作成して実施（これだと認証管理やリトライ管理ができてない）
     func fetchGetChemistryData() {
-        //SVProgressHUD.show(withStatus: "データ取得中")
-        ChemistryAPI.chemistryControllerGet()
+        ApiManager.getChemistry(Void(), isRetry: true)
         .done { result -> Void in
             var firstRanker: ChemistryPersonalityType! = nil
             var secondRanker: ChemistryPersonalityType? = nil
