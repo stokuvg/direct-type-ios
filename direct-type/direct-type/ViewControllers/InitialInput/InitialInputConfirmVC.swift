@@ -100,10 +100,10 @@ private extension InitialInputConfirmVC {
     
     @objc
     func changeButtonState() {
+        guard let inputText = authCodeTextField.text else { return }
+        authCodeTextField.text = inputText.prefix(confirmCodeMaxLength).description
         nextButton.backgroundColor = UIColor(colorType: isValidInputText ? .color_sub : .color_line)
         nextButton.isEnabled = isValidInputText
-        guard let inputText = authCodeTextField.text, isValidInputText else { return }
-        authCodeTextField.text = inputText.prefix(confirmCodeMaxLength).description
     }
     
     func resendAuthCode() {

@@ -144,10 +144,10 @@ private extension InitialInputRegistVC {
     
     @objc
     func changeButtonState() {
+        guard let inputText = phoneNumberTextField.text else { return }
+        phoneNumberTextField.text = inputText.prefix(phoneNumberMaxLength).description
         nextButton.backgroundColor = UIColor(colorType: isValidInputText ? .color_sub : .color_line)
         nextButton.isEnabled = isValidInputText
-        guard let inputText = phoneNumberTextField.text, isValidInputText else { return }
-        phoneNumberTextField.text = inputText.prefix(phoneNumberMaxLength).description
     }
 }
 
