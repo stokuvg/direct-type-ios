@@ -90,7 +90,6 @@ private extension LoginConfirmVC {
     func transitionToBaseTab() {
         let tabSB = UIStoryboard(name: "BaseTabBC", bundle: nil)
         let tabBC = tabSB.instantiateViewController(withIdentifier: "Sbid_BaseTabBC")
-        let newNavigationController = UINavigationController(rootViewController: tabBC)
         
         let ud = UserDefaults.standard
         ud.set(false, forKey: "home")

@@ -90,12 +90,27 @@ extension HPreviewTBCell {
         case .emailH2:
             if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
             return _item.childItems[0].curVal
+        case .hopeAreaH2:
+            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
+            let tmp0: String = _item.childItems[0].curVal
+            var arr0: [String] = []
+            for code in tmp0.split(separator: "_").sorted() { //コード順ソートしておく
+                let buf: String = SelectItemsManager.getCodeDisp(.entryPlace, code: String(code))?.disp ?? ""
+                arr0.append(buf)
+            }
+            let buf0: String = arr0.joined(separator: " / ")
+            return buf0.isEmpty ? Constants.SelectItemsValEmpty.disp : "\(buf0)"
         //========================
         //=== [H-3]履歴書編集
         case .employmentH3:           //===(3a)就業状況
             if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
             let buf0: String = SelectItemsManager.getCodeDisp(.employmentStatus, code: tmp0)?.disp ?? ""
+            return buf0.isEmpty ? Constants.SelectItemsUndefine.disp : "\(buf0)"
+        case .currentSalaryH3:        //===現在の年収
+            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
+            let tmp0: String = _item.childItems[0].curVal
+            let buf0: String = SelectItemsManager.getCodeDisp(.salarySelect, code: tmp0)?.disp ?? ""
             return buf0.isEmpty ? Constants.SelectItemsUndefine.disp : "\(buf0)"
         case .changeCountH3:          //===(3b)転職回数
             if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
@@ -146,7 +161,7 @@ extension HPreviewTBCell {
             tmp1 = (tmp1 == "0" ? "" : tmp1)
             let buf0: String = tmp0.isEmpty ? "--" : "\(tmp0)点"
             let buf1: String = tmp1.isEmpty ? "--" : "\(tmp1)点"
-            let bufToeicToefl: String = "TOEIC：\(buf0)、 / TOEFL：\(buf1)"
+            let bufToeicToefl: String = "TOEIC：\(buf0) / TOEFL：\(buf1)"
             let tmp2: String = _item.childItems[2].curVal
             let buf2: String = SelectItemsManager.getCodeDisp(.skillEnglish, code: tmp2)?.disp ?? ""
             let buf3: String = _item.childItems[3].curVal
@@ -274,7 +289,7 @@ extension HPreviewTBCell {
             let buf0: String = SelectItemsManager.getCodeDisp(.employmentStatus, code: tmp0)?.disp ?? ""
             return "\(buf0)"
         //case .lastJobExperimentA11   //=== [A-11] 入力（直近経験職種）[A-12] 入力（直近の職種の経験年数）
-        case .salaryA13:              //=== [A-13] 入力（現在の年収）
+        case .currentSalaryA13:              //=== [A-13] 入力（現在の年収）
             if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
             let buf0: String = SelectItemsManager.getCodeDisp(.salarySelect, code: tmp0)?.disp ?? ""

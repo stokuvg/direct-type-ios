@@ -100,7 +100,7 @@ class HomeVC: TmpNaviTopVC {
             case 4: pushViewController(.smoothCareerPreviewF11)
             case 5: pushViewController(.firstInputPreviewA)
             case 6: pushViewController(.careerListC)
-            case 7: pushViewController(.entryForm)
+            case 7: pushViewController(.entryForm(.fromHome))
             default: break
             }
         }
@@ -285,7 +285,7 @@ class HomeVC: TmpNaviTopVC {
         ud.synchronize()
     }
 
-    #if false
+    #if true
     private func makeDummyData() {
 
         let mdlData1:MdlJobCard = MdlJobCard.init(jobCardCode: "1000000",

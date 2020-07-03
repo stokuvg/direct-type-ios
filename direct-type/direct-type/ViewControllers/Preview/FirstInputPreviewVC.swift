@@ -80,7 +80,7 @@ final class FirstInputPreviewVC: PreviewBaseVC {
             EditableItemH(type: .selectSpecialYear, editItem: EditItemMdlFirstInputLastJobExperiments.jobTypeAndJobExperimentYear, val: bufLastJobExperimentTypeAndYear),
         ]))
         //=== [A-13] 入力（現在の年収）
-        arrData.append(MdlItemH(.salaryA13, "", childItems: [
+        arrData.append(MdlItemH(.currentSalaryA13, "", childItems: [
             EditableItemH(type: .selectSingle, editItem: EditItemMdlFirstInput.salary, val: _detail.salary),
         ]))
         //=== [A-14] 入力（追加経験職種）

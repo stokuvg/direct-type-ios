@@ -69,8 +69,8 @@ class SubSelectBaseVC: BaseVC {
         }
         //=== 選択数の最大数を項目定義に応じて設定する
         switch editableItem.editableItemKey {
-        case EditItemMdlFirstInput.hopeArea.itemKey:
-            selectMaxCount = 5
+        case EditItemMdlFirstInput.hopeArea.itemKey: fallthrough
+        case EditItemMdlProfile.hopeJobArea.itemKey: fallthrough
         case EditItemMdlEntry.hopeArea.itemKey:
             selectMaxCount = 5
         case EditItemMdlResume.qualifications.itemKey:

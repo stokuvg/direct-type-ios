@@ -55,7 +55,7 @@ class TagsView: UIView {
         let areaWidth = frame.size.width
 //        let areaHeight = frame.size.height
         
-        let tagMargin: CGFloat = 4
+        let tagMargin: CGFloat = 2
         
         var tagFont:UIFont!
         tagFont = UIFont.init(fontType: .font_SS)
@@ -96,7 +96,7 @@ class TagsView: UIView {
 //                Log.selectLog(logLevel: .debug, "tagOriginY:\(tagOriginY)")
 //                Log.selectLog(logLevel: .debug, "frame:\(frame)")
                 
-                if tagOriginY >= frame.size.height {
+                if tagOriginY >= (frame.size.height - tagHeight) {
                     addEndFlag = true
                 }
             }

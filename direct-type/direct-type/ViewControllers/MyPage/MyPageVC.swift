@@ -28,12 +28,12 @@ final class MyPageVC: TmpNaviTopVC {
     private var isExistsChemistry: Bool {
         return topRanker != nil
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchGetEntryAll()
@@ -57,7 +57,7 @@ private extension MyPageVC {
         pageTableView.registerNib(nibName: "MyPageEditedChemistryCell", idName: "MyPageEditedChemistryCell")
         pageTableView.registerNib(nibName: "MyPageSettingCell", idName: "MyPageSettingCell") // 設定
     }
-    
+
     func transitionToChemistry() {
         var vc = UIViewController()
         vc = UIStoryboard(name: "ChemistryStart", bundle: nil).instantiateInitialViewController() as! ChemistryStart
@@ -69,7 +69,7 @@ private extension MyPageVC {
         navigationController?.pushViewController(vc, animated: true)
         hidesBottomBarWhenPushed = false
     }
-    
+
     func transitionToSetting() {
         let vc = getVC(sbName: "SettingVC", vcName: "SettingVC") as! SettingVC
         navigationController?.pushViewController(vc, animated: true)
@@ -87,7 +87,7 @@ extension MyPageVC: UITableViewDelegate {
     var sectionHeaderHeight: CGFloat { return 15 }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         let sectionType = SectionType(rawValue: section)!
-        
+
         switch sectionType {
         case .resume:
             return sectionHeaderHeight
@@ -110,7 +110,7 @@ extension MyPageVC: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         let sectionType = SectionType(rawValue: section)!
-        
+
         switch sectionType {
         case .chemistry, .setting:
             return sectionFooterHeight
@@ -121,7 +121,7 @@ extension MyPageVC: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let cellType = CellType(indexPath)
-        
+
         switch cellType {
         case .userName:
             return 126
@@ -140,7 +140,7 @@ extension MyPageVC: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cellType = CellType(indexPath)
-        
+
         switch cellType {
         case .profileCompleteness:
             pushViewController(.profilePreviewH2, model: profile)
@@ -164,7 +164,7 @@ extension MyPageVC: UITableViewDataSource {
         case resume
         case chemistry
         case setting
-        
+
         var cellCount: Int {
             switch self {
             case .top:
@@ -178,7 +178,7 @@ extension MyPageVC: UITableViewDataSource {
             }
         }
     }
-    
+
     enum CellType {
         case userName
         case profileCompleteness
@@ -187,7 +187,7 @@ extension MyPageVC: UITableViewDataSource {
         case editableChemistry
         case setting
         case unknown
-        
+
         init(_ indexPath: IndexPath) {
             let sectionType = SectionType(rawValue: indexPath.section)!
             switch sectionType {
@@ -223,7 +223,7 @@ extension MyPageVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = UITableViewCell()
         let cellType = CellType(indexPath)
-        
+
         switch cellType {
         case .userName:
             cell =  tableView.loadCell(cellName: "MyPageNameCell", indexPath: indexPath) as! MyPageNameCell
@@ -289,7 +289,7 @@ extension MyPageVC {
     func fetchGetEntryAll() {
         fetchGetProfile()//ここから多段で実施してる
     }
-    
+
     func fetchGetProfile() {
         SVProgressHUD.show(withStatus: "情報の取得")
         ApiManager.getProfile(Void(), isRetry: true)
@@ -304,7 +304,7 @@ extension MyPageVC {
             self.fetchGetResume()
         }
     }
-    
+
     func fetchGetResume() {
         ApiManager.getResume(Void(), isRetry: true)
         .done { result in
@@ -318,7 +318,7 @@ extension MyPageVC {
             self.fetchGetCareerList()
         }
     }
-    
+
     func fetchGetCareerList() {
         ApiManager.getCareer(Void(), isRetry: true)
         .done { result in
@@ -333,7 +333,7 @@ extension MyPageVC {
             self.fetchGetChemistryData()//別途、読んでおく
         }
     }
-    
+
     func fetchGetChemistryData() {
         ApiManager.getChemistry(Void(), isRetry: true)
         .done { result -> Void in

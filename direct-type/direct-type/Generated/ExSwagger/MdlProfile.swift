@@ -75,7 +75,7 @@ class MdlProfile: Codable {
         }
         self.init(
             nickname: dto.nickname ?? "",
-            hopeJobPlaceIds: [],
+            hopeJobPlaceIds:_hopeJobPlaceIds,
             familyName: dto.familyName ?? "",
             firstName: dto.firstName ?? "",
             familyNameKana: dto.familyNameKana ?? "",
@@ -94,7 +94,7 @@ class MdlProfile: Codable {
     var debugDisp: String {
         let _gender = SelectItemsManager.getCodeDisp(.gender, code: gender)?.debugDisp ?? ""
         let _prefecture = SelectItemsManager.getCodeDisp(.place, code: prefecture)?.debugDisp ?? ""
-       return "[\(familyName) \(firstName)（\(familyNameKana) \(firstNameKana)）] [\(_gender)] [\(zipCode)] [\(_prefecture)] [\(address1)] [\(address2)] [\(mailAddress)] [\(mobilePhoneNo)]"
+       return "[\(familyName) \(firstName)（\(familyNameKana) \(firstNameKana)）] [\(_gender)] [\(zipCode)] [\(_prefecture)] [\(address1)] [\(address2)] [\(mailAddress)] [\(hopeJobPlaceIds)] [\(mobilePhoneNo)]"
     }
 }
 
@@ -111,6 +111,7 @@ enum EditItemMdlProfile: String, EditItemProtocol {
     case address1
     case address2
     case mailAddress
+    case hopeJobArea
     case mobilePhoneNo
     //表示名
     var dispName: String {
@@ -126,6 +127,7 @@ enum EditItemMdlProfile: String, EditItemProtocol {
         case .address1:         return "市区町村"
         case .address2:         return "丁目・番地・建物名など"
         case .mailAddress:      return "メールアドレス"
+        case .hopeJobArea:      return "希望勤務地"
         case .mobilePhoneNo:    return "帯電話番号（変更不可：認証アカウントと同一）"
         }
     }
@@ -133,6 +135,7 @@ enum EditItemMdlProfile: String, EditItemProtocol {
         switch self {
         case .gender: return .gender
         case .prefecture: return .place
+        case .hopeJobArea: return .entryPlace
         default: return .undefine
         }
     }

@@ -50,7 +50,7 @@ class ResumePreviewVC: PreviewBaseVC {
             EditableItemH(type: .selectSingle, editItem: EditItemMdlResume.employmentStatus, val: _detail.employmentStatus),
         ]))
         //===(XX)現在の年収
-        arrData.append(MdlItemH(.changeCountH3, "", childItems: [
+        arrData.append(MdlItemH(.currentSalaryH3, "", childItems: [
             EditableItemH(type: .selectSingle, editItem: EditItemMdlResume.currentSalary, val: _detail.currentSalary),
         ]))
         //===(3b)転職回数

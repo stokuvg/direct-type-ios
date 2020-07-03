@@ -11,11 +11,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="JobDetailItemAttentionView" customModule="direct_type" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6yb-hY-LnH">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nba-KM-G1W">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="25"/>
@@ -70,10 +70,10 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pul-cB-G8g">
-                            <rect key="frame" x="0.0" y="75" width="320" height="25"/>
+                            <rect key="frame" x="0.0" y="75" width="320" height="15"/>
                             <color key="backgroundColor" name="color-white"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="25" id="z4f-ft-af0"/>
+                                <constraint firstAttribute="height" constant="15" id="z4f-ft-af0"/>
                             </constraints>
                         </view>
                     </subviews>

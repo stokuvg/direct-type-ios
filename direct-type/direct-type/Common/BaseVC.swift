@@ -118,26 +118,30 @@ class BaseVC: UIViewController {
         
         let dateAttributes: [NSAttributedString.Key : Any] = [
             .foregroundColor : UIColor.init(colorType: .color_white) as Any,
-            .font : UIFont.init(fontType: .C_font_Sb) as Any
+            .font : UIFont.init(fontType: .C_font_SSb) as Any
         ]
-        let dateString = NSAttributedString(string: date, attributes: dateAttributes)
+        let parentDate = "(" + date + ")"
+        let dateString = NSAttributedString(string: parentDate, attributes: dateAttributes)
         
         let paragraphAttributes: [NSAttributedString.Key : Any] = [
             .foregroundColor : UIColor.init(colorType: .color_white) as Any,
             .font : UIFont.init(name: "HiraginoSans-W3", size: 6.0) as Any
         ]
-        let paragraphString = NSAttributedString(string: "\n\n", attributes: paragraphAttributes)
+//        let paragraphString = NSAttributedString(string: "\n\n", attributes: paragraphAttributes)
+        let paragraphString = NSAttributedString(string: " ", attributes: paragraphAttributes)
         
         let titleAttributes: [NSAttributedString.Key : Any] = [
             .foregroundColor : UIColor.init(colorType: .color_white) as Any,
-            .font : UIFont.init(fontType: .C_font_L) as Any
+            .font : UIFont.init(fontType: .C_font_M) as Any
         ]
         let titleString = NSAttributedString(string: title, attributes: titleAttributes)
         let mutableString = NSMutableAttributedString()
         
-        mutableString.append(dateString)
-        mutableString.append(paragraphString)
+//        mutableString.append(dateString)
+//        mutableString.append(paragraphString)
         mutableString.append(titleString)
+        mutableString.append(paragraphString)
+        mutableString.append(dateString)
         
         let naviX:CGFloat = 25
         let naviY:CGFloat = 0

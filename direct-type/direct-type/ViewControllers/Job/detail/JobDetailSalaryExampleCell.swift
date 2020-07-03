@@ -27,7 +27,7 @@ class JobDetailSalaryExampleCell: BaseTableViewCell {
     
     func setup(data:String) {
         examplesNameLabel.text(text: "給与例", fontType: .font_Sb, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
-        examplesItemLabel.text(text: data, fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        examplesItemLabel.text(text: data, fontType: .C_font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
     }
     
 }

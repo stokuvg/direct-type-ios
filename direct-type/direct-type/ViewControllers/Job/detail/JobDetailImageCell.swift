@@ -163,20 +163,22 @@ class JobDetailImageCell: BaseTableViewCell {
                     cnt = i % imageUrlStrings.count
                 }
                 let imageUrlString = imageUrlStrings[cnt]
-                if imageUrlString.count > 0 {
-                    let imageUrl = URL(string: imageUrlString)
-                    let scrollX:CGFloat = (margin + (viewWidth * CGFloat(i)))
+                if addImageScrollCheck() {
+                    if imageUrlString.count > 0 {
+                        let imageUrl = URL(string: imageUrlString)
+                        let scrollX:CGFloat = (margin + (viewWidth * CGFloat(i)))
 
-                    let imageView = UIImageView.init(frame: CGRect(x: scrollX, y: imageY, width: imageW, height: imageH))
-                    imageView.backgroundColor = UIColor.init(colorType: .color_white)
-                    imageView.contentMode = .scaleAspectFit
-                    imageView.af_setImage(withURL: imageUrl!)
-                    
-                    imageView.layer.cornerRadius = 15
-                    imageView.layer.masksToBounds = true
-                    imageView.clipsToBounds = true
-                    
-                    self.mainImagesScrollView.addSubview(imageView)
+                        let imageView = UIImageView.init(frame: CGRect(x: scrollX, y: imageY, width: imageW, height: imageH))
+                        imageView.backgroundColor = UIColor.init(colorType: .color_white)
+                        imageView.contentMode = .scaleAspectFit
+                        imageView.af_setImage(withURL: imageUrl!)
+                        
+                        imageView.layer.cornerRadius = 15
+                        imageView.layer.masksToBounds = true
+                        imageView.clipsToBounds = true
+                        
+                        self.mainImagesScrollView.addSubview(imageView)
+                    }
                 }
             }
             self.mainImagesScrollView.contentSize = CGSize(width: (CGFloat(imageUrlStrings.count) * viewWidth), height: viewHeight)

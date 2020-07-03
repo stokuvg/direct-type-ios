@@ -62,9 +62,11 @@ enum HPreviewItemType: String {
     case genderH2    //===５．性別（必須）
     case adderssH2        //===６．住所
     case emailH2          //===７．メールアドレス
+    case hopeAreaH2       //===希望勤務地
     case mobilephoneH2    //===８．携帯電話番号
     //=== [H-3]履歴書編集
     case employmentH3           //===(3a)就業状況
+    case currentSalaryH3        //===現在の年収
     case changeCountH3          //===(3b)転職回数
     case lastJobExperimentH3    //===(3c)直近の経験職種
     case jobExperimentsH3       //===(3d)その他の経験職種
@@ -96,7 +98,7 @@ enum HPreviewItemType: String {
     case schoolA10              //=== [A-10] 入力（最終学歴）
     case employmentStatusA21    //=== [A-21] 入力（就業状況）
     case lastJobExperimentA11   //=== [A-11] 入力（直近経験職種）[A-12] 入力（直近の職種の経験年数）
-    case salaryA13              //=== [A-13] 入力（現在の年収）
+    case currentSalaryA13              //=== [A-13] 入力（現在の年収）
     case jobExperimentsA14      //=== [A-14] 入力（追加経験職種）
 
     var dispTitle: String {
@@ -126,9 +128,11 @@ enum HPreviewItemType: String {
         case .genderH2:       return "性別"
         case .adderssH2:      return "住所"
         case .emailH2:        return "メールアドレス"
+        case .hopeAreaH2:     return "希望勤務地"
         case .mobilephoneH2:  return "アカウント（認証済み電話番号）"
         //=== [H-3]履歴書編集
         case .employmentH3:         return "就業状況"
+        case .currentSalaryH3:      return "現在の年収"
         case .changeCountH3:        return "転職回数"
         case .lastJobExperimentH3:  return "直近の経験職種"
         case .jobExperimentsH3:     return "その他の経験職種"
@@ -160,7 +164,7 @@ enum HPreviewItemType: String {
         case .schoolA10:            return "最終学歴"
         case .employmentStatusA21:  return "就業状況"
         case .lastJobExperimentA11: return "直近の経験職種"//& "直近の職種の経験年数"
-        case .salaryA13:            return "現在の年収"
+        case .currentSalaryA13:            return "現在の年収"
         case .jobExperimentsA14:    return "追加の経験職種"
         }
     }
