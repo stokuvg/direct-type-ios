@@ -17,30 +17,52 @@ class MdlProfile: Codable {
     var hopeJobPlaceIds: [Code] = []
     //===プロフィール更新
     /** 氏 */
-     var familyName: String = ""
+    var familyName: String = ""
     /** 名 */
-     var firstName: String = ""
+    var firstName: String = ""
     /** 氏（カナ） */
-     var familyNameKana: String = ""
+    var familyNameKana: String = ""
     /** 名（カナ） */
-     var firstNameKana: String = ""
-
+    var firstNameKana: String = ""
+    
     var birthday: Date = Constants.SelectItemsUndefineDate
     /** 性別 */
-     var gender: Code = ""
+    var gender: Code = ""
     /** 郵便番号 */
-     var zipCode: String = ""
+    var zipCode: String = ""
     /** 都道府県 */
-     var prefecture: Code = ""
+    var prefecture: Code = ""
     /** 市区町村 */
-     var address1: String = ""
+    var address1: String = ""
     /** 丁目・番地・建物名など */
-     var address2: String = ""
+    var address2: String = ""
     /** メールアドレス */
-     var mailAddress: String = ""
+    var mailAddress: String = ""
     /** 携帯電話番号（変更不可：認証アカウントと同一） */
-     var mobilePhoneNo: String = ""
-
+    var mobilePhoneNo: String = ""
+    /** プロフィール完成度(100=100%) */
+    var completeness: Int {
+        var result = 40 // MdlProfileが存在している時点で40%としている
+        
+        let existsNameValue = 20
+        let existsAddress = 20
+        let existsMail = 20
+        
+        if !familyName.isEmpty && !firstName.isEmpty && !familyNameKana.isEmpty && !firstNameKana.isEmpty {
+            result += existsNameValue
+        }
+        
+        if !zipCode.isEmpty && !prefecture.isEmpty && !address1.isEmpty && !address2.isEmpty {
+            result += existsAddress
+        }
+        
+        if !mailAddress.isEmpty {
+            result += existsMail
+        }
+        
+        return result
+    }
+    
     init(nickname: Code, hopeJobPlaceIds: [Code],
          familyName: String, firstName: String, familyNameKana: String, firstNameKana: String, birthday: Date, gender: Code, zipCode: String, prefecture: Code, address1: String, address2: String, mailAddress: String, mobilePhoneNo: String) {
         self.nickname = nickname
@@ -88,13 +110,13 @@ class MdlProfile: Codable {
             address2: dto.town ?? "",
             mailAddress: dto.email ?? "",
             mobilePhoneNo: dto.phoneNumber ?? "")
-        }
+    }
     //=== 作成・更新のモデルは、アプリ=>APIなので不要だな ===
-
+    
     var debugDisp: String {
         let _gender = SelectItemsManager.getCodeDisp(.gender, code: gender)?.debugDisp ?? ""
         let _prefecture = SelectItemsManager.getCodeDisp(.place, code: prefecture)?.debugDisp ?? ""
-       return "[\(familyName) \(firstName)（\(familyNameKana) \(firstNameKana)）] [\(_gender)] [\(zipCode)] [\(_prefecture)] [\(address1)] [\(address2)] [\(mailAddress)] [\(hopeJobPlaceIds)] [\(mobilePhoneNo)]"
+        return "[\(familyName) \(firstName)（\(familyNameKana) \(firstNameKana)）] [\(_gender)] [\(zipCode)] [\(_prefecture)] [\(address1)] [\(address2)] [\(mailAddress)] [\(hopeJobPlaceIds)] [\(mobilePhoneNo)]"
     }
 }
 
