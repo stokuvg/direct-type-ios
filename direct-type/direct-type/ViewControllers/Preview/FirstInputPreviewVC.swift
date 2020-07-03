@@ -144,6 +144,30 @@ private extension FirstInputPreviewVC {
         SVProgressHUD.show(withStatus: "履歴書情報の更新")
         ApiManager.createResume(param, isRetry: true)
         .done { result in
+            self.fetchCreateSetting()
+        }
+        .catch { (error) in
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            switch myErr.code {
+            case 400:
+                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
+                self.dicGrpValidErrMsg = dicGrpError
+                self.dicValidErrMsg = dicError
+            default:
+                self.showError(error)
+            }
+        }
+        .finally {
+            self.dispData()
+            SVProgressHUD.dismiss()
+        }
+    }
+    
+    func fetchCreateSetting() {
+        let param = CreateSettingsRequestDTO(scoutEnable: true)
+        SVProgressHUD.show(withStatus: "設定情報の更新")
+        ApiManager.createApproach(param, isRetry: true)
+        .done { result in
             self.transitionToComplete()
         }
         .catch { (error) in
