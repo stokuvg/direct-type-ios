@@ -19,22 +19,45 @@ class CareerListVC: TmpBasicVC {
     //===職歴書カードを追加する
     @IBOutlet weak var btnAddCard: UIButton!
     @IBAction func actAddCard(_ sender: UIButton) {
-        let newCard = MdlCareerCard()
-//        newCard.companyName = "ダミー企業名"
-//        newCard.employeesCount = "\(arc4random_uniform(999))"
-//        newCard.employmentType = "\(arc4random_uniform(6))"
-//        newCard.salary = "\(arc4random_uniform(6) + 6)"
-//        newCard.workPeriod = MdlCareerCardWorkPeriod(
-//            startDate: Constants.SelectItemsUndefineDate,
-//            endDate: Constants.SelectItemsUndefineDate)
-//        newCard.contents = String(repeating: "テキスト", count: Int(arc4random_uniform(100)))
-        self.arrDisp.append(newCard)
+        self.arrDisp.append(makeNewCareerCard())
         let storyboard = UIStoryboard(name: "Preview", bundle: nil)
         if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_CareerPreviewVC") as? CareerPreviewVC{
             nvc.initData(self, self.arrData.count, self.arrDisp)
             self.navigationController?.pushViewController(nvc, animated: true)
         }
-
+    }
+    private func makeNewCareerCard() -> MdlCareerCard {
+        let newCareerCard = MdlCareerCard()
+        //=== 職務経歴詳細（サクサクの名残あり）
+        newCareerCard.contents = ""
+        var dispWorknote: [String] = []
+        //業種分類
+        //case businessType ???
+        //業務内容
+        var workInfo: String = ""
+        workInfo = ["・業務内容", "▲▽"].joined(separator: "\n")
+        //マネジメント経験
+        //case experienceManagement
+        var expManagement: String = ""
+        expManagement = ["・マネジメント経験", "▲▽"].joined(separator: "\n")
+        //PCスキル
+        //case skillExcel
+        //case skillWord
+        //case skillPowerPoint
+        var skillPC: String = ""
+        skillPC = ["・PCスキル", "▲▽"].joined(separator: "\n")
+        //実績
+        var workDetail: String = ""
+        workDetail = ["・実績", "▲▽"].joined(separator: "\n")
+        //=くっつける
+        if !workInfo.isEmpty { dispWorknote.append(workInfo) }
+        if !expManagement.isEmpty { dispWorknote.append(expManagement) }
+        if !skillPC.isEmpty { dispWorknote.append(skillPC) }
+        if !workDetail.isEmpty { dispWorknote.append(workDetail) }
+        if newCareerCard.contents.isEmpty {
+            newCareerCard.contents = dispWorknote.joined(separator: "\n\n")
+        }
+        return newCareerCard
     }
 
     override func viewDidLoad() {
@@ -59,10 +82,8 @@ class CareerListVC: TmpBasicVC {
         }) {
             arrDisp.append(item)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
-            self.tableVW.reloadData()
-            self.chkButtonEnable()
-        })
+        self.tableVW.reloadData()
+        self.chkButtonEnable()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

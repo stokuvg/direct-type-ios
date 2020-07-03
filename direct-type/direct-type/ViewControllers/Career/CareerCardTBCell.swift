@@ -49,14 +49,67 @@ class CareerCardTBCell: UITableViewCell {
         guard let career = item else { return }
         //===表示用文字列の生成
         let bufTitle: String = "\(targetCardNum + 1)社目"
-        let bufDetail: String = career.debugDisp
-        //在籍企業概要
+        //===在籍企業概要
         var dispCompany: [String] = []
         if !career.companyName.isEmpty { dispCompany.append(career.companyName) }
         if (Int(career.employeesCount) ?? 0) > 0 { dispCompany.append("従業員数\(career.employeesCount)名") }
-
+        //=雇用期間
+        let bufWorkPeriodStart = career.workPeriod.startDate.dispYmJP()
+        var bufWorkPeriodEnd: String = ""
+        if career.workPeriod.endDate == Constants.DefaultSelectWorkPeriodEndDate {
+            bufWorkPeriodEnd = Constants.DefaultSelectWorkPeriodEndDateJP
+        } else {
+            bufWorkPeriodEnd = career.workPeriod.endDate.dispYmJP()
+        }
+        var bufWorkPeriod: String = "\(bufWorkPeriodStart)〜\(bufWorkPeriodEnd)"
+        //何年何か月を求める
+        let tmpStart = career.workPeriod.startDate
+        var tmpEnd = career.workPeriod.endDate
+        if tmpEnd == Constants.DefaultSelectWorkPeriodEndDate {
+            tmpEnd = Date()//「就業中」の場合には、「今日」で計算する
+        }
+        if tmpStart != Constants.SelectItemsUndefineDate { //開始が未定義なら計算対象外
+            let period = Calendar.current.dateComponents([.year, .month], from: tmpStart, to: tmpEnd)
+            let tmpPeriodY = period.year ?? 0
+            let tmpPeriodM = (period.month ?? 0)
+            //let tmpPeriodM = (period.month ?? 0) + 1 //当月を1ヶ月とする場合
+            let bufPeriodY: String = (tmpPeriodY == 0) ? "" : "\(tmpPeriodY)年"
+            let bufPeriodM: String = (tmpPeriodM == 0) ? "" : "\(tmpPeriodM)ヶ月"
+            if !(bufPeriodY.isEmpty && bufPeriodM.isEmpty) { //どちらも空じゃない場合
+                bufWorkPeriod = "\(bufWorkPeriod)（\(bufPeriodY)\(bufPeriodM)）"
+            }
+        }
+        dispCompany.append(bufWorkPeriod)
         if let buf = SelectItemsManager.getCodeDisp(.employmentType, code: career.employmentType) {
             dispCompany.append(buf.disp)
+        }
+        //=== 職務経歴詳細（サクサクの名残あり）
+        var dispWorknote: [String] = []
+        //業種分類
+        //case businessType ???
+        //業務内容
+        var workInfo: String = ""
+        workInfo = ["・業務内容", "▲▽"].joined(separator: "\n")
+        //マネジメント経験
+        //case experienceManagement
+        var expManagement: String = ""
+        expManagement = ["・マネジメント経験", "▲▽"].joined(separator: "\n")
+        //PCスキル
+        //case skillExcel
+        //case skillWord
+        //case skillPowerPoint
+        var skillPC: String = ""
+        skillPC = ["・PCスキル", "▲▽"].joined(separator: "\n")
+        //実績
+        var workDetail: String = ""
+        workDetail = ["・実績", "▲▽"].joined(separator: "\n")
+        //=くっつける
+        if !workInfo.isEmpty { dispWorknote.append(workInfo) }
+        if !expManagement.isEmpty { dispWorknote.append(expManagement) }
+        if !skillPC.isEmpty { dispWorknote.append(skillPC) }
+        if !workDetail.isEmpty { dispWorknote.append(workDetail) }
+        if career.contents.isEmpty {
+            career.contents = dispWorknote.joined(separator: "\n\n")
         }
 
         //===表示させる
@@ -69,10 +122,10 @@ class CareerCardTBCell: UITableViewCell {
             asv.removeFromSuperview()
         }
         //=== 表示項目を追加していく
-        stackVW.addArrangedSubview(EntryConfirmItem("職務経歴詳細", bufDetail))
         if dispCompany.count > 0 {
             stackVW.addArrangedSubview(EntryConfirmItem("在籍企業概要", dispCompany.joined(separator: "\n")))
         }
+        stackVW.addArrangedSubview(EntryConfirmItem("職務経歴詳細", career.contents))
         //すべてを表示させる
         for asv in stackVW.arrangedSubviews {
             if let eci = asv as? EntryConfirmItem {
