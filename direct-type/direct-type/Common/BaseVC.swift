@@ -120,7 +120,10 @@ class BaseVC: UIViewController {
             .foregroundColor : UIColor.init(colorType: .color_white) as Any,
             .font : UIFont.init(fontType: .C_font_SSb) as Any
         ]
-        let parentDate = "(" + date + ")"
+        var parentDate:String = ""
+        if date.count > 0 {
+            parentDate = "(" + date + ")"
+        }
         let dateString = NSAttributedString(string: parentDate, attributes: dateAttributes)
         
         let paragraphAttributes: [NSAttributedString.Key : Any] = [
