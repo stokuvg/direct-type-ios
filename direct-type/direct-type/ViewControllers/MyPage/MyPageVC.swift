@@ -233,7 +233,7 @@ extension MyPageVC: UITableViewDataSource {
             (cell as! BasePercentageCompletionCell).delegate = self
         case .resumeCompleteness:
             cell = tableView.loadCell(cellName: "BasePercentageCompletionCell", indexPath: indexPath) as! BasePercentageCompletionCell
-            (cell as! BasePercentageCompletionCell).setup(title: "履歴書の完成度", percent: "40")
+            (cell as! BasePercentageCompletionCell).setup(title: "履歴書の完成度", percent: String(resume?.completeness ?? 0))
             (cell as! BasePercentageCompletionCell).delegate = self
         case .editableCarrer:
             guard isExistCareer else {

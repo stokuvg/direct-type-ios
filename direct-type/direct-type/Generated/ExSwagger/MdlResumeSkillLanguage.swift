@@ -19,6 +19,10 @@ class MdlResumeSkillLanguage: Codable {
     var languageEnglish: String
     /** 英語以外語学スキル（未記入：\&quot;\&quot;） */
     var languageStudySkill: String
+    /** いずれかの語学スキルを持っているかどうかのフラグ */
+    var isHaveSkill: Bool {
+        return !languageToeicScore.isEmpty || !languageToeflScore.isEmpty || !languageEnglish.isEmpty || !languageStudySkill.isEmpty
+    }
 
     init(languageToeicScore: String, languageToeflScore: String, languageEnglish: String, languageStudySkill: String) {
         self.languageToeicScore = languageToeicScore
