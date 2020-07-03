@@ -169,6 +169,8 @@
 		0E1FB23724AC8424005E0BE7 /* AnalyticsEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1FB23624AC8424005E0BE7 /* AnalyticsEventType.swift */; };
 		0E1FB23924AC8A6E005E0BE7 /* AppDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1FB23824AC8A6E005E0BE7 /* AppDefine.swift */; };
 		0E1FB23B24AD7243005E0BE7 /* AnalyticsEventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1FB23A24AD7243005E0BE7 /* AnalyticsEventManager.swift */; };
+		0E22833D24AEB5AB0008765E /* ApiManager+Chemistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22833C24AEB5AB0008765E /* ApiManager+Chemistry.swift */; };
+		0E22833F24AEB6360008765E /* MdlChemistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22833E24AEB6360008765E /* MdlChemistry.swift */; };
 		0E29E34024A43238006175AE /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29E33F24A43238006175AE /* String+Extension.swift */; };
 		0E6951AC248A050000D58E6E /* ChemistryPersonalityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6951AB248A050000D58E6E /* ChemistryPersonalityType.swift */; };
 		0E6951AF248A05EA00D58E6E /* ChemistryQuestionMasterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6951AE248A05EA00D58E6E /* ChemistryQuestionMasterData.swift */; };
@@ -502,6 +504,8 @@
 		0E1FB23624AC8424005E0BE7 /* AnalyticsEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEventType.swift; sourceTree = "<group>"; };
 		0E1FB23824AC8A6E005E0BE7 /* AppDefine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDefine.swift; sourceTree = "<group>"; };
 		0E1FB23A24AD7243005E0BE7 /* AnalyticsEventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEventManager.swift; sourceTree = "<group>"; };
+		0E22833C24AEB5AB0008765E /* ApiManager+Chemistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Chemistry.swift"; sourceTree = "<group>"; };
+		0E22833E24AEB6360008765E /* MdlChemistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlChemistry.swift; sourceTree = "<group>"; };
 		0E29E33F24A43238006175AE /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		0E6951AB248A050000D58E6E /* ChemistryPersonalityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryPersonalityType.swift; sourceTree = "<group>"; };
 		0E6951AE248A05EA00D58E6E /* ChemistryQuestionMasterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryQuestionMasterData.swift; sourceTree = "<group>"; };
@@ -1224,6 +1228,7 @@
 				0E8775A4249778E700C82736 /* MdlApproach.swift */,
 				0670F4612491E14400E60FDC /* MdlKeepList.swift */,
 				0670F4632491F33B00E60FDC /* MdlKeepJob.swift */,
+				0E22833E24AEB6360008765E /* MdlChemistry.swift */,
 			);
 			path = ExSwagger;
 			sourceTree = "<group>";
@@ -1260,6 +1265,7 @@
 				0E74739E24972A9800928644 /* ApiManager+Approach.swift */,
 				0E7372DC2499EE1C00358EFA /* ApiManager+PhoneNumber.swift */,
 				0E7372DE249A089D00358EFA /* ApiManager+AuthCode.swift */,
+				0E22833C24AEB5AB0008765E /* ApiManager+Chemistry.swift */,
 			);
 			path = AuthManager;
 			sourceTree = "<group>";
@@ -1721,6 +1727,7 @@
 				26BF48EB24639D6500E00215 /* SelectItemsManager.swift in Sources */,
 				0645DE05246BDE8600592572 /* BaseJobDetailCell.swift in Sources */,
 				06E519802457CF63004E4B7A /* BaseTableViewCell.swift in Sources */,
+				0E22833D24AEB5AB0008765E /* ApiManager+Chemistry.swift in Sources */,
 				0EAE765D248F2A23009A8F4B /* ChemistryBusinessAbilityCell.swift in Sources */,
 				06E519A72458138E004E4B7A /* SignupVC.swift in Sources */,
 				066F2714246E818A0040BDC1 /* JobDetailFoldingProcessCell.swift in Sources */,
@@ -1848,6 +1855,7 @@
 				269AFFC4246A929300DB364B /* SubSelectSyouTBCell.swift in Sources */,
 				26A5DD642475028E0035267A /* SubSelectSpecialVC+Picker.swift in Sources */,
 				06EA78A5247B69CA0087C660 /* MdlJobCardDetail.swift in Sources */,
+				0E22833F24AEB6360008765E /* MdlChemistry.swift in Sources */,
 				06E5197A2457BA36004E4B7A /* SplashVC.swift in Sources */,
 				06E519BE24581558004E4B7A /* ScountListVC.swift in Sources */,
 				26CFC46E246949B800E458E2 /* MyColorDefine.swift in Sources */,

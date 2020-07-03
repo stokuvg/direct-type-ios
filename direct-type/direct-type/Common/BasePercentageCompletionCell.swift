@@ -9,7 +9,7 @@
 import UIKit
 
 protocol BasePercentageCompletionCellDelegate {
-    func completionEditAction(tagNo:Int)
+    func completionEditAction(sender: BaseTableViewCell)
 }
 
 class BasePercentageCompletionCell: BaseTableViewCell {
@@ -22,7 +22,7 @@ class BasePercentageCompletionCell: BaseTableViewCell {
     @IBOutlet weak var percentProgress:UIProgressView!
     @IBOutlet weak var editBtn:UIButton!
     @IBAction func editBtnAction() {
-        self.delegate.completionEditAction(tagNo:self.tag)
+        self.delegate.completionEditAction(sender: self)
     }
     
     var delegate:BasePercentageCompletionCellDelegate!
