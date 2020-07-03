@@ -251,7 +251,7 @@ extension MyPageVC: MyPageCarrerStartCellDelegate {
 
     // 画面遷移
     func registCarrerAction() {
-        if true { //[Dbg: デバグ用メニュー表示はfalseにする]
+if false { //[Dbg: デバグ用メニュー表示はfalseにする]
         pushViewController(.careerListC)// 職歴書
         } else {
         //[Dbg:遷移先画面の選択]___
