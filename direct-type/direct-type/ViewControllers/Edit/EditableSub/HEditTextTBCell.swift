@@ -95,11 +95,7 @@ class HEditTextTBCell: UITableViewCell {
         if errMsg != "" {
             //lblErrorMsg.text = errMsg
             lblErrorMsg.text(text: errMsg, fontType: .font_SSS, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
-            if UITraitCollection.isDarkMode == true {
-                vwMainArea.backgroundColor = UIColor.init(red: 0.3, green: 0.1, blue: 0.1, alpha: 1.0)
-            } else {
-                vwMainArea.backgroundColor = UIColor.init(red: 1.0, green: 0.8, blue: 0.8, alpha: 1.0)
-            }
+            vwMainArea.backgroundColor = UIColor.init(red: 1.0, green: 0.8, blue: 0.8, alpha: 1.0)
         } else {
             lblErrorMsg.text = ""
             vwMainArea.backgroundColor = self.backgroundColor
