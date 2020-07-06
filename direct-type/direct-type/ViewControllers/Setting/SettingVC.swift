@@ -49,6 +49,7 @@ final class SettingVC: TmpBasicVC {
         }
     }
     
+    private var profile: MdlProfile?
     private var approachSetting = MdlApproach(scoutEnable: false)
     
     override func viewDidLoad() {
@@ -58,7 +59,7 @@ final class SettingVC: TmpBasicVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchData()
+        fetchProfileData()
     }
 }
 
@@ -78,23 +79,6 @@ private extension SettingVC {
         // ログアウト
         // 退会
         tableView.registerNib(nibName: "SettingBaseCell", idName: "SettingBaseCell")
-    }
-    
-    func fetchData() {
-        SVProgressHUD.show(withStatus: "設定情報の取得")
-        ApiManager.getApproach(())
-        .done { result in
-            self.approachSetting = result
-        }
-        .catch { (error) in
-            let myError: MyErrorDisp = AuthManager.convAnyError(error)
-            print("アプローチデータ取得エラー！　コード: \(myError.code)")
-            self.showError(myError)
-        }
-        .finally {
-            self.tableView.reloadData()
-            SVProgressHUD.dismiss()
-        }
     }
     
     func dispLogoutAlert() {
@@ -195,7 +179,9 @@ extension SettingVC: UITableViewDataSource {
         switch cellType {
         case .account:
             let cell = tableView.loadCell(cellName: "SettingAccountCell", indexPath: indexPath) as! SettingAccountCell
-            cell.setup(telNo: "090-1234-5678")
+            if let phoneNumber = profile?.mobilePhoneNo {
+                cell.setup(telNo: phoneNumber)
+            }
             return cell
         case .approach:
             let cell = tableView.loadCell(cellName: "SettingApproachCell", indexPath: indexPath) as! SettingApproachCell
@@ -205,6 +191,41 @@ extension SettingVC: UITableViewDataSource {
             let cell = tableView.loadCell(cellName: "SettingBaseCell", indexPath: indexPath) as! SettingBaseCell
             cell.setup(title: cellType.title)
             return cell
+        }
+    }
+}
+
+// API　データフェッチ
+extension SettingVC {
+    func fetchProfileData() {
+        ApiManager.getProfile(())
+        .done { result in
+            self.profile = result
+        }
+        .catch { (error) in
+            let myError: MyErrorDisp = AuthManager.convAnyError(error)
+            print("アプローチデータ取得エラー！　コード: \(myError.code)")
+            self.showError(myError)
+        }
+        .finally {
+            self.fetchApproachData()
+        }
+    }
+    
+    func fetchApproachData() {
+        SVProgressHUD.show(withStatus: "設定情報の取得")
+        ApiManager.getApproach(())
+        .done { result in
+            self.approachSetting = result
+        }
+        .catch { (error) in
+            let myError: MyErrorDisp = AuthManager.convAnyError(error)
+            print("アプローチデータ取得エラー！　コード: \(myError.code)")
+            self.showError(myError)
+        }
+        .finally {
+            self.tableView.reloadData()
+            SVProgressHUD.dismiss()
         }
     }
 }
