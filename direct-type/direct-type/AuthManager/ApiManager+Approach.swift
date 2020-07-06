@@ -37,46 +37,56 @@ extension ApiManager {
         return promise
     }
 }
-//================================================================
-//=== アプローチ更新 ===
-//extension UpdateApproachRequestDTO {
-//    public init() {
-//        self.init(isScoutEnable: nil, isRecommendationEnable: nil)
-//    }
-//    init(_ editTempCD: [EditableItemKey: EditableItemCurVal]) {
-//        self.init()
-//        for (key, val) in editTempCD {
-//            switch key {
-//            case EditItemMdlApproach.isScoutEnable.itemKey: self.isScoutEnable = val
-//            case EditItemMdlApproach.isRecommendationEnable.itemKey: self.isRecommendationEnable = val
-//            default: break
-//            }
-//        }
-//    }
-//}
-//extension ApiManager {
-//    class func updateApproach(_ param: UpdateApproachRequestDTO, isRetry: Bool = true) -> Promise<Void> {
-//        if isRetry {
-//            return firstly { () -> Promise<Void> in
-//                retry(args: param, task: updateApproachFetch) { (error) -> Bool in return true }
-//            }
-//        } else {
-//            return updateApproachFetch(param: param)
-//        }
-//    }
-//    private class func updateApproachFetch(param: UpdateApproachRequestDTO) -> Promise<Void> {
-//        let (promise, resolver) = Promise<Void>.pending()
-//        AuthManager.needAuth(true)
-//        ProfileAPI.profileControllerUpdate(body: param)
-//        .done { result in
-//            resolver.fulfill(Void())
-//        }
-//        .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
-//            resolver.reject(error)
-//        }
-//        .finally {
-//        }
-//        return promise
-//    }
-//}
+
+extension ApiManager {
+    class func createApproach(_ param: CreateSettingsRequestDTO, isRetry: Bool = true) -> Promise<Void> {
+        if isRetry {
+            return firstly { () -> Promise<Void> in
+                retry(args: param, task: createApproachFetch) { (error) -> Bool in return true }
+            }
+        } else {
+            return createApproachFetch(param: param)
+        }
+    }
+    private class func createApproachFetch(param: CreateSettingsRequestDTO) -> Promise<Void> {
+        let (promise, resolver) = Promise<Void>.pending()
+        AuthManager.needAuth(true)
+        SettingsAPI.settingsControllerCreate(body: param)
+        .done { result in
+            resolver.fulfill(Void())
+        }
+        .catch { (error) in
+            resolver.reject(error)
+        }
+        .finally {
+        }
+        return promise
+    }
+}
+
+extension ApiManager {
+    class func updateApproach(_ param: UpdateSettingsRequestDTO, isRetry: Bool = true) -> Promise<Void> {
+        if isRetry {
+            return firstly { () -> Promise<Void> in
+                retry(args: param, task: updateApproachFetch) { (error) -> Bool in return true }
+            }
+        } else {
+            return updateApproachFetch(param: param)
+        }
+    }
+    private class func updateApproachFetch(param: UpdateSettingsRequestDTO) -> Promise<Void> {
+        let (promise, resolver) = Promise<Void>.pending()
+        AuthManager.needAuth(true)
+        SettingsAPI.settingsControllerUpdate(body: param)
+        .done { result in
+            resolver.fulfill(Void())
+        }
+        .catch { (error) in
+            resolver.reject(error)
+        }
+        .finally {
+        }
+        return promise
+    }
+}
 //================================================================

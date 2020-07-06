@@ -9,6 +9,7 @@
 import UIKit
 import SwaggerClient
 import SVProgressHUD
+import AWSMobileClient
 
 final class AccountChangeVC: TmpBasicVC {
     @IBOutlet private weak var cautionLabel: UILabel!
@@ -18,16 +19,18 @@ final class AccountChangeVC: TmpBasicVC {
         postNewPhoneNumber()
     }
 
+    private var profile: MdlProfile?
     private var existingPhoneNumber = ""
+    private let phoneNumberMaxLength: Int = 11
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
     }
     
-    func configure(data: [String:Any]) {
-        let telNo = data["telNo"] as! String
-        existingPhoneNumber = extractNumbers(from: telNo)
+    func configure(with profile: MdlProfile) {
+        self.profile = profile
+        existingPhoneNumber = extractNumbers(from: profile.mobilePhoneNo)
     }
 }
 
@@ -48,34 +51,44 @@ private extension AccountChangeVC {
     }
     
     func postNewPhoneNumber() {
-        // FIXME: プロトタイピング時の動作確認用に強制的に認証画面へ遷移させる
-        let vc = getVC(sbName: "SettingVC", vcName: "AccountChangeCompleteVC") as! AccountChangeCompleteVC
-        // TODO: 電話番号変更APIリクエスト時に認証コードを受け取って遷移先画面に渡す
-        // vc.configure(with: "Please input code", phoneNumber: "Please input phone number")
-        navigationController?.pushViewController(vc, animated: true)
-
-        guard let inputText = inputField.text, inputText != existingPhoneNumber else {
+        guard let inputText = inputField.text, inputText != existingPhoneNumber,
+            let userAttribute = AWSCognitoIdentityUserAttributeType() else {
             // 既存の電話番号と同じだった場合はニックネームを保存して設定Topへ
             // TODO: ニックネームの保存処理を追加
             navigationController?.popViewController(animated: true)
             return
         }
-        // TODO: サーバー側で電話番号変更API実装後に疎通実装を行う
-//        let param = UpdatePhoneNumberRequestDTO(phoneNumber: inputText)
-//        SVProgressHUD.show()
-//        ApiManager.postPhoneNumber(param)
-//        .done { result in
-//            let vc = getVC(sbName: "SettingVC", vcName: "AccountChangeCompleteVC") as! AccountChangeCompleteVC
-//            vc.telPhone = number
-//            navigationController?.pushViewController(vc, animated: true)
-//        }
-//        .catch { (error) in
-//            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-//            print("電話番号登録エラー コード: \(myErr.code)")
-//        }
-//        .finally {
-//            SVProgressHUD.dismiss()
-//        }
+        
+        SVProgressHUD.show()
+        let phoneNumber = inputText.addCountryCode(type: .japan)
+        userAttribute.name = "phone_number"
+        userAttribute.value = phoneNumber
+        AWSCognitoIdentityUserPool.default().currentUser()?.update([userAttribute])
+            .continueOnSuccessWith(block: { _ -> Void in
+                self.tryLogout()
+            })
+    }
+    
+    func tryLogout() {
+        AWSMobileClient.default().signOut { (error) in
+            if let error = error {
+                DispatchQueue.main.async {
+                    self.showError(error)
+                }
+                return
+            }
+            DispatchQueue.main.async {
+                SVProgressHUD.dismiss()
+                self.transitionToConfirmation()
+            }
+        }
+    }
+    
+    func transitionToConfirmation() {
+        guard let inputText = inputField.text else { return }
+        let vc = getVC(sbName: "SettingVC", vcName: "AccountChangeCompleteVC") as! AccountChangeCompleteVC
+        vc.configure(with: inputText)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func extractNumbers(from text: String) -> String {
@@ -88,10 +101,17 @@ private extension AccountChangeVC {
         return tel as String
     }
     
+    var isValidInputText: Bool {
+        guard let inputText = inputField.text, inputField.markedTextRange == nil,
+            inputText.count == phoneNumberMaxLength else { return false }
+        return true
+    }
     @objc
     func changeButtonState() {
-        nextBtn.isEnabled = isValidPhoneNumber
-        nextBtn.backgroundColor = UIColor(colorType: isValidPhoneNumber ? .color_button : .color_line)
+        guard let inputText = inputField.text else { return }
+        inputField.text = inputText.prefix(phoneNumberMaxLength).description
+        nextBtn.backgroundColor = UIColor(colorType: isValidInputText ? .color_sub : .color_line)
+        nextBtn.isEnabled = isValidInputText
     }
     
     func makeCautionText(text: String) -> NSMutableAttributedString {

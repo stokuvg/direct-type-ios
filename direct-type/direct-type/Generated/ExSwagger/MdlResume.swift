@@ -26,6 +26,37 @@ class MdlResume: Codable {
     var ownPr: String
     /** 現在の年収 */
     var currentSalary: String
+    /** 履歴書完成度(100=100%) */
+    var completeness: Int {
+        var result = 35 // MdlProfileが存在している時点で35%としている
+        
+        let existsJobExperiments = 10
+        let existsLastJobExperiment = 15
+        let existsSkillLanguage = 10
+        let existsQualifications = 15
+        let existsOwnPr = 15
+        
+        // 直近の経験職種は初回から入力必須なのでデフォルトで加算
+        result += existsLastJobExperiment
+        
+        if !jobExperiments.isEmpty {
+            result += existsJobExperiments
+        }
+        
+        if skillLanguage.isHaveSkill {
+            result += existsSkillLanguage
+        }
+        
+        if !qualifications.isEmpty {
+            result += existsQualifications
+        }
+        
+        if !ownPr.isEmpty {
+            result += existsOwnPr
+        }
+        
+        return result
+    }
 
     init(employmentStatus: Code, changeCount: Code, lastJobExperiment: MdlJobExperiment, jobExperiments: [MdlJobExperiment], businessTypes: [Code], educationId: Code, school: MdlResumeSchool, skillLanguage: MdlResumeSkillLanguage, qualifications: [Code], ownPr: String, currentSalary: String) {
         self.employmentStatus = employmentStatus

@@ -10,8 +10,8 @@ import UIKit
 import SVProgressHUD
 import AWSMobileClient
 
-class SettingVC: TmpBasicVC {
-    @IBOutlet weak var tableView:UITableView!
+final class SettingVC: TmpBasicVC {
+    @IBOutlet private weak var tableView:UITableView!
     
     private enum DisplayCellType: Int, CaseIterable {
         case account
@@ -49,14 +49,17 @@ class SettingVC: TmpBasicVC {
         }
     }
     
-    // TODO: サーバー側のAPI実装が完了するまでは、ここのデフォルト値を直に変更して挙動の確認をする想定。(※デフォルトはいずれもfalse)
-    private var approachSetting = MdlApproach(isScoutEnable: false)
+    private var profile: MdlProfile?
+    private var approachSetting = MdlApproach(scoutEnable: false)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // TODO: サーバー側のAPI実装が完了した後に疎通実装を行う
-        // fetchData()
         setup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchProfileData()
     }
 }
 
@@ -64,7 +67,7 @@ private extension SettingVC {
     func setup() {
         title = "設定"
         
-        tableView.backgroundColor = UIColor.init(colorType: .color_white)!
+        tableView.backgroundColor = UIColor(colorType: .color_white)!
         tableView.tableFooterView = UIView()
         // アカウント
         tableView.registerNib(nibName: "SettingAccountCell", idName: "SettingAccountCell")
@@ -76,23 +79,6 @@ private extension SettingVC {
         // ログアウト
         // 退会
         tableView.registerNib(nibName: "SettingBaseCell", idName: "SettingBaseCell")
-    }
-    
-    func fetchData() {
-        SVProgressHUD.show(withStatus: "設定情報の取得")
-        ApiManager.getApproach(())
-            .done { result in
-                self.approachSetting = result
-        }
-            .catch { (error) in
-                let myError: MyErrorDisp = AuthManager.convAnyError(error)
-                print("アプローチデータ取得エラー！　コード: \(myError.code)")
-                self.showError(myError)
-        }
-            .finally {
-                self.tableView.reloadData()
-                SVProgressHUD.dismiss()
-        }
     }
     
     func dispLogoutAlert() {
@@ -145,8 +131,9 @@ extension SettingVC: UITableViewDelegate {
         case .account:
             // H-10 修正画面へ遷移
             let vc = getVC(sbName: "SettingVC", vcName: "AccountChangeVC") as! AccountChangeVC
-            let telephoneData = ["telNo":"090-1234-5678"]
-            vc.configure(data: telephoneData)
+            if let profile = profile {
+                vc.configure(with: profile)
+            }
             navigationController?.pushViewController(vc, animated: true)
         case .approach:
             // H-9 アプローチ設定へ遷移
@@ -193,7 +180,9 @@ extension SettingVC: UITableViewDataSource {
         switch cellType {
         case .account:
             let cell = tableView.loadCell(cellName: "SettingAccountCell", indexPath: indexPath) as! SettingAccountCell
-            cell.setup(telNo: "090-1234-5678")
+            if let phoneNumber = profile?.mobilePhoneNo {
+                cell.setup(telNo: phoneNumber)
+            }
             return cell
         case .approach:
             let cell = tableView.loadCell(cellName: "SettingApproachCell", indexPath: indexPath) as! SettingApproachCell
@@ -203,6 +192,41 @@ extension SettingVC: UITableViewDataSource {
             let cell = tableView.loadCell(cellName: "SettingBaseCell", indexPath: indexPath) as! SettingBaseCell
             cell.setup(title: cellType.title)
             return cell
+        }
+    }
+}
+
+// API　データフェッチ
+extension SettingVC {
+    func fetchProfileData() {
+        ApiManager.getProfile(())
+        .done { result in
+            self.profile = result
+        }
+        .catch { (error) in
+            let myError: MyErrorDisp = AuthManager.convAnyError(error)
+            print("アプローチデータ取得エラー！　コード: \(myError.code)")
+            self.showError(myError)
+        }
+        .finally {
+            self.fetchApproachData()
+        }
+    }
+    
+    func fetchApproachData() {
+        SVProgressHUD.show(withStatus: "設定情報の取得")
+        ApiManager.getApproach(())
+        .done { result in
+            self.approachSetting = result
+        }
+        .catch { (error) in
+            let myError: MyErrorDisp = AuthManager.convAnyError(error)
+            print("アプローチデータ取得エラー！　コード: \(myError.code)")
+            self.showError(myError)
+        }
+        .finally {
+            self.tableView.reloadData()
+            SVProgressHUD.dismiss()
         }
     }
 }
