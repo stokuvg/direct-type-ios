@@ -10,8 +10,8 @@ import UIKit
 import SVProgressHUD
 import AWSMobileClient
 
-class SettingVC: TmpBasicVC {
-    @IBOutlet weak var tableView:UITableView!
+final class SettingVC: TmpBasicVC {
+    @IBOutlet private weak var tableView:UITableView!
     
     private enum DisplayCellType: Int, CaseIterable {
         case account
@@ -66,7 +66,7 @@ private extension SettingVC {
     func setup() {
         title = "設定"
         
-        tableView.backgroundColor = UIColor.init(colorType: .color_white)!
+        tableView.backgroundColor = UIColor(colorType: .color_white)!
         tableView.tableFooterView = UIView()
         // アカウント
         tableView.registerNib(nibName: "SettingAccountCell", idName: "SettingAccountCell")
