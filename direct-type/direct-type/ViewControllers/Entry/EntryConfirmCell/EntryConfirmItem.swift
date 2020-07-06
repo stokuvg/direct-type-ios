@@ -51,6 +51,8 @@ class EntryConfirmItem: UIView {
     func dispCell() {
         lblTitle.text(text: title, fontType: .font_SSb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         lblMessage.text(text: message, fontType: .font_SS, textColor: UIColor(colorType: .color_black)!, alignment: .left)
+        lblTitle.layoutIfNeeded()
+        lblMessage.layoutIfNeeded()
     }
 }
 
