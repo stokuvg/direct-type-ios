@@ -70,7 +70,16 @@ class SubInputMemoVC: BaseVC {
         let bufTitle: String = "\(editableItem.dispName)"
         lblTitle.text(text: bufTitle, fontType: .font_L, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         textVW.text = editableItem.curVal
-        let bufInfoText = editableItem.editItem.placeholder
+        var bufInfoText: String = ""
+        switch editableItem.editableItemKey {
+        case EditItemMdlEntry.exQuestionAnswer1.itemKey: fallthrough
+        case EditItemMdlEntry.exQuestionAnswer2.itemKey: fallthrough
+        case EditItemMdlEntry.exQuestionAnswer3.itemKey:
+            bufInfoText = editableItem.exQuestion
+            print(bufInfoText.description)
+        default:
+            bufInfoText = editableItem.editItem.placeholder
+        }
         lblInfoText.text(text: bufInfoText, fontType: .font_S, textColor: UIColor.init(colorType: .color_white)!, alignment: .left)
         dispCount()
     }

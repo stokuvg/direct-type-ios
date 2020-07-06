@@ -134,17 +134,17 @@ class EntryVC: PreviewBaseVC {
         var exQA: [MdlItemH] = []
         if let exQuestion = entry?.exQuestion1, !exQuestion.isEmpty {
             exQA.append(MdlItemH(.exQAItem1C9, exQuestion, childItems: [
-                EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer1, val: entry?.exAnswer1 ?? ""),
+                EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer1, val: entry?.exAnswer1 ?? "", exQuestion: exQuestion),
             ], model: career))
         }
         if let exQuestion = entry?.exQuestion2, !exQuestion.isEmpty {
             exQA.append(MdlItemH(.exQAItem2C9, exQuestion, childItems: [
-                EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer2, val: entry?.exAnswer2 ?? ""),
+                EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer2, val: entry?.exAnswer2 ?? "", exQuestion: exQuestion),
             ], model: career))
         }
         if let exQuestion = entry?.exQuestion3, !exQuestion.isEmpty {
             exQA.append(MdlItemH(.exQAItem3C9, exQuestion, childItems: [
-                EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer3, val: entry?.exAnswer3 ?? ""),
+                EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer3, val: entry?.exAnswer3 ?? "", exQuestion: exQuestion),
             ], model: career))
         }
         if exQA.count > 0 {

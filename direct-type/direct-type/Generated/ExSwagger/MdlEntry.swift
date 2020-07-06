@@ -94,7 +94,7 @@ case entryItems         //9、10、11、12を一括で扱うためのもの
         case .exQuestionAnswer1: return "回答を入力してください"
         case .exQuestionAnswer2: return "回答を入力してください"
         case .exQuestionAnswer3: return "回答を入力してください"
-        case .ownPR: return "回答を入力してください"
+        case .ownPR: return "自己PRを2000文字以内で入力ください"
         default:
             return ""//return "[\(self.itemKey) PlaceHolder]"
         }

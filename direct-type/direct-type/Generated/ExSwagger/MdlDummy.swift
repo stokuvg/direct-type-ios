@@ -6,6 +6,7 @@
 //  Created by ms-mb014 on 2020/07/06.
 //  Copyright © 2020 ms-mb015. All rights reserved.
 //
+import SwaggerClient
 
 extension MdlProfile {
     class func dummyData() -> MdlProfile {
@@ -42,3 +43,61 @@ extension MdlResume {
             currentSalary: "1450" )
     }
 }
+extension MdlCareer {
+    class func dummyData() -> MdlCareer {
+        return MdlCareer(businessTypes: [])
+    }
+}
+extension MdlCareerCard {
+    class func dummyData() -> MdlCareerCard {
+        return MdlCareerCard(workPeriod: MdlCareerCardWorkPeriod(startDate: DateHelper.convStrYM2Date("2017-04"), endDate: Constants.DefaultSelectWorkPeriodEndDate),
+                             companyName: "ダミーカンパニー",
+                             employmentType: "1",
+                             employeesCount: "2",
+                             salary: "3",
+                             contents: "経歴のもろもろ記載しています" )
+    }
+}
+extension MdlEntry {
+    class func dummyData() -> MdlEntry {
+        return MdlEntry(ownPR: "", hopeArea: [], hopeSalary: "8", exQuestion1: "追加質問の1つめです。これはダミーで尋ねている設問になります", exQuestion2: nil, exQuestion3: nil, exAnswer1: "", exAnswer2: "", exAnswer3: "")
+    }
+}
+extension MdlJobCardDetail {
+    class func dummyData() -> MdlJobCardDetail {
+        return MdlJobCardDetail(
+            jobCardCode: "12345678",
+            jobName: "【PL候補・SE】案件数に絶対的な自信あり！◆月給40万円〜■残業平均月12h",
+            salaryMinId: 3,
+            salaryMaxId: 8,
+            isSalaryDisplay: true,
+            salaryOffer: "",
+            workPlaceCodes: [11, 22, 33],
+            companyName: "株式会社プレーンナレッジシステムズ（ヒューマンクリエイショングループ）",
+            start_date: "",
+            end_date: "",
+            mainPicture: "",
+            subPictures: [],
+            mainTitle: "",
+            mainContents: "",
+            prCodes: [1,3,5],
+            salarySample: "",
+            recruitmentReason: "",
+            jobDescription: "",
+            jobExample: "", product: "", scope: "",
+            spotTitle1: "", spotDetail1: "", spotTitle2: "", spotDetail2: "",
+            qualification: "", betterSkill: "", applicationExample: "",
+            suitableUnsuitable: "", notSuitableUnsuitable: "",
+            employmentType: 2, salary: "", bonusAbout: "", jobtime: "",
+            overtimeCode: 1, overtimeAbout: "", workPlace: "", transport: "",
+            holiday: "", welfare: "", childcare: "", interviewMemo: "",
+            selectionProcess: JobCardDetailSelectionProcess(selectionProcess1: "", selectionProcess2: "", selectionProcess3: "", selectionProcess4: "", selectionProcess5: "", selectionProcessDetail: ""),
+            contactInfo: JobCardDetailContactInfo(companyUrl: "", contactZipcode: "", contactAddress: "", contactPhone: "", contactPerson: "", contactMail: ""),
+            companyDescription: JobCardDetailCompanyDescription(enterpriseContents: "", mainCustomer: "", mediaCoverage: "", established: "", employeesCount: JobCardDetailCompanyDescriptionEmployeesCount(count: nil, averageAge: nil, genderRatio: nil, middleEnter: nil)
+                , capital: nil, turnover: nil, presidentData: JobCardDetailCompanyDescriptionPresidentData(presidentName: "", presidentHistory: "")),
+            userFilter: UserFilterInfo(tudKeepStatus: false, tudSkipStatus: false))
+    }
+
+}
+
+

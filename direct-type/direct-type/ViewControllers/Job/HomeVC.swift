@@ -94,13 +94,13 @@ class HomeVC: TmpNaviTopVC {
         //[Dbg]___
         if Constants.DbgAutoPushVC {
             switch Constants.DbgAutoPushVCNum {
-            case 1: pushViewController(.profilePreviewH2)
+            case 1: pushViewController(.profilePreviewH2, model: MdlProfile.dummyData())
             case 2: pushViewController(.resumePreviewH3)
             case 3: pushViewController(.careerPreviewC15)
             case 4: pushViewController(.smoothCareerPreviewF11)
             case 5: pushViewController(.firstInputPreviewA)
             case 6: pushViewController(.careerListC)
-            case 7: pushViewController(.entryForm(.fromHome))
+            case 7: pushViewController(.entryForm(.fromHome), model: MdlJobCardDetail.dummyData())
             default: break
             }
         }
