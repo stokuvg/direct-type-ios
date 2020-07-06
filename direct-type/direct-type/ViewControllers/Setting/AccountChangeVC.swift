@@ -21,6 +21,7 @@ final class AccountChangeVC: TmpBasicVC {
 
     private var profile: MdlProfile?
     private var existingPhoneNumber = ""
+    private let phoneNumberMaxLength: Int = 11
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,10 +101,17 @@ private extension AccountChangeVC {
         return tel as String
     }
     
+    var isValidInputText: Bool {
+        guard let inputText = inputField.text, inputField.markedTextRange == nil,
+            inputText.count == phoneNumberMaxLength else { return false }
+        return true
+    }
     @objc
     func changeButtonState() {
-        nextBtn.isEnabled = isValidPhoneNumber
-        nextBtn.backgroundColor = UIColor(colorType: isValidPhoneNumber ? .color_button : .color_line)
+        guard let inputText = inputField.text else { return }
+        inputField.text = inputText.prefix(phoneNumberMaxLength).description
+        nextBtn.backgroundColor = UIColor(colorType: isValidInputText ? .color_sub : .color_line)
+        nextBtn.isEnabled = isValidInputText
     }
     
     func makeCautionText(text: String) -> NSMutableAttributedString {
