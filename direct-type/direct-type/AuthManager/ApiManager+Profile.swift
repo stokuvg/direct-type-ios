@@ -23,6 +23,7 @@ extension ApiManager {
     }
     private class func getProfileFetch(param: Void) -> Promise<MdlProfile> {
         let (promise, resolver) = Promise<MdlProfile>.pending()
+        if Constants.DbgFetchDummyData { resolver.fulfill(MdlProfile.dummyData()) }//!!![Dbg: 開発用ダミー返却]
         AuthManager.needAuth(true)
         ProfileAPI.profileControllerGet()
         .done { result in
