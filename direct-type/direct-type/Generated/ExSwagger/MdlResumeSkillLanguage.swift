@@ -61,7 +61,12 @@ enum EditItemMdlResumeSkillLanguage: String, EditItemProtocol {
     }
     //Placeholder Text
     var placeholder: String {
-        return ""//return "[\(self.itemKey) PlaceHolder]"
+        switch self {
+        case .languageStudySkill:
+            return "英語以外の語学スキルを1000文字以内で入力ください"
+        default:
+            return ""//return "[\(self.itemKey) PlaceHolder]"
+        }
     }
     var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" } //画面内でUniqになるようなキーを定義（配列利用時は除く）
 }

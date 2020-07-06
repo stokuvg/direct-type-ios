@@ -168,6 +168,7 @@ extension ResumePreviewVC {
         }
         .finally {
             self.dispData()
+            SVProgressHUD.dismiss()
         }
     }
 }

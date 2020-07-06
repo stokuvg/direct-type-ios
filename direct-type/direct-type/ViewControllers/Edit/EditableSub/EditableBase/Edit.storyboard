@@ -254,22 +254,71 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5g-Vq-a4H" userLabel="ヘッダ下部情報">
-                                <rect key="frame" x="0.0" y="84" width="414" height="100"/>
-                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="84" width="414" height="115"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="4QY-Yc-4BE">
+                                        <rect key="frame" x="0.0" y="4" width="414" height="103"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2G0-bV-eDv">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uBj-Sq-TOc">
+                                                        <rect key="frame" x="8" y="0.0" width="398" height="50"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="uBj-Sq-TOc" secondAttribute="trailing" constant="8" id="GrM-Xo-ung"/>
+                                                    <constraint firstItem="uBj-Sq-TOc" firstAttribute="leading" secondItem="2G0-bV-eDv" secondAttribute="leading" constant="8" id="MSO-Qb-6AV"/>
+                                                    <constraint firstAttribute="bottom" secondItem="uBj-Sq-TOc" secondAttribute="bottom" id="Sgi-Oi-YhT"/>
+                                                    <constraint firstItem="uBj-Sq-TOc" firstAttribute="top" secondItem="2G0-bV-eDv" secondAttribute="top" id="gfQ-vF-6t4"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Udh-u7-qQ4">
+                                                <rect key="frame" x="0.0" y="53" width="414" height="50"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4aa-RD-FsS">
+                                                        <rect key="frame" x="8" y="0.0" width="398" height="50"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="4aa-RD-FsS" secondAttribute="bottom" id="1ue-nJ-XBA"/>
+                                                    <constraint firstItem="4aa-RD-FsS" firstAttribute="top" secondItem="Udh-u7-qQ4" secondAttribute="top" id="9Nu-VL-EEO"/>
+                                                    <constraint firstAttribute="trailing" secondItem="4aa-RD-FsS" secondAttribute="trailing" constant="8" id="HNa-Cx-qJr"/>
+                                                    <constraint firstItem="4aa-RD-FsS" firstAttribute="leading" secondItem="Udh-u7-qQ4" secondAttribute="leading" constant="8" id="u52-W0-SKh"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="N3f-7h-4FZ"/>
+                                    <constraint firstItem="4QY-Yc-4BE" firstAttribute="top" secondItem="a5g-Vq-a4H" secondAttribute="top" constant="4" id="5Em-KK-Zdl"/>
+                                    <constraint firstAttribute="bottom" secondItem="4QY-Yc-4BE" secondAttribute="bottom" constant="8" id="jL3-4S-07C"/>
+                                    <constraint firstItem="4QY-Yc-4BE" firstAttribute="leading" secondItem="a5g-Vq-a4H" secondAttribute="leading" id="tE4-mt-eHV"/>
+                                    <constraint firstAttribute="trailing" secondItem="4QY-Yc-4BE" secondAttribute="trailing" id="wTk-sy-LJG"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bQZ-3J-Y53" userLabel="メイン">
-                                <rect key="frame" x="0.0" y="184" width="414" height="588"/>
+                                <rect key="frame" x="0.0" y="199" width="414" height="573"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="daI-hT-6Hq">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="588"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="573"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="GQe-ia-yC6" id="0z0-rp-cTT"/>
+                                        </connections>
                                     </textView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -281,7 +330,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="vue-tt-kgy" firstAttribute="top" secondItem="Dau-Vv-wtj" secondAttribute="top" id="5a8-sk-9QV"/>
                             <constraint firstItem="vue-tt-kgy" firstAttribute="trailing" secondItem="Dau-Vv-wtj" secondAttribute="trailing" id="8ta-hY-YHL"/>
@@ -302,10 +351,15 @@
                     <connections>
                         <outlet property="btnBack" destination="ISg-un-rjT" id="xHO-Tr-aZ4"/>
                         <outlet property="btnCommit" destination="HCc-Mu-GTa" id="IOk-zW-o2H"/>
+                        <outlet property="lblCount" destination="4aa-RD-FsS" id="hwW-Rs-Aq6"/>
+                        <outlet property="lblInfoText" destination="uBj-Sq-TOc" id="rXT-Iu-oYM"/>
                         <outlet property="lblTitle" destination="Rlj-QO-9oZ" id="pCo-40-nBb"/>
                         <outlet property="textVW" destination="daI-hT-6Hq" id="lMy-ZW-dMG"/>
                         <outlet property="vwFoot" destination="rFs-pO-CES" id="hrV-2Y-gpT"/>
                         <outlet property="vwHead" destination="vue-tt-kgy" id="x6D-ag-OeF"/>
+                        <outlet property="vwInfoArea" destination="a5g-Vq-a4H" id="L2G-wU-aLT"/>
+                        <outlet property="vwInfoCountArea" destination="Udh-u7-qQ4" id="sYO-se-5ei"/>
+                        <outlet property="vwInfoTextArea" destination="2G0-bV-eDv" id="YQy-Oj-dky"/>
                         <outlet property="vwMain" destination="bQZ-3J-Y53" id="Nbd-sD-m59"/>
                     </connections>
                 </viewController>

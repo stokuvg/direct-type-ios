@@ -157,7 +157,12 @@ enum EditItemMdlResume: String, EditItemProtocol {
     }
     //Placeholder Text
     var placeholder: String {
-        return ""//return "[\(self.itemKey) PlaceHolder]"
+        switch self {
+        case .ownPr:
+            return "自己PRを2000文字以内で入力ください"
+        default:
+            return ""//return "[\(self.itemKey) PlaceHolder]"
+        }
     }
     var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" } //画面内でUniqになるようなキーを定義（配列利用時は除く）
 }

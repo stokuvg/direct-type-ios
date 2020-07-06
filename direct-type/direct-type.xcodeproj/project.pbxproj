@@ -233,6 +233,7 @@
 		2642E38F24A04C1F003E6907 /* MstSel_salary.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 2642E38E24A04C1F003E6907 /* MstSel_salary.tsv */; };
 		2642E39124A19B0F003E6907 /* MdlEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2642E39024A19B0F003E6907 /* MdlEntry.swift */; };
 		2642E39324A1A6CC003E6907 /* Validate+Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2642E39224A1A6CC003E6907 /* Validate+Entry.swift */; };
+		265022E024B2C75B000B26D7 /* MdlDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265022DF24B2C75B000B26D7 /* MdlDummy.swift */; };
 		267E635B24A98642004169ED /* EntryFormInfoTextTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267E635924A98642004169ED /* EntryFormInfoTextTBCell.swift */; };
 		267E635C24A98642004169ED /* EntryFormInfoTextTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 267E635A24A98642004169ED /* EntryFormInfoTextTBCell.xib */; };
 		267E635F24A9865E004169ED /* EntryFormExQuestionsHeadTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267E635D24A9865E004169ED /* EntryFormExQuestionsHeadTBCell.swift */; };
@@ -568,6 +569,7 @@
 		2642E38E24A04C1F003E6907 /* MstSel_salary.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstSel_salary.tsv; sourceTree = "<group>"; };
 		2642E39024A19B0F003E6907 /* MdlEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlEntry.swift; sourceTree = "<group>"; };
 		2642E39224A1A6CC003E6907 /* Validate+Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validate+Entry.swift"; sourceTree = "<group>"; };
+		265022DF24B2C75B000B26D7 /* MdlDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlDummy.swift; sourceTree = "<group>"; };
 		267E635924A98642004169ED /* EntryFormInfoTextTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryFormInfoTextTBCell.swift; sourceTree = "<group>"; };
 		267E635A24A98642004169ED /* EntryFormInfoTextTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntryFormInfoTextTBCell.xib; sourceTree = "<group>"; };
 		267E635D24A9865E004169ED /* EntryFormExQuestionsHeadTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryFormExQuestionsHeadTBCell.swift; sourceTree = "<group>"; };
@@ -1229,6 +1231,7 @@
 				0670F4612491E14400E60FDC /* MdlKeepList.swift */,
 				0670F4632491F33B00E60FDC /* MdlKeepJob.swift */,
 				0E22833E24AEB6360008765E /* MdlChemistry.swift */,
+				265022DF24B2C75B000B26D7 /* MdlDummy.swift */,
 			);
 			path = ExSwagger;
 			sourceTree = "<group>";
@@ -1780,6 +1783,7 @@
 				267E636624A9D183004169ED /* HPreviewTBCellTool.swift in Sources */,
 				06E519A02457DAD7004E4B7A /* WithDrawalCompleteVC.swift in Sources */,
 				0E1FB23924AC8A6E005E0BE7 /* AppDefine.swift in Sources */,
+				265022E024B2C75B000B26D7 /* MdlDummy.swift in Sources */,
 				26A4C1CB247B4A81008D8E68 /* ApiManager.swift in Sources */,
 				06E5199C2457DA2D004E4B7A /* AccountChangeCompleteVC.swift in Sources */,
 				268BFF60246E8FF8004B2640 /* MdlAppSmoothCareerWorkBackgroundDetail.swift in Sources */,
