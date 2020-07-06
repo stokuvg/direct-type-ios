@@ -25,9 +25,8 @@ final class AccountChangeVC: TmpBasicVC {
         setup()
     }
     
-    func configure(data: [String:Any]) {
-        let telNo = data["telNo"] as! String
-        existingPhoneNumber = extractNumbers(from: telNo)
+    func configure(with profile: MdlProfile) {
+        existingPhoneNumber = extractNumbers(from: profile.mobilePhoneNo)
     }
 }
 
