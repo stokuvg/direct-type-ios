@@ -50,8 +50,6 @@ private extension InitialInputRegistVC {
         let phoneNumber = phoneNumberText.addCountryCode(type: .japan)
         let phoneNumberAttribute = ["phone_number" : phoneNumber]
         
-        
-//        AWSMobileClient.default().signUp(username: phoneNumberText.addCountryCode(type: .japan), password: password) { (signUpResult, error) in
         AWSMobileClient.default().signUp(username: phoneNumber, password: password, userAttributes: phoneNumberAttribute) { (signUpResult, error) in
             if let error = error {
                 let buf = AuthManager.convAnyError(error).debugDisp
