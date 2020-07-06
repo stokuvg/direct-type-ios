@@ -31,6 +31,7 @@ class BasePercentageCompletionCell: BaseTableViewCell {
         super.awakeFromNib()
         // Initialization code
         percentMark.text(text: "%", fontType: .font_SSb, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
+        editBtn.isUserInteractionEnabled = false //セル全体で反応させるため、ボタンUI無効化した
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
