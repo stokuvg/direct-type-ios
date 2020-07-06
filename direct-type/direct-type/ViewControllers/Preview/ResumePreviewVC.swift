@@ -16,6 +16,9 @@ class ResumePreviewVC: PreviewBaseVC {
     var detail: MdlResume? = nil
 
     override func actCommit(_ sender: UIButton) {
+        if editableModel.editTempCD.count == 0 { //変更なければ、そのまま戻して良いプレビュー画面
+            navigationController?.popViewController(animated: true)
+        }
         if validateLocalModel() {
             tableVW.reloadData()
             return
