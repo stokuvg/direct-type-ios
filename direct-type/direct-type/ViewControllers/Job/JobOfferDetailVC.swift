@@ -41,13 +41,7 @@ final class JobOfferDetailVC: TmpBasicVC {
     private var articleCellMaxSize: CGFloat = 0
     private var prcodesCellMaxSize: CGFloat = 0
     private var transitionSource: AnalyticsEventType.RouteType = .unknown
-    private var keepFlag = false {
-        didSet {
-            keepBtn.setImage(keepButtonImage, for: .normal)
-            keepBtn.setImage(keepButtonImage, for: .highlighted)
-            keepBtn.setImage(keepButtonImage, for: .selected)
-        }
-    }
+    private var keepFlag = false
 
     private var keepButtonImage: UIImage {
         return UIImage(named: keepFlag ? "btn_keep" : "btn_keepclose")!
@@ -57,6 +51,7 @@ final class JobOfferDetailVC: TmpBasicVC {
         super.viewDidLoad()
         setNaviButtons()
         setup()
+        changeButtonState()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,6 +81,12 @@ private extension JobOfferDetailVC {
         setKeepButton()
         registerTableViewNib()
         AnalyticsEventManager.track(type: .toJobDetail, with: transitionSource.parameter)
+    }
+    
+    func changeButtonState() {
+        keepBtn.setImage(keepButtonImage, for: .normal)
+        keepBtn.setImage(keepButtonImage, for: .highlighted)
+        keepBtn.setImage(keepButtonImage, for: .selected)
     }
     
     func setKeepButton() {
@@ -154,6 +155,7 @@ private extension JobOfferDetailVC {
     
     func keepAction() {
         keepFlag = !keepFlag
+        changeButtonState()
         
         // キープ情報送信
         if keepFlag == true {
