@@ -895,7 +895,6 @@
 				066F270C246E6B820040BDC1 /* UITextView+Extensions.swift */,
 				066FE3AD24A3163C006AB2B4 /* Device+Extensions.swift */,
 				066FE3AF24A3347D006AB2B4 /* String+Extensions.swift */,
-				0E29E33F24A43238006175AE /* String+Extension.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1797,7 +1796,6 @@
 				06409C73246D3A6800EA6BBB /* JobDetailFoldingHeaderView.swift in Sources */,
 				26A1F5842480F23100834213 /* MyCmnDialogVC.swift in Sources */,
 				2642E39324A1A6CC003E6907 /* Validate+Entry.swift in Sources */,
-				0E29E34024A43238006175AE /* String+Extension.swift in Sources */,
 				26AF3237248F538300AA78FD /* Validate+Resume.swift in Sources */,
 				06E519982457DA0D004E4B7A /* ApproachSettingVC.swift in Sources */,
 				26F18B5224AB0FB6003048AE /* EntryConfirmItem.swift in Sources */,

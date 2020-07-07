@@ -34,6 +34,9 @@ struct Constants {
 
     //制限値の定数定義
     static let CareerCardMax: Int = 10 //職務経歴書カードの登録際台数
+    //応募や職歴などでのダミー文字列
+    static let TypeDummyStrings: String = "▲▽"
+    
 
     //「年」「月」選択Picker用定義
     static let years: [Int] = (1900...2100).map { $0 }
