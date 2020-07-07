@@ -58,7 +58,7 @@ class EntryVC: PreviewBaseVC {
     var resume: MdlResume? = nil
     var career: MdlCareer? = nil
     var entry: MdlEntry? = nil
-    var transitionSource: AnalyticsEventType.RouteType = .unknown
+    var routeFrom: AnalyticsEventType.RouteFromType = .unknown
 
     override func actCommit(_ sender: UIButton) {
         if validateLocalModel() {
@@ -66,7 +66,7 @@ class EntryVC: PreviewBaseVC {
             return
         }
         //===entryだけは、編集中の値を適用したモデルを生成する必要あり（or editTemp情報も渡すか）
-        var _entry: MdlEntry? = entry
+        let _entry: MdlEntry? = entry
         if let tmp = editableModel.editTempCD[EditItemMdlEntry.exQuestionAnswer1.itemKey] { _entry?.exAnswer1 = tmp }
         if let tmp = editableModel.editTempCD[EditItemMdlEntry.exQuestionAnswer2.itemKey] { _entry?.exAnswer2 = tmp }
         if let tmp = editableModel.editTempCD[EditItemMdlEntry.exQuestionAnswer3.itemKey] { _entry?.exAnswer3 = tmp }
@@ -88,8 +88,16 @@ class EntryVC: PreviewBaseVC {
     //共通プレビューをOverrideして利用する
     override func viewDidLoad() {
         super.viewDidLoad()
+// <<<<<<< feature/entryError_200706_16
         if transitionSource != .unknown {
             AnalyticsEventManager.track(type: .toJobDetail, with: transitionSource.parameter)
+// =======
+//         btnCommit.setTitle(text: "応募確認画面へ", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+//         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
+        
+//         if routeFrom != .unknown {
+//             AnalyticsEventManager.track(type: .transitionPath(destination: .toEntryDetail, from: routeFrom))
+// >>>>>>> develop
         }
     }
     func initData(_ jobCard: MdlJobCardDetail) {

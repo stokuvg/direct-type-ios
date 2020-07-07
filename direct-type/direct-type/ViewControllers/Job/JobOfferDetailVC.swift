@@ -21,7 +21,7 @@ class JobOfferDetailVC: TmpBasicVC {
     @IBAction func applicationBtnAction() {
         AnalyticsEventManager.track(type: .entryJob)
         // 応募フォームに遷移
-        self.pushViewController(.entryForm(transitionSource), model: _mdlJobDetail)
+        self.pushViewController(.entryForm(routeFrom), model: _mdlJobDetail)
     }
     
     var keepFlag:Bool!
@@ -108,7 +108,7 @@ class JobOfferDetailVC: TmpBasicVC {
     
     var prcodesCellMaxSize:CGFloat = 0
     
-    var transitionSource: AnalyticsEventType.RouteType = .unknown
+    var routeFrom: AnalyticsEventType.RouteFromType = .unknown
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -181,7 +181,9 @@ class JobOfferDetailVC: TmpBasicVC {
         keepFlag = false
         self.keepDataSetting(flag: keepFlag)
         
-        AnalyticsEventManager.track(type: .toJobDetail, with: transitionSource.parameter)
+        if routeFrom != .unknown {
+            AnalyticsEventManager.track(type: .transitionPath(destination: .toJobDetail, from: routeFrom))
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
