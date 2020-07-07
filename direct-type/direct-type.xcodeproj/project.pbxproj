@@ -310,6 +310,8 @@
 		26BF48EB24639D6500E00215 /* SelectItemsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF48EA24639D6500E00215 /* SelectItemsManager.swift */; };
 		26BF48EE24639DEE00E00215 /* EditableObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF48ED24639DED00E00215 /* EditableObj.swift */; };
 		26BF48F024639E7100E00215 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF48EF24639E7100E00215 /* Constants.swift */; };
+		26C3207624B4129D00E9564B /* CareerCardItemVW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C3207524B4129D00E9564B /* CareerCardItemVW.swift */; };
+		26C3207824B412DE00E9564B /* CareerCardItemVW.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C3207724B412DE00E9564B /* CareerCardItemVW.xib */; };
 		26C8A6C32490D22600D6B96C /* Validate+Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C8A6C22490D22600D6B96C /* Validate+Base.swift */; };
 		26CFC45F2469495800E458E2 /* ConstantsPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFC45E2469495800E458E2 /* ConstantsPreview.swift */; };
 		26CFC4672469496D00E458E2 /* Edit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26CFC4612469496D00E458E2 /* Edit.storyboard */; };
@@ -646,6 +648,8 @@
 		26BF48EA24639D6500E00215 /* SelectItemsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectItemsManager.swift; sourceTree = "<group>"; };
 		26BF48ED24639DED00E00215 /* EditableObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableObj.swift; sourceTree = "<group>"; };
 		26BF48EF24639E7100E00215 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		26C3207524B4129D00E9564B /* CareerCardItemVW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerCardItemVW.swift; sourceTree = "<group>"; };
+		26C3207724B412DE00E9564B /* CareerCardItemVW.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CareerCardItemVW.xib; sourceTree = "<group>"; };
 		26C8A6C22490D22600D6B96C /* Validate+Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validate+Base.swift"; sourceTree = "<group>"; };
 		26CFC45E2469495800E458E2 /* ConstantsPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsPreview.swift; sourceTree = "<group>"; };
 		26CFC4612469496D00E458E2 /* Edit.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Edit.storyboard; sourceTree = "<group>"; };
@@ -758,6 +762,7 @@
 		0667636D2457B02800AC5039 /* Job */ = {
 			isa = PBXGroup;
 			children = (
+				06E519B4245814C7004E4B7A /* EntryCompleteVC.swift */,
 				06457060246526E300F3B015 /* detail */,
 				06E5197E2457CF31004E4B7A /* Cell */,
 				0667636E2457B04500AC5039 /* HomeVC.swift */,
@@ -782,7 +787,6 @@
 				066763712457B08300AC5039 /* EntryVC.swift */,
 				06E519B0245814B2004E4B7A /* EntryConfirmVC.swift */,
 				06E519B2245814BD004E4B7A /* EntryLoginVC.swift */,
-				06E519B4245814C7004E4B7A /* EntryCompleteVC.swift */,
 			);
 			path = Entry;
 			sourceTree = "<group>";
@@ -1048,6 +1052,8 @@
 				269B29A12496F63200B33FBD /* CareerCardTBCell.swift */,
 				269B29A22496F63200B33FBD /* CareerCardTBCell.xib */,
 				06E519C6245815B0004E4B7A /* CareerPreviewVC.swift */,
+				26C3207524B4129D00E9564B /* CareerCardItemVW.swift */,
+				26C3207724B412DE00E9564B /* CareerCardItemVW.xib */,
 			);
 			path = Career;
 			sourceTree = "<group>";
@@ -1586,6 +1592,7 @@
 				26A1F5852480F23100834213 /* Dialog.storyboard in Resources */,
 				2636075D2477A39900032880 /* Auth.storyboard in Resources */,
 				066F271D246E81B60040BDC1 /* JobDetailFoldingOutlineCell.xib in Resources */,
+				26C3207824B412DE00E9564B /* CareerCardItemVW.xib in Resources */,
 				26BF48E724639D2B00E00215 /* MstK9_employmentType.tsv in Resources */,
 				066BD9E02456ACB5009E610B /* Assets.xcassets in Resources */,
 				2620BCF024AEBA62006D7FFF /* HEditZipcodeTBCell.xib in Resources */,
@@ -1815,6 +1822,7 @@
 				26133A58246B9DC2001802BB /* EditableBasicVC+PickerYMD.swift in Sources */,
 				0EAE7651248E300E009A8F4B /* ChemistryResultPersonalTypeCell.swift in Sources */,
 				2636075F2477AB4900032880 /* BaseVC+ShowDialog.swift in Sources */,
+				26C3207624B4129D00E9564B /* CareerCardItemVW.swift in Sources */,
 				26CFC45F2469495800E458E2 /* ConstantsPreview.swift in Sources */,
 				06E519AD245813DC004E4B7A /* LoginVC.swift in Sources */,
 				0EE8619F2488D50B003C5242 /* ChemistryAnswerButton.swift in Sources */,

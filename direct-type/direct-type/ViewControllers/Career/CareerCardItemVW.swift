@@ -1,5 +1,5 @@
 //
-//  EntryConfirmItem.swift
+//  CareerCardItemVW.swift
 //  direct-type
 //
 //  Created by ms-mb014 on 2020/06/30.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EntryConfirmItem: UIView {
+class CareerCardItemVW: UIView {
     var title: String = ""
     var message: String = ""
 
@@ -29,7 +29,7 @@ class EntryConfirmItem: UIView {
         self.commonInit()
     }
     fileprivate func commonInit() {
-        guard let view = UINib(nibName: "EntryConfirmItem", bundle: nil).instantiate(withOwner: self, options: nil).first as? UIView else {
+        guard let view = UINib(nibName: "CareerCardItemVW", bundle: nil).instantiate(withOwner: self, options: nil).first as? UIView else {
             return
         }
         view.frame = self.bounds
@@ -51,8 +51,8 @@ class EntryConfirmItem: UIView {
     func dispCell() {
         lblTitle.text(text: title, fontType: .font_SSb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         lblMessage.text(text: message, fontType: .font_SS, textColor: UIColor(colorType: .color_black)!, alignment: .left)
-//        lblTitle.layoutIfNeeded()
-//        lblMessage.layoutIfNeeded()
+        lblTitle.layoutIfNeeded()
+        lblMessage.layoutIfNeeded()
     }
 }
 
