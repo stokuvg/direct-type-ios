@@ -28,6 +28,10 @@ final class MyPageVC: TmpNaviTopVC {
     private var isExistsChemistry: Bool {
         return topRanker != nil
     }
+    
+    private var shouldTransitionToInitialInput: Bool {
+        return profile == nil || resume == nil
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +60,15 @@ private extension MyPageVC {
         pageTableView.registerNib(nibName: "MyPageChemistryStartCell", idName: "MyPageChemistryStartCell") // 相性診断
         pageTableView.registerNib(nibName: "MyPageEditedChemistryCell", idName: "MyPageEditedChemistryCell")
         pageTableView.registerNib(nibName: "MyPageSettingCell", idName: "MyPageSettingCell") // 設定
+    }
+    
+    func transitionToInitialInput() {
+        let storyboard = UIStoryboard(name: "Preview", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "Sbid_FirstInputPreviewVC") as! FirstInputPreviewVC
+        vc.hidesBottomBarWhenPushed = true
+        let navi = UINavigationController(rootViewController: vc)
+        navi.modalPresentationStyle = .fullScreen
+        present(navi, animated: true)
     }
 
     func transitionToChemistry() {
@@ -359,6 +372,10 @@ extension MyPageVC {
         .finally {
             self.pageTableView.reloadData()
             SVProgressHUD.dismiss()
+            if self.shouldTransitionToInitialInput {
+                self.showConfirm(title: "プロフィール情報を入力してください", message: "", onlyOK: true)
+                    .done { _ in self.transitionToInitialInput() } .catch { (error) in } .finally {}
+            }
         }
     }
 }
