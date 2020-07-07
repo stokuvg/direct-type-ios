@@ -11,6 +11,7 @@ import AppsFlyerLib
 
 class AnalyticsEventManager {
     static func track(type: AnalyticsEventType, with parameter: [AnyHashable : Any]? = nil) {
+        // APIの口としてはパラメータを受け取れる様になってはいるが、AppsFlyer管理画面上でパラメータデータの確認ができないため基本使用しない想定
         AppsFlyerTracker.shared().trackEvent(type.log, withValues: parameter)
     }
     
