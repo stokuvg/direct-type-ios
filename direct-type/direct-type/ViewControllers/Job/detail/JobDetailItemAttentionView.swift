@@ -13,6 +13,7 @@ class JobDetailItemAttentionView: UIView {
     @IBOutlet weak var titleBackHeight:NSLayoutConstraint!
     @IBOutlet weak var markTopConstraint:NSLayoutConstraint!
     @IBOutlet weak var markLabel:UILabel!
+    @IBOutlet weak var markImageView:UIImageView!
     @IBOutlet weak var titleLabel:UILabel!
     @IBOutlet weak var titleLabelTop:NSLayoutConstraint!
     @IBOutlet weak var titleLabelHeight:NSLayoutConstraint!
