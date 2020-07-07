@@ -12,6 +12,10 @@ import SVProgressHUD
 import SwaggerClient
 
 class EntryConfirmVC: PreviewBaseVC {
+    
+    var isAccept: Bool = false
+    var bufPassword: String = ""
+        
     var jobCard: MdlJobCardDetail? = nil
     var profile: MdlProfile? = nil
     var resume: MdlResume? = nil
@@ -23,9 +27,10 @@ class EntryConfirmVC: PreviewBaseVC {
             tableVW.reloadData()
             return
         }
-        fetchPostEntry(completion: { () in
-            AnalyticsEventManager.track(type: .completeEntry)
-        })
+        showConfirm(title: "[\(isAccept)]", message: "[\(bufPassword)]", onlyOK: true)
+//        fetchPostEntry(completion: { () in
+//            AnalyticsEventManager.track(type: .completeEntry)
+//        })
     }
     //共通プレビューをOverrideして利用する
     override func viewDidLoad() {
@@ -86,7 +91,7 @@ class EntryConfirmVC: PreviewBaseVC {
         super.viewDidAppear(animated)
     }
     override func chkButtonEnable() {
-        btnCommit.isEnabled = true
+        btnCommit.isEnabled = isAccept
     }
 }
 
@@ -96,7 +101,7 @@ extension EntryConfirmVC {
         switch item.type {
         case .notifyEntry1C12:
             let cell: EntryConfirmNotifyEntry1TBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryConfirmNotifyEntry1TBCell", for: indexPath) as! EntryConfirmNotifyEntry1TBCell
-            cell.initCell(email: profile?.mailAddress ?? "")
+            cell.initCell(self, email: profile?.mailAddress ?? "")
             cell.dispCell()
             return cell
 
@@ -165,6 +170,13 @@ extension EntryConfirmVC {
     }
 }
 extension EntryConfirmVC: EntryConfirmNotifyEntryDelegate {
+    func changePasswordText(text: String) {
+        bufPassword = text
+    }
+    func changeAcceptStatus(isAccept: Bool) {
+        self.isAccept = isAccept
+        chkButtonEnable()
+    }
     func actLinkText(type: EntryConfirmLinkTextType) {
         switch type {
         case .passwordForgot:

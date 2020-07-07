@@ -9,6 +9,7 @@
 import UIKit
 
 class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
+    var delegate: EntryConfirmNotifyEntryDelegate? = nil
     var email: String = ""
     var password: String = ""
     
@@ -21,15 +22,16 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
     @IBOutlet weak var vwPasswordArea: UIView!
     @IBOutlet weak var tfPassword: UITextField!
 
-    
     override func awakeFromNib() {
         super.awakeFromNib()
-//        self.isUserInteractionEnabled = false //表示のみでタップ不可
         //===デザイン適用
         backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
         vwMainArea.backgroundColor = UIColor(colorType: .color_base)
+
+        tfPassword.isSecureTextEntry = true
     }
-    func initCell(email: String) {
+    func initCell(_ delegate: EntryConfirmNotifyEntryDelegate, email: String) {
+        self.delegate = delegate
         self.email = email
     }
     func dispCell() {
@@ -40,9 +42,15 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
         lblTitle.text(text: bufTitle, fontType: .font_M, textColor: UIColor(colorType: .color_black)!, alignment: .center)
         lblMessage.text(text: bufMessage, fontType: .font_SS, textColor: UIColor(colorType: .color_black)!, alignment: .left)
     }
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
 }
+
+//=== 文字入力に伴うTextField関連の通知
+extension EntryConfirmNotifyEntry1TBCell {
+    @IBAction func editingChanged(_ sender: UITextField) {
+        delegate?.changePasswordText(text: sender.text ?? "")        
+    }
+}
+

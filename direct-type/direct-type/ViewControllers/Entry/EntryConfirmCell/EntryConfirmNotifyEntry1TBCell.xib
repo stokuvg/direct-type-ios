@@ -63,6 +63,10 @@
                                         <rect key="frame" x="8" y="4" width="304" height="74"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" smartDashesType="no" smartQuotesType="no" textContentType="password"/>
+                                        <connections>
+                                            <action selector="editingChanged:" destination="KGk-i7-Jjw" eventType="editingChanged" id="XwC-Iu-GhV"/>
+                                            <action selector="valueChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="QQF-q0-8gO"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -87,6 +91,7 @@
             <connections>
                 <outlet property="lblMessage" destination="YIT-pz-Wub" id="GR9-qq-d9l"/>
                 <outlet property="lblTitle" destination="zsd-am-1Hk" id="GnB-d0-ajI"/>
+                <outlet property="tfPassword" destination="0qm-TU-EN5" id="9Cz-Id-i9F"/>
                 <outlet property="vwMainArea" destination="H2p-sc-9uM" id="ICc-DL-LvQ"/>
                 <outlet property="vwMessageArea" destination="q5s-HL-FMV" id="cw8-m3-Isk"/>
                 <outlet property="vwPasswordArea" destination="A72-fa-yfy" id="AkK-O7-Hc5"/>
