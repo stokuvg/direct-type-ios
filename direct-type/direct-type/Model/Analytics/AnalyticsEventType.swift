@@ -69,7 +69,7 @@ enum AnalyticsEventType {
         case .confirmAuthCode:
             text =  "confirm_auth_code"
         case .keep:
-            text =  "keep"
+            text =  "keep_job"
         case .skipVacancies:
             text =  "skip_job"
         case .entryJob:
