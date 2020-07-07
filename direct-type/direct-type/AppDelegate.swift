@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().isTranslucent = false
 
         setupAppsFlyer()
+        tryPostActivity()
         
         //=== Cognito認証の初期化処理を組み込む
         // Amazon Cognito 認証情報プロバイダーを初期化します
@@ -79,6 +80,12 @@ private extension AppDelegate {
         let initialVC = initialSB.instantiateViewController(withIdentifier: "InitialInputRegistVC") as! InitialInputRegistVC
         window?.rootViewController = initialVC
         window?.makeKeyAndVisible()
+    }
+    // ログイン済みだった場合は最終ログイン情報を送る
+    func tryPostActivity() {
+        if AuthManager.shared.isLogin {
+            ApiManager.createActivity()
+        }
     }
 }
 
