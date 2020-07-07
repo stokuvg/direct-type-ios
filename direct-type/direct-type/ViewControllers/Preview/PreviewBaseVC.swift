@@ -28,25 +28,25 @@ class PreviewBaseVC: TmpBasicVC {
         print(#line, #function, "＊オーバーライドして使う＊")
     }
 
-    func validateLocalModel() -> Bool {
-        ValidateManager.dbgDispCurrentItems(editableModel: editableModel) //[Dbg: 状態確認]
-        let chkErr = ValidateManager.chkValidationErr(editableModel)
-        self.dicValidErrMsg = chkErr
-        self.dicGrpValidErrMsg = ValidateManager.makeGrpErrByItemErr(chkErr)
-        if chkErr.count > 0 {
-            print("＊＊＊　Validationエラー発生: \(chkErr.count)件　＊＊＊")
-            var msg: String = ""
-            for err in chkErr {
-                msg = "\(msg)\(err.value)\n"
+        func validateLocalModel() -> Bool {
+            ValidateManager.dbgDispCurrentItems(editableModel: editableModel) //[Dbg: 状態確認]
+            let chkErr = ValidateManager.chkValidationErr(editableModel)
+            self.dicValidErrMsg = chkErr
+            self.dicGrpValidErrMsg = ValidateManager.makeGrpErrByItemErr(chkErr)
+            if chkErr.count > 0 {
+                print("＊＊＊　Validationエラー発生: \(chkErr.count)件　＊＊＊")
+                var msg: String = ""
+                for err in chkErr {
+                    msg = "\(msg)\(err.value)\n"
+                }
+    //            self.showValidationError(title: "Validationエラー (\(chkErr.count)件)", message: msg)
+    //            /* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
+                return true
+            } else {
+                print("＊＊＊　Validationエラーなし　＊＊＊")
+                return false
             }
-//            self.showValidationError(title: "Validationエラー (\(chkErr.count)件)", message: msg)
-//            /* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
-            return true
-        } else {
-            print("＊＊＊　Validationエラーなし　＊＊＊")
-            return false
         }
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

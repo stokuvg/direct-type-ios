@@ -23,15 +23,52 @@ class CareerPreviewVC: PreviewBaseVC {
     var arrDetail: [MdlCareerCard] = []
 
     override func actCommit(_ sender: UIButton) {
-        if editableModel.editTempCD.count == 0 { //変更なければ、そのまま戻して良いプレビュー画面
-            navigationController?.popViewController(animated: true)
-        }
+//        if editableModel.editTempCD.count == 0 { //変更なければ、そのまま戻して良いプレビュー画面
+//            navigationController?.popViewController(animated: true)
+//        }
+        //===== フェッチかける
         if validateLocalModel() {
             tableVW.reloadData()
             return
         }
+        //===複数項目にわたるものなど、拡張バリデーションの実施
+        var isExistDummyText: Bool = false
+        if let workMemo = editableModel.getItemByKey(EditItemMdlCareerCard.contents.itemKey) {
+            let text = workMemo.curVal
+            let regexp = "\(Constants.TypeDummyStrings)"
+            let regex = try! NSRegularExpression(pattern: regexp, options: [.dotMatchesLineSeparators])
+            let matches = regex.matches(in: text, options: [], range: NSMakeRange(0, text.count))
+            isExistDummyText = (matches.count > 0) ? true : false
+        }
+        if isExistDummyText {
+            self.dicValidErrMsg.addDicArrVal(key: EditItemMdlCareerCard.contents.itemKey, val: "ダミーテキストが残っています")
+            self.dicGrpValidErrMsg = ValidateManager.makeGrpErrByItemErr(self.dicValidErrMsg)
+            tableVW.reloadData()            
+            let title: String = "確認"
+            let message: String = "ダミーの文字を削除して保存しますが、よろしいですか？"
+            let alert = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+            let okAction = UIAlertAction.init(title: "ダミーを削除して保存", style: UIAlertAction.Style.default) { _ in
+                if let workMemo = self.editableModel.getItemByKey(EditItemMdlCareerCard.contents.itemKey) {
+                    let text = workMemo.curVal
+                    let regexp = "\(Constants.TypeDummyStrings)"
+                    let newText = text.replacementString(text: text, regexp: regexp, fixedReplacementString: "_")
+                    self.editableModel.changeTempItem(workMemo, text: newText)
+                    self.fetchCreateCareerList()
+                }
+            }
+            let cancelAction = UIAlertAction.init(title: "修正する", style: UIAlertAction.Style.cancel) { _ in
+                return
+            }
+            alert.addAction(okAction)
+            alert.addAction(cancelAction)
+            DispatchQueue.main.async {
+                self.present(alert, animated: true, completion: nil)
+            }
+            return
+        }
         fetchCreateCareerList()
     }
+    
     //共通プレビューをOverrideして利用する
     override func initData() {
         title = "職務経歴書"
