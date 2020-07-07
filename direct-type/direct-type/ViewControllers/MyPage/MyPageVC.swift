@@ -373,7 +373,7 @@ extension MyPageVC {
             self.pageTableView.reloadData()
             SVProgressHUD.dismiss()
             if self.shouldTransitionToInitialInput {
-                self.showConfirm(title: "プロフィール情報を入力してください", message: "", onlyOK: true)
+                self.showConfirm(title: "初期入力をしてください", message: "", onlyOK: true)
                     .done { _ in self.transitionToInitialInput() } .catch { (error) in } .finally {}
             }
         }
