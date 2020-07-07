@@ -39,7 +39,7 @@ class MdlKeepJob: Codable {
     // キープフラグ
     var keepStatus:Bool
 
-    init(jobId: String = "", jobName: String = "", pressStartDate: String = "", pressEndDate: String = "", mainTitle: String = "", mainPhotoURL: String = "", salaryMinCode: Int = 0, salaryMaxCode: Int = 0, isSalaryDisplay: Bool = false, companyName: String = "") {
+    init(jobId: String = "", jobName: String = "", pressStartDate: String = "", pressEndDate: String = "", mainTitle: String = "", mainPhotoURL: String = "", salaryMinCode: Int = 0, salaryMaxCode: Int = 0, isSalaryDisplay: Bool = false, companyName: String = "", areaNames: [String] = [], keepStatus:Bool = true) {
         self.jobId = jobId
         self.jobName = jobName
         self.pressStartDate = pressStartDate
@@ -51,9 +51,9 @@ class MdlKeepJob: Codable {
         self.isSalaryDisplay = isSalaryDisplay
         self.companyName = companyName
         
-        self.areaNames = []
+        self.areaNames = areaNames
         
-        self.keepStatus = true
+        self.keepStatus = keepStatus
     }
     // TudApiのデータを変換して保持
     convenience init(dto: KeepJob) {
@@ -61,6 +61,6 @@ class MdlKeepJob: Codable {
         let _minSalaryId = Int(dto.minSalaryId)
         let _maxSalaryId = Int(dto.maxSalaryId)
         
-        self.init(jobId: dto.jobId, jobName: dto.jobName,pressStartDate:dto.pressStartDate,pressEndDate:dto.pressEndDate, mainTitle:dto.mainTitle,mainPhotoURL: dto.mainPhotoURL , salaryMinCode: _minSalaryId!, salaryMaxCode: _maxSalaryId!, isSalaryDisplay: dto.isSalaryDisplay, companyName: dto.companyName)
+        self.init(jobId: dto.jobId, jobName: dto.jobName,pressStartDate:dto.pressStartDate,pressEndDate:dto.pressEndDate, mainTitle:dto.mainTitle,mainPhotoURL: dto.mainPhotoURL , salaryMinCode: _minSalaryId!, salaryMaxCode: _maxSalaryId!, isSalaryDisplay: dto.isSalaryDisplay, companyName: dto.companyName, areaNames:dto.place2Ids)
     }
 }

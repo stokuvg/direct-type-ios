@@ -52,7 +52,7 @@ final class KeepListVC: TmpBasicVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        makeDummyData()
+//        makeDummyData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -181,7 +181,8 @@ extension KeepListVC: KeepNoViewDelegate {
 
 extension KeepListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        return 232.0
+//        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -223,7 +224,7 @@ extension KeepListVC: BaseJobCardCellDelegate {
         Log.selectLog(logLevel: .debug, "KeepListVC delegate keepAction tag:\(tag)")
         let jobCard = lists.keepJobs[tag]
         let jobId = jobCard.jobId
-        let keepStatus = jobCard.keepStatus
+        let keepStatus = !jobCard.keepStatus
         
         if keepStatus == true {
             ApiManager.sendJobKeep(id: jobId)
