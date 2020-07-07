@@ -52,7 +52,7 @@ final class KeepListVC: TmpBasicVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        makeDummyData()
+//        makeDummyData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -223,7 +223,7 @@ extension KeepListVC: BaseJobCardCellDelegate {
         Log.selectLog(logLevel: .debug, "KeepListVC delegate keepAction tag:\(tag)")
         let jobCard = lists.keepJobs[tag]
         let jobId = jobCard.jobId
-        let keepStatus = jobCard.keepStatus
+        let keepStatus = !jobCard.keepStatus
         
         if keepStatus == true {
             ApiManager.sendJobKeep(id: jobId)

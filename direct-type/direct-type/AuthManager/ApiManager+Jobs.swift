@@ -29,12 +29,12 @@ extension ApiManager {
         AuthManager.needAuth(true)
         JobsAPI.jobsControllerRecommended(page: pageNo)
         .done { result in
-            Log.selectLog(logLevel: .debug, "recommended result:\(result)")
+//            Log.selectLog(logLevel: .debug, "recommended result:\(result)")
 //            print(#line, #function, result)
             resolver.fulfill(MdlJobCardList(dto: result)) //変換しておく
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
-            Log.selectLog(logLevel: .debug, "recommended error:\(error)")
+//            Log.selectLog(logLevel: .debug, "recommended error:\(error)")
             
             resolver.reject(error)
         }
