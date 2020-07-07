@@ -35,7 +35,7 @@ enum AnalyticsEventType {
             case .toJobDetail:
                 return "to_job_detail"
             case .toEntryDetail:
-                return "to_entry"
+                return "entry"
             }
         }
     }
@@ -65,17 +65,17 @@ enum AnalyticsEventType {
         var text = ""
         switch self {
         case .createAuthenticationCode:
-            text =  "create_authentication_code"
+            text =  "create_auth_code"
         case .confirmAuthCode:
             text =  "confirm_auth_code"
         case .keep:
             text =  "keep"
         case .skipVacancies:
-            text =  "skip_vacancies"
+            text =  "skip_job"
         case .entryJob:
             text =  "entry_job"
         case .completeEntry:
-            text =  "complete_entry"
+            text =  "entry_complete"
         case .logout:
             text =  "logout"
         case .withdrawal:
@@ -83,7 +83,7 @@ enum AnalyticsEventType {
         case .viewHome:
             text =  "view_home"
         case .viewVacancies:
-            text =  "view_vacancies"
+            text =  "view_job_detail"
         case .viewKeepList:
             text =  "view_keep_list"
         case .transitionPath(let destination, let from):
