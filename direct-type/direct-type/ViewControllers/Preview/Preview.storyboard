@@ -384,10 +384,10 @@
             </objects>
             <point key="canvasLocation" x="2235" y="94"/>
         </scene>
-        <!--Entry FormVC-->
+        <!--EntryVC-->
         <scene sceneID="p2J-st-q7b">
             <objects>
-                <viewController storyboardIdentifier="Sbid_EntryVC" id="5hq-Ae-TcB" customClass="EntryFormVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Sbid_EntryVC" id="5hq-Ae-TcB" customClass="EntryVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xKa-6U-zKI">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

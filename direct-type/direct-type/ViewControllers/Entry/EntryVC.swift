@@ -52,7 +52,7 @@ import UIKit
 import TudApi
 import SVProgressHUD
 
-class EntryFormVC: PreviewBaseVC {
+class EntryVC: PreviewBaseVC {
     var jobCard: MdlJobCardDetail? = nil//応募への遷移元は、求人カード詳細のみでOK?
     var profile: MdlProfile? = nil
     var resume: MdlResume? = nil
@@ -221,7 +221,7 @@ class EntryFormVC: PreviewBaseVC {
     }
 }
 
-extension EntryFormVC {
+extension EntryVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = arrData[indexPath.row]
         switch item.type {
@@ -281,7 +281,7 @@ extension EntryFormVC {
 
 
 //=== APIフェッチ
-extension EntryFormVC {
+extension EntryVC {
     private func fetchGetEntryAll() {
         fetchGetProfile()//ここから多段で実施してる
     }
