@@ -23,39 +23,37 @@ class CareerPreviewVC: PreviewBaseVC {
     var arrDetail: [MdlCareerCard] = []
 
     override func actCommit(_ sender: UIButton) {
-        if editableModel.editTempCD.count == 0 { //変更なければ、そのまま戻して良いプレビュー画面
-            navigationController?.popViewController(animated: true)
+//        if editableModel.editTempCD.count == 0 { //変更なければ、そのまま戻して良いプレビュー画面
+//            navigationController?.popViewController(animated: true)
+//        }
+        //===== フェッチかける
+        if validateLocalModel() {
+            tableVW.reloadData()
+            return
         }
         //===複数項目にわたるものなど、拡張バリデーションの実施
         var isExistDummyText: Bool = false
         if let workMemo = editableModel.getItemByKey(EditItemMdlCareerCard.contents.itemKey) {
             let text = workMemo.curVal
-            let regexp = #"▲▽"#
+            let regexp = "\(Constants.TypeDummyStrings)"
             let regex = try! NSRegularExpression(pattern: regexp, options: [.dotMatchesLineSeparators])
             let matches = regex.matches(in: text, options: [], range: NSMakeRange(0, text.count))
-            for match in matches {
-                for index in 0 ..< match.numberOfRanges {
-                    isExistDummyText = true
-                    let nsRange = match.range(at: index)
-                    if let range = Range(nsRange, in: text) {
-                        print(#line, String(text[range]), range)
-                    }
-                }
-            }
+            isExistDummyText = (matches.count > 0) ? true : false
         }
-        //
         if isExistDummyText {
+            self.dicValidErrMsg.addDicArrVal(key: EditItemMdlCareerCard.contents.itemKey, val: "ダミーテキストが残っています")
+            self.dicGrpValidErrMsg = ValidateManager.makeGrpErrByItemErr(self.dicValidErrMsg)
+            tableVW.reloadData()            
             let title: String = "確認"
             let message: String = "ダミーの文字を削除して保存しますが、よろしいですか？"
             let alert = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
             let okAction = UIAlertAction.init(title: "ダミーを削除して保存", style: UIAlertAction.Style.default) { _ in
-                //文字列を削除して、フェッチかけてみるよ
                 if let workMemo = self.editableModel.getItemByKey(EditItemMdlCareerCard.contents.itemKey) {
-//                    let text = workMemo.curVal
-                    let text = "asdfghjASDFGHAAAJKL"
-                    let pattern = #"(A+)"#
-                    let newText = text.replacementString(text: text, regexp: pattern, fixedReplacementString: "_")
-                    print("* [\(text)]\n->[\(newText)]")
+                    let text = workMemo.curVal
+                    let regexp = "\(Constants.TypeDummyStrings)"
+                    let newText = text.replacementString(text: text, regexp: regexp, fixedReplacementString: "_")
+                    self.editableModel.changeTempItem(workMemo, text: newText)
+                    self.fetchCreateCareerList()
                 }
             }
             let cancelAction = UIAlertAction.init(title: "修正する", style: UIAlertAction.Style.cancel) { _ in
@@ -66,12 +64,6 @@ class CareerPreviewVC: PreviewBaseVC {
             DispatchQueue.main.async {
                 self.present(alert, animated: true, completion: nil)
             }
-            return
-        }
-        
-        //===== フェッチかける
-        if validateLocalModel() {
-            tableVW.reloadData()
             return
         }
         fetchCreateCareerList()
