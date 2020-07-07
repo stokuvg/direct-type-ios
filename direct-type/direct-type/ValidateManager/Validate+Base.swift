@@ -26,6 +26,7 @@ extension ValidateManager {
             case EditItemMdlProfile.address2.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.adderssH2.itemKey, val: val)
             case EditItemMdlProfile.mailAddress.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.emailH2.itemKey, val: val)
             case EditItemMdlProfile.mobilePhoneNo.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.mobilephoneH2.itemKey, val: val)
+            case EditItemMdlProfile.hopeJobArea.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.hopeAreaH2.itemKey, val: val)
 
             //===[A系統]初期入力
             case EditItemMdlFirstInput.nickname.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.nicknameA6.itemKey, val: val)

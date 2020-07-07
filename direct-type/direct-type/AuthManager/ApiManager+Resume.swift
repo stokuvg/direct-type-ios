@@ -23,6 +23,7 @@ extension ApiManager {
     }
     private class func getResumeFetch(param: Void) -> Promise<MdlResume> {
         let (promise, resolver) = Promise<MdlResume>.pending()
+        if Constants.DbgFetchDummyData { resolver.fulfill(MdlResume.dummyData()) }//!!![Dbg: 開発用ダミー返却]
         AuthManager.needAuth(true)
         ResumeAPI.resumeControllerGet()
         .done { result in

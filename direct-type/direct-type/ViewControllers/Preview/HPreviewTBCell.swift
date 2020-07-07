@@ -14,6 +14,7 @@ class HPreviewTBCell: UITableViewCell {
     var editTempCD: [EditableItemKey: EditableItemCurVal] = [:]
     
     @IBOutlet weak var vwMainArea: UIView!
+    @IBOutlet weak var vwRequiredIconArea: UIView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblValue: ExItemLabel!
     @IBOutlet weak var lblNotice: UILabel!
@@ -39,6 +40,14 @@ class HPreviewTBCell: UITableViewCell {
             self.accessoryType = .none // .disclosureIndicator 遷移マーク不要
             self.lblValue.isReadonly = false
         }
+        //必須アイコンの表示制御（子項目に1つでも必須があれば、そのグループは必須）
+        var isRequired: Bool = false
+        for childItem in item.childItems {
+            if childItem.editItem.valid.required == true {
+                isRequired = true
+            }
+        }
+        vwRequiredIconArea.isHidden = !isRequired //必須アイコンの表示制御
     }
     
     func dispCell() {
@@ -62,11 +71,7 @@ class HPreviewTBCell: UITableViewCell {
         if errMsg != "" {
             //lblErrorMsg.text = errMsg
             lblErrorMsg.text(text: errMsg, fontType: .font_SSS, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
-            if UITraitCollection.isDarkMode == true {
-                vwMainArea.backgroundColor = UIColor.init(red: 0.3, green: 0.1, blue: 0.1, alpha: 1.0)
-            } else {
-                vwMainArea.backgroundColor = UIColor.init(red: 1.0, green: 0.8, blue: 0.8, alpha: 1.0)
-            }
+            vwMainArea.backgroundColor = UIColor.init(red: 1.0, green: 0.8, blue: 0.8, alpha: 1.0)
         } else {
             lblErrorMsg.text = ""
             vwMainArea.backgroundColor = self.backgroundColor

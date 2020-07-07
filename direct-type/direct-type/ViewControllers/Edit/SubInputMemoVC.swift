@@ -18,6 +18,11 @@ class SubInputMemoVC: BaseVC {
     @IBAction func actBack(_ sender: UIButton) {
         actPopupCancel()
     }
+    @IBOutlet weak var vwInfoArea: UIView!
+    @IBOutlet weak var lblCount: UILabel!
+    @IBOutlet weak var vwInfoCountArea: UIView!
+    @IBOutlet weak var lblInfoText: UILabel!
+    @IBOutlet weak var vwInfoTextArea: UIView!
 
     @IBOutlet weak var vwMain: UIView!
     @IBOutlet weak var textVW: UITextView!
@@ -34,9 +39,15 @@ class SubInputMemoVC: BaseVC {
         //====デザイン適用
         view.backgroundColor = UIColor(colorType: .color_base)!
         vwHead.backgroundColor = UIColor(colorType: .color_main)!
+
+        vwInfoArea.backgroundColor = UIColor(colorType: .color_main)!
+        vwInfoTextArea.backgroundColor = UIColor(colorType: .color_main)!
+        vwInfoCountArea.backgroundColor = UIColor(colorType: .color_main)!
+
         vwMain.backgroundColor = UIColor(colorType: .color_base)!
         vwFoot.backgroundColor = UIColor(colorType: .color_base)!
         textVW.textColor = UIColor(colorType: .color_black)
+        textVW.backgroundColor = UIColor(colorType: .color_white)
         btnCommit.setTitle(text: "選択", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
         //===ソフトウェアキーボードに〔閉じる〕ボタン付与
@@ -59,10 +70,32 @@ class SubInputMemoVC: BaseVC {
         let bufTitle: String = "\(editableItem.dispName)"
         lblTitle.text(text: bufTitle, fontType: .font_L, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         textVW.text = editableItem.curVal
+        var bufInfoText: String = ""
+        switch editableItem.editableItemKey {
+        case EditItemMdlEntry.exQuestionAnswer1.itemKey: fallthrough
+        case EditItemMdlEntry.exQuestionAnswer2.itemKey: fallthrough
+        case EditItemMdlEntry.exQuestionAnswer3.itemKey:
+            bufInfoText = editableItem.exQuestion
+            print(bufInfoText.description)
+        default:
+            bufInfoText = editableItem.editItem.placeholder
+        }
+        lblInfoText.text(text: bufInfoText, fontType: .font_S, textColor: UIColor.init(colorType: .color_white)!, alignment: .left)
+        dispCount()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         dispData()
+    }
+    private func dispCount() {
+        let maxCount = editableItem.editItem.valid.max ?? 0
+        if maxCount > 0 {
+            let curCount = textVW.text.count
+            let bufCount = "\(curCount)/\(maxCount)文字"
+            lblCount.text(text: bufCount, fontType: .font_SSS, textColor: UIColor.init(colorType: .color_white)!, alignment: .right)
+        } else {
+            lblCount.text = nil
+        }
     }
 }
 
@@ -75,4 +108,12 @@ extension SubInputMemoVC {
     func actPopupCancel() {
         self.dismiss(animated: true) { }
     }
+}
+
+//===テキストのリアルタイム文字カウントに対応させる
+extension SubInputMemoVC: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        dispCount()
+    }
+    
 }

@@ -25,6 +25,7 @@ enum AnalyticsEventType {
     case toEntryDetail
     
     enum RouteType {
+        case unknown
         case fromHome
         case fromKeepList
         
@@ -42,6 +43,8 @@ enum AnalyticsEventType {
                 return "from_home"
             case .fromKeepList:
                 return "from_keep_list"
+            case .unknown:
+                return ""
             }
         }
     }

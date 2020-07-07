@@ -21,13 +21,25 @@ class HEditZipcodeTBCell: UITableViewCell {
         //===デザイン適用
         backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
         tfValueZip3.textColor = UIColor(colorType: .color_black)
+        tfValueZip3.tintColor = UIColor(colorType: .color_black)
+        tfValueZip3.backgroundColor = UIColor(colorType: .color_white)
+        tfValueZip3.borderColor = UIColor(colorType: .color_line)
+        tfValueZip3.cornerRadius = 8
+        tfValueZip3.borderWidth = 1
+
         tfValueZip4.textColor = UIColor(colorType: .color_black)
+        tfValueZip4.tintColor = UIColor(colorType: .color_black)
+        tfValueZip4.backgroundColor = UIColor(colorType: .color_white)
+        tfValueZip4.borderColor = UIColor(colorType: .color_line)
+        tfValueZip4.cornerRadius = 8
+        tfValueZip4.borderWidth = 1
     }
 
     func initCell(_ item: EditableItemH) {
         self.item = item
         tfValueZip3.clearButtonMode = .always //クリアボタンの表示制御
         tfValueZip4.clearButtonMode = .always //クリアボタンの表示制御
+        //vwRequiredIconArea.isHidden = !item.editItem.valid.required //必須アイコンの表示制御
     }
     
     func dispCell() {

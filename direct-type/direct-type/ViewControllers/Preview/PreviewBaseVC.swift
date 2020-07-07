@@ -91,7 +91,7 @@ class PreviewBaseVC: TmpBasicVC {
         super.viewWillDisappear(animated)
     }
     func chkButtonEnable() {
-//        btnCommit.isEnabled = true ; return //!!!
+        btnCommit.isEnabled = true ; return //!!!
         //=== 変更なければフェッチ不要
         if editableModel.editTempCD.count > 0 {
             btnCommit.isEnabled = true
@@ -193,7 +193,7 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSingleVC") as? SubSelectSingleVC{
                     nvc.initData(self, editableItem: editTemp, selectingCodes: editTemp.curVal)
                     //遷移アニメーション関連
-                    nvc.modalTransitionStyle = .crossDissolve
+                    nvc.modalTransitionStyle = .coverVertical//.crossDissolve
                     self.present(nvc, animated: true) {}
                 }
             case .selectMulti:
@@ -201,7 +201,7 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectMultiVC") as? SubSelectMultiVC{
                     nvc.initData(self, editableItem: editTemp, selectingCodes: editTemp.curVal)
                     //遷移アニメーション関連
-                    nvc.modalTransitionStyle = .crossDissolve
+                    nvc.modalTransitionStyle = .coverVertical//.crossDissolve
                     self.present(nvc, animated: true) {}
                 }
             case .selectSpecial: fallthrough
@@ -210,7 +210,7 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSpecialVC") as? SubSelectSpecialVC{
                     nvc.initData(self, editableItem: editTemp, selectingCodes: editTemp.curVal)
                     //遷移アニメーション関連
-                    nvc.modalTransitionStyle = .crossDissolve
+                    nvc.modalTransitionStyle = .coverVertical//.crossDissolve
                     self.present(nvc, animated: true) {}
                 }
             }
@@ -228,7 +228,7 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSpecialVC") as? SubSelectSpecialVC{
                     nvc.initData(self, editableItem: _item, selectingCodes: _item.curVal)
                     //遷移アニメーション関連
-                    nvc.modalTransitionStyle = .crossDissolve
+                    nvc.modalTransitionStyle = .coverVertical//.crossDissolve
                     self.present(nvc, animated: true) {}
                 }
             }

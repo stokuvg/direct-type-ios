@@ -58,7 +58,7 @@ class EntryVC: PreviewBaseVC {
     var resume: MdlResume? = nil
     var career: MdlCareer? = nil
     var entry: MdlEntry? = nil
-    var transitionSource: AnalyticsEventType.RouteType!
+    var transitionSource: AnalyticsEventType.RouteType = .unknown
 
     override func actCommit(_ sender: UIButton) {
         if validateLocalModel() {
@@ -79,7 +79,7 @@ class EntryVC: PreviewBaseVC {
             }
         }
         _entry?.hopeArea = _hopeArea
-        //===独自質問はjobCardDetailに含まれているので、MdlEntryに持たせておく
+        //===独自質問はjobCardDetailに含まれているので、MdlEntryにも持たせておく
         if let tmp = jobCard?.entryQuestion1 { _entry?.exQuestion1 = tmp }
         if let tmp = jobCard?.entryQuestion2 { _entry?.exQuestion2 = tmp }
         if let tmp = jobCard?.entryQuestion3 { _entry?.exQuestion3 = tmp }
@@ -91,12 +91,18 @@ class EntryVC: PreviewBaseVC {
         btnCommit.setTitle(text: "応募確認画面へ", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
         
-        AnalyticsEventManager.track(type: .toJobDetail, with: transitionSource.parameter)
+        if transitionSource != .unknown {
+            AnalyticsEventManager.track(type: .toJobDetail, with: transitionSource.parameter)
+        }
     }
     func initData(_ jobCard: MdlJobCardDetail) {
         title = "[C-9] 応募フォーム"
         self.jobCard = jobCard
         self.entry = MdlEntry()
+        //===独自質問はjobCardDetailに含まれているので、MdlEntryにも持たせておく
+        if let tmp = jobCard.entryQuestion1 { entry?.exQuestion1 = tmp }
+        if let tmp = jobCard.entryQuestion2 { entry?.exQuestion2 = tmp }
+        if let tmp = jobCard.entryQuestion3 { entry?.exQuestion3 = tmp }
     }
     override func dispData() {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
@@ -126,19 +132,19 @@ class EntryVC: PreviewBaseVC {
         
         //===１２．独自質問（必須）
         var exQA: [MdlItemH] = []
-        if let exQuestion = entry?.exQuestion1 {
+        if let exQuestion = entry?.exQuestion1, !exQuestion.isEmpty {
             exQA.append(MdlItemH(.exQAItem1C9, exQuestion, childItems: [
-                EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer1, val: entry?.exAnswer1 ?? ""),
+                EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer1, val: entry?.exAnswer1 ?? "", exQuestion: exQuestion),
             ], model: career))
         }
-        if let exQuestion = entry?.exQuestion2 {
+        if let exQuestion = entry?.exQuestion2, !exQuestion.isEmpty {
             exQA.append(MdlItemH(.exQAItem2C9, exQuestion, childItems: [
-                EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer2, val: entry?.exAnswer2 ?? ""),
+                EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer2, val: entry?.exAnswer2 ?? "", exQuestion: exQuestion),
             ], model: career))
         }
-        if let exQuestion = entry?.exQuestion3 {
+        if let exQuestion = entry?.exQuestion3, !exQuestion.isEmpty {
             exQA.append(MdlItemH(.exQAItem3C9, exQuestion, childItems: [
-                EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer3, val: entry?.exAnswer3 ?? ""),
+                EditableItemH(type: .inputMemo, editItem: EditItemMdlEntry.exQuestionAnswer3, val: entry?.exAnswer3 ?? "", exQuestion: exQuestion),
             ], model: career))
         }
         if exQA.count > 0 {

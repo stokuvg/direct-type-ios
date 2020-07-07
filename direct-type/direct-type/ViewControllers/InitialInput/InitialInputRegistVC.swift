@@ -47,7 +47,10 @@ private extension InitialInputRegistVC {
         }
         
         guard let phoneNumberText = phoneNumberTextField.text else { return }
-        AWSMobileClient.default().signUp(username: phoneNumberText.addCountryCode(type: .japan), password: password) { (signUpResult, error) in
+        let phoneNumber = phoneNumberText.addCountryCode(type: .japan)
+        let phoneNumberAttribute = ["phone_number" : phoneNumber]
+        
+        AWSMobileClient.default().signUp(username: phoneNumber, password: password, userAttributes: phoneNumberAttribute) { (signUpResult, error) in
             if let error = error {
                 let buf = AuthManager.convAnyError(error).debugDisp
                 DispatchQueue.main.async {
@@ -144,10 +147,10 @@ private extension InitialInputRegistVC {
     
     @objc
     func changeButtonState() {
+        guard let inputText = phoneNumberTextField.text else { return }
+        phoneNumberTextField.text = inputText.prefix(phoneNumberMaxLength).description
         nextButton.backgroundColor = UIColor(colorType: isValidInputText ? .color_sub : .color_line)
         nextButton.isEnabled = isValidInputText
-        guard let inputText = phoneNumberTextField.text, isValidInputText else { return }
-        phoneNumberTextField.text = inputText.prefix(phoneNumberMaxLength).description
     }
 }
 

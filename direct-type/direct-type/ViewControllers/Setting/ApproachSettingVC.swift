@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import TudApi
+import SVProgressHUD
 
 final class ApproachSettingVC: TmpBasicVC {
     @IBOutlet private weak var scoutTitleLabel: UILabel!
@@ -47,12 +49,24 @@ final class ApproachSettingVC: TmpBasicVC {
 private extension ApproachSettingVC {
     func setup() {
         guard let approachSetting = approachSetting else { return }
-        isScoutEnable = approachSetting.isScoutEnable
+        isScoutEnable = approachSetting.scoutEnable
     }
     
     func saveSetting() {
-//        let param = UpdateApproachRequestDTO()
-//        ApiManager.updateApproach(param, isRetry: true)
+        SVProgressHUD.show()
+        let param = UpdateSettingsRequestDTO(scoutEnable: isScoutEnable)
+        ApiManager.updateApproach(param, isRetry: true)
+        .done { _ in }
+        .catch { (error) in
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            print(myErr)
+        }
+        .finally {
+            SVProgressHUD.dismiss()
+            self.showFinishReport(title: "データの送信が完了しました", message: "") {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
     }
     
     var linkedText: String { "こちら" }

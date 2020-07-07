@@ -19,6 +19,10 @@ class MdlResumeSkillLanguage: Codable {
     var languageEnglish: String
     /** 英語以外語学スキル（未記入：\&quot;\&quot;） */
     var languageStudySkill: String
+    /** いずれかの語学スキルを持っているかどうかのフラグ */
+    var isHaveSkill: Bool {
+        return !languageToeicScore.isEmpty || !languageToeflScore.isEmpty || !languageEnglish.isEmpty || !languageStudySkill.isEmpty
+    }
 
     init(languageToeicScore: String, languageToeflScore: String, languageEnglish: String, languageStudySkill: String) {
         self.languageToeicScore = languageToeicScore
@@ -61,7 +65,12 @@ enum EditItemMdlResumeSkillLanguage: String, EditItemProtocol {
     }
     //Placeholder Text
     var placeholder: String {
-        return ""//return "[\(self.itemKey) PlaceHolder]"
+        switch self {
+        case .languageStudySkill:
+            return "英語以外の語学スキルを1000文字以内で入力ください"
+        default:
+            return ""//return "[\(self.itemKey) PlaceHolder]"
+        }
     }
     var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" } //画面内でUniqになるようなキーを定義（配列利用時は除く）
 }

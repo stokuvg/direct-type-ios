@@ -198,8 +198,8 @@ extension EntryConfirmVC {
         guard let _resume = self.resume else { return }
         guard let _career = self.career else { return }
         
-        //!!!let _jobCardCode: String = _jobCard.jobCardCode
-        let _jobCardCode: String = "1170847" //!!![[Dbg: 固定値で投げている]
+        let _jobCardCode: String = _jobCard.jobCardCode
+//        let _jobCardCode: String = "1170847" //!!![[Dbg: 固定値で投げている]
         let _typePassword: String = "Dummy1234" //!!![[Dbg: 固定値で投げている]
 
         let param: WebAPIEntryUserDto = WebAPIEntryUserDto(_jobCardCode, _profile, _resume, _career, editableModel.editTempCD, _typePassword)
