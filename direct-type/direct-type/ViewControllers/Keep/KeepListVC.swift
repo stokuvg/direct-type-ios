@@ -8,62 +8,53 @@
 
 import UIKit
 import SVProgressHUD
-//import SwaggerClient
 import TudApi
 
-protocol KeepNoViewDelegate {
+protocol KeepNoViewDelegate: class {
     func btnAction()
 }
 
-class KeepNoView: UIView {
-    
-    @IBOutlet weak var imageView:UIImageView!
-    @IBOutlet weak var textLabel:UILabel!
-    @IBOutlet weak var chemistryLabel:UILabel!
-    @IBOutlet weak var chemistryBtn:UIButton!
-    @IBAction func chemistryBtnAction() {
-        self.delegate.btnAction()
+final class KeepNoView: UIView {
+    @IBOutlet private weak var imageView:UIImageView!
+    @IBOutlet private weak var textLabel:UILabel!
+    @IBOutlet private weak var chemistryLabel:UILabel!
+    @IBOutlet private weak var chemistryBtn:UIButton!
+    @IBAction private func chemistryBtnAction() {
+        delegate?.btnAction()
     }
     
-    var delegate:KeepNoViewDelegate!
+    var delegate: KeepNoViewDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         textLabel.text(text: "現在キープ中の求人は\nありません。\n本日のおすすめから\nきになる求人を探しましょう", fontType: .font_L, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
         chemistryLabel.text(text: "相性診断を受けると、キープした求人との相性が表示できるようになります。", fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
-        
         chemistryBtn.setTitle(text: "相性診断をやってみる", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
     }
 }
 
-class KeepListVC: TmpBasicVC {
-    @IBOutlet weak var keepTableView:UITableView!
+final class KeepListVC: TmpBasicVC {
+    @IBOutlet private weak var keepTableView:UITableView!
+    @IBOutlet private weak var keepNoView:KeepNoView!
     
-    @IBOutlet weak var keepNoView:KeepNoView!
-    
-    var lists:MdlKeepList!
-    var pageNo:Int = 1
+    var lists: MdlKeepList!
+    var pageNo: Int = 1
     // AppsFlyerのイベントトラッキング用にオンメモリでキープ求人リストを保有するプロパティ
     // キープされた求人をオンメモリ上で保有しておき、この画面が切り替わった際にイベント送信する
     var storedKeepList: Set<Int> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        self.title = "キープリスト"
-        self.keepTableView.backgroundColor = UIColor.init(colorType: .color_base)
-        
-        self.keepTableView.registerNib(nibName: "KeepCardCell", idName: "KeepCardCell")
-        
-        self.makeDummyData()
+        title = "キープリスト"
+        keepTableView.backgroundColor = UIColor.init(colorType: .color_base)
+        keepTableView.registerNib(nibName: "KeepCardCell", idName: "KeepCardCell")
+        makeDummyData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.getKeepList()
+        getKeepList()
         AnalyticsEventManager.track(type: .viewKeepList)
     }
     
@@ -74,94 +65,89 @@ class KeepListVC: TmpBasicVC {
         })
         storedKeepList.removeAll()
     }
-    
-    private func getKeepList() {
-        SVProgressHUD.show()
-        lists = MdlKeepList()
-        ApiManager.getKeeps(pageNo, isRetry: true)
-            .done { result in
-                debugLog("ApiManager getKeeps result:\(result.debugDisp)")
-                
-                self.lists = result
-                self.dataDisplay()
-        }
-        .catch { (error) in
-            Log.selectLog(logLevel: .debug, "error:\(error)")
-            
-            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-            switch myErr.code {
-                case 403:
-                    let message:String = "idTokenを取得していません"
-                    self.showConfirm(title: "通信失敗", message: message)
-                        .done { _ in
+}
 
-                            self.dataDisplay()
-                    }.catch { (error) in
-                        
-                    }.finally {
+private extension KeepListVC {
+    func getKeepList() {
+            SVProgressHUD.show()
+            lists = MdlKeepList()
+            ApiManager.getKeeps(pageNo, isRetry: true)
+                .done { result in
+                    debugLog("ApiManager getKeeps result:\(result.debugDisp)")
+                    
+                    self.lists = result
+                    self.dataDisplay()
+            }
+            .catch { (error) in
+                Log.selectLog(logLevel: .debug, "error:\(error)")
+                
+                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+                switch myErr.code {
+                    case 403:
+                        let message:String = "idTokenを取得していません"
+                        self.showConfirm(title: "通信失敗", message: message)
+                            .done { _ in
+
+                                self.dataDisplay()
+                        }.catch { (error) in
+                            
+                        }.finally {
+                    }
+                    default:
+                        break
                 }
-                default:
-                    break
+            }
+            .finally {
+                SVProgressHUD.dismiss()
             }
         }
-        .finally {
-            SVProgressHUD.dismiss()
-//            self.dataCheckAction()
+        
+        func dataDisplay() {
+            Log.selectLog(logLevel: .debug, "KeepListVC dataDisplay start")
+            Log.selectLog(logLevel: .debug, "self.lists.keepJobs.count:\(self.lists.keepJobs.count)")
+            
+            if self.lists.keepJobs.count > 0 {
+                keepNoView.isHidden = true
+                keepNoView.delegate = nil
+                keepTableView.delegate = self
+                keepTableView.dataSource = self
+                keepTableView.reloadData()
+            } else {
+                keepNoView.isHidden = false
+                // 0件
+                keepNoView.delegate = self
+            }
         }
-    }
-    
-    private func dataDisplay() {
-        Log.selectLog(logLevel: .debug, "KeepListVC dataDisplay start")
         
-        Log.selectLog(logLevel: .debug, "self.lists.keepJobs.count:\(self.lists.keepJobs.count)")
-        
-        if self.lists.keepJobs.count > 0 {
+        func makeDummyData() {
+            let _dummy1 = MdlKeepJob.init(jobId: "1234567", jobName: "キープリスト一覧職業名１キープリスト一覧職業名１", pressStartDate: "2020/06/12", pressEndDate: "2020/06/30", mainTitle: "", mainPhotoURL: "https://type.jp/s/img_banner/top_pc_side_number1.jpg", salaryMinCode: 7, salaryMaxCode: 11, isSalaryDisplay: true, companyName: "会社名１")
+            let _dummy2 = MdlKeepJob.init(jobId: "234567", jobName: "キープリスト一覧職業名２キープリスト一覧職業名２", pressStartDate: "2020/06/05", pressEndDate: "2020/06/19", mainTitle: "", mainPhotoURL: "https://type.jp/s/img_banner/top_pc_side_number1.jpg", salaryMinCode: 8, salaryMaxCode: 12, isSalaryDisplay: false, companyName: "会社名２")
+            let _dummy3 = MdlKeepJob.init(jobId: "34567", jobName: "キープリスト一覧職業名３キープリスト一覧職業名３", pressStartDate: "2020/06/01", pressEndDate: "2020/06/12", mainTitle: "", mainPhotoURL: "", salaryMinCode: 9, salaryMaxCode: 13, isSalaryDisplay: true, companyName: "会社名３")
+            
+            let _dummyData:[MdlKeepJob] = [
+                _dummy1,
+                _dummy2,
+                _dummy3,
+                _dummy1,
+                _dummy2,
+                _dummy3,
+                _dummy1,
+                _dummy2,
+                _dummy3,
+                _dummy1,
+                _dummy2,
+                _dummy3,
+            ]
+            self.lists = MdlKeepList.init(hasNext: true, keepJobs: _dummyData)
+
             self.keepNoView.isHidden = true
             self.keepNoView.delegate = nil
-            //
             self.keepTableView.delegate = self
             self.keepTableView.dataSource = self
             self.keepTableView.reloadData()
-        } else {
-            self.keepNoView.isHidden = false
-            // 0件
-            self.keepNoView.delegate = self
-            
-//            self.makeDummyData()
         }
-    }
-    
-    private func makeDummyData() {
-        
-        let _dummy1 = MdlKeepJob.init(jobId: "1234567", jobName: "キープリスト一覧職業名１キープリスト一覧職業名１", pressStartDate: "2020/06/12", pressEndDate: "2020/06/30", mainTitle: "", mainPhotoURL: "https://type.jp/s/img_banner/top_pc_side_number1.jpg", salaryMinCode: 7, salaryMaxCode: 11, isSalaryDisplay: true, companyName: "会社名１")
-        let _dummy2 = MdlKeepJob.init(jobId: "234567", jobName: "キープリスト一覧職業名２キープリスト一覧職業名２", pressStartDate: "2020/06/05", pressEndDate: "2020/06/19", mainTitle: "", mainPhotoURL: "https://type.jp/s/img_banner/top_pc_side_number1.jpg", salaryMinCode: 8, salaryMaxCode: 12, isSalaryDisplay: false, companyName: "会社名２")
-        let _dummy3 = MdlKeepJob.init(jobId: "34567", jobName: "キープリスト一覧職業名３キープリスト一覧職業名３", pressStartDate: "2020/06/01", pressEndDate: "2020/06/12", mainTitle: "", mainPhotoURL: "", salaryMinCode: 9, salaryMaxCode: 13, isSalaryDisplay: true, companyName: "会社名３")
-        
-        let _dummyData:[MdlKeepJob] = [
-            _dummy1,
-            _dummy2,
-            _dummy3,
-            _dummy1,
-            _dummy2,
-            _dummy3,
-            _dummy1,
-            _dummy2,
-            _dummy3,
-            _dummy1,
-            _dummy2,
-            _dummy3,
-        ]
-        self.lists = MdlKeepList.init(hasNext: true, keepJobs: _dummyData)
-
-        self.keepNoView.isHidden = true
-        self.keepNoView.delegate = nil
-        //
-        self.keepTableView.delegate = self
-        self.keepTableView.dataSource = self
-        self.keepTableView.reloadData()
-    }
-
 }
+
 extension KeepListVC: KeepNoViewDelegate {
     func btnAction() {
         Log.selectLog(logLevel: .debug, "navigationController:\(String(describing: self.navigationController))")
@@ -210,14 +196,12 @@ extension KeepListVC: UITableViewDataSource {
 }
 
 extension KeepListVC: BaseJobCardCellDelegate {
-    
-    func skipAction(jobId: String) {
-    }
+    func skipAction(jobId: String) {}
     
     func keepAction(tag: Int) {
         storedKeepList.insert(tag)
         Log.selectLog(logLevel: .debug, "KeepListVC delegate keepAction tag:\(tag)")
-        let jobCard = self.lists.keepJobs[tag]
+        let jobCard = lists.keepJobs[tag]
         let jobId = jobCard.jobId
         let keepStatus = jobCard.keepStatus
         
@@ -275,6 +259,4 @@ extension KeepListVC: BaseJobCardCellDelegate {
             }
         }
     }
-    
-    
 }
