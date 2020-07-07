@@ -167,7 +167,9 @@ extension KeepListVC: KeepNoViewDelegate {
         Log.selectLog(logLevel: .debug, "navigationController:\(String(describing: self.navigationController))")
         
         let vc = getVC(sbName: "ChemistryStart", vcName: "ChemistryStart") as! ChemistryStart
-        self.navigationController?.pushViewController(vc, animated: true)
+        hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+        hidesBottomBarWhenPushed = false
     }
 }
 
