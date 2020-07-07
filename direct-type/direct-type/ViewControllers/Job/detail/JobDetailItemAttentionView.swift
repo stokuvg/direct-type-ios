@@ -12,7 +12,6 @@ class JobDetailItemAttentionView: UIView {
     
     @IBOutlet weak var titleBackHeight:NSLayoutConstraint!
     @IBOutlet weak var markTopConstraint:NSLayoutConstraint!
-    @IBOutlet weak var markLabel:UILabel!
     @IBOutlet weak var markImageView:UIImageView!
     @IBOutlet weak var titleLabel:UILabel!
     @IBOutlet weak var titleLabelTop:NSLayoutConstraint!
@@ -21,7 +20,6 @@ class JobDetailItemAttentionView: UIView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.markLabel.text(text: "注 目", fontType: .C_font_Sb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
     }
     
     func setup(datas:[String:Any]) {
@@ -39,10 +37,13 @@ class JobDetailItemAttentionView: UIView {
 //        Log.selectLog(logLevel: .debug, "textSize:\(textSize)")
         
         if textSize > (singleWidth+5) {
-            markTopConstraint.constant = 9
-            titleLabelTop.constant = 1
+            Log.selectLog(logLevel: .debug, "注目タイトルが２行以上")
+//            markTopConstraint.constant = 9
+            titleLabelTop.constant = 0
             titleLabelHeight.constant = 50
             titleBackHeight.constant = 60
+        } else {
+            Log.selectLog(logLevel: .debug, "注目タイトルが1行以上")
         }
         
         let text = datas["text"] as! String
