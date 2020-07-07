@@ -26,7 +26,6 @@ final class JobOfferDetailVC: TmpBasicVC {
         keepAction()
     }
     
-    private var keepFlag: Bool!
     private var jobId = ""
     private var buttonsView: NaviButtonsView!
     private var _mdlJobDetail: MdlJobCardDetail!
@@ -42,7 +41,18 @@ final class JobOfferDetailVC: TmpBasicVC {
     private var articleCellMaxSize: CGFloat = 0
     private var prcodesCellMaxSize: CGFloat = 0
     private var transitionSource: AnalyticsEventType.RouteType = .unknown
+    private var keepFlag = false {
+        didSet {
+            keepBtn.setImage(keepButtonImage, for: .normal)
+            keepBtn.setImage(keepButtonImage, for: .highlighted)
+            keepBtn.setImage(keepButtonImage, for: .selected)
+        }
+    }
 
+    private var keepButtonImage: UIImage {
+        return UIImage(named: keepFlag ? "btn_keep" : "btn_keepclose")!
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setNaviButtons()
@@ -62,80 +72,84 @@ final class JobOfferDetailVC: TmpBasicVC {
         }
     }
     
-    func configure(jobId: String, transitionSource: AnalyticsEventType.RouteType) {
+    func configure(jobId: String, isKeep: Bool, transitionSource: AnalyticsEventType.RouteType) {
         self.jobId = jobId
+        keepFlag = isKeep
         self.transitionSource = transitionSource
     }
 }
 
 private extension JobOfferDetailVC {
     func setup() {
-        detailTableView.backgroundColor = UIColor.init(colorType: .color_base)
-                
-                /// section 0
-                // 終了間近,スカウト
-                // 職種名
-                // 給与
-                // 勤務地
-                // 社名
-                // 掲載期限
-                detailTableView.registerNib(nibName: "JobDetailDataCell", idName: "JobDetailDataCell")
-                // メイン画像
-                detailTableView.registerNib(nibName: "JobDetailImageCell", idName: "JobDetailImageCell")
-                /// section 1
-                // 記事
-                detailTableView.registerNib(nibName: "JobDetailArticleCell", idName: "JobDetailArticleCell")
-                /// section 2
-                // PRコード
-                detailTableView.registerNib(nibName: "JobDetailPRCodeTagsCell", idName: "JobDetailPRCodeTagsCell")
-                // 給与例
-                detailTableView.registerNib(nibName: "JobDetailSalaryExampleCell", idName: "JobDetailSalaryExampleCell")
-                /// section 3
-                // 募集要項
-                detailTableView.registerNib(nibName: "JobDetailItemCell", idName: "JobDetailItemCell")
-                // 1.仕事内容:              必須
-                // 　・案件例:               任意
-                // 　・手掛ける商品・サービス:   任意
-                // 　・開発環境・業務範囲:     任意
-                // 　・注目ポイント:           任意
-                // 2.応募資格:              必須
-                // 　・歓迎する経験・スキル:     任意
-                // 　・過去の採用例:           任意
-                // 　・この仕事の向き・不向き:  任意
-                // 3.雇用携帯コード:        必須
-                // 4.給与:               必須
-                // 　・賞与について:          任意
-                // 5.勤務時間:             必須
-                //   ・残業について:
-                // 6.勤務地:              必須
-                //   ・交通詳細
-                // 7.休日休暇:            必須
-                // 8.待遇・福利厚生:       必須
-                // 　・産休・育休取得:      任意
-                /// section 4
-                // 取材メモ
-                detailTableView.registerNib(nibName: "JobDetailFoldingMemoCell", idName: "JobDetailFoldingMemoCell")
-                /// section 5
-                // 選考プロセス
-                detailTableView.registerNib(nibName: "JobDetailFoldingProcessCell", idName: "JobDetailFoldingProcessCell")
-                /// section 6
-                // 連絡先
-                detailTableView.registerNib(nibName: "JobDetailFoldingPhoneNumberCell", idName: "JobDetailFoldingPhoneNumberCell")
-                /// section 7
-                // 会社概要
-                detailTableView.registerNib(nibName: "JobDetailFoldingOutlineCell", idName: "JobDetailFoldingOutlineCell")
-                /// section 8
-                // 応募ボタン/キープのボタン
-        //        self.detailTableView.registerNib(nibName: "JobDetailFooterApplicationCell", idName: "JobDetailFooterApplicationCell")
-                
-                applicationBtn.setTitle(text: "応募する", fontType: .C_font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
-                
-        //        keepBtn.setTitle(text: "", fontType: .C_font_M, textColor: UIColor.clear, alignment: .center)
-                
-                keepFlag = false
-                self.keepDataSetting(flag: keepFlag)
-                
-                AnalyticsEventManager.track(type: .toJobDetail, with: transitionSource.parameter)
+        detailTableView.backgroundColor = UIColor(colorType: .color_base)
+        
+        setKeepButton()
+        registerTableViewNib()
+        AnalyticsEventManager.track(type: .toJobDetail, with: transitionSource.parameter)
+    }
+    
+    func setKeepButton() {
+        keepBtn.imageView?.contentMode = .scaleAspectFit
+        keepBtn.contentHorizontalAlignment = .fill
+        keepBtn.contentVerticalAlignment = .fill
+        keepBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
+    func registerTableViewNib() {
+        /// section 0
+        // 終了間近,スカウト
+        // 職種名
+        // 給与
+        // 勤務地
+        // 社名
+        // 掲載期限
+        detailTableView.registerNib(nibName: "JobDetailDataCell", idName: "JobDetailDataCell")
+        // メイン画像
+        detailTableView.registerNib(nibName: "JobDetailImageCell", idName: "JobDetailImageCell")
+        /// section 1
+        // 記事
+        detailTableView.registerNib(nibName: "JobDetailArticleCell", idName: "JobDetailArticleCell")
+        /// section 2
+        // PRコード
+        detailTableView.registerNib(nibName: "JobDetailPRCodeTagsCell", idName: "JobDetailPRCodeTagsCell")
+        // 給与例
+        detailTableView.registerNib(nibName: "JobDetailSalaryExampleCell", idName: "JobDetailSalaryExampleCell")
+        /// section 3
+        // 募集要項
+        detailTableView.registerNib(nibName: "JobDetailItemCell", idName: "JobDetailItemCell")
+        // 1.仕事内容:              必須
+        // 　・案件例:               任意
+        // 　・手掛ける商品・サービス:   任意
+        // 　・開発環境・業務範囲:     任意
+        // 　・注目ポイント:           任意
+        // 2.応募資格:              必須
+        // 　・歓迎する経験・スキル:     任意
+        // 　・過去の採用例:           任意
+        // 　・この仕事の向き・不向き:  任意
+        // 3.雇用携帯コード:        必須
+        // 4.給与:               必須
+        // 　・賞与について:          任意
+        // 5.勤務時間:             必須
+        //   ・残業について:
+        // 6.勤務地:              必須
+        //   ・交通詳細
+        // 7.休日休暇:            必須
+        // 8.待遇・福利厚生:       必須
+        // 　・産休・育休取得:      任意
+        /// section 4
+        // 取材メモ
+        detailTableView.registerNib(nibName: "JobDetailFoldingMemoCell", idName: "JobDetailFoldingMemoCell")
+        /// section 5
+        // 選考プロセス
+        detailTableView.registerNib(nibName: "JobDetailFoldingProcessCell", idName: "JobDetailFoldingProcessCell")
+        /// section 6
+        // 連絡先
+        detailTableView.registerNib(nibName: "JobDetailFoldingPhoneNumberCell", idName: "JobDetailFoldingPhoneNumberCell")
+        /// section 7
+        // 会社概要
+        detailTableView.registerNib(nibName: "JobDetailFoldingOutlineCell", idName: "JobDetailFoldingOutlineCell")
+        /// section 8
+        applicationBtn.setTitle(text: "応募する", fontType: .C_font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
     }
     
     func keepAction() {
@@ -195,8 +209,6 @@ private extension JobOfferDetailVC {
                 Log.selectLog(logLevel: .debug, "keep send finally")
             }
         }
-        
-        self.keepDataSetting(flag: keepFlag)
     }
     
     func setNaviButtons() {
@@ -328,18 +340,6 @@ private extension JobOfferDetailVC {
             }
             .finally {
             }
-        }
-        
-        func keepDataSetting(flag:Bool) {
-            let imageName:String = flag ? "btn_keep" : "btn_keepclose"
-            let btnImage = UIImage(named: imageName)
-            keepBtn.imageView?.contentMode = .scaleAspectFit
-            keepBtn.contentHorizontalAlignment = .fill
-            keepBtn.contentVerticalAlignment = .fill
-            keepBtn.setImage(btnImage, for: .normal)
-            keepBtn.setImage(btnImage, for: .highlighted)
-            keepBtn.setImage(btnImage, for: .selected)
-            keepBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
 }
 
