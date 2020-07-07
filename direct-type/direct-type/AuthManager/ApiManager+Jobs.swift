@@ -24,14 +24,18 @@ extension ApiManager {
     }
     
     private class func getRecommendJobsFetch(pageNo: Int) -> Promise<MdlJobCardList> {
+        Log.selectLog(logLevel: .debug, "getRecommendJobsFetch start")
         let (promise, resolver) = Promise<MdlJobCardList>.pending()
         AuthManager.needAuth(true)
-        JobsAPI.jobsControllerGet(page: pageNo)
+        JobsAPI.jobsControllerRecommended(page: pageNo)
         .done { result in
+            Log.selectLog(logLevel: .debug, "recommended result:\(result)")
 //            print(#line, #function, result)
             resolver.fulfill(MdlJobCardList(dto: result)) //変換しておく
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
+            Log.selectLog(logLevel: .debug, "recommended error:\(error)")
+            
             resolver.reject(error)
         }
         .finally {

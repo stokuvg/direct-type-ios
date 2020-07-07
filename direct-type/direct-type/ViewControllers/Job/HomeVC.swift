@@ -81,7 +81,19 @@ class HomeVC: TmpNaviTopVC {
 //        self.makeDummyData()
 //        self.dataCheckAction()
 
-        self.getJobList()
+        let (homeFlag,pushFlag) = self.getHomeDisplayFlag()
+        Log.selectLog(logLevel: .debug, "homeFlag:\(homeFlag)")
+        Log.selectLog(logLevel: .debug, "pushFlag:\(pushFlag)")
+
+        if homeFlag == true, pushFlag == false {
+            // ２回目以降
+            self.recommendUseFlag = true
+            self.getJobRecommendList()
+        } else {
+            // 初回起動時
+            self.recommendUseFlag = false
+            self.getJobList()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -206,14 +218,14 @@ class HomeVC: TmpNaviTopVC {
             self.dataAddAction()
         }
     }
-    private func recommendLoad() {
-        Log.selectLog(logLevel: .debug, "HomeVC recommendLoad start")
+    private func getJobRecommendList() {
+        Log.selectLog(logLevel: .debug, "HomeVC getJobRecommendList start")
         pageJobCards = MdlJobCardList()
         dispJobCards = MdlJobCardList()
         pageNo = 1
         ApiManager.getRecommendJobs(pageNo, isRetry: true)
             .done { result in
-                debugLog("ApiManager getRecommendJobs result:\(result.debugDisp)")
+                debugLog("ApiManager getJobRecommendList result:\(result.debugDisp)")
 
                 self.pageJobCards = result
         }
@@ -224,6 +236,10 @@ class HomeVC: TmpNaviTopVC {
             self.showError(myErr)
         }
         .finally {
+            let convUpdateDate = DateHelper.convStrYMD2Date(self.pageJobCards.updateAt)
+            let updateDateString = DateHelper.mdDateString(date: convUpdateDate)
+
+            self.linesTitle(date: updateDateString, title: "あなたにぴったりの求人")
             SVProgressHUD.dismiss()
             self.dataCheckAction()
         }
@@ -248,22 +264,8 @@ class HomeVC: TmpNaviTopVC {
             self.showError(myErr)
         }
         .finally {
-            let (homeFlag,pushFlag) = self.getHomeDisplayFlag()
-            Log.selectLog(logLevel: .debug, "homeFlag:\(homeFlag)")
-            Log.selectLog(logLevel: .debug, "pushFlag:\(pushFlag)")
-//            let flag = false
-            if homeFlag == true, pushFlag == false {
-                let convUpdateDate = DateHelper.convStrYMD2Date(self.pageJobCards.updateAt)
-//                    Log.selectLog(logLevel: .debug, "convUpdateDate:\(String(describing: convUpdateDate))")
-
-                let updateDateString = DateHelper.mdDateString(date: convUpdateDate)
-//                    Log.selectLog(logLevel: .debug, "updateDateString:\(String(describing: updateDateString))")
-
-                self.linesTitle(date: updateDateString, title: "あなたにぴったりの求人")
-            } else {
-                self.linesTitle(date: "", title: "おすすめ求人一覧")
-            }
             SVProgressHUD.dismiss()
+            self.linesTitle(date: "", title: "おすすめ求人一覧")
             self.dataCheckAction()
 
             self.saveHomeDisplayFlag()
@@ -348,25 +350,6 @@ class HomeVC: TmpNaviTopVC {
         }
     }
     #endif
-
-    private func recommendSend() {
-        SVProgressHUD.show()
-        RecommendManager.fetchRecommend(type: .ap112, jobID: "")
-        .done { result in
-            Log.selectLog(logLevel: .debug, "求人一覧のレコメンド 成功:\(result)")
-
-//            self.pageJobCards = result
-            self.recommendLoad()
-        }
-        .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
-            SVProgressHUD.dismiss()
-            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-            Log.selectLog(logLevel: .debug, "求人一覧のレコメンド エラー:\(myErr.debugDisp)")
-        }
-        .finally {
-            self.homeTableView.reloadData()
-        }
-    }
 
     private func makeCellHeight(row: Int) -> CGFloat {
         var rowHeight:CGFloat = defaultCellHeight
@@ -523,7 +506,7 @@ extension HomeVC: JobOfferCardReloadCellDelegate {
         Log.selectLog(logLevel: .debug, "allTableReloadAction start")
         // 精度の高い求人を受け取る
         self.recommendUseFlag = true
-        self.recommendSend()
+        self.getJobRecommendList()
     }
 }
 
