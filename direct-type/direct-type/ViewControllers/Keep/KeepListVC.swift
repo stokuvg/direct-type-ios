@@ -24,6 +24,12 @@ final class KeepNoView: UIView {
     }
     
     var delegate: KeepNoViewDelegate?
+    var isExistsChemistry = false {
+        didSet {
+            chemistryLabel.isHidden = isExistsChemistry
+            chemistryBtn.isHidden = isExistsChemistry
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,8 +40,8 @@ final class KeepNoView: UIView {
 }
 
 final class KeepListVC: TmpBasicVC {
-    @IBOutlet private weak var keepTableView:UITableView!
-    @IBOutlet private weak var keepNoView:KeepNoView!
+    @IBOutlet private weak var keepTableView: UITableView!
+    @IBOutlet private weak var keepNoView: KeepNoView!
     
     var lists: MdlKeepList!
     var pageNo: Int = 1
@@ -45,15 +51,15 @@ final class KeepListVC: TmpBasicVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "キープリスト"
-        keepTableView.backgroundColor = UIColor.init(colorType: .color_base)
-        keepTableView.registerNib(nibName: "KeepCardCell", idName: "KeepCardCell")
+        setup()
         makeDummyData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        if !keepNoView.isExistsChemistry {
+            fetchGetChemistryData()
+        }
         getKeepList()
         AnalyticsEventManager.track(type: .viewKeepList)
     }
@@ -68,6 +74,12 @@ final class KeepListVC: TmpBasicVC {
 }
 
 private extension KeepListVC {
+    func setup() {
+        title = "キープリスト"
+        keepTableView.backgroundColor = UIColor.init(colorType: .color_base)
+        keepTableView.registerNib(nibName: "KeepCardCell", idName: "KeepCardCell")
+    }
+    
     func getKeepList() {
         SVProgressHUD.show()
         lists = MdlKeepList()
@@ -145,6 +157,14 @@ private extension KeepListVC {
         self.keepTableView.delegate = self
         self.keepTableView.dataSource = self
         self.keepTableView.reloadData()
+    }
+    
+    func fetchGetChemistryData() {
+        ApiManager.getChemistry(Void(), isRetry: true)
+        .done { result -> Void in
+            self.keepNoView.isExistsChemistry = true
+        }
+        .catch { error in }.finally {}
     }
 }
 
