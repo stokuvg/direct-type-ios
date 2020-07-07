@@ -27,10 +27,9 @@ class EntryConfirmVC: PreviewBaseVC {
             tableVW.reloadData()
             return
         }
-        showConfirm(title: "[\(isAccept)]", message: "[\(bufPassword)]", onlyOK: true)
-//        fetchPostEntry(completion: { () in
-//            AnalyticsEventManager.track(type: .completeEntry)
-//        })
+        fetchPostEntry(completion: { () in
+            AnalyticsEventManager.track(type: .completeEntry)
+        })
     }
     //共通プレビューをOverrideして利用する
     override func viewDidLoad() {
@@ -39,7 +38,7 @@ class EntryConfirmVC: PreviewBaseVC {
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
     }
     func initData(_ jobCard: MdlJobCardDetail, _ profile: MdlProfile? = nil, _ resume: MdlResume? = nil, _ career: MdlCareer? = nil, _ entry: MdlEntry? = nil) {
-        title = "[C-12] 応募確認"
+        title = "応募確認"
         self.jobCard = jobCard
         self.profile = profile
         self.resume = resume
@@ -91,7 +90,11 @@ class EntryConfirmVC: PreviewBaseVC {
         super.viewDidAppear(animated)
     }
     override func chkButtonEnable() {
-        btnCommit.isEnabled = isAccept
+        var isEnable: Bool = true
+        if isAccept == false { isEnable = false } //許可していなければ非活性
+        if self.bufPassword.count < 4 { isEnable = false } //4文字以下なら非活性
+        if self.bufPassword.count > 20 { isEnable = false } //20文字以上なら非活性
+        btnCommit.isEnabled = isEnable
     }
 }
 
@@ -172,6 +175,7 @@ extension EntryConfirmVC {
 extension EntryConfirmVC: EntryConfirmNotifyEntryDelegate {
     func changePasswordText(text: String) {
         bufPassword = text
+        chkButtonEnable()
     }
     func changeAcceptStatus(isAccept: Bool) {
         self.isAccept = isAccept
@@ -212,10 +216,11 @@ extension EntryConfirmVC {
         
         let _jobCardCode: String = _jobCard.jobCardCode
 //        let _jobCardCode: String = "1170847" //!!![[Dbg: 固定値で投げている]
-        let _typePassword: String = "Dummy1234" //!!![[Dbg: 固定値で投げている]
-
+//        let _typePassword: String = "Dummy1234" //!!![[Dbg: 固定値で投げている]
+        let _typePassword: String = self.bufPassword //半角英数4-20
         let param: WebAPIEntryUserDto = WebAPIEntryUserDto(_jobCardCode, _profile, _resume, _career, editableModel.editTempCD, _typePassword)
-        showConfirm(title: "", message: "\(param)", onlyOK: true)
+        
+//showConfirm(title: "", message: "\(param)", onlyOK: true)//!!!
 
         SVProgressHUD.show(withStatus: "応募処理")
         ApiManager.postEntry(param, isRetry: true)

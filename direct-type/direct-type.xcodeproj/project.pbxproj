@@ -141,8 +141,7 @@
 		06E519AD245813DC004E4B7A /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519AC245813DC004E4B7A /* LoginVC.swift */; };
 		06E519AF245813E9004E4B7A /* LoginConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519AE245813E9004E4B7A /* LoginConfirmVC.swift */; };
 		06E519B1245814B2004E4B7A /* EntryConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519B0245814B2004E4B7A /* EntryConfirmVC.swift */; };
-		06E519B3245814BD004E4B7A /* EntryLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519B2245814BD004E4B7A /* EntryLoginVC.swift */; };
-		06E519B5245814C7004E4B7A /* EntryCompleteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519B4245814C7004E4B7A /* EntryCompleteVC.swift */; };
+		06E519B3245814BD004E4B7A /* EntryCompleteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519B2245814BD004E4B7A /* EntryCompleteVC.swift */; };
 		06E519B7245814D4004E4B7A /* SubEditBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519B6245814D4004E4B7A /* SubEditBaseVC.swift */; };
 		06E519BE24581558004E4B7A /* ScountListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519BD24581558004E4B7A /* ScountListVC.swift */; };
 		06E519C024581561004E4B7A /* ScountDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519BF24581561004E4B7A /* ScountDetailVC.swift */; };
@@ -337,6 +336,7 @@
 		26F2A829246D2A230037D47F /* MdlJobExperiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A828246D2A230037D47F /* MdlJobExperiment.swift */; };
 		26F2A82B246D2EE90037D47F /* EditableTableBasicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A82A246D2EE90037D47F /* EditableTableBasicVC.swift */; };
 		26F2A82D246D31020037D47F /* PreviewBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A82C246D31020037D47F /* PreviewBaseVC.swift */; };
+		26F8E50C24B4367B00764193 /* Entry.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26F8E50B24B4367B00764193 /* Entry.storyboard */; };
 		26FC4EE02477C775003B56C3 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FC4EDF2477C775003B56C3 /* AuthManager.swift */; };
 		C29161DB95966DD7132DBD19 /* Pods_direct_type.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A49B0215E0F4A582FB1EC5E /* Pods_direct_type.framework */; };
 /* End PBXBuildFile section */
@@ -478,8 +478,7 @@
 		06E519AC245813DC004E4B7A /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		06E519AE245813E9004E4B7A /* LoginConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginConfirmVC.swift; sourceTree = "<group>"; };
 		06E519B0245814B2004E4B7A /* EntryConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryConfirmVC.swift; sourceTree = "<group>"; };
-		06E519B2245814BD004E4B7A /* EntryLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryLoginVC.swift; sourceTree = "<group>"; };
-		06E519B4245814C7004E4B7A /* EntryCompleteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCompleteVC.swift; sourceTree = "<group>"; };
+		06E519B2245814BD004E4B7A /* EntryCompleteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCompleteVC.swift; sourceTree = "<group>"; };
 		06E519B6245814D4004E4B7A /* SubEditBaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubEditBaseVC.swift; sourceTree = "<group>"; };
 		06E519BD24581558004E4B7A /* ScountListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScountListVC.swift; sourceTree = "<group>"; };
 		06E519BF24581561004E4B7A /* ScountDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScountDetailVC.swift; sourceTree = "<group>"; };
@@ -675,6 +674,7 @@
 		26F2A828246D2A230037D47F /* MdlJobExperiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlJobExperiment.swift; sourceTree = "<group>"; };
 		26F2A82A246D2EE90037D47F /* EditableTableBasicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTableBasicVC.swift; sourceTree = "<group>"; };
 		26F2A82C246D31020037D47F /* PreviewBaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewBaseVC.swift; sourceTree = "<group>"; };
+		26F8E50B24B4367B00764193 /* Entry.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Entry.storyboard; sourceTree = "<group>"; };
 		26FC4EDF2477C775003B56C3 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		8A49B0215E0F4A582FB1EC5E /* Pods_direct_type.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_direct_type.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8C351EB920291E353136BB9 /* Pods-direct-type.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-direct-type.debug.xcconfig"; path = "Target Support Files/Pods-direct-type/Pods-direct-type.debug.xcconfig"; sourceTree = "<group>"; };
@@ -762,7 +762,6 @@
 		0667636D2457B02800AC5039 /* Job */ = {
 			isa = PBXGroup;
 			children = (
-				06E519B4245814C7004E4B7A /* EntryCompleteVC.swift */,
 				06457060246526E300F3B015 /* detail */,
 				06E5197E2457CF31004E4B7A /* Cell */,
 				0667636E2457B04500AC5039 /* HomeVC.swift */,
@@ -786,7 +785,8 @@
 				26A2899F24AAFACE000D2926 /* EntryConfirmCell */,
 				066763712457B08300AC5039 /* EntryVC.swift */,
 				06E519B0245814B2004E4B7A /* EntryConfirmVC.swift */,
-				06E519B2245814BD004E4B7A /* EntryLoginVC.swift */,
+				26F8E50B24B4367B00764193 /* Entry.storyboard */,
+				06E519B2245814BD004E4B7A /* EntryCompleteVC.swift */,
 			);
 			path = Entry;
 			sourceTree = "<group>";
@@ -1630,6 +1630,7 @@
 				26BF48DD24639D2B00E00215 /* MstK25_gender.tsv in Resources */,
 				06FFA0082484E6560085A3D9 /* MyPageEditedCarrerCell.xib in Resources */,
 				0EAE764F248E2FFD009A8F4B /* ChemistryResultPersonalTypeCell.xib in Resources */,
+				26F8E50C24B4367B00764193 /* Entry.storyboard in Resources */,
 				06FFA0042484E1760085A3D9 /* SettingVC.storyboard in Resources */,
 				0E6EA6E724A1C11A00884D07 /* InitialInputConfirmVC.storyboard in Resources */,
 				2619D2A624AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib in Resources */,
@@ -1842,7 +1843,6 @@
 				06E519D6245816A5004E4B7A /* WebTemplateVC.swift in Sources */,
 				06E519A92458139B004E4B7A /* SignupConfirmVC.swift in Sources */,
 				0645DDFC246B907000592572 /* JobDetailPRCodeTagsCell.swift in Sources */,
-				06E519B5245814C7004E4B7A /* EntryCompleteVC.swift in Sources */,
 				2642E39124A19B0F003E6907 /* MdlEntry.swift in Sources */,
 				06E519A22457DC44004E4B7A /* InitialInputRegistVC.swift in Sources */,
 				269AFFC3246A929300DB364B /* SubSelectTBCell.swift in Sources */,
@@ -1888,7 +1888,7 @@
 				26A289A324AAFB2A000D2926 /* EntryConfirmJobCardTBCell.swift in Sources */,
 				06FFA0012484D6850085A3D9 /* MyPageChemistryStartCell.swift in Sources */,
 				267E635F24A9865E004169ED /* EntryFormExQuestionsHeadTBCell.swift in Sources */,
-				06E519B3245814BD004E4B7A /* EntryLoginVC.swift in Sources */,
+				06E519B3245814BD004E4B7A /* EntryCompleteVC.swift in Sources */,
 				26A397F7249AEF0200FED62E /* BaseVC+PushViewController.swift in Sources */,
 				0E1FB23724AC8424005E0BE7 /* AnalyticsEventType.swift in Sources */,
 				066BC827246CF3CA00FE607F /* JobDetailItemAttentionView.swift in Sources */,

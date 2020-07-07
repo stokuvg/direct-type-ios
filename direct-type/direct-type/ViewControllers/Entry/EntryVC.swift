@@ -96,7 +96,7 @@ class EntryVC: PreviewBaseVC {
         }
     }
     func initData(_ jobCard: MdlJobCardDetail) {
-        title = "[C-9] 応募フォーム"
+        title = "応募フォーム"
         self.jobCard = jobCard
         self.entry = MdlEntry()
         //===独自質問はjobCardDetailに含まれているので、MdlEntryにも持たせておく

@@ -29,6 +29,8 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
         vwMainArea.backgroundColor = UIColor(colorType: .color_base)
 
         tfPassword.isSecureTextEntry = true
+        tfPassword.textContentType = .password
+        tfPassword.placeholder = "type用パスワード（半角英数4〜20文字）"
     }
     func initCell(_ delegate: EntryConfirmNotifyEntryDelegate, email: String) {
         self.delegate = delegate
@@ -37,8 +39,10 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
     func dispCell() {
         let email: String = "example@example.com" //これはProfileのものを表示させるのか
         let bufTitle: String = ["※重要※", "応募前に必ずご確認ください"].joined(separator: "\n")
-        let bufMessage: String = ["この求人への応募は転職サイトtypeを通じて行われます。",
-                                  "\(email)で転職サイトtypeに登録済の方はtypeのパスワードを、未登録の方はご希望のパスワードを入力ください。"].joined(separator: "")
+        let bufMessage: String = [
+        "この求人への応募は転職サイトtypeを通じて行われます。",
+        "\(email)で転職サイトtypeに登録済の方はtypeのパスワードを、" +
+        "未登録の方はご希望のパスワードを入力ください。"].joined(separator: "")
         lblTitle.text(text: bufTitle, fontType: .font_M, textColor: UIColor(colorType: .color_black)!, alignment: .center)
         lblMessage.text(text: bufMessage, fontType: .font_SS, textColor: UIColor(colorType: .color_black)!, alignment: .left)
     }
