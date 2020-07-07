@@ -47,6 +47,7 @@ class EntryFormAnyModelTBCell: UITableViewCell {
             lblTitle.text(text: "プロフィール", fontType: .font_SSb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
             lblMessage.text(text: "未入力", fontType: .font_SSSb, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
             if let model = self.detail as? MdlProfile {
+                //print("\t[プロフィール: \(model.completeness)%]")
                 if chkProgressProfile() {
                     lblMessage.text(text: "入力済み", fontType: .font_SS, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .left)
                 }
@@ -55,6 +56,7 @@ class EntryFormAnyModelTBCell: UITableViewCell {
             lblTitle.text(text: "履歴書", fontType: .font_SSb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
             lblMessage.text(text: "未入力", fontType: .font_SSSb, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
             if let model = self.detail as? MdlResume {
+                //print("\t[履歴書: \(model.completeness)%]")
                 if chkProgressResumee() {
                     lblMessage.text(text: "入力済み", fontType: .font_SS, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .left)
                 }

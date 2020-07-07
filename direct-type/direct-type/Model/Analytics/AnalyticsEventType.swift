@@ -10,6 +10,7 @@ import Foundation
 import AppsFlyerLib
 
 enum AnalyticsEventType {
+    // アクションイベント系
     case createAuthenticationCode
     case confirmAuthCode
     case keep
@@ -18,31 +19,38 @@ enum AnalyticsEventType {
     case completeEntry
     case logout
     case withdrawal
+    // 画面表示イベント系
     case viewHome
     case viewVacancies
     case viewKeepList
-    case toJobDetail
-    case toEntryDetail
+    // 画面遷移経路イベント系
+    case transitionPath(destination: RouteDestinationType, from: RouteFromType)
     
-    enum RouteType {
+    enum RouteDestinationType {
+        case toJobDetail
+        case toEntryDetail
+        
+        var eventName: String {
+            switch self {
+            case .toJobDetail:
+                return "to_job_detail"
+            case .toEntryDetail:
+                return "to_entry"
+            }
+        }
+    }
+    
+    enum RouteFromType {
         case unknown
         case fromHome
         case fromKeepList
         
-        var parameter: [AnyHashable : Any] {
-            return [key : value]
-        }
-        
-        private var key: String {
-            return "route"
-        }
-        
-        private var value: String {
+        var suffix: String {
             switch self {
             case .fromHome:
-                return "from_home"
+                return "_from_home"
             case .fromKeepList:
-                return "from_keep_list"
+                return "_from_keep_list"
             case .unknown:
                 return ""
             }
@@ -78,10 +86,8 @@ enum AnalyticsEventType {
             text =  "view_vacancies"
         case .viewKeepList:
             text =  "view_keep_list"
-        case .toJobDetail:
-            text = "to_job_detail"
-        case .toEntryDetail:
-            text = "to_entry_detail"
+        case .transitionPath(let destination, let from):
+            text = destination.eventName + from.suffix
         }
         if AppDefine.isDebugForAppsFlyer {
             text += debugLogSuffix

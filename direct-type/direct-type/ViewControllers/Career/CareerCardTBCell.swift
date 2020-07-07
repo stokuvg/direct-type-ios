@@ -123,12 +123,12 @@ class CareerCardTBCell: UITableViewCell {
         }
         //=== 表示項目を追加していく
         if dispCompany.count > 0 {
-            stackVW.addArrangedSubview(EntryConfirmItem("在籍企業概要", dispCompany.joined(separator: "\n")))
+            stackVW.addArrangedSubview(CareerCardItemVW("在籍企業概要", dispCompany.joined(separator: "\n")))
         }
-        stackVW.addArrangedSubview(EntryConfirmItem("職務経歴詳細", career.contents))
+        stackVW.addArrangedSubview(CareerCardItemVW("職務経歴詳細", career.contents))
         //すべてを表示させる
         for asv in stackVW.arrangedSubviews {
-            if let eci = asv as? EntryConfirmItem {
+            if let eci = asv as? CareerCardItemVW {
                 eci.dispCell()
                 eci.updateConstraints()
             }
