@@ -26,6 +26,18 @@ class MdlResume: Codable {
     var ownPr: String
     /** 現在の年収 */
     var currentSalary: String
+    /** すべての必須項目が設定されているか確認する*/
+    var requiredComplete: Bool {
+        if employmentStatus.isEmpty { return false }
+        if currentSalary.isEmpty { return false }
+        if changeCount.isEmpty { return false }
+        if lastJobExperiment.jobType.isEmpty { return false }
+        if lastJobExperiment.jobExperimentYear.isEmpty { return false }
+        if school.schoolName.isEmpty { return false }
+        if school.faculty.isEmpty { return false }
+        if school.graduationYear.isEmpty { return false }
+        return true //最後までたどり着ければ、必須項目は定義されているとみなせる
+    }
     /** 履歴書完成度(100=100%) */
     var completeness: Int {
         var result = 35 // MdlProfileが存在している時点で35%としている

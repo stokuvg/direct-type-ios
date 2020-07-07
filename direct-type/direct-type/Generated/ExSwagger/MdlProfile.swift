@@ -40,6 +40,21 @@ class MdlProfile: Codable {
     var mailAddress: String = ""
     /** 携帯電話番号（変更不可：認証アカウントと同一） */
     var mobilePhoneNo: String = ""
+    /** すべての必須項目が設定されているか確認する*/
+    var requiredComplete: Bool {
+        if familyName.isEmpty { return false }
+        if firstName.isEmpty { return false }
+        if familyNameKana.isEmpty { return false }
+        if firstNameKana.isEmpty { return false }
+        if birthday == Constants.SelectItemsUndefineDate { return false }
+        if zipCode.isEmpty { return false }
+        if prefecture.isEmpty { return false }
+        if address1.isEmpty { return false }
+        if mailAddress.isEmpty { return false }
+        if hopeJobPlaceIds.count == 0 { return false }
+        if mobilePhoneNo.isEmpty { return false }
+        return true //最後までたどり着ければ、必須項目は定義されているとみなせる
+    }
     /** プロフィール完成度(100=100%) */
     var completeness: Int {
         var result = 40 // MdlProfileが存在している時点で40%としている

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -26,14 +24,14 @@
             <objects>
                 <viewController storyboardIdentifier="Sbid_ProfilePreviewVC" id="M7u-aK-RVq" customClass="ProfilePreviewVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g1q-tj-8Hw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WQt-jE-FSR" userLabel="メイン">
-                                <rect key="frame" x="0.0" y="44" width="414" height="728"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="510"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NtB-K7-xq7">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="728"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="510"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <connections>
                                             <outlet property="dataSource" destination="M7u-aK-RVq" id="6Zc-eL-ekX"/>
@@ -50,10 +48,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xff-J5-hrZ" userLabel="フッタ">
-                                <rect key="frame" x="0.0" y="772" width="414" height="90"/>
+                                <rect key="frame" x="0.0" y="510" width="600" height="90"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WdS-GT-DZi">
-                                        <rect key="frame" x="20" y="20" width="374" height="50"/>
+                                        <rect key="frame" x="20" y="20" width="560" height="50"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="actCommit:" destination="M7u-aK-RVq" eventType="touchUpInside" id="aIw-IM-vjh"/>
@@ -99,14 +97,14 @@
             <objects>
                 <viewController storyboardIdentifier="Sbid_ResumePreviewVC" id="bsy-wz-y8o" customClass="ResumePreviewVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gCS-Or-ObB">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dpu-j0-mLb" userLabel="メイン">
-                                <rect key="frame" x="0.0" y="44" width="414" height="728"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="510"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vWK-NK-w9m">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="728"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="510"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <connections>
                                             <outlet property="dataSource" destination="bsy-wz-y8o" id="DjS-Gd-tsX"/>
@@ -123,10 +121,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B8t-Cz-hoA" userLabel="フッタ">
-                                <rect key="frame" x="0.0" y="772" width="414" height="90"/>
+                                <rect key="frame" x="0.0" y="510" width="600" height="90"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="duo-y1-nnL">
-                                        <rect key="frame" x="20" y="20" width="374" height="50"/>
+                                        <rect key="frame" x="20" y="20" width="560" height="50"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="actCommit:" destination="bsy-wz-y8o" eventType="touchUpInside" id="o3S-H7-KZk"/>
@@ -172,14 +170,14 @@
             <objects>
                 <viewController storyboardIdentifier="Sbid_CareerPreviewVC" id="XV2-0s-alR" customClass="CareerPreviewVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4ht-kt-1Uc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="loX-Ju-B1I" userLabel="メイン">
-                                <rect key="frame" x="0.0" y="44" width="414" height="728"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="510"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SB1-pN-RBJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="728"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="510"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <connections>
                                             <outlet property="dataSource" destination="XV2-0s-alR" id="adU-qu-xNO"/>
@@ -196,10 +194,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tUN-LT-lDW" userLabel="フッタ">
-                                <rect key="frame" x="0.0" y="772" width="414" height="90"/>
+                                <rect key="frame" x="0.0" y="510" width="600" height="90"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qFp-6y-imQ">
-                                        <rect key="frame" x="20" y="20" width="374" height="50"/>
+                                        <rect key="frame" x="20" y="20" width="560" height="50"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="actCommit:" destination="XV2-0s-alR" eventType="touchUpInside" id="Zj2-iY-Hyu"/>
@@ -245,14 +243,14 @@
             <objects>
                 <viewController storyboardIdentifier="Sbid_SmoothCareerPreviewVC" id="Ra9-GO-rb9" customClass="SmoothCareerPreviewVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qAR-5C-3OB">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8qK-Ka-IvM" userLabel="メイン">
-                                <rect key="frame" x="0.0" y="44" width="414" height="728"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="510"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gQj-aF-cbF">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="728"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="510"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <connections>
                                             <outlet property="dataSource" destination="Ra9-GO-rb9" id="Ykv-f5-qXC"/>
@@ -269,10 +267,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5gz-ZX-rzI" userLabel="フッタ">
-                                <rect key="frame" x="0.0" y="772" width="414" height="90"/>
+                                <rect key="frame" x="0.0" y="510" width="600" height="90"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WjQ-Vu-mZO">
-                                        <rect key="frame" x="20" y="20" width="374" height="50"/>
+                                        <rect key="frame" x="20" y="20" width="560" height="50"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="actCommit:" destination="Ra9-GO-rb9" eventType="touchUpInside" id="Bex-xv-SqB"/>
@@ -318,14 +316,14 @@
             <objects>
                 <viewController storyboardIdentifier="Sbid_FirstInputPreviewVC" id="UqA-KX-9G4" customClass="FirstInputPreviewVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0Jz-Dc-0Lh">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fPN-Oa-CuQ" userLabel="メイン">
-                                <rect key="frame" x="0.0" y="44" width="414" height="728"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="510"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vgx-Wx-eYU">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="728"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="510"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <connections>
                                             <outlet property="dataSource" destination="UqA-KX-9G4" id="9Cb-th-ubD"/>
@@ -342,10 +340,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="01S-qp-gee" userLabel="フッタ">
-                                <rect key="frame" x="0.0" y="772" width="414" height="90"/>
+                                <rect key="frame" x="0.0" y="510" width="600" height="90"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDv-Jx-kad">
-                                        <rect key="frame" x="20" y="20" width="374" height="50"/>
+                                        <rect key="frame" x="20" y="20" width="560" height="50"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="actCommit:" destination="UqA-KX-9G4" eventType="touchUpInside" id="XjO-3I-GM9"/>
@@ -391,14 +389,14 @@
             <objects>
                 <viewController storyboardIdentifier="Sbid_EntryVC" id="5hq-Ae-TcB" customClass="EntryVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xKa-6U-zKI">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Cr-CC-u0A" userLabel="メイン">
-                                <rect key="frame" x="0.0" y="44" width="414" height="728"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="510"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ESk-i1-JaT">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="728"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="510"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <connections>
                                             <outlet property="dataSource" destination="5hq-Ae-TcB" id="0lo-un-0FX"/>
@@ -415,10 +413,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bH1-9S-6Cz" userLabel="フッタ">
-                                <rect key="frame" x="0.0" y="772" width="414" height="90"/>
+                                <rect key="frame" x="0.0" y="510" width="600" height="90"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bdY-ld-Enz">
-                                        <rect key="frame" x="20" y="20" width="374" height="50"/>
+                                        <rect key="frame" x="20" y="20" width="560" height="50"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="actCommit:" destination="5hq-Ae-TcB" eventType="touchUpInside" id="A0p-73-ok6"/>
@@ -464,14 +462,14 @@
             <objects>
                 <viewController storyboardIdentifier="Sbid_EntryConfirmVC" id="zKJ-Tz-11r" customClass="EntryConfirmVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="K3m-aQ-F4L">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jDQ-Oc-4jM" userLabel="メイン">
-                                <rect key="frame" x="0.0" y="44" width="414" height="728"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="510"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Sj-2k-YVl">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="728"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="510"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <connections>
                                             <outlet property="dataSource" destination="zKJ-Tz-11r" id="FKX-bQ-nti"/>
@@ -488,10 +486,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Prz-jY-biA" userLabel="フッタ">
-                                <rect key="frame" x="0.0" y="772" width="414" height="90"/>
+                                <rect key="frame" x="0.0" y="510" width="600" height="90"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uBi-f3-5rY">
-                                        <rect key="frame" x="20" y="20" width="374" height="50"/>
+                                        <rect key="frame" x="20" y="20" width="560" height="50"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="actCommit:" destination="zKJ-Tz-11r" eventType="touchUpInside" id="hO2-BM-7lT"/>
