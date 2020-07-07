@@ -84,9 +84,9 @@ enum EditItemReqEntry: String, EditItemProtocol {
         case .selfPr:           return "自己PR"
         case .hopeWorkPlace:    return "希望勤務地"
         case .hopeSalary:       return "希望年収"
-        case .exAnswer1:        return "独自質問①"
-        case .exAnswer2:        return "独自質問②"
-        case .exAnswer3:        return "独自質問③"
+        case .exAnswer1:        return "企業からの質問項目"
+        case .exAnswer2:        return "企業からの質問項目"
+        case .exAnswer3:        return "企業からの質問項目"
         }
     }
     var tsvMaster: SelectItemsManager.TsvMaster {

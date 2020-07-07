@@ -105,6 +105,19 @@ class EntryFormVC: PreviewBaseVC {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
         self.arrData.removeAll()//いったん全件を削除しておく
         editableModel.arrData.removeAll()//こちらで管理させる？！
+        
+        //=== 応募用の自己PR膏肓が空だった場合に、 履歴書のものを適用しておく
+        //８．自己PR（任意）
+        //・マイページ内の自己PR（H-3履歴書確認）に入力がある場合、その内容を表示
+        //・このページ上で自由に編集も可能
+        //・ここで編集した内容はマイページ上の自己PRには反映されない
+        //    ※あくまで応募先企業に向けたPR内容として個別編集させる想定
+        if let entryOwnPR = entry?.ownPR {
+            if entryOwnPR.isEmpty {
+                entry?.ownPR = resume?.ownPr ?? ""
+            }
+        }
+        
 
         //====== [C-9]応募フォーム
         //===４．応募先求人

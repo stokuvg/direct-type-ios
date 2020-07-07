@@ -75,9 +75,9 @@ case entryItems         //9、10、11、12を一括で扱うためのもの
         case .ownPR:        return "自己PR"
         case .hopeArea:     return "希望勤務地"
         case .hopeSalary:   return "希望年収"
-        case .exQuestionAnswer1:   return "独自質問 1（必須）"
-        case .exQuestionAnswer2:   return "独自質問 2（必須）"
-        case .exQuestionAnswer3:   return "独自質問 3（必須）"
+        case .exQuestionAnswer1:   return "企業からの質問項目"
+        case .exQuestionAnswer2:   return "企業からの質問項目"
+        case .exQuestionAnswer3:   return "企業からの質問項目"
         case .entryItems:   return "応募フォーム"
         }
     }
