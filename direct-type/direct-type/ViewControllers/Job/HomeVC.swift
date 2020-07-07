@@ -435,11 +435,9 @@ extension HomeVC: UITableViewDelegate {
         }
         let selectedJobData = dispJobCards.jobCards[row]
         let jobId = selectedJobData.jobCardCode
-
         let vc = getVC(sbName: "JobOfferDetailVC", vcName: "JobOfferDetailVC") as! JobOfferDetailVC
-        vc.jobId = jobId
-        vc.transitionSource = .fromHome
-
+        
+        vc.configure(jobId: jobId, transitionSource: .fromHome)
         vc.hidesBottomBarWhenPushed = true
 
         self.navigationController?.pushViewController(vc, animated: true)

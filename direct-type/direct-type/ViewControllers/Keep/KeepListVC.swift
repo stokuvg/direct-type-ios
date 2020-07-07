@@ -159,14 +159,12 @@ extension KeepListVC: UITableViewDelegate {
         let row = indexPath.row
         let cardData = self.lists.keepJobs[row]
         let jobId = cardData.jobId
-        
         let vc = getVC(sbName: "JobOfferDetailVC", vcName: "JobOfferDetailVC") as! JobOfferDetailVC
-        vc.jobId = jobId
-        vc.transitionSource = .fromKeepList
         
+        vc.configure(jobId: jobId, transitionSource: .fromKeepList)
         vc.hidesBottomBarWhenPushed = true
         
-        self.navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
