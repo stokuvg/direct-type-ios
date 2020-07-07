@@ -72,7 +72,7 @@ extension BaseVC {
             }
         case .entryForm(let transitionSource)://[C-0] 応募フォーム
             let storyboard = UIStoryboard(name: "Preview", bundle: nil)
-            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_EntryVC") as? EntryVC{
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_EntryVC") as? EntryFormVC{
                 nvc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に表示にする
                 nvc.transitionSource = transitionSource
                 if let model = model as? MdlJobCardDetail {

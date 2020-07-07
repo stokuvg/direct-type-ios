@@ -12,6 +12,12 @@ import TudApi
 /** 職務経歴書 */
 class MdlCareer: Codable {
      var businessTypes: [MdlCareerCard]
+    
+    /** businessTypesが1件以上あるか確認する （1件登録されていればOKなので）*/
+    var requiredComplete: Bool {
+        return (businessTypes.count > 0) ? true : false
+    }
+
 
     init(businessTypes: [MdlCareerCard] = []) {
         self.businessTypes = businessTypes
