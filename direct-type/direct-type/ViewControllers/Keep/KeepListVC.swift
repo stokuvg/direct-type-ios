@@ -42,7 +42,7 @@ final class KeepListVC: TmpBasicVC {
     // AppsFlyerのイベントトラッキング用にオンメモリでキープ求人リストを保有するプロパティ
     // キープされた求人をオンメモリ上で保有しておき、この画面が切り替わった際にイベント送信する
     var storedKeepList: Set<Int> = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "キープリスト"
@@ -69,83 +69,83 @@ final class KeepListVC: TmpBasicVC {
 
 private extension KeepListVC {
     func getKeepList() {
-            SVProgressHUD.show()
-            lists = MdlKeepList()
-            ApiManager.getKeeps(pageNo, isRetry: true)
-                .done { result in
-                    debugLog("ApiManager getKeeps result:\(result.debugDisp)")
-                    
-                    self.lists = result
-                    self.dataDisplay()
-            }
-            .catch { (error) in
-                Log.selectLog(logLevel: .debug, "error:\(error)")
+        SVProgressHUD.show()
+        lists = MdlKeepList()
+        ApiManager.getKeeps(pageNo, isRetry: true)
+            .done { result in
+                debugLog("ApiManager getKeeps result:\(result.debugDisp)")
                 
-                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-                switch myErr.code {
-                    case 403:
-                        let message:String = "idTokenを取得していません"
-                        self.showConfirm(title: "通信失敗", message: message)
-                            .done { _ in
-
-                                self.dataDisplay()
-                        }.catch { (error) in
-                            
-                        }.finally {
-                    }
-                    default:
-                        break
+                self.lists = result
+                self.dataDisplay()
+        }
+        .catch { (error) in
+            Log.selectLog(logLevel: .debug, "error:\(error)")
+            
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            switch myErr.code {
+            case 403:
+                let message:String = "idTokenを取得していません"
+                self.showConfirm(title: "通信失敗", message: message)
+                    .done { _ in
+                        
+                        self.dataDisplay()
+                }.catch { (error) in
+                    
+                }.finally {
                 }
-            }
-            .finally {
-                SVProgressHUD.dismiss()
+            default:
+                break
             }
         }
+        .finally {
+            SVProgressHUD.dismiss()
+        }
+    }
+    
+    func dataDisplay() {
+        Log.selectLog(logLevel: .debug, "KeepListVC dataDisplay start")
+        Log.selectLog(logLevel: .debug, "self.lists.keepJobs.count:\(self.lists.keepJobs.count)")
         
-        func dataDisplay() {
-            Log.selectLog(logLevel: .debug, "KeepListVC dataDisplay start")
-            Log.selectLog(logLevel: .debug, "self.lists.keepJobs.count:\(self.lists.keepJobs.count)")
-            
-            if self.lists.keepJobs.count > 0 {
-                keepNoView.isHidden = true
-                keepNoView.delegate = nil
-                keepTableView.delegate = self
-                keepTableView.dataSource = self
-                keepTableView.reloadData()
-            } else {
-                keepNoView.isHidden = false
-                // 0件
-                keepNoView.delegate = self
-            }
+        if self.lists.keepJobs.count > 0 {
+            keepNoView.isHidden = true
+            keepNoView.delegate = nil
+            keepTableView.delegate = self
+            keepTableView.dataSource = self
+            keepTableView.reloadData()
+        } else {
+            keepNoView.isHidden = false
+            // 0件
+            keepNoView.delegate = self
         }
+    }
+    
+    func makeDummyData() {
+        let _dummy1 = MdlKeepJob.init(jobId: "1234567", jobName: "キープリスト一覧職業名１キープリスト一覧職業名１", pressStartDate: "2020/06/12", pressEndDate: "2020/06/30", mainTitle: "", mainPhotoURL: "https://type.jp/s/img_banner/top_pc_side_number1.jpg", salaryMinCode: 7, salaryMaxCode: 11, isSalaryDisplay: true, companyName: "会社名１")
+        let _dummy2 = MdlKeepJob.init(jobId: "234567", jobName: "キープリスト一覧職業名２キープリスト一覧職業名２", pressStartDate: "2020/06/05", pressEndDate: "2020/06/19", mainTitle: "", mainPhotoURL: "https://type.jp/s/img_banner/top_pc_side_number1.jpg", salaryMinCode: 8, salaryMaxCode: 12, isSalaryDisplay: false, companyName: "会社名２")
+        let _dummy3 = MdlKeepJob.init(jobId: "34567", jobName: "キープリスト一覧職業名３キープリスト一覧職業名３", pressStartDate: "2020/06/01", pressEndDate: "2020/06/12", mainTitle: "", mainPhotoURL: "", salaryMinCode: 9, salaryMaxCode: 13, isSalaryDisplay: true, companyName: "会社名３")
         
-        func makeDummyData() {
-            let _dummy1 = MdlKeepJob.init(jobId: "1234567", jobName: "キープリスト一覧職業名１キープリスト一覧職業名１", pressStartDate: "2020/06/12", pressEndDate: "2020/06/30", mainTitle: "", mainPhotoURL: "https://type.jp/s/img_banner/top_pc_side_number1.jpg", salaryMinCode: 7, salaryMaxCode: 11, isSalaryDisplay: true, companyName: "会社名１")
-            let _dummy2 = MdlKeepJob.init(jobId: "234567", jobName: "キープリスト一覧職業名２キープリスト一覧職業名２", pressStartDate: "2020/06/05", pressEndDate: "2020/06/19", mainTitle: "", mainPhotoURL: "https://type.jp/s/img_banner/top_pc_side_number1.jpg", salaryMinCode: 8, salaryMaxCode: 12, isSalaryDisplay: false, companyName: "会社名２")
-            let _dummy3 = MdlKeepJob.init(jobId: "34567", jobName: "キープリスト一覧職業名３キープリスト一覧職業名３", pressStartDate: "2020/06/01", pressEndDate: "2020/06/12", mainTitle: "", mainPhotoURL: "", salaryMinCode: 9, salaryMaxCode: 13, isSalaryDisplay: true, companyName: "会社名３")
-            
-            let _dummyData:[MdlKeepJob] = [
-                _dummy1,
-                _dummy2,
-                _dummy3,
-                _dummy1,
-                _dummy2,
-                _dummy3,
-                _dummy1,
-                _dummy2,
-                _dummy3,
-                _dummy1,
-                _dummy2,
-                _dummy3,
-            ]
-            self.lists = MdlKeepList.init(hasNext: true, keepJobs: _dummyData)
-
-            self.keepNoView.isHidden = true
-            self.keepNoView.delegate = nil
-            self.keepTableView.delegate = self
-            self.keepTableView.dataSource = self
-            self.keepTableView.reloadData()
-        }
+        let _dummyData:[MdlKeepJob] = [
+            _dummy1,
+            _dummy2,
+            _dummy3,
+            _dummy1,
+            _dummy2,
+            _dummy3,
+            _dummy1,
+            _dummy2,
+            _dummy3,
+            _dummy1,
+            _dummy2,
+            _dummy3,
+        ]
+        self.lists = MdlKeepList.init(hasNext: true, keepJobs: _dummyData)
+        
+        self.keepNoView.isHidden = true
+        self.keepNoView.delegate = nil
+        self.keepTableView.delegate = self
+        self.keepTableView.dataSource = self
+        self.keepTableView.reloadData()
+    }
 }
 
 extension KeepListVC: KeepNoViewDelegate {
@@ -208,7 +208,7 @@ extension KeepListVC: BaseJobCardCellDelegate {
         if keepStatus == true {
             ApiManager.sendJobKeep(id: jobId)
                 .done { result in
-                Log.selectLog(logLevel: .debug, "keep send success")
+                    Log.selectLog(logLevel: .debug, "keep send success")
                     Log.selectLog(logLevel: .debug, "keep成功")
                     
             }.catch{ (error) in
@@ -218,8 +218,8 @@ extension KeepListVC: BaseJobCardCellDelegate {
                 case 404:
                     let message: String = ""
                     self.showConfirm(title: "", message: message)
-                    .done { _ in
-                        Log.selectLog(logLevel: .debug, "対応方法の確認")
+                        .done { _ in
+                            Log.selectLog(logLevel: .debug, "対応方法の確認")
                     }
                     .catch { (error) in
                     }
@@ -234,7 +234,7 @@ extension KeepListVC: BaseJobCardCellDelegate {
         } else {
             ApiManager.sendJobDeleteKeep(id: jobId)
                 .done { result in
-                Log.selectLog(logLevel: .debug, "keep delete success")
+                    Log.selectLog(logLevel: .debug, "keep delete success")
                     Log.selectLog(logLevel: .debug, "delete成功")
                     
             }.catch{ (error) in
@@ -244,8 +244,8 @@ extension KeepListVC: BaseJobCardCellDelegate {
                 case 404:
                     let message: String = ""
                     self.showConfirm(title: "", message: message)
-                    .done { _ in
-                        Log.selectLog(logLevel: .debug, "対応方法の確認")
+                        .done { _ in
+                            Log.selectLog(logLevel: .debug, "対応方法の確認")
                     }
                     .catch { (error) in
                     }
