@@ -31,3 +31,25 @@ extension String {
         return String(mutableString)
     }
 }
+
+extension String {
+    func replacementString(text: String, regexp: String, fixedReplacementString: String) -> String {
+        guard let regex = try? NSRegularExpression(pattern: regexp, options: [.dotMatchesLineSeparators]) else { return text }
+        let results = regex.matches(in: text, options: [], range: NSRange(0 ..< text.count))
+        var resultString = text
+        var offset = 0
+        for result in results {
+            let replacementString = regex.replacementString(for: result, in: resultString, offset: offset, template: "$0")
+   
+            print("\t[\(replacementString)]->[\(fixedReplacementString)]")
+            
+            var range = result.range(at: 0)
+            range.location += offset
+            let start = resultString.index(resultString.startIndex, offsetBy: range.location)
+            let end = resultString.index(start, offsetBy: range.length)
+            resultString = resultString.replacingCharacters(in: start..<end, with: fixedReplacementString)
+            offset += fixedReplacementString.count - range.length
+        }
+        return resultString
+    }
+}

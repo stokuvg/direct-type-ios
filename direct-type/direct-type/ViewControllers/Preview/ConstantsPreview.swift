@@ -35,6 +35,20 @@ class IKPickerView: UIPickerView {
 class IKTextField: UITextField {
     var itemKey: EditableItemKey = "<undefine>"
 }
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//        self.borderStyle = .none
+//        let vwWaku: UnderTextFieldLine = UnderTextFieldLine(frame: self.frame)
+//        self.addSubview(vwWaku)
+//    }
+//}
+//class UnderTextFieldLine: UIView {
+//    override func draw(_ rect: CGRect) {
+//        UIColor.lightGray.setFill()
+//        let rectangle = UIBezierPath(rect: rect)
+//        rectangle.fill()
+//    }
+//}
 
 enum HPreviewItemType: String {
     case undefine
