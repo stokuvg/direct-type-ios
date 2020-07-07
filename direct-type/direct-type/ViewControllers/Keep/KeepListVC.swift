@@ -52,7 +52,6 @@ final class KeepListVC: TmpBasicVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        makeDummyData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -129,34 +128,6 @@ private extension KeepListVC {
             // 0件
             keepNoView.delegate = self
         }
-    }
-    
-    func makeDummyData() {
-        let _dummy1 = MdlKeepJob.init(jobId: "1234567", jobName: "キープリスト一覧職業名１キープリスト一覧職業名１", pressStartDate: "2020/06/12", pressEndDate: "2020/06/30", mainTitle: "", mainPhotoURL: "https://type.jp/s/img_banner/top_pc_side_number1.jpg", salaryMinCode: 7, salaryMaxCode: 11, isSalaryDisplay: true, companyName: "会社名１")
-        let _dummy2 = MdlKeepJob.init(jobId: "234567", jobName: "キープリスト一覧職業名２キープリスト一覧職業名２", pressStartDate: "2020/06/05", pressEndDate: "2020/06/19", mainTitle: "", mainPhotoURL: "https://type.jp/s/img_banner/top_pc_side_number1.jpg", salaryMinCode: 8, salaryMaxCode: 12, isSalaryDisplay: false, companyName: "会社名２")
-        let _dummy3 = MdlKeepJob.init(jobId: "34567", jobName: "キープリスト一覧職業名３キープリスト一覧職業名３", pressStartDate: "2020/06/01", pressEndDate: "2020/06/12", mainTitle: "", mainPhotoURL: "", salaryMinCode: 9, salaryMaxCode: 13, isSalaryDisplay: true, companyName: "会社名３")
-        
-        let _dummyData:[MdlKeepJob] = [
-            _dummy1,
-            _dummy2,
-            _dummy3,
-            _dummy1,
-            _dummy2,
-            _dummy3,
-            _dummy1,
-            _dummy2,
-            _dummy3,
-            _dummy1,
-            _dummy2,
-            _dummy3,
-        ]
-        self.lists = MdlKeepList.init(hasNext: true, keepJobs: _dummyData)
-        
-        self.keepNoView.isHidden = true
-        self.keepNoView.delegate = nil
-        self.keepTableView.delegate = self
-        self.keepTableView.dataSource = self
-        self.keepTableView.reloadData()
     }
     
     func fetchGetChemistryData() {
