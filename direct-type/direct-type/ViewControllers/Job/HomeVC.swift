@@ -91,6 +91,7 @@ class HomeVC: TmpNaviTopVC {
             self.getJobRecommendList()
         } else {
             // 初回起動時
+            self.recommendUseFlag = false
             self.getJobList()
         }
     }
