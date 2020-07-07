@@ -2449,14 +2449,7 @@
         },
         "responses": {
           "201": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateSettingsRequestDTO"
-                }
-              }
-            }
+            "description": ""
           }
         },
         "tags": [
