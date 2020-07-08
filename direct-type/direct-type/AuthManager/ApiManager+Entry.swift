@@ -17,16 +17,14 @@ extension WebAPIEntryUserDto {
     }
     init(_ jobCardCode: String, _ profile: MdlProfile, _ resume: MdlResume, _ career: MdlCareer, _ entry: MdlEntry, _ typePassword: String) {
         self.init()
-        
         self.password = typePassword //入力させたもの
-        
         self.lastname = profile.familyName
         self.firstname = profile.firstName
         self.lastnameKana = profile.familyNameKana
         self.firstnameKana = profile.firstNameKana
         self.sex = profile.gender
         self.email = profile.mailAddress
-//        self.emailMobile = XXX
+        //[任意：対応項目なし]self.emailMobile = XXX
         self.birthday = "\(profile.birthday.dispYmd())+09:00"
         if profile.zipCode.count == 7 {
             let zip3: String = String.substr(profile.zipCode, 1, 3)
@@ -35,7 +33,7 @@ extension WebAPIEntryUserDto {
         }
         self.areaValue = profile.prefecture
         self.address = "\(profile.address1)\(profile.address2)"
-//        self.tel = XXX
+        //[必須（ただしmobileがあればtelは不要）：対応項目なし]self.tel = XXX
         self.mobile = profile.mobilePhoneNo
         self.educationValue = resume.educationId //これはFirstInputで入力
         self.educationName = resume.school.schoolName
@@ -43,7 +41,7 @@ extension WebAPIEntryUserDto {
         let graduationYM: Date = DateHelper.convStrYM2Date(resume.school.graduationYear)
         self.graduationY = graduationYM.dispYear()
         self.graduationM = graduationYM.dispMonth() //0埋め不要
-//        self.educationNote = XXX
+        //self.educationNote = XXX  //example: 学歴細補足です。//新規会員登録フォーム画面では「学歴」
         self.workStatus = resume.employmentStatus
         self.changeJobCount = resume.changeCount
         /** 経験職種(userOldJob3)を参照 */
@@ -63,12 +61,19 @@ extension WebAPIEntryUserDto {
         if _userOldJob3List.count > 0 {
             self.userOldIndustryList = _userOldIndustryList
         }
-        self.toeic = resume.skillLanguage.languageToeicScore
-        self.toefl = resume.skillLanguage.languageToeflScore
-        self.englishSkillValue = resume.skillLanguage.languageEnglish
-        self.otherLanguage = resume.skillLanguage.languageStudySkill
-//        public var license: String?
-//        self.license = "tmp"
+        if !resume.skillLanguage.languageToeicScore.isEmpty {
+            self.toeic = resume.skillLanguage.languageToeicScore
+        }
+        if !resume.skillLanguage.languageToeflScore.isEmpty {
+            self.toefl = resume.skillLanguage.languageToeflScore
+        }
+        if !resume.skillLanguage.languageEnglish.isEmpty {
+            self.englishSkillValue = resume.skillLanguage.languageEnglish
+        }
+        if !resume.skillLanguage.languageStudySkill.isEmpty {
+            self.otherLanguage = resume.skillLanguage.languageStudySkill
+        }
+        //[任意：対応項目なし]self.license = XXX//example: 保有資格あああ
         self.jobId = jobCardCode
         /** 職務経歴書(experienceCompany)を参照 */
         var _experienceCompanyList: [ExperienceCompany] = []
@@ -79,13 +84,18 @@ extension WebAPIEntryUserDto {
         if _experienceCompanyList.count > 0 {
             self.experienceCompanyList = _experienceCompanyList
         }
-//        /** スキルシート(userSkill)を参照 */
-//        var _userSkillList: [UserSkill] = []
-//        self.userSkillList = _userSkillList
-//        /** ライセンス(userLicense)を参照 */
-//        var _userLicenseList: [UserLicense] = []
-//        self.userLicenseList = _userLicenseList
-//        self.skillsheetFreeword = XXX
+        //[任意：対応項目なし]　スキルシート(userSkill)を参照
+        //var _userSkillList: [UserSkill] = []
+        //self.userSkillList = _userSkillList
+        //[任意：履歴書-資格] ライセンス(userLicense)を参照
+        var _userLicenseList: [UserLicense] = []
+        for code in resume.qualifications {
+            _userLicenseList.append(UserLicense(licenseId: code))
+        }
+        if _userLicenseList.count > 0 {
+//!!!            self.userLicenseList = _userLicenseList
+        }
+        //[任意：対応項目なし]self.skillsheetFreeword = XXX
         if !entry.ownPR.isEmpty {
             self.entryEtc = entry.ownPR
         }
@@ -99,14 +109,12 @@ extension WebAPIEntryUserDto {
         if !entry.hopeSalary.isEmpty {
             self.salaryId = entry.hopeSalary
         }
-        print(entry.debugDisp)
-//        /** 転職時期マスタより選択。 */
-//        public var changeTimeId: String?
-//        self.changeTimeId = XXX
-//        /** 希望連絡先(entryContact)を参照 */
-//        public var entryContactList: [EntryContact]?
-//        self.entryContactList = XXX
-        
+        //[任意：対応項目なし] 転職時期マスタより選択
+        //public var changeTimeId: String?
+        //self.changeTimeId = XXX
+        //[任意：対応項目なし] 希望連絡先(entryContact)を参照 */
+        //public var entryContactList: [EntryContact]?
+        //self.entryContactList = XXX
         if !entry.exAnswer1.isEmpty {
             self.entryAnswer1 = entry.exAnswer1
         }
