@@ -18,8 +18,8 @@ extension ApiManager {
         let (promise, resolver) = Promise<Void>.pending()
         AuthManager.needAuth(true)
         WithdrawAPI.withdrawControllerDelete()
-            .done { result in
-                resolver.fulfill(Void())
+        .done { result in
+            resolver.fulfill(Void())
         }.catch { (error) in
             resolver.reject(error)
         }.finally {}
