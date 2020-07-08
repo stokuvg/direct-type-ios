@@ -41,6 +41,10 @@ target 'direct-type' do
   ##=== Analytics
   pod 'AppsFlyerFramework', '~> 5.4.1'
 
+  ##=== Crash
+  pod 'Firebase/Crashlytics', '~> 6.27.1'
+  pod 'Firebase/Analytics', '~> 6.27.1'
+
 end
 
 #post_install do | installer |
