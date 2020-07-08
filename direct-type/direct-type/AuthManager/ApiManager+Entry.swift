@@ -93,8 +93,8 @@ extension WebAPIEntryUserDto {
             _userLicenseList.append(UserLicense(licenseId: code))
         }
         if _userLicenseList.count > 0 {
-            print(_userOldJob3List.description)
-            self.userLicenseList = _userLicenseList
+            print(_userLicenseList.description)
+//            self.userLicenseList = _userLicenseList
         }
         //[任意：対応項目なし]self.skillsheetFreeword = XXX
         if !entry.ownPR.isEmpty {
