@@ -89,15 +89,16 @@ private extension WithDrawalVC {
     func tryWithdrawal() {
         SVProgressHUD.show()
         ApiManager.sendDeleteAccount()
-        .done { _ in }
+        .done { _ in
+            AnalyticsEventManager.track(type: .withdrawal)
+            self.transitionToWithdrawalComplete()
+        }
         .catch{ (error) in
             let myErr = AuthManager.convAnyError(error)
             self.showError(myErr)
         }
         .finally {
-            AnalyticsEventManager.track(type: .withdrawal)
             SVProgressHUD.dismiss()
-            self.transitionToWithdrawalComplete()
         }
     }
     
