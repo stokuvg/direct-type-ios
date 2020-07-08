@@ -59,8 +59,6 @@ class SelectItemsManager: NSObject {
         loadMaster(type: .employmentType)
         loadMaster(type: .prCode)
         loadMaster(type: .overtime)
-        loadMasterGrp(type: .skill)
-        loadMaster(type: .skillYear)
         loadMaster(type: .management)
         loadMaster(type: .pcSkillWord)
         loadMaster(type: .pcSkillExcel)
@@ -162,8 +160,6 @@ extension SelectItemsManager {
         case employmentType
         case prCode
         case overtime
-        case skill
-        case skillYear
         case management
         case pcSkillExcel
         case pcSkillWord
@@ -188,8 +184,6 @@ extension SelectItemsManager {
             case .employmentType:       return "MstK9_employmentType"
             case .prCode:               return "MstL2_prCode"
             case .overtime:             return "MstL3_overtime"
-            case .skill:                return "MstL_skill"
-            case .skillYear:            return "MstL_skillYear"
             case .management:           return "MstF16_management"
             case .pcSkillWord:          return "MstF22_pcSkillWord"
             case .pcSkillExcel:         return "MstF22_pcSkillExcel"
@@ -347,7 +341,7 @@ extension SelectItemsManager {
     class func convCodeDisp(_ tsv1: TsvMaster, _ codes: String) -> [CodeDisp] {
         return codes.split(separator: EditItemTool.SplitMultiCodeSeparator).map { (obj) -> (CodeDisp) in
             switch tsv1 {
-            case .jobType, .businessType, .skill:
+            case .jobType, .businessType:
                 return SelectItemsManager.getCodeDispSyou(tsv1, code: String(obj)) ?? Constants.SelectItemsUndefine
             default:
                 return SelectItemsManager.getCodeDisp(tsv1, code: String(obj)) ?? Constants.SelectItemsUndefine

@@ -157,11 +157,11 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
                 //===(3h)資格
                 var disp3h: [String] = []
                 for val in resume.qualifications {
-                    if let cd = SelectItemsManager.getCodeDispSyou(.skill, code: val) {
+                    if let cd = SelectItemsManager.getCodeDisp(.qualification, code: val) {
                         disp3h.append(cd.disp)
                     }
                 }
-                addStackItem(type: .jobExperimentsH3, val: disp3h)
+                addStackItem(type: .qualificationsH3, val: disp3h)
                 //===(3i)自己PR
                 if !resume.ownPr.isEmpty {
                     addStackItem(type: .ownPrH3, val: resume.ownPr)

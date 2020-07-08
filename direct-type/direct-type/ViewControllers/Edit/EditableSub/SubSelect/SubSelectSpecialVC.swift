@@ -100,7 +100,6 @@ class SubSelectSpecialVC: BaseVC {
         self.mainTsvMaster = editableItem.editItem.tsvMaster //メインは指定されている
         switch editableItem.editItem.tsvMaster { //サブ（2段回目)は、メインにしたがって定義される
         case .jobType:  self.subTsvMaster = .jobExperimentYear
-        case .skill:    self.subTsvMaster = .skillYear
         default:        self.subTsvMaster = .undefine
         }
         //=== 遷移時点での選択情報をばらして保持する
