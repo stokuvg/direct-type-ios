@@ -21,6 +21,7 @@ struct ChemistryScoreCalculation {
         var rank = [RankDataSet]()
         
         ChemistryPersonalityType.allCases.forEach({
+            guard $0 != .undefine else { return }
             let totalScore = getTotalScore(type: $0)
             let rankSet = RankDataSet(rank: 0, score: totalScore, personalType: $0)
             rank.append(rankSet)
