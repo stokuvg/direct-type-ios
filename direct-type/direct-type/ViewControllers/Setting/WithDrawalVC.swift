@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CheckBoxView: UIView {
+final class CheckBoxView: UIView {
     @IBOutlet private weak var imageView: UIImageView!
     
     var statusFlag = false
@@ -28,7 +28,7 @@ class CheckBoxView: UIView {
     }
 }
 
-class CheckBoxLabelView: UIView {
+final class CheckBoxLabelView: UIView {
     @IBOutlet weak var checkBoxView: CheckBoxView!
     @IBOutlet private weak var textLabel: UILabel!
     
