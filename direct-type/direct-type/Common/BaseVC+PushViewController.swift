@@ -72,7 +72,7 @@ extension BaseVC {
             }
         case .entryForm(let routeFrom)://[C-0] 応募フォーム
             let storyboard = UIStoryboard(name: "Preview", bundle: nil)
-            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_EntryVC") as? EntryVC{
+            if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_EntryFormVC") as? EntryFormVC{
                 nvc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に表示にする
                 nvc.routeFrom = routeFrom
                 if let model = model as? MdlJobCardDetail {
