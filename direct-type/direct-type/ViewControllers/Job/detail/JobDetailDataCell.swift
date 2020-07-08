@@ -71,24 +71,7 @@ class JobDetailDataCell: BaseTableViewCell {
         let end_date_string = data.end_date
         let endFlag = DateHelper.endFlagHiddenCheck(endDateString:end_date_string, nowDate:nowDate)
                 
-        var limitedType:LimitedType!
-        switch (startFlag,endFlag) {
-            case (false,false):
-//                Log.selectLog(logLevel: .debug, "両方当たる")
-                // 両方とも一致しない
-                limitedType = LimitedType.none
-            case (false,true):
-//                Log.selectLog(logLevel: .debug, "掲載開始から７日以内")
-                // NEWマークのみ表示
-                limitedType = .new
-            case (true,false):
-//                Log.selectLog(logLevel: .debug, "掲載終了まで７日以内")
-                // 終了マークのみ表示
-                limitedType = .end
-            default:
-//                Log.selectLog(logLevel: .debug, "それ以外")
-                limitedType = LimitedType.none
-        }
+        let limitedType:LimitedType = DateHelper.limitedTypeCheck(startFlag: startFlag, endFlag: endFlag)
         self.limitedMarkSetting(type: limitedType)
         
         // 職種

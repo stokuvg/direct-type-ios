@@ -85,7 +85,9 @@ class DateHelper {
         
         let ret = retInterval/86400
 //        Log.selectLog(logLevel: .debug, "ret:\(ret)")
-        if ret < 7 {
+        
+        if 0 <= ret && ret <= 7 {
+            Log.selectLog(logLevel: .debug, "７日以内 最新")
             return true
         }
         return false
@@ -101,12 +103,36 @@ class DateHelper {
             retInterval = endDate.timeIntervalSince(nowDate)
             
             let ret = retInterval/86400
-    //        Log.selectLog(logLevel: .debug, "ret:\(ret)")
-            if ret > 7 {
+            Log.selectLog(logLevel: .debug, "end ret:\(ret)")
+            if 7 >= ret && ret >= 0 {
                 return true
             }
             return false
+    }
+    
+    class func limitedTypeCheck(startFlag:Bool, endFlag:Bool) -> LimitedType {
+        
+        var limitedType:LimitedType!
+
+        switch (startFlag,endFlag) {
+            case (true,true):
+                // 両方とも一致する
+                limitedType = .end
+            case (true,false):
+//                Log.selectLog(logLevel: .debug, "掲載開始から７日以内")
+                // NEWマークのみ表示
+                limitedType = .new
+            case (false,true):
+//                Log.selectLog(logLevel: .debug, "掲載終了まで７日以内")
+                // 終了マークのみ表示
+                limitedType = .end
+            default:
+//                Log.selectLog(logLevel: .debug, "それ以外")
+                limitedType = LimitedType.none
         }
+        
+        return limitedType
+    }
 }
 
 extension Date {

@@ -48,30 +48,16 @@ class KeepCardCell: BaseJobCardCell {
         let nowDate = Date()
         // NEWマーク 表示チェック
         let start_date_string = data.pressStartDate
+//        let start_date_string = "2020-07-02"
+//        Log.selectLog(logLevel: .debug, "start_date_string:\(start_date_string)")
         let startFlag = DateHelper.newMarkFlagCheck(startDateString: start_date_string, nowDate: nowDate)
         // 終了マーク 表示チェック
         let end_date_string = data.pressEndDate
+//        let end_date_string = "2020-07-12"
+//        Log.selectLog(logLevel: .debug, "end_date_string:\(end_date_string)")
         let endFlag = DateHelper.endFlagHiddenCheck(endDateString:end_date_string, nowDate:nowDate)
-
-                
-        var limitedType:LimitedType!
-        switch (startFlag,endFlag) {
-            case (false,false):
-//                Log.selectLog(logLevel: .debug, "両方当たる")
-                // 終了マークのみ表示
-                limitedType = LimitedType.none
-            case (false,true):
-//                Log.selectLog(logLevel: .debug, "掲載開始から７日以内")
-                // NEWマークのみ表示
-                limitedType = .new
-            case (true,false):
-//                Log.selectLog(logLevel: .debug, "掲載終了まで７日以内")
-                // 終了マークのみ表示
-                limitedType = .end
-            default:
-//                Log.selectLog(logLevel: .debug, "それ以外")
-                limitedType = LimitedType.none
-        }
+        
+        let limitedType:LimitedType = DateHelper.limitedTypeCheck(startFlag: startFlag, endFlag: endFlag)
         self.limitedMarkSetting(type: limitedType)
         // 職種名
         let job = data.jobName
@@ -122,7 +108,7 @@ class KeepCardCell: BaseJobCardCell {
     }
     
     private func makeAreaNames(codes: [String]) -> String {
-        Log.selectLog(logLevel: .debug, "self.makeAreaNames codes:\(codes)")
+//        Log.selectLog(logLevel: .debug, "self.makeAreaNames codes:\(codes)")
         
         var text:String = ""
         for i in 0..<codes.count {
