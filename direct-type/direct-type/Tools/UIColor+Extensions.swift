@@ -21,6 +21,7 @@ enum ColorType {
     case color_button
     case color_alart
     case color_close
+    case color_light_gray
 }
 
 extension UIColor {
@@ -51,6 +52,8 @@ extension UIColor {
                 colorName = "color-alart"
             case .color_close:
                 colorName = "color-close"
+            case .color_light_gray:
+                colorName = "color-light-gray"
         }
         
         self.init(named:colorName)

@@ -213,7 +213,7 @@
                                                         <color key="backgroundColor" name="color-white"/>
                                                         <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="17"/>
                                                         <state key="normal" title="見送り" image="deleteDefault">
-                                                            <color key="titleColor" name="color-line"/>
+                                                            <color key="titleColor" name="color-light-gray"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="deleteBtnAction" destination="KGk-i7-Jjw" eventType="touchUpInside" id="YdG-XU-yEX"/>
@@ -309,6 +309,9 @@
         <image name="place" width="16" height="16"/>
         <image name="salary" width="16" height="17"/>
         <image name="upcoming" width="56" height="18"/>
+        <namedColor name="color-light-gray">
+            <color red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="color-line">
             <color red="0.82352941176470584" green="0.82352941176470584" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
