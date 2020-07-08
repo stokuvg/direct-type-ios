@@ -27,12 +27,7 @@ extension WebAPIEntryUserDto {
         self.sex = profile.gender
         self.email = profile.mailAddress
 //        self.emailMobile = XXX
-        self.birthday = profile.birthday.dispYmd()
-        print(String(repeating: "=", count: 22))
-        print(self.birthday)
-        print(String(repeating: "=", count: 22))
-        
-        
+        self.birthday = "\(profile.birthday.dispYmd())+09:00"
         if profile.zipCode.count == 7 {
             let zip3: String = String.substr(profile.zipCode, 1, 3)
             let zip4: String = String.substr(profile.zipCode, 4, 4)
@@ -57,13 +52,17 @@ extension WebAPIEntryUserDto {
         for item in resume.jobExperiments {
             _userOldJob3List.append(UserOldJob3(job3Id: item.jobType, experienceYears: item.jobExperimentYear))
         }
-        self.userOldJob3List = _userOldJob3List
+        if _userOldJob3List.count > 0 {
+            self.userOldJob3List = _userOldJob3List
+        }
         /** 経験業種(userOldIndustry)を参照 */
         var _userOldIndustryList: [UserOldIndustry] = []
         for item in resume.businessTypes {
             _userOldIndustryList.append(UserOldIndustry(industryId: item))
         }
-        self.userOldIndustryList = _userOldIndustryList
+        if _userOldJob3List.count > 0 {
+            self.userOldIndustryList = _userOldIndustryList
+        }
         self.toeic = resume.skillLanguage.languageToeicScore
         self.toefl = resume.skillLanguage.languageToeflScore
         self.englishSkillValue = resume.skillLanguage.languageEnglish
@@ -77,7 +76,9 @@ extension WebAPIEntryUserDto {
             let expCompany = ExperienceCompany(company: item.companyName, startworkY: item.workPeriod.startDate.dispYear(), startworkM: item.workPeriod.startDate.dispMonth(), endworkY: item.workPeriod.endDate.dispYear(), endworkM: item.workPeriod.endDate.dispMonth(), employees: item.employeesCount, employmentId: item.employmentType, salary: item.salary, workNote: item.contents)
             _experienceCompanyList.append(expCompany)
         }
-        self.experienceCompanyList = _experienceCompanyList
+        if _experienceCompanyList.count > 0 {
+            self.experienceCompanyList = _experienceCompanyList
+        }
 //        /** スキルシート(userSkill)を参照 */
 //        var _userSkillList: [UserSkill] = []
 //        self.userSkillList = _userSkillList
@@ -93,8 +94,10 @@ extension WebAPIEntryUserDto {
             for code in tmp.split(separator: EditItemTool.SplitMultiCodeSeparator) {
                 _entryPlaceList.append(EntryPlace(placeId: String(code)))
             }
-        }        
-        self.entryPlaceList = _entryPlaceList
+        }
+        if _entryPlaceList.count > 0 {
+            self.entryPlaceList = _entryPlaceList
+        }
         if let tmp = editTempCD[EditItemMdlEntry.hopeSalary.itemKey] {
             self.salaryId = tmp
         }
