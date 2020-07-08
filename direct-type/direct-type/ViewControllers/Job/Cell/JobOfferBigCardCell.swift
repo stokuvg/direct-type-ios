@@ -33,7 +33,7 @@ class JobOfferBigCardCell: BaseJobCardCell {
         btnView.layer.cornerRadius = 15
         btnView.layer.maskedCorners = [.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
         
-        let textColor:UIColor = UIColor.init(colorType: .color_line)!
+        let textColor:UIColor = UIColor.init(colorType: .color_light_gray)!
         deleteBtn.titleLabel?.text(text: "見送り", fontType: .C_font_M, textColor: textColor, alignment: .center)
         deleteBtn.layer.cornerRadius = 15
         deleteBtn.layer.maskedCorners = [.layerMinXMaxYCorner]
@@ -200,7 +200,7 @@ class JobOfferBigCardCell: BaseJobCardCell {
         let selectedImage = UIImage(named: "likeSelected")
         let useImage = flag ? selectedImage : noSelectImage
         
-        let noSelectColor = UIColor.init(colorType: .color_parts_gray)
+        let noSelectColor = UIColor.init(colorType: .color_light_gray)
         let selectColor = UIColor.init(colorType: .color_sub)
         let useColor = flag ? selectColor : noSelectColor
         
