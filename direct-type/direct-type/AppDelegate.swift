@@ -9,6 +9,7 @@
 import UIKit
 import AWSMobileClient
 import AppsFlyerLib
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         setupAppsFlyer()
         tryPostActivity()
+        FirebaseApp.configure()
         
         //=== Cognito認証の初期化処理を組み込む
         // Amazon Cognito 認証情報プロバイダーを初期化します
