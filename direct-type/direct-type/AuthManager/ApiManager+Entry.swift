@@ -15,7 +15,7 @@ extension WebAPIEntryUserDto {
     init() {
         self.init(password: "", lastname: "", firstname: "", lastnameKana: "", firstnameKana: "", sex: "", email: "", emailMobile: "", birthday: "", zip: "", areaValue: "", address: "", tel: "", mobile: "", educationValue: "", educationName: "", educationDivision: "", graduationY: "", graduationM: "", educationNote: nil, workStatus: "", changeJobCount: "", userOldJob3List: [], userOldIndustryList: [], toeic: nil, toefl: nil, englishSkillValue: nil, otherLanguage: nil, license: nil, jobId: "", experienceCompanyList: [], userSkillList: nil, userLicenseList: nil, skillsheetFreeword: nil, entryEtc: nil, entryPlaceList: nil, salaryId: nil, changeTimeId: nil, entryContactList: nil, entryAnswer1: "", entryAnswer2: "", entryAnswer3: "")
     }
-    init(_ jobCardCode: String, _ profile: MdlProfile, _ resume: MdlResume, _ career: MdlCareer, _ editTempCD: [EditableItemKey: EditableItemCurVal], _ typePassword: String) {
+    init(_ jobCardCode: String, _ profile: MdlProfile, _ resume: MdlResume, _ career: MdlCareer, _ entry: MdlEntry, _ typePassword: String) {
         self.init()
         
         self.password = typePassword //入力させたもの
@@ -86,35 +86,35 @@ extension WebAPIEntryUserDto {
 //        var _userLicenseList: [UserLicense] = []
 //        self.userLicenseList = _userLicenseList
 //        self.skillsheetFreeword = XXX
-        if let tmp = editTempCD[EditItemMdlEntry.ownPR.itemKey] {
-            self.entryEtc = tmp
+        if !entry.ownPR.isEmpty {
+            self.entryEtc = entry.ownPR
         }
         var _entryPlaceList: [EntryPlace] = []
-        if let tmp = editTempCD[EditItemMdlEntry.hopeArea.itemKey] {
-            for code in tmp.split(separator: EditItemTool.SplitMultiCodeSeparator) {
-                _entryPlaceList.append(EntryPlace(placeId: String(code)))
-            }
+        for code in entry.hopeArea {
+            _entryPlaceList.append(EntryPlace(placeId: String(code)))
         }
         if _entryPlaceList.count > 0 {
             self.entryPlaceList = _entryPlaceList
         }
-        if let tmp = editTempCD[EditItemMdlEntry.hopeSalary.itemKey] {
-            self.salaryId = tmp
+        if !entry.hopeSalary.isEmpty {
+            self.salaryId = entry.hopeSalary
         }
+        print(entry.debugDisp)
 //        /** 転職時期マスタより選択。 */
 //        public var changeTimeId: String?
 //        self.changeTimeId = XXX
 //        /** 希望連絡先(entryContact)を参照 */
 //        public var entryContactList: [EntryContact]?
 //        self.entryContactList = XXX
-        if let tmp = editTempCD[EditItemMdlEntry.exQuestionAnswer1.itemKey] {
-            self.entryAnswer1 = tmp
+        
+        if !entry.exAnswer1.isEmpty {
+            self.entryAnswer1 = entry.exAnswer1
         }
-        if let tmp = editTempCD[EditItemMdlEntry.exQuestionAnswer2.itemKey] {
-            self.entryAnswer2 = tmp
+        if !entry.exAnswer2.isEmpty {
+            self.entryAnswer2 = entry.exAnswer2
         }
-        if let tmp = editTempCD[EditItemMdlEntry.exQuestionAnswer3.itemKey] {
-            self.entryAnswer3 = tmp
+        if !entry.exAnswer3.isEmpty {
+            self.entryAnswer3 = entry.exAnswer3
         }
     }
 }

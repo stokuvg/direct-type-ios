@@ -27,9 +27,7 @@ class EntryConfirmVC: PreviewBaseVC {
             tableVW.reloadData()
             return
         }
-        fetchPostEntry(completion: { () in
-//            AnalyticsEventManager.track(type: .completeEntry)
-        })
+        fetchPostEntry()
     }
     //共通プレビューをOverrideして利用する
     override func viewDidLoad() {
@@ -208,18 +206,20 @@ extension EntryConfirmVC: EntryConfirmNotifyEntryDelegate {
 
 //=== APIフェッチ
 extension EntryConfirmVC {
-    private func fetchPostEntry(completion: (() -> ())? = nil) {
+    private func fetchPostEntry() {
         guard let _jobCard = self.jobCard else { return }
         guard let _profile = self.profile else { return }
         guard let _resume = self.resume else { return }
         guard let _career = self.career else { return }
+        guard let _entry = self.entry else { return }
         let _jobCardCode: String = _jobCard.jobCardCode
         let _typePassword: String = self.bufPassword //半角英数4-20
-        let param: WebAPIEntryUserDto = WebAPIEntryUserDto(_jobCardCode, _profile, _resume, _career, editableModel.editTempCD, _typePassword)
+        let param: WebAPIEntryUserDto = WebAPIEntryUserDto(_jobCardCode, _profile, _resume, _career, _entry, _typePassword)
         SVProgressHUD.show(withStatus: "応募処理")
         ApiManager.postEntry(param, isRetry: true)
         .done { result in
-            print(result)
+            AnalyticsEventManager.track(type: .completeEntry)
+            self.pushViewController(.entryComplete)
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -240,8 +240,6 @@ extension EntryConfirmVC {
             }
         }
         .finally {
-            self.dispData()
-            completion?()
             SVProgressHUD.dismiss()
         }
     }
