@@ -117,7 +117,6 @@ class ResumePreviewVC: PreviewBaseVC {
 }
 
 //=== APIフェッチ
-
 extension ResumePreviewVC {
     private func fetchGetResume() {
         SVProgressHUD.show(withStatus: "履歴書の取得")
@@ -144,15 +143,15 @@ extension ResumePreviewVC {
     }
     private func fetchUpdateResume() {
         guard let resume = self.detail else { return }
-        let param = UpdateResumeRequestDTO(resume ,editableModel.editTempCD)
-        print(param)
+//        let param = UpdateResumeRequestDTO(resume ,editableModel.editTempCD)//!!!
+        let param = UpdateResumeRequestDTO(isEmployed: false, changeJobCount: 0, workHistory: [], experienceIndustryIds: [], educationId: "", finalEducation: FinalEducationDTO(schoolName: "", faculty: "", department: "", guraduationYearMonth: ""), toeic: 99999, toefl: 999999, englishSkillId: "", otherLanguageSkillId: "", licenseIds: [], selfPR: "", currentSalary: "")
+        
+        
         self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
         self.dicValidErrMsg.removeAll()//状態をクリアしておく
         SVProgressHUD.show(withStatus: "履歴書情報の更新")
         ApiManager.updateResume(param, isRetry: true)
         .done { result in
-            //self.fetchGetResume()//成功したら取得フェチ
-            //self.completeUpdate()//===更新完了した場合の処理
             self.fetchCompletePopVC()
         }
         .catch { (error) in

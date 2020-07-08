@@ -200,7 +200,8 @@ extension SelectItemsManager {
                 let contents = try String(contentsOfFile: filepath)
                 let lines = contents.components(separatedBy: "\n")
                 //読めたので、ばらして保持させる
-                for (num, line) in lines.enumerated() {
+                for (num, _line) in lines.enumerated() {
+                    let line = _line.trimmingCharacters(in: .whitespacesAndNewlines)
                     if num == 0 { continue } //最初の行はヘッダなので追加しない
                     if num == 1 { continue } //2行めもヘッダなので追加しない
                     let hoge = line.components(separatedBy: "\t")

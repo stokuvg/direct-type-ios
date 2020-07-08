@@ -18,6 +18,7 @@ class ProfilePreviewVC: PreviewBaseVC {
     override func actCommit(_ sender: UIButton) {
         if editableModel.editTempCD.count == 0 { //変更なければ、そのまま戻して良いプレビュー画面
             navigationController?.popViewController(animated: true)
+            return
         }
         if validateLocalModel() {
             tableVW.reloadData()
@@ -78,19 +79,16 @@ class ProfilePreviewVC: PreviewBaseVC {
             EditableItemH(type: .inputText, editItem: EditItemMdlProfile.address1, val: _detail.address1),
             EditableItemH(type: .inputText, editItem: EditItemMdlProfile.address2, val: _detail.address2),
         ]))
-
         //===７．メールアドレス
         //    ・未記入時は「未入力（必須）」と表示
         let bufMailAddress: String = _detail.mailAddress
         arrData.append(MdlItemH(.emailH2, "\(bufMailAddress)", childItems: [
             EditableItemH(type: .inputText, editItem: EditItemMdlProfile.mailAddress, val: _detail.mailAddress),
         ]))
-
         //===希望勤務地
         arrData.append(MdlItemH(.hopeAreaH2, "", childItems: [
             EditableItemH(type: .selectMulti, editItem: EditItemMdlProfile.hopeJobArea, val: _detail.hopeJobPlaceIds.joined(separator: EditItemTool.JoinMultiCodeSeparator)),
         ]))
-
         //===８．携帯電話番号
         //    ・認証電話番号を表示
         //    ・未入力は想定しない
@@ -102,7 +100,6 @@ class ProfilePreviewVC: PreviewBaseVC {
         arrData.append(MdlItemH(.mobilephoneH2, "\(bufMobilePhoneNo)", "\(bufMobilePhoneNoNotice)", readonly: true, childItems: [
             EditableItemH(type: .inputText, editItem: EditItemMdlProfile.mobilePhoneNo, val: _detail.mobilePhoneNo),
         ]))
-
         //=== editableModelで管理させる
         editableModel.arrData.removeAll()
         for items in arrData { editableModel.arrData.append(items.childItems) }//editableModelに登録
@@ -152,8 +149,6 @@ extension ProfilePreviewVC {
         ApiManager.updateProfile(param, isRetry: true)
         .done { result in
             self.fetchCompletePopVC()
-            //self.fetchGetProfile()
-            //self.completeUpdate()//===更新完了した場合の処理
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -171,8 +166,4 @@ extension ProfilePreviewVC {
             SVProgressHUD.dismiss()
         }
     }
-//    private func completeUpdate() {
-//        self.editableModel.editTempCD.removeAll()//編集情報をまるっと削除
-//        self.chkButtonEnable()
-//    }
 }
