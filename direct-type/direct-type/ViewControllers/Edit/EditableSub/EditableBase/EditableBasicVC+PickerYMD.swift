@@ -39,7 +39,7 @@ extension EditableBasicVC {
         picker.locale = Locale(identifier: "ja_JP")
         picker.itemKey = textField.itemKey
         picker.parentTF = textField
-        textField.inputView = picker //
+        textField.inputView = picker
         //Pickerにボタンをつけておく（Pickerにというか、inputViewに対して付くため、Softwareキーボードなければ最下部に、あればその上につく
         let rect = CGRect(origin: CGPoint.zero, size: CGSize.init(width: 260, height: 45))
         let toolbar = UIToolbar(frame: rect)//Autolayout補正かかるけど、そこそこの横幅指定が必要
@@ -56,19 +56,14 @@ extension EditableBasicVC {
         btnClose.parentPicker = picker
         toolbar.setItems([btnClose, separator1, barLbl, separator2, btnSelect], animated: true)
         textField.inputAccessoryView = toolbar
-//        textField.inputAccessoryView?.backgroundColor = .green
     }
     
     //ピッカーにつけた〔選択〕〔Cancel〕ボタン
     @objc func actDatePickerSelectButton(_ sender: IKBarButtonItem) {
         guard let picker = sender.parentPicker as? IKDatePicker else { return }
         picker.parentTF?.text = picker.date.dispYmdJP()
-        //guard let editableModel = editableModel else { return }
         guard let item = editableModel.getItemByKey(picker.itemKey) else { return }
         editableModel.changeTempItem(item, text: picker.date.dispYmd())
-        
-        print("✳️✳️[\(#line)]✳️[\(picker.date.dispYmd())]✳️")
-        
         self.view.endEditing(false)
     }
     @objc func actDatePickerCancelButton(_ sender: IKBarButtonItem) {
