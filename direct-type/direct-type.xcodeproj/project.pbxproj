@@ -165,7 +165,7 @@
 		0E144D93248DCC0E005A659F /* ChemistryResultHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E144D92248DCC0E005A659F /* ChemistryResultHeader.xib */; };
 		0E144D97248DD869005A659F /* ChemistryScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E144D96248DD869005A659F /* ChemistryScore.swift */; };
 		0E144D99248DDBE2005A659F /* ChemistryScoreCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E144D98248DDBE2005A659F /* ChemistryScoreCalculation.swift */; };
-		0E1F06D024B57BD200CCAD46 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E1F06CF24B57BD200CCAD46 /* GoogleService-Info.plist */; };
+		0E1F06D424B5A06B00CCAD46 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E1F06D324B5A06B00CCAD46 /* GoogleService-Info.plist */; };
 		0E1FB23724AC8424005E0BE7 /* AnalyticsEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1FB23624AC8424005E0BE7 /* AnalyticsEventType.swift */; };
 		0E1FB23924AC8A6E005E0BE7 /* AppDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1FB23824AC8A6E005E0BE7 /* AppDefine.swift */; };
 		0E1FB23B24AD7243005E0BE7 /* AnalyticsEventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1FB23A24AD7243005E0BE7 /* AnalyticsEventManager.swift */; };
@@ -504,7 +504,7 @@
 		0E144D92248DCC0E005A659F /* ChemistryResultHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChemistryResultHeader.xib; sourceTree = "<group>"; };
 		0E144D96248DD869005A659F /* ChemistryScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryScore.swift; sourceTree = "<group>"; };
 		0E144D98248DDBE2005A659F /* ChemistryScoreCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryScoreCalculation.swift; sourceTree = "<group>"; };
-		0E1F06CF24B57BD200CCAD46 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0E1F06D324B5A06B00CCAD46 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0E1FB23624AC8424005E0BE7 /* AnalyticsEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEventType.swift; sourceTree = "<group>"; };
 		0E1FB23824AC8A6E005E0BE7 /* AppDefine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDefine.swift; sourceTree = "<group>"; };
 		0E1FB23A24AD7243005E0BE7 /* AnalyticsEventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEventManager.swift; sourceTree = "<group>"; };
@@ -846,7 +846,7 @@
 				06D700322456B5FC00E55FC8 /* Color.xcassets */,
 				066BD9E12456ACB5009E610B /* LaunchScreen.storyboard */,
 				066BD9E42456ACB5009E610B /* Info.plist */,
-				0E1F06CF24B57BD200CCAD46 /* GoogleService-Info.plist */,
+				0E1F06D324B5A06B00CCAD46 /* GoogleService-Info.plist */,
 			);
 			path = "direct-type";
 			sourceTree = "<group>";
@@ -1570,7 +1570,7 @@
 				06FFA00C2484E66C0085A3D9 /* MyPageEditedChemistryCell.xib in Resources */,
 				066763782457B0A700AC5039 /* KeepListVC.storyboard in Resources */,
 				26BF48E624639D2B00E00215 /* MstK8_qualification.tsv in Resources */,
-				0E1F06D024B57BD200CCAD46 /* GoogleService-Info.plist in Resources */,
+				0E1F06D424B5A06B00CCAD46 /* GoogleService-Info.plist in Resources */,
 				26BF48E424639D2B00E00215 /* MstL2_prCode.tsv in Resources */,
 				26BF48E124639D2B00E00215 /* MstL_skillYear.tsv in Resources */,
 				26147F37247267F9009B30B5 /* MstF22_pcSkillExcel.tsv in Resources */,
@@ -2098,6 +2098,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1.0.0;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = T9NJN3ZF88;
 				INFOPLIST_FILE = "direct-type/Info.plist";
