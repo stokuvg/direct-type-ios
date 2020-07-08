@@ -165,6 +165,7 @@
 		0E144D93248DCC0E005A659F /* ChemistryResultHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E144D92248DCC0E005A659F /* ChemistryResultHeader.xib */; };
 		0E144D97248DD869005A659F /* ChemistryScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E144D96248DD869005A659F /* ChemistryScore.swift */; };
 		0E144D99248DDBE2005A659F /* ChemistryScoreCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E144D98248DDBE2005A659F /* ChemistryScoreCalculation.swift */; };
+		0E1F06CE24B566E700CCAD46 /* APIManager+Withdraw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F06CD24B566E700CCAD46 /* APIManager+Withdraw.swift */; };
 		0E1FB23724AC8424005E0BE7 /* AnalyticsEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1FB23624AC8424005E0BE7 /* AnalyticsEventType.swift */; };
 		0E1FB23924AC8A6E005E0BE7 /* AppDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1FB23824AC8A6E005E0BE7 /* AppDefine.swift */; };
 		0E1FB23B24AD7243005E0BE7 /* AnalyticsEventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1FB23A24AD7243005E0BE7 /* AnalyticsEventManager.swift */; };
@@ -501,6 +502,7 @@
 		0E144D92248DCC0E005A659F /* ChemistryResultHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChemistryResultHeader.xib; sourceTree = "<group>"; };
 		0E144D96248DD869005A659F /* ChemistryScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryScore.swift; sourceTree = "<group>"; };
 		0E144D98248DDBE2005A659F /* ChemistryScoreCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryScoreCalculation.swift; sourceTree = "<group>"; };
+		0E1F06CD24B566E700CCAD46 /* APIManager+Withdraw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIManager+Withdraw.swift"; sourceTree = "<group>"; };
 		0E1FB23624AC8424005E0BE7 /* AnalyticsEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEventType.swift; sourceTree = "<group>"; };
 		0E1FB23824AC8A6E005E0BE7 /* AppDefine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDefine.swift; sourceTree = "<group>"; };
 		0E1FB23A24AD7243005E0BE7 /* AnalyticsEventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEventManager.swift; sourceTree = "<group>"; };
@@ -1271,6 +1273,7 @@
 				0E7372DE249A089D00358EFA /* ApiManager+AuthCode.swift */,
 				0E22833C24AEB5AB0008765E /* ApiManager+Chemistry.swift */,
 				0E59D7C424B40D7600FA4570 /* ApiManager+Activity.swift */,
+				0E1F06CD24B566E700CCAD46 /* APIManager+Withdraw.swift */,
 			);
 			path = AuthManager;
 			sourceTree = "<group>";
@@ -1853,6 +1856,7 @@
 				0645DE02246BB6A100592572 /* JobDetailSalaryExampleCell.swift in Sources */,
 				066EF6CB245C119000E15AD2 /* JobOfferCardMoreCell.swift in Sources */,
 				064EF6FE2465550E00853ADD /* JobDetailArticleHeaderView.swift in Sources */,
+				0E1F06CE24B566E700CCAD46 /* APIManager+Withdraw.swift in Sources */,
 				26A2899924AAD74B000D2926 /* EntryConfirmNotifyEntry1TBCell.swift in Sources */,
 				066EF6C5245BB9C400E15AD2 /* KeepCardCell.swift in Sources */,
 				260BBFDC2465171D003D163A /* MdlProfile.swift in Sources */,
