@@ -38,7 +38,7 @@
 		066763692457AF3100AC5039 /* MyPageVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 066763682457AF3100AC5039 /* MyPageVC.storyboard */; };
 		0667636C2457B02200AC5039 /* KeepListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0667636B2457B02200AC5039 /* KeepListVC.swift */; };
 		0667636F2457B04500AC5039 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0667636E2457B04500AC5039 /* HomeVC.swift */; };
-		066763722457B08300AC5039 /* EntryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066763712457B08300AC5039 /* EntryVC.swift */; };
+		066763722457B08300AC5039 /* EntryFormVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066763712457B08300AC5039 /* EntryFormVC.swift */; };
 		066763762457B09F00AC5039 /* HomeVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 066763752457B09F00AC5039 /* HomeVC.storyboard */; };
 		066763782457B0A700AC5039 /* KeepListVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 066763772457B0A700AC5039 /* KeepListVC.storyboard */; };
 		0669380C2485D1030064030F /* SettingAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0669380A2485D1030064030F /* SettingAccountCell.swift */; };
@@ -374,7 +374,7 @@
 		066763682457AF3100AC5039 /* MyPageVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPageVC.storyboard; sourceTree = "<group>"; };
 		0667636B2457B02200AC5039 /* KeepListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeepListVC.swift; sourceTree = "<group>"; };
 		0667636E2457B04500AC5039 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
-		066763712457B08300AC5039 /* EntryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryVC.swift; sourceTree = "<group>"; };
+		066763712457B08300AC5039 /* EntryFormVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryFormVC.swift; sourceTree = "<group>"; };
 		066763752457B09F00AC5039 /* HomeVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeVC.storyboard; sourceTree = "<group>"; };
 		066763772457B0A700AC5039 /* KeepListVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = KeepListVC.storyboard; sourceTree = "<group>"; };
 		0669380A2485D1030064030F /* SettingAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAccountCell.swift; sourceTree = "<group>"; };
@@ -785,7 +785,7 @@
 			children = (
 				26A289A024AAFADD000D2926 /* EntryFormCell */,
 				26A2899F24AAFACE000D2926 /* EntryConfirmCell */,
-				066763712457B08300AC5039 /* EntryVC.swift */,
+				066763712457B08300AC5039 /* EntryFormVC.swift */,
 				06E519B0245814B2004E4B7A /* EntryConfirmVC.swift */,
 				26F8E50B24B4367B00764193 /* Entry.storyboard */,
 				06E519B2245814BD004E4B7A /* EntryCompleteVC.swift */,
@@ -1761,7 +1761,7 @@
 				2688B568249768DA001975AC /* RecommendManager.swift in Sources */,
 				0E59D7C524B40D7600FA4570 /* ApiManager+Activity.swift in Sources */,
 				0670F4662491FCBB00E60FDC /* ApiManager+Keeps.swift in Sources */,
-				066763722457B08300AC5039 /* EntryVC.swift in Sources */,
+				066763722457B08300AC5039 /* EntryFormVC.swift in Sources */,
 				06E519A42457DC7B004E4B7A /* InitialInputCompleteVC.swift in Sources */,
 				0667636C2457B02200AC5039 /* KeepListVC.swift in Sources */,
 				0EE36F1B24872E280098A2AF /* IconCarouselView.swift in Sources */,
