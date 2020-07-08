@@ -9,6 +9,7 @@
 import Foundation
 
 enum ChemistryPersonalityType: Int, CaseIterable {
+    // 【Caution!!】caseの並び順と初期化IDが突合しているので並び順は安易に変えない
     case undefine
     case reformer
     case helper
@@ -72,8 +73,6 @@ enum ChemistryPersonalityType: Int, CaseIterable {
     
     var priority: Int {
         switch self {
-        case .undefine:
-            return 0
         case .reformer:
             return 1
         case .toAchieve:
@@ -92,6 +91,8 @@ enum ChemistryPersonalityType: Int, CaseIterable {
             return 8
         case .unique:
             return 9
+        case .undefine:
+            return 10
         }
     }
     
