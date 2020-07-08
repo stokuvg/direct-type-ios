@@ -23,4 +23,15 @@ class DeviceHelper {
 //        Log.selectLog(logLevel: .debug, "deviceHeight:\(deviceHeight)")
         return deviceHeight
     }
+    
+    class func xsMaxCheck() -> Bool {
+        
+        
+        let screenSize = UIScreen.main.bounds
+        if screenSize.width >= 414 && screenSize.height >= 896 {
+            return true
+        } else {
+            return false
+        }
+    }
 }

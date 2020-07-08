@@ -152,8 +152,14 @@ extension KeepListVC: KeepNoViewDelegate {
 
 extension KeepListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 232.0
-//        return UITableView.automaticDimension
+        
+        if DeviceHelper.xsMaxCheck() {
+            return 252.0
+//            return UITableView.automaticDimension
+        } else {
+            return 232.0
+//            return UITableView.automaticDimension
+        }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
