@@ -11,5 +11,5 @@ import Foundation
 // アプリ内全体の設定フラグなどを集約するためのファイル
 struct AppDefine {
     // AppsFlyerデバッグログフラグ
-    static let isDebugForAppsFlyer = true
+    static let isDebugForAppsFlyer = false
 }

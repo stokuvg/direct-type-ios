@@ -166,6 +166,7 @@
 		0E144D97248DD869005A659F /* ChemistryScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E144D96248DD869005A659F /* ChemistryScore.swift */; };
 		0E144D99248DDBE2005A659F /* ChemistryScoreCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E144D98248DDBE2005A659F /* ChemistryScoreCalculation.swift */; };
 		0E1F06D424B5A06B00CCAD46 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E1F06D324B5A06B00CCAD46 /* GoogleService-Info.plist */; };
+		0E1F06CE24B566E700CCAD46 /* APIManager+Withdraw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F06CD24B566E700CCAD46 /* APIManager+Withdraw.swift */; };
 		0E1FB23724AC8424005E0BE7 /* AnalyticsEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1FB23624AC8424005E0BE7 /* AnalyticsEventType.swift */; };
 		0E1FB23924AC8A6E005E0BE7 /* AppDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1FB23824AC8A6E005E0BE7 /* AppDefine.swift */; };
 		0E1FB23B24AD7243005E0BE7 /* AnalyticsEventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1FB23A24AD7243005E0BE7 /* AnalyticsEventManager.swift */; };
@@ -294,12 +295,10 @@
 		26BF48D924639D2B00E00215 /* MstK25_employmentStatus.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48C824639D2A00E00215 /* MstK25_employmentStatus.tsv */; };
 		26BF48DA24639D2B00E00215 /* MstK14_place.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48C924639D2A00E00215 /* MstK14_place.tsv */; };
 		26BF48DB24639D2B00E00215 /* MstK11_entryPlace.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48CA24639D2A00E00215 /* MstK11_entryPlace.tsv */; };
-		26BF48DC24639D2B00E00215 /* MstL_skill.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48CB24639D2A00E00215 /* MstL_skill.tsv */; };
 		26BF48DD24639D2B00E00215 /* MstK25_gender.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48CC24639D2A00E00215 /* MstK25_gender.tsv */; };
 		26BF48DE24639D2B00E00215 /* MstK13_schoolType.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48CD24639D2A00E00215 /* MstK13_schoolType.tsv */; };
 		26BF48DF24639D2B00E00215 /* MstK6_businessType.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48CE24639D2A00E00215 /* MstK6_businessType.tsv */; };
 		26BF48E024639D2B00E00215 /* MstK3_changeCount.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48CF24639D2A00E00215 /* MstK3_changeCount.tsv */; };
-		26BF48E124639D2B00E00215 /* MstL_skillYear.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48D024639D2A00E00215 /* MstL_skillYear.tsv */; };
 		26BF48E224639D2B00E00215 /* MstK4_jobType.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48D124639D2A00E00215 /* MstK4_jobType.tsv */; };
 		26BF48E324639D2B00E00215 /* MstK10_salary.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48D224639D2A00E00215 /* MstK10_salary.tsv */; };
 		26BF48E424639D2B00E00215 /* MstL2_prCode.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26BF48D324639D2A00E00215 /* MstL2_prCode.tsv */; };
@@ -505,6 +504,7 @@
 		0E144D96248DD869005A659F /* ChemistryScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryScore.swift; sourceTree = "<group>"; };
 		0E144D98248DDBE2005A659F /* ChemistryScoreCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryScoreCalculation.swift; sourceTree = "<group>"; };
 		0E1F06D324B5A06B00CCAD46 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0E1F06CD24B566E700CCAD46 /* APIManager+Withdraw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIManager+Withdraw.swift"; sourceTree = "<group>"; };
 		0E1FB23624AC8424005E0BE7 /* AnalyticsEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEventType.swift; sourceTree = "<group>"; };
 		0E1FB23824AC8A6E005E0BE7 /* AppDefine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDefine.swift; sourceTree = "<group>"; };
 		0E1FB23A24AD7243005E0BE7 /* AnalyticsEventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEventManager.swift; sourceTree = "<group>"; };
@@ -634,12 +634,10 @@
 		26BF48C824639D2A00E00215 /* MstK25_employmentStatus.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK25_employmentStatus.tsv; sourceTree = "<group>"; };
 		26BF48C924639D2A00E00215 /* MstK14_place.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK14_place.tsv; sourceTree = "<group>"; };
 		26BF48CA24639D2A00E00215 /* MstK11_entryPlace.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK11_entryPlace.tsv; sourceTree = "<group>"; };
-		26BF48CB24639D2A00E00215 /* MstL_skill.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstL_skill.tsv; sourceTree = "<group>"; };
 		26BF48CC24639D2A00E00215 /* MstK25_gender.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK25_gender.tsv; sourceTree = "<group>"; };
 		26BF48CD24639D2A00E00215 /* MstK13_schoolType.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK13_schoolType.tsv; sourceTree = "<group>"; };
 		26BF48CE24639D2A00E00215 /* MstK6_businessType.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK6_businessType.tsv; sourceTree = "<group>"; };
 		26BF48CF24639D2A00E00215 /* MstK3_changeCount.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK3_changeCount.tsv; sourceTree = "<group>"; };
-		26BF48D024639D2A00E00215 /* MstL_skillYear.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstL_skillYear.tsv; sourceTree = "<group>"; };
 		26BF48D124639D2A00E00215 /* MstK4_jobType.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK4_jobType.tsv; sourceTree = "<group>"; };
 		26BF48D224639D2A00E00215 /* MstK10_salary.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK10_salary.tsv; sourceTree = "<group>"; };
 		26BF48D324639D2A00E00215 /* MstL2_prCode.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstL2_prCode.tsv; sourceTree = "<group>"; };
@@ -839,11 +837,11 @@
 				26B6E8B4245C1B4B00BE5B90 /* Generated */,
 				067F28D62456CEBF000AAD69 /* ViewControllers */,
 				067F28D32456CE61000AAD69 /* Model */,
-				06D700342456CB7300E55FC8 /* Common */,
 				067F28E62456D0E8000AAD69 /* Tools */,
 				066BD9D62456ACB4009E610B /* AppDelegate.swift */,
 				066BD9DF2456ACB5009E610B /* Assets.xcassets */,
 				06D700322456B5FC00E55FC8 /* Color.xcassets */,
+				06D700342456CB7300E55FC8 /* Common */,
 				066BD9E12456ACB5009E610B /* LaunchScreen.storyboard */,
 				066BD9E42456ACB5009E610B /* Info.plist */,
 				0E1F06D324B5A06B00CCAD46 /* GoogleService-Info.plist */,
@@ -1278,6 +1276,7 @@
 				0E7372DE249A089D00358EFA /* ApiManager+AuthCode.swift */,
 				0E22833C24AEB5AB0008765E /* ApiManager+Chemistry.swift */,
 				0E59D7C424B40D7600FA4570 /* ApiManager+Activity.swift */,
+				0E1F06CD24B566E700CCAD46 /* APIManager+Withdraw.swift */,
 			);
 			path = AuthManager;
 			sourceTree = "<group>";
@@ -1429,8 +1428,6 @@
 				26BF48C924639D2A00E00215 /* MstK14_place.tsv */,
 				26BF48C824639D2A00E00215 /* MstK25_employmentStatus.tsv */,
 				26BF48CC24639D2A00E00215 /* MstK25_gender.tsv */,
-				26BF48CB24639D2A00E00215 /* MstL_skill.tsv */,
-				26BF48D024639D2A00E00215 /* MstL_skillYear.tsv */,
 				26BF48D324639D2A00E00215 /* MstL2_prCode.tsv */,
 				26BF48D424639D2B00E00215 /* MstL3_overtime.tsv */,
 				26147F312472630B009B30B5 /* MstF16_management.tsv */,
@@ -1572,7 +1569,6 @@
 				26BF48E624639D2B00E00215 /* MstK8_qualification.tsv in Resources */,
 				0E1F06D424B5A06B00CCAD46 /* GoogleService-Info.plist in Resources */,
 				26BF48E424639D2B00E00215 /* MstL2_prCode.tsv in Resources */,
-				26BF48E124639D2B00E00215 /* MstL_skillYear.tsv in Resources */,
 				26147F37247267F9009B30B5 /* MstF22_pcSkillExcel.tsv in Resources */,
 				0EAE7655248F1F90009A8F4B /* ChemistryResultFooterView.xib in Resources */,
 				26BF48E024639D2B00E00215 /* MstK3_changeCount.tsv in Resources */,
@@ -1580,7 +1576,6 @@
 				066763762457B09F00AC5039 /* HomeVC.storyboard in Resources */,
 				26989F7F246A5E520050AC40 /* HEditDrumTBCell.xib in Resources */,
 				066938112485D5010064030F /* SettingApproachCell.xib in Resources */,
-				26BF48DC24639D2B00E00215 /* MstL_skill.tsv in Resources */,
 				26BF48E524639D2B00E00215 /* MstL3_overtime.tsv in Resources */,
 				0645DDFD246B907000592572 /* JobDetailPRCodeTagsCell.xib in Resources */,
 				267E636424A98EF7004169ED /* EntryFormExQuestionsItemTBCell.xib in Resources */,
@@ -1885,6 +1880,7 @@
 				0645DE02246BB6A100592572 /* JobDetailSalaryExampleCell.swift in Sources */,
 				066EF6CB245C119000E15AD2 /* JobOfferCardMoreCell.swift in Sources */,
 				064EF6FE2465550E00853ADD /* JobDetailArticleHeaderView.swift in Sources */,
+				0E1F06CE24B566E700CCAD46 /* APIManager+Withdraw.swift in Sources */,
 				26A2899924AAD74B000D2926 /* EntryConfirmNotifyEntry1TBCell.swift in Sources */,
 				066EF6C5245BB9C400E15AD2 /* KeepCardCell.swift in Sources */,
 				260BBFDC2465171D003D163A /* MdlProfile.swift in Sources */,
