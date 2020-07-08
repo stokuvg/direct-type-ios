@@ -17,6 +17,7 @@ enum PushVCType {
     case careerListC
     case entryForm(_ routeFrom: AnalyticsEventType.RouteFromType)
     case entryConfirm
+    case entryComplete
 }
 
 extension BaseVC {
@@ -70,7 +71,7 @@ extension BaseVC {
                 }
                 self.navigationController?.pushViewController(nvc, animated: true)
             }
-        case .entryForm(let routeFrom)://[C-0] 応募フォーム
+        case .entryForm(let routeFrom)://[C-9] 応募フォーム
             let storyboard = UIStoryboard(name: "Preview", bundle: nil)
             if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_EntryFormVC") as? EntryFormVC{
                 nvc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に表示にする
@@ -80,13 +81,19 @@ extension BaseVC {
                 }
                 self.navigationController?.pushViewController(nvc, animated: true)
             }
-            case .entryConfirm://[C-0] 応募フォーム
+            case .entryConfirm://[C-12] 応募確認
                 let storyboard = UIStoryboard(name: "Preview", bundle: nil)
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_EntryConfirmVC") as? EntryConfirmVC{
                     nvc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に表示にする
                     if let (jobCard, profile, resume, career, entry) = model as? (MdlJobCardDetail, MdlProfile, MdlResume, MdlCareer, MdlEntry) {
                         nvc.initData(jobCard, profile, resume, career, entry) //求人カード詳細のデータを横流す
                     }
+                    self.navigationController?.pushViewController(nvc, animated: true)
+                }
+            case .entryComplete://[C-14] 応募完了
+                let storyboard = UIStoryboard(name: "Entry", bundle: nil)
+                if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_EntryCompleteVC") as? EntryCompleteVC{
+                    nvc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に表示にする
                     self.navigationController?.pushViewController(nvc, animated: true)
                 }
 

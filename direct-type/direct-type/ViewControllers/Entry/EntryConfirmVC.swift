@@ -27,9 +27,7 @@ class EntryConfirmVC: PreviewBaseVC {
             tableVW.reloadData()
             return
         }
-        fetchPostEntry(completion: { () in
-            AnalyticsEventManager.track(type: .completeEntry)
-        })
+        fetchPostEntry()
     }
     //共通プレビューをOverrideして利用する
     override func viewDidLoad() {
@@ -208,27 +206,20 @@ extension EntryConfirmVC: EntryConfirmNotifyEntryDelegate {
 
 //=== APIフェッチ
 extension EntryConfirmVC {
-    private func fetchPostEntry(completion: (() -> ())? = nil) {
+    private func fetchPostEntry() {
         guard let _jobCard = self.jobCard else { return }
         guard let _profile = self.profile else { return }
         guard let _resume = self.resume else { return }
         guard let _career = self.career else { return }
-        
+        guard let _entry = self.entry else { return }
         let _jobCardCode: String = _jobCard.jobCardCode
-//        let _jobCardCode: String = "1170847" //!!![[Dbg: 固定値で投げている]
-//        let _typePassword: String = "Dummy1234" //!!![[Dbg: 固定値で投げている]
         let _typePassword: String = self.bufPassword //半角英数4-20
-        let param: WebAPIEntryUserDto = WebAPIEntryUserDto(_jobCardCode, _profile, _resume, _career, editableModel.editTempCD, _typePassword)
-        
-showConfirm(title: "", message: "\(param)", onlyOK: true)//!!!
-        
-        print(param)
-        
-
+        let param: WebAPIEntryUserDto = WebAPIEntryUserDto(_jobCardCode, _profile, _resume, _career, _entry, _typePassword)
         SVProgressHUD.show(withStatus: "応募処理")
         ApiManager.postEntry(param, isRetry: true)
         .done { result in
-            print(result)
+            AnalyticsEventManager.track(type: .completeEntry)
+            self.pushViewController(.entryComplete)
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -236,18 +227,19 @@ showConfirm(title: "", message: "\(param)", onlyOK: true)//!!!
             case 404:
                 let myErr404 = MyErrorDisp(code: 404, title: "type応募", message: "この求人情報は掲載が終了しています", orgErr: nil, arrValidErrMsg: [])
                 self.showError(myErr404)
-
+            case 401:
+                let myErr401 = MyErrorDisp(code: 401, title: "type応募", message: "typeにログインできませんでした", orgErr: nil, arrValidErrMsg: [])
+                self.showError(myErr401)
             case 400:
                 let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
                 self.dicGrpValidErrMsg = dicGrpError
                 self.dicValidErrMsg = dicError
+                self.showError(myErr)
             default:
                 self.showError(error)
             }
         }
         .finally {
-            self.dispData()
-            completion?()
             SVProgressHUD.dismiss()
         }
     }

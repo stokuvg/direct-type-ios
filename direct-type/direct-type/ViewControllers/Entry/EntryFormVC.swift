@@ -203,7 +203,6 @@ class EntryFormVC: PreviewBaseVC {
         if let career = career {
             if career.requiredComplete == false { isEnable = false }
         } else { isEnable = false }
-
         dispButton(isEnable: isEnable)
     }
     private func dispButton(isEnable: Bool) {
@@ -211,12 +210,10 @@ class EntryFormVC: PreviewBaseVC {
             btnCommit.isEnabled = true
             btnCommit.setTitle(text: "応募確認画面へ", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
             btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
-            
         } else {
             btnCommit.isEnabled = false
             btnCommit.setTitle(text: "応募確認画面へ", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
             btnCommit.backgroundColor = UIColor.init(colorType: .color_close)
-            
         }
     }
 }
