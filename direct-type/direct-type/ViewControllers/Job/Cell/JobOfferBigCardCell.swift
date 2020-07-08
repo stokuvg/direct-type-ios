@@ -192,6 +192,7 @@ class JobOfferBigCardCell: BaseJobCardCell {
     
     func keepSetting(flag: Bool) {
         Log.selectLog(logLevel: .debug, "JobOfferBigCardCell keepSetting start")
+        keepBtnSetting(flag: flag)
     }
     
     private func keepBtnSetting(flag:Bool) {
