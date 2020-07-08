@@ -143,7 +143,7 @@ class JobDetailImageCell: BaseTableViewCell {
 
                     let imageView = UIImageView.init(frame: CGRect(x: scrollX, y: imageY, width: imageW, height: imageH))
                     imageView.backgroundColor = UIColor.init(colorType: .color_white)
-                    imageView.contentMode = .scaleAspectFit
+                    imageView.contentMode = .scaleAspectFill
                     imageView.af_setImage(withURL: imageUrl!)
                     
                     imageView.layer.cornerRadius = 15
@@ -170,7 +170,7 @@ class JobDetailImageCell: BaseTableViewCell {
 
                         let imageView = UIImageView.init(frame: CGRect(x: scrollX, y: imageY, width: imageW, height: imageH))
                         imageView.backgroundColor = UIColor.init(colorType: .color_white)
-                        imageView.contentMode = .scaleAspectFit
+                        imageView.contentMode = .scaleAspectFill
                         imageView.af_setImage(withURL: imageUrl!)
                         
                         imageView.layer.cornerRadius = 15

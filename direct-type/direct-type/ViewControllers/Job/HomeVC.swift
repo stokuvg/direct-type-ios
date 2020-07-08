@@ -593,6 +593,15 @@ extension HomeVC: BaseJobCardCellDelegate {
                 self.showError(myErr)
             }.finally {
 //                Log.selectLog(logLevel: .debug, "keep send finally")
+                // セルの設定変更パターン
+                self.dispJobCards.jobCards[tag] = jobCard
+                let updateIndexPath = IndexPath.init(row: row, section: 0)
+                let cell = self.homeTableView.cellForRow(at: updateIndexPath) as! JobOfferBigCardCell
+                cell.keepSetting(flag: flag)
+                self.keepSendStatus = .none
+                
+                /*
+                // TableViewのリロードパターン
                 self.dispJobCards.jobCards[tag] = jobCard
                 let updateIndex = IndexPath.init(row: tag, section: 0)
                 self.homeTableView.performBatchUpdates({
@@ -602,6 +611,7 @@ extension HomeVC: BaseJobCardCellDelegate {
                         self.keepSendStatus = .none
                     }
                 })
+                */
             }
         } else {
 //            Log.selectLog(logLevel: .debug, "キープ削除:jobId:\(jobId)")
@@ -618,7 +628,15 @@ extension HomeVC: BaseJobCardCellDelegate {
                 self.showError(myErr)
             }.finally {
 //                Log.selectLog(logLevel: .debug, "keep delete finally")
-
+                // セルの設定変更パターン
+                self.dispJobCards.jobCards[tag] = jobCard
+                let updateIndexPath = IndexPath.init(row: row, section: 0)
+                let cell = self.homeTableView.cellForRow(at: updateIndexPath) as! JobOfferBigCardCell
+                cell.keepSetting(flag: flag)
+                self.keepSendStatus = .none
+                
+                /*
+                // TableViewのリロードパターン
                 self.dispJobCards.jobCards[tag] = jobCard
                 let updateIndex = IndexPath.init(row: tag, section: 0)
                 self.homeTableView.performBatchUpdates({
@@ -628,6 +646,7 @@ extension HomeVC: BaseJobCardCellDelegate {
                         self.keepSendStatus = .none
                     }
                 })
+                */
             }
         }
     }
