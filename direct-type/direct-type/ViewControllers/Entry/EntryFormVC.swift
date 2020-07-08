@@ -52,13 +52,13 @@ import UIKit
 import TudApi
 import SVProgressHUD
 
-class EntryVC: PreviewBaseVC {
+class EntryFormVC: PreviewBaseVC {
     var jobCard: MdlJobCardDetail? = nil//応募への遷移元は、求人カード詳細のみでOK?
     var profile: MdlProfile? = nil
     var resume: MdlResume? = nil
     var career: MdlCareer? = nil
     var entry: MdlEntry? = nil
-    var transitionSource: AnalyticsEventType.RouteType = .unknown
+    var routeFrom: AnalyticsEventType.RouteFromType = .unknown
 
     override func actCommit(_ sender: UIButton) {
         if validateLocalModel() {
@@ -66,7 +66,7 @@ class EntryVC: PreviewBaseVC {
             return
         }
         //===entryだけは、編集中の値を適用したモデルを生成する必要あり（or editTemp情報も渡すか）
-        var _entry: MdlEntry? = entry
+        let _entry: MdlEntry? = entry
         if let tmp = editableModel.editTempCD[EditItemMdlEntry.exQuestionAnswer1.itemKey] { _entry?.exAnswer1 = tmp }
         if let tmp = editableModel.editTempCD[EditItemMdlEntry.exQuestionAnswer2.itemKey] { _entry?.exAnswer2 = tmp }
         if let tmp = editableModel.editTempCD[EditItemMdlEntry.exQuestionAnswer3.itemKey] { _entry?.exAnswer3 = tmp }
@@ -88,15 +88,12 @@ class EntryVC: PreviewBaseVC {
     //共通プレビューをOverrideして利用する
     override func viewDidLoad() {
         super.viewDidLoad()
-        btnCommit.setTitle(text: "応募確認画面へ", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
-        btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
-        
-        if transitionSource != .unknown {
-            AnalyticsEventManager.track(type: .toJobDetail, with: transitionSource.parameter)
+         if routeFrom != .unknown {
+             AnalyticsEventManager.track(type: .transitionPath(destination: .toEntryDetail, from: routeFrom))
         }
     }
     func initData(_ jobCard: MdlJobCardDetail) {
-        title = "[C-9] 応募フォーム"
+        title = "応募フォーム"
         self.jobCard = jobCard
         self.entry = MdlEntry()
         //===独自質問はjobCardDetailに含まれているので、MdlEntryにも持たせておく
@@ -108,6 +105,19 @@ class EntryVC: PreviewBaseVC {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
         self.arrData.removeAll()//いったん全件を削除しておく
         editableModel.arrData.removeAll()//こちらで管理させる？！
+        
+        //=== 応募用の自己PR膏肓が空だった場合に、 履歴書のものを適用しておく
+        //８．自己PR（任意）
+        //・マイページ内の自己PR（H-3履歴書確認）に入力がある場合、その内容を表示
+        //・このページ上で自由に編集も可能
+        //・ここで編集した内容はマイページ上の自己PRには反映されない
+        //    ※あくまで応募先企業に向けたPR内容として個別編集させる想定
+        if let entryOwnPR = entry?.ownPR {
+            if entryOwnPR.isEmpty {
+                entry?.ownPR = resume?.ownPr ?? ""
+            }
+        }
+        
 
         //====== [C-9]応募フォーム
         //===４．応募先求人
@@ -170,22 +180,48 @@ class EntryVC: PreviewBaseVC {
         for items in arrData { editableModel.arrData.append(items.childItems) }//editableModelに登録
         editableModel.chkTableCellAll()//これ実施しておくと、getItemByKeyが利用可能になる
         tableVW.reloadData()//描画しなおし
+        chkButtonEnable()
     }
     //========================================
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        dispButton(isEnable: false)//いったん無効にしておく
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         fetchGetEntryAll()
     }
     override func chkButtonEnable() {
-        btnCommit.isEnabled = true
+        var isEnable: Bool = true
+        if let profile = profile {
+            if profile.requiredComplete == false { isEnable = false }
+        } else { isEnable = false }
+        if let resume = resume {
+            if resume.requiredComplete == false { isEnable = false }
+        } else { isEnable = false }
+        if let career = career {
+            if career.requiredComplete == false { isEnable = false }
+        } else { isEnable = false }
+
+        dispButton(isEnable: isEnable)
+    }
+    private func dispButton(isEnable: Bool) {
+        if isEnable {
+            btnCommit.isEnabled = true
+            btnCommit.setTitle(text: "応募確認画面へ", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+            btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
+            
+        } else {
+            btnCommit.isEnabled = false
+            btnCommit.setTitle(text: "応募確認画面へ", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+            btnCommit.backgroundColor = UIColor.init(colorType: .color_close)
+            
+        }
     }
 }
 
-extension EntryVC {
+extension EntryFormVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = arrData[indexPath.row]
         switch item.type {
@@ -245,7 +281,7 @@ extension EntryVC {
 
 
 //=== APIフェッチ
-extension EntryVC {
+extension EntryFormVC {
     private func fetchGetEntryAll() {
         fetchGetProfile()//ここから多段で実施してる
     }

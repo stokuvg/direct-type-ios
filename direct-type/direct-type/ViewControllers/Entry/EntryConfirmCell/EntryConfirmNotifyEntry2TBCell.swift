@@ -8,15 +8,16 @@
 
 import UIKit
 
+protocol EntryConfirmNotifyEntryDelegate {
+    func changePasswordText(text: String)
+    func changeAcceptStatus(isAccept: Bool)
+    func actLinkText(type: EntryConfirmLinkTextType)
+}
 enum EntryConfirmLinkTextType {
     case passwordForgot
     case personalInfo
     case memberPolicy
 }
-protocol EntryConfirmNotifyEntryDelegate {
-    func actLinkText(type: EntryConfirmLinkTextType)
-}
-
 class EntryConfirmNotifyEntry2TBCell: UITableViewCell {
     var delegate: EntryConfirmNotifyEntryDelegate? = nil
     var isAccept: Bool = false
@@ -30,7 +31,7 @@ class EntryConfirmNotifyEntry2TBCell: UITableViewCell {
     @IBAction func actAccept(_ sender: Any) {
         isAccept = !isAccept
         ivAccept.image = isAccept ? R.image.checkOn() : R.image.checkOff()
-        print(#line, #function)
+        delegate?.changeAcceptStatus(isAccept: isAccept)
     }
 
     @IBOutlet weak var vwMessageArea: UIView!

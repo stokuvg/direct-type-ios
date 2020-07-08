@@ -18,14 +18,14 @@ final class JobOfferDetailVC: TmpBasicVC {
     @IBAction private func applicationBtnAction() {
         AnalyticsEventManager.track(type: .entryJob)
         // 応募フォームに遷移
-        self.pushViewController(.entryForm(transitionSource), model: _mdlJobDetail)
+        self.pushViewController(.entryForm(routeFrom), model: _mdlJobDetail)
     }
-    
+
     @IBOutlet weak var keepBtn:UIButton!
     @IBAction func keepBtnAction() {
         keepAction()
     }
-    
+
     private var jobId = ""
     private var buttonsView: NaviButtonsView!
     private var _mdlJobDetail: MdlJobCardDetail!
@@ -40,62 +40,62 @@ final class JobOfferDetailVC: TmpBasicVC {
     private var articleHeaderMinSize: CGFloat = 0
     private var articleCellMaxSize: CGFloat = 0
     private var prcodesCellMaxSize: CGFloat = 0
-    private var transitionSource: AnalyticsEventType.RouteType = .unknown
+    private var routeFrom: AnalyticsEventType.RouteFromType = .unknown
     private var keepFlag = false
 
     private var keepButtonImage: UIImage {
         return UIImage(named: keepFlag ? "btn_keep" : "btn_keepclose")!
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setNaviButtons()
         setup()
         changeButtonState()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getJobDetail()
         AnalyticsEventManager.track(type: .viewVacancies)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if keepFlag {
             AnalyticsEventManager.track(type: .keep)
         }
     }
-    
-    func configure(jobId: String, isKeep: Bool, transitionSource: AnalyticsEventType.RouteType) {
+
+    func configure(jobId: String, isKeep: Bool, routeFrom: AnalyticsEventType.RouteFromType) {
         self.jobId = jobId
         keepFlag = isKeep
-        self.transitionSource = transitionSource
+        self.routeFrom = routeFrom
     }
 }
 
 private extension JobOfferDetailVC {
     func setup() {
         detailTableView.backgroundColor = UIColor(colorType: .color_base)
-        
+
         setKeepButton()
         registerTableViewNib()
-        AnalyticsEventManager.track(type: .toJobDetail, with: transitionSource.parameter)
+        AnalyticsEventManager.track(type: .transitionPath(destination: .toJobDetail, from: routeFrom))
     }
-    
+
     func changeButtonState() {
         keepBtn.setImage(keepButtonImage, for: .normal)
         keepBtn.setImage(keepButtonImage, for: .highlighted)
         keepBtn.setImage(keepButtonImage, for: .selected)
     }
-    
+
     func setKeepButton() {
         keepBtn.imageView?.contentMode = .scaleAspectFit
         keepBtn.contentHorizontalAlignment = .fill
         keepBtn.contentVerticalAlignment = .fill
         keepBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
-    
+
     func registerTableViewNib() {
         /// section 0
         // 終了間近,スカウト
@@ -152,18 +152,18 @@ private extension JobOfferDetailVC {
         /// section 8
         applicationBtn.setTitle(text: "応募する", fontType: .C_font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
     }
-    
+
     func keepAction() {
         keepFlag = !keepFlag
         changeButtonState()
-        
+
         // キープ情報送信
         if keepFlag == true {
             ApiManager.sendJobKeep(id: jobId)
                 .done { result in
                 Log.selectLog(logLevel: .debug, "keep send success")
                     Log.selectLog(logLevel: .debug, "keep成功")
-                    
+
             }.catch{ (error) in
                 Log.selectLog(logLevel: .debug, "skip send error:\(error)")
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -189,7 +189,7 @@ private extension JobOfferDetailVC {
                 .done { result in
                 Log.selectLog(logLevel: .debug, "keep delete success")
                     Log.selectLog(logLevel: .debug, "delete成功")
-                    
+
             }.catch{ (error) in
                 Log.selectLog(logLevel: .debug, "skip send error:\(error)")
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -212,7 +212,7 @@ private extension JobOfferDetailVC {
             }
         }
     }
-    
+
     func setNaviButtons() {
             let titleView = UINib(nibName: "NaviButtonsView", bundle: nil)
             .instantiate(withOwner: nil, options: nil)
@@ -221,48 +221,48 @@ private extension JobOfferDetailVC {
             navigationItem.titleView = titleView
             buttonsView = titleView
         }
-        
+
         // メイン記事タイトルサイズ
         func makeArticleHeaderSize() {
             articleHeaderMinSize = 80
-            
+
             let spaceW:CGFloat = 15
             let width = detailTableView.frame.size.width - (spaceW * 2)
             let label:UILabel = UILabel()
             let text = _mdlJobDetail.mainTitle
-            
+
             label.text(text: text, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
             label.numberOfLines = 0
-            
+
             let labelSize = label.sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
-            
+
             articleHeaderMaxSize = (labelSize.height + 10)
         }
-        
+
         // メイン記事サイズ
         func makeArticleCellSize() {
             let spaceW: CGFloat = 15
             let width = detailTableView.frame.size.width - (spaceW * 2)
             let label: UILabel = UILabel()
             let text = self._mdlJobDetail.mainContents
-            
+
             label.text(text: text, fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
             label.numberOfLines = 0
-            
+
             let labelSize = label.sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
-            
+
             articleCellMaxSize = (labelSize.height + 40)
         }
-        
+
         // PRコードの表示サイズ 最大３行
         func makePrCodesCellSize() {
             let spaceW: CGFloat = 15
             let width = detailTableView.frame.size.width - (spaceW * 2)
             let label:UILabel = UILabel()
             let prCodes = _mdlJobDetail.prCodes
-            
+
             var allText:String = ""
-    
+
             for i in 0..<prCodes.count {
                 let codeNo = prCodes[i]
                 let prCode:String = (SelectItemsManager.getCodeDisp(.prCode, code: codeNo)?.disp) ?? ""
@@ -275,16 +275,16 @@ private extension JobOfferDetailVC {
             label.lineBreakMode = .byClipping
             label.text(text: allText, fontType: .font_SS, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
             label.numberOfLines = 3
-            
+
             let labelSize = label.sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
             prcodesCellMaxSize = (labelSize.height + 30)
         }
-        
+
         // 取材メモ表示フラグ
         func memoDispFlagCheck(memo: String) -> Bool {
             return memo.count > 0
         }
-        
+
         func getJobDetail() {
             SVProgressHUD.show()
             self._mdlJobDetail = MdlJobCardDetail()
@@ -292,12 +292,12 @@ private extension JobOfferDetailVC {
             ApiManager.getJobDetail(jobId, isRetry: true)
             .done { result in
                     debugLog("ApiManager getJobDetail result:\(result.debugDisp)")
-                    
+
                     self._mdlJobDetail = result
-                    
+
                     self.makeArticleHeaderSize()
                     self.makeArticleCellSize()
-                    
+
                     self.makePrCodesCellSize()
             }
             .catch { (error) in
@@ -305,7 +305,7 @@ private extension JobOfferDetailVC {
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 Log.selectLog(logLevel: .debug, "myErr:\(myErr.debugDisp)")
                 self.showError(myErr)
-                
+
                 switch myErr.code {
                     case 403:
                         self.showError(myErr)
@@ -319,7 +319,7 @@ private extension JobOfferDetailVC {
                 self.tableViewSettingAction()
             }
         }
-        
+
         // データがセットされた後にtableViewの表示を開始
         func tableViewSettingAction() {
             if _mdlJobDetail != nil {
@@ -330,7 +330,7 @@ private extension JobOfferDetailVC {
                 detailTableView.reloadData()
             }
         }
-        
+
         func recommendAction() {
             RecommendManager.fetchRecommend(type: .ap341, jobID: self.jobId)
             .done { result in
@@ -346,7 +346,7 @@ private extension JobOfferDetailVC {
 }
 
 extension JobOfferDetailVC: UITableViewDelegate {
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let section = indexPath.section
         let row = indexPath.row
@@ -371,7 +371,7 @@ extension JobOfferDetailVC: UITableViewDelegate {
                 return UITableView.automaticDimension
         }
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         var headerHeight:CGFloat = 0
         switch section {
@@ -400,7 +400,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
             return 0
         }
     }
-    
+
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         switch section {
             case 7:
@@ -411,7 +411,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 return UIView()
         }
     }
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
             case 1:
@@ -455,9 +455,9 @@ extension JobOfferDetailVC: UITableViewDataSource {
                     .first as! JobDetailFoldingHeaderView
                 view.delegate = self
                 view.tag = (section - 4)
-                
+
                 view.topLineView.isHidden = false
-                
+
                 var openFlag:Bool = false
                 var title:String = ""
                 switch section {
@@ -479,17 +479,17 @@ extension JobOfferDetailVC: UITableViewDataSource {
                         title = ""
                 }
                 view.setup(title: title,openFlag: openFlag)
-                
+
                 return view
             default:
                 return nil
         }
     }
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 8
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
             case 0:
@@ -506,7 +506,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 return 1
         }
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = indexPath.section
         let row = indexPath.row
@@ -519,7 +519,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
             case (0,1):
                 // 求人画像
                 let cell = tableView.loadCell(cellName: "JobDetailImageCell", indexPath: indexPath) as! JobDetailImageCell
-                
+
                 cell.setCellWidth(width: self.detailTableView.frame.size.width)
                 cell.setup(data: _mdlJobDetail)
                 return cell
@@ -558,7 +558,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
             case (4,_): // メモ
                 if coverageMemoOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailFoldingMemoCell", indexPath: indexPath) as! JobDetailFoldingMemoCell
-                    
+
                     let memoData = _mdlJobDetail.interviewMemo
                     cell.setup(data: memoData)
                     return cell
@@ -568,7 +568,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
             case (5, _):    // プロセス
                 if selectionProcessOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailFoldingProcessCell", indexPath: indexPath) as! JobDetailFoldingProcessCell
-                    
+
                     let process = _mdlJobDetail.selectionProcess
                     cell.setup(data: process)
                     return cell
@@ -579,7 +579,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 // 連絡先
                 if phoneNumberOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailFoldingPhoneNumberCell", indexPath: indexPath) as! JobDetailFoldingPhoneNumberCell
-                    
+
                     let data = _mdlJobDetail.contactInfo
                     cell.setup(data: data)
                     return cell
@@ -589,7 +589,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
             case (7, _):    // 会社概要
                 if companyOutlineOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailFoldingOutlineCell", indexPath: indexPath) as! JobDetailFoldingOutlineCell
-                    
+
                     let data = _mdlJobDetail.companyDescription
                     cell.setup(data: data)
                     return cell
@@ -602,7 +602,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 return cell
         }
     }
-    
+
 }
 
 extension JobOfferDetailVC: UIScrollViewDelegate {
@@ -610,7 +610,7 @@ extension JobOfferDetailVC: UIScrollViewDelegate {
         let offsetY = scrollView.contentOffset.y
         // ヘッダーの位置調整
         let sectionHeaderHeight = detailTableView.sectionHeaderHeight
-        
+
         if offsetY <= sectionHeaderHeight && offsetY >= 0.0 {
             let edgeInset = UIEdgeInsets(top: -offsetY, left: 0.0, bottom: 0.0, right: 0.0)
             scrollView.contentInset = edgeInset
@@ -624,51 +624,51 @@ extension JobOfferDetailVC: UIScrollViewDelegate {
 extension JobOfferDetailVC: NaviButtonsViewDelegate {
     func workContentsAction() {
         buttonsView.colorChange(no:0)
-        
+
         let section = 3
         let row = 0
         let titleName = "仕事内容"
         self.guidebookScrollAnimation(section: section,row: row, titleName: titleName)
     }
-    
+
     func appImportantAction() {
         buttonsView.colorChange(no:1)
-        
+
         let section = 3
         let row = 1
         let titleName = "応募資格"
         self.guidebookScrollAnimation(section: section,row: row, titleName: titleName)
     }
-    
+
     func employeeAction() {
         buttonsView.colorChange(no:2)
-        
+
         let section = 3
         let row = 7
         let titleName = "待遇"
         self.guidebookScrollAnimation(section: section,row: row, titleName: titleName)
     }
-    
+
     func informationAction() {
         buttonsView.colorChange(no:3)
         companyOutlineOpenFlag = true
-        
+
         let indexPath = IndexPath.init(row: 0, section: 7)
         let indexSet = IndexSet(arrayLiteral: 7)
-        
+
         detailTableView.reloadSections(indexSet, with: .top)
         detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
-    
+
     // 募集要項の移動
     func guidebookScrollAnimation(section: Int,row: Int,titleName: String) {
         Log.selectLog(logLevel: .debug, "guidebookScrollAnimation start")
-        
+
         let indexPath = IndexPath.init(row: row, section: section)
         detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
-    
-    
+
+
 }
 
 // 職種のオープン
@@ -687,7 +687,7 @@ extension JobOfferDetailVC: JobDetailArticleCellDelegate {
         let index = IndexSet(arrayLiteral: 1)
         self.detailTableView.reloadSections(index, with: .automatic)
     }
-    
+
 }
 
 // 折りたたみヘッダー
@@ -708,7 +708,7 @@ extension JobOfferDetailVC: FoldingHeaderViewDelegate {
         default:
             break
         }
-        
+
 //        self.detailTableView.reloadSections(indexes, with: .automatic)
         if firstOpenFlag == false {
             firstOpenFlag = true
@@ -722,12 +722,12 @@ extension JobOfferDetailVC: FoldingHeaderViewDelegate {
 // TODO:仕様変わりを考えて残しておく。
 /*
 extension JobOfferDetailVC: JobDetailFooterApplicationCellDelegate {
-    
+
     func footerApplicationBtnAction() {
         //応募フォームに遷移
         self.pushViewController(.entryVC, model: _mdlJobDetail)
     }
-    
+
     func footerKeepBtnAction(keepStatus: Bool) {
         // キープ情報送信
         if keepStatus == true {
@@ -735,7 +735,7 @@ extension JobOfferDetailVC: JobDetailFooterApplicationCellDelegate {
                 .done { result in
                 Log.selectLog(logLevel: .debug, "keep send success")
                     Log.selectLog(logLevel: .debug, "keep成功")
-                    
+
             }.catch{ (error) in
                 Log.selectLog(logLevel: .debug, "skip send error:\(error)")
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -761,7 +761,7 @@ extension JobOfferDetailVC: JobDetailFooterApplicationCellDelegate {
                 .done { result in
                 Log.selectLog(logLevel: .debug, "keep delete success")
                     Log.selectLog(logLevel: .debug, "delete成功")
-                    
+
             }.catch{ (error) in
                 Log.selectLog(logLevel: .debug, "skip send error:\(error)")
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)

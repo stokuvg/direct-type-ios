@@ -14,7 +14,7 @@
   ],
   "servers": [
     {
-        "url": "https://api.sumaten-test.com",
+      "url": "https://api.sumaten-test.com",
       "description": "本番API"
     },
     {
@@ -300,7 +300,6 @@
         "required": [
           "schoolName",
           "faculty",
-          "department",
           "guraduationYearMonth"
         ]
       },
@@ -1133,7 +1132,6 @@
           "minSalaryId",
           "maxSalaryId",
           "isSalaryDisplay",
-          "salaryOffer",
           "place2Ids",
           "companyName",
           "pressStartDate",
@@ -2449,14 +2447,7 @@
         },
         "responses": {
           "201": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateSettingsRequestDTO"
-                }
-              }
-            }
+            "description": ""
           }
         },
         "tags": [
@@ -2485,14 +2476,7 @@
         },
         "responses": {
           "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UpdateSettingsRequestDTO"
-                }
-              }
-            }
+            "description": ""
           }
         },
         "tags": [

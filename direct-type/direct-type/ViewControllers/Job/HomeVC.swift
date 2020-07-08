@@ -419,8 +419,8 @@ extension HomeVC: UITableViewDelegate {
         let selectedJobData = dispJobCards.jobCards[row]
         let jobId = selectedJobData.jobCardCode
         let vc = getVC(sbName: "JobOfferDetailVC", vcName: "JobOfferDetailVC") as! JobOfferDetailVC
-        
-        vc.configure(jobId: jobId, isKeep: selectedJobData.keepStatus, transitionSource: .fromHome)
+
+        vc.configure(jobId: jobId, isKeep: selectedJobData.keepStatus, routeFrom: .fromHome)
         vc.hidesBottomBarWhenPushed = true
 
         self.navigationController?.pushViewController(vc, animated: true)
@@ -512,7 +512,7 @@ extension HomeVC: BaseJobCardCellDelegate {
     func skipAction(jobId: String) {
         Log.selectLog(logLevel: .debug, "skipAction jobId:\(jobId)")
         AnalyticsEventManager.track(type: .skipVacancies)
-        
+
         if skipSendStatus == .sending {
             return
         }

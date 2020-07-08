@@ -122,10 +122,12 @@ class KeepCardCell: BaseJobCardCell {
     }
     
     private func makeAreaNames(codes: [String]) -> String {
+        Log.selectLog(logLevel: .debug, "self.makeAreaNames codes:\(codes)")
+        
         var text:String = ""
         for i in 0..<codes.count {
             let code = Int(codes[i])
-            let areaString:String = (SelectItemsManager.getCodeDisp(.place, code: code!)?.disp ?? "")
+            let areaString:String = (SelectItemsManager.getCodeDisp(.entryPlace, code: code!)?.disp ?? "")
             text += areaString
             if i < (codes.count - 1) {
                 text += ","
