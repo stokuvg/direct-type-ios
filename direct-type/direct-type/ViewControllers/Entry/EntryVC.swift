@@ -88,16 +88,8 @@ class EntryVC: PreviewBaseVC {
     //共通プレビューをOverrideして利用する
     override func viewDidLoad() {
         super.viewDidLoad()
-// <<<<<<< feature/entryError_200706_16
-        if transitionSource != .unknown {
-            AnalyticsEventManager.track(type: .toJobDetail, with: transitionSource.parameter)
-// =======
-//         btnCommit.setTitle(text: "応募確認画面へ", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
-//         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
-        
-//         if routeFrom != .unknown {
-//             AnalyticsEventManager.track(type: .transitionPath(destination: .toEntryDetail, from: routeFrom))
-// >>>>>>> develop
+         if routeFrom != .unknown {
+             AnalyticsEventManager.track(type: .transitionPath(destination: .toEntryDetail, from: routeFrom))
         }
     }
     func initData(_ jobCard: MdlJobCardDetail) {
