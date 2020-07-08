@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import TudApi
+import SVProgressHUD
 
 final class CheckBoxView: UIView {
     @IBOutlet private weak var imageView: UIImageView!
@@ -84,15 +86,32 @@ private extension WithDrawalVC {
         drawalBtn.backgroundColor = btnFlag ? onColor : offColor
     }
     
+    func tryWithdrawal() {
+        SVProgressHUD.show()
+        ApiManager.sendDeleteAccount()
+        .done { _ in }
+        .catch{ (error) in
+            let myErr = AuthManager.convAnyError(error)
+            self.showError(myErr)
+        }
+        .finally {
+            AnalyticsEventManager.track(type: .withdrawal)
+            SVProgressHUD.dismiss()
+            self.transitionToWithdrawalComplete()
+        }
+    }
+    
+    func transitionToWithdrawalComplete() {
+        let vc = self.getVC(sbName: "SettingVC", vcName: "WithDrawalCompleteVC") as! WithDrawalCompleteVC
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     // 退会確認アラート
     func withdrawalConfirmAlert() {
         let withdrawalConfirmAlertController = UIAlertController(title: "退会確認", message: "本当に退会します。よろしいですか？", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "いいえ", style: .cancel)
         let okAction = UIAlertAction.init(title: "はい", style: .default) { (_) in
-            // TODO:退会処理
-            AnalyticsEventManager.track(type: .withdrawal)
-            let vc = self.getVC(sbName: "SettingVC", vcName: "WithDrawalCompleteVC") as! WithDrawalCompleteVC
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.tryWithdrawal()
         }
         withdrawalConfirmAlertController.addAction(cancelAction)
         withdrawalConfirmAlertController.addAction(okAction)

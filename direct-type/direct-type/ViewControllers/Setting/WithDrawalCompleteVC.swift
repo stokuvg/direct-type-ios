@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WithDrawalCompleteVC: TmpBasicVC {
+final class WithDrawalCompleteVC: TmpBasicVC {
     @IBOutlet private weak var infomationLabel:UILabel!
 
     override func viewDidLoad() {
@@ -24,15 +24,13 @@ private extension WithDrawalCompleteVC {
         setLeftBarButton()
     }
     
-    
     var leftBatButtonFrame: CGRect {
         return CGRect(x: .zero, y: .zero, width: 30, height: 30)
     }
     func setLeftBarButton() {
         let leftBarButton = UIButton(type: .system)
         leftBarButton.frame = leftBatButtonFrame
-        // TODO: システムデフォルトの左矢印画像を使用していないため、あとからそれっぽい画像を実装した方がデザイン的には良い
-        leftBarButton.setTitle(text: "<", fontType: .font_XL, textColor: .white, alignment: .left)
+        leftBarButton.setTitle(text: "×", fontType: .font_XL, textColor: .white, alignment: .left)
         leftBarButton.addTarget(self, action: #selector(moveToInitialView), for: .touchUpInside)
         
         let backButtonItem =  UIBarButtonItem(customView: leftBarButton)
@@ -41,7 +39,9 @@ private extension WithDrawalCompleteVC {
     
     @objc
     func moveToInitialView() {
-        // TODO: どこへ遷移させるべきか確認して画面遷移実装をする
+        let vc = getVC(sbName: "InitialInputStartVC", vcName: "InitialInputStartVC") as! InitialInputStartVC
+        let newNavigationController = UINavigationController(rootViewController: vc)
+        UIApplication.shared.keyWindow?.rootViewController = newNavigationController
     }
 }
 
