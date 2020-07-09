@@ -52,6 +52,7 @@ class IKTextField: UITextField {
 
 enum HPreviewItemType: String {
     case undefine
+    case spacer
     //=== [C-9]応募フォーム
     case jobCardC9      //４．応募先求人
     case profileC9      //５．プロフィール（一部必須）
@@ -118,6 +119,7 @@ enum HPreviewItemType: String {
     var dispTitle: String {
         switch self {
         case .undefine:     return "<未定義>"
+        case .spacer:       return "<余白>"
         //=== [C-9]応募フォーム
         case .jobCardC9:      return "応募先求人"
         case .profileC9:      return "プロフィール（一部必須）"

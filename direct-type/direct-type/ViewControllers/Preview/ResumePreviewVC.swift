@@ -34,7 +34,7 @@ class ResumePreviewVC: PreviewBaseVC {
         guard let _detail = detail else { return }
         self.arrData.removeAll()//いったん全件を削除しておく
         editableModel.arrData.removeAll()//こちらで管理させる？！
-
+        arrData.append(MdlItemH(.spacer, "", childItems: [])) //上部の余白を実現させるため（ヘッダと違って、一緒にスクロールアウトさせたい）
         //================================================================================
         //=== [H-3]履歴書編集
         //===(3a)就業状況

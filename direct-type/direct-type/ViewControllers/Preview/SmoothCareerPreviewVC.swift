@@ -27,6 +27,9 @@ class SmoothCareerPreviewVC: PreviewBaseVC {
         //========
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
         guard let _detail = detail else { return }
+        self.arrData.removeAll()//いったん全件を削除しておく
+        editableModel.arrData.removeAll()//こちらで管理させる？！
+        arrData.append(MdlItemH(.spacer, "", childItems: [])) //上部の余白を実現させるため（ヘッダと違って、一緒にスクロールアウトさせたい）
         //◆F-11入力（勤務先企業名）
         //・テキスト入力（サジェスト付き）：「企業名」でサジェスト
         arrData.append(MdlItemH(.companyNameF11, "", childItems: [

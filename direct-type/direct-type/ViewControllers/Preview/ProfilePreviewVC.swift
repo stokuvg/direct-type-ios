@@ -35,7 +35,7 @@ class ProfilePreviewVC: PreviewBaseVC {
         guard let _detail = detail else { return }
         self.arrData.removeAll()//いったん全件を削除しておく
         editableModel.arrData.removeAll()//こちらで管理させる？！
-        
+        arrData.append(MdlItemH(.spacer, "", childItems: [])) //上部の余白を実現させるため（ヘッダと違って、一緒にスクロールアウトさせたい）
         //================================================================================
         //===４．氏名（必須）
         //    ・未記入時は「未入力（必須）」と表示
