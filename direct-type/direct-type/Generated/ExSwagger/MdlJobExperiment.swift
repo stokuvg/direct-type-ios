@@ -54,7 +54,7 @@ enum EditItemMdlResumeJobExperiments: String, EditItemProtocol {
     var placeholder: String {
         switch self {
         case .jobTypeAndJobExperimentYear:
-            return "複数選択可能"
+            return "複数選択可"
         }
     }
     var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" } //画面内でUniqになるようなキーを定義（配列利用時は除く）

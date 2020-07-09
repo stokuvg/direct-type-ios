@@ -35,11 +35,17 @@ class SubSelectBaseVC: BaseVC {
     }
 
     @IBOutlet weak var vwInfoArea: UIView!
+    @IBOutlet weak var stackInfo: UIStackView!
     @IBOutlet weak var lblCount: UILabel!
     @IBOutlet weak var vwInfoCountArea: UIView!
     @IBOutlet weak var lblInfoText: UILabel!
     @IBOutlet weak var vwInfoTextArea: UIView!
-    
+    var subSelectEnable: SubSelectEnableVW? = nil //stackInfoに場合によって付け足すもの
+
+    @IBOutlet weak var vwSelectEnableArea: UIView!
+    @IBOutlet weak var lblSelectEnableTitle: UILabel!
+    @IBOutlet weak var btnSelectEnable: UILabel!
+
     @IBOutlet weak var vwMain: UIView!
     @IBOutlet weak var tableVW: UITableView!
     @IBOutlet weak var lcMainFootSpace: NSLayoutConstraint!
@@ -103,6 +109,18 @@ class SubSelectBaseVC: BaseVC {
         //ヘッダ下部の補足情報エリア
         let bufInfoText = editableItem.placeholder
         lblInfoText.text(text: bufInfoText, fontType: .font_S, textColor: UIColor.init(colorType: .color_white)!, alignment: .left)
+        //補足情報エリアの追加
+        switch editableItem.editableItemKey {
+        case EditItemMdlFirstInput.hopeArea.itemKey: fallthrough
+        case EditItemMdlProfile.hopeJobArea.itemKey: fallthrough
+        case EditItemMdlEntry.hopeArea.itemKey:
+            self.subSelectEnable = SubSelectEnableVW(self, "勤務地にはこだわらない", true)
+            if let _subSelectEnable = subSelectEnable {
+//!!!                stackInfo.addArrangedSubview(_subSelectEnable)
+            }
+        default:
+            break
+        }
 
         dispInfoCount()
     }
@@ -178,4 +196,10 @@ extension SubSelectBaseVC: UITableViewDataSource, UITableViewDelegate {
 
 
 extension SubSelectBaseVC: SubSelectProtocol {
+}
+
+extension SubSelectBaseVC: SubSelectEnableDelegate {
+    func actSelectChange(isEnable: Bool) {
+        print("\t[isEnable: \(isEnable)]")
+    }
 }

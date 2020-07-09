@@ -239,6 +239,7 @@
                         <outlet property="lblTitle" destination="gnS-yA-ZjW" id="DyP-B4-WTx"/>
                         <outlet property="lcFootHeight" destination="2bA-sq-x5d" id="Bw2-jG-d9o"/>
                         <outlet property="lcMainFootSpace" destination="7zt-SW-Geq" id="CQx-Sx-CKt"/>
+                        <outlet property="stackInfo" destination="IhG-SE-nlm" id="Utd-Q4-oHc"/>
                         <outlet property="tableVW" destination="Kbe-JS-eGe" id="26n-Q0-vkI"/>
                         <outlet property="vwFoot" destination="J1U-TS-Gq6" id="qf5-2r-Ls5"/>
                         <outlet property="vwHead" destination="FBL-Lb-4mR" id="9wY-dV-Kiy"/>
@@ -482,6 +483,7 @@
                         <outlet property="lblTitle" destination="JYD-4p-mwO" id="uFN-Hq-R8A"/>
                         <outlet property="lcFootHeight" destination="tSI-XY-fpa" id="RdG-hJ-YKK"/>
                         <outlet property="lcMainFootSpace" destination="tsj-gX-Bul" id="gqr-3x-vOG"/>
+                        <outlet property="stackInfo" destination="bsg-PR-gxn" id="gq6-Hh-7R3"/>
                         <outlet property="tableVW" destination="ycb-EB-Mke" id="z56-p4-en5"/>
                         <outlet property="vwFoot" destination="Bky-Sn-q1M" id="Xaj-sp-Wd9"/>
                         <outlet property="vwHead" destination="yWH-6R-JsX" id="tVv-uY-j1a"/>
