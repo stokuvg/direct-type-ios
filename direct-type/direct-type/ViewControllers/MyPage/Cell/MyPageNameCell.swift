@@ -17,7 +17,6 @@ class MyPageNameCell: BaseTableViewCell {
     
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var nameLabel:UILabel!
-<<<<<<< HEAD
     @IBOutlet weak var editBtn:UIButton!
     @IBAction func editBtnAction() {
         delegate?.actEditNickname()
@@ -26,12 +25,6 @@ class MyPageNameCell: BaseTableViewCell {
         super.awakeFromNib()
         // Initialization code
         editBtn.isHidden = false//変更不可にしておくよ
-=======
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
->>>>>>> feature/c_relayout_2020070802
         dispCell()
     }
   //== セルの初期化と初期表示

@@ -239,17 +239,9 @@ extension MyPageVC: UITableViewDataSource {
 
         switch cellType {
         case .userName:
-<<<<<<< HEAD
-            cell =  tableView.loadCell(cellName: "MyPageNameCell", indexPath: indexPath) as! MyPageNameCell
-            (cell as! MyPageNameCell).initCell(self, profile?.nickname ?? "ゲストさん")
-            (cell as! MyPageNameCell).dispCell()
-=======
-            let cell =  tableView.loadCell(cellName: "MyPageNameCell", indexPath: indexPath) as! MyPageNameCell
-            if (self.profile != nil) {
-                cell.setup(profileData: self.profile!)
-            }
-            return cell
->>>>>>> feature/c_relayout_2020070802
+        cell =  tableView.loadCell(cellName: "MyPageNameCell", indexPath: indexPath) as! MyPageNameCell
+        (cell as! MyPageNameCell).initCell(self, profile?.nickname ?? "ゲストさん")
+        (cell as! MyPageNameCell).dispCell()
         case .profileCompleteness:
             cell = tableView.loadCell(cellName: "BasePercentageCompletionCell", indexPath: indexPath) as! BasePercentageCompletionCell
             (cell as! BasePercentageCompletionCell).setup(title: "プロフィールの完成度", percent: String(profile?.completeness ?? 0))
