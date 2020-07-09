@@ -24,7 +24,6 @@ class MyPageNameCell: BaseTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        editBtn.isHidden = false//変更不可にしておくよ
         dispCell()
     }
   //== セルの初期化と初期表示
