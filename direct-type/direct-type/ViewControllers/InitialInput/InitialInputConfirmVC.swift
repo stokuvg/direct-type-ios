@@ -123,6 +123,7 @@ private extension InitialInputConfirmVC {
     }
     
     func resendAuthCode() {
+        SVProgressHUD.show()
         AWSMobileClient.default().signIn(username: loginInfo.phoneNumberText, password: loginInfo.password)  { (signInResult, error) in
             if let error = error {
                 let buf = AuthManager.convAnyError(error).debugDisp
@@ -141,7 +142,7 @@ private extension InitialInputConfirmVC {
             switch signInResult.signInState {
             case .customChallenge:
                 DispatchQueue.main.async {
-                    self.transitionToComplete()
+                    self.showConfirm(title: "認証コードを再送信しました", message: "", onlyOK: true)
                 }
                 break
             case .unknown, .signedIn, .smsMFA, .passwordVerifier, .deviceSRPAuth,
