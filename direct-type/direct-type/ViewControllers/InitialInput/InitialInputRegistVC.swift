@@ -18,7 +18,8 @@ final class InitialInputRegistVC: TmpBasicVC {
     }
     @IBAction private func nextButton(_ sender: UIButton) {
         AnalyticsEventManager.track(type: .createAuthenticationCode)
-        sendLoginAuthCode()
+        let isDidInputPhoneNumber = didInputPhoneNumbers.first(where: { $0 == phoneNumberTextField.text! })
+        isDidInputPhoneNumber == nil ? trySignUp() : trySignIn()
     }
     
     // TODO: パスワードは毎回自動生成する必要があるため、強度の検討が完了した後に自動生成ロジックを実装する
@@ -27,6 +28,7 @@ final class InitialInputRegistVC: TmpBasicVC {
     private let phoneNumberMaxLength: Int = 11
     // この画面ではログアウトがされている前提だが、ログイン処理の時前に強制的なログアウトをしたい場合にフラグを立てる。
     private let shouldLogOutIfNeeded = true
+    private var didInputPhoneNumbers = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +44,7 @@ private extension InitialInputRegistVC {
         phoneNumberTextField.addTarget(self, action: #selector(changeButtonState), for: .editingChanged)
     }
     
-    func sendLoginAuthCode() {
+    func trySignUp() {
         if shouldLogOutIfNeeded {
             logOutIfNeeded()
         }
@@ -82,13 +84,23 @@ private extension InitialInputRegistVC {
     
     func trySignIn() {
         guard let phoneNumberText = phoneNumberTextField.text else { return }
+        if !SVProgressHUD.isVisible() {
+            SVProgressHUD.show()
+        }
         AWSMobileClient.default().signIn(username: phoneNumberText.addCountryCode(type: .japan), password: password) { (signInResult, error) in
-            if let error = error {
-                let buf = AuthManager.convAnyError(error).debugDisp
-                DispatchQueue.main.async {
-                    print(#line, #function, buf)
-                    self.changeButtonState()
-                    SVProgressHUD.dismiss()
+            if let error = error as? AWSMobileClientError {
+                switch error {
+                case .invalidParameter:
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        self.trySignIn()
+                    }
+                default:
+                    DispatchQueue.main.async {
+                        let buf = AuthManager.convAnyError(error).debugDisp
+                        self.showConfirm(title: "Error", message: buf, onlyOK: true)
+                        self.changeButtonState()
+                        SVProgressHUD.dismiss()
+                    }
                 }
                 return
             }
@@ -126,7 +138,7 @@ private extension InitialInputRegistVC {
     func transitionToComfirm() {
         guard let phoneNumberText = phoneNumberTextField.text else { return }
         let vc = getVC(sbName: "InitialInputConfirmVC", vcName: "InitialInputConfirmVC") as! InitialInputConfirmVC
-        vc.configure(with: InitialInputConfirmVC.LoginInfo(phoneNumberText: phoneNumberText.withCountryCode, password: password))
+        vc.configure(with: InitialInputConfirmVC.LoginInfo(phoneNumberText: phoneNumberText, password: password), delegate: self)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -168,19 +180,8 @@ private extension InitialInputRegistVC {
     }
 }
 
-private extension String {
-    enum CountryCode {
-        case japan
-        
-        var text: String {
-            switch self {
-            case .japan:
-                return "+81"
-            }
-        }
-    }
-    
-    var withCountryCode: String {
-        return CountryCode.japan.text + dropFirst()
+extension InitialInputRegistVC: InitialInputConfirmVCDelegate {
+    func didBack(with phoneNumber: String) {
+        didInputPhoneNumbers.append(phoneNumber)
     }
 }
