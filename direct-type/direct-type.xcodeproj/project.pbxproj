@@ -227,6 +227,8 @@
 		2619D2A624AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2619D2A424AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib */; };
 		2620BCF024AEBA62006D7FFF /* HEditZipcodeTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2620BCEE24AEBA62006D7FFF /* HEditZipcodeTBCell.xib */; };
 		2620BCF124AEBA62006D7FFF /* HEditZipcodeTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2620BCEF24AEBA62006D7FFF /* HEditZipcodeTBCell.swift */; };
+		2635444F24B6D2DC00C4B7C8 /* SpacerTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2635444D24B6D2DC00C4B7C8 /* SpacerTBCell.swift */; };
+		2635445024B6D2DC00C4B7C8 /* SpacerTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2635444E24B6D2DC00C4B7C8 /* SpacerTBCell.xib */; };
 		2636075B2477A37C00032880 /* CognitoAuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2636075A2477A37C00032880 /* CognitoAuthVC.swift */; };
 		2636075D2477A39900032880 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2636075C2477A39900032880 /* Auth.storyboard */; };
 		2636075F2477AB4900032880 /* BaseVC+ShowDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2636075E2477AB4900032880 /* BaseVC+ShowDialog.swift */; };
@@ -565,6 +567,8 @@
 		2619D2A424AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntryConfirmAnyModelTBCell.xib; sourceTree = "<group>"; };
 		2620BCEE24AEBA62006D7FFF /* HEditZipcodeTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HEditZipcodeTBCell.xib; sourceTree = "<group>"; };
 		2620BCEF24AEBA62006D7FFF /* HEditZipcodeTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HEditZipcodeTBCell.swift; sourceTree = "<group>"; };
+		2635444D24B6D2DC00C4B7C8 /* SpacerTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerTBCell.swift; sourceTree = "<group>"; };
+		2635444E24B6D2DC00C4B7C8 /* SpacerTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpacerTBCell.xib; sourceTree = "<group>"; };
 		2636075A2477A37C00032880 /* CognitoAuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CognitoAuthVC.swift; sourceTree = "<group>"; };
 		2636075C2477A39900032880 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		2636075E2477AB4900032880 /* BaseVC+ShowDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseVC+ShowDialog.swift"; sourceTree = "<group>"; };
@@ -1065,6 +1069,8 @@
 			isa = PBXGroup;
 			children = (
 				26CFC45E2469495800E458E2 /* ConstantsPreview.swift */,
+				2635444D24B6D2DC00C4B7C8 /* SpacerTBCell.swift */,
+				2635444E24B6D2DC00C4B7C8 /* SpacerTBCell.xib */,
 				260BBFDD24651732003D163A /* HPreviewTBCell.swift */,
 				26147F2F247258E9009B30B5 /* HPreviewTBCell+dispCellValue.swift */,
 				260BBFDF24651732003D163A /* HPreviewTBCell.xib */,
@@ -1626,6 +1632,7 @@
 				066763642457ABDB00AC5039 /* BaseTabBC.storyboard in Resources */,
 				26BF48E824639D2B00E00215 /* MstK5_jobExperimentYear.tsv in Resources */,
 				06AB97C72489D1600003B334 /* InitialInputStartVC.storyboard in Resources */,
+				2635445024B6D2DC00C4B7C8 /* SpacerTBCell.xib in Resources */,
 				26CFC4672469496D00E458E2 /* Edit.storyboard in Resources */,
 				0EE861902488B026003C5242 /* ChemistrySelect.storyboard in Resources */,
 				066B2D872468DD0D00355E03 /* JobOfferCardReloadCell.xib in Resources */,
@@ -1733,6 +1740,7 @@
 				269AFFCB246A929300DB364B /* SubSelectSpecialVC.swift in Sources */,
 				26AF323B248F698E00AA78FD /* MdlFirstInput.swift in Sources */,
 				26F2A82D246D31020037D47F /* PreviewBaseVC.swift in Sources */,
+				2635444F24B6D2DC00C4B7C8 /* SpacerTBCell.swift in Sources */,
 				0E7372DF249A089D00358EFA /* ApiManager+AuthCode.swift in Sources */,
 				0E6951AF248A05EA00D58E6E /* ChemistryQuestionMasterData.swift in Sources */,
 				0662C60324722E280053CAD9 /* JobDetailFoldingOptionalView.swift in Sources */,

@@ -8,23 +8,28 @@
 
 import UIKit
 
+protocol MyPageNameCellDelegate {
+    func actEditNickname()
+}
 class MyPageNameCell: BaseTableViewCell {
+    var delegate: MyPageNameCellDelegate? = nil
     var nickname: String = "ゲストさん"
     
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var nameLabel:UILabel!
     @IBOutlet weak var editBtn:UIButton!
     @IBAction func editBtnAction() {
+        delegate?.actEditNickname()
     }
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        editBtn.isHidden = true//変更不可にしておくよ
+        editBtn.isHidden = false//変更不可にしておくよ
         dispCell()
     }
   //== セルの初期化と初期表示
-    func initCell(_ nickname: String) {
+    func initCell(_ delegate: MyPageNameCellDelegate, _ nickname: String) {
+        self.delegate = delegate
         self.nickname = nickname
     }
    func dispCell() {

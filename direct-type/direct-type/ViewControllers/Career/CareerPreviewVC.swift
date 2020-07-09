@@ -77,10 +77,9 @@ class CareerPreviewVC: PreviewBaseVC {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
         guard arrDetail.count > targetCardNum else { return }
         let _detail = arrDetail[targetCardNum]
-
         self.arrData.removeAll()//いったん全件を削除しておく
         editableModel.arrData.removeAll()//こちらで管理させる？！
-
+        arrData.append(MdlItemH(.spacer, "", childItems: [])) //上部の余白を実現させるため（ヘッダと違って、一緒にスクロールアウトさせたい）
         //================================================================================
         //・項目見出し部分に「〇社目（{勤務開始年月}～{勤務終了年月}）」と表示
         //・情報の置き方

@@ -44,7 +44,7 @@ final class FirstInputPreviewVC: PreviewBaseVC {
         guard let _detail = detail else { return }
         self.arrData.removeAll()//いったん全件を削除しておく
         editableModel.arrData.removeAll()//こちらで管理させる？！
-
+        arrData.append(MdlItemH(.spacer, "", childItems: [])) //上部の余白を実現させるため（ヘッダと違って、一緒にスクロールアウトさせたい）
         //================================================================================
         //===(3a)就業状況
         //[A系統]初回入力

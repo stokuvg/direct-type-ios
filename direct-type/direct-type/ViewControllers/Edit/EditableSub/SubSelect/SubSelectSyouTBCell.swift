@@ -48,7 +48,7 @@ class SubSelectSyouTBCell: UITableViewCell {
             lblStatus.text = ""
         }
         if let _ = subItem { //TODO: 選択、非選択、選択不可（非活性）などに状態を増やす
-            vwCellArea.backgroundColor = .red
+            vwCellArea.backgroundColor = UIColor(colorType: .color_sub)
             lblName.textColor = .white
             lblStatus.textColor = .white
         } else {

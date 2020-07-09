@@ -61,6 +61,7 @@ class PreviewBaseVC: TmpBasicVC {
         //=== テーブル初期化
         self.tableVW.estimatedRowHeight = 100
         self.tableVW.rowHeight = UITableView.automaticDimension
+        self.tableVW.register(UINib(nibName: "SpacerTBCell", bundle: nil), forCellReuseIdentifier: "Cell_SpacerTBCell")
         //[C-9系]
         self.tableVW.register(UINib(nibName: "EntryFormInfoTextTBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryFormInfoTextTBCell")
         self.tableVW.register(UINib(nibName: "EntryFormExQuestionsHeadTBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryFormExQuestionsHeadTBCell")
@@ -117,6 +118,10 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = arrData[indexPath.row]
         switch item.type {
+        case .spacer:
+            let cell: SpacerTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_SpacerTBCell", for: indexPath) as! SpacerTBCell
+            return cell
+
 //        case .jobCardC9:
         case .profileC9: fallthrough
         case .resumeC9: fallthrough
@@ -142,6 +147,7 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
         //================================================
         //モデル引き渡しによる画面遷移の得例対応
         switch item.type {
+        case .spacer: break
         case .jobCardC9:
             return //遷移なし。以後の処理はパス
         case .profileC9:

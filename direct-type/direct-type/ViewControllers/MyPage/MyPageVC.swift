@@ -240,6 +240,8 @@ extension MyPageVC: UITableViewDataSource {
         switch cellType {
         case .userName:
             cell =  tableView.loadCell(cellName: "MyPageNameCell", indexPath: indexPath) as! MyPageNameCell
+            (cell as! MyPageNameCell).initCell(self, profile?.nickname ?? "ゲストさん")
+            (cell as! MyPageNameCell).dispCell()
         case .profileCompleteness:
             cell = tableView.loadCell(cellName: "BasePercentageCompletionCell", indexPath: indexPath) as! BasePercentageCompletionCell
             (cell as! BasePercentageCompletionCell).setup(title: "プロフィールの完成度", percent: String(profile?.completeness ?? 0))
@@ -296,7 +298,6 @@ extension MyPageVC: MyPageChemistryStartCellDelegate {
         transitionToChemistry()
     }
 }
-
 //=== APIフェッチ
 extension MyPageVC {
     func fetchGetEntryAll() {
@@ -379,3 +380,46 @@ extension MyPageVC {
         }
     }
 }
+
+//=== ニックネームの変更処理
+extension MyPageVC: MyPageNameCellDelegate {
+    func actEditNickname() {
+        let tfNickname = UITextField()
+        tfNickname.placeholder = "8文字まで"
+        let alert = UIAlertController(title: "ニックネームの変更", message: "新しいニックネームを入力してください", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "変更", style: .default) { (action:UIAlertAction) in
+            if let tfNickname = alert.textFields?.first {
+                let bufNickame: String = tfNickname.text ?? ""
+                //TODO: バリデーション
+                self.fetchUpdateProfileNickname(bufNickame)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        alert.addTextField { (tfNickname) in
+            tfNickname.text = self.profile?.nickname ?? "ゲストさん"
+        }
+        present(alert, animated: true, completion: nil)
+    }
+}
+extension MyPageVC {
+    private func fetchUpdateProfileNickname(_ nickname: String) {
+        if nickname.isEmpty { return }
+        let param = UpdateProfileRequestDTO(nickname: nickname, hopeJobPlaceIds: nil, familyName: nil, firstName: nil, familyNameKana: nil, firstNameKana: nil, birthday: nil, genderId: nil, zipCode: nil, prefectureId: nil, city: nil, town: nil, email: nil)
+        SVProgressHUD.show(withStatus: "ニックネームの更新")
+        ApiManager.updateProfile(param, isRetry: true)
+        .done { result in
+            self.profile?.nickname = nickname//ローカルで変更適用しておく
+            self.pageTableView.reloadData()
+        }
+        .catch { (error) in
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            self.showError(myErr)
+        }
+        .finally {
+            SVProgressHUD.dismiss()
+        }
+    }
+}
+
