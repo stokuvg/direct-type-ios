@@ -91,7 +91,7 @@ case entryItems         //9、10、11、12を一括で扱うためのもの
     //Placeholder Text
     var placeholder: String {
         switch self {
-        case .hopeArea: return "複数選択可能"
+        case .hopeArea: return "複数選択可"
         case .exQuestionAnswer1: return "回答を入力してください"
         case .exQuestionAnswer2: return "回答を入力してください"
         case .exQuestionAnswer3: return "回答を入力してください"

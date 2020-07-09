@@ -229,6 +229,8 @@
 		2620BCF124AEBA62006D7FFF /* HEditZipcodeTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2620BCEF24AEBA62006D7FFF /* HEditZipcodeTBCell.swift */; };
 		2635444F24B6D2DC00C4B7C8 /* SpacerTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2635444D24B6D2DC00C4B7C8 /* SpacerTBCell.swift */; };
 		2635445024B6D2DC00C4B7C8 /* SpacerTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2635444E24B6D2DC00C4B7C8 /* SpacerTBCell.xib */; };
+		2635445324B703B500C4B7C8 /* SubSelectEnableVW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2635445124B703B500C4B7C8 /* SubSelectEnableVW.swift */; };
+		2635445624B7051900C4B7C8 /* SubSelectEnableVW.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2635445524B7051900C4B7C8 /* SubSelectEnableVW.xib */; };
 		2636075B2477A37C00032880 /* CognitoAuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2636075A2477A37C00032880 /* CognitoAuthVC.swift */; };
 		2636075D2477A39900032880 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2636075C2477A39900032880 /* Auth.storyboard */; };
 		2636075F2477AB4900032880 /* BaseVC+ShowDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2636075E2477AB4900032880 /* BaseVC+ShowDialog.swift */; };
@@ -569,6 +571,8 @@
 		2620BCEF24AEBA62006D7FFF /* HEditZipcodeTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HEditZipcodeTBCell.swift; sourceTree = "<group>"; };
 		2635444D24B6D2DC00C4B7C8 /* SpacerTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerTBCell.swift; sourceTree = "<group>"; };
 		2635444E24B6D2DC00C4B7C8 /* SpacerTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpacerTBCell.xib; sourceTree = "<group>"; };
+		2635445124B703B500C4B7C8 /* SubSelectEnableVW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSelectEnableVW.swift; sourceTree = "<group>"; };
+		2635445524B7051900C4B7C8 /* SubSelectEnableVW.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubSelectEnableVW.xib; sourceTree = "<group>"; };
 		2636075A2477A37C00032880 /* CognitoAuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CognitoAuthVC.swift; sourceTree = "<group>"; };
 		2636075C2477A39900032880 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		2636075E2477AB4900032880 /* BaseVC+ShowDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseVC+ShowDialog.swift"; sourceTree = "<group>"; };
@@ -1318,6 +1322,8 @@
 			isa = PBXGroup;
 			children = (
 				26A5DD652476547D0035267A /* SubSelectBaseVC.swift */,
+				2635445124B703B500C4B7C8 /* SubSelectEnableVW.swift */,
+				2635445524B7051900C4B7C8 /* SubSelectEnableVW.xib */,
 				269AFFBB246A929200DB364B /* SubSelectSingleVC.swift */,
 				269AFFBE246A929200DB364B /* SubSelectMultiVC.swift */,
 				269AFFC1246A929200DB364B /* SubSelectSpecialVC.swift */,
@@ -1625,6 +1631,7 @@
 				06409C75246D3ACB00EA6BBB /* JobDetailFoldingHeaderView.xib in Resources */,
 				26BF48DA24639D2B00E00215 /* MstK14_place.tsv in Resources */,
 				0E144D93248DCC0E005A659F /* ChemistryResultHeader.xib in Resources */,
+				2635445624B7051900C4B7C8 /* SubSelectEnableVW.xib in Resources */,
 				066BD9DE2456ACB4009E610B /* SplashVC.storyboard in Resources */,
 				063350E52463FD9C00AF90F3 /* NaviButtonsView.xib in Resources */,
 				0E6EA6E924A1C12700884D07 /* InitialInputCompleteVC.storyboard in Resources */,
@@ -1890,6 +1897,7 @@
 				064EF6FE2465550E00853ADD /* JobDetailArticleHeaderView.swift in Sources */,
 				0E1F06CE24B566E700CCAD46 /* APIManager+Withdraw.swift in Sources */,
 				26A2899924AAD74B000D2926 /* EntryConfirmNotifyEntry1TBCell.swift in Sources */,
+				2635445324B703B500C4B7C8 /* SubSelectEnableVW.swift in Sources */,
 				066EF6C5245BB9C400E15AD2 /* KeepCardCell.swift in Sources */,
 				260BBFDC2465171D003D163A /* MdlProfile.swift in Sources */,
 				269AFFC4246A929300DB364B /* SubSelectSyouTBCell.swift in Sources */,
