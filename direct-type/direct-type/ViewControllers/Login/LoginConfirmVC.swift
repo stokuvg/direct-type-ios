@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 import AWSMobileClient
 
 final class LoginConfirmVC: TmpBasicVC {
@@ -51,10 +52,16 @@ private extension LoginConfirmVC {
     }
     
     func tryConfirmAuthCode(with code: String) {
+        SVProgressHUD.show()
+        changeButtonState(shouldForceDisable: true)
         AWSMobileClient.default().confirmSignIn(challengeResponse: code, completionHandler: { (signInResult, error) in
             if let error = error  {
                 let buf = AuthManager.convAnyError(error).debugDisp
-                DispatchQueue.main.async { print(#line, #function, buf) }
+                DispatchQueue.main.async {
+                    print(#line, #function, buf)
+                    self.changeButtonState()
+                    SVProgressHUD.dismiss()
+                }
                 return
             }
             
@@ -83,7 +90,11 @@ private extension LoginConfirmVC {
             case .newPasswordRequired:
                 buf = "newPasswordRequired"
             }
-            DispatchQueue.main.async { print(#line, #function, buf) }
+            DispatchQueue.main.async {
+                print(#line, #function, buf)
+                self.changeButtonState()
+                SVProgressHUD.dismiss()
+            }
         })
     }
     
@@ -110,8 +121,12 @@ private extension LoginConfirmVC {
     }
     
     @objc
-    func changeButtonState() {
-        guard let inputText = authCodeTextField.text else { return }
+    func changeButtonState(shouldForceDisable: Bool = false) {
+        guard let inputText = authCodeTextField.text, !shouldForceDisable else {
+            nextButton.backgroundColor = UIColor(colorType: .color_line)
+            nextButton.isEnabled = false
+            return
+        }
         authCodeTextField.text = inputText.prefix(confirmCodeMaxLength).description
         nextButton.backgroundColor = UIColor(colorType: isValidInputText ? .color_sub : .color_line)
         nextButton.isEnabled = isValidInputText

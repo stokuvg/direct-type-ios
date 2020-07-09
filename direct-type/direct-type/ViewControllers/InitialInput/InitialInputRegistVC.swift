@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 import AWSMobileClient
 
 final class InitialInputRegistVC: TmpBasicVC {
@@ -50,14 +51,15 @@ private extension InitialInputRegistVC {
         let phoneNumber = phoneNumberText.addCountryCode(type: .japan)
         let phoneNumberAttribute = ["phone_number" : phoneNumber]
         
+        SVProgressHUD.show()
+        changeButtonState(shouldForceDisable: true)
         AWSMobileClient.default().signUp(username: phoneNumber, password: password, userAttributes: phoneNumberAttribute) { (signUpResult, error) in
             if let error = error {
                 let buf = AuthManager.convAnyError(error).debugDisp
                 DispatchQueue.main.async {
                     self.showConfirm(title: "Error", message: buf, onlyOK: true)
-                        .done { _ in
-                            DispatchQueue.main.async { self.transitionToComfirm() }
-                    } .catch { (error) in } .finally { } //Warning回避
+                    self.changeButtonState()
+                    SVProgressHUD.dismiss()
                 }
                 return
             }
@@ -83,7 +85,11 @@ private extension InitialInputRegistVC {
         AWSMobileClient.default().signIn(username: phoneNumberText.addCountryCode(type: .japan), password: password) { (signInResult, error) in
             if let error = error {
                 let buf = AuthManager.convAnyError(error).debugDisp
-                DispatchQueue.main.async { print(#line, #function, buf) }
+                DispatchQueue.main.async {
+                    print(#line, #function, buf)
+                    self.changeButtonState()
+                    SVProgressHUD.dismiss()
+                }
                 return
             }
             guard let signInResult = signInResult else { return }
@@ -109,7 +115,11 @@ private extension InitialInputRegistVC {
             case .signedIn:
                 buf = "signedIn"
             }
-            DispatchQueue.main.async { print(#line, #function, buf) }
+            DispatchQueue.main.async {
+                print(#line, #function, buf)
+                self.changeButtonState()
+                SVProgressHUD.dismiss()
+            }
         }
     }
     
@@ -146,8 +156,12 @@ private extension InitialInputRegistVC {
     }
     
     @objc
-    func changeButtonState() {
-        guard let inputText = phoneNumberTextField.text else { return }
+    func changeButtonState(shouldForceDisable: Bool = false) {
+        guard let inputText = phoneNumberTextField.text, !shouldForceDisable else {
+            nextButton.backgroundColor = UIColor(colorType: .color_line)
+            nextButton.isEnabled = false
+            return
+        }
         phoneNumberTextField.text = inputText.prefix(phoneNumberMaxLength).description
         nextButton.backgroundColor = UIColor(colorType: isValidInputText ? .color_sub : .color_line)
         nextButton.isEnabled = isValidInputText

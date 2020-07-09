@@ -47,11 +47,15 @@ private extension LoginVC {
         }
         
         guard let phoneNumberText = phoneNumberTextField.text else { return }
+        SVProgressHUD.show()
+        changeButtonState(shouldForceDisable: true)
         AWSMobileClient.default().signIn(username: phoneNumberText.addCountryCode(type: .japan), password: password)  { (signInResult, error) in
             if let error = error {
                 let buf = AuthManager.convAnyError(error).debugDisp
                 DispatchQueue.main.async {
                     self.showConfirm(title: "Error", message: buf, onlyOK: true)
+                    self.changeButtonState()
+                    SVProgressHUD.dismiss()
                 }
                 return
             }
@@ -72,6 +76,10 @@ private extension LoginVC {
             case .unknown, .signedIn, .smsMFA, .passwordVerifier, .deviceSRPAuth,
                  .devicePasswordVerifier, .adminNoSRPAuth, .newPasswordRequired:
                 break
+            }
+            DispatchQueue.main.async {
+                self.changeButtonState()
+                SVProgressHUD.dismiss()
             }
         }
     }
@@ -102,8 +110,12 @@ private extension LoginVC {
     }
     
     @objc
-    func changeButtonState() {
-        guard let inputText = phoneNumberTextField.text else { return }
+    func changeButtonState(shouldForceDisable: Bool = false) {
+        guard let inputText = phoneNumberTextField.text, !shouldForceDisable else {
+            nextButton.backgroundColor = UIColor(colorType: .color_line)
+            nextButton.isEnabled = false
+            return
+        }
         phoneNumberTextField.text = inputText.prefix(phoneNumberMaxLength).description
         nextButton.backgroundColor = UIColor(colorType: isValidInputText ? .color_sub : .color_line)
         nextButton.isEnabled = isValidInputText
