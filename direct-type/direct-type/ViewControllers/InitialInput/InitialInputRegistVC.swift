@@ -126,7 +126,7 @@ private extension InitialInputRegistVC {
     func transitionToComfirm() {
         guard let phoneNumberText = phoneNumberTextField.text else { return }
         let vc = getVC(sbName: "InitialInputConfirmVC", vcName: "InitialInputConfirmVC") as! InitialInputConfirmVC
-        vc.configure(with: InitialInputConfirmVC.LoginInfo(phoneNumberText: phoneNumberText, password: password))
+        vc.configure(with: InitialInputConfirmVC.LoginInfo(phoneNumberText: phoneNumberText.withCountryCode, password: password))
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
