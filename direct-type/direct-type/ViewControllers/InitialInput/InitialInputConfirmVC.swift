@@ -10,6 +10,10 @@ import Foundation
 import SVProgressHUD
 import AWSMobileClient
 
+protocol InitialInputConfirmVCDelegate: class {
+    func willBack(with phoneNumber: String)
+}
+
 final class InitialInputConfirmVC: TmpBasicVC {
     @IBOutlet private weak var authCodeTextField: UITextField!
     @IBOutlet private weak var nextButton: UIButton!
@@ -24,6 +28,7 @@ final class InitialInputConfirmVC: TmpBasicVC {
     private let confirmCodeMaxLength: Int = 6
     typealias LoginInfo = (phoneNumberText: String, password: String)
     private var loginInfo = LoginInfo(phoneNumberText: "", password: "")
+    private weak var delegate: InitialInputConfirmVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +37,9 @@ final class InitialInputConfirmVC: TmpBasicVC {
     }
     
     
-    func configure(with loginInfo: LoginInfo) {
+    func configure(with loginInfo: LoginInfo, delegate: InitialInputConfirmVCDelegate) {
         self.loginInfo = loginInfo
+        self.delegate = delegate
     }
 }
 
@@ -41,6 +47,7 @@ private extension InitialInputConfirmVC {
     func setup() {
         title = "認証コード入力"
         authCodeTextField.addTarget(self, action: #selector(changeButtonState), for: .editingChanged)
+        navigationController?.delegate = self
     }
     
     func validateAuthCode() {
@@ -124,7 +131,8 @@ private extension InitialInputConfirmVC {
     
     func resendAuthCode() {
         SVProgressHUD.show()
-        AWSMobileClient.default().signIn(username: loginInfo.phoneNumberText, password: loginInfo.password)  { (signInResult, error) in
+        AWSMobileClient.default().signIn(username: loginInfo.phoneNumberText.addCountryCode(type: .japan),
+                                         password: loginInfo.password)  { (signInResult, error) in
             if let error = error as? AWSMobileClientError {
                 switch error {
                 case .invalidParameter:
@@ -160,6 +168,18 @@ private extension InitialInputConfirmVC {
                 self.changeButtonState()
                 SVProgressHUD.dismiss()
             }
+        }
+    }
+}
+
+extension InitialInputConfirmVC: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        // 電話番号登録画面でAWSMobileClient.signUp()をコールした時点でCognitoにはユーザーが既に作成されてしまっているため、
+        // この画面から電話番号登録画面に戻り、再度同じ番号でサインアップしようとした際には、signUp()ではなくsignIn()処理を
+        // させる必要がある。遷移画面の前後で依存関係ができてしまうが、ユーザーが何度も同じ電話番号で新規登録を試みるケースを救済するため、
+        // ここでは無理やり「入力されている電話番号」を渡すことで分岐処理の切り替え判別に利用している。
+        if viewController is InitialInputRegistVC {
+            delegate?.willBack(with: loginInfo.phoneNumberText)
         }
     }
 }
