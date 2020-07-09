@@ -47,11 +47,13 @@ private extension LoginVC {
         }
         
         guard let phoneNumberText = phoneNumberTextField.text else { return }
+        changeButtonState(shouldForceDisable: true)
         AWSMobileClient.default().signIn(username: phoneNumberText.addCountryCode(type: .japan), password: password)  { (signInResult, error) in
             if let error = error {
                 let buf = AuthManager.convAnyError(error).debugDisp
                 DispatchQueue.main.async {
                     self.showConfirm(title: "Error", message: buf, onlyOK: true)
+                    self.changeButtonState()
                 }
                 return
             }
@@ -72,6 +74,9 @@ private extension LoginVC {
             case .unknown, .signedIn, .smsMFA, .passwordVerifier, .deviceSRPAuth,
                  .devicePasswordVerifier, .adminNoSRPAuth, .newPasswordRequired:
                 break
+            }
+            DispatchQueue.main.async {
+                self.changeButtonState()
             }
         }
     }

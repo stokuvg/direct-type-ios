@@ -51,10 +51,14 @@ private extension LoginConfirmVC {
     }
     
     func tryConfirmAuthCode(with code: String) {
+        changeButtonState(shouldForceDisable: true)
         AWSMobileClient.default().confirmSignIn(challengeResponse: code, completionHandler: { (signInResult, error) in
             if let error = error  {
                 let buf = AuthManager.convAnyError(error).debugDisp
-                DispatchQueue.main.async { print(#line, #function, buf) }
+                DispatchQueue.main.async {
+                    print(#line, #function, buf)
+                    self.changeButtonState()
+                }
                 return
             }
             
@@ -83,7 +87,10 @@ private extension LoginConfirmVC {
             case .newPasswordRequired:
                 buf = "newPasswordRequired"
             }
-            DispatchQueue.main.async { print(#line, #function, buf) }
+            DispatchQueue.main.async {
+                print(#line, #function, buf)
+                self.changeButtonState()
+            }
         })
     }
     
