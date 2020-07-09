@@ -100,6 +100,7 @@ private extension InitialInputConfirmVC {
     
     func transitionToComplete() {
         let vc = getVC(sbName: "InitialInputCompleteVC", vcName: "InitialInputCompleteVC") as! InitialInputCompleteVC
+        vc.configure(type: .registeredPhoneNumber)
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -122,24 +123,43 @@ private extension InitialInputConfirmVC {
     }
     
     func resendAuthCode() {
-        AWSMobileClient.default().signUp(username: loginInfo.phoneNumberText, password: loginInfo.password) { (signUpResult, error) in
-            if let _error = error {
-                let buf = AuthManager.convAnyError(_error).debugDisp
-                DispatchQueue.main.async { print(#line, #function, buf) }
+        SVProgressHUD.show()
+        AWSMobileClient.default().signIn(username: loginInfo.phoneNumberText, password: loginInfo.password)  { (signInResult, error) in
+            if let error = error as? AWSMobileClientError {
+                switch error {
+                case .invalidParameter:
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        self.resendAuthCode()
+                    }
+                default:
+                    DispatchQueue.main.async {
+                        let buf = AuthManager.convAnyError(error).debugDisp
+                        self.showConfirm(title: "Error", message: buf, onlyOK: true)
+                        self.changeButtonState()
+                        SVProgressHUD.dismiss()
+                    }
+                }
                 return
             }
-            guard let signUpResult = signUpResult else { return }
-            print(signUpResult.signUpConfirmationState)
-            print(signUpResult.codeDeliveryDetails.debugDescription)
-            var buf: String = ""
-            switch signUpResult.signUpConfirmationState {
-            case .confirmed:    buf = "confirmed"
-                // TODO: SMS認証コードの再送処理を追加
-//[簡易認証Skip]            self.actLogin(sender)//続けてログインも実施してしまう
-            case .unconfirmed:  buf = "unconfirmed"
-            case .unknown:      buf = "unknown"
+            
+            guard let signInResult = signInResult else {
+                print("レスポンスがが正常に受け取れませんでした")
+                return
             }
-            DispatchQueue.main.async { print(#line, #function, buf) }
+            switch signInResult.signInState {
+            case .customChallenge:
+                DispatchQueue.main.async {
+                    self.showConfirm(title: "認証コードを再送信しました", message: "", onlyOK: true)
+                }
+                break
+            case .unknown, .signedIn, .smsMFA, .passwordVerifier, .deviceSRPAuth,
+                 .devicePasswordVerifier, .adminNoSRPAuth, .newPasswordRequired:
+                break
+            }
+            DispatchQueue.main.async {
+                self.changeButtonState()
+                SVProgressHUD.dismiss()
+            }
         }
     }
 }

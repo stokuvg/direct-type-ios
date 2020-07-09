@@ -50,12 +50,19 @@ private extension LoginVC {
         SVProgressHUD.show()
         changeButtonState(shouldForceDisable: true)
         AWSMobileClient.default().signIn(username: phoneNumberText.addCountryCode(type: .japan), password: password)  { (signInResult, error) in
-            if let error = error {
-                let buf = AuthManager.convAnyError(error).debugDisp
-                DispatchQueue.main.async {
-                    self.showConfirm(title: "Error", message: buf, onlyOK: true)
-                    self.changeButtonState()
-                    SVProgressHUD.dismiss()
+            if let error = error as? AWSMobileClientError {
+                switch error {
+                case .invalidParameter:
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        self.sendLoginAuthCode()
+                    }
+                default:
+                    DispatchQueue.main.async {
+                        let buf = AuthManager.convAnyError(error).debugDisp
+                        self.showConfirm(title: "Error", message: buf, onlyOK: true)
+                        self.changeButtonState()
+                        SVProgressHUD.dismiss()
+                    }
                 }
                 return
             }
