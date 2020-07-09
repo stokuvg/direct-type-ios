@@ -174,9 +174,10 @@ private extension InitialInputConfirmVC {
 
 extension InitialInputConfirmVC: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        // 電話番号登録画面でAWSMobileClient.signUp()をコールした時点でユーザーが既に作成されてしまっているため、
-        // ここから電話番号登録画面に戻り再度同じ番号でサインアップしようとした際には、signUp()ではなくsignIn()処理を
-        // させる必要があるため、画面を戻る場合には無理やり「入力されている電話番号」を渡すことで処理の切り替え判定をしている。
+        // 電話番号登録画面でAWSMobileClient.signUp()をコールした時点でCognitoにはユーザーが既に作成されてしまっているため、
+        // この画面から電話番号登録画面に戻り、再度同じ番号でサインアップしようとした際には、signUp()ではなくsignIn()処理を
+        // させる必要がある。遷移画面の前後で依存関係ができてしまうが、ユーザーが何度も同じ電話番号で新規登録を試みるケースを救済するため、
+        // ここでは無理やり「入力されている電話番号」を渡すことで分岐処理の切り替え判別に利用している。
         if viewController is InitialInputRegistVC {
             delegate?.willBack(with: loginInfo.phoneNumberText)
         }
