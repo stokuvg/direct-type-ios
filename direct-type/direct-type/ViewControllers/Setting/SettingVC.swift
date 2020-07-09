@@ -96,12 +96,20 @@ private extension SettingVC {
                     self.showConfirm(title: "認証手順", message: "ログアウトしました", onlyOK: true)
                     .done { _ in
                         self.transitionToInitial()
-                    }
-                    .catch { _ in
-                    }
-                    .finally {
                         AnalyticsEventManager.track(type: .logout)
+                        AWSMobileClient.default().signOut { (error) in
+                            if let error = error {
+                                DispatchQueue.main.async {
+                                    self.showError(error)
+                                }
+                                return
+                            }
+                        }
                     }
+                    .catch { error in
+                        self.showConfirm(title: "エラー", message: error.localizedDescription, onlyOK: true)
+                    }
+                    .finally {}
                 }
             }
         })

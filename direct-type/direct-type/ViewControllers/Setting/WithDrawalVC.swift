@@ -9,6 +9,7 @@
 import UIKit
 import TudApi
 import SVProgressHUD
+import AWSMobileClient
 
 final class CheckBoxView: UIView {
     @IBOutlet private weak var imageView: UIImageView!
@@ -92,6 +93,14 @@ private extension WithDrawalVC {
         .done { _ in
             AnalyticsEventManager.track(type: .withdrawal)
             self.transitionToWithdrawalComplete()
+            AWSMobileClient.default().signOut { (error) in
+                if let error = error {
+                    DispatchQueue.main.async {
+                        self.showError(error)
+                    }
+                    return
+                }
+            }
         }
         .catch{ (error) in
             let myErr = AuthManager.convAnyError(error)
