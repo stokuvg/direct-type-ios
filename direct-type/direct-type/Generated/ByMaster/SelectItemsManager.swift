@@ -207,6 +207,9 @@ extension SelectItemsManager {
                     let hoge = line.components(separatedBy: "\t")
                     if hoge.count >= 2 {
                         let item: SortCodeDisp = SortCodeDisp(hoge[2], hoge[1], hoge[3])
+                        if item.sortNum == 0 && type == .qualification {
+                            continue //登録スキップ
+                        }
                         arrCodeDisp.append(item)
 //                        if num <= 5 { //[Debug]
 //                            print(item.debugDisp)

@@ -99,7 +99,12 @@ enum EditItemMdlFirstInput: String, EditItemProtocol {
     }
     //Placeholder Text
     var placeholder: String {
-        return ""//return "[\(self.itemKey) PlaceHolder]"
+        switch self {
+        case .hopeArea:
+            return "複数選択可能"
+        default:
+            return ""//return "[\(self.itemKey) PlaceHolder]"
+        }
     }
     var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" } //画面内でUniqになるようなキーを定義（配列利用時は除く）
 }
@@ -125,7 +130,10 @@ enum EditItemMdlFirstInputJobExperiments: String, EditItemProtocol {
     }
     //Placeholder Text
     var placeholder: String {
-        return ""//return "[\(self.itemKey) PlaceHolder]"
+        switch self {
+        case .jobTypeAndJobExperimentYear:
+            return "複数選択可能"
+        }
     }
     var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" } //画面内でUniqになるようなキーを定義（配列利用時は除く）
 }

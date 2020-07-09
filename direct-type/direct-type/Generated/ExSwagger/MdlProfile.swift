@@ -181,6 +181,9 @@ enum EditItemMdlProfile: String, EditItemProtocol {
         switch self {
         case .zipCode:
             return "ハイフンなしで入力してください"
+        case .hopeJobArea:
+            return "複数選択可能"
+
         default:
             return ""//return "[\(self.itemKey) PlaceHolder]"
         }

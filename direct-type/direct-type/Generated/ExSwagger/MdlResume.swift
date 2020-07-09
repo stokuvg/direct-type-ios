@@ -203,6 +203,12 @@ enum EditItemMdlResume: String, EditItemProtocol {
         switch self {
         case .ownPr:
             return "自己PRを2000文字以内で入力ください"
+        case .jobExperiments:
+            return "複数選択可能"//これは使われない（jobTypeAndJobExperimentYearとして一括で扱うため）
+        case .businessTypes:
+            return "複数選択可能"
+        case .qualifications:
+            return "複数選択可能"
         default:
             return ""//return "[\(self.itemKey) PlaceHolder]"
         }

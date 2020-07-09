@@ -52,7 +52,10 @@ enum EditItemMdlResumeJobExperiments: String, EditItemProtocol {
     }
     //Placeholder Text
     var placeholder: String {
-        return ""//return "[\(self.itemKey) PlaceHolder]"
+        switch self {
+        case .jobTypeAndJobExperimentYear:
+            return "複数選択可能"
+        }
     }
     var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" } //画面内でUniqになるようなキーを定義（配列利用時は除く）
 }
