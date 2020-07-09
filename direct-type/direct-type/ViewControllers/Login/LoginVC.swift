@@ -102,8 +102,12 @@ private extension LoginVC {
     }
     
     @objc
-    func changeButtonState() {
-        guard let inputText = phoneNumberTextField.text else { return }
+    func changeButtonState(shouldForceDisable: Bool = false) {
+        guard let inputText = phoneNumberTextField.text, !shouldForceDisable else {
+            nextButton.backgroundColor = UIColor(colorType: .color_line)
+            nextButton.isEnabled = false
+            return
+        }
         phoneNumberTextField.text = inputText.prefix(phoneNumberMaxLength).description
         nextButton.backgroundColor = UIColor(colorType: isValidInputText ? .color_sub : .color_line)
         nextButton.isEnabled = isValidInputText

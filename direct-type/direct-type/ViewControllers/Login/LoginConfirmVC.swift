@@ -110,8 +110,12 @@ private extension LoginConfirmVC {
     }
     
     @objc
-    func changeButtonState() {
-        guard let inputText = authCodeTextField.text else { return }
+    func changeButtonState(shouldForceDisable: Bool = false) {
+        guard let inputText = authCodeTextField.text, !shouldForceDisable else {
+            nextButton.backgroundColor = UIColor(colorType: .color_line)
+            nextButton.isEnabled = false
+            return
+        }
         authCodeTextField.text = inputText.prefix(confirmCodeMaxLength).description
         nextButton.backgroundColor = UIColor(colorType: isValidInputText ? .color_sub : .color_line)
         nextButton.isEnabled = isValidInputText
