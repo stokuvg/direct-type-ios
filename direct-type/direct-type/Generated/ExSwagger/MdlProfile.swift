@@ -63,10 +63,14 @@ class MdlProfile: Codable {
         let existsAddress = 20
         let existsMail = 20
         
+        // 名字 + 名前 + 名字カナ + 名前カナ
         if !familyName.isEmpty && !firstName.isEmpty && !familyNameKana.isEmpty && !firstNameKana.isEmpty {
             result += existsNameValue
         }
         
+        // 郵便番号 + 都道府県 + 市区町村 + 丁目・番地・建物名など
+        // TODO:完成度修正
+//        if !zipCode.isEmpty && !prefecture.isEmpty && !address1.isEmpty && !address2.isEmpty {
         if !zipCode.isEmpty && !prefecture.isEmpty && !address1.isEmpty && !address2.isEmpty {
             result += existsAddress
         }
