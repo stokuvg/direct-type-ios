@@ -181,7 +181,7 @@ private extension InitialInputRegistVC {
 }
 
 extension InitialInputRegistVC: InitialInputConfirmVCDelegate {
-    func didBack(with phoneNumber: String) {
+    func willBack(with phoneNumber: String) {
         didInputPhoneNumbers.append(phoneNumber)
     }
 }

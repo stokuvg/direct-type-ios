@@ -11,7 +11,7 @@ import SVProgressHUD
 import AWSMobileClient
 
 protocol InitialInputConfirmVCDelegate: class {
-    func didBack(with phoneNumber: String)
+    func willBack(with phoneNumber: String)
 }
 
 final class InitialInputConfirmVC: TmpBasicVC {
@@ -178,7 +178,7 @@ extension InitialInputConfirmVC: UINavigationControllerDelegate {
         // ここから電話番号登録画面に戻り再度同じ番号でサインアップしようとした際には、signUp()ではなくsignIn()処理を
         // させる必要があるため、画面を戻る場合には無理やり「入力されている電話番号」を渡すことで処理の切り替え判定をしている。
         if viewController is InitialInputRegistVC {
-            delegate?.didBack(with: loginInfo.phoneNumberText)
+            delegate?.willBack(with: loginInfo.phoneNumberText)
         }
     }
 }
