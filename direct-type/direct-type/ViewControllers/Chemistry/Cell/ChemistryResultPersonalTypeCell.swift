@@ -32,6 +32,6 @@ private extension ChemistryResultPersonalTypeCell {
     
     func setFont() {
         personalTypeLabel.font = UIFont(fontType: .font_M)
-        descriptionLabel.font = UIFont(fontType: .font_S)
+//        descriptionLabel.font = UIFont(fontType: .font_S)
     }
 }

@@ -18,10 +18,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5tm-rM-Hgr" customClass="IconCarouselView" customModule="direct_type" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                                 <color key="backgroundColor" name="color-sub"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="o6I-lV-unU"/>
+                                    <constraint firstAttribute="height" constant="150" id="o6I-lV-unU"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1Ac-eY-iiI">
                                     <size key="itemSize" width="128" height="128"/>
@@ -32,7 +32,7 @@
                                 <cells/>
                             </collectionView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="6dd-Uc-URe">
-                                <rect key="frame" x="0.0" y="100" width="320" height="468"/>
+                                <rect key="frame" x="0.0" y="150" width="320" height="418"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fKi-CT-svM">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="10"/>
@@ -41,7 +41,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pcH-Yt-n0e">
-                                        <rect key="frame" x="0.0" y="52.5" width="320" height="30"/>
+                                        <rect key="frame" x="0.0" y="17" width="320" height="30"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hukidashi" translatesAutoresizingMaskIntoConstraints="NO" id="0eT-Nb-xZV">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
@@ -64,7 +64,7 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vBM-gi-Mxm">
-                                        <rect key="frame" x="0.0" y="87.5" width="320" height="85"/>
+                                        <rect key="frame" x="0.0" y="52" width="320" height="85"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="85" id="u9c-JX-Re3"/>
                                         </constraints>
@@ -75,13 +75,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BN0-cX-1Lr" userLabel="BigSpaceView">
-                                        <rect key="frame" x="0.0" y="177.5" width="320" height="30"/>
+                                        <rect key="frame" x="0.0" y="142" width="320" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="L40-Yq-Pn7"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2xe-z6-Nbv">
-                                        <rect key="frame" x="21.5" y="219.5" width="277.5" height="71"/>
+                                        <rect key="frame" x="21.5" y="177" width="277.5" height="71"/>
                                         <attributedString key="attributedText">
                                             <fragment>
                                                 <string key="content">約3分間の質問に答えると
@@ -112,19 +112,19 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="689-nz-255">
-                                        <rect key="frame" x="0.0" y="303" width="320" height="20"/>
+                                        <rect key="frame" x="0.0" y="253" width="320" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="jAm-Ed-pUG"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qoy-v1-9Sr" userLabel="BigSpaceView">
-                                        <rect key="frame" x="0.0" y="328" width="320" height="30"/>
+                                        <rect key="frame" x="0.0" y="278" width="320" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="qBe-YZ-tTR"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="seG-DY-Q88">
-                                        <rect key="frame" x="30" y="363" width="260" height="50"/>
+                                        <rect key="frame" x="30" y="313" width="260" height="50"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Ri7-VA-PQE"/>
@@ -143,7 +143,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fom-Rl-lez" userLabel="BigSpaceView">
-                                        <rect key="frame" x="0.0" y="418" width="320" height="50"/>
+                                        <rect key="frame" x="0.0" y="368" width="320" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="AgX-eM-897"/>
                                         </constraints>
