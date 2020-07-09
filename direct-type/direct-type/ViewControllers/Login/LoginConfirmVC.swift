@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 import AWSMobileClient
 
 final class LoginConfirmVC: TmpBasicVC {
@@ -51,6 +52,7 @@ private extension LoginConfirmVC {
     }
     
     func tryConfirmAuthCode(with code: String) {
+        SVProgressHUD.show()
         changeButtonState(shouldForceDisable: true)
         AWSMobileClient.default().confirmSignIn(challengeResponse: code, completionHandler: { (signInResult, error) in
             if let error = error  {
@@ -58,6 +60,7 @@ private extension LoginConfirmVC {
                 DispatchQueue.main.async {
                     print(#line, #function, buf)
                     self.changeButtonState()
+                    SVProgressHUD.dismiss()
                 }
                 return
             }
@@ -90,6 +93,7 @@ private extension LoginConfirmVC {
             DispatchQueue.main.async {
                 print(#line, #function, buf)
                 self.changeButtonState()
+                SVProgressHUD.dismiss()
             }
         })
     }

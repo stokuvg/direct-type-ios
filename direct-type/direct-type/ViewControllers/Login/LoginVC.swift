@@ -47,6 +47,7 @@ private extension LoginVC {
         }
         
         guard let phoneNumberText = phoneNumberTextField.text else { return }
+        SVProgressHUD.show()
         changeButtonState(shouldForceDisable: true)
         AWSMobileClient.default().signIn(username: phoneNumberText.addCountryCode(type: .japan), password: password)  { (signInResult, error) in
             if let error = error {
@@ -54,6 +55,7 @@ private extension LoginVC {
                 DispatchQueue.main.async {
                     self.showConfirm(title: "Error", message: buf, onlyOK: true)
                     self.changeButtonState()
+                    SVProgressHUD.dismiss()
                 }
                 return
             }
@@ -77,6 +79,7 @@ private extension LoginVC {
             }
             DispatchQueue.main.async {
                 self.changeButtonState()
+                SVProgressHUD.dismiss()
             }
         }
     }
