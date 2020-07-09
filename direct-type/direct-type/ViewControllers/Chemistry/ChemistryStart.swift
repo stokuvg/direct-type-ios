@@ -16,7 +16,7 @@ final class ChemistryStart: UIViewController {
         transitionToChemisrortSelect()
     }
     
-    private let carouselIconFrame = CGRect(x: .zero, y: .zero, width: 100, height: 100)
+    private let carouselIconFrame = CGRect(x: .zero, y: .zero, width: 150, height: 150)
     
     override func viewDidLoad() {
         super.viewDidLoad()
