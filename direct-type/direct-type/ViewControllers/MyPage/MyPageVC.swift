@@ -137,9 +137,9 @@ extension MyPageVC: UITableViewDelegate {
 
         switch cellType {
         case .userName:
-            return 126
+            return 116
         case .profileCompleteness, .resumeCompleteness:
-            return 68
+            return 58
         case .editableCarrer:
             return isExistCareer ? 47 : 205
         case .editableChemistry:
@@ -239,7 +239,11 @@ extension MyPageVC: UITableViewDataSource {
 
         switch cellType {
         case .userName:
-            cell =  tableView.loadCell(cellName: "MyPageNameCell", indexPath: indexPath) as! MyPageNameCell
+            let cell =  tableView.loadCell(cellName: "MyPageNameCell", indexPath: indexPath) as! MyPageNameCell
+            if (self.profile != nil) {
+                cell.setup(profileData: self.profile!)
+            }
+            return cell
         case .profileCompleteness:
             cell = tableView.loadCell(cellName: "BasePercentageCompletionCell", indexPath: indexPath) as! BasePercentageCompletionCell
             (cell as! BasePercentageCompletionCell).setup(title: "プロフィールの完成度", percent: String(profile?.completeness ?? 0))
@@ -312,6 +316,7 @@ extension MyPageVC {
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             print(myErr)
+            
         }
         .finally {
             self.fetchGetResume()
@@ -326,6 +331,7 @@ extension MyPageVC {
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             print(myErr)
+            
         }
         .finally {
             self.fetchGetCareerList()
@@ -340,6 +346,7 @@ extension MyPageVC {
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             print(myErr)
+            
         }
         .finally {
             SVProgressHUD.dismiss()
