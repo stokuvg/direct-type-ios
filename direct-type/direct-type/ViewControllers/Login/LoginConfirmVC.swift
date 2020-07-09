@@ -133,12 +133,21 @@ private extension LoginConfirmVC {
     }
     
     func resendAuthCode() {
-        AWSMobileClient.default()
-            .signIn(username: loginInfo.phoneNumberText, password: loginInfo.password)  { (signInResult, error) in
-            if let error = error {
-                let buf = AuthManager.convAnyError(error).debugDisp
-                DispatchQueue.main.async {
-                    self.showConfirm(title: "Error", message: buf, onlyOK: true)
+        SVProgressHUD.show()
+        AWSMobileClient.default().signIn(username: loginInfo.phoneNumberText, password: loginInfo.password)  { (signInResult, error) in
+            if let error = error as? AWSMobileClientError {
+                switch error {
+                case .invalidParameter:
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        self.resendAuthCode()
+                    }
+                default:
+                    DispatchQueue.main.async {
+                        let buf = AuthManager.convAnyError(error).debugDisp
+                        self.showConfirm(title: "Error", message: buf, onlyOK: true)
+                        self.changeButtonState()
+                        SVProgressHUD.dismiss()
+                    }
                 }
                 return
             }
@@ -149,11 +158,17 @@ private extension LoginConfirmVC {
             }
             switch signInResult.signInState {
             case .customChallenge:
-                // TODO: 認証コードを検証するAPIを実行する。
+                DispatchQueue.main.async {
+                    self.showConfirm(title: "認証コードを再送信しました", message: "", onlyOK: true)
+                }
                 break
             case .unknown, .signedIn, .smsMFA, .passwordVerifier, .deviceSRPAuth,
                  .devicePasswordVerifier, .adminNoSRPAuth, .newPasswordRequired:
                 break
+            }
+            DispatchQueue.main.async {
+                self.changeButtonState()
+                SVProgressHUD.dismiss()
             }
         }
     }
