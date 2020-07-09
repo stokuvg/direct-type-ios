@@ -24,6 +24,7 @@ class MyPageNameCell: BaseTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        editBtn.isHidden = false//変更不可にしておくよ
         dispCell()
     }
   //== セルの初期化と初期表示
@@ -37,11 +38,6 @@ class MyPageNameCell: BaseTableViewCell {
         
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-    }
-    
-    func setup(profileData: MdlProfile) {
-        let nameText = profileData.familyName + " " + profileData.firstName
-        nameLabel.text(text: nameText, fontType: .C_font_L, textColor: UIColor.init(colorType: .color_black)!, alignment: .right)
     }
     
 }
