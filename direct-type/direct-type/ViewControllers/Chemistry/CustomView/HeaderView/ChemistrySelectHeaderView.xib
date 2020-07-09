@@ -29,7 +29,7 @@
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hukidashi" translatesAutoresizingMaskIntoConstraints="NO" id="5By-1k-1AF">
                                     <rect key="frame" x="0.0" y="0.0" width="266" height="30"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="その求人、あなたの正確にあってる？" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kHV-4y-e7C">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="その求人、あなたの性格にあってる？" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kHV-4y-e7C">
                                     <rect key="frame" x="37.5" y="6" width="191.5" height="12"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="12" id="TYF-9D-70N"/>
