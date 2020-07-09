@@ -87,6 +87,10 @@ class SubInputMemoVC: BaseVC {
         super.viewWillAppear(animated)
         dispData()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        textVW.becomeFirstResponder()
+    }
     private func dispCount() {
         let maxCount = editableItem.editItem.valid.max ?? 0
         if maxCount > 0 {

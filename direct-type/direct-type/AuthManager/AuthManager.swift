@@ -58,7 +58,7 @@ extension AuthManager {
         if isNeedAuth { //そもそもトークン必要か？
             if let idToken = AuthManager.shared.idToken {
                 TudApiAPI.customHeaders = ["Authorization": "Bearer \(idToken)"]
-                } else {
+            } else {
                 print("まだidToken取得していない")
             }
         } else {

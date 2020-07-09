@@ -34,6 +34,12 @@ class SubSelectBaseVC: BaseVC {
         actPopupCancel()
     }
 
+    @IBOutlet weak var vwInfoArea: UIView!
+    @IBOutlet weak var lblCount: UILabel!
+    @IBOutlet weak var vwInfoCountArea: UIView!
+    @IBOutlet weak var lblInfoText: UILabel!
+    @IBOutlet weak var vwInfoTextArea: UIView!
+    
     @IBOutlet weak var vwMain: UIView!
     @IBOutlet weak var tableVW: UITableView!
     @IBOutlet weak var lcMainFootSpace: NSLayoutConstraint!
@@ -55,6 +61,9 @@ class SubSelectBaseVC: BaseVC {
         //====デザイン適用
         view.backgroundColor = UIColor(colorType: .color_base)!
         vwHead.backgroundColor = UIColor(colorType: .color_main)!
+        vwInfoArea.backgroundColor = UIColor(colorType: .color_main)!
+        vwInfoTextArea.backgroundColor = UIColor(colorType: .color_main)!
+        vwInfoCountArea.backgroundColor = UIColor(colorType: .color_main)!
         vwMain.backgroundColor = UIColor(colorType: .color_base)!
         vwFoot.backgroundColor = UIColor(colorType: .color_base)!
         tableVW.backgroundColor = UIColor(colorType: .color_base)!
@@ -91,6 +100,19 @@ class SubSelectBaseVC: BaseVC {
 //        let bufTitle: String = "\(editableItem.dispName) \(arrData.count)件"
         let bufTitle: String = "\(editableItem.dispName)"
         lblTitle.text(text: bufTitle, fontType: .font_L, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        //ヘッダ下部の補足情報エリア
+        let bufInfoText = editableItem.placeholder
+        lblInfoText.text(text: bufInfoText, fontType: .font_S, textColor: UIColor.init(colorType: .color_white)!, alignment: .left)
+
+        dispInfoCount()
+    }
+    func dispInfoCount() {
+        var bufCount = ""
+        if selectMaxCount > 1 {
+            let count = self.dicChange.filter { (k, v) -> Bool in v == true }.count
+            bufCount = "\(count)/\(selectMaxCount)"
+        }
+        lblCount.text(text: bufCount, fontType: .font_SSS, textColor: UIColor.init(colorType: .color_white)!, alignment: .right)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -142,6 +164,7 @@ extension SubSelectBaseVC: UITableViewDataSource, UITableViewDelegate {
             }
         }
         dicChange[item.code] = !select
+        dispInfoCount()
         //該当セルの描画しなおし
         if (singleMode) { //=== Single
             tableView.reloadData()
@@ -151,6 +174,8 @@ extension SubSelectBaseVC: UITableViewDataSource, UITableViewDelegate {
         }
     }
 }
+
+
 
 extension SubSelectBaseVC: SubSelectProtocol {
 }

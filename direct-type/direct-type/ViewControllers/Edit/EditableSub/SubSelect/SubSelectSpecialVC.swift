@@ -40,6 +40,12 @@ class SubSelectSpecialVC: BaseVC {
         actPopupCancel()
     }
 
+    @IBOutlet weak var vwInfoArea: UIView!
+    @IBOutlet weak var lblCount: UILabel!
+    @IBOutlet weak var vwInfoCountArea: UIView!
+    @IBOutlet weak var lblInfoText: UILabel!
+    @IBOutlet weak var vwInfoTextArea: UIView!
+    
     @IBOutlet weak var vwMain: UIView!
     @IBOutlet weak var tableVW: UITableView!
     
@@ -66,6 +72,9 @@ class SubSelectSpecialVC: BaseVC {
         //====デザイン適用
         view.backgroundColor = UIColor(colorType: .color_base)!
         vwHead.backgroundColor = UIColor(colorType: .color_main)!
+        vwInfoArea.backgroundColor = UIColor(colorType: .color_main)!
+        vwInfoTextArea.backgroundColor = UIColor(colorType: .color_main)!
+        vwInfoCountArea.backgroundColor = UIColor(colorType: .color_main)!
         vwMain.backgroundColor = UIColor(colorType: .color_base)!
         vwFoot.backgroundColor = UIColor(colorType: .color_base)!
         btnCommit.setTitle(text: "選択", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
@@ -146,6 +155,19 @@ class SubSelectSpecialVC: BaseVC {
         if selectMaxCount == 1 {
             lcFootHeight.constant = 0 //選択即反映にするため、下部尾選択ボタンも非表示とする
         }
+        //ヘッダ下部の補足情報エリア
+        let bufInfoText = editableItem.placeholder
+        lblInfoText.text(text: bufInfoText, fontType: .font_S, textColor: UIColor.init(colorType: .color_white)!, alignment: .left)
+
+        dispInfoCount()
+    }
+    func dispInfoCount() {
+        var bufCount = ""
+        if selectMaxCount > 1 {
+            let count = dicSelectedCode.count
+            bufCount = "\(count)/\(selectMaxCount)"
+        }
+        lblCount.text(text: bufCount, fontType: .font_SSS, textColor: UIColor.init(colorType: .color_white)!, alignment: .right)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
