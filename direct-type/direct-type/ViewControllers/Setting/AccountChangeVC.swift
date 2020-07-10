@@ -63,9 +63,19 @@ private extension AccountChangeVC {
         let phoneNumber = inputText.addCountryCode(type: .japan)
         userAttribute.name = "phone_number"
         userAttribute.value = phoneNumber
+
         AWSCognitoIdentityUserPool.default().currentUser()?.update([userAttribute])
-            .continueOnSuccessWith(block: { _ -> Void in
+            .continueWith(executor: AWSExecutor.mainThread(), block: { (task: AWSTask!) -> AnyObject? in
+                if let error = task.error {
+                    DispatchQueue.main.async {
+                        SVProgressHUD.dismiss()
+                        print(#line, #function, error.localizedDescription)
+                        self.showConfirm(title: "電話番号変更エラー", message: "別の電話番号で再度お試しください。", onlyOK: true)
+                    }
+                    return nil
+                }
                 self.tryLogout()
+                return nil
             })
     }
     
@@ -73,6 +83,7 @@ private extension AccountChangeVC {
         AWSMobileClient.default().signOut { (error) in
             if let error = error {
                 DispatchQueue.main.async {
+                    SVProgressHUD.dismiss()
                     self.showError(error)
                 }
                 return
