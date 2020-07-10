@@ -72,6 +72,7 @@ protocol EditItemProtocol {
     var placeholder: String { get }
     var tsvMaster: SelectItemsManager.TsvMaster { get }
     var valid: ValidInfo { get }
+    var dispUnit: String { get }
 }
 
 enum EditType {

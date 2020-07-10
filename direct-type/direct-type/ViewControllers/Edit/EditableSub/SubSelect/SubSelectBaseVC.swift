@@ -66,10 +66,12 @@ class SubSelectBaseVC: BaseVC {
         super.viewDidLoad()
         //====デザイン適用
         view.backgroundColor = UIColor(colorType: .color_base)!
-        vwHead.backgroundColor = UIColor(colorType: .color_main)!
-        vwInfoArea.backgroundColor = UIColor(colorType: .color_main)!
-        vwInfoTextArea.backgroundColor = UIColor(colorType: .color_main)!
-        vwInfoCountArea.backgroundColor = UIColor(colorType: .color_main)!
+        let colHead = UIColor.black //UIColor(colorType: .color_main)!
+        vwHead.backgroundColor = colHead
+        vwInfoArea.backgroundColor = colHead
+        vwInfoTextArea.backgroundColor = colHead
+        vwInfoCountArea.backgroundColor = colHead
+        
         vwMain.backgroundColor = UIColor(colorType: .color_base)!
         vwFoot.backgroundColor = UIColor(colorType: .color_base)!
         tableVW.backgroundColor = UIColor(colorType: .color_base)!
@@ -103,9 +105,8 @@ class SubSelectBaseVC: BaseVC {
         editableModel.initItemEditable([editableItem])//単独だけど共通化のため
     }
     func dispData() {
-//        let bufTitle: String = "\(editableItem.dispName) \(arrData.count)件"
         let bufTitle: String = "\(editableItem.dispName)"
-        lblTitle.text(text: bufTitle, fontType: .font_L, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        lblTitle.text(text: bufTitle, fontType: .font_M, textColor: UIColor(colorType: .color_white)!, alignment: .center)
         //ヘッダ下部の補足情報エリア
         let bufInfoText = editableItem.placeholder
         lblInfoText.text(text: bufInfoText, fontType: .font_S, textColor: UIColor.init(colorType: .color_white)!, alignment: .left)

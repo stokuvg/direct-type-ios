@@ -18,6 +18,8 @@ class HEditTextTBCell: UITableViewCell {
     @IBOutlet weak var vwRequiredIconArea: UIView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var tfValue: IKTextField!
+    @IBOutlet weak var vwExUnitArea: UIView!
+    @IBOutlet weak var lblExUnit: UILabel!
     @IBOutlet weak var lblDebug: UILabel!
     @IBOutlet weak var lblErrorMsg: UILabel!
 
@@ -64,6 +66,12 @@ class HEditTextTBCell: UITableViewCell {
 
     func dispCell() {
         guard let _item = item else { return }
+        if _item.dispUnit.isEmpty { //単位の追加表示
+            vwExUnitArea.isHidden = true
+        } else {
+            vwExUnitArea.isHidden = false
+            lblExUnit.text(text: _item.dispUnit, fontType: .font_S, textColor: UIColor.init(colorType: .color_main)!, alignment: .left)
+        }
         let bufTitle = _item.dispName //_item.type.dispTitle
         lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_main)!, alignment: .left)
         var bufVal: String = ""
@@ -80,6 +88,7 @@ class HEditTextTBCell: UITableViewCell {
             bufVal = _item.valDisp
         case .inputText:
             if _item.editItem.valid.type == .number {
+                tfValue.keyboardType = UIKeyboardType.numberPad
                 if _item.curVal == "0" {
                     bufVal = ""
                     break

@@ -38,15 +38,16 @@ class SubInputMemoVC: BaseVC {
         super.viewDidLoad()
         //====デザイン適用
         view.backgroundColor = UIColor(colorType: .color_base)!
-        vwHead.backgroundColor = UIColor(colorType: .color_main)!
-
-        vwInfoArea.backgroundColor = UIColor(colorType: .color_main)!
-        vwInfoTextArea.backgroundColor = UIColor(colorType: .color_main)!
-        vwInfoCountArea.backgroundColor = UIColor(colorType: .color_main)!
-
+        let colHead = UIColor.black //UIColor(colorType: .color_main)!
+        vwHead.backgroundColor = colHead
+        vwInfoArea.backgroundColor = colHead
+        vwInfoTextArea.backgroundColor = colHead
+        vwInfoCountArea.backgroundColor = colHead
+        
         vwMain.backgroundColor = UIColor(colorType: .color_base)!
         vwFoot.backgroundColor = UIColor(colorType: .color_base)!
         textVW.textColor = UIColor(colorType: .color_black)
+        textVW.font = UIFont.systemFont(ofSize: 24)//!!!
         textVW.backgroundColor = UIColor(colorType: .color_white)
         btnCommit.setTitle(text: "完了", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)

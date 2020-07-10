@@ -97,9 +97,16 @@ enum EditItemMdlFirstInput: String, EditItemProtocol {
         default: return .undefine
         }
     }
+    var dispUnit: String { //入力項目の単位表示
+        switch self {
+        default: return ""
+        }
+    }
     //Placeholder Text
     var placeholder: String {
         switch self {
+        case .gender:
+            return "選択してください"
         case .hopeArea:
             return "複数選択可"
         default:
@@ -126,6 +133,11 @@ enum EditItemMdlFirstInputJobExperiments: String, EditItemProtocol {
         case .jobTypeAndJobExperimentYear: return .jobType
 //        case .jobType: return .jobType
 //        case .jobExperimentYear: return .jobExperimentYear
+        }
+    }
+    var dispUnit: String { //入力項目の単位表示
+        switch self {
+        default: return ""
         }
     }
     //Placeholder Text
@@ -155,6 +167,11 @@ enum EditItemMdlFirstInputLastJobExperiments: String, EditItemProtocol {
         case .jobTypeAndJobExperimentYear: return .jobType
 //        case .jobType: return .jobType
 //        case .jobExperimentYear: return .jobExperimentYear
+        }
+    }
+    var dispUnit: String { //入力項目の単位表示
+        switch self {
+        default: return ""
         }
     }
     //Placeholder Text

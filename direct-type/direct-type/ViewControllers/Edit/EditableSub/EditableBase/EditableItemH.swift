@@ -18,6 +18,9 @@ struct EditableItemH {
     var placeholder: String {
         get { return editItem.placeholder }
     }
+    var dispUnit: String {
+        get { return editItem.dispUnit }
+    }
     var exQuestion: String
     let orgVal: String!     //String/CodeDisp/[CodeDisp]が入る（更新前の値）
     var curVal: String     //String/CodeDisp/[CodeDisp]が入る（現在の選択値）
@@ -75,7 +78,7 @@ struct EditableItemH {
     var debugDisp: String {
         let selectionItems: [CodeDisp] = SelectItemsManager.getMaster(self.editItem.tsvMaster)
         let cnt = selectionItems.count
-        return "[\(editableItemKey)]\t[\(editType)] [\(dispName)] ... [\(orgVal!)] -> [\(curVal)] / (\(cnt)件) : [\(exQuestion)]"
+        return "[\(editableItemKey)]\t[\(editType)] [\(dispName)] ... [\(orgVal!)] -> [\(curVal)]\(dispUnit) / (\(cnt)件) : [\(exQuestion)]"
     }
     
     //=== 初期化 ===

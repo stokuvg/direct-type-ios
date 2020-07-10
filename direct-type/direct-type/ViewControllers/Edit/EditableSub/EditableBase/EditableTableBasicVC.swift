@@ -131,7 +131,8 @@ class EditableTableBasicVC: EditableBasicVC {
         //====デザイン適用
         view.backgroundColor = UIColor(colorType: .color_base)!
         tableVW.backgroundColor = UIColor(colorType: .color_base)!
-        vwHead.backgroundColor = UIColor(colorType: .color_main)!
+        let colHead = UIColor.black //UIColor(colorType: .color_main)!
+        vwHead.backgroundColor = colHead
         vwMain.backgroundColor = UIColor(colorType: .color_base)!
         vwFoot.backgroundColor = UIColor(colorType: .color_base)!
         btnCommit.setTitle(text: "この内容で保存", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)

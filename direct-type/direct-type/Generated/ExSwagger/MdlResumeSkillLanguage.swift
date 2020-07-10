@@ -63,6 +63,13 @@ enum EditItemMdlResumeSkillLanguage: String, EditItemProtocol {
         default: return .undefine
         }
     }
+    var dispUnit: String { //入力項目の単位表示
+        switch self {
+        case .languageToeicScore: return "点"
+        case .languageToeflScore: return "点"
+        default: return ""
+        }
+    }
     //Placeholder Text
     var placeholder: String {
         switch self {

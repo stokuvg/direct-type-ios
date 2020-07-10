@@ -71,7 +71,8 @@ class SubSelectSpecialVC: BaseVC {
         super.viewDidLoad()
         //====デザイン適用
         view.backgroundColor = UIColor(colorType: .color_base)!
-        vwHead.backgroundColor = UIColor(colorType: .color_main)!
+        let colHead = UIColor.black //UIColor(colorType: .color_main)!
+        vwHead.backgroundColor = colHead
         vwInfoArea.backgroundColor = UIColor(colorType: .color_main)!
         vwInfoTextArea.backgroundColor = UIColor(colorType: .color_main)!
         vwInfoCountArea.backgroundColor = UIColor(colorType: .color_main)!
