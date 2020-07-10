@@ -136,7 +136,9 @@ class EditableTableBasicVC: EditableBasicVC {
         vwFoot.backgroundColor = UIColor(colorType: .color_base)!
         btnCommit.setTitle(text: "この内容で保存", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
+        
         //=== テーブル初期化
+        tableVW.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)//デザイン的に上部に余白を設けておく
         self.tableVW.estimatedRowHeight = 100
         self.tableVW.rowHeight = UITableView.automaticDimension
         self.tableVW.register(UINib(nibName: "HEditTextTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HEditTextTBCell")

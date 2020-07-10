@@ -38,7 +38,7 @@ enum EditItemMdlResumeJobExperiments: String, EditItemProtocol {
     //表示名
     var dispName: String {
         switch self {
-        case .jobTypeAndJobExperimentYear: return "経験職種＆年数"
+        case .jobTypeAndJobExperimentYear: return "その他の経験職種"
 //        case .jobType:              return "経験職種"
 //        case .jobExperimentYear:    return "経験年数"
         }
@@ -68,7 +68,7 @@ enum EditItemMdlResumeLastJobExperiment: String, EditItemProtocol {
     //表示名
     var dispName: String {
         switch self {
-        case .jobTypeAndJobExperimentYear: return "直近の経験職種＆年数"
+        case .jobTypeAndJobExperimentYear: return "直近の経験職種"
 //        case .jobType:              return "直近の経験職種"
 //        case .jobExperimentYear:    return "直近の経験年数"
         }

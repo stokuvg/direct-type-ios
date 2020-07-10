@@ -48,7 +48,7 @@ class SubInputMemoVC: BaseVC {
         vwFoot.backgroundColor = UIColor(colorType: .color_base)!
         textVW.textColor = UIColor(colorType: .color_black)
         textVW.backgroundColor = UIColor(colorType: .color_white)
-        btnCommit.setTitle(text: "選択", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        btnCommit.setTitle(text: "完了", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
         //===ソフトウェアキーボードに〔閉じる〕ボタン付与
         let rect = CGRect(origin: CGPoint.zero, size: CGSize.init(width: 60, height: 45))
