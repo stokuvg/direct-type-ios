@@ -21,7 +21,7 @@ final class ChemistryResult: BaseChemistryVC {
         return cellCount
     }
     
-    private enum IndicateCellType: Int {
+    private enum IndicateCellType: Int, CaseIterable {
         case firstPlaceResult
         case secondPlaceResult
         case thirdPlaceResult
@@ -108,7 +108,10 @@ extension ChemistryResult: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let indicateCellType = IndicateCellType(rawValue: indexPath.row)!
+        var indicateCellTypes = IndicateCellType.allCases
+        if topRanker?.second == nil { indicateCellTypes.remove(at: IndicateCellType.secondPlaceResult.rawValue) }
+        if topRanker?.third == nil { indicateCellTypes.remove(at: IndicateCellType.thirdPlaceResult.rawValue) }
+        let indicateCellType = indicateCellTypes[indexPath.row]
         switch indicateCellType {
         case .firstPlaceResult:
             let cell = tableView.loadCell(cellName: "ChemistryResultPersonalTypeCell", indexPath: indexPath) as! ChemistryResultPersonalTypeCell
