@@ -121,10 +121,12 @@ private extension AccountChangeVC {
             .font: UIFont(fontType: .font_Sb) as Any
         ]
         let titleText = NSAttributedString(string: "アカウント変更には携帯電話番号の認証が必要です。\n", attributes: titleAttributes)
-        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 5
         let textAttributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor(colorType: .color_black) as Any,
-            .font: UIFont(fontType: .font_S) as Any
+            .font: UIFont(fontType: .font_S) as Any,
+            .paragraphStyle: paragraphStyle
         ]
         let text1 = NSAttributedString(string: "\n現在の認証済み番号 ", attributes: textAttributes)
         let text2 = NSAttributedString(string: " を変更する場合は、新しい電話番号を入力してください。認証コードを送信します。", attributes: textAttributes)
