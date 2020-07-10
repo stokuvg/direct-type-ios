@@ -20,9 +20,6 @@ final class LoginVC: TmpBasicVC {
         sendLoginAuthCode()
     }
     
-    // TODO: パスワードは毎回自動生成する必要があるため、強度の検討が完了した後に自動生成ロジックを実装する
-    // 参照: https://type.qiita.com/y_kawamata/items/e251d8904820d5b5ceaf
-    private let password = "Abcd123$"
     private let phoneNumberMaxLength: Int = 11
     // この画面ではログアウトがされている前提だが、ログイン処理の時前に強制的なログアウトをしたい場合にフラグを立てる。
     private let shouldLogOutIfNeeded = true
@@ -49,7 +46,7 @@ private extension LoginVC {
         guard let phoneNumberText = phoneNumberTextField.text else { return }
         SVProgressHUD.show()
         changeButtonState(shouldForceDisable: true)
-        AWSMobileClient.default().signIn(username: phoneNumberText.addCountryCode(type: .japan), password: password)  { (signInResult, error) in
+        AWSMobileClient.default().signIn(username: phoneNumberText.addCountryCode(type: .japan), password: AppDefine.password)  { (signInResult, error) in
             if let error = error as? AWSMobileClientError {
                 switch error {
                 case .invalidParameter:
@@ -75,7 +72,7 @@ private extension LoginVC {
             case .customChallenge:
                 DispatchQueue.main.async {
                     let vc = self.getVC(sbName: "LoginConfirmVC", vcName: "LoginConfirmVC") as! LoginConfirmVC
-                    let loginInfo = LoginConfirmVC.LoginInfo(phoneNumberText: phoneNumberText.addCountryCode(type: .japan), password: self.password)
+                    let loginInfo = LoginConfirmVC.LoginInfo(phoneNumberText: phoneNumberText.addCountryCode(type: .japan), password: AppDefine.password)
                     vc.configure(with: loginInfo)
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
