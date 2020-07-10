@@ -59,7 +59,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zxx-pf-AV1">
-                                <rect key="frame" x="20" y="45.5" width="280" height="64"/>
+                                <rect key="frame" x="30" y="60.5" width="260" height="64"/>
                                 <color key="backgroundColor" name="color-slider-gray"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="fO0-2q-PBT"/>
@@ -68,7 +68,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ypS-QV-vrN">
-                                <rect key="frame" x="12" y="149.5" width="296" height="50"/>
+                                <rect key="frame" x="12" y="164.5" width="296" height="50"/>
                                 <color key="backgroundColor" name="color-button"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="OLD-w0-TCj"/>
@@ -81,14 +81,14 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Zxx-pf-AV1" firstAttribute="top" secondItem="ovF-l7-yOy" secondAttribute="bottom" constant="10" id="0oa-B5-pbI"/>
+                            <constraint firstItem="Zxx-pf-AV1" firstAttribute="top" secondItem="ovF-l7-yOy" secondAttribute="bottom" constant="25" id="0oa-B5-pbI"/>
                             <constraint firstItem="ovF-l7-yOy" firstAttribute="leading" secondItem="3De-I0-hgJ" secondAttribute="leading" constant="10" id="7UJ-DW-kAo"/>
                             <constraint firstItem="ovF-l7-yOy" firstAttribute="top" secondItem="3De-I0-hgJ" secondAttribute="top" constant="15" id="A6f-nn-qIg"/>
                             <constraint firstItem="ypS-QV-vrN" firstAttribute="leading" secondItem="3De-I0-hgJ" secondAttribute="leading" constant="12" id="H2r-4U-T0S"/>
                             <constraint firstItem="3De-I0-hgJ" firstAttribute="trailing" secondItem="ovF-l7-yOy" secondAttribute="trailing" constant="10" id="KEJ-u5-Rak"/>
                             <constraint firstItem="ypS-QV-vrN" firstAttribute="top" secondItem="Zxx-pf-AV1" secondAttribute="bottom" constant="40" id="U6L-zd-M27"/>
-                            <constraint firstItem="3De-I0-hgJ" firstAttribute="trailing" secondItem="Zxx-pf-AV1" secondAttribute="trailing" constant="20" id="Wf7-iH-ZFH"/>
-                            <constraint firstItem="Zxx-pf-AV1" firstAttribute="leading" secondItem="3De-I0-hgJ" secondAttribute="leading" constant="20" id="XSk-VV-QNU"/>
+                            <constraint firstItem="3De-I0-hgJ" firstAttribute="trailing" secondItem="Zxx-pf-AV1" secondAttribute="trailing" constant="30" id="Wf7-iH-ZFH"/>
+                            <constraint firstItem="Zxx-pf-AV1" firstAttribute="leading" secondItem="3De-I0-hgJ" secondAttribute="leading" constant="30" id="XSk-VV-QNU"/>
                             <constraint firstItem="3De-I0-hgJ" firstAttribute="trailing" secondItem="ypS-QV-vrN" secondAttribute="trailing" constant="12" id="Yog-aA-jYk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3De-I0-hgJ"/>
