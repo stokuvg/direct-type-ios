@@ -39,7 +39,7 @@ extension EditableBasicVC {
         let barLbl = IKBarButtonItem.init(customView: lbl)
         let separator2 = IKBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let btnClose = IKBarButtonItem.init(title: "閉じる", style: .done, target: self, action: #selector(actPickerCancelButton))
-        let btnSelect = IKBarButtonItem.init(title: "選択", style: .done, target: self, action: #selector(actPickerSelectButton))
+        let btnSelect = IKBarButtonItem.init(title: "選択1", style: .done, target: self, action: #selector(actPickerSelectButton))
         let btnReset = IKBarButtonItem.init(title: Constants.DefaultSelectWorkPeriodEndDateJP, style: .done, target: self, action: #selector(actPickerResetButton))
         //=== itemKeyをつけておく
         btnSelect.parentPicker = picker
@@ -151,7 +151,7 @@ extension EditableBasicVC: UIPickerViewDataSource, UIPickerViewDelegate {
             }
         }
         let lbl = UILabel.init(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: pickerView.bounds.size.width - 20, height: 30)))
-//        lbl.font = UIFont.systemFont(ofSize: 30)
+        lbl.font = UIFont.systemFont(ofSize: 24)
         lbl.text = "\(val)"
         lbl.textAlignment = NSTextAlignment.center
         lbl.adjustsFontSizeToFitWidth = true //フォント縮小での自動リサイズ

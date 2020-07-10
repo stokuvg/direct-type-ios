@@ -77,7 +77,7 @@ class SubSelectSpecialVC: BaseVC {
         vwInfoCountArea.backgroundColor = UIColor(colorType: .color_main)!
         vwMain.backgroundColor = UIColor(colorType: .color_base)!
         vwFoot.backgroundColor = UIColor(colorType: .color_base)!
-        btnCommit.setTitle(text: "選択", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        btnCommit.setTitle(text: "この内容で保存", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
         //=== テーブル初期化
         self.tableVW.estimatedRowHeight = 60
