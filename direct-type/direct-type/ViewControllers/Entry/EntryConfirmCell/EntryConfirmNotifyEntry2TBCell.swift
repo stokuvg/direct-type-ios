@@ -69,9 +69,9 @@ class EntryConfirmNotifyEntry2TBCell: UITableViewCell {
         ivAccept.image = isAccept ? R.image.checkOn() : R.image.checkOff()
         let bufAccept: String = "転職typeの会員規約・個人情報方針に同意する"
         let bufMessage: String = "※type未登録のメールアドレスの場合、typeに登録の上応募手続きを行います。"
-        let bufLink1: String = "> typeに登録済みパスワードがわからない場合"
-        let bufLink2: String = "> 個人情報"
-        let bufLink3: String = "> 会員規約"
+        let bufLink1: String = "転職サイトtypeに登録済みのパスワードがわからない場合"
+        let bufLink2: String = "転職サイトtypeの個人情報の取り扱いについて"
+        let bufLink3: String = "転職サイトtypeの会員規約"
         lblAccept.text(text: bufAccept, fontType: .font_SS, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         lblMessage.text(text: bufMessage, fontType: .font_SS, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
         lblLinkText1.text(text: bufLink1, fontType: .font_SS, textColor: UIColor(colorType: .color_button)!, alignment: .left)

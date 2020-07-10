@@ -42,7 +42,6 @@ extension SubEditSpecialVC {
         default:
             print("🌷[\(#function)]🌷[\(#line)]🌷")
             let returnKeyType: UIReturnKeyType = (item.editableItemKey == editableModel.lastEditableItemKey) ? .done : .next
-            print("[returnKeyType: \(returnKeyType.rawValue)]")
             let cell: HEditTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditTextTBCell", for: indexPath) as! HEditTextTBCell
             let errMsg = dicValidErrMsg[item.editableItemKey]?.joined(separator: "\n") ?? ""
             cell.initCell(self, item, errMsg: errMsg, returnKeyType)

@@ -71,6 +71,7 @@ class CareerListVC: TmpBasicVC {
         self.tableVW.rowHeight = UITableView.automaticDimension
         self.tableVW.register(UINib(nibName: "CareerCardTBCell", bundle: nil), forCellReuseIdentifier: "Cell_CareerCardTBCell")
     }
+    
     func dispData() {
         title = "職務経歴書情報入力"
         //表示用にソートしておく

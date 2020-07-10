@@ -198,6 +198,11 @@ enum EditItemMdlResume: String, EditItemProtocol {
         default: return .undefine
         }
     }
+    var dispUnit: String { //入力項目の単位表示
+        switch self {
+        default: return ""
+        }
+    }
     //Placeholder Text
     var placeholder: String {
         switch self {

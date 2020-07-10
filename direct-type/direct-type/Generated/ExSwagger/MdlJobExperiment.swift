@@ -50,6 +50,11 @@ enum EditItemMdlResumeJobExperiments: String, EditItemProtocol {
 //        case .jobExperimentYear: return .jobExperimentYear
         }
     }
+    var dispUnit: String { //入力項目の単位表示
+        switch self {
+        default: return ""
+        }
+    }
     //Placeholder Text
     var placeholder: String {
         switch self {
@@ -78,6 +83,11 @@ enum EditItemMdlResumeLastJobExperiment: String, EditItemProtocol {
         case .jobTypeAndJobExperimentYear: return .jobType
 //        case .jobType: return .jobType
 //        case .jobExperimentYear: return .jobExperimentYear
+        }
+    }
+    var dispUnit: String { //入力項目の単位表示
+        switch self {
+        default: return ""
         }
     }
     //Placeholder Text

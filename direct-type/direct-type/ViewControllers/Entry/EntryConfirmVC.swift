@@ -47,7 +47,6 @@ class EntryConfirmVC: PreviewBaseVC {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
         self.arrData.removeAll()//いったん全件を削除しておく
         editableModel.arrData.removeAll()//こちらで管理させる？！
-        arrData.append(MdlItemH(.spacer, "", childItems: [])) //上部の余白を実現させるため（ヘッダと違って、一緒にスクロールアウトさせたい）
         //===== [C-12]応募確認での追加分
         arrData.append(MdlItemH(.notifyEntry1C12, "", childItems: []))
         arrData.append(MdlItemH(.notifyEntry2C12, "", childItems: []))

@@ -63,6 +63,11 @@ enum EditItemMdlAppSmoothCareerWorkBackgroundDetail: String, EditItemProtocol {
         case .skillPowerPoint: return .pcSkillPowerPoint
         }
     }
+    var dispUnit: String { //入力項目の単位表示
+        switch self {
+        default: return ""
+        }
+    }
     //Placeholder Text
     var placeholder: String {
         return ""//return "[\(self.itemKey) PlaceHolder]"

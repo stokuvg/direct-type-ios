@@ -328,7 +328,6 @@ extension MyPageVC {
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             print(myErr)
-            
         }
         .finally {
             self.fetchGetCareerList()
@@ -342,11 +341,15 @@ extension MyPageVC {
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-            print(myErr)
+            switch myErr.code {
+            case 404:
+                break //未作成での404は許容
+            default:
+                print(myErr)
+            }
             
         }
         .finally {
-            SVProgressHUD.dismiss()
             self.fetchGetChemistryData()//別途、読んでおく
         }
     }

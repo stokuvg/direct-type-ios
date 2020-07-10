@@ -88,6 +88,11 @@ case entryItems         //9、10、11、12を一括で扱うためのもの
         default: return .undefine
         }
     }
+    var dispUnit: String { //入力項目の単位表示
+        switch self {
+        default: return ""
+        }
+    }
     //Placeholder Text
     var placeholder: String {
         switch self {
