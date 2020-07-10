@@ -58,7 +58,7 @@ extension WebAPIEntryUserDto {
         for item in resume.businessTypes {
             _userOldIndustryList.append(UserOldIndustry(industryId: item))
         }
-        if _userOldJob3List.count > 0 {
+        if _userOldIndustryList.count > 0 {
             self.userOldIndustryList = _userOldIndustryList
         }
         if !resume.skillLanguage.languageToeicScore.isEmpty {
