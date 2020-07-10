@@ -73,9 +73,9 @@ class SubSelectSpecialVC: BaseVC {
         view.backgroundColor = UIColor(colorType: .color_base)!
         let colHead = UIColor.black //UIColor(colorType: .color_main)!
         vwHead.backgroundColor = colHead
-        vwInfoArea.backgroundColor = UIColor(colorType: .color_main)!
-        vwInfoTextArea.backgroundColor = UIColor(colorType: .color_main)!
-        vwInfoCountArea.backgroundColor = UIColor(colorType: .color_main)!
+        vwInfoArea.backgroundColor = colHead
+        vwInfoTextArea.backgroundColor = colHead
+        vwInfoCountArea.backgroundColor = colHead
         vwMain.backgroundColor = UIColor(colorType: .color_base)!
         vwFoot.backgroundColor = UIColor(colorType: .color_base)!
         btnCommit.setTitle(text: "この内容で保存", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
@@ -153,22 +153,41 @@ class SubSelectSpecialVC: BaseVC {
 //        let bufTitle: String = "\(editableItem.dispName) \(dicSelectedCode.count)件選択"
         let bufTitle: String = "\(editableItem.dispName)"
         lblTitle.text(text: bufTitle, fontType: .font_L, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        vwInfoTextArea.isHidden = true
+        vwInfoCountArea.isHidden = true
         if selectMaxCount == 1 {
             lcFootHeight.constant = 0 //選択即反映にするため、下部尾選択ボタンも非表示とする
         }
-        //ヘッダ下部の補足情報エリア
-        let bufInfoText = editableItem.placeholder
-        lblInfoText.text(text: bufInfoText, fontType: .font_S, textColor: UIColor.init(colorType: .color_white)!, alignment: .left)
-
+//        //ヘッダ下部の補足情報エリア
+//        let bufInfoText = editableItem.placeholder
+//        lblInfoText.text(text: bufInfoText, fontType: .font_S, textColor: UIColor.init(colorType: .color_white)!, alignment: .left)
         dispInfoCount()
     }
     func dispInfoCount() {
-        var bufCount = ""
-        if selectMaxCount > 1 {
-            let count = dicSelectedCode.count
-            bufCount = "\(count)/\(selectMaxCount)"
+//        var bufCount = ""
+//        if selectMaxCount > 1 {
+//            let count = dicSelectedCode.count
+//            bufCount = "\(count)/\(selectMaxCount)"
+//        }
+//        lblCount.text(text: bufCount, fontType: .font_SSS, textColor: UIColor.init(colorType: .color_white)!, alignment: .right)
+        //=== 合わせて表示させる
+        switch editableItem.editType {
+        case .selectMulti, .selectSpecial, .selectSpecialYear:
+            vwInfoTextArea.isHidden = false
+            let bufInfoText = editableItem.placeholder
+            var bufCount = ""
+            if selectMaxCount > 1 {
+                let count = dicSelectedCode.count
+                if selectMaxCount == Constants.SelectMultidMaxUndefine {
+                    bufCount = " (\(count))"
+                } else {
+                    bufCount = " (\(count)/\(selectMaxCount))"
+                }
+            }
+            lblInfoText.text(text: "\(bufInfoText)\(bufCount)", fontType: .font_S, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        default:
+            vwInfoTextArea.isHidden = true
         }
-        lblCount.text(text: bufCount, fontType: .font_SSS, textColor: UIColor.init(colorType: .color_white)!, alignment: .right)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
