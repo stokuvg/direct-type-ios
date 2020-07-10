@@ -39,7 +39,7 @@ extension EditableBasicVC {
         let barLbl = IKBarButtonItem.init(customView: lbl)
         let separator2 = IKBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let btnClose = IKBarButtonItem.init(title: "閉じる", style: .done, target: self, action: #selector(actPickerCancelButton))
-        let btnSelect = IKBarButtonItem.init(title: "選択1", style: .done, target: self, action: #selector(actPickerSelectButton))
+        let btnSelect = IKBarButtonItem.init(title: "選択", style: .done, target: self, action: #selector(actPickerSelectButton))
         let btnReset = IKBarButtonItem.init(title: Constants.DefaultSelectWorkPeriodEndDateJP, style: .done, target: self, action: #selector(actPickerResetButton))
         //=== itemKeyをつけておく
         btnSelect.parentPicker = picker

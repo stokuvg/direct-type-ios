@@ -23,9 +23,6 @@ class CareerPreviewVC: PreviewBaseVC {
     var arrDetail: [MdlCareerCard] = []
 
     override func actCommit(_ sender: UIButton) {
-//        if editableModel.editTempCD.count == 0 { //変更なければ、そのまま戻して良いプレビュー画面
-//            navigationController?.popViewController(animated: true)
-//        }
         //===== フェッチかける
         if validateLocalModel() {
             tableVW.reloadData()
@@ -126,7 +123,6 @@ class CareerPreviewVC: PreviewBaseVC {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        fetchGetCareerList()
     }
     //========================================
     func initData(_ delegate: CareerListProtocol, _ num: Int, _ details: [MdlCareerCard]) {

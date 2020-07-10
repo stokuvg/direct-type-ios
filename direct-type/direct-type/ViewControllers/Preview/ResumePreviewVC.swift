@@ -18,6 +18,7 @@ class ResumePreviewVC: PreviewBaseVC {
     override func actCommit(_ sender: UIButton) {
         if editableModel.editTempCD.count == 0 { //変更なければ、そのまま戻して良いプレビュー画面
             navigationController?.popViewController(animated: true)
+            return
         }
         if validateLocalModel() {
             tableVW.reloadData()
@@ -143,8 +144,8 @@ extension ResumePreviewVC {
     }
     private func fetchUpdateResume() {
         guard let resume = self.detail else { return }
-//        let param = UpdateResumeRequestDTO(resume ,editableModel.editTempCD)//!!!
-        let param = UpdateResumeRequestDTO(isEmployed: false, changeJobCount: 0, workHistory: [], experienceIndustryIds: [], educationId: "", finalEducation: FinalEducationDTO(schoolName: "", faculty: "", department: "", guraduationYearMonth: ""), toeic: 99999, toefl: 999999, englishSkillId: "", otherLanguageSkillId: "", licenseIds: [], selfPR: "", currentSalary: "")
+        let param = UpdateResumeRequestDTO(resume ,editableModel.editTempCD)//!!!
+//        let param = UpdateResumeRequestDTO(isEmployed: false, changeJobCount: 0, workHistory: [], experienceIndustryIds: [], educationId: "", finalEducation: FinalEducationDTO(schoolName: "", faculty: "", department: "", guraduationYearMonth: ""), toeic: 99999, toefl: 999999, englishSkillId: "", otherLanguageSkillId: "", licenseIds: [], selfPR: "", currentSalary: "")
         
         
         self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
