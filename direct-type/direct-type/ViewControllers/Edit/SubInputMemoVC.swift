@@ -47,7 +47,7 @@ class SubInputMemoVC: BaseVC {
         vwMain.backgroundColor = UIColor(colorType: .color_base)!
         vwFoot.backgroundColor = UIColor(colorType: .color_base)!
         textVW.textColor = UIColor(colorType: .color_black)
-        textVW.font = UIFont.systemFont(ofSize: 24)//!!!
+        textVW.font = UIFont.systemFont(ofSize: 18)
         textVW.backgroundColor = UIColor(colorType: .color_white)
         btnCommit.setTitle(text: "完了", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
