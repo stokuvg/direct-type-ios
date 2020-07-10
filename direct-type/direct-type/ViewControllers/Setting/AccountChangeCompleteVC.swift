@@ -23,9 +23,6 @@ final class AccountChangeCompleteVC: TmpBasicVC {
         reSendAuthCode()
     }
     
-    // TODO: パスワードは毎回自動生成する必要があるため、強度の検討が完了した後に自動生成ロジックを実装する
-    // 参照: https://type.qiita.com/y_kawamata/items/e251d8904820d5b5ceaf
-    private let password = "Abcd123$"
     private let codeMaxLength: Int = 6
     private var phoneNumber = ""
 
@@ -64,11 +61,15 @@ private extension AccountChangeCompleteVC {
     }
     
     @objc
-    func changeButtonState() {
+    func changeButtonState(shouldForceDisable: Bool = false) {
+        guard let inputText = inputCodeField.text, !shouldForceDisable else {
+            sendBtn.backgroundColor = UIColor(colorType: .color_line)
+            sendBtn.isEnabled = false
+            return
+        }
+        inputCodeField.text = inputText.prefix(codeMaxLength).description
         sendBtn.backgroundColor = UIColor(colorType: isValidInputText ? .color_sub : .color_line)
         sendBtn.isEnabled = isValidInputText
-        guard let inputText = inputCodeField.text, isValidInputText else { return }
-        inputCodeField.text = inputText.prefix(codeMaxLength).description
     }
     
     func validateAuthCode() {
@@ -76,35 +77,7 @@ private extension AccountChangeCompleteVC {
             showConfirm(title: "フォーマットエラー", message: "数字6桁を入力してください", onlyOK: true)
             return
         }
-        trySingin(with: inputText)
-    }
-    
-    func trySingin(with code: String) {
-        SVProgressHUD.show()
-        AWSMobileClient.default().signIn(username: phoneNumber.addCountryCode(type: .japan), password: password)  { (signInResult, error) in
-            if let error = error {
-                let buf = AuthManager.convAnyError(error).debugDisp
-                DispatchQueue.main.async {
-                    self.showConfirm(title: "Error", message: buf, onlyOK: true)
-                }
-                return
-            }
-            
-            guard let signInResult = signInResult else {
-                print("レスポンスがが正常に受け取れませんでした")
-                return
-            }
-            switch signInResult.signInState {
-            case .customChallenge:
-                DispatchQueue.main.async {
-                    self.tryConfirmAuthCode(with: code)
-                }
-                break
-            case .unknown, .signedIn, .smsMFA, .passwordVerifier, .deviceSRPAuth,
-                 .devicePasswordVerifier, .adminNoSRPAuth, .newPasswordRequired:
-                break
-            }
-        }
+        tryConfirmAuthCode(with: inputText)
     }
     
     func tryConfirmAuthCode(with code: String) {
@@ -122,7 +95,7 @@ private extension AccountChangeCompleteVC {
                 buf = "signedIn"
                 DispatchQueue.main.async {
                     SVProgressHUD.dismiss()
-                    self.showConfirm(title: "", message: "", onlyOK: true)
+                    self.showConfirm(title: "変更が完了しました", message: "", onlyOK: true)
                     .done { _ in
                         self.navigationController?.popToRootViewController(animated: true)
                     } .catch { (error) in } .finally { }
@@ -135,6 +108,10 @@ private extension AccountChangeCompleteVC {
                 buf = "passwordVerifier"
             case .customChallenge:
                 buf = "customChallenge"
+                DispatchQueue.main.async {
+                    SVProgressHUD.dismiss()
+                    self.showConfirm(title: "コードが誤っています", message: "正しいコードを入力してください。", onlyOK: true)
+                }
             case .deviceSRPAuth:
                 buf = "deviceSRPAuth"
             case .devicePasswordVerifier:

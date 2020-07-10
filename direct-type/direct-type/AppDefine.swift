@@ -12,4 +12,7 @@ import Foundation
 struct AppDefine {
     // AppsFlyerデバッグログフラグ
     static let isDebugForAppsFlyer = false
+    // TODO: パスワードは毎回自動生成する必要があるため、強度の検討が完了した後に自動生成ロジックを実装する
+    // 参照: https://type.qiita.com/y_kawamata/items/e251d8904820d5b5ceaf
+    static let password = "Abcd123$"
 }

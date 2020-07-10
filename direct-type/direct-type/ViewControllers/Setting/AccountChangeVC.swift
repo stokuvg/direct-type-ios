@@ -90,7 +90,49 @@ private extension AccountChangeVC {
             }
             DispatchQueue.main.async {
                 SVProgressHUD.dismiss()
-                self.transitionToConfirmation()
+                self.trySignIn()
+            }
+        }
+    }
+    
+    func trySignIn() {
+        guard let phoneNumberText = inputField.text else { return }
+        SVProgressHUD.show()
+        AWSMobileClient.default().signIn(username: phoneNumberText.addCountryCode(type: .japan), password: AppDefine.password)  { (signInResult, error) in
+            if let error = error as? AWSMobileClientError {
+                switch error {
+                case .invalidParameter:
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        self.trySignIn()
+                    }
+                default:
+                    DispatchQueue.main.async {
+                        let buf = AuthManager.convAnyError(error).debugDisp
+                        self.showConfirm(title: "Error", message: buf, onlyOK: true)
+                        self.changeButtonState()
+                        SVProgressHUD.dismiss()
+                    }
+                }
+                return
+            }
+            
+            guard let signInResult = signInResult else {
+                print("レスポンスがが正常に受け取れませんでした")
+                return
+            }
+            switch signInResult.signInState {
+            case .customChallenge:
+                DispatchQueue.main.async {
+                    self.transitionToConfirmation()
+                }
+                break
+            case .unknown, .signedIn, .smsMFA, .passwordVerifier, .deviceSRPAuth,
+                 .devicePasswordVerifier, .adminNoSRPAuth, .newPasswordRequired:
+                break
+            }
+            DispatchQueue.main.async {
+                self.changeButtonState()
+                SVProgressHUD.dismiss()
             }
         }
     }
