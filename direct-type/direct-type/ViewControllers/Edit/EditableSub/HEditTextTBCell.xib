@@ -17,8 +17,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="321"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="bSe-zB-f3f">
-                        <rect key="frame" x="0.0" y="4" width="320" height="275.5"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="bSe-zB-f3f">
+                        <rect key="frame" x="0.0" y="4" width="320" height="269.5"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gan-ZC-ghs">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="107.5"/>
@@ -61,8 +61,26 @@
                                     </view>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fr2-v6-ys4">
+                                <rect key="frame" x="0.0" y="111.5" width="320" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ErrorMsg" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ywc-DE-FEG">
+                                        <rect key="frame" x="16" y="0.0" width="296" height="50"/>
+                                        <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="13"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="ywc-DE-FEG" secondAttribute="trailing" constant="8" id="3Tw-dy-NyZ"/>
+                                    <constraint firstItem="ywc-DE-FEG" firstAttribute="top" secondItem="fr2-v6-ys4" secondAttribute="top" id="AGF-zd-4dS"/>
+                                    <constraint firstItem="ywc-DE-FEG" firstAttribute="leading" secondItem="fr2-v6-ys4" secondAttribute="leading" constant="16" id="CTW-45-rIN"/>
+                                    <constraint firstAttribute="bottom" secondItem="ywc-DE-FEG" secondAttribute="bottom" id="r8t-R7-p0R"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3bp-hK-Bt1">
-                                <rect key="frame" x="0.0" y="113.5" width="320" height="50"/>
+                                <rect key="frame" x="0.0" y="165.5" width="320" height="50"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="maj-dC-N1p" customClass="IKTextField" customModule="direct_type" customModuleProvider="target">
                                         <rect key="frame" x="16" y="0.0" width="296" height="50"/>
@@ -85,26 +103,8 @@
                                     <constraint firstAttribute="bottom" secondItem="maj-dC-N1p" secondAttribute="bottom" id="qkq-TW-xMe"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fr2-v6-ys4">
-                                <rect key="frame" x="0.0" y="169.5" width="320" height="50"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ErrorMsg" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ywc-DE-FEG">
-                                        <rect key="frame" x="16" y="0.0" width="296" height="50"/>
-                                        <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="13"/>
-                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="ywc-DE-FEG" secondAttribute="trailing" constant="8" id="3Tw-dy-NyZ"/>
-                                    <constraint firstItem="ywc-DE-FEG" firstAttribute="top" secondItem="fr2-v6-ys4" secondAttribute="top" id="AGF-zd-4dS"/>
-                                    <constraint firstItem="ywc-DE-FEG" firstAttribute="leading" secondItem="fr2-v6-ys4" secondAttribute="leading" constant="16" id="CTW-45-rIN"/>
-                                    <constraint firstAttribute="bottom" secondItem="ywc-DE-FEG" secondAttribute="bottom" id="r8t-R7-p0R"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5l2-X3-86s">
-                                <rect key="frame" x="0.0" y="225.5" width="320" height="50"/>
+                                <rect key="frame" x="0.0" y="219.5" width="320" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="yv8-ws-A9d">
                                         <rect key="frame" x="16" y="0.0" width="296" height="50"/>
@@ -124,7 +124,7 @@
                         </subviews>
                     </stackView>
                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vJI-Yl-CdQ" userLabel="下端区切り">
-                        <rect key="frame" x="2" y="283.5" width="316" height="1"/>
+                        <rect key="frame" x="2" y="277.5" width="316" height="1"/>
                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="Y4A-5K-tYj"/>

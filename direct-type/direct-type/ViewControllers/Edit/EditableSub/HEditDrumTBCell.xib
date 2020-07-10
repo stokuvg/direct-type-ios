@@ -61,8 +61,26 @@
                                     </view>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GDH-wM-zbY">
+                                <rect key="frame" x="0.0" y="54" width="320" height="17"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ErrorMsg" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Bet-yw-2HJ">
+                                        <rect key="frame" x="16" y="0.0" width="296" height="17"/>
+                                        <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="13"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Bet-yw-2HJ" secondAttribute="bottom" id="Cxp-ee-paZ"/>
+                                    <constraint firstItem="Bet-yw-2HJ" firstAttribute="top" secondItem="GDH-wM-zbY" secondAttribute="top" id="Y5d-Fc-ugB"/>
+                                    <constraint firstAttribute="trailing" secondItem="Bet-yw-2HJ" secondAttribute="trailing" constant="8" id="cQE-k7-lrG"/>
+                                    <constraint firstItem="Bet-yw-2HJ" firstAttribute="leading" secondItem="GDH-wM-zbY" secondAttribute="leading" constant="16" id="upm-Ki-7dA"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h6J-Ef-ZYR">
-                                <rect key="frame" x="0.0" y="54" width="320" height="50"/>
+                                <rect key="frame" x="0.0" y="75" width="320" height="50"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="maj-dC-N1p" customClass="IKTextField" customModule="direct_type" customModuleProvider="target">
                                         <rect key="frame" x="16" y="0.0" width="296" height="50"/>
@@ -83,29 +101,11 @@
                                     <constraint firstItem="maj-dC-N1p" firstAttribute="top" secondItem="h6J-Ef-ZYR" secondAttribute="top" id="UQY-6k-6e0"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GDH-wM-zbY">
-                                <rect key="frame" x="0.0" y="108" width="320" height="50"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ErrorMsg" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Bet-yw-2HJ">
-                                        <rect key="frame" x="16" y="0.0" width="296" height="50"/>
-                                        <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="13"/>
-                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="Bet-yw-2HJ" secondAttribute="bottom" id="Cxp-ee-paZ"/>
-                                    <constraint firstItem="Bet-yw-2HJ" firstAttribute="top" secondItem="GDH-wM-zbY" secondAttribute="top" id="Y5d-Fc-ugB"/>
-                                    <constraint firstAttribute="trailing" secondItem="Bet-yw-2HJ" secondAttribute="trailing" constant="8" id="cQE-k7-lrG"/>
-                                    <constraint firstItem="Bet-yw-2HJ" firstAttribute="leading" secondItem="GDH-wM-zbY" secondAttribute="leading" constant="16" id="upm-Ki-7dA"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Gj-bJ-rTZ">
-                                <rect key="frame" x="0.0" y="162" width="320" height="17"/>
+                                <rect key="frame" x="0.0" y="129" width="320" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="yv8-ws-A9d">
-                                        <rect key="frame" x="16" y="0.0" width="296" height="17"/>
+                                        <rect key="frame" x="16" y="0.0" width="296" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
