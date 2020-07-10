@@ -108,10 +108,13 @@ extension ChemistryResult: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var indicateCellTypes = IndicateCellType.allCases
-        if topRanker?.second == nil { indicateCellTypes.remove(at: IndicateCellType.secondPlaceResult.rawValue) }
-        if topRanker?.third == nil { indicateCellTypes.remove(at: IndicateCellType.thirdPlaceResult.rawValue) }
+        let indicateCellTypes = IndicateCellType.allCases.filter({
+            if topRanker?.second == nil && $0 == .secondPlaceResult { return false }
+            if topRanker?.third == nil && $0 == .thirdPlaceResult { return false }
+            return true
+        })
         let indicateCellType = indicateCellTypes[indexPath.row]
+        
         switch indicateCellType {
         case .firstPlaceResult:
             let cell = tableView.loadCell(cellName: "ChemistryResultPersonalTypeCell", indexPath: indexPath) as! ChemistryResultPersonalTypeCell
