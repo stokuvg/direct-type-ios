@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ChemistryResult: UIViewController {
+final class ChemistryResult: BaseChemistryVC {
     @IBOutlet private weak var tableView: UITableView!
     
     private var topRanker: ChemistryScoreCalculation.TopRanker?

@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ChemistryStart: UIViewController {
+final class ChemistryStart: BaseChemistryVC {
     @IBOutlet private weak var iconCarouselView: IconCarouselView!
     @IBOutlet private weak var hukidashiLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
@@ -24,30 +24,12 @@ final class ChemistryStart: UIViewController {
         iconCarouselView.startAnimation()
         setFont()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setNavigationBar()
-    }
 }
 
 private extension ChemistryStart {
     func setFont() {
         hukidashiLabel.font = UIFont(fontType: .font_SS)
         descriptionLabel.font = UIFont(fontType: .font_S)
-    }
-    
-    func setNavigationBar() {
-        navigationItem.title = ""
-        
-        if #available(iOS 13.0, *) {
-            navigationController?.navigationBar.standardAppearance.backgroundColor = UIColor.init(colorType: .color_sub)!
-            navigationController?.navigationBar.standardAppearance.shadowColor = .clear
-        } else {
-            self.navigationController?.navigationBar.barTintColor = UIColor.init(colorType: .color_sub)
-            navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationController?.navigationBar.shadowImage = UIImage()
-        }
     }
     
     func generateCarouselIconView() -> [UIImageView]{

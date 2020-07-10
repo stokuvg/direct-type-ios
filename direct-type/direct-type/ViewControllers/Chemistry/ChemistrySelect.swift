@@ -11,7 +11,7 @@ import TudApi
 import PromiseKit
 import SVProgressHUD
 
-class ChemistrySelect: BaseVC {
+class ChemistrySelect: BaseChemistryVC {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var buttonBackgroundView: UIView!
     @IBOutlet private weak var nextButton: UIButton!
