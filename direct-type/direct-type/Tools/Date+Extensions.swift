@@ -103,7 +103,7 @@ class DateHelper {
             retInterval = endDate.timeIntervalSince(nowDate)
             
             let ret = retInterval/86400
-            Log.selectLog(logLevel: .debug, "end ret:\(ret)")
+//            Log.selectLog(logLevel: .debug, "end ret:\(ret)")
             if 7 >= ret && ret >= 0 {
                 return true
             }
