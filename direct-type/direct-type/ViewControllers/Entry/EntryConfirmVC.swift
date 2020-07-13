@@ -214,6 +214,11 @@ extension EntryConfirmVC {
         let _jobCardCode: String = _jobCard.jobCardCode
         let _typePassword: String = self.bufPassword //半角英数4-20
         let param: WebAPIEntryUserDto = WebAPIEntryUserDto(_jobCardCode, _profile, _resume, _career, _entry, _typePassword)
+        
+        print(param)
+        
+        
+        
         SVProgressHUD.show(withStatus: "応募処理")
         ApiManager.postEntry(param, isRetry: true)
         .done { result in
