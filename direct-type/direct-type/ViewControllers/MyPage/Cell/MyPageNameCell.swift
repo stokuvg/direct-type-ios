@@ -31,8 +31,9 @@ class MyPageNameCell: BaseTableViewCell {
         dispCell()
     }
   //== セルの初期化と初期表示
-    func initCell(_ delegate: MyPageNameCellDelegate, _ nickname: String) {
-        self.delegate = delegate
+//  func initCell(_ delegate: MyPageNameCellDelegate, _ nickname: String) {
+    func initCell(_ nickname: String) {
+//        self.delegate = delegate
         self.nickname = nickname
     }
    func dispCell() {

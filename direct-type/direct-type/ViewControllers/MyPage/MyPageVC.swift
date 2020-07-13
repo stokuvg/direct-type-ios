@@ -46,12 +46,21 @@ final class MyPageVC: TmpNaviTopVC {
     private func editUserName() {
         let tfNickname = UITextField()
         tfNickname.placeholder = "8文字まで"
+        tfNickname.attributedPlaceholder = NSAttributedString(string: "8文字まで", attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(colorType: .color_light_gray) as Any])
         let alert = UIAlertController(title: "ニックネームの変更", message: "新しいニックネームを入力してください", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "変更", style: .default) { (action:UIAlertAction) in
             if let tfNickname = alert.textFields?.first {
                 let bufNickame: String = tfNickname.text ?? ""
-                //TODO: バリデーション
-                self.fetchUpdateProfileNickname(bufNickame)
+                
+                Log.selectLog(logLevel: .debug, "bufNickame.count:\(bufNickame.count)")
+
+                //バリデーション 8文字を超える場合
+                if bufNickame.count > 8 {
+                    self.showConfirm(title: "９文字以上入力出来ません。", message: "", onlyOK: true)
+                    .done { } .catch { (error) in } .finally {}
+                } else {
+                    self.fetchUpdateProfileNickname(bufNickame)
+                }
             }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -59,6 +68,8 @@ final class MyPageVC: TmpNaviTopVC {
         alert.addAction(cancelAction)
         alert.addTextField { (tfNickname) in
             tfNickname.text = self.profile?.nickname ?? "ゲストさん"
+            tfNickname.placeholder = "8文字まで"
+            tfNickname.attributedPlaceholder = NSAttributedString(string: "8文字まで", attributes: [NSAttributedString.Key.foregroundColor : UIColor.init(colorType: .color_light_gray) as Any])
         }
         present(alert, animated: true, completion: nil)
     }
@@ -260,10 +271,11 @@ extension MyPageVC: UITableViewDataSource {
         let cellType = CellType(indexPath)
 
         switch cellType {
-        case .userName:
-        cell =  tableView.loadCell(cellName: "MyPageNameCell", indexPath: indexPath) as! MyPageNameCell
-        (cell as! MyPageNameCell).initCell(self, profile?.nickname ?? "ゲストさん")
-        (cell as! MyPageNameCell).dispCell()
+            case .userName:
+                cell =  tableView.loadCell(cellName: "MyPageNameCell", indexPath: indexPath) as! MyPageNameCell
+                (cell as! MyPageNameCell).initCell(profile?.nickname ?? "ゲストさん")
+//                (cell as! MyPageNameCell).initCell(self, profile?.nickname ?? "ゲストさん")
+                (cell as! MyPageNameCell).dispCell()
         case .profileCompleteness:
             cell = tableView.loadCell(cellName: "BasePercentageCompletionCell", indexPath: indexPath) as! BasePercentageCompletionCell
             (cell as! BasePercentageCompletionCell).setup(title: "プロフィールの完成度", percent: String(profile?.completeness ?? 0))
@@ -410,6 +422,7 @@ extension MyPageVC {
 }
 
 //=== ニックネームの変更処理
+/*
 extension MyPageVC: MyPageNameCellDelegate {
     func actEditNickname() {
         let tfNickname = UITextField()
@@ -431,6 +444,7 @@ extension MyPageVC: MyPageNameCellDelegate {
         present(alert, animated: true, completion: nil)
     }
 }
+*/
 extension MyPageVC {
     private func fetchUpdateProfileNickname(_ nickname: String) {
         if nickname.isEmpty { return }
