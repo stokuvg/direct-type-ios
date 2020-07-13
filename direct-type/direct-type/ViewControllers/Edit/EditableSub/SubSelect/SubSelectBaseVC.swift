@@ -62,9 +62,9 @@ class SubSelectBaseVC: BaseVC {
         actPopupSelect(selectedItemsCode: bufResult)
     }
     
-//    var cellHeight: CGFloat {
-//        return 70
-//    }
+    var cellHeight: CGFloat {
+        return 70
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -223,9 +223,9 @@ extension SubSelectBaseVC: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 70
-//    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return cellHeight
+    }
 }
 
 

@@ -16,7 +16,7 @@ class SubSelectMultiVC: SubSelectBaseVC {
         lcMainFootSpace.constant = lcFootHeight.constant
     }
     
-//    override var cellHeight: CGFloat {
-//        return 20
-//    }
+    override var cellHeight: CGFloat {
+        return 50
+    }
 }
