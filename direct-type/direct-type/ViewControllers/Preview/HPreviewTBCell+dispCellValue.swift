@@ -19,6 +19,41 @@ extension HPreviewTBCell {
         case .undefine:
             return "<未定義>"
         //========================
+        //[C-15]職務経歴書編集
+        case .workPeriodC15:      //===雇用期間
+            let tmp0: String = _item.childItems[0].curVal
+            let date0 = DateHelper.convStrYM2Date(tmp0)
+            if date0 == Constants.SelectItemsUndefineDate { return "未入力（必須）" } //初回未記入対応
+            let buf0: String = date0.dispYmJP()
+            let tmp1: String = _item.childItems[1].curVal
+            let date1 = DateHelper.convStrYM2Date(tmp1)
+            if date1 == Constants.SelectItemsUndefineDate { return "未入力（必須）" } //初回未記入対応
+            let buf1: String!
+            buf1 = date1.dispYmJP()
+            return "\(buf0)〜\(buf1!)"
+        case .companyNameC15:     //===企業名
+            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
+            return _item.childItems[0].curVal
+        case .employmentTypeC15:  //===雇用形態
+            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
+            let tmp0: String = _item.childItems[0].curVal
+            let buf0: String = SelectItemsManager.getCodeDisp(.employmentType, code: tmp0)?.disp ?? ""
+            return buf0.isEmpty ? Constants.SelectItemsUndefine.disp : "\(buf0)"
+        case .employeesCountC15:  //===従業員数（数値）*これは直接数値入力で良い
+            if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
+            let tmp0: String = _item.childItems[0].curVal
+            let buf0: String = "\(tmp0)名"
+            return "\(buf0)"
+        case .salaryC15:          //===年収
+            if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
+            let tmp0: String = _item.childItems[0].curVal
+            let buf0: String = SelectItemsManager.getCodeDisp(.salary, code: tmp0)?.disp ?? ""
+            return "\(buf0)"
+        case .contentsC15:        //===職務内容本文
+            if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
+            return _item.childItems[0].curVal
+
+        //========================
         //=== [C-9]応募フォーム
         case .jobCardC9:      //４．応募先求人
             if _item.childItems[0].curVal.isEmpty { return "【モデル】" }
@@ -43,7 +78,6 @@ extension HPreviewTBCell {
             return _item.childItems[0].curVal
         case .hopeAreaC9:     //１０．希望勤務地（任意）
             if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
-            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
             var arr0: [String] = []
             for code in tmp0.split(separator: "_").sorted() { //コード順ソートしておく
@@ -203,7 +237,7 @@ extension HPreviewTBCell {
             let tmp0: String = _item.childItems[0].curVal
             let buf0: String = SelectItemsManager.getCodeDisp(.employmentType, code: tmp0)?.disp ?? ""
             return "\(buf0)"
-        //case .employeesCountC15:  //===従業員数（数値）*これもマスタじゃないのか？ */
+        //case .employeesCountC15:  //===従業員数（数値）*これは直接数値入力で良い
         case .salaryC15:          //===年収
             let tmp0: String = _item.childItems[0].curVal
             let buf0: String = SelectItemsManager.getCodeDisp(.salary, code: tmp0)?.disp ?? ""

@@ -190,7 +190,7 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
                     if let cd = SelectItemsManager.getCodeDispSyou(.employmentType, code: career.employmentType) {
                         addStackItem(type: .employmentTypeC15, val: cd.disp)
                     }
-                    //===従業員数（数値）*これもマスタじゃないのか？ */
+                    //===従業員数（数値）*これは直接数値入力で良い
                     let _employeesCount: Int = Int(career.employeesCount) ?? 0
                     if _employeesCount != 0 {
                         addStackItem(type: .employeesCountC15, val: "\(_employeesCount)")

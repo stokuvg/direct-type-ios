@@ -85,12 +85,12 @@ class CareerPreviewVC: PreviewBaseVC {
         //    ｛職務内容本文）
 
         //[C-15]職務経歴書編集
-        //case .workPeriod:       return "雇用期間"
+        //case .workPeriod:       return "在籍期間"
         arrData.append(MdlItemH(.workPeriodC15, "", childItems: [
             EditableItemH(type: .selectDrumYM, editItem: EditItemMdlCareerCardWorkPeriod.startDate, val: _detail.workPeriod.startDate.dispYmd()),
             EditableItemH(type: .selectDrumYM, editItem: EditItemMdlCareerCardWorkPeriod.endDate, val: _detail.workPeriod.endDate.dispYmd()),
         ]))
-        //case .companyName:      return "企業名"
+        //case .companyName:      return "社名"
         arrData.append(MdlItemH(.companyNameC15, "", childItems: [
             EditableItemH(type: .inputText, editItem: EditItemMdlCareerCard.companyName, val: _detail.companyName),
         ]))
