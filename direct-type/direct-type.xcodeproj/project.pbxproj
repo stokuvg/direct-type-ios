@@ -246,7 +246,6 @@
 		267E636424A98EF7004169ED /* EntryFormExQuestionsItemTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 267E636224A98EF7004169ED /* EntryFormExQuestionsItemTBCell.xib */; };
 		267E636624A9D183004169ED /* HPreviewTBCellTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267E636524A9D183004169ED /* HPreviewTBCellTool.swift */; };
 		26800520246A2B440053A7F4 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2680051F246A2B440053A7F4 /* Date+Extensions.swift */; };
-		26859E242488E62A000109D1 /* SubEditSpecialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26859E232488E62A000109D1 /* SubEditSpecialVC.swift */; };
 		26859E272488E636000109D1 /* HEditSpecialTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26859E252488E636000109D1 /* HEditSpecialTBCell.swift */; };
 		26859E282488E636000109D1 /* HEditSpecialTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26859E262488E636000109D1 /* HEditSpecialTBCell.xib */; };
 		2688B568249768DA001975AC /* RecommendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2688B567249768DA001975AC /* RecommendManager.swift */; };
@@ -587,7 +586,6 @@
 		267E636224A98EF7004169ED /* EntryFormExQuestionsItemTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntryFormExQuestionsItemTBCell.xib; sourceTree = "<group>"; };
 		267E636524A9D183004169ED /* HPreviewTBCellTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPreviewTBCellTool.swift; sourceTree = "<group>"; };
 		2680051F246A2B440053A7F4 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
-		26859E232488E62A000109D1 /* SubEditSpecialVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubEditSpecialVC.swift; sourceTree = "<group>"; };
 		26859E252488E636000109D1 /* HEditSpecialTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HEditSpecialTBCell.swift; sourceTree = "<group>"; };
 		26859E262488E636000109D1 /* HEditSpecialTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HEditSpecialTBCell.xib; sourceTree = "<group>"; };
 		2688B567249768DA001975AC /* RecommendManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendManager.swift; sourceTree = "<group>"; };
@@ -1095,7 +1093,6 @@
 				2680051E246A29D50053A7F4 /* EditableSub */,
 				06E519B6245814D4004E4B7A /* SubEditBaseVC.swift */,
 				268BFF55246E8292004B2640 /* SubInputMemoVC.swift */,
-				26859E232488E62A000109D1 /* SubEditSpecialVC.swift */,
 				06E519D224581684004E4B7A /* ContentsEditVC.swift */,
 			);
 			path = Edit;
@@ -1804,7 +1801,6 @@
 				06E5198A2457D6C1004E4B7A /* JobOfferDetailVC.swift in Sources */,
 				0E8775A5249778E700C82736 /* MdlApproach.swift in Sources */,
 				26F2A827246D23800037D47F /* MdlResumeSkillLanguage.swift in Sources */,
-				26859E242488E62A000109D1 /* SubEditSpecialVC.swift in Sources */,
 				26F2A825246D23660037D47F /* MdlResumeSchool.swift in Sources */,
 				26989F82246A66640050AC40 /* EditableModel.swift in Sources */,
 				0EAE7659248F2329009A8F4B /* ProportionBarView.swift in Sources */,

@@ -13,6 +13,7 @@ class SubSelectSyouTBCell: UITableViewCell {
 
     var item: CodeDisp!
     var subItem: CodeDisp? = nil
+    var focus: Bool = false
     
     @IBOutlet weak var vwCellArea: UIView!
     @IBOutlet weak var lblName: UILabel!
@@ -27,10 +28,11 @@ class SubSelectSyouTBCell: UITableViewCell {
         vwCellArea.backgroundColor = UIColor(colorType: .color_base)
     }
     //== セルの初期化と初期表示
-    func initCell(_ delegate: SubSelectProtocol, _ item: CodeDisp, _ subItem: CodeDisp? = nil) {
+    func initCell(_ delegate: SubSelectProtocol, _ item: CodeDisp, _ subItem: CodeDisp? = nil, _ focus: Bool = false) {
         self.delegate = delegate
         self.item = item
         self.subItem = subItem
+        self.focus = focus
         if Constants.DbgDispStatus {
             self.lblDebug.isHidden = false
         } else {
@@ -47,7 +49,7 @@ class SubSelectSyouTBCell: UITableViewCell {
         } else {
             lblStatus.text = ""
         }
-        if let _ = subItem { //TODO: 選択、非選択、選択不可（非活性）などに状態を増やす
+        if let _ = subItem {
             vwCellArea.backgroundColor = UIColor(colorType: .color_sub)
             lblName.textColor = .white
             lblStatus.textColor = .white
@@ -55,6 +57,9 @@ class SubSelectSyouTBCell: UITableViewCell {
             vwCellArea.backgroundColor = .white
             lblName.textColor = .black
             lblStatus.textColor = .black
+            if focus {
+                vwCellArea.backgroundColor = UIColor(colorType: .color_specialItemFocus)
+            }
         }
 
     }
