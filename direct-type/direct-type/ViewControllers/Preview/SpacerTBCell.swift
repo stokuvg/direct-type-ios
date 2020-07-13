@@ -16,6 +16,7 @@ class SpacerTBCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        isUserInteractionEnabled = false
         //===デザイン適用
         backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
         vwMainArea.backgroundColor = UIColor(colorType: .color_base)
