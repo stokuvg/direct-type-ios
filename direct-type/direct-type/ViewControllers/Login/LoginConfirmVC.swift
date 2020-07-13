@@ -174,9 +174,3 @@ private extension LoginConfirmVC {
         }
     }
 }
-
-private extension String {
-    var isNumeric: Bool {
-        return NSPredicate(format: "SELF MATCHES %@", "[0-9]+").evaluate(with: self)
-    }
-}
