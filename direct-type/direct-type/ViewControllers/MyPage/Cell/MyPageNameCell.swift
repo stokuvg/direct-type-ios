@@ -17,14 +17,17 @@ class MyPageNameCell: BaseTableViewCell {
     
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var nameLabel:UILabel!
+    @IBOutlet weak var editImage:UIImageView!
+    /*
     @IBOutlet weak var editBtn:UIButton!
     @IBAction func editBtnAction() {
         delegate?.actEditNickname()
     }
+    */
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        editBtn.isHidden = false//変更不可にしておくよ
+//        editBtn.isHidden = false//変更不可にしておくよ
         dispCell()
     }
   //== セルの初期化と初期表示

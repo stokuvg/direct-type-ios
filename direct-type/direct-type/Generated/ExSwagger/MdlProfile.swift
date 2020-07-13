@@ -71,7 +71,7 @@ class MdlProfile: Codable {
         // 郵便番号 + 都道府県 + 市区町村 + 丁目・番地・建物名など
         // TODO:完成度修正
 //        if !zipCode.isEmpty && !prefecture.isEmpty && !address1.isEmpty && !address2.isEmpty {
-        if !zipCode.isEmpty && !prefecture.isEmpty && !address1.isEmpty && !address2.isEmpty {
+        if !zipCode.isEmpty && !prefecture.isEmpty && !address1.isEmpty {
             result += existsAddress
         }
         

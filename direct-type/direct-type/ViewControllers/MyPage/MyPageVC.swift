@@ -42,6 +42,26 @@ final class MyPageVC: TmpNaviTopVC {
         super.viewWillAppear(animated)
         fetchGetEntryAll()
     }
+    
+    private func editUserName() {
+        let tfNickname = UITextField()
+        tfNickname.placeholder = "8文字まで"
+        let alert = UIAlertController(title: "ニックネームの変更", message: "新しいニックネームを入力してください", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "変更", style: .default) { (action:UIAlertAction) in
+            if let tfNickname = alert.textFields?.first {
+                let bufNickame: String = tfNickname.text ?? ""
+                //TODO: バリデーション
+                self.fetchUpdateProfileNickname(bufNickame)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        alert.addTextField { (tfNickname) in
+            tfNickname.text = self.profile?.nickname ?? "ゲストさん"
+        }
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 private extension MyPageVC {
@@ -137,7 +157,7 @@ extension MyPageVC: UITableViewDelegate {
 
         switch cellType {
         case .userName:
-            return 116
+            return 126
         case .profileCompleteness, .resumeCompleteness:
             return 58
         case .editableCarrer:
@@ -155,18 +175,20 @@ extension MyPageVC: UITableViewDelegate {
         let cellType = CellType(indexPath)
 
         switch cellType {
-        case .profileCompleteness:
-            pushViewController(.profilePreviewH2, model: profile)
-        case .resumeCompleteness:
-            pushViewController(.resumePreviewH3, model: resume)
-        case .editableCarrer:
-            isExistCareer ? pushViewController(.careerListC, model: career) : registChemistryAction()
-        case .editableChemistry:
-            transitionToChemistry()
-        case .setting:
-            transitionToSetting()
-        case .userName, .unknown:
-            break
+            case .userName:
+                self.editUserName()
+            case .profileCompleteness:
+                pushViewController(.profilePreviewH2, model: profile)
+            case .resumeCompleteness:
+                pushViewController(.resumePreviewH3, model: resume)
+            case .editableCarrer:
+                isExistCareer ? pushViewController(.careerListC, model: career) : registChemistryAction()
+            case .editableChemistry:
+                transitionToChemistry()
+            case .setting:
+                transitionToSetting()
+            case .unknown:
+                break
         }
     }
 }
