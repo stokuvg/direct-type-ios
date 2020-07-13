@@ -47,7 +47,7 @@ class SubSelectBaseVC: BaseVC {
     @IBOutlet weak var btnSelectEnable: UILabel!
 
     @IBOutlet weak var vwMain: UIView!
-    @IBOutlet weak var tableVW: UITableView!
+    @IBOutlet private weak var tableVW: UITableView!
     @IBOutlet weak var lcMainFootSpace: NSLayoutConstraint!
 
     @IBOutlet weak var vwFoot: UIView!
@@ -61,6 +61,10 @@ class SubSelectBaseVC: BaseVC {
         let bufResult: String = arrResult.joined(separator: EditItemTool.JoinMultiCodeSeparator)
         actPopupSelect(selectedItemsCode: bufResult)
     }
+    
+//    var cellHeight: CGFloat {
+//        return 70
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +81,7 @@ class SubSelectBaseVC: BaseVC {
         tableVW.backgroundColor = UIColor(colorType: .color_base)!
         btnCommit.setTitle(text: "この内容で保存", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
+        tableVW.register(UINib(nibName: "SubSelectTBCell", bundle: nil), forCellReuseIdentifier: "SubSelectTBCell")
     }
     func initData(_ delegate: SubSelectFeedbackDelegate, editableItem: EditableItemH, selectingCodes: String) {
         self.delegate = delegate
@@ -181,7 +186,8 @@ extension SubSelectBaseVC: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = arrData[indexPath.row]
-        let cell: SubSelectTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_SubSelectTBCell", for: indexPath) as! SubSelectTBCell
+//        let cell: SubSelectTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_SubSelectTBCell", for: indexPath) as! SubSelectTBCell
+        let cell: SubSelectTBCell = tableView.dequeueReusableCell(withIdentifier: "SubSelectTBCell") as! SubSelectTBCell
         //選択状態があるかチェックして反映させる
         let select: Bool = dicChange[item.code] ?? false  //差分情報優先
         cell.initCell(self, item, select)
@@ -216,6 +222,10 @@ extension SubSelectBaseVC: UITableViewDataSource, UITableViewDelegate {
             tableView.reloadRows(at: [indexPath], with: .none)
         }
     }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 70
+//    }
 }
 
 

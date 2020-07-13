@@ -15,4 +15,8 @@ class SubSelectMultiVC: SubSelectBaseVC {
         vwFoot.isHidden = false
         lcMainFootSpace.constant = lcFootHeight.constant
     }
+    
+//    override var cellHeight: CGFloat {
+//        return 20
+//    }
 }
