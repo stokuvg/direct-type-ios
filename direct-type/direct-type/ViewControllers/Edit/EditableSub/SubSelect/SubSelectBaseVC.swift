@@ -186,7 +186,6 @@ extension SubSelectBaseVC: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = arrData[indexPath.row]
-//        let cell: SubSelectTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_SubSelectTBCell", for: indexPath) as! SubSelectTBCell
         let cell: SubSelectTBCell = tableView.dequeueReusableCell(withIdentifier: "SubSelectTBCell") as! SubSelectTBCell
         //選択状態があるかチェックして反映させる
         let select: Bool = dicChange[item.code] ?? false  //差分情報優先
