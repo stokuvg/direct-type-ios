@@ -284,7 +284,8 @@ class MdlJobCardDetail: Codable {
          public var isKeep: Bool
          */
         
-        let _salaryOffer = dto.salaryOffer
+//        let _salaryOffer = dto.salaryOffer
+        let _salaryOffer = ""
         Log.selectLog(logLevel: .debug, "_salaryOffer:\(String(describing: _salaryOffer))")
         
         let _jobDescription = dto.jobContents
@@ -347,14 +348,12 @@ class MdlJobCardDetail: Codable {
         let _entryQuestion1 = dto.entryQuestion1
         let _entryQuestion2 = dto.entryQuestion2
         let _entryQuestion3 = dto.entryQuestion3
-        
-        let _dtoSalaryOffer = dto.salaryOffer ?? ""
 
         self.init(
             jobCardCode: dto.jobId,
             jobName: dto.jobName,
             salaryMinId: Int(dto.minSalaryId)!, salaryMaxId: Int(dto.maxSalaryId)!, isSalaryDisplay: dto.isSalaryDisplay,
-            salaryOffer: _dtoSalaryOffer,
+            salaryOffer: _salaryOffer,
             workPlaceCodes: _place2Ids,
             companyName: dto.companyName,
             start_date: dto.pressStartDate, end_date: dto.pressEndDate,
