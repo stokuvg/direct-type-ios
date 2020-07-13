@@ -43,6 +43,14 @@ extension String {
         mutableString.insert("-", at: 8)
         return String(mutableString)
     }
+    
+    var isNumeric: Bool {
+        return NSPredicate(format: "SELF MATCHES %@", "[0-9]+").evaluate(with: self)
+    }
+    
+    var isValidPhoneNumber: Bool {
+        return NSPredicate(format: "SELF MATCHES %@", "^0[7-9]0[0-9]{8}").evaluate(with: self)
+    }
 }
 
 extension String {

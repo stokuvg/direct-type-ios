@@ -46,7 +46,10 @@ private extension InitialInputRegistVC {
             logOutIfNeeded()
         }
         
-        guard let phoneNumberText = phoneNumberTextField.text else { return }
+        guard let phoneNumberText = phoneNumberTextField.text, phoneNumberText.isValidPhoneNumber else {
+            showConfirm(title: "フォーマットエラー", message: "正しい電話番号を入力してください。", onlyOK: true)
+            return
+        }
         let phoneNumber = phoneNumberText.addCountryCode(type: .japan)
         let phoneNumberAttribute = ["phone_number" : phoneNumber]
         
@@ -80,7 +83,10 @@ private extension InitialInputRegistVC {
     }
     
     func trySignIn() {
-        guard let phoneNumberText = phoneNumberTextField.text else { return }
+        guard let phoneNumberText = phoneNumberTextField.text, phoneNumberText.isValidPhoneNumber else {
+            showConfirm(title: "フォーマットエラー", message: "正しい電話番号を入力してください。", onlyOK: true)
+            return
+        }
         if !SVProgressHUD.isVisible() {
             SVProgressHUD.show()
         }

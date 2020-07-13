@@ -43,7 +43,10 @@ private extension LoginVC {
             logOutIfNeeded()
         }
         
-        guard let phoneNumberText = phoneNumberTextField.text else { return }
+        guard let phoneNumberText = phoneNumberTextField.text, phoneNumberText.isValidPhoneNumber else {
+            showConfirm(title: "フォーマットエラー", message: "正しい電話番号を入力してください。", onlyOK: true)
+            return
+        }
         SVProgressHUD.show()
         changeButtonState(shouldForceDisable: true)
         AWSMobileClient.default().signIn(username: phoneNumberText.addCountryCode(type: .japan), password: AppDefine.password)  { (signInResult, error) in
