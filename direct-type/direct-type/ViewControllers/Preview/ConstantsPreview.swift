@@ -32,9 +32,9 @@ class IKPickerView: UIPickerView {
     var itemKey: EditableItemKey = "<undefine>"
     var parentTF: IKTextField? = nil
 }
-class IKTextField: UITextField {
-    var itemKey: EditableItemKey = "<undefine>"
-}
+//class IKTextField: UITextField {
+//    var itemKey: EditableItemKey = "<undefine>"
+//}
 //    override func awakeFromNib() {
 //        super.awakeFromNib()
 //        self.borderStyle = .none

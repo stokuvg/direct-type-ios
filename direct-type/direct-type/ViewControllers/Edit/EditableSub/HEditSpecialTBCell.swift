@@ -31,8 +31,7 @@ class HEditSpecialTBCell: UITableViewCell {
         tfValue.tintColor = UIColor(colorType: .color_black)
         tfValue.backgroundColor = UIColor(colorType: .color_white)
         tfValue.borderColor = UIColor(colorType: .color_line)
-        tfValue.cornerRadius = 8
-        tfValue.borderWidth = 1
+        tfValue.font = UIFont(fontType: .font_S)
     }
 
     func initCell(_ delegate: InputItemHDelegate, _ item: EditableItemH, _ item2: EditableItemH?,  errMsg: String, _ returnKeyType: UIReturnKeyType) {
@@ -77,7 +76,7 @@ class HEditSpecialTBCell: UITableViewCell {
         //Validationエラー発生時の表示
         if errMsg != "" {
             //lblErrorMsg.text = errMsg
-            lblErrorMsg.text(text: errMsg, fontType: .font_SSS, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
+            lblErrorMsg.text(text: errMsg, fontType: .font_SS, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
             vwMainArea.backgroundColor = UIColor.init(red: 1.0, green: 0.8, blue: 0.8, alpha: 1.0)
         } else {
             lblErrorMsg.text = ""

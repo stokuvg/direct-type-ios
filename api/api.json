@@ -830,11 +830,6 @@
             "example": true,
             "description": "true: 年収公開, false: 年収非公開"
           },
-          "salaryOffer": {
-            "type": "string",
-            "example": "",
-            "description": "スカウトによる提示年収＊初回は未使用＊"
-          },
           "place2Ids": {
             "example": [
               "23"
