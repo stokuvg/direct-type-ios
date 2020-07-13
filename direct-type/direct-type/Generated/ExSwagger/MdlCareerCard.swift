@@ -76,12 +76,12 @@ enum EditItemMdlCareerCard: String, EditItemProtocol {
     //表示名
     var dispName: String {
         switch self {
-        case .workPeriod:       return "勤務期間"
-        case .companyName:      return "企業名"
+        case .workPeriod:       return "在籍期間"
+        case .companyName:      return "社名"
         case .employmentType:   return "雇用形態"
-        case .employeesCount:   return "従業員数（数値）"   //*これもマスタじゃないのか？
+        case .employeesCount:   return "従業員数"   //*これは直接数値入力で良い
         case .salary:           return "年収"
-        case .contents:         return "職務内容本文"
+        case .contents:         return "職務経歴詳細"
         }
     }
     var tsvMaster: SelectItemsManager.TsvMaster {

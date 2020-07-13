@@ -18,6 +18,9 @@ protocol SubSelectFeedbackDelegate {
 class SubSelectBaseVC: BaseVC {
     var delegate: SubSelectFeedbackDelegate? = nil
     var singleMode: Bool = true
+    //先頭項目に排他選択肢をつけて利用するか
+    var exclusiveSelectMode: Bool = false
+    static let ExclusiveSelectCode: String = "<exclusiveSelector>"
     //選択数のMAX（1つなら即確定して前画面の可能性も？）
     var selectMaxCount: Int = 5
     var editableModel: EditableModel = EditableModel() //画面編集項目のモデルと管理//???
@@ -101,11 +104,27 @@ class SubSelectBaseVC: BaseVC {
         default:
             selectMaxCount = 1
         }
+        self.arrData.removeAll()
         //選択肢一覧を取得する（グループタイプはSpecialを利用するため来ない想定ではある）
         let cd: [CodeDisp] = SelectItemsManager.getMaster(self.mainTsvMaster)
         let (grp, _): ([CodeDisp], [GrpCodeDisp]) = SelectItemsManager.getMaster(self.mainTsvMaster)
         //print("[cd: \(cd.count)] / [grp: \(grp.count)] [gcd: \(gcd.count)] ")
         self.arrData = (grp.count != 0) ? grp : cd
+        //=== 希望勤務地の場合の得例：先頭に「勤務地にはこだわらない」を付与し、排他選択を実施する
+        switch editableItem.editableItemKey {
+        case EditItemMdlFirstInput.hopeArea.itemKey: fallthrough
+        case EditItemMdlProfile.hopeJobArea.itemKey: fallthrough
+        case EditItemMdlEntry.hopeArea.itemKey:
+            exclusiveSelectMode = true
+            arrData.insert(CodeDisp(SubSelectBaseVC.ExclusiveSelectCode, "勤務地にはこだわらない"), at: 0)
+            //if exclusiveSelectMode && dicChange.count == 0 {//=== 選択状態の反映（選択ない場合にこれを選んでおく）
+            //    dicChange[SubSelectBaseVC.ExclusiveSelectCode] = true//これやるとダメか。
+            //}
+
+        default:
+            exclusiveSelectMode = false
+            break
+        }
         //=== IndexPathなどを設定するため
         editableModel.initItemEditable([editableItem])//単独だけど共通化のため
     }
@@ -117,18 +136,6 @@ class SubSelectBaseVC: BaseVC {
 //        //ヘッダ下部の補足情報エリア
 //        let bufInfoText = editableItem.placeholder
 //        lblInfoText.text(text: bufInfoText, fontType: .font_S, textColor: UIColor.init(colorType: .color_white)!, alignment: .left)
-        //補足情報エリアの追加
-        switch editableItem.editableItemKey {
-        case EditItemMdlFirstInput.hopeArea.itemKey: fallthrough
-        case EditItemMdlProfile.hopeJobArea.itemKey: fallthrough
-        case EditItemMdlEntry.hopeArea.itemKey:
-            self.subSelectEnable = SubSelectEnableVW(self, "勤務地にはこだわらない", true)
-            if let _subSelectEnable = subSelectEnable {
-//!!!                stackInfo.addArrangedSubview(_subSelectEnable)
-            }
-        default:
-            break
-        }
         dispInfoCount()
     }
     func dispInfoCount() {
@@ -149,7 +156,10 @@ class SubSelectBaseVC: BaseVC {
             let bufInfoText = editableItem.placeholder
             var bufCount = ""
             if selectMaxCount > 1 {
-                let count = self.dicChange.filter { (k, v) -> Bool in v == true }.count
+                //let count = self.dicChange.filter { (k, v) -> Bool in v == true }.count
+                let count = self.dicChange.filter { (k, v) -> Bool in
+                    v == true && k != SubSelectBaseVC.ExclusiveSelectCode
+                }.count
                 if selectMaxCount == Constants.SelectMultidMaxUndefine {
                     bufCount = " (\(count))"
                 } else {
@@ -189,7 +199,8 @@ extension SubSelectBaseVC: UITableViewDataSource, UITableViewDelegate {
         let cell: SubSelectTBCell = tableView.dequeueReusableCell(withIdentifier: "SubSelectTBCell") as! SubSelectTBCell
         //選択状態があるかチェックして反映させる
         let select: Bool = dicChange[item.code] ?? false  //差分情報優先
-        cell.initCell(self, item, select)
+        let exclusive: Bool = dicChange.contains { (k,v) -> Bool in v == true && k == SubSelectBaseVC.ExclusiveSelectCode }
+        cell.initCell(self, item, select, exclusive)
         cell.dispCell()
         return cell
     }
@@ -200,6 +211,19 @@ extension SubSelectBaseVC: UITableViewDataSource, UITableViewDelegate {
             dicChange.removeAll() //Single選択の場合は、まるっと削除してから追加
         }
         let select: Bool = dicChange[item.code] ?? false  //差分情報優先
+        //===排他的選択モード「勤務地にはこだわらない」を選んだ場合の特殊処理
+        if exclusiveSelectMode {
+            if item.code == SubSelectBaseVC.ExclusiveSelectCode {
+                if select {
+                    print("こだわらないが選ばれていた")
+                } else {
+                    print("こだわらないが選ばれていなかった場合 [\(dicChange.count)]だったので、これを選んだ")
+                    dicChange.removeAll()//まるっと選択解除
+                    dicChange[SubSelectBaseVC.ExclusiveSelectCode] = true//この項目のみ選択状態
+                    dispInfoCount()
+                }
+            }
+        }
         if select {
             //選択解除の時には最大チェックは不要
         } else {
@@ -218,7 +242,11 @@ extension SubSelectBaseVC: UITableViewDataSource, UITableViewDelegate {
             tableView.reloadData()
             actPopupSelect(selectedItemsCode: item.code)//選択したもの即時反映の場合
         } else {
-            tableView.reloadRows(at: [indexPath], with: .none)
+            if exclusiveSelectMode {
+                tableView.reloadData()//まるっと全部を表示更新しないとダメです
+            } else {
+                tableView.reloadRows(at: [indexPath], with: .none)
+            }
         }
     }
     

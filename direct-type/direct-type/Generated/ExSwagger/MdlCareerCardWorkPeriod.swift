@@ -51,8 +51,8 @@ enum EditItemMdlCareerCardWorkPeriod: String, EditItemProtocol {
     //表示名
     var dispName: String {
         switch self {
-        case .startDate:    return "勤務開始年月"
-        case .endDate:      return "勤務終了年月"
+        case .startDate:    return "入社"
+        case .endDate:      return "退社"
         }
     }
     var tsvMaster: SelectItemsManager.TsvMaster {

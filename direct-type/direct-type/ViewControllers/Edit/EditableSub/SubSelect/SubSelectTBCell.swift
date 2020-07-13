@@ -16,6 +16,7 @@ class SubSelectTBCell: UITableViewCell {
 
     var item: CodeDisp!
     var selectStatus: Bool = false
+    var exclusive: Bool = false
     
     @IBOutlet weak var vwCellArea: UIView!
     @IBOutlet weak var lblName: UILabel!
@@ -28,10 +29,11 @@ class SubSelectTBCell: UITableViewCell {
         vwCellArea.backgroundColor = UIColor(colorType: .color_base)
     }
     //== セルの初期化と初期表示
-    func initCell(_ delegate: SubSelectProtocol, _ item: CodeDisp, _ selected: Bool = false) {
+    func initCell(_ delegate: SubSelectProtocol, _ item: CodeDisp, _ selected: Bool = false, _ exclusive: Bool) {
         self.delegate = delegate
         self.item = item
         self.selectStatus = selected
+        self.exclusive = exclusive
         if Constants.DbgDispStatus {
             self.lblDebug.isHidden = false
         } else {
@@ -46,12 +48,24 @@ class SubSelectTBCell: UITableViewCell {
         }
         if selectStatus { //TODO: 選択、非選択、選択不可（非活性）などに状態を増やす
             vwCellArea.backgroundColor = UIColor(colorType: .color_sub)
-            lblName.textColor = .white
+            if exclusive && item.code != SubSelectBaseVC.ExclusiveSelectCode {
+                lblName.textColor = UIColor(colorType: .color_light_gray)
+            } else {
+                lblName.textColor = .white
+            }
         } else {
             vwCellArea.backgroundColor = .white
-            lblName.textColor = .black
+            if exclusive && item.code != SubSelectBaseVC.ExclusiveSelectCode {
+                lblName.textColor = UIColor(colorType: .color_light_gray)
+            } else {
+                lblName.textColor = .black
+            }
         }
-        
+        if item.code != SubSelectBaseVC.ExclusiveSelectCode {
+            isUserInteractionEnabled = !exclusive
+        } else {
+            isUserInteractionEnabled = true
+        }
     }
     //=== 選択時の動作
     override func setSelected(_ selected: Bool, animated: Bool) {

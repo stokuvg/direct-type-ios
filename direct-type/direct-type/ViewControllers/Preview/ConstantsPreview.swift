@@ -94,7 +94,7 @@ enum HPreviewItemType: String {
     case workPeriodC15      //===雇用期間
     case companyNameC15     //===企業名
     case employmentTypeC15  //===雇用形態
-    case employeesCountC15  //===従業員数（数値）*これもマスタじゃないのか？ */
+    case employeesCountC15  //===従業員数（数値）*これは直接数値入力で良い
     case salaryC15          //===年収
     case contentsC15        //===職務内容本文
     //[F系統]職歴書サクサク
@@ -158,12 +158,12 @@ enum HPreviewItemType: String {
         case .qualificationsH3:     return "資格"
         case .ownPrH3:                return "自己PR"
         //[C-15]職務経歴書編集
-        case .workPeriodC15:        return "雇用期間"
-        case .companyNameC15:       return "企業名"
-        case .employmentTypeC15:    return "雇用形態"
+        case .workPeriodC15:        return "在籍期間"
+        case .companyNameC15:       return "社名"
         case .employeesCountC15:    return "従業員数"
+        case .employmentTypeC15:    return "雇用形態"
         case .salaryC15:            return "年収"
-        case .contentsC15:          return "職務内容本文"
+        case .contentsC15:          return "職務経歴詳細"
         //[F系統]職歴書サクサク
         case .companyNameF11:       return "勤務先企業名"
         case .businessTypesF12:     return "在籍企業の業種"

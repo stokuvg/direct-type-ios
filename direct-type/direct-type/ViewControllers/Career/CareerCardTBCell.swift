@@ -18,6 +18,7 @@ class CareerCardTBCell: UITableViewCell {
     
     var targetCardNum: Int = 0 //編集対象のカード番号
     var item: MdlCareerCard? = nil
+    var dispDelBtn: Bool = true
     
     @IBOutlet weak var vwTitleArea: UIView!
     @IBOutlet weak var lblTitle: UILabel!
@@ -37,15 +38,15 @@ class CareerCardTBCell: UITableViewCell {
         backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
     }
     
-    func initCell(_ delegate: CareerCardTBCellDelegate, pos: Int, _ item: MdlCareerCard) {
+    func initCell(_ delegate: CareerCardTBCellDelegate, pos: Int, _ item: MdlCareerCard, _ dispDelBtn: Bool = true) {
         self.delegate = delegate
         self.targetCardNum = pos
         self.item = item
-        //===ひとつめは削除不可
-        self.btnDelCard.isHidden = (pos == 0) ? true : false
+        self.dispDelBtn = dispDelBtn
     }
     
     func dispCell() {
+        self.btnDelCard.isHidden = !dispDelBtn //===最後のひとつは削除不可
         guard let career = item else { return }
         //===表示用文字列の生成
         let bufTitle: String = "\(targetCardNum + 1)社目"
@@ -83,6 +84,12 @@ class CareerCardTBCell: UITableViewCell {
         if let buf = SelectItemsManager.getCodeDisp(.employmentType, code: career.employmentType) {
             dispCompany.append(buf.disp)
         }
+        if let buf = SelectItemsManager.getCodeDisp(.salary, code: career.salary) {
+            dispCompany.append(buf.disp)
+        }
+
+
+
         //=== 職務経歴詳細（サクサクの名残あり）
         var dispWorknote: [String] = []
         //業種分類

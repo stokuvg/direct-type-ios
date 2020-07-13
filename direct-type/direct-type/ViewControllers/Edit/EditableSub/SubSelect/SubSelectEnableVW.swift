@@ -36,13 +36,17 @@ class SubSelectEnableVW: UIView {
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         self.addSubview(view)
+        
         stackVW.axis = .vertical
     }
     override func awakeFromNib() {
         super.awakeFromNib()
         //===デザイン適用
-        backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
-        vwMainArea.backgroundColor = UIColor(colorType: .color_main)
+//        backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
+//        vwMainArea.backgroundColor = UIColor(colorType: .color_main)
+        backgroundColor = UIColor.green
+        vwMainArea.backgroundColor = UIColor.yellow
+        vwTitleArea.backgroundColor = .brown
     }
     //== セルの初期化と初期表示
     init(_ delegate: SubSelectEnableDelegate, _ title: String, _ selected: Bool = false) {
@@ -60,5 +64,7 @@ class SubSelectEnableVW: UIView {
             vwMainArea.backgroundColor = .white
             lblTitle.textColor = .black
         }
+        lblTitle.text(text: title, fontType: .font_M, textColor: UIColor.init(colorType: .color_main)!, alignment: .left)
+
     }
 }
