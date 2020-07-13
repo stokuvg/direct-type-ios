@@ -12,6 +12,7 @@ import UIKit
 enum ColorType {
     case color_main
     case color_sub
+    case color_specialItemFocus
     case color_sub2
     case color_base
     case color_black
@@ -34,6 +35,8 @@ extension UIColor {
                 colorName = "color-main"
             case .color_sub:
                 colorName = "color-sub"
+            case .color_specialItemFocus:
+                colorName = "color-sub-half-alpha"
             case .color_sub2:
                 colorName = "color-sub2"
             case .color_base:

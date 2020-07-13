@@ -31,6 +31,7 @@ class SubSelectSpecialVC: BaseVC {
     var curSubItem: (String, IndexPath)? = nil
     var arrSubData: [CodeDisp] = []
     var dicSelectedCode: [String: CodeDisp] = [:]//小分類コードに対応する経験年数のCodeDispを設定する
+    var cellFocus: IndexPath? = nil //サブ選択中の仮選択表示用
 
     @IBOutlet weak var vwHead: UIView!
     @IBOutlet weak var lblTitle: UILabel!
@@ -87,7 +88,6 @@ class SubSelectSpecialVC: BaseVC {
         self.tableVW.register(UINib(nibName: "SubSelectSyouTBCell", bundle: nil), forCellReuseIdentifier: "Cell_SubSelectSyouTBCell")
     }
     func initData(_ delegate: SubSelectFeedbackDelegate, editableItem: EditableItemH, selectingCodes: String) {
-        print(#line, #function, "\t💜初期化💜[selectingCodes: \(selectingCodes)]💜\(editableItem.editableItemKey)")
         //=== 2段回目の年数選択を実施するか
         self.delegate = delegate
         switch editableItem.editType {
@@ -150,7 +150,6 @@ class SubSelectSpecialVC: BaseVC {
         }
     }
     func dispData() {
-//        let bufTitle: String = "\(editableItem.dispName) \(dicSelectedCode.count)件選択"
         let bufTitle: String = "\(editableItem.dispName)"
         lblTitle.text(text: bufTitle, fontType: .font_L, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         vwInfoTextArea.isHidden = true
@@ -223,7 +222,7 @@ extension SubSelectSpecialVC: UITableViewDataSource, UITableViewDelegate {
         } else {
             let cell: SubSelectSyouTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_SubSelectSyouTBCell", for: indexPath) as! SubSelectSyouTBCell
             //選択状態があるかチェックして反映させる
-            cell.initCell(self, item, dicSelectedCode[item.code])
+            cell.initCell(self, item, dicSelectedCode[item.code], (indexPath == cellFocus))
             cell.dispCell()
             return cell
         }
@@ -239,6 +238,8 @@ extension SubSelectSpecialVC: UITableViewDataSource, UITableViewDelegate {
         } else {
             //そのセルの選択状態に応じて、経験年数を入れさせるか、解錠するかを選ぶ
             if let _ = dicSelectedCode[item.code] {
+                changeFocusItem(nil)//仮選択して、該当セルの描画しなおし
+                cellFocus = nil //選択解除
                 dicSelectedCode.removeValue(forKey: item.code)//削除する
                 tableView.reloadRows(at: [indexPath], with: .none) //該当セルの描画しなおし
                 dispData()
@@ -249,6 +250,7 @@ extension SubSelectSpecialVC: UITableViewDataSource, UITableViewDelegate {
                     return
                 }
                 if selectYearMode {//年数選択が必要か、そのまま選択可能か
+                    changeFocusItem(indexPath)//仮選択して、該当セルの描画しなおし
                     tfSubDummy.text = item.code
                     curSubItem = (item.code, indexPath)
                     tfSubDummy.becomeFirstResponder()//ダミーを使ってPicker制御
@@ -260,6 +262,17 @@ extension SubSelectSpecialVC: UITableViewDataSource, UITableViewDelegate {
                     selectAndCloseIfSingle()//===選択と同時に閉じて良いかのチェック
                 }
             }
+        }
+    }
+    func changeFocusItem(_ indexPath: IndexPath?) { //仮選択時のフォーカ表示の切り替え
+        if let ip = cellFocus { //古い箇所の描画更新
+            cellFocus = indexPath
+            tableVW.reloadRows(at: [ip], with: .none) //該当セルの描画しなおし
+        } else {
+            cellFocus = indexPath
+        }
+        if let ip = indexPath { //新しい箇所の描画更新
+            tableVW.reloadRows(at: [ip], with: .none) //該当セルの描画しなおし
         }
     }
     func selectAndCloseIfSingle() {
@@ -279,6 +292,7 @@ extension SubSelectSpecialVC: SubSelectBaseDelegate {
         self.dismiss(animated: true) { }
     }
     func actPopupCancel() {
+        
         self.dismiss(animated: true) { }
     }
 }

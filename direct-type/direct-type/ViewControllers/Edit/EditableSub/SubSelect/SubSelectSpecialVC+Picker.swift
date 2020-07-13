@@ -97,7 +97,7 @@ extension SubSelectSpecialVC {
     //ピッカーにつけた〔選択〕〔Cancel〕ボタン
     @objc func actPickerSelectButton(_ sender: IKBarButtonItem) {
         guard let picker = sender.parentPicker as? IKPickerView else { return }
-        //print("❤️[\(picker.itemKey)]❤️ ピッカー〔選択〕ボタン押下❤️")
+        changeFocusItem(nil)//仮選択して、該当セルの描画しなおし
         let selectionItems = arrSubData
         guard selectionItems.count > 0 else { return }//そもそも項目がない（依存関係ありの時など）
         let num = picker.selectedRow(inComponent: 0)
@@ -117,7 +117,7 @@ extension SubSelectSpecialVC {
     }
     @objc func actPickerCancelButton(_ sender: IKBarButtonItem) {
         guard let picker = sender.parentPicker as? IKPickerView else { return }
-        //print("❤️[\(picker.itemKey)]❤️ ピッカー〔キャンセル〕ボタン押下❤️")
+        changeFocusItem(nil)//仮選択して、該当セルの描画しなおし
         //=== キャンセルされたら、次のセルへ移動せず閉じる
         self.view.endEditing(false) //forceフラグはどこに効いてくるのか？
     }
