@@ -63,14 +63,14 @@ class HPreviewTBCell: UITableViewCell {
         let bufValue: String = dispCellValue(_item)
         let bufNotice: String = _item.notice
         //===表示させる
-        lblTitle.text(text: bufTitle, fontType: .font_SSb, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
-        lblValue.text(text: bufValue, fontType: .font_SS, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
-        lblNotice.text(text: bufNotice, fontType: .font_SSS, textColor: UIColor.init(colorType: .color_parts_gray)!, alignment: .left)
+        lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        lblValue.text(text: bufValue, fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        lblNotice.text(text: bufNotice, fontType: .font_SS, textColor: UIColor.init(colorType: .color_parts_gray)!, alignment: .left)
         lblNotice.isHidden = (_item.notice == "") ? true : false
         //Validationエラー発生時の表示
         if errMsg != "" {
             //lblErrorMsg.text = errMsg
-            lblErrorMsg.text(text: errMsg, fontType: .font_SSS, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
+            lblErrorMsg.text(text: errMsg, fontType: .font_SS, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
             vwMainArea.backgroundColor = UIColor.init(red: 1.0, green: 0.8, blue: 0.8, alpha: 1.0)
         } else {
             lblErrorMsg.text = ""
