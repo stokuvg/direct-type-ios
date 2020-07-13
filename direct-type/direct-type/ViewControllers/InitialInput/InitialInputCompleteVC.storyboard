@@ -25,23 +25,23 @@
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vVX-g2-lv6">
-                                <rect key="frame" x="40" y="254" width="334" height="508"/>
+                                <rect key="frame" x="40" y="254" width="334" height="498"/>
                                 <color key="textColor" name="color-black"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CY3-Mz-cac">
-                                <rect key="frame" x="40" y="782" width="334" height="40"/>
+                                <rect key="frame" x="40" y="772" width="334" height="50"/>
                                 <color key="backgroundColor" name="color-sub"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="chz-oj-Tjv"/>
+                                    <constraint firstAttribute="height" constant="50" id="chz-oj-Tjv"/>
                                 </constraints>
                                 <state key="normal" title="次へ">
                                     <color key="titleColor" name="color-white"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="20"/>
+                                        <real key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
