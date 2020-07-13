@@ -226,8 +226,6 @@
 		26157DC22489CD5F00752C55 /* ApiManager+Career.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26157DC12489CD5F00752C55 /* ApiManager+Career.swift */; };
 		2619D2A524AB2E0600F24624 /* EntryConfirmAnyModelTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619D2A324AB2E0600F24624 /* EntryConfirmAnyModelTBCell.swift */; };
 		2619D2A624AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2619D2A424AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib */; };
-		2620BCF024AEBA62006D7FFF /* HEditZipcodeTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2620BCEE24AEBA62006D7FFF /* HEditZipcodeTBCell.xib */; };
-		2620BCF124AEBA62006D7FFF /* HEditZipcodeTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2620BCEF24AEBA62006D7FFF /* HEditZipcodeTBCell.swift */; };
 		2635444F24B6D2DC00C4B7C8 /* SpacerTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2635444D24B6D2DC00C4B7C8 /* SpacerTBCell.swift */; };
 		2635445024B6D2DC00C4B7C8 /* SpacerTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2635444E24B6D2DC00C4B7C8 /* SpacerTBCell.xib */; };
 		2635445324B703B500C4B7C8 /* SubSelectEnableVW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2635445124B703B500C4B7C8 /* SubSelectEnableVW.swift */; };
@@ -569,8 +567,6 @@
 		26157DC12489CD5F00752C55 /* ApiManager+Career.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Career.swift"; sourceTree = "<group>"; };
 		2619D2A324AB2E0600F24624 /* EntryConfirmAnyModelTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryConfirmAnyModelTBCell.swift; sourceTree = "<group>"; };
 		2619D2A424AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntryConfirmAnyModelTBCell.xib; sourceTree = "<group>"; };
-		2620BCEE24AEBA62006D7FFF /* HEditZipcodeTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HEditZipcodeTBCell.xib; sourceTree = "<group>"; };
-		2620BCEF24AEBA62006D7FFF /* HEditZipcodeTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HEditZipcodeTBCell.swift; sourceTree = "<group>"; };
 		2635444D24B6D2DC00C4B7C8 /* SpacerTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerTBCell.swift; sourceTree = "<group>"; };
 		2635444E24B6D2DC00C4B7C8 /* SpacerTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpacerTBCell.xib; sourceTree = "<group>"; };
 		2635445124B703B500C4B7C8 /* SubSelectEnableVW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSelectEnableVW.swift; sourceTree = "<group>"; };
@@ -1307,8 +1303,6 @@
 				26CFC4632469496D00E458E2 /* HEditTextTBCell.xib */,
 				26859E252488E636000109D1 /* HEditSpecialTBCell.swift */,
 				26859E262488E636000109D1 /* HEditSpecialTBCell.xib */,
-				2620BCEF24AEBA62006D7FFF /* HEditZipcodeTBCell.swift */,
-				2620BCEE24AEBA62006D7FFF /* HEditZipcodeTBCell.xib */,
 			);
 			path = EditableSub;
 			sourceTree = "<group>";
@@ -1613,7 +1607,6 @@
 				26C3207824B412DE00E9564B /* CareerCardItemVW.xib in Resources */,
 				26BF48E724639D2B00E00215 /* MstK9_employmentType.tsv in Resources */,
 				066BD9E02456ACB5009E610B /* Assets.xcassets in Resources */,
-				2620BCF024AEBA62006D7FFF /* HEditZipcodeTBCell.xib in Resources */,
 				066F2711246E811F0040BDC1 /* JobDetailFoldingMemoCell.xib in Resources */,
 				269AFFC7246A929300DB364B /* EditablePopup.storyboard in Resources */,
 				0EE8619B2488C9B3003C5242 /* ChemistrySelectCell.xib in Resources */,
@@ -1802,7 +1795,6 @@
 				06E519A42457DC7B004E4B7A /* InitialInputCompleteVC.swift in Sources */,
 				0667636C2457B02200AC5039 /* KeepListVC.swift in Sources */,
 				0EE36F1B24872E280098A2AF /* IconCarouselView.swift in Sources */,
-				2620BCF124AEBA62006D7FFF /* HEditZipcodeTBCell.swift in Sources */,
 				26B491DE247E394900B58AD4 /* ApiManager+Jobs.swift in Sources */,
 				0EE8619D2488C9BF003C5242 /* ChemistrySelectCell.swift in Sources */,
 				0E144D97248DD869005A659F /* ChemistryScore.swift in Sources */,

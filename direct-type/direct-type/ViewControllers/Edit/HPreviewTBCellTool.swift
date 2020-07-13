@@ -8,13 +8,25 @@
 
 import UIKit
 
+class IKTextField: UITextField {
+    var itemKey: EditableItemKey = "<undefine>"
+    //var padding = UIEdgeInsets.zero
+    let padding = UIEdgeInsets(top: 6, left: 4, bottom: 6, right: 4)
+    override var intrinsicContentSize: CGSize {
+        var intrinsicContentSize = super.intrinsicContentSize
+        intrinsicContentSize.height += ( padding.top + padding.bottom + 0 )
+        intrinsicContentSize.width += ( padding.left + padding.right + 0 )
+        return intrinsicContentSize
+    }
+}
+
 class ExItemLabel: UILabel {
     var isReadonly: Bool = false
     //var padding = UIEdgeInsets.zero
-    let padding = UIEdgeInsets(top: 12, left: 8, bottom: 12, right: 4)
+    let padding = UIEdgeInsets(top: 16, left: 8, bottom: 16, right: 8)
     override func drawText(in rect: CGRect) {
         let rectTmp = rect.inset(by: padding)
-        let rectangle = UIBezierPath(roundedRect: rect, cornerRadius: 8)
+        let rectangle = UIBezierPath(roundedRect: rect, cornerRadius: 6)
         UIColor(colorType: .color_white)!.setFill()
         UIColor(colorType: .color_line)!.setStroke()
         if isReadonly {

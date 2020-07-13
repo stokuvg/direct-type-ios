@@ -144,7 +144,6 @@ class EditableTableBasicVC: EditableBasicVC {
         self.tableVW.rowHeight = UITableView.automaticDimension
         self.tableVW.register(UINib(nibName: "HEditTextTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HEditTextTBCell")
         self.tableVW.register(UINib(nibName: "HEditDrumTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HEditDrumTBCell")
-        self.tableVW.register(UINib(nibName: "HEditZipcodeTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HEditZipcodeTBCell")
         self.tableVW.register(UINib(nibName: "HEditSpecialTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HEditSpecialTBCell")
         //=== Keyboard制御
         vwKbTapArea.backgroundColor = .black
@@ -296,8 +295,10 @@ extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
             return cell
             
         case .inputZipcode:
-            let cell: HEditZipcodeTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditZipcodeTBCell", for: indexPath) as! HEditZipcodeTBCell
-            cell.initCell(item)
+            let returnKeyType: UIReturnKeyType = (item.editableItemKey == editableModel.lastEditableItemKey) ? .done : .next
+            let cell: HEditTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditTextTBCell", for: indexPath) as! HEditTextTBCell
+            let errMsg = dicValidErrMsg[item.editableItemKey]?.joined(separator: "\n" ) ?? ""
+            cell.initCell(self, item, errMsg: errMsg, returnKeyType)
             cell.dispCell()
             return cell
 
