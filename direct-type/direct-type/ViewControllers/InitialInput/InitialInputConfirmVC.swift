@@ -88,6 +88,7 @@ private extension InitialInputConfirmVC {
                 buf = "passwordVerifier"
             case .customChallenge:
                 buf = "customChallenge"
+                self.showConfirm(title: "認証コードが一致しません", message: "正しいコードを入力してください。", onlyOK: true)
             case .deviceSRPAuth:
                 buf = "deviceSRPAuth"
             case .devicePasswordVerifier:
