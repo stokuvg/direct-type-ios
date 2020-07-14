@@ -80,7 +80,7 @@ private extension AccountChangeVC {
     
     func transitionToConfirmation() {
         guard let inputText = inputField.text else { return }
-        let vc = getVC(sbName: "SettingVC", vcName: "AccountChangeCompleteVC") as! AccountChangeCompleteVC
+        let vc = getVC(sbName: "SettingVC", vcName: "AccountChangeCompleteVC") as! AccountChangeConfirmVC
         vc.configure(with: inputText)
         navigationController?.pushViewController(vc, animated: true)
     }

@@ -11,7 +11,7 @@ import TudApi
 import AWSMobileClient
 import SVProgressHUD
 
-final class AccountChangeCompleteVC: TmpBasicVC {
+final class AccountChangeConfirmVC: TmpBasicVC {
     @IBOutlet private weak var infomationLabel: UILabel!
     @IBOutlet private weak var textLabel: UILabel!
     @IBOutlet private weak var inputCodeField: UITextField!
@@ -37,7 +37,7 @@ final class AccountChangeCompleteVC: TmpBasicVC {
     }
 }
 
-private extension AccountChangeCompleteVC {
+private extension AccountChangeConfirmVC {
     func setup() {
         title = "認証コード入力"
         
