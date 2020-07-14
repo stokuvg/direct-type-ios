@@ -48,20 +48,20 @@ class SubSelectTBCell: UITableViewCell {
         }
         if selectStatus { //TODO: 選択、非選択、選択不可（非活性）などに状態を増やす
             vwCellArea.backgroundColor = UIColor(colorType: .color_sub)
-            if exclusive && item.code != SubSelectBaseVC.ExclusiveSelectCodeDisp.code {
+            if exclusive && item.code != Constants.ExclusiveSelectCodeDisp.code {
                 lblName.textColor = UIColor(colorType: .color_light_gray)
             } else {
                 lblName.textColor = .white
             }
         } else {
             vwCellArea.backgroundColor = .white
-            if exclusive && item.code != SubSelectBaseVC.ExclusiveSelectCodeDisp.code {
+            if exclusive && item.code != Constants.ExclusiveSelectCodeDisp.code {
                 lblName.textColor = UIColor(colorType: .color_light_gray)
             } else {
                 lblName.textColor = .black
             }
         }
-        if item.code != SubSelectBaseVC.ExclusiveSelectCodeDisp.code {
+        if item.code != Constants.ExclusiveSelectCodeDisp.code {
             isUserInteractionEnabled = !exclusive
         } else {
             isUserInteractionEnabled = true
