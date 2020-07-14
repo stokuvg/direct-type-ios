@@ -10,6 +10,13 @@ import UIKit
 
 // 使用文字タイプ(スタイル,サイズ,行間)
 enum FontType {
+    // 応募フォーム
+    case E_font_Mb
+    case E_font_Sb
+    case E_font_SSb
+    case E_font_M
+    case E_font_S
+    case E_font_SS
     // 求人系以外
     case font_XL
     case font_L
@@ -35,6 +42,12 @@ enum FontType {
     
     var lineSpacing:CGFloat {
         switch self {
+            case .E_font_M, .E_font_Mb:
+                return 4
+            case .E_font_S, .E_font_Sb:
+                return 4
+            case .E_font_SS, .E_font_SSb:
+                return 4
             case .font_XL:
                 return 4
             case .font_L:
@@ -84,6 +97,24 @@ extension UIFont {
         var fontSize:CGFloat = 0.0
         
         switch fontType {
+            case .E_font_Mb:
+                fontName = "HiraginoSans-W6"
+                fontSize = 18.0
+            case .E_font_Sb:
+                fontName = "HiraginoSans-W6"
+                fontSize = 16.0
+            case .E_font_SSb:
+                fontName = "HiraginoSans-W6"
+                fontSize = 12.0
+            case .E_font_M:
+                fontName = "HiraginoSans-W3"
+                fontSize = 18.0
+            case .E_font_S:
+                fontName = "HiraginoSans-W3"
+                fontSize = 16.0
+            case .E_font_SS:
+                fontName = "HiraginoSans-W3"
+                fontSize = 12.0
             case .font_XL:
                 fontName = "HiraginoSans-W6"
                 fontSize = 30.0

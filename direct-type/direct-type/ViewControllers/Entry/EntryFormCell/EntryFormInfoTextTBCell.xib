@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGY-c4-7xI">
-                                <rect key="frame" x="8" y="8" width="304" height="28"/>
+                                <rect key="frame" x="16" y="25" width="288" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -29,18 +30,28 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="XGY-c4-7xI" firstAttribute="leading" secondItem="wPf-cQ-9B1" secondAttribute="leading" constant="8" id="Fo0-3I-iZm"/>
+                            <constraint firstItem="XGY-c4-7xI" firstAttribute="leading" secondItem="wPf-cQ-9B1" secondAttribute="leading" constant="16" id="Fo0-3I-iZm"/>
                             <constraint firstAttribute="bottom" secondItem="XGY-c4-7xI" secondAttribute="bottom" constant="8" id="Jxe-sV-uQV"/>
-                            <constraint firstAttribute="trailing" secondItem="XGY-c4-7xI" secondAttribute="trailing" constant="8" id="LAo-Ab-Opm"/>
-                            <constraint firstItem="XGY-c4-7xI" firstAttribute="top" secondItem="wPf-cQ-9B1" secondAttribute="top" constant="8" id="PUU-sU-CyF"/>
+                            <constraint firstAttribute="trailing" secondItem="XGY-c4-7xI" secondAttribute="trailing" constant="16" id="LAo-Ab-Opm"/>
+                            <constraint firstItem="XGY-c4-7xI" firstAttribute="top" secondItem="wPf-cQ-9B1" secondAttribute="top" constant="25" id="PUU-sU-CyF"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a9r-s5-aJN" userLabel="上端区切り">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="0.5"/>
+                        <color key="backgroundColor" name="color-line"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="fdH-dh-xdj"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="wPf-cQ-9B1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="8rq-jY-qEW"/>
+                    <constraint firstAttribute="trailing" secondItem="a9r-s5-aJN" secondAttribute="trailing" id="Jir-CU-Rhi"/>
                     <constraint firstAttribute="trailing" secondItem="wPf-cQ-9B1" secondAttribute="trailing" id="K9J-bB-Tj4"/>
                     <constraint firstAttribute="bottom" secondItem="wPf-cQ-9B1" secondAttribute="bottom" id="TVN-E3-RaN"/>
                     <constraint firstItem="wPf-cQ-9B1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Tis-hT-SC7"/>
+                    <constraint firstItem="a9r-s5-aJN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="bvo-cr-63w"/>
+                    <constraint firstItem="a9r-s5-aJN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="xbF-AX-bJG"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -52,4 +63,9 @@
             <point key="canvasLocation" x="139" y="104"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <namedColor name="color-line">
+            <color red="0.82352941176470584" green="0.82352941176470584" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
