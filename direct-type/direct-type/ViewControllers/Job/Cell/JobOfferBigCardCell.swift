@@ -11,6 +11,9 @@ import AlamofireImage
 import TudApi
 
 class JobOfferBigCardCell: BaseJobCardCell {
+    
+    @IBOutlet weak var jobLabelTop:NSLayoutConstraint!
+    @IBOutlet weak var jobLabelHeight:NSLayoutConstraint!
 
     @IBOutlet weak var keepBtn:UIButton!
     @IBAction func keepBtnAction() {
@@ -73,6 +76,14 @@ class JobOfferBigCardCell: BaseJobCardCell {
         // 職業
         let job:String = data.jobName
         jobLabel.text(text: job, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        
+        if limitedType == .none {
+            self.jobLabelTop.constant = 15
+            self.jobLabelHeight.constant = 70
+        } else {
+            self.jobLabelTop.constant = 5
+            self.jobLabelHeight.constant = 60
+        }
 
         // 給与
         let displayFlag = data.salaryDisplay

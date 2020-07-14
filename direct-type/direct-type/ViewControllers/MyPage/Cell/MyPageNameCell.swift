@@ -37,7 +37,7 @@ class MyPageNameCell: BaseTableViewCell {
         self.nickname = nickname
     }
    func dispCell() {
-       nameLabel.text(text: nickname, fontType: .C_font_L, textColor: UIColor.init(colorType: .color_black)!, alignment: .right)
+       nameLabel.text(text: nickname, fontType: .C_font_L, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
     }
         
     override func setSelected(_ selected: Bool, animated: Bool) {
