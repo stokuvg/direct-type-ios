@@ -20,7 +20,7 @@ class SubSelectBaseVC: BaseVC {
     var singleMode: Bool = true
     //先頭項目に排他選択肢をつけて利用するか
     var exclusiveSelectMode: Bool = false
-    static let ExclusiveSelectCode: String = "<exclusiveSelector>"
+    static let ExclusiveSelectCodeDisp: CodeDisp = CodeDisp("<exclusiveSelector>", "勤務地にはこだわらない")
     //選択数のMAX（1つなら即確定して前画面の可能性も？）
     var selectMaxCount: Int = 5
     var editableModel: EditableModel = EditableModel() //画面編集項目のモデルと管理//???
@@ -116,7 +116,7 @@ class SubSelectBaseVC: BaseVC {
         case EditItemMdlProfile.hopeJobArea.itemKey: fallthrough
         case EditItemMdlEntry.hopeArea.itemKey:
             exclusiveSelectMode = true
-            arrData.insert(CodeDisp(SubSelectBaseVC.ExclusiveSelectCode, "勤務地にはこだわらない"), at: 0)
+            arrData.insert(SubSelectBaseVC.ExclusiveSelectCodeDisp, at: 0)
             //if exclusiveSelectMode && dicChange.count == 0 {//=== 選択状態の反映（選択ない場合にこれを選んでおく）
             //    dicChange[SubSelectBaseVC.ExclusiveSelectCode] = true//これやるとダメか。
             //}
@@ -158,7 +158,7 @@ class SubSelectBaseVC: BaseVC {
             if selectMaxCount > 1 {
                 //let count = self.dicChange.filter { (k, v) -> Bool in v == true }.count
                 let count = self.dicChange.filter { (k, v) -> Bool in
-                    v == true && k != SubSelectBaseVC.ExclusiveSelectCode
+                    v == true && k != SubSelectBaseVC.ExclusiveSelectCodeDisp.code
                 }.count
                 if selectMaxCount == Constants.SelectMultidMaxUndefine {
                     bufCount = " (\(count))"
@@ -199,7 +199,7 @@ extension SubSelectBaseVC: UITableViewDataSource, UITableViewDelegate {
         let cell: SubSelectTBCell = tableView.dequeueReusableCell(withIdentifier: "SubSelectTBCell") as! SubSelectTBCell
         //選択状態があるかチェックして反映させる
         let select: Bool = dicChange[item.code] ?? false  //差分情報優先
-        let exclusive: Bool = dicChange.contains { (k,v) -> Bool in v == true && k == SubSelectBaseVC.ExclusiveSelectCode }
+        let exclusive: Bool = dicChange.contains { (k,v) -> Bool in v == true && k == SubSelectBaseVC.ExclusiveSelectCodeDisp.code }
         cell.initCell(self, item, select, exclusive)
         cell.dispCell()
         return cell
@@ -213,13 +213,12 @@ extension SubSelectBaseVC: UITableViewDataSource, UITableViewDelegate {
         let select: Bool = dicChange[item.code] ?? false  //差分情報優先
         //===排他的選択モード「勤務地にはこだわらない」を選んだ場合の特殊処理
         if exclusiveSelectMode {
-            if item.code == SubSelectBaseVC.ExclusiveSelectCode {
+            if item.code == SubSelectBaseVC.ExclusiveSelectCodeDisp.code {
                 if select {
-                    print("こだわらないが選ばれていた")
+                   //特になにもしない（後続処理で、普通に解除される）
                 } else {
-                    print("こだわらないが選ばれていなかった場合 [\(dicChange.count)]だったので、これを選んだ")
                     dicChange.removeAll()//まるっと選択解除
-                    dicChange[SubSelectBaseVC.ExclusiveSelectCode] = true//この項目のみ選択状態
+                    dicChange[SubSelectBaseVC.ExclusiveSelectCodeDisp.code] = true//この項目のみ選択状態
                     dispInfoCount()
                 }
             }
