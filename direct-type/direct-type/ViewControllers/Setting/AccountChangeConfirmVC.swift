@@ -87,7 +87,10 @@ private extension AccountChangeConfirmVC {
         SVProgressHUD.show()
         ApiManager.accountMigrateAnswer(param)
         .done { _ in
-            self.tryLogout()
+            
+            SVProgressHUD.dismiss()
+            self.showConfirm(title: "アカウント変更が完了しました", message: "新しいアカウントで再度ログインしてください。", onlyOK: true)
+            .done { _ in self.tryLogout() } .catch { (error) in } .finally { }
         }
         .catch { (error) in
             DispatchQueue.main.async {
@@ -100,6 +103,7 @@ private extension AccountChangeConfirmVC {
     }
     
     func tryLogout() {
+        SVProgressHUD.show()
         AWSMobileClient.default().signOut { (error) in
             if let error = error {
                 DispatchQueue.main.async {
@@ -109,51 +113,16 @@ private extension AccountChangeConfirmVC {
                 return
             }
             DispatchQueue.main.async {
-                self.trySignIn()
+                SVProgressHUD.dismiss()
+                self.transitionToInitialView()
             }
         }
     }
     
-    
-    func trySignIn() {
-        AWSMobileClient.default().signIn(username: phoneNumber.addCountryCode(type: .japan), password: AppDefine.password)  { (signInResult, error) in
-            if let error = error as? AWSMobileClientError {
-                switch error {
-                case .invalidParameter:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        self.trySignIn()
-                    }
-                default:
-                    DispatchQueue.main.async {
-                        let buf = AuthManager.convAnyError(error).debugDisp
-                        self.showConfirm(title: "Error", message: buf, onlyOK: true)
-                        self.changeButtonState()
-                        SVProgressHUD.dismiss()
-                    }
-                }
-                return
-            }
-            
-            guard let signInResult = signInResult else {
-                print("レスポンスがが正常に受け取れませんでした")
-                return
-            }
-            switch signInResult.signInState {
-            case .customChallenge:
-                DispatchQueue.main.async {
-                    SVProgressHUD.dismiss()
-                    self.showConfirm(title: "変更が完了しました", message: "", onlyOK: true)
-                    .done { _ in
-                        self.navigationController?.popToRootViewController(animated: true)
-                    } .catch { (error) in } .finally { }
-                }
-                break
-            case .unknown, .signedIn, .smsMFA, .passwordVerifier, .deviceSRPAuth,
-                 .devicePasswordVerifier, .adminNoSRPAuth, .newPasswordRequired:
-                SVProgressHUD.dismiss()
-                break
-            }
-        }
+    func transitionToInitialView() {
+        let vc = getVC(sbName: "InitialInputStartVC", vcName: "InitialInputStartVC") as! InitialInputStartVC
+        let newNavigationController = UINavigationController(rootViewController: vc)
+        UIApplication.shared.keyWindow?.rootViewController = newNavigationController
     }
     
     func resendAuthCode() {
