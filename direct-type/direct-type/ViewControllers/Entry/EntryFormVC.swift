@@ -116,8 +116,7 @@ class EntryFormVC: PreviewBaseVC {
             if entryOwnPR.isEmpty {
                 entry?.ownPR = resume?.ownPr ?? ""
             }
-        }
-        
+        }        
 
         //====== [C-9]応募フォーム
         //===４．応募先求人

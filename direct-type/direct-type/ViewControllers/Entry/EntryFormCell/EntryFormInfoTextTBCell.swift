@@ -32,6 +32,6 @@ class EntryFormInfoTextTBCell: UITableViewCell {
         self.title = title
     }
     func dispCell() {
-        lblTitle.text(text: title, fontType: .font_Sb, textColor: UIColor(colorType: .color_black)!, alignment: .center)
+        lblTitle.text(text: title, fontType: .E_font_S, textColor: UIColor(colorType: .color_black)!, alignment: .center)
     }
 }

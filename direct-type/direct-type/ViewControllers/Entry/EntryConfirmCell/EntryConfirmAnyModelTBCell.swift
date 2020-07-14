@@ -10,6 +10,7 @@ import UIKit
 
 extension EntryConfirmAnyModelTBCell {
     enum EntryFormModelType {
+        case jobCard
         case profile
         case resume
         case career
@@ -59,6 +60,7 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
     func dispCell() {
         var bufTitle: String = ""
         switch type {
+        case .jobCard:  bufTitle = "求人カード"
         case .profile:  bufTitle = "プロフィール"
         case .resume:   bufTitle = "履歴書"
         case .career:   bufTitle = "業務経歴書"
@@ -74,6 +76,18 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
         }
         //=== 表示項目を追加していく
         switch type {
+        case .jobCard:
+            if let jobCard = self.detail as? MdlJobCardDetail {
+                //=== 表示項目を追加していく
+                let bufCompanyName = jobCard.companyName
+                let bufJobName = jobCard.jobName
+                let endDate = DateHelper.convStrYMD2Date(jobCard.end_date)
+                let bufDate = "〜\(endDate.dispYmdJP())"
+                stackVW.addArrangedSubview(EntryConfirmItem("会社名", "\(bufCompanyName)"))
+                stackVW.addArrangedSubview(EntryConfirmItem("仕事名", "\(bufJobName)"))
+                stackVW.addArrangedSubview(EntryConfirmItem("応募期限", "\(bufDate)"))
+            }
+
         case .profile:
             if let profile = self.detail as? MdlProfile {
                 let bufFullname: String = "\(profile.familyName) \(profile.firstName)"

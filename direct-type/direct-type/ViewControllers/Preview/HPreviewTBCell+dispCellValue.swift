@@ -78,6 +78,9 @@ extension HPreviewTBCell {
             return _item.childItems[0].curVal
         case .hopeAreaC9:     //１０．希望勤務地（任意）
             if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
+            if _item.childItems[0].curVal == SubSelectBaseVC.ExclusiveSelectCodeDisp.code {
+                return SubSelectBaseVC.ExclusiveSelectCodeDisp.disp
+            }
             let tmp0: String = _item.childItems[0].curVal
             var arr0: [String] = []
             for code in tmp0.split(separator: "_").sorted() { //コード順ソートしておく
@@ -127,6 +130,9 @@ extension HPreviewTBCell {
         case .hopeAreaH2:
             if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
+            if _item.childItems[0].curVal == SubSelectBaseVC.ExclusiveSelectCodeDisp.code {
+                return SubSelectBaseVC.ExclusiveSelectCodeDisp.disp
+            }
             var arr0: [String] = []
             for code in tmp0.split(separator: "_").sorted() { //コード順ソートしておく
                 let buf: String = SelectItemsManager.getCodeDisp(.entryPlace, code: String(code))?.disp ?? ""
@@ -304,6 +310,9 @@ extension HPreviewTBCell {
             return "\(bufBirthday)（\(bufAge)）"
         case .hopeAreaA9:             //=== [A-9] 入力（希望勤務地）
             if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
+            if _item.childItems[0].curVal == SubSelectBaseVC.ExclusiveSelectCodeDisp.code {
+                return SubSelectBaseVC.ExclusiveSelectCodeDisp.disp
+            }
             let tmp0: String = _item.childItems[0].curVal
             var arr0: [String] = []
             for code in tmp0.split(separator: "_").sorted() { //コード順ソートしておく

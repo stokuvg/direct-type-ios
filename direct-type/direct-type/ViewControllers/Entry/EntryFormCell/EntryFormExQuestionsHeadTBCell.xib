@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nd9-FF-IiX">
-                                <rect key="frame" x="8" y="4" width="304" height="36"/>
+                                <rect key="frame" x="16" y="4" width="288" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -29,9 +29,9 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Nd9-FF-IiX" secondAttribute="trailing" constant="8" id="ZjY-Fm-O8H"/>
+                            <constraint firstAttribute="trailing" secondItem="Nd9-FF-IiX" secondAttribute="trailing" constant="16" id="ZjY-Fm-O8H"/>
                             <constraint firstAttribute="bottom" secondItem="Nd9-FF-IiX" secondAttribute="bottom" constant="4" id="gbk-I0-7Xu"/>
-                            <constraint firstItem="Nd9-FF-IiX" firstAttribute="leading" secondItem="zG6-fu-cXY" secondAttribute="leading" constant="8" id="l45-u8-Qle"/>
+                            <constraint firstItem="Nd9-FF-IiX" firstAttribute="leading" secondItem="zG6-fu-cXY" secondAttribute="leading" constant="16" id="l45-u8-Qle"/>
                             <constraint firstItem="Nd9-FF-IiX" firstAttribute="top" secondItem="zG6-fu-cXY" secondAttribute="top" constant="4" id="nuI-jK-jFu"/>
                         </constraints>
                     </view>

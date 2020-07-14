@@ -32,6 +32,6 @@ class EntryFormExQuestionsHeadTBCell: UITableViewCell {
         self.title = title
     }
     func dispCell() {
-        lblTitle.text(text: title, fontType: .font_SSb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
+        lblTitle.text(text: title, fontType: .font_Sb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
     }
 }

@@ -55,14 +55,14 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
         "転職サイトtypeを通じて応募します。",
         "利用するパスワードを入力してください。",
         "（転職サイトtypeにご登録済の方は、ご利用中のパスワードをご入力ください。）",
-        "\n\(email)"].joined(separator: "")
+        "\n\n利用メールアドレス：\(email)"].joined(separator: "")
 //        let bufMessage: String = [
 //        "この求人への応募は転職サイトtypeを通じて行われます。",
 //        "\(email)で転職サイトtypeに登録済の方は転職サイトtypeのパスワードを、" +
 //        "未登録の方はご希望のパスワードを入力ください。"].joined(separator: "")
         lblTitle.text(text: bufTitle, fontType: .font_M, textColor: UIColor(colorType: .color_black)!, alignment: .center)
-        lblMessageB.text(text: bufMessageB, fontType: .font_SSb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
-        lblMessage.text(text: bufMessage, fontType: .font_SS, textColor: UIColor(colorType: .color_black)!, alignment: .left)
+        lblMessageB.text(text: bufMessageB, fontType: .font_Sb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
+        lblMessage.text(text: bufMessage, fontType: .font_S, textColor: UIColor(colorType: .color_black)!, alignment: .left)
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

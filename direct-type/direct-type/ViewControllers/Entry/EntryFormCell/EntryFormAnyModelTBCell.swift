@@ -8,6 +8,27 @@
 
 import UIKit
 
+
+class ExEntryLabel: UILabel {
+    let padding = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+    override func drawText(in rect: CGRect) {
+        let rectTmp = rect.inset(by: padding)
+        let rectangle = UIBezierPath(roundedRect: rect, cornerRadius: 8)
+        UIColor(rgba: "#eee").setFill()
+        UIColor(colorType: .color_line)!.setStroke()
+        rectangle.fill()
+//        rectangle.stroke()
+        super.drawText(in: rectTmp)
+    }
+    override var intrinsicContentSize: CGSize {
+        var intrinsicContentSize = super.intrinsicContentSize
+        intrinsicContentSize.height += ( padding.top + padding.bottom + 0 )
+        intrinsicContentSize.width += ( padding.left + padding.right + 0 )
+        return intrinsicContentSize
+    }
+}
+
+
 extension EntryFormAnyModelTBCell {
     enum EntryFormModelType {
         case profile
@@ -25,17 +46,18 @@ class EntryFormAnyModelTBCell: UITableViewCell {
     @IBOutlet weak var vwMessageArea: UIView!
     @IBOutlet weak var vwIconArea: UIView!
     @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var lblMessage: UILabel!
+    @IBOutlet weak var lblMessage: ExEntryLabel!
     @IBOutlet weak var ivIcon: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         //===デザイン適用
-        backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
-        vwMainArea.backgroundColor = UIColor(colorType: .color_base)
+        backgroundColor = UIColor(colorType: .color_white)//Clearにしたとき、こちらが透過される
+        vwMainArea.backgroundColor = UIColor(colorType: .color_white)
         vwTitleArea.backgroundColor = .clear
         vwMessageArea.backgroundColor = .clear
         vwIconArea.backgroundColor = .clear
+        lblMessage.backgroundColor = .clear
     }
     func initCell(_ type: EntryFormModelType, model: Any?) {
         self.type = type
@@ -44,29 +66,30 @@ class EntryFormAnyModelTBCell: UITableViewCell {
     func dispCell() {
         switch type {
         case .profile:
-            lblTitle.text(text: "プロフィール", fontType: .font_SSb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
-            lblMessage.text(text: "未入力", fontType: .font_SSSb, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
+            lblTitle.text(text: "プロフィール", fontType: .font_Sb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
             if let model = self.detail as? MdlProfile {
-                //print("\t[プロフィール: \(model.completeness)%]")
                 if chkProgressProfile() {
-                    lblMessage.text(text: "入力済み", fontType: .font_SS, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .left)
+                    lblMessage.text(text: "入力済み", fontType: .E_font_Status, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .left)
+                } else {
+                    lblMessage.text(text: "未入力あり", fontType: .E_font_Status, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
                 }
             }
         case .resume:
-            lblTitle.text(text: "履歴書", fontType: .font_SSb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
-            lblMessage.text(text: "未入力", fontType: .font_SSSb, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
+            lblTitle.text(text: "履歴書", fontType: .font_Sb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
             if let model = self.detail as? MdlResume {
-                //print("\t[履歴書: \(model.completeness)%]")
                 if chkProgressResumee() {
-                    lblMessage.text(text: "入力済み", fontType: .font_SS, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .left)
+                    lblMessage.text(text: "入力済み", fontType: .E_font_Status, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .left)
+                } else {
+                    lblMessage.text(text: "未入力あり", fontType: .E_font_Status, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
                 }
             }
         case .career:
-            lblTitle.text(text: "職務経歴書", fontType: .font_SSb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
-            lblMessage.text(text: "未入力", fontType: .font_SSSb, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
+            lblTitle.text(text: "職務経歴書", fontType: .font_Sb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
             if let model = self.detail as? MdlCareer {
                 if chkProgressCareer() {//未入力チェック
-                    lblMessage.text(text: "入力済み", fontType: .font_SS, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .left)
+                    lblMessage.text(text: "入力済み", fontType: .E_font_Status, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .left)
+                } else {
+                    lblMessage.text(text: "未入力あり", fontType: .E_font_Status, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
                 }
             }
         }
