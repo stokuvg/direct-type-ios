@@ -285,6 +285,8 @@
                 <outlet property="companyView" destination="94W-Hi-kO6" id="hz1-iB-MZe"/>
                 <outlet property="deleteBtn" destination="DNE-0G-RoD" id="THH-cr-4ln"/>
                 <outlet property="jobLabel" destination="bFQ-E2-yuX" id="0Yp-yl-wnh"/>
+                <outlet property="jobLabelHeight" destination="64H-Ht-a5n" id="2dZ-4q-eJ1"/>
+                <outlet property="jobLabelTop" destination="9dP-d5-rQM" id="zMh-OL-L8S"/>
                 <outlet property="jobView" destination="4hN-ll-K7f" id="M5S-hr-xuz"/>
                 <outlet property="keepBtn" destination="xq0-ao-yN0" id="51K-9W-Z3Q"/>
                 <outlet property="limitedImageView" destination="YbH-YK-BG5" id="WGk-yW-KiP"/>
