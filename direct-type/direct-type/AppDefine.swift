@@ -16,3 +16,47 @@ struct AppDefine {
     // 参照: https://type.qiita.com/y_kawamata/items/e251d8904820d5b5ceaf
     static let password = "Abcd123$"
 }
+
+//NOTE: 「リンク先URL定義」シートに記載したものと同じ状況で定義しておく
+enum DirectTypeLinkURL {
+    case TypeEntryPasswordForgot    //[C-12]『応募確認』「パスワード再発行の導線」
+    case TypeEntryPersonalInfo      //[C-12]『応募確認』「個人情報」
+    case TypeEntryMemberPolicy      //[C-12]『応募確認』「会員規約」
+    //リンクテキスト
+    var dispText: String {
+        switch self {
+        case .TypeEntryPasswordForgot:
+            return "転職サイトtypeに登録済みのパスワードがわからない場合"
+        case .TypeEntryPersonalInfo:
+            return "転職サイトtypeの個人情報の取り扱いについて"
+        case .TypeEntryMemberPolicy:
+            return "転職サイトtypeの会員規約"
+        }
+    }
+    //リンク先URLテキスト
+    var urlText: String {
+        switch self {
+        case .TypeEntryPasswordForgot:
+            return "https://type.jp/reminder/input.do"
+        case .TypeEntryPersonalInfo:
+            return "https://type.jp/s/kojin/"
+        case .TypeEntryMemberPolicy:
+            return "https://type.jp/help/category_14.html"
+        }
+    }
+    var url: URL? {
+        return URL(string: urlText)
+    }
+    //アプリ内部ブラウザで表示するか、外部ブラウザで表示するか
+    enum LinkType {
+        case appWebBrowser
+        case openBrowser
+    }
+    var linkType: LinkType {
+        switch self {
+        case .TypeEntryPasswordForgot:  return .openBrowser
+        case .TypeEntryPersonalInfo:    return .openBrowser
+        case .TypeEntryMemberPolicy:    return .openBrowser
+        }
+    }
+}

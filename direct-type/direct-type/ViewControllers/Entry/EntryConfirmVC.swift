@@ -178,26 +178,9 @@ extension EntryConfirmVC: EntryConfirmNotifyEntryDelegate {
         self.isAccept = isAccept
         chkButtonEnable()
     }
-    func actLinkText(type: EntryConfirmLinkTextType) {
-        switch type {
-        case .passwordForgot:
-            //[Dbg:（仮）Web(よくある質問・ヘルプ)を表示
-            let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
-            vc.setup(type: .Help)
-            vc.modalPresentationStyle = .fullScreen
-            navigationController?.present(vc, animated: true, completion: nil)
-        case .personalInfo:
-            //（仮） Web(プライバシーポリシー)を表示
-            let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
-            vc.setup(type: .Privacy)
-            vc.modalPresentationStyle = .fullScreen
-            navigationController?.present(vc, animated: true, completion: nil)
-        case .memberPolicy:
-            //（仮） Web(利用規約)を表示
-            let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
-            vc.setup(type: .Term)
-            vc.modalPresentationStyle = .fullScreen
-            navigationController?.present(vc, animated: true, completion: nil)
+    func actLinkText(type: DirectTypeLinkURL) {
+        UIApplication.shared.open(type.url!, options: [:]) { (isSuccess) in
+            print("[\(type.dispText)] [isSuccess: \(isSuccess)]")
         }
     }
     
@@ -214,11 +197,6 @@ extension EntryConfirmVC {
         let _jobCardCode: String = _jobCard.jobCardCode
         let _typePassword: String = self.bufPassword //半角英数4-20
         let param: WebAPIEntryUserDto = WebAPIEntryUserDto(_jobCardCode, _profile, _resume, _career, _entry, _typePassword)
-        
-        print(param)
-        
-        
-        
         SVProgressHUD.show(withStatus: "応募処理")
         ApiManager.postEntry(param, isRetry: true)
         .done { result in
