@@ -55,15 +55,15 @@ class EntryFormExQuestionsItemTBCell: UITableViewCell {
         let answer: String = _child.curVal
         let cnt: Int = answer.count
         let max: Int = _child.editItem.valid.max ?? 0
-        lblQuestion.text(text: question, fontType: .font_SS, textColor: UIColor(colorType: .color_black)!, alignment: .left)
+        lblQuestion.text(text: question, fontType: .font_S, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         if answer.isEmpty {
-            lblAnswaer.text(text: _child.placeholder, fontType: .font_SS, textColor: UIColor(colorType: .color_line)!, alignment: .left)
+            lblAnswaer.text(text: _child.placeholder, fontType: .font_S, textColor: UIColor(colorType: .color_line)!, alignment: .left)
         } else {
-            lblAnswaer.text(text: answer, fontType: .font_SS, textColor: UIColor(colorType: .color_black)!, alignment: .left)
+            lblAnswaer.text(text: answer, fontType: .font_S, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         }
         if max > 0 { //文字数制限が設定されている場合
-            lblCount.text(text: "\(cnt)", fontType: .font_SSSb, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .left)
-            lblCountMax.text(text: "文字 / \(max)字以内", fontType: .font_SSSb, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .left)
+            lblCount.text(text: "\(cnt)", fontType: .font_SSb, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .left)
+            lblCountMax.text(text: "文字 / \(max)字以内", fontType: .font_SSb, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .left)
         } else {
             lblCount.text = nil
             lblCountMax.text = nil
@@ -71,7 +71,7 @@ class EntryFormExQuestionsItemTBCell: UITableViewCell {
         //Validationエラー発生時の表示
         if errMsg != "" {
             //lblErrorMsg.text = errMsg
-            lblErrorMsg.text(text: errMsg, fontType: .font_SSS, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
+            lblErrorMsg.text(text: errMsg, fontType: .font_SS, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
             lblErrorMsg.text = errMsg
             vwMainArea.backgroundColor = UIColor.init(red: 1.0, green: 0.8, blue: 0.8, alpha: 1.0)
         } else {
