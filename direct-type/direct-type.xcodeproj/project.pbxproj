@@ -247,8 +247,6 @@
 		267E636424A98EF7004169ED /* EntryFormExQuestionsItemTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 267E636224A98EF7004169ED /* EntryFormExQuestionsItemTBCell.xib */; };
 		267E636624A9D183004169ED /* HPreviewTBCellTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267E636524A9D183004169ED /* HPreviewTBCellTool.swift */; };
 		26800520246A2B440053A7F4 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2680051F246A2B440053A7F4 /* Date+Extensions.swift */; };
-		26859E272488E636000109D1 /* HEditSpecialTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26859E252488E636000109D1 /* HEditSpecialTBCell.swift */; };
-		26859E282488E636000109D1 /* HEditSpecialTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26859E262488E636000109D1 /* HEditSpecialTBCell.xib */; };
 		2688B568249768DA001975AC /* RecommendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2688B567249768DA001975AC /* RecommendManager.swift */; };
 		268BFF56246E8292004B2640 /* SubInputMemoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BFF55246E8292004B2640 /* SubInputMemoVC.swift */; };
 		268BFF58246E8D25004B2640 /* SmoothCareerPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268BFF57246E8D25004B2640 /* SmoothCareerPreviewVC.swift */; };
@@ -586,8 +584,6 @@
 		267E636224A98EF7004169ED /* EntryFormExQuestionsItemTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntryFormExQuestionsItemTBCell.xib; sourceTree = "<group>"; };
 		267E636524A9D183004169ED /* HPreviewTBCellTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPreviewTBCellTool.swift; sourceTree = "<group>"; };
 		2680051F246A2B440053A7F4 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
-		26859E252488E636000109D1 /* HEditSpecialTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HEditSpecialTBCell.swift; sourceTree = "<group>"; };
-		26859E262488E636000109D1 /* HEditSpecialTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HEditSpecialTBCell.xib; sourceTree = "<group>"; };
 		2688B567249768DA001975AC /* RecommendManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendManager.swift; sourceTree = "<group>"; };
 		268BFF55246E8292004B2640 /* SubInputMemoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubInputMemoVC.swift; sourceTree = "<group>"; };
 		268BFF57246E8D25004B2640 /* SmoothCareerPreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmoothCareerPreviewVC.swift; sourceTree = "<group>"; };
@@ -1297,8 +1293,6 @@
 				26989F7D246A5E520050AC40 /* HEditDrumTBCell.xib */,
 				26CFC4642469496D00E458E2 /* HEditTextTBCell.swift */,
 				26CFC4632469496D00E458E2 /* HEditTextTBCell.xib */,
-				26859E252488E636000109D1 /* HEditSpecialTBCell.swift */,
-				26859E262488E636000109D1 /* HEditSpecialTBCell.xib */,
 			);
 			path = EditableSub;
 			sourceTree = "<group>";
@@ -1534,7 +1528,6 @@
 				26147F322472630B009B30B5 /* MstF16_management.tsv in Resources */,
 				066BD9E32456ACB5009E610B /* LaunchScreen.storyboard in Resources */,
 				0E6EA6E124A1BB3B00884D07 /* InitialInputRegistVC.storyboard in Resources */,
-				26859E282488E636000109D1 /* HEditSpecialTBCell.xib in Resources */,
 				066EF6C6245BB9C400E15AD2 /* KeepCardCell.xib in Resources */,
 				26BF48E924639D2B00E00215 /* MstK7_skillEnglish.tsv in Resources */,
 				066A8A72249066E8004C25D8 /* LoginVC.storyboard in Resources */,
@@ -1858,7 +1851,6 @@
 				268BFF58246E8D25004B2640 /* SmoothCareerPreviewVC.swift in Sources */,
 				26FC4EE02477C775003B56C3 /* AuthManager.swift in Sources */,
 				26CFC46F246949B800E458E2 /* ClassExtensions.swift in Sources */,
-				26859E272488E636000109D1 /* HEditSpecialTBCell.swift in Sources */,
 				26133A56246B9D48001802BB /* EditableBasicVC+Picker.swift in Sources */,
 				269AFFC8246A929300DB364B /* SubSelectMultiVC.swift in Sources */,
 				066BC823246CD0B100FE607F /* JobDetailItemOptionalView.swift in Sources */,
@@ -2097,7 +2089,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20200714_1;
+				CURRENT_PROJECT_VERSION = 20200714_2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = T9NJN3ZF88;
@@ -2123,7 +2115,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20200714_1;
+				CURRENT_PROJECT_VERSION = 20200714_2;
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = T9NJN3ZF88;
 				INFOPLIST_FILE = "direct-type/Info.plist";
