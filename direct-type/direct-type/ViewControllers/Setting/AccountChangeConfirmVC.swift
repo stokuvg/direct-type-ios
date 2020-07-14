@@ -96,9 +96,7 @@ private extension AccountChangeConfirmVC {
                 self.showConfirm(title: "認証エラー", message: "正しいコードを入力ください。", onlyOK: true)
             }
         }
-        .finally {
-            SVProgressHUD.dismiss()
-        }
+        .finally {}
     }
     
     func tryLogout() {
@@ -143,6 +141,7 @@ private extension AccountChangeConfirmVC {
             switch signInResult.signInState {
             case .customChallenge:
                 DispatchQueue.main.async {
+                    SVProgressHUD.dismiss()
                     self.showConfirm(title: "変更が完了しました", message: "", onlyOK: true)
                     .done { _ in
                         self.navigationController?.popToRootViewController(animated: true)
@@ -151,11 +150,8 @@ private extension AccountChangeConfirmVC {
                 break
             case .unknown, .signedIn, .smsMFA, .passwordVerifier, .deviceSRPAuth,
                  .devicePasswordVerifier, .adminNoSRPAuth, .newPasswordRequired:
-                break
-            }
-            DispatchQueue.main.async {
-                self.changeButtonState()
                 SVProgressHUD.dismiss()
+                break
             }
         }
     }
