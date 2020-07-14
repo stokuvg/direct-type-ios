@@ -14,7 +14,7 @@
   ],
   "servers": [
     {
-      "url": "https://api.sumaten-test.com",
+      "url": "https://x76hhily6i.execute-api.ap-northeast-1.amazonaws.com/cloud",
       "description": "本番API"
     },
     {
