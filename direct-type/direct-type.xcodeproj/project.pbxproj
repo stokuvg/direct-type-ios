@@ -131,7 +131,7 @@
 		06E519962457D8D1004E4B7A /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519952457D8D1004E4B7A /* SettingVC.swift */; };
 		06E519982457DA0D004E4B7A /* ApproachSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519972457DA0D004E4B7A /* ApproachSettingVC.swift */; };
 		06E5199A2457DA18004E4B7A /* AccountChangeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519992457DA18004E4B7A /* AccountChangeVC.swift */; };
-		06E5199C2457DA2D004E4B7A /* AccountChangeCompleteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5199B2457DA2D004E4B7A /* AccountChangeCompleteVC.swift */; };
+		06E5199C2457DA2D004E4B7A /* AccountChangeConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5199B2457DA2D004E4B7A /* AccountChangeConfirmVC.swift */; };
 		06E5199E2457DABE004E4B7A /* WithDrawalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5199D2457DABE004E4B7A /* WithDrawalVC.swift */; };
 		06E519A02457DAD7004E4B7A /* WithDrawalCompleteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5199F2457DAD7004E4B7A /* WithDrawalCompleteVC.swift */; };
 		06E519A22457DC44004E4B7A /* InitialInputRegistVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E519A12457DC44004E4B7A /* InitialInputRegistVC.swift */; };
@@ -189,6 +189,7 @@
 		0E8775A5249778E700C82736 /* MdlApproach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8775A4249778E700C82736 /* MdlApproach.swift */; };
 		0E9B8B3324877BA60049CFCC /* ChemistryQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9B8B3224877BA60049CFCC /* ChemistryQuestion.swift */; };
 		0EA0E17F24B7F4770024597F /* BaseChemistryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA0E17E24B7F4770024597F /* BaseChemistryVC.swift */; };
+		0EA3E95324BD3FA200729626 /* ApiManager+AccountChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA3E95224BD3FA200729626 /* ApiManager+AccountChange.swift */; };
 		0EAE764F248E2FFD009A8F4B /* ChemistryResultPersonalTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EAE764E248E2FFD009A8F4B /* ChemistryResultPersonalTypeCell.xib */; };
 		0EAE7651248E300E009A8F4B /* ChemistryResultPersonalTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAE7650248E300E009A8F4B /* ChemistryResultPersonalTypeCell.swift */; };
 		0EAE7653248F1F75009A8F4B /* ChemistryResultFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAE7652248F1F75009A8F4B /* ChemistryResultFooterView.swift */; };
@@ -469,7 +470,7 @@
 		06E519952457D8D1004E4B7A /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		06E519972457DA0D004E4B7A /* ApproachSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproachSettingVC.swift; sourceTree = "<group>"; };
 		06E519992457DA18004E4B7A /* AccountChangeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountChangeVC.swift; sourceTree = "<group>"; };
-		06E5199B2457DA2D004E4B7A /* AccountChangeCompleteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountChangeCompleteVC.swift; sourceTree = "<group>"; };
+		06E5199B2457DA2D004E4B7A /* AccountChangeConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountChangeConfirmVC.swift; sourceTree = "<group>"; };
 		06E5199D2457DABE004E4B7A /* WithDrawalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithDrawalVC.swift; sourceTree = "<group>"; };
 		06E5199F2457DAD7004E4B7A /* WithDrawalCompleteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithDrawalCompleteVC.swift; sourceTree = "<group>"; };
 		06E519A12457DC44004E4B7A /* InitialInputRegistVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialInputRegistVC.swift; sourceTree = "<group>"; };
@@ -527,6 +528,7 @@
 		0E8775A4249778E700C82736 /* MdlApproach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlApproach.swift; sourceTree = "<group>"; };
 		0E9B8B3224877BA60049CFCC /* ChemistryQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryQuestion.swift; sourceTree = "<group>"; };
 		0EA0E17E24B7F4770024597F /* BaseChemistryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChemistryVC.swift; sourceTree = "<group>"; };
+		0EA3E95224BD3FA200729626 /* ApiManager+AccountChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+AccountChange.swift"; sourceTree = "<group>"; };
 		0EAE764E248E2FFD009A8F4B /* ChemistryResultPersonalTypeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChemistryResultPersonalTypeCell.xib; sourceTree = "<group>"; };
 		0EAE7650248E300E009A8F4B /* ChemistryResultPersonalTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryResultPersonalTypeCell.swift; sourceTree = "<group>"; };
 		0EAE7652248F1F75009A8F4B /* ChemistryResultFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryResultFooterView.swift; sourceTree = "<group>"; };
@@ -1020,7 +1022,7 @@
 				06E519952457D8D1004E4B7A /* SettingVC.swift */,
 				06E519972457DA0D004E4B7A /* ApproachSettingVC.swift */,
 				06E519992457DA18004E4B7A /* AccountChangeVC.swift */,
-				06E5199B2457DA2D004E4B7A /* AccountChangeCompleteVC.swift */,
+				06E5199B2457DA2D004E4B7A /* AccountChangeConfirmVC.swift */,
 				06E5199D2457DABE004E4B7A /* WithDrawalVC.swift */,
 				06E5199F2457DAD7004E4B7A /* WithDrawalCompleteVC.swift */,
 				06FFA0032484E1760085A3D9 /* SettingVC.storyboard */,
@@ -1279,6 +1281,7 @@
 				0E22833C24AEB5AB0008765E /* ApiManager+Chemistry.swift */,
 				0E59D7C424B40D7600FA4570 /* ApiManager+Activity.swift */,
 				0E1F06CD24B566E700CCAD46 /* APIManager+Withdraw.swift */,
+				0EA3E95224BD3FA200729626 /* ApiManager+AccountChange.swift */,
 			);
 			path = AuthManager;
 			sourceTree = "<group>";
@@ -1770,6 +1773,7 @@
 				0E144D91248DCC05005A659F /* ChemistryResultHeader.swift in Sources */,
 				068FFAA924727A810083E130 /* JobDetailStepView.swift in Sources */,
 				26F2A821246D12F10037D47F /* MdlCareerCardWorkPeriod.swift in Sources */,
+				0EA3E95324BD3FA200729626 /* ApiManager+AccountChange.swift in Sources */,
 				06E5199A2457DA18004E4B7A /* AccountChangeVC.swift in Sources */,
 				064570622465426500F3B015 /* JobDetailGuideBookHeaderView.swift in Sources */,
 				064EF6FB24654FDB00853ADD /* JobDetailArticleCell.swift in Sources */,
@@ -1812,7 +1816,7 @@
 				0E1FB23924AC8A6E005E0BE7 /* AppDefine.swift in Sources */,
 				265022E024B2C75B000B26D7 /* MdlDummy.swift in Sources */,
 				26A4C1CB247B4A81008D8E68 /* ApiManager.swift in Sources */,
-				06E5199C2457DA2D004E4B7A /* AccountChangeCompleteVC.swift in Sources */,
+				06E5199C2457DA2D004E4B7A /* AccountChangeConfirmVC.swift in Sources */,
 				268BFF60246E8FF8004B2640 /* MdlAppSmoothCareerWorkBackgroundDetail.swift in Sources */,
 				0645705D2464F77700F3B015 /* Logs.swift in Sources */,
 				06E519C7245815B0004E4B7A /* CareerPreviewVC.swift in Sources */,

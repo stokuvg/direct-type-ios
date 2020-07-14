@@ -1396,6 +1396,34 @@
           }
         }
       },
+      "AccountMigrateRequest": {
+        "type": "object",
+        "properties": {
+          "phoneNumber": {
+            "type": "string",
+            "example": "+819000123456",
+            "description": "ログインで使用する携帯電話番号"
+          }
+        },
+        "required": [
+          "phoneNumber"
+        ]
+      },
+      "AccountMigrateAnswerRequest": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "example": "666666",
+            "description": "電話番号変更認証コード",
+            "minLength": 6,
+            "maxLength": 6
+          }
+        },
+        "required": [
+          "code"
+        ]
+      },
       "UserOldJob3": {
         "type": "object",
         "properties": {
@@ -2497,6 +2525,72 @@
         },
         "tags": [
           "withdraw"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/account/migrate": {
+      "post": {
+        "operationId": "AccountController_migrate",
+        "summary": "電話番号変更",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountMigrateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "account"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/account/migrate/answer": {
+      "patch": {
+        "operationId": "AccountController_migrateAnswer",
+        "summary": "電話番号変更認証コード",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountMigrateAnswerRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "description": "認証コードが間違っていた場合"
+          },
+          "410": {
+            "description": "認証コードが古い場合"
+          }
+        },
+        "tags": [
+          "account"
         ],
         "security": [
           {

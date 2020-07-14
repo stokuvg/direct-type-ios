@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import TudApi
 import AWSMobileClient
 import SVProgressHUD
 
-final class AccountChangeCompleteVC: TmpBasicVC {
+final class AccountChangeConfirmVC: TmpBasicVC {
     @IBOutlet private weak var infomationLabel: UILabel!
     @IBOutlet private weak var textLabel: UILabel!
     @IBOutlet private weak var inputCodeField: UITextField!
@@ -20,7 +21,7 @@ final class AccountChangeCompleteVC: TmpBasicVC {
     }
     @IBOutlet private weak var reSendBtn: UIButton!
     @IBAction private func reSendBtnAction() {
-        reSendAuthCode()
+        resendAuthCode()
     }
     
     private let codeMaxLength: Int = 6
@@ -36,7 +37,7 @@ final class AccountChangeCompleteVC: TmpBasicVC {
     }
 }
 
-private extension AccountChangeCompleteVC {
+private extension AccountChangeConfirmVC {
     func setup() {
         title = "認証コード入力"
         
@@ -81,68 +82,66 @@ private extension AccountChangeCompleteVC {
     }
     
     func tryConfirmAuthCode(with code: String) {
-        AWSMobileClient.default().confirmSignIn(challengeResponse: code, completionHandler: { (signInResult, error) in
-            if let error = error  {
-                let buf = AuthManager.convAnyError(error).debugDisp
-                DispatchQueue.main.async { print(#line, #function, buf) }
-                return
-            }
+        let param = AccountMigrateAnswerRequest(code: code)
+        
+        SVProgressHUD.show()
+        ApiManager.accountMigrateAnswer(param)
+        .done { _ in
             
-            guard let signInResult = signInResult else { return }
-            var buf: String = ""
-            switch (signInResult.signInState) {
-            case .signedIn:
-                buf = "signedIn"
-                DispatchQueue.main.async {
-                    SVProgressHUD.dismiss()
-                    self.showConfirm(title: "変更が完了しました", message: "", onlyOK: true)
-                    .done { _ in
-                        self.navigationController?.popToRootViewController(animated: true)
-                    } .catch { (error) in } .finally { }
-                }
-            case .unknown:
-                buf = "unknown"
-            case .smsMFA:
-                buf = "smsMFA"
-            case .passwordVerifier:
-                buf = "passwordVerifier"
-            case .customChallenge:
-                buf = "customChallenge"
-                DispatchQueue.main.async {
-                    SVProgressHUD.dismiss()
-                    self.showConfirm(title: "コードが誤っています", message: "正しいコードを入力してください。", onlyOK: true)
-                }
-            case .deviceSRPAuth:
-                buf = "deviceSRPAuth"
-            case .devicePasswordVerifier:
-                buf = "devicePasswordVerifier"
-            case .adminNoSRPAuth:
-                buf = "adminNoSRPAuth"
-            case .newPasswordRequired:
-                buf = "newPasswordRequired"
+            SVProgressHUD.dismiss()
+            self.showConfirm(title: "アカウント変更が完了しました", message: "新しいアカウントで再度ログインしてください。", onlyOK: true)
+            .done { _ in self.tryLogout() } .catch { (error) in } .finally { }
+        }
+        .catch { (error) in
+            DispatchQueue.main.async {
+                SVProgressHUD.dismiss()
+                print(#line, #function, error.localizedDescription)
+                self.showConfirm(title: "認証エラー", message: "正しいコードを入力ください。", onlyOK: true)
             }
-            DispatchQueue.main.async { print(#line, #function, buf) }
-        })
+        }
+        .finally {}
     }
     
-    func reSendAuthCode() {
-        // TODO: サーバー側のAPI実装完了後に疎通実装をする
-//        let param = GetAuthCodeRequestDTO(phoneNumber: phoneNumber)
-//        SVProgressHUD.show()
-//        ApiManager.getAuthCode(param)
-//            .done { result in
-//                authCode = result.confirmCode
-//                let sendSuccessAlert = UIAlertController.init(title: "認証コード再送信", message: "再送しました。", preferredStyle: .alert)
-//                let okAction = UIAlertAction.init(title: "OK", style: .default)
-//                sendSuccessAlert.addAction(okAction)
-//                navigationController?.present(sendSuccessAlert, animated: true, completion: nil)
-//        }
-//            .catch { (error) in
-//                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-//                print("電話番号登録エラー コード: \(myErr.code)")
-//        }
-//            .finally {
-//                SVProgressHUD.dismiss()
-//        }
+    func tryLogout() {
+        SVProgressHUD.show()
+        AWSMobileClient.default().signOut { (error) in
+            if let error = error {
+                DispatchQueue.main.async {
+                    SVProgressHUD.dismiss()
+                    self.showError(error)
+                }
+                return
+            }
+            DispatchQueue.main.async {
+                SVProgressHUD.dismiss()
+                self.transitionToInitialView()
+            }
+        }
+    }
+    
+    func transitionToInitialView() {
+        let vc = getVC(sbName: "InitialInputStartVC", vcName: "InitialInputStartVC") as! InitialInputStartVC
+        let newNavigationController = UINavigationController(rootViewController: vc)
+        UIApplication.shared.keyWindow?.rootViewController = newNavigationController
+    }
+    
+    func resendAuthCode() {
+        let param = AccountMigrateRequest(phoneNumber: phoneNumber.addCountryCode(type: .japan))
+        
+        SVProgressHUD.show()
+        ApiManager.accountMigrate(param)
+        .done { result in
+            self.showConfirm(title: "認証コードを再送信しました", message: "", onlyOK: true)
+        }
+        .catch { (error) in
+            DispatchQueue.main.async {
+                SVProgressHUD.dismiss()
+                print(#line, #function, error.localizedDescription)
+                self.showConfirm(title: "電話番号変更エラー", message: "別の電話番号で再度お試しください。", onlyOK: true)
+            }
+        }
+        .finally {
+            SVProgressHUD.dismiss()
+        }
     }
 }

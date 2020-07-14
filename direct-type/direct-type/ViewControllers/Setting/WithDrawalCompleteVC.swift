@@ -31,14 +31,14 @@ private extension WithDrawalCompleteVC {
         let leftBarButton = UIButton(type: .system)
         leftBarButton.frame = leftBatButtonFrame
         leftBarButton.setTitle(text: "×", fontType: .font_XL, textColor: .white, alignment: .left)
-        leftBarButton.addTarget(self, action: #selector(moveToInitialView), for: .touchUpInside)
+        leftBarButton.addTarget(self, action: #selector(transitionToInitialView), for: .touchUpInside)
         
         let backButtonItem =  UIBarButtonItem(customView: leftBarButton)
         navigationItem.leftBarButtonItem = backButtonItem
     }
     
     @objc
-    func moveToInitialView() {
+    func transitionToInitialView() {
         let vc = getVC(sbName: "InitialInputStartVC", vcName: "InitialInputStartVC") as! InitialInputStartVC
         let newNavigationController = UINavigationController(rootViewController: vc)
         UIApplication.shared.keyWindow?.rootViewController = newNavigationController
