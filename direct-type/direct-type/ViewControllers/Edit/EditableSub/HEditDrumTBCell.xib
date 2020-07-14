@@ -24,10 +24,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sVE-As-1M7">
-                                        <rect key="frame" x="0.0" y="0.0" width="290" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="228" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKe-BA-am9">
-                                                <rect key="frame" x="8" y="0.0" width="274" height="50"/>
+                                                <rect key="frame" x="16" y="0.0" width="212" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -35,14 +35,14 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="lKe-BA-am9" firstAttribute="leading" secondItem="sVE-As-1M7" secondAttribute="leading" constant="8" id="3cp-Wd-rVQ"/>
+                                            <constraint firstItem="lKe-BA-am9" firstAttribute="leading" secondItem="sVE-As-1M7" secondAttribute="leading" constant="16" id="3cp-Wd-rVQ"/>
                                             <constraint firstItem="lKe-BA-am9" firstAttribute="top" secondItem="sVE-As-1M7" secondAttribute="top" id="Sei-xD-Oav"/>
                                             <constraint firstAttribute="bottom" secondItem="lKe-BA-am9" secondAttribute="bottom" id="TvL-dJ-dBg"/>
-                                            <constraint firstAttribute="trailing" secondItem="lKe-BA-am9" secondAttribute="trailing" constant="8" id="zBL-ge-dCR"/>
+                                            <constraint firstAttribute="trailing" secondItem="lKe-BA-am9" secondAttribute="trailing" id="zBL-ge-dCR"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bfe-ag-eMh" userLabel="必須アイコンエリア">
-                                        <rect key="frame" x="290" y="0.0" width="30" height="50"/>
+                                        <rect key="frame" x="228" y="0.0" width="34" height="50"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="required" translatesAutoresizingMaskIntoConstraints="NO" id="65c-cY-dh4">
                                                 <rect key="frame" x="8" y="18" width="26" height="14"/>
@@ -56,7 +56,14 @@
                                         <constraints>
                                             <constraint firstItem="65c-cY-dh4" firstAttribute="centerY" secondItem="bfe-ag-eMh" secondAttribute="centerY" id="45O-EM-zgn"/>
                                             <constraint firstItem="65c-cY-dh4" firstAttribute="leading" secondItem="bfe-ag-eMh" secondAttribute="leading" constant="8" id="AIw-s0-SAz"/>
-                                            <constraint firstAttribute="trailing" secondItem="65c-cY-dh4" secondAttribute="trailing" constant="-4" id="jIX-hF-9D2"/>
+                                            <constraint firstAttribute="trailing" secondItem="65c-cY-dh4" secondAttribute="trailing" id="jIX-hF-9D2"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NRQ-1x-GFl" userLabel="余白">
+                                        <rect key="frame" x="262" y="0.0" width="58" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="16" id="Xia-lB-92i"/>
                                         </constraints>
                                     </view>
                                 </subviews>

@@ -194,7 +194,7 @@ extension SubSelectBaseVC: UITableViewDataSource, UITableViewDelegate {
         let cell: SubSelectTBCell = tableView.dequeueReusableCell(withIdentifier: "SubSelectTBCell") as! SubSelectTBCell
         //選択状態があるかチェックして反映させる
         let select: Bool = dicChange[item.code] ?? false  //差分情報優先
-        let exclusive: Bool = dicChange.contains { (k,v) -> Bool in v == true && k == Constants.ExclusiveSelectCodeDisp.code }
+        let exclusive: Bool = exclusiveSelectMode && dicChange.contains { (k,v) -> Bool in v == true && k == Constants.ExclusiveSelectCodeDisp.code }
         cell.initCell(self, item, select, exclusive)
         cell.dispCell()
         return cell

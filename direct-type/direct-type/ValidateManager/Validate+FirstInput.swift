@@ -28,7 +28,7 @@ extension ValidateManager {
 extension EditItemMdlFirstInput {
     var valid: ValidInfo {
         switch self {
-        case .nickname:             return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
+        case .nickname:             return ValidInfo(required: true, keta: nil, max: 8, type: .undefine)
         case .gender:               return ValidInfo(required: true, keta: nil, max: nil, type: .code)//初期入力でも必須となった
         case .birthday:             return ValidInfo(required: true, keta: nil, max: nil, type: .code)//誕生日初期値は 96/1/1
         case .hopeArea:             return ValidInfo(required: true, keta: nil, max: nil, type: .code)

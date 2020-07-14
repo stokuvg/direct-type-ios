@@ -144,7 +144,6 @@ class EditableTableBasicVC: EditableBasicVC {
         self.tableVW.rowHeight = UITableView.automaticDimension
         self.tableVW.register(UINib(nibName: "HEditTextTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HEditTextTBCell")
         self.tableVW.register(UINib(nibName: "HEditDrumTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HEditDrumTBCell")
-        self.tableVW.register(UINib(nibName: "HEditSpecialTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HEditSpecialTBCell")
         //=== Keyboard制御
         vwKbTapArea.backgroundColor = .black
         vwKbTapArea.alpha = 0.0
