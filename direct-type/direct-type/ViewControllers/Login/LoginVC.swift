@@ -17,7 +17,7 @@ final class LoginVC: TmpBasicVC {
         openReasonOfConfirmPhone()
     }
     @IBAction private func nextButton(_ sender: UIButton) {
-        sendLoginAuthCode()
+        trySignIn()
     }
     
     private let phoneNumberMaxLength: Int = 11
@@ -38,7 +38,7 @@ private extension LoginVC {
         phoneNumberTextField.addTarget(self, action: #selector(changeButtonState), for: .editingChanged)
     }
     
-    func sendLoginAuthCode() {
+    func trySignIn() {
         if shouldLogOutIfNeeded {
             logOutIfNeeded()
         }
@@ -54,7 +54,7 @@ private extension LoginVC {
                 switch error {
                 case .invalidParameter:
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        self.sendLoginAuthCode()
+                        self.trySignIn()
                     }
                 default:
                     DispatchQueue.main.async {
