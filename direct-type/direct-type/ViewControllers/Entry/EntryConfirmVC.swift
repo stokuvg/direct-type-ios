@@ -112,8 +112,8 @@ extension EntryConfirmVC {
             return cell
 
         case .jobCardC9:
-            let cell: EntryConfirmJobCardTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryConfirmJobCardTBCell", for: indexPath) as! EntryConfirmJobCardTBCell
-            cell.initCell(self.jobCard)
+            let cell: EntryConfirmAnyModelTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryConfirmAnyModelTBCell", for: indexPath) as! EntryConfirmAnyModelTBCell
+            cell.initCell(.jobCard, model: self.jobCard)
             cell.dispCell()
             return cell
 

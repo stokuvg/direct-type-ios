@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwaggerClient
 
 //===[H-2]「個人プロフィール確認」
 //===[H-3]「履歴書確認」
