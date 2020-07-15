@@ -315,6 +315,12 @@ extension EntryFormVC {
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            switch myErr.code {
+            case 404:
+                self.career = MdlCareer()//404の場合、0件となるからのモデルを生成してセットしておく
+            default:
+                break
+            }
             print(myErr)
         }
         .finally {

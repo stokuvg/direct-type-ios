@@ -14,7 +14,8 @@ class SubSelectSyouTBCell: UITableViewCell {
     var item: CodeDisp!
     var subItem: CodeDisp? = nil
     var focus: Bool = false
-    
+    var disable: Bool = false
+
     @IBOutlet weak var vwCellArea: UIView!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblDebug: UILabel!
@@ -28,16 +29,18 @@ class SubSelectSyouTBCell: UITableViewCell {
         vwCellArea.backgroundColor = UIColor(colorType: .color_base)
     }
     //== セルの初期化と初期表示
-    func initCell(_ delegate: SubSelectProtocol, _ item: CodeDisp, _ subItem: CodeDisp? = nil, _ focus: Bool = false) {
+    func initCell(_ delegate: SubSelectProtocol, _ item: CodeDisp, _ subItem: CodeDisp? = nil, _ focus: Bool, _ disable: Bool, _ selectYearMode: Bool) {
         self.delegate = delegate
         self.item = item
         self.subItem = subItem
         self.focus = focus
+        self.disable = disable
         if Constants.DbgDispStatus {
             self.lblDebug.isHidden = false
         } else {
             self.lblDebug.isHidden = true
         }
+        self.lblStatus.isHidden = !selectYearMode
     }
     func dispCell() {
         lblName.text(text: item.disp, fontType: .font_S, textColor: UIColor.init(colorType: .color_main)!, alignment: .left)
@@ -61,7 +64,13 @@ class SubSelectSyouTBCell: UITableViewCell {
                 vwCellArea.backgroundColor = UIColor(colorType: .color_specialItemFocus)
             }
         }
-
+        if disable {
+            lblName.textColor = .gray
+            lblStatus.textColor = .gray
+            isUserInteractionEnabled = false
+        } else {
+            isUserInteractionEnabled = true
+        }
     }
     //=== 選択時の動作
     override func setSelected(_ selected: Bool, animated: Bool) {

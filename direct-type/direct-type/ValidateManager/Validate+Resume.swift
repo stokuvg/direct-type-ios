@@ -15,7 +15,7 @@ extension EditItemMdlResume {
         case .changeCount:          return ValidInfo(required: true, keta: nil, max: nil, type: .code)
         case .lastJobExperiment:    return ValidInfo(required: true, keta: nil, max: nil, type: .code)
         case .jobExperiments:       return ValidInfo(required: false, keta: nil, max: nil, type: .code)
-        case .businessTypes:        return ValidInfo(required: false, keta: nil, max: nil, type: .code)
+        case .businessTypes:        return ValidInfo(required: true, keta: nil, max: nil, type: .code)
         case .school:               return ValidInfo(required: false, keta: nil, max: nil, type: .code)
         case .skillLanguage:        return ValidInfo(required: false, keta: nil, max: nil, type: .code)
         case .qualifications:       return ValidInfo(required: false, keta: nil, max: nil, type: .code)
