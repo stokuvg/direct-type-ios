@@ -50,6 +50,7 @@ private extension ApproachSettingVC {
     func setup() {
         guard let approachSetting = approachSetting else { return }
         isScoutEnable = approachSetting.scoutEnable
+        navigationItem.title = "アプローチ設定"
     }
     
     func saveSetting() {
