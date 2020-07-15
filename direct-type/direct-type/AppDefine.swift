@@ -49,8 +49,8 @@ enum DirectTypeLinkURL {
     }
     //アプリ内部ブラウザで表示するか、外部ブラウザで表示するか
     enum LinkType {
-        case appWebBrowser
-        case openBrowser
+        case appWebBrowser  //内部ブラウザ
+        case openBrowser    //外部ブラウザ
     }
     var linkType: LinkType {
         switch self {
