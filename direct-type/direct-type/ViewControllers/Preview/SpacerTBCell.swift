@@ -21,7 +21,6 @@ class SpacerTBCell: UITableViewCell {
         backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
         vwMainArea.backgroundColor = UIColor(colorType: .color_base)
         lcMainAreaHeight.constant = 20
-        selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
