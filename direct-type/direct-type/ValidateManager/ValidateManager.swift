@@ -127,7 +127,7 @@ extension ValidateManager {
                             errMsg = "入力文字数が超過しています (\(max))"
                         }
                     } else {//正規表現にマッチしない（＝形式エラー）
-                        errMsg = "入力してください [\(regexp)]"
+                        errMsg = Constants.DbgDispStatus ? "入力してください [\(regexp)]" : "入力してください"
                     }
 
                 case .zenkaku:
@@ -141,7 +141,7 @@ extension ValidateManager {
                             errMsg = "入力文字数が超過しています (\(max))"
                         }
                     } else {//正規表現にマッチしない（＝形式エラー）
-                        errMsg = "全角文字で入力してください [\(regexp)]"
+                        errMsg = Constants.DbgDispStatus ? "全角文字で入力してください [\(regexp)]" : "全角文字で入力してください"
                     }
 
                 case .hiraKataKan:
