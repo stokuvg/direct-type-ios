@@ -60,7 +60,6 @@ class PreviewBaseVC: TmpBasicVC {
         //=== テーブル初期化
         self.tableVW.estimatedRowHeight = 100
         self.tableVW.rowHeight = UITableView.automaticDimension
-        self.tableVW.allowsSelection = false
         self.tableVW.register(UINib(nibName: "SpacerTBCell", bundle: nil), forCellReuseIdentifier: "Cell_SpacerTBCell")
         //[C-9系]
         self.tableVW.register(UINib(nibName: "EntryFormInfoTextTBCell", bundle: nil), forCellReuseIdentifier: "Cell_EntryFormInfoTextTBCell")

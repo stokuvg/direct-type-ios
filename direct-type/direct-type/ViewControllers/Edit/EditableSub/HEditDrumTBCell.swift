@@ -35,6 +35,7 @@ class HEditDrumTBCell: UITableViewCell {
         super.awakeFromNib()
         //===デザイン適用
         backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
+        selectionStyle = .none
         vwMainArea.backgroundColor = UIColor(colorType: .color_base)
         tfValue.textColor = UIColor(colorType: .color_black)
         tfValue.tintColor = UIColor(colorType: .color_black)
