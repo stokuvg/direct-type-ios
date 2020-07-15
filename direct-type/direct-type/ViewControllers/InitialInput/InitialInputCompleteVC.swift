@@ -73,6 +73,11 @@ final class InitialInputCompleteVC: TmpBasicVC {
         AnalyticsEventManager.track(type: .confirmAuthCode)
     }
     
+    override func viewDidLayoutSubviews() {
+      super.viewDidLayoutSubviews()
+        textView.setContentOffset(.zero, animated: false)
+    }
+    
     func configure(type: ContextType) {
         contextType = type
     }
