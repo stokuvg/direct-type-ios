@@ -108,10 +108,8 @@ extension EditableBasicVC: InputItemHDelegate {
         //=== タイプによって割り込み処理
         switch item.editType {
         case .selectDrumYM: //Pickerを生成する
-            print("Picker開く時の処理 [\(item.editableItemKey): \(item.dispName)]")
             showPicker(tf, item)
         case .selectDrumYMD: //Pickerを生成する
-            print("Picker開く時の処理 [\(item.editableItemKey): \(item.dispName)]")
             showPickerYMD(tf, item)
         case .selectSingle:
             //さらに子ナビさせたいので@objc  
@@ -123,6 +121,7 @@ extension EditableBasicVC: InputItemHDelegate {
                     //遷移アニメーション関連
                     nvc.modalTransitionStyle = .coverVertical//.crossDissolve
                     self.present(nvc, animated: true) {}
+                    return
                 }
             })
         case .selectMulti:
@@ -135,18 +134,38 @@ extension EditableBasicVC: InputItemHDelegate {
                     //遷移アニメーション関連
                     nvc.modalTransitionStyle = .coverVertical//.crossDissolve
                     self.present(nvc, animated: true) {}
+                    return
                 }
             })
         case .selectSpecial, .selectSpecialYear:
             //さらに子ナビさせたいので
             DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
                 tf.resignFirstResponder()//自分を解除しておかないと、戻ってきたときにまた遷移してしまうため
+                //=== 関連項目の選択値を求める
+                var bufCannotSelectCodes: String = ""
+                switch editTemp.editableItemKey {
+                case EditItemMdlResumeLastJobExperiment.jobTypeAndJobExperimentYear.itemKey:
+                    bufCannotSelectCodes = self.editableModel.getItemByKey(EditItemMdlResumeJobExperiments.jobTypeAndJobExperimentYear.itemKey)?.curVal ?? ""
+                case EditItemMdlResumeJobExperiments.jobTypeAndJobExperimentYear.itemKey:
+                    bufCannotSelectCodes = self.editableModel.getItemByKey(EditItemMdlResumeLastJobExperiment.jobTypeAndJobExperimentYear.itemKey)?.curVal ?? ""
+                case EditItemMdlFirstInputLastJobExperiments.jobTypeAndJobExperimentYear.itemKey:
+                    bufCannotSelectCodes = self.editableModel.getItemByKey(EditItemMdlFirstInputJobExperiments.jobTypeAndJobExperimentYear.itemKey)?.curVal ?? ""
+                case EditItemMdlFirstInputJobExperiments.jobTypeAndJobExperimentYear.itemKey:
+                    bufCannotSelectCodes = self.editableModel.getItemByKey(EditItemMdlFirstInputLastJobExperiments.jobTypeAndJobExperimentYear.itemKey)?.curVal ?? ""
+                default:
+                    break
+                }
+                var cannotSelectCodes: [Code] = [] //他の項目との関連におり、選択不可能なコードを入れておく
+                for code in EditItemTool.convTypeAndYear(codes: bufCannotSelectCodes).0 {
+                    cannotSelectCodes.append(code)
+                }
                 let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSpecialVC") as? SubSelectSpecialVC{
-                    nvc.initData(self, editableItem: item, selectingCodes: "") // jobType | skill
+                    nvc.initData(self, editableItem: item, selectingCodes: "", cannotSelectCodes) // jobType | skill
                     //遷移アニメーション関連
                     nvc.modalTransitionStyle = .coverVertical//.crossDissolve
                     self.present(nvc, animated: true) {}
+                    return
                 }
             })
         case .inputMemo:
@@ -159,6 +178,7 @@ extension EditableBasicVC: InputItemHDelegate {
                     //遷移アニメーション関連
                     nvc.modalTransitionStyle = .coverVertical//.crossDissolve
                     self.present(nvc, animated: true) {}
+                    return
                 }
             })
             break
@@ -179,7 +199,7 @@ extension EditableBasicVC: InputItemHDelegate {
         //=== タイプによって割り込み処理
         switch item.editType {
         case .inputMemo:
-            print("テキストビューでの大量文字入力時")
+            break
         case .selectDrumYM:
             hidePicker(tf)
         case .selectDrumYMD:
@@ -201,7 +221,7 @@ extension EditableBasicVC: InputItemHDelegate {
         case .selectSpecial, .selectSpecialYear:
             break
         }
-        print("💛[\(tf.itemKey)] 編集終わり💛「[\(tf.tag)] \(#function)」[\(tf.itemKey)][\(tf.text ?? "")] [\(String(describing: tf.inputAccessoryView))] [\(String(describing: tf.inputView))]")
+        //print("💛[\(tf.itemKey)] 編集終わり💛「[\(tf.tag)] \(#function)」[\(tf.itemKey)][\(tf.text ?? "")] [\(String(describing: tf.inputAccessoryView))] [\(String(describing: tf.inputView))]")
     }
     func changedItem(_ tf: IKTextField, _ item: EditableItemH, text: String) {
         editableModel.changeTempItem(item, text: text)//入力値の反映

@@ -200,6 +200,7 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
                     //遷移アニメーション関連
                     nvc.modalTransitionStyle = .coverVertical//.crossDissolve
                     self.present(nvc, animated: true) {}
+                    return
                 }
             case .selectMulti:
                 let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
@@ -208,15 +209,35 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
                     //遷移アニメーション関連
                     nvc.modalTransitionStyle = .coverVertical//.crossDissolve
                     self.present(nvc, animated: true) {}
+                    return
                 }
             case .selectSpecial: fallthrough
             case .selectSpecialYear:
+                //=== 関連項目の選択値を求める
+                var bufCannotSelectCodes: String = ""
+                switch editTemp.editableItemKey {
+                case EditItemMdlResumeLastJobExperiment.jobTypeAndJobExperimentYear.itemKey:
+                    bufCannotSelectCodes = editableModel.getItemByKey(EditItemMdlResumeJobExperiments.jobTypeAndJobExperimentYear.itemKey)?.curVal ?? ""
+                case EditItemMdlResumeJobExperiments.jobTypeAndJobExperimentYear.itemKey:
+                    bufCannotSelectCodes = editableModel.getItemByKey(EditItemMdlResumeLastJobExperiment.jobTypeAndJobExperimentYear.itemKey)?.curVal ?? ""
+                case EditItemMdlFirstInputLastJobExperiments.jobTypeAndJobExperimentYear.itemKey:
+                    bufCannotSelectCodes = editableModel.getItemByKey(EditItemMdlFirstInputJobExperiments.jobTypeAndJobExperimentYear.itemKey)?.curVal ?? ""
+                case EditItemMdlFirstInputJobExperiments.jobTypeAndJobExperimentYear.itemKey:
+                    bufCannotSelectCodes = editableModel.getItemByKey(EditItemMdlFirstInputLastJobExperiments.jobTypeAndJobExperimentYear.itemKey)?.curVal ?? ""
+                default:
+                    break
+                }
+                var cannotSelectCodes: [Code] = [] //他の項目との関連におり、選択不可能なコードを入れておく
+                for code in EditItemTool.convTypeAndYear(codes: bufCannotSelectCodes).0 {
+                    cannotSelectCodes.append(code)
+                }
                 let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSpecialVC") as? SubSelectSpecialVC{
-                    nvc.initData(self, editableItem: editTemp, selectingCodes: editTemp.curVal)
+                    nvc.initData(self, editableItem: editTemp, selectingCodes: editTemp.curVal, cannotSelectCodes)
                     //遷移アニメーション関連
                     nvc.modalTransitionStyle = .coverVertical//.crossDissolve
                     self.present(nvc, animated: true) {}
+                    return
                 }
             }
         default:
@@ -228,13 +249,32 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
             return
 
         case .lastJobExperimentH3, .jobExperimentsH3, .businessTypesH3, .lastJobExperimentA11, .jobExperimentsA14:
+            //=== 関連項目の選択値を求める
+            var bufCannotSelectCodes: String = ""
+            switch item.childItems.first?.editableItemKey {
+            case EditItemMdlResumeLastJobExperiment.jobTypeAndJobExperimentYear.itemKey:
+                bufCannotSelectCodes = editableModel.getItemByKey(EditItemMdlResumeJobExperiments.jobTypeAndJobExperimentYear.itemKey)?.curVal ?? ""
+            case EditItemMdlResumeJobExperiments.jobTypeAndJobExperimentYear.itemKey:
+                bufCannotSelectCodes = editableModel.getItemByKey(EditItemMdlResumeLastJobExperiment.jobTypeAndJobExperimentYear.itemKey)?.curVal ?? ""
+            case EditItemMdlFirstInputLastJobExperiments.jobTypeAndJobExperimentYear.itemKey:
+                bufCannotSelectCodes = editableModel.getItemByKey(EditItemMdlFirstInputJobExperiments.jobTypeAndJobExperimentYear.itemKey)?.curVal ?? ""
+            case EditItemMdlFirstInputJobExperiments.jobTypeAndJobExperimentYear.itemKey:
+                bufCannotSelectCodes = editableModel.getItemByKey(EditItemMdlFirstInputLastJobExperiments.jobTypeAndJobExperimentYear.itemKey)?.curVal ?? ""
+            default:
+                break
+            }
+            var cannotSelectCodes: [Code] = [] //他の項目との関連におり、選択不可能なコードを入れておく
+            for code in EditItemTool.convTypeAndYear(codes: bufCannotSelectCodes).0 {
+                cannotSelectCodes.append(code)
+            }
             let storyboard = UIStoryboard(name: "EditablePopup", bundle: nil)
             if let _item = item.childItems.first {
                 if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubSelectSpecialVC") as? SubSelectSpecialVC{
-                    nvc.initData(self, editableItem: _item, selectingCodes: _item.curVal)
+                    nvc.initData(self, editableItem: _item, selectingCodes: _item.curVal, cannotSelectCodes)
                     //遷移アニメーション関連
                     nvc.modalTransitionStyle = .coverVertical//.crossDissolve
                     self.present(nvc, animated: true) {}
+                    return
                 }
             }
             //直接、特殊選択画面へ遷移させる
@@ -250,6 +290,7 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
                 nvc.modalTransitionStyle = .coverVertical
                 self.present(nvc, animated: true) {
                 }
+                return
             }
         }
         //通常の複数編集画面
@@ -262,6 +303,7 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
             nvc.modalTransitionStyle = .coverVertical
             self.present(nvc, animated: true) {
             }
+            return
         }
     }
 }

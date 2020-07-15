@@ -16,6 +16,7 @@ protocol SubSelectSpecialDelegate {
 
 class SubSelectSpecialVC: BaseVC {
     var delegate: SubSelectFeedbackDelegate? = nil
+    var arrCannotSelectCodes: [Code] = []//Validation的に選択不可能なコード(最近・その他での重複指定を避けるため)
     //年数選択が必要か、即選択できるか
     var selectYearMode: Bool = false
     //選択数のMAX（1つなら即確定して前画面の可能性も？）
@@ -87,7 +88,8 @@ class SubSelectSpecialVC: BaseVC {
         self.tableVW.register(UINib(nibName: "SubSelectDaiTBCell", bundle: nil), forCellReuseIdentifier: "Cell_SubSelectDaiTBCell")
         self.tableVW.register(UINib(nibName: "SubSelectSyouTBCell", bundle: nil), forCellReuseIdentifier: "Cell_SubSelectSyouTBCell")
     }
-    func initData(_ delegate: SubSelectFeedbackDelegate, editableItem: EditableItemH, selectingCodes: String) {
+    func initData(_ delegate: SubSelectFeedbackDelegate, editableItem: EditableItemH, selectingCodes: String, _ cannotSelectCodes: [String]) {
+        self.arrCannotSelectCodes = cannotSelectCodes
         //=== 2段回目の年数選択を実施するか
         self.delegate = delegate
         switch editableItem.editType {
@@ -221,8 +223,9 @@ extension SubSelectSpecialVC: UITableViewDataSource, UITableViewDelegate {
             return cell
         } else {
             let cell: SubSelectSyouTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_SubSelectSyouTBCell", for: indexPath) as! SubSelectSyouTBCell
-            //選択状態があるかチェックして反映させる
-            cell.initCell(self, item, dicSelectedCode[item.code], (indexPath == cellFocus))
+            let isFocus: Bool = (indexPath == cellFocus) //選択状態があるかチェックして反映させる
+            let isDisable: Bool = arrCannotSelectCodes.contains(item.code) //関連画面での指定済コードなら指定不可にする
+            cell.initCell(self, item, dicSelectedCode[item.code], isFocus, isDisable)
             cell.dispCell()
             return cell
         }
