@@ -13,6 +13,7 @@ import SVProgressHUD
 class CareerListVC: TmpBasicVC {
     var arrData: [MdlCareerCard] = []
     var arrDisp: [MdlCareerCard] = []
+    var isFirstFetch: Bool = true
     
     @IBOutlet weak var tableVW: UITableView!
 
@@ -158,6 +159,11 @@ extension CareerListVC {
         .finally {
             self.dispData()
             SVProgressHUD.dismiss()
+            //===初回画面遷移時の0件誘導
+            if self.isFirstFetch && self.arrData.count == 0 {
+                self.actAddCard(self.btnAddCard)
+            }
+            self.isFirstFetch = false
         }
     }
     private func fetchUpdateCareerList() {
