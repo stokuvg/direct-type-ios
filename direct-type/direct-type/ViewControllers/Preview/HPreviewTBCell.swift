@@ -24,6 +24,7 @@ class HPreviewTBCell: UITableViewCell {
         super.awakeFromNib()
         //===デザイン適用
         backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
+        selectionStyle = .none
         vwMainArea.backgroundColor = UIColor(colorType: .color_base)
     }
 
