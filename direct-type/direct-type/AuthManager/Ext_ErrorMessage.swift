@@ -143,6 +143,11 @@ struct SwaValidErrSubModel: Codable {
    var children: [String] = []
    var constraints: [String: String] = [:]
 }
+//===Type応募APIでのサーバ側エラー(不正なXMLによるリクエストです)
+struct TypeEntryErrModel: Codable {
+    var message: String = ""
+    var detailMessage: String = ""
+}
 
 
 //======== もろもろエラーをひっぺがす
@@ -265,10 +270,19 @@ extension AuthManager {
                         case .error(let swaCode, let swaData, let swaErr):
                             myErrorDisp.code = swaCode
                             switch swaCode {
-                                
                             case 400:
                                 myErrorDisp.title = "Validation Error"
                                 if let _data = swaData, _data.count > 0 {
+                                    var isErrorDecode: Bool = false
+                                    do {
+                                        let swa = try JSONDecoder().decode(TypeEntryErrModel.self, from: _data) as TypeEntryErrModel
+                                        var bufMsg: String = ""
+                                        bufMsg += "[\(swa.message)]\n\(swa.detailMessage)"
+                                        myErrorDisp.message = bufMsg
+                                        isErrorDecode = true
+                                    } catch {
+                                        //Decode失敗
+                                    }
                                     do {
                                         let swa = try JSONDecoder().decode(SwaValidErrModel.self, from: _data) as SwaValidErrModel
                                         myErrorDisp.code = swa.statusCode
@@ -283,10 +297,18 @@ extension AuthManager {
                                             }
                                         }
                                         myErrorDisp.message = bufMsg
+                                        isErrorDecode = true
                                     } catch {
-                                        let jsonStr = String(bytes: _data, encoding: .utf8)!
-                                        print("JSONモデルのパースに失敗: [\(jsonStr)]", error.localizedDescription)
+                                        //Decode失敗
                                     }
+                                    
+                                    if isErrorDecode {
+                                        //Decodeできた
+                                    } else {
+                                        let jsonStr = String(bytes: _data, encoding: .utf8)!
+                                        print("JSONモデルのパースに失敗(\(#line)): [\(jsonStr)]", error.localizedDescription)
+                                    }
+
                                 }
                                 
                             case 500: // （ネットワーク接続がない時にやってくる：　user-apiなど）
@@ -301,7 +323,7 @@ extension AuthManager {
                                         myErrorDisp.message = swa.message
                                     } catch {
                                         let jsonStr = String(bytes: _data, encoding: .utf8)!
-                                        print("JSONモデルのパースに失敗: [\(jsonStr)]", error.localizedDescription)
+                                        print("JSONモデルのパースに失敗(\(#line)): [\(jsonStr)]", error.localizedDescription)
                                     }
                                 }
                                 //=== 再認証を促すため、ログイン画面に遷移させるとかする？
@@ -315,7 +337,7 @@ extension AuthManager {
                                         myErrorDisp.message = swa.error
                                     } catch {
                                         let jsonStr = String(bytes: _data, encoding: .utf8)!
-                                        print("JSONモデルのパースに失敗: [\(jsonStr)]", error.localizedDescription)
+                                        print("JSONモデルのパースに失敗(\(#line)): [\(jsonStr)]", error.localizedDescription)
                                     }
                                 }
 
@@ -327,7 +349,7 @@ extension AuthManager {
                                         myErrorDisp.message = swa.message
                                     } catch {
                                         let jsonStr = String(bytes: _data, encoding: .utf8)!
-                                        print("JSONモデルのパースに失敗: [\(jsonStr)]", error.localizedDescription)
+                                        print("JSONモデルのパースに失敗(\(#line)): [\(jsonStr)]", error.localizedDescription)
                                     }
                                 }
                             }
