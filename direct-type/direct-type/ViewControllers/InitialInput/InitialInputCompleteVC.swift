@@ -50,6 +50,16 @@ final class InitialInputCompleteVC: TmpBasicVC {
                 """
             }
         }
+        
+        
+        var title: String {
+            switch self {
+            case .registeredPhoneNumber:
+                return "職務経歴書情報入力"
+            case .registeredAll:
+                return "職務経歴書情報入力完了"
+            }
+        }
     }
     
     private let closeMouthImage = UIImage(named: "suma_normal1")!
@@ -72,6 +82,7 @@ private extension InitialInputCompleteVC {
     func setup() {
         textView.text = contextType.description
         navigationItem.hidesBackButton = true
+        navigationItem.title = contextType.title
     }
     
     func startAnimation() {
