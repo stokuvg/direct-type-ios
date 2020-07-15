@@ -236,10 +236,19 @@ class HomeVC: TmpNaviTopVC {
             self.showError(myErr)
         }
         .finally {
-            let convUpdateDate = DateHelper.convStrYMD2Date(self.pageJobCards.updateAt)
-            let updateDateString = DateHelper.mdDateString(date: convUpdateDate)
+            if self.pageJobCards.updateAt.count > 0 {
+                let convUpdateDate = DateHelper.convStrYMD2Date(self.pageJobCards.updateAt)
+                let updateDateString = DateHelper.mdDateString(date: convUpdateDate)
 
-            self.linesTitle(date: updateDateString, title: "あなたにぴったりの求人")
+                self.linesTitle(date: updateDateString, title: "あなたにぴったりの求人")
+            } else {
+                let nowDateString = DateHelper.mdDateString(date: Date())
+                Log.selectLog(logLevel: .debug, "nowDateString:\(nowDateString)")
+//                let convUpdateDate = DateHelper.convStrYMD2Date(self.pageJobCards.updateAt)
+//                let updateDateString = DateHelper.mdDateString(date: convUpdateDate)
+
+                self.linesTitle(date: nowDateString, title: "あなたにぴったりの求人")
+            }
             SVProgressHUD.dismiss()
             self.dataCheckAction()
         }

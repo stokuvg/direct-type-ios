@@ -32,7 +32,7 @@
                                                             <constraint firstAttribute="height" constant="24" id="Ejz-fV-O5V"/>
                                                             <constraint firstAttribute="width" constant="24" id="Iqr-lF-CTH"/>
                                                         </constraints>
-                                                        <state key="normal" title="Button" image="close"/>
+                                                        <state key="normal" image="close"/>
                                                         <connections>
                                                             <action selector="actBack:" destination="mlm-xq-Kg1" eventType="touchUpInside" id="rVf-iB-bpe"/>
                                                         </connections>
@@ -296,7 +296,7 @@
                                                             <constraint firstAttribute="width" constant="24" id="Udv-g1-sXT"/>
                                                             <constraint firstAttribute="height" constant="24" id="giG-9L-4cS"/>
                                                         </constraints>
-                                                        <state key="normal" title="Button" image="close"/>
+                                                        <state key="normal" image="close"/>
                                                         <connections>
                                                             <action selector="actBack:" destination="SRg-ks-FQF" eventType="touchUpInside" id="PgO-BQ-Y9n"/>
                                                         </connections>
@@ -531,7 +531,7 @@
                                                             <constraint firstAttribute="height" constant="24" id="5KX-in-dYC"/>
                                                             <constraint firstAttribute="width" constant="24" id="FtE-VQ-lZf"/>
                                                         </constraints>
-                                                        <state key="normal" title="Button" image="close"/>
+                                                        <state key="normal" image="close"/>
                                                         <connections>
                                                             <action selector="actBack:" destination="B4P-8Y-68R" eventType="touchUpInside" id="6rD-ob-kkn"/>
                                                         </connections>
