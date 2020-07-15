@@ -29,7 +29,7 @@ class SubSelectSyouTBCell: UITableViewCell {
         vwCellArea.backgroundColor = UIColor(colorType: .color_base)
     }
     //== セルの初期化と初期表示
-    func initCell(_ delegate: SubSelectProtocol, _ item: CodeDisp, _ subItem: CodeDisp? = nil, _ focus: Bool, _ disable: Bool) {
+    func initCell(_ delegate: SubSelectProtocol, _ item: CodeDisp, _ subItem: CodeDisp? = nil, _ focus: Bool, _ disable: Bool, _ selectYearMode: Bool) {
         self.delegate = delegate
         self.item = item
         self.subItem = subItem
@@ -40,6 +40,7 @@ class SubSelectSyouTBCell: UITableViewCell {
         } else {
             self.lblDebug.isHidden = true
         }
+        self.lblStatus.isHidden = !selectYearMode
     }
     func dispCell() {
         lblName.text(text: item.disp, fontType: .font_S, textColor: UIColor.init(colorType: .color_main)!, alignment: .left)

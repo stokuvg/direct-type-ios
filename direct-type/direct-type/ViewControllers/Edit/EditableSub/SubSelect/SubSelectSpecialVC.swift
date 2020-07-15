@@ -225,7 +225,7 @@ extension SubSelectSpecialVC: UITableViewDataSource, UITableViewDelegate {
             let cell: SubSelectSyouTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_SubSelectSyouTBCell", for: indexPath) as! SubSelectSyouTBCell
             let isFocus: Bool = (indexPath == cellFocus) //選択状態があるかチェックして反映させる
             let isDisable: Bool = arrCannotSelectCodes.contains(item.code) //関連画面での指定済コードなら指定不可にする
-            cell.initCell(self, item, dicSelectedCode[item.code], isFocus, isDisable)
+            cell.initCell(self, item, dicSelectedCode[item.code], isFocus, isDisable, selectYearMode)
             cell.dispCell()
             return cell
         }

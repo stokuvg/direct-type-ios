@@ -16,8 +16,10 @@ class ExEntryLabel: UILabel {
         let rectangle = UIBezierPath(roundedRect: rect, cornerRadius: 8)
         UIColor(rgba: "#eee").setFill()
         UIColor(colorType: .color_line)!.setStroke()
-        rectangle.fill()
-//        rectangle.stroke()
+        if !(text ?? "").isEmpty {//文字が空のときには余白も表示させない
+            rectangle.fill()
+            //rectangle.stroke()
+        }
         super.drawText(in: rectTmp)
     }
     override var intrinsicContentSize: CGSize {
