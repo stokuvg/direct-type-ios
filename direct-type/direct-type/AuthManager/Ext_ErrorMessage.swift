@@ -131,25 +131,29 @@ struct SwaErrModel_404: Codable {
     var status: Int = -1
     var error: String = ""
 }
-struct SwaValidErrModel: Codable {
+struct SwaValidErrModel: Decodable {
     var statusCode: Int = -1
     var error: String = ""
     var message: [SwaValidErrSubModel] = []
+    
+    var debugDisp: String {
+        return "[\(statusCode): \(error)] [\(message.count)]件 ... [\(message.description)]"
+    }
 }
-struct SwaValidErrSubModel: Codable {
-   var target: [String: String] = [:]
-   var value: String = ""
+struct SwaValidErrSubModel: Decodable {
+   var children: [SwaValidErrSubModel] = []
    var property: String = ""
-   var children: [String] = []
-   var constraints: [String: String] = [:]
+   var constraints: [String: String]? = nil
+    
+    var debugDisp: String {
+        return "[\(property): \(constraints?.count)件] ... [\(constraints?.keys)] の情報あり ：　[続行\((children.count > 0) ? "あり" : "なし")]"
+    }
 }
 //===Type応募APIでのサーバ側エラー(不正なXMLによるリクエストです)
 struct TypeEntryErrModel: Codable {
     var message: String = ""
     var detailMessage: String = ""
 }
-
-
 //======== もろもろエラーをひっぺがす
 struct SwaValidErrMsg {
     var property: String = ""
@@ -274,7 +278,7 @@ extension AuthManager {
                                 myErrorDisp.title = "Validation Error"
                                 if let _data = swaData, _data.count > 0 {
                                     var isErrorDecode: Bool = false
-                                    do {
+                                    do {//Type応募を叩いた場合でのエラーモデル
                                         let swa = try JSONDecoder().decode(TypeEntryErrModel.self, from: _data) as TypeEntryErrModel
                                         var bufMsg: String = ""
                                         bufMsg += "[\(swa.message)]\n\(swa.detailMessage)"
@@ -283,32 +287,40 @@ extension AuthManager {
                                     } catch {
                                         //Decode失敗
                                     }
-                                    do {
+                                    do {//TUD-APIを叩いた場合でのエラーモデル
                                         let swa = try JSONDecoder().decode(SwaValidErrModel.self, from: _data) as SwaValidErrModel
+                                        print(swa)
                                         myErrorDisp.code = swa.statusCode
                                         var bufMsg: String = ""
-                                        for item in swa.message {
-                                            bufMsg += "▽項目[\(item.property)]：\n"
-                                            //さらに個別にチェック
-                                            for (key, val) in item.constraints {
-                                                bufMsg += "\t[\(key): \(val)]\n"
-                                                let obj: SwaValidErrMsg = SwaValidErrMsg(property: item.property, constraintsKey: key, constraintsVal: val)
-                                                myErrorDisp.arrValidErrMsg.append(obj)
+                                        func chkChildErr(subModel: SwaValidErrSubModel) {
+                                            if let _constraints = subModel.constraints {
+                                                for (k, v) in _constraints {
+                                                    let obj: SwaValidErrMsg = SwaValidErrMsg(property: subModel.property, constraintsKey: k, constraintsVal: v)
+                                                    myErrorDisp.arrValidErrMsg.append(obj)
+                                                    bufMsg += "\t[\(subModel.property): \(v)]\n"
+                                                }
                                             }
+                                            if subModel.children.count > 0 {
+                                                for child in subModel.children {
+                                                    chkChildErr(subModel: child)
+                                                }
+                                            }
+                                        }
+                                        //ぐるぐるっと呼び出しまくる
+                                        for item in swa.message {
+                                            chkChildErr(subModel: item)
                                         }
                                         myErrorDisp.message = bufMsg
                                         isErrorDecode = true
                                     } catch {
                                         //Decode失敗
                                     }
-                                    
                                     if isErrorDecode {
                                         //Decodeできた
                                     } else {
                                         let jsonStr = String(bytes: _data, encoding: .utf8)!
                                         print("JSONモデルのパースに失敗(\(#line)): [\(jsonStr)]", error.localizedDescription)
                                     }
-
                                 }
                                 
                             case 500: // （ネットワーク接続がない時にやってくる：　user-apiなど）
