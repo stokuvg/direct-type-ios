@@ -57,7 +57,7 @@ enum FontType {
             case .EC_font_Info:
                 return 9
             case .EC_font_Notice:
-                return 22
+                return 9
             case .font_XL:
                 return 4
             case .font_L:

@@ -23,8 +23,9 @@ class EntryConfirmNotifyEntry2TBCell: UITableViewCell {
     @IBOutlet weak var vwMainArea: UIView!
     
     @IBOutlet weak var vwAcceptArea: UIView!
-    @IBOutlet weak var lblAccept: UILabel!
     @IBOutlet weak var ivAccept: UIImageView!
+    @IBOutlet weak var lblAccept: UILabel!
+    @IBOutlet weak var textVWAccept: UITextView!
     @IBOutlet weak var btnAccept: UIButton!
     @IBAction func actAccept(_ sender: Any) {
         isAccept = !isAccept
@@ -32,50 +33,90 @@ class EntryConfirmNotifyEntry2TBCell: UITableViewCell {
         delegate?.changeAcceptStatus(isAccept: isAccept)
     }
 
-    @IBOutlet weak var vwMessageArea: UIView!
-    @IBOutlet weak var lblMessage: UILabel!
-
-    @IBOutlet weak var vwLinkText1Area: UIView!
-    @IBOutlet weak var lblLinkText1: UILabel!
-    @IBOutlet weak var btnLinkText1: UIButton!
-    @IBAction func actLinkText1(_ sender: Any) {
-        delegate?.actLinkText(type: tmpLink1)
-    }
-    @IBOutlet weak var vwLinkText2Area: UIView!
-    @IBOutlet weak var lblLinkText2: UILabel!
-    @IBOutlet weak var btnLinkText2: UIButton!
-    @IBAction func actLinkText2(_ sender: Any) {
-        delegate?.actLinkText(type: tmpLink2)
-    }
-    @IBOutlet weak var vwLinkText3Area: UIView!
-    @IBOutlet weak var lblLinkText3: UILabel!
-    @IBOutlet weak var btnLinkText3: UIButton!
-    @IBAction func actLinkText3(_ sender: Any) {
-        delegate?.actLinkText(type: tmpLink3)
-    }
+    @IBOutlet weak var vwNoticeArea: UIView!
+    @IBOutlet weak var lblNotice: UILabel!
+    @IBOutlet weak var textVWNotice: UITextView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         //===デザイン適用
         backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
         vwMainArea.backgroundColor = UIColor(colorType: .color_base)
+        vwAcceptArea.backgroundColor = UIColor(colorType: .color_base)
+        vwNoticeArea.backgroundColor = UIColor(colorType: .color_base)
+        textVWAccept.backgroundColor = UIColor(colorType: .color_base)
+        textVWNotice.backgroundColor = UIColor(colorType: .color_base)
     }
     func initCell(_ delegate: EntryConfirmNotifyEntryDelegate) {
         self.delegate = delegate
+        
+        //リンク対応TextViewの属性初期化
+        textVWAccept.isScrollEnabled = false
+        textVWAccept.textContainerInset = UIEdgeInsets.zero
+        textVWAccept.textContainer.lineFragmentPadding = 0
+        textVWAccept.isSelectable = true
+        textVWAccept.isEditable = false
+        textVWAccept.delegate = self
+        textVWAccept.linkTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(colorType: .color_sub)!]
+
+        textVWNotice.isScrollEnabled = false
+        textVWNotice.textContainerInset = UIEdgeInsets.zero
+        textVWNotice.textContainer.lineFragmentPadding = 0
+        textVWNotice.isSelectable = true
+        textVWNotice.isEditable = false
+        textVWNotice.delegate = self
+        textVWNotice.linkTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(colorType: .color_sub)!]
     }
     func dispCell() {
         ivAccept.image = isAccept ? R.image.checkOn() : R.image.checkOff()
         let bufAccept: String = "転職サイトtypeの会員規約・\n個人情報方針に同意する"
-        
-        let bufMessage: String = "※転職サイトtype未登録のメールアドレスの場合、転職サイトtypeに登録の上応募手続きを行います。"
-        lblAccept.text(text: bufAccept, fontType: .EC_font_Info, textColor: UIColor(colorType: .color_black)!, alignment: .left)
+        let bufNotice: String = [
+            "※転職サイトtype未登録のメールアドレスの場合、転職サイトtypeに登録の上応募手続きを行います。",
+            "転職サイトtypeに登録済みのパスワードが分からない場合はこちら。",
+        ].joined(separator: "\n")
+        let paraAccept = NSMutableParagraphStyle()
+        paraAccept.alignment = .left
+        paraAccept.lineSpacing = FontType.EC_font_Info.lineSpacing
+        let attrStrAccept = NSMutableAttributedString(string: bufAccept, attributes: [
+            NSAttributedString.Key.paragraphStyle : paraAccept,
+            NSAttributedString.Key.font : UIFont(fontType: .EC_font_Info)!,
+            NSAttributedString.Key.foregroundColor : UIColor(colorType: .color_black)!,
+            NSAttributedString.Key.underlineColor : UIColor.clear,
+        ])
+        attrStrAccept.addAttribute(.link,
+                                      value: tmpLink2.urlText,
+                                      range: NSString(string: bufAccept).range(of: tmpLink2.dispText))
+        attrStrAccept.addAttribute(.link,
+                                      value: tmpLink3.urlText,
+                                      range: NSString(string: bufAccept).range(of: tmpLink3.dispText))
+        lblAccept.attributedText = attrStrAccept
+        textVWAccept.attributedText = attrStrAccept
+        textVWAccept.linkTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(colorType: .color_sub)!]
 
-        lblMessage.text(text: bufMessage, fontType: .font_SS, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
-        lblLinkText1.text(text: tmpLink1.dispText, fontType: .font_SS, textColor: UIColor(colorType: .color_button)!, alignment: .left)
-        lblLinkText2.text(text: tmpLink2.dispText, fontType: .font_SS, textColor: UIColor(colorType: .color_button)!, alignment: .left)
-        lblLinkText3.text(text: tmpLink3.dispText, fontType: .font_SS, textColor: UIColor(colorType: .color_button)!, alignment: .left)
+        let paraNotice = NSMutableParagraphStyle()
+        paraNotice.alignment = .left
+        paraNotice.lineSpacing = FontType.EC_font_Notice.lineSpacing
+        let attrStrNotice = NSMutableAttributedString(string: bufNotice, attributes: [
+            NSAttributedString.Key.paragraphStyle : paraNotice,
+            NSAttributedString.Key.font : UIFont(fontType: .EC_font_Notice)!,
+            NSAttributedString.Key.foregroundColor : UIColor(colorType: .color_black)!,
+            NSAttributedString.Key.underlineColor : UIColor.clear,
+        ])
+        attrStrNotice.addAttribute(.link,
+                                      value: tmpLink1.urlText,
+                                      range: NSString(string: bufNotice).range(of: tmpLink1.dispText))
+        lblNotice.attributedText = attrStrNotice
+        textVWNotice.attributedText = attrStrNotice
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+}
+
+extension EntryConfirmNotifyEntry2TBCell: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        print(#line, #function)
+        UIApplication.shared.open(URL)
+        return false
     }
 }
