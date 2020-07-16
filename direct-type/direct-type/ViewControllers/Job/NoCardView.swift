@@ -35,11 +35,21 @@ class NoCardView: UIView {
         registEditBtnBackView.layer.cornerRadius = 15
         registEditBtnBackView.layer.maskedCorners = [.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
         
-        noJobLabel.text(text: "現在｛ニックネーム｝におすすめできる求人はありません", fontType: .font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
-        jobInfomationLabel.text(text: "｛ニックネーム｝の登録情報を更新することで、おすすめできる求人が増える可能性があります", fontType: .font_SS, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
+        noJobLabel.text(text: "現在 ゲストさん におすすめできる求人はありません", fontType: .font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
+        jobInfomationLabel.text(text: " ゲストさん の登録情報を更新することで、おすすめできる求人が増える可能性があります", fontType: .font_SS, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
         
         registEditBtn.setTitle(text: "登録情報を編集する", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         registEditBtn.backgroundColor = UIColor.init(colorType: .color_button)
+    }
+    
+    func setup(profileData:MdlProfile) {
+        
+        if profileData.nickname.count > 0 {
+            
+            let nickName = profileData.nickname
+            noJobLabel.text(text: "現在 " + nickName + " さんにおすすめできる求人はありません", fontType: .font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
+            jobInfomationLabel.text(text: nickName + " さんの登録情報を更新することで、おすすめできる求人が増える可能性があります", fontType: .font_SS, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
+        }
     }
 
 }
