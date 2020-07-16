@@ -69,7 +69,7 @@ class EntryConfirmNotifyEntry2TBCell: UITableViewCell {
     }
     func dispCell() {
         ivAccept.image = isAccept ? R.image.checkOn() : R.image.checkOff()
-        let bufAccept: String = "転職サイトtypeの会員規約・\n個人情報方針に同意する"
+        let bufAccept: String = "転職サイトtypeの会員規約・\n個人情報に同意する"
         let bufNotice: String = [
             "※転職サイトtype未登録のメールアドレスの場合、転職サイトtypeに登録の上応募手続きを行います。",
             "転職サイトtypeに登録済みのパスワードが分からない場合はこちら。",

@@ -28,7 +28,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b0J-2q-YYc">
-                                <rect key="frame" x="0.0" y="33.5" width="339" height="100"/>
+                                <rect key="frame" x="0.0" y="35.5" width="339" height="100"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SZ4-AS-0I3">
                                         <rect key="frame" x="0.0" y="0.0" width="339" height="100"/>
@@ -128,14 +128,14 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="20V-fF-o5f" userLabel="余白">
-                                <rect key="frame" x="0.0" y="151" width="339" height="16"/>
+                                <rect key="frame" x="0.0" y="155" width="339" height="16"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="u9X-Tn-z2u"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="EY8-Zj-2x5">
-                                <rect key="frame" x="0.0" y="184.5" width="339" height="50"/>
+                                <rect key="frame" x="0.0" y="190.5" width="339" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H5s-id-swm">
                                         <rect key="frame" x="16" y="0.0" width="307" height="50"/>
@@ -168,10 +168,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9V2-o1-Gc8" userLabel="余白">
-                                <rect key="frame" x="0.0" y="252" width="339" height="16"/>
+                                <rect key="frame" x="0.0" y="260" width="339" height="8"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="16" id="mac-Pf-SI6"/>
+                                    <constraint firstAttribute="height" constant="8" id="mac-Pf-SI6"/>
                                 </constraints>
                             </view>
                         </subviews>
