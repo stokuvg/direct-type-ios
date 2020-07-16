@@ -64,8 +64,7 @@ class HomeVC: TmpNaviTopVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        Log.selectLog(logLevel: .debug, "HomeVC viewDidLoad start")
-
+//        Log.selectLog(logLevel: .debug, "HomeVC viewDidLoad start")
         // Do any additional setup after loading the view.
 
         // TODO:初回リリースでは外す
@@ -80,26 +79,14 @@ class HomeVC: TmpNaviTopVC {
 
 //        self.makeDummyData()
 //        self.dataCheckAction()
-
-        let (homeFlag,pushFlag) = self.getHomeDisplayFlag()
-        Log.selectLog(logLevel: .debug, "homeFlag:\(homeFlag)")
-        Log.selectLog(logLevel: .debug, "pushFlag:\(pushFlag)")
-
-        if homeFlag == true, pushFlag == false {
-            // ２回目以降
-            self.recommendUseFlag = true
-            self.getJobRecommendList()
-        } else {
-            // 初回起動時
-            self.recommendUseFlag = false
-            self.getJobList()
-        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        Log.selectLog(logLevel: .debug, "HomeVC viewWillAppear start")
+//        Log.selectLog(logLevel: .debug, "HomeVC viewWillAppear start")
         AnalyticsEventManager.track(type: .viewHome)
+        
+        self.getJobData()
 
         safeAreaTop = self.view.safeAreaInsets.top
 
@@ -136,6 +123,23 @@ class HomeVC: TmpNaviTopVC {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
+    }
+    
+    private func getJobData() {
+
+        let (homeFlag,pushFlag) = self.getHomeDisplayFlag()
+//        Log.selectLog(logLevel: .debug, "homeFlag:\(homeFlag)")
+//        Log.selectLog(logLevel: .debug, "pushFlag:\(pushFlag)")
+
+        if homeFlag == true, pushFlag == false {
+            // ２回目以降
+            self.recommendUseFlag = true
+            self.getJobRecommendList()
+        } else {
+            // 初回起動時
+            self.recommendUseFlag = false
+            self.getJobList()
+        }
     }
 
     private func dataAddAction() {
@@ -219,13 +223,13 @@ class HomeVC: TmpNaviTopVC {
         }
     }
     private func getJobRecommendList() {
-        Log.selectLog(logLevel: .debug, "HomeVC getJobRecommendList start")
+//        Log.selectLog(logLevel: .debug, "HomeVC getJobRecommendList start")
         pageJobCards = MdlJobCardList()
         dispJobCards = MdlJobCardList()
         pageNo = 1
         ApiManager.getRecommendJobs(pageNo, isRetry: true)
             .done { result in
-                debugLog("ApiManager getJobRecommendList result:\(result.debugDisp)")
+//                debugLog("ApiManager getJobRecommendList result:\(result.debugDisp)")
 
                 self.pageJobCards = result
         }
@@ -243,7 +247,7 @@ class HomeVC: TmpNaviTopVC {
                 self.linesTitle(date: updateDateString, title: "あなたにぴったりの求人")
             } else {
                 let nowDateString = DateHelper.mdDateString(date: Date())
-                Log.selectLog(logLevel: .debug, "nowDateString:\(nowDateString)")
+//                Log.selectLog(logLevel: .debug, "nowDateString:\(nowDateString)")
 //                let convUpdateDate = DateHelper.convStrYMD2Date(self.pageJobCards.updateAt)
 //                let updateDateString = DateHelper.mdDateString(date: convUpdateDate)
 
@@ -255,14 +259,14 @@ class HomeVC: TmpNaviTopVC {
     }
 
     private func getJobList() {
-        Log.selectLog(logLevel: .debug, "HomeVC getJobList start")
+//        Log.selectLog(logLevel: .debug, "HomeVC getJobList start")
         SVProgressHUD.show()
         pageJobCards = MdlJobCardList()
         dispJobCards = MdlJobCardList()
         pageNo = 1
         ApiManager.getJobs(pageNo, isRetry: true)
             .done { result in
-                debugLog("ApiManager getJobs result:\(result.debugDisp)")
+//                debugLog("ApiManager getJobs result:\(result.debugDisp)")
 
                 self.pageJobCards = result
         }
@@ -289,7 +293,7 @@ class HomeVC: TmpNaviTopVC {
     }
 
     private func saveHomeDisplayFlag() {
-        Log.selectLog(logLevel: .debug, "saveHomeDisplayFlag start")
+//        Log.selectLog(logLevel: .debug, "saveHomeDisplayFlag start")
         let ud = UserDefaults.standard
         ud.set(true, forKey: "home")
         ud.set(false, forKey: "pushTab")
@@ -493,7 +497,7 @@ extension HomeVC: NoCardViewDelegate {
 
 extension HomeVC: JobOfferCardReloadCellDelegate {
     func allTableReloadAction() {
-        Log.selectLog(logLevel: .debug, "allTableReloadAction start")
+//        Log.selectLog(logLevel: .debug, "allTableReloadAction start")
         // 精度の高い求人を受け取る
         self.recommendUseFlag = true
         self.getJobRecommendList()
@@ -502,7 +506,7 @@ extension HomeVC: JobOfferCardReloadCellDelegate {
 
 extension HomeVC: BaseJobCardCellDelegate {
     func skipAction(jobId: String) {
-        Log.selectLog(logLevel: .debug, "skipAction jobId:\(jobId)")
+//        Log.selectLog(logLevel: .debug, "skipAction jobId:\(jobId)")
         AnalyticsEventManager.track(type: .skipVacancies)
 
         if skipSendStatus == .sending {
