@@ -24,14 +24,12 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
     
     @IBOutlet weak var vwBoardArea: UIView!
     @IBOutlet weak var vwBoardSafeArea: UIView!
-
     @IBOutlet weak var vwMainArea: UIView!
-    @IBOutlet weak var vwHeadArea: UIView!
+    @IBOutlet weak var lcTitleAreaBottom: NSLayoutConstraint!
     @IBOutlet weak var vwTitleArea: UIView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var vwStackArea: UIView!
     @IBOutlet weak var stackVW: UIStackView!
-    @IBOutlet weak var vwFootArea: UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,8 +39,6 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
         vwBoardArea.backgroundColor = .white
         vwBoardArea.cornerRadius = 16
         vwBoardArea.clipsToBounds = true
-        vwBoardArea.borderColor = UIColor(colorType: .color_line)!
-        vwBoardArea.borderWidth = 1
     }
     func initCell(_ type: EntryFormModelType, model: Any?) {
         self.type = type
@@ -64,8 +60,9 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
         case .profile:  bufTitle = "プロフィール"
         case .resume:   bufTitle = "履歴書"
         case .career:   bufTitle = "業務経歴書"
-        case .entry:    bufTitle = "企業向けに送る情報"
+        case .entry:    bufTitle = ""
         }
+        lcTitleAreaBottom.constant = bufTitle.isEmpty ? 0 : 16 //タイトルなければ、次との余白も含めて非表示にする
         lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         lblTitle.updateConstraints()
 

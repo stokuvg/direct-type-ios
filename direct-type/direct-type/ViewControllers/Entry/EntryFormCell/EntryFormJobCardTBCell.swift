@@ -10,6 +10,7 @@ import UIKit
 
 class EntryFormJobCardTBCell: UITableViewCell {
     var model: MdlJobCardDetail? = nil
+    var isFullDisp: Bool = false
     
     @IBOutlet weak 	var vwMainArea: UIView!
     @IBOutlet weak var ivIcon: UIImageView!
@@ -25,8 +26,10 @@ class EntryFormJobCardTBCell: UITableViewCell {
         backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
         vwMainArea.backgroundColor = UIColor(colorType: .color_base)
     }
-    func initCell(_ model: MdlJobCardDetail?) {
+    func initCell(_ model: MdlJobCardDetail?, isFullDisp: Bool = false) {
         self.model = model
+        self.isFullDisp = isFullDisp
+        lblJobTitle.numberOfLines = isFullDisp ? 0 : 2
     }
     
     func dispCell() {
@@ -39,7 +42,6 @@ class EntryFormJobCardTBCell: UITableViewCell {
         lblCompanyName.text(text: bufCompanyName, fontType: .E_font_SS, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .left)
         lblJobTitle.text(text: bufJobName, fontType: .E_font_Sb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         lblDate.text(text: bufDate, fontType: .E_font_SS, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .right)
-
     }
             
             
