@@ -34,9 +34,9 @@ final public class AuthManager {
         AWSCognitoIdentityUserPool.default().currentUser()?.getSession()
         .continueOnSuccessWith(block: { (task) -> Void in
             token = task.result?.idToken?.tokenString
-            //print(token, task.result?.expirationTime) //Debug:
+            Log.selectLog(logLevel: .debug, "token:\(String(describing: token))")
+            })
         })
-        Log.selectLog(logLevel: .debug, "token:\(String(describing: token))")
         return token
     }
     var userState: UserState {
@@ -48,7 +48,7 @@ final public class AuthManager {
     }
     
     var isLogin: Bool {
-        return userState == .signedIn
+        return (userState == .signedIn) && !((AuthManager.shared.idToken ?? "").isEmpty)
     }
 }
 
@@ -60,6 +60,12 @@ extension AuthManager {
                 TudApiAPI.customHeaders = ["Authorization": "Bearer \(idToken)"]
             } else {
                 print("まだidToken取得していない")
+                AWSMobileClient.default().getTokens { (tokens, error) in
+                    if let _error = error as? NSError{
+                        Log.selectLog(logLevel: .debug, "_error:\(_error.localizedDescription)")
+                        Log.selectLog(logLevel: .debug, "userInfo:\(_error.userInfo.description)")
+                    }
+                }
             }
         } else {
             //print("認証不要なAPIを叩こうとしている") //この場合は idToken を除去っておく方が良いか？
