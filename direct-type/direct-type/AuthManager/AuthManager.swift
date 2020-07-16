@@ -36,6 +36,7 @@ final public class AuthManager {
             token = task.result?.idToken?.tokenString
             Log.selectLog(logLevel: .debug, "token:\(String(describing: token))")
             })
+        })
         return token
     }
     var userState: UserState {

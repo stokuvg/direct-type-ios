@@ -40,6 +40,8 @@ class HomeVC: TmpNaviTopVC {
 //    @IBOutlet weak var homeNaviBackView:UIView!
 //    @IBOutlet weak var homeNaviHeight:NSLayoutConstraint!
     @IBOutlet weak var homeTableView:UITableView!
+    
+    private var profile: MdlProfile? = nil
 
     var pageJobCards: MdlJobCardList!   // nページを取得
     var dispJobCards: MdlJobCardList!   // 取得したページを全て表示
@@ -61,6 +63,11 @@ class HomeVC: TmpNaviTopVC {
     // AppsFlyerのイベントトラッキング用にオンメモリでキープ求人リストを保有するプロパティ
     // キープされた求人をオンメモリ上で保有しておき、この画面が切り替わった際にイベント送信する
     var storedKeepList: Set<Int> = []
+    
+    // 初回画面表示
+    var firstLoadFlag:Bool = false
+    // 求人追加表示フラグ
+    var dataAddFlag:Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,7 +93,10 @@ class HomeVC: TmpNaviTopVC {
 //        Log.selectLog(logLevel: .debug, "HomeVC viewWillAppear start")
         AnalyticsEventManager.track(type: .viewHome)
         
-        self.getJobData()
+        if firstLoadFlag == false {
+            self.getProgileData()
+            self.firstLoadFlag = true
+        }
 
         safeAreaTop = self.view.safeAreaInsets.top
 
@@ -126,7 +136,7 @@ class HomeVC: TmpNaviTopVC {
     }
     
     private func getJobData() {
-
+        Log.selectLog(logLevel: .debug, "HomeVC getJobData start")
         let (homeFlag,pushFlag) = self.getHomeDisplayFlag()
 //        Log.selectLog(logLevel: .debug, "homeFlag:\(homeFlag)")
 //        Log.selectLog(logLevel: .debug, "pushFlag:\(pushFlag)")
@@ -155,6 +165,9 @@ class HomeVC: TmpNaviTopVC {
 
     private func dataCheckAction() {
         Log.selectLog(logLevel: .debug, "HomeVC dataCheckAction start")
+        
+        // ０件時レイアウト修正用
+//        pageJobCards = MdlJobCardList()
 
         if (pageJobCards.jobCards.count) > 0 {
 //        if masterTableData.count > 0 {
@@ -166,6 +179,7 @@ class HomeVC: TmpNaviTopVC {
             self.homeTableView.delegate = self
             self.homeTableView.dataSource = self
             self.homeTableView.reloadData()
+            
         } else {
             dispType = .none
             let cardNoView = UINib(nibName: "NoCardView", bundle: nil)
@@ -175,6 +189,8 @@ class HomeVC: TmpNaviTopVC {
             cardFrame = noCardBackView.frame
             cardNoView.frame = cardFrame
             cardNoView.delegate = self
+            
+            cardNoView.setup(profileData: self.profile!)
             noCardBackView.addSubview(cardNoView)
 
             homeTableView.isHidden = true
@@ -260,7 +276,6 @@ class HomeVC: TmpNaviTopVC {
 
     private func getJobList() {
 //        Log.selectLog(logLevel: .debug, "HomeVC getJobList start")
-        SVProgressHUD.show()
         pageJobCards = MdlJobCardList()
         dispJobCards = MdlJobCardList()
         pageNo = 1
@@ -282,6 +297,32 @@ class HomeVC: TmpNaviTopVC {
             self.dataCheckAction()
 
             self.saveHomeDisplayFlag()
+        }
+    }
+    
+    private func getProgileData() {
+        SVProgressHUD.show()
+        ApiManager.getProfile(Void(), isRetry: true)
+            .done { result in
+                self.profile = result
+        }
+        .catch { (error) in
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            print(myErr)
+            
+        }
+        .finally {
+            if self.dataAddFlag {
+                // 次ページの求人情報を取得
+                if self.recommendUseFlag {
+                    self.getJobRecommendAddList()
+                } else {
+                    self.getJobAddList()
+                }
+                self.dataAddFlag = false
+            } else {
+                self.getJobData()
+            }
         }
     }
 
@@ -479,12 +520,10 @@ extension HomeVC: UITableViewDataSource {
 
 extension HomeVC: JobOfferCardMoreCellDelegate {
     func moreDataAdd() {
-        // 次ページの求人情報を取得
-        if recommendUseFlag {
-            self.getJobRecommendAddList()
-        } else {
-            self.getJobAddList()
-        }
+        
+        self.dataAddFlag = true
+        
+        self.getProgileData()
     }
 }
 
