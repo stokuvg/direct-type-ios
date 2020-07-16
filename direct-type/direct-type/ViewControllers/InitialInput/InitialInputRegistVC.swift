@@ -57,8 +57,14 @@ private extension InitialInputRegistVC {
         changeButtonState(shouldForceDisable: true)
         AWSMobileClient.default().signUp(username: phoneNumber, password: AppDefine.password, userAttributes: phoneNumberAttribute) { (signUpResult, error) in
             if let error = error {
-                let buf = AuthManager.convAnyError(error).debugDisp
+                let myError = AuthManager.convAnyError(error)
+                var buf = myError.debugDisp
                 DispatchQueue.main.async {
+                    let errorType = MyErrorDisp.CodeType(rawValue: myError.code)
+                    if errorType == .existsUser {
+                        // TODO: 既存ユーザーだった場合のエラー文面を検討して実装する
+                        buf = "既存ユーザーが存在する場合のエラーですよ"
+                    }
                     self.showConfirm(title: "Error", message: buf, onlyOK: true)
                     self.changeButtonState()
                     SVProgressHUD.dismiss()
