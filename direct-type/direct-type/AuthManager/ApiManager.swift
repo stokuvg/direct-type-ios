@@ -77,16 +77,19 @@ extension ApiManager {
                 let myErr = AuthManager.convAnyError(error)
                 switch myErr.code {
                 case 401:
-                    print("401: NotAuthorized ちょっとまってリトライ")
+                    //print("401: NotAuthorized ちょっとまってリトライ")
                     break
                 case 400: //Validation Errorはリトライしない
-                    print("400: Validation Errorはリトライしない（一括チェック）")
+                    //print("400: Validation Errorはリトライしない（一括チェック）")
                     throw error
-                case 404: //404 Error はリトライしない
-                    print("404: NotFound はリトライしない")
+                case 410: //Gone はリトライしない
+                    //print("410: Gone はリトライしない（一括チェック）")
+                    throw error
+                case 404: //404 NotFound はリトライしない
+                    //print("404: NotFound はリトライしない")
                     throw error
                 case 500: //Network Errorはリトライしない
-                    print("500: Network Error はリトライしない")
+                    //print("500: Network Error はリトライしない")
                     throw error
                 default:
                     print("\(myErr.code): \(myErr)")
