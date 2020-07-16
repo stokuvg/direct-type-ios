@@ -48,7 +48,7 @@ final public class AuthManager {
     }
     
     var isLogin: Bool {
-        return userState == .signedIn
+        return (userState == .signedIn) && !((AuthManager.shared.idToken ?? "").isEmpty)
     }
 }
 
@@ -60,6 +60,12 @@ extension AuthManager {
                 TudApiAPI.customHeaders = ["Authorization": "Bearer \(idToken)"]
             } else {
                 print("まだidToken取得していない")
+                AWSMobileClient.default().getTokens { (tokens, error) in
+                    if let _error = error as? NSError{
+                        print(_error.localizedDescription)
+                        print(_error.userInfo.description)
+                    }
+                }
             }
         } else {
             //print("認証不要なAPIを叩こうとしている") //この場合は idToken を除去っておく方が良いか？
