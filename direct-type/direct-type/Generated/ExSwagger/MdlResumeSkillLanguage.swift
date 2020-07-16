@@ -54,7 +54,7 @@ enum EditItemMdlResumeSkillLanguage: String, EditItemProtocol {
         case .languageToeicScore:   return "TOEIC"
         case .languageToeflScore:   return "TOEFL"
         case .languageEnglish:      return "英語スキル"
-        case .languageStudySkill:   return "英語以外語学スキル"
+        case .languageStudySkill:   return "英語以外の語学スキル"
         }
     }
     var tsvMaster: SelectItemsManager.TsvMaster {
