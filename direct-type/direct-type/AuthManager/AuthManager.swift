@@ -35,8 +35,8 @@ final public class AuthManager {
         .continueOnSuccessWith(block: { (task) -> Void in
             token = task.result?.idToken?.tokenString
             //print(token, task.result?.expirationTime) //Debug:
-        })
-        Log.selectLog(logLevel: .debug, "token:\(String(describing: token))")
+            Log.selectLog(logLevel: .debug, "token:\(String(describing: token))")
+            })
         return token
     }
     var userState: UserState {
@@ -62,8 +62,8 @@ extension AuthManager {
                 print("まだidToken取得していない")
                 AWSMobileClient.default().getTokens { (tokens, error) in
                     if let _error = error as? NSError{
-                        print(_error.localizedDescription)
-                        print(_error.userInfo.description)
+                        Log.selectLog(logLevel: .debug, "_error:\(_error.localizedDescription)")
+                        Log.selectLog(logLevel: .debug, "userInfo:\(_error.userInfo.description)")
                     }
                 }
             }
