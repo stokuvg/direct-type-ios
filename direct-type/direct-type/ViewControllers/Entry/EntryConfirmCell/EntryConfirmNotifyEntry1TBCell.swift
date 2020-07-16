@@ -21,7 +21,7 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
     @IBOutlet weak var vwMessageAreaB: UIView!
     @IBOutlet weak var lblMessageB: UILabel!
     @IBOutlet weak var vwPasswordArea: UIView!
-    @IBOutlet weak var tfPassword: UITextField!
+    @IBOutlet weak var tfPassword: IKTextField!
     @IBOutlet weak var vwMessageAreaA: UIView!
     @IBOutlet weak var lblMessageA: UILabel!
 
@@ -60,7 +60,7 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
         ].joined(separator: "")
         let bufMessageA: String = "メールアドレス：\(email)"
         lblTitle.text(text: bufTitle, fontType: .font_M, textColor: UIColor(colorType: .color_black)!, alignment: .center)
-        lblMessage.text(text: bufMessage, fontType: .font_S, textColor: UIColor(colorType: .color_black)!, alignment: .left)
+        lblMessage.text(text: bufMessage, fontType: .EC_font_Info, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         lblMessageB.text(text: bufMessageB, fontType: .font_Sb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         lblMessageA.text(text: bufMessageA, fontType: .font_S, textColor: UIColor(colorType: .color_black)!, alignment: .left)
     }
