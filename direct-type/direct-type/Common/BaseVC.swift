@@ -38,7 +38,7 @@ class BaseVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        Log.selectLog(logLevel: .debug, "BaseVC viewWillAppear start")
+//        Log.selectLog(logLevel: .debug, "BaseVC viewWillAppear start")
         
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "arDefaultWhite")
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "arDefaultWhite")
