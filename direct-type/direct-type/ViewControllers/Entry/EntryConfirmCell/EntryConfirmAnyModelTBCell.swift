@@ -176,10 +176,11 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
                     }
                 }
                 addStackItem(type: .qualificationsH3, val: disp3h)
-                //===(3i)自己PR
-                if !resume.ownPr.isEmpty {
-                    addStackItem(type: .ownPrH3, val: resume.ownPr)
-                }
+                //===応募フォームでは「履歴書」の「自己PR」は非表示にする
+                ////===(3i)自己PR
+                //if !resume.ownPr.isEmpty {
+                //    addStackItem(type: .ownPrH3, val: resume.ownPr)
+                //}
             }
         case .career:
             if let careerList = self.detail as? MdlCareer {

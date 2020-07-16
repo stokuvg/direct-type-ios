@@ -10,7 +10,7 @@ import UIKit
 
 enum PushVCType {
     case profilePreviewH2
-    case resumePreviewH3
+    case resumePreviewH3(_ entryMode: Bool)
     case careerPreviewC15
     case smoothCareerPreviewF11
     case firstInputPreviewA
@@ -32,7 +32,7 @@ extension BaseVC {
                 }
                 self.navigationController?.pushViewController(nvc, animated: true)
             }
-        case .resumePreviewH3://[H-3] 履歴書確認
+        case .resumePreviewH3(let entryMode)://[H-3] 履歴書確認
             let storyboard = UIStoryboard(name: "Preview", bundle: nil)
             if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ResumePreviewVC") as? ResumePreviewVC{
                 nvc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に表示にする
