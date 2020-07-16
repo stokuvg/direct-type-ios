@@ -153,7 +153,7 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
             pushViewController(.profilePreviewH2)
             return //遷移させたので以後の処理はパス
         case .resumeC9:
-            pushViewController(.resumePreviewH3)
+            pushViewController(.resumePreviewH3(true))
             return //遷移させたので以後の処理はパス
         case .careerC9:
             pushViewController(.careerListC)

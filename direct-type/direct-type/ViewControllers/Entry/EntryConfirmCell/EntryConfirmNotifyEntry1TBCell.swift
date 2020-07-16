@@ -16,13 +16,15 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
     @IBOutlet weak var vwMainArea: UIView!
     @IBOutlet weak var vwTitleArea: UIView!
     @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var vwMessageAreaB: UIView!
-    @IBOutlet weak var lblMessageB: UILabel!
     @IBOutlet weak var vwMessageArea: UIView!
     @IBOutlet weak var lblMessage: UILabel!
-
+    @IBOutlet weak var vwMessageAreaB: UIView!
+    @IBOutlet weak var lblMessageB: UILabel!
     @IBOutlet weak var vwPasswordArea: UIView!
     @IBOutlet weak var tfPassword: UITextField!
+    @IBOutlet weak var vwMessageAreaA: UIView!
+    @IBOutlet weak var lblMessageA: UILabel!
+
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -50,19 +52,17 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
     }
     func dispCell() {
         let bufTitle: String = ["応募前に必ずご確認ください"].joined(separator: "\n")
-        let bufMessageB: String = "応募後に利用するパスワード"
+        let bufMessageB: String = "応募に利用するパスワード"
         let bufMessage: String = [
         "転職サイトtypeを通じて応募します。",
         "利用するパスワードを入力してください。",
-        "（転職サイトtypeにご登録済の方は、ご利用中のパスワードをご入力ください。）",
-        "\n\n利用メールアドレス：\(email)"].joined(separator: "")
-//        let bufMessage: String = [
-//        "この求人への応募は転職サイトtypeを通じて行われます。",
-//        "\(email)で転職サイトtypeに登録済の方は転職サイトtypeのパスワードを、" +
-//        "未登録の方はご希望のパスワードを入力ください。"].joined(separator: "")
+        "（転職サイトtypeにご登録済の方は、ご利用中のパスワードを入力してください。）",
+        ].joined(separator: "")
+        let bufMessageA: String = "メールアドレス：\(email)"
         lblTitle.text(text: bufTitle, fontType: .font_M, textColor: UIColor(colorType: .color_black)!, alignment: .center)
-        lblMessageB.text(text: bufMessageB, fontType: .font_Sb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         lblMessage.text(text: bufMessage, fontType: .font_S, textColor: UIColor(colorType: .color_black)!, alignment: .left)
+        lblMessageB.text(text: bufMessageB, fontType: .font_Sb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
+        lblMessageA.text(text: bufMessageA, fontType: .font_S, textColor: UIColor(colorType: .color_black)!, alignment: .left)
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

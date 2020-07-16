@@ -14,6 +14,7 @@ import SVProgressHUD
 //===[H-3]「履歴書確認」
 class ResumePreviewVC: PreviewBaseVC {
     var detail: MdlResume? = nil
+    var isEntryMode: Bool = false //応募フォームから呼び出された場合には、「自己PR」欄を非表示にするため
 
     override func actCommit(_ sender: UIButton) {
         if editableModel.editTempCD.count == 0 { //変更なければ、そのまま戻して良いプレビュー画面
@@ -27,8 +28,9 @@ class ResumePreviewVC: PreviewBaseVC {
         fetchUpdateResume()
     }
     //共通プレビューをOverrideして利用する
-    override func initData() {
+    func initData(isEntryMode: Bool) {
         title = "履歴書"
+        self.isEntryMode = isEntryMode
     }
     override func dispData() {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
@@ -93,9 +95,11 @@ class ResumePreviewVC: PreviewBaseVC {
             EditableItemH(type: .selectMulti, editItem: EditItemMdlResume.qualifications, val: codes),
         ]))
         //===(3i)自己PR
-        arrData.append(MdlItemH(.ownPrH3, "", childItems: [
-            EditableItemH(type: .inputMemo, editItem: EditItemMdlResume.ownPr, val: _detail.ownPr),
-        ]))
+        if !isEntryMode { //応募フォームの場合には項目非表示とする
+            arrData.append(MdlItemH(.ownPrH3, "", childItems: [
+                EditableItemH(type: .inputMemo, editItem: EditItemMdlResume.ownPr, val: _detail.ownPr),
+            ]))
+        }
 
         //=== editableModelで管理させる
         editableModel.arrData.removeAll()

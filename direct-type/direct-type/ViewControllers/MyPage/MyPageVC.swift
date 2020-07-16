@@ -191,7 +191,7 @@ extension MyPageVC: UITableViewDelegate {
             case .profileCompleteness:
                 pushViewController(.profilePreviewH2, model: profile)
             case .resumeCompleteness:
-                pushViewController(.resumePreviewH3, model: resume)
+                pushViewController(.resumePreviewH3(false), model: resume)
             case .editableCarrer:
                 isExistCareer ? pushViewController(.careerListC, model: career) : registChemistryAction()
             case .editableChemistry:
@@ -313,7 +313,7 @@ extension MyPageVC: BasePercentageCompletionCellDelegate {
         case is MyPageEditedCarrerCell:
             pushViewController(.profilePreviewH2)
         case is MyPageEditedChemistryCell:
-            pushViewController(.resumePreviewH3)
+            pushViewController(.resumePreviewH3(false))
         default:
             break
         }
