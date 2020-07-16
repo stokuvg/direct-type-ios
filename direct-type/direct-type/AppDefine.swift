@@ -26,11 +26,14 @@ enum DirectTypeLinkURL {
     var dispText: String {
         switch self {
         case .TypeEntryPasswordForgot:
-            return "転職サイトtypeに登録済みのパスワードがわからない場合"
+            //return "転職サイトtypeに登録済みのパスワードがわからない場合"
+            return "パスワードが分からない"
         case .TypeEntryPersonalInfo:
-            return "転職サイトtypeの個人情報の取り扱いについて"
+            //return "転職サイトtypeの個人情報の取り扱いについて"
+            return "個人情報"
         case .TypeEntryMemberPolicy:
-            return "転職サイトtypeの会員規約"
+            //return "転職サイトtypeの会員規約"
+            return "会員規約"
         }
     }
     //リンク先URLテキスト
