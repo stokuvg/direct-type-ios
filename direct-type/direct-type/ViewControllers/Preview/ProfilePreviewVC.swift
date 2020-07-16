@@ -148,6 +148,8 @@ extension ProfilePreviewVC {
         SVProgressHUD.show(withStatus: "プロフィール情報の更新")
         ApiManager.updateProfile(param, isRetry: true)
         .done { result in
+            // 戻す前に画面内でインジケータを削除しないと、前の画面でインジケータが表示されない
+            SVProgressHUD.dismiss()
             self.fetchCompletePopVC()
         }
         .catch { (error) in
@@ -163,7 +165,6 @@ extension ProfilePreviewVC {
         }
         .finally {
             self.dispData()
-            SVProgressHUD.dismiss()
         }
     }
 }
