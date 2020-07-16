@@ -27,6 +27,7 @@ class MyPageNameCell: BaseTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.contentView.backgroundColor = UIColor.init(colorType: .color_base)
 //        editBtn.isHidden = false//変更不可にしておくよ
         dispCell()
     }

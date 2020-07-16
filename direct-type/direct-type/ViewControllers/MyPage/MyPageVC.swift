@@ -168,7 +168,7 @@ extension MyPageVC: UITableViewDelegate {
 
         switch cellType {
         case .userName:
-            return 126
+            return 136
         case .profileCompleteness, .resumeCompleteness:
             return 58
         case .editableCarrer:
@@ -413,6 +413,7 @@ extension MyPageVC {
         .finally {
             self.pageTableView.reloadData()
             SVProgressHUD.dismiss()
+//            SVProgressHUD.dismiss(withDelay: 1.5)
             if self.shouldTransitionToInitialInput {
                 self.showConfirm(title: "初期入力をしてください", message: "", onlyOK: true)
                     .done { _ in self.transitionToInitialInput() } .catch { (error) in } .finally {}
