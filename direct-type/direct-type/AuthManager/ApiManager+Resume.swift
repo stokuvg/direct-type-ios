@@ -68,10 +68,16 @@ extension UpdateResumeRequestDTO {
             for item in convTypeAndYear(codes: tmp) {
                 _workHistory.append(item)
             }
+        } else {
+            _workHistory.append(WorkHistoryDTO(job3Id: resume.lastJobExperiment.jobType, experienceYears: resume.lastJobExperiment.jobExperimentYear))
         }
         if let tmp = editTempCD[EditItemMdlResumeJobExperiments.jobTypeAndJobExperimentYear.itemKey] {
             for item in convTypeAndYear(codes: tmp) {
                 _workHistory.append(item)
+            }
+        } else {
+            for item in resume.jobExperiments {
+                _workHistory.append(WorkHistoryDTO(job3Id: item.jobType, experienceYears: item.jobExperimentYear))
             }
         }
         if _workHistory.count > 0 {
