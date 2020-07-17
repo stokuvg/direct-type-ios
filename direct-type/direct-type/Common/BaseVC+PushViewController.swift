@@ -27,19 +27,14 @@ extension BaseVC {
             let storyboard = UIStoryboard(name: "Preview", bundle: nil)
             if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ProfilePreviewVC") as? ProfilePreviewVC {
                 nvc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に表示にする
-                if let model = model as? MdlProfile {
-                    print("TODO: モデルを引き渡す [\(model.debugDisp)]")
-                }
+                if let model = model as? MdlProfile { nvc.transferModel(profile: model) }//モデルがあれば横流す
                 self.navigationController?.pushViewController(nvc, animated: true)
             }
         case .resumePreviewH3(let entryMode)://[H-3] 履歴書確認
             let storyboard = UIStoryboard(name: "Preview", bundle: nil)
             if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_ResumePreviewVC") as? ResumePreviewVC{
                 nvc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に表示にする
-                if let model = model as? MdlResume {
-                    print("TODO: モデルを引き渡す [\(model.debugDisp)]")
-                }
-                nvc.initData(isEntryMode: entryMode)
+                nvc.transferModel(anyModel: model, isEntryMode: entryMode) //モデルがあれば横流す
                 self.navigationController?.pushViewController(nvc, animated: true)
             }
         case .careerPreviewC15://[C-15] 職務経歴書確認

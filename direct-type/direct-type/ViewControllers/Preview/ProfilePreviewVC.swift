@@ -30,6 +30,9 @@ class ProfilePreviewVC: PreviewBaseVC {
     override func initData() {
         title = "個人プロフィール"
     }
+    func transferModel(profile: MdlProfile) {
+        self.detail = profile
+    }
     override func dispData() {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
         guard let _detail = detail else { return }
@@ -112,7 +115,11 @@ class ProfilePreviewVC: PreviewBaseVC {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        fetchGetProfile()
+        if let _ = detail {
+            dispData()//画面引き渡しでモデルを渡しているので
+        } else {
+            fetchGetProfile()
+        }
     }
 }
 

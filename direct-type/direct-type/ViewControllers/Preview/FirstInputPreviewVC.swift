@@ -150,7 +150,7 @@ private extension FirstInputPreviewVC {
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
             case 400:
-                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
+                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgResume(myErr.arrValidErrMsg)
                 self.dicGrpValidErrMsg = dicGrpError
                 self.dicValidErrMsg = dicError
             default:
@@ -172,14 +172,7 @@ private extension FirstInputPreviewVC {
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-            switch myErr.code {
-            case 400:
-                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
-                self.dicGrpValidErrMsg = dicGrpError
-                self.dicValidErrMsg = dicError
-            default:
-                self.showError(error)
-            }
+            self.showError(myErr)
         }
         .finally {
             self.dispData()

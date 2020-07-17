@@ -103,9 +103,13 @@ extension UpdateResumeRequestDTO {
         self.finalEducation = _finalEducation
         if let tmp = editTempCD[EditItemMdlResumeSkillLanguage.languageToeicScore.itemKey] {//TOEICスコア
             self.toeic = Int(tmp)
+        } else {
+            self.toeic = nil
         }
         if let tmp = editTempCD[EditItemMdlResumeSkillLanguage.languageToeflScore.itemKey] {//TOEFLスコア
             self.toefl = Int(tmp)
+        } else {
+            self.toefl = nil
         }
         if let tmp = editTempCD[EditItemMdlResumeSkillLanguage.languageEnglish.itemKey] {//英語スキルID
             self.englishSkillId = tmp

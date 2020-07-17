@@ -8,6 +8,22 @@
 
 import UIKit
 
+extension ValidateManager {
+    class func convValidErrMsgResume(_ arrValidErrMsg: [SwaValidErrMsg]) -> ([MdlItemHTypeKey: [String]],
+        [EditableItemKey: [String]]) {
+        var dicGrpError: [MdlItemHTypeKey: [String]] = [:]
+        var dicError: [EditableItemKey: [String]] = [:]
+        for valid in arrValidErrMsg {
+            switch valid.property { //これで対応する項目に結びつける
+            default:
+                print("❤️\t[\(valid.property)]\t[\(valid.constraintsKey)] : [\(valid.constraintsVal)]")
+            }
+        }
+        dicGrpError = makeGrpErrByItemErr(dicError)//これだと配列の足し込み非対応なのでメッセージ減る
+        return (dicGrpError, dicError)
+    }
+}
+
 extension EditItemMdlResume {
     var valid: ValidInfo {
         switch self {
