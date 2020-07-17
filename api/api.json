@@ -121,7 +121,23 @@
             "example": "09012345678",
             "description": "ログインで使用する携帯電話番号"
           }
-        }
+        },
+        "required": [
+          "nickname",
+          "hopeJobPlaceIds",
+          "familyName",
+          "firstName",
+          "familyNameKana",
+          "firstNameKana",
+          "birthday",
+          "genderId",
+          "zipCode",
+          "prefectureId",
+          "city",
+          "town",
+          "email",
+          "phoneNumber"
+        ]
       },
       "CreateProfileRequestDTO": {
         "type": "object",
