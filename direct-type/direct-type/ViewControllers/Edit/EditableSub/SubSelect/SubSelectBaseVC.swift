@@ -169,6 +169,15 @@ class SubSelectBaseVC: BaseVC {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if #available(iOS 13.0, *) {
+            Log.selectLog(logLevel: .debug, "iOS13以上はこっちでステータスバーの色対応")
+        } else {
+            Log.selectLog(logLevel: .debug, "iOS13未満はこっちでステータスバーの色対応")
+            self.view.backgroundColor = UIColor.init(colorType: .color_black)
+            self.setStattusBarStyle(style: .lightContent)
+        }
+        
         dispData()
     }
 }
