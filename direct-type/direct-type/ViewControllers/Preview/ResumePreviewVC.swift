@@ -161,7 +161,7 @@ extension ResumePreviewVC {
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
             case 400:
-                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
+                let (dicGrpError, dicError) = ValidateManager.convValidErrMsgResume(myErr.arrValidErrMsg)
                 self.dicGrpValidErrMsg = dicGrpError
                 self.dicValidErrMsg = dicError
             default:
