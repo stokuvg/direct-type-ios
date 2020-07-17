@@ -8,18 +8,6 @@
 
 import UIKit
 
-class IKTextField: UITextField {
-    var itemKey: EditableItemKey = "<undefine>"
-    //var padding = UIEdgeInsets.zero
-    let padding = UIEdgeInsets(top: 6, left: 4, bottom: 6, right: 4)
-    override var intrinsicContentSize: CGSize {
-        var intrinsicContentSize = super.intrinsicContentSize
-        intrinsicContentSize.height += ( padding.top + padding.bottom + 0 )
-        intrinsicContentSize.width += ( padding.left + padding.right + 0 )
-        return intrinsicContentSize
-    }
-}
-
 class ExItemLabel: UILabel {
     var isReadonly: Bool = false
     //var padding = UIEdgeInsets.zero

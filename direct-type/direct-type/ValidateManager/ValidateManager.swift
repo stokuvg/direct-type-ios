@@ -69,6 +69,27 @@ extension ValidateManager {
                 dicError.addDicArrVal(key: key, val: val)
             }
         }
+        //追加の特殊チェック（複数項目での関連あり）
+        for (key, vals) in subValidateSpecialCheck(editableModel) {
+            for val in vals {
+                dicError.addDicArrVal(key: key, val: val)
+            }
+        }
+
+        return dicError
+    }
+    //============================================
+    class func subValidateSpecialCheck(_ editableModel: EditableModel) -> [EditableItemKey: [String]] {
+        var dicError: [EditableItemKey: [String]] = [:]
+        //===「学部」「学科・専攻」は、併せて全角30文字
+        if let item1 = editableModel.getItemByKey(EditItemMdlResumeSchool.faculty.itemKey),
+            let item2 = editableModel.getItemByKey(EditItemMdlResumeSchool.department.itemKey) {
+            let buf = "\(item1.curVal)\(item2.curVal)"
+            if buf.count > 30 {
+                dicError.addDicArrVal(key: item1.editableItemKey, val: "入力文字数が超過しています")
+                dicError.addDicArrVal(key: item2.editableItemKey, val: "入力文字数が超過しています")
+            }
+        }
         return dicError
     }
     //============================================
