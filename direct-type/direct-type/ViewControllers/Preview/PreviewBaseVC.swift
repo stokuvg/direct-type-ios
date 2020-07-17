@@ -91,13 +91,14 @@ class PreviewBaseVC: TmpBasicVC {
         super.viewWillDisappear(animated)
     }
     func chkButtonEnable() {
-        btnCommit.isEnabled = true ; return //!!!
-        //=== 変更なければフェッチ不要
-        if editableModel.editTempCD.count > 0 {
-            btnCommit.isEnabled = true
-        } else {
-            btnCommit.isEnabled = false
-        }
+        btnCommit.isEnabled = true
+        return
+//        //=== 変更なければフェッチ不要
+//        if editableModel.editTempCD.count > 0 {
+//            btnCommit.isEnabled = true
+//        } else {
+//            btnCommit.isEnabled = false
+//        }
     }
     func fetchCompletePopVC() { //フェッチ完了時に画面を戻す処理
         self.navigationController?.popViewController(animated: true)

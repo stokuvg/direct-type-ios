@@ -128,8 +128,7 @@ extension CareerListVC: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true) //ハイライトの解除
-        let item = arrDisp[indexPath.row]
-
+        //let item = arrDisp[indexPath.row]
         let storyboard = UIStoryboard(name: "Preview", bundle: nil)
         if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_CareerPreviewVC") as? CareerPreviewVC{
             nvc.initData(self, indexPath.row, arrDisp)
