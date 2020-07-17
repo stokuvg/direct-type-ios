@@ -102,33 +102,27 @@ class MdlProfile: Codable {
     //ApiモデルをAppモデルに変換して保持させる
     convenience init(dto: GetProfileResponseDTO) {
         var _hopeJobPlaceIds: [Code] = []
-        if let codes = dto.hopeJobPlaceIds {
-            for code in codes {
-                _hopeJobPlaceIds.append(String(code))
-            }
+        for code in dto.hopeJobPlaceIds {
+            _hopeJobPlaceIds.append(String(code))
         }
         var _birthday: Date!
-        if let bufDate = dto.birthday {
-            let _tmp = DateHelper.convStrYMD2Date(bufDate)
-            _birthday = _tmp
-        } else {
-            _birthday = Constants.SelectItemsUndefineBirthday//未設定時の誕生日初期値
-        }
+        let _tmp = DateHelper.convStrYMD2Date(dto.birthday)
+        _birthday = _tmp
         self.init(
-            nickname: dto.nickname ?? "",
+            nickname: dto.nickname,
             hopeJobPlaceIds:_hopeJobPlaceIds,
-            familyName: dto.familyName ?? "",
-            firstName: dto.firstName ?? "",
-            familyNameKana: dto.familyNameKana ?? "",
-            firstNameKana: dto.firstNameKana ?? "",
+            familyName: dto.familyName,
+            firstName: dto.firstName,
+            familyNameKana: dto.familyNameKana,
+            firstNameKana: dto.firstNameKana,
             birthday: _birthday,
-            gender: dto.genderId ?? "",
-            zipCode: dto.zipCode ?? "",
-            prefecture: dto.prefectureId ?? "",
-            address1: dto.city ?? "",
-            address2: dto.town ?? "",
-            mailAddress: dto.email ?? "",
-            mobilePhoneNo: dto.phoneNumber ?? "")
+            gender: dto.genderId,
+            zipCode: dto.zipCode,
+            prefecture: dto.prefectureId,
+            address1: dto.city,
+            address2: dto.town,
+            mailAddress: dto.email,
+            mobilePhoneNo: dto.phoneNumber)
     }
     //=== 作成・更新のモデルは、アプリ=>APIなので不要だな ===
     
