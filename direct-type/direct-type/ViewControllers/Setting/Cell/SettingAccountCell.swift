@@ -17,6 +17,8 @@ class SettingAccountCell: BaseTableViewCell {
         super.awakeFromNib()
         // Initialization code
         titleLabel.text(text: "アカウント（認証済み電話番号）", fontType: .font_Sb, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
+        //初期表示（ゴミ表示をなくす）
+        telNoLabel.text = ""
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
