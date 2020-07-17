@@ -46,8 +46,8 @@ enum EditItemMdlResumeSchool: String, EditItemProtocol {
     var dispName: String {
         switch self {
         case .schoolName:       return "学校名"
-        case .faculty:       return "学部"
-        case .department:          return "学科・専攻"
+        case .faculty:          return "学部"
+        case .department:       return "学科・専攻"
         case .graduationYear:   return "卒業年月"
         }
     }

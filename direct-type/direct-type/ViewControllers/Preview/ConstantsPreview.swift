@@ -32,23 +32,17 @@ class IKPickerView: UIPickerView {
     var itemKey: EditableItemKey = "<undefine>"
     var parentTF: IKTextField? = nil
 }
-//class IKTextField: UITextField {
-//    var itemKey: EditableItemKey = "<undefine>"
-//}
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        self.borderStyle = .none
-//        let vwWaku: UnderTextFieldLine = UnderTextFieldLine(frame: self.frame)
-//        self.addSubview(vwWaku)
-//    }
-//}
-//class UnderTextFieldLine: UIView {
-//    override func draw(_ rect: CGRect) {
-//        UIColor.lightGray.setFill()
-//        let rectangle = UIBezierPath(rect: rect)
-//        rectangle.fill()
-//    }
-//}
+class IKTextField: UITextField {
+    var itemKey: EditableItemKey = "<undefine>"
+    //余白の拡張のため
+    let padding = UIEdgeInsets(top: 6, left: 4, bottom: 6, right: 4)
+    override var intrinsicContentSize: CGSize {
+        var intrinsicContentSize = super.intrinsicContentSize
+        intrinsicContentSize.height += ( padding.top + padding.bottom + 0 )
+        intrinsicContentSize.width += ( padding.left + padding.right + 0 )
+        return intrinsicContentSize
+    }
+}
 
 enum HPreviewItemType: String {
     case undefine
