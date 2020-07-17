@@ -154,6 +154,7 @@ class EditableTableBasicVC: EditableBasicVC {
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(kbAreaTap(_:)))
         vwKbTapArea.addGestureRecognizer(tapGesture)
     }
+    
     @objc func kbAreaTap(_ sender: UIGestureRecognizer) {
         self.view.endEditing(true)
     }
@@ -219,12 +220,13 @@ class EditableTableBasicVC: EditableBasicVC {
             let safeAreaB = self.view.safeAreaInsets.bottom
             let szKeyBoard = rect.size
             let szGamen = self.view.frame.size
+            let szFoot = vwFoot.frame.size
             let size = CGSize(width: szGamen.width - 4,
                               height: szGamen.height - szKeyBoard.height - 4 - safeAreaT)
             let frame = CGRect(origin: CGPoint(x: 2, y: 2 + safeAreaT), size: size)
             self.vwKbTapArea.frame = frame
             //!!!print(szDevice, szGamen, szKeyBoard, tableVW.contentInset.top, tableVW.contentInset.bottom, safeAreaT, safeAreaB)
-            tableVW.contentInset.bottom =  szKeyBoard.height - safeAreaB
+            tableVW.contentInset.bottom = szKeyBoard.height - szFoot.height + safeAreaB
         }
     }
     @objc func keyboardDidHide(notification: NSNotification) {
