@@ -74,6 +74,7 @@ class HEditTextTBCell: UITableViewCell {
         }
         let bufTitle = _item.dispName //_item.type.dispTitle
         lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_main)!, alignment: .left)
+        tfValue.keyboardType = UIKeyboardType.default
         var bufVal: String = ""
         switch _item.editType {
         case .selectDrumYMD:
