@@ -28,9 +28,15 @@ class ResumePreviewVC: PreviewBaseVC {
         fetchUpdateResume()
     }
     //共通プレビューをOverrideではなくなった
-    func initData(isEntryMode: Bool) {
+    //共通プレビューをOverrideして利用する
+    override func initData() {
         title = "履歴書"
+    }
+    func transferModel(anyModel: Any?, isEntryMode: Bool) {
         self.isEntryMode = isEntryMode
+        if let resume = anyModel as? MdlResume {
+            self.detail = resume
+        }
     }
     override func dispData() {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
@@ -113,7 +119,11 @@ class ResumePreviewVC: PreviewBaseVC {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        fetchGetResume()
+        if let _ = detail {
+            dispData()//画面引き渡しでモデルを渡しているので
+        } else {
+            fetchGetResume()
+        }
     }
     private func completeUpdate() {
         self.editableModel.editTempCD.removeAll()//編集情報をまるっと削除

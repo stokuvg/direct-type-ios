@@ -115,7 +115,7 @@ class ProfilePreviewVC: PreviewBaseVC {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let profile = detail {
+        if let _ = detail {
             dispData()//画面引き渡しでモデルを渡しているので
         } else {
             fetchGetProfile()
