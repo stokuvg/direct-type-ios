@@ -48,7 +48,7 @@ class CareerPreviewVC: PreviewBaseVC {
                 if let workMemo = self.editableModel.getItemByKey(EditItemMdlCareerCard.contents.itemKey) {
                     let text = workMemo.curVal
                     let regexp = "\(Constants.TypeDummyStrings)"
-                    let newText = text.replacementString(text: text, regexp: regexp, fixedReplacementString: "_")
+                    let newText = text.replacementString(text: text, regexp: regexp, fixedReplacementString: "")
                     self.editableModel.changeTempItem(workMemo, text: newText)
                     self.fetchCreateCareerList()
                 }

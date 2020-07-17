@@ -152,7 +152,8 @@ extension ValidateManager {
                     }
 
                 case .zenkaku:
-                    regexp = #"^[ー\p{Hiragana}\p{Katakana}\p{Han}\n]*$"#
+                    //regexp = #"^[ー\p{Hiragana}\p{Katakana}\p{Han}\n]*$"#
+                    regexp = #"^[[^\x01-\x7E]\n]*$"#
                     if let bufMatch = getRegexMatchString(editTemp, regexp) {
                         if let keta = validInfo.keta, bufMatch.count != keta {
                             if bufMatch.isEmpty && validInfo.required == false { continue } //桁指定あっても必須じゃなければ0桁は許される

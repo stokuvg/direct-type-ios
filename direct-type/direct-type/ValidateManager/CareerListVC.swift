@@ -46,7 +46,7 @@ class CareerListVC: TmpBasicVC {
         //case skillWord
         //case skillPowerPoint
         var skillPC: String = ""
-        skillPC = ["・PCスキル", Constants.TypeDummyStrings].joined(separator: "\n")
+        skillPC = ["・ＰＣスキル", Constants.TypeDummyStrings].joined(separator: "\n")
         //実績
         var workDetail: String = ""
         workDetail = ["・実績", Constants.TypeDummyStrings].joined(separator: "\n")
@@ -58,6 +58,9 @@ class CareerListVC: TmpBasicVC {
         if newCareerCard.contents.isEmpty {
             newCareerCard.contents = dispWorknote.joined(separator: "\n\n")
         }
+        print(dispWorknote.description)
+
+
         return newCareerCard
     }
 
