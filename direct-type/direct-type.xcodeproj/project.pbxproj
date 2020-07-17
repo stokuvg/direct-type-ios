@@ -337,6 +337,8 @@
 		26F2A82B246D2EE90037D47F /* EditableTableBasicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A82A246D2EE90037D47F /* EditableTableBasicVC.swift */; };
 		26F2A82D246D31020037D47F /* PreviewBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2A82C246D31020037D47F /* PreviewBaseVC.swift */; };
 		26F8E50C24B4367B00764193 /* Entry.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26F8E50B24B4367B00764193 /* Entry.storyboard */; };
+		26F9F1AA24C16B2C00EAFC3E /* HEditMemoTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F9F1A824C16B2C00EAFC3E /* HEditMemoTBCell.swift */; };
+		26F9F1AB24C16B2C00EAFC3E /* HEditMemoTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F9F1A924C16B2C00EAFC3E /* HEditMemoTBCell.xib */; };
 		26FC4EE02477C775003B56C3 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FC4EDF2477C775003B56C3 /* AuthManager.swift */; };
 		C29161DB95966DD7132DBD19 /* Pods_direct_type.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A49B0215E0F4A582FB1EC5E /* Pods_direct_type.framework */; };
 /* End PBXBuildFile section */
@@ -675,6 +677,8 @@
 		26F2A82A246D2EE90037D47F /* EditableTableBasicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTableBasicVC.swift; sourceTree = "<group>"; };
 		26F2A82C246D31020037D47F /* PreviewBaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewBaseVC.swift; sourceTree = "<group>"; };
 		26F8E50B24B4367B00764193 /* Entry.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Entry.storyboard; sourceTree = "<group>"; };
+		26F9F1A824C16B2C00EAFC3E /* HEditMemoTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HEditMemoTBCell.swift; sourceTree = "<group>"; };
+		26F9F1A924C16B2C00EAFC3E /* HEditMemoTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HEditMemoTBCell.xib; sourceTree = "<group>"; };
 		26FC4EDF2477C775003B56C3 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		8A49B0215E0F4A582FB1EC5E /* Pods_direct_type.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_direct_type.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8C351EB920291E353136BB9 /* Pods-direct-type.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-direct-type.debug.xcconfig"; path = "Target Support Files/Pods-direct-type/Pods-direct-type.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1293,6 +1297,8 @@
 				26989F7D246A5E520050AC40 /* HEditDrumTBCell.xib */,
 				26CFC4642469496D00E458E2 /* HEditTextTBCell.swift */,
 				26CFC4632469496D00E458E2 /* HEditTextTBCell.xib */,
+				26F9F1A824C16B2C00EAFC3E /* HEditMemoTBCell.swift */,
+				26F9F1A924C16B2C00EAFC3E /* HEditMemoTBCell.xib */,
 			);
 			path = EditableSub;
 			sourceTree = "<group>";
@@ -1578,6 +1584,7 @@
 				26BF48E324639D2B00E00215 /* MstK10_salary.tsv in Resources */,
 				063350E12463FB3F00AF90F3 /* JobOfferDetailVC.storyboard in Resources */,
 				0EAE7665248F2E5E009A8F4B /* ChemistryBusinessAvilityView.xib in Resources */,
+				26F9F1AB24C16B2C00EAFC3E /* HEditMemoTBCell.xib in Resources */,
 				06AA8C652484D2DA001733FA /* MyPageCarrerStartCell.xib in Resources */,
 				064EF7002465551D00853ADD /* JobDetailArticleHeaderView.xib in Resources */,
 				269AFFC6246A929300DB364B /* SubSelectSyouTBCell.xib in Resources */,
@@ -1818,6 +1825,7 @@
 				26A1F5842480F23100834213 /* MyCmnDialogVC.swift in Sources */,
 				2642E39324A1A6CC003E6907 /* Validate+Entry.swift in Sources */,
 				26AF3237248F538300AA78FD /* Validate+Resume.swift in Sources */,
+				26F9F1AA24C16B2C00EAFC3E /* HEditMemoTBCell.swift in Sources */,
 				06E519982457DA0D004E4B7A /* ApproachSettingVC.swift in Sources */,
 				26F18B5224AB0FB6003048AE /* EntryConfirmItem.swift in Sources */,
 				06DCAEAB245A7616008FE9FA /* UILabel+Extensions.swift in Sources */,
