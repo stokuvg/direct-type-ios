@@ -22,8 +22,9 @@ struct EditableItemH {
         get { return editItem.dispUnit }
     }
     var exQuestion: String
+    var exModel: Any? = nil   //拡張情報
     let orgVal: String!     //String/CodeDisp/[CodeDisp]が入る（更新前の値）
-    var curVal: String     //String/CodeDisp/[CodeDisp]が入る（現在の選択値）
+    var curVal: String     //String/CodeDisp/[CodeDisp]が入る（現在の選択値）    
     var valDisp: String {
         let _val = curVal
         switch editType {
@@ -82,12 +83,13 @@ struct EditableItemH {
     }
     
     //=== 初期化 ===
-    init(type: EditType, editItem: EditItemProtocol, val code: Code, exQuestion: String = "") {
+    init(type: EditType, editItem: EditItemProtocol, val code: Code, exQuestion: String = "", exModel: Any? = nil) {
         self.editType = type
         self.editItem = editItem
         self.editableItemKey = editItem.itemKey
         self.orgVal = code
         self.curVal = code
         self.exQuestion = exQuestion
+        self.exModel = exModel
     }
 }

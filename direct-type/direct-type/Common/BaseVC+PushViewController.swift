@@ -39,6 +39,7 @@ extension BaseVC {
                 if let model = model as? MdlResume {
                     print("TODO: モデルを引き渡す [\(model.debugDisp)]")
                 }
+                nvc.initData(isEntryMode: entryMode)
                 self.navigationController?.pushViewController(nvc, animated: true)
             }
         case .careerPreviewC15://[C-15] 職務経歴書確認

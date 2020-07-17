@@ -167,7 +167,7 @@ class EntryFormVC: PreviewBaseVC {
         //===１０．希望勤務地（任意）
         let _hopeArea = entry?.hopeArea.joined(separator: EditItemTool.JoinMultiCodeSeparator)
         arrData.append(MdlItemH(.hopeAreaC9, "", childItems: [
-            EditableItemH(type: .selectMulti, editItem: EditItemMdlEntry.hopeArea, val: _hopeArea ?? ""),
+            EditableItemH(type: .selectMulti, editItem: EditItemMdlEntry.hopeArea, val: _hopeArea ?? "", exModel: jobCard),
         ]))
         //===１１．希望年収（任意）
         arrData.append(MdlItemH(.hopeSalaryC9, "", childItems: [

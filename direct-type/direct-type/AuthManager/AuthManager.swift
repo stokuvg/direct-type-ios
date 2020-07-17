@@ -47,6 +47,12 @@ final public class AuthManager {
     }
     
     var isLogin: Bool {
+        AWSMobileClient.default().getTokens { (tokens, error) in
+            if let _error = error as? NSError{
+                Log.selectLog(logLevel: .debug, "_error:\(_error.localizedDescription)")
+                Log.selectLog(logLevel: .debug, "userInfo:\(_error.userInfo.description)")
+            }
+        }
         return (userState == .signedIn) && !((AuthManager.shared.idToken ?? "").isEmpty)
     }
 }
