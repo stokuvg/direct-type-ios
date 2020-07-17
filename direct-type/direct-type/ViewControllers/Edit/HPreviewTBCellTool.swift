@@ -41,7 +41,7 @@ class MdlItemH {
     var notice: String = ""
     var readonly: Bool = false
     var childItems: [EditableItemH] = []
-    var model: Any? = nil
+    var exModel: Any? = nil   //拡張情報
     
     convenience init(_ type: HPreviewItemType, _ value: String, _ notice: String = "", readonly: Bool = false, childItems: [EditableItemH], model: Any? = nil) {
         self.init()
@@ -50,10 +50,10 @@ class MdlItemH {
         self.notice = notice
         self.readonly = readonly
         self.childItems = childItems
-        self.model = model
+        self.exModel = model
     }
         
     var debugDisp: String {
-        return "[\(type.dispTitle)] [\(value)]（\(childItems.count)件のサブ項目） [\(readonly ? "変更不可" : "")] [\(notice)] [\(model)]"
+        return "[\(type.dispTitle)] [\(value)]（\(childItems.count)件のサブ項目） [\(readonly ? "変更不可" : "")] [\(notice)] [\(exModel)]"
     }
 }

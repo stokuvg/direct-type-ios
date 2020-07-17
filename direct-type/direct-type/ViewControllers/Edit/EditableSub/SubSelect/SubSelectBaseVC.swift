@@ -105,10 +105,21 @@ class SubSelectBaseVC: BaseVC {
         }
         self.arrData.removeAll()
         //選択肢一覧を取得する（グループタイプはSpecialを利用するため来ない想定ではある）
-        let cd: [CodeDisp] = SelectItemsManager.getMaster(self.mainTsvMaster)
-        let (grp, _): ([CodeDisp], [GrpCodeDisp]) = SelectItemsManager.getMaster(self.mainTsvMaster)
-        //print("[cd: \(cd.count)] / [grp: \(grp.count)] [gcd: \(gcd.count)] ")
-        self.arrData = (grp.count != 0) ? grp : cd
+        switch editableItem.editableItemKey {
+        case EditItemMdlEntry.hopeArea.itemKey:
+            if let jobCardDetail = editableItem.exModel as? MdlJobCardDetail {
+                for code in jobCardDetail.workPlaceCodes {
+                    if let codeDisp = SelectItemsManager.getCodeDisp(.entryPlace, code: code) {
+                        self.arrData.append(codeDisp)
+                    }
+                }
+            }
+        default:
+            let cd: [CodeDisp] = SelectItemsManager.getMaster(self.mainTsvMaster)
+            let (grp, _): ([CodeDisp], [GrpCodeDisp]) = SelectItemsManager.getMaster(self.mainTsvMaster)
+            //print("[cd: \(cd.count)] / [grp: \(grp.count)] [gcd: \(gcd.count)] ")
+            self.arrData = (grp.count != 0) ? grp : cd
+        }
         //=== 希望勤務地の場合の得例：先頭に「勤務地にはこだわらない」を付与し、排他選択を実施する
         switch editableItem.editableItemKey {
         case EditItemMdlFirstInput.hopeArea.itemKey: fallthrough
