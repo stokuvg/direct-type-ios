@@ -143,6 +143,7 @@ class EditableTableBasicVC: EditableBasicVC {
         self.tableVW.estimatedRowHeight = 100
         self.tableVW.rowHeight = UITableView.automaticDimension
         self.tableVW.register(UINib(nibName: "HEditTextTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HEditTextTBCell")
+        self.tableVW.register(UINib(nibName: "HEditMemoTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HEditMemoTBCell")
         self.tableVW.register(UINib(nibName: "HEditDrumTBCell", bundle: nil), forCellReuseIdentifier: "Cell_HEditDrumTBCell")
         //=== Keyboard制御
         vwKbTapArea.backgroundColor = .black
@@ -285,6 +286,15 @@ extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
         let item: EditableItemH! = isChange ? editTemp : _item
         switch item.editType {
             
+        case .inputMemo:
+            let returnKeyType: UIReturnKeyType = (item.editableItemKey == editableModel.lastEditableItemKey) ? .done : .next
+            let cell: HEditMemoTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditMemoTBCell", for: indexPath) as! HEditMemoTBCell
+            let errMsg = dicValidErrMsg[item.editableItemKey]?.joined(separator: "\n" ) ?? ""
+            cell.initCell(self, item, errMsg: errMsg, returnKeyType)
+            cell.dispCell()
+            return cell
+
+            
         case .inputText:
             let returnKeyType: UIReturnKeyType = (item.editableItemKey == editableModel.lastEditableItemKey) ? .done : .next
             let cell: HEditTextTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HEditTextTBCell", for: indexPath) as! HEditTextTBCell
@@ -322,6 +332,9 @@ extension EditableTableBasicVC: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true) //ハイライトの解除
         if let cell = tableView.cellForRow(at: indexPath) as? HEditTextTBCell {
             cell.tfValue.becomeFirstResponder()
+        }
+        if let cell = tableView.cellForRow(at: indexPath) as? HEditMemoTBCell {
+            cell.active()
         }
     }
 }
