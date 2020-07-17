@@ -92,6 +92,35 @@ class SubInputMemoVC: BaseVC {
         super.viewDidAppear(animated)
         textVW.becomeFirstResponder()
     }
+    //=== Notification通知の登録 ===
+    // 画面遷移時にも取り除かないもの（他の画面で変更があった場合の更新のため）
+    override func initNotify() {
+    }
+    // この画面に遷移したときに登録するもの
+    override func addNotify() {
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: UIResponder.keyboardDidShowNotification, object: nil)
+        nc.addObserver(self, selector: #selector(keyboardDidHide(notification:)), name: UIResponder.keyboardDidHideNotification, object: nil)
+    }
+    // 他の画面に遷移するときに消して良いもの
+    override func removeNotify() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidHideNotification, object: nil)
+    }
+    @objc func keyboardDidShow(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else { return }
+        if let rect = userInfo["UIKeyboardFrameEndUserInfoKey"] as? CGRect {
+            let safeAreaB = self.view.safeAreaInsets.bottom
+            let szKeyBoard = rect.size
+            let szFoot = vwFoot.frame.size
+            textVW.contentInset.bottom = szKeyBoard.height - szFoot.height + safeAreaB
+        }
+    }
+    @objc func keyboardDidHide(notification: NSNotification) {
+      textVW.contentInset.bottom = 0
+    }
+    //=======================================================================================================
+
     private func dispCount() {
         let maxCount = editableItem.editItem.valid.max ?? 0
         if maxCount > 0 {
