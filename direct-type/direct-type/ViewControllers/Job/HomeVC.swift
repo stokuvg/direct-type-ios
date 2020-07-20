@@ -189,8 +189,9 @@ class HomeVC: TmpNaviTopVC {
             cardFrame = noCardBackView.frame
             cardNoView.frame = cardFrame
             cardNoView.delegate = self
-            
-            cardNoView.setup(profileData: self.profile!)
+            if let _profile = self.profile {
+                cardNoView.setup(profileData: _profile)
+            }
             noCardBackView.addSubview(cardNoView)
 
             homeTableView.isHidden = true
