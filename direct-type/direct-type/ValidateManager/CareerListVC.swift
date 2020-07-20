@@ -14,6 +14,8 @@ class CareerListVC: TmpBasicVC {
     var arrData: [MdlCareerCard] = []
     var arrDisp: [MdlCareerCard] = []
     var isFirstFetch: Bool = true
+    //===フェッチ抑止処理
+    var lastDispUpdateCareerList: Date = Date(timeIntervalSince1970: 0)
     
     @IBOutlet weak var tableVW: UITableView!
 
@@ -77,6 +79,7 @@ class CareerListVC: TmpBasicVC {
         for career in careerList.businessTypes {
             self.arrData.append(career)
         }
+        self.lastDispUpdateCareerList = Date()//設定したデータで表示するので
     }
     func dispData() {
         title = "職務経歴書情報入力"
@@ -98,7 +101,7 @@ class CareerListVC: TmpBasicVC {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //フェッチ抑止処理
-        if ApiManager.needFetch(.careerList) {
+        if ApiManager.needFetch(.careerList, lastDispUpdateCareerList) {
             fetchGetCareerList()
         } else {
             dispData()//画面引き渡しでモデルを渡しているので
@@ -154,6 +157,7 @@ extension CareerListVC {
             for (_, item) in result.businessTypes.enumerated() {
                 self.arrData.append(item)
             }
+            self.lastDispUpdateCareerList = Date()//取得したデータで表示更新するので
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)

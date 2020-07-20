@@ -19,6 +19,8 @@ final class MyPageVC: TmpNaviTopVC {
     private var career: MdlCareer? = nil
     private var entry: MdlEntry? = nil
     private var topRanker: ChemistryScoreCalculation.TopRanker?
+    //===フェッチ抑止処理
+    var lastDispUpdateCareerList: Date = Date(timeIntervalSince1970: 0)
 
     @IBOutlet private weak var pageTableView: UITableView!
 
@@ -369,9 +371,16 @@ extension MyPageVC {
     }
 
     func fetchGetCareerList() {
+        var isNeedFetch: Bool = ApiManager.needFetch(.careerList, lastDispUpdateCareerList)
+        if self.career == nil { isNeedFetch = true } //モデル未取得ならフェッチが必要
+        guard isNeedFetch else {
+            self.fetchGetChemistryData()//別途、読んでおく
+            return
+        }
         ApiManager.getCareer(Void(), isRetry: true)
         .done { result in
             self.career = result
+            self.lastDispUpdateCareerList = Date()//取得したデータで表示更新するので
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)

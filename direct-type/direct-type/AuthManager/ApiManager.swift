@@ -54,9 +54,12 @@ final public class ApiManager {
 
 extension ApiManager {
     //一覧の更新が必要かチェックしている（フェッチ抑止制御）
-    class func needFetch(_ type: FetchType) -> Bool {
+    class func needFetch(_ type: FetchType, _ lastDispUpdate: Date) -> Bool {
         guard let lastUpdate: Date = ApiManager.shared.dicLastUpdate[type] else { return true } //初回で未登録ならフェッチが必要
         let tiLastUpdate: TimeInterval = lastUpdate.timeIntervalSince1970
+        let tiLastDispUpdate: TimeInterval = lastDispUpdate.timeIntervalSince1970
+        print("データの最終更新が: \(tiLastUpdate) / この画面の最終更新が: \(tiLastDispUpdate) ... \((tiLastUpdate > tiLastDispUpdate) ? "データの方が新しいので更新が必要" : "講師不要"))")
+        if tiLastUpdate > tiLastDispUpdate { return true } //表示されているデータより新しいデータで更新されている
         let tiCurrent: TimeInterval = Date(timeIntervalSinceNow: 0).timeIntervalSince1970
         let flg = ( (tiCurrent - tiLastUpdate) > Constants.FetchIntervalSecond )
         print("今が: \(tiCurrent) / 最終更新が: \(tiLastUpdate) ... \(tiCurrent - tiLastUpdate) > \(Constants.FetchIntervalSecond) : \(flg)")
