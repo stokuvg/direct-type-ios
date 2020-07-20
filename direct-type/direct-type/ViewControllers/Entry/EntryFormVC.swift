@@ -273,6 +273,29 @@ extension EntryFormVC {
             return cell
         }
     }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true) //ハイライトの解除
+        let item = arrData[indexPath.row]
+
+        //================================================
+        //モデル引き渡しによる画面遷移の得例対応
+        switch item.type {
+        case .spacer: break
+        case .jobCardC9:
+            return //遷移なし。以後の処理はパス
+        case .profileC9:
+            pushViewController(.profilePreviewH2, model: profile)
+            return //遷移させたので以後の処理はパス
+        case .resumeC9:
+            pushViewController(.resumePreviewH3(true), model: resume)
+            return //遷移させたので以後の処理はパス
+        default:
+            break
+        }
+        return super.tableView(tableView, didSelectRowAt: indexPath)//残りはBase側で処理してもらう
+
+    }
+
 }
 
 
