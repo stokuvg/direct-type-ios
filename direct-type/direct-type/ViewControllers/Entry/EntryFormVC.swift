@@ -59,6 +59,10 @@ class EntryFormVC: PreviewBaseVC {
     var career: MdlCareer? = nil
     var entry: MdlEntry? = nil
     var routeFrom: AnalyticsEventType.RouteFromType = .unknown
+    //===フェッチ抑止処理
+    var lastDispUpdateProfile: Date = Date(timeIntervalSince1970: 0)
+    var lastDispUpdateResume: Date = Date(timeIntervalSince1970: 0)
+    var lastDispUpdateCareerList: Date = Date(timeIntervalSince1970: 0)
 
     override func actCommit(_ sender: UIButton) {
         if validateLocalModel() {
@@ -309,9 +313,16 @@ extension EntryFormVC {
     }
     private func fetchGetProfile() {
         SVProgressHUD.show(withStatus: "情報の取得")
+        var isNeedFetch: Bool = ApiManager.needFetch(.profile, lastDispUpdateProfile)
+        if self.profile == nil { isNeedFetch = true } //モデル未取得ならフェッチが必要
+        guard isNeedFetch else {
+            self.fetchGetResume()//次の処理の呼び出し
+            return
+        }
         ApiManager.getProfile(Void(), isRetry: true)
         .done { result in
             self.profile = result
+            self.lastDispUpdateProfile = Date()//取得したデータで表示更新するので
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -322,9 +333,16 @@ extension EntryFormVC {
         }
     }
     private func fetchGetResume() {
+        var isNeedFetch: Bool = ApiManager.needFetch(.resume, lastDispUpdateResume)
+        if self.resume == nil { isNeedFetch = true } //モデル未取得ならフェッチが必要
+        guard isNeedFetch else {
+            self.fetchGetCareerList()//次の処理の呼び出し
+            return
+        }
         ApiManager.getResume(Void(), isRetry: true)
         .done { result in
             self.resume = result
+            self.lastDispUpdateResume = Date()//取得したデータで表示更新するので
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -335,9 +353,16 @@ extension EntryFormVC {
         }
     }
     private func fetchGetCareerList() {
+        var isNeedFetch: Bool = ApiManager.needFetch(.careerList, lastDispUpdateCareerList)
+        if self.career == nil { isNeedFetch = true } //モデル未取得ならフェッチが必要
+        guard isNeedFetch else {
+            fetchGroupeFinish()
+            return
+        }
         ApiManager.getCareer(Void(), isRetry: true)
         .done { result in
             self.career = result
+            self.lastDispUpdateCareerList = Date()//取得したデータで表示更新するので
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -350,9 +375,12 @@ extension EntryFormVC {
             print(myErr)
         }
         .finally {
-            self.dispData()
-            SVProgressHUD.dismiss()
+            self.fetchGroupeFinish()
         }
+    }
+    private func fetchGroupeFinish() {
+        self.dispData()
+        SVProgressHUD.dismiss()
     }
 }
 
