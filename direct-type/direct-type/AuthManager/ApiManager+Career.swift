@@ -26,6 +26,7 @@ extension ApiManager {
         AuthManager.needAuth(true)
         CareerAPI.careerControllerGet()
         .done { result in
+            ApiManager.shared.dicLastUpdate[.careerList] = Date()//取得できたので、最終取得日時を更新
             resolver.fulfill(MdlCareer(dto: result)) //変換しておく
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
@@ -88,6 +89,7 @@ extension ApiManager {
         AuthManager.needAuth(true)
         CareerAPI.careerControllerCreate(body: param)
         .done { result in
+            ApiManager.shared.dicLastUpdate[.careerList] = Date(timeIntervalSince1970: 0)//モデル更新したので、一覧再取得が必要
             resolver.fulfill(Void())
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
@@ -121,6 +123,7 @@ extension ApiManager {
         AuthManager.needAuth(true)
         CareerAPI.careerControllerUpdate(body: param)
         .done { result in
+            ApiManager.shared.dicLastUpdate[.careerList] = Date(timeIntervalSince1970: 0)//モデル更新したので、一覧再取得が必要
             resolver.fulfill(Void())
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し

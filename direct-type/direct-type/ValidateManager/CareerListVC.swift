@@ -72,15 +72,20 @@ class CareerListVC: TmpBasicVC {
         self.tableVW.rowHeight = UITableView.automaticDimension
         self.tableVW.register(UINib(nibName: "CareerCardTBCell", bundle: nil), forCellReuseIdentifier: "Cell_CareerCardTBCell")
     }
-    
+    func transferModel(careerList: MdlCareer) {
+        self.arrData.removeAll()
+        for career in careerList.businessTypes {
+            self.arrData.append(career)
+        }
+    }
     func dispData() {
         title = "職務経歴書情報入力"
         //表示用にソートしておく
         arrDisp.removeAll()
         for item in arrData.sorted(by: { (lv, rv) -> Bool in
-            lv.workPeriod.endDate > rv.workPeriod.endDate
-        }).sorted(by: { (lv, rv) -> Bool in
             lv.workPeriod.startDate > rv.workPeriod.startDate
+        }).sorted(by: { (lv, rv) -> Bool in
+            lv.workPeriod.endDate > rv.workPeriod.endDate
         }) {
             arrDisp.append(item)
         }
@@ -92,7 +97,12 @@ class CareerListVC: TmpBasicVC {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        fetchGetCareerList()
+        //フェッチ抑止処理
+        if ApiManager.needFetch(.careerList) {
+            fetchGetCareerList()
+        } else {
+            dispData()//画面引き渡しでモデルを渡しているので
+        }
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

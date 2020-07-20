@@ -43,7 +43,7 @@ public enum ApiError: Error {
 final public class ApiManager {
     //フェッチ抑止制御をするもの
     enum FetchType {
-        case todoList
+        case careerList
     }
     var dicLastUpdate: [FetchType: Date] = [:]  //フェッチ抑止チェックのため
 

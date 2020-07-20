@@ -289,6 +289,9 @@ extension EntryFormVC {
         case .resumeC9:
             pushViewController(.resumePreviewH3(true), model: resume)
             return //遷移させたので以後の処理はパス
+        case .careerC9:
+            pushViewController(.careerListC, model: career)
+            return //遷移させたので以後の処理はパス
         default:
             break
         }
