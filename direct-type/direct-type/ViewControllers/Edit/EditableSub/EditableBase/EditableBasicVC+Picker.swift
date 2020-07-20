@@ -129,11 +129,11 @@ extension EditableBasicVC {
 //「年」「月」選択特化Picker
 extension EditableBasicVC: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        guard let pickerView = pickerView as? IKPickerView else { return 0 }
+        //guard let pickerView = pickerView as? IKPickerView else { return 0 }
         return 2
     }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        guard let pickerView = pickerView as? IKPickerView else { return 0 }
+        //guard let pickerView = pickerView as? IKPickerView else { return 0 }
         switch component {
         case 0: return Constants.years.count
         case 1: return Constants.months.count
@@ -142,7 +142,7 @@ extension EditableBasicVC: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         guard let pickerView = pickerView as? IKPickerView else { return UIView() }
-        let selectionItems = editableModel.makePickerItems(itemKey: pickerView.itemKey)
+        //let selectionItems = editableModel.makePickerItems(itemKey: pickerView.itemKey)
         var val: Int {
             switch component {
             case 0: return Constants.years[row]

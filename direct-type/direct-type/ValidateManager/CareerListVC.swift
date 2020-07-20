@@ -58,9 +58,6 @@ class CareerListVC: TmpBasicVC {
         if newCareerCard.contents.isEmpty {
             newCareerCard.contents = dispWorknote.joined(separator: "\n\n")
         }
-        print(dispWorknote.description)
-
-
         return newCareerCard
     }
 
@@ -144,7 +141,7 @@ extension CareerListVC {
         ApiManager.getCareer(Void(), isRetry: true)
         .done { result in
             self.arrData.removeAll()
-            for (num, item) in result.businessTypes.enumerated() {
+            for (_, item) in result.businessTypes.enumerated() {
                 self.arrData.append(item)
             }
         }
@@ -156,7 +153,7 @@ extension CareerListVC {
             default:
                 break
             }
-            self.showError(error)
+            self.showError(myErr)
         }
         .finally {
             self.dispData()
@@ -170,7 +167,7 @@ extension CareerListVC {
     }
     private func fetchUpdateCareerList() {
         var tempCards: [CareerHistoryDTO] = []
-        for (num, item) in arrDisp.enumerated() {
+        for (_, item) in arrDisp.enumerated() {
             tempCards.append(CareerHistoryDTO(item))
         }
         let param = CreateCareerRequestDTO(careerHistory: tempCards)
@@ -181,7 +178,7 @@ extension CareerListVC {
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-            self.showError(error)
+            self.showError(myErr)
         }
         .finally {
             SVProgressHUD.dismiss()

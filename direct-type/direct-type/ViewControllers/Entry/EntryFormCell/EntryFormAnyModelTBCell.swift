@@ -69,7 +69,7 @@ class EntryFormAnyModelTBCell: UITableViewCell {
         switch type {
         case .profile:
             lblTitle.text(text: "プロフィール", fontType: .font_Sb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
-            if let model = self.detail as? MdlProfile {
+            if let _ = self.detail as? MdlProfile {
                 if chkProgressProfile() {
                     lblMessage.text(text: "入力済み", fontType: .E_font_Status, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .left)
                 } else {
@@ -78,7 +78,7 @@ class EntryFormAnyModelTBCell: UITableViewCell {
             }
         case .resume:
             lblTitle.text(text: "履歴書", fontType: .font_Sb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
-            if let model = self.detail as? MdlResume {
+            if let _ = self.detail as? MdlResume {
                 if chkProgressResumee() {
                     lblMessage.text(text: "入力済み", fontType: .E_font_Status, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .left)
                 } else {
@@ -87,7 +87,7 @@ class EntryFormAnyModelTBCell: UITableViewCell {
             }
         case .career:
             lblTitle.text(text: "職務経歴書", fontType: .font_Sb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
-            if let model = self.detail as? MdlCareer {
+            if let _ = self.detail as? MdlCareer {
                 if chkProgressCareer() {//未入力チェック
                     lblMessage.text(text: "入力済み", fontType: .E_font_Status, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .left)
                 } else {
