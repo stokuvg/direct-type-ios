@@ -90,6 +90,15 @@ extension ValidateManager {
                 dicError.addDicArrVal(key: item2.editableItemKey, val: "入力文字数が超過しています")
             }
         }
+        //===「市区町村」「丁目・番地・建物名など」は、併せて全角100文字
+        if let item1 = editableModel.getItemByKey(EditItemMdlProfile.address1.itemKey),
+            let item2 = editableModel.getItemByKey(EditItemMdlProfile.address2.itemKey) {
+            let buf = "\(item1.curVal)\(item2.curVal)"
+            if buf.count > 100 {
+                dicError.addDicArrVal(key: item1.editableItemKey, val: "入力文字数が超過しています")
+                dicError.addDicArrVal(key: item2.editableItemKey, val: "入力文字数が超過しています")
+            }
+        }
         return dicError
     }
     //============================================
