@@ -34,7 +34,7 @@ final public class AuthManager {
         AWSCognitoIdentityUserPool.default().currentUser()?.getSession()
         .continueOnSuccessWith(block: { (task) -> Void in
             token = task.result?.idToken?.tokenString
-            Log.selectLog(logLevel: .debug, "token:\(String(describing: token))")
+            //Log.selectLog(logLevel: .debug, "token:\(String(describing: token))")
         })
         return token
     }

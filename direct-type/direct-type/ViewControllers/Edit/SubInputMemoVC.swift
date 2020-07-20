@@ -49,18 +49,24 @@ class SubInputMemoVC: BaseVC {
         textVW.textColor = UIColor(colorType: .color_black)
         textVW.font = UIFont.systemFont(ofSize: 18)
         textVW.backgroundColor = UIColor(colorType: .color_white)
-        btnCommit.setTitle(text: "完了", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        btnCommit.setTitle(text: "この内容で保存", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
         //===ソフトウェアキーボードに〔閉じる〕ボタン付与
         let rect = CGRect(origin: CGPoint.zero, size: CGSize.init(width: 60, height: 45))
         let toolbar = UIToolbar(frame: rect)//Autolayout補正かかるけど、そこそこの横幅指定が必要
         let separator1 = IKBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let btnClose = IKBarButtonItem.init(title: "閉じる", style: .done, target: self, action: #selector(actInputCancelButton))
+        //let btnSelect = IKBarButtonItem.init(title: "この内容で保存", style: .done, target: self, action: #selector(actInputSelectButton))
+        //toolbar.setItems([btnClose, separator1, btnSelect], animated: true)
         toolbar.setItems([btnClose, separator1], animated: true)
         textVW.inputAccessoryView = toolbar
     }
     @objc func actInputCancelButton(_ sender: IKBarButtonItem) {
         self.view.endEditing(true)
+    }
+    @objc func actInputSelectButton(_ sender: IKBarButtonItem) {
+        self.view.endEditing(true)
+        self.actCommit(btnCommit)
     }
 
     func initData(_ delegate: SubSelectFeedbackDelegate, editableItem: EditableItemH) {

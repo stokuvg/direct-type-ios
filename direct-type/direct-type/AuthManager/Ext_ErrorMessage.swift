@@ -146,7 +146,7 @@ struct SwaValidErrSubModel: Decodable {
    var constraints: [String: String]? = nil
     
     var debugDisp: String {
-        return "[\(property): \(constraints?.count)件] ... [\(constraints?.keys)] の情報あり ：　[続行\((children.count > 0) ? "あり" : "なし")]"
+        return "[\(property): \(String(describing: constraints?.count))件] ... [\(String(describing: constraints?.keys))] の情報あり ：　[続行\((children.count > 0) ? "あり" : "なし")]"
     }
 }
 //===Type応募APIでのサーバ側エラー(不正なXMLによるリクエストです)

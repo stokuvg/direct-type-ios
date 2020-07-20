@@ -20,6 +20,9 @@ extension HPreviewTBCell {
             return "<未定義>"
         //========================
         //[C-15]職務経歴書編集
+        //※ウィンドウの初期表示は「選択してください」
+        //タップするとドラムが開き、その初期選択値が、開始は{2018/04}、終了は現在の年月を取得して入れる
+        //※退社時期が入社時期より前に設定されている場合はエラー
         case .workPeriodC15:      //===雇用期間
             let tmp0: String = _item.childItems[0].curVal
             let date0 = DateHelper.convStrYM2Date(tmp0)
@@ -28,9 +31,8 @@ extension HPreviewTBCell {
             let tmp1: String = _item.childItems[1].curVal
             let date1 = DateHelper.convStrYM2Date(tmp1)
             if date1 == Constants.SelectItemsUndefineDate { return "未入力（必須）" } //初回未記入対応
-            let buf1: String!
-            buf1 = date1.dispYmJP()
-            return "\(buf0)〜\(buf1!)"
+            let buf1: String = date1.dispYmJP()
+            return "\(buf0)〜\(buf1)"
         case .companyNameC15:     //===企業名
             if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
             return _item.childItems[0].curVal
@@ -222,33 +224,6 @@ extension HPreviewTBCell {
             if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
             return _item.childItems[0].curVal
 
-        //========================
-        //[C-15]職務経歴書編集
-        //※ウィンドウの初期表示は「選択してください」
-        //タップするとドラムが開き、その初期選択値が、開始は{2018/04}、終了は現在の年月を取得して入れる
-        //※退社時期が入社時期より前に設定されている場合はエラー
-        case .workPeriodC15:      //===雇用期間
-            let tmp0: String = _item.childItems[0].curVal
-            let date0 = DateHelper.convStrYM2Date(tmp0)
-            if date0 == Constants.SelectItemsUndefineDate { return "未入力" } //初回未記入対応
-            let buf0: String = date0.dispYmJP()
-            let tmp1: String = _item.childItems[1].curVal
-            let date1 = DateHelper.convStrYM2Date(tmp1)
-            if date1 == Constants.SelectItemsUndefineDate { return "未入力" } //初回未記入対応
-            let buf1: String!
-            buf1 = date1.dispYmJP()
-            return "\(buf0)〜\(buf1!)" //「現在就業中」をどう表す？「直近」の場合で、「開始」はあるが「終了」が未設定の場合か？
-        //case .companyNameC15:     //===企業名
-        case .employmentTypeC15:  //===雇用形態
-            let tmp0: String = _item.childItems[0].curVal
-            let buf0: String = SelectItemsManager.getCodeDisp(.employmentType, code: tmp0)?.disp ?? ""
-            return "\(buf0)"
-        //case .employeesCountC15:  //===従業員数（数値）*これは直接数値入力で良い
-        case .salaryC15:          //===年収
-            let tmp0: String = _item.childItems[0].curVal
-            let buf0: String = SelectItemsManager.getCodeDisp(.salary, code: tmp0)?.disp ?? ""
-            return "\(buf0)"
-        //case .contentsC15:        //===職務内容本文
         //========================
         //===[F-11]〜サクサク
         case .businessTypesF12: //◆F-12入力（在籍企業の業種）

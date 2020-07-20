@@ -27,7 +27,7 @@ extension ApiManager {
         AuthManager.needAuth(true)
         ResumeAPI.resumeControllerGet()
         .done { result in
-            print(#line, #function, param)
+            ApiManager.shared.dicLastUpdate[.resume] = Date()//取得できたので、最終取得日時を更新
             resolver.fulfill(MdlResume(dto: result)) //変換しておく
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
@@ -150,6 +150,7 @@ extension ApiManager {
         AuthManager.needAuth(true)
         ResumeAPI.resumeControllerUpdate(body: param)
         .done { result in
+            ApiManager.shared.dicLastUpdate[.resume] = Date(timeIntervalSince1970: 0)//モデル更新したので、一覧再取得が必要
             resolver.fulfill(Void())
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
@@ -217,6 +218,7 @@ extension ApiManager {
         AuthManager.needAuth(true)
         ResumeAPI.resumeControllerRegister(body: param)
         .done { result in
+            ApiManager.shared.dicLastUpdate[.resume] = Date(timeIntervalSince1970: 0)//モデル更新したので、一覧再取得が必要
             resolver.fulfill(Void())
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し

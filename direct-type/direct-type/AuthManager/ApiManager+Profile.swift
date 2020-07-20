@@ -27,6 +27,7 @@ extension ApiManager {
         AuthManager.needAuth(true)
         ProfileAPI.profileControllerGet()
         .done { result in
+            ApiManager.shared.dicLastUpdate[.profile] = Date()//取得できたので、最終取得日時を更新
             resolver.fulfill(MdlProfile(dto: result)) //変換しておく
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
@@ -84,6 +85,7 @@ extension ApiManager {
         AuthManager.needAuth(true)
         ProfileAPI.profileControllerUpdate(body: param)
         .done { result in
+            ApiManager.shared.dicLastUpdate[.profile] = Date(timeIntervalSince1970: 0)//モデル更新したので、一覧再取得が必要
             resolver.fulfill(Void())
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
@@ -145,6 +147,7 @@ extension ApiManager {
         AuthManager.needAuth(true)
         ProfileAPI.profileControllerCreate(body: param)
         .done { result in
+            ApiManager.shared.dicLastUpdate[.profile] = Date(timeIntervalSince1970: 0)//モデル更新したので、一覧再取得が必要
             resolver.fulfill(Void())
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し

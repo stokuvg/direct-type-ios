@@ -125,17 +125,8 @@
         "required": [
           "nickname",
           "hopeJobPlaceIds",
-          "familyName",
-          "firstName",
-          "familyNameKana",
-          "firstNameKana",
           "birthday",
           "genderId",
-          "zipCode",
-          "prefectureId",
-          "city",
-          "town",
-          "email",
           "phoneNumber"
         ]
       },

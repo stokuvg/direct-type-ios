@@ -111,17 +111,17 @@ class MdlProfile: Codable {
         self.init(
             nickname: dto.nickname,
             hopeJobPlaceIds:_hopeJobPlaceIds,
-            familyName: dto.familyName,
-            firstName: dto.firstName,
-            familyNameKana: dto.familyNameKana,
-            firstNameKana: dto.firstNameKana,
+            familyName: dto.familyName ?? "",
+            firstName: dto.firstName ?? "",
+            familyNameKana: dto.familyNameKana ?? "",
+            firstNameKana: dto.firstNameKana ?? "",
             birthday: _birthday,
             gender: dto.genderId,
-            zipCode: dto.zipCode,
-            prefecture: dto.prefectureId,
-            address1: dto.city,
-            address2: dto.town,
-            mailAddress: dto.email,
+            zipCode: dto.zipCode ?? "",
+            prefecture: dto.prefectureId ?? "",
+            address1: dto.city ?? "",
+            address2: dto.town ?? "",
+            mailAddress: dto.email ?? "",
             mobilePhoneNo: dto.phoneNumber)
     }
     //=== 作成・更新のモデルは、アプリ=>APIなので不要だな ===

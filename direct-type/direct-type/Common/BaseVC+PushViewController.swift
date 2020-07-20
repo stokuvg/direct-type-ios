@@ -62,9 +62,9 @@ extension BaseVC {
             let storyboard2 = UIStoryboard(name: "Career", bundle: nil)
             if let nvc = storyboard2.instantiateViewController(withIdentifier: "Sbid_CareerListVC") as? CareerListVC{
                 nvc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に表示にする
-                if let model = model as? MdlCareer{
-                    print("TODO: モデルを引き渡す [\(model.debugDisp)]")
-                }
+                if let model = model as? MdlCareer {
+                    nvc.transferModel(careerList: model)
+                }//モデルがあれば横流す
                 self.navigationController?.pushViewController(nvc, animated: true)
             }
         case .entryForm(let routeFrom)://[C-9] 応募フォーム
