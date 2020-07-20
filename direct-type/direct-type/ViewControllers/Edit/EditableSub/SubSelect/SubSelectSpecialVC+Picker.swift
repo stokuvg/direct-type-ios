@@ -116,7 +116,7 @@ extension SubSelectSpecialVC {
         selectAndCloseIfSingle()//===選択と同時に閉じて良いかのチェック
     }
     @objc func actPickerCancelButton(_ sender: IKBarButtonItem) {
-        guard let picker = sender.parentPicker as? IKPickerView else { return }
+        //guard let picker = sender.parentPicker as? IKPickerView else { return }
         changeFocusItem(nil)//仮選択して、該当セルの描画しなおし
         //=== キャンセルされたら、次のセルへ移動せず閉じる
         self.view.endEditing(false) //forceフラグはどこに効いてくるのか？

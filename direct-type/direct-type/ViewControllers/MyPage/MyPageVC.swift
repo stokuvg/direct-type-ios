@@ -19,6 +19,10 @@ final class MyPageVC: TmpNaviTopVC {
     private var career: MdlCareer? = nil
     private var entry: MdlEntry? = nil
     private var topRanker: ChemistryScoreCalculation.TopRanker?
+    //===フェッチ抑止処理
+    var lastDispUpdateProfile: Date = Date(timeIntervalSince1970: 0)
+    var lastDispUpdateResume: Date = Date(timeIntervalSince1970: 0)
+    var lastDispUpdateCareerList: Date = Date(timeIntervalSince1970: 0)
 
     @IBOutlet private weak var pageTableView: UITableView!
 
@@ -340,9 +344,16 @@ extension MyPageVC {
 
     func fetchGetProfile() {
         SVProgressHUD.show(withStatus: "情報の取得")
+        var isNeedFetch: Bool = ApiManager.needFetch(.profile, lastDispUpdateProfile)
+        if self.profile == nil { isNeedFetch = true } //モデル未取得ならフェッチが必要
+        guard isNeedFetch else {
+            self.fetchGetResume()//次の処理の呼び出し
+            return
+        }
         ApiManager.getProfile(Void(), isRetry: true)
         .done { result in
             self.profile = result
+            self.lastDispUpdateProfile = Date()//取得したデータで表示更新するので
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -350,28 +361,42 @@ extension MyPageVC {
             
         }
         .finally {
-            self.fetchGetResume()
+            self.fetchGetResume()//次の処理の呼び出し
         }
     }
 
     func fetchGetResume() {
+        var isNeedFetch: Bool = ApiManager.needFetch(.resume, lastDispUpdateResume)
+        if self.resume == nil { isNeedFetch = true } //モデル未取得ならフェッチが必要
+        guard isNeedFetch else {
+            self.fetchGetCareerList()//次の処理の呼び出し
+            return
+        }
         ApiManager.getResume(Void(), isRetry: true)
         .done { result in
             self.resume = result
+            self.lastDispUpdateResume = Date()//取得したデータで表示更新するので
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             print(myErr)
         }
         .finally {
-            self.fetchGetCareerList()
+            self.fetchGetCareerList()//次の処理の呼び出し
         }
     }
 
     func fetchGetCareerList() {
+        var isNeedFetch: Bool = ApiManager.needFetch(.careerList, lastDispUpdateCareerList)
+        if self.career == nil { isNeedFetch = true } //モデル未取得ならフェッチが必要
+        guard isNeedFetch else {
+            self.fetchGetChemistryData()//次の処理の呼び出し
+            return
+        }
         ApiManager.getCareer(Void(), isRetry: true)
         .done { result in
             self.career = result
+            self.lastDispUpdateCareerList = Date()//取得したデータで表示更新するので
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -381,10 +406,9 @@ extension MyPageVC {
             default:
                 print(myErr)
             }
-            
         }
         .finally {
-            self.fetchGetChemistryData()//別途、読んでおく
+            self.fetchGetChemistryData()//次の処理の呼び出し
         }
     }
 

@@ -79,8 +79,8 @@ class ProfilePreviewVC: PreviewBaseVC {
             //EditableItemH(type: .inputZipcode, editItem: EditItemMdlProfile.zipCode, val: _detail.zipCode),
             EditableItemH(type: .inputText, editItem: EditItemMdlProfile.zipCode, val: _detail.zipCode),
             EditableItemH(type: .selectSingle, editItem: EditItemMdlProfile.prefecture, val: _detail.prefecture),
-            EditableItemH(type: .inputText, editItem: EditItemMdlProfile.address1, val: _detail.address1),
-            EditableItemH(type: .inputText, editItem: EditItemMdlProfile.address2, val: _detail.address2),
+            EditableItemH(type: .inputMemo, editItem: EditItemMdlProfile.address1, val: _detail.address1),
+            EditableItemH(type: .inputMemo, editItem: EditItemMdlProfile.address2, val: _detail.address2),
         ]))
         //===７．メールアドレス
         //    ・未記入時は「未入力（必須）」と表示

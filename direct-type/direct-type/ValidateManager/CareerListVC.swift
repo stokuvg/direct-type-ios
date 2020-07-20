@@ -14,6 +14,8 @@ class CareerListVC: TmpBasicVC {
     var arrData: [MdlCareerCard] = []
     var arrDisp: [MdlCareerCard] = []
     var isFirstFetch: Bool = true
+    //===フェッチ抑止処理
+    var lastDispUpdateCareerList: Date = Date(timeIntervalSince1970: 0)
     
     @IBOutlet weak var tableVW: UITableView!
 
@@ -58,9 +60,6 @@ class CareerListVC: TmpBasicVC {
         if newCareerCard.contents.isEmpty {
             newCareerCard.contents = dispWorknote.joined(separator: "\n\n")
         }
-        print(dispWorknote.description)
-
-
         return newCareerCard
     }
 
@@ -75,15 +74,21 @@ class CareerListVC: TmpBasicVC {
         self.tableVW.rowHeight = UITableView.automaticDimension
         self.tableVW.register(UINib(nibName: "CareerCardTBCell", bundle: nil), forCellReuseIdentifier: "Cell_CareerCardTBCell")
     }
-    
+    func transferModel(careerList: MdlCareer) {
+        self.arrData.removeAll()
+        for career in careerList.businessTypes {
+            self.arrData.append(career)
+        }
+        self.lastDispUpdateCareerList = Date()//設定したデータで表示するので
+    }
     func dispData() {
         title = "職務経歴書情報入力"
         //表示用にソートしておく
         arrDisp.removeAll()
         for item in arrData.sorted(by: { (lv, rv) -> Bool in
-            lv.workPeriod.endDate > rv.workPeriod.endDate
-        }).sorted(by: { (lv, rv) -> Bool in
             lv.workPeriod.startDate > rv.workPeriod.startDate
+        }).sorted(by: { (lv, rv) -> Bool in
+            lv.workPeriod.endDate > rv.workPeriod.endDate
         }) {
             arrDisp.append(item)
         }
@@ -95,7 +100,12 @@ class CareerListVC: TmpBasicVC {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        fetchGetCareerList()
+        //フェッチ抑止処理
+        if ApiManager.needFetch(.careerList, lastDispUpdateCareerList) {
+            fetchGetCareerList()
+        } else {
+            dispData()//画面引き渡しでモデルを渡しているので
+        }
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -144,9 +154,10 @@ extension CareerListVC {
         ApiManager.getCareer(Void(), isRetry: true)
         .done { result in
             self.arrData.removeAll()
-            for (num, item) in result.businessTypes.enumerated() {
+            for (_, item) in result.businessTypes.enumerated() {
                 self.arrData.append(item)
             }
+            self.lastDispUpdateCareerList = Date()//取得したデータで表示更新するので
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -156,7 +167,7 @@ extension CareerListVC {
             default:
                 break
             }
-            self.showError(error)
+            self.showError(myErr)
         }
         .finally {
             self.dispData()
@@ -170,7 +181,7 @@ extension CareerListVC {
     }
     private func fetchUpdateCareerList() {
         var tempCards: [CareerHistoryDTO] = []
-        for (num, item) in arrDisp.enumerated() {
+        for (_, item) in arrDisp.enumerated() {
             tempCards.append(CareerHistoryDTO(item))
         }
         let param = CreateCareerRequestDTO(careerHistory: tempCards)
@@ -181,7 +192,7 @@ extension CareerListVC {
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-            self.showError(error)
+            self.showError(myErr)
         }
         .finally {
             SVProgressHUD.dismiss()
