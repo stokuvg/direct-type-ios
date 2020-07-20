@@ -29,8 +29,8 @@ class MyPageCarrerStartCell: BaseTableViewCell {
         // Initialization code
         backCenterView.layer.cornerRadius = 15
         
-        textCenterLabel.text(text: "職務経歴書情報を登録して\nおすすめの求人の精度をあげよう！", fontType: .font_Sb, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
-        registBtn.setTitle(text: "職務経歴書情報を登録する", fontType: .font_Sb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        textCenterLabel.text(text: "職務経歴書を登録して\nおすすめの求人の精度をあげよう！", fontType: .font_Sb, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
+        registBtn.setTitle(text: "職務経歴書を登録する", fontType: .font_Sb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
