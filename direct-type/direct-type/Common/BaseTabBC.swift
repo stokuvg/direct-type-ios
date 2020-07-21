@@ -12,9 +12,6 @@ class BaseTabBC: UITabBarController {
     
     private var profile: MdlProfile?
     private var resume: MdlResume?
-    private var shouldTransitionToInitialInput: Bool {
-        return profile == nil || resume == nil
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

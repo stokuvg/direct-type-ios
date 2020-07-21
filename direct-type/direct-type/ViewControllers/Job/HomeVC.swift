@@ -72,30 +72,18 @@ class HomeVC: TmpNaviTopVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        Log.selectLog(logLevel: .debug, "HomeVC viewDidLoad start")
-        // Do any additional setup after loading the view.
-
-        // TODO:初回リリースでは外す
-//        self.setRightSearchBtn()
-
         homeTableView.backgroundColor = UIColor.init(colorType: .color_base)
         homeTableView.rowHeight = UITableView.automaticDimension
 
         homeTableView.registerNib(nibName: "JobOfferBigCardCell", idName: "JobOfferBigCardCell")        // 求人カード
         homeTableView.registerNib(nibName: "JobOfferCardMoreCell", idName: "JobOfferCardMoreCell")      // もっと見る
         homeTableView.registerNib(nibName: "JobOfferCardReloadCell", idName: "JobOfferCardReloadCell")// 全求人カード表示/更新
-
-//        self.makeDummyData()
-//        self.dataCheckAction()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        Log.selectLog(logLevel: .debug, "HomeVC viewWillAppear start")
         AnalyticsEventManager.track(type: .viewHome)
-        
         shouldTransitionToInitialInput ? getProfileData() : getJobData()
-        
         safeAreaTop = self.view.safeAreaInsets.top
 
         //[Dbg]___
@@ -135,19 +123,8 @@ class HomeVC: TmpNaviTopVC {
     
     private func getJobData() {
         Log.selectLog(logLevel: .debug, "HomeVC getJobData start")
-        let (homeFlag,pushFlag) = self.getHomeDisplayFlag()
-//        Log.selectLog(logLevel: .debug, "homeFlag:\(homeFlag)")
-//        Log.selectLog(logLevel: .debug, "pushFlag:\(pushFlag)")
-
-        if homeFlag == true, pushFlag == false {
-            // ２回目以降
-            self.recommendUseFlag = true
-            self.getJobRecommendList()
-        } else {
-            // 初回起動時
-            self.recommendUseFlag = false
-            self.getJobList()
-        }
+        UserDefaultsManager.shared.isInitialDisplayedHome ? getJobRecommendList() : getJobList()
+        recommendUseFlag = !UserDefaultsManager.shared.isInitialDisplayedHome
     }
 
     private func dataAddAction() {
@@ -295,7 +272,9 @@ class HomeVC: TmpNaviTopVC {
             self.linesTitle(date: "", title: "おすすめ求人一覧")
             self.dataCheckAction()
 
-            self.saveHomeDisplayFlag()
+            if !self.shouldTransitionToInitialInput {
+                self.setInitialDisplayedFlag()
+            }
         }
     }
     
@@ -341,17 +320,11 @@ class HomeVC: TmpNaviTopVC {
         vc.hidesBottomBarWhenPushed = true
         let navi = UINavigationController(rootViewController: vc)
         navi.modalPresentationStyle = .fullScreen
-        present(navi, animated: true)
+        UIApplication.shared.keyWindow?.rootViewController = navi
     }
 
-    private func getHomeDisplayFlag() -> (Bool,Bool) {
-        return (UserDefaultsManager.shared.isDisplayHome, UserDefaultsManager.shared.isPushTab)
-    }
-
-    private func saveHomeDisplayFlag() {
-        UserDefaultsManager.shared.setObject(true, key: .isDisplayHome)
-        UserDefaultsManager.shared.setObject(false, key: .isPushTab)
-        UserDefaultsManager.shared.synchronize()
+    private func setInitialDisplayedFlag() {
+        UserDefaultsManager.shared.setObject(true, key: .isInitialDisplayedHome)
     }
 
     #if true
