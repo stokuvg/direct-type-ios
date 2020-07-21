@@ -10,19 +10,18 @@ import UIKit
 import TudApi
 import PromiseKit
 import SVProgressHUD
-import SwaggerClient
 
 //[H-1]
 final class MyPageVC: TmpNaviTopVC {
     private var profile: MdlProfile? = nil
     private var resume: MdlResume? = nil
     private var career: MdlCareer? = nil
-    private var entry: MdlEntry? = nil
-    private var topRanker: ChemistryScoreCalculation.TopRanker?
+    private var topRanker: ChemistryScoreCalculation.TopRanker? = nil
     //===フェッチ抑止処理
     var lastDispUpdateProfile: Date = Date(timeIntervalSince1970: 0)
     var lastDispUpdateResume: Date = Date(timeIntervalSince1970: 0)
     var lastDispUpdateCareerList: Date = Date(timeIntervalSince1970: 0)
+    var lastDispUpdateTopRanker: Date = Date(timeIntervalSince1970: 0)
 
     @IBOutlet private weak var pageTableView: UITableView!
 
@@ -32,10 +31,6 @@ final class MyPageVC: TmpNaviTopVC {
     private var isExistsChemistry: Bool {
         return topRanker != nil
     }
-    
-    private var shouldTransitionToInitialInput: Bool {
-        return profile == nil || resume == nil
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +39,7 @@ final class MyPageVC: TmpNaviTopVC {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchGetEntryAll()
+        fetchGetMyPageAll()
     }
     
     private func editUserName() {
@@ -338,7 +333,7 @@ extension MyPageVC: MyPageChemistryStartCellDelegate {
 }
 //=== APIフェッチ
 extension MyPageVC {
-    func fetchGetEntryAll() {
+    func fetchGetMyPageAll() {
         fetchGetProfile()//ここから多段で実施してる
     }
 
@@ -413,6 +408,12 @@ extension MyPageVC {
     }
 
     func fetchGetChemistryData() {
+        var isNeedFetch: Bool = ApiManager.needFetch(.topRanker, lastDispUpdateTopRanker)
+        if self.topRanker == nil { isNeedFetch = true } //モデル未取得ならフェッチが必要
+        guard isNeedFetch else {
+            self.fetchGroupeFinish()
+            return
+        }
         ApiManager.getChemistry(Void(), isRetry: true)
         .done { result -> Void in
             var firstRanker: ChemistryPersonalityType! = nil
@@ -431,45 +432,21 @@ extension MyPageVC {
                 }
             }
             self.topRanker = ChemistryScoreCalculation.TopRanker(first: firstRanker, second: secondRanker, third: thirdRanker)
+            self.lastDispUpdateTopRanker = Date()//取得したデータで表示更新するので
         }
         .catch { error in
         }
         .finally {
-            self.pageTableView.reloadData()
-            SVProgressHUD.dismiss()
-//            SVProgressHUD.dismiss(withDelay: 1.5)
-            if self.shouldTransitionToInitialInput {
-                self.showConfirm(title: "初期入力をしてください", message: "", onlyOK: true)
-                    .done { _ in self.transitionToInitialInput() } .catch { (error) in } .finally {}
-            }
+            self.fetchGroupeFinish()
         }
+    }
+    private func fetchGroupeFinish() {
+        self.pageTableView.reloadData()
+        SVProgressHUD.dismiss()
     }
 }
 
 //=== ニックネームの変更処理
-/*
-extension MyPageVC: MyPageNameCellDelegate {
-    func actEditNickname() {
-        let tfNickname = UITextField()
-        tfNickname.placeholder = "8文字まで"
-        let alert = UIAlertController(title: "ニックネームの変更", message: "新しいニックネームを入力してください", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "変更", style: .default) { (action:UIAlertAction) in
-            if let tfNickname = alert.textFields?.first {
-                let bufNickame: String = tfNickname.text ?? ""
-                //TODO: バリデーション
-                self.fetchUpdateProfileNickname(bufNickame)
-            }
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alert.addAction(okAction)
-        alert.addAction(cancelAction)
-        alert.addTextField { (tfNickname) in
-            tfNickname.text = self.profile?.nickname ?? "ゲストさん"
-        }
-        present(alert, animated: true, completion: nil)
-    }
-}
-*/
 extension MyPageVC {
     private func fetchUpdateProfileNickname(_ nickname: String) {
         if nickname.isEmpty { return }
