@@ -24,6 +24,7 @@ extension ApiManager {
         AuthManager.needAuth(true)
         ChemistryAPI.chemistryControllerGet()
         .done { result in
+            ApiManager.shared.dicLastUpdate[.topRanker] = Date()//取得できたので、最終取得日時を更新
             resolver.fulfill(MdlChemistry(dto: result))
         }
         .catch { (error) in
