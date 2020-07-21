@@ -15,6 +15,11 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    private var profile: MdlProfile?
+    private var resume: MdlResume?
+    private var shouldTransitionToInitialInput: Bool {
+        return profile == nil || resume == nil
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -27,6 +32,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupAppsFlyer()
         tryPostActivity()
         FirebaseApp.configure()
+        
+        if shouldTransitionToInitialInput {
+            fetchProfile()
+        }
         
         //=== Cognito認証の初期化処理を組み込む
         // Amazon Cognito 認証情報プロバイダーを初期化します
@@ -88,6 +97,48 @@ private extension AppDelegate {
         if AuthManager.shared.isLogin {
             ApiManager.createActivity()
         }
+    }
+    // プロフィールデータ取得
+    func fetchProfile() {
+        ApiManager.getProfile(Void(), isRetry: true)
+        .done { result in
+            self.profile = result
+            UserDefaultsManager.shared.setObject(Date(), key: .profileFetchDate)
+        }
+        .catch { _ in }
+        .finally {
+            self.fetchResume()//次の処理の呼び出し
+        }
+    }
+    // 履歴書データ取得
+    func fetchResume() {
+        ApiManager.getResume(Void(), isRetry: true)
+        .done { result in
+            self.resume = result
+        }
+        .catch { _ in}
+        .finally {
+            if self.shouldTransitionToInitialInput {
+                self.showConfirm()
+            }
+        }
+    }
+    
+    func showConfirm() {
+        let alert = UIAlertController(title: "初期入力をしてください", message: "", preferredStyle:  .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: { _ in self.transitionToInitialInput() })
+        
+        alert.addAction(action)
+        window?.rootViewController?.present(alert, animated: true, completion: nil)
+    }
+    
+    func transitionToInitialInput() {
+        let storyboard = UIStoryboard(name: "Preview", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "Sbid_FirstInputPreviewVC") as! FirstInputPreviewVC
+        vc.hidesBottomBarWhenPushed = true
+        let navi = UINavigationController(rootViewController: vc)
+        navi.modalPresentationStyle = .fullScreen
+        window?.rootViewController?.present(navi, animated: true)
     }
 }
 

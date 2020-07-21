@@ -12,6 +12,7 @@ class UserDefaultsManager {
     enum Keys: String {
         case isDisplayHome
         case isPushTab
+        case profileFetchDate
         case mstCompanyKey
     }
     
@@ -37,7 +38,11 @@ class UserDefaultsManager {
     
     // MARK: - プッシュタブ画面表示フラグ
     var isPushTab: Bool {
-        return UserDefaults.standard
-            .bool(forKey: Keys.isPushTab.rawValue)
+        return UserDefaults.standard.bool(forKey: Keys.isPushTab.rawValue)
+    }
+    
+    // MARK: - 最後にプロフィールデータを取得した日付
+    var profileFetchDate: Date? {
+        return UserDefaults.standard.object(forKey: Keys.profileFetchDate.rawValue) as? Date
     }
 }
