@@ -85,6 +85,7 @@ private extension KeepListVC {
     func getKeepList() {
         SVProgressHUD.show()
         lists = []
+        pageNo = 1
         ApiManager.getKeeps(pageNo, isRetry: true)
             .done { result in
                 debugLog("ApiManager getKeeps result:\(result.debugDisp)")
