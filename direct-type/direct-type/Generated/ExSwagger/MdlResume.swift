@@ -173,6 +173,7 @@ enum EditItemMdlResume: String, EditItemProtocol {
     case qualifications
     case ownPr
     case currentSalary
+    case educationId
     //表示名
     var dispName: String {
         switch self {
@@ -186,6 +187,7 @@ enum EditItemMdlResume: String, EditItemProtocol {
         case .qualifications:       return "資格"
         case .ownPr:                return "自己PR"
         case .currentSalary:        return "現在の年収"
+        case .educationId:          return "学種"
         }
     }
     var tsvMaster: SelectItemsManager.TsvMaster {
@@ -195,6 +197,7 @@ enum EditItemMdlResume: String, EditItemProtocol {
         case .businessTypes: return .businessType
         case .qualifications: return .qualification
         case .currentSalary: return .salarySelect//コードではなく選択数値が入るもの
+        case .educationId: return .schoolType
         default: return .undefine
         }
     }
