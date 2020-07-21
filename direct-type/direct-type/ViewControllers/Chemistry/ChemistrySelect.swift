@@ -99,6 +99,7 @@ private extension ChemistrySelect {
         
         ChemistryAPI.chemistryControllerCreate(body: parameter)
             .done { result -> Void in
+                ApiManager.shared.dicLastUpdate[.topRanker] = Date(timeIntervalSince1970: 0)//モデル更新したので、一覧再取得が必要
         }
         .catch { error in
             self.showConfirm(title: "データ送信エラー", message: error.localizedDescription, onlyOK: true)
