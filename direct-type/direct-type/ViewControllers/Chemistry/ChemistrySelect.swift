@@ -92,16 +92,16 @@ private extension ChemistrySelect {
     }
     
     func postChemistryData() {
-        SVProgressHUD.show()
         let topRanker = ChemistryScoreCalculation(questionScores: questionScores).topThree
         let ids = [topRanker.first, topRanker.second, topRanker.third].compactMap({ $0 }).map({ String($0.rawValue) })
         let parameter = CreateChemistryRequestDTO(chemistryTypeIds: ids)
-        
-        ChemistryAPI.chemistryControllerCreate(body: parameter)
-            .done { result -> Void in
-                ApiManager.shared.dicLastUpdate[.topRanker] = Date(timeIntervalSince1970: 0)//モデル更新したので、一覧再取得が必要
+        SVProgressHUD.show(withStatus: "")
+        ApiManager.createChemistry(parameter, isRetry: true)
+        .done { result in
+            ApiManager.shared.dicLastUpdate[.topRanker] = Date(timeIntervalSince1970: 0)//モデル更新したので、一覧再取得が必要
         }
-        .catch { error in
+        .catch { (error) in
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             self.showConfirm(title: "データ送信エラー", message: error.localizedDescription, onlyOK: true)
         }
         .finally {
