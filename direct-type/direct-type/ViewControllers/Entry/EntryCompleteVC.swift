@@ -15,12 +15,12 @@ class EntryCompleteVC: TmpBasicVC {
     @IBOutlet weak var vwFootArea: UIView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
-        print(#line, #function, "大元にもどす？！")
         navigationController?.popToRootViewController(animated: true)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "応募完了"
+        navigationItem.hidesBackButton = true//〔戻る〕ボタン非表示にする
         //===デザイン適用
         self.view.backgroundColor = UIColor(colorType: .color_base)
         self.vwMainArea.backgroundColor = UIColor(colorType: .color_base)
