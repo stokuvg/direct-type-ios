@@ -64,9 +64,7 @@ private extension ApproachSettingVC {
         }
         .finally {
             SVProgressHUD.dismiss()
-            self.showFinishReport(title: "データの送信が完了しました", message: "") {
-                self.navigationController?.popViewController(animated: true)
-            }
+            self.navigationController?.popViewController(animated: true)
         }
     }
     
