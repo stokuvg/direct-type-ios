@@ -23,6 +23,7 @@ class HomePageUrlView: UIView {
         self.urlTextView.dataDetectorTypes = .link
         self.urlTextView.isEditable = false
         self.urlTextView.isSelectable = true
+        self.urlTextView.isScrollEnabled = false
         self.urlTextView.delegate = self
         
         self.urlTextView.isUserInteractionEnabled = true

@@ -173,7 +173,7 @@ class HomeVC: TmpNaviTopVC {
          */
         
         var updateIndexRow:Int = 0
-        for i in 0..<dispJobCards.jobCards.count {
+        for i in 0..<(dispJobCards.jobCards.count-1) {
             let dispJobCard = dispJobCards.jobCards[i]
             if dispJobCard.jobCardCode == changeKeepJobId {
                 dispJobCard.keepStatus = changeKeepStatus

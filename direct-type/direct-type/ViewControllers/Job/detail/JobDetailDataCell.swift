@@ -35,6 +35,8 @@ class JobDetailDataCell: BaseTableViewCell {
     @IBOutlet weak var workPlaceLabel:UILabel!
     // 社名
     @IBOutlet weak var companyBackView:UIView!
+    @IBOutlet weak var companyTopLayout:NSLayoutConstraint!
+    @IBOutlet weak var companyBottomLayout:NSLayoutConstraint!
     @IBOutlet weak var companyLabel:UILabel!
     // 掲載期限
     @IBOutlet weak var limitBackView:UIView!
@@ -101,7 +103,10 @@ class JobDetailDataCell: BaseTableViewCell {
         self.workPlaceLabel.text(text: areaText, fontType: .C_font_SSb ,textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         // 社名
         let company = data.companyName
+//        let dCompany = company + company
+        self.companyLayoutSizeCheck(text:company)
         self.companyLabel.text(text: company, fontType: .C_font_SSb ,textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+//        self.companyLabel.text(text: dCompany, fontType: .C_font_SSb ,textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
                 
         // 掲載期間
 //        let ymdStartDate = DateHelper.dateStringChangeFormatString(dateString: start_date_string)
@@ -109,6 +114,23 @@ class JobDetailDataCell: BaseTableViewCell {
 //        let period_string = ymdStartDate + "〜" + ymdEndDate
         let period_string = "〜" + ymdEndDate
         self.limitLabel.text(text: period_string, fontType: .C_font_SSb ,textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+    }
+    
+    private func companyLayoutSizeCheck(text: String) {
+        let areaWidth = self.companyLabel.frame.size.width
+        Log.selectLog(logLevel: .debug, "areaWidth:\(areaWidth)")
+        
+        Log.selectLog(logLevel: .debug, "text:\(text)")
+        Log.selectLog(logLevel: .debug, "UIFont.init(fontType: .C_font_SSb)?.pointSize:\(String(describing: UIFont.init(fontType: .C_font_SSb)?.pointSize))")
+        
+        let areaTextSize = CGFloat(text.count) * UIFont.init(fontType: .C_font_SSb)!.pointSize
+        Log.selectLog(logLevel: .debug, "areaTextSize:\(areaTextSize)")
+        
+        if areaWidth < areaTextSize {
+            self.companyTopLayout.constant =  1
+            self.companyBottomLayout.constant = 1
+        }
+        
     }
     
     private func cutText(defaultText: String, cutString: String) -> String {

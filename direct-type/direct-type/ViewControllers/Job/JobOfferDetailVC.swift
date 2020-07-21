@@ -724,12 +724,23 @@ extension JobOfferDetailVC: FoldingHeaderViewDelegate {
 
 extension JobOfferDetailVC: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+//        Log.selectLog(logLevel: .debug, "JobOfferDetailVC willShow")
+//        Log.selectLog(logLevel: .debug, "navigationController.viewControllers:\(navigationController.viewControllers)")
+//        Log.selectLog(logLevel: .debug, "viewController:\(viewController)")
+        
+//        Log.selectLog(logLevel: .debug, "self.tabBarController?.selectedIndex:\(String(describing: self.tabBarController?.selectedIndex))")
+//        Log.selectLog(logLevel: .debug, "navigationController.tabBarController?.selectedIndex:\(String(describing: navigationController.tabBarController?.selectedIndex))")
         
         // 遷移先がHomeVCの場合
         if let controller = viewController as? HomeVC {
-            Log.selectLog(logLevel: .debug, "前の画面がHomeVC")
-            controller.changeKeepJobId = _mdlJobDetail.jobCardCode
-            controller.changeKeepStatus = keepFlag
+            if navigationController.tabBarController?.selectedIndex == 0 {
+                Log.selectLog(logLevel: .debug, "前の画面がHomeVC")
+                controller.changeKeepJobId = _mdlJobDetail.jobCardCode
+                controller.changeKeepStatus = keepFlag
+            } else {
+                controller.changeKeepJobId = ""
+                controller.changeKeepStatus = false
+            }
         }
     }
 }
