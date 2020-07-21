@@ -182,12 +182,12 @@ extension HPreviewTBCell {
                 disp.append(buf0)
             }
             return disp.count == 0 ? Constants.SelectItemsValEmpty.disp : disp.joined(separator: "\n")
-        case .schoolH3:               //===(3f)最終学歴
+        case .schoolH3:               //===(3f)最終学歴（childItems[0]は非表示）
             var disp: [String] = []
-            let buf0: String = _item.childItems[0].curVal
-            let buf1: String = _item.childItems[1].curVal
-            let buf2: String = _item.childItems[2].curVal
-            let buf3: String = _item.childItems[3].curVal
+            let buf0: String = _item.childItems[1].curVal
+            let buf1: String = _item.childItems[2].curVal
+            let buf2: String = _item.childItems[3].curVal
+            let buf3: String = _item.childItems[4].curVal
             if !buf0.isEmpty { disp.append(buf0) }
             if !"\(buf1)\(buf2)".isEmpty { disp.append("\(buf1)\(buf2)") }
             let date3 = DateHelper.convStrYM2Date(buf3)
