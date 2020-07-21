@@ -486,6 +486,22 @@ class HomeVC: TmpNaviTopVC {
         if limitedType != LimitedType.none {
             rowHeight += 40
         }
+        
+        // 職種のサイズチェック
+        // カード外 左:20pt,右20pt
+        // カード内 左:24pt,右24pt
+        // フォント:C_font_M
+        let areaWidth = self.view.frame.size.width - ((20 * 2) + (24 * 2))
+        Log.selectLog(logLevel: .debug, "areaWidth:\(areaWidth)")
+        
+        let text = jobData.jobName
+        let font = UIFont.init(fontType: .C_font_M)
+        let textSize = CGFloat(text.count) * font!.pointSize
+        Log.selectLog(logLevel: .debug, "textSize:\(textSize)")
+        if areaWidth > textSize {
+            rowHeight -= 30
+        }
+        
         rowHeight = DeviceHelper.deviceAddHeight(defaultHeight: rowHeight, addHeight: 25)
 
         return rowHeight

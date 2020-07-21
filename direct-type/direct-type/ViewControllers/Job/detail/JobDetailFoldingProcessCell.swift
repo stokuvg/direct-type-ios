@@ -74,13 +74,18 @@ class JobDetailFoldingProcessCell: BaseTableViewCell {
         }
         
         let detailText = data.selectionProcessDetail
-        let view = UINib.init(nibName: "JobDetailTextView", bundle: nil)
-        .instantiate(withOwner: self, options: nil)
-        .first as! JobDetailTextView
-        
-        view.setup(data: detailText)
-        self.stackView.addArrangedSubview(view)
-        
+        if detailText.count > 0 {
+            let spaceView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 0, height: 20))
+            spaceView.backgroundColor = UIColor.clear
+            self.stackView.addArrangedSubview(spaceView)
+            
+            let view = UINib.init(nibName: "JobDetailTextView", bundle: nil)
+            .instantiate(withOwner: self, options: nil)
+            .first as! JobDetailTextView
+            
+            view.setup(data: detailText)
+            self.stackView.addArrangedSubview(view)
+        }
     }
     
     private func removeStepViews() {
