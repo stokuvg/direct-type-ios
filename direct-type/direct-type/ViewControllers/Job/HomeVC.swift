@@ -328,18 +328,13 @@ class HomeVC: TmpNaviTopVC {
     }
 
     private func getHomeDisplayFlag() -> (Bool,Bool) {
-        let ud = UserDefaults.standard
-        let homeFlag = ud.bool(forKey: "home")
-        let pushFlag = ud.bool(forKey: "pushTab")
-        return (homeFlag,pushFlag)
+        return (UserDefaultsManager.shared.isDisplayHome, UserDefaultsManager.shared.isPushTab)
     }
 
     private func saveHomeDisplayFlag() {
-//        Log.selectLog(logLevel: .debug, "saveHomeDisplayFlag start")
-        let ud = UserDefaults.standard
-        ud.set(true, forKey: "home")
-        ud.set(false, forKey: "pushTab")
-        ud.synchronize()
+        UserDefaultsManager.shared.setObject(true, key: .isDisplayHome)
+        UserDefaultsManager.shared.setObject(false, key: .isPushTab)
+        UserDefaultsManager.shared.synchronize()
     }
 
     #if true
