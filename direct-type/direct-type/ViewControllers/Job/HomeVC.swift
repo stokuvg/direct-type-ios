@@ -68,6 +68,17 @@ class HomeVC: TmpNaviTopVC {
     var firstLoadFlag:Bool = false
     // 求人追加表示フラグ
     var dataAddFlag:Bool = false
+    
+    var changeKeepStatus:Bool = false {
+        didSet {
+            Log.selectLog(logLevel: .debug, "new changeKeepStatus:\(changeKeepStatus)")
+        }
+    }
+    var changeKeepJobId:String = "" {
+        didSet {
+            Log.selectLog(logLevel: .debug, "new changeKeepJobId:\(changeKeepJobId)")
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,12 +101,13 @@ class HomeVC: TmpNaviTopVC {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        Log.selectLog(logLevel: .debug, "HomeVC viewWillAppear start")
+        Log.selectLog(logLevel: .debug, "HomeVC viewWillAppear start")
         AnalyticsEventManager.track(type: .viewHome)
         
         if firstLoadFlag == false {
-            self.getProgileData()
+            self.getProfileData()
             self.firstLoadFlag = true
+        } else {
         }
 
         safeAreaTop = self.view.safeAreaInsets.top
@@ -118,7 +130,19 @@ class HomeVC: TmpNaviTopVC {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
+        Log.selectLog(logLevel: .debug, "HomeVC viewDidAppear start")
+        
+        if firstLoadFlag == false {
+            self.firstLoadFlag = true
+        } else {
+            Log.selectLog(logLevel: .debug, "changeKeepJobId:\(changeKeepJobId)")
+            Log.selectLog(logLevel: .debug, "changeKeepStatus:\(changeKeepStatus)")
+            
+            // 詳細でキープした求人のキープ状態のチェック
+            if changeKeepJobId.count > 0 {
+                self.detailKeepStatusChange()
+            }
+        }
 
     }
 
@@ -133,6 +157,41 @@ class HomeVC: TmpNaviTopVC {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
+    }
+    
+    // 求人詳細画面で行なったキープのアクションのデータをセットする。
+    private func detailKeepStatusChange() {
+        
+        /*
+
+         // セルの設定変更パターン
+         self.dispJobCards.jobCards[tag] = jobCard
+         let updateIndexPath = IndexPath.init(row: row, section: 0)
+         let cell = self.homeTableView.cellForRow(at: updateIndexPath) as! JobOfferBigCardCell
+         cell.keepSetting(flag: flag)
+         self.keepSendStatus = .none
+         */
+        
+        var updateIndexRow:Int = 0
+        for i in 0..<dispJobCards.jobCards.count {
+            let dispJobCard = dispJobCards.jobCards[i]
+            if dispJobCard.jobCardCode == changeKeepJobId {
+                dispJobCard.keepStatus = changeKeepStatus
+                dispJobCards.jobCards[i] = dispJobCard
+                
+                updateIndexRow = i
+                let updateIndex = IndexPath.init(row: updateIndexRow, section: 0)
+                let updateCell = self.homeTableView.cellForRow(at: updateIndex) as! JobOfferBigCardCell
+                updateCell.keepSetting(flag: changeKeepStatus)
+                
+                break
+            } else {
+                continue
+            }
+        }
+        changeKeepStatus = false
+        changeKeepJobId = ""
+        
     }
     
     private func getJobData() {
@@ -301,7 +360,7 @@ class HomeVC: TmpNaviTopVC {
         }
     }
     
-    private func getProgileData() {
+    private func getProfileData() {
         SVProgressHUD.show()
         ApiManager.getProfile(Void(), isRetry: true)
             .done { result in
@@ -524,7 +583,7 @@ extension HomeVC: JobOfferCardMoreCellDelegate {
         
         self.dataAddFlag = true
         
-        self.getProgileData()
+        self.getProfileData()
     }
 }
 

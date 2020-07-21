@@ -49,6 +49,9 @@ final class JobOfferDetailVC: TmpBasicVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.delegate = self
+        
         setNaviButtons()
         setup()
         changeButtonState()
@@ -715,6 +718,18 @@ extension JobOfferDetailVC: FoldingHeaderViewDelegate {
             self.detailTableView.reloadSections(_allIndex, with: .automatic)
         } else {
             self.detailTableView.reloadSections(index, with: .automatic)
+        }
+    }
+}
+
+extension JobOfferDetailVC: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        
+        // 遷移先がHomeVCの場合
+        if let controller = viewController as? HomeVC {
+            Log.selectLog(logLevel: .debug, "前の画面がHomeVC")
+            controller.changeKeepJobId = _mdlJobDetail.jobCardCode
+            controller.changeKeepStatus = keepFlag
         }
     }
 }
