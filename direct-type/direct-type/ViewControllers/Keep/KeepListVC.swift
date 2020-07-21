@@ -43,11 +43,14 @@ final class KeepListVC: TmpBasicVC {
     @IBOutlet private weak var keepTableView: UITableView!
     @IBOutlet private weak var keepNoView: KeepNoView!
 
-    var lists: MdlKeepList!
+    var lists: [MdlKeepJob] = []
     var pageNo: Int = 1
+    var hasNext:Bool = false
     // AppsFlyerのイベントトラッキング用にオンメモリでキープ求人リストを保有するプロパティ
     // キープされた求人をオンメモリ上で保有しておき、この画面が切り替わった際にイベント送信する
     var storedKeepList: Set<Int> = []
+    
+    var isAddLoad:Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,12 +84,13 @@ private extension KeepListVC {
 
     func getKeepList() {
         SVProgressHUD.show()
-        lists = MdlKeepList()
+        lists = []
         ApiManager.getKeeps(pageNo, isRetry: true)
             .done { result in
                 debugLog("ApiManager getKeeps result:\(result.debugDisp)")
 
-                self.lists = result
+                self.lists = result.keepJobs
+                self.hasNext = result.hasNext
                 self.dataDisplay()
         }
         .catch { (error) in
@@ -112,12 +116,48 @@ private extension KeepListVC {
             SVProgressHUD.dismiss()
         }
     }
+    
+    func getKeepAddList() {
+        SVProgressHUD.show()
+        pageNo += 1
+        ApiManager.getKeeps(pageNo, isRetry: true)
+            .done { result in
+                debugLog("ApiManager getKeeps result:\(result.debugDisp)")
+
+                self.lists += result.keepJobs
+                self.hasNext = result.hasNext
+                self.dataDisplay()
+        }
+        .catch { (error) in
+            Log.selectLog(logLevel: .debug, "error:\(error)")
+
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            switch myErr.code {
+            case 403:
+                let message:String = "idTokenを取得していません"
+                self.showConfirm(title: "通信失敗", message: message)
+                    .done { _ in
+
+                        self.dataDisplay()
+                }.catch { (error) in
+
+                }.finally {
+                }
+            default:
+                break
+            }
+        }
+        .finally {
+            self.isAddLoad = true
+            SVProgressHUD.dismiss()
+        }
+    }
 
     func dataDisplay() {
         Log.selectLog(logLevel: .debug, "KeepListVC dataDisplay start")
-        Log.selectLog(logLevel: .debug, "self.lists.keepJobs.count:\(self.lists.keepJobs.count)")
+        Log.selectLog(logLevel: .debug, "self.lists.count:\(self.lists.count)")
 
-        if self.lists.keepJobs.count > 0 {
+        if self.lists.count > 0 {
             keepNoView.isHidden = true
             keepNoView.delegate = nil
             keepTableView.delegate = self
@@ -164,7 +204,7 @@ extension KeepListVC: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = indexPath.row
-        let cardData = self.lists.keepJobs[row]
+        let cardData = self.lists[row]
         let jobId = cardData.jobId
         let vc = getVC(sbName: "JobOfferDetailVC", vcName: "JobOfferDetailVC") as! JobOfferDetailVC
 
@@ -177,17 +217,26 @@ extension KeepListVC: UITableViewDelegate {
 
 extension KeepListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return lists.keepJobs.count
+        return lists.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = indexPath.row
-        let _keepData = self.lists.keepJobs[row]
+        let _keepData = self.lists[row]
         let cell = tableView.loadCell(cellName: "KeepCardCell", indexPath: indexPath) as! KeepCardCell
         cell.tag = row
         cell.delegate = self
         cell.setup(data: _keepData)
         return cell
+    }
+}
+
+extension KeepListVC: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if self.keepTableView.contentOffset.y + self.keepTableView.frame.size.height > self.keepTableView.contentSize.height && self.keepTableView.isDragging && isAddLoad == true && self.hasNext {
+            self.isAddLoad = false
+            self.getKeepAddList()
+        }
     }
 }
 
@@ -197,7 +246,7 @@ extension KeepListVC: BaseJobCardCellDelegate {
     func keepAction(tag: Int) {
         storedKeepList.insert(tag)
         Log.selectLog(logLevel: .debug, "KeepListVC delegate keepAction tag:\(tag)")
-        let jobCard = lists.keepJobs[tag]
+        let jobCard = lists[tag]
         let jobId = jobCard.jobId
         let keepStatus = !jobCard.keepStatus
 
