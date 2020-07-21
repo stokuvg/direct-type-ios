@@ -79,6 +79,7 @@ class ResumePreviewVC: PreviewBaseVC {
         ]))
         //===(3f)最終学歴
         arrData.append(MdlItemH(.schoolH3, "", childItems: [
+            EditableItemH(type: .selectSingle, editItem: EditItemMdlResume.educationId, val: _detail.educationId),
             EditableItemH(type: .inputText, editItem: EditItemMdlResumeSchool.schoolName, val: _detail.school.schoolName),
             EditableItemH(type: .inputText, editItem: EditItemMdlResumeSchool.faculty, val: _detail.school.faculty),
             EditableItemH(type: .inputText, editItem: EditItemMdlResumeSchool.department, val: _detail.school.department),

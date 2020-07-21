@@ -37,6 +37,7 @@ extension EditItemMdlResume {
         case .qualifications:       return ValidInfo(required: false, keta: nil, max: nil, type: .code)
         case .ownPr:                return ValidInfo(required: false, keta: nil, max: 2000, type: .zenkaku)
         case .currentSalary:        return ValidInfo(required: true, keta: nil, max: nil, type: .code)
+        case .educationId:          return ValidInfo(required: true, keta: nil, max: nil, type: .code)
         }
     }
 }
