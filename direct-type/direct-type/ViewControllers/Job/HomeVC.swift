@@ -41,8 +41,11 @@ class HomeVC: TmpNaviTopVC {
 //    @IBOutlet weak var homeNaviHeight:NSLayoutConstraint!
     @IBOutlet weak var homeTableView:UITableView!
     
-    private var profile: MdlProfile? = nil
-
+    private var profile: MdlProfile?
+    private var resume: MdlResume?
+    private var shouldTransitionToInitialInput: Bool {
+        return profile == nil || resume == nil
+    }
     var pageJobCards: MdlJobCardList!   // nページを取得
     var dispJobCards: MdlJobCardList!   // 取得したページを全て表示
 
@@ -64,10 +67,8 @@ class HomeVC: TmpNaviTopVC {
     // キープされた求人をオンメモリ上で保有しておき、この画面が切り替わった際にイベント送信する
     var storedKeepList: Set<Int> = []
     
-    // 初回画面表示
-    var firstLoadFlag:Bool = false
     // 求人追加表示フラグ
-    var dataAddFlag:Bool = false
+    var dataAddFlag = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,11 +94,8 @@ class HomeVC: TmpNaviTopVC {
 //        Log.selectLog(logLevel: .debug, "HomeVC viewWillAppear start")
         AnalyticsEventManager.track(type: .viewHome)
         
-        if firstLoadFlag == false {
-            self.getProgileData()
-            self.firstLoadFlag = true
-        }
-
+        shouldTransitionToInitialInput ? getProfileData() : getJobData()
+        
         safeAreaTop = self.view.safeAreaInsets.top
 
         //[Dbg]___
@@ -301,30 +299,49 @@ class HomeVC: TmpNaviTopVC {
         }
     }
     
-    private func getProgileData() {
+    private func getProfileData() {
         SVProgressHUD.show()
         ApiManager.getProfile(Void(), isRetry: true)
             .done { result in
                 self.profile = result
         }
         .catch { (error) in
+            SVProgressHUD.dismiss()
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             print(myErr)
             
         }
         .finally {
-            if self.dataAddFlag {
-                // 次ページの求人情報を取得
-                if self.recommendUseFlag {
-                    self.getJobRecommendAddList()
-                } else {
-                    self.getJobAddList()
-                }
-                self.dataAddFlag = false
-            } else {
-                self.getJobData()
-            }
+            self.getResume()
         }
+    }
+    
+    private func getResume() {
+        ApiManager.getResume(Void(), isRetry: true)
+        .done { result in
+            self.resume = result
+        }
+        .catch { _ in}
+        .finally {
+            self.shouldTransitionToInitialInput ? self.showConfirm() : self.getJobData()
+        }
+    }
+    
+    private func showConfirm() {
+        let alert = UIAlertController(title: "初期入力をしてください", message: "", preferredStyle:  .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: { _ in self.transitionToInitialInput() })
+        
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func transitionToInitialInput() {
+        let storyboard = UIStoryboard(name: "Preview", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "Sbid_FirstInputPreviewVC") as! FirstInputPreviewVC
+        vc.hidesBottomBarWhenPushed = true
+        let navi = UINavigationController(rootViewController: vc)
+        navi.modalPresentationStyle = .fullScreen
+        present(navi, animated: true)
     }
 
     private func getHomeDisplayFlag() -> (Bool,Bool) {
@@ -516,10 +533,9 @@ extension HomeVC: UITableViewDataSource {
 
 extension HomeVC: JobOfferCardMoreCellDelegate {
     func moreDataAdd() {
-        
-        self.dataAddFlag = true
-        
-        self.getProgileData()
+        guard dataAddFlag else { return }
+        recommendUseFlag ? getJobRecommendAddList() : getJobAddList()
+        self.dataAddFlag = false
     }
 }
 
