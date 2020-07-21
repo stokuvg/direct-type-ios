@@ -132,6 +132,24 @@ extension ValidateManager {
         return dicError
     }
     //============================================
+    class func chkValidateTypePassword(typePassword: String) -> Bool {
+        let regexp = #"^[0-9a-zA-Z]{4,20}$"#
+        let text = typePassword
+        let regex = try! NSRegularExpression(pattern: regexp, options: [.dotMatchesLineSeparators])
+        let matches = regex.matches(in: text, options: [], range: NSMakeRange(0, text.count))
+        if matches.count == 0 { return false }
+        //基本的に ^$　マッチングさせるので、matchesは 1つとして処理する
+        for match in matches {
+            for index in 0 ..< match.numberOfRanges {
+                let nsRange = match.range(at: index)
+                if let range = Range(nsRange, in: text) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
     class func subValidateTypeLengtyByKey(_ editableModel: EditableModel) -> [EditableItemKey: [String]] {
         var dicError: [EditableItemKey: [String]] = [:]
         //文字種チェック

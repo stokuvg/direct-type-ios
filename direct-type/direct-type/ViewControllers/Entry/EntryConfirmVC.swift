@@ -27,6 +27,13 @@ class EntryConfirmVC: PreviewBaseVC {
             tableVW.reloadData()
             return
         }
+        //=== 入力Typeパスワードのバリデーション
+        let buf = bufPassword
+        if !ValidateManager.chkValidateTypePassword(typePassword: buf) {
+            let errMsg: String = "ログインできません。入力内容をご確認ください"
+            showConfirm(title: "", message: errMsg, onlyOK: true)
+            return
+        }
         fetchPostEntry()
     }
     //共通プレビューをOverrideして利用する
@@ -234,11 +241,15 @@ extension EntryConfirmVC {
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
             case 404:
-                let myErr404 = MyErrorDisp(code: 404, title: "type応募", message: "この求人情報は掲載が終了しています", orgErr: nil, arrValidErrMsg: [])
-                self.showError(myErr404)
+                //let myErr404 = MyErrorDisp(code: 404, title: "type応募", message: "この求人情報は掲載が終了しています", orgErr: nil, arrValidErrMsg: [])
+                //self.showError(myErr404)
+                let errMsg: String = "この求人情報は掲載が終了しています"
+                self.showConfirm(title: "", message: errMsg, onlyOK: true)
             case 401:
-                let myErr401 = MyErrorDisp(code: 401, title: "type応募", message: "typeにログインできませんでした", orgErr: nil, arrValidErrMsg: [])
-                self.showError(myErr401)
+                //let myErr401 = MyErrorDisp(code: 401, title: "type応募", message: "typeにログインできませんでした", orgErr: nil, arrValidErrMsg: [])
+                //self.showError(myErr401)
+                let errMsg: String = "ログインできません。入力内容をご確認ください"
+                self.showConfirm(title: "", message: errMsg, onlyOK: true)
             case 400:
                 let (dicGrpError, dicError) = ValidateManager.convValidErrMsgEntry(myErr.arrValidErrMsg)
                 self.dicGrpValidErrMsg = dicGrpError
