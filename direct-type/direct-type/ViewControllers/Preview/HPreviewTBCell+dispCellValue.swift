@@ -179,7 +179,8 @@ extension HPreviewTBCell {
             for job in tmp0.split(separator: "_") {
                 let tmp0 = String(job)
                 let buf0: String = SelectItemsManager.getCodeDispSyou(.businessType, code: tmp0)?.disp ?? ""
-                disp.append(buf0)
+                let grp0: String = SelectItemsManager.getDispDai(.businessType, code: tmp0)
+                disp.append("\(grp0)/\(buf0)")
             }
             return disp.count == 0 ? Constants.SelectItemsValEmpty.disp : disp.joined(separator: "\n")
         case .schoolH3:               //===(3f)最終学歴（childItems[0]は非表示）

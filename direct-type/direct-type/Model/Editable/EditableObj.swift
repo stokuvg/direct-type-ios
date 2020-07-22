@@ -58,13 +58,13 @@ class EditItemTool {
             let tmp1 = String(buf[1])
             let buf0: String = SelectItemsManager.getCodeDispSyou(tsvMaain, code: tmp0)?.disp ?? ""
             let buf1: String = SelectItemsManager.getCodeDisp(tsvSub, code: tmp1)?.disp ?? ""
-            let bufExperiment: String = "\(buf0) \(buf1)"
+            let grp0: String = SelectItemsManager.getDispDai(tsvMaain, code: tmp0)
+            let bufExperiment: String = "\(grp0)/\(buf0)：\(buf1)"
             disp.append(bufExperiment)
         }
         return disp
     }
 }
-
 
 protocol EditItemProtocol {
     var itemKey: String { get }
