@@ -287,6 +287,8 @@ extension KeepListVC: BaseJobCardCellDelegate {
         let jobCard = lists[tag]
         let jobId = jobCard.jobId
         let keepStatus = !jobCard.keepStatus
+        Log.selectLog(logLevel: .debug, "jobId:\(jobId)")
+        Log.selectLog(logLevel: .debug, "keepStatus:\(keepStatus)")
         let keepData:[String:Any] = ["jobId":jobId,"keepStatus":keepStatus]
 
         if keepStatus == true {
@@ -297,23 +299,13 @@ extension KeepListVC: BaseJobCardCellDelegate {
 
             }.catch{ (error) in
                 Log.selectLog(logLevel: .debug, "skip send error:\(error)")
+
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-                switch myErr.code {
-                case 404:
-                    let message: String = ""
-                    self.showConfirm(title: "", message: message)
-                        .done { _ in
-                            Log.selectLog(logLevel: .debug, "対応方法の確認")
-                    }
-                    .catch { (error) in
-                    }
-                    .finally {
-                    }
-                default: break
-                }
-                self.showError(error)
+                self.showError(myErr)
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep send finally")
+                jobCard.keepStatus = keepStatus
+                self.lists[tag] = jobCard
                 self.keepDataAddRemoveCheck(checkData:keepData)
             }
         } else {
@@ -324,23 +316,13 @@ extension KeepListVC: BaseJobCardCellDelegate {
 
             }.catch{ (error) in
                 Log.selectLog(logLevel: .debug, "skip send error:\(error)")
+
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-                switch myErr.code {
-                case 404:
-                    let message: String = ""
-                    self.showConfirm(title: "", message: message)
-                        .done { _ in
-                            Log.selectLog(logLevel: .debug, "対応方法の確認")
-                    }
-                    .catch { (error) in
-                    }
-                    .finally {
-                    }
-                default: break
-                }
-                self.showError(error)
+                self.showError(myErr)
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep send finally")
+                jobCard.keepStatus = keepStatus
+                self.lists[tag] = jobCard
                 self.keepDataAddRemoveCheck(checkData:keepData)
             }
         }
