@@ -123,8 +123,8 @@ class HomeVC: TmpNaviTopVC {
     
     private func getJobData() {
         Log.selectLog(logLevel: .debug, "HomeVC getJobData start")
-        UserDefaultsManager.shared.isInitialDisplayedHome ? getJobRecommendList() : getJobList()
-        recommendUseFlag = !UserDefaultsManager.shared.isInitialDisplayedHome
+        UserDefaultsManager.isInitialDisplayedHome ? getJobRecommendList() : getJobList()
+        recommendUseFlag = !UserDefaultsManager.isInitialDisplayedHome
     }
 
     private func dataAddAction() {
@@ -324,7 +324,7 @@ class HomeVC: TmpNaviTopVC {
     }
 
     private func setInitialDisplayedFlag() {
-        UserDefaultsManager.shared.setObject(true, key: .isInitialDisplayedHome)
+        UserDefaultsManager.setObject(true, key: .isInitialDisplayedHome)
     }
 
     #if true

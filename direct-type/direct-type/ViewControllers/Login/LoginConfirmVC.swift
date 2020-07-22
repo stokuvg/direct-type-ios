@@ -103,7 +103,7 @@ private extension LoginConfirmVC {
         let tabSB = UIStoryboard(name: "BaseTabBC", bundle: nil)
         let tabBC = tabSB.instantiateViewController(withIdentifier: "Sbid_BaseTabBC")
         
-        if UserDefaultsManager.shared.synchronize() {
+        if UserDefaultsManager.synchronize() {
             Log.selectLog(logLevel: .debug, "ホーム画面　C1,タブ遷移 フラグの保存成功")
             UIApplication.shared.keyWindow?.rootViewController = tabBC
         }

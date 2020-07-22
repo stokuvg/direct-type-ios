@@ -15,18 +15,16 @@ class UserDefaultsManager {
         case mstCompanyKey
     }
     
-    static let shared = UserDefaultsManager()
-    
-    func setObject<T>(_ value: T, key: Keys) {
+    static func setObject<T>(_ value: T, key: Keys) {
         UserDefaults.standard.set(value, forKey: key.rawValue)
         UserDefaults.standard.synchronize()
     }
     
-    func remove(key: Keys) {
+    static func remove(key: Keys) {
         UserDefaults.standard.removeObject(forKey: key.rawValue)
     }
     
-    func removeAll() {
+    static func removeAll() {
         Keys.allCases.forEach({ key in
             UserDefaults.standard.removeObject(forKey: key.rawValue)
         })
@@ -34,17 +32,17 @@ class UserDefaultsManager {
     }
     
     @discardableResult
-    func synchronize() -> Bool {
+    static func synchronize() -> Bool {
         return UserDefaults.standard.synchronize()
     }
     
     // MARK: - ホーム画面初回表示フラグ
-    var isInitialDisplayedHome: Bool {
+    static var isInitialDisplayedHome: Bool {
         return UserDefaults.standard.bool(forKey: Keys.isInitialDisplayedHome.rawValue)
     }
     
     // MARK: - 最後にプロフィールデータを取得した日付
-    var profileFetchDate: Date? {
+    static var profileFetchDate: Date? {
         return UserDefaults.standard.object(forKey: Keys.profileFetchDate.rawValue) as? Date
     }
 }

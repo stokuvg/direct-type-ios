@@ -118,7 +118,7 @@ private extension WithDrawalVC {
     }
     
     func clearLocalData() {
-        UserDefaultsManager.shared.removeAll()
+        UserDefaultsManager.removeAll()
     }
     
     // 退会確認アラート

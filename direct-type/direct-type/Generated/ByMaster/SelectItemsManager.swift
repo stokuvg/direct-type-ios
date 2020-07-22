@@ -88,7 +88,7 @@ class SelectItemsManager: NSObject {
 
     //=== キャッシュ保持のクリア
     class func allClear() {
-        UserDefaultsManager.shared.remove(key: .mstCompanyKey)
+        UserDefaultsManager.remove(key: .mstCompanyKey)
         self.shared.isCachedCompany = false
     }
 }
