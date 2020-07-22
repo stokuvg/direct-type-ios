@@ -49,6 +49,9 @@ final class JobOfferDetailVC: TmpBasicVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.delegate = self
+        
         setNaviButtons()
         setup()
         changeButtonState()
@@ -183,6 +186,11 @@ private extension JobOfferDetailVC {
                 self.showError(error)
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep send finally")
+                // タブに丸ポチを追加
+                if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
+                    let tabItem:UITabBarItem = tabItems[1]
+                    tabItem.badgeValue = ""
+                }
             }
         } else {
             ApiManager.sendJobDeleteKeep(id: jobId)
@@ -715,6 +723,32 @@ extension JobOfferDetailVC: FoldingHeaderViewDelegate {
             self.detailTableView.reloadSections(_allIndex, with: .automatic)
         } else {
             self.detailTableView.reloadSections(index, with: .automatic)
+        }
+    }
+}
+
+extension JobOfferDetailVC: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+//        Log.selectLog(logLevel: .debug, "JobOfferDetailVC willShow")
+//        Log.selectLog(logLevel: .debug, "navigationController.viewControllers:\(navigationController.viewControllers)")
+//        Log.selectLog(logLevel: .debug, "viewController:\(viewController)")
+        
+//        Log.selectLog(logLevel: .debug, "self.tabBarController?.selectedIndex:\(String(describing: self.tabBarController?.selectedIndex))")
+//        Log.selectLog(logLevel: .debug, "navigationController.tabBarController?.selectedIndex:\(String(describing: navigationController.tabBarController?.selectedIndex))")
+        
+        // 遷移先がHomeVCの場合
+        if let controller = viewController as? HomeVC {
+            if navigationController.tabBarController?.selectedIndex == 0 {
+                Log.selectLog(logLevel: .debug, "前の画面がHomeVC")
+                let keepDatas:[String:Any] = ["jobId":_mdlJobDetail.jobCardCode,"keepStatus":keepFlag]
+                controller.changeKeepDatas = [keepDatas]
+//                controller.changeKeepJobId = _mdlJobDetail.jobCardCode
+//                controller.changeKeepStatus = keepFlag
+            } else {
+                controller.changeKeepDatas = []
+//                controller.changeKeepJobId = ""
+//                controller.changeKeepStatus = false
+            }
         }
     }
 }

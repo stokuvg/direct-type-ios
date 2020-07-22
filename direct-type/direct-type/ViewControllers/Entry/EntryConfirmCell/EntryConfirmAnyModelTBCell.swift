@@ -59,7 +59,7 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
         case .jobCard:  bufTitle = "求人カード"
         case .profile:  bufTitle = "プロフィール"
         case .resume:   bufTitle = "履歴書"
-        case .career:   bufTitle = "業務経歴書"
+        case .career:   bufTitle = "職務経歴書"
         case .entry:    bufTitle = ""
         }
         lcTitleAreaBottom.constant = bufTitle.isEmpty ? 0 : 16 //タイトルなければ、次との余白も含めて非表示にする
@@ -119,14 +119,16 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
                 //===(3c)直近の経験職種
                 if let cd = SelectItemsManager.getCodeDispSyou(.jobType, code: resume.lastJobExperiment.jobType),
                 let cd2 = SelectItemsManager.getCodeDisp(.jobExperimentYear, code: resume.lastJobExperiment.jobExperimentYear) {
-                    addStackItem(type: .lastJobExperimentH3, val: "\(cd.disp) \(cd2.disp)")
+                    let grpName = SelectItemsManager.getDispDai(.jobType, code: resume.lastJobExperiment.jobType)
+                    addStackItem(type: .lastJobExperimentH3, val: "\(grpName)/\(cd.disp)：\(cd2.disp)")
                 }
                 //===(3d)その他の経験職種
                 var disp3d: [String] = []
                 for jy in resume.jobExperiments {
                     if let cd = SelectItemsManager.getCodeDispSyou(.jobType, code: jy.jobType),
                     let cd2 = SelectItemsManager.getCodeDisp(.jobExperimentYear, code: jy.jobExperimentYear) {
-                        disp3d.append("\(cd.disp) \(cd2.disp)")
+                        let grpName = SelectItemsManager.getDispDai(.jobType, code: jy.jobType)
+                        disp3d.append("\(grpName)/\(cd.disp)：\(cd2.disp)")
                     }
                 }
                 addStackItem(type: .jobExperimentsH3, val: disp3d)
@@ -134,7 +136,8 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
                 var disp3e: [String] = []
                 for tmp in resume.businessTypes {
                     if let cd = SelectItemsManager.getCodeDispSyou(.businessType, code: tmp) {
-                        disp3e.append("\(cd.disp)")
+                        let grpName = SelectItemsManager.getDispDai(.businessType, code: tmp)
+                        disp3e.append("\(grpName)/\(cd.disp)")
                     }
                 }
                 addStackItem(type: .businessTypesH3, val: disp3e)
@@ -162,7 +165,7 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
                     disp3g.append(cd.disp)
                 }
                 if !resume.skillLanguage.languageStudySkill.isEmpty {
-                    disp3f.append(resume.skillLanguage.languageStudySkill)
+                    disp3g.append(resume.skillLanguage.languageStudySkill)
                 }
                 addStackItem(type: .skillLanguageH3, val: disp3g)
                 //===(3h)資格
@@ -199,16 +202,16 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
                     let bufWorkPeriod: String = "\(bufWorkPeriodStart)〜\(bufWorkPeriodEnd)"
                     addStackItem(type: .workPeriodC15, val: bufWorkPeriod)
                     //===雇用形態
-                    if let cd = SelectItemsManager.getCodeDispSyou(.employmentType, code: career.employmentType) {
+                    if let cd = SelectItemsManager.getCodeDisp(.employmentType, code: career.employmentType) {
                         addStackItem(type: .employmentTypeC15, val: cd.disp)
                     }
                     //===従業員数（数値）*これは直接数値入力で良い
                     let _employeesCount: Int = Int(career.employeesCount) ?? 0
                     if _employeesCount != 0 {
-                        addStackItem(type: .employeesCountC15, val: "\(_employeesCount)")
+                        addStackItem(type: .employeesCountC15, val: "\(_employeesCount)名")
                     }
                     //===年収
-                    if let cd = SelectItemsManager.getCodeDispSyou(.salary, code: career.salary) {
+                    if let cd = SelectItemsManager.getCodeDisp(.salary, code: career.salary) {
                         addStackItem(type: .salaryC15, val: cd.disp)
                     }
                     //===職務内容本文

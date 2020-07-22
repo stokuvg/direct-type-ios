@@ -37,7 +37,7 @@ class HomeVC: TmpNaviTopVC {
 
     @IBOutlet weak var noCardBackView:UIView!
     @IBOutlet weak var homeTableView:UITableView!
-    
+
     private var profile: MdlProfile?
     private var resume: MdlResume?
     private var shouldFetchPersonalData: Bool {
@@ -63,9 +63,27 @@ class HomeVC: TmpNaviTopVC {
     // AppsFlyerのイベントトラッキング用にオンメモリでキープ求人リストを保有するプロパティ
     // キープされた求人をオンメモリ上で保有しておき、この画面が切り替わった際にイベント送信する
     var storedKeepList: Set<Int> = []
-    
+
     // 求人追加表示フラグ
     var dataAddFlag = true
+
+    var changeKeepDatas:[[String:Any]] = [] {
+        didSet {
+            Log.selectLog(logLevel: .debug, "new changeKeepDatas:\(changeKeepDatas)")
+        }
+    }
+    /*
+    var changeKeepStatus:Bool = false {
+        didSet {
+            Log.selectLog(logLevel: .debug, "new changeKeepStatus:\(changeKeepStatus)")
+        }
+    }
+    var changeKeepJobId:String = "" {
+        didSet {
+            Log.selectLog(logLevel: .debug, "new changeKeepJobId:\(changeKeepJobId)")
+        }
+    }
+    */
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,7 +97,9 @@ class HomeVC: TmpNaviTopVC {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        Log.selectLog(logLevel: .debug, "HomeVC viewWillAppear start")
         AnalyticsEventManager.track(type: .viewHome)
+
         shouldFetchPersonalData ? getProfileData() : getJobData()
         safeAreaTop = self.view.safeAreaInsets.top
 
@@ -101,8 +121,13 @@ class HomeVC: TmpNaviTopVC {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-
+        Log.selectLog(logLevel: .debug, "HomeVC viewDidAppear start")
+        Log.selectLog(logLevel: .debug, "changeKeepDatas:\(changeKeepDatas)")
+        
+        // 詳細でキープした求人のキープ状態のチェック
+        if changeKeepDatas.count > 0 {
+            self.detailKeepStatusChange()
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -117,7 +142,48 @@ class HomeVC: TmpNaviTopVC {
         super.viewWillLayoutSubviews()
 
     }
-    
+
+    // 求人詳細画面で行なったキープのアクションのデータをセットする。
+    private func detailKeepStatusChange() {
+
+        /*
+         // セルの設定変更パターン
+         self.dispJobCards.jobCards[tag] = jobCard
+         let updateIndexPath = IndexPath.init(row: row, section: 0)
+         let cell = self.homeTableView.cellForRow(at: updateIndexPath) as! JobOfferBigCardCell
+         cell.keepSetting(flag: flag)
+         self.keepSendStatus = .none
+         */
+
+        var updateIndexRow:Int = 0
+        for j in 0..<changeKeepDatas.count {
+            let changeData = changeKeepDatas[j]
+            let changeKeepJobId = changeData["jobId"] as! String
+            let changeKeepStatus = changeData["keepStatus"] as! Bool
+            for i in 0..<dispJobCards.jobCards.count {
+                let dispJobCard = dispJobCards.jobCards[i]
+                if dispJobCard.jobCardCode == changeKeepJobId {
+                    dispJobCard.keepStatus = changeKeepStatus
+                    dispJobCards.jobCards[i] = dispJobCard
+
+                    updateIndexRow = i
+                    Log.selectLog(logLevel: .debug, "updateIndexRow:\(updateIndexRow)")
+                    let updateIndex = IndexPath.init(row: updateIndexRow, section: 0)
+                    let updateCell = self.homeTableView.cellForRow(at: updateIndex) as! JobOfferBigCardCell
+                    updateCell.keepSetting(flag: changeKeepStatus)
+
+                    break
+                } else {
+                    continue
+                }
+            }
+        }
+        changeKeepDatas = []
+//        changeKeepStatus = false
+//        changeKeepJobId = ""
+
+    }
+
     private func getJobData() {
         Log.selectLog(logLevel: .debug, "HomeVC getJobData start")
         UserDefaultsManager.isInitialDisplayedHome ? getJobRecommendList() : getJobList()
@@ -137,7 +203,7 @@ class HomeVC: TmpNaviTopVC {
 
     private func dataCheckAction() {
         Log.selectLog(logLevel: .debug, "HomeVC dataCheckAction start")
-        
+
         // ０件時レイアウト修正用
         if (pageJobCards.jobCards.count) > 0 {
             homeTableView.isHidden = false
@@ -148,7 +214,7 @@ class HomeVC: TmpNaviTopVC {
             self.homeTableView.delegate = self
             self.homeTableView.dataSource = self
             self.homeTableView.reloadData()
-            
+
         } else {
             dispType = .none
             let cardNoView = UINib(nibName: "NoCardView", bundle: nil)
@@ -234,6 +300,9 @@ class HomeVC: TmpNaviTopVC {
             }
             SVProgressHUD.dismiss()
             self.dataCheckAction()
+
+            let topIndex = IndexPath.init(row: 0, section: 0)
+            self.homeTableView.selectRow(at: topIndex, animated: true, scrollPosition: .top)
         }
     }
 
@@ -258,7 +327,7 @@ class HomeVC: TmpNaviTopVC {
             self.dataCheckAction()
         }
     }
-    
+
     private func getProfileData() {
         SVProgressHUD.show()
         ApiManager.getProfile(Void(), isRetry: true)
@@ -272,7 +341,7 @@ class HomeVC: TmpNaviTopVC {
         }
         .finally {}
     }
-    
+
     private func getResume() {
         ApiManager.getResume(Void(), isRetry: true)
         .done { result in
@@ -282,11 +351,11 @@ class HomeVC: TmpNaviTopVC {
         .catch { _ in }
         .finally {}
     }
-    
+
     private func profileErrorHandling(with error: Error) {
         let myError = AuthManager.convAnyError(error)
         let profileError = ProfileApiError.init(rawValue: myError.code)
-        
+
         SVProgressHUD.dismiss()
         if let errorType = profileError {
             switch errorType {
@@ -301,29 +370,29 @@ class HomeVC: TmpNaviTopVC {
             }
         }
     }
-    
+
     private func transitionToInitialView() {
         let vc = getVC(sbName: "InitialInputStartVC", vcName: "InitialInputStartVC") as! InitialInputStartVC
         let newNavigationController = UINavigationController(rootViewController: vc)
         UIApplication.shared.keyWindow?.rootViewController = newNavigationController
     }
-    
+
     private func showRetryFetchProfile() {
         let alert = UIAlertController(title: "通信エラー", message: "再度データの取得を行います。", preferredStyle:  .alert)
         let action = UIAlertAction(title: "OK", style: .default, handler: { _ in self.getProfileData() })
-        
+
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
-    
+
     private func showConfirm() {
         let alert = UIAlertController(title: "初期入力をしてください", message: "", preferredStyle:  .alert)
         let action = UIAlertAction(title: "OK", style: .default, handler: { _ in self.transitionToInitialInput() })
-        
+
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
-    
+
     func transitionToInitialInput() {
         let storyboard = UIStoryboard(name: "Preview", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "Sbid_FirstInputPreviewVC") as! FirstInputPreviewVC
@@ -414,12 +483,28 @@ class HomeVC: TmpNaviTopVC {
         // 終了マーク 表示チェック
         let end_date_string = jobData.displayPeriod.endAt
         let endPeriod = DateHelper.endFlagHiddenCheck(endDateString:end_date_string, nowDate:nowDate)
-        
+
         let limitedType:LimitedType = DateHelper.limitedTypeCheck(startFlag: startPeriod, endFlag: endPeriod)
 
         if limitedType != LimitedType.none {
             rowHeight += 40
         }
+
+        // 職種のサイズチェック
+        // カード外 左:20pt,右20pt
+        // カード内 左:24pt,右24pt
+        // フォント:C_font_M
+        let areaWidth = self.view.frame.size.width - ((20 * 2) + (24 * 2))
+        Log.selectLog(logLevel: .debug, "areaWidth:\(areaWidth)")
+
+        let text = jobData.jobName
+        let font = UIFont.init(fontType: .C_font_M)
+        let textSize = CGFloat(text.count) * font!.pointSize
+        Log.selectLog(logLevel: .debug, "textSize:\(textSize)")
+        if areaWidth > textSize {
+            rowHeight -= 30
+        }
+
         rowHeight = DeviceHelper.deviceAddHeight(defaultHeight: rowHeight, addHeight: 25)
 
         return rowHeight
@@ -579,6 +664,7 @@ extension HomeVC: BaseJobCardCellDelegate {
         storedKeepList.insert(tag)
         if self.keepSendStatus == .sending { return }
 
+        SVProgressHUD.show()
         self.keepSendStatus = .sending
         // TODO:通信処理
         let row = tag
@@ -590,6 +676,8 @@ extension HomeVC: BaseJobCardCellDelegate {
             ApiManager.sendJobKeep(id: jobId)
                 .done { result in
             }.catch{ (error) in
+                Log.selectLog(logLevel: .debug, "keep send error:\(error)")
+
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 self.showError(myErr)
             }.finally {
@@ -599,7 +687,7 @@ extension HomeVC: BaseJobCardCellDelegate {
                 let cell = self.homeTableView.cellForRow(at: updateIndexPath) as! JobOfferBigCardCell
                 cell.keepSetting(flag: flag)
                 self.keepSendStatus = .none
-                
+
                 /*
                 // TableViewのリロードパターン
                 self.dispJobCards.jobCards[tag] = jobCard
@@ -612,11 +700,20 @@ extension HomeVC: BaseJobCardCellDelegate {
                     }
                 })
                 */
+                // タブに丸ポチを追加
+                if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
+                    let tabItem:UITabBarItem = tabItems[1]
+                    tabItem.badgeValue = ""
+                }
+
+                SVProgressHUD.dismiss()
             }
         } else {
             ApiManager.sendJobDeleteKeep(id: jobId)
                 .done { result in
             }.catch{ (error) in
+                Log.selectLog(logLevel: .debug, "keep delete error:\(error)")
+
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 self.showError(myErr)
             }.finally {
@@ -626,7 +723,7 @@ extension HomeVC: BaseJobCardCellDelegate {
                 let cell = self.homeTableView.cellForRow(at: updateIndexPath) as! JobOfferBigCardCell
                 cell.keepSetting(flag: flag)
                 self.keepSendStatus = .none
-                
+
                 /*
                 // TableViewのリロードパターン
                 self.dispJobCards.jobCards[tag] = jobCard
@@ -639,6 +736,7 @@ extension HomeVC: BaseJobCardCellDelegate {
                     }
                 })
                 */
+                SVProgressHUD.dismiss()
             }
         }
     }

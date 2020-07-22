@@ -46,6 +46,7 @@ final public class ApiManager {
         case profile
         case resume
         case careerList
+        case topRanker
     }
     var dicLastUpdate: [FetchType: Date] = [:]  //フェッチ抑止チェックのため
 

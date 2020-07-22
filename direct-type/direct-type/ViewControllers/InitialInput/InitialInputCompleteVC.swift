@@ -88,6 +88,13 @@ private extension InitialInputCompleteVC {
         textView.text = contextType.description
         navigationItem.hidesBackButton = true
         navigationItem.title = contextType.title
+        
+        let ud = UserDefaults.standard
+        ud.set(false, forKey: "home")
+        ud.set(true, forKey: "pushTab")
+        if ud.synchronize() {
+            Log.selectLog(logLevel: .debug, "ホーム画面　C1,タブ遷移 フラグの保存成功")
+        }
     }
     
     func startAnimation() {

@@ -20,9 +20,11 @@ class HomePageUrlView: UIView {
         self.urlTextView.linkTextAttributes = [
             NSAttributedString.Key.foregroundColor: UIColor.init(colorType: .color_sub) as Any
         ]
+        self.urlTextView.textContainerInset = .zero
         self.urlTextView.dataDetectorTypes = .link
         self.urlTextView.isEditable = false
         self.urlTextView.isSelectable = true
+        self.urlTextView.isScrollEnabled = false
         self.urlTextView.delegate = self
         
         self.urlTextView.isUserInteractionEnabled = true
@@ -32,6 +34,7 @@ class HomePageUrlView: UIView {
         let style = NSMutableParagraphStyle()
         style.lineSpacing = FontType.C_font_S.lineSpacing
         let attributes = [
+            NSAttributedString.Key.font: UIFont.init(fontType: .C_font_S) as Any,
             NSAttributedString.Key.foregroundColor : UIColor.init(colorType: .color_black) as Any,
             NSAttributedString.Key.paragraphStyle : style,
 //            NSAttributedString.Key.foregroundColor : UIColor.init(colorType: .color_sub)
@@ -79,6 +82,7 @@ class JobDetailFoldingPhoneNumberCell: BaseTableViewCell {
         let style = NSMutableParagraphStyle()
         style.lineSpacing = FontType.C_font_S.lineSpacing
         let attributes = [
+            NSAttributedString.Key.font: UIFont.init(fontType: .C_font_S) as Any,
             NSAttributedString.Key.foregroundColor : UIColor.init(colorType: .color_black) as Any,
             NSAttributedString.Key.paragraphStyle : style,
 //            NSAttributedString.Key.foregroundColor : UIColor.init(colorType: .color_sub)
@@ -104,33 +108,42 @@ class JobDetailFoldingPhoneNumberCell: BaseTableViewCell {
         let text = NSMutableString()
         
         // 郵便番号         必須
+//        Log.selectLog(logLevel: .debug, "zipCode:\(zipCode)")
         // 住所            必須
-        // 担当者          任意
+//        Log.selectLog(logLevel: .debug, "address:\(address)")
         // 電話番号         任意
+//        Log.selectLog(logLevel: .debug, "tel:\(tel)")
         // メールアドレス     任意
-        // URL             任意
+//        Log.selectLog(logLevel: .debug, "email:\(email)")
+        // 担当者          任意
+//        Log.selectLog(logLevel: .debug, "person:\(person)")
         text.append("〒 ")
         text.append(zipCode)
         text.append("\n")
         
         text.append(address)
-        text.append("\n")
         
         if tel.count > 0 {
+            Log.selectLog(logLevel: .debug, "電話番号あり")
+            text.append("\n")
             text.append("TEL / ")
             text.append(tel)
-            text.append("\n")
         }
         
         if email.count > 0 {
+            Log.selectLog(logLevel: .debug, "メールアドレスあり")
+            text.append("\n")
             text.append("E-mail / ")
             text.append(email)
-            text.append("\n")
         }
         
         if person.count > 0 {
+            Log.selectLog(logLevel: .debug, "担当者あり")
+            text.append("\n")
             text.append(person)
         }
+        
+//        Log.selectLog(logLevel: .debug, "text:\(text)")
         
         return text as String
     }

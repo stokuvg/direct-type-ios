@@ -76,6 +76,7 @@ class JobOfferBigCardCell: BaseJobCardCell {
         // 職業
         let job:String = data.jobName
         jobLabel.text(text: job, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        jobLabel.sizeToFit()
         
         if limitedType == .none {
             self.jobLabelTop.constant = 15
@@ -83,6 +84,11 @@ class JobOfferBigCardCell: BaseJobCardCell {
         } else {
             self.jobLabelTop.constant = 5
             self.jobLabelHeight.constant = 60
+        }
+        // かつ１行か２行か
+        Log.selectLog(logLevel: .debug, "jobLabel:\(String(describing: jobLabel))")
+        if jobLabel.bounds.size.height <= 20.5 {
+            self.jobLabelHeight.constant -= 30
         }
 
         // 給与
