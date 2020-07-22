@@ -119,14 +119,16 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
                 //===(3c)直近の経験職種
                 if let cd = SelectItemsManager.getCodeDispSyou(.jobType, code: resume.lastJobExperiment.jobType),
                 let cd2 = SelectItemsManager.getCodeDisp(.jobExperimentYear, code: resume.lastJobExperiment.jobExperimentYear) {
-                    addStackItem(type: .lastJobExperimentH3, val: "\(cd.disp) \(cd2.disp)")
+                    let grpName = SelectItemsManager.getDispDai(.jobType, code: resume.lastJobExperiment.jobType)
+                    addStackItem(type: .lastJobExperimentH3, val: "\(grpName)/\(cd.disp)：\(cd2.disp)")
                 }
                 //===(3d)その他の経験職種
                 var disp3d: [String] = []
                 for jy in resume.jobExperiments {
                     if let cd = SelectItemsManager.getCodeDispSyou(.jobType, code: jy.jobType),
                     let cd2 = SelectItemsManager.getCodeDisp(.jobExperimentYear, code: jy.jobExperimentYear) {
-                        disp3d.append("\(cd.disp) \(cd2.disp)")
+                        let grpName = SelectItemsManager.getDispDai(.jobType, code: jy.jobType)
+                        disp3d.append("\(grpName)/\(cd.disp)：\(cd2.disp)")
                     }
                 }
                 addStackItem(type: .jobExperimentsH3, val: disp3d)
@@ -134,7 +136,8 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
                 var disp3e: [String] = []
                 for tmp in resume.businessTypes {
                     if let cd = SelectItemsManager.getCodeDispSyou(.businessType, code: tmp) {
-                        disp3e.append("\(cd.disp)")
+                        let grpName = SelectItemsManager.getDispDai(.businessType, code: tmp)
+                        disp3e.append("\(grpName)/\(cd.disp)")
                     }
                 }
                 addStackItem(type: .businessTypesH3, val: disp3e)
