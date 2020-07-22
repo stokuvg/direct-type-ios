@@ -43,7 +43,7 @@ class HomeVC: TmpNaviTopVC {
     
     private var profile: MdlProfile?
     private var resume: MdlResume?
-    private var shouldTransitionToInitialInput: Bool {
+    private var shouldFetchPersonalData: Bool {
         return profile == nil || resume == nil
     }
     var pageJobCards: MdlJobCardList!   // nページを取得
@@ -83,7 +83,7 @@ class HomeVC: TmpNaviTopVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         AnalyticsEventManager.track(type: .viewHome)
-        shouldTransitionToInitialInput ? getProfileData() : getJobData()
+        shouldFetchPersonalData ? getProfileData() : getJobData()
         safeAreaTop = self.view.safeAreaInsets.top
 
         //[Dbg]___
@@ -251,15 +251,13 @@ class HomeVC: TmpNaviTopVC {
     }
 
     private func getJobList() {
-//        Log.selectLog(logLevel: .debug, "HomeVC getJobList start")
         pageJobCards = MdlJobCardList()
         dispJobCards = MdlJobCardList()
         pageNo = 1
         ApiManager.getJobs(pageNo, isRetry: true)
             .done { result in
-//                debugLog("ApiManager getJobs result:\(result.debugDisp)")
-
                 self.pageJobCards = result
+                self.setInitialDisplayedFlag()
         }
         .catch { (error) in
             Log.selectLog(logLevel: .debug, "error:\(error)")
@@ -271,10 +269,6 @@ class HomeVC: TmpNaviTopVC {
             SVProgressHUD.dismiss()
             self.linesTitle(date: "", title: "おすすめ求人一覧")
             self.dataCheckAction()
-
-            if !self.shouldTransitionToInitialInput {
-                self.setInitialDisplayedFlag()
-            }
         }
     }
     
@@ -283,30 +277,40 @@ class HomeVC: TmpNaviTopVC {
         ApiManager.getProfile(Void(), isRetry: true)
             .done { result in
                 self.profile = result
+                self.getResume()
         }
         .catch { (error) in
-            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-            print(myErr)
+            let myErr = AuthManager.convAnyError(error)
+            let profileError = ProfileApiError.init(rawValue: myErr.code)
+            if let errorType = profileError {
+                switch errorType {
+                case .notFount:
+                    SVProgressHUD.dismiss()
+                    self.showConfirm()
+                }
+            }
         }
-        .finally {
-            self.getResume()
-        }
+        .finally {}
     }
     
     private func getResume() {
         ApiManager.getResume(Void(), isRetry: true)
         .done { result in
             self.resume = result
+            self.getJobData()
         }
-        .catch { _ in}
-        .finally {
-            if self.shouldTransitionToInitialInput {
-                SVProgressHUD.dismiss()
-                self.showConfirm()
-            } else {
-                self.getJobData()
+        .catch { error in
+            let myErr = AuthManager.convAnyError(error)
+            let profileError = ProfileApiError.init(rawValue: myErr.code)
+            if let errorType = profileError {
+                switch errorType {
+                case .notFount:
+                    SVProgressHUD.dismiss()
+                    self.showConfirm()
+                }
             }
         }
+        .finally {}
     }
     
     private func showConfirm() {

@@ -10,6 +10,9 @@ import PromiseKit
 import TudApi
 
 //================================================================
+enum ProfileApiError: Int {
+    case notFount = 404
+}
 //=== プロフィール取得 ===
 extension ApiManager {
     class func getProfile(_ param: Void, isRetry: Bool = true) -> Promise<MdlProfile> {
