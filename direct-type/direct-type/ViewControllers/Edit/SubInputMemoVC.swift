@@ -132,7 +132,14 @@ class SubInputMemoVC: BaseVC {
         if maxCount > 0 {
             let curCount = textVW.text.count
             let bufCount = "\(curCount)/\(maxCount)文字"
-            lblCount.text(text: bufCount, fontType: .font_SSS, textColor: UIColor.init(colorType: .color_white)!, alignment: .right)
+            //文字数超過時のリアルタイム表示フィードバック
+            if curCount > maxCount {
+                lblCount.text(text: bufCount, fontType: .font_SSS, textColor: UIColor.init(colorType: .color_sub)!, alignment: .right)
+                textVW.backgroundColor = UIColor.init(red: 1.0, green: 0.8, blue: 0.8, alpha: 1.0)
+            } else {
+                lblCount.text(text: bufCount, fontType: .font_SSS, textColor: UIColor.init(colorType: .color_white)!, alignment: .right)
+                textVW.backgroundColor = UIColor(colorType: .color_white)
+            }
         } else {
             lblCount.text = nil
         }
@@ -155,5 +162,19 @@ extension SubInputMemoVC: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         dispCount()
     }
-    
+    //func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    //    //入力適用前の文字列に、入力予定の範囲と文字列を事前適用してみる。（false返せば入力却下が可能）
+    //    if let curBuf = textView.text, let _range = Range(range, in: curBuf) {
+    //        let newBuf = curBuf.replacingCharacters(in: _range, with: text)
+    //        let maxCount = editableItem.editItem.valid.max ?? 0
+    //        if maxCount > 0 {
+    //            //リアルタイムに入力を抑止する場合
+    //            if newBuf.count > maxCount { //NOTE: フリック入力なら問題なし。ローマ字入力の場合など未確定段階で制限かかる
+    //                return false
+    //            }
+    //        }
+    //    }
+    //    return true
+    //}
 }
+
