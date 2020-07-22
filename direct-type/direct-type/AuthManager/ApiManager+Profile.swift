@@ -11,7 +11,11 @@ import TudApi
 
 //================================================================
 enum ProfileApiError: Int {
+    case invalidation = 400
+    case notAuthorized = 401
     case notFount = 404
+    case oldAuthCode = 410
+    case internalError = 500
 }
 //=== プロフィール取得 ===
 extension ApiManager {

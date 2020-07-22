@@ -267,15 +267,8 @@ class HomeVC: TmpNaviTopVC {
                 self.getResume()
         }
         .catch { (error) in
-            let myErr = AuthManager.convAnyError(error)
-            let profileError = ProfileApiError.init(rawValue: myErr.code)
-            if let errorType = profileError {
-                switch errorType {
-                case .notFount:
-                    SVProgressHUD.dismiss()
-                    self.showConfirm()
-                }
-            }
+            SVProgressHUD.dismiss()
+            self.profileErrorHandling(with: error)
         }
         .finally {}
     }
@@ -286,18 +279,41 @@ class HomeVC: TmpNaviTopVC {
             self.resume = result
             self.getJobData()
         }
-        .catch { error in
-            let myErr = AuthManager.convAnyError(error)
-            let profileError = ProfileApiError.init(rawValue: myErr.code)
-            if let errorType = profileError {
-                switch errorType {
-                case .notFount:
-                    SVProgressHUD.dismiss()
-                    self.showConfirm()
-                }
+        .catch { _ in }
+        .finally {}
+    }
+    
+    private func profileErrorHandling(with error: Error) {
+        let myError = AuthManager.convAnyError(error)
+        let profileError = ProfileApiError.init(rawValue: myError.code)
+        
+        SVProgressHUD.dismiss()
+        if let errorType = profileError {
+            switch errorType {
+            case .invalidation, .oldAuthCode:
+                break
+            case .notAuthorized:
+                transitionToInitialView()
+            case .notFount:
+                showConfirm()
+            case .internalError:
+                showRetryFetchProfile()
             }
         }
-        .finally {}
+    }
+    
+    private func transitionToInitialView() {
+        let vc = getVC(sbName: "InitialInputStartVC", vcName: "InitialInputStartVC") as! InitialInputStartVC
+        let newNavigationController = UINavigationController(rootViewController: vc)
+        UIApplication.shared.keyWindow?.rootViewController = newNavigationController
+    }
+    
+    private func showRetryFetchProfile() {
+        let alert = UIAlertController(title: "通信エラー", message: "再度データの取得を行います。", preferredStyle:  .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: { _ in self.getProfileData() })
+        
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
     }
     
     private func showConfirm() {
