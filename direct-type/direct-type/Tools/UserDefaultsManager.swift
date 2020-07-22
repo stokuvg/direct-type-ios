@@ -11,7 +11,6 @@ import Foundation
 class UserDefaultsManager {
     enum Keys: String, CaseIterable {
         case isInitialDisplayedHome
-        case profileFetchDate
         case mstCompanyKey
     }
     
@@ -40,10 +39,5 @@ class UserDefaultsManager {
     // MARK: - ホーム画面初回表示フラグ
     static var isInitialDisplayedHome: Bool {
         return UserDefaults.standard.bool(forKey: Keys.isInitialDisplayedHome.rawValue)
-    }
-    
-    // MARK: - 最後にプロフィールデータを取得した日付
-    static var profileFetchDate: Date? {
-        return UserDefaults.standard.object(forKey: Keys.profileFetchDate.rawValue) as? Date
     }
 }
