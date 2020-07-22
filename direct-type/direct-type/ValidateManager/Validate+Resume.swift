@@ -35,7 +35,7 @@ extension EditItemMdlResume {
         case .school:               return ValidInfo(required: false, keta: nil, max: nil, type: .code)
         case .skillLanguage:        return ValidInfo(required: false, keta: nil, max: nil, type: .code)
         case .qualifications:       return ValidInfo(required: false, keta: nil, max: nil, type: .code)
-        case .ownPr:                return ValidInfo(required: false, keta: nil, max: 2000, type: .zenkaku)
+        case .ownPr:                return ValidInfo(required: false, keta: nil, max: 2000, type: .zenHanNumSym)
         case .currentSalary:        return ValidInfo(required: true, keta: nil, max: nil, type: .code)
         case .educationId:          return ValidInfo(required: true, keta: nil, max: nil, type: .code)
         }
@@ -44,9 +44,9 @@ extension EditItemMdlResume {
 extension EditItemMdlResumeSchool {
     var valid: ValidInfo {
         switch self {
-        case .schoolName:       return ValidInfo(required: true, keta: nil, max: 30, type: .zenkaku)
-        case .faculty:          return ValidInfo(required: true, keta: nil, max: 30, type: .zenkaku)
-        case .department:       return ValidInfo(required: false, keta: nil, max: 30, type: .zenkaku)
+        case .schoolName:       return ValidInfo(required: true, keta: nil, max: 30, type: .zenHanNumSym)
+        case .faculty:          return ValidInfo(required: true, keta: nil, max: 30, type: .zenHanNumSym)//別途、併せて30文字チェック
+        case .department:       return ValidInfo(required: false, keta: nil, max: 30, type: .zenHanNumSym)//別途、併せて30文字チェック
         case .graduationYear:   return ValidInfo(required: true, keta: nil, max: nil, type: .code)
         }
     }
@@ -58,7 +58,7 @@ extension EditItemMdlResumeSkillLanguage {
         case .languageToeicScore:   return ValidInfo(required: false, keta: nil, max: 3, type: .number)
         case .languageToeflScore:   return ValidInfo(required: false, keta: nil, max: 3, type: .number)
         case .languageEnglish:      return ValidInfo(required: false, keta: nil, max: nil, type: .code)
-        case .languageStudySkill:   return ValidInfo(required: false, keta: nil, max: nil, type: .zenkaku)
+        case .languageStudySkill:   return ValidInfo(required: false, keta: nil, max: nil, type: .zenHanNumSym)
         }
     }
 }
