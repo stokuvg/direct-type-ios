@@ -22,6 +22,7 @@ class UserDefaultsManager {
     
     static func remove(key: Keys) {
         UserDefaults.standard.removeObject(forKey: key.rawValue)
+        UserDefaults.standard.synchronize()
     }
     
     static func removeAll() {
