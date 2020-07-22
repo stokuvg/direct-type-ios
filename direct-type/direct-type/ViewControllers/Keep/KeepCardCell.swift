@@ -20,6 +20,7 @@ class KeepCardCell: BaseJobCardCell {
     @IBOutlet weak var keepActionBtn:UIButton!
     @IBAction func keepAction() {
         self.changeKeepStatus()
+        self.changeKeepImage()
         self.delegate.keepAction(tag: self.tag)
     }
 
@@ -42,7 +43,6 @@ class KeepCardCell: BaseJobCardCell {
         
         // キープのステータス
         self.keepFlag = data.keepStatus
-        
         self.changeKeepImage()
         
         let nowDate = Date()
@@ -59,6 +59,7 @@ class KeepCardCell: BaseJobCardCell {
         
         let limitedType:LimitedType = DateHelper.limitedTypeCheck(startFlag: startFlag, endFlag: endFlag)
         self.limitedMarkSetting(type: limitedType)
+        
         // 職種名
         let job = data.jobName
         jobLabel.text(text: job, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
@@ -145,8 +146,11 @@ class KeepCardCell: BaseJobCardCell {
     }
     
     private func changeKeepImage() {
+//        Log.selectLog(logLevel: .debug, "changeKeepImage start")
         let offImage = UIImage(named: "keepDefault_GN")
         let onImage = UIImage(named: "keepSelected_GN")
+        
+//        Log.selectLog(logLevel: .debug, "keepFlag:\(keepFlag)")
         
         let useImage = self.keepFlag ? onImage : offImage
         
