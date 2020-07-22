@@ -22,6 +22,14 @@ private extension WithDrawalCompleteVC {
         title = "退会完了"
         infomationLabel.text(text: "退会手続きが完了しました。", fontType: .font_S, textColor: UIColor(colorType: .color_black)!, alignment: .center)
         setLeftBarButton()
+
+        let ud = UserDefaults.standard
+        ud.set(false, forKey: "home")
+        ud.set(true, forKey: "pushTab")
+        if ud.synchronize() {
+            Log.selectLog(logLevel: .debug, "ホーム画面　C1,タブ遷移 フラグの保存成功")
+        }
+        
     }
     
     var leftBatButtonFrame: CGRect {

@@ -186,6 +186,11 @@ private extension JobOfferDetailVC {
                 self.showError(error)
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep send finally")
+                // タブに丸ポチを追加
+                if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
+                    let tabItem:UITabBarItem = tabItems[1]
+                    tabItem.badgeValue = ""
+                }
             }
         } else {
             ApiManager.sendJobDeleteKeep(id: jobId)
@@ -735,11 +740,14 @@ extension JobOfferDetailVC: UINavigationControllerDelegate {
         if let controller = viewController as? HomeVC {
             if navigationController.tabBarController?.selectedIndex == 0 {
                 Log.selectLog(logLevel: .debug, "前の画面がHomeVC")
-                controller.changeKeepJobId = _mdlJobDetail.jobCardCode
-                controller.changeKeepStatus = keepFlag
+                let keepDatas:[String:Any] = ["jobId":_mdlJobDetail.jobCardCode,"keepStatus":keepFlag]
+                controller.changeKeepDatas = [keepDatas]
+//                controller.changeKeepJobId = _mdlJobDetail.jobCardCode
+//                controller.changeKeepStatus = keepFlag
             } else {
-                controller.changeKeepJobId = ""
-                controller.changeKeepStatus = false
+                controller.changeKeepDatas = []
+//                controller.changeKeepJobId = ""
+//                controller.changeKeepStatus = false
             }
         }
     }

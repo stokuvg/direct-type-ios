@@ -69,6 +69,12 @@ class HomeVC: TmpNaviTopVC {
     // 求人追加表示フラグ
     var dataAddFlag:Bool = false
     
+    var changeKeepDatas:[[String:Any]] = [] {
+        didSet {
+            Log.selectLog(logLevel: .debug, "new changeKeepDatas:\(changeKeepDatas)")
+        }
+    }
+    /*
     var changeKeepStatus:Bool = false {
         didSet {
             Log.selectLog(logLevel: .debug, "new changeKeepStatus:\(changeKeepStatus)")
@@ -79,6 +85,7 @@ class HomeVC: TmpNaviTopVC {
             Log.selectLog(logLevel: .debug, "new changeKeepJobId:\(changeKeepJobId)")
         }
     }
+    */
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,11 +142,12 @@ class HomeVC: TmpNaviTopVC {
         if firstLoadFlag == false {
             self.firstLoadFlag = true
         } else {
-            Log.selectLog(logLevel: .debug, "changeKeepJobId:\(changeKeepJobId)")
-            Log.selectLog(logLevel: .debug, "changeKeepStatus:\(changeKeepStatus)")
+            Log.selectLog(logLevel: .debug, "changeKeepDatas:\(changeKeepDatas)")
+//            Log.selectLog(logLevel: .debug, "changeKeepJobId:\(changeKeepJobId)")
+//            Log.selectLog(logLevel: .debug, "changeKeepStatus:\(changeKeepStatus)")
             
             // 詳細でキープした求人のキープ状態のチェック
-            if changeKeepJobId.count > 0 {
+            if changeKeepDatas.count > 0 {
                 self.detailKeepStatusChange()
             }
         }
@@ -163,7 +171,6 @@ class HomeVC: TmpNaviTopVC {
     private func detailKeepStatusChange() {
         
         /*
-
          // セルの設定変更パターン
          self.dispJobCards.jobCards[tag] = jobCard
          let updateIndexPath = IndexPath.init(row: row, section: 0)
@@ -173,24 +180,31 @@ class HomeVC: TmpNaviTopVC {
          */
         
         var updateIndexRow:Int = 0
-        for i in 0..<(dispJobCards.jobCards.count-1) {
-            let dispJobCard = dispJobCards.jobCards[i]
-            if dispJobCard.jobCardCode == changeKeepJobId {
-                dispJobCard.keepStatus = changeKeepStatus
-                dispJobCards.jobCards[i] = dispJobCard
-                
-                updateIndexRow = i
-                let updateIndex = IndexPath.init(row: updateIndexRow, section: 0)
-                let updateCell = self.homeTableView.cellForRow(at: updateIndex) as! JobOfferBigCardCell
-                updateCell.keepSetting(flag: changeKeepStatus)
-                
-                break
-            } else {
-                continue
+        for j in 0..<changeKeepDatas.count {
+            let changeData = changeKeepDatas[j]
+            let changeKeepJobId = changeData["jobId"] as! String
+            let changeKeepStatus = changeData["keepStatus"] as! Bool
+            for i in 0..<dispJobCards.jobCards.count {
+                let dispJobCard = dispJobCards.jobCards[i]
+                if dispJobCard.jobCardCode == changeKeepJobId {
+                    dispJobCard.keepStatus = changeKeepStatus
+                    dispJobCards.jobCards[i] = dispJobCard
+                    
+                    updateIndexRow = i
+                    Log.selectLog(logLevel: .debug, "updateIndexRow:\(updateIndexRow)")
+                    let updateIndex = IndexPath.init(row: updateIndexRow, section: 0)
+                    let updateCell = self.homeTableView.cellForRow(at: updateIndex) as! JobOfferBigCardCell
+                    updateCell.keepSetting(flag: changeKeepStatus)
+                    
+                    break
+                } else {
+                    continue
+                }
             }
         }
-        changeKeepStatus = false
-        changeKeepJobId = ""
+        changeKeepDatas = []
+//        changeKeepStatus = false
+//        changeKeepJobId = ""
         
     }
     
@@ -331,6 +345,9 @@ class HomeVC: TmpNaviTopVC {
             }
             SVProgressHUD.dismiss()
             self.dataCheckAction()
+            
+            let topIndex = IndexPath.init(row: 0, section: 0)
+            self.homeTableView.selectRow(at: topIndex, animated: true, scrollPosition: .top)
         }
     }
 
@@ -680,6 +697,7 @@ extension HomeVC: BaseJobCardCellDelegate {
 //        Log.selectLog(logLevel: .debug, "keepAction tag:\(tag)")
         if self.keepSendStatus == .sending { return }
 
+        SVProgressHUD.show()
         self.keepSendStatus = .sending
         // TODO:通信処理
         let row = tag
@@ -696,7 +714,7 @@ extension HomeVC: BaseJobCardCellDelegate {
 //                    Log.selectLog(logLevel: .debug, "keep成功")
 
             }.catch{ (error) in
-//                Log.selectLog(logLevel: .debug, "keep send error:\(error)")
+                Log.selectLog(logLevel: .debug, "keep send error:\(error)")
 
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 self.showError(myErr)
@@ -721,6 +739,13 @@ extension HomeVC: BaseJobCardCellDelegate {
                     }
                 })
                 */
+                // タブに丸ポチを追加
+                if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
+                    let tabItem:UITabBarItem = tabItems[1]
+                    tabItem.badgeValue = ""
+                }
+
+                SVProgressHUD.dismiss()
             }
         } else {
 //            Log.selectLog(logLevel: .debug, "キープ削除:jobId:\(jobId)")
@@ -731,7 +756,7 @@ extension HomeVC: BaseJobCardCellDelegate {
 //                    Log.selectLog(logLevel: .debug, "delete成功")
 
             }.catch{ (error) in
-//                Log.selectLog(logLevel: .debug, "keep delete error:\(error)")
+                Log.selectLog(logLevel: .debug, "keep delete error:\(error)")
 
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 self.showError(myErr)
@@ -756,6 +781,7 @@ extension HomeVC: BaseJobCardCellDelegate {
                     }
                 })
                 */
+                SVProgressHUD.dismiss()
             }
         }
     }

@@ -51,9 +51,12 @@ final class KeepListVC: TmpBasicVC {
     var storedKeepList: Set<Int> = []
     
     var isAddLoad:Bool = true
+    
+    var keepDatas:[[String:Any]] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.tabBarController?.delegate = self
         setup()
     }
 
@@ -64,6 +67,16 @@ final class KeepListVC: TmpBasicVC {
         }
         getKeepList()
         AnalyticsEventManager.track(type: .viewKeepList)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // 丸ポチを消す
+        if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
+            let tabItem = tabItems[1]
+            tabItem.badgeValue = nil
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -80,6 +93,7 @@ private extension KeepListVC {
         title = "キープリスト"
         keepTableView.backgroundColor = UIColor.init(colorType: .color_base)
         keepTableView.registerNib(nibName: "KeepCardCell", idName: "KeepCardCell")
+        
     }
 
     func getKeepList() {
@@ -178,6 +192,29 @@ private extension KeepListVC {
         }
         .catch { error in }.finally {}
     }
+    
+    func keepDataAddRemoveCheck(checkData:[String:Any]) {
+        
+        if keepDatas.count > 0 {
+            
+            for i in 0..<keepDatas.count {
+                var _data = keepDatas[i]
+                
+                let checkId = checkData["jobId"] as! String
+                let checkStatus = checkData["keepStatus"] as! Bool
+                
+                let _dataId = _data["jobId"] as! String
+                if checkId == _dataId {
+                    _data["keepStatus"] = checkStatus
+                    keepDatas[i] = _data
+                } else {
+                    keepDatas.append(checkData)
+                }
+            }
+        } else {
+            keepDatas.append(checkData)
+        }
+    }
 }
 
 extension KeepListVC: KeepNoViewDelegate {
@@ -250,6 +287,7 @@ extension KeepListVC: BaseJobCardCellDelegate {
         let jobCard = lists[tag]
         let jobId = jobCard.jobId
         let keepStatus = !jobCard.keepStatus
+        let keepData:[String:Any] = ["jobId":jobId,"keepStatus":keepStatus]
 
         if keepStatus == true {
             ApiManager.sendJobKeep(id: jobId)
@@ -276,6 +314,7 @@ extension KeepListVC: BaseJobCardCellDelegate {
                 self.showError(error)
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep send finally")
+                self.keepDataAddRemoveCheck(checkData:keepData)
             }
         } else {
             ApiManager.sendJobDeleteKeep(id: jobId)
@@ -302,6 +341,32 @@ extension KeepListVC: BaseJobCardCellDelegate {
                 self.showError(error)
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep send finally")
+                self.keepDataAddRemoveCheck(checkData:keepData)
+            }
+        }
+    }
+}
+
+extension KeepListVC: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        Log.selectLog(logLevel: .debug, "KeepListVC didSelect start")
+
+        if let vcs = tabBarController.viewControllers {
+            Log.selectLog(logLevel: .debug, "vcs:\(vcs)")
+            
+            let firstNavi = vcs.first as! BaseNaviController
+            let firstVC = firstNavi.visibleViewController as! HomeVC
+            
+            Log.selectLog(logLevel: .debug, "firstVC:\(String(describing: firstVC))")
+            
+//            let homeVC = vcs[0] as! HomeVC
+//            Log.selectLog(logLevel: .debug, "viewController:\(viewController)")
+            if tabBarController.selectedIndex == 0 {
+                Log.selectLog(logLevel: .debug, "切り替えた画面がHomeVC")
+                Log.selectLog(logLevel: .debug, "keepDatas:\(keepDatas)")
+                firstVC.changeKeepDatas = keepDatas
+            } else {
+                firstVC.changeKeepDatas = []
             }
         }
     }
