@@ -10,10 +10,6 @@
 
 
 import Foundation
-
-struct SelectItemKey {
-    static let MstCompanyKey: String = "MstKey_CompanyGrp" //=== 会社
-}
     
 //マスタはDbg/Userそれぞれのprefectureではなく、prefectureとしてのマスタ定義で良いはず
 //ただし、それぞれの選択された値などは、Dbg/Userそれぞれのprefectureになるべきです
@@ -92,8 +88,7 @@ class SelectItemsManager: NSObject {
 
     //=== キャッシュ保持のクリア
     class func allClear() {
-        let ud = UserDefaults.standard
-        ud.removeObject(forKey: SelectItemKey.MstCompanyKey)
+        UserDefaultsManager.remove(key: .mstCompanyKey)
         self.shared.isCachedCompany = false
     }
 }

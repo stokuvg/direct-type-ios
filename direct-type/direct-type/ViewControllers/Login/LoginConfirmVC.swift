@@ -103,15 +103,9 @@ private extension LoginConfirmVC {
         let tabSB = UIStoryboard(name: "BaseTabBC", bundle: nil)
         let tabBC = tabSB.instantiateViewController(withIdentifier: "Sbid_BaseTabBC")
         
-        let ud = UserDefaults.standard
-        ud.set(false, forKey: "home")
-        ud.set(true, forKey: "pushTab")
-        if ud.synchronize() {
+        if UserDefaultsManager.synchronize() {
             Log.selectLog(logLevel: .debug, "ホーム画面　C1,タブ遷移 フラグの保存成功")
-//            self.navigationController?.pushViewController(tabBC, animated: true)
-            
             UIApplication.shared.keyWindow?.rootViewController = tabBC
-//            UIApplication.shared.keyWindow?.rootViewController = newNavigationController
         }
     }
     

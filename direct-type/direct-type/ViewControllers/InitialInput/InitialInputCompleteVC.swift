@@ -106,7 +106,6 @@ private extension InitialInputCompleteVC {
     func transitionToBaseTab() {
         let tabSB = UIStoryboard(name: "BaseTabBC", bundle: nil)
         let tabBC = tabSB.instantiateViewController(withIdentifier: "Sbid_BaseTabBC")
-//        let newNavigationController = UINavigationController(rootViewController: tabBC)
         UIApplication.shared.keyWindow?.rootViewController = tabBC
     }
 }

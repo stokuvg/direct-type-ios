@@ -9,6 +9,9 @@
 import UIKit
 
 class BaseTabBC: UITabBarController {
+    
+    private var profile: MdlProfile?
+    private var resume: MdlResume?
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -93,6 +93,7 @@ private extension WithDrawalVC {
         .done { _ in
             AnalyticsEventManager.track(type: .withdrawal)
             self.transitionToWithdrawalComplete()
+            self.clearLocalData()
             AWSMobileClient.default().signOut { (error) in
                 if let error = error {
                     DispatchQueue.main.async {
@@ -114,6 +115,10 @@ private extension WithDrawalVC {
     func transitionToWithdrawalComplete() {
         let vc = self.getVC(sbName: "SettingVC", vcName: "WithDrawalCompleteVC") as! WithDrawalCompleteVC
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func clearLocalData() {
+        UserDefaultsManager.removeAll()
     }
     
     // 退会確認アラート

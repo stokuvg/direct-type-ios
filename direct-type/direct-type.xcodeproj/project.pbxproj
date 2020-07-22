@@ -173,6 +173,7 @@
 		0E22833D24AEB5AB0008765E /* ApiManager+Chemistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22833C24AEB5AB0008765E /* ApiManager+Chemistry.swift */; };
 		0E22833F24AEB6360008765E /* MdlChemistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E22833E24AEB6360008765E /* MdlChemistry.swift */; };
 		0E59D7C524B40D7600FA4570 /* ApiManager+Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E59D7C424B40D7600FA4570 /* ApiManager+Activity.swift */; };
+		0E5ECDAF24C6A728007CD98D /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5ECDAE24C6A728007CD98D /* UserDefaultsManager.swift */; };
 		0E6951AC248A050000D58E6E /* ChemistryPersonalityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6951AB248A050000D58E6E /* ChemistryPersonalityType.swift */; };
 		0E6951AF248A05EA00D58E6E /* ChemistryQuestionMasterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6951AE248A05EA00D58E6E /* ChemistryQuestionMasterData.swift */; };
 		0E6951B1248A11A000D58E6E /* ChemistryAnswerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6951B0248A11A000D58E6E /* ChemistryAnswerType.swift */; };
@@ -512,6 +513,7 @@
 		0E22833C24AEB5AB0008765E /* ApiManager+Chemistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Chemistry.swift"; sourceTree = "<group>"; };
 		0E22833E24AEB6360008765E /* MdlChemistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlChemistry.swift; sourceTree = "<group>"; };
 		0E59D7C424B40D7600FA4570 /* ApiManager+Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Activity.swift"; sourceTree = "<group>"; };
+		0E5ECDAE24C6A728007CD98D /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		0E6951AB248A050000D58E6E /* ChemistryPersonalityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryPersonalityType.swift; sourceTree = "<group>"; };
 		0E6951AE248A05EA00D58E6E /* ChemistryQuestionMasterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryQuestionMasterData.swift; sourceTree = "<group>"; };
 		0E6951B0248A11A000D58E6E /* ChemistryAnswerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryAnswerType.swift; sourceTree = "<group>"; };
@@ -899,6 +901,7 @@
 				066F270C246E6B820040BDC1 /* UITextView+Extensions.swift */,
 				066FE3AD24A3163C006AB2B4 /* Device+Extensions.swift */,
 				066FE3AF24A3347D006AB2B4 /* String+Extensions.swift */,
+				0E5ECDAE24C6A728007CD98D /* UserDefaultsManager.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1903,6 +1906,7 @@
 				06DCAEA9245A70A8008FE9FA /* UITableView+Extensions.swift in Sources */,
 				26CFC46A2469496D00E458E2 /* HEditTextTBCell.swift in Sources */,
 				0E6951AC248A050000D58E6E /* ChemistryPersonalityType.swift in Sources */,
+				0E5ECDAF24C6A728007CD98D /* UserDefaultsManager.swift in Sources */,
 				267E636324A98EF7004169ED /* EntryFormExQuestionsItemTBCell.swift in Sources */,
 				0E6EA6E524A1C11000884D07 /* InitialInputConfirmVC.swift in Sources */,
 				067F28D02456CCB8000AAD69 /* BaseVC.swift in Sources */,
