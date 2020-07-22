@@ -43,12 +43,12 @@ extension EditItemMdlProfile {
         case .firstName:        return ValidInfo(required: true, keta: nil, max: 8, type: .hiraKataKan)
         case .familyNameKana:   return ValidInfo(required: true, keta: nil, max: 8, type: .katakana)
         case .firstNameKana:    return ValidInfo(required: true, keta: nil, max: 8, type: .katakana)
-        case .birthday:         return ValidInfo(required: true, keta: nil, max: nil, type: .code)//今日以降の誕生日を許容する？（年齢がマイナスになる）
-        case .gender:           return ValidInfo(required: true, keta: nil, max: nil, type: .code)//結局、男女の選択のみ？
+        case .birthday:         return ValidInfo(required: true, keta: nil, max: nil, type: .code)//別途、今日以降の誕生日チェック（次期フェーズで、特定年齢以前はNG）
+        case .gender:           return ValidInfo(required: true, keta: nil, max: nil, type: .code)
         case .zipCode:          return ValidInfo(required: true, keta: 7, max: nil, type: .number)
         case .prefecture:       return ValidInfo(required: true, keta: nil, max: nil, type: .code)
-        case .address1:         return ValidInfo(required: true, keta: nil, max: 100, type: .zenkaku)
-        case .address2:         return ValidInfo(required: false, keta: nil, max: 100, type: .zenkaku)//必須に変わった（やっぱり任意に戻った）
+        case .address1:         return ValidInfo(required: true, keta: nil, max: 100, type: .zenHanNumSym)//別途、併せて100文字チェック
+        case .address2:         return ValidInfo(required: false, keta: nil, max: 100, type: .zenHanNumSym)//別途、併せて100文字チェック
         case .mailAddress:      return ValidInfo(required: true, keta: nil, max: nil, type: .email)
         case .hopeJobArea:      return ValidInfo(required: true, keta: nil, max: nil, type: .code)
         case .mobilePhoneNo:    return ValidInfo(required: true, keta: nil, max: nil, type: .number)//編集不可（requiredはtrueの方が良いか）
