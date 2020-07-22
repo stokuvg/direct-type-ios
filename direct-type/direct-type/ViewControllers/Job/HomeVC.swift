@@ -285,10 +285,8 @@ class HomeVC: TmpNaviTopVC {
                 self.profile = result
         }
         .catch { (error) in
-            SVProgressHUD.dismiss()
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             print(myErr)
-            
         }
         .finally {
             self.getResume()
@@ -302,7 +300,12 @@ class HomeVC: TmpNaviTopVC {
         }
         .catch { _ in}
         .finally {
-            self.shouldTransitionToInitialInput ? self.showConfirm() : self.getJobData()
+            if self.shouldTransitionToInitialInput {
+                SVProgressHUD.dismiss()
+                self.showConfirm()
+            } else {
+                self.getJobData()
+            }
         }
     }
     
