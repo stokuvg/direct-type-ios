@@ -48,7 +48,7 @@ class EditItemTool {
         }
         return (arrType, arrYear)
     }
-    class func dispTypeAndYear(codes: String, _ tsvMaain: SelectItemsManager.TsvMaster = .jobType, _ tsvSub: SelectItemsManager.TsvMaster = .jobExperimentYear ) -> [String] {
+    class func dispTypeAndYear(codes: String, _ tsvMaain: SelectItemsManager.TsvMaster, _ tsvSub: SelectItemsManager.TsvMaster) -> [String] {
         var disp: [String] = []
         if Constants.DbgDispStatus { disp.append("[\(codes)]") }
         for code in codes.split(separator: "_") {
@@ -58,13 +58,27 @@ class EditItemTool {
             let tmp1 = String(buf[1])
             let buf0: String = SelectItemsManager.getCodeDispSyou(tsvMaain, code: tmp0)?.disp ?? ""
             let buf1: String = SelectItemsManager.getCodeDisp(tsvSub, code: tmp1)?.disp ?? ""
-            let bufExperiment: String = "\(buf0) \(buf1)"
+            let grp0: String = SelectItemsManager.getDispDai(tsvMaain, code: tmp0)
+            let bufExperiment: String = "\(grp0)/\(buf0)：\(buf1)"
+            disp.append(bufExperiment)
+        }
+        return disp
+    }
+    class func dispType(codes: String, _ tsvMaain: SelectItemsManager.TsvMaster) -> [String] {
+        var disp: [String] = []
+        if Constants.DbgDispStatus { disp.append("[\(codes)]") }
+        for code in codes.split(separator: "_") {
+            let buf = String(code).split(separator: SplitTypeYearSeparator)
+            guard buf.count == 2 else { continue }
+            let tmp0 = String(buf[0])
+            let buf0: String = SelectItemsManager.getCodeDispSyou(tsvMaain, code: tmp0)?.disp ?? ""
+            let grp0: String = SelectItemsManager.getDispDai(tsvMaain, code: tmp0)
+            let bufExperiment: String = "\(grp0)/\(buf0)"
             disp.append(bufExperiment)
         }
         return disp
     }
 }
-
 
 protocol EditItemProtocol {
     var itemKey: String { get }

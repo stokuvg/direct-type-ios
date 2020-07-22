@@ -324,6 +324,16 @@ extension SelectItemsManager {
             cd.codeDisp.code == code
         }.first?.codeDisp
     }
+    class func getDispDai(_ type: TsvMaster, code: Code) -> String { //小分類コードを渡すと、大分類のコードと表示文字列を返す
+        let (dai, syou): ([CodeDisp], [GrpCodeDisp]) = SelectItemsManager.getMaster(type)
+        let daiCode = syou.filter { (cd) -> Bool in
+            cd.codeDisp.code == code
+        }.first?.grp
+        let daiCodeDisp = dai.filter { (grp) -> Bool in
+            grp.code == daiCode
+        }
+        return daiCodeDisp.first?.disp ?? ""
+    }
 
 }
 
