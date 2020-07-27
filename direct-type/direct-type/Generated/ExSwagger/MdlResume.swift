@@ -50,26 +50,25 @@ class MdlResume: Codable {
         //資格（任意）を1項目以上選択で+15%
         //自己PR（任意）を入力で＋15％
         var result = 35 // MdlProfileが存在している時点で35%としている
-        
-        let nRequiredItems = 25
-        let nLanguage = 10
-        let nQualifications = 15
-        let nOwnPr = 15
-        
-        if isHaveRequired {
-            result += nRequiredItems
+
+        let existsRequiredItem = 25
+        if !changeCount.isEmpty && !lastJobExperiment.jobType.isEmpty && !school.schoolName.isEmpty {
+            result += existsRequiredItem
         }
-        
+
+        let existsSkillLanguage = 10
         if skillLanguage.isHaveSkill {
-            result += nLanguage
+            result += existsSkillLanguage
         }
-        
-        if (qualifications.count > 0) {
-            result += nQualifications
+
+        let existsQualifications = 15
+        if !qualifications.isEmpty {
+            result += existsQualifications
         }
-        
+
+        let existsOwnPr = 15
         if !ownPr.isEmpty {
-            result += nOwnPr
+            result += existsOwnPr
         }
 
         return result
