@@ -11,9 +11,9 @@ import WebKit
 
 enum SettingWebType {
     case none
-    case Help
-    case Privacy
-    case Term
+    case help
+    case privacy
+    case term
     case approachExplanation
     case reasonOfConfirmPhone
 }
@@ -54,13 +54,13 @@ class SettingWebVC: TmpWebVC {
         var urlString:String = ""
         guard let _type = _type else { return }
         switch _type {
-        case .Help:
+        case .help:
             title = "よくある質問・ヘルプ"
             urlString = "https://type.jp/help/index.html"
-        case .Privacy:
+        case .privacy:
             title = "プライバシーポリシー"
             urlString = "https://type.jp/s/kojin/"
-        case .Term:
+        case .term:
             title = "利用規約"
             urlString = "https://type.jp/help/category_14.html"
         case .none:
