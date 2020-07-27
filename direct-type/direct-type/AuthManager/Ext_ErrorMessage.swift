@@ -174,6 +174,7 @@ struct MyErrorDisp {
     enum CodeType: Int {
         case existsUser = 24
         case undefinedUser = 23
+        case invalidSession = 13
     }
     
     var debugDisp: String {

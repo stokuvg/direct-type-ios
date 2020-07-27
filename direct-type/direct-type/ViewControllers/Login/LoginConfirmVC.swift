@@ -86,9 +86,12 @@ private extension LoginConfirmVC {
         changeButtonState(shouldForceDisable: true)
         AWSMobileClient.default().confirmSignIn(challengeResponse: code, completionHandler: { (signInResult, error) in
             if let error = error  {
-                let buf = AuthManager.convAnyError(error).debugDisp
+                let myError = AuthManager.convAnyError(error)
                 DispatchQueue.main.async {
-                    print(#line, #function, buf)
+                    let errorType = MyErrorDisp.CodeType(rawValue: myError.code)
+                    if errorType == .invalidSession {
+                        self.showConfirm(title: "認証エラー", message: "認証コードを再送信してください。", onlyOK: true)
+                    }
                     self.changeButtonState()
                     SVProgressHUD.dismiss()
                 }
