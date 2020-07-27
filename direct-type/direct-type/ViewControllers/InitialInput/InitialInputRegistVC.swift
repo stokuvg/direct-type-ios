@@ -93,14 +93,11 @@ private extension InitialInputRegistVC {
         AWSMobileClient.default().signUp(username: phoneNumber, password: AppDefine.password, userAttributes: phoneNumberAttribute) { (signUpResult, error) in
             if let error = error {
                 let myError = AuthManager.convAnyError(error)
-                var buf = myError.debugDisp
                 DispatchQueue.main.async {
                     let errorType = MyErrorDisp.CodeType(rawValue: myError.code)
                     if errorType == .existsUser {
-                        // TODO: 既存ユーザーだった場合のエラー文面を検討して実装する
-                        buf = "既存ユーザーが存在する場合のエラーですよ"
+                        self.showConfirm(title: "電話番号登録エラー", message: "別の電話番号で再度お試しください。", onlyOK: true)
                     }
-                    self.showConfirm(title: "Error", message: buf, onlyOK: true)
                     self.changeButtonState()
                     SVProgressHUD.dismiss()
                 }

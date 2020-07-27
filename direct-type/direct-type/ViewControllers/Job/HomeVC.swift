@@ -72,6 +72,13 @@ class HomeVC: TmpNaviTopVC {
             Log.selectLog(logLevel: .debug, "new changeKeepDatas:\(changeKeepDatas)")
         }
     }
+    
+    var firstViewFlag:Bool = true {
+        didSet {
+            Log.selectLog(logLevel: .debug, "new firstViewFlag")
+        }
+    }
+    
     /*
     var changeKeepStatus:Bool = false {
         didSet {
@@ -100,7 +107,10 @@ class HomeVC: TmpNaviTopVC {
         Log.selectLog(logLevel: .debug, "HomeVC viewWillAppear start")
         AnalyticsEventManager.track(type: .viewHome)
 
-        shouldFetchPersonalData ? getProfileData() : getJobData()
+        if firstViewFlag {
+            shouldFetchPersonalData ? getProfileData() : getJobData()
+            firstViewFlag = false
+        }
         safeAreaTop = self.view.safeAreaInsets.top
 
         //[Dbg]___
@@ -477,6 +487,10 @@ class HomeVC: TmpNaviTopVC {
 
     private func makeCellHeight(row: Int) -> CGFloat {
         var rowHeight:CGFloat = defaultCellHeight
+        
+        if self.dispJobCards.jobCards.count == 0 {
+            return 0
+        }
 
         let jobData = self.dispJobCards.jobCards[row]
 
@@ -598,15 +612,15 @@ extension HomeVC: UITableViewDataSource {
 
 extension HomeVC: JobOfferCardMoreCellDelegate {
     func moreDataAdd() {
-        Log.selectLog(logLevel: .debug, "HomeVC JobOfferCardMoreCellDelegate start")
-        Log.selectLog(logLevel: .debug, "dataAddFlag:\(dataAddFlag)")
+//        Log.selectLog(logLevel: .debug, "HomeVC JobOfferCardMoreCellDelegate start")
+//        Log.selectLog(logLevel: .debug, "dataAddFlag:\(dataAddFlag)")
         if dataAddFlag == true {
-            Log.selectLog(logLevel: .debug, "データの追加不可")
+//            Log.selectLog(logLevel: .debug, "データの追加不可")
             return
         }
         self.dataAddFlag = true
         recommendUseFlag ? getJobRecommendAddList() : getJobAddList()
-        Log.selectLog(logLevel: .debug, "HomeVC JobOfferCardMoreCellDelegate end")
+//        Log.selectLog(logLevel: .debug, "HomeVC JobOfferCardMoreCellDelegate end")
     }
 }
 
@@ -686,8 +700,19 @@ extension HomeVC: BaseJobCardCellDelegate {
         if flag == true {
             ApiManager.sendJobKeep(id: jobId)
                 .done { result in
+                // タブに丸ポチを追加
+                if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
+                    let tabItem:UITabBarItem = tabItems[1]
+                    tabItem.badgeValue = "●"
+                    tabItem.badgeColor = .clear
+                    tabItem.setBadgeTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.red], for: .normal)
+                }
             }.catch{ (error) in
                 Log.selectLog(logLevel: .debug, "keep send error:\(error)")
+                if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
+                    let tabItem:UITabBarItem = tabItems[1]
+                    tabItem.badgeValue = nil
+                }
 
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 self.showError(myErr)
@@ -711,13 +736,6 @@ extension HomeVC: BaseJobCardCellDelegate {
                     }
                 })
                 */
-                // タブに丸ポチを追加
-                if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
-                    let tabItem:UITabBarItem = tabItems[1]
-                    tabItem.badgeValue = "●"
-                    tabItem.badgeColor = .clear
-                    tabItem.setBadgeTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.red], for: .normal)
-                }
 
                 SVProgressHUD.dismiss()
             }
