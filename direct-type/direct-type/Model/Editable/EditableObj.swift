@@ -68,9 +68,7 @@ class EditItemTool {
         var disp: [String] = []
         if Constants.DbgDispStatus { disp.append("[\(codes)]") }
         for code in codes.split(separator: "_") {
-            let buf = String(code).split(separator: SplitTypeYearSeparator)
-            guard buf.count == 2 else { continue }
-            let tmp0 = String(buf[0])
+            let tmp0 = String(code)
             let buf0: String = SelectItemsManager.getCodeDispSyou(tsvMaain, code: tmp0)?.disp ?? ""
             let grp0: String = SelectItemsManager.getDispDai(tsvMaain, code: tmp0)
             let bufExperiment: String = "\(grp0)/\(buf0)"
