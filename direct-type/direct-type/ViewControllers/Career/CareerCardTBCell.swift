@@ -49,7 +49,7 @@ class CareerCardTBCell: UITableViewCell {
         self.btnDelCard.isHidden = !dispDelBtn //===最後のひとつは削除不可
         guard let career = item else { return }
         //===表示用文字列の生成
-        let bufTitle: String = "\(targetCardNum + 1)社目"
+        let bufTitle: String = "勤務先\(targetCardNum + 1)"
         //===在籍企業概要
         var dispCompany: [String] = []
         if !career.companyName.isEmpty { dispCompany.append(career.companyName) }

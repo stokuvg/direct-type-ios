@@ -15,6 +15,7 @@ protocol InitialInputConfirmVCDelegate: class {
 }
 
 final class InitialInputConfirmVC: TmpBasicVC {
+    @IBOutlet private weak var scrollVW: UIScrollView!
     @IBOutlet private weak var authCodeTextField: UITextField!
     @IBOutlet private weak var nextButton: UIButton!
     
@@ -35,7 +36,34 @@ final class InitialInputConfirmVC: TmpBasicVC {
         setup()
         changeButtonState()
     }
-    
+    //=== Notification通知の登録 ===
+    // 画面遷移時にも取り除かないもの（他の画面で変更があった場合の更新のため）
+    override func initNotify() {
+    }
+    // この画面に遷移したときに登録するもの
+    override func addNotify() {
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: UIResponder.keyboardDidShowNotification, object: nil)
+        nc.addObserver(self, selector: #selector(keyboardDidHide(notification:)), name: UIResponder.keyboardDidHideNotification, object: nil)
+    }
+    // 他の画面に遷移するときに消して良いもの
+    override func removeNotify() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidHideNotification, object: nil)
+    }
+    @objc func keyboardDidShow(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else { return }
+        if let rect = userInfo["UIKeyboardFrameEndUserInfoKey"] as? CGRect {
+            let safeAreaB = self.view.safeAreaInsets.bottom
+            let szKeyBoard = rect.size
+            scrollVW.contentInset.bottom = szKeyBoard.height + safeAreaB
+        }
+    }
+    @objc func keyboardDidHide(notification: NSNotification) {
+      scrollVW.contentInset.bottom = 0
+    }
+    //=======================================================================================================
+
     
     func configure(with loginInfo: LoginInfo, delegate: InitialInputConfirmVCDelegate) {
         self.loginInfo = loginInfo
