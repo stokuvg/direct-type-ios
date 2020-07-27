@@ -40,7 +40,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oty-O0-I6b">
-                                <rect key="frame" x="241" y="442" width="133" height="24"/>
+                                <rect key="frame" x="241" y="437" width="133" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <state key="normal" title="電話番号の確認が必要な理由">
                                     <color key="titleColor" name="color-sub"/>
@@ -50,7 +50,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0r-iX-nRl">
-                                <rect key="frame" x="40" y="476" width="334" height="40"/>
+                                <rect key="frame" x="40" y="471" width="334" height="40"/>
                                 <color key="backgroundColor" name="color-sub"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="d6l-wy-ueG"/>
@@ -107,7 +107,7 @@
                             <constraint firstItem="LR5-aW-sXL" firstAttribute="leading" secondItem="o4X-mO-AyH" secondAttribute="leading" constant="30" id="jt7-Jl-FfU"/>
                             <constraint firstItem="o4X-mO-AyH" firstAttribute="trailing" secondItem="qTh-BW-Ty8" secondAttribute="trailing" constant="40" id="oW3-tB-esB"/>
                             <constraint firstItem="b0r-iX-nRl" firstAttribute="leading" secondItem="o4X-mO-AyH" secondAttribute="leading" constant="40" id="uoB-Tq-ATI"/>
-                            <constraint firstItem="Oty-O0-I6b" firstAttribute="top" secondItem="VCs-WW-4CL" secondAttribute="bottom" constant="5" id="zmX-Yv-HeP"/>
+                            <constraint firstItem="Oty-O0-I6b" firstAttribute="top" secondItem="VCs-WW-4CL" secondAttribute="bottom" id="zmX-Yv-HeP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="o4X-mO-AyH"/>
                     </view>
