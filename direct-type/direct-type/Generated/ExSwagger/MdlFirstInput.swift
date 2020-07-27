@@ -83,7 +83,7 @@ enum EditItemMdlFirstInput: String, EditItemProtocol {
         case .employmentStatus:     return "就業状況"
         case .lastJobExperiment:    return "直近経験職種"
         case .salary:               return "現在の年収"
-        case .jobExperiments:       return "追加経験職種"
+        case .jobExperiments:       return "追加の経験職種"
         }
     }
     var tsvMaster: SelectItemsManager.TsvMaster {
@@ -116,23 +116,42 @@ enum EditItemMdlFirstInput: String, EditItemProtocol {
     var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" } //画面内でUniqになるようなキーを定義（配列利用時は除く）
 }
 //=== 編集用の項目と定義など
-enum EditItemMdlFirstInputJobExperiments: String, EditItemProtocol {
+enum EditItemMdlFirstInputLastJobExperiments: String, EditItemProtocol {
     case jobTypeAndJobExperimentYear
-//    case jobType
-//    case jobExperimentYear
     //表示名
     var dispName: String {
         switch self {
-        case .jobTypeAndJobExperimentYear: return "追加経験職種"
-//        case .jobType:              return "経験職種"
-//        case .jobExperimentYear:    return "経験年数"
+        case .jobTypeAndJobExperimentYear: return "直近の経験職種"
         }
     }
     var tsvMaster: SelectItemsManager.TsvMaster {
         switch self {
         case .jobTypeAndJobExperimentYear: return .jobType
-//        case .jobType: return .jobType
-//        case .jobExperimentYear: return .jobExperimentYear
+        }
+    }
+    var dispUnit: String { //入力項目の単位表示
+        switch self {
+        default: return ""
+        }
+    }
+    //Placeholder Text
+    var placeholder: String {
+        return ""//return "[\(self.itemKey) PlaceHolder]"
+    }
+    var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" } //画面内でUniqになるようなキーを定義（配列利用時は除く）
+}
+//=== 編集用の項目と定義など
+enum EditItemMdlFirstInputJobExperiments: String, EditItemProtocol {
+    case jobTypeAndJobExperimentYear
+    //表示名
+    var dispName: String {
+        switch self {
+        case .jobTypeAndJobExperimentYear: return "追加の経験職種"
+        }
+    }
+    var tsvMaster: SelectItemsManager.TsvMaster {
+        switch self {
+        case .jobTypeAndJobExperimentYear: return .jobType
         }
     }
     var dispUnit: String { //入力項目の単位表示
@@ -146,37 +165,6 @@ enum EditItemMdlFirstInputJobExperiments: String, EditItemProtocol {
         case .jobTypeAndJobExperimentYear:
             return "複数選択可"
         }
-    }
-    var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" } //画面内でUniqになるようなキーを定義（配列利用時は除く）
-}
-//=== 編集用の項目と定義など
-enum EditItemMdlFirstInputLastJobExperiments: String, EditItemProtocol {
-    case jobTypeAndJobExperimentYear
-//    case jobType
-//    case jobExperimentYear
-    //表示名
-    var dispName: String {
-        switch self {
-        case .jobTypeAndJobExperimentYear: return "直近の経験職種"
-//        case .jobType:              return "直近の経験職種"
-//        case .jobExperimentYear:    return "直近の経験年数"
-        }
-    }
-    var tsvMaster: SelectItemsManager.TsvMaster {
-        switch self {
-        case .jobTypeAndJobExperimentYear: return .jobType
-//        case .jobType: return .jobType
-//        case .jobExperimentYear: return .jobExperimentYear
-        }
-    }
-    var dispUnit: String { //入力項目の単位表示
-        switch self {
-        default: return ""
-        }
-    }
-    //Placeholder Text
-    var placeholder: String {
-        return ""//return "[\(self.itemKey) PlaceHolder]"
     }
     var itemKey: String { return "\(String(describing: type(of: self)))_\(self.rawValue)" } //画面内でUniqになるようなキーを定義（配列利用時は除く）
 }

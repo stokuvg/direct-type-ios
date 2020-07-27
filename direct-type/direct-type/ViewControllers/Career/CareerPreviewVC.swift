@@ -68,7 +68,7 @@ class CareerPreviewVC: PreviewBaseVC {
     
     //共通プレビューをOverrideして利用する
     override func initData() {
-        title = "職務経歴書"
+        title = "職務経歴書入力"
     }
     override func dispData() {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
