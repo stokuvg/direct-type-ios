@@ -250,6 +250,7 @@ class HomeVC: TmpNaviTopVC {
         }
         .finally {
             SVProgressHUD.dismiss()
+            self.dataAddFlag = false
             self.dataAddAction()
         }
     }
@@ -271,10 +272,12 @@ class HomeVC: TmpNaviTopVC {
         }
         .finally {
             SVProgressHUD.dismiss()
+            self.dataAddFlag = false
             self.dataAddAction()
         }
     }
     private func getJobRecommendList() {
+        SVProgressHUD.show()
         pageJobCards = MdlJobCardList()
         dispJobCards = MdlJobCardList()
         pageNo = 1
@@ -299,6 +302,7 @@ class HomeVC: TmpNaviTopVC {
                 self.linesTitle(date: nowDateString, title: "あなたにぴったりの求人")
             }
             SVProgressHUD.dismiss()
+            self.dataAddFlag = false
             self.dataCheckAction()
 
             let topIndex = IndexPath.init(row: 0, section: 0)
@@ -324,6 +328,7 @@ class HomeVC: TmpNaviTopVC {
         .finally {
             SVProgressHUD.dismiss()
             self.linesTitle(date: "", title: "おすすめ求人一覧")
+            self.dataAddFlag = false
             self.dataCheckAction()
         }
     }
@@ -495,12 +500,12 @@ class HomeVC: TmpNaviTopVC {
         // カード内 左:24pt,右24pt
         // フォント:C_font_M
         let areaWidth = self.view.frame.size.width - ((20 * 2) + (24 * 2))
-        Log.selectLog(logLevel: .debug, "areaWidth:\(areaWidth)")
+//        Log.selectLog(logLevel: .debug, "areaWidth:\(areaWidth)")
 
         let text = jobData.jobName
         let font = UIFont.init(fontType: .C_font_M)
         let textSize = CGFloat(text.count) * font!.pointSize
-        Log.selectLog(logLevel: .debug, "textSize:\(textSize)")
+//        Log.selectLog(logLevel: .debug, "textSize:\(textSize)")
         if areaWidth > textSize {
             rowHeight -= 30
         }
@@ -593,9 +598,15 @@ extension HomeVC: UITableViewDataSource {
 
 extension HomeVC: JobOfferCardMoreCellDelegate {
     func moreDataAdd() {
-        guard dataAddFlag else { return }
+        Log.selectLog(logLevel: .debug, "HomeVC JobOfferCardMoreCellDelegate start")
+        Log.selectLog(logLevel: .debug, "dataAddFlag:\(dataAddFlag)")
+        if dataAddFlag == true {
+            Log.selectLog(logLevel: .debug, "データの追加不可")
+            return
+        }
+        self.dataAddFlag = true
         recommendUseFlag ? getJobRecommendAddList() : getJobAddList()
-        self.dataAddFlag = false
+        Log.selectLog(logLevel: .debug, "HomeVC JobOfferCardMoreCellDelegate end")
     }
 }
 

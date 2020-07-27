@@ -118,13 +118,13 @@ class JobDetailDataCell: BaseTableViewCell {
     
     private func companyLayoutSizeCheck(text: String) {
         let areaWidth = self.companyLabel.frame.size.width
-        Log.selectLog(logLevel: .debug, "areaWidth:\(areaWidth)")
+//        Log.selectLog(logLevel: .debug, "areaWidth:\(areaWidth)")
         
-        Log.selectLog(logLevel: .debug, "text:\(text)")
-        Log.selectLog(logLevel: .debug, "UIFont.init(fontType: .C_font_SSb)?.pointSize:\(String(describing: UIFont.init(fontType: .C_font_SSb)?.pointSize))")
+//        Log.selectLog(logLevel: .debug, "text:\(text)")
+//        Log.selectLog(logLevel: .debug, "UIFont.init(fontType: .C_font_SSb)?.pointSize:\(String(describing: UIFont.init(fontType: .C_font_SSb)?.pointSize))")
         
         let areaTextSize = CGFloat(text.count) * UIFont.init(fontType: .C_font_SSb)!.pointSize
-        Log.selectLog(logLevel: .debug, "areaTextSize:\(areaTextSize)")
+//        Log.selectLog(logLevel: .debug, "areaTextSize:\(areaTextSize)")
         
         if areaWidth < areaTextSize {
             self.companyTopLayout.constant =  1

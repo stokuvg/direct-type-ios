@@ -86,7 +86,7 @@ class JobOfferBigCardCell: BaseJobCardCell {
             self.jobLabelHeight.constant = 60
         }
         // かつ１行か２行か
-        Log.selectLog(logLevel: .debug, "jobLabel:\(String(describing: jobLabel))")
+//        Log.selectLog(logLevel: .debug, "jobLabel:\(String(describing: jobLabel))")
         if jobLabel.bounds.size.height <= 20.5 {
             self.jobLabelHeight.constant -= 30
         }
