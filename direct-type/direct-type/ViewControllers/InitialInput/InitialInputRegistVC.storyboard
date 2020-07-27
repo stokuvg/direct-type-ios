@@ -40,7 +40,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oty-O0-I6b">
-                                <rect key="frame" x="241" y="413" width="133" height="24"/>
+                                <rect key="frame" x="241" y="437" width="133" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <state key="normal" title="電話番号の確認が必要な理由">
                                     <color key="titleColor" name="color-sub"/>
@@ -50,7 +50,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0r-iX-nRl">
-                                <rect key="frame" x="40" y="457" width="334" height="40"/>
+                                <rect key="frame" x="40" y="471" width="334" height="40"/>
                                 <color key="backgroundColor" name="color-sub"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="d6l-wy-ueG"/>
@@ -67,23 +67,47 @@
                                     <action selector="nextButton:" destination="7G8-ao-tWJ" eventType="touchUpInside" id="zkM-IH-osx"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VCs-WW-4CL">
+                                <rect key="frame" x="333" y="413" width="41" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <state key="normal" title="利用規約">
+                                    <color key="titleColor" name="color-sub"/>
+                                </state>
+                                <connections>
+                                    <action selector="termsOfServiceButton:" destination="7G8-ao-tWJ" eventType="touchUpInside" id="owc-Vq-f6L"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Jp-Zb-uuJ">
+                                <rect key="frame" x="210" y="413" width="103" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <state key="normal" title="プライバシーポリシー">
+                                    <color key="titleColor" name="color-sub"/>
+                                </state>
+                                <connections>
+                                    <action selector="privacyPolicyButton:" destination="7G8-ao-tWJ" eventType="touchUpInside" id="5yB-03-166"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="VCs-WW-4CL" firstAttribute="leading" secondItem="0Jp-Zb-uuJ" secondAttribute="trailing" constant="20" id="01x-bY-OFP"/>
                             <constraint firstItem="Oty-O0-I6b" firstAttribute="trailing" secondItem="qTh-BW-Ty8" secondAttribute="trailing" id="37s-Kj-e2m"/>
                             <constraint firstItem="fPm-7i-O1B" firstAttribute="leading" secondItem="o4X-mO-AyH" secondAttribute="leading" constant="20" id="3jW-SN-OaG"/>
                             <constraint firstItem="o4X-mO-AyH" firstAttribute="trailing" secondItem="fPm-7i-O1B" secondAttribute="trailing" constant="20" id="4KG-PH-vSz"/>
+                            <constraint firstItem="VCs-WW-4CL" firstAttribute="top" secondItem="qTh-BW-Ty8" secondAttribute="bottom" id="78Q-pJ-I2x"/>
                             <constraint firstItem="o4X-mO-AyH" firstAttribute="trailing" secondItem="b0r-iX-nRl" secondAttribute="trailing" constant="40" id="Ei9-PB-6Vt"/>
-                            <constraint firstItem="b0r-iX-nRl" firstAttribute="top" secondItem="Oty-O0-I6b" secondAttribute="bottom" constant="20" id="Sgp-bP-48g"/>
-                            <constraint firstItem="Oty-O0-I6b" firstAttribute="top" secondItem="qTh-BW-Ty8" secondAttribute="bottom" id="Vr2-cv-jRb"/>
+                            <constraint firstItem="0Jp-Zb-uuJ" firstAttribute="top" secondItem="qTh-BW-Ty8" secondAttribute="bottom" id="IO9-Ji-U2C"/>
+                            <constraint firstItem="b0r-iX-nRl" firstAttribute="top" secondItem="Oty-O0-I6b" secondAttribute="bottom" constant="10" id="Sgp-bP-48g"/>
                             <constraint firstItem="LR5-aW-sXL" firstAttribute="top" secondItem="fPm-7i-O1B" secondAttribute="bottom" constant="20" id="afn-zd-WUM"/>
                             <constraint firstItem="qTh-BW-Ty8" firstAttribute="top" secondItem="LR5-aW-sXL" secondAttribute="bottom" constant="40" id="ckh-RT-x7v"/>
                             <constraint firstItem="o4X-mO-AyH" firstAttribute="trailing" secondItem="LR5-aW-sXL" secondAttribute="trailing" constant="30" id="fOx-8Y-q1r"/>
                             <constraint firstItem="qTh-BW-Ty8" firstAttribute="centerY" secondItem="zEt-4o-qFa" secondAttribute="centerY" constant="-60" id="hDc-6I-2rZ"/>
                             <constraint firstItem="qTh-BW-Ty8" firstAttribute="leading" secondItem="o4X-mO-AyH" secondAttribute="leading" constant="40" id="iHo-hB-rTX"/>
+                            <constraint firstItem="VCs-WW-4CL" firstAttribute="trailing" secondItem="qTh-BW-Ty8" secondAttribute="trailing" id="id6-GQ-BqX"/>
                             <constraint firstItem="LR5-aW-sXL" firstAttribute="leading" secondItem="o4X-mO-AyH" secondAttribute="leading" constant="30" id="jt7-Jl-FfU"/>
                             <constraint firstItem="o4X-mO-AyH" firstAttribute="trailing" secondItem="qTh-BW-Ty8" secondAttribute="trailing" constant="40" id="oW3-tB-esB"/>
                             <constraint firstItem="b0r-iX-nRl" firstAttribute="leading" secondItem="o4X-mO-AyH" secondAttribute="leading" constant="40" id="uoB-Tq-ATI"/>
+                            <constraint firstItem="Oty-O0-I6b" firstAttribute="top" secondItem="VCs-WW-4CL" secondAttribute="bottom" id="zmX-Yv-HeP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="o4X-mO-AyH"/>
                     </view>

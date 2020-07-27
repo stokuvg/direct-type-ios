@@ -13,8 +13,14 @@ import AWSMobileClient
 final class InitialInputRegistVC: TmpBasicVC {
     @IBOutlet private weak var phoneNumberTextField: UITextField!
     @IBOutlet private weak var nextButton: UIButton!
+    @IBAction private func privacyPolicyButton(_ sender: UIButton) {
+        openWebView(type: .privacy)
+    }
+    @IBAction func termsOfServiceButton(_ sender: UIButton) {
+        openWebView(type: .term)
+    }
     @IBAction private func reasonOfConfirmPhoneButton(_ sender: UIButton) {
-        openReasonOfConfirmPhone()
+        openWebView(type: .reasonOfConfirmPhone)
     }
     @IBAction private func nextButton(_ sender: UIButton) {
         AnalyticsEventManager.track(type: .createAuthenticationCode)
@@ -151,9 +157,9 @@ private extension InitialInputRegistVC {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func openReasonOfConfirmPhone() {
+    func openWebView(type: SettingWebType) {
         let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
-        vc.setup(type: .reasonOfConfirmPhone)
+        vc.setup(type: type)
         vc.modalPresentationStyle = .fullScreen
         navigationController?.present(vc, animated: true, completion: nil)
     }
