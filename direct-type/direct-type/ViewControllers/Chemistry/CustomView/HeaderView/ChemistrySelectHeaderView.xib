@@ -76,7 +76,7 @@
                                         <constraint firstAttribute="height" constant="14" id="6KT-MQ-gCE"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                    <nil key="textColor"/>
+                                    <color key="textColor" name="color-black"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="あてはまらないかを選択式で答えてください。" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T46-lx-zNM">
@@ -86,7 +86,7 @@
                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="14" id="aVN-HS-oAY"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                    <nil key="textColor"/>
+                                    <color key="textColor" name="color-black"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -130,6 +130,9 @@
     </objects>
     <resources>
         <image name="hukidashi" width="266" height="39"/>
+        <namedColor name="color-black">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="color-sub">
             <color red="1" green="0.35294117647058826" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
