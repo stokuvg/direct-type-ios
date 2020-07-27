@@ -20,6 +20,10 @@ class MdlResumeSchool: Codable {
     /** 卒業年月 */
     var graduationYear: String
 
+    var isHaveRequired: Bool {
+        return !schoolName.isEmpty && !faculty.isEmpty && !graduationYear.isEmpty
+    }
+
     init(schoolName: String, faculty: String, department: String, graduationYear: String) {
         self.schoolName = schoolName
         self.faculty = faculty
