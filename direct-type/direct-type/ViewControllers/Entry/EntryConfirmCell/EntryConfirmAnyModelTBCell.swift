@@ -186,7 +186,7 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
             if let careerList = self.detail as? MdlCareer {
                 for (cnt, career) in careerList.businessTypes.enumerated() {
                     //[C-15]職務経歴書編集
-                    stackVW.addArrangedSubview(EntryConfirmItem("▼\(cnt + 1)社目", ""))
+                    stackVW.addArrangedSubview(EntryConfirmItem("▼勤務先\(cnt + 1)", ""))
                     //===企業名
                     if !career.companyName.isEmpty {
                         addStackItem(type: .companyNameC15, val: career.companyName)
