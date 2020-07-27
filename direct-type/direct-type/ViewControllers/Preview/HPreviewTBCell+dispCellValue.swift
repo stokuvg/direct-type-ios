@@ -174,7 +174,7 @@ extension HPreviewTBCell {
         case .businessTypesH3:        //===(3e)経験業種
             if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
-            let disp = EditItemTool.dispTypeAndYear(codes: tmp0, .jobType, .businessType)
+            let disp = EditItemTool.dispType(codes: tmp0, .businessType)
             return disp.count == 0 ? Constants.SelectItemsValEmpty.disp : disp.joined(separator: "\n")
         case .schoolH3:               //===(3f)最終学歴（childItems[0]は非表示）
             var disp: [String] = []

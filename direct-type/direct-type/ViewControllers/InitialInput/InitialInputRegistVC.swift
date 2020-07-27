@@ -42,7 +42,7 @@ final class InitialInputRegistVC: TmpBasicVC {
 
 private extension InitialInputRegistVC {
     func setup() {
-        title = "電話番号認証"
+        title = "電話番号入力"
         navigationController?.isNavigationBarHidden = false
         phoneNumberTextField.addTarget(self, action: #selector(changeButtonState), for: .editingChanged)
     }

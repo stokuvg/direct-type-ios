@@ -49,10 +49,12 @@ final public class AuthManager {
     var isLogin: Bool {
         AWSMobileClient.default().getTokens { (tokens, error) in
             if let _error = error as? NSError{
+                //print("\t🐶🐶ログインチェック🐶エラー発生🐶 [tokens: \(tokens)]🐶🐶[error: \(error)]\n\(error?.localizedDescription)")
                 Log.selectLog(logLevel: .debug, "_error:\(_error.localizedDescription)")
                 Log.selectLog(logLevel: .debug, "userInfo:\(_error.userInfo.description)")
             }
         }
+        //print("\t🐶🐶ログインチェック🐶🐶 [userState: \(userState)]🐶🐶[idToken: \((AuthManager.shared.idToken ?? "").isEmpty)]🐶🐶\n\(idToken)")
         return (userState == .signedIn) && !((AuthManager.shared.idToken ?? "").isEmpty)
     }
 }
@@ -64,7 +66,7 @@ extension AuthManager {
             if let idToken = AuthManager.shared.idToken {
                 TudApiAPI.customHeaders = ["Authorization": "Bearer \(idToken)"]
             } else {
-                print("まだidToken取得していない")
+                print("🐶🐶まだidToken取得していない")
                 AWSMobileClient.default().getTokens { (tokens, error) in
                     if let _error = error as? NSError{
                         Log.selectLog(logLevel: .debug, "_error:\(_error.localizedDescription)")

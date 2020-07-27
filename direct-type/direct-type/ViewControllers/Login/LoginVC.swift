@@ -39,7 +39,7 @@ final class LoginVC: TmpBasicVC {
 
 private extension LoginVC {
     func setup() {
-        title = "初期入力"
+        title = "電話番号入力"
         navigationController?.isNavigationBarHidden = false
         phoneNumberTextField.addTarget(self, action: #selector(changeButtonState), for: .editingChanged)
     }
