@@ -21,10 +21,10 @@
                                 <rect key="frame" x="30" y="44" width="354" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQd-S1-SxD" userLabel="ContentsView">
-                                        <rect key="frame" x="0.0" y="0.0" width="354" height="673.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="693.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rza-qb-vT8">
-                                                <rect key="frame" x="0.0" y="0.0" width="354" height="673.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="354" height="693.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tvY-2J-MWh" userLabel="余白">
                                                         <rect key="frame" x="0.0" y="0.0" width="354" height="60"/>
@@ -149,6 +149,13 @@
                                                             <action selector="nextButton:" destination="7G8-ao-tWJ" eventType="touchUpInside" id="zkM-IH-osx"/>
                                                         </connections>
                                                     </button>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AbY-xq-wfL" userLabel="余白">
+                                                        <rect key="frame" x="0.0" y="673.5" width="354" height="20"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="20" id="Caf-9M-ik9"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -185,6 +192,7 @@
                     <connections>
                         <outlet property="nextButton" destination="b0r-iX-nRl" id="beU-R7-6In"/>
                         <outlet property="phoneNumberTextField" destination="qTh-BW-Ty8" id="dgY-QS-P0s"/>
+                        <outlet property="scrollVW" destination="bFD-sP-QcJ" id="Nk5-E4-9Em"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r6g-JV-GZj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
