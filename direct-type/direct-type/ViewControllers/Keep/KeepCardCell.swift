@@ -28,8 +28,11 @@ class KeepCardCell: BaseJobCardCell {
         super.awakeFromNib()
         // Initialization code
         // サムネイル
-        thumnailImageView.layer.cornerRadius = 15
-        thumnailImageView.layer.maskedCorners = [.layerMinXMinYCorner,.layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
+//        thumnailImageView.layer.cornerRadius = 15
+//        thumnailImageView.layer.maskedCorners = [.layerMinXMinYCorner,.layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
+        
+//        thumbnailImageBackView.layer.cornerRadius = 15
+//        thumbnailImageBackView.clipsToBounds = true
         
         // 終了間近
         limitedLabel.text(text: "終了間近", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
@@ -68,6 +71,10 @@ class KeepCardCell: BaseJobCardCell {
         let imageUrlString = data.mainPhotoURL
         if imageUrlString.count > 0 {
             thumnailImageView.af_setImage(withURL: URL(string: imageUrlString)!)
+            
+            thumnailImageView.layer.cornerRadius = 15
+            thumnailImageView.cornerRadius = 15
+            thumnailImageView.clipsToBounds = true
         }
         
         // 給与金額

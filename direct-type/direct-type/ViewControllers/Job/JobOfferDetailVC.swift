@@ -189,7 +189,9 @@ private extension JobOfferDetailVC {
                 // タブに丸ポチを追加
                 if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
                     let tabItem:UITabBarItem = tabItems[1]
-                    tabItem.badgeValue = ""
+                    tabItem.badgeValue = "●"
+                    tabItem.badgeColor = .clear
+                    tabItem.setBadgeTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.red], for: .normal)
                 }
             }
         } else {
