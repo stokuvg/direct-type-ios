@@ -64,7 +64,6 @@ private extension InitialInputRegistVC {
         AWSMobileClient.default().signUp(username: phoneNumber, password: AppDefine.password, userAttributes: phoneNumberAttribute) { (signUpResult, error) in
             if let error = error {
                 let myError = AuthManager.convAnyError(error)
-                var buf = myError.debugDisp
                 DispatchQueue.main.async {
                     let errorType = MyErrorDisp.CodeType(rawValue: myError.code)
                     if errorType == .existsUser {

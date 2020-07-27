@@ -63,9 +63,12 @@ private extension LoginVC {
                         self.trySignIn()
                     }
                 default:
+                    let myError = AuthManager.convAnyError(error)
                     DispatchQueue.main.async {
-                        let buf = AuthManager.convAnyError(error).debugDisp
-                        self.showConfirm(title: "Error", message: buf, onlyOK: true)
+                        let errorType = MyErrorDisp.CodeType(rawValue: myError.code)
+                        if errorType == .undefinedUser {
+                            self.showConfirm(title: "認証エラー", message: "電話番号の確認を行ってください。", onlyOK: true)
+                        }
                         self.changeButtonState()
                         SVProgressHUD.dismiss()
                     }

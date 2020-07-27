@@ -173,6 +173,7 @@ struct MyErrorDisp {
     //var dicParam: [String: String] = [:]//NSErrorにあるやつのために用意したけど、orgErrorにもついてるだろうし、つかわないかな？
     enum CodeType: Int {
         case existsUser = 24
+        case undefinedUser = 23
     }
     
     var debugDisp: String {
