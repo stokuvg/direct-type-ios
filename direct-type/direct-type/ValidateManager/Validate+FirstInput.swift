@@ -40,14 +40,13 @@ extension EditItemMdlFirstInput {
         }
     }
 }
-extension EditItemMdlFirstInputJobExperiments {
-    var valid: ValidInfo {
-        return ValidInfo(required: false, keta: nil, max: nil, type: .undefine)
-    }
-}
 extension EditItemMdlFirstInputLastJobExperiments {
     var valid: ValidInfo {
         return ValidInfo(required: true, keta: nil, max: nil, type: .undefine)
     }
 }
-
+extension EditItemMdlFirstInputJobExperiments {
+    var valid: ValidInfo {
+        return ValidInfo(required: false, keta: nil, max: nil, type: .undefine)
+    }
+}

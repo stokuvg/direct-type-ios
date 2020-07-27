@@ -38,30 +38,39 @@ class MdlResume: Codable {
         if school.graduationYear.isEmpty { return false }
         return true //最後までたどり着ければ、必須項目は定義されているとみなせる
     }
+    var isHaveRequired: Bool {
+        return !changeCount.isEmpty && (businessTypes.count > 0) && school.isHaveRequired || !ownPr.isEmpty
+    }
     /** 履歴書完成度(100=100%) */
     var completeness: Int {
+        //===計算ロジック変更あり
+        //初期入力完了時点：35%
+        //必須項目（転職回数・経験業種・最終学歴）入力で＋25%
+        //語学（任意）を1項目以上入力で+10%
+        //資格（任意）を1項目以上選択で+15%
+        //自己PR（任意）を入力で＋15％
         var result = 35 // MdlProfileが存在している時点で35%としている
-        
+
         let existsRequiredItem = 25
         if !changeCount.isEmpty && !lastJobExperiment.jobType.isEmpty && !school.schoolName.isEmpty {
             result += existsRequiredItem
         }
-        
+
         let existsSkillLanguage = 10
         if skillLanguage.isHaveSkill {
             result += existsSkillLanguage
         }
-        
+
         let existsQualifications = 15
         if !qualifications.isEmpty {
             result += existsQualifications
         }
-        
+
         let existsOwnPr = 15
         if !ownPr.isEmpty {
             result += existsOwnPr
         }
-        
+
         return result
     }
 
