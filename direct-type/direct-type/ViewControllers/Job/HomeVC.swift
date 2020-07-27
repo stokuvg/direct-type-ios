@@ -72,6 +72,13 @@ class HomeVC: TmpNaviTopVC {
             Log.selectLog(logLevel: .debug, "new changeKeepDatas:\(changeKeepDatas)")
         }
     }
+    
+    var firstViewFlag:Bool = true {
+        didSet {
+            Log.selectLog(logLevel: .debug, "new firstViewFlag")
+        }
+    }
+    
     /*
     var changeKeepStatus:Bool = false {
         didSet {
@@ -100,7 +107,10 @@ class HomeVC: TmpNaviTopVC {
         Log.selectLog(logLevel: .debug, "HomeVC viewWillAppear start")
         AnalyticsEventManager.track(type: .viewHome)
 
-        shouldFetchPersonalData ? getProfileData() : getJobData()
+        if firstViewFlag {
+            shouldFetchPersonalData ? getProfileData() : getJobData()
+            firstViewFlag = false
+        }
         safeAreaTop = self.view.safeAreaInsets.top
 
         //[Dbg]___
@@ -477,6 +487,10 @@ class HomeVC: TmpNaviTopVC {
 
     private func makeCellHeight(row: Int) -> CGFloat {
         var rowHeight:CGFloat = defaultCellHeight
+        
+        if self.dispJobCards.jobCards.count == 0 {
+            return 0
+        }
 
         let jobData = self.dispJobCards.jobCards[row]
 
@@ -598,15 +612,15 @@ extension HomeVC: UITableViewDataSource {
 
 extension HomeVC: JobOfferCardMoreCellDelegate {
     func moreDataAdd() {
-        Log.selectLog(logLevel: .debug, "HomeVC JobOfferCardMoreCellDelegate start")
-        Log.selectLog(logLevel: .debug, "dataAddFlag:\(dataAddFlag)")
+//        Log.selectLog(logLevel: .debug, "HomeVC JobOfferCardMoreCellDelegate start")
+//        Log.selectLog(logLevel: .debug, "dataAddFlag:\(dataAddFlag)")
         if dataAddFlag == true {
-            Log.selectLog(logLevel: .debug, "データの追加不可")
+//            Log.selectLog(logLevel: .debug, "データの追加不可")
             return
         }
         self.dataAddFlag = true
         recommendUseFlag ? getJobRecommendAddList() : getJobAddList()
-        Log.selectLog(logLevel: .debug, "HomeVC JobOfferCardMoreCellDelegate end")
+//        Log.selectLog(logLevel: .debug, "HomeVC JobOfferCardMoreCellDelegate end")
     }
 }
 
