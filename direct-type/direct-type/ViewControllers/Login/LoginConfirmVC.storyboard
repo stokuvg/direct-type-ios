@@ -17,73 +17,138 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="コードを入力" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dsr-d4-1ZA">
-                                <rect key="frame" x="40" y="363" width="334" height="50"/>
-                                <color key="backgroundColor" name="color-white"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pdl-fY-92x">
+                                <rect key="frame" x="30" y="0.0" width="354" height="896"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gdj-wi-dBv" userLabel="ContentsView">
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="399.5"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Tx9-6W-tKb">
+                                                <rect key="frame" x="0.0" y="0.0" width="354" height="399.5"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hp8-1I-Hzc" userLabel="余白">
+                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="60"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="60" id="Omp-2C-1KJ"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="６桁の認証コードを入力してください" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RGI-ZL-XyS">
+                                                        <rect key="frame" x="0.0" y="60" width="354" height="18"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                        <color key="textColor" name="color-black"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oey-XJ-5Fx" userLabel="余白">
+                                                        <rect key="frame" x="0.0" y="78" width="354" height="20"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="20" id="4AM-AN-jTW"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="入力いただいた電話番号に認証コードを送りました。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yRs-Pg-PEg">
+                                                        <rect key="frame" x="0.0" y="98" width="354" height="13.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                        <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vnS-ng-U08" userLabel="余白">
+                                                        <rect key="frame" x="0.0" y="111.5" width="354" height="30"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="h6t-Z1-OI8"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="コードを入力" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dsr-d4-1ZA">
+                                                        <rect key="frame" x="0.0" y="141.5" width="354" height="50"/>
+                                                        <color key="backgroundColor" name="color-white"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="uCl-zc-1co"/>
+                                                        </constraints>
+                                                        <color key="textColor" name="color-black"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    </textField>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wVP-wb-3qp" userLabel="余白">
+                                                        <rect key="frame" x="0.0" y="191.5" width="354" height="10"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="10" id="vdj-hw-sPa"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="EFQ-xC-k9l">
+                                                        <rect key="frame" x="0.0" y="201.5" width="354" height="128"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mqR-4o-aav" userLabel="余白">
+                                                                <rect key="frame" x="0.0" y="0.0" width="322" height="128"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </view>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DkR-za-VZ9">
+                                                                <rect key="frame" x="338" y="0.0" width="16" height="128"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                <state key="normal" title="認証コードを再送信する">
+                                                                    <color key="titleColor" name="color-sub"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="resendAuthCodeButton:" destination="SFi-WS-gi4" eventType="touchUpInside" id="P2d-cV-pfl"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IkT-nd-NLa" userLabel="余白">
+                                                        <rect key="frame" x="0.0" y="329.5" width="354" height="30"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="IOe-58-dzW"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JRg-mF-yg5">
+                                                        <rect key="frame" x="0.0" y="359.5" width="354" height="40"/>
+                                                        <color key="backgroundColor" name="color-sub"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="MzL-4e-XEP"/>
+                                                        </constraints>
+                                                        <state key="normal" title="次へ">
+                                                            <color key="titleColor" name="color-white"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="20"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="nextButton:" destination="SFi-WS-gi4" eventType="touchUpInside" id="FTk-nT-CmN"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="Tx9-6W-tKb" secondAttribute="bottom" id="EbH-Zv-U9f"/>
+                                            <constraint firstItem="Tx9-6W-tKb" firstAttribute="leading" secondItem="Gdj-wi-dBv" secondAttribute="leading" id="OsS-ni-1BF"/>
+                                            <constraint firstItem="Tx9-6W-tKb" firstAttribute="top" secondItem="Gdj-wi-dBv" secondAttribute="top" id="Xi1-tC-8Fh"/>
+                                            <constraint firstAttribute="trailing" secondItem="Tx9-6W-tKb" secondAttribute="trailing" id="xdX-CQ-aCp"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="uCl-zc-1co"/>
+                                    <constraint firstItem="Gdj-wi-dBv" firstAttribute="top" secondItem="jf7-Gf-bgw" secondAttribute="top" id="4fU-ZW-zdR"/>
+                                    <constraint firstItem="Gdj-wi-dBv" firstAttribute="bottom" secondItem="jf7-Gf-bgw" secondAttribute="bottom" id="Tbt-ZB-T22"/>
+                                    <constraint firstItem="Gdj-wi-dBv" firstAttribute="leading" secondItem="jf7-Gf-bgw" secondAttribute="leading" id="bZc-Cu-K8I"/>
+                                    <constraint firstItem="Gdj-wi-dBv" firstAttribute="width" secondItem="0bA-Jl-hWi" secondAttribute="width" id="hBF-kN-Vut"/>
+                                    <constraint firstItem="Gdj-wi-dBv" firstAttribute="trailing" secondItem="jf7-Gf-bgw" secondAttribute="trailing" id="llS-g0-w0Q"/>
                                 </constraints>
-                                <color key="textColor" name="color-black"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="入力いただいた電話番号に認証コードを送りました。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yRs-Pg-PEg">
-                                <rect key="frame" x="30" y="309.5" width="354" height="13.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="６桁の認証コードを入力してください" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RGI-ZL-XyS">
-                                <rect key="frame" x="20" y="271.5" width="374" height="18"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <color key="textColor" name="color-black"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DkR-za-VZ9">
-                                <rect key="frame" x="261" y="413" width="113" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <state key="normal" title="認証コードを再送信する">
-                                    <color key="titleColor" name="color-sub"/>
-                                </state>
-                                <connections>
-                                    <action selector="resendAuthCodeButton:" destination="SFi-WS-gi4" eventType="touchUpInside" id="P2d-cV-pfl"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JRg-mF-yg5">
-                                <rect key="frame" x="40" y="457" width="334" height="40"/>
-                                <color key="backgroundColor" name="color-sub"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="MzL-4e-XEP"/>
-                                </constraints>
-                                <state key="normal" title="次へ">
-                                    <color key="titleColor" name="color-white"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="nextButton:" destination="SFi-WS-gi4" eventType="touchUpInside" id="FTk-nT-CmN"/>
-                                </connections>
-                            </button>
+                                <viewLayoutGuide key="contentLayoutGuide" id="jf7-Gf-bgw"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="0bA-Jl-hWi"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="DkR-za-VZ9" firstAttribute="trailing" secondItem="Dsr-d4-1ZA" secondAttribute="trailing" id="3lM-jA-juC"/>
-                            <constraint firstItem="RGI-ZL-XyS" firstAttribute="leading" secondItem="8sz-GB-6p2" secondAttribute="leading" constant="20" id="7dx-Lg-b7j"/>
-                            <constraint firstItem="Dsr-d4-1ZA" firstAttribute="leading" secondItem="8sz-GB-6p2" secondAttribute="leading" constant="40" id="BJv-q8-50V"/>
-                            <constraint firstItem="8sz-GB-6p2" firstAttribute="trailing" secondItem="JRg-mF-yg5" secondAttribute="trailing" constant="40" id="O39-tc-zN4"/>
-                            <constraint firstItem="Dsr-d4-1ZA" firstAttribute="centerY" secondItem="fOM-f3-mMe" secondAttribute="centerY" constant="-60" id="OXM-0g-mKp"/>
-                            <constraint firstItem="Dsr-d4-1ZA" firstAttribute="top" secondItem="yRs-Pg-PEg" secondAttribute="bottom" constant="40" id="Qdv-uu-QaM"/>
-                            <constraint firstItem="8sz-GB-6p2" firstAttribute="trailing" secondItem="Dsr-d4-1ZA" secondAttribute="trailing" constant="40" id="RxD-RG-yux"/>
-                            <constraint firstItem="yRs-Pg-PEg" firstAttribute="leading" secondItem="8sz-GB-6p2" secondAttribute="leading" constant="30" id="Vws-DD-YZW"/>
-                            <constraint firstItem="JRg-mF-yg5" firstAttribute="top" secondItem="DkR-za-VZ9" secondAttribute="bottom" constant="20" id="hX2-bZ-Eid"/>
-                            <constraint firstItem="8sz-GB-6p2" firstAttribute="trailing" secondItem="yRs-Pg-PEg" secondAttribute="trailing" constant="30" id="o2Z-hp-ExS"/>
-                            <constraint firstItem="JRg-mF-yg5" firstAttribute="leading" secondItem="8sz-GB-6p2" secondAttribute="leading" constant="40" id="ueJ-em-eIM"/>
-                            <constraint firstItem="DkR-za-VZ9" firstAttribute="top" secondItem="Dsr-d4-1ZA" secondAttribute="bottom" id="y1T-Ts-HTP"/>
-                            <constraint firstItem="8sz-GB-6p2" firstAttribute="trailing" secondItem="RGI-ZL-XyS" secondAttribute="trailing" constant="20" id="y9V-PC-V6l"/>
-                            <constraint firstItem="yRs-Pg-PEg" firstAttribute="top" secondItem="RGI-ZL-XyS" secondAttribute="bottom" constant="20" id="yTR-WJ-xqG"/>
+                            <constraint firstAttribute="bottom" secondItem="pdl-fY-92x" secondAttribute="bottom" id="ShT-ld-hgh"/>
+                            <constraint firstItem="pdl-fY-92x" firstAttribute="top" secondItem="fOM-f3-mMe" secondAttribute="top" id="UCq-vS-EC3"/>
+                            <constraint firstItem="pdl-fY-92x" firstAttribute="leading" secondItem="8sz-GB-6p2" secondAttribute="leading" constant="30" id="ofU-LB-1f2"/>
+                            <constraint firstItem="8sz-GB-6p2" firstAttribute="trailing" secondItem="pdl-fY-92x" secondAttribute="trailing" constant="30" id="taC-FM-h0x"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8sz-GB-6p2"/>
                     </view>
