@@ -55,9 +55,9 @@ final class InitialInputCompleteVC: TmpBasicVC {
         var title: String {
             switch self {
             case .registeredPhoneNumber:
-                return "職務経歴書情報入力"
+                return "プロフィール入力"
             case .registeredAll:
-                return "職務経歴書情報入力完了"
+                return "プロフィール入力完了"
             }
         }
     }

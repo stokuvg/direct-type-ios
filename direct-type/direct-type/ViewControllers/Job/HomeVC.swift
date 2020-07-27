@@ -386,7 +386,7 @@ class HomeVC: TmpNaviTopVC {
     }
 
     private func showConfirm() {
-        let alert = UIAlertController(title: "初期入力をしてください", message: "", preferredStyle:  .alert)
+        let alert = UIAlertController(title: "プロフィール入力をしてください", message: "", preferredStyle:  .alert)
         let action = UIAlertAction(title: "OK", style: .default, handler: { _ in self.transitionToInitialInput() })
 
         alert.addAction(action)
