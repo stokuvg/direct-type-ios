@@ -17,97 +17,167 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="携帯電番号入力（ハイフンなし）" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qTh-BW-Ty8">
-                                <rect key="frame" x="40" y="363" width="334" height="50"/>
-                                <color key="backgroundColor" name="color-white"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bFD-sP-QcJ">
+                                <rect key="frame" x="30" y="44" width="354" height="818"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQd-S1-SxD" userLabel="ContentsView">
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="673.5"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rza-qb-vT8">
+                                                <rect key="frame" x="0.0" y="0.0" width="354" height="673.5"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tvY-2J-MWh" userLabel="余白">
+                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="60"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="60" id="g9a-Tc-yhK"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="電話番号を入力してください" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPm-7i-O1B">
+                                                        <rect key="frame" x="0.0" y="60" width="354" height="18"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                        <color key="textColor" name="color-black"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NLZ-0a-8bm" userLabel="余白">
+                                                        <rect key="frame" x="0.0" y="78" width="354" height="20"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="20" id="Nc7-j5-Sic"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="本人確認のため、携帯電話のSMS(ショートメッセージ)を利用して認証を行います。電話番号が同意なく第三者に公開されることはありません。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LR5-aW-sXL">
+                                                        <rect key="frame" x="0.0" y="98" width="354" height="39.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                        <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rrm-WJ-aE2" userLabel="余白">
+                                                        <rect key="frame" x="0.0" y="137.5" width="354" height="30"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="SoK-jf-KMX"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="携帯電番号入力（ハイフンなし）" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qTh-BW-Ty8">
+                                                        <rect key="frame" x="0.0" y="167.5" width="354" height="50"/>
+                                                        <color key="backgroundColor" name="color-white"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="9Q3-oR-E75"/>
+                                                        </constraints>
+                                                        <color key="textColor" name="color-black"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                                    </textField>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qr7-H9-GSO" userLabel="余白">
+                                                        <rect key="frame" x="0.0" y="217.5" width="354" height="10"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="10" id="zD5-wA-6Zo"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="nTd-54-Lzd">
+                                                        <rect key="frame" x="0.0" y="227.5" width="354" height="128"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Us-TY-3cb" userLabel="余白">
+                                                                <rect key="frame" x="0.0" y="0.0" width="322" height="128"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </view>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Jp-Zb-uuJ">
+                                                                <rect key="frame" x="338" y="0.0" width="0.0" height="128"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                <state key="normal" title="プライバシーポリシー">
+                                                                    <color key="titleColor" name="color-sub"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="privacyPolicyButton:" destination="7G8-ao-tWJ" eventType="touchUpInside" id="5yB-03-166"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VCs-WW-4CL">
+                                                                <rect key="frame" x="354" y="0.0" width="0.0" height="128"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                <state key="normal" title="利用規約">
+                                                                    <color key="titleColor" name="color-sub"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="termsOfServiceButton:" destination="7G8-ao-tWJ" eventType="touchUpInside" id="owc-Vq-f6L"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ZtU-PK-kTJ">
+                                                        <rect key="frame" x="0.0" y="355.5" width="354" height="248"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vtU-ti-O9p" userLabel="余白">
+                                                                <rect key="frame" x="0.0" y="0.0" width="338" height="248"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </view>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oty-O0-I6b">
+                                                                <rect key="frame" x="354" y="0.0" width="0.0" height="248"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                <state key="normal" title="電話番号の確認が必要な理由">
+                                                                    <color key="titleColor" name="color-sub"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="reasonOfConfirmPhoneButton:" destination="7G8-ao-tWJ" eventType="touchUpInside" id="Jbs-93-N7D"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fBw-5m-Vea" userLabel="余白">
+                                                        <rect key="frame" x="0.0" y="603.5" width="354" height="30"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="h67-Jr-HUn"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0r-iX-nRl">
+                                                        <rect key="frame" x="0.0" y="633.5" width="354" height="40"/>
+                                                        <color key="backgroundColor" name="color-sub"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="d6l-wy-ueG"/>
+                                                        </constraints>
+                                                        <state key="normal" title="次へ">
+                                                            <color key="titleColor" name="color-white"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="20"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="nextButton:" destination="7G8-ao-tWJ" eventType="touchUpInside" id="zkM-IH-osx"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="rza-qb-vT8" secondAttribute="trailing" id="Geu-C2-n1u"/>
+                                            <constraint firstItem="rza-qb-vT8" firstAttribute="leading" secondItem="jQd-S1-SxD" secondAttribute="leading" id="gv5-sn-jL9"/>
+                                            <constraint firstAttribute="bottom" secondItem="rza-qb-vT8" secondAttribute="bottom" id="ilt-D6-TBo"/>
+                                            <constraint firstItem="rza-qb-vT8" firstAttribute="top" secondItem="jQd-S1-SxD" secondAttribute="top" id="kKV-FQ-0xT"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="9Q3-oR-E75"/>
+                                    <constraint firstItem="jQd-S1-SxD" firstAttribute="width" secondItem="PKC-Qr-MUc" secondAttribute="width" id="Iza-Je-s0Z"/>
+                                    <constraint firstItem="jQd-S1-SxD" firstAttribute="top" secondItem="4zk-zW-mca" secondAttribute="top" id="ReV-Th-OwI"/>
+                                    <constraint firstItem="jQd-S1-SxD" firstAttribute="trailing" secondItem="4zk-zW-mca" secondAttribute="trailing" id="TD0-FY-2kI"/>
+                                    <constraint firstItem="jQd-S1-SxD" firstAttribute="leading" secondItem="4zk-zW-mca" secondAttribute="leading" id="hc6-zl-Sv9"/>
+                                    <constraint firstItem="jQd-S1-SxD" firstAttribute="bottom" secondItem="4zk-zW-mca" secondAttribute="bottom" id="s8Q-XE-TiH"/>
                                 </constraints>
-                                <color key="textColor" name="color-black"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="本人確認のため、携帯電話のSMS(ショートメッセージ)を利用して認証を行います。電話番号が同意なく第三者に公開されることはありません。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LR5-aW-sXL">
-                                <rect key="frame" x="30" y="283.5" width="354" height="39.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="電話番号を入力してください" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPm-7i-O1B">
-                                <rect key="frame" x="20" y="245.5" width="374" height="18"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <color key="textColor" name="color-black"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oty-O0-I6b">
-                                <rect key="frame" x="241" y="437" width="133" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <state key="normal" title="電話番号の確認が必要な理由">
-                                    <color key="titleColor" name="color-sub"/>
-                                </state>
-                                <connections>
-                                    <action selector="reasonOfConfirmPhoneButton:" destination="7G8-ao-tWJ" eventType="touchUpInside" id="Jbs-93-N7D"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0r-iX-nRl">
-                                <rect key="frame" x="40" y="471" width="334" height="40"/>
-                                <color key="backgroundColor" name="color-sub"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="d6l-wy-ueG"/>
-                                </constraints>
-                                <state key="normal" title="次へ">
-                                    <color key="titleColor" name="color-white"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="nextButton:" destination="7G8-ao-tWJ" eventType="touchUpInside" id="zkM-IH-osx"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VCs-WW-4CL">
-                                <rect key="frame" x="333" y="413" width="41" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <state key="normal" title="利用規約">
-                                    <color key="titleColor" name="color-sub"/>
-                                </state>
-                                <connections>
-                                    <action selector="termsOfServiceButton:" destination="7G8-ao-tWJ" eventType="touchUpInside" id="owc-Vq-f6L"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Jp-Zb-uuJ">
-                                <rect key="frame" x="210" y="413" width="103" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <state key="normal" title="プライバシーポリシー">
-                                    <color key="titleColor" name="color-sub"/>
-                                </state>
-                                <connections>
-                                    <action selector="privacyPolicyButton:" destination="7G8-ao-tWJ" eventType="touchUpInside" id="5yB-03-166"/>
-                                </connections>
-                            </button>
+                                <viewLayoutGuide key="contentLayoutGuide" id="4zk-zW-mca"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="PKC-Qr-MUc"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="VCs-WW-4CL" firstAttribute="leading" secondItem="0Jp-Zb-uuJ" secondAttribute="trailing" constant="20" id="01x-bY-OFP"/>
-                            <constraint firstItem="Oty-O0-I6b" firstAttribute="trailing" secondItem="qTh-BW-Ty8" secondAttribute="trailing" id="37s-Kj-e2m"/>
-                            <constraint firstItem="fPm-7i-O1B" firstAttribute="leading" secondItem="o4X-mO-AyH" secondAttribute="leading" constant="20" id="3jW-SN-OaG"/>
-                            <constraint firstItem="o4X-mO-AyH" firstAttribute="trailing" secondItem="fPm-7i-O1B" secondAttribute="trailing" constant="20" id="4KG-PH-vSz"/>
-                            <constraint firstItem="VCs-WW-4CL" firstAttribute="top" secondItem="qTh-BW-Ty8" secondAttribute="bottom" id="78Q-pJ-I2x"/>
-                            <constraint firstItem="o4X-mO-AyH" firstAttribute="trailing" secondItem="b0r-iX-nRl" secondAttribute="trailing" constant="40" id="Ei9-PB-6Vt"/>
-                            <constraint firstItem="0Jp-Zb-uuJ" firstAttribute="top" secondItem="qTh-BW-Ty8" secondAttribute="bottom" id="IO9-Ji-U2C"/>
-                            <constraint firstItem="b0r-iX-nRl" firstAttribute="top" secondItem="Oty-O0-I6b" secondAttribute="bottom" constant="10" id="Sgp-bP-48g"/>
-                            <constraint firstItem="LR5-aW-sXL" firstAttribute="top" secondItem="fPm-7i-O1B" secondAttribute="bottom" constant="20" id="afn-zd-WUM"/>
-                            <constraint firstItem="qTh-BW-Ty8" firstAttribute="top" secondItem="LR5-aW-sXL" secondAttribute="bottom" constant="40" id="ckh-RT-x7v"/>
-                            <constraint firstItem="o4X-mO-AyH" firstAttribute="trailing" secondItem="LR5-aW-sXL" secondAttribute="trailing" constant="30" id="fOx-8Y-q1r"/>
-                            <constraint firstItem="qTh-BW-Ty8" firstAttribute="centerY" secondItem="zEt-4o-qFa" secondAttribute="centerY" constant="-60" id="hDc-6I-2rZ"/>
-                            <constraint firstItem="qTh-BW-Ty8" firstAttribute="leading" secondItem="o4X-mO-AyH" secondAttribute="leading" constant="40" id="iHo-hB-rTX"/>
-                            <constraint firstItem="VCs-WW-4CL" firstAttribute="trailing" secondItem="qTh-BW-Ty8" secondAttribute="trailing" id="id6-GQ-BqX"/>
-                            <constraint firstItem="LR5-aW-sXL" firstAttribute="leading" secondItem="o4X-mO-AyH" secondAttribute="leading" constant="30" id="jt7-Jl-FfU"/>
-                            <constraint firstItem="o4X-mO-AyH" firstAttribute="trailing" secondItem="qTh-BW-Ty8" secondAttribute="trailing" constant="40" id="oW3-tB-esB"/>
-                            <constraint firstItem="b0r-iX-nRl" firstAttribute="leading" secondItem="o4X-mO-AyH" secondAttribute="leading" constant="40" id="uoB-Tq-ATI"/>
-                            <constraint firstItem="Oty-O0-I6b" firstAttribute="top" secondItem="VCs-WW-4CL" secondAttribute="bottom" id="zmX-Yv-HeP"/>
+                            <constraint firstItem="o4X-mO-AyH" firstAttribute="trailing" secondItem="bFD-sP-QcJ" secondAttribute="trailing" constant="30" id="Di7-51-Slf"/>
+                            <constraint firstItem="bFD-sP-QcJ" firstAttribute="leading" secondItem="o4X-mO-AyH" secondAttribute="leading" constant="30" id="Yhw-rx-5II"/>
+                            <constraint firstItem="bFD-sP-QcJ" firstAttribute="top" secondItem="o4X-mO-AyH" secondAttribute="top" id="l6P-4l-fCm"/>
+                            <constraint firstItem="o4X-mO-AyH" firstAttribute="bottom" secondItem="bFD-sP-QcJ" secondAttribute="bottom" id="ooN-Ky-Xb9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="o4X-mO-AyH"/>
                     </view>

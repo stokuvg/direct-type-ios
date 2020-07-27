@@ -37,6 +37,7 @@ final class InitialInputRegistVC: TmpBasicVC {
         super.viewDidLoad()
         setup()
         changeButtonState()
+        phoneNumberTextField.keyboardType = .numberPad
     }
 }
 

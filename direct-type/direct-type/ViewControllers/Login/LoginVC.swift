@@ -34,6 +34,7 @@ final class LoginVC: TmpBasicVC {
         super.viewDidLoad()
         setup()
         changeButtonState()
+        phoneNumberTextField.keyboardType = .numberPad
     }
 }
 
