@@ -700,8 +700,19 @@ extension HomeVC: BaseJobCardCellDelegate {
         if flag == true {
             ApiManager.sendJobKeep(id: jobId)
                 .done { result in
+                // タブに丸ポチを追加
+                if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
+                    let tabItem:UITabBarItem = tabItems[1]
+                    tabItem.badgeValue = "●"
+                    tabItem.badgeColor = .clear
+                    tabItem.setBadgeTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.red], for: .normal)
+                }
             }.catch{ (error) in
                 Log.selectLog(logLevel: .debug, "keep send error:\(error)")
+                if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
+                    let tabItem:UITabBarItem = tabItems[1]
+                    tabItem.badgeValue = nil
+                }
 
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 self.showError(myErr)
@@ -725,13 +736,6 @@ extension HomeVC: BaseJobCardCellDelegate {
                     }
                 })
                 */
-                // タブに丸ポチを追加
-                if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
-                    let tabItem:UITabBarItem = tabItems[1]
-                    tabItem.badgeValue = "●"
-                    tabItem.badgeColor = .clear
-                    tabItem.setBadgeTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.red], for: .normal)
-                }
 
                 SVProgressHUD.dismiss()
             }
