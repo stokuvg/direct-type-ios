@@ -13,33 +13,34 @@ protocol BasePercentageCompletionCellDelegate: class {
 }
 
 class BasePercentageCompletionCell: BaseTableViewCell {
-    @IBOutlet private weak var stackView:UIStackView!
-    @IBOutlet private weak var titleLabel:UILabel!
-    @IBOutlet private weak var percentLabel:UILabel!
-    @IBOutlet private weak var percentMark:UILabel!
-    @IBOutlet private weak var percentProgressMaskView:UIView!
-    @IBOutlet private weak var percentProgress:UIProgressView!
-    @IBOutlet private weak var editBtn:UIButton!
+    @IBOutlet private weak var stackView: UIStackView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var percentLabel: UILabel!
+    @IBOutlet private weak var percentMark: UILabel!
+    @IBOutlet private weak var percentProgressMaskView: UIView!
+    @IBOutlet private weak var percentProgress: UIProgressView!
+    @IBOutlet private weak var editBtn: UIButton!
     @IBAction private func editBtnAction() {
         delegate?.completionEditAction(sender: self)
     }
     
-    var delegate: BasePercentageCompletionCellDelegate?
+    weak var delegate: BasePercentageCompletionCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         percentMark.text(text: "%", fontType: .font_SSb, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
         editBtn.isUserInteractionEnabled = false //セル全体で反応させるため、ボタンUI無効化した
-        
-//        percentProgress.cornerRadius = (percentProgress.frame.size.height/2)
         percentProgressMaskView.layer.cornerRadius = (percentProgressMaskView.frame.size.height/2)
         percentProgressMaskView.layer.masksToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
     }
     
     func setup(title: String, percent: String) {
