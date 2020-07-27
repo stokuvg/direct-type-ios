@@ -168,9 +168,22 @@ private extension JobOfferDetailVC {
                 .done { result in
                 Log.selectLog(logLevel: .debug, "keep send success")
                     Log.selectLog(logLevel: .debug, "keep成功")
+                    // タブに丸ポチを追加
+                    if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
+                        let tabItem:UITabBarItem = tabItems[1]
+                        tabItem.badgeValue = "●"
+                        tabItem.badgeColor = .clear
+                        tabItem.setBadgeTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.red], for: .normal)
+                    }
 
             }.catch{ (error) in
-                Log.selectLog(logLevel: .debug, "skip send error:\(error)")
+                Log.selectLog(logLevel: .debug, "keep send error:\(error)")
+                // タブに丸ポチを追加
+                if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
+                    let tabItem:UITabBarItem = tabItems[1]
+                    tabItem.badgeValue = nil
+                }
+                
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 switch myErr.code {
                 case 404:
@@ -188,13 +201,6 @@ private extension JobOfferDetailVC {
                 self.showError(error)
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep send finally")
-                // タブに丸ポチを追加
-                if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
-                    let tabItem:UITabBarItem = tabItems[1]
-                    tabItem.badgeValue = "●"
-                    tabItem.badgeColor = .clear
-                    tabItem.setBadgeTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.red], for: .normal)
-                }
             }
         } else {
             ApiManager.sendJobDeleteKeep(id: jobId)
