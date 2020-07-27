@@ -68,9 +68,8 @@ private extension InitialInputRegistVC {
                 DispatchQueue.main.async {
                     let errorType = MyErrorDisp.CodeType(rawValue: myError.code)
                     if errorType == .existsUser {
-                        buf = "別の電話番号で再度お試しください。"
+                        self.showConfirm(title: "電話番号登録エラー", message: "別の電話番号で再度お試しください。", onlyOK: true)
                     }
-                    self.showConfirm(title: "電話番号登録エラー", message: buf, onlyOK: true)
                     self.changeButtonState()
                     SVProgressHUD.dismiss()
                 }
