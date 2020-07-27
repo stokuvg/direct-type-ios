@@ -243,7 +243,7 @@ class HomeVC: TmpNaviTopVC {
                 self.pageJobCards = result
         }
         .catch { (error) in
-            Log.selectLog(logLevel: .debug, "error:\(error)")
+            Log.selectLog(logLevel: .debug, "getJobRecommendAddList error:\(error)")
 
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             self.showError(myErr)
@@ -265,7 +265,7 @@ class HomeVC: TmpNaviTopVC {
                 self.pageJobCards = result
         }
         .catch { (error) in
-            Log.selectLog(logLevel: .debug, "error:\(error)")
+            Log.selectLog(logLevel: .debug, "getJobAddList error:\(error)")
 
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             self.showError(myErr)
@@ -286,7 +286,7 @@ class HomeVC: TmpNaviTopVC {
                 self.pageJobCards = result
         }
         .catch { (error) in
-            Log.selectLog(logLevel: .debug, "error:\(error)")
+            Log.selectLog(logLevel: .debug, "getJobRecommendList error:\(error)")
 
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             self.showError(myErr)
@@ -320,7 +320,7 @@ class HomeVC: TmpNaviTopVC {
                 self.setInitialDisplayedFlag()
         }
         .catch { (error) in
-            Log.selectLog(logLevel: .debug, "error:\(error)")
+            Log.selectLog(logLevel: .debug, "getJobList error:\(error)")
 
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             self.showError(myErr)

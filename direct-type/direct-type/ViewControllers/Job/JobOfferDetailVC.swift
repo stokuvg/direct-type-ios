@@ -42,6 +42,7 @@ final class JobOfferDetailVC: TmpBasicVC {
     private var prcodesCellMaxSize: CGFloat = 0
     private var routeFrom: AnalyticsEventType.RouteFromType = .unknown
     private var keepFlag = false
+    private var keepChangeCnt:Int = 0
 
     private var keepButtonImage: UIImage {
         return UIImage(named: keepFlag ? "btn_keep" : "btn_keepclose")!
@@ -158,6 +159,7 @@ private extension JobOfferDetailVC {
 
     func keepAction() {
         keepFlag = !keepFlag
+        keepChangeCnt += 1
         changeButtonState()
 
         // キープ情報送信
@@ -366,7 +368,8 @@ extension JobOfferDetailVC: UITableViewDelegate {
             case (0,1):
                 return UITableView.automaticDimension
             case (1,0):
-                return articleOpenFlag ? articleCellMaxSize : 0
+//                return articleOpenFlag ? articleCellMaxSize : 0
+                return articleOpenFlag ? UITableView.automaticDimension : 0
             case (2,0):
                 return prcodesCellMaxSize
             case (4,0):
@@ -534,7 +537,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 cell.setup(data: _mdlJobDetail)
                 return cell
             case (1,0):
-                //
+                // メイン記事の展開処理
                 if articleOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailArticleCell", indexPath: indexPath) as! JobDetailArticleCell
                     cell.delegate = self
@@ -742,10 +745,12 @@ extension JobOfferDetailVC: UINavigationControllerDelegate {
         if let controller = viewController as? HomeVC {
             if navigationController.tabBarController?.selectedIndex == 0 {
                 Log.selectLog(logLevel: .debug, "前の画面がHomeVC")
-                let keepDatas:[String:Any] = ["jobId":_mdlJobDetail.jobCardCode,"keepStatus":keepFlag]
-                controller.changeKeepDatas = [keepDatas]
-//                controller.changeKeepJobId = _mdlJobDetail.jobCardCode
-//                controller.changeKeepStatus = keepFlag
+                if keepChangeCnt > 0 {
+                    let keepDatas:[String:Any] = ["jobId":_mdlJobDetail.jobCardCode,"keepStatus":keepFlag]
+                    controller.changeKeepDatas = [keepDatas]
+                } else {
+                    controller.changeKeepDatas = []
+                }
             } else {
                 controller.changeKeepDatas = []
 //                controller.changeKeepJobId = ""

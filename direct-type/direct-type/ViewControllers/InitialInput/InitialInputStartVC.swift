@@ -125,13 +125,14 @@ class InitialInputStartVC: TmpBasicVC {
         
         self.initialSlideView.delegate = self
         
-        let img01 = UIImage(named: "img01")!
+        let img01 = UIImage(named: "onboard_1") ?? UIImage.init()
+        let img02 = UIImage(named: "onboard_2") ?? UIImage.init()
+        let img03 = UIImage(named: "onboard_3") ?? UIImage.init()
         
         images = [
             img01,
-            img01,
-            img01,
-            img01,
+            img02,
+            img03,
         ]
         
         self.registBtn.setTitle(text: "利用を始める", fontType: .font_S, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
