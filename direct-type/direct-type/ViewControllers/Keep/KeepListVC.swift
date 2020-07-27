@@ -53,6 +53,7 @@ final class KeepListVC: TmpBasicVC {
     var isAddLoad:Bool = true
     
     var keepDatas:[[String:Any]] = []
+    var keepChangeCnt:Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()

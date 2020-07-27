@@ -18,6 +18,7 @@ class BaseJobCardCell: BaseTableViewCell {
     
     @IBOutlet weak var spaceView:UIView!
     @IBOutlet weak var stackView:UIStackView!
+    @IBOutlet weak var thumbnailImageBackView:UIView!
     @IBOutlet weak var thumnailImageView:UIImageView!       // サムネイル
     @IBOutlet weak var limitedMarkBackView:UIView!          // 終了間近View
     @IBOutlet weak var limitedMarkView:UIView!              // 終了間近マーク
