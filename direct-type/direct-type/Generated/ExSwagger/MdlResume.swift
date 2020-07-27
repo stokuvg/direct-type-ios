@@ -42,27 +42,22 @@ class MdlResume: Codable {
     var completeness: Int {
         var result = 35 // MdlProfileが存在している時点で35%としている
         
-        let existsJobExperiments = 10
-        let existsLastJobExperiment = 15
-        let existsSkillLanguage = 10
-        let existsQualifications = 15
-        let existsOwnPr = 15
-        
-        // 直近の経験職種は初回から入力必須なのでデフォルトで加算
-        result += existsLastJobExperiment
-        
-        if !jobExperiments.isEmpty {
-            result += existsJobExperiments
+        let existsRequiredItem = 25
+        if !changeCount.isEmpty && !lastJobExperiment.jobType.isEmpty && !school.schoolName.isEmpty {
+            result += existsRequiredItem
         }
         
+        let existsSkillLanguage = 10
         if skillLanguage.isHaveSkill {
             result += existsSkillLanguage
         }
         
+        let existsQualifications = 15
         if !qualifications.isEmpty {
             result += existsQualifications
         }
         
+        let existsOwnPr = 15
         if !ownPr.isEmpty {
             result += existsOwnPr
         }
