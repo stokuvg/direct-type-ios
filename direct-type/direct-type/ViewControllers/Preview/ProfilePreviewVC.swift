@@ -136,10 +136,9 @@ extension ProfilePreviewVC {
             switch myErr.code {
             case 403:
                 break
-            case 404:
-                let message: String = "[A系統]初期入力画面でProfileやResumeの一部データが登録されているはず\n"
-                self.showError(MyErrorDisp(code: 9999, title: "特殊処理", message: message, orgErr: nil, arrValidErrMsg: []))
-                default: break
+            case 404://見つからない場合、空データを適用して画面を表示
+                return //エラー表示させないため
+            default: break
             }
             self.showError(myErr)
         }

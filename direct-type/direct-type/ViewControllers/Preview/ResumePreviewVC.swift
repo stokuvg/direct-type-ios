@@ -144,9 +144,6 @@ extension ResumePreviewVC {
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
             case 404://見つからない場合、空データを適用して画面を表示
-                let message: String = "[A系統]初期入力画面でProfileやResumeの一部データが登録されているはず\n"
-                self.showError(MyErrorDisp(code: 9999, title: "特殊処理", message: message, orgErr: nil, arrValidErrMsg: []))
-                self.pushViewController(.firstInputPreviewA)
                 return //エラー表示させないため
             default: break
             }
