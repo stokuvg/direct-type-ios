@@ -96,10 +96,19 @@ class EntryFormVC: PreviewBaseVC {
              AnalyticsEventManager.track(type: .transitionPath(destination: .toEntryDetail, from: routeFrom))
         }
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let entry = entry {
+            let newEntry = EntryFormManager.convEditTemp2Model(entry: entry, editTempCD: editableModel.editTempCD)
+            EntryFormManager.saveCache(jobCardCode: jobCard?.jobCardCode ?? "", entry: newEntry)
+        }
+    }
     func initData(_ jobCard: MdlJobCardDetail) {
         title = "応募フォーム"
         self.jobCard = jobCard
-        self.entry = MdlEntry()
+        //self.entry = MdlEntry()//[#133: キャッシュ保持対応させる]
+        self.entry = EntryFormManager.cachedEntry(jobCardCode: jobCard.jobCardCode)
+        
         //===独自質問はjobCardDetailに含まれているので、MdlEntryにも持たせておく
         if let tmp = jobCard.entryQuestion1 { entry?.exQuestion1 = tmp }
         if let tmp = jobCard.entryQuestion2 { entry?.exQuestion2 = tmp }
