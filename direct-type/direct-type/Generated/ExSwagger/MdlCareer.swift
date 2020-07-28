@@ -25,10 +25,8 @@ class MdlCareer: Codable {
     //ApiモデルをAppモデルに変換して保持させる
     convenience init(dto: GetCareerResponseDTO) {
         var _businessTypes: [MdlCareerCard] = []
-        if let items = dto.careerHistory {
-            for item in items {
-                _businessTypes.append(MdlCareerCard(dto: item))
-            }
+        for item in dto.careerHistory {
+            _businessTypes.append(MdlCareerCard(dto: item))
         }
         self.init(businessTypes: _businessTypes)
     }

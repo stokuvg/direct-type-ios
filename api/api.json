@@ -258,7 +258,7 @@
           }
         }
       },
-      "WorkHistoryDTO": {
+      "WorkHistoryResponse": {
         "type": "object",
         "properties": {
           "job3Id": {
@@ -277,7 +277,7 @@
           "experienceYears"
         ]
       },
-      "FinalEducationDTO": {
+      "FinalEducationResponse": {
         "type": "object",
         "properties": {
           "schoolName": {
@@ -319,15 +319,15 @@
             "description": "就業状況"
           },
           "changeJobCount": {
-            "type": "integer",
-            "example": 1,
+            "type": "string",
+            "example": "1",
             "description": "転職回数"
           },
           "workHistory": {
             "description": "経験職種リスト",
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/WorkHistoryDTO"
+              "$ref": "#/components/schemas/WorkHistoryResponse"
             }
           },
           "experienceIndustryIds": {
@@ -349,19 +349,17 @@
             "description": "学種コード"
           },
           "finalEducation": {
-            "$ref": "#/components/schemas/FinalEducationDTO"
+            "$ref": "#/components/schemas/FinalEducationResponse"
           },
           "toeic": {
-            "type": "integer",
-            "example": 990,
-            "description": "TOEICスコア",
-            "maximum": 999
+            "type": "string",
+            "example": "990",
+            "description": "TOEICスコア"
           },
           "toefl": {
-            "type": "integer",
-            "example": 990,
-            "description": "TOEFLスコア",
-            "maximum": 999
+            "type": "string",
+            "example": "490",
+            "description": "TOEFLスコア"
           },
           "englishSkillId": {
             "type": "string",
@@ -396,7 +394,32 @@
             "example": "500",
             "description": "現在の年収"
           }
-        }
+        },
+        "required": [
+          "isEmployed",
+          "workHistory",
+          "educationId",
+          "currentSalary"
+        ]
+      },
+      "WorkHistoryDTO": {
+        "type": "object",
+        "properties": {
+          "job3Id": {
+            "type": "string",
+            "example": "1",
+            "description": "職種小分類ID"
+          },
+          "experienceYears": {
+            "type": "string",
+            "example": "1",
+            "description": "経験年数"
+          }
+        },
+        "required": [
+          "job3Id",
+          "experienceYears"
+        ]
       },
       "CreateResumeRequestDTO": {
         "type": "object",
@@ -431,6 +454,39 @@
           "currentSalary"
         ]
       },
+      "FinalEducationDTO": {
+        "type": "object",
+        "properties": {
+          "schoolName": {
+            "type": "string",
+            "example": "スマ澤大学",
+            "description": "学校名",
+            "maxLength": 60
+          },
+          "faculty": {
+            "type": "string",
+            "example": "スマ澤学部",
+            "description": "学部",
+            "maxLength": 30
+          },
+          "department": {
+            "type": "string",
+            "example": "スマ澤学科",
+            "description": "学科/専攻",
+            "maxLength": 30
+          },
+          "guraduationYearMonth": {
+            "type": "string",
+            "example": "2020-03",
+            "description": "卒業年月"
+          }
+        },
+        "required": [
+          "schoolName",
+          "faculty",
+          "guraduationYearMonth"
+        ]
+      },
       "UpdateResumeRequestDTO": {
         "type": "object",
         "properties": {
@@ -440,8 +496,8 @@
             "description": "就業状況"
           },
           "changeJobCount": {
-            "type": "integer",
-            "example": 1,
+            "type": "string",
+            "example": "1",
             "description": "転職回数"
           },
           "workHistory": {
@@ -473,16 +529,14 @@
             "$ref": "#/components/schemas/FinalEducationDTO"
           },
           "toeic": {
-            "type": "integer",
-            "example": 990,
-            "description": "TOEICスコア",
-            "maximum": 999
+            "type": "string",
+            "example": "990",
+            "description": "TOEICスコア"
           },
           "toefl": {
-            "type": "integer",
-            "example": 990,
-            "description": "TOEFLスコア",
-            "maximum": 999
+            "type": "string",
+            "example": "490",
+            "description": "TOEFLスコア"
           },
           "englishSkillId": {
             "type": "string",
@@ -543,12 +597,12 @@
             "description": "雇用形態マスタの値"
           },
           "employees": {
-            "type": "integer",
+            "type": "string",
             "example": 100,
             "description": "従業員数"
           },
           "salary": {
-            "type": "integer",
+            "type": "string",
             "example": 999,
             "description": "年収"
           },
@@ -563,10 +617,7 @@
           "startWorkPeriod",
           "endWorkPeriod",
           "companyName",
-          "employmentId",
-          "employees",
-          "salary",
-          "workNote"
+          "employmentId"
         ]
       },
       "GetCareerResponseDTO": {
@@ -580,7 +631,10 @@
               "$ref": "#/components/schemas/CareerHistoryDTO"
             }
           }
-        }
+        },
+        "required": [
+          "careerHistory"
+        ]
       },
       "CreateCareerRequestDTO": {
         "type": "object",
