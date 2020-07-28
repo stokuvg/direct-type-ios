@@ -15,7 +15,9 @@ enum SettingWebType {
     case privacy
     case term
     case approachExplanation
-    case reasonOfConfirmPhone
+    case accountPrivacyPolicy
+    case accountAgreements
+    case accountPhoneReason
 }
 
 class SettingWebVC: TmpWebVC {
@@ -54,27 +56,39 @@ class SettingWebVC: TmpWebVC {
         var urlString:String = ""
         guard let _type = _type else { return }
         switch _type {
-        case .help:
-            title = "よくある質問・ヘルプ"
-            urlString = "https://type.jp/help/index.html"
-        case .privacy:
-            title = "プライバシーポリシー"
-            urlString = "https://type.jp/s/kojin/"
-        case .term:
-            title = "利用規約"
-            urlString = "https://type.jp/help/category_14.html"
         case .none:
             title = ""
             urlString = ""
+
+        case .help:
+            title = DirectTypeLinkURL.SettingsFAQ.dispText
+            urlString = DirectTypeLinkURL.SettingsFAQ.urlText
+        case .privacy:
+            title = DirectTypeLinkURL.SettingsPrivacyPolicy.dispText
+            urlString = DirectTypeLinkURL.SettingsPrivacyPolicy.urlText
+        case .term:
+            title = DirectTypeLinkURL.SettingsAgreement.dispText
+            urlString = DirectTypeLinkURL.SettingsAgreement.urlText
+
         case .approachExplanation:
-            title = ""
-            urlString = ""
-        case .reasonOfConfirmPhone:
-            title = ""
-            urlString = ""
+            title = DirectTypeLinkURL.AproachAbout.dispText
+            urlString = DirectTypeLinkURL.AproachAbout.urlText
+            
+        case .accountPrivacyPolicy:
+            title = DirectTypeLinkURL.RegistPrivacyPolicy.dispText
+            urlString = DirectTypeLinkURL.RegistPrivacyPolicy.urlText
+        case .accountAgreements:
+            title = DirectTypeLinkURL.RegistAgreement.dispText
+            urlString = DirectTypeLinkURL.RegistAgreement.urlText
+        case .accountPhoneReason:
+            title = DirectTypeLinkURL.RegistPhoneReason.dispText
+            urlString = DirectTypeLinkURL.RegistPhoneReason.urlText
         }
         
         self.tmpNavigationBar.topItem?.title = title
+        self.tmpNavigationBar.backgroundColor = .blue
+        self.tmpNavigationBar.topItem?.titleView?.backgroundColor = .yellow
+
         settingWeb.navigationDelegate = self
         settingWeb.uiDelegate = self
         

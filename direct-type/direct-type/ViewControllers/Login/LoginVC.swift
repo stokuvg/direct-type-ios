@@ -21,7 +21,7 @@ final class LoginVC: TmpBasicVC {
         openWebView(type: .term)
     }
     @IBAction private func reasonOfConfirmPhoneButton(_ sender: UIButton) {
-        openWebView(type: .reasonOfConfirmPhone)
+        openWebView(type: .accountPhoneReason)
     }
     @IBAction private func nextButton(_ sender: UIButton) {
         trySignIn()
