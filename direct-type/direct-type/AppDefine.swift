@@ -22,28 +22,75 @@ enum DirectTypeLinkURL {
     case TypeEntryPasswordForgot    //[C-12]『応募確認』「パスワード再発行の導線」
     case TypeEntryPersonalInfo      //[C-12]『応募確認』「個人情報」
     case TypeEntryMemberPolicy      //[C-12]『応募確認』「会員規約」
+    case RegistPrivacyPolicy        //[A-3]『初回認証』「プライバシーポリシー」
+    case RegistAgreement            //[A-3]『初回認証』「利用規約」
+    case RegistPhoneReason          //[A-3]『初回認証』「電話番号の確認が必要な理由」
+    case LoginPrivacyPolicy         //[B-1]『ログイン』「プライバシーポリシー」
+    case LoginAgreement             //[B-1]『ログイン』「利用規約」
+    case LoginPhoneReason           //[B-1]『ログイン』「電話番号の確認が必要な理由」
+    case AproachAbout               //[H-9]『アプローチ設定』「こちら」
+    case SettingsFAQ                //[H-8]『設定Top』「よくある質問・ヘルプ」
+    case SettingsPrivacyPolicy      //[H-8]『設定Top』「プライバシーポリシー」
+    case SettingsAgreement          //[H-8]『設定Top』「利用規約」
+
     //リンクテキスト
     var dispText: String {
         switch self {
         case .TypeEntryPasswordForgot:
-            //return "転職サイトtypeに登録済みのパスワードがわからない場合"
             return "パスワードが分からない"
         case .TypeEntryPersonalInfo:
-            //return "転職サイトtypeの個人情報の取り扱いについて"
             return "個人情報"
         case .TypeEntryMemberPolicy:
-            //return "転職サイトtypeの会員規約"
             return "会員規約"
+        case .RegistPrivacyPolicy: fallthrough
+        case .LoginPrivacyPolicy:
+            return "プライバシーポリシー"
+        case .RegistAgreement: fallthrough
+        case .LoginAgreement:
+            return "利用規約"
+        case .RegistPhoneReason: fallthrough
+        case .LoginPhoneReason:
+            return "電話番号の確認が必要な理由"
+        case .AproachAbout:
+            return "こちら"
+        case .SettingsFAQ:
+            return "よくある質問・ヘルプ"
+        case .SettingsPrivacyPolicy:
+            return "プライバシーポリシー"
+        case .SettingsAgreement:
+            return "利用規約"
         }
+        
     }
     //リンク先URLテキスト
     var urlText: String {
         switch self {
+        //===type応募時
         case .TypeEntryPasswordForgot:
             return "https://type.jp/reminder/input.do"
         case .TypeEntryPersonalInfo:
             return "https://type.jp/s/kojin/"
         case .TypeEntryMemberPolicy:
+            return "https://type.jp/help/category_14.html"
+        //===ユーザ作成、ログイン
+        case .RegistPrivacyPolicy: fallthrough
+        case .LoginPrivacyPolicy:
+            return "https://type.jp/help/index.html"
+        case .RegistAgreement: fallthrough
+        case .LoginAgreement:
+            return "https://type.jp/help/index.html"
+        case .RegistPhoneReason: fallthrough
+        case .LoginPhoneReason:
+            return "https://type.jp/help/index.html"
+        //===アプローチ設定
+        case .AproachAbout:
+            return "https://type.jp/help/index.html"
+        //===設定項目
+        case .SettingsFAQ:
+            return "https://type.jp/help/index.html"
+        case .SettingsPrivacyPolicy:
+            return "https://type.jp/s/kojin/"
+        case .SettingsAgreement:
             return "https://type.jp/help/category_14.html"
         }
     }
@@ -60,6 +107,16 @@ enum DirectTypeLinkURL {
         case .TypeEntryPasswordForgot:  return .openBrowser
         case .TypeEntryPersonalInfo:    return .openBrowser
         case .TypeEntryMemberPolicy:    return .openBrowser
+        case .RegistPrivacyPolicy:      return .appWebBrowser
+        case .RegistAgreement:          return .appWebBrowser
+        case .RegistPhoneReason:        return .appWebBrowser
+        case .LoginPrivacyPolicy:       return .appWebBrowser
+        case .LoginAgreement:           return .appWebBrowser
+        case .LoginPhoneReason:         return .appWebBrowser
+        case .AproachAbout:             return .appWebBrowser
+        case .SettingsFAQ:              return .appWebBrowser
+        case .SettingsPrivacyPolicy:    return .appWebBrowser
+        case .SettingsAgreement:        return .appWebBrowser
         }
     }
 }

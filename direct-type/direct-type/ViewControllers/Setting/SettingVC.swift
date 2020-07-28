@@ -143,19 +143,19 @@ extension SettingVC: UITableViewDelegate {
         case .help:
             // Web(よくある質問・ヘルプ)を表示
             let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
-            vc.setup(type: .help)
+            vc.setup(type: .SettingsFAQ)
             vc.modalPresentationStyle = .fullScreen
             navigationController?.present(vc, animated: true, completion: nil)
         case .privacyPolicy:
             // Web(プライバシーポリシー)を表示
             let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
-            vc.setup(type: .privacy)
+            vc.setup(type: .SettingsPrivacyPolicy)
             vc.modalPresentationStyle = .fullScreen
             navigationController?.present(vc, animated: true, completion: nil)
         case .termsOfService:
             // Web(利用規約)を表示
             let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
-            vc.setup(type: .term)
+            vc.setup(type: .SettingsAgreement)
             vc.modalPresentationStyle = .fullScreen
             navigationController?.present(vc, animated: true, completion: nil)
         case .logout:

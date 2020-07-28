@@ -9,22 +9,13 @@
 import UIKit
 import WebKit
 
-enum SettingWebType {
-    case none
-    case help
-    case privacy
-    case term
-    case approachExplanation
-    case reasonOfConfirmPhone
-}
-
 class SettingWebVC: TmpWebVC {
     
     @IBOutlet weak var settingWeb:WKWebView!
     @IBOutlet weak var backItem:UIBarButtonItem!
     @IBOutlet weak var forwardItem:UIBarButtonItem!
     
-    var _type:SettingWebType!
+    var _type: DirectTypeLinkURL!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,28 +44,12 @@ class SettingWebVC: TmpWebVC {
         var title = ""
         var urlString:String = ""
         guard let _type = _type else { return }
-        switch _type {
-        case .help:
-            title = "よくある質問・ヘルプ"
-            urlString = "https://type.jp/help/index.html"
-        case .privacy:
-            title = "プライバシーポリシー"
-            urlString = "https://type.jp/s/kojin/"
-        case .term:
-            title = "利用規約"
-            urlString = "https://type.jp/help/category_14.html"
-        case .none:
-            title = ""
-            urlString = ""
-        case .approachExplanation:
-            title = ""
-            urlString = ""
-        case .reasonOfConfirmPhone:
-            title = ""
-            urlString = ""
-        }
-        
+        title = _type.dispText
+        urlString = _type.urlText
         self.tmpNavigationBar.topItem?.title = title
+        self.tmpNavigationBar.backgroundColor = .blue
+        self.tmpNavigationBar.topItem?.titleView?.backgroundColor = .yellow
+
         settingWeb.navigationDelegate = self
         settingWeb.uiDelegate = self
         
@@ -84,9 +59,8 @@ class SettingWebVC: TmpWebVC {
         }
     }
     
-    func setup(type:SettingWebType) {
+    func setup(type: DirectTypeLinkURL) {
         Log.selectLog(logLevel: .debug, "SettingWebVC setup start")
-        
         _type = type
     }
     
