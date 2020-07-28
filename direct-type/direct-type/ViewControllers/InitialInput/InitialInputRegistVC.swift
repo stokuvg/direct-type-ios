@@ -15,13 +15,13 @@ final class InitialInputRegistVC: TmpBasicVC {
     @IBOutlet private weak var phoneNumberTextField: UITextField!
     @IBOutlet private weak var nextButton: UIButton!
     @IBAction private func privacyPolicyButton(_ sender: UIButton) {
-        openWebView(type: .privacy)
+        openWebView(type: .RegistPrivacyPolicy)
     }
     @IBAction func termsOfServiceButton(_ sender: UIButton) {
-        openWebView(type: .term)
+        openWebView(type: .RegistAgreement)
     }
     @IBAction private func reasonOfConfirmPhoneButton(_ sender: UIButton) {
-        openWebView(type: .accountPhoneReason)
+        openWebView(type: .RegistPhoneReason)
     }
     @IBAction private func nextButton(_ sender: UIButton) {
         AnalyticsEventManager.track(type: .createAuthenticationCode)
@@ -183,7 +183,7 @@ private extension InitialInputRegistVC {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func openWebView(type: SettingWebType) {
+    func openWebView(type: DirectTypeLinkURL) {
         let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
         vc.setup(type: type)
         vc.modalPresentationStyle = .fullScreen

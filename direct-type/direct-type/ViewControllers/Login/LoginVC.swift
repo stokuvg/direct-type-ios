@@ -15,13 +15,13 @@ final class LoginVC: TmpBasicVC {
     @IBOutlet private weak var phoneNumberTextField: UITextField!
     @IBOutlet private weak var nextButton: UIButton!
     @IBAction func privacyPolicyButton(_ sender: UIButton) {
-        openWebView(type: .privacy)
+        openWebView(type: .LoginPrivacyPolicy)
     }
     @IBAction func termsOfServiceButton(_ sender: UIButton) {
-        openWebView(type: .term)
+        openWebView(type: .LoginAgreement)
     }
     @IBAction private func reasonOfConfirmPhoneButton(_ sender: UIButton) {
-        openWebView(type: .accountPhoneReason)
+        openWebView(type: .LoginPhoneReason)
     }
     @IBAction private func nextButton(_ sender: UIButton) {
         trySignIn()
@@ -129,7 +129,7 @@ private extension LoginVC {
         }
     }
     
-    func openWebView(type: SettingWebType) {
+    func openWebView(type: DirectTypeLinkURL) {
         let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
         vc.setup(type: type)
         vc.modalPresentationStyle = .fullScreen
