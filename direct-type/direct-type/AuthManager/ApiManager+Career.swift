@@ -46,7 +46,7 @@ extension CreateCareerRequestDTO {
 }
 extension CareerHistoryDTO {
     init() {
-        self.init(startWorkPeriod: "", endWorkPeriod: "", companyName: "", employmentId: "", employees: 0, salary: 0, workNote: "")
+        self.init(startWorkPeriod: "", endWorkPeriod: "", companyName: "", employmentId: "", employees: "", salary: "", workNote: "")
     }
     init(_ career: MdlCareerCard) {
         self.init()
@@ -54,8 +54,8 @@ extension CareerHistoryDTO {
         self.endWorkPeriod = career.workPeriod.endDate.dispYm()//勤務終了年月（ISO8601[YYYY-MM]）※就業中の場合は9999-12とする
         self.companyName = career.companyName//企業名
         self.employmentId = career.employmentType//雇用形態マスタの値
-        self.employees = Int(career.employeesCount) ?? 0 //従業員数 //!!!型が違うのでとりあえず
-        self.salary = Int(career.salary) ?? 0 //年収 //!!!型が違うのでとりあえず
+        self.employees = career.employeesCount //従業員数
+        self.salary = career.salary //年収
         self.workNote = career.contents//職務内容本文
     }
     init(_ career: MdlCareerCard, _ editTempCD: [EditableItemKey: EditableItemCurVal]) {
@@ -66,8 +66,8 @@ extension CareerHistoryDTO {
             case EditItemMdlCareerCardWorkPeriod.endDate.itemKey: self.endWorkPeriod = val
             case EditItemMdlCareerCard.companyName.itemKey: self.companyName = val
             case EditItemMdlCareerCard.employmentType.itemKey: self.employmentId = val
-            case EditItemMdlCareerCard.employeesCount.itemKey: self.employees = Int(val) ?? 0
-            case EditItemMdlCareerCard.salary.itemKey: self.salary = Int(val) ?? 0
+            case EditItemMdlCareerCard.employeesCount.itemKey: self.employees = val
+            case EditItemMdlCareerCard.salary.itemKey: self.salary = val
             case EditItemMdlCareerCard.contents.itemKey: self.workNote = val
             default: break
             }

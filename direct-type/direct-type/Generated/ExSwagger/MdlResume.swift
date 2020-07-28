@@ -113,13 +113,11 @@ class MdlResume: Codable {
         }
         var _lastJobExperiments: MdlJobExperiment = MdlJobExperiment(jobType: "", jobExperimentYear: "")
         var _jobExperiments: [MdlJobExperiment] = []
-        if let workHistorys = dto.workHistory {
-            for (num, workHistory) in workHistorys.enumerated() {
-                if num == 0 {
-                    _lastJobExperiments = MdlJobExperiment(jobType: workHistory.job3Id, jobExperimentYear: workHistory.experienceYears)
-                } else {
-                    _jobExperiments.append(MdlJobExperiment(jobType: workHistory.job3Id, jobExperimentYear: workHistory.experienceYears))
-                }
+        for (num, workHistory) in dto.workHistory.enumerated() {
+            if num == 0 {
+                _lastJobExperiments = MdlJobExperiment(jobType: workHistory.job3Id, jobExperimentYear: workHistory.experienceYears)
+            } else {
+                _jobExperiments.append(MdlJobExperiment(jobType: workHistory.job3Id, jobExperimentYear: workHistory.experienceYears))
             }
         }
         var _businessTypes: [Code] = []
@@ -134,8 +132,8 @@ class MdlResume: Codable {
                                       faculty: dto.finalEducation?.faculty ?? "",
                                       department: dto.finalEducation?.department ?? "",
                                       graduationYear: dto.finalEducation?.guraduationYearMonth ?? Constants.SelectItemsUndefineDate.dispYm())
-        let _skillLanguage = MdlResumeSkillLanguage(languageToeicScore: "\(dto.toeic ?? 0)",
-                                                    languageToeflScore: "\(dto.toefl ?? 0)",
+        let _skillLanguage = MdlResumeSkillLanguage(languageToeicScore: dto.toeic ?? "",
+                                                    languageToeflScore: dto.toefl ?? "",
                                                     languageEnglish: dto.englishSkillId ?? "",
                                                     languageStudySkill: dto.otherLanguageSkillId ?? "" )
         var _qualifications: [Code] = []

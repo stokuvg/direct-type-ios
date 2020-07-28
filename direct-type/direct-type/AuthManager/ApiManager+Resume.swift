@@ -61,7 +61,7 @@ extension UpdateResumeRequestDTO {
             self.isEmployed = (tmp == "1") ? true : false // 1: 就業中, 0: 就業していない
         }
         if let tmp = editTempCD[EditItemMdlResume.changeCount.itemKey] {//転職回数
-            self.changeJobCount = Int(tmp)
+            self.changeJobCount = tmp
         }
         var _workHistory: [WorkHistoryDTO] = []// 経験職種リスト
         if let tmp = editTempCD[EditItemMdlResumeLastJobExperiment.jobTypeAndJobExperimentYear.itemKey] {
@@ -102,14 +102,10 @@ extension UpdateResumeRequestDTO {
         let _finalEducation = FinalEducationDTO(schoolName: _schoolName, faculty: _faculty, department: _department, guraduationYearMonth: _guraduationYearMonth)
         self.finalEducation = _finalEducation
         if let tmp = editTempCD[EditItemMdlResumeSkillLanguage.languageToeicScore.itemKey] {//TOEICスコア
-            self.toeic = Int(tmp)
-        } else {
-            self.toeic = nil
+            self.toeic = tmp
         }
         if let tmp = editTempCD[EditItemMdlResumeSkillLanguage.languageToeflScore.itemKey] {//TOEFLスコア
-            self.toefl = Int(tmp)
-        } else {
-            self.toefl = nil
+            self.toefl = tmp
         }
         if let tmp = editTempCD[EditItemMdlResumeSkillLanguage.languageEnglish.itemKey] {//英語スキルID
             self.englishSkillId = tmp

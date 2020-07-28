@@ -42,15 +42,12 @@ class MdlCareerCard: Codable {
         let _workPeriod: MdlCareerCardWorkPeriod =
             MdlCareerCardWorkPeriod(startDate: DateHelper.convStrYM2Date(dto.startWorkPeriod),
                                     endDate: DateHelper.convStrYM2Date(dto.endWorkPeriod) )
-        let _employmentType = dto.employmentId
-        let _employeesCount = "\(dto.employees)"
-        let _salary = "\(dto.salary)"
         self.init(workPeriod: _workPeriod,
                   companyName: dto.companyName,
-                  employmentType: _employmentType,
-                  employeesCount: _employeesCount,
-                  salary: _salary,
-                  contents: dto.workNote)
+                  employmentType: dto.employmentId ?? "",
+                  employeesCount: dto.employees ?? "",
+                  salary: dto.salary ?? "",
+                  contents: dto.workNote ?? "")
     }
 //    convenience init(dto: CareerCard) {
 //        let _workPeriod: MdlCareerCardWorkPeriod = MdlCareerCardWorkPeriod.init(dto: dto.workPeriod)
