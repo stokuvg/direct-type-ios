@@ -72,6 +72,8 @@
                     <connections>
                         <outlet property="btnAddCard" destination="No1-OL-gch" id="bhV-Rk-UKs"/>
                         <outlet property="tableVW" destination="obd-xt-HE9" id="KYA-Uh-Mgk"/>
+                        <outlet property="vwFootArea" destination="KHv-g0-mMj" id="GuU-Pg-g50"/>
+                        <outlet property="vwMainArea" destination="iol-Xd-3LG" id="tJ6-Zd-si9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ah3-0I-Xfe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

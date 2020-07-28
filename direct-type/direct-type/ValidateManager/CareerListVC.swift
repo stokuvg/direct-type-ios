@@ -17,7 +17,9 @@ class CareerListVC: TmpBasicVC {
     //===フェッチ抑止処理
     var lastDispUpdateCareerList: Date = Date(timeIntervalSince1970: 0)
     
+    @IBOutlet weak var vwMainArea: UIView!
     @IBOutlet weak var tableVW: UITableView!
+    @IBOutlet weak var vwFootArea: UIView!
 
     //===職歴書カードを追加する
     @IBOutlet weak var btnAddCard: UIButton!
@@ -65,10 +67,13 @@ class CareerListVC: TmpBasicVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        btnAddCard.setTitle(text: "追加する", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        //===デザイン適用
+        self.view.backgroundColor = UIColor(colorType: .color_base)
+        self.vwMainArea.backgroundColor = UIColor(colorType: .color_base)
+        self.vwFootArea.backgroundColor = UIColor(colorType: .color_base)
+        self.tableVW.backgroundColor = UIColor(colorType: .color_base)
+        btnAddCard.setTitle(text: "追加する", fontType: .font_M, textColor: UIColor(colorType: .color_white)!, alignment: .center)
         btnAddCard.backgroundColor = UIColor.init(colorType: .color_button)
-        self.tableVW.backgroundColor = UIColor.init(colorType: .color_base)
         //=== テーブル初期化
         self.tableVW.estimatedRowHeight = 100
         self.tableVW.rowHeight = UITableView.automaticDimension

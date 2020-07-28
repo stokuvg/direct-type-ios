@@ -159,6 +159,7 @@ extension ProfilePreviewVC {
             self.fetchCompletePopVC()
         }
         .catch { (error) in
+            SVProgressHUD.dismiss()
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
             case 400:

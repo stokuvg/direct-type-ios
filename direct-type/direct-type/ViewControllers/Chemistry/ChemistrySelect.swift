@@ -95,17 +95,17 @@ private extension ChemistrySelect {
         let topRanker = ChemistryScoreCalculation(questionScores: questionScores).topThree
         let ids = [topRanker.first, topRanker.second, topRanker.third].compactMap({ $0 }).map({ String($0.rawValue) })
         let parameter = CreateChemistryRequestDTO(chemistryTypeIds: ids)
-        SVProgressHUD.show(withStatus: "")
+        SVProgressHUD.show()
         ApiManager.createChemistry(parameter, isRetry: true)
         .done { result in
             ApiManager.shared.dicLastUpdate[.topRanker] = Date(timeIntervalSince1970: 0)//モデル更新したので、一覧再取得が必要
+            self.transitionToChemisrortResult()
         }
         .catch { (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-            self.showConfirm(title: "データ送信エラー", message: error.localizedDescription, onlyOK: true)
+            self.showConfirm(title: "データ送信エラー", message: myErr.message, onlyOK: true)
         }
         .finally {
-            self.transitionToChemisrortResult()
             SVProgressHUD.dismiss()
         }
     }

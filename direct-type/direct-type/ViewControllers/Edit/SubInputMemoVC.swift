@@ -31,6 +31,13 @@ class SubInputMemoVC: BaseVC {
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
         let bufText: String = textVW.text ?? ""
+        //文字数制限がある場合、オーバーしてたら却下する
+        let maxCount = editableItem.editItem.valid.max ?? 0
+        if maxCount > 0 {
+            if bufText.count > maxCount {
+                return
+            }
+        }
         actPopupSelect(text: bufText)
     }
 
@@ -50,7 +57,7 @@ class SubInputMemoVC: BaseVC {
         textVW.font = UIFont.systemFont(ofSize: 18)
         textVW.backgroundColor = UIColor(colorType: .color_white)
         btnCommit.setTitle(text: "この内容で保存", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
-        btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
+        btnCommit.backgroundColor = UIColor(colorType: .color_button)
         //===ソフトウェアキーボードに〔閉じる〕ボタン付与
         let rect = CGRect(origin: CGPoint.zero, size: CGSize.init(width: 60, height: 45))
         let toolbar = UIToolbar(frame: rect)//Autolayout補正かかるけど、そこそこの横幅指定が必要
@@ -128,6 +135,8 @@ class SubInputMemoVC: BaseVC {
     //=======================================================================================================
 
     private func dispCount() {
+        btnCommit.isEnabled = true
+        btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
         let maxCount = editableItem.editItem.valid.max ?? 0
         if maxCount > 0 {
             let curCount = textVW.text.count
@@ -135,7 +144,9 @@ class SubInputMemoVC: BaseVC {
             //文字数超過時のリアルタイム表示フィードバック
             if curCount > maxCount {
                 lblCount.text(text: bufCount, fontType: .font_SSS, textColor: UIColor.init(colorType: .color_sub)!, alignment: .right)
-                textVW.backgroundColor = UIColor.init(red: 1.0, green: 0.8, blue: 0.8, alpha: 1.0)
+                textVW.backgroundColor = UIColor(red: 1.0, green: 0.8, blue: 0.8, alpha: 1.0)
+                btnCommit.isEnabled = false //ボタン押下も禁止しておく
+                btnCommit.backgroundColor = UIColor(colorType: .color_close)
             } else {
                 lblCount.text(text: bufCount, fontType: .font_SSS, textColor: UIColor.init(colorType: .color_white)!, alignment: .right)
                 textVW.backgroundColor = UIColor(colorType: .color_white)
