@@ -107,7 +107,7 @@ class EntryFormVC: PreviewBaseVC {
         title = "応募フォーム"
         self.jobCard = jobCard
         //self.entry = MdlEntry()//[#133: キャッシュ保持対応させる]
-        self.entry = EntryFormManager.cachedEntry(jobCardCode: jobCard.jobCardCode)
+        self.entry = EntryFormManager.loacCache(jobCardCode: jobCard.jobCardCode)
         
         //===独自質問はjobCardDetailに含まれているので、MdlEntryにも持たせておく
         if let tmp = jobCard.entryQuestion1 { entry?.exQuestion1 = tmp }

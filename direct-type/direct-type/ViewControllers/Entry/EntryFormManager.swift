@@ -14,8 +14,10 @@ class EntryFormManager {
     public static let shared = EntryFormManager()
     private init() {
     }
-
-    class func cachedEntry(jobCardCode: String) -> MdlEntry {
+    class func deleteCache(jobCardCode: String) {
+        shared.dicEntryFormCache.removeValue(forKey: jobCardCode)
+    }
+    class func loacCache(jobCardCode: String) -> MdlEntry {
         if let entry = shared.dicEntryFormCache[jobCardCode] {
             return entry
         } else {
@@ -40,18 +42,6 @@ class EntryFormManager {
             }
         }
         _entry.hopeArea = _hopeArea
-//        //===独自質問はjobCardDetailに含まれているので、MdlEntryにも持たせておく
-//        if let tmp = jobCard?.entryQuestion1 { _entry?.exQuestion1 = tmp }
-//        if let tmp = jobCard?.entryQuestion2 { _entry?.exQuestion2 = tmp }
-//        if let tmp = jobCard?.entryQuestion3 { _entry?.exQuestion3 = tmp }
-
         return _entry
     }
-    
-    
-    
-    
-
-    
-    
 }
