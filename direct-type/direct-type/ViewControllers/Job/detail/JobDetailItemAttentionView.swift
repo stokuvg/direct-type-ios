@@ -37,13 +37,13 @@ class JobDetailItemAttentionView: UIView {
 //        Log.selectLog(logLevel: .debug, "textSize:\(textSize)")
         
         if textSize > (singleWidth+5) {
-            Log.selectLog(logLevel: .debug, "注目タイトルが２行以上")
+//            Log.selectLog(logLevel: .debug, "注目タイトルが２行以上")
 //            markTopConstraint.constant = 9
             titleLabelTop.constant = 0
             titleLabelHeight.constant = 50
             titleBackHeight.constant = 60
         } else {
-            Log.selectLog(logLevel: .debug, "注目タイトルが1行以上")
+//            Log.selectLog(logLevel: .debug, "注目タイトルが1行以上")
         }
         
         let text = datas["text"] as! String

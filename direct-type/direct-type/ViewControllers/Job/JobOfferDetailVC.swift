@@ -378,6 +378,14 @@ extension JobOfferDetailVC: UITableViewDelegate {
                 return articleOpenFlag ? UITableView.automaticDimension : 0
             case (2,0):
                 return prcodesCellMaxSize
+            case (3,2):
+                let type = _mdlJobDetail.employmentType
+                let employmentType = SelectItemsManager.getCodeDisp(.employmentType, code: type)?.disp ?? ""
+                if employmentType.count > 0 {
+                    return UITableView.automaticDimension
+                } else {
+                    return 0
+                }
             case (4,0):
                 return coverageMemoOpenFlag ? UITableView.automaticDimension : 0
             case (5,0):
@@ -569,6 +577,18 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 let examples = _mdlJobDetail.salarySample
                 cell.setup(data: examples)
                 return cell
+            case (3,2):
+                
+                // 雇用形態
+                let cell = tableView.loadCell(cellName: "JobDetailItemCell", indexPath: indexPath) as! JobDetailItemCell
+                let type = _mdlJobDetail.employmentType
+                let employmentType = SelectItemsManager.getCodeDisp(.employmentType, code: type)?.disp ?? ""
+                if employmentType.count > 0 {
+                    cell.setup(data: _mdlJobDetail,row:row)
+                    return cell
+                } else {
+                    return UITableViewCell()
+                }
             case (3,_):
                 // 仕事内容
                 let cell = tableView.loadCell(cellName: "JobDetailItemCell", indexPath: indexPath) as! JobDetailItemCell

@@ -8,6 +8,7 @@
 
 import UIKit
 import SwaggerClient
+import TudApi
 
 class JobDetailItemCell: BaseJobDetailCell {
 
@@ -55,7 +56,10 @@ class JobDetailItemCell: BaseJobDetailCell {
             case 2:
                 // 雇用形態
                 title = "雇用形態"
+                Log.selectLog(logLevel: .debug, "employmentType:\(data.employmentType)")
+                
                 let type = SelectItemsManager.getCodeDisp(.employmentType, code: data.employmentType)?.disp ?? ""
+                Log.selectLog(logLevel: .debug, "雇用形態:\(type)")
                 
                 text = type
             case 3:
@@ -166,12 +170,13 @@ class JobDetailItemCell: BaseJobDetailCell {
                 }
                 // 残業時間目安
                 if data.overtimeCode > 0 {
-//                    let title = data.overtimeCode.title
+                    
                     let code = SelectItemsManager.getCodeDisp(.overtime, code: data.overtimeCode)?.disp ?? ""
                     let text = code
-//                    let overtimeCodeData = ["title":title, "text":text]
-                    let overtimeCodeData = ["title":"残業時間目安", "text":text]
-                    optionalDatas.append(overtimeCodeData as [String : Any])
+                    if text.count > 0 {
+                        let overtimeCodeData = ["title":"残業時間目安", "text":text]
+                        optionalDatas.append(overtimeCodeData as [String : Any])
+                    }
                 }
             case 5:
                 // 交通・詳細

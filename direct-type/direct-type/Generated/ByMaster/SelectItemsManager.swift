@@ -303,6 +303,7 @@ extension SelectItemsManager {
     //種別とコードを渡すと、対応するCodeDispを返却する
     class func getCodeDisp(_ type: TsvMaster, code: Code) -> CodeDisp? {
         let mst: [CodeDisp] = getMaster(type)
+        
         return mst.filter { (cd) -> Bool in
             cd.code == code
         }.first
