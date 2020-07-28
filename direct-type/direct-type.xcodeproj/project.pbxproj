@@ -240,6 +240,7 @@
 		2642E38F24A04C1F003E6907 /* MstSel_salary.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 2642E38E24A04C1F003E6907 /* MstSel_salary.tsv */; };
 		2642E39124A19B0F003E6907 /* MdlEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2642E39024A19B0F003E6907 /* MdlEntry.swift */; };
 		2642E39324A1A6CC003E6907 /* Validate+Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2642E39224A1A6CC003E6907 /* Validate+Entry.swift */; };
+		264D52C724D0123100F3A56B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 264D52C624D0123100F3A56B /* Settings.bundle */; };
 		265022E024B2C75B000B26D7 /* MdlDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265022DF24B2C75B000B26D7 /* MdlDummy.swift */; };
 		267E635B24A98642004169ED /* EntryFormInfoTextTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267E635924A98642004169ED /* EntryFormInfoTextTBCell.swift */; };
 		267E635C24A98642004169ED /* EntryFormInfoTextTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 267E635A24A98642004169ED /* EntryFormInfoTextTBCell.xib */; };
@@ -581,6 +582,7 @@
 		2642E38E24A04C1F003E6907 /* MstSel_salary.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstSel_salary.tsv; sourceTree = "<group>"; };
 		2642E39024A19B0F003E6907 /* MdlEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlEntry.swift; sourceTree = "<group>"; };
 		2642E39224A1A6CC003E6907 /* Validate+Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validate+Entry.swift"; sourceTree = "<group>"; };
+		264D52C624D0123100F3A56B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		265022DF24B2C75B000B26D7 /* MdlDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlDummy.swift; sourceTree = "<group>"; };
 		267E635924A98642004169ED /* EntryFormInfoTextTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryFormInfoTextTBCell.swift; sourceTree = "<group>"; };
 		267E635A24A98642004169ED /* EntryFormInfoTextTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntryFormInfoTextTBCell.xib; sourceTree = "<group>"; };
@@ -816,6 +818,7 @@
 		066BD9CA2456ACB4009E610B = {
 			isa = PBXGroup;
 			children = (
+				264D52C624D0123100F3A56B /* Settings.bundle */,
 				26D4CB21247777F1002EE9A9 /* awsconfiguration.json */,
 				066BD9EB2456B3A2009E610B /* R.generated.swift */,
 				066BD9D52456ACB4009E610B /* direct-type */,
@@ -1592,6 +1595,7 @@
 				0EAE7665248F2E5E009A8F4B /* ChemistryBusinessAvilityView.xib in Resources */,
 				26F9F1AB24C16B2C00EAFC3E /* HEditMemoTBCell.xib in Resources */,
 				06AA8C652484D2DA001733FA /* MyPageCarrerStartCell.xib in Resources */,
+				264D52C724D0123100F3A56B /* Settings.bundle in Resources */,
 				064EF7002465551D00853ADD /* JobDetailArticleHeaderView.xib in Resources */,
 				269AFFC6246A929300DB364B /* SubSelectSyouTBCell.xib in Resources */,
 				267E635C24A98642004169ED /* EntryFormInfoTextTBCell.xib in Resources */,
@@ -2105,7 +2109,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20200727_1;
+				CURRENT_PROJECT_VERSION = 20200728_1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = T9NJN3ZF88;
@@ -2131,7 +2135,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20200727_1;
+				CURRENT_PROJECT_VERSION = 20200728_1;
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = T9NJN3ZF88;
 				INFOPLIST_FILE = "direct-type/Info.plist";

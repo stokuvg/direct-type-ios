@@ -45,10 +45,11 @@ target 'direct-type' do
   pod 'Firebase/Crashlytics', '~> 6.27.1'
   pod 'Firebase/Analytics', '~> 6.27.1'
 
+  ##=== Acknowledgements
+  post_install do | installer |
+    require 'fileutils'
+    FileUtils.cp_r('Pods/Target Support Files/Pods-direct-type/Pods-direct-type-acknowledgements.plist', './Settings.bundle/acknowledgements.plist', :remove_destination => true)
+  end
 end
 
-#post_install do | installer |
-#  require 'fileutils'
-#  FileUtils.cp_r('Pods/Target Support Files/Pods-direct-type/Pods-direct-type-#acknowledgements.plist', 'direct-type/Settings.bundle/#Acknowledgements.plist', :remove_destination => true)
 
-#end
