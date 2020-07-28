@@ -84,10 +84,7 @@ private extension ApproachSettingVC {
 extension ApproachSettingVC: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         // Web(アプローチ説明)を表示
-        let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
-        vc.setup(type: .AproachAbout)
-        vc.modalPresentationStyle = .fullScreen
-        navigationController?.present(vc, animated: true, completion: nil)
+        OpenLinkUrlTool.open(type: .AproachAbout, navigationController)
         return false
     }
 }

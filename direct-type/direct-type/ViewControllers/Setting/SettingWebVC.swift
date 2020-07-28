@@ -9,6 +9,25 @@
 import UIKit
 import WebKit
 
+class OpenLinkUrlTool {
+    class func open(type: DirectTypeLinkURL, _ navigationController: UINavigationController?) {
+        switch type.linkType {
+        case .appWebBrowser:
+            let storyboard = UIStoryboard(name: "Web", bundle: nil)
+            if let vc = storyboard.instantiateViewController(withIdentifier: "Sbid_SettingWebVC") as? SettingWebVC {
+                vc.setup(type: type)
+                vc.modalPresentationStyle = .fullScreen
+                navigationController?.present(vc, animated: true, completion: nil)
+            }
+        case .openBrowser:
+            UIApplication.shared.open(type.url!, options: [:]) { (isSuccess) in
+                print("[\(type.dispText)] [isSuccess: \(isSuccess)]")
+            }
+        }
+    }
+}
+
+
 class SettingWebVC: TmpWebVC {
     
     @IBOutlet weak var settingWeb:WKWebView!

@@ -212,12 +212,6 @@ extension EntryConfirmVC: EntryConfirmNotifyEntryDelegate {
         self.isAccept = isAccept
         chkButtonEnable()
     }
-    func actLinkText(type: DirectTypeLinkURL) {
-        UIApplication.shared.open(type.url!, options: [:]) { (isSuccess) in
-            print("[\(type.dispText)] [isSuccess: \(isSuccess)]")
-        }
-    }
-    
 }
 
 //=== APIフェッチ
