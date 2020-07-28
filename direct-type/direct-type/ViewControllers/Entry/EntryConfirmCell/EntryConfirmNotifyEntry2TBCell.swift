@@ -11,7 +11,6 @@ import UIKit
 protocol EntryConfirmNotifyEntryDelegate {
     func changePasswordText(text: String)
     func changeAcceptStatus(isAccept: Bool)
-    func actLinkText(type: DirectTypeLinkURL)
 }
 class EntryConfirmNotifyEntry2TBCell: UITableViewCell {
     var delegate: EntryConfirmNotifyEntryDelegate? = nil
@@ -115,7 +114,6 @@ class EntryConfirmNotifyEntry2TBCell: UITableViewCell {
 
 extension EntryConfirmNotifyEntry2TBCell: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        print(#line, #function)
         UIApplication.shared.open(URL)
         return false
     }

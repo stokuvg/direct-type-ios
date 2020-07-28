@@ -184,10 +184,7 @@ private extension InitialInputRegistVC {
     }
     
     func openWebView(type: DirectTypeLinkURL) {
-        let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
-        vc.setup(type: type)
-        vc.modalPresentationStyle = .fullScreen
-        navigationController?.present(vc, animated: true, completion: nil)
+        OpenLinkUrlTool.open(type: type, navigationController)
     }
     
     func logOutIfNeeded() {

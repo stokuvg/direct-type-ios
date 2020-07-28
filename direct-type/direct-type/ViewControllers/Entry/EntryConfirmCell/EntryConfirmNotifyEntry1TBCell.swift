@@ -35,6 +35,9 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
         tfPassword.isSecureTextEntry = true
         tfPassword.textContentType = .password
         tfPassword.placeholder = "type用パスワード（半角英数4〜20文字）"
+        tfPassword.textColor = UIColor(colorType: .color_black)
+        tfPassword.tintColor = UIColor(colorType: .color_black)
+        tfPassword.backgroundColor = UIColor(colorType: .color_white)
     }
     func initCell(_ delegate: EntryConfirmNotifyEntryDelegate, email: String) {
         self.delegate = delegate

@@ -142,22 +142,13 @@ extension SettingVC: UITableViewDelegate {
             navigationController?.pushViewController(vc, animated: true)
         case .help:
             // Web(よくある質問・ヘルプ)を表示
-            let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
-            vc.setup(type: .SettingsFAQ)
-            vc.modalPresentationStyle = .fullScreen
-            navigationController?.present(vc, animated: true, completion: nil)
+            OpenLinkUrlTool.open(type: .SettingsFAQ, navigationController)
         case .privacyPolicy:
             // Web(プライバシーポリシー)を表示
-            let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
-            vc.setup(type: .SettingsPrivacyPolicy)
-            vc.modalPresentationStyle = .fullScreen
-            navigationController?.present(vc, animated: true, completion: nil)
+            OpenLinkUrlTool.open(type: .SettingsPrivacyPolicy, navigationController)
         case .termsOfService:
             // Web(利用規約)を表示
-            let vc = getVC(sbName: "Web", vcName: "SettingWebVC") as! SettingWebVC
-            vc.setup(type: .SettingsAgreement)
-            vc.modalPresentationStyle = .fullScreen
-            navigationController?.present(vc, animated: true, completion: nil)
+            OpenLinkUrlTool.open(type: .SettingsAgreement, navigationController)
         case .logout:
             // ログアウト
             dispLogoutAlert()
