@@ -234,6 +234,7 @@ extension EntryConfirmVC {
         SVProgressHUD.show(withStatus: "応募処理")
         ApiManager.postEntry(param, isRetry: true)
         .done { result in
+            EntryFormManager.deleteCache(jobCardCode: _jobCard.jobCardCode)//応募フォーム情報はクリアして良し
             AnalyticsEventManager.track(type: .completeEntry)
             self.pushViewController(.entryComplete)
         }

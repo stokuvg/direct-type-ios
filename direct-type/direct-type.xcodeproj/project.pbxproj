@@ -228,6 +228,7 @@
 		26157DC22489CD5F00752C55 /* ApiManager+Career.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26157DC12489CD5F00752C55 /* ApiManager+Career.swift */; };
 		2619D2A524AB2E0600F24624 /* EntryConfirmAnyModelTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619D2A324AB2E0600F24624 /* EntryConfirmAnyModelTBCell.swift */; };
 		2619D2A624AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2619D2A424AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib */; };
+		2622250124CFC53D004810F3 /* EntryFormManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2622250024CFC53D004810F3 /* EntryFormManager.swift */; };
 		2635444F24B6D2DC00C4B7C8 /* SpacerTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2635444D24B6D2DC00C4B7C8 /* SpacerTBCell.swift */; };
 		2635445024B6D2DC00C4B7C8 /* SpacerTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2635444E24B6D2DC00C4B7C8 /* SpacerTBCell.xib */; };
 		2635445324B703B500C4B7C8 /* SubSelectEnableVW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2635445124B703B500C4B7C8 /* SubSelectEnableVW.swift */; };
@@ -568,6 +569,7 @@
 		26157DC12489CD5F00752C55 /* ApiManager+Career.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Career.swift"; sourceTree = "<group>"; };
 		2619D2A324AB2E0600F24624 /* EntryConfirmAnyModelTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryConfirmAnyModelTBCell.swift; sourceTree = "<group>"; };
 		2619D2A424AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntryConfirmAnyModelTBCell.xib; sourceTree = "<group>"; };
+		2622250024CFC53D004810F3 /* EntryFormManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryFormManager.swift; sourceTree = "<group>"; };
 		2635444D24B6D2DC00C4B7C8 /* SpacerTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerTBCell.swift; sourceTree = "<group>"; };
 		2635444E24B6D2DC00C4B7C8 /* SpacerTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpacerTBCell.xib; sourceTree = "<group>"; };
 		2635445124B703B500C4B7C8 /* SubSelectEnableVW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSelectEnableVW.swift; sourceTree = "<group>"; };
@@ -787,6 +789,7 @@
 		066763702457B06200AC5039 /* Entry */ = {
 			isa = PBXGroup;
 			children = (
+				2622250024CFC53D004810F3 /* EntryFormManager.swift */,
 				26A289A024AAFADD000D2926 /* EntryFormCell */,
 				26A2899F24AAFACE000D2926 /* EntryConfirmCell */,
 				066763712457B08300AC5039 /* EntryFormVC.swift */,
@@ -1876,6 +1879,7 @@
 				06E519A22457DC44004E4B7A /* InitialInputRegistVC.swift in Sources */,
 				269AFFC3246A929300DB364B /* SubSelectTBCell.swift in Sources */,
 				06E519AF245813E9004E4B7A /* LoginConfirmVC.swift in Sources */,
+				2622250124CFC53D004810F3 /* EntryFormManager.swift in Sources */,
 				26AF323D248F7F6B00AA78FD /* Validate+FirstInput.swift in Sources */,
 				066EF6C8245BBA1100E15AD2 /* BaseJobCardCell.swift in Sources */,
 				269B29A32496F63200B33FBD /* CareerCardTBCell.swift in Sources */,
