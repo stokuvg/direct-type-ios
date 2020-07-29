@@ -156,7 +156,8 @@ extension Date {
     //日本時刻(localTZ)で表示するようにしておく
     func dispLogTime() -> String {
         let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withFullTime]
+        formatter.timeZone = TimeZone.current
+        formatter.formatOptions = [.withFullDate, .withFullTime]
         let buf: String = formatter.string(from: self)
         return buf
     }

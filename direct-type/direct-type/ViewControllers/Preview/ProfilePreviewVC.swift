@@ -128,6 +128,7 @@ extension ProfilePreviewVC {
     private func fetchGetProfile() {
         SVProgressHUD.show(withStatus: "プロフィール情報の取得")
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("getProfile", Void(), function: #function, line: #line)
         ApiManager.getProfile(Void(), isRetry: true)
         .done { result in
             self.detail = result

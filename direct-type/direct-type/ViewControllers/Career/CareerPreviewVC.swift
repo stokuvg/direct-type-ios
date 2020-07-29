@@ -156,6 +156,7 @@ extension CareerPreviewVC {
         self.dicValidErrMsg.removeAll()//状態をクリアしておく
         SVProgressHUD.show(withStatus: "職務経歴書情報の作成")
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("createCareer", param, function: #function, line: #line)
         ApiManager.createCareer(param, isRetry: true)
         .done { result in
             //self.fetchGetCareerList()

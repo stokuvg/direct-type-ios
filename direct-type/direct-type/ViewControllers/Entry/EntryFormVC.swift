@@ -329,6 +329,7 @@ extension EntryFormVC {
             self.fetchGetResume()//次の処理の呼び出し
             return
         }
+        LogManager.appendApiLog("getProfile", Void(), function: #function, line: #line)
         ApiManager.getProfile(Void(), isRetry: true)
         .done { result in
             self.profile = result

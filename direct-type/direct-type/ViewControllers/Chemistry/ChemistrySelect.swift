@@ -98,6 +98,7 @@ private extension ChemistrySelect {
         let parameter = CreateChemistryRequestDTO(chemistryTypeIds: ids)
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("createChemistry", parameter, function: #function, line: #line)
         ApiManager.createChemistry(parameter, isRetry: true)
         .done { result in
             ApiManager.shared.dicLastUpdate[.topRanker] = Date(timeIntervalSince1970: 0)//モデル更新したので、一覧再取得が必要

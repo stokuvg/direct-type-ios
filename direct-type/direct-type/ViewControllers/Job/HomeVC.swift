@@ -263,6 +263,7 @@ class HomeVC: TmpNaviTopVC {
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         pageNo += 1
         pageJobCards = MdlJobCardList()
+        LogManager.appendApiLog("getRecommendJobs", "[pageNo: \(pageNo)]", function: #function, line: #line)
         ApiManager.getRecommendJobs(pageNo, isRetry: true)
             .done { result in
                 Log.selectLog(logLevel: .debug, "getJobRecommendAddList result:\(result.debugDisp)")
@@ -286,6 +287,7 @@ class HomeVC: TmpNaviTopVC {
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         pageNo += 1
         pageJobCards = MdlJobCardList()
+        LogManager.appendApiLog("getJobs", "[pageNo: \(pageNo)]]", function: #function, line: #line)
         ApiManager.getJobs(pageNo, isRetry: true)
             .done { result in
                 Log.selectLog(logLevel: .debug, "getJobAddList result:\(result.debugDisp)")
@@ -309,6 +311,7 @@ class HomeVC: TmpNaviTopVC {
         pageJobCards = MdlJobCardList()
         dispJobCards = MdlJobCardList()
         pageNo = 1
+        LogManager.appendApiLog("getRecommendJobs", "[pageNo: \(pageNo)]]", function: #function, line: #line)
         ApiManager.getRecommendJobs(pageNo, isRetry: true)
             .done { result in
                 self.pageJobCards = result
@@ -367,6 +370,7 @@ class HomeVC: TmpNaviTopVC {
     private func getProfileData() {
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("getProfile", Void(), function: #function, line: #line)
         ApiManager.getProfile(Void(), isRetry: true)
             .done { result in
                 self.profile = result
@@ -721,6 +725,7 @@ extension HomeVC: BaseJobCardCellDelegate {
         let flag = !jobCard.keepStatus
         jobCard.keepStatus = flag
         if flag == true {
+            LogManager.appendApiLog("sendJobKeep", "[jobId: \(jobId)]", function: #function, line: #line)
             ApiManager.sendJobKeep(id: jobId)
                 .done { result in
                 // タブに丸ポチを追加

@@ -157,6 +157,7 @@ extension CareerListVC {
     private func fetchGetCareerList() {
         SVProgressHUD.show(withStatus: "職務経歴書情報の取得")
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("getCareer", Void(), function: #function, line: #line)
         ApiManager.getCareer(Void(), isRetry: true)
         .done { result in
             self.arrData.removeAll()
@@ -193,6 +194,7 @@ extension CareerListVC {
         let param = CreateCareerRequestDTO(careerHistory: tempCards)
         SVProgressHUD.show(withStatus: "職務経歴書情報の削除")
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("createCareer", param, function: #function, line: #line)
         ApiManager.createCareer(param, isRetry: true)
         .done { result in
             self.fetchGetCareerList()

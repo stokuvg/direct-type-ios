@@ -85,6 +85,7 @@ private extension LoginVC {
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         changeButtonState(shouldForceDisable: true)
+        LogManager.appendApiLog("AWSMobileClient", "signIn", function: #function, line: #line)
         AWSMobileClient.default().signIn(username: phoneNumberText.addCountryCode(type: .japan), password: AppDefine.password)  { (signInResult, error) in
             if let error = error as? AWSMobileClientError {
                 switch error {

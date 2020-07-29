@@ -91,6 +91,7 @@ private extension InitialInputRegistVC {
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         changeButtonState(shouldForceDisable: true)
+        LogManager.appendApiLog("AWSMobileClient", "signUp", function: #function, line: #line)
         AWSMobileClient.default().signUp(username: phoneNumber, password: AppDefine.password, userAttributes: phoneNumberAttribute) { (signUpResult, error) in
             if let error = error {
                 let myError = AuthManager.convAnyError(error)
@@ -130,6 +131,7 @@ private extension InitialInputRegistVC {
             SVProgressHUD.show()
             LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         }
+        LogManager.appendApiLog("AWSMobileClient", "signIn", function: #function, line: #line)
         AWSMobileClient.default().signIn(username: phoneNumberText.addCountryCode(type: .japan), password: AppDefine.password) { (signInResult, error) in
             if let error = error as? AWSMobileClientError {
                 switch error {

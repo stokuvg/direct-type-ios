@@ -116,6 +116,7 @@ private extension FirstInputPreviewVC {
         let param = CreateProfileRequestDTO(editableModel.editTempCD)
         SVProgressHUD.show(withStatus: "プロフィール情報の作成")
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("createProfile", param, function: #function, line: #line)
         ApiManager.createProfile(param, isRetry: true)
         .done { result in
             self.fetchCreateResume()
@@ -143,6 +144,7 @@ private extension FirstInputPreviewVC {
         let param = CreateResumeRequestDTO(editableModel.editTempCD)
         SVProgressHUD.show(withStatus: "履歴書情報の更新")
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("createResume", param, function: #function, line: #line)
         ApiManager.createResume(param, isRetry: true)
         .done { result in
             self.fetchCreateSetting()
@@ -168,6 +170,7 @@ private extension FirstInputPreviewVC {
         let param = CreateSettingsRequestDTO(scoutEnable: true)
         SVProgressHUD.show(withStatus: "設定情報の更新")
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("createApproach", param, function: #function, line: #line)
         ApiManager.createApproach(param, isRetry: true)
         .done { result in
             self.transitionToComplete()

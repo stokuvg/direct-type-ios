@@ -102,6 +102,7 @@ private extension KeepListVC {
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         lists = []
         pageNo = 1
+        LogManager.appendApiLog("getKeeps", "[pageNo: \(pageNo)]", function: #function, line: #line)
         ApiManager.getKeeps(pageNo, isRetry: true)
             .done { result in
                 debugLog("ApiManager getKeeps result:\(result.debugDisp)")
@@ -138,6 +139,7 @@ private extension KeepListVC {
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         pageNo += 1
+        LogManager.appendApiLog("getKeeps", "[pageNo: \(pageNo)]", function: #function, line: #line)
         ApiManager.getKeeps(pageNo, isRetry: true)
             .done { result in
                 debugLog("ApiManager getKeeps result:\(result.debugDisp)")

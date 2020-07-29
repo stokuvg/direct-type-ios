@@ -207,6 +207,7 @@ extension SettingVC {
     func fetchApproachData() {
         SVProgressHUD.show(withStatus: "設定情報の取得")
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("getApproach", nil, function: #function, line: #line)
         ApiManager.getApproach(())
         .done { result in
             self.approachSetting = result

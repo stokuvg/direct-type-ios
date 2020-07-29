@@ -137,6 +137,7 @@ extension ResumePreviewVC {
     private func fetchGetResume() {
         SVProgressHUD.show(withStatus: "履歴書の取得")
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("getResume", Void(), function: #function, line: #line)
         ApiManager.getResume(Void(), isRetry: true)
         .done { result in
             self.detail = result

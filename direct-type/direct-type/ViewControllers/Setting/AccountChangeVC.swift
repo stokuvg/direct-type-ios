@@ -63,6 +63,7 @@ private extension AccountChangeVC {
         
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("accountMigrate", param, function: #function, line: #line)
         ApiManager.accountMigrate(param)
         .done { result in
             SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")

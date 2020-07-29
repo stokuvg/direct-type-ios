@@ -90,6 +90,7 @@ private extension WithDrawalVC {
     func tryWithdrawal() {
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("sendDeleteAccount", nil, function: #function, line: #line)
         ApiManager.sendDeleteAccount()
         .done { _ in
             AnalyticsEventManager.track(type: .withdrawal)

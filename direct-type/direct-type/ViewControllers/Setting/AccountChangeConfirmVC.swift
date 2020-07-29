@@ -86,6 +86,7 @@ private extension AccountChangeConfirmVC {
         
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("accountMigrateAnswer", param, function: #function, line: #line)
         ApiManager.accountMigrateAnswer(param)
         .done { _ in
             
@@ -106,6 +107,7 @@ private extension AccountChangeConfirmVC {
     func tryLogout() {
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("AWSMobileClient", "signOut", function: #function, line: #line)
         AWSMobileClient.default().signOut { (error) in
             if let error = error {
                 DispatchQueue.main.async {
@@ -132,6 +134,7 @@ private extension AccountChangeConfirmVC {
         
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("accountMigrate", param, function: #function, line: #line)
         ApiManager.accountMigrate(param)
         .done { result in
             SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")

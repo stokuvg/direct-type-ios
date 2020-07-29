@@ -57,6 +57,7 @@ private extension ApproachSettingVC {
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         let param = UpdateSettingsRequestDTO(scoutEnable: isScoutEnable)
+        LogManager.appendApiLog("updateApproach", param, function: #function, line: #line)
         ApiManager.updateApproach(param, isRetry: true)
         .done { _ in }
         .catch { (error) in

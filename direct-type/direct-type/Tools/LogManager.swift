@@ -24,7 +24,7 @@ class LogManager: NSObject {
     class func appendLog(_ mode: Mode, _ title: String, _ text: String) {
         appendLog(mode, "", title, text)
     }
-    class func appendApiLog(_ apiName: String, _ param: Any, function: String, line: Int) {
+    class func appendApiLog(_ apiName: String, _ param: Any?, function: String, line: Int) {
         let _param = String(describing: type(of: param))
         appendLogEx(.apiFetch, "api", apiName, _param, function, line)
     }
@@ -63,7 +63,7 @@ class LogManager: NSObject {
         print(self.LogFullPath)
     }
     private func appendLog(_ text: String) {
-        let log = "\(Date().dispLogTime)\t\(text)\n"
+        let log = "\(Date().dispLogTime())\t\(text)\n"
         let output = OutputStream(toFileAtPath: self.LogFullPath, append: true)
         output?.open()
         let tmps = [UInt8](log.utf8)

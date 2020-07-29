@@ -85,6 +85,7 @@ private extension LoginConfirmVC {
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         changeButtonState(shouldForceDisable: true)
+        LogManager.appendApiLog("AWSMobileClient", "confirmSignIn", function: #function, line: #line)
         AWSMobileClient.default().confirmSignIn(challengeResponse: code, completionHandler: { (signInResult, error) in
             if let error = error  {
                 let myError = AuthManager.convAnyError(error)
@@ -164,6 +165,7 @@ private extension LoginConfirmVC {
     func resendAuthCode() {
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("AWSMobileClient", "signIn", function: #function, line: #line)
         AWSMobileClient.default().signIn(username: loginInfo.phoneNumberText, password: loginInfo.password)  { (signInResult, error) in
             if let error = error as? AWSMobileClientError {
                 switch error {
