@@ -35,6 +35,7 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
         super.awakeFromNib()
         self.isUserInteractionEnabled = false //表示のみでタップ不可
         //===デザイン適用
+        selectionStyle = .none
         backgroundColor = UIColor(colorType: .color_base)
         vwBoardArea.backgroundColor = .white
         vwBoardArea.cornerRadius = 16

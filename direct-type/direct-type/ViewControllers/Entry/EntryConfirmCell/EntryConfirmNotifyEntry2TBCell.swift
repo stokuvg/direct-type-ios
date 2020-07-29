@@ -39,6 +39,7 @@ class EntryConfirmNotifyEntry2TBCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         //===デザイン適用
+        selectionStyle = .none
         backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
         vwMainArea.backgroundColor = UIColor(colorType: .color_base)
         vwAcceptArea.backgroundColor = UIColor(colorType: .color_base)
