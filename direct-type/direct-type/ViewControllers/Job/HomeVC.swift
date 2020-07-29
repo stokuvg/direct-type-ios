@@ -79,6 +79,12 @@ class HomeVC: TmpNaviTopVC {
         }
     }
     
+    var changeProfileFlag:Bool = false {
+        didSet {
+            Log.selectLog(logLevel: .debug, "new changeProfileFlag:\(changeProfileFlag)")
+        }
+    }
+    
     /*
     var changeKeepStatus:Bool = false {
         didSet {
@@ -108,6 +114,7 @@ class HomeVC: TmpNaviTopVC {
         AnalyticsEventManager.track(type: .viewHome)
 
         if firstViewFlag {
+            Log.selectLog(logLevel: .debug, "初回求人ホーム表示時のAPI取得")
             shouldFetchPersonalData ? getProfileData() : getJobData()
             firstViewFlag = false
         }
@@ -132,11 +139,19 @@ class HomeVC: TmpNaviTopVC {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         Log.selectLog(logLevel: .debug, "HomeVC viewDidAppear start")
-        Log.selectLog(logLevel: .debug, "changeKeepDatas:\(changeKeepDatas)")
         
         // 詳細でキープした求人のキープ状態のチェック
         if changeKeepDatas.count > 0 {
+            Log.selectLog(logLevel: .debug, "changeKeepDatas:\(changeKeepDatas)")
             self.detailKeepStatusChange()
+        } else if firstViewFlag == false && changeProfileFlag == true && changeKeepDatas.count == 0 {
+            Log.selectLog(logLevel: .debug, "マイページ更新後の求人情報更新取得開始")
+            self.getJobData()
+            
+            // 一応情報を再度更新
+            firstViewFlag = false
+            changeKeepDatas = []
+            changeProfileFlag = false
         }
     }
 
