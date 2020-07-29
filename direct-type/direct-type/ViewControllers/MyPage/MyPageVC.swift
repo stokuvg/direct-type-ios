@@ -342,6 +342,7 @@ extension MyPageVC {
 
     func fetchGetProfile() {
         SVProgressHUD.show(withStatus: "情報の取得")
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         var isNeedFetch: Bool = ApiManager.needFetch(.profile, lastDispUpdateProfile)
         if self.profile == nil { isNeedFetch = true } //モデル未取得ならフェッチが必要
         guard isNeedFetch else {
@@ -349,6 +350,7 @@ extension MyPageVC {
             self.fetchGetResume()//次の処理の呼び出し
             return
         }
+        LogManager.appendApiLog("getProfile", Void(), function: #function, line: #line)
         ApiManager.getProfile(Void(), isRetry: true)
         .done { result in
 //            Log.selectLog(logLevel: .debug, "fetchGetProfile 読み込みstart")
@@ -472,7 +474,7 @@ extension MyPageVC {
 //        Log.selectLog(logLevel: .debug, "updateCnt:\(self.updateCnt)")
         
         self.pageTableView.reloadData()
-        SVProgressHUD.dismiss()
+        SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
     }
 }
 
@@ -482,6 +484,8 @@ extension MyPageVC {
         if nickname.isEmpty { return }
         let param = UpdateProfileRequestDTO(nickname: nickname, hopeJobPlaceIds: nil, familyName: nil, firstName: nil, familyNameKana: nil, firstNameKana: nil, birthday: nil, genderId: nil, zipCode: nil, prefectureId: nil, city: nil, town: nil, email: nil)
         SVProgressHUD.show(withStatus: "ニックネームの更新")
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("updateProfile", param, function: #function, line: #line)
         ApiManager.updateProfile(param, isRetry: true)
         .done { result in
             self.profile?.nickname = nickname//ローカルで変更適用しておく
@@ -492,7 +496,7 @@ extension MyPageVC {
             self.showError(myErr)
         }
         .finally {
-            SVProgressHUD.dismiss()
+            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         }
     }
 }

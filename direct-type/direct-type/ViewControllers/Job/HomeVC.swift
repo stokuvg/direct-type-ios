@@ -260,8 +260,10 @@ class HomeVC: TmpNaviTopVC {
 
     private func getJobRecommendAddList() {
         SVProgressHUD.show()
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         pageNo += 1
         pageJobCards = MdlJobCardList()
+        LogManager.appendApiLog("getRecommendJobs", "[pageNo: \(pageNo)]", function: #function, line: #line)
         ApiManager.getRecommendJobs(pageNo, isRetry: true)
             .done { result in
                 Log.selectLog(logLevel: .debug, "getJobRecommendAddList result:\(result.debugDisp)")
@@ -274,7 +276,7 @@ class HomeVC: TmpNaviTopVC {
             self.showError(myErr)
         }
         .finally {
-            SVProgressHUD.dismiss()
+            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             self.dataAddFlag = false
             self.dataAddAction()
         }
@@ -282,8 +284,10 @@ class HomeVC: TmpNaviTopVC {
 
     private func getJobAddList() {
         SVProgressHUD.show()
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         pageNo += 1
         pageJobCards = MdlJobCardList()
+        LogManager.appendApiLog("getJobs", "[pageNo: \(pageNo)]]", function: #function, line: #line)
         ApiManager.getJobs(pageNo, isRetry: true)
             .done { result in
                 Log.selectLog(logLevel: .debug, "getJobAddList result:\(result.debugDisp)")
@@ -296,16 +300,18 @@ class HomeVC: TmpNaviTopVC {
             self.showError(myErr)
         }
         .finally {
-            SVProgressHUD.dismiss()
+            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             self.dataAddFlag = false
             self.dataAddAction()
         }
     }
     private func getJobRecommendList() {
         SVProgressHUD.show()
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         pageJobCards = MdlJobCardList()
         dispJobCards = MdlJobCardList()
         pageNo = 1
+        LogManager.appendApiLog("getRecommendJobs", "[pageNo: \(pageNo)]]", function: #function, line: #line)
         ApiManager.getRecommendJobs(pageNo, isRetry: true)
             .done { result in
                 self.pageJobCards = result
@@ -326,7 +332,7 @@ class HomeVC: TmpNaviTopVC {
                 let nowDateString = DateHelper.mdDateString(date: Date())
                 self.linesTitle(date: nowDateString, title: "あなたにぴったりの求人")
             }
-            SVProgressHUD.dismiss()
+            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             self.dataAddFlag = false
             self.dataCheckAction()
 
@@ -354,7 +360,7 @@ class HomeVC: TmpNaviTopVC {
             self.showError(myErr)
         }
         .finally {
-            SVProgressHUD.dismiss()
+            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             self.linesTitle(date: "", title: "おすすめ求人一覧")
             self.dataAddFlag = false
             self.dataCheckAction()
@@ -363,13 +369,15 @@ class HomeVC: TmpNaviTopVC {
 
     private func getProfileData() {
         SVProgressHUD.show()
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("getProfile", Void(), function: #function, line: #line)
         ApiManager.getProfile(Void(), isRetry: true)
             .done { result in
                 self.profile = result
                 self.getResume()
         }
         .catch { (error) in
-            SVProgressHUD.dismiss()
+            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressErr("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             self.profileErrorHandling(with: error)
         }
         .finally {}
@@ -389,7 +397,7 @@ class HomeVC: TmpNaviTopVC {
         let myError = AuthManager.convAnyError(error)
         let profileError = ProfileApiError.init(rawValue: myError.code)
 
-        SVProgressHUD.dismiss()
+        SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressErr("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         if let errorType = profileError {
             switch errorType {
             case .invalidation, .oldAuthCode:
@@ -708,6 +716,7 @@ extension HomeVC: BaseJobCardCellDelegate {
         if self.keepSendStatus == .sending { return }
 
         SVProgressHUD.show()
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         self.keepSendStatus = .sending
         // TODO:通信処理
         let row = tag
@@ -716,6 +725,7 @@ extension HomeVC: BaseJobCardCellDelegate {
         let flag = !jobCard.keepStatus
         jobCard.keepStatus = flag
         if flag == true {
+            LogManager.appendApiLog("sendJobKeep", "[jobId: \(jobId)]", function: #function, line: #line)
             ApiManager.sendJobKeep(id: jobId)
                 .done { result in
                 // タブに丸ポチを追加
@@ -755,7 +765,7 @@ extension HomeVC: BaseJobCardCellDelegate {
                 })
                 */
 
-                SVProgressHUD.dismiss()
+                SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             }
         } else {
             ApiManager.sendJobDeleteKeep(id: jobId)
@@ -785,7 +795,7 @@ extension HomeVC: BaseJobCardCellDelegate {
                     }
                 })
                 */
-                SVProgressHUD.dismiss()
+                SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             }
         }
     }

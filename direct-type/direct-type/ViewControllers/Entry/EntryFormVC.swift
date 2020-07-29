@@ -322,12 +322,14 @@ extension EntryFormVC {
     }
     private func fetchGetProfile() {
         SVProgressHUD.show(withStatus: "情報の取得")
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         var isNeedFetch: Bool = ApiManager.needFetch(.profile, lastDispUpdateProfile)
         if self.profile == nil { isNeedFetch = true } //モデル未取得ならフェッチが必要
         guard isNeedFetch else {
             self.fetchGetResume()//次の処理の呼び出し
             return
         }
+        LogManager.appendApiLog("getProfile", Void(), function: #function, line: #line)
         ApiManager.getProfile(Void(), isRetry: true)
         .done { result in
             self.profile = result
@@ -389,7 +391,7 @@ extension EntryFormVC {
     }
     private func fetchGroupeFinish() {
         self.dispData()
-        SVProgressHUD.dismiss()
+        SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
     }
 }
 

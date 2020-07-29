@@ -156,6 +156,8 @@ extension CareerListVC: UITableViewDataSource, UITableViewDelegate {
 extension CareerListVC {
     private func fetchGetCareerList() {
         SVProgressHUD.show(withStatus: "職務経歴書情報の取得")
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("getCareer", Void(), function: #function, line: #line)
         ApiManager.getCareer(Void(), isRetry: true)
         .done { result in
             self.arrData.removeAll()
@@ -176,7 +178,7 @@ extension CareerListVC {
         }
         .finally {
             self.dispData()
-            SVProgressHUD.dismiss()
+            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             //===初回画面遷移時の0件誘導
             if self.isFirstFetch && self.arrData.count == 0 {
                 self.actAddCard(self.btnAddCard)
@@ -191,6 +193,8 @@ extension CareerListVC {
         }
         let param = CreateCareerRequestDTO(careerHistory: tempCards)
         SVProgressHUD.show(withStatus: "職務経歴書情報の削除")
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("createCareer", param, function: #function, line: #line)
         ApiManager.createCareer(param, isRetry: true)
         .done { result in
             self.fetchGetCareerList()
@@ -200,7 +204,7 @@ extension CareerListVC {
             self.showError(myErr)
         }
         .finally {
-            SVProgressHUD.dismiss()
+            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             self.dispData()
         }
     }

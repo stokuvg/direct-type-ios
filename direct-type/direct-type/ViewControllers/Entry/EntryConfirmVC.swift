@@ -226,6 +226,8 @@ extension EntryConfirmVC {
         let _typePassword: String = self.bufPassword //半角英数4-20
         let param: WebAPIEntryUserDto = WebAPIEntryUserDto(_jobCardCode, _profile, _resume, _career, _entry, _typePassword)
         SVProgressHUD.show(withStatus: "応募処理")
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("postEntry", param, function: #function, line: #line)
         ApiManager.postEntry(param, isRetry: true)
         .done { result in
             EntryFormManager.deleteCache(jobCardCode: _jobCard.jobCardCode)//応募フォーム情報はクリアして良し
@@ -255,7 +257,7 @@ extension EntryConfirmVC {
             }
         }
         .finally {
-            SVProgressHUD.dismiss()
+            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         }
     }
 

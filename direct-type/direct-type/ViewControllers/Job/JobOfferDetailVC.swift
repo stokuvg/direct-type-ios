@@ -305,8 +305,10 @@ private extension JobOfferDetailVC {
 
         func getJobDetail() {
             SVProgressHUD.show()
+            LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             self._mdlJobDetail = MdlJobCardDetail()
             Log.selectLog(logLevel: .debug, "jobId:\(jobId)")
+            LogManager.appendApiLog("getJobDetail", "[jobId: \(jobId)]", function: #function, line: #line)
             ApiManager.getJobDetail(jobId, isRetry: true)
             .done { result in
                     debugLog("ApiManager getJobDetail result:\(result.debugDisp)")
@@ -332,7 +334,7 @@ private extension JobOfferDetailVC {
                 }
             }
             .finally {
-                SVProgressHUD.dismiss()
+                SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
                 self.recommendAction()
                 self.tableViewSettingAction()
             }

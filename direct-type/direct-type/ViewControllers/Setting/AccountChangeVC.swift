@@ -62,19 +62,21 @@ private extension AccountChangeVC {
         let param = AccountMigrateRequest(phoneNumber: inputText.addCountryCode(type: .japan))
         
         SVProgressHUD.show()
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("accountMigrate", param, function: #function, line: #line)
         ApiManager.accountMigrate(param)
         .done { result in
+            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             self.transitionToConfirmation()
         }
         .catch { (error) in
             DispatchQueue.main.async {
-                SVProgressHUD.dismiss()
+                SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressErr("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
                 print(#line, #function, error.localizedDescription)
                 self.showConfirm(title: "電話番号変更エラー", message: "別の電話番号で再度お試しください。", onlyOK: true)
             }
         }
         .finally {
-            SVProgressHUD.dismiss()
         }
     }
     

@@ -136,6 +136,8 @@ class ResumePreviewVC: PreviewBaseVC {
 extension ResumePreviewVC {
     private func fetchGetResume() {
         SVProgressHUD.show(withStatus: "履歴書の取得")
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("getResume", Void(), function: #function, line: #line)
         ApiManager.getResume(Void(), isRetry: true)
         .done { result in
             self.detail = result
@@ -151,7 +153,7 @@ extension ResumePreviewVC {
         }
         .finally {
             self.dispData()
-            SVProgressHUD.dismiss()
+            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         }
     }
     private func fetchUpdateResume() {
@@ -161,6 +163,7 @@ extension ResumePreviewVC {
         self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
         self.dicValidErrMsg.removeAll()//状態をクリアしておく
         SVProgressHUD.show(withStatus: "履歴書情報の更新")
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         ApiManager.updateResume(param, isRetry: true)
         .done { result in
             self.fetchCompletePopVC()
@@ -178,7 +181,7 @@ extension ResumePreviewVC {
         }
         .finally {
             self.dispData()
-            SVProgressHUD.dismiss()
+            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         }
     }
 }

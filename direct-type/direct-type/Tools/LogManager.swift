@@ -1,20 +1,28 @@
 import UIKit
 
+//Documentsフォルダ以下に【logTest_2020072908.txt】のように出力されるので、適宜表示させて確認できます
+//シミュレータの場合、「$ tail -f /Users/ms-mb000/Library/Developer/CoreSimulator/Devices/~/data/Containers/Data/Application/~/Documents/logTest_2020072908.txt」みたいにやると、幸せになれます
+//ファイル名はアプリ起動時の時刻までで区切って生成されます
+
 class LogManager: NSObject {
     private var cntDispatch: Int = 0
     private var cntSemaphore: Int = 0
     
     enum Mode {
         case ALWAYS
-        case progress
-        case apiFetch
+        case progress   //プログレスの対応確認のため
+        case apiFetch   //apiフェッチの確認のため
+        //===これ以降に必要に応じて追加して利用してください
+        case apiDetail
 
         var isOut: Bool {
             if Constants.DbgOutputLog == false { return false }
             switch self {
-            case .ALWAYS:   return true
-            case .progress: return true
-            case .apiFetch: return true
+            case .ALWAYS:       return true
+            case .progress:     return true
+            case .apiFetch:     return true
+            //===これ以降に必要に応じて追加して利用してください
+            case .apiDetail:    return true
             }
         }
     }
@@ -24,7 +32,7 @@ class LogManager: NSObject {
     class func appendLog(_ mode: Mode, _ title: String, _ text: String) {
         appendLog(mode, "", title, text)
     }
-    class func appendApiLog(_ apiName: String, _ param: Any, function: String, line: Int) {
+    class func appendApiLog(_ apiName: String, _ param: Any?, function: String, line: Int) {
         let _param = String(describing: type(of: param))
         appendLogEx(.apiFetch, "api", apiName, _param, function, line)
     }
@@ -45,6 +53,7 @@ class LogManager: NSObject {
     }
     class func appendLogProgressIn(_ api: String) { appendLogProgress("Progress In", api) }
     class func appendLogProgressOut(_ api: String) { appendLogProgress("Progress Out", api) }
+    class func appendLogProgressErr(_ api: String) { appendLogProgress("Progress Out(Err)", api) }
     class func appendLogProgress(_ title: String, _ text: String) {
         LogManager.appendLog(.progress, title, text)
     }
@@ -62,7 +71,7 @@ class LogManager: NSObject {
         print(self.LogFullPath)
     }
     private func appendLog(_ text: String) {
-        let log = "\(Date().dispLogTime)\t\(text)\n"
+        let log = "\(Date().dispLogTime())\t\(text)\n"
         let output = OutputStream(toFileAtPath: self.LogFullPath, append: true)
         output?.open()
         let tmps = [UInt8](log.utf8)

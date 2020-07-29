@@ -127,6 +127,8 @@ class ProfilePreviewVC: PreviewBaseVC {
 extension ProfilePreviewVC {
     private func fetchGetProfile() {
         SVProgressHUD.show(withStatus: "プロフィール情報の取得")
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("getProfile", Void(), function: #function, line: #line)
         ApiManager.getProfile(Void(), isRetry: true)
         .done { result in
             self.detail = result
@@ -144,7 +146,7 @@ extension ProfilePreviewVC {
         }
         .finally {
             self.dispData()
-            SVProgressHUD.dismiss()
+            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         }
     }
     private func fetchUpdateProfile() {
@@ -152,17 +154,17 @@ extension ProfilePreviewVC {
         self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
         self.dicValidErrMsg.removeAll()//状態をクリアしておく
         SVProgressHUD.show(withStatus: "プロフィール情報の更新")
-        LogManager.appendLogProgressIn("プロフィール情報の更新")
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         LogManager.appendApiLog("updateProfile", param, function: #function, line: #line)
         ApiManager.updateProfile(param, isRetry: true)
         .done { result in
             // 戻す前に画面内でインジケータを削除しないと、前の画面でインジケータが表示されない
-            SVProgressHUD.dismiss()
-            LogManager.appendLogProgressOut("プロフィール情報の更新")
+            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             self.fetchCompletePopVC()
         }
         .catch { (error) in
-            SVProgressHUD.dismiss()
+            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressErr("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+            LogManager.appendLogProgressErr("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
             case 400:

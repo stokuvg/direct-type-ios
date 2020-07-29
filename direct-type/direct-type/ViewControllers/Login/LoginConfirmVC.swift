@@ -83,7 +83,9 @@ private extension LoginConfirmVC {
     
     func tryConfirmAuthCode(with code: String) {
         SVProgressHUD.show()
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         changeButtonState(shouldForceDisable: true)
+        LogManager.appendApiLog("AWSMobileClient", "confirmSignIn", function: #function, line: #line)
         AWSMobileClient.default().confirmSignIn(challengeResponse: code, completionHandler: { (signInResult, error) in
             if let error = error  {
                 let myError = AuthManager.convAnyError(error)
@@ -93,7 +95,7 @@ private extension LoginConfirmVC {
                         self.showConfirm(title: "認証エラー", message: "認証コードを再送信してください。", onlyOK: true)
                     }
                     self.changeButtonState()
-                    SVProgressHUD.dismiss()
+                    SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressErr("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
                 }
                 return
             }
@@ -127,7 +129,7 @@ private extension LoginConfirmVC {
             DispatchQueue.main.async {
                 print(#line, #function, buf)
                 self.changeButtonState()
-                SVProgressHUD.dismiss()
+                SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             }
         })
     }
@@ -162,6 +164,8 @@ private extension LoginConfirmVC {
     
     func resendAuthCode() {
         SVProgressHUD.show()
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("AWSMobileClient", "signIn", function: #function, line: #line)
         AWSMobileClient.default().signIn(username: loginInfo.phoneNumberText, password: loginInfo.password)  { (signInResult, error) in
             if let error = error as? AWSMobileClientError {
                 switch error {
@@ -174,7 +178,7 @@ private extension LoginConfirmVC {
                         let buf = AuthManager.convAnyError(error).debugDisp
                         self.showConfirm(title: "Error", message: buf, onlyOK: true)
                         self.changeButtonState()
-                        SVProgressHUD.dismiss()
+                        SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressErr("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
                     }
                 }
                 return
@@ -196,7 +200,7 @@ private extension LoginConfirmVC {
             }
             DispatchQueue.main.async {
                 self.changeButtonState()
-                SVProgressHUD.dismiss()
+                SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             }
         }
     }
