@@ -146,7 +146,7 @@ class HomeVC: TmpNaviTopVC {
             self.detailKeepStatusChange()
         } else if firstViewFlag == false && changeProfileFlag == true && changeKeepDatas.count == 0 {
             Log.selectLog(logLevel: .debug, "マイページ更新後の求人情報更新取得開始")
-            self.getJobData()
+            self.getProfileData()
             
             // 一応情報を再度更新
             firstViewFlag = false

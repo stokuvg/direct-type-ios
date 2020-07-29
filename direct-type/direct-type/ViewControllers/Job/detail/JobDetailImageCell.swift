@@ -78,6 +78,7 @@ class JobDetailImageCell: BaseTableViewCell {
             self.mainImagesScrollView.showsVerticalScrollIndicator = false
             self.mainImagesScrollView.showsHorizontalScrollIndicator = false
             self.mainImagesScrollView.delegate = self
+            
             self.mainImageBackView.addSubview(self.mainImagesScrollView)
         }
     }
@@ -107,12 +108,39 @@ class JobDetailImageCell: BaseTableViewCell {
         return addFlag
     }
     
+    private func makeBackViewSize(viewSize:CGSize,imageSize: CGSize) -> CGSize {
+        
+        var backViewWidth:CGFloat = 0.0
+        var backViewHeight:CGFloat = 0.0
+        
+        backViewWidth = viewSize.width - (margin * 2)
+        backViewHeight = (backViewWidth*imageSize.height)/imageSize.width
+        if backViewHeight > viewSize.height {
+            backViewHeight = viewSize.height
+        }
+        
+        let backViewSize = CGSize(width: backViewWidth, height: backViewHeight)
+        return backViewSize
+    }
+    
     func setup(data: MdlJobCardDetail) {
-        Log.selectLog(logLevel: .debug, "JobDetailImageCell setup start")
+//        Log.selectLog(logLevel: .debug, "JobDetailImageCell setup start")
         // 画像セット
         
         let mainImageUrlString:String = data.mainPicture
         let subImageUrlStrings:[String] = data.subPictures
+        
+        let imageSizeCheckView:UIImageView! = UIImageView()
+        let checkImageURL = URL(string: mainImageUrlString)
+        imageSizeCheckView.af_setImage(withURL: checkImageURL!)
+        let checkImage = imageSizeCheckView.image
+//        Log.selectLog(logLevel: .debug, "checkImage:\(String(describing: checkImage))")
+        let checkImageSize = checkImage?.size ?? CGSize.zero
+//        Log.selectLog(logLevel: .debug, "checkImageSize:\(String(describing: checkImageSize))")
+        
+        let backViewSize = self.makeBackViewSize(viewSize: self.mainImagesScrollView.bounds.size, imageSize: checkImageSize)
+        
+        imageY = (viewHeight - backViewSize.height) / 2
         
         var imageUrlStrings:[String] = [mainImageUrlString]
         if subImageUrlStrings.count > 0 {
@@ -137,20 +165,30 @@ class JobDetailImageCell: BaseTableViewCell {
                     if i >= imageUrlStrings.count {
                         cnt = i % imageUrlStrings.count
                     }
+                    
                     let imageUrlString = imageUrlStrings[cnt]
                     let imageUrl = URL(string: imageUrlString)
                     let scrollX:CGFloat = (margin + (viewWidth * CGFloat(i)))
+                    
+                    let imageBackView = UIView.init(frame: CGRect(x: scrollX, y: imageY, width: backViewSize.width, height: backViewSize.height))
+                    
+                    imageBackView.layer.cornerRadius = 15
+                    imageBackView.layer.masksToBounds = true
+                    imageBackView.clipsToBounds = true
 
-                    let imageView = UIImageView.init(frame: CGRect(x: scrollX, y: imageY, width: imageW, height: imageH))
+//                    let imageView = UIImageView.init(frame: CGRect(x: scrollX, y: imageY, width: imageW, height: imageH))
+                    let imageView = UIImageView.init(frame: CGRect(x: 0, y: 0, width: backViewSize.width, height: backViewSize.height))
                     imageView.backgroundColor = UIColor.init(colorType: .color_white)
-                    imageView.contentMode = .scaleAspectFill
+                    imageView.contentMode = .scaleAspectFit
                     imageView.af_setImage(withURL: imageUrl!)
                     
                     imageView.layer.cornerRadius = 15
                     imageView.layer.masksToBounds = true
                     imageView.clipsToBounds = true
                     
-                    self.mainImagesScrollView.addSubview(imageView)
+                    imageBackView.addSubview(imageView)
+                    
+                    self.mainImagesScrollView.addSubview(imageBackView)
                 }
                 self.mainImagesScrollView.contentSize = CGSize(width: (CGFloat(imageUrlStrings.count*3) * viewWidth), height: viewHeight)
             }
@@ -167,17 +205,26 @@ class JobDetailImageCell: BaseTableViewCell {
                     if imageUrlString.count > 0 {
                         let imageUrl = URL(string: imageUrlString)
                         let scrollX:CGFloat = (margin + (viewWidth * CGFloat(i)))
+                        
+                        let imageBackView = UIView.init(frame: CGRect(x: scrollX, y: imageY, width: backViewSize.width, height: backViewSize.height))
+                        
+                        imageBackView.layer.cornerRadius = 15
+                        imageBackView.layer.masksToBounds = true
+                        imageBackView.clipsToBounds = true
 
-                        let imageView = UIImageView.init(frame: CGRect(x: scrollX, y: imageY, width: imageW, height: imageH))
+                        let imageView = UIImageView.init(frame: CGRect(x: 0, y: 0, width: backViewSize.width, height: backViewSize.height))
+//                        let imageView = UIImageView.init(frame: CGRect(x: scrollX, y: imageY, width: imageW, height: imageH))
                         imageView.backgroundColor = UIColor.init(colorType: .color_white)
-                        imageView.contentMode = .scaleAspectFill
+                        imageView.contentMode = .scaleAspectFit
                         imageView.af_setImage(withURL: imageUrl!)
                         
                         imageView.layer.cornerRadius = 15
                         imageView.layer.masksToBounds = true
                         imageView.clipsToBounds = true
                         
-                        self.mainImagesScrollView.addSubview(imageView)
+                        imageBackView.addSubview(imageView)
+                        
+                        self.mainImagesScrollView.addSubview(imageBackView)
                     }
                 }
             }
