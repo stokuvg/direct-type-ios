@@ -76,7 +76,7 @@ class JobOfferBigCardCell: BaseJobCardCell {
         // 職業
         let job:String = data.jobName
         jobLabel.text(text: job, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
-        jobLabel.sizeToFit()
+//        jobLabel.sizeToFit()
         
         if limitedType == .none {
             self.jobLabelTop.constant = 15
