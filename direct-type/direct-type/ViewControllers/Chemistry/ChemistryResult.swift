@@ -138,6 +138,9 @@ extension ChemistryResult: UITableViewDataSource {
 
 extension ChemistryResult: ChemistryResultFooterViewDelegate {
     func didTapCompleteButton() {
+        if let tabBar = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController {
+            tabBar.selectedIndex = 0
+        }
         navigationController?.popToRootViewController(animated: true)
     }
 }
