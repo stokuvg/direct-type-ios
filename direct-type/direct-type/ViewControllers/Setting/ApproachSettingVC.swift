@@ -59,8 +59,11 @@ private extension ApproachSettingVC {
         let param = UpdateSettingsRequestDTO(scoutEnable: isScoutEnable)
         LogManager.appendApiLog("updateApproach", param, function: #function, line: #line)
         ApiManager.updateApproach(param, isRetry: true)
-        .done { _ in }
+        .done { result in
+            LogManager.appendApiResultLog("updateApproach", result, function: #function, line: #line)
+        }
         .catch { (error) in
+            LogManager.appendApiErrorLog("updateApproach", error, function: #function, line: #line)
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             print(myErr)
         }

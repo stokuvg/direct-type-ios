@@ -66,10 +66,12 @@ private extension AccountChangeVC {
         LogManager.appendApiLog("accountMigrate", param, function: #function, line: #line)
         ApiManager.accountMigrate(param)
         .done { result in
+            LogManager.appendApiResultLog("accountMigrate", result, function: #function, line: #line)
             SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             self.transitionToConfirmation()
         }
         .catch { (error) in
+            LogManager.appendApiErrorLog("accountMigrate", error, function: #function, line: #line)
             DispatchQueue.main.async {
                 SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressErr("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
                 print(#line, #function, error.localizedDescription)

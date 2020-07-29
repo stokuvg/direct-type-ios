@@ -159,10 +159,12 @@ extension CareerPreviewVC {
         LogManager.appendApiLog("createCareer", param, function: #function, line: #line)
         ApiManager.createCareer(param, isRetry: true)
         .done { result in
+            LogManager.appendApiResultLog("createCareer", result, function: #function, line: #line)
             //self.fetchGetCareerList()
             self.fetchCompletePopVC()
         }
         .catch { (error) in
+            LogManager.appendApiErrorLog("createCareer", error, function: #function, line: #line)
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
             case 400:

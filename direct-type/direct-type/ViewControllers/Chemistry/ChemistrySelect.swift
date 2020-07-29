@@ -101,10 +101,12 @@ private extension ChemistrySelect {
         LogManager.appendApiLog("createChemistry", parameter, function: #function, line: #line)
         ApiManager.createChemistry(parameter, isRetry: true)
         .done { result in
+            LogManager.appendApiResultLog("createChemistry", result, function: #function, line: #line)
             ApiManager.shared.dicLastUpdate[.topRanker] = Date(timeIntervalSince1970: 0)//モデル更新したので、一覧再取得が必要
             self.transitionToChemisrortResult()
         }
         .catch { (error) in
+            LogManager.appendApiErrorLog("createChemistry", error, function: #function, line: #line)
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             self.showConfirm(title: "データ送信エラー", message: myErr.message, onlyOK: true)
         }

@@ -311,16 +311,18 @@ private extension JobOfferDetailVC {
             LogManager.appendApiLog("getJobDetail", "[jobId: \(jobId)]", function: #function, line: #line)
             ApiManager.getJobDetail(jobId, isRetry: true)
             .done { result in
-                    debugLog("ApiManager getJobDetail result:\(result.debugDisp)")
+                LogManager.appendApiResultLog("getJobDetail", result, function: #function, line: #line)
+                debugLog("ApiManager getJobDetail result:\(result.debugDisp)")
 
-                    self._mdlJobDetail = result
+                self._mdlJobDetail = result
 
-                    self.makeArticleHeaderSize()
-                    self.makeArticleCellSize()
+                self.makeArticleHeaderSize()
+                self.makeArticleCellSize()
 
-                    self.makePrCodesCellSize()
+                self.makePrCodesCellSize()
             }
             .catch { (error) in
+                LogManager.appendApiErrorLog("getJobDetail", error, function: #function, line: #line)
                 Log.selectLog(logLevel: .debug, "error:\(error)")
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 Log.selectLog(logLevel: .debug, "myErr:\(myErr.debugDisp)")

@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        let _launchOptions = launchOptions ?? [:]
+        LogManager.appendLogEx(.ALWAYS, "起動", String(repeating: "=", count: 44), _launchOptions.debugDescription, #function, #line)
         // Override point for customization after application launch.
         if #available(iOS 13.0, *) {
             UIApplication.shared.statusBarStyle = .darkContent

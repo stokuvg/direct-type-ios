@@ -87,38 +87,6 @@ class CareerCardTBCell: UITableViewCell {
         if let buf = SelectItemsManager.getCodeDisp(.salary, code: career.salary) {
             dispCompany.append(buf.disp)
         }
-
-
-
-        //=== 職務経歴詳細（サクサクの名残あり）
-        var dispWorknote: [String] = []
-        //業種分類
-        //case businessType ???
-        //業務内容
-        var workInfo: String = ""
-        workInfo = ["・業務内容", Constants.TypeDummyStrings].joined(separator: "\n")
-        //マネジメント経験
-        //case experienceManagement
-        var expManagement: String = ""
-        expManagement = ["・マネジメント経験", Constants.TypeDummyStrings].joined(separator: "\n")
-        //PCスキル
-        //case skillExcel
-        //case skillWord
-        //case skillPowerPoint
-        var skillPC: String = ""
-        skillPC = ["・PCスキル", Constants.TypeDummyStrings].joined(separator: "\n")
-        //実績
-        var workDetail: String = ""
-        workDetail = ["・実績", Constants.TypeDummyStrings].joined(separator: "\n")
-        //=くっつける
-        if !workInfo.isEmpty { dispWorknote.append(workInfo) }
-        if !expManagement.isEmpty { dispWorknote.append(expManagement) }
-        if !skillPC.isEmpty { dispWorknote.append(skillPC) }
-        if !workDetail.isEmpty { dispWorknote.append(workDetail) }
-        if career.contents.isEmpty {
-            career.contents = dispWorknote.joined(separator: "\n\n")
-        }
-
         //===表示させる
         lblTitle.text(text: bufTitle, fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .left)
         lblTitle.updateConstraints()
@@ -132,7 +100,9 @@ class CareerCardTBCell: UITableViewCell {
         if dispCompany.count > 0 {
             stackVW.addArrangedSubview(CareerCardItemVW("在籍企業概要", dispCompany.joined(separator: "\n")))
         }
-        stackVW.addArrangedSubview(CareerCardItemVW("職務経歴詳細", career.contents))
+        if !career.contents.isEmpty {
+            stackVW.addArrangedSubview(CareerCardItemVW("職務経歴詳細", career.contents))
+        }
         //すべてを表示させる
         for asv in stackVW.arrangedSubviews {
             if let eci = asv as? CareerCardItemVW {

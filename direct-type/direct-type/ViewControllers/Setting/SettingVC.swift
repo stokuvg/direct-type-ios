@@ -210,9 +210,11 @@ extension SettingVC {
         LogManager.appendApiLog("getApproach", nil, function: #function, line: #line)
         ApiManager.getApproach(())
         .done { result in
+            LogManager.appendApiResultLog("getApproach", result, function: #function, line: #line)
             self.approachSetting = result
         }
         .catch { (error) in
+            LogManager.appendApiErrorLog("getApproach", error, function: #function, line: #line)
             let myError: MyErrorDisp = AuthManager.convAnyError(error)
             print("アプローチデータ取得エラー！　コード: \(myError.code)")
             self.showError(myError)

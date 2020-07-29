@@ -88,13 +88,14 @@ private extension AccountChangeConfirmVC {
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         LogManager.appendApiLog("accountMigrateAnswer", param, function: #function, line: #line)
         ApiManager.accountMigrateAnswer(param)
-        .done { _ in
-            
+        .done { result in
+            LogManager.appendApiResultLog("accountMigrateAnswer", result, function: #function, line: #line)
             SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             self.showConfirm(title: "アカウント変更が完了しました", message: "新しいアカウントで再度ログインしてください。", onlyOK: true)
             .done { _ in self.tryLogout() } .catch { (error) in } .finally { }
         }
         .catch { (error) in
+            LogManager.appendApiErrorLog("accountMigrateAnswer", error, function: #function, line: #line)
             DispatchQueue.main.async {
                 SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressErr("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
                 print(#line, #function, error.localizedDescription)
@@ -109,6 +110,7 @@ private extension AccountChangeConfirmVC {
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         LogManager.appendApiLog("AWSMobileClient", "signOut", function: #function, line: #line)
         AWSMobileClient.default().signOut { (error) in
+            LogManager.appendApiErrorLog("signOut", error, function: #function, line: #line)
             if let error = error {
                 DispatchQueue.main.async {
                     SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressErr("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
@@ -116,6 +118,7 @@ private extension AccountChangeConfirmVC {
                 }
                 return
             }
+            LogManager.appendApiResultLog("signOut", "成功", function: #function, line: #line)
             DispatchQueue.main.async {
                 SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
                 self.transitionToInitialView()
@@ -137,10 +140,12 @@ private extension AccountChangeConfirmVC {
         LogManager.appendApiLog("accountMigrate", param, function: #function, line: #line)
         ApiManager.accountMigrate(param)
         .done { result in
+            LogManager.appendApiResultLog("accountMigrate", result, function: #function, line: #line)
             SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             self.showConfirm(title: "認証コードを再送信しました", message: "", onlyOK: true)
         }
         .catch { (error) in
+            LogManager.appendApiErrorLog("accountMigrate", error, function: #function, line: #line)
             DispatchQueue.main.async {
                 SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressErr("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
                 print(#line, #function, error.localizedDescription)

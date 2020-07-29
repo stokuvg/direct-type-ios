@@ -88,6 +88,7 @@ private extension LoginVC {
         LogManager.appendApiLog("AWSMobileClient", "signIn", function: #function, line: #line)
         AWSMobileClient.default().signIn(username: phoneNumberText.addCountryCode(type: .japan), password: AppDefine.password)  { (signInResult, error) in
             if let error = error as? AWSMobileClientError {
+                LogManager.appendApiErrorLog("signIn", error, function: #function, line: #line)
                 switch error {
                 case .invalidParameter:
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -106,7 +107,7 @@ private extension LoginVC {
                 }
                 return
             }
-            
+            LogManager.appendApiResultLog("signIn", signInResult, function: #function, line: #line)
             guard let signInResult = signInResult else {
                 print("レスポンスがが正常に受け取れませんでした")
                 return

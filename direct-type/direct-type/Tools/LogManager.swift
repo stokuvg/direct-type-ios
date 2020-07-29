@@ -12,6 +12,8 @@ class LogManager: NSObject {
         case ALWAYS
         case progress   //プログレスの対応確認のため
         case apiFetch   //apiフェッチの確認のため
+        case apiResult  //apiフェッチで成功した場合のレスポンス
+        case apiError   //apiフェッチで失敗した場合のエラー
         //===これ以降に必要に応じて追加して利用してください
         case apiDetail
 
@@ -21,6 +23,8 @@ class LogManager: NSObject {
             case .ALWAYS:       return true
             case .progress:     return true
             case .apiFetch:     return true
+            case .apiResult:    return true
+            case .apiError:     return true
             //===これ以降に必要に応じて追加して利用してください
             case .apiDetail:    return true
             }
@@ -32,10 +36,20 @@ class LogManager: NSObject {
     class func appendLog(_ mode: Mode, _ title: String, _ text: String) {
         appendLog(mode, "", title, text)
     }
+
     class func appendApiLog(_ apiName: String, _ param: Any?, function: String, line: Int) {
-        let _param = String(describing: type(of: param))
-        appendLogEx(.apiFetch, "api", apiName, _param, function, line)
+        let _param = param.debugDescription
+        appendLogEx(.apiFetch, "api", " * [\(apiName)]", _param, function, line)
     }
+    class func appendApiResultLog(_ apiName: String, _ result: Any?, function: String, line: Int) {
+        let _result = result.debugDescription
+        appendLogEx(.apiFetch, "api", "OK [\(apiName)] ", _result, function, line)
+    }
+    class func appendApiErrorLog(_ apiName: String, _ error: Any?, function: String, line: Int) {
+        let _error = error.debugDescription
+        appendLogEx(.apiFetch, "api", "NG [\(apiName)]", _error, function, line)
+    }
+
     class func appendLog(_ mode: Mode, _ grp: String, _ title: String, _ text: String) {
         appendLogEx(mode, grp, title, text, "", 0)
     }

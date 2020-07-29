@@ -92,11 +92,14 @@ private extension WithDrawalVC {
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         LogManager.appendApiLog("sendDeleteAccount", nil, function: #function, line: #line)
         ApiManager.sendDeleteAccount()
-        .done { _ in
+        .done { result in
+            LogManager.appendApiResultLog("sendDeleteAccount", result, function: #function, line: #line)
             AnalyticsEventManager.track(type: .withdrawal)
             self.transitionToWithdrawalComplete()
             self.clearLocalData()
+            LogManager.appendApiLog("AWSMobileClient", "signOut", function: #function, line: #line)
             AWSMobileClient.default().signOut { (error) in
+                LogManager.appendApiErrorLog("signOut", error, function: #function, line: #line)
                 if let error = error {
                     DispatchQueue.main.async {
                         self.showError(error)
@@ -106,6 +109,7 @@ private extension WithDrawalVC {
             }
         }
         .catch{ (error) in
+            LogManager.appendApiErrorLog("sendDeleteAccount", error, function: #function, line: #line)
             let myErr = AuthManager.convAnyError(error)
             self.showError(myErr)
         }

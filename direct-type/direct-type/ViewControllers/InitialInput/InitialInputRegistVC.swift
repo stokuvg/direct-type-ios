@@ -94,6 +94,7 @@ private extension InitialInputRegistVC {
         LogManager.appendApiLog("AWSMobileClient", "signUp", function: #function, line: #line)
         AWSMobileClient.default().signUp(username: phoneNumber, password: AppDefine.password, userAttributes: phoneNumberAttribute) { (signUpResult, error) in
             if let error = error {
+                LogManager.appendApiErrorLog("signUp", error, function: #function, line: #line)
                 let myError = AuthManager.convAnyError(error)
                 DispatchQueue.main.async {
                     let errorType = MyErrorDisp.CodeType(rawValue: myError.code)
@@ -105,6 +106,7 @@ private extension InitialInputRegistVC {
                 }
                 return
             }
+            LogManager.appendApiResultLog("signUp", signUpResult, function: #function, line: #line)
             guard let signUpResult = signUpResult else { return }
             print(signUpResult.signUpConfirmationState)
             print(signUpResult.codeDeliveryDetails.debugDescription)
@@ -134,6 +136,7 @@ private extension InitialInputRegistVC {
         LogManager.appendApiLog("AWSMobileClient", "signIn", function: #function, line: #line)
         AWSMobileClient.default().signIn(username: phoneNumberText.addCountryCode(type: .japan), password: AppDefine.password) { (signInResult, error) in
             if let error = error as? AWSMobileClientError {
+                LogManager.appendApiErrorLog("signIn", error, function: #function, line: #line)
                 switch error {
                 case .invalidParameter:
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -149,6 +152,7 @@ private extension InitialInputRegistVC {
                 }
                 return
             }
+            LogManager.appendApiResultLog("signIn", signInResult, function: #function, line: #line)
             guard let signInResult = signInResult else { return }
             var buf: String = ""
             switch signInResult.signInState {
