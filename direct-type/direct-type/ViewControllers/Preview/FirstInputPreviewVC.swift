@@ -119,9 +119,11 @@ private extension FirstInputPreviewVC {
         LogManager.appendApiLog("createProfile", param, function: #function, line: #line)
         ApiManager.createProfile(param, isRetry: true)
         .done { result in
+            LogManager.appendApiResultLog("createProfile", result, function: #function, line: #line)
             self.fetchCreateResume()
         }
         .catch { (error) in
+            LogManager.appendApiErrorLog("createProfile", error, function: #function, line: #line)
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
             case 400:
@@ -147,9 +149,11 @@ private extension FirstInputPreviewVC {
         LogManager.appendApiLog("createResume", param, function: #function, line: #line)
         ApiManager.createResume(param, isRetry: true)
         .done { result in
+            LogManager.appendApiResultLog("createResume", result, function: #function, line: #line)
             self.fetchCreateSetting()
         }
         .catch { (error) in
+            LogManager.appendApiErrorLog("createResume", error, function: #function, line: #line)
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
             case 400:
@@ -173,9 +177,11 @@ private extension FirstInputPreviewVC {
         LogManager.appendApiLog("createApproach", param, function: #function, line: #line)
         ApiManager.createApproach(param, isRetry: true)
         .done { result in
+            LogManager.appendApiResultLog("createApproach", result, function: #function, line: #line)
             self.transitionToComplete()
         }
         .catch { (error) in
+            LogManager.appendApiErrorLog("createApproach", error, function: #function, line: #line)
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             self.showError(myErr)
         }

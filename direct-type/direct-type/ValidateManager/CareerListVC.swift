@@ -160,6 +160,7 @@ extension CareerListVC {
         LogManager.appendApiLog("getCareer", Void(), function: #function, line: #line)
         ApiManager.getCareer(Void(), isRetry: true)
         .done { result in
+            LogManager.appendApiResultLog("getCareer", result, function: #function, line: #line)
             self.arrData.removeAll()
             for (_, item) in result.businessTypes.enumerated() {
                 self.arrData.append(item)
@@ -167,6 +168,7 @@ extension CareerListVC {
             self.lastDispUpdateCareerList = Date()//取得したデータで表示更新するので
         }
         .catch { (error) in
+            LogManager.appendApiErrorLog("getCareer", error, function: #function, line: #line)
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
             case 404://見つからない場合、空データを適用して画面を表示
@@ -197,9 +199,11 @@ extension CareerListVC {
         LogManager.appendApiLog("createCareer", param, function: #function, line: #line)
         ApiManager.createCareer(param, isRetry: true)
         .done { result in
+            LogManager.appendApiResultLog("createCareer", result, function: #function, line: #line)
             self.fetchGetCareerList()
         }
         .catch { (error) in
+            LogManager.appendApiErrorLog("createCareer", error, function: #function, line: #line)
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             self.showError(myErr)
         }

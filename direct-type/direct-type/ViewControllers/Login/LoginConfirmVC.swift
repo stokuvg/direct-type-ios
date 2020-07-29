@@ -88,6 +88,7 @@ private extension LoginConfirmVC {
         LogManager.appendApiLog("AWSMobileClient", "confirmSignIn", function: #function, line: #line)
         AWSMobileClient.default().confirmSignIn(challengeResponse: code, completionHandler: { (signInResult, error) in
             if let error = error  {
+                LogManager.appendApiErrorLog("confirmSignIn", error, function: #function, line: #line)
                 let myError = AuthManager.convAnyError(error)
                 DispatchQueue.main.async {
                     let errorType = MyErrorDisp.CodeType(rawValue: myError.code)
@@ -99,7 +100,7 @@ private extension LoginConfirmVC {
                 }
                 return
             }
-            
+            LogManager.appendApiResultLog("confirmSignIn", signInResult, function: #function, line: #line)
             guard let signInResult = signInResult else { return }
             var buf: String = ""
             switch (signInResult.signInState) {
@@ -168,6 +169,7 @@ private extension LoginConfirmVC {
         LogManager.appendApiLog("AWSMobileClient", "signIn", function: #function, line: #line)
         AWSMobileClient.default().signIn(username: loginInfo.phoneNumberText, password: loginInfo.password)  { (signInResult, error) in
             if let error = error as? AWSMobileClientError {
+                LogManager.appendApiErrorLog("signIn", error, function: #function, line: #line)
                 switch error {
                 case .invalidParameter:
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -183,7 +185,7 @@ private extension LoginConfirmVC {
                 }
                 return
             }
-            
+            LogManager.appendApiResultLog("signIn", signInResult, function: #function, line: #line)
             guard let signInResult = signInResult else {
                 print("レスポンスがが正常に受け取れませんでした")
                 return

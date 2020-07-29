@@ -140,9 +140,11 @@ extension ResumePreviewVC {
         LogManager.appendApiLog("getResume", Void(), function: #function, line: #line)
         ApiManager.getResume(Void(), isRetry: true)
         .done { result in
+            LogManager.appendApiResultLog("getResume", result, function: #function, line: #line)
             self.detail = result
         }
         .catch { (error) in
+            LogManager.appendApiErrorLog("getResume", error, function: #function, line: #line)
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
             case 404://見つからない場合、空データを適用して画面を表示

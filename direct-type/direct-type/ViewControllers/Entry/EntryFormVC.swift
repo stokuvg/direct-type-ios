@@ -332,10 +332,12 @@ extension EntryFormVC {
         LogManager.appendApiLog("getProfile", Void(), function: #function, line: #line)
         ApiManager.getProfile(Void(), isRetry: true)
         .done { result in
+            LogManager.appendApiResultLog("getProfile", result, function: #function, line: #line)
             self.profile = result
             self.lastDispUpdateProfile = Date()//取得したデータで表示更新するので
         }
         .catch { (error) in
+            LogManager.appendApiErrorLog("getProfile", error, function: #function, line: #line)
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             print(myErr)
         }

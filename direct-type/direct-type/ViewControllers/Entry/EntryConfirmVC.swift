@@ -230,11 +230,13 @@ extension EntryConfirmVC {
         LogManager.appendApiLog("postEntry", param, function: #function, line: #line)
         ApiManager.postEntry(param, isRetry: true)
         .done { result in
+            LogManager.appendApiResultLog("postEntry", result, function: #function, line: #line)
             EntryFormManager.deleteCache(jobCardCode: _jobCard.jobCardCode)//応募フォーム情報はクリアして良し
             AnalyticsEventManager.track(type: .completeEntry)
             self.pushViewController(.entryComplete)
         }
         .catch { (error) in
+            LogManager.appendApiErrorLog("postEntry", error, function: #function, line: #line)
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
             case 404:

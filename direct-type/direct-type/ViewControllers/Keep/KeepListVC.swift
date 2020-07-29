@@ -104,14 +104,16 @@ private extension KeepListVC {
         pageNo = 1
         LogManager.appendApiLog("getKeeps", "[pageNo: \(pageNo)]", function: #function, line: #line)
         ApiManager.getKeeps(pageNo, isRetry: true)
-            .done { result in
-                debugLog("ApiManager getKeeps result:\(result.debugDisp)")
+        .done { result in
+            LogManager.appendApiResultLog("getKeeps", result, function: #function, line: #line)
+            debugLog("ApiManager getKeeps result:\(result.debugDisp)")
 
-                self.lists = result.keepJobs
-                self.hasNext = result.hasNext
-                self.dataDisplay()
+            self.lists = result.keepJobs
+            self.hasNext = result.hasNext
+            self.dataDisplay()
         }
         .catch { (error) in
+            LogManager.appendApiErrorLog("getKeeps", error, function: #function, line: #line)
             Log.selectLog(logLevel: .debug, "error:\(error)")
 
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -141,14 +143,16 @@ private extension KeepListVC {
         pageNo += 1
         LogManager.appendApiLog("getKeeps", "[pageNo: \(pageNo)]", function: #function, line: #line)
         ApiManager.getKeeps(pageNo, isRetry: true)
-            .done { result in
-                debugLog("ApiManager getKeeps result:\(result.debugDisp)")
+        .done { result in
+            LogManager.appendApiResultLog("getKeeps", result, function: #function, line: #line)
+            debugLog("ApiManager getKeeps result:\(result.debugDisp)")
 
-                self.lists += result.keepJobs
-                self.hasNext = result.hasNext
-                self.dataDisplay()
+            self.lists += result.keepJobs
+            self.hasNext = result.hasNext
+            self.dataDisplay()
         }
         .catch { (error) in
+            LogManager.appendApiErrorLog("getKeeps", error, function: #function, line: #line)
             Log.selectLog(logLevel: .debug, "error:\(error)")
 
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)

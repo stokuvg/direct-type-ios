@@ -131,9 +131,11 @@ extension ProfilePreviewVC {
         LogManager.appendApiLog("getProfile", Void(), function: #function, line: #line)
         ApiManager.getProfile(Void(), isRetry: true)
         .done { result in
+            LogManager.appendApiResultLog("getProfile", result, function: #function, line: #line)
             self.detail = result
         }
         .catch { (error) in
+            LogManager.appendApiErrorLog("getProfile", error, function: #function, line: #line)
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
             case 403:
@@ -158,11 +160,13 @@ extension ProfilePreviewVC {
         LogManager.appendApiLog("updateProfile", param, function: #function, line: #line)
         ApiManager.updateProfile(param, isRetry: true)
         .done { result in
+            LogManager.appendApiResultLog("updateProfile", result, function: #function, line: #line)
             // 戻す前に画面内でインジケータを削除しないと、前の画面でインジケータが表示されない
             SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             self.fetchCompletePopVC()
         }
         .catch { (error) in
+            LogManager.appendApiErrorLog("updateProfile", error, function: #function, line: #line)
             SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressErr("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             LogManager.appendLogProgressErr("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)

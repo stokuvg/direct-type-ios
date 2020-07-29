@@ -266,10 +266,12 @@ class HomeVC: TmpNaviTopVC {
         LogManager.appendApiLog("getRecommendJobs", "[pageNo: \(pageNo)]", function: #function, line: #line)
         ApiManager.getRecommendJobs(pageNo, isRetry: true)
             .done { result in
+                LogManager.appendApiResultLog("getRecommendJobs", result, function: #function, line: #line)
                 Log.selectLog(logLevel: .debug, "getJobRecommendAddList result:\(result.debugDisp)")
                 self.pageJobCards = result
         }
         .catch { (error) in
+            LogManager.appendApiErrorLog("getRecommendJobs", error, function: #function, line: #line)
             Log.selectLog(logLevel: .debug, "getJobRecommendAddList error:\(error)")
 
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -290,10 +292,12 @@ class HomeVC: TmpNaviTopVC {
         LogManager.appendApiLog("getJobs", "[pageNo: \(pageNo)]]", function: #function, line: #line)
         ApiManager.getJobs(pageNo, isRetry: true)
             .done { result in
+                LogManager.appendApiResultLog("getJobs", result, function: #function, line: #line)
                 Log.selectLog(logLevel: .debug, "getJobAddList result:\(result.debugDisp)")
                 self.pageJobCards = result
         }
         .catch { (error) in
+            LogManager.appendApiErrorLog("getJobs", error, function: #function, line: #line)
             Log.selectLog(logLevel: .debug, "getJobAddList error:\(error)")
 
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -313,10 +317,12 @@ class HomeVC: TmpNaviTopVC {
         pageNo = 1
         LogManager.appendApiLog("getRecommendJobs", "[pageNo: \(pageNo)]]", function: #function, line: #line)
         ApiManager.getRecommendJobs(pageNo, isRetry: true)
-            .done { result in
-                self.pageJobCards = result
+        .done { result in
+            LogManager.appendApiResultLog("getRecommendJobs", result, function: #function, line: #line)
+            self.pageJobCards = result
         }
         .catch { (error) in
+            LogManager.appendApiErrorLog("getRecommendJobs", error, function: #function, line: #line)
             Log.selectLog(logLevel: .debug, "getJobRecommendList error:\(error)")
 
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -372,11 +378,13 @@ class HomeVC: TmpNaviTopVC {
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         LogManager.appendApiLog("getProfile", Void(), function: #function, line: #line)
         ApiManager.getProfile(Void(), isRetry: true)
-            .done { result in
-                self.profile = result
-                self.getResume()
+        .done { result in
+            LogManager.appendApiResultLog("getProfile", result, function: #function, line: #line)
+            self.profile = result
+            self.getResume()
         }
         .catch { (error) in
+            LogManager.appendApiErrorLog("getProfile", error, function: #function, line: #line)
             SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressErr("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             self.profileErrorHandling(with: error)
         }
@@ -727,7 +735,8 @@ extension HomeVC: BaseJobCardCellDelegate {
         if flag == true {
             LogManager.appendApiLog("sendJobKeep", "[jobId: \(jobId)]", function: #function, line: #line)
             ApiManager.sendJobKeep(id: jobId)
-                .done { result in
+            .done { result in
+                LogManager.appendApiResultLog("sendJobKeep", result, function: #function, line: #line)
                 // タブに丸ポチを追加
                 if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
                     let tabItem:UITabBarItem = tabItems[1]
@@ -736,6 +745,7 @@ extension HomeVC: BaseJobCardCellDelegate {
                     tabItem.setBadgeTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.red], for: .normal)
                 }
             }.catch{ (error) in
+                LogManager.appendApiErrorLog("sendJobKeep", error, function: #function, line: #line)
                 Log.selectLog(logLevel: .debug, "keep send error:\(error)")
                 if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
                     let tabItem:UITabBarItem = tabItems[1]
