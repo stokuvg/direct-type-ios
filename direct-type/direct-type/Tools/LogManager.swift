@@ -1,20 +1,28 @@
 import UIKit
 
+//Documentsフォルダ以下に【logTest_2020072908.txt】のように出力されるので、適宜表示させて確認できます
+//シミュレータの場合、「$ tail -f /Users/ms-mb000/Library/Developer/CoreSimulator/Devices/~/data/Containers/Data/Application/~/Documents/logTest_2020072908.txt」みたいにやると、幸せになれます
+//ファイル名はアプリ起動時の時刻までで区切って生成されます
+
 class LogManager: NSObject {
     private var cntDispatch: Int = 0
     private var cntSemaphore: Int = 0
     
     enum Mode {
         case ALWAYS
-        case progress
-        case apiFetch
+        case progress   //プログレスの対応確認のため
+        case apiFetch   //apiフェッチの確認のため
+        //===これ以降に必要に応じて追加して利用してください
+        case apiDetail
 
         var isOut: Bool {
             if Constants.DbgOutputLog == false { return false }
             switch self {
-            case .ALWAYS:   return true
-            case .progress: return true
-            case .apiFetch: return true
+            case .ALWAYS:       return true
+            case .progress:     return true
+            case .apiFetch:     return true
+            //===これ以降に必要に応じて追加して利用してください
+            case .apiDetail:    return true
             }
         }
     }
