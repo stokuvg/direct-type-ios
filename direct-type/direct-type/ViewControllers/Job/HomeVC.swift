@@ -330,8 +330,11 @@ class HomeVC: TmpNaviTopVC {
             self.dataAddFlag = false
             self.dataCheckAction()
 
-            let topIndex = IndexPath.init(row: 0, section: 0)
-            self.homeTableView.selectRow(at: topIndex, animated: true, scrollPosition: .top)
+            //上部にスクロールさせる（データない時に実施するとクラッシュするため）
+            if self.dispJobCards.jobCards.count > 0 {
+                let topIndex = IndexPath.init(row: 0, section: 0)
+                self.homeTableView.selectRow(at: topIndex, animated: true, scrollPosition: .top)
+            }
         }
     }
 

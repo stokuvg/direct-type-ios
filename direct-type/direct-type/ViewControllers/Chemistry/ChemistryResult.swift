@@ -46,6 +46,7 @@ private extension ChemistryResult {
     func setup() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.allowsSelection = false
         tableView.registerNib(nibName: "ChemistryResultPersonalTypeCell", idName: "ChemistryResultPersonalTypeCell")
         tableView.registerNib(nibName: "ChemistryBusinessAbilityCell", idName: "ChemistryBusinessAbilityCell")
         tableView.estimatedRowHeight = tableViewEstimateCellHeight
@@ -138,9 +139,6 @@ extension ChemistryResult: UITableViewDataSource {
 
 extension ChemistryResult: ChemistryResultFooterViewDelegate {
     func didTapCompleteButton() {
-        if let tabBar = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController {
-            tabBar.selectedIndex = 0
-        }
         navigationController?.popToRootViewController(animated: true)
     }
 }

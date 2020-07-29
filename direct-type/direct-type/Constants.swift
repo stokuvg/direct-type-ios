@@ -48,7 +48,7 @@ struct Constants {
     static let DefaultSelectWorkPeriodStartDate: Date = DateHelper.convStrYM2Date("2018-04")//初期選択値
     static let DefaultSelectWorkPeriodEndDate: Date = DateHelper.convStrYM2Date("9999-12")//就業中の場合は9999-12とする
     static let DefaultSelectWorkPeriodEndDateJP: String = "就業中"//就業中の場合は9999-12とする
-    static let ExclusiveSelectCodeDisp: CodeDisp = CodeDisp("0", "勤務地にはこだわらない")
+    static let ExclusiveSelectCodeDisp: CodeDisp = CodeDisp("0", "勤務地にはこだわらない")//!!!こだわらない場合、空配列にするか、から文字の配列でOKか
     static let SelectItemsUndefineDate: Date = DateHelper.convStrYMD2Date("1800-01-01")
     static let SelectItemsUndefineDateJP: String = "未設定"
     static let SelectItemsUndefineBirthday: Date = DateHelper.convStrYMD2Date("1996-01-01")//誕生日の場合の初期値
