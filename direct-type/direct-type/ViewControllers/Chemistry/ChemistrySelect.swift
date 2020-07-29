@@ -97,6 +97,7 @@ private extension ChemistrySelect {
         let ids = [topRanker.first, topRanker.second, topRanker.third].compactMap({ $0 }).map({ String($0.rawValue) })
         let parameter = CreateChemistryRequestDTO(chemistryTypeIds: ids)
         SVProgressHUD.show()
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         ApiManager.createChemistry(parameter, isRetry: true)
         .done { result in
             ApiManager.shared.dicLastUpdate[.topRanker] = Date(timeIntervalSince1970: 0)//モデル更新したので、一覧再取得が必要
@@ -107,7 +108,7 @@ private extension ChemistrySelect {
             self.showConfirm(title: "データ送信エラー", message: myErr.message, onlyOK: true)
         }
         .finally {
-            SVProgressHUD.dismiss()
+            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         }
     }
     

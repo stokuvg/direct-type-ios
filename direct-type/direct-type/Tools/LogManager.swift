@@ -45,6 +45,7 @@ class LogManager: NSObject {
     }
     class func appendLogProgressIn(_ api: String) { appendLogProgress("Progress In", api) }
     class func appendLogProgressOut(_ api: String) { appendLogProgress("Progress Out", api) }
+    class func appendLogProgressErr(_ api: String) { appendLogProgress("Progress Out(Err)", api) }
     class func appendLogProgress(_ title: String, _ text: String) {
         LogManager.appendLog(.progress, title, text)
     }

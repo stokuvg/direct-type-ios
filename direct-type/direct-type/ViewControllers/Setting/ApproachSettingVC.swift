@@ -55,6 +55,7 @@ private extension ApproachSettingVC {
     
     func saveSetting() {
         SVProgressHUD.show()
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         let param = UpdateSettingsRequestDTO(scoutEnable: isScoutEnable)
         ApiManager.updateApproach(param, isRetry: true)
         .done { _ in }
@@ -63,7 +64,7 @@ private extension ApproachSettingVC {
             print(myErr)
         }
         .finally {
-            SVProgressHUD.dismiss()
+            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             self.navigationController?.popViewController(animated: true)
         }
     }

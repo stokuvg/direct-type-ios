@@ -83,6 +83,7 @@ private extension LoginVC {
             return
         }
         SVProgressHUD.show()
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         changeButtonState(shouldForceDisable: true)
         AWSMobileClient.default().signIn(username: phoneNumberText.addCountryCode(type: .japan), password: AppDefine.password)  { (signInResult, error) in
             if let error = error as? AWSMobileClientError {
@@ -99,7 +100,7 @@ private extension LoginVC {
                             self.showConfirm(title: "認証エラー", message: "電話番号の確認を行ってください。", onlyOK: true)
                         }
                         self.changeButtonState()
-                        SVProgressHUD.dismiss()
+                        SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressErr("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
                     }
                 }
                 return
@@ -124,7 +125,7 @@ private extension LoginVC {
             }
             DispatchQueue.main.async {
                 self.changeButtonState()
-                SVProgressHUD.dismiss()
+                SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             }
         }
     }

@@ -89,6 +89,7 @@ private extension InitialInputRegistVC {
         let phoneNumberAttribute = ["phone_number" : phoneNumber]
         
         SVProgressHUD.show()
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         changeButtonState(shouldForceDisable: true)
         AWSMobileClient.default().signUp(username: phoneNumber, password: AppDefine.password, userAttributes: phoneNumberAttribute) { (signUpResult, error) in
             if let error = error {
@@ -99,7 +100,7 @@ private extension InitialInputRegistVC {
                         self.showConfirm(title: "電話番号登録エラー", message: "別の電話番号で再度お試しください。", onlyOK: true)
                     }
                     self.changeButtonState()
-                    SVProgressHUD.dismiss()
+                    SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressErr("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
                 }
                 return
             }
@@ -127,6 +128,7 @@ private extension InitialInputRegistVC {
         }
         if !SVProgressHUD.isVisible() {
             SVProgressHUD.show()
+            LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         }
         AWSMobileClient.default().signIn(username: phoneNumberText.addCountryCode(type: .japan), password: AppDefine.password) { (signInResult, error) in
             if let error = error as? AWSMobileClientError {
@@ -140,7 +142,7 @@ private extension InitialInputRegistVC {
                         let buf = AuthManager.convAnyError(error).debugDisp
                         self.showConfirm(title: "Error", message: buf, onlyOK: true)
                         self.changeButtonState()
-                        SVProgressHUD.dismiss()
+                        SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressErr("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
                     }
                 }
                 return
@@ -171,7 +173,7 @@ private extension InitialInputRegistVC {
             DispatchQueue.main.async {
                 print(#line, #function, buf)
                 self.changeButtonState()
-                SVProgressHUD.dismiss()
+                SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             }
         }
     }

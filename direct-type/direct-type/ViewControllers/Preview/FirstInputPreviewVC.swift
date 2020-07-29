@@ -115,6 +115,7 @@ private extension FirstInputPreviewVC {
     func fetchCreateProfile() {
         let param = CreateProfileRequestDTO(editableModel.editTempCD)
         SVProgressHUD.show(withStatus: "プロフィール情報の作成")
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         ApiManager.createProfile(param, isRetry: true)
         .done { result in
             self.fetchCreateResume()
@@ -126,14 +127,13 @@ private extension FirstInputPreviewVC {
                 let (dicGrpError, dicError) = ValidateManager.convValidErrMsgProfile(myErr.arrValidErrMsg)
                 self.dicGrpValidErrMsg = dicGrpError
                 self.dicValidErrMsg = dicError
-                self.showError(myErr)//!!!
             default:
                 self.showError(error)
             }
         }
         .finally {
             self.dispData()
-            SVProgressHUD.dismiss()
+            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         }
     }
     
@@ -142,6 +142,7 @@ private extension FirstInputPreviewVC {
         self.dicValidErrMsg.removeAll()//状態をクリアしておく
         let param = CreateResumeRequestDTO(editableModel.editTempCD)
         SVProgressHUD.show(withStatus: "履歴書情報の更新")
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         ApiManager.createResume(param, isRetry: true)
         .done { result in
             self.fetchCreateSetting()
@@ -159,13 +160,14 @@ private extension FirstInputPreviewVC {
         }
         .finally {
             self.dispData()
-            SVProgressHUD.dismiss()
+            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         }
     }
     
     func fetchCreateSetting() {
         let param = CreateSettingsRequestDTO(scoutEnable: true)
         SVProgressHUD.show(withStatus: "設定情報の更新")
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         ApiManager.createApproach(param, isRetry: true)
         .done { result in
             self.transitionToComplete()
@@ -176,7 +178,7 @@ private extension FirstInputPreviewVC {
         }
         .finally {
             self.dispData()
-            SVProgressHUD.dismiss()
+            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         }
     }
     

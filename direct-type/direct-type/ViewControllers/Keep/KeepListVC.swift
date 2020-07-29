@@ -99,6 +99,7 @@ private extension KeepListVC {
 
     func getKeepList() {
         SVProgressHUD.show()
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         lists = []
         pageNo = 1
         ApiManager.getKeeps(pageNo, isRetry: true)
@@ -129,12 +130,13 @@ private extension KeepListVC {
             }
         }
         .finally {
-            SVProgressHUD.dismiss()
+            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         }
     }
     
     func getKeepAddList() {
         SVProgressHUD.show()
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         pageNo += 1
         ApiManager.getKeeps(pageNo, isRetry: true)
             .done { result in
@@ -165,7 +167,7 @@ private extension KeepListVC {
         }
         .finally {
             self.isAddLoad = true
-            SVProgressHUD.dismiss()
+            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         }
     }
 
