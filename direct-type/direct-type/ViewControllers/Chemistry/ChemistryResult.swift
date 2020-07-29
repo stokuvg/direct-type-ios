@@ -46,6 +46,7 @@ private extension ChemistryResult {
     func setup() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.allowsSelection = false
         tableView.registerNib(nibName: "ChemistryResultPersonalTypeCell", idName: "ChemistryResultPersonalTypeCell")
         tableView.registerNib(nibName: "ChemistryBusinessAbilityCell", idName: "ChemistryBusinessAbilityCell")
         tableView.estimatedRowHeight = tableViewEstimateCellHeight

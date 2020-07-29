@@ -48,6 +48,7 @@ private extension ChemistrySelect {
     func setup() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.allowsSelection = false
         tableView.registerNib(nibName: "ChemistrySelectCell", idName: "ChemistrySelectCell")
         questionScores = ChemistryQuestionMasterData.questions.enumerated().map({
             ChemistryScore(questionNumber: $0.offset, personalType: $0.element.type, selectedAnswer: .unanswered)
