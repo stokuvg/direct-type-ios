@@ -152,7 +152,7 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
                 }
                 let _graduationYear = DateHelper.convStrYM2Date(resume.school.graduationYear)
                 if _graduationYear != Constants.SelectItemsUndefineDate {
-                    disp3f.append(_graduationYear.dispYmJP())
+                    disp3f.append("\(_graduationYear.dispYmJP())卒業")
                 }
                 addStackItem(type: .schoolH3, val: disp3f)
                 //===(3g)語学
@@ -163,7 +163,7 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
                 let bufToefl = (tmoToefl == 0) ? "--" : "\(tmoToefl)"
                 disp3g.append("TOEIC：\(bufToeic) / TOEFL：\(bufToefl)")
                 if let cd = SelectItemsManager.getCodeDisp(.skillEnglish, code: resume.skillLanguage.languageEnglish) {
-                    disp3g.append(cd.disp)
+                    disp3g.append("英語：\(cd.disp)")
                 }
                 if !resume.skillLanguage.languageStudySkill.isEmpty {
                     disp3g.append(resume.skillLanguage.languageStudySkill)
