@@ -170,7 +170,7 @@ class HomeVC: TmpNaviTopVC {
 
     // 求人詳細画面で行なったキープのアクションのデータをセットする。
     private func detailKeepStatusChange() {
-
+        SVProgressHUD.show()
         /*
          // セルの設定変更パターン
          self.dispJobCards.jobCards[tag] = jobCard
@@ -185,6 +185,9 @@ class HomeVC: TmpNaviTopVC {
             let changeData = changeKeepDatas[j]
             let changeKeepJobId = changeData["jobId"] as! String
             let changeKeepStatus = changeData["keepStatus"] as! Bool
+            
+            Log.selectLog(logLevel: .debug, "self.dispJobCards.jobCards.count:\(self.dispJobCards.jobCards.count)")
+            
             for i in 0..<dispJobCards.jobCards.count {
                 let dispJobCard = dispJobCards.jobCards[i]
                 if dispJobCard.jobCardCode == changeKeepJobId {
@@ -194,8 +197,9 @@ class HomeVC: TmpNaviTopVC {
                     updateIndexRow = i
                     Log.selectLog(logLevel: .debug, "updateIndexRow:\(updateIndexRow)")
                     let updateIndex = IndexPath.init(row: updateIndexRow, section: 0)
-                    let updateCell = self.homeTableView.cellForRow(at: updateIndex) as! JobOfferBigCardCell
-                    updateCell.keepSetting(flag: changeKeepStatus)
+                    self.homeTableView.reloadRows(at: [updateIndex], with: .none)
+//                    let updateCell = self.homeTableView.cellForRow(at: updateIndex) as! JobOfferBigCardCell
+//                    updateCell.keepSetting(flag: changeKeepStatus)
 
                     break
                 } else {
@@ -206,7 +210,8 @@ class HomeVC: TmpNaviTopVC {
         changeKeepDatas = []
 //        changeKeepStatus = false
 //        changeKeepJobId = ""
-
+        
+        SVProgressHUD.dismiss()
     }
 
     private func getJobData() {
