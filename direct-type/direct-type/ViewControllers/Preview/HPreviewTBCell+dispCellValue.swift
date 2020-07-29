@@ -187,7 +187,7 @@ extension HPreviewTBCell {
             let date3 = DateHelper.convStrYM2Date(buf3)
             if date3 == Constants.SelectItemsUndefineDate {
             } else {
-                disp.append(date3.dispYmJP())
+                disp.append("\(date3.dispYmJP())卒業")
             }
             return disp.count == 0 ? "未入力（必須）" : disp.joined(separator: "\n")
         case .skillLanguageH3:        //===(3g)語学
@@ -203,7 +203,7 @@ extension HPreviewTBCell {
             let buf3: String = _item.childItems[3].curVal
             var disp: [String] = []
             disp.append(bufToeicToefl)
-            if !buf2.isEmpty { disp.append(buf2) }
+            if !buf2.isEmpty { disp.append("英語：\(buf2)") }
             if !buf3.isEmpty { disp.append(buf3) }
             return disp.joined(separator: "\n")
         case .qualificationsH3:       //===(3h)資格
