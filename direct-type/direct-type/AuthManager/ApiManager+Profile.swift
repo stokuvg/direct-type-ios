@@ -74,14 +74,12 @@ extension UpdateProfileRequestDTO {
                 var _hopeJobPlaceIds: [Code] = []
                 for code in val.split(separator: EditItemTool.SplitMultiCodeSeparator) {
                     if code == Constants.ExclusiveSelectCodeDisp.code {
-                        // アプリ独自の特別なコードなので、サーバへは通知しない
+                        // アプリ独自の特別なコードなので、サーバへは登録しない
                     } else {
                         _hopeJobPlaceIds.append(String(code))
                     }
                 }
                 self.hopeJobPlaceIds = _hopeJobPlaceIds
-                
-                print("[self.hopeJobPlaceIds: \(self.hopeJobPlaceIds)]")
             default: break
             }
         }
@@ -119,13 +117,6 @@ extension CreateProfileRequestDTO {
     init() {
         self.init(nickname: "", hopeJobPlaceIds: [], birthday: "", genderId: "")
     }
-//    init(_ profile: MdlProfile) {
-//        self.init()
-//        self.nickname = profile.nickname
-//        self.hopeJobPlaceIds = profile.hopeJobPlaceIds
-//        self.birthday = profile.birthday.dispYmd()
-//        self.genderId = profile.gender
-//    }
     init(_ editTempCD: [EditableItemKey: EditableItemCurVal]) {
         self.init()
         if let tmp = editTempCD[EditItemMdlFirstInput.nickname.itemKey] {
@@ -140,14 +131,16 @@ extension CreateProfileRequestDTO {
         var _hopeJobPlaceIds: [Code] = []
         if let tmp = editTempCD[EditItemMdlFirstInput.hopeArea.itemKey] {
             for code in tmp.split(separator: EditItemTool.SplitMultiCodeSeparator) {
-                _hopeJobPlaceIds.append(String(code))
+                if code == Constants.ExclusiveSelectCodeDisp.code {
+                    // アプリ独自の特別なコードなので、サーバへは登録しない
+                } else {
+                    _hopeJobPlaceIds.append(String(code))
+                }
             }
         }
         self.hopeJobPlaceIds = _hopeJobPlaceIds
     }
 }
-
-
     
 extension ApiManager {
     class func createProfile(_ param: CreateProfileRequestDTO, isRetry: Bool = true) -> Promise<Void> {
