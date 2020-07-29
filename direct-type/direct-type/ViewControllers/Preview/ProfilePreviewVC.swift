@@ -152,10 +152,13 @@ extension ProfilePreviewVC {
         self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
         self.dicValidErrMsg.removeAll()//状態をクリアしておく
         SVProgressHUD.show(withStatus: "プロフィール情報の更新")
+        LogManager.appendLogProgressIn("プロフィール情報の更新")
+        LogManager.appendApiLog("updateProfile", param, function: #function, line: #line)
         ApiManager.updateProfile(param, isRetry: true)
         .done { result in
             // 戻す前に画面内でインジケータを削除しないと、前の画面でインジケータが表示されない
             SVProgressHUD.dismiss()
+            LogManager.appendLogProgressOut("プロフィール情報の更新")
             self.fetchCompletePopVC()
         }
         .catch { (error) in

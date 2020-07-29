@@ -18,20 +18,15 @@ class EditableBasicVC: TmpBasicVC, SubSelectFeedbackDelegate {
         case .selectSpecial:
             editableModel.changeTempItem(editItem, text: codes)//入力値の反映
             dispEditableItemAll()//対象の表示を更新する
-            print("❤️❤️[\(editItem.editType)]]❤️❤️", editItem.debugDisp)
-            print(#line, #function, editItem.editType, editItem.debugDisp, codes)
         case .selectSpecialYear:
             editableModel.changeTempItem(editItem, text: codes)//入力値の反映
             dispEditableItemAll()//対象の表示を更新する
-            print("❤️❤️[\(editItem.editType)]]❤️❤️", editItem.debugDisp)
-            print(#line, #function, editItem.editType, editItem.debugDisp, codes)
         case .inputMemo:
             editableModel.changeTempItem(editItem, text: codes)//入力値の反映
             dispEditableItemByKey(editItem.editableItemKey)//対象の表示を更新する
         default:
             editableModel.changeTempItem(editItem, text: codes)//入力値の反映
             dispEditableItemByKey(editItem.editableItemKey)//対象の表示を更新する
-            print("❤️❤️[\(editItem.editType)]]❤️❤️", editItem.debugDisp)
         }
     }
     
