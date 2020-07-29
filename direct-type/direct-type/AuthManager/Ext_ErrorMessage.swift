@@ -242,7 +242,7 @@ extension AuthManager {
         }
         
         myErrorDisp.code = _error.code
-        myErrorDisp.title = "❤️" + _error.domain
+        myErrorDisp.title = _error.domain
         myErrorDisp.message = _error.userInfo.description
         
         //=== AWS Mobile Client:

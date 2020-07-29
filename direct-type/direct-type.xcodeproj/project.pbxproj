@@ -216,6 +216,8 @@
 		260BBFE124651732003D163A /* Preview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 260BBFDE24651732003D163A /* Preview.storyboard */; };
 		260BBFE224651732003D163A /* HPreviewTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 260BBFDF24651732003D163A /* HPreviewTBCell.xib */; };
 		260DD26B248E179000BFB9FE /* Validate+Career.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260DD26A248E179000BFB9FE /* Validate+Career.swift */; };
+		2612AAB824D133620002BD6A /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2612AAB524D133620002BD6A /* LogManager.swift */; };
+		2612AAB924D133620002BD6A /* FileManagerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2612AAB624D133620002BD6A /* FileManagerExtension.swift */; };
 		26133A54246B7A00001802BB /* EditableBasicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26133A53246B7A00001802BB /* EditableBasicVC.swift */; };
 		26133A56246B9D48001802BB /* EditableBasicVC+Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26133A55246B9D48001802BB /* EditableBasicVC+Picker.swift */; };
 		26133A58246B9DC2001802BB /* EditableBasicVC+PickerYMD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26133A57246B9DC2001802BB /* EditableBasicVC+PickerYMD.swift */; };
@@ -558,6 +560,8 @@
 		260BBFDE24651732003D163A /* Preview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preview.storyboard; sourceTree = "<group>"; };
 		260BBFDF24651732003D163A /* HPreviewTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HPreviewTBCell.xib; sourceTree = "<group>"; };
 		260DD26A248E179000BFB9FE /* Validate+Career.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validate+Career.swift"; sourceTree = "<group>"; };
+		2612AAB524D133620002BD6A /* LogManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
+		2612AAB624D133620002BD6A /* FileManagerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManagerExtension.swift; sourceTree = "<group>"; };
 		26133A53246B7A00001802BB /* EditableBasicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableBasicVC.swift; sourceTree = "<group>"; };
 		26133A55246B9D48001802BB /* EditableBasicVC+Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditableBasicVC+Picker.swift"; sourceTree = "<group>"; };
 		26133A57246B9DC2001802BB /* EditableBasicVC+PickerYMD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditableBasicVC+PickerYMD.swift"; sourceTree = "<group>"; };
@@ -902,6 +906,8 @@
 				06DCAEAA245A7616008FE9FA /* UILabel+Extensions.swift */,
 				06C347232463A595000FB4DA /* UIButton+Extensions.swift */,
 				2680051F246A2B440053A7F4 /* Date+Extensions.swift */,
+				2612AAB624D133620002BD6A /* FileManagerExtension.swift */,
+				2612AAB524D133620002BD6A /* LogManager.swift */,
 				0645705C2464F77700F3B015 /* Logs.swift */,
 				0645DDFE246B969000592572 /* Tags.swift */,
 				066F270C246E6B820040BDC1 /* UITextView+Extensions.swift */,
@@ -1876,6 +1882,7 @@
 				26157DC02489CD4B00752C55 /* ApiManager+Resume.swift in Sources */,
 				0685017D24738D98009770A3 /* JobDetailImageCell.swift in Sources */,
 				066BD9D72456ACB4009E610B /* AppDelegate.swift in Sources */,
+				2612AAB824D133620002BD6A /* LogManager.swift in Sources */,
 				06E519D6245816A5004E4B7A /* WebTemplateVC.swift in Sources */,
 				06E519A92458139B004E4B7A /* SignupConfirmVC.swift in Sources */,
 				0645DDFC246B907000592572 /* JobDetailPRCodeTagsCell.swift in Sources */,
@@ -1929,6 +1936,7 @@
 				267E635F24A9865E004169ED /* EntryFormExQuestionsHeadTBCell.swift in Sources */,
 				06E519B3245814BD004E4B7A /* EntryCompleteVC.swift in Sources */,
 				26A397F7249AEF0200FED62E /* BaseVC+PushViewController.swift in Sources */,
+				2612AAB924D133620002BD6A /* FileManagerExtension.swift in Sources */,
 				0E1FB23724AC8424005E0BE7 /* AnalyticsEventType.swift in Sources */,
 				066BC827246CF3CA00FE607F /* JobDetailItemAttentionView.swift in Sources */,
 				26CFC46B2469496D00E458E2 /* EditableItemH.swift in Sources */,

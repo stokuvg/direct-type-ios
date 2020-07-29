@@ -48,7 +48,7 @@ struct Constants {
     static let DefaultSelectWorkPeriodStartDate: Date = DateHelper.convStrYM2Date("2018-04")//初期選択値
     static let DefaultSelectWorkPeriodEndDate: Date = DateHelper.convStrYM2Date("9999-12")//就業中の場合は9999-12とする
     static let DefaultSelectWorkPeriodEndDateJP: String = "就業中"//就業中の場合は9999-12とする
-    static let ExclusiveSelectCodeDisp: CodeDisp = CodeDisp("0", "勤務地にはこだわらない")//!!!こだわらない場合、空配列にするか、から文字の配列でOKか
+    static let ExclusiveSelectCodeDisp: CodeDisp = CodeDisp("<!!!>", "勤務地にはこだわらない")//こだわらない場合、空配列でサーバに登録するが、アプリ内部では別コード割り当てしないと必須チェックなどできないため
     static let SelectItemsUndefineDate: Date = DateHelper.convStrYMD2Date("1800-01-01")
     static let SelectItemsUndefineDateJP: String = "未設定"
     static let SelectItemsUndefineBirthday: Date = DateHelper.convStrYMD2Date("1996-01-01")//誕生日の場合の初期値
@@ -64,5 +64,6 @@ struct Constants {
     static let DbgAutoPushVCNum: Int = 1 //0:なし, 1:プロフィール, 2:履歴書, 3:職歴, 4:サクサク職歴, 5:初回入力, 6: 職歴一覧, 7: 応募フォーム
     static let DbgDispStatus: Bool = false
     static let DbgFetchDummyData: Bool = false //フェッチ時にローカルで用意したダミーデータを返却する場合
+    static let DbgOutputLog: Bool = true
 }
 

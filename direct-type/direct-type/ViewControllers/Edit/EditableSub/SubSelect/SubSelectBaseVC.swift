@@ -164,7 +164,8 @@ class SubSelectBaseVC: BaseVC {
             if selectMaxCount > 1 {
                 //let count = self.dicChange.filter { (k, v) -> Bool in v == true }.count
                 let count = self.dicChange.filter { (k, v) -> Bool in
-                    v == true && k != Constants.ExclusiveSelectCodeDisp.code
+                    //v == true && k != Constants.ExclusiveSelectCodeDisp.code //「こだわらない」をカウントさせない場合
+                    v == true
                 }.count
                 if selectMaxCount == Constants.SelectMultidMaxUndefine {
                     bufCount = " (\(count))"

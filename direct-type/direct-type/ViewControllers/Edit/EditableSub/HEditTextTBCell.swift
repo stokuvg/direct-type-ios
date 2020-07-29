@@ -146,7 +146,6 @@ extension HEditTextTBCell: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let textField = textField as? IKTextField else { return true }
         if let tfiv = textField.inputView as? UIPickerView {
-            print("❤️[\(textField.itemKey)][\(tfiv.description)] [\(#function)]❤️ ❤️[Pickerのため編集抑止]❤️")
             return false //Pickerに結びついていたら編集却下とする
         }
         return true
@@ -154,7 +153,6 @@ extension HEditTextTBCell: UITextFieldDelegate {
     //今はTextField使い捨てなので無理ですが、ちゃんと画面定義してすべて保持するようにしておけば、Nextでの移動も可能になる
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let textField = textField as? IKTextField else { return true }
-        print("❤️[\(textField.itemKey)] [\(#function)]❤️ ❤️[Return押された]❤️")
         if let delegate = delegate {
             return delegate.textFieldShouldReturn(textField, item!)
         }
@@ -162,7 +160,6 @@ extension HEditTextTBCell: UITextFieldDelegate {
     }
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         guard let textField = textField as? IKTextField else { return true }
-        print("❤️[\(textField.itemKey)] [\(#function)]❤️ ❤️[Clear押された]❤️")
         if let delegate = delegate {
             return delegate.textFieldShouldClear(textField, item!)
         }

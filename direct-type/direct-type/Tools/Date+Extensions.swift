@@ -9,6 +9,13 @@
 import UIKit
 
 class DateHelper {
+    class func dateTimeFormatterFNameShort() -> DateFormatter {
+        let dateTimeFormatter = DateFormatter()
+        dateTimeFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateTimeFormatter.dateFormat = "YYYYMMddHH"
+        dateTimeFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        return dateTimeFormatter
+    }
     class func convStrYMD2Date(_ buf: String) -> Date {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withFullDate]
@@ -136,6 +143,10 @@ class DateHelper {
 }
 
 extension Date {
+    var FName: String {
+        let dateFormat = DateHelper.dateTimeFormatterFNameShort()
+        return dateFormat.string(from: self)
+    }
     var calendarJP: Calendar {
         var calendarJP = Calendar(identifier: .gregorian)
         calendarJP.timeZone = TimeZone(identifier: "Asia/Tokyo")!
@@ -143,6 +154,12 @@ extension Date {
         return calendarJP
     }
     //日本時刻(localTZ)で表示するようにしておく
+    func dispLogTime() -> String {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withFullTime]
+        let buf: String = formatter.string(from: self)
+        return buf
+    }
     func dispYmdJP() -> String {
         let dateFormat = DateHelper.dateTimeFormatterYmdJP()
         let buf = dateFormat.string(from: self)

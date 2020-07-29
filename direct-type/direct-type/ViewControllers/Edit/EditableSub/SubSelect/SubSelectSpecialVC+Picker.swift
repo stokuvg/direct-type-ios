@@ -24,7 +24,6 @@ extension SubSelectSpecialVC {
     //=== 表示・非表示
     func showPicker(_ textField: IKTextField) {
         //親子の依存関係がある場合に、親が選択済か調べる。未選択の場合には子は選択できない
-        //print("❤️❤️ Picker 表示 [\(textField.itemKey)] [\(textField.inputView)] [\(textField.inputAccessoryView)]")
         //Pickerを表示する
         let picker = IKPickerView()
         picker.delegate = self
@@ -48,11 +47,8 @@ extension SubSelectSpecialVC {
         btnClose.parentPicker = picker
         toolbar.setItems([btnClose, separator1, barLbl, separator2, btnSelect], animated: true)
         tfSubDummy.inputAccessoryView = toolbar
-//        tfSubDummy.inputAccessoryView?.backgroundColor = .green
-
     }
     func hidePicker(_ textField: IKTextField) {
-        //print("❤️❤️ Picker 消す [\(textField.itemKey)]")
         textField.inputAccessoryView = nil //ここで、関連つけていたToolbarを殺す
         textField.inputView = nil //ここで、関連つけていたPickerを殺す
     }
