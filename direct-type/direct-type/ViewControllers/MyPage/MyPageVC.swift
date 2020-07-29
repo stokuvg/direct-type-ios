@@ -345,20 +345,20 @@ extension MyPageVC {
         var isNeedFetch: Bool = ApiManager.needFetch(.profile, lastDispUpdateProfile)
         if self.profile == nil { isNeedFetch = true } //モデル未取得ならフェッチが必要
         guard isNeedFetch else {
-            Log.selectLog(logLevel: .debug, "fetchGetProfile 読み込み不要")
+//            Log.selectLog(logLevel: .debug, "fetchGetProfile 読み込み不要")
             self.fetchGetResume()//次の処理の呼び出し
             return
         }
         ApiManager.getProfile(Void(), isRetry: true)
         .done { result in
-            Log.selectLog(logLevel: .debug, "fetchGetProfile 読み込みstart")
+//            Log.selectLog(logLevel: .debug, "fetchGetProfile 読み込みstart")
             self.profile = result
             self.lastDispUpdateProfile = Date()//取得したデータで表示更新するので
-            Log.selectLog(logLevel: .debug, "lastDispUpdateProfile:\(self.lastDispUpdateProfile)")
+//            Log.selectLog(logLevel: .debug, "lastDispUpdateProfile:\(self.lastDispUpdateProfile)")
             self.updateCnt += 1
         }
         .catch { (error) in
-            Log.selectLog(logLevel: .debug, "fetchGetProfile 読み込みerror")
+//            Log.selectLog(logLevel: .debug, "fetchGetProfile 読み込みerror")
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             print(myErr)
             
@@ -372,20 +372,20 @@ extension MyPageVC {
         var isNeedFetch: Bool = ApiManager.needFetch(.resume, lastDispUpdateResume)
         if self.resume == nil { isNeedFetch = true } //モデル未取得ならフェッチが必要
         guard isNeedFetch else {
-            Log.selectLog(logLevel: .debug, "fetchGetResume 読み込み不要")
+//            Log.selectLog(logLevel: .debug, "fetchGetResume 読み込み不要")
             self.fetchGetCareerList()//次の処理の呼び出し
             return
         }
         ApiManager.getResume(Void(), isRetry: true)
         .done { result in
-            Log.selectLog(logLevel: .debug, "fetchGetResume 読み込みstart")
+//            Log.selectLog(logLevel: .debug, "fetchGetResume 読み込みstart")
             self.resume = result
             self.lastDispUpdateResume = Date()//取得したデータで表示更新するので
-            Log.selectLog(logLevel: .debug, "lastDispUpdateResume:\(self.lastDispUpdateResume)")
+//            Log.selectLog(logLevel: .debug, "lastDispUpdateResume:\(self.lastDispUpdateResume)")
             self.updateCnt += 1
         }
         .catch { (error) in
-            Log.selectLog(logLevel: .debug, "fetchGetResume 読み込みerror")
+//            Log.selectLog(logLevel: .debug, "fetchGetResume 読み込みerror")
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             print(myErr)
         }
@@ -398,25 +398,25 @@ extension MyPageVC {
         var isNeedFetch: Bool = ApiManager.needFetch(.careerList, lastDispUpdateCareerList)
         if self.career == nil { isNeedFetch = true } //モデル未取得ならフェッチが必要
         guard isNeedFetch else {
-            Log.selectLog(logLevel: .debug, "fetchGetCareerList 読み込み不要")
+//            Log.selectLog(logLevel: .debug, "fetchGetCareerList 読み込み不要")
             self.fetchGetChemistryData()//次の処理の呼び出し
             return
         }
-        Log.selectLog(logLevel: .debug, "fetchGetCareerList 読み込みstart")
+//        Log.selectLog(logLevel: .debug, "fetchGetCareerList 読み込みstart")
         ApiManager.getCareer(Void(), isRetry: true)
         .done { result in
-            Log.selectLog(logLevel: .debug, "fetchGetCareerList 読み込み結果")
+//            Log.selectLog(logLevel: .debug, "fetchGetCareerList 読み込み結果")
             self.career = result
             self.lastDispUpdateCareerList = Date()//取得したデータで表示更新するので
-            Log.selectLog(logLevel: .debug, "lastDispUpdateCareerList:\(self.lastDispUpdateCareerList)")
+//            Log.selectLog(logLevel: .debug, "lastDispUpdateCareerList:\(self.lastDispUpdateCareerList)")
             self.updateCnt += 1
         }
         .catch { (error) in
-            Log.selectLog(logLevel: .debug, "fetchGetCareerList 読み込みerror")
+//            Log.selectLog(logLevel: .debug, "fetchGetCareerList 読み込みerror")
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
             case 404:
-                Log.selectLog(logLevel: .debug, "carrer未作成のため、updateCntは追加しない")
+//                Log.selectLog(logLevel: .debug, "carrer未作成のため、updateCntは追加しない")
                 break //未作成での404は許容
             default:
                 print(myErr)
@@ -431,14 +431,14 @@ extension MyPageVC {
         var isNeedFetch: Bool = ApiManager.needFetch(.topRanker, lastDispUpdateTopRanker)
         if self.topRanker == nil { isNeedFetch = true } //モデル未取得ならフェッチが必要
         guard isNeedFetch else {
-            Log.selectLog(logLevel: .debug, "fetchGetChemistryData 読み込み不要")
+//            Log.selectLog(logLevel: .debug, "fetchGetChemistryData 読み込み不要")
             self.fetchGroupeFinish()
             return
         }
-        Log.selectLog(logLevel: .debug, "fetchGetChemistryData 読み込みstart")
+//        Log.selectLog(logLevel: .debug, "fetchGetChemistryData 読み込みstart")
         ApiManager.getChemistry(Void(), isRetry: true)
         .done { result -> Void in
-            Log.selectLog(logLevel: .debug, "fetchGetChemistryData 読み込み結果")
+//            Log.selectLog(logLevel: .debug, "fetchGetChemistryData 読み込み結果")
             var firstRanker: ChemistryPersonalityType! = nil
             var secondRanker: ChemistryPersonalityType? = nil
             var thirdRanker: ChemistryPersonalityType? = nil
@@ -456,20 +456,20 @@ extension MyPageVC {
             }
             self.topRanker = ChemistryScoreCalculation.TopRanker(first: firstRanker, second: secondRanker, third: thirdRanker)
             self.lastDispUpdateTopRanker = Date()//取得したデータで表示更新するので
-            Log.selectLog(logLevel: .debug, "lastDispUpdateTopRanker:\(self.lastDispUpdateTopRanker)")
+//            Log.selectLog(logLevel: .debug, "lastDispUpdateTopRanker:\(self.lastDispUpdateTopRanker)")
             self.updateCnt += 1
         }
         .catch { error in
-            Log.selectLog(logLevel: .debug, "fetchGetChemistryData 読み込みerror")
+//            Log.selectLog(logLevel: .debug, "fetchGetChemistryData 読み込みerror")
         }
         .finally {
             self.fetchGroupeFinish()
         }
     }
     private func fetchGroupeFinish() {
-        Log.selectLog(logLevel: .debug, "fetchGroupeFinish start")
+//        Log.selectLog(logLevel: .debug, "fetchGroupeFinish start")
         
-        Log.selectLog(logLevel: .debug, "updateCnt:\(self.updateCnt)")
+//        Log.selectLog(logLevel: .debug, "updateCnt:\(self.updateCnt)")
         
         self.pageTableView.reloadData()
         SVProgressHUD.dismiss()
@@ -511,9 +511,9 @@ extension MyPageVC: UITabBarControllerDelegate {
             
             if tabBarController.selectedIndex == 0 {
                 Log.selectLog(logLevel: .debug, "切り替えた画面がHomeVC")
-                Log.selectLog(logLevel: .debug, "updateCnt:\(updateCnt)")
+//                Log.selectLog(logLevel: .debug, "updateCnt:\(updateCnt)")
                 if updateCnt > 0 {
-                    Log.selectLog(logLevel: .debug, "更新した部分がある")
+//                    Log.selectLog(logLevel: .debug, "更新した部分がある")
                     firstVC.changeProfileFlag = true
                     firstVC.changeKeepDatas = []
                     updateCnt = 0

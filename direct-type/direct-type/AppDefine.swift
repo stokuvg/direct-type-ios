@@ -62,6 +62,10 @@ enum DirectTypeLinkURL {
         }
         
     }
+    
+    static var connectDommain:String = "directtype.net" // 仮環境
+//    static var connectDommain:String = "directtype.jp" // 本番
+    
     //リンク先URLテキスト
     var urlText: String {
         switch self {
@@ -75,23 +79,23 @@ enum DirectTypeLinkURL {
         //===ユーザ作成、ログイン
         case .RegistPrivacyPolicy: fallthrough
         case .LoginPrivacyPolicy:
-            return "https://type.jp/help/index.html"
+            return "https://" + DirectTypeLinkURL.connectDommain + "/privacy/"
         case .RegistAgreement: fallthrough
         case .LoginAgreement:
-            return "https://type.jp/help/index.html"
+            return "https://" + DirectTypeLinkURL.connectDommain + "/policy/"
         case .RegistPhoneReason: fallthrough
         case .LoginPhoneReason:
-            return "https://type.jp/help/index.html"
+            return "https://" + DirectTypeLinkURL.connectDommain + "/help/#001"
         //===アプローチ設定
         case .AproachAbout:
-            return "https://type.jp/help/index.html"
+            return "https://" + DirectTypeLinkURL.connectDommain + "/help/#002"
         //===設定項目
         case .SettingsFAQ:
-            return "https://type.jp/help/index.html"
+            return "https://" + DirectTypeLinkURL.connectDommain + "/help/"
         case .SettingsPrivacyPolicy:
-            return "https://type.jp/s/kojin/"
+            return "https://" + DirectTypeLinkURL.connectDommain + "/privacy/"
         case .SettingsAgreement:
-            return "https://type.jp/help/category_14.html"
+            return "https://" + DirectTypeLinkURL.connectDommain + "/policy/"
         }
     }
     var url: URL? {
