@@ -46,7 +46,9 @@ struct ChemistryScoreCalculation {
         let secondPlace = ranking[1]
         let thirdPlace = ranking[2]
         
-        if abs(firstPlace.score.distance(to: secondPlace.score)) < acceptedScoreDistance && secondPlace.score > 0 && thirdPlace.score > 0 {
+        if abs(firstPlace.score.distance(to: secondPlace.score)) < acceptedScoreDistance &&
+            abs(secondPlace.score.distance(to: thirdPlace.score)) < acceptedScoreDistance &&
+            secondPlace.score > 0 && thirdPlace.score > 0 {
             return TopRanker(first: firstPlace.personalType, second: secondPlace.personalType, third: thirdPlace.personalType)
         }
         
