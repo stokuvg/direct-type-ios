@@ -35,7 +35,11 @@ extension ApiManager {
         ProfileAPI.profileControllerGet()
         .done { result in
             ApiManager.shared.dicLastUpdate[.profile] = Date()//取得できたので、最終取得日時を更新
-            resolver.fulfill(MdlProfile(dto: result)) //変換しておく
+            let profile = MdlProfile(dto: result)
+            if profile.hopeJobPlaceIds.count == 0 { //フェッチ取得して「希望勤務地」が「空」の場合には、アプリ内では「勤務地にはこだわらない」が選ばれているものとして扱わせる
+                profile.hopeJobPlaceIds.append(Constants.ExclusiveSelectCodeDisp.code)
+            }
+             resolver.fulfill(profile) //変換しておく
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
             resolver.reject(error)
@@ -69,9 +73,15 @@ extension UpdateProfileRequestDTO {
             case EditItemMdlProfile.hopeJobArea.itemKey:
                 var _hopeJobPlaceIds: [Code] = []
                 for code in val.split(separator: EditItemTool.SplitMultiCodeSeparator) {
-                    _hopeJobPlaceIds.append(String(code))
+                    if code == Constants.ExclusiveSelectCodeDisp.code {
+                        // アプリ独自の特別なコードなので、サーバへは通知しない
+                    } else {
+                        _hopeJobPlaceIds.append(String(code))
+                    }
                 }
                 self.hopeJobPlaceIds = _hopeJobPlaceIds
+                
+                print("[self.hopeJobPlaceIds: \(self.hopeJobPlaceIds)]")
             default: break
             }
         }

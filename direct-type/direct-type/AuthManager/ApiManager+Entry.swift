@@ -108,7 +108,11 @@ extension WebAPIEntryUserDto {
         }
         var _entryPlaceList: [EntryPlace] = []
         for code in entry.hopeArea {
-            _entryPlaceList.append(EntryPlace(placeId: String(code)))
+            if code == Constants.ExclusiveSelectCodeDisp.code {
+                //これは足さない
+            } else {
+                _entryPlaceList.append(EntryPlace(placeId: String(code)))
+            }
         }
         if _entryPlaceList.count > 0 {
             /*[任意]*/self.entryPlaceList = _entryPlaceList
