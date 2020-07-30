@@ -271,7 +271,8 @@ class HomeVC: TmpNaviTopVC {
             homeTableView.isHidden = true
         }
     }
-
+    
+    /// ２回目以降求人一覧追加表示
     private func getJobRecommendAddList() {
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
@@ -297,7 +298,8 @@ class HomeVC: TmpNaviTopVC {
             self.dataAddAction()
         }
     }
-
+    
+    /// 初回求人一覧追加表示
     private func getJobAddList() {
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
@@ -323,6 +325,7 @@ class HomeVC: TmpNaviTopVC {
             self.dataAddAction()
         }
     }
+    /// ２回目以降求人一覧表示
     private func getJobRecommendList() {
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
@@ -357,6 +360,7 @@ class HomeVC: TmpNaviTopVC {
             self.dataCheckAction()
 
             //上部にスクロールさせる（データない時に実施するとクラッシュするため）
+            // おすすめ求人を更新ボタン押下時は、一番上に来る。
             if self.dispJobCards.jobCards.count > 0 {
                 let topIndex = IndexPath.init(row: 0, section: 0)
                 self.homeTableView.selectRow(at: topIndex, animated: true, scrollPosition: .top)
@@ -364,6 +368,8 @@ class HomeVC: TmpNaviTopVC {
         }
     }
 
+    
+    /// 初回求人一覧表示
     private func getJobList() {
         pageJobCards = MdlJobCardList()
         dispJobCards = MdlJobCardList()
