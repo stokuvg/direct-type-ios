@@ -26,8 +26,8 @@ final class KeepNoView: UIView {
     var delegate: KeepNoViewDelegate?
     var isExistsChemistry = false {
         didSet {
-            chemistryLabel.isHidden = isExistsChemistry
-            chemistryBtn.isHidden = isExistsChemistry
+//            chemistryLabel.isHidden = isExistsChemistry
+//            chemistryBtn.isHidden = isExistsChemistry
         }
     }
 
