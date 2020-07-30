@@ -26,10 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().isTranslucent = false
         UITabBar.appearance().isTranslucent = false
 
-        setupAppsFlyer()
-        tryPostActivity()
-        FirebaseApp.configure()
-        
         //=== Cognito認証の初期化処理を組み込む
         // Amazon Cognito 認証情報プロバイダーを初期化します
         let credentialsProvider = AWSCognitoCredentialsProvider(
@@ -47,6 +43,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
+        setupAppsFlyer()
+        tryPostActivity()//これはCognito初期化後でないと意味ないのでは？
+        FirebaseApp.configure()
+        
         window = UIWindow(frame: UIScreen.main.bounds)
 
         if AuthManager.shared.isLogin {

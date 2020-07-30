@@ -48,6 +48,7 @@ final public class AuthManager {
     
     var isLogin: Bool {
         AWSMobileClient.default().getTokens { (tokens, error) in
+            LogManager.appendLoginCheckLog("isLogin", tokens, error, #function, #line)
             if let _error = error as? NSError{
                 //print("\t🐶🐶ログインチェック🐶エラー発生🐶 [tokens: \(tokens)]🐶🐶[error: \(error)]\n\(error?.localizedDescription)")
                 Log.selectLog(logLevel: .debug, "_error:\(_error.localizedDescription)")
@@ -55,7 +56,15 @@ final public class AuthManager {
             }
         }
         //print("\t🐶🐶ログインチェック🐶🐶 [userState: \(userState)]🐶🐶[idToken: \((AuthManager.shared.idToken ?? "").isEmpty)]🐶🐶\n\(idToken)")
-        return (userState == .signedIn) && !((AuthManager.shared.idToken ?? "").isEmpty)
+        let _idToken = (idToken != nil) ? "ある" : "ない"
+        LogManager.appendLogEx(.loginCheck, "isLogin", "[idToken: \(_idToken)]", "[userState: \(userState.rawValue)][idToken: \(_idToken)]", #function, #line)
+        let chk1: Bool = (userState == .signedIn)
+        let chk2: Bool = (userState == .signedIn) && !((AuthManager.shared.idToken ?? "").isEmpty)
+        if chk1 != chk2 {
+            LogManager.appendLogEx(.loginCheck, "isLogin", String(repeating: "☠️", count: 44), "状態不一致で現象発生の可能性あり？！", #function, #line)
+        }
+        return (userState == .signedIn)
+        //return (userState == .signedIn) && !((AuthManager.shared.idToken ?? "").isEmpty)
     }
 }
 

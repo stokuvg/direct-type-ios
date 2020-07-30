@@ -16,6 +16,7 @@ class LogManager: NSObject {
         case apiError   //apiフェッチで失敗した場合のエラー
         //===これ以降に必要に応じて追加して利用してください
         case apiDetail
+        case loginCheck
 
         var isOut: Bool {
             if Constants.DbgOutputLog == false { return false }
@@ -27,6 +28,7 @@ class LogManager: NSObject {
             case .apiError:     return true
             //===これ以降に必要に応じて追加して利用してください
             case .apiDetail:    return true
+            case .loginCheck:   return true
             }
         }
     }
@@ -48,6 +50,12 @@ class LogManager: NSObject {
     class func appendApiErrorLog(_ apiName: String, _ error: Any?, function: String, line: Int) {
         let _error = error.debugDescription
         appendLogEx(.apiFetch, "api", "NG [\(apiName)]", _error, function, line)
+    }
+    
+    class func appendLoginCheckLog(_ grp: String, _ tokens: Any?, _ error: Any?, _ function: String, _ line: Int) {
+        let _tokens = (tokens != nil) ? "ある" : "ない"
+        let _error = error.debugDescription
+        appendLogEx(.loginCheck, grp, "[token: \(_tokens)]", "[error: \(_error)]", function, line)
     }
 
     class func appendLog(_ mode: Mode, _ grp: String, _ title: String, _ text: String) {
