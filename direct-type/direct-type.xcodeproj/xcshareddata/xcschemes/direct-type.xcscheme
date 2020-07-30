@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "066BD9D22456ACB4009E610B"
-               BuildableName = "direct-type.app"
+               BuildableName = "Direct type.app"
                BlueprintName = "direct-type"
                ReferencedContainer = "container:direct-type.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "066BD9D22456ACB4009E610B"
-            BuildableName = "direct-type.app"
+            BuildableName = "Direct type.app"
             BlueprintName = "direct-type"
             ReferencedContainer = "container:direct-type.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "066BD9D22456ACB4009E610B"
-            BuildableName = "direct-type.app"
+            BuildableName = "Direct type.app"
             BlueprintName = "direct-type"
             ReferencedContainer = "container:direct-type.xcodeproj">
          </BuildableReference>
