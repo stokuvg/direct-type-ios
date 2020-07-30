@@ -44,6 +44,17 @@ class HEditTextTBCell: UITableViewCell {
         tfValue.itemKey = item.editableItemKey
         tfValue.returnKeyType = returnKeyType
         tfValue.placeholder = item.placeholder
+        //==キーボードタイプを設定する
+        switch item.editItem.valid.type {
+        case .password:
+            tfValue.keyboardType = UIKeyboardType.asciiCapable
+        case .email:
+            tfValue.keyboardType = UIKeyboardType.emailAddress
+        case .number:
+            tfValue.keyboardType = UIKeyboardType.numberPad
+        default:
+            tfValue.keyboardType = UIKeyboardType.default
+        }
         //クリアボタンの表示制御
         switch item.editType {
         case .inputText, .inputTextSecret:
@@ -74,7 +85,6 @@ class HEditTextTBCell: UITableViewCell {
         }
         let bufTitle = _item.dispName //_item.type.dispTitle
         lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_main)!, alignment: .left)
-        tfValue.keyboardType = UIKeyboardType.default
         var bufVal: String = ""
         switch _item.editType {
         case .selectDrumYMD:
@@ -89,7 +99,6 @@ class HEditTextTBCell: UITableViewCell {
             bufVal = _item.valDisp
         case .inputText:
             if _item.editItem.valid.type == .number {
-                tfValue.keyboardType = UIKeyboardType.numberPad
                 if _item.curVal == "0" {
                     bufVal = ""
                     break
