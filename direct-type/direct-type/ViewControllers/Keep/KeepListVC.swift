@@ -10,32 +10,13 @@ import UIKit
 import SVProgressHUD
 import TudApi
 
-protocol KeepNoViewDelegate: class {
-    func btnAction()
-}
-
 final class KeepNoView: UIView {
     @IBOutlet private weak var imageView:UIImageView!
     @IBOutlet private weak var textLabel:UILabel!
-    @IBOutlet private weak var chemistryLabel:UILabel!
-    @IBOutlet private weak var chemistryBtn:UIButton!
-    @IBAction private func chemistryBtnAction() {
-        delegate?.btnAction()
-    }
-
-    var delegate: KeepNoViewDelegate?
-    var isExistsChemistry = false {
-        didSet {
-//            chemistryLabel.isHidden = isExistsChemistry
-//            chemistryBtn.isHidden = isExistsChemistry
-        }
-    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
         textLabel.text(text: "現在キープ中の求人はありません。\n求人情報からキープしたい\n求人を選んでください", fontType: .font_L, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
-//        chemistryLabel.text(text: "相性診断を受けると、キープした求人との相性が表示できるようになります。", fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
-//        chemistryBtn.setTitle(text: "相性診断をやってみる", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
     }
 }
 
@@ -63,9 +44,6 @@ final class KeepListVC: TmpBasicVC {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if !keepNoView.isExistsChemistry {
-            fetchGetChemistryData()
-        }
         getKeepList()
         AnalyticsEventManager.track(type: .viewKeepList)
     }
@@ -183,23 +161,12 @@ private extension KeepListVC {
 
         if self.lists.count > 0 {
             keepNoView.isHidden = true
-            keepNoView.delegate = nil
             keepTableView.delegate = self
             keepTableView.dataSource = self
             keepTableView.reloadData()
         } else {
             keepNoView.isHidden = false
-            // 0件
-            keepNoView.delegate = self
         }
-    }
-
-    func fetchGetChemistryData() {
-        ApiManager.getChemistry(Void(), isRetry: true)
-        .done { result -> Void in
-            self.keepNoView.isExistsChemistry = true
-        }
-        .catch { error in }.finally {}
     }
     
     func keepDataAddRemoveCheck(checkData:[String:Any]) {
@@ -223,17 +190,6 @@ private extension KeepListVC {
         } else {
             keepDatas.append(checkData)
         }
-    }
-}
-
-extension KeepListVC: KeepNoViewDelegate {
-    func btnAction() {
-        Log.selectLog(logLevel: .debug, "navigationController:\(String(describing: self.navigationController))")
-
-        let vc = getVC(sbName: "ChemistryStart", vcName: "ChemistryStart") as! ChemistryStart
-        hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(vc, animated: true)
-        hidesBottomBarWhenPushed = false
     }
 }
 
