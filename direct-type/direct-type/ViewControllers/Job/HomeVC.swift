@@ -388,10 +388,16 @@ class HomeVC: TmpNaviTopVC {
             self.showError(myErr)
         }
         .finally {
-            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
-            self.linesTitle(date: "", title: "おすすめ求人一覧")
-            self.dataAddFlag = false
-            self.dataCheckAction()
+            if self.pageJobCards.jobCards.count > 0 {
+                SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+                self.linesTitle(date: "", title: "おすすめ求人一覧")
+                self.dataAddFlag = false
+                self.dataCheckAction()
+            } else {
+                // 精度の高い求人を受け取る
+                self.recommendUseFlag = true
+                self.getJobRecommendList()
+            }
         }
     }
 
