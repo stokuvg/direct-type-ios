@@ -39,9 +39,20 @@ class EntryConfirmVC: PreviewBaseVC {
     //共通プレビューをOverrideして利用する
     override func viewDidLoad() {
         super.viewDidLoad()
-        btnCommit.setTitle(text: "応募する", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
-        btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
+        dispButton(isEnable: false)
     }
+    private func dispButton(isEnable: Bool) {
+        if isEnable {
+            btnCommit.isEnabled = true
+            btnCommit.setTitle(text: "応募する", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+            btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
+        } else {
+            btnCommit.isEnabled = false
+            btnCommit.setTitle(text: "応募する", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+            btnCommit.backgroundColor = UIColor.init(colorType: .color_close)
+        }
+    }
+
     func initData(_ jobCard: MdlJobCardDetail, _ profile: MdlProfile? = nil, _ resume: MdlResume? = nil, _ career: MdlCareer? = nil, _ entry: MdlEntry? = nil) {
         title = "応募確認"
         self.jobCard = jobCard
@@ -125,7 +136,9 @@ class EntryConfirmVC: PreviewBaseVC {
         if isAccept == false { isEnable = false } //許可していなければ非活性
         if self.bufPassword.count < 4 { isEnable = false } //4文字以下なら非活性
         if self.bufPassword.count > 20 { isEnable = false } //20文字以上なら非活性
-        btnCommit.isEnabled = isEnable
+        //=== 入力Typeパスワードのリアルタイムバリデーション
+        if !ValidateManager.chkValidateTypePassword(typePassword: bufPassword) { isEnable = false }
+        dispButton(isEnable: isEnable)
     }
 }
 

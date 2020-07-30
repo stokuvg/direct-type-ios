@@ -119,7 +119,7 @@ enum HPreviewItemType: String {
         case .profileC9:      return "プロフィール（一部必須）"
         case .resumeC9:       return "履歴書（一部必須）"
         case .careerC9:       return "職務経歴書（一部必須）"
-        case .fixedInfoC9:    return "以下はマイページに保存されません"
+        case .fixedInfoC9:    return "以下はマイページに保存されません。\n応募先求人に合わせて編集してください。"
         case .exQuestionC9:   return "企業からの質問項目"
         case .exQAItem1C9:    return " - 独自質問1"
         case .exQAItem2C9:    return " - 独自質問2"

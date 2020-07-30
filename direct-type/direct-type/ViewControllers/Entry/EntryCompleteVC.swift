@@ -26,10 +26,14 @@ class EntryCompleteVC: TmpBasicVC {
         self.vwMainArea.backgroundColor = UIColor(colorType: .color_base)
         self.vwFootArea.backgroundColor = UIColor(colorType: .color_base)
 
-        btnCommit.setTitle(text: "完了する", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        btnCommit.setTitle(text: "求人情報へ", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         btnCommit.backgroundColor = UIColor.init(colorType: .color_button)
         
-        let bufMessage = "応募が完了しました。\n企業からの連絡をお待ちください。"
+        let bufMessage = [
+            "応募が完了しました。",
+            "企業から連絡がありましたら、応募時のメールアドレスへ転職サイトtypeよりお知らせが届きます。",
+            "しばらくお待ちください。",
+        ].joined(separator: "\n")
         lblMessage.text(text: bufMessage, fontType: .font_M, textColor: UIColor(colorType: .color_black)!, alignment: .center)
     }
     

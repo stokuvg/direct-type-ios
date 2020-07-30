@@ -35,7 +35,8 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
 
         tfPassword.isSecureTextEntry = true
         tfPassword.textContentType = .password
-        tfPassword.placeholder = "type用パスワード（半角英数4〜20文字）"
+        tfPassword.keyboardType = .asciiCapable
+        tfPassword.attributedPlaceholder = NSAttributedString(string: "type用パスワード（半角英数4〜20文字）", attributes: [NSAttributedString.Key.foregroundColor : UIColor(colorType: .color_light_gray)!])
         tfPassword.textColor = UIColor(colorType: .color_black)
         tfPassword.tintColor = UIColor(colorType: .color_black)
         tfPassword.backgroundColor = UIColor(colorType: .color_white)
