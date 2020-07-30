@@ -9,6 +9,13 @@
 import UIKit
 import AlamofireImage
 
+class ImageBackView: UIView {
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+}
+
 class JobDetailImageCell: BaseTableViewCell {
     
     // メイン画像
@@ -72,7 +79,7 @@ class JobDetailImageCell: BaseTableViewCell {
         margin = imageX
         
         if addImageScrollViewCheck() {
-            
+            Log.selectLog(logLevel: .debug, "スクロール初回のみadd")
             self.mainImagesScrollView = UIScrollView.init(frame: CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight))
             self.mainImagesScrollView.isPagingEnabled = true
             self.mainImagesScrollView.showsVerticalScrollIndicator = false
@@ -100,7 +107,8 @@ class JobDetailImageCell: BaseTableViewCell {
         var addFlag:Bool = true
         for _subView in self.mainImagesScrollView.subviews {
 //            Log.selectLog(logLevel: .debug, "_subView:\(_subView)")
-            if _subView is UIImageView {
+            if _subView is ImageBackView {
+//            if _subView is UIImageView {
                 addFlag = false
                 break
             }
@@ -170,7 +178,7 @@ class JobDetailImageCell: BaseTableViewCell {
                     let imageUrl = URL(string: imageUrlString)
                     let scrollX:CGFloat = (margin + (viewWidth * CGFloat(i)))
                     
-                    let imageBackView = UIView.init(frame: CGRect(x: scrollX, y: imageY, width: backViewSize.width, height: backViewSize.height))
+                    let imageBackView = ImageBackView.init(frame: CGRect(x: scrollX, y: imageY, width: backViewSize.width, height: backViewSize.height))
                     
                     imageBackView.layer.cornerRadius = 15
                     imageBackView.layer.masksToBounds = true
@@ -205,8 +213,9 @@ class JobDetailImageCell: BaseTableViewCell {
                     if imageUrlString.count > 0 {
                         let imageUrl = URL(string: imageUrlString)
                         let scrollX:CGFloat = (margin + (viewWidth * CGFloat(i)))
-                        
-                        let imageBackView = UIView.init(frame: CGRect(x: scrollX, y: imageY, width: backViewSize.width, height: backViewSize.height))
+
+                        let imageBackView = ImageBackView.init(frame: CGRect(x: scrollX, y: imageY, width: backViewSize.width, height: backViewSize.height))
+//                        let imageBackView = UIView.init(frame: CGRect(x: scrollX, y: imageY, width: backViewSize.width, height: backViewSize.height))
                         
                         imageBackView.layer.cornerRadius = 15
                         imageBackView.layer.masksToBounds = true

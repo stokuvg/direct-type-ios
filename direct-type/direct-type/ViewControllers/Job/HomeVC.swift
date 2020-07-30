@@ -181,6 +181,9 @@ class HomeVC: TmpNaviTopVC {
          */
 
         var updateIndexRow:Int = 0
+        
+        var updateIndexes:[IndexPath] = []
+        
         for j in 0..<changeKeepDatas.count {
             let changeData = changeKeepDatas[j]
             let changeKeepJobId = changeData["jobId"] as! String
@@ -197,15 +200,21 @@ class HomeVC: TmpNaviTopVC {
                     updateIndexRow = i
                     Log.selectLog(logLevel: .debug, "updateIndexRow:\(updateIndexRow)")
                     let updateIndex = IndexPath.init(row: updateIndexRow, section: 0)
-                    self.homeTableView.reloadRows(at: [updateIndex], with: .none)
-//                    let updateCell = self.homeTableView.cellForRow(at: updateIndex) as! JobOfferBigCardCell
-//                    updateCell.keepSetting(flag: changeKeepStatus)
+                    updateIndexes.append(updateIndex)
 
-                    break
                 } else {
                     continue
                 }
             }
+        }
+        /*
+
+                             self.homeTableView.reloadRows(at: [updateIndex], with: .automatic)
+         //                    let updateCell = self.homeTableView.cellForRow(at: updateIndex) as! JobOfferBigCardCell
+         //                    updateCell.keepSetting(flag: changeKeepStatus)
+         */
+        if updateIndexes.count > 0 {
+            self.homeTableView.reloadRows(at: updateIndexes, with: .automatic)
         }
         changeKeepDatas = []
 //        changeKeepStatus = false
@@ -556,12 +565,21 @@ class HomeVC: TmpNaviTopVC {
 //        Log.selectLog(logLevel: .debug, "areaWidth:\(areaWidth)")
 
         let text = jobData.jobName
+//        Log.selectLog(logLevel: .debug, "text:\(text)")
         let font = UIFont.init(fontType: .C_font_M)
         let textSize = CGFloat(text.count) * font!.pointSize
 //        Log.selectLog(logLevel: .debug, "textSize:\(textSize)")
+
+        if (textSize / areaWidth) > 2.0 {
+            rowHeight += 30
+        } else if textSize > areaWidth {
+            rowHeight += 30
+        }
+        /*
         if areaWidth > textSize {
             rowHeight -= 30
         }
+        */
 
         rowHeight = DeviceHelper.deviceAddHeight(defaultHeight: rowHeight, addHeight: 25)
 
