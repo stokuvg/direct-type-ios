@@ -15,6 +15,7 @@ class EntryConfirmVC: PreviewBaseVC {
     
     var isAccept: Bool = false
     var bufPassword: String = ""
+    var flgValidErrExist: Bool = false
         
     var jobCard: MdlJobCardDetail? = nil
     var profile: MdlProfile? = nil
@@ -137,7 +138,18 @@ class EntryConfirmVC: PreviewBaseVC {
         if self.bufPassword.count < 4 { isEnable = false } //4文字以下なら非活性
         if self.bufPassword.count > 20 { isEnable = false } //20文字以上なら非活性
         //=== 入力Typeパスワードのリアルタイムバリデーション
-        if !ValidateManager.chkValidateTypePassword(typePassword: bufPassword) { isEnable = false }
+        if !ValidateManager.chkValidateTypePassword(typePassword: bufPassword) {
+            isEnable = false
+            flgValidErrExist = true
+        } else {
+            flgValidErrExist = false
+        }
+        //
+        let idxPath = IndexPath(row: 0, section: 0)
+        if let passwordCell = tableVW.cellForRow(at: idxPath) as? EntryConfirmNotifyEntry1TBCell {
+            passwordCell.changeErrorStatus(isErr: flgValidErrExist)
+            passwordCell.dispCell()
+        }
         dispButton(isEnable: isEnable)
     }
 }
@@ -147,8 +159,9 @@ extension EntryConfirmVC {
         let item = arrData[indexPath.row]
         switch item.type {
         case .notifyEntry1C12:
+            let errMsg: String = flgValidErrExist ? "半角英数字で4文字以上、20文字以内です" : ""
             let cell: EntryConfirmNotifyEntry1TBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryConfirmNotifyEntry1TBCell", for: indexPath) as! EntryConfirmNotifyEntry1TBCell
-            cell.initCell(self, email: profile?.mailAddress ?? "")
+            cell.initCell(self, email: profile?.mailAddress ?? "", errorMsg: errMsg)
             cell.dispCell()
             return cell
 
