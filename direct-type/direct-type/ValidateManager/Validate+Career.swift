@@ -72,7 +72,7 @@ extension EditItemMdlCareerCard {
         case .employmentType:   return ValidInfo(required: true, keta: nil, max: nil, type: .code)
         case .employeesCount:   return ValidInfo(required: false, keta: nil, max: 6, type: .number)//桁数制限かけておく
         case .salary:           return ValidInfo(required: false, keta: nil, max: nil, type: .code)
-        case .contents:         return ValidInfo(required: false, keta: nil, max: 2000, type: .zenHanNumSym)
+        case .contents:         return ValidInfo(required: true, keta: nil, max: 2000, type: .zenHanNumSym)
         }
     }
 }
