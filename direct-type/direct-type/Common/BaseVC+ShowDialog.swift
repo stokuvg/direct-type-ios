@@ -66,6 +66,17 @@ extension BaseVC {
         return promise
     }
     internal func showError(_ myErrorDisp: MyErrorDisp) {
+        var isDisp: Bool = true
+        switch myErrorDisp.code {
+        case 401, 404, 410:
+            isDisp = false
+        default:
+            isDisp = true
+        }
+        if !isDisp {
+            Log.selectLog(logLevel: .error, myErrorDisp.debugDisp)
+            return
+        }
         self.showErrorPromise(myErrorDisp)
         .done { _ in
         }
