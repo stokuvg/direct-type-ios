@@ -21,8 +21,11 @@ class KeepCardCell: BaseJobCardCell {
     @IBAction func keepAction() {
         self.changeKeepStatus()
         self.changeKeepImage()
-        self.delegate.keepAction(tag: self.tag)
+        self.delegate.keepAction(jobId: self.jobId)
+//        self.delegate.keepAction(tag: self.tag)
     }
+    
+    var jobId:String = ""
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,6 +46,8 @@ class KeepCardCell: BaseJobCardCell {
     }
     
     func setup(data:MdlKeepJob) {
+        
+        self.jobId = data.jobId
         
         // キープのステータス
         self.keepFlag = data.keepStatus
