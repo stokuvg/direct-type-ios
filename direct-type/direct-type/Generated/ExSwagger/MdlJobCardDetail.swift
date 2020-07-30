@@ -329,8 +329,8 @@ class MdlJobCardDetail: Codable {
         
         var _prIds:[Int] = []
         for i in 0..<dto.jobPrIds.count {
-            let prId = Int(dto.jobPrIds[i])
-            _prIds.append(prId!)
+            guard let prId = Int(dto.jobPrIds[i]) else { continue }
+            _prIds.append(prId)
         }
         
         let _mainPicture = dto.mainPhotoURL 
