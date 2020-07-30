@@ -63,6 +63,8 @@ class HomeVC: TmpNaviTopVC {
     // AppsFlyerのイベントトラッキング用にオンメモリでキープ求人リストを保有するプロパティ
     // キープされた求人をオンメモリ上で保有しておき、この画面が切り替わった際にイベント送信する
     var storedKeepList: Set<String> = []
+    
+    var badgeKeepCnt:Int = 0
 
     // 求人追加表示フラグ
     var dataAddFlag = true
@@ -779,6 +781,7 @@ extension HomeVC: BaseJobCardCellDelegate {
             ApiManager.sendJobKeep(id: jobId)
             .done { result in
                 LogManager.appendApiResultLog("sendJobKeep", result, function: #function, line: #line)
+                self.badgeKeepCnt += 1
                 // タブに丸ポチを追加
                 if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
                     let tabItem:UITabBarItem = tabItems[1]
@@ -822,6 +825,19 @@ extension HomeVC: BaseJobCardCellDelegate {
         } else {
             ApiManager.sendJobDeleteKeep(id: jobId)
                 .done { result in
+                    
+                    self.badgeKeepCnt -= 1
+                    if self.badgeKeepCnt == 0 {
+                        // タブに丸ポチを追加
+                        if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
+                            let tabItem:UITabBarItem = tabItems[1]
+                            tabItem.badgeValue = nil
+                        }
+                    } else if self.badgeKeepCnt < 0 {
+                        self.badgeKeepCnt = 0
+                    }
+                    
+                    
             }.catch{ (error) in
                 Log.selectLog(logLevel: .debug, "keep delete error:\(error)")
 
