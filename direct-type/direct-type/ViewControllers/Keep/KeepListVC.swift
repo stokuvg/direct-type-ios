@@ -48,7 +48,7 @@ final class KeepListVC: TmpBasicVC {
     var hasNext:Bool = false
     // AppsFlyerのイベントトラッキング用にオンメモリでキープ求人リストを保有するプロパティ
     // キープされた求人をオンメモリ上で保有しておき、この画面が切り替わった際にイベント送信する
-    var storedKeepList: Set<Int> = []
+    var storedKeepList: Set<String> = []
     
     var isAddLoad:Bool = true
     
@@ -283,11 +283,21 @@ extension KeepListVC: UIScrollViewDelegate {
 extension KeepListVC: BaseJobCardCellDelegate {
     func skipAction(jobId: String) {}
 
-    func keepAction(tag: Int) {
-        storedKeepList.insert(tag)
-        Log.selectLog(logLevel: .debug, "KeepListVC delegate keepAction tag:\(tag)")
-        let jobCard = lists[tag]
-        let jobId = jobCard.jobId
+    func keepAction(jobId: String) {
+        storedKeepList.insert(jobId)
+        Log.selectLog(logLevel: .debug, "KeepListVC delegate keepAction tag:\(jobId)")
+        var jobCard:MdlKeepJob = MdlKeepJob()
+        var updateNo:Int = 0
+        for i in 0..<lists.count {
+            let checkJobCard = lists[i]
+            if checkJobCard.jobId == jobId {
+                jobCard = checkJobCard
+                updateNo = i
+                break
+            } else {
+                continue
+            }
+        }
         let keepStatus = !jobCard.keepStatus
         Log.selectLog(logLevel: .debug, "jobId:\(jobId)")
         Log.selectLog(logLevel: .debug, "keepStatus:\(keepStatus)")
@@ -307,7 +317,7 @@ extension KeepListVC: BaseJobCardCellDelegate {
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep send finally")
                 jobCard.keepStatus = keepStatus
-                self.lists[tag] = jobCard
+                self.lists[updateNo] = jobCard
                 self.keepDataAddRemoveCheck(checkData:keepData)
             }
         } else {
@@ -324,7 +334,7 @@ extension KeepListVC: BaseJobCardCellDelegate {
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep send finally")
                 jobCard.keepStatus = keepStatus
-                self.lists[tag] = jobCard
+                self.lists[updateNo] = jobCard
                 self.keepDataAddRemoveCheck(checkData:keepData)
             }
         }

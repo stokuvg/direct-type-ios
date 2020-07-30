@@ -62,7 +62,7 @@ class HomeVC: TmpNaviTopVC {
     var recommendUseFlag:Bool = false
     // AppsFlyerのイベントトラッキング用にオンメモリでキープ求人リストを保有するプロパティ
     // キープされた求人をオンメモリ上で保有しておき、この画面が切り替わった際にイベント送信する
-    var storedKeepList: Set<Int> = []
+    var storedKeepList: Set<String> = []
 
     // 求人追加表示フラグ
     var dataAddFlag = true
@@ -748,16 +748,29 @@ extension HomeVC: BaseJobCardCellDelegate {
         }
     }
 
-    func keepAction(tag: Int) {
-        storedKeepList.insert(tag)
+    func keepAction(jobId: String) {
+        storedKeepList.insert(jobId)
+//        storedKeepList.insert(tag)
         if self.keepSendStatus == .sending { return }
 
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         self.keepSendStatus = .sending
         // TODO:通信処理
-        let row = tag
-        let jobCard = dispJobCards.jobCards[row]
+        var updateNo:Int = 0
+        var jobCard:MdlJobCard = MdlJobCard()
+        for i in 0..<dispJobCards.jobCards.count {
+            let checkJobCard = dispJobCards.jobCards[i]
+            if checkJobCard.jobCardCode == jobId {
+                jobCard = checkJobCard
+                updateNo = i
+                break
+            } else {
+                continue
+            }
+        }
+//        let row = tag
+//        let jobCard = dispJobCards.jobCards[row]
         let jobId = jobCard.jobCardCode
         let flag = !jobCard.keepStatus
         jobCard.keepStatus = flag
@@ -785,8 +798,8 @@ extension HomeVC: BaseJobCardCellDelegate {
                 self.showError(myErr)
             }.finally {
                 // セルの設定変更パターン
-                self.dispJobCards.jobCards[tag] = jobCard
-                let updateIndexPath = IndexPath.init(row: row, section: 0)
+                self.dispJobCards.jobCards[updateNo] = jobCard
+                let updateIndexPath = IndexPath.init(row: updateNo, section: 0)
                 let cell = self.homeTableView.cellForRow(at: updateIndexPath) as! JobOfferBigCardCell
                 cell.keepSetting(flag: flag)
                 self.keepSendStatus = .none
@@ -816,8 +829,8 @@ extension HomeVC: BaseJobCardCellDelegate {
                 self.showError(myErr)
             }.finally {
                 // セルの設定変更パターン
-                self.dispJobCards.jobCards[tag] = jobCard
-                let updateIndexPath = IndexPath.init(row: row, section: 0)
+                self.dispJobCards.jobCards[updateNo] = jobCard
+                let updateIndexPath = IndexPath.init(row: updateNo, section: 0)
                 let cell = self.homeTableView.cellForRow(at: updateIndexPath) as! JobOfferBigCardCell
                 cell.keepSetting(flag: flag)
                 self.keepSendStatus = .none

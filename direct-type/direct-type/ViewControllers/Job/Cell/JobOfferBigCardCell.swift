@@ -18,8 +18,10 @@ class JobOfferBigCardCell: BaseJobCardCell {
     @IBOutlet weak var keepBtn:UIButton!
     @IBAction func keepBtnAction() {
         
-        self.delegate.keepAction(tag: self.tag)
+        self.delegate.keepAction(jobId: self.jobId)
     }
+    
+    var jobId:String = ""
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -55,7 +57,11 @@ class JobOfferBigCardCell: BaseJobCardCell {
     func setup(data:MdlJobCard) {
 //        Log.selectLog(logLevel: .debug, "JobOfferBigCardCell setup start")
 //        Log.selectLog(logLevel: .debug, "jobId:\(data.jobCardCode)")
+        
         self.jobCardData = data
+        
+        self.jobId = jobCardData.jobCardCode
+        
         // サムネイル画像
         let imageUrlString:String = data.mainPicture
         thumnailImageView.af_setImage(withURL: URL(string: imageUrlString)!)
