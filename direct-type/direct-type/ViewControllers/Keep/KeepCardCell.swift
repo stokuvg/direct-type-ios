@@ -159,8 +159,8 @@ class KeepCardCell: BaseJobCardCell {
     
     private func changeKeepImage() {
 //        Log.selectLog(logLevel: .debug, "changeKeepImage start")
-        let offImage = UIImage(named: "keepDefault_GN")
-        let onImage = UIImage(named: "keepSelected_GN")
+        let offImage = UIImage(named: "like_gray")
+        let onImage = UIImage(named: "likeSelected")
         
 //        Log.selectLog(logLevel: .debug, "keepFlag:\(keepFlag)")
         
