@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Opi-9n-1sF">
-                        <rect key="frame" x="0.0" y="40" width="324" height="326"/>
+                        <rect key="frame" x="0.0" y="40" width="324" height="388"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ed-hU-clK">
                                 <rect key="frame" x="0.0" y="0.0" width="324" height="50"/>
@@ -81,8 +81,26 @@
                                     <constraint firstItem="Gju-IV-r02" firstAttribute="top" secondItem="Zba-Y7-mbb" secondAttribute="top" id="idf-Ll-HvE"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A72-fa-yfy">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dMy-cC-G4u">
                                 <rect key="frame" x="0.0" y="214" width="324" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAz-Q0-5OX">
+                                        <rect key="frame" x="16" y="0.0" width="292" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="ZAz-Q0-5OX" secondAttribute="trailing" constant="16" id="5ra-hs-EpP"/>
+                                    <constraint firstItem="ZAz-Q0-5OX" firstAttribute="leading" secondItem="dMy-cC-G4u" secondAttribute="leading" constant="16" id="Kyo-xp-Zmq"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZAz-Q0-5OX" secondAttribute="bottom" id="PV3-NK-awL"/>
+                                    <constraint firstItem="ZAz-Q0-5OX" firstAttribute="top" secondItem="dMy-cC-G4u" secondAttribute="top" id="Rp8-uv-fNU"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A72-fa-yfy">
+                                <rect key="frame" x="0.0" y="276" width="324" height="50"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0qm-TU-EN5" customClass="IKTextField" customModule="direct_type" customModuleProvider="target">
                                         <rect key="frame" x="16" y="4" width="292" height="42"/>
@@ -103,7 +121,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3La-KC-u4L">
-                                <rect key="frame" x="0.0" y="276" width="324" height="50"/>
+                                <rect key="frame" x="0.0" y="338" width="324" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJP-Jy-Hl2">
                                         <rect key="frame" x="16" y="0.0" width="292" height="50"/>
@@ -136,6 +154,7 @@
                 <outlet property="lblMessageA" destination="pJP-Jy-Hl2" id="YF6-vn-PqX"/>
                 <outlet property="lblMessageB" destination="Gju-IV-r02" id="dUH-Ac-M3X"/>
                 <outlet property="lblTitle" destination="zsd-am-1Hk" id="GnB-d0-ajI"/>
+                <outlet property="lblValidateError" destination="ZAz-Q0-5OX" id="uQt-VX-oTU"/>
                 <outlet property="tfPassword" destination="0qm-TU-EN5" id="9Cz-Id-i9F"/>
                 <outlet property="vwMainArea" destination="H2p-sc-9uM" id="ICc-DL-LvQ"/>
                 <outlet property="vwMessageArea" destination="q5s-HL-FMV" id="cw8-m3-Isk"/>
@@ -143,6 +162,7 @@
                 <outlet property="vwMessageAreaB" destination="Zba-Y7-mbb" id="965-ek-NBM"/>
                 <outlet property="vwPasswordArea" destination="A72-fa-yfy" id="AkK-O7-Hc5"/>
                 <outlet property="vwTitleArea" destination="7Ed-hU-clK" id="oZc-lP-9mS"/>
+                <outlet property="vwValidateErrorArea" destination="dMy-cC-G4u" id="oOF-Fc-rN2"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="132.58928571428572"/>
         </tableViewCell>
