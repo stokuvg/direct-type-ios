@@ -33,9 +33,9 @@ final class KeepNoView: UIView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        textLabel.text(text: "現在キープ中の\n求人はありません。\n求人情報からキープしたい\n求人を選んでください", fontType: .font_L, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
-        chemistryLabel.text(text: "相性診断を受けると、キープした求人との相性が表示できるようになります。", fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
-        chemistryBtn.setTitle(text: "相性診断をやってみる", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        textLabel.text(text: "現在キープ中の求人はありません。\n求人情報からキープしたい\n求人を選んでください", fontType: .font_L, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
+//        chemistryLabel.text(text: "相性診断を受けると、キープした求人との相性が表示できるようになります。", fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
+//        chemistryBtn.setTitle(text: "相性診断をやってみる", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
     }
 }
 

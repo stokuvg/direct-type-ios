@@ -47,51 +47,11 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PWh-KV-CBf">
-                                                <rect key="frame" x="0.0" y="200" width="280" height="208"/>
+                                                <rect key="frame" x="0.0" y="200" width="280" height="328"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zxT-vY-4kz">
-                                                <rect key="frame" x="0.0" y="408" width="280" height="60"/>
-                                                <subviews>
-                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wcu-B9-cRh">
-                                                        <rect key="frame" x="10" y="5" width="260" height="50"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="Wcu-B9-cRh" secondAttribute="trailing" constant="10" id="G7O-m4-NTN"/>
-                                                    <constraint firstAttribute="bottom" secondItem="Wcu-B9-cRh" secondAttribute="bottom" constant="5" id="df7-9U-mSM"/>
-                                                    <constraint firstItem="Wcu-B9-cRh" firstAttribute="top" secondItem="zxT-vY-4kz" secondAttribute="top" constant="5" id="hbU-T3-pyK"/>
-                                                    <constraint firstItem="Wcu-B9-cRh" firstAttribute="leading" secondItem="zxT-vY-4kz" secondAttribute="leading" constant="10" id="hhF-le-2KS"/>
-                                                    <constraint firstAttribute="height" constant="60" id="hjG-Xr-UWL"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1aV-Of-ljP">
-                                                <rect key="frame" x="0.0" y="468" width="280" height="60"/>
-                                                <subviews>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Glv-Rk-2xY">
-                                                        <rect key="frame" x="20" y="5" width="240" height="50"/>
-                                                        <color key="backgroundColor" name="color-button"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <connections>
-                                                            <action selector="chemistryBtnAction" destination="QSk-To-RRj" eventType="touchUpInside" id="N7i-2x-CMe"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="Ck5-W3-dg3"/>
-                                                    <constraint firstItem="Glv-Rk-2xY" firstAttribute="leading" secondItem="1aV-Of-ljP" secondAttribute="leading" constant="20" id="EQB-qj-VrE"/>
-                                                    <constraint firstItem="Glv-Rk-2xY" firstAttribute="top" secondItem="1aV-Of-ljP" secondAttribute="top" constant="5" id="TPg-Sg-Lwz"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Glv-Rk-2xY" secondAttribute="trailing" constant="20" id="f19-lI-mD3"/>
-                                                    <constraint firstAttribute="bottom" secondItem="Glv-Rk-2xY" secondAttribute="bottom" constant="5" id="yJf-9u-sB9"/>
-                                                </constraints>
-                                            </view>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -103,8 +63,6 @@
                                     <constraint firstAttribute="trailing" secondItem="YzU-gd-Vzd" secondAttribute="trailing" constant="20" id="jmT-qh-Bgd"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="chemistryBtn" destination="Glv-Rk-2xY" id="vN2-jI-CJv"/>
-                                    <outlet property="chemistryLabel" destination="Wcu-B9-cRh" id="jdJ-tn-6fJ"/>
                                     <outlet property="imageView" destination="gXG-fi-sbu" id="iKX-dr-93e"/>
                                     <outlet property="textLabel" destination="PWh-KV-CBf" id="Sza-fi-aeE"/>
                                 </connections>
@@ -135,9 +93,6 @@
     </scenes>
     <resources>
         <image name="suma_setsumei2" width="175" height="175"/>
-        <namedColor name="color-button">
-            <color red="0.0" green="0.72549019607843135" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="color-white">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

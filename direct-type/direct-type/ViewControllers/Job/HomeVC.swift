@@ -181,6 +181,9 @@ class HomeVC: TmpNaviTopVC {
          */
 
         var updateIndexRow:Int = 0
+        
+        var updateIndexes:[IndexPath] = []
+        
         for j in 0..<changeKeepDatas.count {
             let changeData = changeKeepDatas[j]
             let changeKeepJobId = changeData["jobId"] as! String
@@ -197,15 +200,21 @@ class HomeVC: TmpNaviTopVC {
                     updateIndexRow = i
                     Log.selectLog(logLevel: .debug, "updateIndexRow:\(updateIndexRow)")
                     let updateIndex = IndexPath.init(row: updateIndexRow, section: 0)
-                    self.homeTableView.reloadRows(at: [updateIndex], with: .none)
-//                    let updateCell = self.homeTableView.cellForRow(at: updateIndex) as! JobOfferBigCardCell
-//                    updateCell.keepSetting(flag: changeKeepStatus)
+                    updateIndexes.append(updateIndex)
 
-                    break
                 } else {
                     continue
                 }
             }
+        }
+        /*
+
+                             self.homeTableView.reloadRows(at: [updateIndex], with: .automatic)
+         //                    let updateCell = self.homeTableView.cellForRow(at: updateIndex) as! JobOfferBigCardCell
+         //                    updateCell.keepSetting(flag: changeKeepStatus)
+         */
+        if updateIndexes.count > 0 {
+            self.homeTableView.reloadRows(at: updateIndexes, with: .automatic)
         }
         changeKeepDatas = []
 //        changeKeepStatus = false
@@ -262,7 +271,8 @@ class HomeVC: TmpNaviTopVC {
             homeTableView.isHidden = true
         }
     }
-
+    
+    /// ２回目以降求人一覧追加表示
     private func getJobRecommendAddList() {
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
@@ -288,7 +298,8 @@ class HomeVC: TmpNaviTopVC {
             self.dataAddAction()
         }
     }
-
+    
+    /// 初回求人一覧追加表示
     private func getJobAddList() {
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
@@ -314,6 +325,7 @@ class HomeVC: TmpNaviTopVC {
             self.dataAddAction()
         }
     }
+    /// ２回目以降求人一覧表示
     private func getJobRecommendList() {
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
@@ -348,6 +360,7 @@ class HomeVC: TmpNaviTopVC {
             self.dataCheckAction()
 
             //上部にスクロールさせる（データない時に実施するとクラッシュするため）
+            // おすすめ求人を更新ボタン押下時は、一番上に来る。
             if self.dispJobCards.jobCards.count > 0 {
                 let topIndex = IndexPath.init(row: 0, section: 0)
                 self.homeTableView.selectRow(at: topIndex, animated: true, scrollPosition: .top)
@@ -355,6 +368,8 @@ class HomeVC: TmpNaviTopVC {
         }
     }
 
+    
+    /// 初回求人一覧表示
     private func getJobList() {
         pageJobCards = MdlJobCardList()
         dispJobCards = MdlJobCardList()
@@ -556,12 +571,21 @@ class HomeVC: TmpNaviTopVC {
 //        Log.selectLog(logLevel: .debug, "areaWidth:\(areaWidth)")
 
         let text = jobData.jobName
+//        Log.selectLog(logLevel: .debug, "text:\(text)")
         let font = UIFont.init(fontType: .C_font_M)
         let textSize = CGFloat(text.count) * font!.pointSize
 //        Log.selectLog(logLevel: .debug, "textSize:\(textSize)")
+
+        if (textSize / areaWidth) > 2.0 {
+            rowHeight += 30
+        } else if textSize > areaWidth {
+            rowHeight += 30
+        }
+        /*
         if areaWidth > textSize {
             rowHeight -= 30
         }
+        */
 
         rowHeight = DeviceHelper.deviceAddHeight(defaultHeight: rowHeight, addHeight: 25)
 
