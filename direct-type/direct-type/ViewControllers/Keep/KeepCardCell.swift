@@ -96,7 +96,7 @@ class KeepCardCell: BaseJobCardCell {
             // 単位
             unitLabel.text(text: "万円", fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
         } else {
-            saralyLabel.text(text: "非公開", fontType: .C_font_M , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+            saralyLabel.text(text: "非公開", fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
             // 単位
             unitLabel.text(text: "", fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         }
