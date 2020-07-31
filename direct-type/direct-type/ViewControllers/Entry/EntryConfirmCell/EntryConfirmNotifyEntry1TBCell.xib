@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell_EntryConfirmNotifyEntry1TBCell" rowHeight="444" id="KGk-i7-Jjw" customClass="EntryConfirmNotifyEntry1TBCell" customModule="direct_type" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell_EntryConfirmNotifyEntry1TBCell" rowHeight="444" id="KGk-i7-Jjw" customClass="EntryConfirmNotifyEntry1TBCell" customModule="Direct_type" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="324" height="444"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -81,8 +81,29 @@
                                     <constraint firstItem="Gju-IV-r02" firstAttribute="top" secondItem="Zba-Y7-mbb" secondAttribute="top" id="idf-Ll-HvE"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dMy-cC-G4u">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A72-fa-yfy">
                                 <rect key="frame" x="0.0" y="214" width="324" height="50"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0qm-TU-EN5" customClass="IKTextField" customModule="Direct_type" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="4" width="292" height="46"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" smartDashesType="no" smartQuotesType="no" textContentType="password"/>
+                                        <connections>
+                                            <action selector="editingChanged:" destination="KGk-i7-Jjw" eventType="editingChanged" id="XwC-Iu-GhV"/>
+                                            <action selector="valueChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="QQF-q0-8gO"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="0qm-TU-EN5" firstAttribute="leading" secondItem="A72-fa-yfy" secondAttribute="leading" constant="16" id="4vF-F5-Ybs"/>
+                                    <constraint firstAttribute="trailing" secondItem="0qm-TU-EN5" secondAttribute="trailing" constant="16" id="5d6-ok-jwY"/>
+                                    <constraint firstItem="0qm-TU-EN5" firstAttribute="top" secondItem="A72-fa-yfy" secondAttribute="top" constant="4" id="EHJ-xm-za2"/>
+                                    <constraint firstAttribute="bottom" secondItem="0qm-TU-EN5" secondAttribute="bottom" id="Gr8-44-Ud1"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dMy-cC-G4u">
+                                <rect key="frame" x="0.0" y="276" width="324" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAz-Q0-5OX">
                                         <rect key="frame" x="16" y="0.0" width="292" height="50"/>
@@ -97,27 +118,6 @@
                                     <constraint firstItem="ZAz-Q0-5OX" firstAttribute="leading" secondItem="dMy-cC-G4u" secondAttribute="leading" constant="16" id="Kyo-xp-Zmq"/>
                                     <constraint firstAttribute="bottom" secondItem="ZAz-Q0-5OX" secondAttribute="bottom" id="PV3-NK-awL"/>
                                     <constraint firstItem="ZAz-Q0-5OX" firstAttribute="top" secondItem="dMy-cC-G4u" secondAttribute="top" id="Rp8-uv-fNU"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A72-fa-yfy">
-                                <rect key="frame" x="0.0" y="276" width="324" height="50"/>
-                                <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0qm-TU-EN5" customClass="IKTextField" customModule="direct_type" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="4" width="292" height="42"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" smartDashesType="no" smartQuotesType="no" textContentType="password"/>
-                                        <connections>
-                                            <action selector="editingChanged:" destination="KGk-i7-Jjw" eventType="editingChanged" id="XwC-Iu-GhV"/>
-                                            <action selector="valueChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="QQF-q0-8gO"/>
-                                        </connections>
-                                    </textField>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="0qm-TU-EN5" firstAttribute="leading" secondItem="A72-fa-yfy" secondAttribute="leading" constant="16" id="4vF-F5-Ybs"/>
-                                    <constraint firstAttribute="trailing" secondItem="0qm-TU-EN5" secondAttribute="trailing" constant="16" id="5d6-ok-jwY"/>
-                                    <constraint firstItem="0qm-TU-EN5" firstAttribute="top" secondItem="A72-fa-yfy" secondAttribute="top" constant="4" id="EHJ-xm-za2"/>
-                                    <constraint firstAttribute="bottom" secondItem="0qm-TU-EN5" secondAttribute="bottom" constant="4" id="Gr8-44-Ud1"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3La-KC-u4L">

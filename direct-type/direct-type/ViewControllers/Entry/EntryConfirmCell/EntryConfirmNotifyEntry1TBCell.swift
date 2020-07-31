@@ -12,7 +12,7 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
     var delegate: EntryConfirmNotifyEntryDelegate? = nil
     var email: String = ""
     var password: String = ""
-    var errorMsg: String = ""
+    var isValidErrorExist: Bool = false
     
     @IBOutlet weak var vwMainArea: UIView!
     @IBOutlet weak var vwTitleArea: UIView!
@@ -44,10 +44,10 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
         tfPassword.tintColor = UIColor(colorType: .color_black)
         tfPassword.backgroundColor = UIColor(colorType: .color_white)
     }
-    func initCell(_ delegate: EntryConfirmNotifyEntryDelegate, email: String, errorMsg: String) {
+    func initCell(_ delegate: EntryConfirmNotifyEntryDelegate, email: String, isValidError: Bool) {
         self.delegate = delegate
         self.email = email
-        self.errorMsg = errorMsg
+        self.isValidErrorExist = isValidError
         //===ソフトウェアキーボードに〔閉じる〕ボタン付与
         let rect = CGRect(origin: CGPoint.zero, size: CGSize.init(width: 60, height: 45))
         let toolbar = UIToolbar(frame: rect)//Autolayout補正かかるけど、そこそこの横幅指定が必要
@@ -59,8 +59,8 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
     @objc func actInputCancelButton(_ sender: IKBarButtonItem) {
         self.endEditing(true)
     }
-    func changeErrorStatus(isErr: Bool) {
-        errorMsg = isErr ? "半角英数字で4文字以上、20文字以内です" : ""
+    func changeErrorStatus(isValidErrorExist: Bool) {
+        self.isValidErrorExist = isValidErrorExist
     }
     func dispCell() {
         let bufTitle: String = ["応募前に必ずご確認ください"].joined(separator: "\n")
@@ -76,13 +76,13 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
         lblMessageB.text(text: bufMessageB, fontType: .font_Sb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         lblMessageA.text(text: bufMessageA, fontType: .font_S, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         //===エラーが存在した場合
-        if errorMsg.isEmpty {
-            vwValidateErrorArea.isHidden = true
-            tfPassword.backgroundColor = UIColor(colorType: .color_white)
-        } else {
-            vwValidateErrorArea.isHidden = false
-            lblValidateError.text(text: errorMsg, fontType: .font_SS, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
+        let validMessage: String = "半角英数字で4文字以上、20文字以内です"
+        if isValidErrorExist {
             tfPassword.backgroundColor = UIColor.init(red: 1.0, green: 0.8, blue: 0.8, alpha: 1.0)
+            lblValidateError.text(text: validMessage, fontType: .font_SS, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
+        } else {
+            tfPassword.backgroundColor = UIColor(colorType: .color_white)
+            lblValidateError.text(text: validMessage, fontType: .font_SS, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         }
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
