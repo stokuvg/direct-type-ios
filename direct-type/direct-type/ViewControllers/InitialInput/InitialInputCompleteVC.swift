@@ -82,6 +82,7 @@ final class InitialInputCompleteVC: TmpBasicVC {
 private extension InitialInputCompleteVC {
     func setup() {
         textView.text = contextType.description
+        textView.textColor = UIColor.init(colorType: .color_black)
         navigationItem.hidesBackButton = true
         navigationItem.title = contextType.title
         

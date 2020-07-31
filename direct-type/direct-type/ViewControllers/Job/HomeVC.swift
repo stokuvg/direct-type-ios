@@ -102,6 +102,7 @@ class HomeVC: TmpNaviTopVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.tabBarController?.delegate = self
         homeTableView.backgroundColor = UIColor.init(colorType: .color_base)
         homeTableView.rowHeight = UITableView.automaticDimension
 
@@ -215,6 +216,7 @@ class HomeVC: TmpNaviTopVC {
          //                    let updateCell = self.homeTableView.cellForRow(at: updateIndex) as! JobOfferBigCardCell
          //                    updateCell.keepSetting(flag: changeKeepStatus)
          */
+        Log.selectLog(logLevel: .debug, "updateIndexes:\(updateIndexes)")
         if updateIndexes.count > 0 {
             self.homeTableView.reloadRows(at: updateIndexes, with: .automatic)
         }
@@ -874,4 +876,25 @@ extension HomeVC: BaseJobCardCellDelegate {
         }
     }
 
+}
+
+extension HomeVC: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        Log.selectLog(logLevel: .debug, "HomeVC didSelect start")
+
+        if let vcs = tabBarController.viewControllers {
+            Log.selectLog(logLevel: .debug, "vcs:\(vcs)")
+            
+            let secondNavi = vcs[1] as! BaseNaviController
+            let secondVC = secondNavi.visibleViewController as! KeepListVC
+            
+            Log.selectLog(logLevel: .debug, "secondVC:\(String(describing: secondVC))")
+            if tabBarController.selectedIndex == 1 {
+                Log.selectLog(logLevel: .debug, "切り替えた画面がKeepListVC")
+                secondVC.keepDatas = []
+            } else {
+                secondVC.keepDatas = []
+            }
+        }
+    }
 }
