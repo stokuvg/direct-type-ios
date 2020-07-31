@@ -64,7 +64,7 @@ final public class AuthManager {
             LogManager.appendLogEx(.loginCheck, "isLogin", String(repeating: "☠️", count: 44), "状態不一致で現象発生の可能性あり？！", #function, #line)
         }
         return (userState == .signedIn)
-        //return (userState == .signedIn) && !((AuthManager.shared.idToken ?? "").isEmpty)
+//        return (userState == .signedIn) && !((AuthManager.shared.idToken ?? "").isEmpty)//これだと #143 が発生する（アプリ再起動時に1時間経過でidTokenが期限切でも、そのままエラーリトライでリフレッシュトークンにより再発行されるので、signedIn状態のみチェックでOK）
     }
 }
 
