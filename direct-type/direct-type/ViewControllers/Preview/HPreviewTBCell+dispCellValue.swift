@@ -46,10 +46,10 @@ extension HPreviewTBCell {
             let tmp0: String = _item.childItems[0].curVal
             let buf0: String = "\(tmp0)名"
             return "\(buf0)"
-        case .salaryC15:          //===年収
+        case .salaryC15:          //===年収（数値）
             if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
-            let buf0: String = SelectItemsManager.getCodeDisp(.salary, code: tmp0)?.disp ?? ""
+            let buf0: String = SelectItemsManager.getCodeDisp(.salarySelect, code: tmp0)?.disp ?? ""
             return "\(buf0)"
         case .contentsC15:        //===職務内容本文
             if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応

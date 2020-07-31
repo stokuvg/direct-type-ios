@@ -84,7 +84,7 @@ class CareerCardTBCell: UITableViewCell {
         if let buf = SelectItemsManager.getCodeDisp(.employmentType, code: career.employmentType) {
             dispCompany.append(buf.disp)
         }
-        if let buf = SelectItemsManager.getCodeDisp(.salary, code: career.salary) {
+        if let buf = SelectItemsManager.getCodeDisp(.salarySelect, code: career.salary) {
             dispCompany.append(buf.disp)
         }
         //===表示させる
