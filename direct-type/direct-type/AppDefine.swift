@@ -78,20 +78,20 @@ enum DirectTypeLinkURL {
             return "https://type.jp/help/category_14.html"
         //===ユーザ作成、ログイン
         case .LoginPrivacyPolicy, .RegistPrivacyPolicy, .SettingsAgreement:
-            return "https://" + DirectTypeLinkURL.connectDommain + "/privacy/"
+            return "https://" + DirectTypeLinkURL.connectDommain + "/privacy/index.html"
         case .RegistAgreement: fallthrough
         case .LoginAgreement:
-            return "https://" + DirectTypeLinkURL.connectDommain + "/policy/"
+            return "https://" + DirectTypeLinkURL.connectDommain + "/policy/index.html"
         case .RegistPhoneReason, .LoginPhoneReason:
-            return "https://" + DirectTypeLinkURL.connectDommain + "/help/#001"
+            return "https://" + DirectTypeLinkURL.connectDommain + "/help/index.html#001"
         //===アプローチ設定
         case .AproachAbout:
-            return "https://" + DirectTypeLinkURL.connectDommain + "/help/#002"
+            return "https://" + DirectTypeLinkURL.connectDommain + "/help/index.html#002"
         //===設定項目
         case .SettingsFAQ:
-            return "https://" + DirectTypeLinkURL.connectDommain + "/help/"
+            return "https://" + DirectTypeLinkURL.connectDommain + "/help/index.html"
         case .SettingsPrivacyPolicy:
-            return "https://" + DirectTypeLinkURL.connectDommain + "/privacy/"
+            return "https://" + DirectTypeLinkURL.connectDommain + "/privacy/index.html"
         }
     }
     var url: URL? {
