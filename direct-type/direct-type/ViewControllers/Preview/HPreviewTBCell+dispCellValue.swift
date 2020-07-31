@@ -94,7 +94,7 @@ extension HPreviewTBCell {
         case .hopeSalaryC9:   //１１．希望年収（任意）
             if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
-            let buf0: String = SelectItemsManager.getCodeDisp(.salary, code: tmp0)?.disp ?? ""
+            let buf0: String = SelectItemsManager.getCodeDisp(.salaryCode, code: tmp0)?.disp ?? ""
             return "\(buf0)"
 
         //========================

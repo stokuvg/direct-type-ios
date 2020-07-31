@@ -245,7 +245,7 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
                 }
                 addStackItem(type: .hopeAreaA9, val: dispHopeArea)
                 //=== 希望年収
-                if let cd = SelectItemsManager.getCodeDisp(.salary, code: entry.hopeSalary) {
+                if let cd = SelectItemsManager.getCodeDisp(.salaryCode, code: entry.hopeSalary) {
                     addStackItem(type: .hopeSalaryC9, val: cd.disp)
                 }
                 //=== 自己PR
