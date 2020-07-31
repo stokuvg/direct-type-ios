@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina3_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -14,20 +14,20 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="スマ転" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hG8-sM-3Fq">
-                                <rect key="frame" x="158.5" y="429" width="97" height="38.5"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
-                                <color key="textColor" name="color-white"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="o8E-Yg-gOQ">
+                                <rect key="frame" x="48" y="128" width="224" height="224"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="o8E-Yg-gOQ" secondAttribute="height" multiplier="1:1" id="8xK-aV-r08"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" name="color-sub"/>
+                        <color key="backgroundColor" name="color-white"/>
                         <constraints>
-                            <constraint firstItem="hG8-sM-3Fq" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Akw-Ve-h8o"/>
-                            <constraint firstItem="hG8-sM-3Fq" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="gHO-9E-AJ6"/>
+                            <constraint firstItem="o8E-Yg-gOQ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="L7D-M5-pGJ"/>
+                            <constraint firstItem="o8E-Yg-gOQ" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="XoB-dm-65p"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -38,9 +38,7 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="color-sub">
-            <color red="1" green="0.35294117647058826" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
+        <image name="splash_logo" width="224" height="224"/>
         <namedColor name="color-white">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
