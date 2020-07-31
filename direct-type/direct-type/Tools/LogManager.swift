@@ -17,6 +17,7 @@ class LogManager: NSObject {
         //===これ以降に必要に応じて追加して利用してください
         case apiDetail
         case loginCheck
+        case keepList
 
         var isOut: Bool {
             if Constants.DbgOutputLog == false { return false }
@@ -29,6 +30,7 @@ class LogManager: NSObject {
             //===これ以降に必要に応じて追加して利用してください
             case .apiDetail:    return true
             case .loginCheck:   return true
+            case .keepList:     return true
             }
         }
     }

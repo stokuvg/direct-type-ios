@@ -762,6 +762,7 @@ extension HomeVC: BaseJobCardCellDelegate {
     }
 
     func keepAction(jobId: String) {
+        //LogManager.appendLogEx(.keepList, String(repeating: "🔖", count: 11), "[jobId: \(jobId)]", "[keepSendStatus: \(keepSendStatus)]", #function, #line)
         storedKeepList.insert(jobId)
 //        storedKeepList.insert(tag)
         if self.keepSendStatus == .sending { return }
