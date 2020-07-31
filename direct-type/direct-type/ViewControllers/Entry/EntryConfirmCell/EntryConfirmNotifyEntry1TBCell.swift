@@ -67,7 +67,7 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
         let bufMessageB: String = "応募に利用するパスワード"
         let bufMessage: String = [
         "転職サイトtypeを通じて応募します。",
-        "利用するパスワードを入力してください。",
+        "パスワードを設定してください。",
         "（転職サイトtypeにご登録済の方は、ご利用中のパスワードを入力してください。）",
         ].joined(separator: "")
         let bufMessageA: String = "メールアドレス：\(email)"
