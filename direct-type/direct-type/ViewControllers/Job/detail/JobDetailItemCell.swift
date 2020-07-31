@@ -35,6 +35,37 @@ class JobDetailItemCell: BaseJobDetailCell {
         }
     }
     
+    private func makeEmploymentTypes(typeString: String) -> String {
+        
+//        let dummyTypeString = "1_2_5"
+//        let typeCutStrings = dummyTypeString.components(separatedBy: "_")
+        let typeCutStrings = typeString.components(separatedBy: "_")
+//        Log.selectLog(logLevel: .debug, "typeCutStrings:\(typeCutStrings)")
+        
+        if typeCutStrings.count > 1 {
+            var types:String = ""
+            let firstCode = Int(typeCutStrings[0]) ?? 0
+            let firstType = SelectItemsManager.getCodeDisp(.employmentType, code: firstCode)?.disp ?? ""
+            
+            types.append(firstType)
+            
+            for i in 1..<typeCutStrings.count {
+                let typeCode = Int(typeCutStrings[i]) ?? 0
+                let typeItem = SelectItemsManager.getCodeDisp(.employmentType, code: typeCode)?.disp ?? ""
+                
+                types.append("/")
+                types.append(typeItem)
+            }
+            
+            return types
+            
+        } else {
+            let typeCode = Int(typeString) ?? 0
+            let type = SelectItemsManager.getCodeDisp(.employmentType, code: typeCode)?.disp
+            return type!
+        }
+    }
+    
     func setup(data: MdlJobCardDetail,row: Int) {
 //    func setup(data:[String:Any]) {
         
@@ -58,10 +89,11 @@ class JobDetailItemCell: BaseJobDetailCell {
                 title = "雇用形態"
                 Log.selectLog(logLevel: .debug, "employmentType:\(data.employmentType)")
                 
-                let type = SelectItemsManager.getCodeDisp(.employmentType, code: data.employmentType)?.disp ?? ""
-                Log.selectLog(logLevel: .debug, "雇用形態:\(type)")
+                let types = self.makeEmploymentTypes(typeString:data.employmentType)
+//                let type = SelectItemsManager.getCodeDisp(.employmentType, code: data.employmentType)?.disp ?? ""
+                Log.selectLog(logLevel: .debug, "雇用形態:\(types)")
                 
-                text = type
+                text = types
             case 3:
                 // 給与
 //                title = data.salary.title!

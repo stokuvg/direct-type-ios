@@ -623,6 +623,8 @@ extension HomeVC: UITableViewDelegate {
         }
         let selectedJobData = dispJobCards.jobCards[row]
         let jobId = selectedJobData.jobCardCode
+        // ダミーチェック
+//        let jobId = "1187957"
         let vc = getVC(sbName: "JobOfferDetailVC", vcName: "JobOfferDetailVC") as! JobOfferDetailVC
 
         vc.configure(jobId: jobId, isKeep: selectedJobData.keepStatus, routeFrom: .fromHome)

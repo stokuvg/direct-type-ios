@@ -80,12 +80,14 @@ class JobDetailImageCell: BaseTableViewCell {
         
         if addImageScrollViewCheck() {
             Log.selectLog(logLevel: .debug, "スクロール初回のみadd")
+//            Log.selectLog(logLevel: .debug, "viewHeight:\(String(describing: viewHeight))")
             self.mainImagesScrollView = UIScrollView.init(frame: CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight))
             self.mainImagesScrollView.isPagingEnabled = true
             self.mainImagesScrollView.showsVerticalScrollIndicator = false
             self.mainImagesScrollView.showsHorizontalScrollIndicator = false
             self.mainImagesScrollView.delegate = self
             
+//            Log.selectLog(logLevel: .debug, "mainImagesScrollView:\(mainImagesScrollView)")
             self.mainImageBackView.addSubview(self.mainImagesScrollView)
         }
     }
@@ -122,7 +124,10 @@ class JobDetailImageCell: BaseTableViewCell {
         var backViewHeight:CGFloat = 0.0
         
         backViewWidth = viewSize.width - (margin * 2)
-        backViewHeight = (backViewWidth*imageSize.height)/imageSize.width
+        if imageSize.width > 0 && imageSize.height > 0 {
+            backViewHeight = (backViewWidth*imageSize.height)/imageSize.width
+        }
+        
         if backViewHeight > viewSize.height {
             backViewHeight = viewSize.height
         }
@@ -136,113 +141,124 @@ class JobDetailImageCell: BaseTableViewCell {
         // 画像セット
         
         let mainImageUrlString:String = data.mainPicture
+//        Log.selectLog(logLevel: .debug, "mainImageUrlString:\(mainImageUrlString)")
         let subImageUrlStrings:[String] = data.subPictures
+//        Log.selectLog(logLevel: .debug, "subImageUrlStrings:\(subImageUrlStrings)")
         
         let imageSizeCheckView:UIImageView! = UIImageView()
+        
         let checkImageURL = URL(string: mainImageUrlString)
-        imageSizeCheckView.af_setImage(withURL: checkImageURL!)
-        let checkImage = imageSizeCheckView.image
-//        Log.selectLog(logLevel: .debug, "checkImage:\(String(describing: checkImage))")
-        let checkImageSize = checkImage?.size ?? CGSize.zero
-//        Log.selectLog(logLevel: .debug, "checkImageSize:\(String(describing: checkImageSize))")
-        
-        let backViewSize = self.makeBackViewSize(viewSize: self.mainImagesScrollView.bounds.size, imageSize: checkImageSize)
-        
-        imageY = (viewHeight - backViewSize.height) / 2
-        
-        var imageUrlStrings:[String] = [mainImageUrlString]
-        if subImageUrlStrings.count > 0 {
-            for i in 0..<subImageUrlStrings.count {
-                let _subImageUrlString = subImageUrlStrings[i]
-                if _subImageUrlString.count > 0 {
-                    imageUrlStrings.append(_subImageUrlString)
-                }
-            }
-        }
-        
-        imageCnt = imageUrlStrings.count
-        if imageCnt > 1 {
-            
-            self.mainImagesControl.numberOfPages = imageUrlStrings.count
-            
-            if addImageScrollCheck() {
-                // 無限スクロール用
-                for i in 0..<(imageUrlStrings.count * 3) {
-                    var cnt:Int = 0
-                    cnt = i
-                    if i >= imageUrlStrings.count {
-                        cnt = i % imageUrlStrings.count
-                    }
-                    
-                    let imageUrlString = imageUrlStrings[cnt]
-                    let imageUrl = URL(string: imageUrlString)
-                    let scrollX:CGFloat = (margin + (viewWidth * CGFloat(i)))
-                    
-                    let imageBackView = ImageBackView.init(frame: CGRect(x: scrollX, y: imageY, width: backViewSize.width, height: backViewSize.height))
-                    
-                    imageBackView.layer.cornerRadius = 15
-                    imageBackView.layer.masksToBounds = true
-                    imageBackView.clipsToBounds = true
-
-//                    let imageView = UIImageView.init(frame: CGRect(x: scrollX, y: imageY, width: imageW, height: imageH))
-                    let imageView = UIImageView.init(frame: CGRect(x: 0, y: 0, width: backViewSize.width, height: backViewSize.height))
-                    imageView.backgroundColor = UIColor.init(colorType: .color_white)
-                    imageView.contentMode = .scaleAspectFit
-                    imageView.af_setImage(withURL: imageUrl!)
-                    
-                    imageView.layer.cornerRadius = 15
-                    imageView.layer.masksToBounds = true
-                    imageView.clipsToBounds = true
-                    
-                    imageBackView.addSubview(imageView)
-                    
-                    self.mainImagesScrollView.addSubview(imageBackView)
-                }
-                self.mainImagesScrollView.contentSize = CGSize(width: (CGFloat(imageUrlStrings.count*3) * viewWidth), height: viewHeight)
-            }
-            
-        } else {
-            for i in 0..<(imageUrlStrings.count) {
-                var cnt:Int = 0
-                cnt = i
-                if i >= imageUrlStrings.count {
-                    cnt = i % imageUrlStrings.count
-                }
-                let imageUrlString = imageUrlStrings[cnt]
-                if addImageScrollCheck() {
-                    if imageUrlString.count > 0 {
-                        let imageUrl = URL(string: imageUrlString)
-                        let scrollX:CGFloat = (margin + (viewWidth * CGFloat(i)))
-
-                        let imageBackView = ImageBackView.init(frame: CGRect(x: scrollX, y: imageY, width: backViewSize.width, height: backViewSize.height))
-//                        let imageBackView = UIView.init(frame: CGRect(x: scrollX, y: imageY, width: backViewSize.width, height: backViewSize.height))
-                        
-                        imageBackView.layer.cornerRadius = 15
-                        imageBackView.layer.masksToBounds = true
-                        imageBackView.clipsToBounds = true
-
-                        let imageView = UIImageView.init(frame: CGRect(x: 0, y: 0, width: backViewSize.width, height: backViewSize.height))
-//                        let imageView = UIImageView.init(frame: CGRect(x: scrollX, y: imageY, width: imageW, height: imageH))
-                        imageView.backgroundColor = UIColor.init(colorType: .color_white)
-                        imageView.contentMode = .scaleAspectFit
-                        imageView.af_setImage(withURL: imageUrl!)
-                        
-                        imageView.layer.cornerRadius = 15
-                        imageView.layer.masksToBounds = true
-                        imageView.clipsToBounds = true
-                        
-                        imageBackView.addSubview(imageView)
-                        
-                        self.mainImagesScrollView.addSubview(imageBackView)
+//        imageSizeCheckView.af_setImage(withURL: checkImageURL!)
+        imageSizeCheckView.af_setImage(withURL: checkImageURL!, placeholderImage: UIImage.init(), filter: nil, progress: nil, progressQueue: DispatchQueue.main, imageTransition: UIImageView.ImageTransition.noTransition, runImageTransitionIfCached: false) { (response) in
+//            let image = result as? UIImage
+//            Log.selectLog(logLevel: .debug, "response:\(response)")
+            if response.result.value != nil {
+                
+                let checkImage = response.result.value
+                let checkImageSize = checkImage?.size ?? CGSize.zero
+//                Log.selectLog(logLevel: .debug, "checkImageSize:\(String(describing: checkImageSize))")
+                
+                let backViewSize = self.makeBackViewSize(viewSize: self.mainImagesScrollView.bounds.size, imageSize: checkImageSize)
+                
+                self.imageY = (self.viewHeight - backViewSize.height) / 2
+                
+                var imageUrlStrings:[String] = [mainImageUrlString]
+                if subImageUrlStrings.count > 0 {
+                    for i in 0..<subImageUrlStrings.count {
+                        let _subImageUrlString = subImageUrlStrings[i]
+                        if _subImageUrlString.count > 0 {
+                            imageUrlStrings.append(_subImageUrlString)
+                        }
                     }
                 }
+                
+                self.imageCnt = imageUrlStrings.count
+        //        Log.selectLog(logLevel: .debug, "imageCnt:\(imageCnt)")
+                if self.imageCnt > 1 {
+                    self.mainImagesControl.numberOfPages = imageUrlStrings.count
+                    
+                    if self.addImageScrollCheck() {
+                        // 無限スクロール用
+                        for i in 0..<(imageUrlStrings.count * 3) {
+                            var cnt:Int = 0
+                            cnt = i
+                            if i >= imageUrlStrings.count {
+                                cnt = i % imageUrlStrings.count
+                            }
+                            
+                            let imageUrlString = imageUrlStrings[cnt]
+                            let imageUrl = URL(string: imageUrlString)
+                            let scrollX:CGFloat = (self.margin + (self.viewWidth * CGFloat(i)))
+                            
+                            let imageBackView = ImageBackView.init(frame: CGRect(x: scrollX, y: self.imageY, width: backViewSize.width, height: backViewSize.height))
+                            
+                            imageBackView.layer.cornerRadius = 15
+                            imageBackView.layer.masksToBounds = true
+                            imageBackView.clipsToBounds = true
+
+        //                    let imageView = UIImageView.init(frame: CGRect(x: scrollX, y: imageY, width: imageW, height: imageH))
+                            let imageView = UIImageView.init(frame: CGRect(x: 0, y: 0, width: backViewSize.width, height: backViewSize.height))
+                            imageView.backgroundColor = UIColor.init(colorType: .color_white)
+                            imageView.contentMode = .scaleAspectFit
+                            imageView.af_setImage(withURL: imageUrl!)
+                            
+                            imageView.layer.cornerRadius = 15
+                            imageView.layer.masksToBounds = true
+                            imageView.clipsToBounds = true
+                            
+                            imageBackView.addSubview(imageView)
+                            
+                            self.mainImagesScrollView.addSubview(imageBackView)
+                        }
+                        self.mainImagesScrollView.contentSize = CGSize(width: (CGFloat(imageUrlStrings.count*3) * self.viewWidth), height: self.viewHeight)
+                    }
+                    
+                } else {
+                    for i in 0..<(imageUrlStrings.count) {
+                        var cnt:Int = 0
+                        cnt = i
+                        if i >= imageUrlStrings.count {
+                            cnt = i % imageUrlStrings.count
+                        }
+                        let imageUrlString = imageUrlStrings[cnt]
+                        if self.addImageScrollCheck() {
+                            if imageUrlString.count > 0 {
+                                let imageUrl = URL(string: imageUrlString)
+                                let scrollX:CGFloat = (self.margin + (self.viewWidth * CGFloat(i)))
+
+                                let imageBackView = ImageBackView.init(frame: CGRect(x: scrollX, y: self.imageY, width: backViewSize.width, height: backViewSize.height))
+        //                        let imageBackView = UIView.init(frame: CGRect(x: scrollX, y: imageY, width: backViewSize.width, height: backViewSize.height))
+                                
+                                imageBackView.layer.cornerRadius = 15
+                                imageBackView.layer.masksToBounds = true
+                                imageBackView.clipsToBounds = true
+
+                                let imageView = UIImageView.init(frame: CGRect(x: 0, y: 0, width: backViewSize.width, height: backViewSize.height))
+        //                        let imageView = UIImageView.init(frame: CGRect(x: scrollX, y: imageY, width: imageW, height: imageH))
+                                imageView.backgroundColor = UIColor.init(colorType: .color_white)
+                                imageView.contentMode = .scaleAspectFit
+                                imageView.af_setImage(withURL: imageUrl!)
+                                
+                                imageView.layer.cornerRadius = 15
+                                imageView.layer.masksToBounds = true
+                                imageView.clipsToBounds = true
+                                
+                                imageBackView.addSubview(imageView)
+                                
+                                self.mainImagesScrollView.addSubview(imageBackView)
+                            }
+                        }
+                    }
+                    self.mainImagesScrollView.contentSize = CGSize(width: (CGFloat(imageUrlStrings.count) * self.viewWidth), height: self.viewHeight)
+                    
+                    self.mainImagesControl.numberOfPages = 1
+                    self.mainImagesControl.isHidden = true
+                    self.pageControlViewHeight.constant = 40
+                    self.mainImagesPageControlBackView.isHidden = true
+                }
+            } else {
+                Log.selectLog(logLevel: .debug, "response value なし")
             }
-            self.mainImagesScrollView.contentSize = CGSize(width: (CGFloat(imageUrlStrings.count) * viewWidth), height: viewHeight)
-            
-            self.mainImagesControl.numberOfPages = 1
-            self.mainImagesControl.isHidden = true
-            self.pageControlViewHeight.constant = 40
-            self.mainImagesPageControlBackView.isHidden = true
         }
     }
     

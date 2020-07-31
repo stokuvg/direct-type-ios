@@ -37,7 +37,7 @@ class NoCardView: UIView {
         
         noJobLabel.text(text: "現在 ゲストさん におすすめできる求人はありません", fontType: .font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
 //        jobInfomationLabel.text(text: " ゲストさん の登録情報を更新することで、おすすめできる求人が増える可能性があります", fontType: .font_SS, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
-        jobInfomationLabel.text(text: "申し訳ありません。これ以上、おすすめできる求人がありませんので、明日以降でお試しください", fontType: .font_SS, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
+        jobInfomationLabel.text(text: "申し訳ありません。これ以上、おすすめできる求人がありませんので、明日以降でお試しください", fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
         
         registEditBtn.setTitle(text: "登録情報を編集する", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         registEditBtn.backgroundColor = UIColor.init(colorType: .color_button)
