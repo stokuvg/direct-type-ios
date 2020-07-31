@@ -84,7 +84,7 @@ case entryItems         //9、10、11、12を一括で扱うためのもの
     var tsvMaster: SelectItemsManager.TsvMaster {
         switch self {
         case .hopeArea: return .entryPlace
-        case .hopeSalary: return .salary
+        case .hopeSalary: return .salaryCode
         default: return .undefine
         }
     }
