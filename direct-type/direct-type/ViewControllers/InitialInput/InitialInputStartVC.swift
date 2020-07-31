@@ -121,7 +121,7 @@ class InitialInputStartVC: TmpBasicVC {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = UIColor.init(colorType: .color_sub)
+        self.view.backgroundColor = UIColor.init(colorType: .color_navy)
         
         self.initialSlideView.delegate = self
         
