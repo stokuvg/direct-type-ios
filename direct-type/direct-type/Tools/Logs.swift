@@ -29,7 +29,9 @@ public struct Log {
         switch logLevel {
         case .error:
             printToConsole(logLevel: .error, file: file, function: function, line: line, message: message)
-            assertionFailure(message)
+            //assertionFailure(message)
+            LogManager.appendLog(.ALWAYS, "Log.selectLog", message)
+            print(message)
         default:
             printToConsole(logLevel: logLevel, file: file, function: function, line: line, message: message)
         }
