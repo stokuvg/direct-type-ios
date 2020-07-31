@@ -147,7 +147,7 @@ class EntryConfirmVC: PreviewBaseVC {
         //
         let idxPath = IndexPath(row: 0, section: 0)
         if let passwordCell = tableVW.cellForRow(at: idxPath) as? EntryConfirmNotifyEntry1TBCell {
-            passwordCell.changeErrorStatus(isErr: flgValidErrExist)
+            passwordCell.changeErrorStatus(isValidErrorExist: flgValidErrExist)
             passwordCell.dispCell()
         }
         dispButton(isEnable: isEnable)
@@ -159,9 +159,8 @@ extension EntryConfirmVC {
         let item = arrData[indexPath.row]
         switch item.type {
         case .notifyEntry1C12:
-            let errMsg: String = flgValidErrExist ? "半角英数字で4文字以上、20文字以内です" : ""
             let cell: EntryConfirmNotifyEntry1TBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_EntryConfirmNotifyEntry1TBCell", for: indexPath) as! EntryConfirmNotifyEntry1TBCell
-            cell.initCell(self, email: profile?.mailAddress ?? "", errorMsg: errMsg)
+            cell.initCell(self, email: profile?.mailAddress ?? "", isValidError: flgValidErrExist)
             cell.dispCell()
             return cell
 
