@@ -68,7 +68,8 @@ class HomeVC: TmpNaviTopVC {
 
     // 求人追加表示フラグ
     var dataAddFlag = true
-
+    
+    // キープリストのデータ
     var changeKeepDatas:[[String:Any]] = [] {
         didSet {
             Log.selectLog(logLevel: .debug, "new changeKeepDatas:\(changeKeepDatas)")
@@ -485,7 +486,7 @@ class HomeVC: TmpNaviTopVC {
         UserDefaultsManager.setObject(true, key: .isInitialDisplayedHome)
     }
 
-    #if true
+    #if false
     private func makeDummyData() {
 
         let mdlData1:MdlJobCard = MdlJobCard.init(jobCardCode: "1000000",

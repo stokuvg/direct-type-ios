@@ -787,6 +787,22 @@ extension JobOfferDetailVC: UINavigationControllerDelegate {
 //                controller.changeKeepStatus = false
             }
         }
+        if let keepListController = viewController as? KeepListVC {
+            if navigationController.tabBarController?.selectedIndex == 1 {
+                if keepChangeCnt > 0 {
+                    Log.selectLog(logLevel: .debug, "前の画面がKeepListVC")
+                    if keepChangeCnt > 0 {
+                        let keepDatas:[String:Any] = ["jobId":_mdlJobDetail.jobCardCode,"keepStatus":keepFlag]
+                        keepListController.keepDatas = [keepDatas]
+                        keepListController.jobDetailCheckFlag = true
+                    } else {
+                        keepListController.keepDatas = []
+                    }
+                } else {
+                    keepListController.keepDatas = []
+                }
+            }
+        }
     }
 }
 
