@@ -69,7 +69,7 @@ class MdlJobCardDetail: Codable {
     var suitableUnsuitable: String
     var notSuitableUnsuitable: String
     /** ２５．雇用形態コード（必須） */
-    var employmentType: Int
+    var employmentType: String
     /** ２6．給与（必須）＊「想定給与」＊ */
     var salary: String
     /** ２７．賞与について（任意） */
@@ -106,7 +106,7 @@ class MdlJobCardDetail: Codable {
          start_date:String = "", end_date:String = "", mainPicture: String = "", subPictures: [String] = [], mainTitle: String = "", mainContents: String = "",
          prCodes: [Int] = [], salarySample: String = "", recruitmentReason: String = "", jobDescription: String = "", jobExample: String = "", product: String = "", scope: String = "",
          spotTitle1: String = "", spotDetail1: String = "", spotTitle2: String = "", spotDetail2: String = "", qualification: String = "", betterSkill: String = "", applicationExample: String = "",
-         suitableUnsuitable: String = "", notSuitableUnsuitable:String = "", employmentType: Int = 0, salary: String = "", bonusAbout: String = "", jobtime: String = "", overtimeCode: Int = 0, overtimeAbout: String = "", workPlace: String = "",
+         suitableUnsuitable: String = "", notSuitableUnsuitable:String = "", employmentType: String = "", salary: String = "", bonusAbout: String = "", jobtime: String = "", overtimeCode: Int = 0, overtimeAbout: String = "", workPlace: String = "",
          transport: String = "", holiday: String = "", welfare: String = "", childcare: String = "",
          interviewMemo: String = "",
          selectionProcess: JobCardDetailSelectionProcess = JobCardDetailSelectionProcess.init(selectionProcess1: "", selectionProcess2: "", selectionProcess3: "", selectionProcess4: "", selectionProcess5: "", selectionProcessDetail: ""),
@@ -336,7 +336,8 @@ class MdlJobCardDetail: Codable {
         let _mainPicture = dto.mainPhotoURL 
         let _subPictures:[String] = dto.subPhotoURLs 
         
-        let _employmentId = Int(dto.employmentId) ?? 0
+        let _employmendIds = dto.employmentId
+//        let _employmentId = Int(dto.employmentId) ?? 0
         let _overtimeCode = Int(dto.indicationOvertimeId)
         
         let _selectionProcess = JobCardDetailSelectionProcess.init(selectionProcess1: dto.selectionProcessStep1, selectionProcess2: dto.selectionProcessStep2, selectionProcess3: dto.selectionProcessStep3, selectionProcess4: dto.selectionProcessStep4, selectionProcess5: dto.selectionProcessStep5, selectionProcessDetail: dto.selectionProcess)
@@ -364,7 +365,7 @@ class MdlJobCardDetail: Codable {
             jobExample: _jobExample, product: _product, scope: _scope, spotTitle1: _spotTitle1, spotDetail1: _spotDetail1, spotTitle2: _spotTitle2, spotDetail2: _spotDetail2,
             qualification: dto.applicationSkill, betterSkill: dto.desirableCapability, applicationExample: dto.adoptionExample,
             suitableUnsuitable: _suitableUnsuitable, notSuitableUnsuitable: _notSuitableUnsuitable,
-            employmentType: _employmentId, salary: dto.salary, bonusAbout: _bonusAbout, jobtime: dto.officeHours,
+            employmentType: _employmendIds, salary: dto.salary, bonusAbout: _bonusAbout, jobtime: dto.officeHours,
             overtimeCode: _overtimeCode!, overtimeAbout: dto.overtime, workPlace: dto.jobPlace,
             transport: dto.transportation, holiday: dto.vacation, welfare: dto.jobCondition,
             childcare: _childcare, interviewMemo: _interviewMemo, selectionProcess: _selectionProcess,

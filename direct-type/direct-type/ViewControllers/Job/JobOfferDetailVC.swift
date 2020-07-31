@@ -315,6 +315,8 @@ private extension JobOfferDetailVC {
                 debugLog("ApiManager getJobDetail result:\(result.debugDisp)")
 
                 self._mdlJobDetail = result
+                
+                Log.selectLog(logLevel: .debug, "_mdlJobDetail.jobCardCode:\(self._mdlJobDetail.jobCardCode)")
 
                 self.makeArticleHeaderSize()
                 self.makeArticleCellSize()
@@ -384,8 +386,10 @@ extension JobOfferDetailVC: UITableViewDelegate {
                 return prcodesCellMaxSize
             case (3,2):
                 let type = _mdlJobDetail.employmentType
-                let employmentType = SelectItemsManager.getCodeDisp(.employmentType, code: type)?.disp ?? ""
-                if employmentType.count > 0 {
+                Log.selectLog(logLevel: .debug, "_mdlJobDetail.employmentType:\(_mdlJobDetail.employmentType)")
+                if type.count > 0 {
+//                let employmentType = SelectItemsManager.getCodeDisp(.employmentType, code: type)?.disp ?? ""
+//                if employmentType.count > 0 {
                     return UITableView.automaticDimension
                 } else {
                     return 0
@@ -586,8 +590,9 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 // 雇用形態
                 let cell = tableView.loadCell(cellName: "JobDetailItemCell", indexPath: indexPath) as! JobDetailItemCell
                 let type = _mdlJobDetail.employmentType
-                let employmentType = SelectItemsManager.getCodeDisp(.employmentType, code: type)?.disp ?? ""
-                if employmentType.count > 0 {
+                if type.count > 0 {
+//                let employmentType = SelectItemsManager.getCodeDisp(.employmentType, code: type)?.disp ?? ""
+//                if employmentType.count > 0 {
                     cell.setup(data: _mdlJobDetail,row:row)
                     return cell
                 } else {

@@ -88,7 +88,7 @@ extension MdlJobCardDetail {
             spotTitle1: "", spotDetail1: "", spotTitle2: "", spotDetail2: "",
             qualification: "", betterSkill: "", applicationExample: "",
             suitableUnsuitable: "", notSuitableUnsuitable: "",
-            employmentType: 2, salary: "", bonusAbout: "", jobtime: "",
+            employmentType: "2_3_4", salary: "", bonusAbout: "", jobtime: "",
             overtimeCode: 1, overtimeAbout: "", workPlace: "", transport: "",
             holiday: "", welfare: "", childcare: "", interviewMemo: "",
             selectionProcess: JobCardDetailSelectionProcess(selectionProcess1: "", selectionProcess2: "", selectionProcess3: "", selectionProcess4: "", selectionProcess5: "", selectionProcessDetail: ""),
