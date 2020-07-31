@@ -211,8 +211,8 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
                     if _employeesCount != 0 {
                         addStackItem(type: .employeesCountC15, val: "\(_employeesCount)名")
                     }
-                    //===年収
-                    if let cd = SelectItemsManager.getCodeDisp(.salary, code: career.salary) {
+                    //===年収（数値）
+                    if let cd = SelectItemsManager.getCodeDisp(.salarySelect, code: career.salary) {
                         addStackItem(type: .salaryC15, val: cd.disp)
                     }
                     //===職務内容本文
