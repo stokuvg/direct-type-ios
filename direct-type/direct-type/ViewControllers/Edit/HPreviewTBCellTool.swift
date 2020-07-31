@@ -11,7 +11,7 @@ import UIKit
 class ExItemLabel: UILabel {
     var isReadonly: Bool = false
     //var padding = UIEdgeInsets.zero
-    let padding = UIEdgeInsets(top: 16, left: 8, bottom: 16, right: 8)
+    let padding = UIEdgeInsets(top: 16, left: 8, bottom: 16, right: 0)
     override func drawText(in rect: CGRect) {
         let rectTmp = rect.inset(by: padding)
         let rectangle = UIBezierPath(roundedRect: rect, cornerRadius: 6)
