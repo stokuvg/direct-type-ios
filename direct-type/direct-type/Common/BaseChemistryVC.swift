@@ -35,6 +35,16 @@ class BaseChemistryVC: UIViewController {
         }
         return promise
     }
+    
+    func getVC<T: UIViewController>(sbName:String,vcName:String) -> T? {
+            
+        let sb = UIStoryboard(name: sbName, bundle: nil)
+            
+        let sbid = "Sbid_" + vcName
+            
+        let vc = sb.instantiateViewController(withIdentifier: sbid) as! T
+        return vc
+    }
 }
 
 private extension BaseChemistryVC {

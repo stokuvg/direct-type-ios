@@ -30,6 +30,7 @@ enum DirectTypeLinkURL {
     case LoginPhoneReason           //[B-1]『ログイン』「電話番号の確認が必要な理由」
     case AproachAbout               //[H-9]『アプローチ設定』「こちら」
     case SettingsFAQ                //[H-8]『設定Top』「よくある質問・ヘルプ」
+    case SettingsHowTo              //[H-8]『設定Top』「使い方」
     case SettingsPrivacyPolicy      //[H-8]『設定Top』「プライバシーポリシー」
     case SettingsAgreement          //[H-8]『設定Top』「利用規約」
 
@@ -55,6 +56,8 @@ enum DirectTypeLinkURL {
             return "こちら"
         case .SettingsFAQ:
             return "よくある質問・ヘルプ"
+        case .SettingsHowTo:
+            return "使い方"
         case .SettingsPrivacyPolicy:
             return "プライバシーポリシー"
         case .SettingsAgreement:
@@ -90,6 +93,8 @@ enum DirectTypeLinkURL {
         //===設定項目
         case .SettingsFAQ:
             return "https://" + DirectTypeLinkURL.connectDommain + "/help/index.html"
+        case .SettingsHowTo:
+            return "https://" + DirectTypeLinkURL.connectDommain + "/tutorial/index.html"
         case .SettingsPrivacyPolicy:
             return "https://" + DirectTypeLinkURL.connectDommain + "/privacy/index.html"
         }
@@ -115,6 +120,7 @@ enum DirectTypeLinkURL {
         case .LoginPhoneReason:         return .appWebBrowser
         case .AproachAbout:             return .appWebBrowser
         case .SettingsFAQ:              return .appWebBrowser
+        case .SettingsHowTo:            return .appWebBrowser
         case .SettingsPrivacyPolicy:    return .appWebBrowser
         case .SettingsAgreement:        return .appWebBrowser
         }

@@ -16,6 +16,7 @@ final class SettingVC: TmpBasicVC {
     private enum DisplayCellType: Int, CaseIterable {
         case account
         case approach
+        case howto
         case help
         case privacyPolicy
         case termsOfService
@@ -26,6 +27,8 @@ final class SettingVC: TmpBasicVC {
             switch self {
             case .account, .approach:
                 return ""
+            case .howto:
+                return "使い方"
             case .help:
                 return "よくある質問・ヘルプ"
             case .privacyPolicy:
@@ -43,7 +46,7 @@ final class SettingVC: TmpBasicVC {
             switch self {
             case .account, .approach:
                 return 68
-            case .help, .privacyPolicy, .termsOfService, .logout, .withdrawal:
+            case .help, .howto, .privacyPolicy, .termsOfService, .logout, .withdrawal:
                 return 54
             }
         }
@@ -73,6 +76,7 @@ private extension SettingVC {
         tableView.registerNib(nibName: "SettingAccountCell", idName: "SettingAccountCell")
         // アプローチ
         tableView.registerNib(nibName: "SettingApproachCell", idName: "SettingApproachCell")
+        // 使い方
         // よくある質問
         // プライバシーポリシー
         // 利用規約
@@ -140,6 +144,9 @@ extension SettingVC: UITableViewDelegate {
             let vc = getVC(sbName: "SettingVC", vcName: "ApproachSettingVC") as! ApproachSettingVC
             vc.configure(with: approachSetting)
             navigationController?.pushViewController(vc, animated: true)
+        case .howto:
+            // Web(使い方)を表示
+            OpenLinkUrlTool.open(type: .SettingsHowTo, navigationController)
         case .help:
             // Web(よくある質問・ヘルプ)を表示
             OpenLinkUrlTool.open(type: .SettingsFAQ, navigationController)
@@ -179,7 +186,7 @@ extension SettingVC: UITableViewDataSource {
             let cell = tableView.loadCell(cellName: "SettingApproachCell", indexPath: indexPath) as! SettingApproachCell
             cell.configure(with: approachSetting)
             return cell
-        case .help, .privacyPolicy, .termsOfService, .logout, .withdrawal:
+        case .help, .howto, .privacyPolicy, .termsOfService, .logout, .withdrawal:
             let cell = tableView.loadCell(cellName: "SettingBaseCell", indexPath: indexPath) as! SettingBaseCell
             cell.setup(title: cellType.title)
             return cell

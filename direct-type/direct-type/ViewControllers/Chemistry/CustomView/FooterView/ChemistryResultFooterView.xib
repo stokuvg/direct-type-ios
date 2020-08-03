@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChemistryResultFooterView" customModule="direct_type" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChemistryResultFooterView" customModule="Direct_type" customModuleProvider="target">
             <connections>
                 <outlet property="whiteBackgroundView" destination="31R-7T-KWU" id="vzw-dp-9AV"/>
             </connections>
@@ -45,7 +45,7 @@
                         <constraint firstAttribute="height" constant="50" id="OCY-sN-MAr"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" title="完了する">
+                    <state key="normal" title="もう一度診断する">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <userDefinedRuntimeAttributes>
@@ -54,7 +54,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="completeButton:" destination="-1" eventType="touchUpInside" id="y6n-gs-cG3"/>
+                        <action selector="reCheckButton:" destination="-1" eventType="touchUpInside" id="vYl-J4-zIe"/>
                     </connections>
                 </button>
             </subviews>

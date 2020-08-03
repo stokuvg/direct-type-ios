@@ -12,7 +12,7 @@
         <!--Initial Input ConfirmVC-->
         <scene sceneID="zIL-nF-3N0">
             <objects>
-                <viewController storyboardIdentifier="Sbid_InitialInputConfirmVC" id="MOW-qK-40g" customClass="InitialInputConfirmVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Sbid_InitialInputConfirmVC" id="MOW-qK-40g" customClass="InitialInputConfirmVC" customModule="Direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="I4b-pe-g05">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

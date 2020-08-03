@@ -9,13 +9,19 @@
 import UIKit
 
 protocol ChemistryResultFooterViewDelegate: class {
-    func didTapCompleteButton()
+    func didTapReCheckButton()
+//    func didTapCompleteButton()
 }
 
 final class ChemistryResultFooterView: UIView {
     @IBOutlet private weak var whiteBackgroundView: UIView!
+    /*
     @IBAction func completeButton(_ sender: UIButton) {
         delegate?.didTapCompleteButton()
+    }
+    */
+    @IBAction func reCheckButton(_ sender: UIButton) {
+        delegate?.didTapReCheckButton()
     }
     
     private let whiteBackgroundViewCornerRadius: CGFloat = 10
