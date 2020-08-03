@@ -138,20 +138,7 @@ extension ChemistryResult: UITableViewDataSource {
 }
 
 extension ChemistryResult: ChemistryResultFooterViewDelegate {
-    // 再診断
-    func didTapReCheckButton() {
-        Log.selectLog(logLevel: .debug, "ChemistryResultFooterViewDelegate didTapReCheckButton start")
-        
-        var vc = UIViewController()
-        vc = UIStoryboard(name: "ChemistryStart", bundle: nil).instantiateInitialViewController() as! ChemistryStart
-        hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(vc, animated: true)
-        hidesBottomBarWhenPushed = false
-    }
-    /*
-    // 完了する
     func didTapCompleteButton() {
         navigationController?.popToRootViewController(animated: true)
     }
-    */
 }

@@ -183,22 +183,8 @@ private extension JobOfferDetailVC {
                     let tabItem:UITabBarItem = tabItems[1]
                     tabItem.badgeValue = nil
                 }
-                
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-                switch myErr.code {
-                case 404:
-                    let message: String = ""
-                    self.showConfirm(title: "", message: message)
-                    .done { _ in
-                        Log.selectLog(logLevel: .debug, "対応方法の確認")
-                    }
-                    .catch { (error) in
-                    }
-                    .finally {
-                    }
-                default: break
-                }
-                self.showError(error)
+                self.showError(myErr)
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep send finally")
             }
@@ -211,20 +197,7 @@ private extension JobOfferDetailVC {
             }.catch{ (error) in
                 Log.selectLog(logLevel: .debug, "skip send error:\(error)")
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-                switch myErr.code {
-                case 404:
-                    let message: String = ""
-                    self.showConfirm(title: "", message: message)
-                    .done { _ in
-                        Log.selectLog(logLevel: .debug, "対応方法の確認")
-                    }
-                    .catch { (error) in
-                    }
-                    .finally {
-                    }
-                default: break
-                }
-                self.showError(error)
+                self.showError(myErr)
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep send finally")
             }
