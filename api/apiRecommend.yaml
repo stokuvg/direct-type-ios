@@ -57,4 +57,80 @@ paths:
       responses:
         200:
           description: 成功
+  /pycre5/purchase:
+    get:
+      tags:
+        - recommend
+      summary: コンバージョンクエリ
+      description: 応募完了時に叩く
+      parameters:
+        - in: query
+          name: prod
+          required: true
+          description: クリックした案件ID（求人カードID）
+          schema:
+            type: string
+            default: 0
+            example: jobID
+        - in: query
+          name: merch
+          required: true
+          description: 固定値
+          schema:
+            type: string
+            default: directtype
+            example: directtype
+        - in: query
+          name: sku
+          required: true
+          description: クリックした案件ID（求人カードID）
+          schema:
+            type: string
+            default: 0
+            example: jobID
+        - in: query
+          name: order
+          required: true
+          description: yyyymmddhhmmssms(年月日時分秒ミリ秒)
+          schema:
+            type: string
+            default: 'yyyymmddhhmmssms'
+        - in: query
+          name: qty
+          required: true
+          description: 固定値「1」
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: price
+          required: true
+          description: 固定値「1」
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: cust
+          required: true
+          description: subの値を暗号化された顧客IDとして指定
+          schema:
+            type: string
+            default: 'sub'
+        - in: query
+          name: cookie
+          required: true
+          description: subの値をcookieIDとして指定
+          schema:
+            type: string
+            default: 'sub'
+        - in: query
+          name: device
+          required: true
+          description: 固定値「a」（アプリ）
+          schema:
+            type: string
+            default: 'a'
+      responses:
+        200:
+          description: 成功
 ###==============================================###
