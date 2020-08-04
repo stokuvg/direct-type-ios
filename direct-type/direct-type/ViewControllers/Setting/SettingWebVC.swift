@@ -69,6 +69,12 @@ class SettingWebVC: TmpWebVC {
         self.tmpNavigationBar.backgroundColor = .blue
         self.tmpNavigationBar.topItem?.titleView?.backgroundColor = .yellow
 
+        let subView = settingWeb.subviews.first
+        if let scrollView = subView as? UIScrollView {
+            scrollView.bounces = false
+        }
+        
+        
         settingWeb.navigationDelegate = self
         settingWeb.uiDelegate = self
         

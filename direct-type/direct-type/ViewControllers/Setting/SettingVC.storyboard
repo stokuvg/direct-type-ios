@@ -12,7 +12,7 @@
         <!--SettingVC-->
         <scene sceneID="HBe-Sa-Wke">
             <objects>
-                <viewController storyboardIdentifier="Sbid_SettingVC" id="Oft-Qe-jOy" customClass="SettingVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Sbid_SettingVC" id="Oft-Qe-jOy" customClass="SettingVC" customModule="Direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="15T-gg-s6Q">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -47,7 +47,7 @@
         <!--Account ChangeVC-->
         <scene sceneID="Ydu-NC-5Si">
             <objects>
-                <viewController storyboardIdentifier="Sbid_AccountChangeVC" id="l60-eG-oRx" customClass="AccountChangeVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Sbid_AccountChangeVC" id="l60-eG-oRx" customClass="AccountChangeVC" customModule="Direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZZw-Sv-Wh0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -106,7 +106,7 @@
         <!--Account Change ConfirmVC-->
         <scene sceneID="1B7-VK-VdV">
             <objects>
-                <viewController storyboardIdentifier="Sbid_AccountChangeCompleteVC" id="QZ2-9s-5Oy" customClass="AccountChangeConfirmVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Sbid_AccountChangeCompleteVC" id="QZ2-9s-5Oy" customClass="AccountChangeConfirmVC" customModule="Direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Pwp-Pw-hTS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -191,7 +191,7 @@
         <!--With DrawalVC-->
         <scene sceneID="FXZ-1D-O3k">
             <objects>
-                <viewController storyboardIdentifier="Sbid_WithDrawalVC" id="Pyf-5d-svL" customClass="WithDrawalVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Sbid_WithDrawalVC" id="Pyf-5d-svL" customClass="WithDrawalVC" customModule="Direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zge-MM-ome">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -202,10 +202,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Piy-98-72q" customClass="CheckBoxLabelView" customModule="direct_type" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Piy-98-72q" customClass="CheckBoxLabelView" customModule="Direct_type" customModuleProvider="target">
                                 <rect key="frame" x="107" y="116.5" width="200" height="21"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o3G-ZC-YtD" customClass="CheckBoxView" customModule="direct_type" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o3G-ZC-YtD" customClass="CheckBoxView" customModule="Direct_type" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RBm-jb-SN8">
@@ -285,7 +285,7 @@
         <!--With Drawal CompleteVC-->
         <scene sceneID="37y-at-uzj">
             <objects>
-                <viewController storyboardIdentifier="Sbid_WithDrawalCompleteVC" hidesBottomBarWhenPushed="YES" id="IPM-YY-ffN" customClass="WithDrawalCompleteVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Sbid_WithDrawalCompleteVC" hidesBottomBarWhenPushed="YES" id="IPM-YY-ffN" customClass="WithDrawalCompleteVC" customModule="Direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CRL-hR-iem">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -316,7 +316,7 @@
         <!--Approach SettingVC-->
         <scene sceneID="bIf-eb-jnI">
             <objects>
-                <viewController storyboardIdentifier="Sbid_ApproachSettingVC" id="mD6-xl-Udt" customClass="ApproachSettingVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Sbid_ApproachSettingVC" id="mD6-xl-Udt" customClass="ApproachSettingVC" customModule="Direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2k7-dI-7nR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
