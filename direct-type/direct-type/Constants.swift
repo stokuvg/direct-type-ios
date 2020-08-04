@@ -64,6 +64,6 @@ struct Constants {
     static let DbgAutoPushVCNum: Int = 1 //0:なし, 1:プロフィール, 2:履歴書, 3:職歴, 4:サクサク職歴, 5:初回入力, 6: 職歴一覧, 7: 応募フォーム
     static let DbgDispStatus: Bool = false
     static let DbgFetchDummyData: Bool = false //フェッチ時にローカルで用意したダミーデータを返却する場合
-    static let DbgOutputLog: Bool = true
+    static let DbgOutputLog: Bool = false
 }
 
