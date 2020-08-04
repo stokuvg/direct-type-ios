@@ -48,6 +48,17 @@ extension RecommendManager {
             return getRecommendFetch(spec: type.specID)
         }
     }
+    class func clickRecommend(type: RecommendManager.SpecType, jobID: String) -> Promise<Void> {
+        SERecommendAPI.basePath = Constants.RecommendServer
+        switch type {
+        case .ap341:
+            return clickRecommendFetch(spec: type.specID, jobID: jobID)
+        default:
+            let (promise, resolver) = Promise<Void>.pending()
+            resolver.fulfill(Void())
+            return promise
+        }
+    }
 }
 
 extension RecommendManager {
@@ -55,6 +66,21 @@ extension RecommendManager {
         let (promise, resolver) = Promise<Void>.pending()
         let sub: String = AWSMobileClient.default().username ?? ""
         RecommendAPI.pycre5JsonRecommendGet(merch: "directtype", cookie: sub, spec: spec, prod: jobID, num: num)
+        .done { result in
+            resolver.fulfill(Void())
+        }
+        .catch { (error) in
+            resolver.reject(error)
+        }
+        .finally {
+        }
+        return promise
+    }
+    private class func clickRecommendFetch(spec: String, jobID: String) -> Promise<Void> {
+        let (promise, resolver) = Promise<Void>.pending()
+        let sub: String = AWSCognitoIdentityUserPool.default().currentUser()?.deviceId ?? ""
+        let orderId: String = Date().RecommendParamOrderID
+        RecommendAPI.pycre5JsonPurchaseGet(prod: jobID, merch: "directtype", sku: jobID, order: orderId, qty: 1, price: 1, cust: sub, cookie: sub, device: "a")
         .done { result in
             resolver.fulfill(Void())
         }

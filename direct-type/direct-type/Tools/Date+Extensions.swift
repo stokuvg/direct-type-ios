@@ -9,10 +9,17 @@
 import UIKit
 
 class DateHelper {
+    class func dateTimeFormatterRecommendParam() -> DateFormatter {
+        let dateTimeFormatter = DateFormatter()
+        dateTimeFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateTimeFormatter.dateFormat = "yyyyMMdd HHmmss.SSS"
+        dateTimeFormatter.timeZone = TimeZone(identifier: "Asia/Tokyo")
+        return dateTimeFormatter
+    }
     class func dateTimeFormatterFNameShort() -> DateFormatter {
         let dateTimeFormatter = DateFormatter()
         dateTimeFormatter.locale = Locale(identifier: "en_US_POSIX")
-        dateTimeFormatter.dateFormat = "YYYYMMddHH"
+        dateTimeFormatter.dateFormat = "yyyyMMddHH"
         dateTimeFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         return dateTimeFormatter
     }
@@ -31,14 +38,14 @@ class DateHelper {
     class func dateTimeFormatterYmdJP() -> DateFormatter {
          let dateTimeFormatter = DateFormatter()
          dateTimeFormatter.locale = Locale(identifier: "en_US_POSIX")
-         dateTimeFormatter.dateFormat = "YYYY年M月d日"
+         dateTimeFormatter.dateFormat = "yyyy年M月d日"
          dateTimeFormatter.timeZone = TimeZone(secondsFromGMT: 0)
          return dateTimeFormatter
     }
     class func dateTimeFormatterYmJP() -> DateFormatter {
          let dateTimeFormatter = DateFormatter()
          dateTimeFormatter.locale = Locale(identifier: "en_US_POSIX")
-         dateTimeFormatter.dateFormat = "YYYY年M月"
+         dateTimeFormatter.dateFormat = "yyyy年M月"
          dateTimeFormatter.timeZone = TimeZone(secondsFromGMT: 0)
          return dateTimeFormatter
     }
@@ -143,6 +150,10 @@ class DateHelper {
 }
 
 extension Date {
+    var RecommendParamOrderID: String {
+        let dateFormat = DateHelper.dateTimeFormatterRecommendParam()
+        return dateFormat.string(from: self)
+    }
     var FName: String {
         let dateFormat = DateHelper.dateTimeFormatterFNameShort()
         return dateFormat.string(from: self)

@@ -255,6 +255,17 @@ extension EntryConfirmVC {
         LogManager.appendApiLog("postEntry", param, function: #function, line: #line)
         ApiManager.postEntry(param, isRetry: true)
         .done { result in
+            RecommendManager.clickRecommend(type: .ap341, jobID: _jobCardCode)
+            .done { result in
+                Log.selectLog(logLevel: .debug, "応募完了のコンバージョン 成功:\(result)")
+            }
+            .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
+                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+                Log.selectLog(logLevel: .debug, "応募完了のコンバージョン エラー:\(myErr.debugDisp)")
+            }
+            .finally {
+            }
+            
             LogManager.appendApiResultLog("postEntry", result, function: #function, line: #line)
             EntryFormManager.deleteCache(jobCardCode: _jobCard.jobCardCode)//応募フォーム情報はクリアして良し
             AnalyticsEventManager.track(type: .completeEntry)
