@@ -41,6 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AWSMobileClient.default().initialize { (userState, error) in
             if let userState = userState {
                 print("UserState: \(userState.rawValue)")
+                if userState != .signedIn {
+                    AWSMobileClient.default().clearKeychain()
+                }
             } else if let error = error {
                 print("error: \(error.localizedDescription)")
             }
