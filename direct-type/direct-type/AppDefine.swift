@@ -80,10 +80,10 @@ enum DirectTypeLinkURL {
         case .TypeEntryMemberPolicy:
             return "https://type.jp/help/category_14.html"
         //===ユーザ作成、ログイン
-        case .LoginPrivacyPolicy, .RegistPrivacyPolicy, .SettingsAgreement:
+        case .LoginPrivacyPolicy, .RegistPrivacyPolicy:
             return "https://" + DirectTypeLinkURL.connectDommain + "/privacy/index.html"
         case .RegistAgreement: fallthrough
-        case .LoginAgreement:
+        case .LoginAgreement, .SettingsAgreement:
             return "https://" + DirectTypeLinkURL.connectDommain + "/policy/index.html"
         case .RegistPhoneReason, .LoginPhoneReason:
             return "https://" + DirectTypeLinkURL.connectDommain + "/help/index.html#001"
