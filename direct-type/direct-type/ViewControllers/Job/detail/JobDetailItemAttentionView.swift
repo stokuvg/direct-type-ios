@@ -30,13 +30,19 @@ class JobDetailItemAttentionView: UIView {
         
         titleLabel.text(text: title, fontType: titleFont, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
         
+        let attentionBackView = self
+        Log.selectLog(logLevel: .debug, "attentionBackView:\(attentionBackView)")
+        
+        let labelSpace = (attentionBackView.frame.size.width - (self.markImageView.bounds.origin.x + self.markImageView.bounds.size.width)) - (15 + 10)
+        Log.selectLog(logLevel: .debug, "labelSpace:\(labelSpace)")
+        
         let singleWidth = self.titleLabel.frame.size.width
         let textSize = CGFloat(title.count * 14)
         
-//        Log.selectLog(logLevel: .debug, "singleWidth:\(singleWidth)")
-//        Log.selectLog(logLevel: .debug, "textSize:\(textSize)")
+        Log.selectLog(logLevel: .debug, "singleWidth:\(singleWidth)")
+        Log.selectLog(logLevel: .debug, "textSize:\(textSize)")
         
-        if textSize > (singleWidth+5) {
+        if textSize >= labelSpace {
 //            Log.selectLog(logLevel: .debug, "注目タイトルが２行以上")
 //            markTopConstraint.constant = 9
             titleLabelTop.constant = 0

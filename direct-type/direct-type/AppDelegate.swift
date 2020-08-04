@@ -63,6 +63,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window?.makeKeyAndVisible()
 
+        // スプラッシュの表示を確実にするための起動遅延
+        #if (!arch(i386) && !arch(x86_64))
+            // 実機
+            sleep(2)
+        #else
+            // シミュレータ
+        #endif
         return true
     }
     

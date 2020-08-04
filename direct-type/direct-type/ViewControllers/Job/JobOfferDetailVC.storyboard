@@ -12,7 +12,7 @@
         <!--Job Offer DetailVC-->
         <scene sceneID="OUK-tm-tfb">
             <objects>
-                <viewController storyboardIdentifier="Sbid_JobOfferDetailVC" id="RrC-bJ-AAi" customClass="JobOfferDetailVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Sbid_JobOfferDetailVC" id="RrC-bJ-AAi" customClass="JobOfferDetailVC" customModule="Direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BTm-GL-Ti1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

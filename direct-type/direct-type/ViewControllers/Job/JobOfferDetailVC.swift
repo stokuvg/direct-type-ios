@@ -162,6 +162,7 @@ private extension JobOfferDetailVC {
         keepChangeCnt += 1
         changeButtonState()
 
+        SVProgressHUD.show()
         // キープ情報送信
         if keepFlag == true {
             ApiManager.sendJobKeep(id: jobId)
@@ -187,6 +188,7 @@ private extension JobOfferDetailVC {
                 self.showError(myErr)
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep send finally")
+                SVProgressHUD.dismiss()
             }
         } else {
             ApiManager.sendJobDeleteKeep(id: jobId)
@@ -200,6 +202,7 @@ private extension JobOfferDetailVC {
                 self.showError(myErr)
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep send finally")
+                SVProgressHUD.dismiss()
             }
         }
     }
