@@ -75,21 +75,21 @@ enum ChemistryPersonalityType: Int, CaseIterable {
         switch self {
         case .reformer:
             return 1
-        case .toAchieve:
-            return 2
-        case .challenger:
-            return 3
-        case .enthusiastic:
-            return 4
-        case .faithful:
-            return 5
-        case .toExamine:
-            return 6
-        case .peaceful:
-            return 7
         case .helper:
-            return 8
+            return 2
+        case .toAchieve:
+            return 3
         case .unique:
+            return 4
+        case .toExamine:
+            return 5
+        case .faithful:
+            return 6
+        case .enthusiastic:
+            return 7
+        case .challenger:
+            return 8
+        case .peaceful:
             return 9
         case .undefine:
             return 10
