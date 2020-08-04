@@ -78,9 +78,9 @@ extension RecommendManager {
     }
     private class func clickRecommendFetch(spec: String, jobID: String) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
-        let sub: String = AWSCognitoIdentityUserPool.default().currentUser()?.deviceId ?? ""
+        let sub: String = AWSMobileClient.default().username ?? ""
         let orderId: String = Date().RecommendParamOrderID
-        RecommendAPI.pycre5JsonPurchaseGet(prod: jobID, merch: "directtype", sku: jobID, order: orderId, qty: 1, price: 1, cust: sub, cookie: sub, device: "a")
+        RecommendAPI.pycre5PurchaseGet(prod: jobID, merch: "directtype", sku: jobID, order: orderId, qty: 1, price: 1, cust: sub, cookie: sub, device: "a")
         .done { result in
             resolver.fulfill(Void())
         }

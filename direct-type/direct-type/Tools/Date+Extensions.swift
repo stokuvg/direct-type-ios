@@ -12,7 +12,7 @@ class DateHelper {
     class func dateTimeFormatterRecommendParam() -> DateFormatter {
         let dateTimeFormatter = DateFormatter()
         dateTimeFormatter.locale = Locale(identifier: "en_US_POSIX")
-        dateTimeFormatter.dateFormat = "yyyyMMdd HHmmss.SSS"
+        dateTimeFormatter.dateFormat = "yyyyMMddHHmmssSSS"
         dateTimeFormatter.timeZone = TimeZone(identifier: "Asia/Tokyo")
         return dateTimeFormatter
     }

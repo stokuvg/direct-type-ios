@@ -57,7 +57,7 @@ paths:
       responses:
         200:
           description: 成功
-  /pycre5/json/purchase:
+  /pycre5/purchase:
     get:
       tags:
         - recommend
