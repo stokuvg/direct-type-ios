@@ -100,9 +100,15 @@ class HomeVC: TmpNaviTopVC {
         }
     }
     */
+    
+    var deviceType:String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        deviceType = DeviceHelper.getDeviceInfo()
+        Log.selectLog(logLevel: .debug, "deviceType:\(deviceType)")
+        
         self.navigationController?.tabBarController?.delegate = self
         homeTableView.backgroundColor = UIColor.init(colorType: .color_base)
         homeTableView.rowHeight = UITableView.automaticDimension
@@ -599,6 +605,11 @@ class HomeVC: TmpNaviTopVC {
         */
 
         rowHeight = DeviceHelper.deviceAddHeight(defaultHeight: rowHeight, addHeight: 25)
+        
+        // iPhone5s,SEの場合縮小
+        if deviceType == "iPhone5s" || deviceType == "iPhoneSE" {
+            rowHeight -= 60
+        }
 
         return rowHeight
     }
