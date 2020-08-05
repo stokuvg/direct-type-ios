@@ -62,7 +62,8 @@ extension ApiManager {
         let tiLastUpdate: TimeInterval = lastUpdate.timeIntervalSince1970
         let tiLastDispUpdate: TimeInterval = lastDispUpdate.timeIntervalSince1970
         if tiLastUpdate > tiLastDispUpdate {
-            print(type, "データの最終更新が: \(tiLastUpdate) / この画面の最終更新が: \(tiLastDispUpdate) ... \((tiLastUpdate > tiLastDispUpdate) ? "データの方が新しいので更新が必要" : "講師不要"))")
+            let buf = "データの最終更新が: \(tiLastUpdate) / この画面の最終更新が: \(tiLastDispUpdate) ... \((tiLastUpdate > tiLastDispUpdate) ? "データの方が新しいので更新が必要" : "講師不要"))"
+            LogManager.appendLog(.apiFetch, "[type: \(type)]", buf)
             return true } //表示されているデータより新しいデータで更新されている
         let tiCurrent: TimeInterval = Date(timeIntervalSinceNow: 0).timeIntervalSince1970
         let flg = ( (tiCurrent - tiLastUpdate) > Constants.FetchIntervalSecond )

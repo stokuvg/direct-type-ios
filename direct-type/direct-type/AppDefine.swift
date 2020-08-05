@@ -10,12 +10,52 @@ import Foundation
 
 // アプリ内全体の設定フラグなどを集約するためのファイル
 struct AppDefine {
-    // AppsFlyerデバッグログフラグ
-    static let isDebugForAppsFlyer = false
-    // TODO: パスワードは毎回自動生成する必要があるため、強度の検討が完了した後に自動生成ロジックを実装する
-    // 参照: https://type.qiita.com/y_kawamata/items/e251d8904820d5b5ceaf
-    static let password = "Abcd123$"
+    static let buildMode: BuildMode = .Develop //【ここでビルド対象を選択】＆【awsconfiguration.json】のコピー
+    enum BuildMode {
+        case Develop
+        case Release
+    }
+    
+    //=== Cognito 認証関連 (これと、【awsconfiguration.json】に設定しておく)
+    //Develop: 【awsconfiguration_Dev.json】をリネームして利用する
+    //Release: 【awsconfiguration_Rel.json】をリネームして利用する
+    static var CognitoIdentityPoolId: String {
+        switch AppDefine.buildMode {
+        case .Develop:  return "ap-northeast-1:4da204bb-c86f-419d-9879-8744af15248f"
+        case .Release:  return "ap-northeast-1:c6e549ed-db63-4016-8386-55cad2c2f020"
+        }
+    }
+    //=== AppsFlyerデバッグログフラグ
+    static var isDebugForAppsFlyer: Bool {
+        switch AppDefine.buildMode {
+        case .Develop:  return true
+        case .Release:  return false
+        }
+    }
+    //=== TUDAPI通信の定義
+    static var tudApiServer: String {
+        switch AppDefine.buildMode {
+        case .Develop:  return "http://api.directtype.net/"
+        case .Release:  return "http://api.directtype.jp/"
+        }
+    }
+    //=== レコメンド通信の定義
+    static var RecommendServer: String {
+        switch AppDefine.buildMode {
+        case .Develop:  return "https://directtype-test.silveregg.net"
+        case .Release:  return "https://directtype.silveregg.net"
+        }
+    }
+    //=== アプリ呼び出しWebページURL
+    static var connectDommain: String {
+        switch AppDefine.buildMode {
+        case .Develop:  return "directtype.net"
+        case .Release:  return "directtype.jp"
+        }
+    }
+
 }
+
 
 //NOTE: 「リンク先URL定義」シートに記載したものと同じ状況で定義しておく
 enum DirectTypeLinkURL {
@@ -66,9 +106,10 @@ enum DirectTypeLinkURL {
         
     }
     
-    static var connectDommain:String = "directtype.net" // 仮環境
+//    static var connectDommain:String = "directtype.net" // 仮環境
 //    static var connectDommain:String = "directtype.jp" // 本番
-    
+    static var connectDommain: String = AppDefine.connectDommain
+
     //リンク先URLテキスト
     var urlText: String {
         switch self {

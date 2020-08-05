@@ -86,7 +86,7 @@ private extension LoginVC {
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         changeButtonState(shouldForceDisable: true)
         LogManager.appendApiLog("AWSMobileClient", "signIn", function: #function, line: #line)
-        AWSMobileClient.default().signIn(username: phoneNumberText.addCountryCode(type: .japan), password: AppDefine.password)  { (signInResult, error) in
+        AWSMobileClient.default().signIn(username: phoneNumberText.addCountryCode(type: .japan), password: Constants.Auth_password)  { (signInResult, error) in
             if let error = error as? AWSMobileClientError {
                 LogManager.appendApiErrorLog("signIn", error, function: #function, line: #line)
                 switch error {
@@ -112,7 +112,7 @@ private extension LoginVC {
             case .customChallenge:
                 DispatchQueue.main.async {
                     let vc = self.getVC(sbName: "LoginConfirmVC", vcName: "LoginConfirmVC") as! LoginConfirmVC
-                    let loginInfo = LoginConfirmVC.LoginInfo(phoneNumberText: phoneNumberText.addCountryCode(type: .japan), password: AppDefine.password)
+                    let loginInfo = LoginConfirmVC.LoginInfo(phoneNumberText: phoneNumberText.addCountryCode(type: .japan), password: Constants.Auth_password)
                     vc.configure(with: loginInfo)
                     self.navigationController?.pushViewController(vc, animated: true)
                 }

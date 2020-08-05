@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Amazon Cognito 認証情報プロバイダーを初期化します
         let credentialsProvider = AWSCognitoCredentialsProvider(
             regionType:.APNortheast1,
-            identityPoolId: Constants.CognitoIdentityPoolId)
+            identityPoolId: AppDefine.CognitoIdentityPoolId)
         let configuration = AWSServiceConfiguration(
             region:.APNortheast1,
             credentialsProvider: credentialsProvider)

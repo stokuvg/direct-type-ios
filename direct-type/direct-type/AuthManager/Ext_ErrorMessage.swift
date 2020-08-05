@@ -325,7 +325,7 @@ extension AuthManager {
                                         //Decodeできた
                                     } else {
                                         let jsonStr = String(bytes: _data, encoding: .utf8)!
-                                        print("JSONモデルのパースに失敗(\(#line)): [\(jsonStr)]", error.localizedDescription)
+                                        LogManager.appendLogEx(.apiError, "JSONモデルのパースに失敗", "", jsonStr, #function, #line)
                                     }
                                 }
                                 
@@ -341,7 +341,7 @@ extension AuthManager {
                                         myErrorDisp.message = swa.message
                                     } catch {
                                         let jsonStr = String(bytes: _data, encoding: .utf8)!
-                                        print("JSONモデルのパースに失敗(\(#line)): [\(jsonStr)]", error.localizedDescription)
+                                        LogManager.appendLogEx(.apiError, "JSONモデルのパースに失敗", "", jsonStr, #function, #line)
                                     }
                                 }
                                 //=== 再認証を促すため、ログイン画面に遷移させるとかする？
@@ -355,7 +355,7 @@ extension AuthManager {
                                         myErrorDisp.message = swa.error
                                     } catch {
                                         let jsonStr = String(bytes: _data, encoding: .utf8)!
-                                        print("JSONモデルのパースに失敗(\(#line)): [\(jsonStr)]", error.localizedDescription)
+                                        LogManager.appendLogEx(.apiError, "JSONモデルのパースに失敗", "", jsonStr, #function, #line)
                                     }
                                 }
 
@@ -367,7 +367,7 @@ extension AuthManager {
                                         myErrorDisp.message = swa.message
                                     } catch {
                                         let jsonStr = String(bytes: _data, encoding: .utf8)!
-                                        print("JSONモデルのパースに失敗(\(#line)): [\(jsonStr)]", error.localizedDescription)
+                                        LogManager.appendLogEx(.apiError, "JSONモデルのパースに失敗", "", jsonStr, #function, #line)
                                     }
                                 }
                             }
