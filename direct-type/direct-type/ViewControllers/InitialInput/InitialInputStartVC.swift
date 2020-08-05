@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AWSMobileClient
 
 protocol InitialSlideViewDelegate {
     func delegateSliderBtnHiddenCheck()
@@ -101,6 +102,8 @@ class InitialInputStartVC: TmpBasicVC {
     
     @IBOutlet weak var registBtn:UIButton!
     @IBAction func registAction() {
+        AWSMobileClient.default().signOut()//別ユーザプールの残りなどを削除するため
+        AWSMobileClient.default().clearKeychain()//別ユーザプールの残りなどを削除するため
         let vc = getVC(sbName: "InitialInputRegistVC", vcName: "InitialInputRegistVC") as! InitialInputRegistVC
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -109,6 +112,8 @@ class InitialInputStartVC: TmpBasicVC {
     @IBOutlet weak var loginedLabel:UILabel!
     @IBOutlet weak var loginBtn:UIButton!
     @IBAction func loginAction() {
+        AWSMobileClient.default().signOut()//別ユーザプールの残りなどを削除するため
+        AWSMobileClient.default().clearKeychain()//別ユーザプールの残りなどを削除するため
         let vc = getVC(sbName: "LoginVC", vcName: "LoginVC") as! LoginVC
         navigationController?.pushViewController(vc, animated: true)
     }

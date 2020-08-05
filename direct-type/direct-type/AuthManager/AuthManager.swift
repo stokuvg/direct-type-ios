@@ -70,13 +70,13 @@ final public class AuthManager {
 
 extension AuthManager {
     class func needAuth(_ isNeedAuth: Bool) {
-//        TudApiAPI.basePath = AppDefine.tudApiServer
+        TudApiAPI.basePath = AppDefine.tudApiServer
         //idTokenが必要なのに未取得だったり期限切れだったら取得を促すとかするならば、ここで噛ませれば良い感じで。
         if isNeedAuth { //そもそもトークン必要か？
             if let idToken = AuthManager.shared.idToken {
                 TudApiAPI.customHeaders = ["Authorization": "Bearer \(idToken)"]
             } else {
-                print("🐶🐶まだidToken取得していない")
+                //print("🐶🐶まだidToken取得していない")
                 AWSMobileClient.default().getTokens { (tokens, error) in
                     if let _error = error as? NSError{
                         Log.selectLog(logLevel: .debug, "_error:\(_error.localizedDescription)")

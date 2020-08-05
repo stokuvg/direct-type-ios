@@ -1,13 +1,11 @@
 #!/bin/bash
-read -p 'Release向けビルドに切り替えます'
-cd direct-type
-\cp -f awsconfiguration_Rel.json awsconfiguration.json
+echo 'Release向けビルドに切り替えます'
+\cp -f ./_BuildMode/awsconfiguration_Rel.json ./direct-type/awsconfiguration.json
+\cp -f ./_BuildMode/BuildMode_Rel.swift ./direct-type/BuildMode.swift
 
-cd ..
 sh rebuildAll.sh
-
 echo ''
 echo '********************************************************************************'
-echo '* 【AppDefine.swift】が「Release」に設定されているか確認してビルドしてください *'
+echo '* 【BuildMode.swift】が「Release」に設定されているか確認してビルドしてください *'
 echo '********************************************************************************'
 echo ''
