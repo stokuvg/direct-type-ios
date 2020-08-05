@@ -141,7 +141,7 @@ enum DirectTypeLinkURL {
                 return "https://" + DirectTypeLinkURL.connectDommain + "/privacy/index.html"
         //===ヘルプ
             case .Help:
-                return "https://" + DirectTypeLinkURL.connectDommain + "help/index.html#003"
+                return "https://" + DirectTypeLinkURL.connectDommain + "/help/index.html#003"
         }
     }
     var url: URL? {
