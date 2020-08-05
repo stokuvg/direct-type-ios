@@ -51,5 +51,3 @@ struct Constants {
     static let DbgFetchDummyData: Bool = false //フェッチ時にローカルで用意したダミーデータを返却する場合
     static let DbgOutputLog: Bool = true
 }
-
-

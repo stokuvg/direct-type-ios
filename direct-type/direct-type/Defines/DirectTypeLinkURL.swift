@@ -1,59 +1,12 @@
 //
-//  AppDefine.swift
+//  DirectTypeLinkURL.swift
 //  direct-type
 //
-//  Created by yamataku on 2020/07/01.
+//  Created by ms-mb014 on 2020/08/05.
 //  Copyright © 2020 ms-mb015. All rights reserved.
 //
 
-import Foundation
-
-// アプリ内全体の設定フラグなどを集約するためのファイル
-extension AppDefine {
-    enum BuildMode {
-        case Develop
-        case Release
-    }
-    //=== Cognito 認証関連 (これと、【awsconfiguration.json】に設定しておく)
-    //Develop: 【awsconfiguration_Dev.json】をリネームして利用する
-    //Release: 【awsconfiguration_Rel.json】をリネームして利用する
-    static var CognitoIdentityPoolId: String {
-        switch AppDefine.buildMode {
-        case .Develop:  return "ap-northeast-1:4da204bb-c86f-419d-9879-8744af15248f"
-        case .Release:  return "ap-northeast-1:c6e549ed-db63-4016-8386-55cad2c2f020"
-        }
-    }
-    //=== AppsFlyerデバッグログフラグ
-    static var isDebugForAppsFlyer: Bool {
-        switch AppDefine.buildMode {
-        case .Develop:  return true
-        case .Release:  return false
-        }
-    }
-    //=== TUDAPI通信の定義（末尾に/をつけると405エラー発生となる）
-    static var tudApiServer: String {
-        switch AppDefine.buildMode {
-        case .Develop:  return "https://api.directtype.net"
-        case .Release:  return "https://api.directtype.jp"
-        }
-    }
-    //=== レコメンド通信の定義
-    static var RecommendServer: String {
-        switch AppDefine.buildMode {
-        case .Develop:  return "https://directtype-test.silveregg.net"
-        case .Release:  return "https://directtype.silveregg.net"
-        }
-    }
-    //=== アプリ呼び出しWebページURL
-    static var connectDommain: String {
-        switch AppDefine.buildMode {
-        case .Develop:  return "directtype.net"
-        case .Release:  return "directtype.jp"
-        }
-    }
-
-}
-
+import UIKit
 
 //NOTE: 「リンク先URL定義」シートに記載したものと同じ状況で定義しておく
 enum DirectTypeLinkURL {
