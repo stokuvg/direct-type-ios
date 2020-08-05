@@ -9,13 +9,11 @@
 import Foundation
 
 // アプリ内全体の設定フラグなどを集約するためのファイル
-struct AppDefine {
-    static let buildMode: BuildMode = .Develop //【ここでビルド対象を選択】＆【awsconfiguration.json】のコピー
+extension AppDefine {
     enum BuildMode {
         case Develop
         case Release
     }
-    
     //=== Cognito 認証関連 (これと、【awsconfiguration.json】に設定しておく)
     //Develop: 【awsconfiguration_Dev.json】をリネームして利用する
     //Release: 【awsconfiguration_Rel.json】をリネームして利用する
@@ -32,11 +30,11 @@ struct AppDefine {
         case .Release:  return false
         }
     }
-    //=== TUDAPI通信の定義
+    //=== TUDAPI通信の定義（末尾に/をつけると405エラー発生となる）
     static var tudApiServer: String {
         switch AppDefine.buildMode {
-        case .Develop:  return "https://api.directtype.net/"
-        case .Release:  return "https://api.directtype.jp/"
+        case .Develop:  return "https://api.directtype.net"
+        case .Release:  return "https://api.directtype.jp"
         }
     }
     //=== レコメンド通信の定義

@@ -1,13 +1,11 @@
 #!/bin/bash
-read -p 'Develop向けビルドに切り替えます'
-cd direct-type
-\cp -f awsconfiguration_Dev.json awsconfiguration.json
+echo 'Develop向けビルドに切り替えます'
+\cp -f ./_BuildMode/awsconfiguration_Dev.json ./direct-type/awsconfiguration.json
+\cp -f ./_BuildMode/BuildMode_Dev.swift ./direct-type/BuildMode.swift
 
-cd ..
 sh rebuildAll.sh
-
 echo ''
 echo '********************************************************************************'
-echo '* 【AppDefine.swift】が「Develop」に設定されているか確認してビルドしてください *'
+echo '* 【BuildMode.swift】が「Develop」に設定されているか確認してビルドしてください *'
 echo '********************************************************************************'
 echo ''

@@ -317,6 +317,7 @@
 		26C3207624B4129D00E9564B /* CareerCardItemVW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C3207524B4129D00E9564B /* CareerCardItemVW.swift */; };
 		26C3207824B412DE00E9564B /* CareerCardItemVW.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C3207724B412DE00E9564B /* CareerCardItemVW.xib */; };
 		26C8A6C32490D22600D6B96C /* Validate+Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C8A6C22490D22600D6B96C /* Validate+Base.swift */; };
+		26CA071224DA938600A03E7B /* BuildMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CA071124DA938600A03E7B /* BuildMode.swift */; };
 		26CFC45F2469495800E458E2 /* ConstantsPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFC45E2469495800E458E2 /* ConstantsPreview.swift */; };
 		26CFC4672469496D00E458E2 /* Edit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26CFC4612469496D00E458E2 /* Edit.storyboard */; };
 		26CFC4692469496D00E458E2 /* HEditTextTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26CFC4632469496D00E458E2 /* HEditTextTBCell.xib */; };
@@ -662,6 +663,7 @@
 		26C3207524B4129D00E9564B /* CareerCardItemVW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerCardItemVW.swift; sourceTree = "<group>"; };
 		26C3207724B412DE00E9564B /* CareerCardItemVW.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CareerCardItemVW.xib; sourceTree = "<group>"; };
 		26C8A6C22490D22600D6B96C /* Validate+Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validate+Base.swift"; sourceTree = "<group>"; };
+		26CA071124DA938600A03E7B /* BuildMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildMode.swift; sourceTree = "<group>"; };
 		26CFC45E2469495800E458E2 /* ConstantsPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsPreview.swift; sourceTree = "<group>"; };
 		26CFC4612469496D00E458E2 /* Edit.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Edit.storyboard; sourceTree = "<group>"; };
 		26CFC4632469496D00E458E2 /* HEditTextTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HEditTextTBCell.xib; sourceTree = "<group>"; };
@@ -824,6 +826,7 @@
 			children = (
 				264D52C624D0123100F3A56B /* Settings.bundle */,
 				26D4CB21247777F1002EE9A9 /* awsconfiguration.json */,
+				26CA071124DA938600A03E7B /* BuildMode.swift */,
 				066BD9EB2456B3A2009E610B /* R.generated.swift */,
 				066BD9D52456ACB4009E610B /* direct-type */,
 				066BD9D42456ACB4009E610B /* Products */,
@@ -1777,6 +1780,7 @@
 				26BF48EB24639D6500E00215 /* SelectItemsManager.swift in Sources */,
 				0645DE05246BDE8600592572 /* BaseJobDetailCell.swift in Sources */,
 				06E519802457CF63004E4B7A /* BaseTableViewCell.swift in Sources */,
+				26CA071224DA938600A03E7B /* BuildMode.swift in Sources */,
 				0E22833D24AEB5AB0008765E /* ApiManager+Chemistry.swift in Sources */,
 				0EAE765D248F2A23009A8F4B /* ChemistryBusinessAbilityCell.swift in Sources */,
 				06E519A72458138E004E4B7A /* SignupVC.swift in Sources */,

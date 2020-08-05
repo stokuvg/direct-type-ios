@@ -32,6 +32,7 @@ extension ApiManager {
         let (promise, resolver) = Promise<MdlProfile>.pending()
         if Constants.DbgFetchDummyData { resolver.fulfill(MdlProfile.dummyData()) }//!!![Dbg: 開発用ダミー返却]
         AuthManager.needAuth(true)
+//        TudApiAPI.basePath = AppDefine.tudApiServer
         ProfileAPI.profileControllerGet()
         .done { result in
             ApiManager.shared.dicLastUpdate[.profile] = Date()//取得できたので、最終取得日時を更新
@@ -98,6 +99,7 @@ extension ApiManager {
     private class func updateProfileFetch(param: UpdateProfileRequestDTO) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
         AuthManager.needAuth(true)
+//        TudApiAPI.basePath = AppDefine.tudApiServer
         ProfileAPI.profileControllerUpdate(body: param)
         .done { result in
             ApiManager.shared.dicLastUpdate[.profile] = Date(timeIntervalSince1970: 0)//モデル更新したので、一覧再取得が必要
@@ -155,6 +157,7 @@ extension ApiManager {
     private class func createProfileFetch(param: CreateProfileRequestDTO) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
         AuthManager.needAuth(true)
+//        TudApiAPI.basePath = AppDefine.tudApiServer
         ProfileAPI.profileControllerCreate(body: param)
         .done { result in
             ApiManager.shared.dicLastUpdate[.profile] = Date(timeIntervalSince1970: 0)//モデル更新したので、一覧再取得が必要
