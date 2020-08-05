@@ -202,6 +202,7 @@ private extension InitialInputRegistVC {
                     let buf = AuthManager.convAnyError(error).debugDisp
                     print("ログアウトエラー: \(buf)")
                 }
+                AWSCognitoAuth.default().signOutLocallyAndClearLastKnownUser()//サインアウト時の後処理
                 print("ログアウト完了")
             }
         }

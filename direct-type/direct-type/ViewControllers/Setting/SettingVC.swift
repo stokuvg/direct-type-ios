@@ -96,6 +96,7 @@ private extension SettingVC {
                     }
                     return
                 }
+                AWSCognitoAuth.default().signOutLocallyAndClearLastKnownUser()//サインアウト時の後処理
                 DispatchQueue.main.async {
                     self.showConfirm(title: "認証手順", message: "ログアウトしました", onlyOK: true)
                     .done { _ in

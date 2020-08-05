@@ -106,6 +106,7 @@ private extension WithDrawalVC {
                     }
                     return
                 }
+                AWSCognitoAuth.default().signOutLocallyAndClearLastKnownUser()//サインアウト時の後処理
             }
         }
         .catch{ (error) in
