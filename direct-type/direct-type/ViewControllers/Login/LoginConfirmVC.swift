@@ -112,6 +112,7 @@ private extension LoginConfirmVC {
             case .signedIn:
                 buf = "signedIn"
                 DispatchQueue.main.async {
+                    ApiManager.createActivity()
                     self.transitionToBaseTab()
                 }
             case .unknown:

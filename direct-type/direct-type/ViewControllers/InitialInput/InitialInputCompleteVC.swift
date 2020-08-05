@@ -71,6 +71,12 @@ final class InitialInputCompleteVC: TmpBasicVC {
         AnalyticsEventManager.track(type: .confirmAuthCode)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        ApiManager.createActivity()
+    }
+    
     override func viewDidLayoutSubviews() {
       super.viewDidLayoutSubviews()
         textView.setContentOffset(.zero, animated: false)
