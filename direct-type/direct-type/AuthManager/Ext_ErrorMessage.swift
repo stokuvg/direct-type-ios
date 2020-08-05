@@ -175,6 +175,7 @@ struct MyErrorDisp {
         case existsUser = 24
         case undefinedUser = 23
         case invalidSession = 13
+        case afterInvalidSession = 32
     }
     
     var debugDisp: String {

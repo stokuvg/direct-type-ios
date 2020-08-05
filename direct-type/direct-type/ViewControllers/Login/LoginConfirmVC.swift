@@ -92,7 +92,7 @@ private extension LoginConfirmVC {
                 let myError = AuthManager.convAnyError(error)
                 DispatchQueue.main.async {
                     let errorType = MyErrorDisp.CodeType(rawValue: myError.code)
-                    if errorType == .invalidSession {
+                    if errorType == .invalidSession || errorType == .afterInvalidSession {
                         self.showConfirm(title: "認証エラー", message: "認証コードを再送信してください。", onlyOK: true)
                     }
                     self.changeButtonState()
