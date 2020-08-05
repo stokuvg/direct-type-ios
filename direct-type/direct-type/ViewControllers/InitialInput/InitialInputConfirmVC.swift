@@ -22,6 +22,9 @@ final class InitialInputConfirmVC: TmpBasicVC {
     @IBAction private func resendAuthCodeButton(_ sender: UIButton) {
         resendAuthCode()
     }
+    @IBAction private func codeWebHelpButton(_ sender: UIButton) {
+        codeWebHelp()
+    }
     @IBAction private func nextButton(_ sender: UIButton) {
         validateAuthCode()
     }
@@ -207,6 +210,10 @@ private extension InitialInputConfirmVC {
                 SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             }
         }
+    }
+    
+    func codeWebHelp() {
+        OpenLinkUrlTool.open(type: .Help, navigationController)
     }
 }
 

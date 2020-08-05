@@ -16,8 +16,13 @@ final class LoginConfirmVC: TmpBasicVC {
     @IBOutlet private weak var authCodeTextField: UITextField!
     @IBOutlet private weak var nextButton: UIButton!
     
+    // 再送信
     @IBAction private func resendAuthCodeButton(_ sender: UIButton) {
         resendAuthCode()
+    }
+    // ヘルプ
+    @IBAction private func codeWebHelpButton(_ sender: UIButton) {
+        codeWebHelp()
     }
     @IBAction private func nextButton(_ sender: UIButton) {
         validateAuthCode()
@@ -161,6 +166,10 @@ private extension LoginConfirmVC {
         authCodeTextField.text = inputText.prefix(confirmCodeMaxLength).description
         nextButton.backgroundColor = UIColor(colorType: isValidInputText ? .color_sub : .color_line)
         nextButton.isEnabled = isValidInputText
+    }
+    
+    func codeWebHelp() {
+        OpenLinkUrlTool.open(type: .Help, navigationController)
     }
     
     func resendAuthCode() {
