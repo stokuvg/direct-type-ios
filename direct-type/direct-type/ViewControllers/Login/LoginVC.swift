@@ -139,7 +139,7 @@ private extension LoginVC {
                     let buf = AuthManager.convAnyError(error).debugDisp
                     print("ログアウトエラー: \(buf)")
                 }
-                AWSCognitoAuth.default().signOutLocallyAndClearLastKnownUser()//サインアウト時の後処理
+                //AWSCognitoAuth.default().signOutLocallyAndClearLastKnownUser()//サインアウト時の後処理（これ使う場合には、Info.plistにユーザプールID定義する必要あり）
                 print("ログアウト完了")
             }
         }

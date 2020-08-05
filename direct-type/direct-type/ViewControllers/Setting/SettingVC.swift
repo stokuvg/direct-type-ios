@@ -96,7 +96,7 @@ private extension SettingVC {
                     }
                     return
                 }
-                AWSCognitoAuth.default().signOutLocallyAndClearLastKnownUser()//サインアウト時の後処理
+                //AWSCognitoAuth.default().signOutLocallyAndClearLastKnownUser()//サインアウト時の後処理（これ使う場合には、Info.plistにユーザプールID定義する必要あり）
                 DispatchQueue.main.async {
                     self.showConfirm(title: "認証手順", message: "ログアウトしました", onlyOK: true)
                     .done { _ in
