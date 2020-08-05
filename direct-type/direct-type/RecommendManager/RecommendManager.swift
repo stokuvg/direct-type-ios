@@ -38,7 +38,6 @@ final public class RecommendManager {
 }
 extension RecommendManager {
     class func fetchRecommend(type: RecommendManager.SpecType, jobID: String) -> Promise<Void> {
-        SERecommendAPI.basePath = AppDefine.RecommendServer
         switch type {
         case .ap341:
             return getRecommendFetch(spec: type.specID, jobID: jobID, num: 0)
@@ -49,7 +48,6 @@ extension RecommendManager {
         }
     }
     class func clickRecommend(type: RecommendManager.SpecType, jobID: String) -> Promise<Void> {
-        SERecommendAPI.basePath = AppDefine.RecommendServer
         switch type {
         case .ap341:
             return clickRecommendFetch(spec: type.specID, jobID: jobID)
@@ -65,6 +63,7 @@ extension RecommendManager {
     private class func getRecommendFetch(spec: String, jobID: String? = nil, num: Int = 100) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
         let sub: String = AWSMobileClient.default().username ?? ""
+        SERecommendAPI.basePath = AppDefine.RecommendServer
         RecommendAPI.pycre5JsonRecommendGet(merch: "directtype", cookie: sub, spec: spec, prod: jobID, num: num)
         .done { result in
             resolver.fulfill(Void())
@@ -80,6 +79,7 @@ extension RecommendManager {
         let (promise, resolver) = Promise<Void>.pending()
         let sub: String = AWSMobileClient.default().username ?? ""
         let orderId: String = Date().RecommendParamOrderID
+        SERecommendAPI.basePath = AppDefine.RecommendServer
         RecommendAPI.pycre5PurchaseGet(prod: jobID, merch: "directtype", sku: jobID, order: orderId, qty: 1, price: 1, cust: sub, cookie: sub, device: "a")
         .done { result in
             resolver.fulfill(Void())
