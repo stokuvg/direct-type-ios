@@ -33,6 +33,7 @@ enum DirectTypeLinkURL {
     case SettingsHowTo              //[H-8]『設定Top』「使い方」
     case SettingsPrivacyPolicy      //[H-8]『設定Top』「プライバシーポリシー」
     case SettingsAgreement          //[H-8]『設定Top』「利用規約」
+    case Help                       //[A-4][B-3] ヘルプ
 
     //リンクテキスト
     var dispText: String {
@@ -62,6 +63,8 @@ enum DirectTypeLinkURL {
             return "プライバシーポリシー"
         case .SettingsAgreement:
             return "利用規約"
+        case .Help:
+            return "ヘルプ"
         }
         
     }
@@ -73,30 +76,33 @@ enum DirectTypeLinkURL {
     var urlText: String {
         switch self {
         //===type応募時
-        case .TypeEntryPasswordForgot:
-            return "https://type.jp/reminder/input.do"
-        case .TypeEntryPersonalInfo:
-            return "https://type.jp/s/kojin/"
-        case .TypeEntryMemberPolicy:
-            return "https://type.jp/help/category_14.html"
+            case .TypeEntryPasswordForgot:
+                return "https://type.jp/reminder/input.do"
+            case .TypeEntryPersonalInfo:
+                return "https://type.jp/s/kojin/"
+            case .TypeEntryMemberPolicy:
+                return "https://type.jp/help/category_14.html"
         //===ユーザ作成、ログイン
-        case .LoginPrivacyPolicy, .RegistPrivacyPolicy:
-            return "https://" + DirectTypeLinkURL.connectDommain + "/privacy/index.html"
-        case .RegistAgreement: fallthrough
-        case .LoginAgreement, .SettingsAgreement:
-            return "https://" + DirectTypeLinkURL.connectDommain + "/policy/index.html"
-        case .RegistPhoneReason, .LoginPhoneReason:
-            return "https://" + DirectTypeLinkURL.connectDommain + "/help/index.html#001"
+            case .LoginPrivacyPolicy, .RegistPrivacyPolicy:
+                return "https://" + DirectTypeLinkURL.connectDommain + "/privacy/index.html"
+            case .RegistAgreement: fallthrough
+            case .LoginAgreement, .SettingsAgreement:
+                return "https://" + DirectTypeLinkURL.connectDommain + "/policy/index.html"
+            case .RegistPhoneReason, .LoginPhoneReason:
+                return "https://" + DirectTypeLinkURL.connectDommain + "/help/index.html#001"
         //===アプローチ設定
-        case .AproachAbout:
-            return "https://" + DirectTypeLinkURL.connectDommain + "/help/index.html#002"
+            case .AproachAbout:
+                return "https://" + DirectTypeLinkURL.connectDommain + "/help/index.html#002"
         //===設定項目
-        case .SettingsFAQ:
-            return "https://" + DirectTypeLinkURL.connectDommain + "/help/index.html"
-        case .SettingsHowTo:
-            return "https://" + DirectTypeLinkURL.connectDommain + "/tutorial/index.html"
-        case .SettingsPrivacyPolicy:
-            return "https://" + DirectTypeLinkURL.connectDommain + "/privacy/index.html"
+            case .SettingsFAQ:
+                return "https://" + DirectTypeLinkURL.connectDommain + "/help/index.html"
+            case .SettingsHowTo:
+                return "https://" + DirectTypeLinkURL.connectDommain + "/tutorial/index.html"
+            case .SettingsPrivacyPolicy:
+                return "https://" + DirectTypeLinkURL.connectDommain + "/privacy/index.html"
+        //===ヘルプ
+            case .Help:
+                return "https://" + DirectTypeLinkURL.connectDommain + "help/index.html#003"
         }
     }
     var url: URL? {
@@ -123,6 +129,7 @@ enum DirectTypeLinkURL {
         case .SettingsHowTo:            return .appWebBrowser
         case .SettingsPrivacyPolicy:    return .appWebBrowser
         case .SettingsAgreement:        return .appWebBrowser
+        case .Help:                     return .appWebBrowser
         }
     }
 }

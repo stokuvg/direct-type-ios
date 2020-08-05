@@ -12,7 +12,7 @@
         <!--Login ConfirmVC-->
         <scene sceneID="SRa-BL-jz4">
             <objects>
-                <viewController storyboardIdentifier="Sbid_LoginConfirmVC" id="SFi-WS-gi4" customClass="LoginConfirmVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Sbid_LoginConfirmVC" id="SFi-WS-gi4" customClass="LoginConfirmVC" customModule="Direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fOM-f3-mMe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,10 +21,10 @@
                                 <rect key="frame" x="30" y="0.0" width="354" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gdj-wi-dBv" userLabel="ContentsView">
-                                        <rect key="frame" x="0.0" y="0.0" width="354" height="419.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="547.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Tx9-6W-tKb">
-                                                <rect key="frame" x="0.0" y="0.0" width="354" height="419.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="354" height="547.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hp8-1I-Hzc" userLabel="余白">
                                                         <rect key="frame" x="0.0" y="0.0" width="354" height="60"/>
@@ -95,15 +95,34 @@
                                                             </button>
                                                         </subviews>
                                                     </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="aUE-Q9-0Xc">
+                                                        <rect key="frame" x="0.0" y="329.5" width="354" height="128"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xqj-VW-3TX" userLabel="余白">
+                                                                <rect key="frame" x="0.0" y="0.0" width="322" height="128"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </view>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VsS-Bl-g2C">
+                                                                <rect key="frame" x="338" y="0.0" width="16" height="128"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                <state key="normal" title="認証コードが届かない場合">
+                                                                    <color key="titleColor" name="color-sub"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="codeWebHelpButton:" destination="SFi-WS-gi4" eventType="touchUpInside" id="Qyh-nq-ppv"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IkT-nd-NLa" userLabel="余白">
-                                                        <rect key="frame" x="0.0" y="329.5" width="354" height="30"/>
+                                                        <rect key="frame" x="0.0" y="457.5" width="354" height="30"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="IOe-58-dzW"/>
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JRg-mF-yg5">
-                                                        <rect key="frame" x="0.0" y="359.5" width="354" height="40"/>
+                                                        <rect key="frame" x="0.0" y="487.5" width="354" height="40"/>
                                                         <color key="backgroundColor" name="color-sub"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="MzL-4e-XEP"/>
@@ -121,7 +140,7 @@
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mgx-Bl-Svk" userLabel="余白">
-                                                        <rect key="frame" x="0.0" y="399.5" width="354" height="20"/>
+                                                        <rect key="frame" x="0.0" y="527.5" width="354" height="20"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="A3o-Bb-H9O"/>
