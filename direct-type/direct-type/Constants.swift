@@ -11,36 +11,21 @@ import UIKit
 // TODO: 今後アプリ内の設定フラグなどは「AppDefine」クラスに徐々に移管していくため、このファイルには新規のプロパティを追加しない
 struct Constants {
     //安全なダミー番号: https://stabucky.com/wp/archives/6180
-    static let Auth_username: String = "+8190012345678" //安全なダミー番号: https://stabucky.com/wp/archives/6180
-    static var Auth_password: String {
-        return AppDefine.password
-    }
-
-    
-    //=== レコメンド通信の定義
-    //      - url: 'https://directtype.silveregg.net'
-    //        description: 本番環境
-    //      - url: 'https://directtype-test.silveregg.net'
-    //        description: テスト環境
-    static let RecommendServer: String = "https://directtype-test.silveregg.net"
-
+    static let Auth_username: String = "" //安全なダミー番号: https://stabucky.com/wp/archives/6180
+    static var Auth_password: String { return UUID().uuidString }//パスワード不要のためダミーでOK
     
     //=== 通信関連の設定値
     static let FetchIntervalSecond: TimeInterval = 10 * 60 // 10minutes経つまで、フェッチを抑止する(APIError.noFetchを返す)
     static let ApiAutoRetryMax: Int = 3 // 自動リトライ回数（初回含めているので、2以上じゃないとidTokenリフレッシュができない）
     // ⇒ 401の場合だけは、かならずリトライを１回は試みると内部で処理しておくべきか？（サインイン頻度の仕様によって考慮する）
     static let ApiAutoRetryDelaySecond: DispatchTimeInterval = .seconds(1) // 自動リトライ間隔
-    //=== 認証関連 (これと、【awsconfiguration.json】に設定しておく)
-    static let CognitoIdentityPoolId: String = "ap-northeast-1:4da204bb-c86f-419d-9879-8744af15248f"
     
-
     //制限値の定数定義
     static let SelectMultidMaxUndefine: Int = 9999 //最大選択数未定義の場合
     static let CareerCardMax: Int = 10 //職務経歴書カードの登録際台数
     //応募や職歴などでのダミー文字列
     static let TypeDummyStrings: String = "▲▽"
     
-
     //「年」「月」選択Picker用定義
     static let years: [Int] = (1900...2100).map { $0 }
     static let months: [Int] = (1...12).map { $0 }
@@ -66,4 +51,5 @@ struct Constants {
     static let DbgFetchDummyData: Bool = false //フェッチ時にローカルで用意したダミーデータを返却する場合
     static let DbgOutputLog: Bool = false
 }
+
 

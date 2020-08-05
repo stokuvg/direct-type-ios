@@ -38,7 +38,7 @@ final public class RecommendManager {
 }
 extension RecommendManager {
     class func fetchRecommend(type: RecommendManager.SpecType, jobID: String) -> Promise<Void> {
-        SERecommendAPI.basePath = Constants.RecommendServer
+        SERecommendAPI.basePath = AppDefine.RecommendServer
         switch type {
         case .ap341:
             return getRecommendFetch(spec: type.specID, jobID: jobID, num: 0)
@@ -49,7 +49,7 @@ extension RecommendManager {
         }
     }
     class func clickRecommend(type: RecommendManager.SpecType, jobID: String) -> Promise<Void> {
-        SERecommendAPI.basePath = Constants.RecommendServer
+        SERecommendAPI.basePath = AppDefine.RecommendServer
         switch type {
         case .ap341:
             return clickRecommendFetch(spec: type.specID, jobID: jobID)

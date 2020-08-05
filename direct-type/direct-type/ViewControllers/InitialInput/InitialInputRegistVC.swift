@@ -92,7 +92,7 @@ private extension InitialInputRegistVC {
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         changeButtonState(shouldForceDisable: true)
         LogManager.appendApiLog("AWSMobileClient", "signUp", function: #function, line: #line)
-        AWSMobileClient.default().signUp(username: phoneNumber, password: AppDefine.password, userAttributes: phoneNumberAttribute) { (signUpResult, error) in
+        AWSMobileClient.default().signUp(username: phoneNumber, password: Constants.Auth_password, userAttributes: phoneNumberAttribute) { (signUpResult, error) in
             if let error = error {
                 LogManager.appendApiErrorLog("signUp", error, function: #function, line: #line)
                 let myError = AuthManager.convAnyError(error)
@@ -134,7 +134,7 @@ private extension InitialInputRegistVC {
             LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         }
         LogManager.appendApiLog("AWSMobileClient", "signIn", function: #function, line: #line)
-        AWSMobileClient.default().signIn(username: phoneNumberText.addCountryCode(type: .japan), password: AppDefine.password) { (signInResult, error) in
+        AWSMobileClient.default().signIn(username: phoneNumberText.addCountryCode(type: .japan), password: Constants.Auth_password) { (signInResult, error) in
             if let error = error as? AWSMobileClientError {
                 LogManager.appendApiErrorLog("signIn", error, function: #function, line: #line)
                 switch error {
@@ -187,7 +187,7 @@ private extension InitialInputRegistVC {
     func transitionToComfirm() {
         guard let phoneNumberText = phoneNumberTextField.text else { return }
         let vc = getVC(sbName: "InitialInputConfirmVC", vcName: "InitialInputConfirmVC") as! InitialInputConfirmVC
-        vc.configure(with: InitialInputConfirmVC.LoginInfo(phoneNumberText: phoneNumberText, password: AppDefine.password), delegate: self)
+        vc.configure(with: InitialInputConfirmVC.LoginInfo(phoneNumberText: phoneNumberText, password: Constants.Auth_password), delegate: self)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
