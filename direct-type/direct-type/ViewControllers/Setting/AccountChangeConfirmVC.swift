@@ -118,6 +118,7 @@ private extension AccountChangeConfirmVC {
                 }
                 return
             }
+            //AWSCognitoAuth.default().signOutLocallyAndClearLastKnownUser()//サインアウト時の後処理（これ使う場合には、Info.plistにユーザプールID定義する必要あり）
             LogManager.appendApiResultLog("signOut", "成功", function: #function, line: #line)
             DispatchQueue.main.async {
                 SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")

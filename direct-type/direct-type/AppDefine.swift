@@ -35,8 +35,8 @@ struct AppDefine {
     //=== TUDAPI通信の定義
     static var tudApiServer: String {
         switch AppDefine.buildMode {
-        case .Develop:  return "http://api.directtype.net/"
-        case .Release:  return "http://api.directtype.jp/"
+        case .Develop:  return "https://api.directtype.net/"
+        case .Release:  return "https://api.directtype.jp/"
         }
     }
     //=== レコメンド通信の定義
