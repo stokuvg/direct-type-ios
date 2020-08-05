@@ -91,7 +91,7 @@ private extension LoginVC {
                 LogManager.appendApiErrorLog("signIn", error, function: #function, line: #line)
                 switch error {
                 case .invalidParameter:
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         self.trySignIn()
                     }
                 default:
