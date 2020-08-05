@@ -10,12 +10,21 @@ import Foundation
 
 // アプリ内全体の設定フラグなどを集約するためのファイル
 struct AppDefine {
-    static let buildMode: BuildMode = .Develop
+    static let buildMode: BuildMode = .Develop //【ここでビルド対象を選択】＆【awsconfiguration.json】のコピー
     enum BuildMode {
         case Develop
         case Release
     }
     
+    //=== Cognito 認証関連 (これと、【awsconfiguration.json】に設定しておく)
+    //Develop: 【awsconfiguration_Dev.json】をリネームして利用する
+    //Release: 【awsconfiguration_Rel.json】をリネームして利用する
+    static var CognitoIdentityPoolId: String {
+        switch AppDefine.buildMode {
+        case .Develop:  return "ap-northeast-1:4da204bb-c86f-419d-9879-8744af15248f"
+        case .Release:  return "ap-northeast-1:c6e549ed-db63-4016-8386-55cad2c2f020"
+        }
+    }
     //=== AppsFlyerデバッグログフラグ
     static var isDebugForAppsFlyer: Bool {
         switch AppDefine.buildMode {
@@ -37,16 +46,6 @@ struct AppDefine {
         case .Release:  return "https://directtype.silveregg.net"
         }
     }
-    //=== Cognito 認証関連 (これと、【awsconfiguration.json】に設定しておく)
-    //Develop: 【awsconfiguration_Dev.json】をリネームして利用する
-    //Release: 【awsconfiguration_Rel.json】をリネームして利用する
-    static var CognitoIdentityPoolId: String {
-        switch AppDefine.buildMode {
-        case .Develop:  return "ap-northeast-1:4da204bb-c86f-419d-9879-8744af15248f"
-        case .Release:  return "ap-northeast-1:4da204bb-c86f-419d-9879-8744af15248f"
-        }
-    }
-
     //=== アプリ呼び出しWebページURL
     static var connectDommain: String {
         switch AppDefine.buildMode {
