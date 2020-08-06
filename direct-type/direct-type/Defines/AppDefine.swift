@@ -5,6 +5,7 @@
 //  Created by yamataku on 2020/07/01.
 //  Copyright © 2020 ms-mb015. All rights reserved.
 //
+//このファイルでは、BuildModeに応じて変わる設定値を記述する（主にエンドポイント関連など）
 //NOTE: ビルド定義の切り替え方法
 //【switchDev.sh】で開発用のモードに切り替える。それ以後は【rebuildAll.sh】を実行
 //【switchRel.sh】でリリース用のモードに切り替える。それ以後は【rebuildAll.sh】を実行
@@ -39,7 +40,9 @@ extension AppDefine {
         case .Release:  return false
         }
     }
-    //=== TUDAPI通信の定義（末尾に/をつけると405エラー発生となる）
+    //======== SwaggerClient制御（api.jsonでの初期値を上書きして呼び出すため）
+    //＊末尾に/をつけると405エラー発生となる
+    //=== TUDAPI通信の定義
     static var tudApiServer: String {
         switch AppDefine.buildMode {
         case .Develop:  return "https://api.directtype.net"
@@ -53,6 +56,7 @@ extension AppDefine {
         case .Release:  return "https://directtype.silveregg.net"
         }
     }
+    //======== その他のサイト定義
     //=== アプリ呼び出しWebページURL
     static var connectDommain: String {
         switch AppDefine.buildMode {
