@@ -183,6 +183,7 @@ private extension KeepListVC {
         
         if keepDatas.count > 0 {
             
+            var sameCnt:Int = 0
             for i in 0..<keepDatas.count {
                 var _data = keepDatas[i]
                 
@@ -193,9 +194,13 @@ private extension KeepListVC {
                 if checkId == _dataId {
                     _data["keepStatus"] = checkStatus
                     keepDatas[i] = _data
+                    sameCnt += 1
                 } else {
-                    keepDatas.append(checkData)
+                    continue
                 }
+            }
+            if sameCnt == 0 {
+                keepDatas.append(checkData)
             }
         } else {
             keepDatas.append(checkData)
