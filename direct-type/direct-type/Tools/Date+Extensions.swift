@@ -101,7 +101,7 @@ class DateHelper {
 //        Log.selectLog(logLevel: .debug, "ret:\(ret)")
         
         if 0 <= ret && ret <= 7 {
-            Log.selectLog(logLevel: .debug, "７日以内 最新")
+//            Log.selectLog(logLevel: .debug, "新着　７日以内 最新")
             return true
         }
         return false
@@ -119,6 +119,7 @@ class DateHelper {
             let ret = retInterval/86400
 //            Log.selectLog(logLevel: .debug, "end ret:\(ret)")
             if 7 >= ret && ret >= 0 {
+//                Log.selectLog(logLevel: .debug, "表示終了まで　７日以内")
                 return true
             }
             return false
