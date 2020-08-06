@@ -106,18 +106,18 @@ private extension KeepListVC {
 
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
-            case 403:
-                let message:String = "idTokenを取得していません"
-                self.showConfirm(title: "通信失敗", message: message)
-                    .done { _ in
+                case 403:
+                    let message:String = "idTokenを取得していません"
+                    self.showConfirm(title: "通信失敗", message: message)
+                        .done { _ in
 
-                        self.dataDisplay()
-                }.catch { (error) in
+                            self.dataDisplay()
+                    }.catch { (error) in
 
-                }.finally {
-                }
-            default:
-                break
+                    }.finally {
+                    }
+                default:
+                    self.showError(myErr)
             }
         }
         .finally {
@@ -145,18 +145,18 @@ private extension KeepListVC {
 
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             switch myErr.code {
-            case 403:
-                let message:String = "idTokenを取得していません"
-                self.showConfirm(title: "通信失敗", message: message)
-                    .done { _ in
+                case 403:
+                    let message:String = "idTokenを取得していません"
+                    self.showConfirm(title: "通信失敗", message: message)
+                        .done { _ in
 
-                        self.dataDisplay()
-                }.catch { (error) in
+                            self.dataDisplay()
+                    }.catch { (error) in
 
-                }.finally {
-                }
-            default:
-                break
+                    }.finally {
+                    }
+                default:
+                    self.showError(myErr)
             }
         }
         .finally {
@@ -250,30 +250,33 @@ extension KeepListVC: BaseJobCardCellDelegate {
     func skipAction(jobId: String) {}
 
     func keepAction(jobId: String) {
+        SVProgressHUD.show()
         storedKeepList.insert(jobId)
         Log.selectLog(logLevel: .debug, "KeepListVC delegate keepAction tag:\(jobId)")
-        var jobCard:MdlKeepJob = MdlKeepJob()
         var updateNo:Int = 0
         for i in 0..<lists.count {
             let checkJobCard = lists[i]
             if checkJobCard.jobId == jobId {
-                jobCard = checkJobCard
                 updateNo = i
                 break
             } else {
                 continue
             }
         }
-        let keepStatus = !jobCard.keepStatus
+        
+        let updateKeepData = self.lists[updateNo]
+        let updateKeepJobId = updateKeepData.jobId
+        let updateKeepStatus = !updateKeepData.keepStatus
+        
         Log.selectLog(logLevel: .debug, "jobId:\(jobId)")
-        Log.selectLog(logLevel: .debug, "keepStatus:\(keepStatus)")
-        let keepData:[String:Any] = ["jobId":jobId,"keepStatus":keepStatus]
+        let homeKeepData:[String:Any] = ["jobId":updateKeepJobId,"keepStatus":updateKeepStatus]
 
-        if keepStatus == true {
+        if updateKeepStatus == true {
             ApiManager.sendJobKeep(id: jobId)
                 .done { result in
                     Log.selectLog(logLevel: .debug, "keep send success")
                     Log.selectLog(logLevel: .debug, "keep成功")
+                    updateKeepData.keepStatus = updateKeepStatus
 
             }.catch{ (error) in
                 Log.selectLog(logLevel: .debug, "skip send error:\(error)")
@@ -282,15 +285,17 @@ extension KeepListVC: BaseJobCardCellDelegate {
                 self.showError(myErr)
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep send finally")
-                jobCard.keepStatus = keepStatus
-                self.lists[updateNo] = jobCard
-                self.keepDataAddRemoveCheck(checkData:keepData)
+                self.lists[updateNo] = updateKeepData
+                self.keepDataAddRemoveCheck(checkData:homeKeepData)
+//                self.keepTableView.reloadRows(at: [updateIndexPath], with: .automatic)
+                SVProgressHUD.dismiss()
             }
         } else {
             ApiManager.sendJobDeleteKeep(id: jobId)
                 .done { result in
                     Log.selectLog(logLevel: .debug, "keep delete success")
                     Log.selectLog(logLevel: .debug, "delete成功")
+                    updateKeepData.keepStatus = updateKeepStatus
 
             }.catch{ (error) in
                 Log.selectLog(logLevel: .debug, "skip send error:\(error)")
@@ -299,9 +304,10 @@ extension KeepListVC: BaseJobCardCellDelegate {
                 self.showError(myErr)
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep send finally")
-                jobCard.keepStatus = keepStatus
-                self.lists[updateNo] = jobCard
-                self.keepDataAddRemoveCheck(checkData:keepData)
+                self.lists[updateNo] = updateKeepData
+                self.keepDataAddRemoveCheck(checkData:homeKeepData)
+//                self.keepTableView.reloadRows(at: [updateIndexPath], with: .automatic)
+                SVProgressHUD.dismiss()
             }
         }
     }
