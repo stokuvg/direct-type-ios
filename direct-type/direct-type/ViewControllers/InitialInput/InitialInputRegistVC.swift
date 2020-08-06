@@ -120,7 +120,6 @@ private extension InitialInputRegistVC {
             case .unknown:
                 buf = "unknown"
             }
-            DispatchQueue.main.async { print(#line, #function, buf) }
         }
     }
     
@@ -177,7 +176,6 @@ private extension InitialInputRegistVC {
                 buf = "signedIn"
             }
             DispatchQueue.main.async {
-                print(#line, #function, buf)
                 self.changeButtonState()
                 SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             }

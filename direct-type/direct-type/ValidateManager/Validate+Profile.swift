@@ -28,7 +28,7 @@ extension ValidateManager {
             case "town":            dicError.addDicArrVal(key: EditItemMdlProfile.address2.itemKey, val: valid.constraintsVal)
             case "email":           dicError.addDicArrVal(key: EditItemMdlProfile.mailAddress.itemKey, val: valid.constraintsVal)
             default:
-                print("❤️\t[\(valid.property)]\t[\(valid.constraintsKey)] : [\(valid.constraintsVal)]")
+                LogManager.appendLog(.validator, "Validate", "[\(valid.property)]\t[\(valid.constraintsKey)] : [\(valid.constraintsVal)]")
             }
         }
         dicGrpError = makeGrpErrByItemErr(dicError)//これだと配列の足し込み非対応なのでメッセージ減る

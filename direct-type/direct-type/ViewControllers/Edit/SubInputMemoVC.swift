@@ -90,7 +90,6 @@ class SubInputMemoVC: BaseVC {
         case EditItemMdlEntry.exQuestionAnswer2.itemKey: fallthrough
         case EditItemMdlEntry.exQuestionAnswer3.itemKey:
             bufInfoText = editableItem.exQuestion
-            print(bufInfoText.description)
         default:
             bufInfoText = editableItem.editItem.placeholder
         }

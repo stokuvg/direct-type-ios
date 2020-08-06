@@ -277,6 +277,5 @@ extension SubSelectBaseVC: SubSelectProtocol {
 
 extension SubSelectBaseVC: SubSelectEnableDelegate {
     func actSelectChange(isEnable: Bool) {
-        print("\t[isEnable: \(isEnable)]")
     }
 }

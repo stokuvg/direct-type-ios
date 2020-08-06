@@ -30,7 +30,7 @@ extension ValidateManager {
             case "workNote":
                 dicGrpError.addDicArrVal(key: HPreviewItemType.contentsC15.itemKey, val: valid.constraintsVal)
             default:
-                print("❤️\t[\(valid.property)]\t[\(valid.constraintsKey)] : [\(valid.constraintsVal)]")
+                LogManager.appendLog(.validator, "Validate", "[\(valid.property)]\t[\(valid.constraintsKey)] : [\(valid.constraintsVal)]")
             }
             //===個別のエラー
             switch valid.property { //これで対応する項目に結びつける
@@ -49,7 +49,7 @@ extension ValidateManager {
             case "workNote":
                 dicError.addDicArrVal(key: EditItemMdlCareerCard.contents.itemKey, val: valid.constraintsVal)
             default:
-                print("❤️\t[\(valid.property)]\t[\(valid.constraintsKey)] : [\(valid.constraintsVal)]")
+                LogManager.appendLog(.validator, "Validate", "[\(valid.property)]\t[\(valid.constraintsKey)] : [\(valid.constraintsVal)]")
             }
         }
         return (dicGrpError, dicError)

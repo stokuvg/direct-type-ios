@@ -33,7 +33,18 @@ extension AppDefine {
         case .Release:  return "ap-northeast-1:c6e549ed-db63-4016-8386-55cad2c2f020"
         }
     }
-    //=== AppsFlyerデバッグログフラグ
+    //=== AWSデバッグログフラグ
+    static var isDebugForAWS: Bool {
+        switch AppDefine.buildMode {
+        case .Develop:  return true
+        case .Release:  return false
+        }
+    }
+    //======= AppsFlyer定義
+    //=== AppsFlyer定数定義（現在はDevもRelも一緒でOK）
+    static var AppsFlyerTracker_appsFlyerDevKey = "hC9KqefECmBi3yLRDofayS"
+    static var AppsFlyerTracker_appleAppID = "id1525688066"
+    //=== AppsFlyerデバッグログフラグ（Suffixの切り替えに用いている）
     static var isDebugForAppsFlyer: Bool {
         switch AppDefine.buildMode {
         case .Develop:  return true

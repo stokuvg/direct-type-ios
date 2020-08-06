@@ -92,7 +92,7 @@ extension ValidateManager {
             case EditItemMdlEntry.exQuestionAnswer3.itemKey: dicGrpError.addDicArrVal(key: HPreviewItemType.exQAItem3C9.itemKey, val: val)
 
             default:
-                print("\t☠️割り当てエラー☠️[\(key): \(val)]☠️")
+                LogManager.appendLog(.validator, "Validate", "☠️割り当てエラー☠️[\(key): \(val)]☠️")
             }
         }
         return dicGrpError

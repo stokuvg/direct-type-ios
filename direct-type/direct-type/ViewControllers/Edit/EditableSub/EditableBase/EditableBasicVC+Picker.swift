@@ -56,7 +56,6 @@ extension EditableBasicVC {
         //===現在の設定値を反映させる
         guard let item = editableModel.getItemByKey(textField.itemKey) else { return }
         let (_, editTemp) = editableModel.makeTempItem(item)
-        print(#line, #function, "💙💙その他💙", editTemp.curVal, editTemp.valDisp, editTemp.debugDisp)
         var bufYYYY: String = ""
         var bufMM: String = ""
         var date = DateHelper.convStrYM2Date(editTemp.curVal)

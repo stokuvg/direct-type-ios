@@ -37,21 +37,21 @@ final public class ValidateManager {
 //==========================================================================================
 extension ValidateManager {
     class func dbgDispCurrentItems(editableModel: EditableModel) {
-        return//!!!
-        //===変更内容の確認
-        print(#line, String(repeating: "=", count: 44))
-        for (y, items) in editableModel.arrData.enumerated() {
-            for (x, _item) in items.enumerated() {
-                let (isChange, editTemp) = editableModel.makeTempItem(_item)
-                let item: EditableItemH! = isChange ? editTemp : _item
-                if isChange {
-                    print("\t(\(y)-\(x)) ✍️ [\(item.debugDisp)]")
-                } else {
-                    print("\t(\(y)-\(x)) 　 [\(item.debugDisp)]")
-                }
-            }
-        }
-        print(#line, String(repeating: "=", count: 44))
+        return//!!!リターンさせても、なぜか後続が処理されるバグあるため、コメントアウトしておく
+//        //===変更内容の確認
+//        print(#line, String(repeating: "=", count: 44))
+//        for (y, items) in editableModel.arrData.enumerated() {
+//            for (x, _item) in items.enumerated() {
+//                let (isChange, editTemp) = editableModel.makeTempItem(_item)
+//                let item: EditableItemH! = isChange ? editTemp : _item
+//                if isChange {
+//                    print("\t(\(y)-\(x)) ✍️ [\(item.debugDisp)]")
+//                } else {
+//                    print("\t(\(y)-\(x)) 　 [\(item.debugDisp)]")
+//                }
+//            }
+//        }
+//        print(#line, String(repeating: "=", count: 44))
     }
 }
 //==========================================================================================
