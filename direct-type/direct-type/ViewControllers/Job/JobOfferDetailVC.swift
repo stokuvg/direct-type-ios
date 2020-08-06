@@ -47,6 +47,8 @@ final class JobOfferDetailVC: TmpBasicVC {
     private var keepButtonImage: UIImage {
         return UIImage(named: keepFlag ? "btn_keep" : "btn_keepclose")!
     }
+    
+    var naviButtonTapActionFlag:Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -647,6 +649,8 @@ extension JobOfferDetailVC: UIScrollViewDelegate {
 
 extension JobOfferDetailVC: NaviButtonsViewDelegate {
     func workContentsAction() {
+        if naviButtonTapActionFlag == true { return }
+        naviButtonTapActionFlag = true
         buttonsView.colorChange(no:0)
 
         let section = 3
@@ -656,6 +660,8 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
     }
 
     func appImportantAction() {
+        if naviButtonTapActionFlag == true { return }
+        naviButtonTapActionFlag = true
         buttonsView.colorChange(no:1)
 
         let section = 3
@@ -665,6 +671,8 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
     }
 
     func employeeAction() {
+        if naviButtonTapActionFlag == true { return }
+        naviButtonTapActionFlag = true
         buttonsView.colorChange(no:2)
 
         let section = 3
@@ -674,14 +682,24 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
     }
 
     func informationAction() {
+        if naviButtonTapActionFlag == true { return }
+        naviButtonTapActionFlag = true
         buttonsView.colorChange(no:3)
         companyOutlineOpenFlag = true
 
         let indexPath = IndexPath.init(row: 0, section: 7)
         let indexSet = IndexSet(arrayLiteral: 7)
 
-        detailTableView.reloadSections(indexSet, with: .top)
-        detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        UIView.animate(withDuration: 0.0,
+                       animations: {
+                        self.detailTableView.reloadSections(indexSet, with: .top)
+        }, completion:{ finished in
+            if finished {
+                self.detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
+                self.naviButtonTapActionFlag = false
+            }
+        })
+
     }
 
     // 募集要項の移動
@@ -690,6 +708,7 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
 
         let indexPath = IndexPath.init(row: row, section: section)
         detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        naviButtonTapActionFlag = false
     }
 
 
@@ -774,7 +793,8 @@ extension JobOfferDetailVC: UINavigationControllerDelegate {
                     Log.selectLog(logLevel: .debug, "前の画面がKeepListVC")
                     if keepChangeCnt > 0 {
                         let keepDatas:[String:Any] = ["jobId":_mdlJobDetail.jobCardCode,"keepStatus":keepFlag]
-                        keepListController.keepDatas = [keepDatas]
+                        let kListData = self.checkListData(listDatas: keepListController.keepDatas, savedData: keepDatas)
+                        keepListController.keepDatas = kListData
                         keepListController.jobDetailCheckFlag = true
                     } else {
                         keepListController.keepDatas = []
@@ -784,6 +804,36 @@ extension JobOfferDetailVC: UINavigationControllerDelegate {
                 }
             }
         }
+    }
+    
+    private func checkListData(listDatas:[[String:Any]], savedData:[String:Any]) -> [[String:Any]] {
+        
+        var checkListDatas = listDatas
+        
+        var addFlagCnt:Int = 0
+        for i in 0..<listDatas.count {
+            var listData = listDatas[i]
+            let listDataId = listData["jobId"] as! String
+            
+            let savedId = savedData["jobId"] as! String
+            let savedStatus = savedData["keepStatus"] as! Bool
+            
+            if listDataId == savedId {
+                listData["keepStatus"] = savedStatus
+                checkListDatas[i] = listData
+                addFlagCnt += 1
+            } else {
+                continue
+            }
+            
+        }
+        
+        if addFlagCnt == 0 {
+            checkListDatas.append(savedData)
+        }
+        
+        
+        return checkListDatas
     }
 }
 
