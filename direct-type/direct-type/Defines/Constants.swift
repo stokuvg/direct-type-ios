@@ -18,6 +18,9 @@ struct Constants {
     // ⇒ 401の場合だけは、かならずリトライを１回は試みると内部で処理しておくべきか？（サインイン頻度の仕様によって考慮する）
     static let ApiAutoRetryDelaySecond: DispatchTimeInterval = .seconds(1) // 自動リトライ間隔
     
+    //=== 通知系
+    static let NotificationKeepStatusChanged = NSNotification.Name(rawValue: "KeepStatusChanged")
+    
     //制限値の定数定義
     static let SelectMultidMaxUndefine: Int = 9999 //最大選択数未定義の場合
     static let CareerCardMax: Int = 10 //職務経歴書カードの登録際台数

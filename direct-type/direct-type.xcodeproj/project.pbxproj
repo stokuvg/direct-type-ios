@@ -319,6 +319,7 @@
 		26C8A6C32490D22600D6B96C /* Validate+Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C8A6C22490D22600D6B96C /* Validate+Base.swift */; };
 		26CA071224DA938600A03E7B /* BuildMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CA071124DA938600A03E7B /* BuildMode.swift */; };
 		26CA071524DA980700A03E7B /* DirectTypeLinkURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CA071424DA980700A03E7B /* DirectTypeLinkURL.swift */; };
+		26CA071824DBDCC800A03E7B /* KeepManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CA071724DBDCC800A03E7B /* KeepManager.swift */; };
 		26CFC45F2469495800E458E2 /* ConstantsPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CFC45E2469495800E458E2 /* ConstantsPreview.swift */; };
 		26CFC4672469496D00E458E2 /* Edit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26CFC4612469496D00E458E2 /* Edit.storyboard */; };
 		26CFC4692469496D00E458E2 /* HEditTextTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26CFC4632469496D00E458E2 /* HEditTextTBCell.xib */; };
@@ -666,6 +667,7 @@
 		26C8A6C22490D22600D6B96C /* Validate+Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validate+Base.swift"; sourceTree = "<group>"; };
 		26CA071124DA938600A03E7B /* BuildMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildMode.swift; sourceTree = "<group>"; };
 		26CA071424DA980700A03E7B /* DirectTypeLinkURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectTypeLinkURL.swift; sourceTree = "<group>"; };
+		26CA071724DBDCC800A03E7B /* KeepManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeepManager.swift; sourceTree = "<group>"; };
 		26CFC45E2469495800E458E2 /* ConstantsPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsPreview.swift; sourceTree = "<group>"; };
 		26CFC4612469496D00E458E2 /* Edit.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Edit.storyboard; sourceTree = "<group>"; };
 		26CFC4632469496D00E458E2 /* HEditTextTBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HEditTextTBCell.xib; sourceTree = "<group>"; };
@@ -850,6 +852,7 @@
 			children = (
 				26CA071324DA97E800A03E7B /* Defines */,
 				2688B56624976888001975AC /* RecommendManager */,
+				26CA071624DBDCAA00A03E7B /* KeepManager */,
 				26A1F57A247F5D1000834213 /* ValidateManager */,
 				263607592477A35E00032880 /* AuthManager */,
 				26B6E8B4245C1B4B00BE5B90 /* Generated */,
@@ -1478,6 +1481,14 @@
 			path = Defines;
 			sourceTree = "<group>";
 		};
+		26CA071624DBDCAA00A03E7B /* KeepManager */ = {
+			isa = PBXGroup;
+			children = (
+				26CA071724DBDCC800A03E7B /* KeepManager.swift */,
+			);
+			path = KeepManager;
+			sourceTree = "<group>";
+		};
 		47EC95279A88E89B17F99C58 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1772,6 +1783,7 @@
 				0662C60324722E280053CAD9 /* JobDetailFoldingOptionalView.swift in Sources */,
 				066F2710246E811F0040BDC1 /* JobDetailFoldingMemoCell.swift in Sources */,
 				067F28D22456CE39000AAD69 /* TmpBasicVC.swift in Sources */,
+				26CA071824DBDCC800A03E7B /* KeepManager.swift in Sources */,
 				06E5198F2457D70B004E4B7A /* ChemistrySelect.swift in Sources */,
 				26F2A829246D2A230037D47F /* MdlJobExperiment.swift in Sources */,
 				06E519862457D2C1004E4B7A /* UIView+Extensions.swift in Sources */,

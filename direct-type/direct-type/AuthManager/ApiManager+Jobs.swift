@@ -31,6 +31,9 @@ extension ApiManager {
         .done { result in
 //            Log.selectLog(logLevel: .debug, "recommended result:\(result)")
 //            print(#line, #function, result)
+            for item in result.jobs {
+                KeepManager.shared.setKeepStatusByFetch(jobCardID: item.jobId, status: item.isKeep) //一覧取得時の情報でキープ状態を洗い変え
+            }
             resolver.fulfill(MdlJobCardList(dto: result)) //変換しておく
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
@@ -64,6 +67,9 @@ extension ApiManager {
         JobsAPI.jobsControllerGet(page: pageNo)
         .done { result in
 //            print(#line, #function, result)
+            for item in result.jobs {
+                KeepManager.shared.setKeepStatusByFetch(jobCardID: item.jobId, status: item.isKeep) //一覧取得時の情報でキープ状態を洗い変え
+            }
             resolver.fulfill(MdlJobCardList(dto: result)) //変換しておく
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
@@ -96,6 +102,7 @@ extension ApiManager {
         AuthManager.needAuth(true)
         JobsAPI.jobsControllerDetail(jobId: jobId)
             .done { result in
+                KeepManager.shared.setKeepStatusByFetch(jobCardID: result.jobId, status: result.isKeep) //詳細取得時の情報でキープ状態を洗い変え
                 resolver.fulfill(MdlJobCardDetail(dto: result))
         }.catch { (error) in
             Log.selectLog(logLevel: .debug, "getJobDetailFetch error:\(error.localizedDescription)")
@@ -159,11 +166,13 @@ extension ApiManager {
         let keepRequest = CreateKeepRequestDTO.init(jobId: id)
         KeepsAPI.keepsControllerCreate(body: keepRequest)
             .done { result in
+                KeepManager.shared.setKeepStatusByFetch(jobCardID: id, status: true)//キープした
                 Log.selectLog(logLevel: .debug, "sendCreateJobKeepFetch result:\(result)")
                 resolver.fulfill(MdlJobCard())
         }.catch { (error) in
             resolver.reject(error)
         }.finally {
+            NotificationCenter.default.post(name: Constants.NotificationKeepStatusChanged, object: nil, userInfo: ["jobCardCode": id])//失敗時も投げておく（事前に表示だけ更新している場合にもどさせるため）
         }
         
         return promise
@@ -178,12 +187,14 @@ extension ApiManager {
         AuthManager.needAuth(true)
         KeepsAPI.keepsControllerDelete(jobId: id)
             .done { result in
+                KeepManager.shared.setKeepStatusByFetch(jobCardID: id, status: false)//キープ削除した
                 Log.selectLog(logLevel: .debug, "sendDeleteJobKeepFetch result:\(result)")
                 resolver.fulfill(Void())
         }.catch { (error) in
             Log.selectLog(logLevel: .debug, "sendDeleteJobKeepFetch error:\(error)")
             resolver.reject(error)
         }.finally {
+            NotificationCenter.default.post(name: Constants.NotificationKeepStatusChanged, object: nil, userInfo: ["jobCardCode": id])//失敗時も投げておく（事前に表示だけ更新している場合にもどさせるため）
         }
         
         return promise

@@ -50,7 +50,8 @@ class KeepCardCell: BaseJobCardCell {
         self.jobId = data.jobId
         
         // キープのステータス
-        self.keepFlag = data.keepStatus
+        //self.keepFlag = data.keepStatus
+        self.keepFlag = KeepManager.shared.getKeepStatus(jobCardID: self.jobId)
         self.changeKeepImage()
         
         let nowDate = Date()

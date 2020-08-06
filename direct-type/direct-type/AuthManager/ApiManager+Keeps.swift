@@ -28,7 +28,9 @@ extension ApiManager {
         KeepsAPI.keepsControllerGet(page: pageNo)
         .done { result in
 //            Log.selectLog(logLevel: .debug, "result:\(result)")
-            
+            for item in result.keepJobs {
+                KeepManager.shared.setKeepStatusByFetch(jobCardID: item.jobId, status: true) //キープ一覧にあるものはキープ済み
+            }
             resolver.fulfill(MdlKeepList(dto: result)) //変換しておく
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
