@@ -191,8 +191,6 @@ class HomeVC: TmpNaviTopVC {
             let changeKeepJobId = changeData["jobId"] as! String
             let changeKeepStatus = changeData["keepStatus"] as! Bool
             
-            Log.selectLog(logLevel: .debug, "self.dispJobCards.jobCards.count:\(self.dispJobCards.jobCards.count)")
-            
             for i in 0..<dispJobCards.jobCards.count {
                 let dispJobCard = dispJobCards.jobCards[i]
                 if dispJobCard.jobCardCode == changeKeepJobId {
@@ -200,7 +198,7 @@ class HomeVC: TmpNaviTopVC {
                     dispJobCards.jobCards[i] = dispJobCard
 
                     updateIndexRow = i
-                    Log.selectLog(logLevel: .debug, "updateIndexRow:\(updateIndexRow)")
+//                    Log.selectLog(logLevel: .debug, "updateIndexRow:\(updateIndexRow)")
                     let updateIndex = IndexPath.init(row: updateIndexRow, section: 0)
                     updateIndexes.append(updateIndex)
 
@@ -210,7 +208,7 @@ class HomeVC: TmpNaviTopVC {
             }
         }
         
-        Log.selectLog(logLevel: .debug, "updateIndexes:\(updateIndexes)")
+//        Log.selectLog(logLevel: .debug, "updateIndexes:\(updateIndexes)")
         
         if updateIndexes.count > 0 {
             UIView.animate(withDuration: 0.0,
@@ -218,8 +216,8 @@ class HomeVC: TmpNaviTopVC {
                                self.homeTableView.reloadRows(at: updateIndexes, with: .automatic)
             }, completion:{ finished in
                 if finished {
-                    SVProgressHUD.dismiss()
                 }
+                SVProgressHUD.dismiss()
             })
             
         }else {

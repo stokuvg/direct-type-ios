@@ -339,6 +339,7 @@ extension KeepListVC: UITabBarControllerDelegate {
                 firstVC.changeKeepDatas = keepDatas
             } else {
                 firstVC.changeKeepDatas = []
+                keepDatas = []
             }
         }
     }
