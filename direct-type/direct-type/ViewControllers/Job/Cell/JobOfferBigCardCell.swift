@@ -156,8 +156,8 @@ class JobOfferBigCardCell: BaseJobCardCell {
 //        self.skipSetting(flag:skip)
         
         // キープボタン
-        let keep = data.keepStatus
-        keepFlag = keep
+//        let keep = data.keepStatus
+        keepFlag = KeepManager.shared.getKeepStatus(jobCardID: data.jobCardCode)
         self.keepBtnSetting(flag: keepFlag)
         
     }

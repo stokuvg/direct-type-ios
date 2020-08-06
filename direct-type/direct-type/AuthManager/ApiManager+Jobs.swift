@@ -159,11 +159,13 @@ extension ApiManager {
         let keepRequest = CreateKeepRequestDTO.init(jobId: id)
         KeepsAPI.keepsControllerCreate(body: keepRequest)
             .done { result in
+                KeepManager.shared.setKeepStatusByFetch(jobCardID: id, status: true)//キープした
                 Log.selectLog(logLevel: .debug, "sendCreateJobKeepFetch result:\(result)")
                 resolver.fulfill(MdlJobCard())
         }.catch { (error) in
             resolver.reject(error)
         }.finally {
+            NotificationCenter.default.post(name: Constants.NotificationKeepStatusChanged, object: nil, userInfo: ["jobCardCode": id])//失敗時も投げておく（事前に表示だけ更新している場合にもどさせるため）
         }
         
         return promise
@@ -178,12 +180,14 @@ extension ApiManager {
         AuthManager.needAuth(true)
         KeepsAPI.keepsControllerDelete(jobId: id)
             .done { result in
+                KeepManager.shared.setKeepStatusByFetch(jobCardID: id, status: false)//キープ削除した
                 Log.selectLog(logLevel: .debug, "sendDeleteJobKeepFetch result:\(result)")
                 resolver.fulfill(Void())
         }.catch { (error) in
             Log.selectLog(logLevel: .debug, "sendDeleteJobKeepFetch error:\(error)")
             resolver.reject(error)
         }.finally {
+            NotificationCenter.default.post(name: Constants.NotificationKeepStatusChanged, object: nil, userInfo: ["jobCardCode": id])//失敗時も投げておく（事前に表示だけ更新している場合にもどさせるため）
         }
         
         return promise
