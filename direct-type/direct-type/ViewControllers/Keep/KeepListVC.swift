@@ -178,35 +178,8 @@ private extension KeepListVC {
             keepNoView.isHidden = false
         }
     }
-    
-//    func keepDataAddRemoveCheck(checkData:[String:Any]) {
-//        
-//        if keepDatas.count > 0 {
-//            
-//            var sameCnt:Int = 0
-//            for i in 0..<keepDatas.count {
-//                var _data = keepDatas[i]
-//                
-//                let checkId = checkData["jobId"] as! String
-//                let checkStatus = checkData["keepStatus"] as! Bool
-//                
-//                let _dataId = _data["jobId"] as! String
-//                if checkId == _dataId {
-//                    _data["keepStatus"] = checkStatus
-//                    keepDatas[i] = _data
-//                    sameCnt += 1
-//                } else {
-//                    continue
-//                }
-//            }
-//            if sameCnt == 0 {
-//                keepDatas.append(checkData)
-//            }
-//        } else {
-//            keepDatas.append(checkData)
-//        }
-//    }
 }
+
 
 extension KeepListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -254,64 +227,37 @@ extension KeepListVC: UIScrollViewDelegate {
 extension KeepListVC: BaseJobCardCellDelegate {
     func skipAction(jobId: String) {}
 
-    func keepAction(jobId: String) {
+    func keepAction(jobId: String, newStatus: Bool) {
         SVProgressHUD.show()
         storedKeepList.insert(jobId)
         Log.selectLog(logLevel: .debug, "KeepListVC delegate keepAction tag:\(jobId)")
-        var updateNo:Int = 0
-        for i in 0..<lists.count {
-            let checkJobCard = lists[i]
-            if checkJobCard.jobId == jobId {
-                updateNo = i
-                break
-            } else {
-                continue
-            }
-        }
+        let curKeepStatus = KeepManager.shared.getKeepStatus(jobCardID: jobId)
         
-        let updateKeepData = self.lists[updateNo]
-        let updateKeepJobId = updateKeepData.jobId
-        let updateKeepStatus = !updateKeepData.keepStatus
-        
-        Log.selectLog(logLevel: .debug, "jobId:\(jobId)")
-        let homeKeepData:[String:Any] = ["jobId":updateKeepJobId,"keepStatus":updateKeepStatus]
+        print(curKeepStatus ? "キープされてる" : "キープされてない")
+        print(curKeepStatus ? "キープさせたい" : "キープとりたい")
 
-        if updateKeepStatus == true {
+        if newStatus == true { //キープさせたい
             ApiManager.sendJobKeep(id: jobId)
                 .done { result in
-                    Log.selectLog(logLevel: .debug, "keep send success")
                     Log.selectLog(logLevel: .debug, "keep成功")
-                    updateKeepData.keepStatus = updateKeepStatus
-
             }.catch{ (error) in
                 Log.selectLog(logLevel: .debug, "skip send error:\(error)")
-
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 self.showError(myErr)
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep send finally")
-//                self.lists[updateNo] = updateKeepData
-//                self.keepDataAddRemoveCheck(checkData:homeKeepData)
-//                self.keepTableView.reloadRows(at: [updateIndexPath], with: .automatic)
                 SVProgressHUD.dismiss()
             }
         } else {
             ApiManager.sendJobDeleteKeep(id: jobId)
                 .done { result in
-                    Log.selectLog(logLevel: .debug, "keep delete success")
                     Log.selectLog(logLevel: .debug, "delete成功")
-                    updateKeepData.keepStatus = updateKeepStatus
-
             }.catch{ (error) in
                 Log.selectLog(logLevel: .debug, "skip send error:\(error)")
-
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 self.showError(myErr)
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep send finally")
-//                self.lists[updateNo] = updateKeepData
-//                self.keepDataAddRemoveCheck(checkData:homeKeepData)
-//                self.keepTableView.reloadRows(at: [updateIndexPath], with: .automatic)
                 SVProgressHUD.dismiss()
             }
         }

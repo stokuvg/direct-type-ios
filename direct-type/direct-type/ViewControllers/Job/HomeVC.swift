@@ -183,50 +183,50 @@ class HomeVC: TmpNaviTopVC {
 
     // 求人詳細画面で行なったキープのアクションのデータをセットする。
     private func detailKeepStatusChange() {
-        SVProgressHUD.show()
-
-        var updateIndexRow:Int = 0
-        
-        var updateIndexes:[IndexPath] = []
-        
-        for j in 0..<changeKeepDatas.count {
-            let changeData = changeKeepDatas[j]
-            let changeKeepJobId = changeData["jobId"] as! String
-            let changeKeepStatus = changeData["keepStatus"] as! Bool
-            
-            for i in 0..<dispJobCards.jobCards.count {
-                let dispJobCard = dispJobCards.jobCards[i]
-                if dispJobCard.jobCardCode == changeKeepJobId {
-                    dispJobCard.keepStatus = changeKeepStatus
-                    dispJobCards.jobCards[i] = dispJobCard
-
-                    updateIndexRow = i
-//                    Log.selectLog(logLevel: .debug, "updateIndexRow:\(updateIndexRow)")
-                    let updateIndex = IndexPath.init(row: updateIndexRow, section: 0)
-                    updateIndexes.append(updateIndex)
-
-                } else {
-                    continue
-                }
-            }
-        }
-        
-//        Log.selectLog(logLevel: .debug, "updateIndexes:\(updateIndexes)")
-        
-        if updateIndexes.count > 0 {
-            UIView.animate(withDuration: 0.0,
-                           animations: {
-                               self.homeTableView.reloadRows(at: updateIndexes, with: .automatic)
-            }, completion:{ finished in
-                if finished {
-                }
-                SVProgressHUD.dismiss()
-            })
-            
-        }else {
-            SVProgressHUD.dismiss()
-        }
-        changeKeepDatas = []
+//        SVProgressHUD.show()
+//
+//        var updateIndexRow:Int = 0
+//
+//        var updateIndexes:[IndexPath] = []
+//
+//        for j in 0..<changeKeepDatas.count {
+//            let changeData = changeKeepDatas[j]
+//            let changeKeepJobId = changeData["jobId"] as! String
+//            let changeKeepStatus = changeData["keepStatus"] as! Bool
+//
+//            for i in 0..<dispJobCards.jobCards.count {
+//                let dispJobCard = dispJobCards.jobCards[i]
+//                if dispJobCard.jobCardCode == changeKeepJobId {
+//                    dispJobCard.keepStatus = changeKeepStatus
+//                    dispJobCards.jobCards[i] = dispJobCard
+//
+//                    updateIndexRow = i
+////                    Log.selectLog(logLevel: .debug, "updateIndexRow:\(updateIndexRow)")
+//                    let updateIndex = IndexPath.init(row: updateIndexRow, section: 0)
+//                    updateIndexes.append(updateIndex)
+//
+//                } else {
+//                    continue
+//                }
+//            }
+//        }
+//
+////        Log.selectLog(logLevel: .debug, "updateIndexes:\(updateIndexes)")
+//
+//        if updateIndexes.count > 0 {
+//            UIView.animate(withDuration: 0.0,
+//                           animations: {
+//                               self.homeTableView.reloadRows(at: updateIndexes, with: .automatic)
+//            }, completion:{ finished in
+//                if finished {
+//                }
+//                SVProgressHUD.dismiss()
+//            })
+//
+//        }else {
+//            SVProgressHUD.dismiss()
+//        }
+//        changeKeepDatas = []
     }
 
     private func getJobData() {
@@ -795,7 +795,7 @@ extension HomeVC: BaseJobCardCellDelegate {
         }
     }
 
-    func keepAction(jobId: String) {
+    func keepAction(jobId: String, newStatus: Bool) {
         if self.keepSendStatus == .sending { return }
         //LogManager.appendLogEx(.keepList, String(repeating: "🔖", count: 11), "[jobId: \(jobId)]", "[keepSendStatus: \(keepSendStatus)]", #function, #line)
         storedKeepList.insert(jobId)
@@ -822,7 +822,7 @@ extension HomeVC: BaseJobCardCellDelegate {
         let jobId = jobCard.jobCardCode
         let flag = !jobCard.keepStatus
         jobCard.keepStatus = flag
-        if flag == true {
+        if newStatus == true {
             LogManager.appendApiLog("sendJobKeep", "[jobId: \(jobId)]", function: #function, line: #line)
             ApiManager.sendJobKeep(id: jobId)
             .done { result in

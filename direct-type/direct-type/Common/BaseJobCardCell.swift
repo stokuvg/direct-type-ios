@@ -11,7 +11,7 @@ import SwaggerClient
 
 protocol BaseJobCardCellDelegate {
     func skipAction(jobId:String)
-    func keepAction(jobId:String)
+    func keepAction(jobId:String, newStatus: Bool)
 }
 
 class BaseJobCardCell: BaseTableViewCell {

@@ -21,7 +21,8 @@ class KeepCardCell: BaseJobCardCell {
     @IBAction func keepAction() {
         self.changeKeepStatus()
         self.changeKeepImage()
-        self.delegate.keepAction(jobId: self.jobId)
+        let flag = KeepManager.shared.getKeepStatus(jobCardID: self.jobId)
+        self.delegate.keepAction(jobId: self.jobId, newStatus: !flag)
 //        self.delegate.keepAction(tag: self.tag)
     }
     
