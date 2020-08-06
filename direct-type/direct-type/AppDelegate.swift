@@ -122,8 +122,8 @@ extension AppDelegate: AppsFlyerTrackerDelegate {
     }
     
     func setupAppsFlyer() {
-        AppsFlyerTracker.shared().appsFlyerDevKey = "hC9KqefECmBi3yLRDofayS"
-        AppsFlyerTracker.shared().appleAppID = "id1525688066"
+        AppsFlyerTracker.shared().appsFlyerDevKey = AppDefine.AppsFlyerTracker_appsFlyerDevKey
+        AppsFlyerTracker.shared().appleAppID = AppDefine.AppsFlyerTracker_appleAppID
         AppsFlyerTracker.shared().delegate = self
         #if DEBUG
             AppsFlyerTracker.shared().isDebug = true
