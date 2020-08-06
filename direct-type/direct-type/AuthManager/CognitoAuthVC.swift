@@ -33,8 +33,8 @@ import AWSMobileClient
 //
 
 class CognitoAuthVC: BaseVC {
-    var username: String = Constants.Auth_username //安全なダミー番号: https://stabucky.com/wp/archives/6180
-    let password: String = Constants.Auth_password
+    var username: String = "" //安全なダミー番号: https://stabucky.com/wp/archives/6180
+    let password: String = ""
 
     @IBOutlet weak var lblStatus: UILabel!
     @IBOutlet weak var tfPhone: UITextField!

@@ -8,11 +8,9 @@
 
 import UIKit
 
-// TODO: 今後アプリ内の設定フラグなどは「AppDefine」クラスに徐々に移管していくため、このファイルには新規のプロパティを追加しない
+// このファイルでは定数関係を扱い、フラグなどは「AppDefine」で管理する
 struct Constants {
-    //安全なダミー番号: https://stabucky.com/wp/archives/6180
-    static let Auth_username: String = "" //安全なダミー番号: https://stabucky.com/wp/archives/6180
-    static var Auth_password: String { return UUID().uuidString }//パスワード不要のためダミーでOK
+    static var AuthDummyPassword: String { return UUID().uuidString }//パスワード不要のためダミーでOK（公式サンプルが uuid だったので、それにならっておく）
     
     //=== 通信関連の設定値
     static let FetchIntervalSecond: TimeInterval = 10 * 60 // 10minutes経つまで、フェッチを抑止する(APIError.noFetchを返す)
