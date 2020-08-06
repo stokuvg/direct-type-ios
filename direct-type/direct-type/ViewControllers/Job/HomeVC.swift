@@ -806,10 +806,10 @@ extension HomeVC: BaseJobCardCellDelegate {
     }
 
     func keepAction(jobId: String) {
+        if self.keepSendStatus == .sending { return }
         //LogManager.appendLogEx(.keepList, String(repeating: "🔖", count: 11), "[jobId: \(jobId)]", "[keepSendStatus: \(keepSendStatus)]", #function, #line)
         storedKeepList.insert(jobId)
 //        storedKeepList.insert(tag)
-        if self.keepSendStatus == .sending { return }
 
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
@@ -856,32 +856,18 @@ extension HomeVC: BaseJobCardCellDelegate {
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 self.showError(myErr)
             }.finally {
-                // セルの設定変更パターン
-                self.dispJobCards.jobCards[updateNo] = jobCard
-                let updateIndexPath = IndexPath.init(row: updateNo, section: 0)
-                let cell = self.homeTableView.cellForRow(at: updateIndexPath) as! JobOfferBigCardCell
-                cell.keepSetting(flag: flag)
+                //フェッチ後の表示更新はKeepManagerに任せる
+                //// セルの設定変更パターン
+                //self.dispJobCards.jobCards[updateNo] = jobCard
+                //let updateIndexPath = IndexPath.init(row: updateNo, section: 0)
+                //let cell = self.homeTableView.cellForRow(at: updateIndexPath) as! JobOfferBigCardCell
+                //cell.keepSetting(flag: flag)
                 self.keepSendStatus = .none
-
-                /*
-                // TableViewのリロードパターン
-                self.dispJobCards.jobCards[tag] = jobCard
-                let updateIndex = IndexPath.init(row: tag, section: 0)
-                self.homeTableView.performBatchUpdates({
-                    self.homeTableView.reloadRows(at: [updateIndex], with: .automatic)
-                }, completion: { finished in
-                    if finished {
-                        self.keepSendStatus = .none
-                    }
-                })
-                */
-
                 SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             }
         } else {
             ApiManager.sendJobDeleteKeep(id: jobId)
                 .done { result in
-                    
                     self.badgeKeepCnt -= 1
                     if self.badgeKeepCnt == 0 {
                         // タブに丸ポチを追加
@@ -892,33 +878,18 @@ extension HomeVC: BaseJobCardCellDelegate {
                     } else if self.badgeKeepCnt < 0 {
                         self.badgeKeepCnt = 0
                     }
-                    
-                    
             }.catch{ (error) in
                 Log.selectLog(logLevel: .debug, "keep delete error:\(error)")
-
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 self.showError(myErr)
             }.finally {
-                // セルの設定変更パターン
-                self.dispJobCards.jobCards[updateNo] = jobCard
-                let updateIndexPath = IndexPath.init(row: updateNo, section: 0)
-                let cell = self.homeTableView.cellForRow(at: updateIndexPath) as! JobOfferBigCardCell
-                cell.keepSetting(flag: flag)
+                //フェッチ後の表示更新はKeepManagerに任せる
+                //// セルの設定変更パターン
+                //self.dispJobCards.jobCards[updateNo] = jobCard
+                //let updateIndexPath = IndexPath.init(row: updateNo, section: 0)
+                //let cell = self.homeTableView.cellForRow(at: updateIndexPath) as! JobOfferBigCardCell
+                //cell.keepSetting(flag: flag)
                 self.keepSendStatus = .none
-
-                /*
-                // TableViewのリロードパターン
-                self.dispJobCards.jobCards[tag] = jobCard
-                let updateIndex = IndexPath.init(row: tag, section: 0)
-                self.homeTableView.performBatchUpdates({
-                    self.homeTableView.reloadRows(at: [updateIndex], with: .automatic)
-                }, completion: { finished in
-                    if finished {
-                        self.keepSendStatus = .none
-                    }
-                })
-                */
                 SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             }
         }

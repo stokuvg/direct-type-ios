@@ -179,33 +179,33 @@ private extension KeepListVC {
         }
     }
     
-    func keepDataAddRemoveCheck(checkData:[String:Any]) {
-        
-        if keepDatas.count > 0 {
-            
-            var sameCnt:Int = 0
-            for i in 0..<keepDatas.count {
-                var _data = keepDatas[i]
-                
-                let checkId = checkData["jobId"] as! String
-                let checkStatus = checkData["keepStatus"] as! Bool
-                
-                let _dataId = _data["jobId"] as! String
-                if checkId == _dataId {
-                    _data["keepStatus"] = checkStatus
-                    keepDatas[i] = _data
-                    sameCnt += 1
-                } else {
-                    continue
-                }
-            }
-            if sameCnt == 0 {
-                keepDatas.append(checkData)
-            }
-        } else {
-            keepDatas.append(checkData)
-        }
-    }
+//    func keepDataAddRemoveCheck(checkData:[String:Any]) {
+//        
+//        if keepDatas.count > 0 {
+//            
+//            var sameCnt:Int = 0
+//            for i in 0..<keepDatas.count {
+//                var _data = keepDatas[i]
+//                
+//                let checkId = checkData["jobId"] as! String
+//                let checkStatus = checkData["keepStatus"] as! Bool
+//                
+//                let _dataId = _data["jobId"] as! String
+//                if checkId == _dataId {
+//                    _data["keepStatus"] = checkStatus
+//                    keepDatas[i] = _data
+//                    sameCnt += 1
+//                } else {
+//                    continue
+//                }
+//            }
+//            if sameCnt == 0 {
+//                keepDatas.append(checkData)
+//            }
+//        } else {
+//            keepDatas.append(checkData)
+//        }
+//    }
 }
 
 extension KeepListVC: UITableViewDelegate {
@@ -290,8 +290,8 @@ extension KeepListVC: BaseJobCardCellDelegate {
                 self.showError(myErr)
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep send finally")
-                self.lists[updateNo] = updateKeepData
-                self.keepDataAddRemoveCheck(checkData:homeKeepData)
+//                self.lists[updateNo] = updateKeepData
+//                self.keepDataAddRemoveCheck(checkData:homeKeepData)
 //                self.keepTableView.reloadRows(at: [updateIndexPath], with: .automatic)
                 SVProgressHUD.dismiss()
             }
@@ -309,8 +309,8 @@ extension KeepListVC: BaseJobCardCellDelegate {
                 self.showError(myErr)
             }.finally {
                 Log.selectLog(logLevel: .debug, "keep send finally")
-                self.lists[updateNo] = updateKeepData
-                self.keepDataAddRemoveCheck(checkData:homeKeepData)
+//                self.lists[updateNo] = updateKeepData
+//                self.keepDataAddRemoveCheck(checkData:homeKeepData)
 //                self.keepTableView.reloadRows(at: [updateIndexPath], with: .automatic)
                 SVProgressHUD.dismiss()
             }
