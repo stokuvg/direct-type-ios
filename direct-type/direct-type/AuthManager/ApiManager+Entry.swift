@@ -25,7 +25,7 @@ extension WebAPIEntryUserDto {
         /*[必須]*/self.sex = profile.gender
         /*[必須]*/self.email = profile.mailAddress
         //[任意：対応項目なし]self.emailMobile = XXX
-        /*[必須]*/self.birthday = "\(profile.birthday.dispYmd())+09:00"
+        /*[必須]*/self.birthday = "\(profile.birthday.dispYmd())"
         if profile.zipCode.count == 7 {
             let zip3: String = String.substr(profile.zipCode, 1, 3)
             let zip4: String = String.substr(profile.zipCode, 4, 4)

@@ -104,14 +104,14 @@ PODS:
   - R.swift (5.1.0):
     - R.swift.Library (~> 5.1.0)
   - R.swift.Library (5.1.0)
-  - SERecommend (0.20.6.15):
+  - SERecommend (0.20.8.6):
     - Alamofire (~> 4.9.0)
     - PromiseKit (~> 6.8)
   - SVProgressHUD (2.2.5)
-  - SwaggerClient (0.20.4.30):
+  - SwaggerClient (0.20.8.6):
     - Alamofire (~> 4.9.0)
     - PromiseKit (~> 6.8)
-  - TudApi (0.20.6.4):
+  - TudApi (0.20.8.6):
     - Alamofire (~> 4.9.0)
     - PromiseKit (~> 6.8)
 
@@ -192,10 +192,10 @@ SPEC CHECKSUMS:
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   R.swift: 8cbc4fc69b740305b6a17c8a8ed968eb788962d9
   R.swift.Library: fa85ce1e0d0b7e818cd9e080df910ba54d2776cc
-  SERecommend: 693c9167d256a8072535f634692c2add93b90443
+  SERecommend: e5bb73e9f623662adbe5033be31bc8b6962f66e7
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  SwaggerClient: deb4a616e282c99b0e89519fd3fa3e0c4ddd8d67
-  TudApi: 5a956e970242dd6cebc5e8c26b5c3a7cf611c614
+  SwaggerClient: a43eabc6c7947bfcd383a4351bfcdd508ae6f003
+  TudApi: 5b3101447d7b1c2ed3ca4ccf295fab3c56057922
 
 PODFILE CHECKSUM: 0956fac79af4140d01b2863d60aafb7379d5addb
 
