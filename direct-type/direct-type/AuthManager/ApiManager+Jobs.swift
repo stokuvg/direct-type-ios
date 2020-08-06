@@ -31,6 +31,9 @@ extension ApiManager {
         .done { result in
 //            Log.selectLog(logLevel: .debug, "recommended result:\(result)")
 //            print(#line, #function, result)
+            for item in result.jobs {
+                KeepManager.shared.setKeepStatusByFetch(jobCardID: item.jobId, status: item.isKeep) //一覧取得時の情報でキープ状態を洗い変え
+            }
             resolver.fulfill(MdlJobCardList(dto: result)) //変換しておく
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
@@ -64,6 +67,9 @@ extension ApiManager {
         JobsAPI.jobsControllerGet(page: pageNo)
         .done { result in
 //            print(#line, #function, result)
+            for item in result.jobs {
+                KeepManager.shared.setKeepStatusByFetch(jobCardID: item.jobId, status: item.isKeep) //一覧取得時の情報でキープ状態を洗い変え
+            }
             resolver.fulfill(MdlJobCardList(dto: result)) //変換しておく
         }
         .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
@@ -96,6 +102,7 @@ extension ApiManager {
         AuthManager.needAuth(true)
         JobsAPI.jobsControllerDetail(jobId: jobId)
             .done { result in
+                KeepManager.shared.setKeepStatusByFetch(jobCardID: result.jobId, status: result.isKeep) //詳細取得時の情報でキープ状態を洗い変え
                 resolver.fulfill(MdlJobCardDetail(dto: result))
         }.catch { (error) in
             Log.selectLog(logLevel: .debug, "getJobDetailFetch error:\(error.localizedDescription)")
