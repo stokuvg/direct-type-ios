@@ -26,6 +26,8 @@ class KeepCardCell: BaseJobCardCell {
     }
     
     var jobId:String = ""
+    
+    var nowDate:Date = Date.init()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,6 +45,8 @@ class KeepCardCell: BaseJobCardCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        
+        nowDate = Date()
     }
     
     func setup(data:MdlKeepJob) {
@@ -54,7 +58,6 @@ class KeepCardCell: BaseJobCardCell {
         self.keepFlag = KeepManager.shared.getKeepStatus(jobCardID: self.jobId)
         self.changeKeepImage()
         
-        let nowDate = Date()
         // NEWマーク 表示チェック
         let start_date_string = data.pressStartDate
 //        let start_date_string = "2020-07-02"
