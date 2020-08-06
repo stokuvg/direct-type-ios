@@ -132,7 +132,6 @@ extension UpdateResumeRequestDTO {
 
 extension ApiManager {
     class func updateResume(_ param: UpdateResumeRequestDTO, isRetry: Bool = true) -> Promise<Void> {
-        print(#line, #function, param)
         if isRetry {
             return firstly { () -> Promise<Void> in
                 retry(args: param, task: updateResumeFetch) { (error) -> Bool in return true }

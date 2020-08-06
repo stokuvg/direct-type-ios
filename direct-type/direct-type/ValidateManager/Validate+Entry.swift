@@ -17,7 +17,7 @@ extension ValidateManager {
         for valid in arrValidErrMsg {
             switch valid.property { //これで対応する項目に結びつける
             default:
-                print("❤️\t[\(valid.property)]\t[\(valid.constraintsKey)] : [\(valid.constraintsVal)]")
+                LogManager.appendLog(.validator, "Validate", "[\(valid.property)]\t[\(valid.constraintsKey)] : [\(valid.constraintsVal)]")
             }
         }
         dicGrpError = makeGrpErrByItemErr(dicError)//これだと配列の足し込み非対応なのでメッセージ減る

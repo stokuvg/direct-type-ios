@@ -243,9 +243,6 @@ extension HPreviewTBCell {
             //・「マネジメント経験」の入力をする・単一選択で即遷移する
             let tmp0: String = _item.childItems[0].curVal
             let buf0: String = SelectItemsManager.getCodeDisp(.management, code: tmp0)?.disp ?? ""
-
-            print(tmp0, buf0)
-
             return "\(buf0)"
         case .pcSkillF22: //◆F-22職種別入力（PCスキル）
             //・「PCスキル」の入力をする：「Excel」「Word」「PowerPoint」・それぞれドラム選択

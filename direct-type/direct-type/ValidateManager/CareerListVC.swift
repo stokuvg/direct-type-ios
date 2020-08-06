@@ -216,10 +216,8 @@ extension CareerListVC {
 
 extension CareerListVC: CareerCardTBCellDelegate {
     func selectCareerCard(num: Int, card: MdlCareerCard) {
-        print(#line, #function, "#\(num): [\(card.debugDisp)]が選択されました")
     }
     func deleteCareerCard(num: Int, card: MdlCareerCard) {
-        print(#line, #function, "#\(num): [\(card.debugDisp)]が削除指定されました")
         let bufTitle: String = "削除確認"
         let bufMessage: String = "履歴書カード #\(num + 1) を削除します。\nよろしいですか？"
         showConfirm(title: bufTitle, message: bufMessage)
@@ -235,10 +233,7 @@ extension CareerListVC: CareerCardTBCellDelegate {
 }
 extension CareerListVC: CareerListProtocol {
     func changedCard(num: Int, item: MdlCareerCard) {
-        print(#line, #function, "変更あった")
     }
-    
     func cancelCard(num: Int, item: MdlCareerCard) {
-        print(#line, #function, "変更なし")
     }
 }

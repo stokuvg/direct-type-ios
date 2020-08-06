@@ -136,7 +136,6 @@ private extension InitialInputConfirmVC {
                 buf = "newPasswordRequired"
             }
             DispatchQueue.main.async {
-                print(#line, #function, buf)
                 self.changeButtonState()
                 SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             }

@@ -26,8 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().isTranslucent = false
         UITabBar.appearance().isTranslucent = false
 
-        AWSDDLog.sharedInstance.logLevel = .verbose // TODO: Disable or reduce log level in production
-        AWSDDLog.add(AWSDDTTYLogger.sharedInstance) // TTY = Log everything to Xcode console
+        if AppDefine.isDebugForAWS {
+            AWSDDLog.sharedInstance.logLevel = .verbose // TODO: Disable or reduce log level in production
+            AWSDDLog.add(AWSDDTTYLogger.sharedInstance) // TTY = Log everything to Xcode console
+        }
 
         //=== Cognito認証の初期化処理を組み込む
         // Amazon Cognito 認証情報プロバイダーを初期化します

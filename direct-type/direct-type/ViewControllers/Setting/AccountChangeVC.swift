@@ -74,7 +74,6 @@ private extension AccountChangeVC {
             LogManager.appendApiErrorLog("accountMigrate", error, function: #function, line: #line)
             DispatchQueue.main.async {
                 SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressErr("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
-                print(#line, #function, error.localizedDescription)
                 self.showConfirm(title: "電話番号変更エラー", message: "別の電話番号で再度お試しください。", onlyOK: true)
             }
         }

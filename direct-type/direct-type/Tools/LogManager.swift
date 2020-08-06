@@ -14,6 +14,7 @@ class LogManager: NSObject {
         case apiFetch   //apiフェッチの確認のため
         case apiResult  //apiフェッチで成功した場合のレスポンス
         case apiError   //apiフェッチで失敗した場合のエラー
+        case validator
         //===これ以降に必要に応じて追加して利用してください
         case apiDetail
         case loginCheck
@@ -27,6 +28,7 @@ class LogManager: NSObject {
             case .apiFetch:     return true
             case .apiResult:    return true
             case .apiError:     return true
+            case .validator:    return true
             //===これ以降に必要に応じて追加して利用してください
             case .apiDetail:    return true
             case .loginCheck:   return true

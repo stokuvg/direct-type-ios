@@ -241,9 +241,9 @@ class EditableTableBasicVC: EditableBasicVC {
     //func dispEditableItemAll() {} //すべての項目を表示する
     //func dispEditableItemByKey(_ itemKey: EditableItemKey) {} //指定した項目を表示する （TODO：複数キーの一括指定に拡張予定）
     override func moveNextCell(_ editableItemKey: String) -> Bool {  //次のセルへ遷移
-        for (cnt, item) in editableModel.arrTextFieldNextDoneKey.enumerated() {
-            print("\t\(cnt) \(item == editableItemKey ? "💥" : "")\t\(editableItemKey) \(item)")
-        }
+        //for (cnt, item) in editableModel.arrTextFieldNextDoneKey.enumerated() {
+        //    print("\t\(cnt) \(item == editableItemKey ? "💥" : "")\t\(editableItemKey) \(item)")
+        //}
         let idx = editableModel.arrTextFieldNextDoneKey.firstIndex(where: { (item) -> Bool in
             item == editableItemKey
         }) ?? 0

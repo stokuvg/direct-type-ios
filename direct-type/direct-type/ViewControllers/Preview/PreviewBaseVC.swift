@@ -24,7 +24,7 @@ class PreviewBaseVC: TmpBasicVC {
     @IBOutlet weak var vwFootArea: UIView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
-        print(#line, #function, "＊オーバーライドして使う＊")
+        LogManager.appendLog(.ALWAYS, "[\(#function): \(#line)]", "＊オーバーライドして使う＊")
     }
 
     func validateLocalModel() -> Bool {
@@ -33,16 +33,14 @@ class PreviewBaseVC: TmpBasicVC {
         self.dicValidErrMsg = chkErr
         self.dicGrpValidErrMsg = ValidateManager.makeGrpErrByItemErr(chkErr)
         if chkErr.count > 0 {
-            print("＊＊＊　Validationエラー発生: \(chkErr.count)件　＊＊＊")
             var msg: String = ""
             for err in chkErr {
                 msg = "\(msg)\(err.value)\n"
             }
-//            self.showValidationError(title: "Validationエラー (\(chkErr.count)件)", message: msg)
-//            /* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
+            //self.showValidationError(title: "Validationエラー (\(chkErr.count)件)", message: msg)
+            ///* Warning回避 */ .done { _ in } .catch { (error) in } .finally { } //Warning回避
             return true
         } else {
-            print("＊＊＊　Validationエラーなし　＊＊＊")
             return false
         }
     }

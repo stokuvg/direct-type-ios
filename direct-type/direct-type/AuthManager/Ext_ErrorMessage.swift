@@ -295,7 +295,6 @@ extension AuthManager {
                                     }
                                     do {//TUD-APIを叩いた場合でのエラーモデル
                                         let swa = try JSONDecoder().decode(SwaValidErrModel.self, from: _data) as SwaValidErrModel
-                                        print(swa)
                                         myErrorDisp.code = swa.statusCode
                                         var bufMsg: String = ""
                                         func chkChildErr(subModel: SwaValidErrSubModel) {
