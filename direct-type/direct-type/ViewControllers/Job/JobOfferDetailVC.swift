@@ -64,6 +64,7 @@ final class JobOfferDetailVC: TmpBasicVC {
         super.viewWillAppear(animated)
         getJobDetail()
         AnalyticsEventManager.track(type: .viewVacancies)
+        dispKeepStatus()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -336,6 +337,7 @@ private extension JobOfferDetailVC {
                 SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
                 self.recommendAction()
                 self.tableViewSettingAction()
+                self.dispKeepStatus()
             }
         }
 
