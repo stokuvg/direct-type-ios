@@ -195,7 +195,7 @@ extension MyPageVC: UITableViewDelegate {
             case .resumeCompleteness:
                 pushViewController(.resumePreviewH3(false), model: resume)
             case .editableCarrer:
-                isExistCareer ? pushViewController(.careerListC, model: career) : registChemistryAction()
+                isExistCareer ? pushViewController(.careerListC, model: career) : registCarrerAction()
             case .editableChemistry:
                 transitionToChemistry()
             case .setting:

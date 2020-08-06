@@ -59,11 +59,6 @@ enum DirectTypeLinkURL {
         }
         
     }
-    
-//    static var connectDommain:String = "directtype.net" // 仮環境
-//    static var connectDommain:String = "directtype.jp" // 本番
-    static var connectDommain: String = AppDefine.connectDommain
-
     //リンク先URLテキスト
     var urlText: String {
         switch self {
@@ -76,25 +71,25 @@ enum DirectTypeLinkURL {
                 return "https://type.jp/help/category_14.html"
         //===ユーザ作成、ログイン
             case .LoginPrivacyPolicy, .RegistPrivacyPolicy:
-                return "https://" + DirectTypeLinkURL.connectDommain + "/privacy/index.html"
+                return "https://" + AppDefine.connectDommain + "/privacy/index.html"
             case .RegistAgreement: fallthrough
             case .LoginAgreement, .SettingsAgreement:
-                return "https://" + DirectTypeLinkURL.connectDommain + "/policy/index.html"
+                return "https://" + AppDefine.connectDommain + "/policy/index.html"
             case .RegistPhoneReason, .LoginPhoneReason:
-                return "https://" + DirectTypeLinkURL.connectDommain + "/help/index.html#001"
+                return "https://" + AppDefine.connectDommain + "/help/index.html#001"
         //===アプローチ設定
             case .AproachAbout:
-                return "https://" + DirectTypeLinkURL.connectDommain + "/help/index.html#002"
+                return "https://" + AppDefine.connectDommain + "/help/index.html#002"
         //===設定項目
             case .SettingsFAQ:
-                return "https://" + DirectTypeLinkURL.connectDommain + "/help/index.html"
+                return "https://" + AppDefine.connectDommain + "/help/index.html"
             case .SettingsHowTo:
-                return "https://" + DirectTypeLinkURL.connectDommain + "/tutorial/index.html"
+                return "https://" + AppDefine.connectDommain + "/tutorial/index.html"
             case .SettingsPrivacyPolicy:
-                return "https://" + DirectTypeLinkURL.connectDommain + "/privacy/index.html"
+                return "https://" + AppDefine.connectDommain + "/privacy/index.html"
         //===ヘルプ
             case .Help:
-                return "https://" + DirectTypeLinkURL.connectDommain + "/help/index.html#003"
+                return "https://" + AppDefine.connectDommain + "/help/index.html#003"
         }
     }
     var url: URL? {
