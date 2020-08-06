@@ -17,7 +17,6 @@ class JobOfferBigCardCell: BaseJobCardCell {
 
     @IBOutlet weak var keepBtn:UIButton!
     @IBAction func keepBtnAction() {
-        
         self.delegate.keepAction(jobId: self.jobId)
     }
     
@@ -46,7 +45,33 @@ class JobOfferBigCardCell: BaseJobCardCell {
         keepBtn.titleLabel?.text(text: "キープ", fontType: .C_font_M, textColor: UIColor.init(colorType: .color_sub)!, alignment: .center)
         keepBtn.layer.cornerRadius = 15
         keepBtn.layer.maskedCorners = [.layerMaxXMaxYCorner]
+        
+        initNotify()
     }
+    
+    //=== Notification通知の登録 ===
+    // 画面遷移時にも取り除かないもの（他の画面で変更があった場合の更新のため）
+    func initNotify() {
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(keepListChanged(notification:)), name: Constants.NotificationKeepStatusChanged, object: nil)
+    }
+    @objc func keepListChanged(notification: NSNotification) {
+        //notification.userInfoにjobCardIDを入れてるので、個別の表示更新にも対応可能
+        if let userInfo = notification.userInfo {
+            if let targetJobID: String = userInfo["jobCardCode"] as? String {
+                if jobId == targetJobID {
+                    dispKeepStatus()//表示更新のため
+                }
+            }
+        }
+    }
+
+    func dispKeepStatus() {
+        let keepFlag = KeepManager.shared.getKeepStatus(jobCardID: jobId)
+        keepBtnSetting(flag: keepFlag)
+    }
+
+    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

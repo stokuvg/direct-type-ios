@@ -175,16 +175,6 @@ class HomeVC: TmpNaviTopVC {
         })
         storedKeepList.removeAll()
     }
-    //=== Notification通知の登録 ===
-    // 画面遷移時にも取り除かないもの（他の画面で変更があった場合の更新のため）
-    override func initNotify() {
-        let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(keepListChanged(notification:)), name: Constants.NotificationKeepStatusChanged, object: nil)
-    }
-    @objc func keepListChanged(notification: NSNotification) {
-        //notification.userInfoにjobCardIDを入れてるので、個別の表示更新にも対応可能
-        homeTableView.reloadData()//まるっとセルの再描画のため
-    }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
