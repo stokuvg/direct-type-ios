@@ -17,7 +17,10 @@ class JobOfferBigCardCell: BaseJobCardCell {
 
     @IBOutlet weak var keepBtn:UIButton!
     @IBAction func keepBtnAction() {
-        self.delegate.keepAction(jobId: self.jobId)
+        
+        let flag = KeepManager.shared.getKeepStatus(jobCardID: self.jobId)
+        keepBtnSetting(flag: !flag)//いったんローカルの表示だけ更新している
+        self.delegate.keepAction(jobId: self.jobId, newStatus: !flag)
     }
     
     var jobId:String = ""
@@ -176,14 +179,8 @@ class JobOfferBigCardCell: BaseJobCardCell {
         catchLabel.text(text: mainText, fontType: .C_font_SS , textColor: UIColor.init(colorType: .color_parts_gray)!, alignment: .left)
         catchLabel.lineBreakMode = .byTruncatingTail
         
-        // 見送りボタン
-//        let skip = data.skipStatus
-//        self.skipSetting(flag:skip)
-        
         // キープボタン
-//        let keep = data.keepStatus
-        keepFlag = KeepManager.shared.getKeepStatus(jobCardID: data.jobCardCode)
-        self.keepBtnSetting(flag: keepFlag)
+        dispKeepStatus()
         
     }
     
@@ -235,17 +232,7 @@ class JobOfferBigCardCell: BaseJobCardCell {
         return text
     }
     
-    // 見送り設定
-    func skipSetting(flag: Bool) {
-    }
-    
-    func keepSetting(flag: Bool) {
-        Log.selectLog(logLevel: .debug, "JobOfferBigCardCell keepSetting start")
-        keepBtnSetting(flag: flag)
-    }
-    
     private func keepBtnSetting(flag:Bool) {
-        
         let noSelectImage = UIImage(named: "like_gray")
         let selectedImage = UIImage(named: "likeSelected")
         let useImage = flag ? selectedImage : noSelectImage
@@ -255,7 +242,6 @@ class JobOfferBigCardCell: BaseJobCardCell {
         let useColor = flag ? selectColor : noSelectColor
         
         keepBtn.setTitleColor(useColor, for: .normal)
-        
         keepBtn.setImage(useImage, for: .normal)
     }
     
