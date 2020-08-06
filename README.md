@@ -45,6 +45,7 @@ $ brew install swagger-codegen@3
 ### ビルド定義の切り替え方法
 - 【switchDev.sh】で開発用のモードに切り替える。それ以後は【rebuildAll.sh】を実行
 - 【switchRel.sh】でリリース用のモードに切り替える。それ以後は【rebuildAll.sh】を実行
+
 ### ▼補足：
 - これらのスクリプトを実行すると、「_BuildMode」フォルダにあるファイルをモードに応じてコピーする
 - 【awsconfiguration.json】は、AWSMobileClientが利用するCognito認証用の定義ファイル
@@ -52,23 +53,15 @@ $ brew install swagger-codegen@3
 - 　⇒これに応じて値が切り替わるため、適宜Stagingなども増やして対応させていく
 
 ```
+$ sh switchDev.sh
+```
+
+### api.jsonなどの変更時
+- Develop/Release用それぞれを、「_buidlMode」フォルダに用意しておく必要あり
+- Swagger Client生成が必要となるため、下記を実施
+
+```
 $ sh rebuildAll.sh
 ```
 
 
-【rebuildAll.sh】
-
-```
-#!/bin/bash
-read -p 'まるっとリビルドします'
-
-\rm -fr ./generated/
-\rm -fr ./generatedSvr/
-\rm -fr ./direct-type/Pods/
-\rm -fr ./direct-type/direct-type.xcworkspace
-cd api
-sh gen.sh
-cd ../
-cd direct-type
-pod install
-```
