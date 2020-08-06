@@ -59,7 +59,10 @@ class HomeVC: TmpNaviTopVC {
     var keepSendStatus:KeepSendStatus = .none
 
     // おすすめ求人を更新を使用しているか true:使用ずみ,false:未使用
-    var recommendUseFlag:Bool = false
+//    var recommendUseFlag:Bool = false
+    
+    var useApiListFlag:Bool = true
+    
     // AppsFlyerのイベントトラッキング用にオンメモリでキープ求人リストを保有するプロパティ
     // キープされた求人をオンメモリ上で保有しておき、この画面が切り替わった際にイベント送信する
     var storedKeepList: Set<String> = []
@@ -229,7 +232,8 @@ class HomeVC: TmpNaviTopVC {
     private func getJobData() {
         Log.selectLog(logLevel: .debug, "HomeVC getJobData start")
         UserDefaultsManager.isInitialDisplayedHome ? getJobRecommendList() : getJobList()
-        recommendUseFlag = !UserDefaultsManager.isInitialDisplayedHome
+        useApiListFlag = UserDefaultsManager.isInitialDisplayedHome
+//        recommendUseFlag = !UserDefaultsManager.isInitialDisplayedHome
     }
 
     private func dataAddAction() {
@@ -256,6 +260,9 @@ class HomeVC: TmpNaviTopVC {
             self.homeTableView.delegate = self
             self.homeTableView.dataSource = self
             self.homeTableView.reloadData()
+
+            let topIndex = IndexPath.init(row: 0, section: 0)
+            self.homeTableView.selectRow(at: topIndex, animated: true, scrollPosition: .top)
 
         } else {
             dispType = .none
@@ -330,6 +337,7 @@ class HomeVC: TmpNaviTopVC {
     }
     /// ２回目以降求人一覧表示
     private func getJobRecommendList() {
+        Log.selectLog(logLevel: .debug, "HomeVC getJobRecommendList start")
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         pageJobCards = MdlJobCardList()
@@ -374,6 +382,7 @@ class HomeVC: TmpNaviTopVC {
     
     /// 初回求人一覧表示
     private func getJobList() {
+        Log.selectLog(logLevel: .debug, "HomeVC getJobList start")
         pageJobCards = MdlJobCardList()
         dispJobCards = MdlJobCardList()
         pageNo = 1
@@ -391,12 +400,28 @@ class HomeVC: TmpNaviTopVC {
         .finally {
             if self.pageJobCards.jobCards.count > 0 {
                 SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
-                self.linesTitle(date: "", title: "おすすめ求人一覧")
+                /*
+                if UserDefaultsManager.isInitialDisplayedHome {
+                    self.linesTitle(date: "", title: "おすすめ求人一覧")
+                } else {
+                    let convUpdateDate = DateHelper.convStrYMD2Date(self.pageJobCards.updateAt)
+                    let updateDateString = DateHelper.mdDateString(date: convUpdateDate)
+
+                    self.linesTitle(date: updateDateString, title: "あなたにぴったりの求人")
+                }
+ */
+
+                let convUpdateDate = DateHelper.convStrYMD2Date(self.pageJobCards.updateAt)
+                let updateDateString = DateHelper.mdDateString(date: convUpdateDate)
+
+                self.linesTitle(date: updateDateString, title: "あなたにぴったりの求人")
+                
                 self.dataAddFlag = false
                 self.dataCheckAction()
             } else {
                 // 精度の高い求人を受け取る
-                self.recommendUseFlag = true
+//                self.recommendUseFlag = true
+                self.useApiListFlag = true
                 self.getJobRecommendList()
             }
         }
@@ -698,9 +723,10 @@ extension HomeVC: JobOfferCardMoreCellDelegate {
 //            Log.selectLog(logLevel: .debug, "データの追加不可")
             return
         }
-        self.dataAddFlag = true
-        recommendUseFlag ? getJobRecommendAddList() : getJobAddList()
+        useApiListFlag ? getJobRecommendAddList() : getJobAddList()
+//        recommendUseFlag ? getJobRecommendAddList() : getJobAddList()
 //        Log.selectLog(logLevel: .debug, "HomeVC JobOfferCardMoreCellDelegate end")
+        self.dataAddFlag = true
     }
 }
 
@@ -713,9 +739,13 @@ extension HomeVC: NoCardViewDelegate {
 
 extension HomeVC: JobOfferCardReloadCellDelegate {
     func allTableReloadAction() {
+        Log.selectLog(logLevel: .debug, "HomeVC allTableReloadAction start")
         // 精度の高い求人を受け取る
-        self.recommendUseFlag = true
-        self.getJobRecommendList()
+        self.useApiListFlag = !self.useApiListFlag
+        Log.selectLog(logLevel: .debug, "self.useApiListFlag:\(self.useApiListFlag)")
+        self.useApiListFlag ? getJobRecommendList() : getJobList()
+//        self.recommendUseFlag ? getJobRecommendList() : getJobList()
+//        self.getJobRecommendList()
     }
 }
 
