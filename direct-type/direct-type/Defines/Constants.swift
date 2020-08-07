@@ -20,7 +20,8 @@ struct Constants {
     
     //=== 通知系
     static let NotificationKeepStatusChanged = NSNotification.Name(rawValue: "KeepStatusChanged")
-    
+    static let NotificationKeepStatusChangedParamJobID = "jobCardCode"
+
     //制限値の定数定義
     static let SelectMultidMaxUndefine: Int = 9999 //最大選択数未定義の場合
     static let CareerCardMax: Int = 10 //職務経歴書カードの登録際台数
