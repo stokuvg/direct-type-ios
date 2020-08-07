@@ -399,8 +399,18 @@ class HomeVC: TmpNaviTopVC {
             self.showError(myErr)
         }
         .finally {
+
+            let convUpdateDate = DateHelper.convStrYMD2Date(self.pageJobCards.updateAt)
+            let updateDateString = DateHelper.mdDateString(date: convUpdateDate)
+
+            self.linesTitle(date: updateDateString, title: "あなたにぴったりの求人")
+            
+            self.dataAddFlag = false
+            self.dataCheckAction()
+            /*
             if self.pageJobCards.jobCards.count > 0 {
-                SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+                SVProgressHUD.dismiss()
+                /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
                 /*
                 if UserDefaultsManager.isInitialDisplayedHome {
                     self.linesTitle(date: "", title: "おすすめ求人一覧")
@@ -425,6 +435,7 @@ class HomeVC: TmpNaviTopVC {
                 self.useApiListFlag = true
                 self.getJobRecommendList()
             }
+            */
         }
     }
 
