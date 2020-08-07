@@ -80,7 +80,7 @@ extension RecommendManager {
         let sub: String = AWSMobileClient.default().username ?? ""
         let orderId: String = Date().RecommendParamOrderID
         SERecommendAPI.basePath = AppDefine.RecommendServer
-        RecommendAPI.pycre5PurchaseGet(prod: jobID, merch: "directtype", sku: jobID, order: orderId, qty: 1, price: 1, cust: sub, cookie: sub, device: "s")
+        RecommendAPI.pycre5PurchaseGet(prod: jobID, merch: "directtype", sku: jobID, order: orderId, qty: 1, price: 1, cust: sub, cookie: sub, device: "a")
         .done { result in
             resolver.fulfill(Void())
         }
