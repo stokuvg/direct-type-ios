@@ -33,11 +33,6 @@ final class KeepListVC: TmpBasicVC {
     
     var isAddLoad:Bool = true
     
-    var keepDatas:[[String:Any]] = [] {
-        didSet {
-            Log.selectLog(logLevel: .debug, "new keepDatas")
-        }
-    }
     var keepChangeCnt:Int = 0
     var jobDetailCheckFlag:Bool = false
 
@@ -61,8 +56,7 @@ final class KeepListVC: TmpBasicVC {
             let tabItem = tabItems[1]
             tabItem.badgeValue = nil
             if jobDetailCheckFlag == false {
-                keepDatas = []
-            } else {
+        } else {
                 jobDetailCheckFlag = true
             }
         }
@@ -275,18 +269,6 @@ extension KeepListVC: UITabBarControllerDelegate {
             let firstVC = firstNavi.visibleViewController as! HomeVC
             
             Log.selectLog(logLevel: .debug, "firstVC:\(String(describing: firstVC))")
-            
-//            let homeVC = vcs[0] as! HomeVC
-//            Log.selectLog(logLevel: .debug, "viewController:\(viewController)")
-            if tabBarController.selectedIndex == 0 {
-                Log.selectLog(logLevel: .debug, "切り替えた画面がHomeVC")
-                Log.selectLog(logLevel: .debug, "keepDatas:\(keepDatas)")
-                
-                firstVC.changeKeepDatas = keepDatas
-            } else {
-                firstVC.changeKeepDatas = []
-                keepDatas = []
-            }
         }
     }
 }

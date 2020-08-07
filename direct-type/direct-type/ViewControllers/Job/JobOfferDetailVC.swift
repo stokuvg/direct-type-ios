@@ -783,46 +783,6 @@ extension JobOfferDetailVC: FoldingHeaderViewDelegate {
 
 extension JobOfferDetailVC: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-//        Log.selectLog(logLevel: .debug, "JobOfferDetailVC willShow")
-//        Log.selectLog(logLevel: .debug, "navigationController.viewControllers:\(navigationController.viewControllers)")
-//        Log.selectLog(logLevel: .debug, "viewController:\(viewController)")
-        
-//        Log.selectLog(logLevel: .debug, "self.tabBarController?.selectedIndex:\(String(describing: self.tabBarController?.selectedIndex))")
-//        Log.selectLog(logLevel: .debug, "navigationController.tabBarController?.selectedIndex:\(String(describing: navigationController.tabBarController?.selectedIndex))")
-        
-        // 遷移先がHomeVCの場合
-        if let controller = viewController as? HomeVC {
-            if navigationController.tabBarController?.selectedIndex == 0 {
-                Log.selectLog(logLevel: .debug, "前の画面がHomeVC")
-                if keepChangeCnt > 0 {
-                    let keepDatas:[String:Any] = ["jobId":_mdlJobDetail.jobCardCode,"keepStatus":keepFlag]
-                    controller.changeKeepDatas = [keepDatas]
-                } else {
-                    controller.changeKeepDatas = []
-                }
-            } else {
-                controller.changeKeepDatas = []
-//                controller.changeKeepJobId = ""
-//                controller.changeKeepStatus = false
-            }
-        }
-        if let keepListController = viewController as? KeepListVC {
-            if navigationController.tabBarController?.selectedIndex == 1 {
-                if keepChangeCnt > 0 {
-                    Log.selectLog(logLevel: .debug, "前の画面がKeepListVC")
-                    if keepChangeCnt > 0 {
-                        let keepDatas:[String:Any] = ["jobId":_mdlJobDetail.jobCardCode,"keepStatus":keepFlag]
-                        let kListData = self.checkListData(listDatas: keepListController.keepDatas, savedData: keepDatas)
-                        keepListController.keepDatas = kListData
-                        keepListController.jobDetailCheckFlag = true
-                    } else {
-                        keepListController.keepDatas = []
-                    }
-                } else {
-                    keepListController.keepDatas = []
-                }
-            }
-        }
     }
     
     private func checkListData(listDatas:[[String:Any]], savedData:[String:Any]) -> [[String:Any]] {
