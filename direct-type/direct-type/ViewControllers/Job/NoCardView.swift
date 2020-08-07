@@ -43,7 +43,7 @@ class NoCardView: UIView {
         新たにあなたにぴったりの求人が探せるかもしれません。
         マイページを更新後、下のボタンを押して更新してください*/
 //        jobInfomationLabel.text(text: "申し訳ありません。これ以上、おすすめできる求人がありませんので、明日以降でお試しください", fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
-        jobInfomationLabel.text(text: "申し訳ありません。\n今、おすすめできる求人はありません。\nマイページから希望勤務地を増やしてもらえると新たにあなたにぴったりの求人が探せるかもしれません。\nマイページを更新後、下のボタンを押して更新してください", fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
+        jobInfomationLabel.text(text: "ごめんなさい。マイページから希望勤務地を増やしてみてね！あなたにぴったりの求人が探せるかもしれません。マイページ更新後、ボタンを押してみてください！", fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
         
 //        registEditBtn.setTitle(text: "登録情報を編集する", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         registEditBtn.setTitle(text: "おすすめ求人を更新する", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
