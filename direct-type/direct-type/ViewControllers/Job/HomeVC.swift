@@ -250,6 +250,7 @@ class HomeVC: TmpNaviTopVC {
     private func dataCheckAction() {
         Log.selectLog(logLevel: .debug, "HomeVC dataCheckAction start")
 
+        Log.selectLog(logLevel: .debug, "pageJobCards.jobCards:\(pageJobCards.jobCards.count)")
         // ０件時レイアウト修正用
         if (pageJobCards.jobCards.count) > 0 {
             homeTableView.isHidden = false
@@ -732,8 +733,10 @@ extension HomeVC: JobOfferCardMoreCellDelegate {
 
 extension HomeVC: NoCardViewDelegate {
     func registEditAction() {
-        // マイページへ移動
-        self.tabBarController?.selectedIndex = 2
+//        // マイページへ移動
+//        self.tabBarController?.selectedIndex = 2
+        self.useApiListFlag = true
+        self.getJobRecommendList()
     }
 }
 
