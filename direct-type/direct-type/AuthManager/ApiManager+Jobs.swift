@@ -172,7 +172,7 @@ extension ApiManager {
         }.catch { (error) in
             resolver.reject(error)
         }.finally {
-            NotificationCenter.default.post(name: Constants.NotificationKeepStatusChanged, object: nil, userInfo: ["jobCardCode": id])//失敗時も投げておく（事前に表示だけ更新している場合にもどさせるため）
+            NotificationCenter.default.post(name: Constants.NotificationKeepStatusChanged, object: nil, userInfo: [Constants.NotificationKeepStatusChangedParamJobID: id])//失敗時も投げておく（事前に表示だけ更新している場合にもどさせるため）
         }
         
         return promise
@@ -194,7 +194,7 @@ extension ApiManager {
             Log.selectLog(logLevel: .debug, "sendDeleteJobKeepFetch error:\(error)")
             resolver.reject(error)
         }.finally {
-            NotificationCenter.default.post(name: Constants.NotificationKeepStatusChanged, object: nil, userInfo: ["jobCardCode": id])//失敗時も投げておく（事前に表示だけ更新している場合にもどさせるため）
+            NotificationCenter.default.post(name: Constants.NotificationKeepStatusChanged, object: nil, userInfo: [Constants.NotificationKeepStatusChangedParamJobID: id])//失敗時も投げておく（事前に表示だけ更新している場合にもどさせるため）
         }
         
         return promise

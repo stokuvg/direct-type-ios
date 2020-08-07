@@ -862,7 +862,7 @@ extension HomeVC: BaseJobCardCellDelegate {
             ApiManager.sendJobDeleteKeep(id: jobId)
                 .done { result in
                     self.badgeKeepCnt -= 1
-                    if self.badgeKeepCnt == 0 {
+                    if self.badgeKeepCnt <= 0 {
                         // タブに丸ポチを追加
                         if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
                             let tabItem:UITabBarItem = tabItems[1]

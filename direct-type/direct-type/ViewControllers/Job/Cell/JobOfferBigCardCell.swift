@@ -61,7 +61,7 @@ class JobOfferBigCardCell: BaseJobCardCell {
     @objc func keepListChanged(notification: NSNotification) {
         //notification.userInfoにjobCardIDを入れてるので、個別の表示更新にも対応可能
         if let userInfo = notification.userInfo {
-            if let targetJobID: String = userInfo["jobCardCode"] as? String {
+            if let targetJobID: String = userInfo[Constants.NotificationKeepStatusChangedParamJobID] as? String {
                 if jobId == targetJobID {
                     dispKeepStatus()//表示更新のため
                 }
