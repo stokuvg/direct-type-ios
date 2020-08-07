@@ -44,7 +44,7 @@ class BaseVC: UIViewController {
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "arDefaultWhite")
         
         if #available(iOS 13.0, *) {
-            self.setStattusBarStyle(style: .darkContent)
+            self.setStattusBarStyle(style: .lightContent)
         } else {
             self.navigationController?.navigationBar.barStyle = .black
         }
@@ -106,7 +106,7 @@ class BaseVC: UIViewController {
     }
 
     func setStattusBarStyle(style: UIStatusBarStyle) {
-        statusBarStyle = style
+        statusBarStyle = .lightContent
         self.setNeedsStatusBarAppearanceUpdate()
     }
     
