@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         LogManager.appendLogEx(.ALWAYS, "起動", String(repeating: "=", count: 44), _launchOptions.debugDescription, #function, #line)
         // Override point for customization after application launch.
         if #available(iOS 13.0, *) {
-            UIApplication.shared.statusBarStyle = .darkContent
+            UIApplication.shared.statusBarStyle = .lightContent
         }
         UINavigationBar.appearance().isTranslucent = false
         UITabBar.appearance().isTranslucent = false
