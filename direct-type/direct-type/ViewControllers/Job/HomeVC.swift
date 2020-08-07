@@ -407,6 +407,7 @@ class HomeVC: TmpNaviTopVC {
             
             self.dataAddFlag = false
             self.dataCheckAction()
+            SVProgressHUD.dismiss()
             /*
             if self.pageJobCards.jobCards.count > 0 {
                 SVProgressHUD.dismiss()
