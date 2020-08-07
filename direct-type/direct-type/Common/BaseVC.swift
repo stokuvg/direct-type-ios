@@ -111,7 +111,7 @@ class BaseVC: UIViewController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return statusBarStyle
+        return .lightContent
     }
     
     func linesTitle(date:String,title:String) {
