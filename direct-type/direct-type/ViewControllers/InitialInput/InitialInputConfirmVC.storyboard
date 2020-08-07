@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Initial Input ConfirmVC-->
+        <scene sceneID="zIL-nF-3N0">
+            <objects>
+                <viewController storyboardIdentifier="Sbid_InitialInputConfirmVC" id="MOW-qK-40g" customClass="InitialInputConfirmVC" customModule="Direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="I4b-pe-g05">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4RU-QF-8gq">
+                                <rect key="frame" x="30" y="0.0" width="354" height="862"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L68-Be-c7c" userLabel="ContentsView">
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="547.5"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Eef-9f-MWu">
+                                                <rect key="frame" x="0.0" y="0.0" width="354" height="547.5"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YNa-dK-ShB" userLabel="余白">
+                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="60"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="60" id="dAn-B3-m3H"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="６桁の認証コードを入力してください" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P9T-Z7-rsh">
+                                                        <rect key="frame" x="0.0" y="60" width="354" height="18"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                        <color key="textColor" name="color-black"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WOz-q4-gR2" userLabel="余白">
+                                                        <rect key="frame" x="0.0" y="78" width="354" height="20"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="20" id="TKv-8e-u6w"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="入力いただいた電話番号に認証コードを送りました。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oxr-Pd-vtm">
+                                                        <rect key="frame" x="0.0" y="98" width="354" height="13.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                        <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f0R-oD-9xP" userLabel="余白">
+                                                        <rect key="frame" x="0.0" y="111.5" width="354" height="30"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="QuG-KU-ZPs"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="コードを入力" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3un-bl-J0I">
+                                                        <rect key="frame" x="0.0" y="141.5" width="354" height="50"/>
+                                                        <color key="backgroundColor" name="color-white"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="Uzu-sW-brB"/>
+                                                        </constraints>
+                                                        <color key="textColor" name="color-black"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    </textField>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bJs-29-5Tv" userLabel="余白">
+                                                        <rect key="frame" x="0.0" y="191.5" width="354" height="10"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="10" id="Vhp-4O-ScH"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="QBf-cK-ISi">
+                                                        <rect key="frame" x="0.0" y="201.5" width="354" height="128"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Vh-yM-IoL" userLabel="余白">
+                                                                <rect key="frame" x="0.0" y="0.0" width="338" height="128"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </view>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KQp-Dz-Qya">
+                                                                <rect key="frame" x="354" y="0.0" width="0.0" height="128"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                <state key="normal" title="認証コードを再送信する">
+                                                                    <color key="titleColor" name="color-sub"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="resendAuthCodeButton:" destination="MOW-qK-40g" eventType="touchUpInside" id="LnE-MW-efQ"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ijn-XI-fws">
+                                                        <rect key="frame" x="0.0" y="329.5" width="354" height="128"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N45-7p-aZy" userLabel="余白">
+                                                                <rect key="frame" x="0.0" y="0.0" width="338" height="128"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </view>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dS5-lc-GYb">
+                                                                <rect key="frame" x="354" y="0.0" width="0.0" height="128"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                <state key="normal" title="認証コードが届かない場合">
+                                                                    <color key="titleColor" name="color-sub"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="codeWebHelpButton:" destination="MOW-qK-40g" eventType="touchUpInside" id="cDg-rr-ADs"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xb2-G4-mmc" userLabel="余白">
+                                                        <rect key="frame" x="0.0" y="457.5" width="354" height="30"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="Lgt-xx-A77"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qph-yq-9eJ">
+                                                        <rect key="frame" x="0.0" y="487.5" width="354" height="40"/>
+                                                        <color key="backgroundColor" name="color-sub"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="16z-zr-YWG"/>
+                                                        </constraints>
+                                                        <state key="normal" title="次へ">
+                                                            <color key="titleColor" name="color-white"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="20"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="nextButton:" destination="MOW-qK-40g" eventType="touchUpInside" id="T9u-jb-7E7"/>
+                                                        </connections>
+                                                    </button>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="coz-il-hg8" userLabel="余白">
+                                                        <rect key="frame" x="0.0" y="527.5" width="354" height="20"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="20" id="vuR-uj-yh4"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="Eef-9f-MWu" firstAttribute="leading" secondItem="L68-Be-c7c" secondAttribute="leading" id="5cV-VB-OoL"/>
+                                            <constraint firstItem="Eef-9f-MWu" firstAttribute="top" secondItem="L68-Be-c7c" secondAttribute="top" id="KQ0-VX-Wfb"/>
+                                            <constraint firstAttribute="bottom" secondItem="Eef-9f-MWu" secondAttribute="bottom" id="fT6-S9-UYj"/>
+                                            <constraint firstAttribute="trailing" secondItem="Eef-9f-MWu" secondAttribute="trailing" id="xVt-gC-v65"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="L68-Be-c7c" firstAttribute="leading" secondItem="NyF-JZ-42J" secondAttribute="leading" id="866-9z-aam"/>
+                                    <constraint firstItem="L68-Be-c7c" firstAttribute="bottom" secondItem="NyF-JZ-42J" secondAttribute="bottom" id="HK0-kt-lai"/>
+                                    <constraint firstItem="L68-Be-c7c" firstAttribute="width" secondItem="SXF-GV-PRz" secondAttribute="width" id="egh-Hs-rhM"/>
+                                    <constraint firstItem="L68-Be-c7c" firstAttribute="top" secondItem="NyF-JZ-42J" secondAttribute="top" id="mgT-iG-F7h"/>
+                                    <constraint firstItem="L68-Be-c7c" firstAttribute="trailing" secondItem="NyF-JZ-42J" secondAttribute="trailing" id="qLN-dJ-a3G"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="NyF-JZ-42J"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="SXF-GV-PRz"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="4RU-QF-8gq" firstAttribute="leading" secondItem="SzV-G9-6rA" secondAttribute="leading" constant="30" id="9ES-E2-65f"/>
+                            <constraint firstItem="SzV-G9-6rA" firstAttribute="trailing" secondItem="4RU-QF-8gq" secondAttribute="trailing" constant="30" id="LoT-zh-ZIO"/>
+                            <constraint firstItem="SzV-G9-6rA" firstAttribute="bottom" secondItem="4RU-QF-8gq" secondAttribute="bottom" id="ZLb-ea-RNF"/>
+                            <constraint firstItem="4RU-QF-8gq" firstAttribute="top" secondItem="I4b-pe-g05" secondAttribute="top" id="rTb-xM-ZpP"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="SzV-G9-6rA"/>
+                    </view>
+                    <connections>
+                        <outlet property="authCodeTextField" destination="3un-bl-J0I" id="l48-bE-V52"/>
+                        <outlet property="nextButton" destination="qph-yq-9eJ" id="mu8-m1-Cqk"/>
+                        <outlet property="scrollVW" destination="4RU-QF-8gq" id="Z0V-hr-APN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ibb-zO-mOt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="51" y="21"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="color-black">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="color-sub">
+            <color red="1" green="0.35294117647058826" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="color-white">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

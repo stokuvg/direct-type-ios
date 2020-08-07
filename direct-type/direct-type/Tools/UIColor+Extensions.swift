@@ -12,6 +12,7 @@ import UIKit
 enum ColorType {
     case color_main
     case color_sub
+    case color_specialItemFocus
     case color_sub2
     case color_base
     case color_black
@@ -20,6 +21,9 @@ enum ColorType {
     case color_line
     case color_button
     case color_alart
+    case color_close
+    case color_light_gray
+    case color_navy
 }
 
 extension UIColor {
@@ -32,6 +36,8 @@ extension UIColor {
                 colorName = "color-main"
             case .color_sub:
                 colorName = "color-sub"
+            case .color_specialItemFocus:
+                colorName = "color-sub-half-alpha"
             case .color_sub2:
                 colorName = "color-sub2"
             case .color_base:
@@ -41,13 +47,19 @@ extension UIColor {
             case .color_white:
                 colorName = "color-white"
             case .color_parts_gray:
-                colorName = "color-parts-gray"
+                colorName = "color-parts_gray"
             case .color_line:
-                colorName = "color-liney"
+                colorName = "color-line"
             case .color_button:
                 colorName = "color-button"
             case .color_alart:
                 colorName = "color-alart"
+            case .color_close:
+                colorName = "color-close"
+            case .color_light_gray:
+                colorName = "color-light-gray"
+            case .color_navy:
+                colorName = "color-navy"
         }
         
         self.init(named:colorName)

@@ -10,6 +10,8 @@ import UIKit
 
 class BasePresentVC: BaseVC {
     @IBOutlet weak var tmpNavigationBar:UINavigationBar!
+    
+    var titleLabel:UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,11 +28,16 @@ class BasePresentVC: BaseVC {
     
     // Modalを閉じるボタンを表示
     func leftCloseDisp() {
-        let closeBtn = UIBarButtonItem.init(image: UIImage(named: "close"), style: .done, target: self, action: #selector(leftCloseBtnAction))
-        self.navigationItem.leftBarButtonItem = closeBtn
+        let closeBtn = UIButton(type: .custom)
+        closeBtn.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        closeBtn.setBackgroundImage(UIImage(named: "webClose"), for: .normal)
+        closeBtn.addTarget(self, action: #selector(leftCloseBtnAction), for: .touchUpInside)
+//        let closeBtn = UIBarButtonItem.init(image: UIImage(named: "close"), style: .done, target: self, action: #selector(leftCloseBtnAction))
+//        self.navigationItem.leftBarButtonItem = closeBtn
         
         let naviItem = UINavigationItem(title: "")
-        naviItem.leftBarButtonItem = closeBtn
+//        naviItem.leftBarButtonItem = closeBtn
+        naviItem.leftBarButtonItem = UIBarButtonItem(customView: closeBtn)
         tmpNavigationBar.pushItem(naviItem, animated: true)
     }
     

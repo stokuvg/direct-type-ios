@@ -9,6 +9,9 @@
 import UIKit
 
 class BaseTabBC: UITabBarController {
+    
+    private var profile: MdlProfile?
+    private var resume: MdlResume?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,7 +19,7 @@ class BaseTabBC: UITabBarController {
         UITabBar.appearance().tintColor = UIColor.init(colorType: .color_sub)
         
         self.selectedIndex = 0
-        
+
         /// 赤ポチ
         // 求人        つかない
         // キープ       つく

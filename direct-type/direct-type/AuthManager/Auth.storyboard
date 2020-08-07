@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Cognito AuthVC-->
+        <scene sceneID="aHr-96-Wy9">
+            <objects>
+                <viewController storyboardIdentifier="Sbid_CognitoAuthVC" id="TaC-uw-Znr" customClass="CognitoAuthVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Vjq-Kq-1Ni">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="muF-Wx-JHN">
+                                <rect key="frame" x="4" y="48" width="406" height="810"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9LW-vw-VUH">
+                                        <rect key="frame" x="0.0" y="0.0" width="406" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="actStatus:" destination="TaC-uw-Znr" eventType="touchUpInside" id="RQa-Zo-DqY"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FgY-as-RnX">
+                                        <rect key="frame" x="0.0" y="30" width="406" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="32x-xZ-a1w">
+                                        <rect key="frame" x="0.0" y="64" width="406" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jp7-5T-iOD">
+                                        <rect key="frame" x="0.0" y="98" width="406" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="actSignup:" destination="TaC-uw-Znr" eventType="touchUpInside" id="1a6-As-pvc"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RvX-vf-r0S">
+                                        <rect key="frame" x="0.0" y="128" width="406" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="actLogin:" destination="TaC-uw-Znr" eventType="touchUpInside" id="ueY-vF-7QZ"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="04l-NR-zem">
+                                        <rect key="frame" x="0.0" y="158" width="406" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i7k-ZY-cSx">
+                                        <rect key="frame" x="0.0" y="192" width="406" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="actConfirm:" destination="TaC-uw-Znr" eventType="touchUpInside" id="z9O-Rr-fqs"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6i-on-FgQ">
+                                        <rect key="frame" x="0.0" y="222" width="406" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="actLogout:" destination="TaC-uw-Znr" eventType="touchUpInside" id="MoX-df-YcN"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rb4-yW-xLd">
+                                        <rect key="frame" x="0.0" y="252" width="406" height="558"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="zrE-Vt-GFo" firstAttribute="trailing" secondItem="muF-Wx-JHN" secondAttribute="trailing" constant="4" id="Qg9-9H-Rst"/>
+                            <constraint firstItem="muF-Wx-JHN" firstAttribute="top" secondItem="zrE-Vt-GFo" secondAttribute="top" constant="4" id="cLQ-kJ-Q4s"/>
+                            <constraint firstItem="muF-Wx-JHN" firstAttribute="leading" secondItem="zrE-Vt-GFo" secondAttribute="leading" constant="4" id="oaL-Gu-ElL"/>
+                            <constraint firstItem="zrE-Vt-GFo" firstAttribute="bottom" secondItem="muF-Wx-JHN" secondAttribute="bottom" constant="4" id="odc-sa-vnN"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="zrE-Vt-GFo"/>
+                    </view>
+                    <connections>
+                        <outlet property="btnConfirm" destination="i7k-ZY-cSx" id="CU2-Cn-46a"/>
+                        <outlet property="btnLogin" destination="RvX-vf-r0S" id="pGa-vX-DhX"/>
+                        <outlet property="btnLogout" destination="F6i-on-FgQ" id="r7D-Aa-S0H"/>
+                        <outlet property="btnSignup" destination="Jp7-5T-iOD" id="GYr-8J-Jll"/>
+                        <outlet property="btnStatus" destination="9LW-vw-VUH" id="eLa-lL-8fl"/>
+                        <outlet property="lblStatus" destination="Rb4-yW-xLd" id="0cG-mQ-4bX"/>
+                        <outlet property="tfConfirm" destination="04l-NR-zem" id="GYk-xR-2Id"/>
+                        <outlet property="tfPassword" destination="32x-xZ-a1w" id="07X-hW-BKj"/>
+                        <outlet property="tfPhone" destination="FgY-as-RnX" id="Qfk-vb-sev"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qvr-na-xDG" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="138"/>
+        </scene>
+    </scenes>
+</document>

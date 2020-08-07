@@ -1,0 +1,5 @@
+Pods/*
+xcuserdata/*
+direct-type.xcworkspace/
+R.generated.swift
+direct-type.xcodeproj/xcuserdata

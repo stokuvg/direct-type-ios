@@ -1,0 +1,2039 @@
+openapi: 3.0.0
+info:
+  version: 5.27.02
+  title: アプリ想定モデル・API
+  description: アプリの想定モデル・APIの仕様書です
+
+paths:
+
+###============================================================###
+###======== ユーザ状態管理 ========
+  /dummy/api43:
+    get:
+      tags:
+        - userStatus
+      summary: Api43_ユーザ状態管理の取得
+      description: アプローチも含めて取得させているが...Api31を別途叩く方が良いか？
+      responses:
+        200:
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserStatus'
+
+  /dummy/api44:
+    post:
+      tags:
+        - userStatus
+      summary: Api44_ユーザ状態管理の作成・更新
+      description: 指定パラメタだの部分指定更新は可能か？
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserStatus'
+      responses:
+        200:
+          description: 成功
+
+###============================================================###
+###======== 初回登録 ========
+  /dummy/api26:
+    post:
+      tags:
+        - userInfo
+      summary: Api26_初回登録
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReqRegist'
+      responses:
+        200:
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserStatus'
+
+###======== プロフィール ========
+  /dummy/api10:
+    get:
+      tags:
+        - userInfo
+      summary: Api10_プロフィールの取得
+      responses:
+        200:
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+  /dummy/api14:
+    post:
+      tags:
+        - userInfo
+      summary: Api14_プロフィールの作成・更新
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Profile'
+      responses:
+        200:
+          description: 成功
+
+###======== 履歴書 ========
+  /dummy/api11:
+    get:
+      tags:
+        - userInfo
+      summary: Api11_履歴書の取得
+      responses:
+        200:
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resume'
+  /dummy/api15:
+    post:
+      tags:
+        - userInfo
+      summary: Api15_履歴書の作成・更新
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Resume'
+      responses:
+        200:
+          description: 成功
+
+###======== 職務経歴書 ========
+  /dummy/api12:
+    get:
+      tags:
+        - userInfo
+      summary: Api12_職務経歴書の取得
+      responses:
+        200:
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Career'
+  /dummy/api16:
+    post:
+      tags:
+        - userInfo
+      summary: Api16_職務経歴書の作成・更新
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Career'
+      responses:
+        200:
+          description: 成功
+
+###======== スカウト希望条件 ========
+  /dummy/api41:
+    get:
+      tags:
+        - userInfo
+      summary: Api41_スカウト希望条件の取得
+      description: 初回スコープアウト
+      responses:
+        200:
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Scout'
+  /dummy/api42:
+    post:
+      tags:
+        - userInfo
+      summary: Api42_スカウト希望条件の作成・更新
+      description: 初回スコープアウト
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Scout'
+      responses:
+        200:
+          description: 成功
+
+###======== 相性診断結果 ========
+  /dummy/api48:
+    get:
+      tags:
+        - chemistry
+      summary: Api48_相性診断結果の取得
+      responses:
+        200:
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChemistryResult'
+  /dummy/api37:
+    post:
+      tags:
+        - chemistry
+      summary: Api37_相性診断結果の作成・更新
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChemistryResult'
+      responses:
+        200:
+          description: 成功
+
+###======== 応募フォーム ========
+  /dummy/api13/{jobCode}:
+    get:
+      tags:
+        - entry
+      summary: Api13_応募フォーム情報の取得
+      description: GetじゃなくPostにした方が良いのか？
+      parameters:
+        - in: path
+          name: jobCode
+          required: true
+          description: クエリパラメータ
+          schema:
+            $ref: '#/components/schemas/JobOfferCode'
+      # requestBody:
+      #   content:
+      #     application/x-www-form-urlencoded:
+      #       schema:
+      #         $ref: '#/components/schemas/JobOfferCode'
+      responses:
+        200:
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntryFormInfo'
+  /dummy/api18/{jobCode}:
+    post:
+      tags:
+        - entry
+      summary: Api18_応募フォームでの応募
+      parameters:
+        - in: path
+          name: jobCode
+          required: true
+          schema:
+            $ref: '#/components/schemas/JobOfferCode'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReqEntry'
+      responses:
+        200:
+          description: 成功
+
+###======== アプローチ ========
+  /dummy/api31:
+    get:
+      tags:
+        - userStatus
+      summary: Api31_アプローチ情報を受信
+      responses:
+        200:
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Approach'
+  /dummy/api32:
+    post:
+      tags:
+        - userStatus
+      summary: Api32_アプローチ情報を送信
+      description: 片方だけ指定してリクエストできるか？
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Approach'
+      responses:
+        200:
+          description: 成功
+
+###======== ホーム ========
+  /dummy/api01_02:
+    post:
+      tags:
+        - job
+      summary: Api01_02_求人カード一覧を取得
+      parameters:
+        - in: query
+          name: mode
+          required: false
+          description: 初回からxx時間の場合の[C-1]のためのリクエスト時には1を渡す。[C-2]のためのリクエスト時には2を渡す。＊urlを分離しておくのと、どちらが良いか？
+          schema:
+            type: integer
+            default: 2
+        - in: query
+          name: page
+          required: false
+          description: 無指定の場合はpage=1から開始
+          schema:
+            type: integer
+            default: 1
+      responses:
+        200:
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobCardList'
+
+  /dummy/api07/{id}:
+    post:
+      tags:
+        - job
+      summary: Api07_求人カード詳細
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: 求人コード
+          schema:
+            type: string
+      responses:
+        200:
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobCardDetail'
+
+###======== 見送り ========
+  /dummy/api05:
+    post:
+      tags:
+        - jobFilter
+      summary: Api05_見送りリストに追加
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobOfferCode'
+      responses:
+        200:
+          description: 成功
+
+###======== キープ ========
+  /dummy/api03:
+    post:
+      tags:
+        - jobFilter
+      summary: Api03_キープリストに追加
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobOfferCode'
+      responses:
+        200:
+          description: 成功
+
+  /dummy/api04:
+  # /dummy/api04{jobCode}:
+    delete:
+      tags:
+        - jobFilter
+      summary: Api04_キープリストから削除
+      parameters:
+        - in: query
+        # - in: path
+          name: jobCode
+          required: true
+          schema:
+            $ref: '#/components/schemas/JobOfferCode'
+      responses:
+        200:
+          description: 成功
+  /dummy/api06:
+    post:
+      tags:
+        - job
+      summary: Api06_キープリストを取得
+      parameters:
+        - in: query
+          name: page
+          required: false
+          description: 無指定の場合はpage=1から開始
+          schema:
+            type: string
+      responses:
+        200:
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeepCardList'
+
+###============================================================###
+###===認証関連：24,25, 33,34,35,36 39,40
+###=== 30???
+### https://type.qiita.com/y_kawamata/items/e251d8904820d5b5ceaf
+###==============================
+  /dummy/api24:
+    post:
+      tags:
+        - authAccount
+      summary: Api24_初回認証：電話番号登録
+      description: Cognitoカスタム認証でのやりとりになる
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthSignupReq'
+      responses:
+        200:
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthSignupResp'
+  /dummy/api25:
+    post:
+      tags:
+        - authAccount
+      summary: Api25_初回認証：認証コード確認
+      description: Cognitoカスタム認証でのやりとりになる
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthSignupConfirmReq'
+      responses:
+        200:
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthSignupConfirmResp'
+  /dummy/api45:
+    post:
+      tags:
+        - authAccount
+      summary: Api45_初回認証：認証コードの再送信
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthSignupResendReq'
+      responses:
+        200:
+          description: 成功。認証コード送信時にセッション情報も必要になるのか？
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthSignupResendResp'
+
+###==============================
+  /dummy/api39:
+    post:
+      tags:
+        - authAccount
+      summary: Api39_ログイン：電話番号登録
+      description: 初回認証と同じものになるのか？
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthSigninReq'
+      responses:
+        200:
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthSigninResp'
+  /dummy/api40:
+    post:
+      tags:
+        - authAccount
+      summary: Api40_ログイン：認証コード確認
+      description: 初回認証と同じものになるのか？
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthSigninConfirmReq'
+      responses:
+        200:
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthSigninConfirmResp'
+  /dummy/api47:
+    post:
+      tags:
+        - authAccount
+      summary: Api47_ログイン：認証コードの再送信
+      description: 初回認証と同じものになるのか？
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthSigninResendReq'
+      responses:
+        200:
+          description: 成功。認証コード送信時にセッション情報も必要になるのか。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthSigninResendResp'
+
+###==============================
+  /dummy/api33:
+    post:
+      tags:
+        - authAccount
+      summary: Api24_アカウント変更：電話番号登録
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthChangeAccountReq'
+      responses:
+        200:
+          description: 成功。別途、SMSで認証コードをサーバから送信している
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthChangeAccountResp'
+  /dummy/api35:
+    post:
+      tags:
+        - authAccount
+      summary: Api35_アカウント変更：認証コード確認
+      description: デバイスにアカウント・パスワードを保存する場合、変更先のもので更新する必要あり。その場合にパスワードは同じままで設定できるのか？新しくするならどこで管理？？
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthChangeAccountConfirmReq'
+      responses:
+        200:
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthChangeAccountConfirmResp'
+  /dummy/api46:
+    post:
+      tags:
+        - authAccount
+      summary: Api46_アカウント変更：認証コードの再送信
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthChangeAccountResendReq'
+      responses:
+        200:
+          description: 成功。認証コード送信時にセッション情報も必要になるのか。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthChangeAccountResendResp'
+
+###==============================
+  /dummy/api36:
+    post:
+      tags:
+        - authAccount
+      summary: Api36_退会処理
+      responses:
+        200:
+          description: 成功
+###==============================
+  /dummy/dmy01:
+    get:
+      tags:
+        - appOnlyModel
+      responses:
+        200:
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppSmoothCareer'
+###==============================
+
+
+###============================================================###
+###============================================================###
+###======== スキーマ定義 ========
+components:
+  schemas:
+###============================================================###
+###============================================================###
+###認証関連のリクエスト・レスポンスのモデル
+###======== Cognitoモデル
+    AuthSessionModel:
+      type: object
+      properties:
+        session:
+          description: セッション情報（なんらかのオブジェクトで定義）
+          type: string
+
+###======== 初回認証
+    AuthSignupReq:
+      type: object
+      properties:
+        mobile_phone_no:
+          type: string
+          example: 09012345678
+          description: 携帯電話番号。パスワード保存するなら、こちらもデバイスに保存されることになる（対になって管理しないと破綻するため）。認証コードの再送信要求は別途用意するのか、これを再び叩かせるのか？
+        password:
+          type: string
+          example: Test123$
+          description: 自動生成したパスワード。デバイス内キーチェインに保存？
+    AuthSignupResp:
+      $ref: '#/components/schemas/AuthSessionModel'
+
+    AuthSignupConfirmReq:
+      type: object
+      properties:
+        session:
+          $ref: '#/components/schemas/AuthSessionModel'
+        confirm_code:
+          type: string
+          example: 123456
+          description: 認証コード（6桁）
+    AuthSignupConfirmResp:
+      type: object
+      properties:
+        account:
+          $ref: '#/components/schemas/Account'
+
+    AuthSignupResendReq:
+      type: object
+      properties:
+        mobile_phone_no:
+          type: string
+          example: 09012345678
+          description: 携帯電話番号
+    AuthSignupResendResp:
+      $ref: '#/components/schemas/AuthSessionModel'
+      
+###======== ログイン
+    AuthSigninReq:
+      type: object
+      properties:
+        mobile_phone_no:
+          type: string
+          example: 09012345678
+          description: 携帯電話番号
+        password:
+          type: string
+          example: Test123$
+          description: デバイス内キーチェインに保存したものを利用
+    AuthSigninResp:
+      $ref: '#/components/schemas/AuthSessionModel'
+
+    AuthSigninConfirmReq:
+      type: object
+      properties:
+        session:
+          $ref: '#/components/schemas/AuthSessionModel'
+        confirm_code:
+          type: string
+          example: 123456
+          description: 認証コード（6桁）
+    AuthSigninConfirmResp:
+      type: object
+      properties:
+        account:
+          $ref: '#/components/schemas/Account'
+
+    AuthSigninResendReq:
+      type: object
+      properties:
+        mobile_phone_no:
+          type: string
+          example: 09012345678
+          description: 携帯電話番号
+    AuthSigninResendResp:
+      $ref: '#/components/schemas/AuthSessionModel'
+
+###======== アカウント変更
+    AuthChangeAccountReq:
+      type: object
+      properties:
+        new_mobile_phone_no:
+          type: string
+          example: 08076543210
+          description: 変更先の携帯電話番号
+    AuthChangeAccountResp:
+      $ref: '#/components/schemas/AuthSessionModel'
+
+    AuthChangeAccountConfirmReq:
+      type: object
+      properties:
+        session:
+          $ref: '#/components/schemas/AuthSessionModel'
+        confirm_code:
+          type: string
+          example: 123456
+          description: 認証コード（6桁）
+    AuthChangeAccountConfirmResp:
+      type: object
+      properties:
+        account:
+          $ref: '#/components/schemas/Account'
+
+    AuthChangeAccountResendReq:
+      type: object
+      properties:
+        mobile_phone_no:
+          type: string
+          example: 09012345678
+          description: 携帯電話番号
+    AuthChangeAccountResendResp:
+      $ref: '#/components/schemas/AuthSessionModel'
+
+###============================================================###
+###レスポンス用のモデル
+
+
+
+###============================================================###
+###============================================================###
+  
+    UserStatus:
+      type: object
+      required: #必須定義
+        - nickname
+        - first_input_complete_date_time
+        - resume_status
+        - career_status
+        - profile_status
+        - diagnosis_status
+        - approach
+        - type_connect_status
+      properties:
+        nickname:
+          type: string
+          example: ニックネーム
+          description: 求人コード
+        first_input_complete_date_time:
+          type: string
+          example: 2020-04-01T12:34:56.789Z
+          description: 初回入力の完了日時(年月日時分秒)
+        progress:
+          type: object
+          properties:
+            resume_progress:
+              type: integer
+              example: 0
+              description: 「履歴書」の編集状況（パーセント表記、完了で100）
+            career_progress:
+              type: integer
+              example: 0
+              description: 「経歴書」の編集状況（パーセント表記、完了で100）
+            profile_progress:
+              type: integer
+              example: 0
+              description: 「プロフィール」の編集状況（パーセント表記、完了で100）
+            chemistry_progress:
+              type: integer
+              example: 0
+              description: 「相性診断」の実施状況（パーセント表記、完了で100）
+        approach:
+          $ref: '#/components/schemas/Approach'
+        type_connect_status:
+          type: boolean
+          example: false
+          description: type連携履歴をしたことがあるか（これ必要か？）
+  
+###============================================================###
+    Account:
+      type: object
+      required: #必須定義
+        - mobile_phone_no
+      properties:
+        # nickname:
+        #   type: string
+        #   example: nickname
+        #   description: ニックネーム（＊UserStatusから取得にするか）
+        mobile_phone_no:
+          type: string
+          example: mobilePhoneNo
+          description: 認証済み電話番号（＊TUD認証アカウント：携帯電話番号）
+        # password:
+        #   type: string
+        #   example: password
+        #   description: パスワード（＊デバイスに保存する？）
+        # authcode:
+        #   type: string
+        #   example: authcode
+        #   description: 認証コード（＊都度入力）
+
+    Approach:
+      type: object
+      required: #必須定義
+        - scout_enable
+        - recommendation_enable
+      properties:
+        scout_enable:
+          type: boolean
+          default: true
+          example: true
+          description: 「アプローチ：スカウト」を利用するか
+        recommendation_enable:
+          type: boolean
+          default: true
+          example: false
+          description: 「アプローチ：プロのおすすめ」を利用するか
+
+###============================================================###
+    ChemistryResult:
+      type: object
+      required: #必須定義
+        - chemistry_type_codes
+      properties:
+        chemistry_type_codes:
+          description: 相性診断で出たタイプNo。上位3種類まで
+          type: array
+          minItems: 1
+          maxItems: 3
+          example: [4, 7]
+          items:
+            type: integer
+
+###============================================================###
+    Profile:
+      type: object
+      description: プロフィール (H2)
+      required: #必須定義
+        - family_name
+        - first_name
+        - family_name_kana
+        - first_name_kana
+        - birthday
+        - gender
+        - zip_code
+        - prefecture
+        - address1
+        - address2
+        - mail_address
+        - mobile_phone_no
+      properties:
+        family_name:
+          type: string
+          example: familyName
+          description: 氏
+        first_name:
+          type: string
+          example: firstName
+          description: 名
+        family_name_kana:
+          type: string
+          example: familyNameKana
+          description: 氏（カナ）
+        first_name_kana:
+          type: string
+          example: firstNameKana
+          description: 名（カナ）
+        birthday:
+          type: object
+          required: #必須定義
+            - birthday_year
+            - birthday_month
+            - birthday_day
+          properties:
+            birthday_year:
+              type: integer
+              example: 1996
+              description: 生年月日：年　＊type仕様
+            birthday_month:
+              type: integer
+              example: 2
+              description: 生年月日：月　＊type仕様
+            birthday_day:
+              type: integer
+              example: 29
+              description: 生年月日：日　＊type仕様
+        gender:
+          type: integer
+          example: 2
+          description: 性別
+        zip_code:
+          type: string
+          example: zipCode
+          description: 郵便番号
+        prefecture:
+          type: integer
+          example: 13
+          description: 都道府県
+        address1:
+          type: string
+          example: 東京都
+          description: 市区町村
+        address2:
+          type: string
+          example: 千代田区有楽町1-1-1
+          description: 丁目・番地・建物名など
+        mail_address:
+          type: string
+          example: mailAddress
+          description: メールアドレス
+        mobile_phone_no:
+          type: string
+          example: 09012345678
+          description: 携帯電話番号（変更不可：認証アカウントと同一）
+          
+    Resume:
+      type: object
+      description: 履歴書 (H3)
+      required: #必須定義
+        - employment
+        - change_count
+        - last_job_experiment
+        - job_experiments
+        - business_types
+        - school
+        - skill_language
+        - qualifications
+        - own_pr
+      properties:
+        employment:
+          type: integer
+          example: 0
+          description: 就業状況
+        change_count:
+          type: integer
+          example: 0
+          description: 転職回数
+        last_job_experiment:
+          type: object
+          required: #必須定義
+            - job_type
+            - job_experiment_year
+          properties:
+            job_type:
+              type: integer
+              example: 0
+              description: 直近の経験職種：小分類
+            job_experiment_year:
+              type: integer
+              example: 0
+              description: 直近の経験年数
+        job_experiments:
+          type: array
+          minItems: 0
+          maxItems: 9
+          required: #必須定義
+            - job_type
+            - job_experiment_year
+          items:
+            properties:
+              job_type:
+                type: integer
+                description: その他の経験職種(n≦9)：小分類
+              job_experiment_year:
+                type: integer
+                description: その他の経験年数(n≦9)
+        business_types:
+          type: array
+          minItems: 0
+          maxItems: 10
+          items:
+            type: integer
+            description: 経験業種(n≦10)
+
+        school:
+          type: object
+          required: #必須定義
+            - school_name
+            - department
+            - subject
+            - graduation_year
+          properties:
+            school_name:
+              type: string
+              example: schoolName
+              description: 学校名
+            department:
+              type: string
+              example: department
+              description: 学部
+            subject:
+              type: string
+              example: subject
+              description: 学科・専攻
+            graduation_year:
+              type: string
+              example: graduationYear
+              description: 卒業年月
+
+        skill_language:
+          type: object
+          required: #必須定義
+            - language_toeic
+            - language_toefl
+            - language_english
+            - language_study_skill
+          properties:
+            language_toeic_score:
+              type: string
+              example: languageToeic
+              description: TOEIC（未記入：""）
+            language_toefl_score:
+              type: string
+              example: languageToefl
+              description: TOEFL（未記入：""）
+            language_english:
+              type: string
+              example: languageEnglish
+              description: 英語スキル（未記入：""）
+            language_study_skill:
+              type: string
+              example: languageStudySkill
+              description: 英語以外語学スキル（未記入：""）
+
+        qualifications:
+          type: array
+          items:
+            type: integer
+            description: 資格
+        own_pr:
+          type: string
+          example: ownPR
+          description: 自己PR
+          
+    Scout:
+      type: object
+      description: スカウト：初回スコープアウト
+      required: #必須定義
+        - interest_themes
+        - no_interst_themes
+        - hope_entry_places
+        - hope_salary
+        - hope_job_types
+      properties:
+        interest_themes:
+          type: array
+          minItems: 0
+          maxItems: 3
+          items:
+            type: integer
+            description: 興味あるテーマ(n≦3)
+        no_interst_themes:
+          type: array
+          minItems: 0
+          maxItems: 3
+          items:
+            type: integer
+            description: 興味ないテーマ(n≦3)
+        hope_entry_places:
+          type: array
+          minItems: 0
+          maxItems: 5
+          items:
+            type: integer
+            description: 希望勤務地(n≦5)
+        hope_salary:
+          type: integer
+          example: 0
+          description: 希望年収
+        hope_job_types:
+          type: array
+          minItems: 0
+          maxItems: 5
+          items:
+            type: integer
+            description: 希望職種(n≦5)
+
+    Career:
+      type: object
+      description: 職務経歴書
+      required: #必須定義
+        - career_cards
+      properties:
+        business_types:
+          type: array
+          minItems: 0
+          maxItems: 10
+          items:
+            $ref: '#/components/schemas/CareerCard'
+
+    CareerCard:
+      type: object
+      description: 職務経歴書（1社ごと）
+      required: #必須定義
+        - work_period
+        - company_name
+        - employment_type
+        - employees_count
+        - salary
+        - contents
+      properties:
+        work_period:
+          type: object
+          required: #必須定義
+            - start_year
+            - start_month
+            - end_year
+            - end_month
+          properties:
+            start_year:
+              type: string
+              example: startYear
+              description: 勤務開始年月：年
+            start_month:
+              type: string
+              example: startMonth
+              description: 勤務開始年月：月
+            end_year:
+              type: string
+              example: endYear
+              description: 勤務終了年月：年
+            end_month:
+              type: string
+              example: endMonth
+              description: 勤務終了年月：月
+        company_name:
+          type: string
+          example: name
+          description: 企業名
+        employment_type:
+          type: integer
+          example: 0
+          description: 雇用形態
+        employees_count:
+          type: integer
+          example: 0
+          description: 従業員数（数値）*これもマスタじゃないのか？
+        salary:
+          type: integer
+          example: 0
+          description: 年収
+        contents:
+          type: string
+          example: contents
+          description: 職務内容本文
+
+###============================================================###
+    AppSmoothCareer:
+      description: サクサク職歴書で利用（これはアプリでのみ使われ、サーバ登録時には Resume に加工されて登録となるはず）
+      required: #必須定義
+        - compony_description
+        - work_background_detail
+        - salary
+      properties:
+        compony_description:
+          description: 在籍企業概要
+          type: object
+          required: #必須定義
+            - company_name
+            - employees_count
+            - work_period
+            - employment_type
+          properties:
+            company_name:
+              type: string
+              example: companyName
+              description: 勤務先企業名
+            employees_count:
+              type: integer
+              example: 0
+              description: 社員数（コードで指定）
+            work_period:
+              type: object
+              required: #必須定義
+                - start_year
+                - start_month
+                - end_year
+                - end_month
+              properties:
+                work_start_year:
+                  type: integer
+                  example: 0
+                  description: 在籍期間：開始：年
+                work_start_month:
+                  type: integer
+                  example: 0
+                  description: 在籍期間：開始：月
+                work_end_year:
+                  type: integer
+                  example: 0
+                  description: 在籍期間：終了：年
+                work_end_month:
+                  type: integer
+                  example: 0
+                  description: 在籍期間：終了：月
+            employment_type:
+              type: integer
+              example: 0
+              description: 雇用形態
+
+        work_background_detail:
+          description: 職務経歴詳細
+          type: object
+          required: #必須定義
+            - business_type
+            - experiene_management
+            - skill_excel
+            - skill_word
+            - skill_power_point
+          properties:
+            business_type:
+              type: integer
+              example: 0
+              description: 在籍企業の業種
+            experiene_management:
+              type: array
+              items:
+                type: integer
+                description: マネジメント経験
+            skill_excel:
+              type: integer
+              example: 0
+              description: PCスキル：Excel
+            skill_word:
+              type: integer
+              example: 0
+              description: PCスキル：Word
+            skill_power_point:
+              type: integer
+              example: 0
+              description: PCスキル：PowerPoint
+        salary:
+          type: integer
+          example: 0
+          description: 年収（＊初回登録必須、ここでは非表示）
+
+###============================================================###
+    EntryFormInfo:
+      description: ※応募時にエントリー情報として渡す項目。独自質問は「職種」として設定している場合と「企業」として設定している場合があるので、type同様に前者に入力がある場合は前者を優先する。
+      type: object
+      required: #必須定義
+        - job_card_code
+        - display_period
+        - company_name
+        - job_name
+        - ex_question1
+        - ex_question2
+        - ex_question3
+        - ReqEntry
+      properties:
+        job_card_code:
+          type: string
+          example: JobOfferCode
+          description: 求人コード
+        display_period:
+          type: object
+          required: #必須定義
+            - start_at
+            - end_at
+          properties:
+            start_at:
+              type: string
+              example: 2020-04-01T12:34:56.789Z
+              description: 掲載開始日
+            end_at:
+              type: string
+              example: 2020-04-01T12:34:56.789Z
+              description: 掲載終了日
+        company_name:
+          type: string
+          example: company_name
+          description: 企業名
+        job_name:
+          type: string
+          example: job_name
+          description: 外部表示用職種名
+        ex_question1:
+          type: string
+          example: ひとつめの追加質問の設問テキスト
+          description: 追加の質問事項（1）
+        ex_question2:
+          type: string
+          example: ふたつめの追加質問の設問テキスト
+          description: 追加の質問事項（2）
+        ex_question3:
+          type: string
+          example: みっつめの追加質問の設問テキスト
+          description: 追加の質問事項（3）
+          
+    ReqEntry:
+      type: object
+      required: #必須定義
+        - profile_model
+        - resume_model
+        - career_model
+        - self_pr
+        - hope_work_place
+        - hope_salary
+        - ex_answer1
+        - ex_answer2
+        - ex_answer3
+      properties:
+        profile_model:
+          $ref: '#/components/schemas/Profile'
+        resume_model:
+          $ref: '#/components/schemas/Resume'
+        career_model:
+          $ref: '#/components/schemas/Career'
+        self_pr:
+          type: string
+          example: selfPR
+          description: 自己PR
+        hope_work_place:
+          type: array
+          items:
+            type: integer
+            description: 希望勤務地
+        hope_salary:
+          type: integer
+          example: 0
+          description: 希望年収
+        ex_answer1:
+          type: string
+          example: exAnswer1
+          description: 独自質問①
+        ex_answer2:
+          type: string
+          example: exAnswer2
+          description: 独自質問②
+        ex_answer3:
+          type: string
+          example: exAnswer3
+          description: 独自質問③
+          
+    ReqRegist:
+      type: object
+      required: #必須定義
+        - nickname
+        - birthday
+        - gender
+        - entry_places
+        - items
+        - school_type
+        - employment
+        - last_job_experiment
+        - salary
+        - job_experiments
+      properties:
+        nickname:
+          type: string
+          example: ニックネーム
+          description: ニックネーム
+        birthday:
+          type: object
+          required: #必須定義
+            - birthday_year
+            - birthday_month
+            - birthday_day
+          properties:
+            birthday_year:
+              type: integer
+              example: 1996
+              description: 生年月日：年　＊type仕様
+            birthday_month:
+              type: integer
+              example: 2
+              description: 生年月日：月　＊type仕様
+            birthday_day:
+              type: integer
+              example: 29
+              description: 生年月日：日　＊type仕様
+        gender:
+          type: integer
+          example: 2
+          description: 性別
+        entry_places:
+          type: array
+          items:
+            type: integer
+            example: entryPlace
+            description: 希望勤務地  希望勤務地(n≦5)
+        school_type:
+          type: integer
+          example: 最終学歴
+          description: 最終学歴
+        employment:
+          type: integer
+          example: 就業状況
+          description: 就業状況
+        last_job_experiment:
+          type: object
+          required: #必須定義
+            - job_type
+            - job_experiment_year
+          properties:
+            job_type:
+              type: integer
+              example: 0
+              description: 直近の経験職種：小分類
+            job_experiment_year:
+              type: integer
+              example: 0
+              description: 直近の経験年数
+        salary:
+          type: integer
+          example: 現在の年収
+          description: 現在の年収
+        job_experiments:
+          type: array
+          items:
+            type: object
+            required: #必須定義
+              - job_type
+              - job_experiment_year
+            properties:
+              job_type:
+                type: integer
+                description: その他の経験職種(n≦9)：小分類
+              job_experiment_year:
+                type: integer
+                description: その他の経験年数(n≦9)
+
+###============================================================###
+    UserFilterInfo:
+      type: object
+      description: ユーザ操作によるフィルタ(?)情報
+      properties:
+        tud_keep_status:
+          type: boolean
+          default: false
+          example: false
+          description: 【TUD独自】キープ状態
+        tud_skip_status:
+          type: boolean
+          default: false
+          example: false
+          description: 【TUD独自】見送り状態
+          
+###============================================================###
+
+    JobCardList:
+      type: object
+      properties:
+        nextPage:
+          type: integer
+          description: 次のページがなければ0、あれば次のページ数を返す（最初のページは1とする）
+        updateAt:
+          type: string
+          example: 2020-04-01T12:34:56.789Z
+          description:  一覧作成日時
+        jobCards:
+            type: array
+            items:
+              $ref: '#/components/schemas/JobCardBig'
+
+    KeepCardList:
+      type: object
+      properties:
+        nextPage:
+          type: integer
+          description: 次のページがなければ0、あれば次のページ数を返す（最初のページは1とする）
+        updateAt:
+          type: string
+          example: 2020-04-01T12:34:56.789Z
+          description:  一覧作成日時
+        jobCards:
+            type: array
+            items:
+              $ref: '#/components/schemas/JobCardSmall'
+
+###============================================================###
+
+    JobCardSmall:
+      type: object
+      required: #必須定義
+        - job_card_code
+        - display_period
+        - company_name
+        - job_name
+        - main_picture
+        - salary_code
+        - work_place_code
+        - user_filter
+      properties:
+        job_card_code:
+          type: string
+          example: JobOfferCode
+          description: 求人コード
+        display_period:
+          type: object
+          required: #必須定義
+            - start_at
+            - end_at
+          properties:
+            start_at:
+              type: string
+              example: 2020-04-01T12:34:56.789Z
+              description: 掲載開始日
+            end_at:
+              type: string
+              example: 2020-04-01T12:34:56.789Z
+              description: 掲載終了日
+        company_name:
+          type: string
+          example: company_name
+          description: 企業名
+        job_name:
+          type: string
+          example: job_name
+          description: 外部表示用職種名
+        main_picture:
+          type: string
+          example: （＊s3画像URL）
+          description: メイン記事写真
+        salary_code:
+          type: string
+          example: salary_code
+          description: 年収例コード
+        work_place_code:
+          type: integer
+          example: 0
+          description: 勤務地コード
+        user_filter:
+          $ref: '#/components/schemas/UserFilterInfo'
+
+    JobCardBig:
+      type: object
+      required: #必須定義
+        - job_card_code
+        - display_period
+        - company_name
+        - job_name
+        - mainTitle
+        - main_picture
+        - salary_min_code
+        - salary_max_code
+        - work_place_code
+        - is_salary_display
+        - keep_status
+        - skip_status
+        - user_filter
+      properties:
+        job_card_code:
+          type: string
+          example: JobOfferCode
+          description: 求人コード
+        display_period:
+          type: object
+          required: #必須定義
+            - start_at
+            - end_at
+          properties:
+            start_at:
+              type: string
+              example: 2020-04-01T12:34:56.789Z
+              description: 掲載開始日
+            end_at:
+              type: string
+              example: 2020-04-01T12:34:56.789Z
+              description: 掲載終了日
+        company_name:
+          type: string
+          example: company_name
+          description: 企業名
+        job_name:
+          type: string
+          example: job_name
+          description: 外部表示用職種名
+        mainTitle:
+          type: string
+          example: mainTitle
+          description: メイン記事メインタイトル
+        main_picture:
+          type: string
+          example: （＊s3画像URL）
+          description: メイン記事写真
+        minSalaryId:
+          type: integer
+          example: 0
+          description: 年収下限例コード
+        maxSalaryId:
+          type: integer
+          example: 0
+          description: 年収上限例コード
+        isSalaryDisplay:
+            type: boolean
+            example: true
+        work_place_code:
+          description: 勤務地コード
+          type: array
+          example: [1,34]
+          items:
+            type: integer
+        keep_status:
+            type: boolean
+            example: true
+            description: キープ状態 true,false
+        skip_status:
+            type: boolean
+            example: true
+            description: 見送り状態
+        user_filter:
+          $ref: '#/components/schemas/UserFilterInfo'
+
+    JobCardDetail:
+      type: object
+      required: #必須定義
+        - job_card_code
+        - job_name
+        - salary_min_id
+        - salary_max_id
+        - salary_offer
+        - work_place_codes
+        - company_name
+        - display_period
+        - main_picture
+        - sub_pictures
+        - main_title
+        - main_contents
+        - pr_codes
+        - salary_sample
+        - recruitment_reason
+        - product
+        - scope
+        - spot_title1
+        - spot_detail1
+        - spot_title2
+        - spot_detail2
+        - qualification
+        - better_skill
+        - application_example
+        - suitable_unsuitable
+        - employment_type
+        - salary
+        - bonus_about
+        - jobtime
+        - overtime_code    ##必須で良い？
+        - overtime_about    ##必須で良い？
+        - work_place
+        - transport
+        - holiday
+        - welfare
+        - childcare
+        - interview_memo
+        - selection_process
+        - contact_info
+        - user_filter
+      properties:
+        job_card_code:
+          type: string
+          example: JobOfferCode
+          description: 求人コード
+        ##=====================
+        ##４．NEW/終了間近アイコン＊display_periodを用いて表示制御
+        ##=====================
+        ##５．スカウト受信アイコン
+        ##=====================
+        job_name:
+          type: string
+          example: job_name
+          description: ６．職種名
+        ##=====================
+        salary_min_id:
+          type: integer
+          example: 0
+          description: ７．給与下限＊年収例コード＊
+        ##=====================
+        salary_max_id:
+            type: integer
+            example: 0
+            description: ７．給与上限＊年収例コード＊
+        ##=====================
+        isSalaryDisplay:
+            type: boolean
+            example: true
+            description: 給与公開フラグ
+        ##=====================
+        salary_offer:
+          type: string
+          example: salary_offer
+          description: スカウトによる提示年収＊初回は未使用＊
+        ##=====================
+        work_place_codes:
+          description: ８．勤務地
+          type: array
+          example: [13, 14]
+          items:
+            type: integer
+        ##=====================
+        company_name:
+          type: string
+          example: company_name
+          description: ９．社名＊外部表示用職種名＊
+        ##=====================
+        display_period:
+          type: object
+          description: １０．掲載期限
+          required: #必須定義
+            - start_at
+            - end_at
+          properties:
+            start_at:
+              type: string
+              example: 2020-04-01T12:34:56.789Z
+              description: 掲載開始日
+            end_at:
+              type: string
+              example: 2020-04-01T12:34:56.789Z
+              description: 掲載終了日
+        ##=====================
+        main_picture:
+          type: string
+          example: （＊s3画像URL）
+          description: １１．求人メイン画像＊メイン記事写真＊
+        ##=====================
+        sub_pictures:
+          description: １１. 求人メイン画像＊サブ画像最大３枚＊
+          example: (サブ画像URL1,サブ画像URL2,サブ画像URL3)
+          type: array
+          items:
+            type: string
+            example: "https://~,https://~"
+            description: (サブ画像URL1,サブ画像URL2,サブ画像URL3)
+        ##=====================
+        ##１２．メイン記事
+        main_title:
+          type: string
+          example: main_title
+          description: メイン記事メインタイトル
+        main_contents:
+          type: string
+          maxLength: 500
+          example: main_contents
+          description: メイン記事本文
+        ##=====================
+        pr_codes:
+          type: array
+          items:
+            type: integer
+            example: 0
+            description: １３．PRコード＊こだわり条件＊
+        ##=====================
+        salary_sample:
+          type: string
+          example: salary_sample
+          description: １４．給与例
+        ##=====================
+        recruitment_reason:
+            type: string
+            example: title
+            description: 15. 募集背景(必須)
+        ##=====================
+        job_description:
+          type: string
+          example: job_description
+          description: １６．仕事内容（必須）
+        ##=====================
+        job_example:
+          type: string
+          example: job_example
+          description: １７．案件例（任意）
+        ##=====================
+        product:
+          type: string
+          example: product
+          description: １８．手がける商品・サービス（任意）
+        ##=====================
+        scope:
+          type: string
+          example: scope
+          description: １９．開発環境・業務範囲（任意）
+        ##=====================
+        ##２０．注目ポイント（任意）
+        spot_title1:
+          type: string
+          example: spot_title1
+          description: 注目ポイント見出し１
+        spot_detail1:
+          type: string
+          example: spot_detail1
+          description: 注目ポイント本文１
+        spot_title2:
+          type: string
+          example: spot_title2
+          description: 注目ポイント見出し２
+        spot_detail2:
+          type: string
+          example: spot_detail2
+          description: 注目ポイント本文２
+        ##=====================
+        qualification:
+          type: string
+          example: qualification
+          description: ２１．応募資格（必須）
+        ##=====================
+        better_skill:
+          type: string
+          example: better_skill
+          description: ２２．歓迎する経験・スキル（任意）
+        ##=====================
+        application_example:
+          type: string
+          example: application_example
+          description: ２３．過去の採用例（任意）
+        ##=====================
+        suitable_unsuitable:
+          type: string
+          example: suitable_unsuitable
+          description: ２４．この仕事の向き・不向き（任意）
+        ##=====================
+        employment_type:
+          type: integer
+          example: 0
+          description: ２５．雇用形態コード（必須）
+        ##=====================
+        salary:
+          type: string
+          example: salary
+          description: ２6．給与（必須）＊「想定給与」＊
+        ##=====================
+        bonus_about:
+          type: string
+          example: bonus_about
+          description: ２７．賞与について（任意）
+        ##=====================
+        jobtime:
+          type: string
+          example: jobtime
+          description: 28．勤務時間（必須）
+        ##=====================
+        ##29．残業について（残業時間）
+        overtime_code:
+          type: integer
+          example: 0
+          description: 目安残業時間
+        overtime_about:
+          type: string
+          example: overtime_about
+          description: 残業について
+        ##=====================
+        work_place:
+          type: string
+          example: work_place
+          description: 30．勤務地（必須）
+        ##=====================
+        transport:
+          type: string
+          example: transport
+          description: ３１．交通・詳細（必須）
+        ##=====================
+        holiday:
+            type: string
+            example: holiday
+            description: ＊３２．休日休暇（必須）
+        ##=====================
+        welfare:
+            type: string
+            example: welfare
+            description: ＊３３．待遇・福利厚生（必須）
+        ##=====================
+        childcare:
+            type: string
+            example: childcare
+            description: ３４．産休・育休取得状況（任意）
+        ##=====================
+        interview_memo:
+          type: object
+          description: ３５．取材メモ（任意）
+          required: #必須定義
+            - interview_content
+            - interview_photo1
+            - interview_photo2
+            - interview_photo3
+          properties:
+            interview_content:
+              type: string
+              example: interview_content
+              description: 本文
+            interview_photo1:
+              type: string
+              example: （＊s3画像URL）
+              description: 写真 （１）
+            interview_photo2:
+              type: string
+              example: （＊s3画像URL）
+              description: 写真（２）
+            interview_photo3:
+              type: string
+              example: （＊s3画像URL）
+              description: 写真（３）
+        ##=====================
+        selection_process:
+          type: object
+          description: ３６．選考プロセス（必須）
+          required: #必須定義
+            - selection_process1
+            - selection_process2
+            - selection_process3
+            - selection_process4
+            - selection_process5
+            - selection_process_detail
+          properties:
+            selection_process1:
+              type: string
+              example: selection_process1
+              description: 【STEP1】
+            selection_process2:
+              type: string
+              example: selection_process2
+              description: 【STEP2】
+            selection_process3:
+              type: string
+              example: selection_process3
+              description: 【STEP3】
+            selection_process4:
+              type: string
+              example: selection_process4
+              description: 【STEP4】
+            selection_process5:
+              type: string
+              example: selection_process5
+              description: 【STEP5】
+            selection_process_detail:
+              type: string
+              example: selection_process_detail
+              description: 詳細
+        ##=====================
+        contact_info:
+          type: object
+          description: ３７．連絡先（必須）
+          required: #必須定義
+            - company_url
+            - contact_zipcode
+            - contact_address
+            - contact_phone
+            - contact_person
+            - contact_mail
+          properties:
+            company_url:
+              type: string
+              example: company_url
+              description: 企業ホームページURL
+            contact_zipcode:
+              type: string
+              example: contact_zipcode
+              description: 郵便番号
+            contact_address:
+              type: string
+              example: contact_address
+              description: 住所
+            contact_phone:
+              type: string
+              example: contact_phone
+              description: Tel
+            contact_person:
+              type: string
+              example: contact_person
+              description: 担当者
+            contact_mail:
+              type: string
+              example: contact_mail
+              description: 表示用e-mailアドレス
+        ##=====================
+        company_description:
+          type: object
+          description: ３８．会社概要（必須）
+          required: #必須定義
+            - enterprise_contents
+            - main_customer
+            - media_coverage
+            - established
+            - employees_count
+            - president_data
+          properties:
+            enterprise_contents:
+              type: string
+              example: enterprise_contents
+              description: 事業内容
+            main_customer:
+              type: string
+              example: main_customer
+              description: 主要取引先
+            media_coverage:
+              type: string
+              example: media_coverage
+              description: 事業・サービスのメディア掲載実績
+            established:
+              type: string
+              example: established
+              description: 設立
+            employees_count:
+              type: object
+              required:
+                - count:
+                - average_age:
+                - gender_ratio:
+                - middle_enter:
+                - capital:
+                - turnover:
+              properties:
+                count:
+                    type: string
+                    example: count
+                    description: 従業員数
+                average_age:
+                    type: string
+                    example: average_age
+                    description: 平均年齢
+                gender_ratio:
+                    type: string
+                    example: gender_ratio
+                    description: 男女比
+                middle_enter:
+                    type: string
+                    example: middle_enter
+                    description: 中途入社者の割合
+              example: employees_count
+              description: 従業員数
+            capital:
+              type: string
+              example: capital
+              description: 資本金
+            turnover:
+              type: string
+              example: turnover
+              description: 売上高
+            president_data:
+              type: object
+              required:
+                - president_name:
+                - president_history
+              properties:
+                president_name:
+                    type: string
+                    example: president_name
+                    description: 代表者名
+                president_history:
+                    type: string
+                    example: president_history
+                    description: 代表者略歴
+              example: president_data
+              description: 代表者
+        ##=====================
+        user_filter:
+          $ref: '#/components/schemas/UserFilterInfo'
+
+###============================================================###
+    JobOfferCode:
+      type: string
+      example: 12345678
+      description: 求人情報を指定するためのユニークID
+
+###============================================================###

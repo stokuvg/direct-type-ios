@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChemistrySelectFooterView" customModule="direct_type" customModuleProvider="target">
+            <connections>
+                <outlet property="whiteBackgroundView" destination="dOY-uO-LPH" id="MXj-qJ-a5o"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dOY-uO-LPH">
+                    <rect key="frame" x="20" y="0.0" width="374" height="30"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZE1-5p-Ufp">
+                            <rect key="frame" x="20" y="5" width="334" height="1"/>
+                            <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="H4A-gu-p8H"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" name="color-white"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="ZE1-5p-Ufp" secondAttribute="trailing" constant="20" id="1Lp-pQ-gXX"/>
+                        <constraint firstItem="ZE1-5p-Ufp" firstAttribute="top" secondItem="dOY-uO-LPH" secondAttribute="top" constant="5" id="Dm9-hu-Xkq"/>
+                        <constraint firstAttribute="height" constant="30" id="PCC-ES-MPe"/>
+                        <constraint firstItem="ZE1-5p-Ufp" firstAttribute="leading" secondItem="dOY-uO-LPH" secondAttribute="leading" constant="20" id="dva-qe-pfU"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" name="color-base"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="dOY-uO-LPH" secondAttribute="trailing" constant="20" id="3Bu-Up-upS"/>
+                <constraint firstItem="dOY-uO-LPH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Acc-uq-HNf"/>
+                <constraint firstItem="dOY-uO-LPH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="Zc7-dC-MLb"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="140.57971014492756" y="107.47767857142857"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="color-base">
+            <color red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="color-white">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

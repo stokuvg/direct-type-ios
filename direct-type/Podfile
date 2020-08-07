@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '12.0'
+platform :ios, '12.0'
 
 target 'direct-type' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -10,13 +10,20 @@ target 'direct-type' do
 
   # Pods for direct-type
 
-  pod 'AWSMobileClient', '~> 2.12.1'      # Required dependency
+  ##=== Cognito ===
+  pod 'AWSMobileClient', '~> 2.13.0'      # Required dependency
 
   ##=== PromiseKit
 #  pod "PromiseKit", "~> 6.8"
 
-  ##=== Swagger ===
-  pod 'SwaggerClient', :path => 'generated/promise'
+  ##=== Swagger ===（仮定義なアプリモデル生成用）
+  pod 'SwaggerClient', :path => '../generated/promise'
+
+  ##=== Swagger ===（シルバーエッグレコメンド叩くIF）
+  pod 'SERecommend', :path => '../generatedRecommend/promise'
+  
+  ##=== Swagger ===（最終的なサーバ側API）
+  pod 'TudApi', :path => '../generatedSvr/promise'
   
   ##=== Progress
   pod 'SVProgressHUD'
@@ -31,10 +38,18 @@ target 'direct-type' do
   ##=== Projects
   pod 'R.swift'
 
+  ##=== Analytics
+  pod 'AppsFlyerFramework', '~> 5.4.1'
+
+  ##=== Crash
+  pod 'Firebase/Crashlytics', '~> 6.27.1'
+  pod 'Firebase/Analytics', '~> 6.27.1'
+
+  ##=== Acknowledgements
+  post_install do | installer |
+    require 'fileutils'
+    FileUtils.cp_r('Pods/Target Support Files/Pods-direct-type/Pods-direct-type-acknowledgements.plist', './Settings.bundle/acknowledgements.plist', :remove_destination => true)
+  end
 end
 
-#post_install do | installer |
-#  require 'fileutils'
-#  FileUtils.cp_r('Pods/Target Support Files/Pods-direct-type/Pods-direct-type-#acknowledgements.plist', 'direct-type/Settings.bundle/#Acknowledgements.plist', :remove_destination => true)
 
-#end
