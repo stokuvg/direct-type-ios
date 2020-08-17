@@ -60,8 +60,7 @@ class JobDetailDataCell: BaseTableViewCell {
     }
     
     func setup(data:MdlJobCardDetail) {
-        Log.selectLog(logLevel: .debug, "JobDetailDataCell setup start")
-        
+//        Log.selectLog(logLevel: .debug, "JobDetailDataCell setup start")
         
         let nowDate = Date()
         // NEWマーク 表示チェック
@@ -83,7 +82,7 @@ class JobDetailDataCell: BaseTableViewCell {
         // 年収
         let salaryDisplay = data.isSalaryDisplay
         if salaryDisplay {
-            Log.selectLog(logLevel: .debug, "data.salaryMinId:\(data.salaryMinId)")
+//            Log.selectLog(logLevel: .debug, "data.salaryMinId:\(data.salaryMinId)")
             let minPriceLabel = SelectItemsManager.getCodeDisp(.salaryCode, code: data.salaryMinId)?.disp ?? ""
             let maxPriceLabel = SelectItemsManager.getCodeDisp(.salaryCode, code: data.salaryMaxId)?.disp ?? ""
             if minPriceLabel.count > 0 && (maxPriceLabel.count > 0) {
