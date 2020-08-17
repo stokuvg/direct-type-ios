@@ -18,10 +18,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oS2-sl-xBB">
-                        <rect key="frame" x="15" y="0.0" width="290" height="90"/>
+                        <rect key="frame" x="15" y="0.0" width="290" height="95"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="bff-OZ-9E7">
-                                <rect key="frame" x="0.0" y="0.0" width="290" height="90"/>
+                                <rect key="frame" x="0.0" y="0.0" width="290" height="95"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HcH-wZ-XFv">
                                         <rect key="frame" x="0.0" y="0.0" width="290" height="45"/>
@@ -62,10 +62,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xj7-Jg-LrB">
-                                        <rect key="frame" x="0.0" y="45" width="290" height="45"/>
+                                        <rect key="frame" x="0.0" y="45" width="290" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rlT-QF-lHN">
-                                                <rect key="frame" x="15" y="12" width="260" height="21"/>
+                                                <rect key="frame" x="15" y="12" width="260" height="26"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -95,7 +95,7 @@
                 <constraints>
                     <constraint firstItem="oS2-sl-xBB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="4KP-D6-iyC"/>
                     <constraint firstItem="oS2-sl-xBB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="DyK-Pt-LLd"/>
-                    <constraint firstAttribute="bottom" secondItem="oS2-sl-xBB" secondAttribute="bottom" constant="20" id="bsJ-3T-elo"/>
+                    <constraint firstAttribute="bottom" secondItem="oS2-sl-xBB" secondAttribute="bottom" constant="15" id="bsJ-3T-elo"/>
                     <constraint firstAttribute="trailing" secondItem="oS2-sl-xBB" secondAttribute="trailing" constant="15" id="hwe-Kg-yUf"/>
                 </constraints>
             </tableViewCellContentView>

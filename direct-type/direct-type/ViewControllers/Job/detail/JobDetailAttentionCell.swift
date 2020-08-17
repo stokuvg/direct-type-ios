@@ -1,5 +1,5 @@
 //
-//  JobDetailWorkAttentionCell.swift
+//  JobDetailAttentionCell.swift
 //  direct-type
 //
 //  Created by ms-mb015 on 2020/08/17.
@@ -8,8 +8,9 @@
 
 import UIKit
 
-class JobDetailWorkAttentionCell: BaseTableViewCell {
+class JobDetailAttentionCell: BaseTableViewCell {
     
+    @IBOutlet weak var titleView:UIView!
     @IBOutlet weak var titleBackHeight:NSLayoutConstraint!
     @IBOutlet weak var markTopConstraint:NSLayoutConstraint!
     @IBOutlet weak var markImageView:UIImageView!
@@ -17,11 +18,13 @@ class JobDetailWorkAttentionCell: BaseTableViewCell {
     @IBOutlet weak var titleLabelTop:NSLayoutConstraint!
     @IBOutlet weak var titleLabelHeight:NSLayoutConstraint!
     @IBOutlet weak var attentionText:UILabel!
+    
+    @IBOutlet weak var bottomSpaceHeight:NSLayoutConstraint!
+    @IBOutlet weak var bottomSpaceView:UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        Log.selectLog(logLevel: .debug, "JobDetailWorkAttentionCell awakeFromNib start")
     }
     
     override func prepareForReuse() {
@@ -33,8 +36,8 @@ class JobDetailWorkAttentionCell: BaseTableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    func setup(title: String, text: String) {
+        
+    func setup(title: String, text: String, bottomSpaceFlag:Bool) {
         Log.selectLog(logLevel: .debug, "title:\(title)")
         
         let titleFont:FontType = .font_Sb
@@ -42,16 +45,16 @@ class JobDetailWorkAttentionCell: BaseTableViewCell {
         self.attentionTitle.text(text: title, fontType: titleFont, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
         
         let attentionBackView = self
-//        Log.selectLog(logLevel: .debug, "attentionBackView:\(attentionBackView)")
+        Log.selectLog(logLevel: .debug, "attentionBackView:\(attentionBackView)")
         
-        let labelSpace = (attentionBackView.frame.size.width - (self.markImageView.bounds.origin.x + self.markImageView.bounds.size.width)) - (15 + 10)
+        let labelSpace = (self.titleView.frame.size.width - (self.markImageView.bounds.origin.x + self.markImageView.bounds.size.width)) - (15 + 10)
         Log.selectLog(logLevel: .debug, "labelSpace:\(labelSpace)")
         
-//        let singleWidth = self.titleLabel.frame.size.width
-        let textSize = CGFloat(title.count * 14)
+        let singleWidth = self.attentionTitle.frame.size.width
+        Log.selectLog(logLevel: .debug, "singleWidth:\(singleWidth)")
         
-//        Log.selectLog(logLevel: .debug, "singleWidth:\(singleWidth)")
-//        Log.selectLog(logLevel: .debug, "textSize:\(textSize)")
+        let textSize = CGFloat(title.count * 14)
+        Log.selectLog(logLevel: .debug, "textSize:\(textSize)")
         
         if textSize >= labelSpace {
             Log.selectLog(logLevel: .debug, "注目タイトルが２行以上")
@@ -64,5 +67,14 @@ class JobDetailWorkAttentionCell: BaseTableViewCell {
         }
         
         self.attentionText.text(text: text, fontType: .C_font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        
+        if bottomSpaceFlag {
+            self.bottomSpaceHeight.constant = 15
+            self.bottomSpaceView.backgroundColor = UIColor.init(colorType: .color_base)
+        } else {
+            self.bottomSpaceHeight.constant = 0
+            self.bottomSpaceView.backgroundColor = UIColor.init(colorType: .color_white)
+        }
     }
+    
 }

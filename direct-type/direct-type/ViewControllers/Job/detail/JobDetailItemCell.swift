@@ -30,7 +30,7 @@ class JobDetailItemCell: BaseJobDetailCell {
             if subView is JobDetailItemOptionalView {
                 subView.removeFromSuperview()
             } else if subView is JobDetailItemAttentionView {
-//                subView.removeFromSuperview()
+                subView.removeFromSuperview()
             }
         }
     }
@@ -255,7 +255,6 @@ class JobDetailItemCell: BaseJobDetailCell {
         }
         
         // 注目
-        /*
         var attentionDatas:[[String:Any]] = []
         if row == 0 {
             let spotTitle1 = data.spotTitle1
@@ -295,6 +294,6 @@ class JobDetailItemCell: BaseJobDetailCell {
         } else {
 //            Log.selectLog(logLevel: .debug, "注目用Viewは他は入らない")
         }
-        */
+        
     }
 }

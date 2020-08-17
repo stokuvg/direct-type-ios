@@ -136,7 +136,7 @@ private extension JobOfferDetailVC {
         /// section 3
         // 募集要項
         detailTableView.registerNib(nibName: "JobDetailWorkContentsCell", idName: "JobDetailWorkContentsCell")
-        detailTableView.registerNib(nibName: "JobDetailWorkAttentionCell", idName: "JobDetailWorkAttentionCell")
+        detailTableView.registerNib(nibName: "JobDetailAttentionCell", idName: "JobDetailAttentionCell")
         // 1.仕事内容:              必須  3-0
         // 　・案件例:               任意
         // 　・手掛ける商品・サービス:   任意
@@ -560,7 +560,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = indexPath.section
         let row = indexPath.row
-        Log.selectLog(logLevel: .debug, "section:\(section),row:\(row)")
+//        Log.selectLog(logLevel: .debug, "section:\(section),row:\(row)")
         switch (section,row) {
             case (0,0):
                 // 求人内容
@@ -610,11 +610,16 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 // 注目1
                 let spotTitle1 = _mdlJobDetail.spotTitle1
                 let spotDetail1 = _mdlJobDetail.spotDetail1
+                let spotTitle2 = _mdlJobDetail.spotTitle2
+                let spotDetail2 = _mdlJobDetail.spotDetail2
                 if (spotTitle1.count > 0 && spotDetail1.count > 0) {
+                    var flag = false
+                    if (spotTitle2.count == 0 || spotDetail2.count == 0) {
+                        flag = true
+                    }
                     Log.selectLog(logLevel: .debug, "注目１セル表示")
-                    let cell = tableView.loadCell(cellName: "JobDetailWorkContentsCell", indexPath: indexPath) as! JobDetailWorkContentsCell
-//                    let cell = tableView.loadCell(cellName: "JobDetailWorkAttentionCell", indexPath: indexPath) as! JobDetailWorkAttentionCell
-//                    cell.setup(title: spotTitle1, text: spotDetail1)
+                    let cell = tableView.loadCell(cellName: "JobDetailAttentionCell", indexPath: indexPath) as! JobDetailAttentionCell
+                    cell.setup(title: spotTitle1, text: spotDetail1, bottomSpaceFlag: flag)
                     return cell
                 } else {
                     Log.selectLog(logLevel: .debug, "注目１セル非表示")
@@ -625,10 +630,12 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 let spotTitle2 = _mdlJobDetail.spotTitle2
                 let spotDetail2 = _mdlJobDetail.spotDetail2
                 if (spotTitle2.count > 0 && spotDetail2.count > 0) {
-                    let cell = tableView.loadCell(cellName: "JobDetailWorkAttentionCell", indexPath: indexPath) as! JobDetailWorkAttentionCell
-                    cell.setup(title: spotTitle2, text: spotDetail2)
+                    Log.selectLog(logLevel: .debug, "注目２セル表示")
+                    let cell = tableView.loadCell(cellName: "JobDetailAttentionCell", indexPath: indexPath) as! JobDetailAttentionCell
+                    cell.setup(title: spotTitle2, text: spotDetail2, bottomSpaceFlag: true)
                     return cell
                 } else {
+                    Log.selectLog(logLevel: .debug, "注目２セル非表示")
                     return UITableViewCell()
                 }
             case (3,3):
@@ -748,6 +755,15 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
         self.guidebookScrollAnimation(section: section,row: row, titleName: titleName)
     }
 
+    // 募集要項の移動
+    func guidebookScrollAnimation(section: Int,row: Int,titleName: String) {
+        Log.selectLog(logLevel: .debug, "guidebookScrollAnimation start")
+
+        let indexPath = IndexPath.init(row: row, section: section)
+        detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        naviButtonTapActionFlag = false
+    }
+
     // 企業情報,会社情報を表示
     func informationAction() {
         if naviButtonTapActionFlag == true { return }
@@ -761,15 +777,6 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
         self.detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
         self.naviButtonTapActionFlag = false
 
-    }
-
-    // 募集要項の移動
-    func guidebookScrollAnimation(section: Int,row: Int,titleName: String) {
-        Log.selectLog(logLevel: .debug, "guidebookScrollAnimation start")
-
-        let indexPath = IndexPath.init(row: row, section: section)
-        detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
-        naviButtonTapActionFlag = false
     }
 
 

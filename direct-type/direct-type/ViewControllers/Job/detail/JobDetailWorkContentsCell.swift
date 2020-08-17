@@ -43,7 +43,7 @@ class JobDetailWorkContentsCell: BaseJobDetailCell {
         
         // 注目1,注目２が両方とも無い
         if (spotTitle1.count == 0 || spotDetail1.count == 0) && (spotTitle2.count == 0 || spotDetail2.count == 0) {
-            bottomSpace.constant = 20
+            bottomSpace.constant = 15
         } else {
             bottomSpace.constant = 0
         }
