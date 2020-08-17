@@ -62,7 +62,7 @@ extension RecommendManager {
 extension RecommendManager {
     private class func getRecommendFetch(spec: String, jobID: String? = nil, num: Int = 100) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
-        let sub: String = AWSMobileClient.default().username ?? ""
+        let sub: String = AuthManager.shared.sub //確実にsubの値を設定する
         SERecommendAPI.basePath = AppDefine.RecommendServer
         RecommendAPI.pycre5JsonRecommendGet(merch: "directtype", cookie: sub, spec: spec, prod: jobID, num: num)
         .done { result in
@@ -77,7 +77,7 @@ extension RecommendManager {
     }
     private class func clickRecommendFetch(spec: String, jobID: String) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
-        let sub: String = AWSMobileClient.default().username ?? ""
+        let sub: String = AuthManager.shared.sub //確実にsubの値を設定する
         let orderId: String = Date().RecommendParamOrderID
         SERecommendAPI.basePath = AppDefine.RecommendServer
         RecommendAPI.pycre5PurchaseGet(prod: jobID, merch: "directtype", sku: jobID, order: orderId, qty: 1, price: 1, cust: sub, cookie: sub, device: "a")
