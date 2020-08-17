@@ -9,36 +9,27 @@
 import UIKit
 
 struct DeepLinkHierarchy {
-    enum TabType: String, CaseIterable {
-        case home
-        case keep
-        case myPage
-        case undefined
-        
-        var index: Int? {
-            switch self {
-            case .home: return 0
-            case .keep: return 1
-            case .myPage: return 2
-            case .undefined: return nil
-            }
-        }
-    }
-    
     enum ScreenType: String {
         case jobDetail = "job_detail"
         case approachSettings = "approach_settings"
         case undefined
     }
     
-    var tabType: TabType
     var screenType: ScreenType
     var query: DeepLinkQuery
     
-    init(host tabText: String, path: String, query queryText: String) {
-        tabType = TabType(rawValue: tabText) ?? .undefined
-        screenType = ScreenType(rawValue: path.replacingOccurrences(of: "/", with: "")) ?? .undefined
+    init(host: String, path: String, query queryText: String) {
+        screenType = ScreenType(rawValue: host) ?? .undefined
         query = DeepLinkQuery(queryText)
+    }
+
+    
+    var rootNavigation: UINavigationController? {
+        guard let rootTabBarController = UIApplication.shared.keyWindow?
+            .rootViewController as? UITabBarController,
+        let tabIndex = tabType.index else { return nil }
+        rootTabBarController.selectedIndex = tabIndex
+        return rootTabBarController.children[tabIndex] as? UINavigationController
     }
     
     var distination: UIViewController? {
@@ -55,6 +46,36 @@ struct DeepLinkHierarchy {
             return destinationViewController
         case .undefined:
             return nil
+        }
+    }
+}
+
+private extension DeepLinkHierarchy {
+    enum TabType: String, CaseIterable {
+        case home
+        case keep
+        case myPage
+        case undefined
+        
+        var index: Int? {
+            switch self {
+            case .home: return 0
+            case .keep: return 1
+            case .myPage: return 2
+            case .undefined: return nil
+            }
+        }
+    }
+    
+    var tabType: TabType {
+        // 遷移先画面からルートとなるタブを内部的に判定する
+        switch screenType {
+        case .jobDetail:
+            return .home
+        case .approachSettings:
+            return .myPage
+        case .undefined:
+            return .undefined
         }
     }
 }

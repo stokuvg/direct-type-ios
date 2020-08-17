@@ -114,13 +114,8 @@ private extension AppDelegate {
     }
     
     func transitionToDeepLinkDestination(with hierarchy: DeepLinkHierarchy) {
-        guard let rootTabBarController = window?.rootViewController as? UITabBarController,
-            let tabIndex = hierarchy.tabType.index else { return }
-        
-        rootTabBarController.selectedIndex = tabIndex
-        
-        let rootNavigationController = rootTabBarController.children[tabIndex] as! UINavigationController
-        guard let destinationViewController = hierarchy.distination else { return }
+        guard let rootNavigationController = hierarchy.rootNavigation,
+            let destinationViewController = hierarchy.distination else { return }
         
         rootNavigationController.popToRootViewController(animated: false)
         rootNavigationController.pushViewController(destinationViewController, animated: true)
