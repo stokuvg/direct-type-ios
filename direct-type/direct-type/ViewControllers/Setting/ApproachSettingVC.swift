@@ -41,8 +41,9 @@ final class ApproachSettingVC: TmpBasicVC {
         setAttributedText()
     }
     
-    func configure(with approachSetting: MdlApproach) {
-        self.approachSetting = approachSetting
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchApproachData()
     }
 }
 
@@ -51,6 +52,26 @@ private extension ApproachSettingVC {
         guard let approachSetting = approachSetting else { return }
         isScoutEnable = approachSetting.scoutEnable
         navigationItem.title = "アプローチ設定"
+    }
+    
+    func fetchApproachData() {
+        SVProgressHUD.show(withStatus: "設定情報の取得")
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        LogManager.appendApiLog("getApproach", nil, function: #function, line: #line)
+        ApiManager.getApproach(())
+        .done { result in
+            LogManager.appendApiResultLog("getApproach", result, function: #function, line: #line)
+            self.approachSetting = result
+        }
+        .catch { (error) in
+            LogManager.appendApiErrorLog("getApproach", error, function: #function, line: #line)
+            let myError: MyErrorDisp = AuthManager.convAnyError(error)
+            print("アプローチデータ取得エラー！　コード: \(myError.code)")
+            self.showError(myError)
+        }
+        .finally {
+            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        }
     }
     
     func saveSetting() {

@@ -82,11 +82,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        // 想定されるURL形式: direct-type://myPage/vacanciesDetail?vacanciesId=123&keepId=456&searchText=hoge&campainText=fuga
+        // 未ログインの場合は初期画面へ遷移
+        guard AuthManager.shared.isLogin else {
+            let inputSB = UIStoryboard(name: "InitialInputStartVC", bundle: nil)
+            let startNavi = inputSB.instantiateViewController(withIdentifier: "Sbid_InitialInputNavi") as! UINavigationController
+            window?.rootViewController = startNavi
+            return true
+        }
+        
         let deepLinkHierarchy = DeepLinkHierarchy(host: url.host ?? "", path: url.path , query: url.query ?? "")
-        guard let rootTabBarController = window?.rootViewController as? UITabBarController else { return true }
-        guard let tabIndex = deepLinkHierarchy.tabType.index else { return true }
-        rootTabBarController.selectedIndex = tabIndex
+        transitionToDeepLinkDestination(with: deepLinkHierarchy)
+        
         return true
     }
 }
@@ -105,6 +111,19 @@ private extension AppDelegate {
         if AuthManager.shared.isLogin {
             ApiManager.createActivity()
         }
+    }
+    
+    func transitionToDeepLinkDestination(with hierarchy: DeepLinkHierarchy) {
+        guard let rootTabBarController = window?.rootViewController as? UITabBarController,
+            let tabIndex = hierarchy.tabType.index else { return }
+        
+        rootTabBarController.selectedIndex = tabIndex
+        
+        let rootNavigationController = rootTabBarController.children[tabIndex] as! UINavigationController
+        guard let destinationViewController = hierarchy.distination else { return }
+        
+        rootNavigationController.popToRootViewController(animated: false)
+        rootNavigationController.pushViewController(destinationViewController, animated: true)
     }
 }
 
