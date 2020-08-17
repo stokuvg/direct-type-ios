@@ -31,7 +31,6 @@ final class ApproachSettingVC: TmpBasicVC {
         }
     }
     
-    private var approachSetting: MdlApproach?
     private let inuseTitle = "利用中"
     private let unuseTitle = "利用停止中"
     
@@ -49,8 +48,6 @@ final class ApproachSettingVC: TmpBasicVC {
 
 private extension ApproachSettingVC {
     func setup() {
-        guard let approachSetting = approachSetting else { return }
-        isScoutEnable = approachSetting.scoutEnable
         navigationItem.title = "アプローチ設定"
     }
     
@@ -61,7 +58,7 @@ private extension ApproachSettingVC {
         ApiManager.getApproach(())
         .done { result in
             LogManager.appendApiResultLog("getApproach", result, function: #function, line: #line)
-            self.approachSetting = result
+            self.isScoutEnable = result.scoutEnable
         }
         .catch { (error) in
             LogManager.appendApiErrorLog("getApproach", error, function: #function, line: #line)
