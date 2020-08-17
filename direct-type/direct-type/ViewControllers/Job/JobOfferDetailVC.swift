@@ -76,6 +76,8 @@ final class JobOfferDetailVC: TmpBasicVC {
 
     func configure(jobId: String, isKeep: Bool, routeFrom: AnalyticsEventType.RouteFromType) {
         self.jobId = jobId
+        // このスコープのisKeep引数はKeepManagerへ責務を移管したため、現状は不要なフラグとなっている
+        // FIXME: 不要なisKeepを削除する
         keepFlag = isKeep
         self.routeFrom = routeFrom
     }
