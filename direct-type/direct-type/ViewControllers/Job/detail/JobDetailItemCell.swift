@@ -30,7 +30,7 @@ class JobDetailItemCell: BaseJobDetailCell {
             if subView is JobDetailItemOptionalView {
                 subView.removeFromSuperview()
             } else if subView is JobDetailItemAttentionView {
-                subView.removeFromSuperview()
+//                subView.removeFromSuperview()
             }
         }
     }
@@ -78,13 +78,13 @@ class JobDetailItemCell: BaseJobDetailCell {
 //                text = data.jobDescription.text
                 title = "仕事内容"
                 text = data.jobDescription
-            case 1:
+            case 3:
                 // 応募資格
 //                title = data.qualification.title!
 //                text = data.qualification.text!
                 title = "応募資格"
                 text = data.qualification
-            case 2:
+            case 4:
                 // 雇用形態
                 title = "雇用形態"
                 Log.selectLog(logLevel: .debug, "employmentType:\(data.employmentType)")
@@ -94,27 +94,27 @@ class JobDetailItemCell: BaseJobDetailCell {
                 Log.selectLog(logLevel: .debug, "雇用形態:\(types)")
                 
                 text = types
-            case 3:
+            case 5:
                 // 給与
 //                title = data.salary.title!
                 title = "給与"
                 text = data.salary
-            case 4:
+            case 6:
                 // 勤務時間
 //                title = data.jobtime.title!
                 title = "勤務時間"
                 text = data.jobtime
-            case 5:
+            case 7:
                 // 勤務地
 //                title = data.workPlace.title!
                 title = "勤務地"
                 text = data.workPlace
-            case 6:
+            case 8:
                 // 休日休暇
 //                title = data.holiday.title!
                 title = "休日休暇"
                 text = data.holiday
-            case 7:
+            case 9:
                 // 待遇・福利厚生
 //                title = data.welfare.title!
                 title = "待遇・福利厚生"
@@ -255,6 +255,7 @@ class JobDetailItemCell: BaseJobDetailCell {
         }
         
         // 注目
+        /*
         var attentionDatas:[[String:Any]] = []
         if row == 0 {
             let spotTitle1 = data.spotTitle1
@@ -294,6 +295,6 @@ class JobDetailItemCell: BaseJobDetailCell {
         } else {
 //            Log.selectLog(logLevel: .debug, "注目用Viewは他は入らない")
         }
-        
+        */
     }
 }

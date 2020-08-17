@@ -20,7 +20,10 @@ extension UITableView {
     
     func loadCell<T: UITableViewCell>(cellName: String, indexPath:IndexPath) -> T? {
         let name = "Xib_" + cellName
-        let cell = self.dequeueReusableCell(withIdentifier: name, for: indexPath) as! T
+        Log.selectLog(logLevel: .debug, "name:\(name)")
+        
+        let cell = self.dequeueReusableCell(withIdentifier: name, for: indexPath) as! T        
+        Log.selectLog(logLevel: .debug, "cell:\(cell)")
         
         return cell
     }
