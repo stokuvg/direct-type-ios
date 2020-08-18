@@ -45,14 +45,8 @@ final public class AuthManager {
     private init() {
         AWSMobileClient.default().initialize() {_,_ in }
     }
-    
-    var isLogin: Bool {
-        AWSMobileClient.default().getTokens { (tokens, error) in
-            //LogManager.appendLoginCheckLog("isLogin", tokens, error, #function, #line)
-            if let _error = error as? NSError{
-                Log.selectLog(logLevel: .debug, "_error:\(_error.localizedDescription)")
-                Log.selectLog(logLevel: .debug, "userInfo:\(_error.userInfo.description)")
-            }
+    func updateSub() {
+        AWSMobileClient.default().getTokens { (tokens, _) in
             if let _claims = tokens?.accessToken?.claims {
                 if let sub = _claims["sub"] as? String {
                     self._sub = sub
@@ -60,6 +54,16 @@ final public class AuthManager {
             } else {
                 self._sub = ""
             }
+        }
+    }
+    var isLogin: Bool {
+        AWSMobileClient.default().getTokens { (tokens, error) in
+            //LogManager.appendLoginCheckLog("isLogin", tokens, error, #function, #line)
+            if let _error = error as? NSError{
+                Log.selectLog(logLevel: .debug, "_error:\(_error.localizedDescription)")
+                Log.selectLog(logLevel: .debug, "userInfo:\(_error.userInfo.description)")
+            }
+            self.updateSub()//sub値の更新をしておく
         }
         return (userState == .signedIn)
 //        return (userState == .signedIn) && !((AuthManager.shared.idToken ?? "").isEmpty)//これだと #143 が発生する（アプリ再起動時に1時間経過でidTokenが期限切でも、そのままエラーリトライでリフレッシュトークンにより再発行されるので、signedIn状態のみチェックでOK）
