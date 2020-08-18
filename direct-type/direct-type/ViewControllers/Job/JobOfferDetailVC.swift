@@ -71,6 +71,7 @@ final class JobOfferDetailVC: TmpBasicVC {
         super.viewWillDisappear(animated)
         if keepFlag {
             AnalyticsEventManager.track(type: .keep)
+            AnalyticsEventManager.track(type: .transitionPath(destination: .keepJob, from: routeFrom))
         }
     }
 

@@ -40,7 +40,7 @@ struct DeepLinkHierarchy {
         case .jobDetail:
             let storyboad = UIStoryboard(name: "JobOfferDetailVC", bundle: nil)
             let destinationViewController = storyboad.instantiateViewController(withIdentifier: "Sbid_JobOfferDetailVC") as! JobOfferDetailVC
-            destinationViewController.configure(jobId: query.jobId ?? "", isKeep: false, routeFrom: .fromHome)
+            destinationViewController.configure(jobId: query.jobId ?? "", isKeep: false, routeFrom: .smsScout)
             destinationViewController.hidesBottomBarWhenPushed = true
             return destinationViewController
         case .approachSettings:
