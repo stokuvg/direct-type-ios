@@ -124,6 +124,7 @@ class JobDetailItemCell: BaseJobDetailCell {
                 text = ""
         }
         titleLabel.text(text: title, fontType: .font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+//        Log.selectLog(logLevel: .debug, "text:\(text)")
         self.indispensableLabel.text(text: text, fontType: .C_font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         
         // 任意
@@ -252,47 +253,6 @@ class JobDetailItemCell: BaseJobDetailCell {
             }
         } else {
 //            Log.selectLog(logLevel: .debug, "任意用Viewは他は入らない")
-        }
-        
-        // 注目
-        var attentionDatas:[[String:Any]] = []
-        if row == 0 {
-            let spotTitle1 = data.spotTitle1
-            let spotDetail1 = data.spotDetail1
-            
-            let spotTitle2 = data.spotTitle2
-            let spotDetail2 = data.spotDetail2
-            
-            let spot1 = ["title":spotTitle1,"text":spotDetail1]
-            let spot2 = ["title":spotTitle2,"text":spotDetail2]
-            
-            if spotTitle1.count > 0 && spotDetail1.count > 0 {
-                attentionDatas.append(spot1)
-            }
-            
-            if spotTitle2.count > 0 && spotDetail2.count > 0 {
-                attentionDatas.append(spot2)
-            }
-            
-            let attentionFrameWidth = self.itemBackView.frame.size.width
-            for i in 0..<attentionDatas.count {
-                let attentionView = UINib.init(nibName: "JobDetailItemAttentionView", bundle: nil)
-                .instantiate(withOwner: self, options: nil)
-                .first as! JobDetailItemAttentionView
-                
-                var viewFrame = attentionView.frame
-                viewFrame.size.width = attentionFrameWidth
-                attentionView.frame = viewFrame
-                
-                attentionView.tag = (i+1)
-                
-                let attentionData = attentionDatas[i]
-                attentionView.setup(datas: attentionData)
-                
-                self.itemStackView.addArrangedSubview(attentionView)
-            }
-        } else {
-//            Log.selectLog(logLevel: .debug, "注目用Viewは他は入らない")
         }
         
     }

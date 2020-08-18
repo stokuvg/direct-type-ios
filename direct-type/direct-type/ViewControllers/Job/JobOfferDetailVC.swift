@@ -750,7 +750,7 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
         buttonsView.colorChange(no:2)
 
         let section = 3
-        let row = 7
+        let row = 9
         let titleName = "待遇"
         self.guidebookScrollAnimation(section: section,row: row, titleName: titleName)
     }
