@@ -41,10 +41,9 @@ final class JobOfferDetailVC: TmpBasicVC {
     private var articleCellMaxSize: CGFloat = 0
     private var prcodesCellMaxSize: CGFloat = 0
     private var routeFrom: AnalyticsEventType.RouteFromType = .unknown
-    private var keepFlag = false
-    private var keepChangeCnt:Int = 0
 
     private var keepButtonImage: UIImage {
+        let keepFlag: Bool = KeepManager.shared.getKeepStatus(jobCardID: jobId)
         return UIImage(named: keepFlag ? "btn_keep" : "btn_keepclose")!
     }
     
@@ -69,6 +68,7 @@ final class JobOfferDetailVC: TmpBasicVC {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        let keepFlag: Bool = KeepManager.shared.getKeepStatus(jobCardID: jobId)
         if keepFlag {
             AnalyticsEventManager.track(type: .keep)
         }
@@ -76,7 +76,7 @@ final class JobOfferDetailVC: TmpBasicVC {
 
     func configure(jobId: String, isKeep: Bool, routeFrom: AnalyticsEventType.RouteFromType) {
         self.jobId = jobId
-        keepFlag = isKeep
+        //keepFlag = isKeep
         self.routeFrom = routeFrom
     }
     
@@ -172,14 +172,14 @@ private extension JobOfferDetailVC {
     }
 
     func dispKeepStatus() {
-        keepFlag = KeepManager.shared.getKeepStatus(jobCardID: jobId)
+        let keepFlag: Bool = KeepManager.shared.getKeepStatus(jobCardID: jobId)
         changeButtonState()
     }
     
     
     func keepAction() {
+        var keepFlag: Bool = KeepManager.shared.getKeepStatus(jobCardID: jobId)
         keepFlag = !keepFlag
-        keepChangeCnt += 1
         changeButtonState()
 
         SVProgressHUD.show()
@@ -815,71 +815,3 @@ extension JobOfferDetailVC: UINavigationControllerDelegate {
         return checkListDatas
     }
 }
-
-// TODO:仕様変わりを考えて残しておく。
-/*
-extension JobOfferDetailVC: JobDetailFooterApplicationCellDelegate {
-
-    func footerApplicationBtnAction() {
-        //応募フォームに遷移
-        self.pushViewController(.entryVC, model: _mdlJobDetail)
-    }
-
-    func footerKeepBtnAction(keepStatus: Bool) {
-        // キープ情報送信
-        if keepStatus == true {
-            ApiManager.sendJobKeep(id: jobId)
-                .done { result in
-                Log.selectLog(logLevel: .debug, "keep send success")
-                    Log.selectLog(logLevel: .debug, "keep成功")
-
-            }.catch{ (error) in
-                Log.selectLog(logLevel: .debug, "skip send error:\(error)")
-                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-                switch myErr.code {
-                case 404:
-                    let message: String = ""
-                    self.showConfirm(title: "", message: message)
-                    .done { _ in
-                        Log.selectLog(logLevel: .debug, "対応方法の確認")
-                    }
-                    .catch { (error) in
-                    }
-                    .finally {
-                    }
-                default: break
-                }
-                self.showError(error)
-            }.finally {
-                Log.selectLog(logLevel: .debug, "keep send finally")
-            }
-        } else {
-            ApiManager.sendJobDeleteKeep(id: jobId)
-                .done { result in
-                Log.selectLog(logLevel: .debug, "keep delete success")
-                    Log.selectLog(logLevel: .debug, "delete成功")
-
-            }.catch{ (error) in
-                Log.selectLog(logLevel: .debug, "skip send error:\(error)")
-                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-                switch myErr.code {
-                case 404:
-                    let message: String = ""
-                    self.showConfirm(title: "", message: message)
-                    .done { _ in
-                        Log.selectLog(logLevel: .debug, "対応方法の確認")
-                    }
-                    .catch { (error) in
-                    }
-                    .finally {
-                    }
-                default: break
-                }
-                self.showError(error)
-            }.finally {
-                Log.selectLog(logLevel: .debug, "keep send finally")
-            }
-        }
-    }
-}
-*/

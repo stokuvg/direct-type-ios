@@ -19,11 +19,9 @@ class KeepCardCell: BaseJobCardCell {
     @IBOutlet weak var unitLabel:UILabel!
     @IBOutlet weak var keepActionBtn:UIButton!
     @IBAction func keepAction() {
-        self.changeKeepStatus()
-        self.changeKeepImage()
-        let flag = KeepManager.shared.getKeepStatus(jobCardID: self.jobId)
-        self.delegate.keepAction(jobId: self.jobId, newStatus: !flag)
-//        self.delegate.keepAction(tag: self.tag)
+        let keepFlag = KeepManager.shared.getKeepStatus(jobCardID: self.jobId)
+        self.changeKeepImage(!keepFlag)//表示だけ更新
+        self.delegate.keepAction(jobId: self.jobId, newStatus: !keepFlag)//実際にフェッチさせる
     }
     
     var jobId:String = ""
@@ -55,9 +53,8 @@ class KeepCardCell: BaseJobCardCell {
         self.jobId = data.jobId
         
         // キープのステータス
-        //self.keepFlag = data.keepStatus
-        self.keepFlag = KeepManager.shared.getKeepStatus(jobCardID: self.jobId)
-        self.changeKeepImage()
+        let keepFlag: Bool = KeepManager.shared.getKeepStatus(jobCardID: self.jobId)
+        self.changeKeepImage(keepFlag)
         
         // NEWマーク 表示チェック
         let start_date_string = data.pressStartDate
@@ -162,15 +159,10 @@ class KeepCardCell: BaseJobCardCell {
         }
     }
     
-    private func changeKeepImage() {
-//        Log.selectLog(logLevel: .debug, "changeKeepImage start")
+    private func changeKeepImage(_ keepFlag: Bool) {
         let offImage = UIImage(named: "like_gray")
         let onImage = UIImage(named: "likeSelected")
-        
-//        Log.selectLog(logLevel: .debug, "keepFlag:\(keepFlag)")
-        
-        let useImage = self.keepFlag ? onImage : offImage
-        
+        let useImage = keepFlag ? onImage : offImage
         keepActionBtn.setImage(useImage, for: .normal)
     }
     
