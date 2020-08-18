@@ -24,6 +24,7 @@ final class JobOfferDetailVC: TmpBasicVC {
     @IBOutlet weak var keepBtn:UIButton!
     @IBAction func keepBtnAction() {
         keepAction()
+        AnalyticsEventManager.track(type: .transitionPath(destination: .keepJob, from: routeFrom))
     }
 
     private var jobId = ""

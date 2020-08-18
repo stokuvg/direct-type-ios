@@ -29,6 +29,7 @@ enum AnalyticsEventType {
     enum RouteDestinationType {
         case toJobDetail
         case toEntryDetail
+        case keepJob
         
         var eventName: String {
             switch self {
@@ -36,6 +37,8 @@ enum AnalyticsEventType {
                 return "to_job_detail"
             case .toEntryDetail:
                 return "entry"
+            case .keepJob:
+                return "keep_job"
             }
         }
     }
@@ -44,6 +47,7 @@ enum AnalyticsEventType {
         case unknown
         case fromHome
         case fromKeepList
+        case smsScout
         
         var suffix: String {
             switch self {
@@ -51,6 +55,8 @@ enum AnalyticsEventType {
                 return "_from_home"
             case .fromKeepList:
                 return "_from_keep_list"
+            case .smsScout:
+                return "_from_sms_scout"
             case .unknown:
                 return ""
             }
