@@ -12,19 +12,27 @@ class BaseNaviController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        initNotify()
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    //=== Notification通知の登録 ===
+    // 画面遷移時にも取り除かないもの（他の画面で変更があった場合の更新のため）
+    func initNotify() {
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(keepListChanged(notification:)), name: Constants.NotificationKeepStatusChanged, object: nil)
     }
-    */
-
+    @objc func keepListChanged(notification: NSNotification) {
+        //タブの新着チェックは独立させてタブにまかせたい（各所で叩かれるKeep須佐が管理するのは破綻するので）
+        //現在の通知はKeep更新だけど、追加と削除のどちらかも分かるようにした方が良さげ。追加変更だけBadgeつくので
+        let cntKeep: Int = KeepManager.shared.getKeepCount()
+        if let tabItems: [UITabBarItem] = self.tabBarController?.tabBar.items {
+            let tabItem:UITabBarItem = tabItems[1] //キープリストのタブ位置
+            tabItem.badgeColor = .clear
+            tabItem.setBadgeTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.red], for: .normal)
+            if cntKeep > 0 {
+                tabItem.badgeValue = "●"
+            } else {
+                tabItem.badgeValue = nil
+            }
+        }
+    }
 }

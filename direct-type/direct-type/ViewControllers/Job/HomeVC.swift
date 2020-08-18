@@ -67,7 +67,7 @@ class HomeVC: TmpNaviTopVC {
     // キープされた求人をオンメモリ上で保有しておき、この画面が切り替わった際にイベント送信する
     var storedKeepList: Set<String> = []
     
-    var badgeKeepCnt:Int = 0
+//    var badgeKeepCnt:Int = 0
 
     // 求人追加表示フラグ
     var dataAddFlag = true
@@ -752,25 +752,9 @@ extension HomeVC: BaseJobCardCellDelegate {
             ApiManager.sendJobKeep(id: jobId)
             .done { result in
                 LogManager.appendApiResultLog("sendJobKeep", result, function: #function, line: #line)
-                self.badgeKeepCnt += 1
-                print("❤️キープ数❤️[\(self.badgeKeepCnt)]❤️[\(KeepManager.shared.getKeepCount())]❤️")
-                //タブの新着チェックは独立させてタブにまかせたい（各所で叩かれるKeep須佐が管理するのは破綻するので）
-                //現在の通知はKeep更新だけど、追加と削除のどちらかも分かるようにした方が良さげ。追加変更だけBadgeつくので
-                // タブに丸ポチを追加
-                if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
-                    let tabItem:UITabBarItem = tabItems[1]
-                    tabItem.badgeValue = "●"
-                    tabItem.badgeColor = .clear
-                    tabItem.setBadgeTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.red], for: .normal)
-                }
             }.catch{ (error) in
                 LogManager.appendApiErrorLog("sendJobKeep", error, function: #function, line: #line)
                 Log.selectLog(logLevel: .debug, "keep send error:\(error)")
-                if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
-                    let tabItem:UITabBarItem = tabItems[1]
-                    tabItem.badgeValue = nil
-                }
-
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 self.showError(myErr)
             }.finally {
@@ -781,17 +765,6 @@ extension HomeVC: BaseJobCardCellDelegate {
         } else {
             ApiManager.sendJobDeleteKeep(id: jobId)
                 .done { result in
-                    self.badgeKeepCnt -= 1
-                    print("❤️キープ数❤️[\(self.badgeKeepCnt)]❤️[\(KeepManager.shared.getKeepCount())]❤️")
-                    if self.badgeKeepCnt <= 0 {
-                        // タブに丸ポチを追加
-                        if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
-                            let tabItem:UITabBarItem = tabItems[1]
-                            tabItem.badgeValue = nil
-                        }
-                    } else if self.badgeKeepCnt < 0 {
-                        self.badgeKeepCnt = 0
-                    }
             }.catch{ (error) in
                 Log.selectLog(logLevel: .debug, "keep delete error:\(error)")
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
