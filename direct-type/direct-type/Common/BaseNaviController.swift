@@ -25,7 +25,7 @@ class BaseNaviController: UINavigationController {
         //追加だった場合に個数が一位上ならBadgeがつく（現状だと失敗時にもBadgeがついてしまう）
         let cntKeep: Int = KeepManager.shared.getKeepCount()
         if let tabItems: [UITabBarItem] = self.tabBarController?.tabBar.items {
-            let tabItem:UITabBarItem = tabItems[1] //キープリストのタブ位置
+            let tabItem:UITabBarItem = tabItems[Constants.TabIndexKeepList] //キープリストのタブ位置
             tabItem.badgeColor = .clear
             tabItem.setBadgeTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.red], for: .normal)
             if cntKeep > 0 {

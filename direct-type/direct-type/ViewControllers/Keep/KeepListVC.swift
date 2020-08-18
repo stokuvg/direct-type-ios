@@ -53,7 +53,7 @@ final class KeepListVC: TmpBasicVC {
         
         // 丸ポチを消す
         if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
-            let tabItem = tabItems[1]
+            let tabItem = tabItems[Constants.TabIndexKeepList]
             tabItem.badgeValue = nil
             if jobDetailCheckFlag == false {
         } else {

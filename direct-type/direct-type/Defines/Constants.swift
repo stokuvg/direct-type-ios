@@ -24,7 +24,9 @@ struct Constants {
     static let NotificationKeepStatusChangedParamMode = "modeAddDel"
     static let NotificationKeepStatusChangedParamMode_Add = "modeAddDel_Add"
     static let NotificationKeepStatusChangedParamMode_Del = "modeAddDel_Del"
-
+    //キープリストのタブ位置
+    static let TabIndexKeepList: Int = 1
+    
     //制限値の定数定義
     static let SelectMultidMaxUndefine: Int = 9999 //最大選択数未定義の場合
     static let CareerCardMax: Int = 10 //職務経歴書カードの登録際台数
