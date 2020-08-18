@@ -27,15 +27,15 @@ enum AnalyticsEventType {
     case transitionPath(destination: RouteDestinationType, from: RouteFromType)
     
     enum RouteDestinationType {
-        case toJobDetail
-        case toEntryDetail
-        case keepJob
+        case toJobDetail // 求人詳細画面を表示しようとした時
+        case toEntry // 応募画面を表示しようとした時
+        case keepJob // 求人詳細画面でキープをタップして当該画面から離れた時
         
         var eventName: String {
             switch self {
             case .toJobDetail:
                 return "to_job_detail"
-            case .toEntryDetail:
+            case .toEntry:
                 return "entry"
             case .keepJob:
                 return "keep_job"
