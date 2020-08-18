@@ -778,16 +778,6 @@ extension HomeVC: BaseJobCardCellDelegate {
         } else {
             ApiManager.sendJobDeleteKeep(id: jobId)
                 .done { result in
-                    self.badgeKeepCnt -= 1
-                    if self.badgeKeepCnt <= 0 {
-                        // タブに丸ポチを追加
-                        if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
-                            let tabItem:UITabBarItem = tabItems[1]
-                            tabItem.badgeValue = nil
-                        }
-                    } else if self.badgeKeepCnt < 0 {
-                        self.badgeKeepCnt = 0
-                    }
             }.catch{ (error) in
                 Log.selectLog(logLevel: .debug, "keep delete error:\(error)")
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
