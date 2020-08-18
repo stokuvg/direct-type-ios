@@ -15,11 +15,14 @@ struct DeepLinkHierarchy {
         case undefined
     }
     
+    private var actionType: ActionType
     var screenType: ScreenType
     var query: DeepLinkQuery
     
     init(host: String, path: String, query queryText: String) {
-        screenType = ScreenType(rawValue: host) ?? .undefined
+        actionType = ActionType(rawValue: host) ?? .view
+        let pathList = path.split(separator: "/").map({String($0)})
+        screenType = ScreenType(rawValue: pathList.first ?? "") ?? .undefined
         query = DeepLinkQuery(queryText)
     }
 
@@ -77,6 +80,10 @@ private extension DeepLinkHierarchy {
         case .undefined:
             return .undefined
         }
+    }
+    
+    enum ActionType: String {
+        case view
     }
 }
 
