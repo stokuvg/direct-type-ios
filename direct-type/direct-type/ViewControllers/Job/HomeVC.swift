@@ -667,6 +667,7 @@ extension HomeVC: UITableViewDelegate {
         // ダミーチェック
 //        let jobId = "526123"
 //        let jobId = "1187957"
+//        let jobId = "1194358"
         let vc = getVC(sbName: "JobOfferDetailVC", vcName: "JobOfferDetailVC") as! JobOfferDetailVC
 
         vc.configure(jobId: jobId, isKeep: selectedJobData.keepStatus, routeFrom: .fromHome)
