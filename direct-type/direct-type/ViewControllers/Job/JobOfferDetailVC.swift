@@ -24,7 +24,6 @@ final class JobOfferDetailVC: TmpBasicVC {
     @IBOutlet weak var keepBtn:UIButton!
     @IBAction func keepBtnAction() {
         keepAction()
-        AnalyticsEventManager.track(type: .transitionPath(destination: .keepJob, from: routeFrom))
     }
 
     private var jobId = ""
@@ -72,6 +71,7 @@ final class JobOfferDetailVC: TmpBasicVC {
         super.viewWillDisappear(animated)
         if keepFlag {
             AnalyticsEventManager.track(type: .keep)
+            AnalyticsEventManager.track(type: .transitionPath(destination: .keepJob, from: routeFrom))
         }
     }
 
