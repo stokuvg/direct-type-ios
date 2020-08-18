@@ -37,11 +37,18 @@ class NoCardView: UIView {
         
         noJobLabel.text(text: "現在 ゲストさん におすすめできる求人はありません", fontType: .font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
 //        jobInfomationLabel.text(text: " ゲストさん の登録情報を更新することで、おすすめできる求人が増える可能性があります", fontType: .font_SS, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
-        jobInfomationLabel.text(text: "申し訳ありません。これ以上、おすすめできる求人がありませんので、明日以降でお試しください", fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
+        /*申し訳ありません。
+        今、おすすめできる求人はありません。
+        マイページから希望勤務地を増やしてもらえると
+        新たにあなたにぴったりの求人が探せるかもしれません。
+        マイページを更新後、下のボタンを押して更新してください*/
+//        jobInfomationLabel.text(text: "申し訳ありません。これ以上、おすすめできる求人がありませんので、明日以降でお試しください", fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
+        jobInfomationLabel.text(text: "ごめんなさい。マイページから希望勤務地を増やしてみてね！あなたにぴったりの求人が探せるかもしれません。マイページ更新後、ボタンを押してみてください！", fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .center)
         
-        registEditBtn.setTitle(text: "登録情報を編集する", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+//        registEditBtn.setTitle(text: "登録情報を編集する", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        registEditBtn.setTitle(text: "おすすめ求人を更新する", fontType: .font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         registEditBtn.backgroundColor = UIColor.init(colorType: .color_button)
-        registEditBtn.isHidden = true
+        registEditBtn.isHidden = false
     }
     
     func setup(profileData:MdlProfile) {

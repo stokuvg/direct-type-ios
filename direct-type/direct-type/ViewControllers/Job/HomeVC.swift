@@ -156,10 +156,6 @@ class HomeVC: TmpNaviTopVC {
 
     }
 
-    // 求人詳細画面で行なったキープのアクションのデータをセットする。
-//    private func detailKeepStatusChange() {
-//    }
-
     private func getJobData() {
         Log.selectLog(logLevel: .debug, "HomeVC getJobData start")
         UserDefaultsManager.isInitialDisplayedHome ? getJobRecommendList() : getJobList()
@@ -181,6 +177,7 @@ class HomeVC: TmpNaviTopVC {
     private func dataCheckAction() {
         Log.selectLog(logLevel: .debug, "HomeVC dataCheckAction start")
 
+        Log.selectLog(logLevel: .debug, "pageJobCards.jobCards:\(pageJobCards.jobCards.count)")
         // ０件時レイアウト修正用
         if (pageJobCards.jobCards.count) > 0 {
             homeTableView.isHidden = false
@@ -329,8 +326,19 @@ class HomeVC: TmpNaviTopVC {
             self.showError(myErr)
         }
         .finally {
+
+            let convUpdateDate = DateHelper.convStrYMD2Date(self.pageJobCards.updateAt)
+            let updateDateString = DateHelper.mdDateString(date: convUpdateDate)
+
+            self.linesTitle(date: updateDateString, title: "あなたにぴったりの求人")
+            
+            self.dataAddFlag = false
+            self.dataCheckAction()
+            SVProgressHUD.dismiss()
+            /*
             if self.pageJobCards.jobCards.count > 0 {
-                SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+                SVProgressHUD.dismiss()
+                /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
                 /*
                 if UserDefaultsManager.isInitialDisplayedHome {
                     self.linesTitle(date: "", title: "おすすめ求人一覧")
@@ -355,6 +363,7 @@ class HomeVC: TmpNaviTopVC {
                 self.useApiListFlag = true
                 self.getJobRecommendList()
             }
+            */
         }
     }
 
@@ -585,6 +594,8 @@ extension HomeVC: UITableViewDelegate {
         // ダミーチェック
 //        let jobId = "526123"
 //        let jobId = "1187957"
+//        let jobId = "1194358" // 画像でエラーが起きる。
+//        let jobId = "1172337" // 文字化けする
         let vc = getVC(sbName: "JobOfferDetailVC", vcName: "JobOfferDetailVC") as! JobOfferDetailVC
 
         vc.configure(jobId: jobId, isKeep: selectedJobData.keepStatus, routeFrom: .fromHome)
@@ -663,8 +674,10 @@ extension HomeVC: JobOfferCardMoreCellDelegate {
 
 extension HomeVC: NoCardViewDelegate {
     func registEditAction() {
-        // マイページへ移動
-        self.tabBarController?.selectedIndex = 2
+//        // マイページへ移動
+//        self.tabBarController?.selectedIndex = 2
+        self.useApiListFlag = true
+        self.getJobRecommendList()
     }
 }
 
@@ -765,6 +778,16 @@ extension HomeVC: BaseJobCardCellDelegate {
         } else {
             ApiManager.sendJobDeleteKeep(id: jobId)
                 .done { result in
+                    self.badgeKeepCnt -= 1
+                    if self.badgeKeepCnt <= 0 {
+                        // タブに丸ポチを追加
+                        if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
+                            let tabItem:UITabBarItem = tabItems[1]
+                            tabItem.badgeValue = nil
+                        }
+                    } else if self.badgeKeepCnt < 0 {
+                        self.badgeKeepCnt = 0
+                    }
             }.catch{ (error) in
                 Log.selectLog(logLevel: .debug, "keep delete error:\(error)")
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)

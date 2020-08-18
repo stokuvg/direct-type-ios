@@ -111,6 +111,7 @@ private extension LoginConfirmVC {
             switch (signInResult.signInState) {
             case .signedIn:
                 buf = "signedIn"
+                AuthManager.shared.updateSub()//Sub値の更新をしておく
                 DispatchQueue.main.async {
                     ApiManager.createActivity()
                     self.transitionToBaseTab()

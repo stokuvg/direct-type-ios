@@ -71,13 +71,15 @@ final class JobOfferDetailVC: TmpBasicVC {
         let keepFlag: Bool = KeepManager.shared.getKeepStatus(jobCardID: jobId)
         if keepFlag {
             AnalyticsEventManager.track(type: .keep)
+            AnalyticsEventManager.track(type: .transitionPath(destination: .keepJob, from: routeFrom))
         }
     }
 
     func configure(jobId: String, isKeep: Bool, routeFrom: AnalyticsEventType.RouteFromType) {
         self.jobId = jobId
+        // このスコープのisKeep引数はKeepManagerへ責務を移管したため、現状は不要なフラグとなっている
+        // FIXME: 不要なisKeepを削除する
         //keepFlag = isKeep
-        self.routeFrom = routeFrom
     }
     
     //=== Notification通知の登録 ===
@@ -135,25 +137,27 @@ private extension JobOfferDetailVC {
         detailTableView.registerNib(nibName: "JobDetailSalaryExampleCell", idName: "JobDetailSalaryExampleCell")
         /// section 3
         // 募集要項
-        detailTableView.registerNib(nibName: "JobDetailItemCell", idName: "JobDetailItemCell")
-        // 1.仕事内容:              必須
+        detailTableView.registerNib(nibName: "JobDetailWorkContentsCell", idName: "JobDetailWorkContentsCell")
+        detailTableView.registerNib(nibName: "JobDetailAttentionCell", idName: "JobDetailAttentionCell")
+        // 1.仕事内容:              必須  3-0
         // 　・案件例:               任意
         // 　・手掛ける商品・サービス:   任意
         // 　・開発環境・業務範囲:     任意
-        // 　・注目ポイント:           任意
-        // 2.応募資格:              必須
+        // 　・注目ポイント:           任意 3-1,3-2
+        detailTableView.registerNib(nibName: "JobDetailItemCell", idName: "JobDetailItemCell")
+        // 2.応募資格:              必須  3-3
         // 　・歓迎する経験・スキル:     任意
         // 　・過去の採用例:           任意
         // 　・この仕事の向き・不向き:  任意
-        // 3.雇用携帯コード:        必須
-        // 4.給与:               必須
+        // 3.雇用携帯コード:        必須 3-4
+        // 4.給与:               必須 3-5
         // 　・賞与について:          任意
-        // 5.勤務時間:             必須
+        // 5.勤務時間:             必須 3-6
         //   ・残業について:
-        // 6.勤務地:              必須
+        // 6.勤務地:              必須 3-7
         //   ・交通詳細
-        // 7.休日休暇:            必須
-        // 8.待遇・福利厚生:       必須
+        // 7.休日休暇:            必須 3-8
+        // 8.待遇・福利厚生:       必須 3-9
         // 　・産休・育休取得:      任意
         /// section 4
         // 取材メモ
@@ -368,7 +372,23 @@ extension JobOfferDetailVC: UITableViewDelegate {
                 return articleOpenFlag ? UITableView.automaticDimension : 0
             case (2,0):
                 return prcodesCellMaxSize
+            case (3,1):
+                let spotTitle1 = _mdlJobDetail.spotTitle1
+                let spotDetail1 = _mdlJobDetail.spotDetail1
+                if (spotTitle1.count > 0 && spotDetail1.count > 0) {
+                    return UITableView.automaticDimension
+                } else {
+                    return 0
+                }
             case (3,2):
+                let spotTitle2 = _mdlJobDetail.spotTitle2
+                let spotDetail2 = _mdlJobDetail.spotDetail2
+                if (spotTitle2.count > 0 && spotDetail2.count > 0) {
+                    return UITableView.automaticDimension
+                } else {
+                    return 0
+                }
+            case (3,3):
                 let type = _mdlJobDetail.employmentType
                 Log.selectLog(logLevel: .debug, "_mdlJobDetail.employmentType:\(_mdlJobDetail.employmentType)")
                 if type.count > 0 {
@@ -520,7 +540,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                     return 1
                 }
             case 3:
-                return 8
+                return 10
             default:
                 return 1
         }
@@ -529,6 +549,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = indexPath.section
         let row = indexPath.row
+//        Log.selectLog(logLevel: .debug, "section:\(section),row:\(row)")
         switch (section,row) {
             case (0,0):
                 // 求人内容
@@ -569,8 +590,44 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 let examples = _mdlJobDetail.salarySample
                 cell.setup(data: examples)
                 return cell
+            case (3,0):
+                // 仕事内容
+                let cell = tableView.loadCell(cellName: "JobDetailWorkContentsCell", indexPath: indexPath) as! JobDetailWorkContentsCell
+                cell.setup(data: _mdlJobDetail)
+                return cell
+            case (3,1):
+                // 注目1
+                let spotTitle1 = _mdlJobDetail.spotTitle1
+                let spotDetail1 = _mdlJobDetail.spotDetail1
+                let spotTitle2 = _mdlJobDetail.spotTitle2
+                let spotDetail2 = _mdlJobDetail.spotDetail2
+                if (spotTitle1.count > 0 && spotDetail1.count > 0) {
+                    var flag = false
+                    if (spotTitle2.count == 0 || spotDetail2.count == 0) {
+                        flag = true
+                    }
+                    Log.selectLog(logLevel: .debug, "注目１セル表示")
+                    let cell = tableView.loadCell(cellName: "JobDetailAttentionCell", indexPath: indexPath) as! JobDetailAttentionCell
+                    cell.setup(title: spotTitle1, text: spotDetail1, bottomSpaceFlag: flag)
+                    return cell
+                } else {
+                    Log.selectLog(logLevel: .debug, "注目１セル非表示")
+                    return UITableViewCell()
+                }
             case (3,2):
-                
+                // 注目2
+                let spotTitle2 = _mdlJobDetail.spotTitle2
+                let spotDetail2 = _mdlJobDetail.spotDetail2
+                if (spotTitle2.count > 0 && spotDetail2.count > 0) {
+                    Log.selectLog(logLevel: .debug, "注目２セル表示")
+                    let cell = tableView.loadCell(cellName: "JobDetailAttentionCell", indexPath: indexPath) as! JobDetailAttentionCell
+                    cell.setup(title: spotTitle2, text: spotDetail2, bottomSpaceFlag: true)
+                    return cell
+                } else {
+                    Log.selectLog(logLevel: .debug, "注目２セル非表示")
+                    return UITableViewCell()
+                }
+            case (3,3):
                 // 雇用形態
                 let cell = tableView.loadCell(cellName: "JobDetailItemCell", indexPath: indexPath) as! JobDetailItemCell
                 let type = _mdlJobDetail.employmentType
@@ -671,7 +728,7 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
         buttonsView.colorChange(no:1)
 
         let section = 3
-        let row = 1
+        let row = 3
         let titleName = "応募資格"
         self.guidebookScrollAnimation(section: section,row: row, titleName: titleName)
     }
@@ -682,30 +739,9 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
         buttonsView.colorChange(no:2)
 
         let section = 3
-        let row = 7
+        let row = 9
         let titleName = "待遇"
         self.guidebookScrollAnimation(section: section,row: row, titleName: titleName)
-    }
-
-    func informationAction() {
-        if naviButtonTapActionFlag == true { return }
-        naviButtonTapActionFlag = true
-        buttonsView.colorChange(no:3)
-        companyOutlineOpenFlag = true
-
-        let indexPath = IndexPath.init(row: 0, section: 7)
-        let indexSet = IndexSet(arrayLiteral: 7)
-
-        UIView.animate(withDuration: 0.0,
-                       animations: {
-                        self.detailTableView.reloadSections(indexSet, with: .top)
-        }, completion:{ finished in
-            if finished {
-                self.detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
-                self.naviButtonTapActionFlag = false
-            }
-        })
-
     }
 
     // 募集要項の移動
@@ -715,6 +751,21 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
         let indexPath = IndexPath.init(row: row, section: section)
         detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
         naviButtonTapActionFlag = false
+    }
+
+    // 企業情報,会社情報を表示
+    func informationAction() {
+        if naviButtonTapActionFlag == true { return }
+        naviButtonTapActionFlag = true
+        buttonsView.colorChange(no:3)
+        companyOutlineOpenFlag = true
+
+        let indexPath = IndexPath.init(row: 0, section: 7)
+        let indexSet = IndexSet(arrayLiteral: 7)
+        self.detailTableView.reloadSections(indexSet, with: .top)
+        self.detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        self.naviButtonTapActionFlag = false
+
     }
 
 

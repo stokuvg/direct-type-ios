@@ -169,6 +169,8 @@ private extension KeepListVC {
             keepTableView.dataSource = self
             keepTableView.reloadData()
         } else {
+            keepTableView.delegate = nil
+            keepTableView.dataSource = nil
             keepNoView.isHidden = false
         }
     }
@@ -200,11 +202,13 @@ extension KeepListVC: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = indexPath.row
+//        if self.lists.count == 0 { return UITableViewCell() }
         let _keepData = self.lists[row]
         let cell = tableView.loadCell(cellName: "KeepCardCell", indexPath: indexPath) as! KeepCardCell
         cell.tag = row
         cell.delegate = self
         cell.setup(data: _keepData)
+            
         return cell
     }
 }
