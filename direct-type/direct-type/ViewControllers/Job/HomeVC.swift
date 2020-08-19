@@ -822,7 +822,11 @@ extension HomeVC: BaseJobCardCellDelegate {
     func keepAction(jobId: String, newStatus: Bool) {
         if self.keepSendStatus == .sending { return }
         //LogManager.appendLogEx(.keepList, String(repeating: "🔖", count: 11), "[jobId: \(jobId)]", "[keepSendStatus: \(keepSendStatus)]", #function, #line)
-        newStatus ? keepIdListForAppsFlyer.append(jobId) : keepIdListForAppsFlyer.removeAll(where: { $0 == jobId})
+        if newStatus {
+            keepIdListForAppsFlyer.append(jobId)
+        } else {
+            keepIdListForAppsFlyer.removeAll(where: { $0 == jobId})
+        }
 
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
