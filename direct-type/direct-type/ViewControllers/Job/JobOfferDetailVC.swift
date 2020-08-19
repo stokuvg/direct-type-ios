@@ -304,6 +304,12 @@ private extension JobOfferDetailVC {
             return memo.count > 0
         }
 
+        private func changeButtonEnable(_ isEnable: Bool) {
+            buttonsView.isHidden = !isEnable//上部の表示切り替えは非表示にする
+            applicationBtn.isEnabled = isEnable//応募ボタンを非活性にする
+            keepBtn.isEnabled = isEnable//キープボタンを非活性にする
+        }
+
         func getJobDetail() {
             SVProgressHUD.show()
             LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
@@ -312,6 +318,7 @@ private extension JobOfferDetailVC {
             LogManager.appendApiLog("getJobDetail", "[jobId: \(jobId)]", function: #function, line: #line)
             ApiManager.getJobDetail(jobId, isRetry: true)
             .done { result in
+                self.changeButtonEnable(true)//求人詳細に対するUI操作を可能にする
                 LogManager.appendApiResultLog("getJobDetail", result, function: #function, line: #line)
                 debugLog("ApiManager getJobDetail result:\(result.debugDisp)")
                 self._mdlJobDetail = result//取得成功したら、そのモデルで更新する
@@ -323,6 +330,7 @@ private extension JobOfferDetailVC {
                 self.makePrCodesCellSize()
             }
             .catch { (error) in
+                self.changeButtonEnable(false)//求人詳細に対するUI操作を不可能にする
                 LogManager.appendApiErrorLog("getJobDetail", error, function: #function, line: #line)
                 Log.selectLog(logLevel: .debug, "error:\(error)")
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
