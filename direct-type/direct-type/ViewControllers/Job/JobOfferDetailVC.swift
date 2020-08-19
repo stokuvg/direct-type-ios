@@ -41,10 +41,9 @@ final class JobOfferDetailVC: TmpBasicVC {
     private var articleCellMaxSize: CGFloat = 0
     private var prcodesCellMaxSize: CGFloat = 0
     private var routeFrom: AnalyticsEventType.RouteFromType = .unknown
-    private var keepFlag = false
-    private var keepChangeCnt:Int = 0
 
     private var keepButtonImage: UIImage {
+        let keepFlag: Bool = KeepManager.shared.getKeepStatus(jobCardID: jobId)
         return UIImage(named: keepFlag ? "btn_keep" : "btn_keepclose")!
     }
     
@@ -69,6 +68,7 @@ final class JobOfferDetailVC: TmpBasicVC {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        let keepFlag: Bool = KeepManager.shared.getKeepStatus(jobCardID: jobId)
         if keepFlag {
             AnalyticsEventManager.track(type: .keep)
             AnalyticsEventManager.track(type: .transitionPath(destination: .keepJob, from: routeFrom))
@@ -79,8 +79,7 @@ final class JobOfferDetailVC: TmpBasicVC {
         self.jobId = jobId
         // このスコープのisKeep引数はKeepManagerへ責務を移管したため、現状は不要なフラグとなっている
         // FIXME: 不要なisKeepを削除する
-        keepFlag = isKeep
-        self.routeFrom = routeFrom
+        //keepFlag = isKeep
     }
     
     //=== Notification通知の登録 ===
@@ -177,14 +176,14 @@ private extension JobOfferDetailVC {
     }
 
     func dispKeepStatus() {
-        keepFlag = KeepManager.shared.getKeepStatus(jobCardID: jobId)
+        let keepFlag: Bool = KeepManager.shared.getKeepStatus(jobCardID: jobId)
         changeButtonState()
     }
     
     
     func keepAction() {
+        var keepFlag: Bool = KeepManager.shared.getKeepStatus(jobCardID: jobId)
         keepFlag = !keepFlag
-        keepChangeCnt += 1
         changeButtonState()
 
         SVProgressHUD.show()
@@ -194,21 +193,8 @@ private extension JobOfferDetailVC {
                 .done { result in
                 Log.selectLog(logLevel: .debug, "keep send success")
                     Log.selectLog(logLevel: .debug, "keep成功")
-                    // タブに丸ポチを追加
-                    if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
-                        let tabItem:UITabBarItem = tabItems[1]
-                        tabItem.badgeValue = "●"
-                        tabItem.badgeColor = .clear
-                        tabItem.setBadgeTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.red], for: .normal)
-                    }
-
             }.catch{ (error) in
                 Log.selectLog(logLevel: .debug, "keep send error:\(error)")
-                // タブに丸ポチを追加
-                if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
-                    let tabItem:UITabBarItem = tabItems[1]
-                    tabItem.badgeValue = nil
-                }
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 self.showError(myErr)
             }.finally {
@@ -848,46 +834,6 @@ extension JobOfferDetailVC: FoldingHeaderViewDelegate {
 
 extension JobOfferDetailVC: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-//        Log.selectLog(logLevel: .debug, "JobOfferDetailVC willShow")
-//        Log.selectLog(logLevel: .debug, "navigationController.viewControllers:\(navigationController.viewControllers)")
-//        Log.selectLog(logLevel: .debug, "viewController:\(viewController)")
-        
-//        Log.selectLog(logLevel: .debug, "self.tabBarController?.selectedIndex:\(String(describing: self.tabBarController?.selectedIndex))")
-//        Log.selectLog(logLevel: .debug, "navigationController.tabBarController?.selectedIndex:\(String(describing: navigationController.tabBarController?.selectedIndex))")
-        
-        // 遷移先がHomeVCの場合
-        if let controller = viewController as? HomeVC {
-            if navigationController.tabBarController?.selectedIndex == 0 {
-                Log.selectLog(logLevel: .debug, "前の画面がHomeVC")
-                if keepChangeCnt > 0 {
-                    let keepDatas:[String:Any] = ["jobId":_mdlJobDetail.jobCardCode,"keepStatus":keepFlag]
-                    controller.changeKeepDatas = [keepDatas]
-                } else {
-                    controller.changeKeepDatas = []
-                }
-            } else {
-                controller.changeKeepDatas = []
-//                controller.changeKeepJobId = ""
-//                controller.changeKeepStatus = false
-            }
-        }
-        if let keepListController = viewController as? KeepListVC {
-            if navigationController.tabBarController?.selectedIndex == 1 {
-                if keepChangeCnt > 0 {
-                    Log.selectLog(logLevel: .debug, "前の画面がKeepListVC")
-                    if keepChangeCnt > 0 {
-                        let keepDatas:[String:Any] = ["jobId":_mdlJobDetail.jobCardCode,"keepStatus":keepFlag]
-                        let kListData = self.checkListData(listDatas: keepListController.keepDatas, savedData: keepDatas)
-                        keepListController.keepDatas = kListData
-                        keepListController.jobDetailCheckFlag = true
-                    } else {
-                        keepListController.keepDatas = []
-                    }
-                } else {
-                    keepListController.keepDatas = []
-                }
-            }
-        }
     }
     
     private func checkListData(listDatas:[[String:Any]], savedData:[String:Any]) -> [[String:Any]] {
@@ -920,71 +866,3 @@ extension JobOfferDetailVC: UINavigationControllerDelegate {
         return checkListDatas
     }
 }
-
-// TODO:仕様変わりを考えて残しておく。
-/*
-extension JobOfferDetailVC: JobDetailFooterApplicationCellDelegate {
-
-    func footerApplicationBtnAction() {
-        //応募フォームに遷移
-        self.pushViewController(.entryVC, model: _mdlJobDetail)
-    }
-
-    func footerKeepBtnAction(keepStatus: Bool) {
-        // キープ情報送信
-        if keepStatus == true {
-            ApiManager.sendJobKeep(id: jobId)
-                .done { result in
-                Log.selectLog(logLevel: .debug, "keep send success")
-                    Log.selectLog(logLevel: .debug, "keep成功")
-
-            }.catch{ (error) in
-                Log.selectLog(logLevel: .debug, "skip send error:\(error)")
-                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-                switch myErr.code {
-                case 404:
-                    let message: String = ""
-                    self.showConfirm(title: "", message: message)
-                    .done { _ in
-                        Log.selectLog(logLevel: .debug, "対応方法の確認")
-                    }
-                    .catch { (error) in
-                    }
-                    .finally {
-                    }
-                default: break
-                }
-                self.showError(error)
-            }.finally {
-                Log.selectLog(logLevel: .debug, "keep send finally")
-            }
-        } else {
-            ApiManager.sendJobDeleteKeep(id: jobId)
-                .done { result in
-                Log.selectLog(logLevel: .debug, "keep delete success")
-                    Log.selectLog(logLevel: .debug, "delete成功")
-
-            }.catch{ (error) in
-                Log.selectLog(logLevel: .debug, "skip send error:\(error)")
-                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-                switch myErr.code {
-                case 404:
-                    let message: String = ""
-                    self.showConfirm(title: "", message: message)
-                    .done { _ in
-                        Log.selectLog(logLevel: .debug, "対応方法の確認")
-                    }
-                    .catch { (error) in
-                    }
-                    .finally {
-                    }
-                default: break
-                }
-                self.showError(error)
-            }.finally {
-                Log.selectLog(logLevel: .debug, "keep send finally")
-            }
-        }
-    }
-}
-*/

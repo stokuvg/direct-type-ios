@@ -97,8 +97,6 @@
 		0685017E24738D98009770A3 /* JobDetailImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0685017C24738D98009770A3 /* JobDetailImageCell.xib */; };
 		068501802473CE43009770A3 /* HomeTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0685017F2473CE43009770A3 /* HomeTitleView.swift */; };
 		068501822473CE4D009770A3 /* HomeTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068501812473CE4D009770A3 /* HomeTitleView.xib */; };
-		068FFAA224725F4B0083E130 /* JobDetailFooterApplicationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068FFAA024725F4B0083E130 /* JobDetailFooterApplicationCell.swift */; };
-		068FFAA324725F4B0083E130 /* JobDetailFooterApplicationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068FFAA124725F4B0083E130 /* JobDetailFooterApplicationCell.xib */; };
 		068FFAA924727A810083E130 /* JobDetailStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068FFAA824727A810083E130 /* JobDetailStepView.swift */; };
 		068FFAAB24727A8B0083E130 /* JobDetailStepView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068FFAAA24727A8B0083E130 /* JobDetailStepView.xib */; };
 		06A3742F24EA4E7700E2DE31 /* JobDetailAttentionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A3742D24EA4E7700E2DE31 /* JobDetailAttentionCell.swift */; };
@@ -448,8 +446,6 @@
 		0685017C24738D98009770A3 /* JobDetailImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailImageCell.xib; sourceTree = "<group>"; };
 		0685017F2473CE43009770A3 /* HomeTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTitleView.swift; sourceTree = "<group>"; };
 		068501812473CE4D009770A3 /* HomeTitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTitleView.xib; sourceTree = "<group>"; };
-		068FFAA024725F4B0083E130 /* JobDetailFooterApplicationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailFooterApplicationCell.swift; sourceTree = "<group>"; };
-		068FFAA124725F4B0083E130 /* JobDetailFooterApplicationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailFooterApplicationCell.xib; sourceTree = "<group>"; };
 		068FFAA824727A810083E130 /* JobDetailStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailStepView.swift; sourceTree = "<group>"; };
 		068FFAAA24727A8B0083E130 /* JobDetailStepView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailStepView.xib; sourceTree = "<group>"; };
 		06A3742D24EA4E7700E2DE31 /* JobDetailAttentionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailAttentionCell.swift; sourceTree = "<group>"; };
@@ -754,8 +750,6 @@
 				066F271B246E81B60040BDC1 /* JobDetailFoldingOutlineCell.xib */,
 				0662C60224722E280053CAD9 /* JobDetailFoldingOptionalView.swift */,
 				0662C60424722E390053CAD9 /* JobDetailFoldingOptionalView.xib */,
-				068FFAA024725F4B0083E130 /* JobDetailFooterApplicationCell.swift */,
-				068FFAA124725F4B0083E130 /* JobDetailFooterApplicationCell.xib */,
 				068FFAA824727A810083E130 /* JobDetailStepView.swift */,
 				068FFAAA24727A8B0083E130 /* JobDetailStepView.xib */,
 				066CC17B24735DDB009A123A /* JobDetailTextView.swift */,
@@ -1614,7 +1608,6 @@
 				0EE36F172486256F0098A2AF /* ChemistryStart.storyboard in Resources */,
 				269B29A42496F63200B33FBD /* CareerCardTBCell.xib in Resources */,
 				068501822473CE4D009770A3 /* HomeTitleView.xib in Resources */,
-				068FFAA324725F4B0083E130 /* JobDetailFooterApplicationCell.xib in Resources */,
 				066BC829246CF40C00FE607F /* JobDetailItemAttentionView.xib in Resources */,
 				0669380D2485D1030064030F /* SettingAccountCell.xib in Resources */,
 				06BE18F82484A15900FAE476 /* MyPageSettingCell.xib in Resources */,
@@ -1858,7 +1851,6 @@
 				26F2A825246D23660037D47F /* MdlResumeSchool.swift in Sources */,
 				26989F82246A66640050AC40 /* EditableModel.swift in Sources */,
 				0EAE7659248F2329009A8F4B /* ProportionBarView.swift in Sources */,
-				068FFAA224725F4B0083E130 /* JobDetailFooterApplicationCell.swift in Sources */,
 				06E519C22458156A004E4B7A /* AccessDenyVC.swift in Sources */,
 				066A8A70249056E2004C25D8 /* InitialInputStartVC.swift in Sources */,
 				067F28EA2456D135000AAD69 /* UIFont+Extensions.swift in Sources */,
@@ -2161,7 +2153,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20200807_18;
+				CURRENT_PROJECT_VERSION = 20200819_15;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = T9NJN3ZF88;
@@ -2187,7 +2179,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20200807_18;
+				CURRENT_PROJECT_VERSION = 20200819_15;
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = T9NJN3ZF88;
 				INFOPLIST_FILE = "direct-type/Info.plist";

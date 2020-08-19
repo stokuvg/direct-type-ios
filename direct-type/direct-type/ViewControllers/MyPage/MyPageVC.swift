@@ -523,7 +523,6 @@ extension MyPageVC: UITabBarControllerDelegate {
                 if updateCnt > 0 {
 //                    Log.selectLog(logLevel: .debug, "更新した部分がある")
                     firstVC.changeProfileFlag = true
-                    firstVC.changeKeepDatas = []
                     updateCnt = 0
                 }
             } else {
