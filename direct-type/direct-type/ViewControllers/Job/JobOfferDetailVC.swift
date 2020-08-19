@@ -77,6 +77,7 @@ final class JobOfferDetailVC: TmpBasicVC {
 
     func configure(jobId: String, routeFrom: AnalyticsEventType.RouteFromType) {
         self.jobId = jobId
+        self.routeFrom = routeFrom
     }
     
     //=== Notification通知の登録 ===
