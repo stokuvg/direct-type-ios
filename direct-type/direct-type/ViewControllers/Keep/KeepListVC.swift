@@ -28,8 +28,6 @@ final class KeepListVC: TmpBasicVC {
     var pageNo: Int = 1
     var hasNext:Bool = false
     var isAddLoad:Bool = true
-    var keepChangeCnt:Int = 0
-    var jobDetailCheckFlag:Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,10 +48,6 @@ final class KeepListVC: TmpBasicVC {
         if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
             let tabItem = tabItems[Constants.TabIndexKeepList]
             tabItem.badgeValue = nil
-            if jobDetailCheckFlag == false {
-        } else {
-                jobDetailCheckFlag = true
-            }
         }
     }
 
