@@ -85,6 +85,11 @@ class HomeVC: TmpNaviTopVC {
     }
     
     var deviceType:String = ""
+    
+    // AppsFlyerのイベントトラッキング用にオンメモリでキープ求人リストを保有するプロパティ
+    // キープされた求人をオンメモリ上で保有しておき、この画面が切り替わった際にイベント送信する
+    var keepIdListForAppsFlyer: [String] = []
+    var trackedKeepIdListForAppsFlyer: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -145,10 +150,7 @@ class HomeVC: TmpNaviTopVC {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        storedKeepList.forEach({ _ in
-            AnalyticsEventManager.track(type: .keep)
-        })
-        storedKeepList.removeAll()
+        trackKeepActionEvent()
     }
     
     override func viewWillLayoutSubviews() {
@@ -738,11 +740,25 @@ extension HomeVC: BaseJobCardCellDelegate {
             }
         }
     }
+    
+    func trackKeepActionEvent() {
+        keepIdListForAppsFlyer.forEach({ id in
+            guard trackedKeepIdListForAppsFlyer
+                .first(where: { $0 == id }) == nil else { return }
+            AnalyticsEventManager.track(type: .keep)
+        })
+        trackedKeepIdListForAppsFlyer = keepIdListForAppsFlyer
+    }
 
     func keepAction(jobId: String, newStatus: Bool) {
         if self.keepSendStatus == .sending { return }
         //LogManager.appendLogEx(.keepList, String(repeating: "🔖", count: 11), "[jobId: \(jobId)]", "[keepSendStatus: \(keepSendStatus)]", #function, #line)
-        storedKeepList.insert(jobId)
+        if newStatus {
+            keepIdListForAppsFlyer.append(jobId)
+        } else {
+            keepIdListForAppsFlyer.removeAll(where: { $0 == jobId})
+        }
+
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         self.keepSendStatus = .sending
