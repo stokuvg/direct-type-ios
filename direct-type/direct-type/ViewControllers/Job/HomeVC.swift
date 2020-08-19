@@ -600,7 +600,7 @@ extension HomeVC: UITableViewDelegate {
 //        let jobId = "1172337" // 文字化けする
         let vc = getVC(sbName: "JobOfferDetailVC", vcName: "JobOfferDetailVC") as! JobOfferDetailVC
 
-        vc.configure(jobId: jobId, isKeep: selectedJobData.keepStatus, routeFrom: .fromHome)
+        vc.configure(jobId: jobId, routeFrom: .fromHome)
         vc.hidesBottomBarWhenPushed = true
 
         self.navigationController?.pushViewController(vc, animated: true)
