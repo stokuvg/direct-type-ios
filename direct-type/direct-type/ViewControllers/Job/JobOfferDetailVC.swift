@@ -290,19 +290,24 @@ private extension JobOfferDetailVC {
             return memo.count > 0
         }
 
+        private func changeButtonEnable(_ isEnable: Bool) {
+            buttonsView.isHidden = !isEnable//上部の表示切り替えは非表示にする
+            applicationBtn.isEnabled = isEnable//応募ボタンを非活性にする
+            keepBtn.isEnabled = isEnable//キープボタンを非活性にする
+        }
+
         func getJobDetail() {
             SVProgressHUD.show()
             LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
-            self._mdlJobDetail = MdlJobCardDetail()
+            self._mdlJobDetail = MdlJobCardDetail()//空のモデルを設定しておく
             Log.selectLog(logLevel: .debug, "jobId:\(jobId)")
             LogManager.appendApiLog("getJobDetail", "[jobId: \(jobId)]", function: #function, line: #line)
             ApiManager.getJobDetail(jobId, isRetry: true)
             .done { result in
+                self.changeButtonEnable(true)//求人詳細に対するUI操作を可能にする
                 LogManager.appendApiResultLog("getJobDetail", result, function: #function, line: #line)
                 debugLog("ApiManager getJobDetail result:\(result.debugDisp)")
-
-                self._mdlJobDetail = result
-                
+                self._mdlJobDetail = result//取得成功したら、そのモデルで更新する
                 Log.selectLog(logLevel: .debug, "_mdlJobDetail.jobCardCode:\(self._mdlJobDetail.jobCardCode)")
 
                 self.makeArticleHeaderSize()
@@ -311,22 +316,28 @@ private extension JobOfferDetailVC {
                 self.makePrCodesCellSize()
             }
             .catch { (error) in
+                self.changeButtonEnable(false)//求人詳細に対するUI操作を不可能にする
                 LogManager.appendApiErrorLog("getJobDetail", error, function: #function, line: #line)
                 Log.selectLog(logLevel: .debug, "error:\(error)")
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 Log.selectLog(logLevel: .debug, "myErr:\(myErr.debugDisp)")
-                self.showError(myErr)
-
-                switch myErr.code {
-                    case 403:
-                        self.showError(myErr)
-                    default:
-                        self.showError(myErr)
+                //===取得できなかった場合、リトライさせるか、前の画面に戻るかする（ディープリンクで遷移してきた場合にも対応させるため）
+                let title: String = "エラー"
+                let message: String = "求人情報詳細の取得ができませんでした"
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                let backAction = UIAlertAction(title: "戻る", style: .default) { (action:UIAlertAction) in
+                    self.navigationController?.popViewController(animated: true)
                 }
+                let retryAction = UIAlertAction(title: "リトライ", style: .default) { (action:UIAlertAction) in
+                    self.getJobDetail()
+                }
+                alert.addAction(backAction)
+                alert.addAction(retryAction)
+                self.present(alert, animated: true, completion: nil)
             }
             .finally {
                 SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
-                self.recommendAction()
+                self.recommendAction()//詳細表示をしようとしたのでリコメンド叩く（エラー出てても叩いて良い）
                 self.tableViewSettingAction()
                 self.dispKeepStatus()
             }
@@ -526,6 +537,8 @@ extension JobOfferDetailVC: UITableViewDataSource {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
+        //モデル取得できていなければ0にしておく
+        if self._mdlJobDetail.jobCardCode.isEmpty { return 0 }//フェッチ失敗していた場合など、jobCardCodeが空になっているので
         return 8
     }
 
