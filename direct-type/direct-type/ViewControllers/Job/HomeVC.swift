@@ -62,12 +62,6 @@ class HomeVC: TmpNaviTopVC {
 //    var recommendUseFlag:Bool = false
     
     var useApiListFlag:Bool = true
-    
-    // AppsFlyerのイベントトラッキング用にオンメモリでキープ求人リストを保有するプロパティ
-    // キープされた求人をオンメモリ上で保有しておき、この画面が切り替わった際にイベント送信する
-    var storedKeepList: Set<String> = []
-    
-//    var badgeKeepCnt:Int = 0
 
     // 求人追加表示フラグ
     var dataAddFlag = true

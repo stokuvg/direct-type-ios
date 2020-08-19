@@ -27,12 +27,7 @@ final class KeepListVC: TmpBasicVC {
     var lists: [MdlKeepJob] = []
     var pageNo: Int = 1
     var hasNext:Bool = false
-    // AppsFlyerのイベントトラッキング用にオンメモリでキープ求人リストを保有するプロパティ
-    // キープされた求人をオンメモリ上で保有しておき、この画面が切り替わった際にイベント送信する
-    var storedKeepList: Set<String> = []
-    
     var isAddLoad:Bool = true
-    
     var keepChangeCnt:Int = 0
     var jobDetailCheckFlag:Bool = false
 
@@ -64,10 +59,6 @@ final class KeepListVC: TmpBasicVC {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        storedKeepList.forEach({ _ in
-            AnalyticsEventManager.track(type: .keep)
-        })
-        storedKeepList.removeAll()
     }
 }
 
@@ -227,17 +218,12 @@ extension KeepListVC: BaseJobCardCellDelegate {
 
     func keepAction(jobId: String, newStatus: Bool) {
         SVProgressHUD.show()
-        storedKeepList.insert(jobId)
         Log.selectLog(logLevel: .debug, "KeepListVC delegate keepAction tag:\(jobId)")
-        let curKeepStatus = KeepManager.shared.getKeepStatus(jobCardID: jobId)
-        
-        print(curKeepStatus ? "キープされてる" : "キープされてない")
-        print(curKeepStatus ? "キープさせたい" : "キープとりたい")
 
         if newStatus == true { //キープさせたい
             ApiManager.sendJobKeep(id: jobId)
-                .done { result in
-                    Log.selectLog(logLevel: .debug, "keep成功")
+            .done { result in
+                Log.selectLog(logLevel: .debug, "keep成功")
             }.catch{ (error) in
                 Log.selectLog(logLevel: .debug, "skip send error:\(error)")
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
