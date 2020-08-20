@@ -452,26 +452,6 @@ extension JobOfferDetailVC: UITableViewDelegate {
 }
 
 extension JobOfferDetailVC: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        switch section {
-        case 7:
-            return 35
-        default:
-            return 0
-        }
-    }
-
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        switch section {
-            case 7:
-                let view = UIView()
-                view.backgroundColor = UIColor.init(colorType: .color_base)
-                return view
-            default:
-                return UIView()
-        }
-    }
-
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
             case 1:
