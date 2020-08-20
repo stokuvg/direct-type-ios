@@ -66,11 +66,16 @@ class JobDetailItemCell: BaseJobDetailCell {
         }
     }
     
-    func setup(data: MdlJobCardDetail,row: Int) {
+    func setup(data: MdlJobCardDetail,indexPath: IndexPath) {
 //    func setup(data:[String:Any]) {
         
         var title:String = ""
         var text:String = ""
+        let section = indexPath.section
+        let row = indexPath.row
+        
+        Log.selectLog(logLevel: .debug, "JobDetailItemCell setup section:\(section),row:\(row)")
+        
         switch row {
             case 0:
                 // 仕事内容
@@ -149,7 +154,7 @@ class JobDetailItemCell: BaseJobDetailCell {
                     let scopeData = ["title":"開発環境・業務範囲","text":data.scope]
                     optionalDatas.append(scopeData)
                 }
-            case 1:
+            case 3:
                 // 歓迎するスキル
                 if data.betterSkill.count > 0 {
 //                    let title = data.betterSkill.title!
@@ -183,7 +188,7 @@ class JobDetailItemCell: BaseJobDetailCell {
                     let suitableUnsuitableData = ["title": "この仕事の向き・不向き", "text": sumText]
                     optionalDatas.append(suitableUnsuitableData)
                 }
-            case 3:
+            case 5:
                 // 賞与について
                 if data.bonusAbout.count > 0 {
 //                    let title = data.bonusAbout.title!
@@ -192,7 +197,7 @@ class JobDetailItemCell: BaseJobDetailCell {
                     let bonusAboutData = ["title":"賞与について","text":text]
                     optionalDatas.append(bonusAboutData)
                 }
-            case 4:
+            case 6:
                 // 残業について
                 if data.overtimeAbout.count > 0 {
 //                    let title = data.overtimeAbout.title!
@@ -211,7 +216,7 @@ class JobDetailItemCell: BaseJobDetailCell {
                         optionalDatas.append(overtimeCodeData as [String : Any])
                     }
                 }
-            case 5:
+            case 7:
                 // 交通・詳細
                 if data.transport.count > 0 {
 //                    let title = data.transport.title!
@@ -220,7 +225,7 @@ class JobDetailItemCell: BaseJobDetailCell {
                     let transportData = ["title":"交通・詳細","text":text]
                     optionalDatas.append(transportData)
                 }
-            case 7:
+            case 9:
                 // 産休・育休取得状況
                 if data.childcare.count > 0 {
 //                    let title = data.childcare.title!

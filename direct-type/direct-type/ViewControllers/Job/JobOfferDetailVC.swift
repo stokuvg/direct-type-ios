@@ -657,7 +657,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 if type.count > 0 {
 //                let employmentType = SelectItemsManager.getCodeDisp(.employmentType, code: type)?.disp ?? ""
 //                if employmentType.count > 0 {
-                    cell.setup(data: _mdlJobDetail,row:row)
+                    cell.setup(data: _mdlJobDetail, indexPath: indexPath)
                     return cell
                 } else {
                     return UITableViewCell()
@@ -665,7 +665,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
             case (3,_):
                 // 仕事内容
                 let cell = tableView.loadCell(cellName: "JobDetailItemCell", indexPath: indexPath) as! JobDetailItemCell
-                cell.setup(data: _mdlJobDetail,row:row)
+                cell.setup(data: _mdlJobDetail, indexPath: indexPath)
                 return cell
             case (4,_): // メモ
                 if coverageMemoOpenFlag {
