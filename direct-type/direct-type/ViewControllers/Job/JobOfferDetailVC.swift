@@ -411,7 +411,7 @@ extension JobOfferDetailVC: UITableViewDelegate {
                 }
             case (3,3):
                 let type = _mdlJobDetail.employmentType
-                Log.selectLog(logLevel: .debug, "_mdlJobDetail.employmentType:\(_mdlJobDetail.employmentType)")
+//                Log.selectLog(logLevel: .debug, "_mdlJobDetail.employmentType:\(_mdlJobDetail.employmentType)")
                 if type.count > 0 {
 //                let employmentType = SelectItemsManager.getCodeDisp(.employmentType, code: type)?.disp ?? ""
 //                if employmentType.count > 0 {
@@ -629,12 +629,12 @@ extension JobOfferDetailVC: UITableViewDataSource {
                     if (spotTitle2.count == 0 || spotDetail2.count == 0) {
                         flag = true
                     }
-                    Log.selectLog(logLevel: .debug, "注目１セル表示")
+//                    Log.selectLog(logLevel: .debug, "注目１セル表示")
                     let cell = tableView.loadCell(cellName: "JobDetailAttentionCell", indexPath: indexPath) as! JobDetailAttentionCell
                     cell.setup(title: spotTitle1, text: spotDetail1, bottomSpaceFlag: flag)
                     return cell
                 } else {
-                    Log.selectLog(logLevel: .debug, "注目１セル非表示")
+//                    Log.selectLog(logLevel: .debug, "注目１セル非表示")
                     return UITableViewCell()
                 }
             case (3,2):
@@ -642,12 +642,12 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 let spotTitle2 = _mdlJobDetail.spotTitle2
                 let spotDetail2 = _mdlJobDetail.spotDetail2
                 if (spotTitle2.count > 0 && spotDetail2.count > 0) {
-                    Log.selectLog(logLevel: .debug, "注目２セル表示")
+//                    Log.selectLog(logLevel: .debug, "注目２セル表示")
                     let cell = tableView.loadCell(cellName: "JobDetailAttentionCell", indexPath: indexPath) as! JobDetailAttentionCell
                     cell.setup(title: spotTitle2, text: spotDetail2, bottomSpaceFlag: true)
                     return cell
                 } else {
-                    Log.selectLog(logLevel: .debug, "注目２セル非表示")
+//                    Log.selectLog(logLevel: .debug, "注目２セル非表示")
                     return UITableViewCell()
                 }
             case (3,3):

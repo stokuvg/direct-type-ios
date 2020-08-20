@@ -38,34 +38,39 @@ class JobDetailAttentionCell: BaseTableViewCell {
     }
         
     func setup(title: String, text: String, bottomSpaceFlag:Bool) {
-        Log.selectLog(logLevel: .debug, "title:\(title)")
+//        Log.selectLog(logLevel: .debug, "JobDetailAttentionCell setup start")
+//        Log.selectLog(logLevel: .debug, "title:\(title)")
         
         let titleFont:FontType = .font_Sb
         
-        self.attentionTitle.text(text: title, fontType: titleFont, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
-        
         let attentionBackView = self
-        Log.selectLog(logLevel: .debug, "attentionBackView:\(attentionBackView)")
+//        Log.selectLog(logLevel: .debug, "attentionBackView:\(attentionBackView)")
         
         let labelSpace = (self.titleView.frame.size.width - (self.markImageView.bounds.origin.x + self.markImageView.bounds.size.width)) - (15 + 10)
-        Log.selectLog(logLevel: .debug, "labelSpace:\(labelSpace)")
+//        Log.selectLog(logLevel: .debug, "labelSpace:\(labelSpace)")
         
         let singleWidth = self.attentionTitle.frame.size.width
-        Log.selectLog(logLevel: .debug, "singleWidth:\(singleWidth)")
+//        Log.selectLog(logLevel: .debug, "singleWidth:\(singleWidth)")
         
         let textSize = CGFloat(title.count * 14)
-        Log.selectLog(logLevel: .debug, "textSize:\(textSize)")
+//        Log.selectLog(logLevel: .debug, "textSize:\(textSize)")
         
-        if textSize >= labelSpace {
-            Log.selectLog(logLevel: .debug, "注目タイトルが２行以上")
+        if textSize > labelSpace || textSize > singleWidth {
+//            Log.selectLog(logLevel: .debug, "注目タイトルが２行以上")
 //            markTopConstraint.constant = 9
             titleLabelTop.constant = 0
             titleLabelHeight.constant = 50
             titleBackHeight.constant = 60
         } else {
-            Log.selectLog(logLevel: .debug, "注目タイトルが1行以上")
+//            Log.selectLog(logLevel: .debug, "注目タイトルが1行以上")
+            titleLabelTop.constant = 4
+            titleLabelHeight.constant = 16
+            titleBackHeight.constant = 28
         }
+        // 注目 タイトル
+        self.attentionTitle.clipText(text: title, fontType: titleFont, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left, type: .byCharWrapping)
         
+        // 注目 テキスト
         self.attentionText.text(text: text, fontType: .C_font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         
         if bottomSpaceFlag {

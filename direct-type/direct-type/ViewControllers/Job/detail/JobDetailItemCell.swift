@@ -74,7 +74,7 @@ class JobDetailItemCell: BaseJobDetailCell {
         let section = indexPath.section
         let row = indexPath.row
         
-        Log.selectLog(logLevel: .debug, "JobDetailItemCell setup section:\(section),row:\(row)")
+//        Log.selectLog(logLevel: .debug, "JobDetailItemCell setup section:\(section),row:\(row)")
         
         switch row {
             case 0:
@@ -92,11 +92,11 @@ class JobDetailItemCell: BaseJobDetailCell {
             case 4:
                 // 雇用形態
                 title = "雇用形態"
-                Log.selectLog(logLevel: .debug, "employmentType:\(data.employmentType)")
+//                Log.selectLog(logLevel: .debug, "employmentType:\(data.employmentType)")
                 
                 let types = self.makeEmploymentTypes(typeString:data.employmentType)
 //                let type = SelectItemsManager.getCodeDisp(.employmentType, code: data.employmentType)?.disp ?? ""
-                Log.selectLog(logLevel: .debug, "雇用形態:\(types)")
+//                Log.selectLog(logLevel: .debug, "雇用形態:\(types)")
                 
                 text = types
             case 5:

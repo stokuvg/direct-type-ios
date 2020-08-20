@@ -43,6 +43,26 @@ extension UILabel {
         self.attributedText = mutableAttrStr
     }
     
+    func clipText(text:String,fontType:FontType,textColor:UIColor, alignment:NSTextAlignment, type:NSLineBreakMode) {
+        var attributes:[NSAttributedString.Key:Any] = [:]
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = alignment
+        paragraphStyle.lineBreakMode = type
+        
+        let textFont = UIFont.init(fontType: fontType)
+        
+        attributes = [
+            .foregroundColor: textColor,
+            .font: textFont as Any,
+        ]
+        paragraphStyle.lineSpacing = fontType.lineSpacing
+        attributes.updateValue(paragraphStyle, forKey: .paragraphStyle)
+        
+        let attrText = NSAttributedString(string: text, attributes: attributes)
+        
+        self.attributedText = attrText
+    }
+    
     func text(text:String,fontType:FontType,textColor:UIColor, alignment:NSTextAlignment) {
         var attributes:[NSAttributedString.Key:Any] = [:]
         let paragraphStyle = NSMutableParagraphStyle()
