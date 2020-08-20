@@ -31,10 +31,6 @@ target 'direct-type' do
   ##=== Image
   pod 'AlamofireImage'
   
-  ##=== Graph
-  pod 'Charts'
-  pod 'MBCircularProgressBar'
-
   ##=== Projects
   pod 'R.swift'
 
