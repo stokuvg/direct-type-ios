@@ -320,18 +320,30 @@ private extension JobOfferDetailVC {
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 Log.selectLog(logLevel: .debug, "myErr:\(myErr.debugDisp)")
                 //===取得できなかった場合、リトライさせるか、前の画面に戻るかする（ディープリンクで遷移してきた場合にも対応させるため）
-                let title: String = "エラー"
-                let message: String = "求人情報詳細の取得ができませんでした"
-                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                let backAction = UIAlertAction(title: "戻る", style: .default) { (action:UIAlertAction) in
-                    self.navigationController?.popViewController(animated: true)
+                switch myErr.code {
+                case 404, 410:
+                    let title: String = ""
+                    let message: String = "現在掲載されていない求人です"
+                    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    let backAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                    alert.addAction(backAction)
+                    self.present(alert, animated: true, completion: nil)
+                default:
+                    let title: String = ""
+                    let message: String = "正常に取得出来ません"
+                    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    let backAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                    let retryAction = UIAlertAction(title: "リトライ", style: .default) { (action:UIAlertAction) in
+                        self.getJobDetail()
+                    }
+                    alert.addAction(backAction)
+                    alert.addAction(retryAction)
+                    self.present(alert, animated: true, completion: nil)
                 }
-                let retryAction = UIAlertAction(title: "リトライ", style: .default) { (action:UIAlertAction) in
-                    self.getJobDetail()
-                }
-                alert.addAction(backAction)
-                alert.addAction(retryAction)
-                self.present(alert, animated: true, completion: nil)
             }
             .finally {
                 SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
