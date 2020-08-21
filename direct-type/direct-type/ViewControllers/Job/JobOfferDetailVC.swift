@@ -765,7 +765,7 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
 
         let indexPath = IndexPath.init(row: 0, section: 7)
         let indexSet = IndexSet(arrayLiteral: 7)
-        self.detailTableView.reloadSections(indexSet, with: .top)
+        self.detailTableView.reloadSections(indexSet, with: .none)
         self.detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
         self.naviButtonTapActionFlag = false
 
