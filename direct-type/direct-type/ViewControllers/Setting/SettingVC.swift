@@ -162,7 +162,7 @@ extension SettingVC: UITableViewDelegate {
         case .withdrawal:
             // 退会
             let vc = getVC(sbName: "SettingVC", vcName: "WithDrawalVC") as! WithDrawalVC
-            vc.modalPresentationStyle = .fullScreen
+            //(2020-08-21) hidesBottomBarWhenPushedで下部グローバルナビの表示制御はしなくて良くなった（表示されていて構わない）
             navigationController?.pushViewController(vc, animated: true)
         }
     }

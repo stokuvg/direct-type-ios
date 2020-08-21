@@ -174,7 +174,7 @@ extension KeepListVC: UITableViewDelegate {
         let vc = getVC(sbName: "JobOfferDetailVC", vcName: "JobOfferDetailVC") as! JobOfferDetailVC
 
         vc.configure(jobId: jobId, routeFrom: .fromKeepList)
-        vc.hidesBottomBarWhenPushed = true
+        vc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に非表示にする
 
         navigationController?.pushViewController(vc, animated: true)
     }

@@ -435,7 +435,7 @@ class HomeVC: TmpNaviTopVC {
     func transitionToInitialInput() {
         let storyboard = UIStoryboard(name: "Preview", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "Sbid_FirstInputPreviewVC") as! FirstInputPreviewVC
-        vc.hidesBottomBarWhenPushed = true
+        vc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に非表示にする
         let navi = UINavigationController(rootViewController: vc)
         navi.modalPresentationStyle = .fullScreen
         UIApplication.shared.keyWindow?.rootViewController = navi
@@ -595,7 +595,7 @@ extension HomeVC: UITableViewDelegate {
         let vc = getVC(sbName: "JobOfferDetailVC", vcName: "JobOfferDetailVC") as! JobOfferDetailVC
 
         vc.configure(jobId: jobId, routeFrom: .fromHome)
-        vc.hidesBottomBarWhenPushed = true
+        vc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に非表示にする
 
         self.navigationController?.pushViewController(vc, animated: true)
     }

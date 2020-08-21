@@ -98,7 +98,7 @@ private extension MyPageVC {
     func transitionToInitialInput() {
         let storyboard = UIStoryboard(name: "Preview", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "Sbid_FirstInputPreviewVC") as! FirstInputPreviewVC
-        vc.hidesBottomBarWhenPushed = true
+        vc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に非表示にする
         let navi = UINavigationController(rootViewController: vc)
         navi.modalPresentationStyle = .fullScreen
         present(navi, animated: true)
@@ -111,9 +111,8 @@ private extension MyPageVC {
             vc = getVC(sbName: "ChemistryResult", vcName: "ChemistryResult") as! ChemistryResult
             (vc as! ChemistryResult).configure(with: topRanker)
         }
-        hidesBottomBarWhenPushed = true
+        hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に非表示にする
         navigationController?.pushViewController(vc, animated: true)
-        hidesBottomBarWhenPushed = false
     }
 
     func transitionToSetting() {
