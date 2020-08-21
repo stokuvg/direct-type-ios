@@ -47,7 +47,7 @@ private extension ChemistryStart {
     func transitionToChemisrortSelect() {
         let vc = UIStoryboard(name: "ChemistrySelect", bundle: nil)
             .instantiateInitialViewController() as! ChemistrySelect
-        hidesBottomBarWhenPushed = true
+        hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に非表示にする
         navigationController?.pushViewController(vc, animated: true)
     }
 }

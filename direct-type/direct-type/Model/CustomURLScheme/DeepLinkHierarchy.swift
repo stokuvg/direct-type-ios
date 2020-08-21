@@ -41,7 +41,7 @@ struct DeepLinkHierarchy {
             let storyboad = UIStoryboard(name: "JobOfferDetailVC", bundle: nil)
             let destinationViewController = storyboad.instantiateViewController(withIdentifier: "Sbid_JobOfferDetailVC") as! JobOfferDetailVC
             destinationViewController.configure(jobId: query.jobId ?? "", routeFrom: .smsScout)
-            destinationViewController.hidesBottomBarWhenPushed = true
+            destinationViewController.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に非表示にする
             return destinationViewController
         case .approachSettings:
             let storyboad = UIStoryboard(name: "SettingVC", bundle: nil)
