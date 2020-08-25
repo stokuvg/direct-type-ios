@@ -65,6 +65,8 @@
 		066BD9EC2456B3A2009E610B /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066BD9EB2456B3A2009E610B /* R.generated.swift */; };
 		066CC17C24735DDB009A123A /* JobDetailTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066CC17B24735DDB009A123A /* JobDetailTextView.swift */; };
 		066CC17E24735DE6009A123A /* JobDetailTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 066CC17D24735DE6009A123A /* JobDetailTextView.xib */; };
+		066E42D824F49E7D009E812F /* JobDetailArticleHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066E42D624F49E7D009E812F /* JobDetailArticleHeaderCell.swift */; };
+		066E42D924F49E7D009E812F /* JobDetailArticleHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 066E42D724F49E7D009E812F /* JobDetailArticleHeaderCell.xib */; };
 		066EF6C5245BB9C400E15AD2 /* KeepCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066EF6C3245BB9C400E15AD2 /* KeepCardCell.swift */; };
 		066EF6C6245BB9C400E15AD2 /* KeepCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 066EF6C4245BB9C400E15AD2 /* KeepCardCell.xib */; };
 		066EF6C8245BBA1100E15AD2 /* BaseJobCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066EF6C7245BBA1100E15AD2 /* BaseJobCardCell.swift */; };
@@ -409,6 +411,8 @@
 		066BD9EB2456B3A2009E610B /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		066CC17B24735DDB009A123A /* JobDetailTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailTextView.swift; sourceTree = "<group>"; };
 		066CC17D24735DE6009A123A /* JobDetailTextView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailTextView.xib; sourceTree = "<group>"; };
+		066E42D624F49E7D009E812F /* JobDetailArticleHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailArticleHeaderCell.swift; sourceTree = "<group>"; };
+		066E42D724F49E7D009E812F /* JobDetailArticleHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailArticleHeaderCell.xib; sourceTree = "<group>"; };
 		066EF6C3245BB9C400E15AD2 /* KeepCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeepCardCell.swift; sourceTree = "<group>"; };
 		066EF6C4245BB9C400E15AD2 /* KeepCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeepCardCell.xib; sourceTree = "<group>"; };
 		066EF6C7245BBA1100E15AD2 /* BaseJobCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseJobCardCell.swift; sourceTree = "<group>"; };
@@ -750,6 +754,8 @@
 				066AD2B924EA0D5B00712E9F /* JobDetailWorkContentsCell.xib */,
 				06A3742D24EA4E7700E2DE31 /* JobDetailAttentionCell.swift */,
 				06A3742E24EA4E7700E2DE31 /* JobDetailAttentionCell.xib */,
+				066E42D624F49E7D009E812F /* JobDetailArticleHeaderCell.swift */,
+				066E42D724F49E7D009E812F /* JobDetailArticleHeaderCell.xib */,
 			);
 			path = detail;
 			sourceTree = "<group>";
@@ -1589,6 +1595,7 @@
 				26147F37247267F9009B30B5 /* MstF22_pcSkillExcel.tsv in Resources */,
 				0EAE7655248F1F90009A8F4B /* ChemistryResultFooterView.xib in Resources */,
 				26BF48E024639D2B00E00215 /* MstK3_changeCount.tsv in Resources */,
+				066E42D924F49E7D009E812F /* JobDetailArticleHeaderCell.xib in Resources */,
 				26A2899E24AAD75C000D2926 /* EntryConfirmNotifyEntry2TBCell.xib in Resources */,
 				066763762457B09F00AC5039 /* HomeVC.storyboard in Resources */,
 				26989F7F246A5E520050AC40 /* HEditDrumTBCell.xib in Resources */,
@@ -1862,6 +1869,7 @@
 				067F28DF2456D013000AAD69 /* TmpNaviTopVC.swift in Sources */,
 				268BFF56246E8292004B2640 /* SubInputMemoVC.swift in Sources */,
 				06B94F64246BE38E002FEDDC /* JobDetailItemCell.swift in Sources */,
+				066E42D824F49E7D009E812F /* JobDetailArticleHeaderCell.swift in Sources */,
 				26A5DD662476547D0035267A /* SubSelectBaseVC.swift in Sources */,
 				06E519D02458164B004E4B7A /* ScoutPreview.swift in Sources */,
 				26133A58246B9DC2001802BB /* EditableBasicVC+PickerYMD.swift in Sources */,

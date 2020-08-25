@@ -48,9 +48,12 @@ final class JobOfferDetailVC: TmpBasicVC {
     }
     
     var naviButtonTapActionFlag:Bool = false
+    var deviceType:String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        deviceType = DeviceHelper.getDeviceInfo()
         
         self.navigationController?.delegate = self
         
@@ -126,6 +129,8 @@ private extension JobOfferDetailVC {
         // メイン画像
         detailTableView.registerNib(nibName: "JobDetailImageCell", idName: "JobDetailImageCell")
         /// section 1
+        // 記事ヘッダー
+        detailTableView.registerNib(nibName: "JobDetailArticleHeaderCell", idName: "JobDetailArticleHeaderCell")
         // 記事
         detailTableView.registerNib(nibName: "JobDetailArticleCell", idName: "JobDetailArticleCell")
         /// section 2
@@ -389,6 +394,9 @@ extension JobOfferDetailVC: UITableViewDelegate {
             case (0,1):
                 return UITableView.automaticDimension
             case (1,0):
+//                Log.selectLog(logLevel: .debug, "DeviceInfo:\(DeviceHelper.getDeviceInfo())")
+                return articleOpenFlag ? articleHeaderMaxSize : articleHeaderMinSize
+            case (1,1):
 //                return articleOpenFlag ? articleCellMaxSize : 0
                 return articleOpenFlag ? UITableView.automaticDimension : 0
             case (2,0):
@@ -435,8 +443,8 @@ extension JobOfferDetailVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         var headerHeight:CGFloat = 0
         switch section {
-            case 1:
-                headerHeight = articleOpenFlag ? articleHeaderMaxSize : articleHeaderMinSize
+//            case 1:
+//                headerHeight = articleOpenFlag ? articleHeaderMaxSize : articleHeaderMinSize
             case 3:
                 headerHeight = 60
             case 4:
@@ -454,6 +462,7 @@ extension JobOfferDetailVC: UITableViewDelegate {
 extension JobOfferDetailVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
+            /*
             case 1:
                 // メイン記事タイトル
                 let view = UINib(nibName: "JobDetailArticleHeaderView", bundle: nil)
@@ -463,6 +472,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 let articleTitle = _mdlJobDetail.mainTitle
                 view.setup(string: articleTitle,openFlag: articleOpenFlag)
                 return view
+            */
             case 3:
                 // 募集要項
                 let view = UINib(nibName: "JobDetailGuideBookHeaderView", bundle: nil)
@@ -536,6 +546,8 @@ extension JobOfferDetailVC: UITableViewDataSource {
         switch section {
             case 0:
                 return 2
+            case 1:
+                return 2
             case 2:
                 if _mdlJobDetail.salarySample.count > 0 {
                     return 2
@@ -567,6 +579,13 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 cell.setup(data: _mdlJobDetail)
                 return cell
             case (1,0):
+                let cell = tableView.loadCell(cellName: "JobDetailArticleHeaderCell", indexPath: indexPath) as! JobDetailArticleHeaderCell
+                cell.delegate = self
+                
+                let articleTitle = _mdlJobDetail.mainTitle
+                cell.setup(string: articleTitle,openFlag: articleOpenFlag)
+                return cell
+            case (1,1):
                 // メイン記事の展開処理
                 if articleOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailArticleCell", indexPath: indexPath) as! JobDetailArticleCell
@@ -775,7 +794,17 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
 }
 
 // 職種のオープン
+/*
 extension JobOfferDetailVC: JobDetailArticleHeaderViewDelegate {
+    func articleHeaderAction() {
+        self.articleOpenFlag = true
+        let index = IndexSet(arrayLiteral: 1)
+        self.detailTableView.reloadSections(index, with: .automatic)
+    }
+}
+*/
+
+extension JobOfferDetailVC: JobDetailArticleHeaderCellDelegate {
     func articleHeaderAction() {
         self.articleOpenFlag = true
         let index = IndexSet(arrayLiteral: 1)
@@ -786,9 +815,13 @@ extension JobOfferDetailVC: JobDetailArticleHeaderViewDelegate {
 // 職種のクローズ
 extension JobOfferDetailVC: JobDetailArticleCellDelegate {
     func articleCellCloseAction() {
+        Log.selectLog(logLevel: .debug, "JobOfferDetailVC articleCellCloseAction start")
         self.articleOpenFlag = false
         let index = IndexSet(arrayLiteral: 1)
-        self.detailTableView.reloadSections(index, with: .automatic)
+        self.detailTableView.reloadSections(index, with: .none)
+        
+        let updateIndex = IndexPath(row: 0, section: 1)
+        self.detailTableView.scrollToRow(at: updateIndex, at: .middle, animated: true)
     }
 
 }

@@ -25,6 +25,7 @@ class JobDetailAttentionCell: BaseTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+//        self.attentionTitle.backgroundColor = UIColor.init(colorType: .color_button)
     }
     
     override func prepareForReuse() {
@@ -58,12 +59,12 @@ class JobDetailAttentionCell: BaseTableViewCell {
         if textSize > labelSpace || textSize > singleWidth {
 //            Log.selectLog(logLevel: .debug, "注目タイトルが２行以上")
 //            markTopConstraint.constant = 9
-            titleLabelTop.constant = 0
-            titleLabelHeight.constant = 50
+            titleLabelTop.constant = 4
+            titleLabelHeight.constant = 40
             titleBackHeight.constant = 60
         } else {
 //            Log.selectLog(logLevel: .debug, "注目タイトルが1行以上")
-            titleLabelTop.constant = 4
+            titleLabelTop.constant = 6
             titleLabelHeight.constant = 16
             titleBackHeight.constant = 28
         }
