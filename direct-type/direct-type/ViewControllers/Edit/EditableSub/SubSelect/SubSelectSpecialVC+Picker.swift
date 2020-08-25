@@ -105,7 +105,11 @@ extension SubSelectSpecialVC {
             if _selectedItem.code == "" { //未選択コードは選択しない（仮）
                 dicSelectedCode.removeValue(forKey: selItemKey)
             }
-            tableVW.reloadRows(at: [selIdxPath], with: .none) //該当セルの描画しなおし
+            //その大項目が閉じているときには対象がないので描画できずにクラッシュするのでチェックする
+            let select: Bool = arrSelected[selIdxPath.section]
+            if select {
+                tableVW.reloadRows(at: [selIdxPath], with: .none) //該当セルの描画しなおし
+            }
             dispData()
         }
         self.view.endEditing(false) //forceフラグはどこに効いてくるのか？
