@@ -14,7 +14,7 @@
   ],
   "servers": [
     {
-      "url": "https://api.directtype.jp"
+      "url": "https://api.directtype.net"
     },
     {
       "url": "http://localhost:3000"
