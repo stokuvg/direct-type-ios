@@ -92,20 +92,28 @@ class JobOfferBigCardCell: BaseJobCardCell {
         self.limitedMarkSetting(type: limitedType)
         
         // 職業
-        let job:String = data.jobName
-        jobLabel.text(text: job, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
-        if limitedType == .none {
-            self.jobLabelTop.constant = 15
-            self.jobLabelHeight.constant = 70
+        let jobWidth = self.jobLabel.frame.size.width
+        let jobName:String = data.jobName
+        Log.selectLog(logLevel: .debug, "jobName:\(jobName)")
+        Log.selectLog(logLevel: .debug, "jobName.count:\(jobName.count)")
+        
+        jobLabel.text(text: jobName, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        
+        let saveHeight:CGFloat = 30.0
+        // かつ１行か２行か
+        let jobTextSize = CGFloat(jobName.count) * UIFont.init(fontType: .C_font_M)!.pointSize
+        
+        Log.selectLog(logLevel: .debug, "jobTextSize:\(jobTextSize)")
+        Log.selectLog(logLevel: .debug, "jobWidth:\(jobWidth)")
+        
+        
+        if jobTextSize <= (jobWidth + 10) {
+            self.jobLabelHeight.constant = saveHeight
         } else {
-            self.jobLabelTop.constant = 5
             self.jobLabelHeight.constant = 60
         }
         
-        let saveHeight = self.jobLabelHeight.constant
-        // かつ１行か２行か
-        let jobNameWidth = CGFloat(job.count) * UIFont.init(fontType: .C_font_M)!.pointSize
-        
+        /*
         if jobLabel.bounds.size.width > jobNameWidth {
             self.jobLabelHeight.constant -= 30
         } else if jobNameWidth > jobLabel.bounds.size.width {
@@ -118,6 +126,7 @@ class JobOfferBigCardCell: BaseJobCardCell {
         } else {
             self.jobLabelHeight.constant = saveHeight
         }
+        */
 
         // 給与
         let displayFlag = data.salaryDisplay

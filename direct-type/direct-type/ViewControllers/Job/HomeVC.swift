@@ -693,9 +693,11 @@ extension HomeVC: JobOfferCardReloadCellDelegate {
 
 extension HomeVC: BaseJobCardCellDelegate {
     func skipAction(jobId: String) {
+        Log.selectLog(logLevel: .debug, "HomeVC skipAction start")
         AnalyticsEventManager.track(type: .skipVacancies)
 
         if skipSendStatus == .sending {
+            Log.selectLog(logLevel: .debug, "HomeVC skipAction skipSendStatus == .sending")
             return
         }
 
@@ -712,28 +714,25 @@ extension HomeVC: BaseJobCardCellDelegate {
             }
         }
 
-        var successFlag:Bool = false
         ApiManager.sendJobSkip(id: jobId)
             .done { result in
-
-                successFlag = true
         }.catch{ (error) in
             let myErr: MyErrorDisp = AuthManager.convAnyError(error)
             self.showError(myErr)
         }.finally {
-            if successFlag {
-                successFlag = false
-                self.dispJobCards.jobCards.remove(at: jobCardIndex)
-                let deleteIndex = IndexPath(row: jobCardIndex, section: 0)
+            self.dispJobCards.jobCards.remove(at: jobCardIndex)
+            let deleteIndex = IndexPath(row: jobCardIndex, section: 0)
 
-                self.homeTableView.performBatchUpdates({
-                    self.homeTableView.deleteRows(at: [deleteIndex], with: .left)
-                }, completion: { finished in
-                    if finished {
-                        self.skipSendStatus = .none
-                    }
-                })
-            }
+            self.homeTableView.performBatchUpdates({
+                self.homeTableView.deleteRows(at: [deleteIndex], with: .left)
+            }, completion: { finished in
+                if finished {
+                    self.skipSendStatus = .none
+                    Log.selectLog(logLevel: .debug, "HomeVC skipAction finished")
+                } else {
+                    Log.selectLog(logLevel: .debug, "HomeVC skipAction no finished")
+                }
+            })
         }
     }
     

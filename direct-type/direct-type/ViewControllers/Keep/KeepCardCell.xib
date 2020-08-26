@@ -351,6 +351,8 @@
                 <outlet property="areaLabel" destination="dEF-MS-1jR" id="17m-lt-Kkj"/>
                 <outlet property="companyNameLabel" destination="tYW-pQ-dnT" id="aZG-mH-2Me"/>
                 <outlet property="jobLabel" destination="6eo-BO-Ht1" id="ZHm-WI-PdH"/>
+                <outlet property="jobNameBackView" destination="emq-wP-HPv" id="RFU-T6-prw"/>
+                <outlet property="jobNameBackViewHeight" destination="t6j-Oo-PX6" id="H4Z-Er-5x3"/>
                 <outlet property="keepActionBtn" destination="AOf-13-gSr" id="zTn-18-0UR"/>
                 <outlet property="limitedImageView" destination="ibi-66-pdQ" id="Ahd-Jk-OW4"/>
                 <outlet property="limitedLabel" destination="LbM-VG-Vh6" id="lZi-oC-QM8"/>
