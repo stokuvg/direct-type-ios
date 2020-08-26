@@ -93,7 +93,7 @@ class EntryFormVC: PreviewBaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
          if routeFrom != .unknown {
-             AnalyticsEventManager.track(type: .transitionPath(destination: .toEntryDetail, from: routeFrom))
+             AnalyticsEventManager.track(type: .transitionPath(destination: .toEntry, from: routeFrom))
         }
     }
     override func viewWillDisappear(_ animated: Bool) {

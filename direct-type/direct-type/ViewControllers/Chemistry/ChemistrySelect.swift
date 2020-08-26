@@ -119,7 +119,7 @@ private extension ChemistrySelect {
         let vc = UIStoryboard(name: "ChemistryResult", bundle: nil)
             .instantiateInitialViewController() as! ChemistryResult
         vc.configure(with: questionScores)
-        hidesBottomBarWhenPushed = true
+        hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に非表示にする
         navigationController?.pushViewController(vc, animated: true)
     }
 }

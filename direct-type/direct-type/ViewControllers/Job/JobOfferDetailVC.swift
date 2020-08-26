@@ -41,10 +41,9 @@ final class JobOfferDetailVC: TmpBasicVC {
     private var articleCellMaxSize: CGFloat = 0
     private var prcodesCellMaxSize: CGFloat = 0
     private var routeFrom: AnalyticsEventType.RouteFromType = .unknown
-    private var keepFlag = false
-    private var keepChangeCnt:Int = 0
 
     private var keepButtonImage: UIImage {
+        let keepFlag: Bool = KeepManager.shared.getKeepStatus(jobCardID: jobId)
         return UIImage(named: keepFlag ? "btn_keep" : "btn_keepclose")!
     }
     
@@ -69,14 +68,15 @@ final class JobOfferDetailVC: TmpBasicVC {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        let keepFlag: Bool = KeepManager.shared.getKeepStatus(jobCardID: jobId)
         if keepFlag {
             AnalyticsEventManager.track(type: .keep)
+            AnalyticsEventManager.track(type: .transitionPath(destination: .keepJob, from: routeFrom))
         }
     }
 
-    func configure(jobId: String, isKeep: Bool, routeFrom: AnalyticsEventType.RouteFromType) {
+    func configure(jobId: String, routeFrom: AnalyticsEventType.RouteFromType) {
         self.jobId = jobId
-        keepFlag = isKeep
         self.routeFrom = routeFrom
     }
     
@@ -135,25 +135,27 @@ private extension JobOfferDetailVC {
         detailTableView.registerNib(nibName: "JobDetailSalaryExampleCell", idName: "JobDetailSalaryExampleCell")
         /// section 3
         // 募集要項
-        detailTableView.registerNib(nibName: "JobDetailItemCell", idName: "JobDetailItemCell")
-        // 1.仕事内容:              必須
+        detailTableView.registerNib(nibName: "JobDetailWorkContentsCell", idName: "JobDetailWorkContentsCell")
+        detailTableView.registerNib(nibName: "JobDetailAttentionCell", idName: "JobDetailAttentionCell")
+        // 1.仕事内容:              必須  3-0
         // 　・案件例:               任意
         // 　・手掛ける商品・サービス:   任意
         // 　・開発環境・業務範囲:     任意
-        // 　・注目ポイント:           任意
-        // 2.応募資格:              必須
+        // 　・注目ポイント:           任意 3-1,3-2
+        detailTableView.registerNib(nibName: "JobDetailItemCell", idName: "JobDetailItemCell")
+        // 2.応募資格:              必須  3-3
         // 　・歓迎する経験・スキル:     任意
         // 　・過去の採用例:           任意
         // 　・この仕事の向き・不向き:  任意
-        // 3.雇用携帯コード:        必須
-        // 4.給与:               必須
+        // 3.雇用携帯コード:        必須 3-4
+        // 4.給与:               必須 3-5
         // 　・賞与について:          任意
-        // 5.勤務時間:             必須
+        // 5.勤務時間:             必須 3-6
         //   ・残業について:
-        // 6.勤務地:              必須
+        // 6.勤務地:              必須 3-7
         //   ・交通詳細
-        // 7.休日休暇:            必須
-        // 8.待遇・福利厚生:       必須
+        // 7.休日休暇:            必須 3-8
+        // 8.待遇・福利厚生:       必須 3-9
         // 　・産休・育休取得:      任意
         /// section 4
         // 取材メモ
@@ -172,14 +174,14 @@ private extension JobOfferDetailVC {
     }
 
     func dispKeepStatus() {
-        keepFlag = KeepManager.shared.getKeepStatus(jobCardID: jobId)
+        let keepFlag: Bool = KeepManager.shared.getKeepStatus(jobCardID: jobId)
         changeButtonState()
     }
     
     
     func keepAction() {
+        var keepFlag: Bool = KeepManager.shared.getKeepStatus(jobCardID: jobId)
         keepFlag = !keepFlag
-        keepChangeCnt += 1
         changeButtonState()
 
         SVProgressHUD.show()
@@ -189,21 +191,8 @@ private extension JobOfferDetailVC {
                 .done { result in
                 Log.selectLog(logLevel: .debug, "keep send success")
                     Log.selectLog(logLevel: .debug, "keep成功")
-                    // タブに丸ポチを追加
-                    if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
-                        let tabItem:UITabBarItem = tabItems[1]
-                        tabItem.badgeValue = "●"
-                        tabItem.badgeColor = .clear
-                        tabItem.setBadgeTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.red], for: .normal)
-                    }
-
             }.catch{ (error) in
                 Log.selectLog(logLevel: .debug, "keep send error:\(error)")
-                // タブに丸ポチを追加
-                if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
-                    let tabItem:UITabBarItem = tabItems[1]
-                    tabItem.badgeValue = nil
-                }
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 self.showError(myErr)
             }.finally {
@@ -299,19 +288,24 @@ private extension JobOfferDetailVC {
             return memo.count > 0
         }
 
+        private func changeButtonEnable(_ isEnable: Bool) {
+            buttonsView.isHidden = !isEnable//上部の表示切り替えは非表示にする
+            applicationBtn.isEnabled = isEnable//応募ボタンを非活性にする
+            keepBtn.isEnabled = isEnable//キープボタンを非活性にする
+        }
+
         func getJobDetail() {
             SVProgressHUD.show()
             LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
-            self._mdlJobDetail = MdlJobCardDetail()
+            self._mdlJobDetail = MdlJobCardDetail()//空のモデルを設定しておく
             Log.selectLog(logLevel: .debug, "jobId:\(jobId)")
             LogManager.appendApiLog("getJobDetail", "[jobId: \(jobId)]", function: #function, line: #line)
             ApiManager.getJobDetail(jobId, isRetry: true)
             .done { result in
+                self.changeButtonEnable(true)//求人詳細に対するUI操作を可能にする
                 LogManager.appendApiResultLog("getJobDetail", result, function: #function, line: #line)
                 debugLog("ApiManager getJobDetail result:\(result.debugDisp)")
-
-                self._mdlJobDetail = result
-                
+                self._mdlJobDetail = result//取得成功したら、そのモデルで更新する
                 Log.selectLog(logLevel: .debug, "_mdlJobDetail.jobCardCode:\(self._mdlJobDetail.jobCardCode)")
 
                 self.makeArticleHeaderSize()
@@ -320,22 +314,40 @@ private extension JobOfferDetailVC {
                 self.makePrCodesCellSize()
             }
             .catch { (error) in
+                self.changeButtonEnable(false)//求人詳細に対するUI操作を不可能にする
                 LogManager.appendApiErrorLog("getJobDetail", error, function: #function, line: #line)
                 Log.selectLog(logLevel: .debug, "error:\(error)")
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 Log.selectLog(logLevel: .debug, "myErr:\(myErr.debugDisp)")
-                self.showError(myErr)
-
+                //===取得できなかった場合、リトライさせるか、前の画面に戻るかする（ディープリンクで遷移してきた場合にも対応させるため）
                 switch myErr.code {
-                    case 403:
-                        self.showError(myErr)
-                    default:
-                        self.showError(myErr)
+                case 404, 410:
+                    let title: String = ""
+                    let message: String = "現在掲載されていない求人です"
+                    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    let backAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                    alert.addAction(backAction)
+                    self.present(alert, animated: true, completion: nil)
+                default:
+                    let title: String = ""
+                    let message: String = "正常に取得出来ません"
+                    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    let backAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                    let retryAction = UIAlertAction(title: "リトライ", style: .default) { (action:UIAlertAction) in
+                        self.getJobDetail()
+                    }
+                    alert.addAction(backAction)
+                    alert.addAction(retryAction)
+                    self.present(alert, animated: true, completion: nil)
                 }
             }
             .finally {
                 SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
-                self.recommendAction()
+                self.recommendAction()//詳細表示をしようとしたのでリコメンド叩く（エラー出てても叩いて良い）
                 self.tableViewSettingAction()
                 self.dispKeepStatus()
             }
@@ -381,9 +393,25 @@ extension JobOfferDetailVC: UITableViewDelegate {
                 return articleOpenFlag ? UITableView.automaticDimension : 0
             case (2,0):
                 return prcodesCellMaxSize
+            case (3,1):
+                let spotTitle1 = _mdlJobDetail.spotTitle1
+                let spotDetail1 = _mdlJobDetail.spotDetail1
+                if (spotTitle1.count > 0 && spotDetail1.count > 0) {
+                    return UITableView.automaticDimension
+                } else {
+                    return 0
+                }
             case (3,2):
+                let spotTitle2 = _mdlJobDetail.spotTitle2
+                let spotDetail2 = _mdlJobDetail.spotDetail2
+                if (spotTitle2.count > 0 && spotDetail2.count > 0) {
+                    return UITableView.automaticDimension
+                } else {
+                    return 0
+                }
+            case (3,3):
                 let type = _mdlJobDetail.employmentType
-                Log.selectLog(logLevel: .debug, "_mdlJobDetail.employmentType:\(_mdlJobDetail.employmentType)")
+//                Log.selectLog(logLevel: .debug, "_mdlJobDetail.employmentType:\(_mdlJobDetail.employmentType)")
                 if type.count > 0 {
 //                let employmentType = SelectItemsManager.getCodeDisp(.employmentType, code: type)?.disp ?? ""
 //                if employmentType.count > 0 {
@@ -424,26 +452,6 @@ extension JobOfferDetailVC: UITableViewDelegate {
 }
 
 extension JobOfferDetailVC: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        switch section {
-        case 7:
-            return 35
-        default:
-            return 0
-        }
-    }
-
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        switch section {
-            case 7:
-                let view = UIView()
-                view.backgroundColor = UIColor.init(colorType: .color_base)
-                return view
-            default:
-                return UIView()
-        }
-    }
-
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
             case 1:
@@ -519,6 +527,8 @@ extension JobOfferDetailVC: UITableViewDataSource {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
+        //モデル取得できていなければ0にしておく
+        if self._mdlJobDetail.jobCardCode.isEmpty { return 0 }//フェッチ失敗していた場合など、jobCardCodeが空になっているので
         return 8
     }
 
@@ -533,7 +543,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                     return 1
                 }
             case 3:
-                return 8
+                return 10
             default:
                 return 1
         }
@@ -542,6 +552,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = indexPath.section
         let row = indexPath.row
+//        Log.selectLog(logLevel: .debug, "section:\(section),row:\(row)")
         switch (section,row) {
             case (0,0):
                 // 求人内容
@@ -582,15 +593,51 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 let examples = _mdlJobDetail.salarySample
                 cell.setup(data: examples)
                 return cell
+            case (3,0):
+                // 仕事内容
+                let cell = tableView.loadCell(cellName: "JobDetailWorkContentsCell", indexPath: indexPath) as! JobDetailWorkContentsCell
+                cell.setup(data: _mdlJobDetail)
+                return cell
+            case (3,1):
+                // 注目1
+                let spotTitle1 = _mdlJobDetail.spotTitle1
+                let spotDetail1 = _mdlJobDetail.spotDetail1
+                let spotTitle2 = _mdlJobDetail.spotTitle2
+                let spotDetail2 = _mdlJobDetail.spotDetail2
+                if (spotTitle1.count > 0 && spotDetail1.count > 0) {
+                    var flag = false
+                    if (spotTitle2.count == 0 || spotDetail2.count == 0) {
+                        flag = true
+                    }
+//                    Log.selectLog(logLevel: .debug, "注目１セル表示")
+                    let cell = tableView.loadCell(cellName: "JobDetailAttentionCell", indexPath: indexPath) as! JobDetailAttentionCell
+                    cell.setup(title: spotTitle1, text: spotDetail1, bottomSpaceFlag: flag)
+                    return cell
+                } else {
+//                    Log.selectLog(logLevel: .debug, "注目１セル非表示")
+                    return UITableViewCell()
+                }
             case (3,2):
-                
+                // 注目2
+                let spotTitle2 = _mdlJobDetail.spotTitle2
+                let spotDetail2 = _mdlJobDetail.spotDetail2
+                if (spotTitle2.count > 0 && spotDetail2.count > 0) {
+//                    Log.selectLog(logLevel: .debug, "注目２セル表示")
+                    let cell = tableView.loadCell(cellName: "JobDetailAttentionCell", indexPath: indexPath) as! JobDetailAttentionCell
+                    cell.setup(title: spotTitle2, text: spotDetail2, bottomSpaceFlag: true)
+                    return cell
+                } else {
+//                    Log.selectLog(logLevel: .debug, "注目２セル非表示")
+                    return UITableViewCell()
+                }
+            case (3,3):
                 // 雇用形態
                 let cell = tableView.loadCell(cellName: "JobDetailItemCell", indexPath: indexPath) as! JobDetailItemCell
                 let type = _mdlJobDetail.employmentType
                 if type.count > 0 {
 //                let employmentType = SelectItemsManager.getCodeDisp(.employmentType, code: type)?.disp ?? ""
 //                if employmentType.count > 0 {
-                    cell.setup(data: _mdlJobDetail,row:row)
+                    cell.setup(data: _mdlJobDetail, indexPath: indexPath)
                     return cell
                 } else {
                     return UITableViewCell()
@@ -598,7 +645,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
             case (3,_):
                 // 仕事内容
                 let cell = tableView.loadCell(cellName: "JobDetailItemCell", indexPath: indexPath) as! JobDetailItemCell
-                cell.setup(data: _mdlJobDetail,row:row)
+                cell.setup(data: _mdlJobDetail, indexPath: indexPath)
                 return cell
             case (4,_): // メモ
                 if coverageMemoOpenFlag {
@@ -684,7 +731,7 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
         buttonsView.colorChange(no:1)
 
         let section = 3
-        let row = 1
+        let row = 3
         let titleName = "応募資格"
         self.guidebookScrollAnimation(section: section,row: row, titleName: titleName)
     }
@@ -695,30 +742,9 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
         buttonsView.colorChange(no:2)
 
         let section = 3
-        let row = 7
+        let row = 9
         let titleName = "待遇"
         self.guidebookScrollAnimation(section: section,row: row, titleName: titleName)
-    }
-
-    func informationAction() {
-        if naviButtonTapActionFlag == true { return }
-        naviButtonTapActionFlag = true
-        buttonsView.colorChange(no:3)
-        companyOutlineOpenFlag = true
-
-        let indexPath = IndexPath.init(row: 0, section: 7)
-        let indexSet = IndexSet(arrayLiteral: 7)
-
-        UIView.animate(withDuration: 0.0,
-                       animations: {
-                        self.detailTableView.reloadSections(indexSet, with: .top)
-        }, completion:{ finished in
-            if finished {
-                self.detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
-                self.naviButtonTapActionFlag = false
-            }
-        })
-
     }
 
     // 募集要項の移動
@@ -728,6 +754,21 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
         let indexPath = IndexPath.init(row: row, section: section)
         detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
         naviButtonTapActionFlag = false
+    }
+
+    // 企業情報,会社情報を表示
+    func informationAction() {
+        if naviButtonTapActionFlag == true { return }
+        naviButtonTapActionFlag = true
+        buttonsView.colorChange(no:3)
+        companyOutlineOpenFlag = true
+
+        let indexPath = IndexPath.init(row: 0, section: 7)
+        let indexSet = IndexSet(arrayLiteral: 7)
+        self.detailTableView.reloadSections(indexSet, with: .none)
+        self.detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        self.naviButtonTapActionFlag = false
+
     }
 
 
@@ -783,46 +824,6 @@ extension JobOfferDetailVC: FoldingHeaderViewDelegate {
 
 extension JobOfferDetailVC: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-//        Log.selectLog(logLevel: .debug, "JobOfferDetailVC willShow")
-//        Log.selectLog(logLevel: .debug, "navigationController.viewControllers:\(navigationController.viewControllers)")
-//        Log.selectLog(logLevel: .debug, "viewController:\(viewController)")
-        
-//        Log.selectLog(logLevel: .debug, "self.tabBarController?.selectedIndex:\(String(describing: self.tabBarController?.selectedIndex))")
-//        Log.selectLog(logLevel: .debug, "navigationController.tabBarController?.selectedIndex:\(String(describing: navigationController.tabBarController?.selectedIndex))")
-        
-        // 遷移先がHomeVCの場合
-        if let controller = viewController as? HomeVC {
-            if navigationController.tabBarController?.selectedIndex == 0 {
-                Log.selectLog(logLevel: .debug, "前の画面がHomeVC")
-                if keepChangeCnt > 0 {
-                    let keepDatas:[String:Any] = ["jobId":_mdlJobDetail.jobCardCode,"keepStatus":keepFlag]
-                    controller.changeKeepDatas = [keepDatas]
-                } else {
-                    controller.changeKeepDatas = []
-                }
-            } else {
-                controller.changeKeepDatas = []
-//                controller.changeKeepJobId = ""
-//                controller.changeKeepStatus = false
-            }
-        }
-        if let keepListController = viewController as? KeepListVC {
-            if navigationController.tabBarController?.selectedIndex == 1 {
-                if keepChangeCnt > 0 {
-                    Log.selectLog(logLevel: .debug, "前の画面がKeepListVC")
-                    if keepChangeCnt > 0 {
-                        let keepDatas:[String:Any] = ["jobId":_mdlJobDetail.jobCardCode,"keepStatus":keepFlag]
-                        let kListData = self.checkListData(listDatas: keepListController.keepDatas, savedData: keepDatas)
-                        keepListController.keepDatas = kListData
-                        keepListController.jobDetailCheckFlag = true
-                    } else {
-                        keepListController.keepDatas = []
-                    }
-                } else {
-                    keepListController.keepDatas = []
-                }
-            }
-        }
     }
     
     private func checkListData(listDatas:[[String:Any]], savedData:[String:Any]) -> [[String:Any]] {
@@ -855,71 +856,3 @@ extension JobOfferDetailVC: UINavigationControllerDelegate {
         return checkListDatas
     }
 }
-
-// TODO:仕様変わりを考えて残しておく。
-/*
-extension JobOfferDetailVC: JobDetailFooterApplicationCellDelegate {
-
-    func footerApplicationBtnAction() {
-        //応募フォームに遷移
-        self.pushViewController(.entryVC, model: _mdlJobDetail)
-    }
-
-    func footerKeepBtnAction(keepStatus: Bool) {
-        // キープ情報送信
-        if keepStatus == true {
-            ApiManager.sendJobKeep(id: jobId)
-                .done { result in
-                Log.selectLog(logLevel: .debug, "keep send success")
-                    Log.selectLog(logLevel: .debug, "keep成功")
-
-            }.catch{ (error) in
-                Log.selectLog(logLevel: .debug, "skip send error:\(error)")
-                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-                switch myErr.code {
-                case 404:
-                    let message: String = ""
-                    self.showConfirm(title: "", message: message)
-                    .done { _ in
-                        Log.selectLog(logLevel: .debug, "対応方法の確認")
-                    }
-                    .catch { (error) in
-                    }
-                    .finally {
-                    }
-                default: break
-                }
-                self.showError(error)
-            }.finally {
-                Log.selectLog(logLevel: .debug, "keep send finally")
-            }
-        } else {
-            ApiManager.sendJobDeleteKeep(id: jobId)
-                .done { result in
-                Log.selectLog(logLevel: .debug, "keep delete success")
-                    Log.selectLog(logLevel: .debug, "delete成功")
-
-            }.catch{ (error) in
-                Log.selectLog(logLevel: .debug, "skip send error:\(error)")
-                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-                switch myErr.code {
-                case 404:
-                    let message: String = ""
-                    self.showConfirm(title: "", message: message)
-                    .done { _ in
-                        Log.selectLog(logLevel: .debug, "対応方法の確認")
-                    }
-                    .catch { (error) in
-                    }
-                    .finally {
-                    }
-                default: break
-                }
-                self.showError(error)
-            }.finally {
-                Log.selectLog(logLevel: .debug, "keep send finally")
-            }
-        }
-    }
-}
-*/

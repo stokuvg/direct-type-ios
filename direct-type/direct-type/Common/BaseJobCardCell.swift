@@ -51,9 +51,7 @@ class BaseJobCardCell: BaseTableViewCell {
     }
     
     var delegate:BaseJobCardCellDelegate!
-    
     var jobCardData:MdlJobCard!
-    var keepFlag:Bool = false
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -67,8 +65,7 @@ class BaseJobCardCell: BaseTableViewCell {
         // Configure the view for the selected state
     }
     
-    func changeKeepStatus() {
-        keepFlag = !keepFlag
-    }
+//    func changeKeepStatus() {
+//    }
 
 }

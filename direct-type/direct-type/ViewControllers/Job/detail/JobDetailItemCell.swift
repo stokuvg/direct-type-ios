@@ -66,11 +66,16 @@ class JobDetailItemCell: BaseJobDetailCell {
         }
     }
     
-    func setup(data: MdlJobCardDetail,row: Int) {
+    func setup(data: MdlJobCardDetail,indexPath: IndexPath) {
 //    func setup(data:[String:Any]) {
         
         var title:String = ""
         var text:String = ""
+        let section = indexPath.section
+        let row = indexPath.row
+        
+//        Log.selectLog(logLevel: .debug, "JobDetailItemCell setup section:\(section),row:\(row)")
+        
         switch row {
             case 0:
                 // 仕事内容
@@ -78,43 +83,43 @@ class JobDetailItemCell: BaseJobDetailCell {
 //                text = data.jobDescription.text
                 title = "仕事内容"
                 text = data.jobDescription
-            case 1:
+            case 3:
                 // 応募資格
 //                title = data.qualification.title!
 //                text = data.qualification.text!
                 title = "応募資格"
                 text = data.qualification
-            case 2:
+            case 4:
                 // 雇用形態
                 title = "雇用形態"
-                Log.selectLog(logLevel: .debug, "employmentType:\(data.employmentType)")
+//                Log.selectLog(logLevel: .debug, "employmentType:\(data.employmentType)")
                 
                 let types = self.makeEmploymentTypes(typeString:data.employmentType)
 //                let type = SelectItemsManager.getCodeDisp(.employmentType, code: data.employmentType)?.disp ?? ""
-                Log.selectLog(logLevel: .debug, "雇用形態:\(types)")
+//                Log.selectLog(logLevel: .debug, "雇用形態:\(types)")
                 
                 text = types
-            case 3:
+            case 5:
                 // 給与
 //                title = data.salary.title!
                 title = "給与"
                 text = data.salary
-            case 4:
+            case 6:
                 // 勤務時間
 //                title = data.jobtime.title!
                 title = "勤務時間"
                 text = data.jobtime
-            case 5:
+            case 7:
                 // 勤務地
 //                title = data.workPlace.title!
                 title = "勤務地"
                 text = data.workPlace
-            case 6:
+            case 8:
                 // 休日休暇
 //                title = data.holiday.title!
                 title = "休日休暇"
                 text = data.holiday
-            case 7:
+            case 9:
                 // 待遇・福利厚生
 //                title = data.welfare.title!
                 title = "待遇・福利厚生"
@@ -124,6 +129,7 @@ class JobDetailItemCell: BaseJobDetailCell {
                 text = ""
         }
         titleLabel.text(text: title, fontType: .font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+//        Log.selectLog(logLevel: .debug, "text:\(text)")
         self.indispensableLabel.text(text: text, fontType: .C_font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         
         // 任意
@@ -148,7 +154,7 @@ class JobDetailItemCell: BaseJobDetailCell {
                     let scopeData = ["title":"開発環境・業務範囲","text":data.scope]
                     optionalDatas.append(scopeData)
                 }
-            case 1:
+            case 3:
                 // 歓迎するスキル
                 if data.betterSkill.count > 0 {
 //                    let title = data.betterSkill.title!
@@ -182,7 +188,7 @@ class JobDetailItemCell: BaseJobDetailCell {
                     let suitableUnsuitableData = ["title": "この仕事の向き・不向き", "text": sumText]
                     optionalDatas.append(suitableUnsuitableData)
                 }
-            case 3:
+            case 5:
                 // 賞与について
                 if data.bonusAbout.count > 0 {
 //                    let title = data.bonusAbout.title!
@@ -191,7 +197,7 @@ class JobDetailItemCell: BaseJobDetailCell {
                     let bonusAboutData = ["title":"賞与について","text":text]
                     optionalDatas.append(bonusAboutData)
                 }
-            case 4:
+            case 6:
                 // 残業について
                 if data.overtimeAbout.count > 0 {
 //                    let title = data.overtimeAbout.title!
@@ -210,7 +216,7 @@ class JobDetailItemCell: BaseJobDetailCell {
                         optionalDatas.append(overtimeCodeData as [String : Any])
                     }
                 }
-            case 5:
+            case 7:
                 // 交通・詳細
                 if data.transport.count > 0 {
 //                    let title = data.transport.title!
@@ -219,7 +225,7 @@ class JobDetailItemCell: BaseJobDetailCell {
                     let transportData = ["title":"交通・詳細","text":text]
                     optionalDatas.append(transportData)
                 }
-            case 7:
+            case 9:
                 // 産休・育休取得状況
                 if data.childcare.count > 0 {
 //                    let title = data.childcare.title!
@@ -252,47 +258,6 @@ class JobDetailItemCell: BaseJobDetailCell {
             }
         } else {
 //            Log.selectLog(logLevel: .debug, "任意用Viewは他は入らない")
-        }
-        
-        // 注目
-        var attentionDatas:[[String:Any]] = []
-        if row == 0 {
-            let spotTitle1 = data.spotTitle1
-            let spotDetail1 = data.spotDetail1
-            
-            let spotTitle2 = data.spotTitle2
-            let spotDetail2 = data.spotDetail2
-            
-            let spot1 = ["title":spotTitle1,"text":spotDetail1]
-            let spot2 = ["title":spotTitle2,"text":spotDetail2]
-            
-            if spotTitle1.count > 0 && spotDetail1.count > 0 {
-                attentionDatas.append(spot1)
-            }
-            
-            if spotTitle2.count > 0 && spotDetail2.count > 0 {
-                attentionDatas.append(spot2)
-            }
-            
-            let attentionFrameWidth = self.itemBackView.frame.size.width
-            for i in 0..<attentionDatas.count {
-                let attentionView = UINib.init(nibName: "JobDetailItemAttentionView", bundle: nil)
-                .instantiate(withOwner: self, options: nil)
-                .first as! JobDetailItemAttentionView
-                
-                var viewFrame = attentionView.frame
-                viewFrame.size.width = attentionFrameWidth
-                attentionView.frame = viewFrame
-                
-                attentionView.tag = (i+1)
-                
-                let attentionData = attentionDatas[i]
-                attentionView.setup(datas: attentionData)
-                
-                self.itemStackView.addArrangedSubview(attentionView)
-            }
-        } else {
-//            Log.selectLog(logLevel: .debug, "注目用Viewは他は入らない")
         }
         
     }

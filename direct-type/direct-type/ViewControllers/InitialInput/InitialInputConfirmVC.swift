@@ -113,6 +113,7 @@ private extension InitialInputConfirmVC {
             var buf: String = ""
             switch (signInResult.signInState) {
             case .signedIn:
+                AuthManager.shared.updateSub()//Sub値の更新をしておく
                 buf = "signedIn"
                 DispatchQueue.main.async {
                     self.transitionToComplete()

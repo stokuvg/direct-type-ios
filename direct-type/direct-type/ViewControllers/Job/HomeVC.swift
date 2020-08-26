@@ -62,22 +62,9 @@ class HomeVC: TmpNaviTopVC {
 //    var recommendUseFlag:Bool = false
     
     var useApiListFlag:Bool = true
-    
-    // AppsFlyerのイベントトラッキング用にオンメモリでキープ求人リストを保有するプロパティ
-    // キープされた求人をオンメモリ上で保有しておき、この画面が切り替わった際にイベント送信する
-    var storedKeepList: Set<String> = []
-    
-    var badgeKeepCnt:Int = 0
 
     // 求人追加表示フラグ
     var dataAddFlag = true
-    
-    // キープリストのデータ
-    var changeKeepDatas:[[String:Any]] = [] {
-        didSet {
-            Log.selectLog(logLevel: .debug, "new changeKeepDatas:\(changeKeepDatas)")
-        }
-    }
     
     var firstViewFlag:Bool = true {
         didSet {
@@ -91,20 +78,12 @@ class HomeVC: TmpNaviTopVC {
         }
     }
     
-    /*
-    var changeKeepStatus:Bool = false {
-        didSet {
-            Log.selectLog(logLevel: .debug, "new changeKeepStatus:\(changeKeepStatus)")
-        }
-    }
-    var changeKeepJobId:String = "" {
-        didSet {
-            Log.selectLog(logLevel: .debug, "new changeKeepJobId:\(changeKeepJobId)")
-        }
-    }
-    */
-    
     var deviceType:String = ""
+    
+    // AppsFlyerのイベントトラッキング用にオンメモリでキープ求人リストを保有するプロパティ
+    // キープされた求人をオンメモリ上で保有しておき、この画面が切り替わった際にイベント送信する
+    var keepIdListForAppsFlyer: [String] = []
+    var trackedKeepIdListForAppsFlyer: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -153,80 +132,24 @@ class HomeVC: TmpNaviTopVC {
         super.viewDidAppear(animated)
         Log.selectLog(logLevel: .debug, "HomeVC viewDidAppear start")
         
-        // 詳細でキープした求人のキープ状態のチェック
-        if changeKeepDatas.count > 0 {
-            Log.selectLog(logLevel: .debug, "changeKeepDatas:\(changeKeepDatas)")
-            self.detailKeepStatusChange()
-        } else if firstViewFlag == false && changeProfileFlag == true && changeKeepDatas.count == 0 {
+        if firstViewFlag == false && changeProfileFlag == true {
             Log.selectLog(logLevel: .debug, "マイページ更新後の求人情報更新取得開始")
             self.getProfileData()
             
             // 一応情報を再度更新
             firstViewFlag = false
-            changeKeepDatas = []
             changeProfileFlag = false
         }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        storedKeepList.forEach({ _ in
-            AnalyticsEventManager.track(type: .keep)
-        })
-        storedKeepList.removeAll()
+        trackKeepActionEvent()
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
-    }
-
-    // 求人詳細画面で行なったキープのアクションのデータをセットする。
-    private func detailKeepStatusChange() {
-//        SVProgressHUD.show()
-//
-//        var updateIndexRow:Int = 0
-//
-//        var updateIndexes:[IndexPath] = []
-//
-//        for j in 0..<changeKeepDatas.count {
-//            let changeData = changeKeepDatas[j]
-//            let changeKeepJobId = changeData["jobId"] as! String
-//            let changeKeepStatus = changeData["keepStatus"] as! Bool
-//
-//            for i in 0..<dispJobCards.jobCards.count {
-//                let dispJobCard = dispJobCards.jobCards[i]
-//                if dispJobCard.jobCardCode == changeKeepJobId {
-//                    dispJobCard.keepStatus = changeKeepStatus
-//                    dispJobCards.jobCards[i] = dispJobCard
-//
-//                    updateIndexRow = i
-////                    Log.selectLog(logLevel: .debug, "updateIndexRow:\(updateIndexRow)")
-//                    let updateIndex = IndexPath.init(row: updateIndexRow, section: 0)
-//                    updateIndexes.append(updateIndex)
-//
-//                } else {
-//                    continue
-//                }
-//            }
-//        }
-//
-////        Log.selectLog(logLevel: .debug, "updateIndexes:\(updateIndexes)")
-//
-//        if updateIndexes.count > 0 {
-//            UIView.animate(withDuration: 0.0,
-//                           animations: {
-//                               self.homeTableView.reloadRows(at: updateIndexes, with: .automatic)
-//            }, completion:{ finished in
-//                if finished {
-//                }
-//                SVProgressHUD.dismiss()
-//            })
-//
-//        }else {
-//            SVProgressHUD.dismiss()
-//        }
-//        changeKeepDatas = []
     }
 
     private func getJobData() {
@@ -512,7 +435,7 @@ class HomeVC: TmpNaviTopVC {
     func transitionToInitialInput() {
         let storyboard = UIStoryboard(name: "Preview", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "Sbid_FirstInputPreviewVC") as! FirstInputPreviewVC
-        vc.hidesBottomBarWhenPushed = true
+        vc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に非表示にする
         let navi = UINavigationController(rootViewController: vc)
         navi.modalPresentationStyle = .fullScreen
         UIApplication.shared.keyWindow?.rootViewController = navi
@@ -667,10 +590,12 @@ extension HomeVC: UITableViewDelegate {
         // ダミーチェック
 //        let jobId = "526123"
 //        let jobId = "1187957"
+//        let jobId = "1194358" // 画像でエラーが起きる。
+//        let jobId = "1172337" // 文字化けする
         let vc = getVC(sbName: "JobOfferDetailVC", vcName: "JobOfferDetailVC") as! JobOfferDetailVC
 
-        vc.configure(jobId: jobId, isKeep: selectedJobData.keepStatus, routeFrom: .fromHome)
-        vc.hidesBottomBarWhenPushed = true
+        vc.configure(jobId: jobId, routeFrom: .fromHome)
+        vc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に非表示にする
 
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -809,31 +734,39 @@ extension HomeVC: BaseJobCardCellDelegate {
             }
         }
     }
+    
+    func trackKeepActionEvent() {
+        keepIdListForAppsFlyer.forEach({ id in
+            guard trackedKeepIdListForAppsFlyer
+                .first(where: { $0 == id }) == nil else { return }
+            AnalyticsEventManager.track(type: .keep)
+        })
+        trackedKeepIdListForAppsFlyer = keepIdListForAppsFlyer
+    }
 
     func keepAction(jobId: String, newStatus: Bool) {
         if self.keepSendStatus == .sending { return }
         //LogManager.appendLogEx(.keepList, String(repeating: "🔖", count: 11), "[jobId: \(jobId)]", "[keepSendStatus: \(keepSendStatus)]", #function, #line)
-        storedKeepList.insert(jobId)
-//        storedKeepList.insert(tag)
+        if newStatus {
+            keepIdListForAppsFlyer.append(jobId)
+        } else {
+            keepIdListForAppsFlyer.removeAll(where: { $0 == jobId})
+        }
 
         SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         self.keepSendStatus = .sending
         // TODO:通信処理
-        var updateNo:Int = 0
         var jobCard:MdlJobCard = MdlJobCard()
         for i in 0..<dispJobCards.jobCards.count {
             let checkJobCard = dispJobCards.jobCards[i]
             if checkJobCard.jobCardCode == jobId {
                 jobCard = checkJobCard
-                updateNo = i
                 break
             } else {
                 continue
             }
         }
-//        let row = tag
-//        let jobCard = dispJobCards.jobCards[row]
         let jobId = jobCard.jobCardCode
         let flag = !jobCard.keepStatus
         jobCard.keepStatus = flag
@@ -842,47 +775,19 @@ extension HomeVC: BaseJobCardCellDelegate {
             ApiManager.sendJobKeep(id: jobId)
             .done { result in
                 LogManager.appendApiResultLog("sendJobKeep", result, function: #function, line: #line)
-                self.badgeKeepCnt += 1
-                // タブに丸ポチを追加
-                if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
-                    let tabItem:UITabBarItem = tabItems[1]
-                    tabItem.badgeValue = "●"
-                    tabItem.badgeColor = .clear
-                    tabItem.setBadgeTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.red], for: .normal)
-                }
             }.catch{ (error) in
                 LogManager.appendApiErrorLog("sendJobKeep", error, function: #function, line: #line)
                 Log.selectLog(logLevel: .debug, "keep send error:\(error)")
-                if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
-                    let tabItem:UITabBarItem = tabItems[1]
-                    tabItem.badgeValue = nil
-                }
-
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 self.showError(myErr)
             }.finally {
                 //フェッチ後の表示更新はKeepManagerに任せる
-                //// セルの設定変更パターン
-                //self.dispJobCards.jobCards[updateNo] = jobCard
-                //let updateIndexPath = IndexPath.init(row: updateNo, section: 0)
-                //let cell = self.homeTableView.cellForRow(at: updateIndexPath) as! JobOfferBigCardCell
-                //cell.keepSetting(flag: flag)
                 self.keepSendStatus = .none
                 SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             }
         } else {
             ApiManager.sendJobDeleteKeep(id: jobId)
                 .done { result in
-                    self.badgeKeepCnt -= 1
-                    if self.badgeKeepCnt <= 0 {
-                        // タブに丸ポチを追加
-                        if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
-                            let tabItem:UITabBarItem = tabItems[1]
-                            tabItem.badgeValue = nil
-                        }
-                    } else if self.badgeKeepCnt < 0 {
-                        self.badgeKeepCnt = 0
-                    }
             }.catch{ (error) in
                 Log.selectLog(logLevel: .debug, "keep delete error:\(error)")
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -890,10 +795,6 @@ extension HomeVC: BaseJobCardCellDelegate {
             }.finally {
                 //フェッチ後の表示更新はKeepManagerに任せる
                 //// セルの設定変更パターン
-                //self.dispJobCards.jobCards[updateNo] = jobCard
-                //let updateIndexPath = IndexPath.init(row: updateNo, section: 0)
-                //let cell = self.homeTableView.cellForRow(at: updateIndexPath) as! JobOfferBigCardCell
-                //cell.keepSetting(flag: flag)
                 self.keepSendStatus = .none
                 SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             }
@@ -913,12 +814,6 @@ extension HomeVC: UITabBarControllerDelegate {
             let secondVC = secondNavi.visibleViewController as! KeepListVC
             
             Log.selectLog(logLevel: .debug, "secondVC:\(String(describing: secondVC))")
-            if tabBarController.selectedIndex == 1 {
-                Log.selectLog(logLevel: .debug, "切り替えた画面がKeepListVC")
-                secondVC.keepDatas = []
-            } else {
-                secondVC.keepDatas = []
-            }
         }
     }
 }

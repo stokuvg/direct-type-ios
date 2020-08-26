@@ -17,7 +17,6 @@ class JobOfferBigCardCell: BaseJobCardCell {
 
     @IBOutlet weak var keepBtn:UIButton!
     @IBAction func keepBtnAction() {
-        
         let flag = KeepManager.shared.getKeepStatus(jobCardID: self.jobId)
         keepBtnSetting(flag: !flag)//いったんローカルの表示だけ更新している
         self.delegate.keepAction(jobId: self.jobId, newStatus: !flag)
@@ -68,40 +67,25 @@ class JobOfferBigCardCell: BaseJobCardCell {
             }
         }
     }
-
     func dispKeepStatus() {
         let keepFlag = KeepManager.shared.getKeepStatus(jobCardID: jobId)
         keepBtnSetting(flag: keepFlag)
     }
-
-    
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
-    
-    func setup(data:MdlJobCard) {
-//        Log.selectLog(logLevel: .debug, "JobOfferBigCardCell setup start")
-//        Log.selectLog(logLevel: .debug, "jobId:\(data.jobCardCode)")
-        
+    func setup(data: MdlJobCard) {
         self.jobCardData = data
-        
         self.jobId = jobCardData.jobCardCode
-        
         // サムネイル画像
         let imageUrlString:String = data.mainPicture
         thumnailImageView.af_setImage(withURL: URL(string: imageUrlString)!)
-        
-        let nowDate = Date()
         // NEWマーク 表示チェック
+        let nowDate = Date()
         let start_date_string = data.displayPeriod.startAt
-//        Log.selectLog(logLevel: .debug, "start_date_string:\(start_date_string)")
         let startPeriod = DateHelper.newMarkFlagCheck(startDateString: start_date_string, nowDate: nowDate)
         // 終了マーク 表示チェック
         let end_date_string = data.displayPeriod.endAt
-//        Log.selectLog(logLevel: .debug, "end_date_string:\(end_date_string)")
         let endPeriod = DateHelper.endFlagHiddenCheck(endDateString:end_date_string, nowDate:nowDate)
         
         let limitedType:LimitedType = DateHelper.limitedTypeCheck(startFlag: startPeriod, endFlag: endPeriod)
@@ -109,10 +93,7 @@ class JobOfferBigCardCell: BaseJobCardCell {
         
         // 職業
         let job:String = data.jobName
-//        Log.selectLog(logLevel: .debug, "job:\(job)")
         jobLabel.text(text: job, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
-//        jobLabel.sizeToFit()
-        
         if limitedType == .none {
             self.jobLabelTop.constant = 15
             self.jobLabelHeight.constant = 70
@@ -123,11 +104,7 @@ class JobOfferBigCardCell: BaseJobCardCell {
         
         let saveHeight = self.jobLabelHeight.constant
         // かつ１行か２行か
-//        Log.selectLog(logLevel: .debug, "jobLabel:\(String(describing: jobLabel))")
-        
         let jobNameWidth = CGFloat(job.count) * UIFont.init(fontType: .C_font_M)!.pointSize
-        
-//        Log.selectLog(logLevel: .debug, "jobNameWidth:\(String(describing: jobNameWidth))")
         
         if jobLabel.bounds.size.width > jobNameWidth {
             self.jobLabelHeight.constant -= 30
@@ -171,7 +148,6 @@ class JobOfferBigCardCell: BaseJobCardCell {
         
         // 社名
         let companyName = data.companyName
-//        Log.selectLog(logLevel: .debug, "companyName:\(String(describing: companyName))")
         companyNameLabel.text(text: companyName, fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         
         // メイン
@@ -181,7 +157,6 @@ class JobOfferBigCardCell: BaseJobCardCell {
         
         // キープボタン
         dispKeepStatus()
-        
     }
     
     private func limitedMarkSetting(type:LimitedType) {

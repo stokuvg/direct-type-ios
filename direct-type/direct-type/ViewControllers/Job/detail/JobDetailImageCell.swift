@@ -139,7 +139,6 @@ class JobDetailImageCell: BaseTableViewCell {
     func setup(data: MdlJobCardDetail) {
 //        Log.selectLog(logLevel: .debug, "JobDetailImageCell setup start")
         // 画像セット
-        
         let mainImageUrlString:String = data.mainPicture
 //        Log.selectLog(logLevel: .debug, "mainImageUrlString:\(mainImageUrlString)")
         let subImageUrlStrings:[String] = data.subPictures

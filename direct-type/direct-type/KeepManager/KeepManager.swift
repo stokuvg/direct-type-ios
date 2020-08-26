@@ -10,6 +10,12 @@ import Foundation
 
 final public class KeepManager {
     var dicKeepStatus: [String: Bool] = [:]
+    
+    func getKeepCount() -> Int {
+        return dicKeepStatus.filter { (k, v) -> Bool in
+            v == true
+        }.count
+    }
 
     public static let shared = KeepManager()
     private init() {

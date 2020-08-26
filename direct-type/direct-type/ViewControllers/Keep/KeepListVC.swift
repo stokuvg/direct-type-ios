@@ -27,19 +27,7 @@ final class KeepListVC: TmpBasicVC {
     var lists: [MdlKeepJob] = []
     var pageNo: Int = 1
     var hasNext:Bool = false
-    // AppsFlyerのイベントトラッキング用にオンメモリでキープ求人リストを保有するプロパティ
-    // キープされた求人をオンメモリ上で保有しておき、この画面が切り替わった際にイベント送信する
-    var storedKeepList: Set<String> = []
-    
     var isAddLoad:Bool = true
-    
-    var keepDatas:[[String:Any]] = [] {
-        didSet {
-            Log.selectLog(logLevel: .debug, "new keepDatas")
-        }
-    }
-    var keepChangeCnt:Int = 0
-    var jobDetailCheckFlag:Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,22 +46,13 @@ final class KeepListVC: TmpBasicVC {
         
         // 丸ポチを消す
         if let tabItems:[UITabBarItem] = self.navigationController?.tabBarController?.tabBar.items {
-            let tabItem = tabItems[1]
+            let tabItem = tabItems[Constants.TabIndexKeepList]
             tabItem.badgeValue = nil
-            if jobDetailCheckFlag == false {
-                keepDatas = []
-            } else {
-                jobDetailCheckFlag = true
-            }
         }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        storedKeepList.forEach({ _ in
-            AnalyticsEventManager.track(type: .keep)
-        })
-        storedKeepList.removeAll()
     }
 }
 
@@ -175,6 +154,8 @@ private extension KeepListVC {
             keepTableView.dataSource = self
             keepTableView.reloadData()
         } else {
+            keepTableView.delegate = nil
+            keepTableView.dataSource = nil
             keepNoView.isHidden = false
         }
     }
@@ -192,8 +173,8 @@ extension KeepListVC: UITableViewDelegate {
         let jobId = cardData.jobId
         let vc = getVC(sbName: "JobOfferDetailVC", vcName: "JobOfferDetailVC") as! JobOfferDetailVC
 
-        vc.configure(jobId: jobId, isKeep: cardData.keepStatus, routeFrom: .fromKeepList)
-        vc.hidesBottomBarWhenPushed = true
+        vc.configure(jobId: jobId, routeFrom: .fromKeepList)
+        vc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に非表示にする
 
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -206,11 +187,13 @@ extension KeepListVC: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = indexPath.row
+//        if self.lists.count == 0 { return UITableViewCell() }
         let _keepData = self.lists[row]
         let cell = tableView.loadCell(cellName: "KeepCardCell", indexPath: indexPath) as! KeepCardCell
         cell.tag = row
         cell.delegate = self
         cell.setup(data: _keepData)
+            
         return cell
     }
 }
@@ -229,17 +212,12 @@ extension KeepListVC: BaseJobCardCellDelegate {
 
     func keepAction(jobId: String, newStatus: Bool) {
         SVProgressHUD.show()
-        storedKeepList.insert(jobId)
         Log.selectLog(logLevel: .debug, "KeepListVC delegate keepAction tag:\(jobId)")
-        let curKeepStatus = KeepManager.shared.getKeepStatus(jobCardID: jobId)
-        
-        print(curKeepStatus ? "キープされてる" : "キープされてない")
-        print(curKeepStatus ? "キープさせたい" : "キープとりたい")
 
         if newStatus == true { //キープさせたい
             ApiManager.sendJobKeep(id: jobId)
-                .done { result in
-                    Log.selectLog(logLevel: .debug, "keep成功")
+            .done { result in
+                Log.selectLog(logLevel: .debug, "keep成功")
             }.catch{ (error) in
                 Log.selectLog(logLevel: .debug, "skip send error:\(error)")
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
@@ -275,18 +253,6 @@ extension KeepListVC: UITabBarControllerDelegate {
             let firstVC = firstNavi.visibleViewController as! HomeVC
             
             Log.selectLog(logLevel: .debug, "firstVC:\(String(describing: firstVC))")
-            
-//            let homeVC = vcs[0] as! HomeVC
-//            Log.selectLog(logLevel: .debug, "viewController:\(viewController)")
-            if tabBarController.selectedIndex == 0 {
-                Log.selectLog(logLevel: .debug, "切り替えた画面がHomeVC")
-                Log.selectLog(logLevel: .debug, "keepDatas:\(keepDatas)")
-                
-                firstVC.changeKeepDatas = keepDatas
-            } else {
-                firstVC.changeKeepDatas = []
-                keepDatas = []
-            }
         }
     }
 }
