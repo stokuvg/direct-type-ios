@@ -139,29 +139,30 @@ private extension JobOfferDetailVC {
         // 給与例
         detailTableView.registerNib(nibName: "JobDetailSalaryExampleCell", idName: "JobDetailSalaryExampleCell")
         /// section 3
-        // 募集要項
+        // 募集要項     3-0
+        detailTableView.registerNib(nibName: "JobDetailGuideBookHeaderCell", idName: "JobDetailGuideBookHeaderCell")
+        // 1.仕事内容:              必須  3-1
         detailTableView.registerNib(nibName: "JobDetailWorkContentsCell", idName: "JobDetailWorkContentsCell")
-        detailTableView.registerNib(nibName: "JobDetailAttentionCell", idName: "JobDetailAttentionCell")
-        // 1.仕事内容:              必須  3-0
         // 　・案件例:               任意
         // 　・手掛ける商品・サービス:   任意
         // 　・開発環境・業務範囲:     任意
-        // 　・注目ポイント:           任意 3-1,3-2
-        detailTableView.registerNib(nibName: "JobDetailItemCell", idName: "JobDetailItemCell")
-        // 2.応募資格:              必須  3-3
+        // 　・注目ポイント:           任意 3-2,3-3
+        detailTableView.registerNib(nibName: "JobDetailAttentionCell", idName: "JobDetailAttentionCell")
+        // 2.応募資格:              必須  3-4
         // 　・歓迎する経験・スキル:     任意
         // 　・過去の採用例:           任意
         // 　・この仕事の向き・不向き:  任意
-        // 3.雇用携帯コード:        必須 3-4
-        // 4.給与:               必須 3-5
+        // 3.雇用携帯コード:        必須 3-5
+        // 4.給与:               必須 3-6
         // 　・賞与について:          任意
-        // 5.勤務時間:             必須 3-6
+        // 5.勤務時間:             必須 3-7
         //   ・残業について:
-        // 6.勤務地:              必須 3-7
+        // 6.勤務地:              必須 3-8
         //   ・交通詳細
-        // 7.休日休暇:            必須 3-8
-        // 8.待遇・福利厚生:       必須 3-9
+        // 7.休日休暇:            必須 3-9
+        // 8.待遇・福利厚生:       必須 3-10
         // 　・産休・育休取得:      任意
+        detailTableView.registerNib(nibName: "JobDetailItemCell", idName: "JobDetailItemCell")
         /// section 4
         // ヘッダー
         detailTableView.registerNib(nibName: "JobDetailFoldingHeaderCell", idName: "JobDetailFoldingHeaderCell")
@@ -424,8 +425,10 @@ extension JobOfferDetailVC: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        Log.selectLog(logLevel: .debug, "JobOfferDetailVC heightForRowAt start")
         let section = indexPath.section
         let row = indexPath.row
+        Log.selectLog(logLevel: .debug, "section:\(section),row:\(row)")
         switch (section,row) {
             case (0,0):
                 return UITableView.automaticDimension
@@ -439,7 +442,9 @@ extension JobOfferDetailVC: UITableViewDelegate {
                 return articleOpenFlag ? UITableView.automaticDimension : 0
             case (2,0):
                 return prcodesCellMaxSize
-            case (3,1):
+            case (3,0):
+                return 60
+            case (3,2):
                 let spotTitle1 = _mdlJobDetail.spotTitle1
                 let spotDetail1 = _mdlJobDetail.spotDetail1
                 if (spotTitle1.count > 0 && spotDetail1.count > 0) {
@@ -447,7 +452,7 @@ extension JobOfferDetailVC: UITableViewDelegate {
                 } else {
                     return 0
                 }
-            case (3,2):
+            case (3,3):
                 let spotTitle2 = _mdlJobDetail.spotTitle2
                 let spotDetail2 = _mdlJobDetail.spotDetail2
                 if (spotTitle2.count > 0 && spotDetail2.count > 0) {
@@ -455,16 +460,8 @@ extension JobOfferDetailVC: UITableViewDelegate {
                 } else {
                     return 0
                 }
-            case (3,3):
-                let type = _mdlJobDetail.employmentType
-//                Log.selectLog(logLevel: .debug, "_mdlJobDetail.employmentType:\(_mdlJobDetail.employmentType)")
-                if type.count > 0 {
-//                let employmentType = SelectItemsManager.getCodeDisp(.employmentType, code: type)?.disp ?? ""
-//                if employmentType.count > 0 {
-                    return UITableView.automaticDimension
-                } else {
-                    return 0
-                }
+            case (3,4):
+                return UITableView.automaticDimension
             case (4,0),(5,0),(6,0),(7,0):
                 return 55
             case (4,1):
@@ -481,6 +478,8 @@ extension JobOfferDetailVC: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let headerHeight:CGFloat = 0
+        /*
         var headerHeight:CGFloat = 0
         switch section {
 //            case 1:
@@ -490,6 +489,7 @@ extension JobOfferDetailVC: UITableViewDelegate {
             default:
                 headerHeight = 0
         }
+        */
         tableView.sectionHeaderHeight = headerHeight
         return headerHeight
     }
@@ -509,13 +509,13 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 view.setup(string: articleTitle,openFlag: articleOpenFlag)
                 return view
             */
+            /*
             case 3:
                 // 募集要項
                 let view = UINib(nibName: "JobDetailGuideBookHeaderView", bundle: nil)
                     .instantiate(withOwner: self, options: nil)
                     .first as! JobDetailGuideBookHeaderView
                 return view
-            /*
             case 4,5,6,7:
                 var dispFlag:Bool = false
                 switch section {
@@ -593,7 +593,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                     return 1
                 }
             case 3:
-                return 10
+                return 11
             case 4,5,6,7:
                 return 2
             default:
@@ -602,9 +602,10 @@ extension JobOfferDetailVC: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        Log.selectLog(logLevel: .debug, "JobOfferDetailVC cellForRowAt start")
         let section = indexPath.section
         let row = indexPath.row
-//        Log.selectLog(logLevel: .debug, "section:\(section),row:\(row)")
+        Log.selectLog(logLevel: .debug, "section:\(section),row:\(row)")
         switch (section,row) {
             case (0,0):
                 // 求人内容
@@ -653,11 +654,15 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 cell.setup(data: examples)
                 return cell
             case (3,0):
+                // 募集要項
+                let cell = tableView.loadCell(cellName: "JobDetailGuideBookHeaderCell", indexPath: indexPath) as! JobDetailGuideBookHeaderCell
+                return cell
+            case (3,1):
                 // 仕事内容
                 let cell = tableView.loadCell(cellName: "JobDetailWorkContentsCell", indexPath: indexPath) as! JobDetailWorkContentsCell
                 cell.setup(data: _mdlJobDetail)
                 return cell
-            case (3,1):
+            case (3,2):
                 // 注目1
                 let spotTitle1 = _mdlJobDetail.spotTitle1
                 let spotDetail1 = _mdlJobDetail.spotDetail1
@@ -673,10 +678,12 @@ extension JobOfferDetailVC: UITableViewDataSource {
                     cell.setup(title: spotTitle1, text: spotDetail1, bottomSpaceFlag: flag)
                     return cell
                 } else {
-//                    Log.selectLog(logLevel: .debug, "注目１セル非表示")
-                    return UITableViewCell()
+                    Log.selectLog(logLevel: .debug, "注目１セル非表示")
+                    let cell = UITableViewCell()
+                    cell.backgroundColor = UIColor.init(colorType: .color_base)
+                    return cell
                 }
-            case (3,2):
+            case (3,3):
                 // 注目2
                 let spotTitle2 = _mdlJobDetail.spotTitle2
                 let spotDetail2 = _mdlJobDetail.spotDetail2
@@ -686,11 +693,13 @@ extension JobOfferDetailVC: UITableViewDataSource {
                     cell.setup(title: spotTitle2, text: spotDetail2, bottomSpaceFlag: true)
                     return cell
                 } else {
-//                    Log.selectLog(logLevel: .debug, "注目２セル非表示")
-                    return UITableViewCell()
+                    Log.selectLog(logLevel: .debug, "注目２セル非表示")
+                    let cell = UITableViewCell()
+                    cell.backgroundColor = UIColor.init(colorType: .color_base)
+                    return cell
                 }
-            case (3,3):
-                // 雇用形態
+            case (3,4):
+                // 応募資格
                 let cell = tableView.loadCell(cellName: "JobDetailItemCell", indexPath: indexPath) as! JobDetailItemCell
                 let type = _mdlJobDetail.employmentType
                 if type.count > 0 {
@@ -804,7 +813,7 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
         buttonsView.colorChange(no:0)
 
         let section = 3
-        let row = 0
+        let row = 1
         let titleName = "仕事内容"
         self.guidebookScrollAnimation(section: section,row: row, titleName: titleName)
     }
@@ -815,7 +824,7 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
         buttonsView.colorChange(no:1)
 
         let section = 3
-        let row = 3
+        let row = 4
         let titleName = "応募資格"
         self.guidebookScrollAnimation(section: section,row: row, titleName: titleName)
     }
@@ -826,7 +835,7 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
         buttonsView.colorChange(no:2)
 
         let section = 3
-        let row = 9
+        let row = 10
         let titleName = "待遇"
         self.guidebookScrollAnimation(section: section,row: row, titleName: titleName)
     }

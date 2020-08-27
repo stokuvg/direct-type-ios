@@ -94,6 +94,8 @@
 		067F28E52456D05F000AAD69 /* TmpWebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067F28E42456D05F000AAD69 /* TmpWebVC.swift */; };
 		067F28E82456D112000AAD69 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067F28E72456D112000AAD69 /* UIColor+Extensions.swift */; };
 		067F28EA2456D135000AAD69 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067F28E92456D135000AAD69 /* UIFont+Extensions.swift */; };
+		0680958B24F7AC67001F8793 /* JobDetailGuideBookHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0680958924F7AC67001F8793 /* JobDetailGuideBookHeaderCell.swift */; };
+		0680958C24F7AC67001F8793 /* JobDetailGuideBookHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0680958A24F7AC67001F8793 /* JobDetailGuideBookHeaderCell.xib */; };
 		0685017D24738D98009770A3 /* JobDetailImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0685017B24738D98009770A3 /* JobDetailImageCell.swift */; };
 		0685017E24738D98009770A3 /* JobDetailImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0685017C24738D98009770A3 /* JobDetailImageCell.xib */; };
 		068501802473CE43009770A3 /* HomeTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0685017F2473CE43009770A3 /* HomeTitleView.swift */; };
@@ -442,6 +444,8 @@
 		067F28E42456D05F000AAD69 /* TmpWebVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpWebVC.swift; sourceTree = "<group>"; };
 		067F28E72456D112000AAD69 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		067F28E92456D135000AAD69 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
+		0680958924F7AC67001F8793 /* JobDetailGuideBookHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailGuideBookHeaderCell.swift; sourceTree = "<group>"; };
+		0680958A24F7AC67001F8793 /* JobDetailGuideBookHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailGuideBookHeaderCell.xib; sourceTree = "<group>"; };
 		0685017B24738D98009770A3 /* JobDetailImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailImageCell.swift; sourceTree = "<group>"; };
 		0685017C24738D98009770A3 /* JobDetailImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailImageCell.xib; sourceTree = "<group>"; };
 		0685017F2473CE43009770A3 /* HomeTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTitleView.swift; sourceTree = "<group>"; };
@@ -959,6 +963,8 @@
 				066E42D724F49E7D009E812F /* JobDetailArticleHeaderCell.xib */,
 				06D07C0A24F79A7A00189326 /* JobDetailFoldingHeaderCell.swift */,
 				06D07C0B24F79A7A00189326 /* JobDetailFoldingHeaderCell.xib */,
+				0680958924F7AC67001F8793 /* JobDetailGuideBookHeaderCell.swift */,
+				0680958A24F7AC67001F8793 /* JobDetailGuideBookHeaderCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1591,6 +1597,7 @@
 				064EF6F824654A7300853ADD /* JobDetailDataCell.xib in Resources */,
 				269B29A6249708C300B33FBD /* Career.storyboard in Resources */,
 				06FFA0022484D6850085A3D9 /* MyPageChemistryStartCell.xib in Resources */,
+				0680958C24F7AC67001F8793 /* JobDetailGuideBookHeaderCell.xib in Resources */,
 				26147F36247267F9009B30B5 /* MstF22_pcSkillWord.tsv in Resources */,
 				2642E38F24A04C1F003E6907 /* MstSel_salary.tsv in Resources */,
 				267E636024A9865E004169ED /* EntryFormExQuestionsHeadTBCell.xib in Resources */,
@@ -1820,6 +1827,7 @@
 				0E22833D24AEB5AB0008765E /* ApiManager+Chemistry.swift in Sources */,
 				0EAE765D248F2A23009A8F4B /* ChemistryBusinessAbilityCell.swift in Sources */,
 				06E519A72458138E004E4B7A /* SignupVC.swift in Sources */,
+				0680958B24F7AC67001F8793 /* JobDetailGuideBookHeaderCell.swift in Sources */,
 				066F2714246E818A0040BDC1 /* JobDetailFoldingProcessCell.swift in Sources */,
 				26800520246A2B440053A7F4 /* Date+Extensions.swift in Sources */,
 				06E519912457D742004E4B7A /* ChemistryResult.swift in Sources */,

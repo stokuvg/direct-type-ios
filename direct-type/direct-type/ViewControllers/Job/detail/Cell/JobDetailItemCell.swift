@@ -78,18 +78,22 @@ class JobDetailItemCell: BaseJobDetailCell {
         
         switch row {
             case 0:
+                title = ""
+                text = ""
+                // 募集要項
+            case 1:
                 // 仕事内容
 //                title = data.jobDescription.title
 //                text = data.jobDescription.text
                 title = "仕事内容"
                 text = data.jobDescription
-            case 3:
+            case 4:
                 // 応募資格
 //                title = data.qualification.title!
 //                text = data.qualification.text!
                 title = "応募資格"
                 text = data.qualification
-            case 4:
+            case 5:
                 // 雇用形態
                 title = "雇用形態"
 //                Log.selectLog(logLevel: .debug, "employmentType:\(data.employmentType)")
@@ -99,27 +103,27 @@ class JobDetailItemCell: BaseJobDetailCell {
 //                Log.selectLog(logLevel: .debug, "雇用形態:\(types)")
                 
                 text = types
-            case 5:
+            case 6:
                 // 給与
 //                title = data.salary.title!
                 title = "給与"
                 text = data.salary
-            case 6:
+            case 7:
                 // 勤務時間
 //                title = data.jobtime.title!
                 title = "勤務時間"
                 text = data.jobtime
-            case 7:
+            case 8:
                 // 勤務地
 //                title = data.workPlace.title!
                 title = "勤務地"
                 text = data.workPlace
-            case 8:
+            case 9:
                 // 休日休暇
 //                title = data.holiday.title!
                 title = "休日休暇"
                 text = data.holiday
-            case 9:
+            case 10:
                 // 待遇・福利厚生
 //                title = data.welfare.title!
                 title = "待遇・福利厚生"
