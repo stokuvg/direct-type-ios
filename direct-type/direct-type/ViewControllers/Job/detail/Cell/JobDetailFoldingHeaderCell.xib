@@ -29,13 +29,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="------" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gIb-LL-Swl">
-                                <rect key="frame" x="12" y="12" width="239" height="31"/>
+                                <rect key="frame" x="15" y="12" width="233" height="31"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TmP-Iw-n32">
-                                <rect key="frame" x="263" y="12" width="15" height="31"/>
+                                <rect key="frame" x="260" y="12" width="15" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="LVI-PM-XPk"/>
                                     <constraint firstAttribute="width" constant="15" id="hrS-wO-ej3"/>
@@ -45,17 +45,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="color-white"/>
                         <constraints>
                             <constraint firstItem="Lqg-ep-Bsd" firstAttribute="top" secondItem="TAh-K9-xxn" secondAttribute="top" id="2pj-A3-2Bm"/>
                             <constraint firstItem="Lqg-ep-Bsd" firstAttribute="leading" secondItem="TAh-K9-xxn" secondAttribute="leading" id="51M-81-kfK"/>
-                            <constraint firstAttribute="trailing" secondItem="TmP-Iw-n32" secondAttribute="trailing" constant="12" id="CX1-Yo-ToW"/>
+                            <constraint firstAttribute="trailing" secondItem="TmP-Iw-n32" secondAttribute="trailing" constant="15" id="CX1-Yo-ToW"/>
                             <constraint firstItem="TmP-Iw-n32" firstAttribute="leading" secondItem="gIb-LL-Swl" secondAttribute="trailing" constant="12" id="JND-hS-bs8"/>
                             <constraint firstAttribute="bottom" secondItem="gIb-LL-Swl" secondAttribute="bottom" constant="12" id="Lg5-90-gG1"/>
                             <constraint firstItem="gIb-LL-Swl" firstAttribute="top" secondItem="Lqg-ep-Bsd" secondAttribute="bottom" constant="11" id="Mx4-WX-VFy"/>
                             <constraint firstAttribute="trailing" secondItem="Lqg-ep-Bsd" secondAttribute="trailing" id="Wud-Y6-VM9"/>
                             <constraint firstItem="TmP-Iw-n32" firstAttribute="centerY" secondItem="TAh-K9-xxn" secondAttribute="centerY" id="qm9-s3-YJ8"/>
-                            <constraint firstItem="gIb-LL-Swl" firstAttribute="leading" secondItem="TAh-K9-xxn" secondAttribute="leading" constant="12" id="zCH-pa-i25"/>
+                            <constraint firstItem="gIb-LL-Swl" firstAttribute="leading" secondItem="TAh-K9-xxn" secondAttribute="leading" constant="15" id="zCH-pa-i25"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -83,6 +83,9 @@
         </namedColor>
         <namedColor name="color-line">
             <color red="0.82352941176470584" green="0.82352941176470584" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="color-white">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

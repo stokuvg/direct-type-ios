@@ -386,6 +386,42 @@ private extension JobOfferDetailVC {
 }
 
 extension JobOfferDetailVC: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        Log.selectLog(logLevel: .debug, "JobOfferDetailVC didSelectRowAt start")
+        let section = indexPath.section
+        let row = indexPath.row
+        
+        Log.selectLog(logLevel: .debug, "section:\(section),row:\(row)")
+
+        let index = IndexSet(arrayLiteral: section)
+        let _allIndex = IndexSet(arrayLiteral: 4,5,6,7)
+        
+        switch (section,row) {
+            case (4,0):
+                coverageMemoOpenFlag = !coverageMemoOpenFlag
+                // 取材メモ
+            case (5,0):
+                selectionProcessOpenFlag = !selectionProcessOpenFlag
+                // 選考プロセス
+            case (6,0):
+                // 連絡先
+                phoneNumberOpenFlag = !phoneNumberOpenFlag
+            case (7,0):
+                // 会社概要の展開
+                companyOutlineOpenFlag = !companyOutlineOpenFlag
+            default:
+                break
+        }
+        if 4 <= section && section <= 7 {
+            if firstOpenFlag == false {
+                firstOpenFlag = true
+                self.detailTableView.reloadSections(_allIndex, with: .automatic)
+            } else {
+                self.detailTableView.reloadSections(index, with: .automatic)
+            }
+        }
+    }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let section = indexPath.section
@@ -431,13 +467,13 @@ extension JobOfferDetailVC: UITableViewDelegate {
                 }
             case (4,0),(5,0),(6,0),(7,0):
                 return 55
-            case (4,0):
+            case (4,1):
                 return coverageMemoOpenFlag ? UITableView.automaticDimension : 0
-            case (5,0):
+            case (5,1):
                 return selectionProcessOpenFlag ? UITableView.automaticDimension : 0
-            case (6,0):
+            case (6,1):
                 return phoneNumberOpenFlag ? UITableView.automaticDimension : 0
-            case (7,0):
+            case (7,1):
                 return companyOutlineOpenFlag ? UITableView.automaticDimension : 0
             default:
                 return UITableView.automaticDimension
@@ -451,8 +487,6 @@ extension JobOfferDetailVC: UITableViewDelegate {
 //                headerHeight = articleOpenFlag ? articleHeaderMaxSize : articleHeaderMinSize
             case 3:
                 headerHeight = 60
-            case 4:
-                headerHeight = memoDispFlag ? 50 : 0
             default:
                 headerHeight = 0
         }
@@ -481,6 +515,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                     .instantiate(withOwner: self, options: nil)
                     .first as! JobDetailGuideBookHeaderView
                 return view
+            /*
             case 4,5,6,7:
                 var dispFlag:Bool = false
                 switch section {
@@ -533,6 +568,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 view.setup(title: title,openFlag: openFlag)
 
                 return view
+            */
             default:
                 return nil
         }
@@ -672,8 +708,30 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 return cell
             case (4,0),(5,0),(6,0),(7,0):
                 let cell = tableView.loadCell(cellName: "JobDetailFoldingHeaderCell", indexPath: indexPath) as! JobDetailFoldingHeaderCell
+                var title:String = ""
+                var openFlag:Bool = false
+                cell.topLineView.isHidden = false
+                switch section {
+                    case 4:
+                    cell.topLineView.isHidden = true
+                        openFlag = coverageMemoOpenFlag
+                        title = "取材メモ"
+                    case 5:
+                        openFlag = selectionProcessOpenFlag
+                        title = "選考プロセス"
+                    case 6:
+                        openFlag = phoneNumberOpenFlag
+                        title = "連絡先"
+                    case 7:
+                        openFlag = companyOutlineOpenFlag
+                        title = "会社概要"
+                    default:
+                        openFlag = false
+                        title = ""
+                }
+                cell.setup(title: title, openFlag: openFlag)
                 return cell
-            case (4,_): // メモ
+            case (4,1): // メモ
                 if coverageMemoOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailFoldingMemoCell", indexPath: indexPath) as! JobDetailFoldingMemoCell
 
@@ -683,7 +741,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 } else {
                     return UITableViewCell()
                 }
-            case (5, _):    // プロセス
+            case (5, 1):    // プロセス
                 if selectionProcessOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailFoldingProcessCell", indexPath: indexPath) as! JobDetailFoldingProcessCell
 
@@ -693,7 +751,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 } else {
                     return UITableViewCell()
                 }
-            case (6, _):
+            case (6, 1):
                 // 連絡先
                 if phoneNumberOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailFoldingPhoneNumberCell", indexPath: indexPath) as! JobDetailFoldingPhoneNumberCell
@@ -704,7 +762,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 } else {
                     return UITableViewCell()
                 }
-            case (7, _):    // 会社概要
+            case (7, 1):    // 会社概要
                 if companyOutlineOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailFoldingOutlineCell", indexPath: indexPath) as! JobDetailFoldingOutlineCell
 
