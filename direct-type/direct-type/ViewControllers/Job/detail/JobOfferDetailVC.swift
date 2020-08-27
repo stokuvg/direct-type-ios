@@ -163,6 +163,8 @@ private extension JobOfferDetailVC {
         // 8.待遇・福利厚生:       必須 3-9
         // 　・産休・育休取得:      任意
         /// section 4
+        // ヘッダー
+        detailTableView.registerNib(nibName: "JobDetailFoldingHeaderCell", idName: "JobDetailFoldingHeaderCell")
         // 取材メモ
         detailTableView.registerNib(nibName: "JobDetailFoldingMemoCell", idName: "JobDetailFoldingMemoCell")
         /// section 5
@@ -427,6 +429,8 @@ extension JobOfferDetailVC: UITableViewDelegate {
                 } else {
                     return 0
                 }
+            case (4,0),(5,0),(6,0),(7,0):
+                return 55
             case (4,0):
                 return coverageMemoOpenFlag ? UITableView.automaticDimension : 0
             case (5,0):
@@ -449,8 +453,6 @@ extension JobOfferDetailVC: UITableViewDelegate {
                 headerHeight = 60
             case 4:
                 headerHeight = memoDispFlag ? 50 : 0
-            case 5,6,7:
-                headerHeight = 55
             default:
                 headerHeight = 0
         }
@@ -556,6 +558,8 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 }
             case 3:
                 return 10
+            case 4,5,6,7:
+                return 2
             default:
                 return 1
         }
@@ -665,6 +669,9 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 // 仕事内容
                 let cell = tableView.loadCell(cellName: "JobDetailItemCell", indexPath: indexPath) as! JobDetailItemCell
                 cell.setup(data: _mdlJobDetail, indexPath: indexPath)
+                return cell
+            case (4,0),(5,0),(6,0),(7,0):
+                let cell = tableView.loadCell(cellName: "JobDetailFoldingHeaderCell", indexPath: indexPath) as! JobDetailFoldingHeaderCell
                 return cell
             case (4,_): // メモ
                 if coverageMemoOpenFlag {

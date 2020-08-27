@@ -117,6 +117,8 @@
 		06C347242463A595000FB4DA /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C347232463A595000FB4DA /* UIButton+Extensions.swift */; };
 		06CDF6BF247643200075370F /* MdlJobCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CDF6BE247643200075370F /* MdlJobCard.swift */; };
 		06CDF6C1247648730075370F /* MdlJobCardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CDF6C0247648730075370F /* MdlJobCardList.swift */; };
+		06D07C0C24F79A7A00189326 /* JobDetailFoldingHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D07C0A24F79A7A00189326 /* JobDetailFoldingHeaderCell.swift */; };
+		06D07C0D24F79A7A00189326 /* JobDetailFoldingHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06D07C0B24F79A7A00189326 /* JobDetailFoldingHeaderCell.xib */; };
 		06D700332456B5FC00E55FC8 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06D700322456B5FC00E55FC8 /* Color.xcassets */; };
 		06DCAEA9245A70A8008FE9FA /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DCAEA8245A70A8008FE9FA /* UITableView+Extensions.swift */; };
 		06DCAEAB245A7616008FE9FA /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DCAEAA245A7616008FE9FA /* UILabel+Extensions.swift */; };
@@ -463,6 +465,8 @@
 		06C347232463A595000FB4DA /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		06CDF6BE247643200075370F /* MdlJobCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlJobCard.swift; sourceTree = "<group>"; };
 		06CDF6C0247648730075370F /* MdlJobCardList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlJobCardList.swift; sourceTree = "<group>"; };
+		06D07C0A24F79A7A00189326 /* JobDetailFoldingHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailFoldingHeaderCell.swift; sourceTree = "<group>"; };
+		06D07C0B24F79A7A00189326 /* JobDetailFoldingHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailFoldingHeaderCell.xib; sourceTree = "<group>"; };
 		06D700322456B5FC00E55FC8 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		06DCAEA8245A70A8008FE9FA /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		06DCAEAA245A7616008FE9FA /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
@@ -714,48 +718,12 @@
 		06457060246526E300F3B015 /* detail */ = {
 			isa = PBXGroup;
 			children = (
-				064570612465426500F3B015 /* JobDetailGuideBookHeaderView.swift */,
-				064570632465427000F3B015 /* JobDetailGuideBookHeaderView.xib */,
-				064EF6F524654A7300853ADD /* JobDetailDataCell.swift */,
-				064EF6F624654A7300853ADD /* JobDetailDataCell.xib */,
-				064EF6F924654FDB00853ADD /* JobDetailArticleCell.swift */,
-				064EF6FA24654FDB00853ADD /* JobDetailArticleCell.xib */,
-				064EF6FD2465550E00853ADD /* JobDetailArticleHeaderView.swift */,
-				064EF6FF2465551D00853ADD /* JobDetailArticleHeaderView.xib */,
-				0645DDFA246B907000592572 /* JobDetailPRCodeTagsCell.swift */,
-				0645DDFB246B907000592572 /* JobDetailPRCodeTagsCell.xib */,
-				0645DE00246BB6A100592572 /* JobDetailSalaryExampleCell.swift */,
-				0645DE01246BB6A100592572 /* JobDetailSalaryExampleCell.xib */,
-				06B94F62246BE38E002FEDDC /* JobDetailItemCell.swift */,
-				06B94F63246BE38E002FEDDC /* JobDetailItemCell.xib */,
-				066BC822246CD0B100FE607F /* JobDetailItemOptionalView.swift */,
-				066BC824246CD0C100FE607F /* JobDetailItemOptionalView.xib */,
-				066BC826246CF3CA00FE607F /* JobDetailItemAttentionView.swift */,
-				066BC828246CF40C00FE607F /* JobDetailItemAttentionView.xib */,
-				06409C72246D3A6800EA6BBB /* JobDetailFoldingHeaderView.swift */,
-				06409C74246D3ACB00EA6BBB /* JobDetailFoldingHeaderView.xib */,
-				066F270E246E811F0040BDC1 /* JobDetailFoldingMemoCell.swift */,
-				066F270F246E811F0040BDC1 /* JobDetailFoldingMemoCell.xib */,
-				066F2712246E818A0040BDC1 /* JobDetailFoldingProcessCell.swift */,
-				066F2713246E818A0040BDC1 /* JobDetailFoldingProcessCell.xib */,
-				066F2716246E81A10040BDC1 /* JobDetailFoldingPhoneNumberCell.swift */,
-				066F2717246E81A10040BDC1 /* JobDetailFoldingPhoneNumberCell.xib */,
-				066F271A246E81B60040BDC1 /* JobDetailFoldingOutlineCell.swift */,
-				066F271B246E81B60040BDC1 /* JobDetailFoldingOutlineCell.xib */,
-				0662C60224722E280053CAD9 /* JobDetailFoldingOptionalView.swift */,
-				0662C60424722E390053CAD9 /* JobDetailFoldingOptionalView.xib */,
-				068FFAA824727A810083E130 /* JobDetailStepView.swift */,
-				068FFAAA24727A8B0083E130 /* JobDetailStepView.xib */,
-				066CC17B24735DDB009A123A /* JobDetailTextView.swift */,
-				066CC17D24735DE6009A123A /* JobDetailTextView.xib */,
-				0685017B24738D98009770A3 /* JobDetailImageCell.swift */,
-				0685017C24738D98009770A3 /* JobDetailImageCell.xib */,
-				066AD2B824EA0D5B00712E9F /* JobDetailWorkContentsCell.swift */,
-				066AD2B924EA0D5B00712E9F /* JobDetailWorkContentsCell.xib */,
-				06A3742D24EA4E7700E2DE31 /* JobDetailAttentionCell.swift */,
-				06A3742E24EA4E7700E2DE31 /* JobDetailAttentionCell.xib */,
-				066E42D624F49E7D009E812F /* JobDetailArticleHeaderCell.swift */,
-				066E42D724F49E7D009E812F /* JobDetailArticleHeaderCell.xib */,
+				06D07C0924F796A900189326 /* Header */,
+				06D07C0824F7969500189326 /* Cell */,
+				063350E22463FD9600AF90F3 /* NaviButtonsView.swift */,
+				063350E42463FD9C00AF90F3 /* NaviButtonsView.xib */,
+				06E519892457D6C1004E4B7A /* JobOfferDetailVC.swift */,
+				063350E02463FB3F00AF90F3 /* JobOfferDetailVC.storyboard */,
 			);
 			path = detail;
 			sourceTree = "<group>";
@@ -784,18 +752,8 @@
 		0667636D2457B02800AC5039 /* Job */ = {
 			isa = PBXGroup;
 			children = (
+				06D07C0724F7965500189326 /* List */,
 				06457060246526E300F3B015 /* detail */,
-				06E5197E2457CF31004E4B7A /* Cell */,
-				0667636E2457B04500AC5039 /* HomeVC.swift */,
-				066763752457B09F00AC5039 /* HomeVC.storyboard */,
-				06E519892457D6C1004E4B7A /* JobOfferDetailVC.swift */,
-				063350E02463FB3F00AF90F3 /* JobOfferDetailVC.storyboard */,
-				063350DC2463EC4B00AF90F3 /* NoCardView.swift */,
-				063350DE2463EC5800AF90F3 /* NoCardView.xib */,
-				063350E22463FD9600AF90F3 /* NaviButtonsView.swift */,
-				063350E42463FD9C00AF90F3 /* NaviButtonsView.xib */,
-				0685017F2473CE43009770A3 /* HomeTitleView.swift */,
-				068501812473CE4D009770A3 /* HomeTitleView.xib */,
 			);
 			path = Job;
 			sourceTree = "<group>";
@@ -944,6 +902,78 @@
 				06FFA00A2484E66C0085A3D9 /* MyPageEditedChemistryCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		06D07C0724F7965500189326 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				0685017F2473CE43009770A3 /* HomeTitleView.swift */,
+				068501812473CE4D009770A3 /* HomeTitleView.xib */,
+				063350DC2463EC4B00AF90F3 /* NoCardView.swift */,
+				063350DE2463EC5800AF90F3 /* NoCardView.xib */,
+				06E5197E2457CF31004E4B7A /* Cell */,
+				0667636E2457B04500AC5039 /* HomeVC.swift */,
+				066763752457B09F00AC5039 /* HomeVC.storyboard */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		06D07C0824F7969500189326 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				064EF6F524654A7300853ADD /* JobDetailDataCell.swift */,
+				064EF6F624654A7300853ADD /* JobDetailDataCell.xib */,
+				064EF6F924654FDB00853ADD /* JobDetailArticleCell.swift */,
+				064EF6FA24654FDB00853ADD /* JobDetailArticleCell.xib */,
+				0645DDFA246B907000592572 /* JobDetailPRCodeTagsCell.swift */,
+				0645DDFB246B907000592572 /* JobDetailPRCodeTagsCell.xib */,
+				0645DE00246BB6A100592572 /* JobDetailSalaryExampleCell.swift */,
+				0645DE01246BB6A100592572 /* JobDetailSalaryExampleCell.xib */,
+				06B94F62246BE38E002FEDDC /* JobDetailItemCell.swift */,
+				06B94F63246BE38E002FEDDC /* JobDetailItemCell.xib */,
+				066BC822246CD0B100FE607F /* JobDetailItemOptionalView.swift */,
+				066BC824246CD0C100FE607F /* JobDetailItemOptionalView.xib */,
+				066BC826246CF3CA00FE607F /* JobDetailItemAttentionView.swift */,
+				066BC828246CF40C00FE607F /* JobDetailItemAttentionView.xib */,
+				066F270E246E811F0040BDC1 /* JobDetailFoldingMemoCell.swift */,
+				066F270F246E811F0040BDC1 /* JobDetailFoldingMemoCell.xib */,
+				066F2712246E818A0040BDC1 /* JobDetailFoldingProcessCell.swift */,
+				066F2713246E818A0040BDC1 /* JobDetailFoldingProcessCell.xib */,
+				066F2716246E81A10040BDC1 /* JobDetailFoldingPhoneNumberCell.swift */,
+				066F2717246E81A10040BDC1 /* JobDetailFoldingPhoneNumberCell.xib */,
+				066F271A246E81B60040BDC1 /* JobDetailFoldingOutlineCell.swift */,
+				066F271B246E81B60040BDC1 /* JobDetailFoldingOutlineCell.xib */,
+				0662C60224722E280053CAD9 /* JobDetailFoldingOptionalView.swift */,
+				0662C60424722E390053CAD9 /* JobDetailFoldingOptionalView.xib */,
+				068FFAA824727A810083E130 /* JobDetailStepView.swift */,
+				068FFAAA24727A8B0083E130 /* JobDetailStepView.xib */,
+				066CC17B24735DDB009A123A /* JobDetailTextView.swift */,
+				066CC17D24735DE6009A123A /* JobDetailTextView.xib */,
+				0685017B24738D98009770A3 /* JobDetailImageCell.swift */,
+				0685017C24738D98009770A3 /* JobDetailImageCell.xib */,
+				066AD2B824EA0D5B00712E9F /* JobDetailWorkContentsCell.swift */,
+				066AD2B924EA0D5B00712E9F /* JobDetailWorkContentsCell.xib */,
+				06A3742D24EA4E7700E2DE31 /* JobDetailAttentionCell.swift */,
+				06A3742E24EA4E7700E2DE31 /* JobDetailAttentionCell.xib */,
+				066E42D624F49E7D009E812F /* JobDetailArticleHeaderCell.swift */,
+				066E42D724F49E7D009E812F /* JobDetailArticleHeaderCell.xib */,
+				06D07C0A24F79A7A00189326 /* JobDetailFoldingHeaderCell.swift */,
+				06D07C0B24F79A7A00189326 /* JobDetailFoldingHeaderCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		06D07C0924F796A900189326 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				06409C72246D3A6800EA6BBB /* JobDetailFoldingHeaderView.swift */,
+				06409C74246D3ACB00EA6BBB /* JobDetailFoldingHeaderView.xib */,
+				064EF6FD2465550E00853ADD /* JobDetailArticleHeaderView.swift */,
+				064EF6FF2465551D00853ADD /* JobDetailArticleHeaderView.xib */,
+				064570612465426500F3B015 /* JobDetailGuideBookHeaderView.swift */,
+				064570632465427000F3B015 /* JobDetailGuideBookHeaderView.xib */,
+			);
+			path = Header;
 			sourceTree = "<group>";
 		};
 		06D700342456CB7300E55FC8 /* Common */ = {
@@ -1570,6 +1600,7 @@
 				0662C60524722E390053CAD9 /* JobDetailFoldingOptionalView.xib in Resources */,
 				26BF48DF24639D2B00E00215 /* MstK6_businessType.tsv in Resources */,
 				066938212485D5940064030F /* SettingBaseCell.xib in Resources */,
+				06D07C0D24F79A7A00189326 /* JobDetailFoldingHeaderCell.xib in Resources */,
 				06D700332456B5FC00E55FC8 /* Color.xcassets in Resources */,
 				06B94F65246BE38E002FEDDC /* JobDetailItemCell.xib in Resources */,
 				26BF48E224639D2B00E00215 /* MstK4_jobType.tsv in Resources */,
@@ -1844,6 +1875,7 @@
 				0645705D2464F77700F3B015 /* Logs.swift in Sources */,
 				06E519C7245815B0004E4B7A /* CareerPreviewVC.swift in Sources */,
 				26CA071524DA980700A03E7B /* DirectTypeLinkURL.swift in Sources */,
+				06D07C0C24F79A7A00189326 /* JobDetailFoldingHeaderCell.swift in Sources */,
 				06AA8C642484D2DA001733FA /* MyPageCarrerStartCell.swift in Sources */,
 				06409C73246D3A6800EA6BBB /* JobDetailFoldingHeaderView.swift in Sources */,
 				26A1F5842480F23100834213 /* MyCmnDialogVC.swift in Sources */,
