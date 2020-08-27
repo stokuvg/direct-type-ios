@@ -63,11 +63,11 @@ extension UILabel {
         self.attributedText = attrText
     }
     
-    func text(text:String,fontType:FontType,textColor:UIColor, alignment:NSTextAlignment) {
+    func text(text:String,fontType:FontType,textColor:UIColor, alignment:NSTextAlignment, lineBreakMode: NSLineBreakMode = .byTruncatingTail) {
         var attributes:[NSAttributedString.Key:Any] = [:]
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = alignment
-        paragraphStyle.lineBreakMode = .byTruncatingTail
+        paragraphStyle.lineBreakMode = lineBreakMode
         
         let textFont = UIFont.init(fontType: fontType)
         
