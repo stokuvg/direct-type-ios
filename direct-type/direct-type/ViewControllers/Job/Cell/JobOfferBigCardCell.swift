@@ -94,8 +94,8 @@ class JobOfferBigCardCell: BaseJobCardCell {
         // 職業
         let jobWidth = self.jobLabel.frame.size.width
         let jobName:String = data.jobName
-        Log.selectLog(logLevel: .debug, "jobName:\(jobName)")
-        Log.selectLog(logLevel: .debug, "jobName.count:\(jobName.count)")
+//        Log.selectLog(logLevel: .debug, "jobName:\(jobName)")
+//        Log.selectLog(logLevel: .debug, "jobName.count:\(jobName.count)")
         
         jobLabel.text(text: jobName, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         
@@ -103,8 +103,8 @@ class JobOfferBigCardCell: BaseJobCardCell {
         // かつ１行か２行か
         let jobTextSize = CGFloat(jobName.count) * UIFont.init(fontType: .C_font_M)!.pointSize
         
-        Log.selectLog(logLevel: .debug, "jobTextSize:\(jobTextSize)")
-        Log.selectLog(logLevel: .debug, "jobWidth:\(jobWidth)")
+//        Log.selectLog(logLevel: .debug, "jobTextSize:\(jobTextSize)")
+//        Log.selectLog(logLevel: .debug, "jobWidth:\(jobWidth)")
         
         
         if jobTextSize <= (jobWidth + 10) {
