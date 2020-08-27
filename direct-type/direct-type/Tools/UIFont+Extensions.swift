@@ -21,6 +21,8 @@ enum FontType {
     // 応募確認
     case EC_font_Info
     case EC_font_Notice
+    // プレビュー
+    case PV_font_S
     // 求人系以外
     case font_XL
     case font_L
@@ -58,6 +60,8 @@ enum FontType {
                 return 9
             case .EC_font_Notice:
                 return 9
+            case .PV_font_S:
+                return 2
             case .font_XL:
                 return 4
             case .font_L:
@@ -98,6 +102,14 @@ enum FontType {
                 return 2
         }
     }
+    var paragraphSpacing: CGFloat? {
+        switch self {
+        case .PV_font_S:
+            return 10
+        default:
+            return nil
+        }
+    }
 }
 
 extension UIFont {
@@ -134,6 +146,9 @@ extension UIFont {
             case .EC_font_Notice:
                 fontName = "HiraginoSans-W3"
                 fontSize = 12.0
+            case .PV_font_S:
+                fontName = "HiraginoSans-W3"
+                fontSize = 14.0
             case .font_XL:
                 fontName = "HiraginoSans-W6"
                 fontSize = 30.0

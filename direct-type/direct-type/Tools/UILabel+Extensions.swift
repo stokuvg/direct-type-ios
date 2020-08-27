@@ -56,6 +56,9 @@ extension UILabel {
             .font: textFont as Any,
         ]
         paragraphStyle.lineSpacing = fontType.lineSpacing
+        if let _paragraphSpacing = fontType.paragraphSpacing {//行間とは別に段落間の余白を設定する
+            paragraphStyle.paragraphSpacing = _paragraphSpacing
+        }
         attributes.updateValue(paragraphStyle, forKey: .paragraphStyle)
         
         let attrText = NSAttributedString(string: text, attributes: attributes)
@@ -76,6 +79,9 @@ extension UILabel {
             .font: textFont as Any,
         ]
         paragraphStyle.lineSpacing = fontType.lineSpacing
+        if let _paragraphSpacing = fontType.paragraphSpacing {//行間とは別に段落間の余白を設定する
+            paragraphStyle.paragraphSpacing = _paragraphSpacing
+        }
         attributes.updateValue(paragraphStyle, forKey: .paragraphStyle)
         
         let attrText = NSAttributedString(string: text, attributes: attributes)
