@@ -25,6 +25,9 @@ class JobDetailDataCell: BaseTableViewCell {
     
     // 職種名
     @IBOutlet weak var jobCategoryBackView:UIView!
+    @IBOutlet weak var jobCategoryBackViewTop:NSLayoutConstraint!
+    @IBOutlet weak var jobCategoryBackViewHeight:NSLayoutConstraint!
+    @IBOutlet weak var jobCategoryBackViewBottom:NSLayoutConstraint!
     @IBOutlet weak var jobCategoryLabel:UILabel!
     // 給与
     @IBOutlet weak var salaryBackView:UIView!
@@ -77,8 +80,28 @@ class JobDetailDataCell: BaseTableViewCell {
         
         // 職種
 //        let job = data["job"] as! String
-        let job = data.jobName
-        self.jobCategoryLabel.text(text: job, fontType: .C_font_L, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        
+        let jobNameWidth = self.jobCategoryLabel.frame.size.width
+        
+        let jobName = data.jobName
+        self.jobCategoryLabel.text(text: jobName, fontType: .C_font_L, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        Log.selectLog(logLevel: .debug, "jobName:\(jobName)")
+        Log.selectLog(logLevel: .debug, "jobName.count:\(jobName.count)")
+        
+        Log.selectLog(logLevel: .debug, "jobNameWidth:\(jobNameWidth)")
+        let jobNameSize = CGFloat(jobName.count) * UIFont.init(fontType: .C_font_L)!.pointSize
+        Log.selectLog(logLevel: .debug, "jobNameSize:\(jobNameSize)")
+        // 1行
+        if jobNameWidth <= jobNameSize {
+            self.jobCategoryBackViewTop.constant = 1
+            self.jobCategoryBackViewHeight.constant = 25
+            self.jobCategoryBackViewBottom.constant = 1
+        } else {
+            // 複数行
+            self.jobCategoryBackViewTop.constant = 3
+            self.jobCategoryBackViewHeight.constant = 60
+            self.jobCategoryBackViewBottom.constant = 3
+        }
         // 年収
         let salaryDisplay = data.isSalaryDisplay
         if salaryDisplay {
