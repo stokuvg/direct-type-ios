@@ -270,7 +270,11 @@ extension SubSelectSpecialVC: UITableViewDataSource, UITableViewDelegate {
     func changeFocusItem(_ indexPath: IndexPath?) { //仮選択時のフォーカ表示の切り替え
         if let ip = cellFocus { //古い箇所の描画更新
             cellFocus = indexPath
-            tableVW.reloadRows(at: [ip], with: .none) //該当セルの描画しなおし
+            //その大項目が閉じているときには対象がないので描画できずにクラッシュするのでチェックする
+            let select: Bool = arrSelected[ip.section]
+            if select {
+                tableVW.reloadRows(at: [ip], with: .none) //該当セルの描画しなおし
+            }
         } else {
             cellFocus = indexPath
         }

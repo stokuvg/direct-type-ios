@@ -2117,7 +2117,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20200820_09;
+				CURRENT_PROJECT_VERSION = 20200826_11;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = T9NJN3ZF88;
@@ -2126,7 +2126,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.type.directtype;
 				PRODUCT_NAME = "Direct type";
 				PROVISIONING_PROFILE_SPECIFIER = directtype.development;
@@ -2143,7 +2143,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20200820_09;
+				CURRENT_PROJECT_VERSION = 20200826_11;
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = T9NJN3ZF88;
 				INFOPLIST_FILE = "direct-type/Info.plist";
@@ -2151,7 +2151,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.type.directtype;
 				PRODUCT_NAME = "Direct type";
 				PROVISIONING_PROFILE_SPECIFIER = directtype.development;
