@@ -95,8 +95,8 @@ class EditableTableBasicVC: EditableBasicVC {
                     chkErr.addDicArrVal(key: editTempEnd.editableItemKey, val: "未来の日付は設定できません")
                 }
             }
-            //===開始は終了以後にできない
-            if dateStart >= dateEnd {
+            //===開始は終了以後にできない（同年月は許容する）
+            if dateStart > dateEnd {
                 chkErr.addDicArrVal(key: editTempStart.editableItemKey, val: "正しい期間を設定してください")
                 chkErr.addDicArrVal(key: editTempEnd.editableItemKey, val: "正しい期間を設定してください")
 

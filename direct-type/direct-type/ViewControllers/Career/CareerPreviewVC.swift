@@ -54,7 +54,17 @@ class CareerPreviewVC: PreviewBaseVC {
                 }
             }
             let cancelAction = UIAlertAction.init(title: "修正する", style: UIAlertAction.Style.cancel) { _ in
-                return
+                if let item = self.editableModel.getItemByKey(EditItemMdlCareerCard.contents.itemKey) {
+                    DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+                        let storyboard = UIStoryboard(name: "Edit", bundle: nil)
+                        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubInputMemoVC") as? SubInputMemoVC{
+                            nvc.initData(self, editableItem: item)
+                            //遷移アニメーション関連
+                            nvc.modalTransitionStyle = .coverVertical//.crossDissolve
+                            self.present(nvc, animated: true) {}
+                        }
+                    })
+                }
             }
             alert.addAction(okAction)
             alert.addAction(cancelAction)
@@ -68,7 +78,7 @@ class CareerPreviewVC: PreviewBaseVC {
     
     //共通プレビューをOverrideして利用する
     override func initData() {
-        title = "職務経歴書入力"
+        //title = "職務経歴書入力" //「n社目」表示するようになったため、このタイミングのtitle表示は不要
     }
     override func dispData() {
         //項目を設定する（複数項目を繋いで表示するやつをどう扱おうか。編集と切り分けて、個別設定で妥協する？！）
@@ -129,6 +139,7 @@ class CareerPreviewVC: PreviewBaseVC {
         self.delegate = delegate
         self.targetCardNum = num
         self.arrDetail = details
+        title = "職務経歴書入力 \(num + 1)社目"
     }
 }
 

@@ -49,7 +49,7 @@ class CareerCardItemVW: UIView {
         self.message = message
     }
     func dispCell() {
-        lblTitle.text(text: title, fontType: .font_Sb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
+        lblTitle.text(text: title, fontType: .font_Sb, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
         lblMessage.text(text: message, fontType: .font_S, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         lblTitle.layoutIfNeeded()
         lblMessage.layoutIfNeeded()

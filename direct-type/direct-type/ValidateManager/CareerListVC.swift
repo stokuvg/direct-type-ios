@@ -219,7 +219,7 @@ extension CareerListVC: CareerCardTBCellDelegate {
     }
     func deleteCareerCard(num: Int, card: MdlCareerCard) {
         let bufTitle: String = "削除確認"
-        let bufMessage: String = "履歴書カード #\(num + 1) を削除します。\nよろしいですか？"
+        let bufMessage: String = "職歴書\(num + 1)社目を削除します。\nよろしいですか？"
         showConfirm(title: bufTitle, message: bufMessage)
         .done { _ in
             self.arrDisp.remove(at: num)
