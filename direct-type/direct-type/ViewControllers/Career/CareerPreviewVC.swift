@@ -54,7 +54,17 @@ class CareerPreviewVC: PreviewBaseVC {
                 }
             }
             let cancelAction = UIAlertAction.init(title: "修正する", style: UIAlertAction.Style.cancel) { _ in
-                return
+                if let item = self.editableModel.getItemByKey(EditItemMdlCareerCard.contents.itemKey) {
+                    DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+                        let storyboard = UIStoryboard(name: "Edit", bundle: nil)
+                        if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_SubInputMemoVC") as? SubInputMemoVC{
+                            nvc.initData(self, editableItem: item)
+                            //遷移アニメーション関連
+                            nvc.modalTransitionStyle = .coverVertical//.crossDissolve
+                            self.present(nvc, animated: true) {}
+                        }
+                    })
+                }
             }
             alert.addAction(okAction)
             alert.addAction(cancelAction)

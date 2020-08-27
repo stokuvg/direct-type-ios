@@ -349,7 +349,7 @@ extension SelectItemsManager {
         }
     }
     class func convCodeDisp(_ tsv1: TsvMaster, _ codes: String) -> [CodeDisp] {
-        return codes.split(separator: EditItemTool.SplitMultiCodeSeparator).map { (obj) -> (CodeDisp) in
+        let hashCD: [CodeDisp] = codes.split(separator: EditItemTool.SplitMultiCodeSeparator).map { (obj) -> (CodeDisp) in
             switch tsv1 {
             case .jobType, .businessType:
                 return SelectItemsManager.getCodeDispSyou(tsv1, code: String(obj)) ?? Constants.SelectItemsUndefine
@@ -357,6 +357,22 @@ extension SelectItemsManager {
                 return SelectItemsManager.getCodeDisp(tsv1, code: String(obj)) ?? Constants.SelectItemsUndefine
             }
         }
+        var sortCD: [CodeDisp] = []
+         switch tsv1 {
+         case .qualification://資格の列挙順序も、マスタのソート順を考慮する
+             let items: [CodeDisp] = SelectItemsManager.getMaster(tsv1)
+             for item in items {
+                 if let find = hashCD.filter({ (cd) -> Bool in
+                     cd.code == item.code
+                 }).first {
+                     sortCD.append(item)
+                 }
+             }
+             return sortCD
+         default:
+             return hashCD
+         }
+         return hashCD
     }
 }
 

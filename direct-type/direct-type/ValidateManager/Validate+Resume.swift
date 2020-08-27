@@ -58,7 +58,7 @@ extension EditItemMdlResumeSkillLanguage {
         case .languageToeicScore:   return ValidInfo(required: false, keta: nil, max: 3, type: .number)
         case .languageToeflScore:   return ValidInfo(required: false, keta: nil, max: 3, type: .number)
         case .languageEnglish:      return ValidInfo(required: false, keta: nil, max: nil, type: .code)
-        case .languageStudySkill:   return ValidInfo(required: false, keta: nil, max: nil, type: .zenHanNumSym)
+        case .languageStudySkill:   return ValidInfo(required: false, keta: nil, max: 1000, type: .zenHanNumSym)
         }
     }
 }
