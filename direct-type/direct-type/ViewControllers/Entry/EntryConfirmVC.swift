@@ -283,7 +283,7 @@ extension EntryConfirmVC {
             case 401:
                 //let myErr401 = MyErrorDisp(code: 401, title: "type応募", message: "typeにログインできませんでした", orgErr: nil, arrValidErrMsg: [])
                 //self.showError(myErr401)
-                let errMsg: String = "ログインできません。入力内容をご確認ください"
+                let errMsg: String = "typeにログインできませんでした。\nパスワードまたは、メールアドレスをご確認ください。"
                 self.showConfirm(title: "", message: errMsg, onlyOK: true)
             case 400:
                 let (dicGrpError, dicError) = ValidateManager.convValidErrMsgEntry(myErr.arrValidErrMsg)
