@@ -12,8 +12,7 @@ class ExItemLabel: UILabel {
     var isReadonly: Bool = false
     private var fontType: FontType = .font_S //とりあえず標準サイズとしておく
     private var maxLabelSize: CGSize = CGSize.zero
-//    let padding = UIEdgeInsets(top: 16, left: 8, bottom: 16, right: 8)
-    let padding = UIEdgeInsets(top: 0, left: 120, bottom: 0, right: 120)
+    let padding = UIEdgeInsets(top: 16, left: 8, bottom: 16, right: 8)
 
     func setProperties(fontType: FontType) {
         self.fontType = fontType
@@ -37,9 +36,9 @@ class ExItemLabel: UILabel {
         }
         super.drawText(in: rectTmp)
 //        //===処理確認用の枠線表示
-        let rectangleTmp = UIBezierPath(roundedRect: rectTmp, cornerRadius: 4)
-        UIColor.red.setStroke()
-        rectangleTmp.stroke()
+//        let rectangleTmp = UIBezierPath(roundedRect: rectTmp, cornerRadius: 4)
+//        UIColor.red.setStroke()
+//        rectangleTmp.stroke()
     }
     override var intrinsicContentSize: CGSize {
         var intrinsicContentSize = CGSize.zero
