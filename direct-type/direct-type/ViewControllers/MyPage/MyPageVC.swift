@@ -105,12 +105,10 @@ private extension MyPageVC {
     }
 
     func transitionToChemistry() {
-        var vc = UIViewController()
-        vc = UIStoryboard(name: "ChemistryStart", bundle: nil).instantiateInitialViewController() as! ChemistryStart
-        if let topRanker = topRanker {
-            vc = getVC(sbName: "ChemistryResult", vcName: "ChemistryResult") as! ChemistryResult
-            (vc as! ChemistryResult).configure(with: topRanker)
-        }
+        let isExistsData = topRanker != nil
+        let vc = UIStoryboard(name: "ChemistryStart", bundle: nil).instantiateInitialViewController() as! ChemistryStart
+        vc.configure(isExistsData: isExistsData)
+        
         hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に非表示にする
         navigationController?.pushViewController(vc, animated: true)
     }
