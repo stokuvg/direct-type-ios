@@ -15,77 +15,22 @@ enum DashedLineType {
 
 extension UILabel {
     
-    func persentText(text:String,textColor:UIColor) {
-        var strAttr1:[NSAttributedString.Key : Any] = [
-            .foregroundColor : textColor,
-            .font: UIFont.init(fontType: .font_Sb) as Any
-        ]
-        let textParagraphStyle = NSMutableParagraphStyle()
-        textParagraphStyle.lineSpacing = 22
-        strAttr1.updateValue(textParagraphStyle, forKey: .paragraphStyle)
-        
-        let string1 = NSAttributedString(string: text, attributes: strAttr1)
-        
-        var strAttr2:[NSAttributedString.Key : Any] = [
-            .foregroundColor : textColor,
-            .font: UIFont.init(fontType: .font_SSb) as Any
-        ]
-        let persentParagraphStyle = NSMutableParagraphStyle()
-        persentParagraphStyle.lineSpacing = 14
-        strAttr2.updateValue(persentParagraphStyle, forKey: .paragraphStyle)
-        
-        let string2 = NSAttributedString(string: "%", attributes: strAttr2)
-        
-        let mutableAttrStr = NSMutableAttributedString()
-        mutableAttrStr.append(string1)
-        mutableAttrStr.append(string2)
-        
-        self.attributedText = mutableAttrStr
-    }
-    
-    func clipText(text:String,fontType:FontType,textColor:UIColor, alignment:NSTextAlignment, type:NSLineBreakMode) {
-        var attributes:[NSAttributedString.Key:Any] = [:]
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = alignment
-        paragraphStyle.lineBreakMode = type
-        
-        let textFont = UIFont.init(fontType: fontType)
-        
+    func text(text: String, fontType: FontType, textColor: UIColor, alignment: NSTextAlignment, lineBreakMode: NSLineBreakMode = .byTruncatingTail) {
+        let textFont = UIFont(fontType: fontType)
+        var attributes:[NSAttributedString.Key: Any] = [:]
         attributes = [
             .foregroundColor: textColor,
             .font: textFont as Any,
         ]
-        paragraphStyle.lineSpacing = fontType.lineSpacing
-        if let _paragraphSpacing = fontType.paragraphSpacing {//行間とは別に段落間の余白を設定する
-            paragraphStyle.paragraphSpacing = _paragraphSpacing
-        }
-        attributes.updateValue(paragraphStyle, forKey: .paragraphStyle)
-        
-        let attrText = NSAttributedString(string: text, attributes: attributes)
-        
-        self.attributedText = attrText
-    }
-    
-    func text(text:String,fontType:FontType,textColor:UIColor, alignment:NSTextAlignment, lineBreakMode: NSLineBreakMode = .byTruncatingTail) {
-        var attributes:[NSAttributedString.Key:Any] = [:]
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = alignment
         paragraphStyle.lineBreakMode = lineBreakMode
-        
-        let textFont = UIFont.init(fontType: fontType)
-        
-        attributes = [
-            .foregroundColor: textColor,
-            .font: textFont as Any,
-        ]
         paragraphStyle.lineSpacing = fontType.lineSpacing
         if let _paragraphSpacing = fontType.paragraphSpacing {//行間とは別に段落間の余白を設定する
             paragraphStyle.paragraphSpacing = _paragraphSpacing
         }
         attributes.updateValue(paragraphStyle, forKey: .paragraphStyle)
-        
         let attrText = NSAttributedString(string: text, attributes: attributes)
-        
         self.attributedText = attrText
     }
     
