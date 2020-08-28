@@ -58,8 +58,10 @@ class EntryFormExQuestionsItemTBCell: UITableViewCell {
         let max: Int = _child.editItem.valid.max ?? 0
         lblQuestion.text(text: question, fontType: .font_S, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         if answer.isEmpty {
+            lblAnswaer.setProperties(fontType: .font_S)
             lblAnswaer.text(text: _child.placeholder, fontType: .font_S, textColor: UIColor(colorType: .color_line)!, alignment: .left)
         } else {
+            lblAnswaer.setProperties(fontType: .font_S)
             lblAnswaer.text(text: answer, fontType: .font_S, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         }
         if max > 0 { //文字数制限が設定されている場合

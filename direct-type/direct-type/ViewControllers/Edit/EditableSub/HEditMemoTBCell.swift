@@ -56,9 +56,11 @@ class HEditMemoTBCell: UITableViewCell {
         //PlaceHolder表示
         if bufVal.isEmpty {
             lblValue.numberOfLines = 1
+            lblValue.setProperties(fontType: .font_S)
             lblValue.text(text: _item.placeholder, fontType: .font_S, textColor: UIColor.init(colorType: .color_light_gray)!, alignment: .left)
         } else {
             lblValue.numberOfLines = 0
+            lblValue.setProperties(fontType: .font_S)
             lblValue.text(text: bufVal, fontType: .font_S, textColor: UIColor.init(colorType: .color_main)!, alignment: .left)
         }
         lblDebug.text = ""

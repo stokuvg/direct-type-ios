@@ -64,6 +64,7 @@ class HPreviewTBCell: UITableViewCell {
         let bufNotice: String = _item.notice
         //===表示させる
         lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        lblValue.setProperties(fontType: .PV_font_S)
         lblValue.text(text: bufValue, fontType: .PV_font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left, lineBreakMode: .byCharWrapping)
         lblNotice.text(text: bufNotice, fontType: .font_SS, textColor: UIColor.init(colorType: .color_parts_gray)!, alignment: .left)
         lblNotice.isHidden = (_item.notice == "") ? true : false
