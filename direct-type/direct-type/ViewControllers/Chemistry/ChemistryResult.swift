@@ -51,6 +51,7 @@ private extension ChemistryResult {
         tableView.registerNib(nibName: "ChemistryBusinessAbilityCell", idName: "ChemistryBusinessAbilityCell")
         tableView.estimatedRowHeight = tableViewEstimateCellHeight
         tableView.rowHeight = UITableView.automaticDimension
+        navigationItem.hidesBackButton = true
     }
     
     func getAvarageAvilityScore() -> BusinessAvilityScore {

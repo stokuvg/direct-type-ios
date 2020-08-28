@@ -12,12 +12,12 @@
         <!--ChemistryStart-->
         <scene sceneID="Frb-t1-sHv">
             <objects>
-                <viewController storyboardIdentifier="Sbid_ChemistryStart" title="ChemistryStart" id="VWq-1x-SgO" customClass="ChemistryStart" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Sbid_ChemistryStart" title="ChemistryStart" id="VWq-1x-SgO" customClass="ChemistryStart" customModule="Direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qbT-wc-Y2D">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5tm-rM-Hgr" customClass="IconCarouselView" customModule="direct_type" customModuleProvider="target">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5tm-rM-Hgr" customClass="IconCarouselView" customModule="Direct_type" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                                 <color key="backgroundColor" name="color-sub"/>
                                 <constraints>
@@ -176,6 +176,7 @@
                         <outlet property="descriptionLabel" destination="2xe-z6-Nbv" id="Ucn-cu-jya"/>
                         <outlet property="hukidashiLabel" destination="9f6-t8-wsB" id="MCI-CC-s80"/>
                         <outlet property="iconCarouselView" destination="5tm-rM-Hgr" id="Brh-Dj-aNC"/>
+                        <outlet property="startButton" destination="seG-DY-Q88" id="Ci0-jL-iGJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wQN-kj-uGv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

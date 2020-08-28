@@ -45,7 +45,7 @@
                         <constraint firstAttribute="height" constant="50" id="OCY-sN-MAr"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" title="完了する">
+                    <state key="normal" title="マイページへ戻る">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <userDefinedRuntimeAttributes>

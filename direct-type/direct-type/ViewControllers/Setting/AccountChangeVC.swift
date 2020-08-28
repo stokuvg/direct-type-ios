@@ -55,7 +55,7 @@ private extension AccountChangeVC {
         guard let inputText = inputField.text, inputText != existingPhoneNumber else {
             // 既存の電話番号と同じだった場合はニックネームを保存して設定Topへ
             // TODO: ニックネームの保存処理を追加
-            navigationController?.popViewController(animated: true)
+            showExistsPhoneNumberError()
             return
         }
         
@@ -79,6 +79,16 @@ private extension AccountChangeVC {
         }
         .finally {
         }
+    }
+    
+    func showExistsPhoneNumberError() {
+        let title: String = "エラー"
+        let message: String = "現在登録されている電話番号です。"
+        let alert = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        let okAction = UIAlertAction.init(title: "OK", style: UIAlertAction.Style.default)
+        
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
     }
     
     func transitionToConfirmation() {
