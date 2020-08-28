@@ -97,15 +97,15 @@ final class JobOfferDetailVC: TmpBasicVC {
     }
     
     private func updateTableOffset(animation:Bool = false) {
-        Log.selectLog(logLevel: .debug, "updateTableOffset start")
-        Log.selectLog(logLevel: .debug, "articleHeaderPosition:\(articleHeaderPosition)")
+//        Log.selectLog(logLevel: .debug, "updateTableOffset start")
+//        Log.selectLog(logLevel: .debug, "articleHeaderPosition:\(articleHeaderPosition)")
         let indexPath = IndexPath.init(row: 0, section: 1)
         UIView.animate(withDuration: 0.0, animations: {
             self.detailTableView.scrollToRow(at: indexPath, at: .top, animated: false)
         }, completion: { (finished) in
             // スクロール位置の調整終了
             UIView.animate(withDuration: 0.0, animations: {
-                Log.selectLog(logLevel: .debug, "offsetの更新")
+//                Log.selectLog(logLevel: .debug, "offsetの更新")
                 self.detailTableView.setContentOffset(self.articleHeaderPosition, animated: animation)
             }, completion: {(secondFinished) in
                 Log.selectLog(logLevel: .debug, "detailTableViewの更新結果:\(String(describing: self.detailTableView))")
@@ -914,7 +914,7 @@ extension JobOfferDetailVC: JobDetailArticleHeaderViewDelegate {
 
 extension JobOfferDetailVC: JobDetailArticleHeaderCellDelegate {
     func articleHeaderAction() {
-        Log.selectLog(logLevel: .debug, "JobOfferDetailVC articleHeaderAction start")
+//        Log.selectLog(logLevel: .debug, "JobOfferDetailVC articleHeaderAction start")
         self.articleOpenFlag = true
         
         self.articleHeaderPosition = self.detailTableView.contentOffset
@@ -931,40 +931,40 @@ extension JobOfferDetailVC: JobDetailArticleHeaderCellDelegate {
 // 職種のクローズ
 extension JobOfferDetailVC: JobDetailArticleCellDelegate {
     func articleCellCloseAction() {
-        Log.selectLog(logLevel: .debug, "JobOfferDetailVC articleCellCloseAction start")
+//        Log.selectLog(logLevel: .debug, "JobOfferDetailVC articleCellCloseAction start")
 
         self.articleOpenFlag = false
         let _allIndex = IndexSet(arrayLiteral: 0,1,2,3)
         let index = IndexSet(arrayLiteral: 1)
 
-        Log.selectLog(logLevel: .debug, "テーブルの更新開始")
+//        Log.selectLog(logLevel: .debug, "テーブルの更新開始")
         UIView.animate(withDuration: 0.0, animations: {
             if self.firstOpenFlag == false {
-                Log.selectLog(logLevel: .debug, "周りのセルを更新")
+//                Log.selectLog(logLevel: .debug, "周りのセルを更新")
                 self.firstOpenFlag = true
                 self.detailTableView.reloadSections(_allIndex, with: .automatic)
             } else {
-                Log.selectLog(logLevel: .debug, "折りたたみセルのみを更新")
+//                Log.selectLog(logLevel: .debug, "折りたたみセルのみを更新")
                 self.detailTableView.reloadSections(index, with: .automatic)
             }
         }, completion: { (finished) in
-            Log.selectLog(logLevel: .debug, "テーブルの更新終了")
+//            Log.selectLog(logLevel: .debug, "テーブルの更新終了")
             
             UIView.animate(withDuration: 0.0, animations: {
-                Log.selectLog(logLevel: .debug, "テーブルのoffset セット開始:\(self.articleHeaderPosition)")
+//                Log.selectLog(logLevel: .debug, "テーブルのoffset セット開始:\(self.articleHeaderPosition)")
                 self.updateTableOffset(animation: true)
                 
             }, completion: { (finished) in
                 if finished {
-                    Log.selectLog(logLevel: .debug, "テーブルのoffset セット終了 detailTableView:\(String(describing: self.detailTableView))")
+//                    Log.selectLog(logLevel: .debug, "テーブルのoffset セット終了 detailTableView:\(String(describing: self.detailTableView))")
                     let checkOffset = self.detailTableView.contentOffset
                     if checkOffset.y != self.articleHeaderPosition.y {
-                        Log.selectLog(logLevel: .debug, "offsetが一致しないため再度セット")
+//                        Log.selectLog(logLevel: .debug, "offsetが一致しないため再度セット")
                         self.updateTableOffset()
                     }
                 } else {
                     UIView.animate(withDuration: 0.0, animations: {
-                        Log.selectLog(logLevel: .debug, "テーブルのoffset 再セット開始:\(self.articleHeaderPosition)")
+//                        Log.selectLog(logLevel: .debug, "テーブルのoffset 再セット開始:\(self.articleHeaderPosition)")
                         self.updateTableOffset(animation: true)
                     }, completion: { (secondFinished) in
                         Log.selectLog(logLevel: .debug, "テーブルのoffset 再セット終了 detailTableView:\(String(describing: self.detailTableView))")
