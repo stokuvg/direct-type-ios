@@ -571,10 +571,8 @@ class HomeVC: TmpNaviTopVC {
 extension HomeVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let row = indexPath.row
-        if row == dispJobCards.jobCards.count && dispType == .add {
+        if row == dispJobCards.jobCards.count && (dispType == .add || dispType == .end){
             return 100
-        } else if row == dispJobCards.jobCards.count && dispType == .end {
-            return 250
         }
 
         return self.makeCellHeight(row: row)
