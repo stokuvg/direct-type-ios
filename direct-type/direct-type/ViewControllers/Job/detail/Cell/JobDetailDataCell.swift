@@ -85,12 +85,12 @@ class JobDetailDataCell: BaseTableViewCell {
         
         let jobName = data.jobName
         self.jobCategoryLabel.text(text: jobName, fontType: .C_font_L, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
-        Log.selectLog(logLevel: .debug, "jobName:\(jobName)")
-        Log.selectLog(logLevel: .debug, "jobName.count:\(jobName.count)")
+//        Log.selectLog(logLevel: .debug, "jobName:\(jobName)")
+//        Log.selectLog(logLevel: .debug, "jobName.count:\(jobName.count)")
         
-        Log.selectLog(logLevel: .debug, "jobNameWidth:\(jobNameWidth)")
+//        Log.selectLog(logLevel: .debug, "jobNameWidth:\(jobNameWidth)")
         let jobNameSize = CGFloat(jobName.count) * UIFont.init(fontType: .C_font_L)!.pointSize
-        Log.selectLog(logLevel: .debug, "jobNameSize:\(jobNameSize)")
+//        Log.selectLog(logLevel: .debug, "jobNameSize:\(jobNameSize)")
         // 1行
         if jobNameWidth <= jobNameSize {
             self.jobCategoryBackViewTop.constant = 1

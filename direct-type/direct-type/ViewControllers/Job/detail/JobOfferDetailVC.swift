@@ -49,6 +49,8 @@ final class JobOfferDetailVC: TmpBasicVC {
     
     var naviButtonTapActionFlag:Bool = false
     var deviceType:String = ""
+    
+    var articleHeaderPosition:CGPoint = CGPoint.zero
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,6 +94,23 @@ final class JobOfferDetailVC: TmpBasicVC {
     @objc func keepListChanged(notification: NSNotification) {
         //notification.userInfoにjobCardIDを入れてるので、個別の表示更新にも対応可能
         dispKeepStatus()//表示更新のため
+    }
+    
+    private func updateTableOffset(animation:Bool = false) {
+        Log.selectLog(logLevel: .debug, "updateTableOffset start")
+        Log.selectLog(logLevel: .debug, "articleHeaderPosition:\(articleHeaderPosition)")
+        let indexPath = IndexPath.init(row: 0, section: 1)
+        UIView.animate(withDuration: 0.0, animations: {
+            self.detailTableView.scrollToRow(at: indexPath, at: .top, animated: false)
+        }, completion: { (finished) in
+            // スクロール位置の調整終了
+            UIView.animate(withDuration: 0.0, animations: {
+                Log.selectLog(logLevel: .debug, "offsetの更新")
+                self.detailTableView.setContentOffset(self.articleHeaderPosition, animated: animation)
+            }, completion: {(secondFinished) in
+                Log.selectLog(logLevel: .debug, "detailTableViewの更新結果:\(String(describing: self.detailTableView))")
+            })
+        })
     }
 }
 
@@ -384,6 +403,64 @@ private extension JobOfferDetailVC {
             .finally {
             }
         }
+    
+    func returnForRowAt(indexPath: IndexPath) -> CGFloat {
+        let section = indexPath.section
+        let row = indexPath.row
+        switch (section,row) {
+            case (0,0):
+                return UITableView.automaticDimension
+            case (0,1):
+                return UITableView.automaticDimension
+            case (1,0):
+//                Log.selectLog(logLevel: .debug, "DeviceInfo:\(DeviceHelper.getDeviceInfo())")
+                return articleOpenFlag ? articleHeaderMaxSize : articleHeaderMinSize
+            case (1,1):
+                if articleOpenFlag {
+                    let articleText = self._mdlJobDetail.mainContents
+                    if articleText.count == 0 {
+                        return 0
+                    }
+                    return UITableView.automaticDimension
+                } else {
+                    return 0
+                }
+            case (2,0):
+                return prcodesCellMaxSize
+            case (3,0):
+                return 60
+            case (3,2):
+                let spotTitle1 = _mdlJobDetail.spotTitle1
+                let spotDetail1 = _mdlJobDetail.spotDetail1
+                if (spotTitle1.count > 0 && spotDetail1.count > 0) {
+                    return UITableView.automaticDimension
+                } else {
+                    return 0
+                }
+            case (3,3):
+                let spotTitle2 = _mdlJobDetail.spotTitle2
+                let spotDetail2 = _mdlJobDetail.spotDetail2
+                if (spotTitle2.count > 0 && spotDetail2.count > 0) {
+                    return UITableView.automaticDimension
+                } else {
+                    return 0
+                }
+            case (3,4):
+                return UITableView.automaticDimension
+            case (4,0),(5,0),(6,0),(7,0):
+                return 55
+            case (4,1):
+                return coverageMemoOpenFlag ? UITableView.automaticDimension : 0
+            case (5,1):
+                return selectionProcessOpenFlag ? UITableView.automaticDimension : 0
+            case (6,1):
+                return phoneNumberOpenFlag ? UITableView.automaticDimension : 0
+            case (7,1):
+                return companyOutlineOpenFlag ? UITableView.automaticDimension : 0
+            default:
+                return UITableView.automaticDimension
+        }
+    }
 }
 
 extension JobOfferDetailVC: UITableViewDelegate {
@@ -423,58 +500,15 @@ extension JobOfferDetailVC: UITableViewDelegate {
             }
         }
     }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        Log.selectLog(logLevel: .debug, "JobOfferDetailVC estimatedHeightForRowAt start")
+        return self.returnForRowAt(indexPath: indexPath)
+    }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        Log.selectLog(logLevel: .debug, "JobOfferDetailVC heightForRowAt start")
-        let section = indexPath.section
-        let row = indexPath.row
-        Log.selectLog(logLevel: .debug, "section:\(section),row:\(row)")
-        switch (section,row) {
-            case (0,0):
-                return UITableView.automaticDimension
-            case (0,1):
-                return UITableView.automaticDimension
-            case (1,0):
-//                Log.selectLog(logLevel: .debug, "DeviceInfo:\(DeviceHelper.getDeviceInfo())")
-                return articleOpenFlag ? articleHeaderMaxSize : articleHeaderMinSize
-            case (1,1):
-//                return articleOpenFlag ? articleCellMaxSize : 0
-                return articleOpenFlag ? UITableView.automaticDimension : 0
-            case (2,0):
-                return prcodesCellMaxSize
-            case (3,0):
-                return 60
-            case (3,2):
-                let spotTitle1 = _mdlJobDetail.spotTitle1
-                let spotDetail1 = _mdlJobDetail.spotDetail1
-                if (spotTitle1.count > 0 && spotDetail1.count > 0) {
-                    return UITableView.automaticDimension
-                } else {
-                    return 0
-                }
-            case (3,3):
-                let spotTitle2 = _mdlJobDetail.spotTitle2
-                let spotDetail2 = _mdlJobDetail.spotDetail2
-                if (spotTitle2.count > 0 && spotDetail2.count > 0) {
-                    return UITableView.automaticDimension
-                } else {
-                    return 0
-                }
-            case (3,4):
-                return UITableView.automaticDimension
-            case (4,0),(5,0),(6,0),(7,0):
-                return 55
-            case (4,1):
-                return coverageMemoOpenFlag ? UITableView.automaticDimension : 0
-            case (5,1):
-                return selectionProcessOpenFlag ? UITableView.automaticDimension : 0
-            case (6,1):
-                return phoneNumberOpenFlag ? UITableView.automaticDimension : 0
-            case (7,1):
-                return companyOutlineOpenFlag ? UITableView.automaticDimension : 0
-            default:
-                return UITableView.automaticDimension
-        }
+//        Log.selectLog(logLevel: .debug, "JobOfferDetailVC heightForRowAt start")
+        return self.returnForRowAt(indexPath: indexPath)
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -602,10 +636,10 @@ extension JobOfferDetailVC: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        Log.selectLog(logLevel: .debug, "JobOfferDetailVC cellForRowAt start")
+//        Log.selectLog(logLevel: .debug, "JobOfferDetailVC cellForRowAt start")
         let section = indexPath.section
         let row = indexPath.row
-        Log.selectLog(logLevel: .debug, "section:\(section),row:\(row)")
+//        Log.selectLog(logLevel: .debug, "section:\(section),row:\(row)")
         switch (section,row) {
             case (0,0):
                 // 求人内容
@@ -631,11 +665,11 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 if articleOpenFlag {
                     let cell = tableView.loadCell(cellName: "JobDetailArticleCell", indexPath: indexPath) as! JobDetailArticleCell
                     cell.delegate = self
-                    if articleOpenFlag {
-                        let articleString = _mdlJobDetail.mainContents
-                        cell.setup(data: articleString)
+                    let articleString = _mdlJobDetail.mainContents
+                    if articleString.count == 0 {
+                        return UITableViewCell()
                     } else {
-                        cell.setup(data: "")
+                        cell.setup(data: articleString)
                     }
                     return cell
                 } else {
@@ -880,9 +914,17 @@ extension JobOfferDetailVC: JobDetailArticleHeaderViewDelegate {
 
 extension JobOfferDetailVC: JobDetailArticleHeaderCellDelegate {
     func articleHeaderAction() {
+        Log.selectLog(logLevel: .debug, "JobOfferDetailVC articleHeaderAction start")
         self.articleOpenFlag = true
-        let index = IndexSet(arrayLiteral: 1)
-        self.detailTableView.reloadSections(index, with: .automatic)
+        
+        self.articleHeaderPosition = self.detailTableView.contentOffset
+        
+        UIView.animate(withDuration: 0.1, animations: {
+            let index = IndexSet(arrayLiteral: 1)
+            self.detailTableView.reloadSections(index, with: .automatic)
+        }, completion: { (finished) in
+            Log.selectLog(logLevel: .debug, "articleHeaderAction articleHeaderPosition:\(self.articleHeaderPosition)")
+        })
     }
 }
 
@@ -890,14 +932,48 @@ extension JobOfferDetailVC: JobDetailArticleHeaderCellDelegate {
 extension JobOfferDetailVC: JobDetailArticleCellDelegate {
     func articleCellCloseAction() {
         Log.selectLog(logLevel: .debug, "JobOfferDetailVC articleCellCloseAction start")
-        self.articleOpenFlag = false
-        let index = IndexSet(arrayLiteral: 1)
-        self.detailTableView.reloadSections(index, with: .none)
-        
-        let updateIndex = IndexPath(row: 0, section: 1)
-        self.detailTableView.scrollToRow(at: updateIndex, at: .middle, animated: true)
-    }
 
+        self.articleOpenFlag = false
+        let _allIndex = IndexSet(arrayLiteral: 0,1,2,3)
+        let index = IndexSet(arrayLiteral: 1)
+
+        Log.selectLog(logLevel: .debug, "テーブルの更新開始")
+        UIView.animate(withDuration: 0.0, animations: {
+            if self.firstOpenFlag == false {
+                Log.selectLog(logLevel: .debug, "周りのセルを更新")
+                self.firstOpenFlag = true
+                self.detailTableView.reloadSections(_allIndex, with: .automatic)
+            } else {
+                Log.selectLog(logLevel: .debug, "折りたたみセルのみを更新")
+                self.detailTableView.reloadSections(index, with: .automatic)
+            }
+        }, completion: { (finished) in
+            Log.selectLog(logLevel: .debug, "テーブルの更新終了")
+            
+            UIView.animate(withDuration: 0.0, animations: {
+                Log.selectLog(logLevel: .debug, "テーブルのoffset セット開始:\(self.articleHeaderPosition)")
+                self.updateTableOffset(animation: true)
+                
+            }, completion: { (finished) in
+                if finished {
+                    Log.selectLog(logLevel: .debug, "テーブルのoffset セット終了 detailTableView:\(String(describing: self.detailTableView))")
+                    let checkOffset = self.detailTableView.contentOffset
+                    if checkOffset.y != self.articleHeaderPosition.y {
+                        Log.selectLog(logLevel: .debug, "offsetが一致しないため再度セット")
+                        self.updateTableOffset()
+                    }
+                } else {
+                    UIView.animate(withDuration: 0.0, animations: {
+                        Log.selectLog(logLevel: .debug, "テーブルのoffset 再セット開始:\(self.articleHeaderPosition)")
+                        self.updateTableOffset(animation: true)
+                    }, completion: { (secondFinished) in
+                        Log.selectLog(logLevel: .debug, "テーブルのoffset 再セット終了 detailTableView:\(String(describing: self.detailTableView))")
+                    })
+                }
+            })
+        })
+        
+    }
 }
 
 // 折りたたみヘッダー
