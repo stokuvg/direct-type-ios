@@ -47,10 +47,10 @@ class CareerPreviewVC: PreviewBaseVC {
             let okAction = UIAlertAction.init(title: "ダミーを削除して保存", style: UIAlertAction.Style.default) { _ in
                 if let workMemo = self.editableModel.getItemByKey(EditItemMdlCareerCard.contents.itemKey) {
                     let text = workMemo.curVal
-                    let workInfo: String = ["・業務内容", Constants.TypeDummyStrings].joined(separator: "\n") + "\n\n"
-                    let expManagement: String = ["・マネジメント経験", Constants.TypeDummyStrings].joined(separator: "\n") + "\n\n"
-                    let skillPC: String = ["・ＰＣスキル", Constants.TypeDummyStrings].joined(separator: "\n") + "\n\n"
-                    let workDetail: String = ["・実績", Constants.TypeDummyStrings].joined(separator: "\n")
+                    let workInfo: String = [Constants.TypeDummyItem1Strings, Constants.TypeDummyStrings].joined(separator: "\n") + "\n\n"
+                    let expManagement: String = [Constants.TypeDummyItem2Strings, Constants.TypeDummyStrings].joined(separator: "\n") + "\n\n"
+                    let skillPC: String = [Constants.TypeDummyItem3Strings, Constants.TypeDummyStrings].joined(separator: "\n") + "\n\n"
+                    let workDetail: String = [Constants.TypeDummyItem4Strings, Constants.TypeDummyStrings].joined(separator: "\n")
                     let regexp = "(\(workInfo)|\(expManagement)|\(skillPC)|\(workDetail)|\(Constants.TypeDummyStrings))"
                     let newText = text.replacementString(text: text, regexp: regexp, fixedReplacementString: "")
                     self.editableModel.changeTempItem(workMemo, text: newText)
