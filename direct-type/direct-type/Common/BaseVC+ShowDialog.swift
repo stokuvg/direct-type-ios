@@ -53,7 +53,12 @@ extension BaseVC {
     }
     internal func showErrorPromise(_ myErrorDisp: MyErrorDisp) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
-        let bufTitle = "\(myErrorDisp.title) (\(myErrorDisp.code))"
+        let bufTitle: String!
+        if Constants.DbgDispStatus {
+            bufTitle = "\(myErrorDisp.title) (\(myErrorDisp.code))"
+        } else {
+            bufTitle = "\(myErrorDisp.title)"
+        }
         let alert = UIAlertController.init(title: bufTitle, message: myErrorDisp.message, preferredStyle: .alert)
         //<UIView:_UIAlertControllerInterfaceActionGroupView:UIView:_UIInterfaceActionGroupHeaderScrollView:UIView> の <UILabel> が title　/　message
         let okAction = UIAlertAction.init(title: "OK", style: .default) { _ in
@@ -95,7 +100,12 @@ extension BaseVC {
 //    }
     internal func showErrorRetryPromise(_ myErrorDisp: MyErrorDisp) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
-        let bufTitle = "\(myErrorDisp.title) (\(myErrorDisp.code))"
+        let bufTitle: String!
+        if Constants.DbgDispStatus {
+            bufTitle = "\(myErrorDisp.title) (\(myErrorDisp.code))"
+        } else {
+            bufTitle = "\(myErrorDisp.title)"
+        }
         let alert = UIAlertController.init(title: bufTitle, message: myErrorDisp.message, preferredStyle: .alert)
         //<UIView:_UIAlertControllerInterfaceActionGroupView:UIView:_UIInterfaceActionGroupHeaderScrollView:UIView> の <UILabel> が title　/　message
         let retryAction = UIAlertAction.init(title: "今すぐリトライ", style: .default) { _ in
