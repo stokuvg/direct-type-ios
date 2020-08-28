@@ -32,7 +32,10 @@ struct Constants {
     static let CareerCardMax: Int = 10 //職務経歴書カードの登録際台数
     //応募や職歴などでのダミー文字列
     static let TypeDummyStrings: String = "▲▽"
-    
+    static let TypeDummyItem1Strings: String = "・業務内容"
+    static let TypeDummyItem2Strings: String = "・マネジメント経験"
+    static let TypeDummyItem3Strings: String = "・ＰＣスキル"
+    static let TypeDummyItem4Strings: String = "・実績"
     //「年」「月」選択Picker用定義
     static let years: [Int] = (1900...2100).map { $0 }
     static let months: [Int] = (1...12).map { $0 }

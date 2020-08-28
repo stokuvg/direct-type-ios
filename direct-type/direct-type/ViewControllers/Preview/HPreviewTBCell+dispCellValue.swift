@@ -26,18 +26,18 @@ extension HPreviewTBCell {
         case .workPeriodC15:      //===雇用期間
             let tmp0: String = _item.childItems[0].curVal
             let date0 = DateHelper.convStrYM2Date(tmp0)
-            if date0 == Constants.SelectItemsUndefineDate { return "未入力（必須）" } //初回未記入対応
+            if date0 == Constants.SelectItemsUndefineDate { return "未入力" } //初回未記入対応
             let buf0: String = date0.dispYmJP()
             let tmp1: String = _item.childItems[1].curVal
             let date1 = DateHelper.convStrYM2Date(tmp1)
-            if date1 == Constants.SelectItemsUndefineDate { return "未入力（必須）" } //初回未記入対応
+            if date1 == Constants.SelectItemsUndefineDate { return "未入力" } //初回未記入対応
             let buf1: String = date1.dispYmJP()
             return "\(buf0)〜\(buf1)"
         case .companyNameC15:     //===企業名
-            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
+            if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
             return _item.childItems[0].curVal
         case .employmentTypeC15:  //===雇用形態
-            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
+            if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
             let buf0: String = SelectItemsManager.getCodeDisp(.employmentType, code: tmp0)?.disp ?? ""
             return buf0.isEmpty ? Constants.SelectItemsUndefine.disp : "\(buf0)"
@@ -99,14 +99,14 @@ extension HPreviewTBCell {
 
         //========================
         case .fullnameH2:
-            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
+            if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
             let bufFullname: String = "\(_item.childItems[0].valDisp) \(_item.childItems[1].valDisp)"
             let bufFullnameKana: String = "\(_item.childItems[2].valDisp) \(_item.childItems[3].valDisp)"
             return "\(bufFullname)（\(bufFullnameKana)）"
         case .birthH2:
             let tmpBirthday: String = _item.childItems[0].curVal
             let date = DateHelper.convStrYMD2Date(tmpBirthday)
-            if date == Constants.SelectItemsUndefineDate { return "未入力（必須）"} //初回未記入対応
+            if date == Constants.SelectItemsUndefineDate { return "未入力"} //初回未記入対応
             let bufBirthday: String = date.dispYmdJP()
             let bufAge: String = "\(date.age)歳"
             return "\(bufBirthday)（\(bufAge)）"
@@ -127,10 +127,10 @@ extension HPreviewTBCell {
             if !bufAddress.isEmpty { arrBuf.append(bufAddress)}
             return arrBuf.count == 0 ? "未入力" : arrBuf.joined(separator: "\n")
         case .emailH2:
-            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
+            if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
             return _item.childItems[0].curVal
         case .hopeAreaH2:
-            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
+            if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
             if _item.childItems[0].curVal == Constants.ExclusiveSelectCodeDisp.code {
                 return Constants.ExclusiveSelectCodeDisp.disp
@@ -145,23 +145,23 @@ extension HPreviewTBCell {
         //========================
         //=== [H-3]履歴書編集
         case .employmentH3:           //===(3a)就業状況
-            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
+            if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
             let buf0: String = SelectItemsManager.getCodeDisp(.employmentStatus, code: tmp0)?.disp ?? ""
             return buf0.isEmpty ? Constants.SelectItemsUndefine.disp : "\(buf0)"
         case .currentSalaryH3:        //===現在の年収
-            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
+            if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
             let buf0: String = SelectItemsManager.getCodeDisp(.salarySelect, code: tmp0)?.disp ?? ""
             return buf0.isEmpty ? Constants.SelectItemsUndefine.disp : "\(buf0)"
         case .changeCountH3:          //===(3b)転職回数
-            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
+            if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
             let buf0: String = SelectItemsManager.getCodeDisp(.changeCount, code: tmp0)?.disp ?? ""
             return "\(buf0)"
         case .lastJobExperimentA11: fallthrough
         case .lastJobExperimentH3:    //===(3c)直近の経験職種
-            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
+            if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
             let disp = EditItemTool.dispTypeAndYear(codes: tmp0, .jobType, .jobExperimentYear)
             return disp.count == 0 ? Constants.SelectItemsValEmpty.disp : disp.joined(separator: "\n")
@@ -189,7 +189,7 @@ extension HPreviewTBCell {
             } else {
                 disp.append("\(date3.dispYmJP())卒業")
             }
-            return disp.count == 0 ? "未入力（必須）" : disp.joined(separator: "\n")
+            return disp.count == 0 ? "未入力" : disp.joined(separator: "\n")
         case .skillLanguageH3:        //===(3g)語学
             var tmp0: String = _item.childItems[0].curVal
             var tmp1: String = _item.childItems[1].curVal
@@ -260,22 +260,22 @@ extension HPreviewTBCell {
         //========================
         //[A系統]初回入力
         case .nicknameA6:             //=== [A-5/6] 入力（ニックネーム）
-            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
+            if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
             return _item.childItems[0].curVal
         case .genderA7:               //=== [A-7] 入力（性別）
-            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応（スキップ可能から必須になった）
+            if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応（スキップ可能から必須になった）
             let tmpGender: String = _item.childItems[0].curVal
             let bufGender: String = SelectItemsManager.getCodeDisp(.gender, code: tmpGender)?.disp ?? "--"
             return "\(bufGender)"
         case .birthdayA8:             //=== [A-8] 入力（生年月日）
             let tmpBirthday: String = _item.childItems[0].curVal
             let date = DateHelper.convStrYMD2Date(tmpBirthday)
-            if date == Constants.SelectItemsUndefineDate { return "未入力（必須）"} //初回未記入対応
+            if date == Constants.SelectItemsUndefineDate { return "未入力"} //初回未記入対応
             let bufBirthday: String = date.dispYmdJP()
             let bufAge: String = "\(date.age)歳"
             return "\(bufBirthday)（\(bufAge)）"
         case .hopeAreaA9:             //=== [A-9] 入力（希望勤務地）
-            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
+            if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
             if _item.childItems[0].curVal == Constants.ExclusiveSelectCodeDisp.code {
                 return Constants.ExclusiveSelectCodeDisp.disp
             }
@@ -288,18 +288,18 @@ extension HPreviewTBCell {
             let buf0: String = arr0.joined(separator: " / ")
             return buf0.isEmpty ? Constants.SelectItemsValEmpty.disp : "\(buf0)"
         case .schoolA10:              //=== [A-10] 入力（最終学歴）
-            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
+            if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
             let buf0: String = SelectItemsManager.getCodeDisp(.schoolType, code: tmp0)?.disp ?? ""
             return "\(buf0)"
         case .employmentStatusA21:    //=== [A-21] 入力（就業状況）
-            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
+            if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
             let buf0: String = SelectItemsManager.getCodeDisp(.employmentStatus, code: tmp0)?.disp ?? ""
             return "\(buf0)"
         //case .lastJobExperimentA11   //=== [A-11] 入力（直近経験職種）[A-12] 入力（直近の職種の経験年数）
         case .currentSalaryA13:              //=== [A-13] 入力（現在の年収）
-            if _item.childItems[0].curVal.isEmpty { return "未入力（必須）" } //初回未記入対応
+            if _item.childItems[0].curVal.isEmpty { return "未入力" } //初回未記入対応
             let tmp0: String = _item.childItems[0].curVal
             let buf0: String = SelectItemsManager.getCodeDisp(.salarySelect, code: tmp0)?.disp ?? ""
             return "\(buf0)"

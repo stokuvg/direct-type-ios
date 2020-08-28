@@ -51,14 +51,27 @@ class EditItemTool {
     class func dispTypeAndYear(codes: String, _ tsvMaain: SelectItemsManager.TsvMaster, _ tsvSub: SelectItemsManager.TsvMaster) -> [String] {
         var disp: [String] = []
         if Constants.DbgDispStatus { disp.append("[\(codes)]") }
+        let (_, mst) = SelectItemsManager.getMaster(tsvMaain)
+        var hashCC: [(Code, Code)] = []
         for code in codes.split(separator: "_") {
             let buf = String(code).split(separator: SplitTypeYearSeparator)
             guard buf.count == 2 else { continue }
             let tmp0 = String(buf[0])
             let tmp1 = String(buf[1])
-            let buf0: String = SelectItemsManager.getCodeDispSyou(tsvMaain, code: tmp0)?.disp ?? ""
-            let buf1: String = SelectItemsManager.getCodeDisp(tsvSub, code: tmp1)?.disp ?? ""
-            let grp0: String = SelectItemsManager.getDispDai(tsvMaain, code: tmp0)
+            hashCC.append((tmp0, tmp1))
+        }
+        var sortCDC: [(CodeDisp, Code)] = []
+        for item in mst {
+            if let find = hashCC.filter({ (cd1, cd2) -> Bool in
+                cd1 == item.codeDisp.code
+            }).first {
+                sortCDC.append((item.codeDisp, find.1))
+            }
+        }
+        for cdc in sortCDC {
+            let buf0: String = cdc.0.disp
+            let buf1: String = SelectItemsManager.getCodeDisp(tsvSub, code: cdc.1)?.disp ?? ""
+            let grp0: String = SelectItemsManager.getDispDai(tsvMaain, code: cdc.0.code)
             let bufExperiment: String = "\(grp0)/\(buf0)：\(buf1)"
             disp.append(bufExperiment)
         }
@@ -67,10 +80,19 @@ class EditItemTool {
     class func dispType(codes: String, _ tsvMaain: SelectItemsManager.TsvMaster) -> [String] {
         var disp: [String] = []
         if Constants.DbgDispStatus { disp.append("[\(codes)]") }
-        for code in codes.split(separator: "_") {
-            let tmp0 = String(code)
-            let buf0: String = SelectItemsManager.getCodeDispSyou(tsvMaain, code: tmp0)?.disp ?? ""
-            let grp0: String = SelectItemsManager.getDispDai(tsvMaain, code: tmp0)
+        let (_, mst) = SelectItemsManager.getMaster(tsvMaain)
+        let hashCD = codes.split(separator: "_")
+        var sortCD: [CodeDisp] = []
+        for item in mst {
+            if let _ = hashCD.filter({ (cd) -> Bool in
+                cd == item.codeDisp.code
+            }).first {
+                sortCD.append(item.codeDisp)
+            }
+        }
+        for cd in sortCD {
+            let buf0: String = cd.disp
+            let grp0: String = SelectItemsManager.getDispDai(tsvMaain, code: cd.code)
             let bufExperiment: String = "\(grp0)/\(buf0)"
             disp.append(bufExperiment)
         }

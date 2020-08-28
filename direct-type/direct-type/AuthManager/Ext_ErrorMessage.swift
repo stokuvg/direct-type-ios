@@ -329,9 +329,9 @@ extension AuthManager {
                                 }
                                 
                             case 500: // （ネットワーク接続がない時にやってくる：　user-apiなど）
-                                myErrorDisp.title = "Network Error"
-                                myErrorDisp.message = swaErr.localizedDescription
-
+                                myErrorDisp.title = "ネットワークエラー"
+                                myErrorDisp.message = "インターネットに接続されていません"
+                                
                             case 401:
                                 myErrorDisp.title = "認証エラー"
                                 if let _data = swaData, _data.count > 0 {

@@ -40,20 +40,20 @@ class CareerListVC: TmpBasicVC {
         //case businessType ???
         //業務内容
         var workInfo: String = ""
-        workInfo = ["・業務内容", Constants.TypeDummyStrings].joined(separator: "\n")
+        workInfo = [Constants.TypeDummyItem1Strings, Constants.TypeDummyStrings].joined(separator: "\n")
         //マネジメント経験
         //case experienceManagement
         var expManagement: String = ""
-        expManagement = ["・マネジメント経験", Constants.TypeDummyStrings].joined(separator: "\n")
+        expManagement = [Constants.TypeDummyItem2Strings, Constants.TypeDummyStrings].joined(separator: "\n")
         //PCスキル
         //case skillExcel
         //case skillWord
         //case skillPowerPoint
         var skillPC: String = ""
-        skillPC = ["・ＰＣスキル", Constants.TypeDummyStrings].joined(separator: "\n")
+        skillPC = [Constants.TypeDummyItem3Strings, Constants.TypeDummyStrings].joined(separator: "\n")
         //実績
         var workDetail: String = ""
-        workDetail = ["・実績", Constants.TypeDummyStrings].joined(separator: "\n")
+        workDetail = [Constants.TypeDummyItem4Strings, Constants.TypeDummyStrings].joined(separator: "\n")
         //=くっつける
         if !workInfo.isEmpty { dispWorknote.append(workInfo) }
         if !expManagement.isEmpty { dispWorknote.append(expManagement) }

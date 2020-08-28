@@ -41,7 +41,7 @@ class ProfilePreviewVC: PreviewBaseVC {
         arrData.append(MdlItemH(.spacer, "", childItems: [])) //上部の余白を実現させるため（ヘッダと違って、一緒にスクロールアウトさせたい）
         //================================================================================
         //===４．氏名（必須）
-        //    ・未記入時は「未入力（必須）」と表示
+        //    ・未記入時は「未入力」と表示
         //    ・表記形式は「{氏} {名} （{氏(カナ)} {名(カナ)}」
         let bufFullname: String = "\(_detail.familyName) \(_detail.firstName)"
         let bufFullnameKana: String = "\(_detail.familyNameKana) \(_detail.firstNameKana)"
@@ -68,7 +68,7 @@ class ProfilePreviewVC: PreviewBaseVC {
         ]))
 
         //===６．住所
-        //    ・未記入時は「未入力（必須）」と表示
+        //    ・未記入時は「未入力」と表示
         //    ・郵便番号の表記形式は「〒{郵便番号上3桁}-{郵便番号下桁}」
         //    ・都道府県以下の表示形式は郵便番号から改行して表示
         //        「{都道府県}{市区町村}{丁目・番地・建物名など}」
@@ -83,7 +83,7 @@ class ProfilePreviewVC: PreviewBaseVC {
             EditableItemH(type: .inputMemo, editItem: EditItemMdlProfile.address2, val: _detail.address2),
         ]))
         //===７．メールアドレス
-        //    ・未記入時は「未入力（必須）」と表示
+        //    ・未記入時は「未入力」と表示
         let bufMailAddress: String = _detail.mailAddress
         arrData.append(MdlItemH(.emailH2, "\(bufMailAddress)", childItems: [
             EditableItemH(type: .inputText, editItem: EditItemMdlProfile.mailAddress, val: _detail.mailAddress),
