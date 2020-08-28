@@ -61,7 +61,7 @@ enum FontType {
             case .EC_font_Notice:
                 return 9
             case .PV_font_S:
-                return 2
+                return 6
             case .font_XL:
                 return 4
             case .font_L:
@@ -105,7 +105,7 @@ enum FontType {
     var paragraphSpacing: CGFloat? {
         switch self {
         case .PV_font_S:
-            return 10
+            return 8
         default:
             return nil
         }
