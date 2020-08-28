@@ -69,7 +69,7 @@ class JobDetailAttentionCell: BaseTableViewCell {
             titleBackHeight.constant = 28
         }
         // 注目 タイトル
-        self.attentionTitle.clipText(text: title, fontType: titleFont, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left, type: .byCharWrapping)
+        self.attentionTitle.text(text: title, fontType: titleFont, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left, lineBreakMode: .byCharWrapping)
         
         // 注目 テキスト
         self.attentionText.text(text: text, fontType: .C_font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
