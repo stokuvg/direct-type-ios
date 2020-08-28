@@ -141,6 +141,27 @@ class CareerPreviewVC: PreviewBaseVC {
         self.arrDetail = details
         title = "職務経歴書入力 \(num + 1)社目"
     }
+    //========================================
+    override func chkButtonEnable() {
+        var isEnable: Bool = true
+        if (editableModel.getItemByKey(EditItemMdlCareerCardWorkPeriod.startDate.itemKey)?.curVal ?? "").isEmpty { isEnable = false }
+        if (editableModel.getItemByKey(EditItemMdlCareerCardWorkPeriod.endDate.itemKey)?.curVal ?? "").isEmpty { isEnable = false }
+        if (editableModel.getItemByKey(EditItemMdlCareerCard.companyName.itemKey)?.curVal ?? "").isEmpty { isEnable = false }
+        if (editableModel.getItemByKey(EditItemMdlCareerCard.contents.itemKey)?.curVal ?? "").isEmpty { isEnable = false }
+        dispButton(isEnable: isEnable)
+    }
+    private func dispButton(isEnable: Bool) {
+        if isEnable {
+            btnCommit.isEnabled = true
+            btnCommit.setTitle(text: "完了する", fontType: .font_M, textColor: UIColor(colorType: .color_white)!, alignment: .center)
+            btnCommit.backgroundColor = UIColor(colorType: .color_button)
+        } else {
+            btnCommit.isEnabled = false
+            btnCommit.setTitle(text: "完了する", fontType: .font_M, textColor: UIColor(colorType: .color_white)!, alignment: .center)
+            btnCommit.backgroundColor = UIColor(colorType: .color_close)
+        }
+    }
+
 }
 
 //=== APIフェッチ
