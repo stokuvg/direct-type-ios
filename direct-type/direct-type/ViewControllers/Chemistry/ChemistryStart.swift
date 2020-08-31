@@ -25,6 +25,11 @@ final class ChemistryStart: BaseChemistryVC {
         iconCarouselView.startAnimation()
         setFont()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
+    }
 }
 
 private extension ChemistryStart {

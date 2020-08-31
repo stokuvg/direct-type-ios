@@ -34,6 +34,11 @@ final class ChemistryResult: BaseChemistryVC {
         setup()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
+    }
+    
     func configure(with scores: [ChemistryScore]) {
         topRanker = ChemistryScoreCalculation(questionScores: scores).topThree
     }
