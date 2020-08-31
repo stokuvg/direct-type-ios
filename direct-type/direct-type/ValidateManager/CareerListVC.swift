@@ -27,7 +27,7 @@ class CareerListVC: TmpBasicVC {
         self.arrDisp.append(makeNewCareerCard())
         let storyboard = UIStoryboard(name: "Preview", bundle: nil)
         if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_CareerPreviewVC") as? CareerPreviewVC{
-            nvc.initData(self, self.arrData.count, self.arrDisp)
+            nvc.initData(self, self.arrData.count, self.arrDisp, true)
             self.navigationController?.pushViewController(nvc, animated: true)
         }
     }
@@ -146,7 +146,7 @@ extension CareerListVC: UITableViewDataSource, UITableViewDelegate {
         //let item = arrDisp[indexPath.row]
         let storyboard = UIStoryboard(name: "Preview", bundle: nil)
         if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_CareerPreviewVC") as? CareerPreviewVC{
-            nvc.initData(self, indexPath.row, arrDisp)
+            nvc.initData(self, indexPath.row, arrDisp, false)
             self.navigationController?.pushViewController(nvc, animated: true)
         }
 

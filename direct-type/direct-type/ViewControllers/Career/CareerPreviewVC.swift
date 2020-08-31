@@ -21,6 +21,7 @@ class CareerPreviewVC: PreviewBaseVC {
     var delegate: CareerListProtocol? = nil
     var targetCardNum: Int = 0 //編集対象のカード番号
     var arrDetail: [MdlCareerCard] = []
+    var isNeedAddPopVC: Bool = true //追加で2画面分を戻らせるか（List0件時に追加Pushしているため）
 
     override func actCommit(_ sender: UIButton) {
         //===== フェッチかける
@@ -142,11 +143,19 @@ class CareerPreviewVC: PreviewBaseVC {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if (self.isMovingFromParent && isNeedAddPopVC) {
+            //1件目を作成しよううとしてバックで戻る場合、結局0件なのでListのさらに上部へ戻らせる
+            self.navigationController?.popViewController(animated: true)//さらに戻る
+        }
+    }
     //========================================
-    func initData(_ delegate: CareerListProtocol, _ num: Int, _ details: [MdlCareerCard]) {
+    func initData(_ delegate: CareerListProtocol, _ num: Int, _ details: [MdlCareerCard], _ isNeedAddPopVC: Bool) {
         self.delegate = delegate
         self.targetCardNum = num
         self.arrDetail = details
+        self.isNeedAddPopVC = (num == 0) ? isNeedAddPopVC : false //新規作成時以外は、追加での戻りは不要のため
         title = "職務経歴書入力 \(num + 1)社目"
     }
     //========================================
@@ -201,6 +210,7 @@ extension CareerPreviewVC {
         .done { result in
             LogManager.appendApiResultLog("createCareer", result, function: #function, line: #line)
             //self.fetchGetCareerList()
+            self.isNeedAddPopVC = false//作成に成功したので、一覧まで戻せばよくなるため
             self.fetchCompletePopVC()
         }
         .catch { (error) in
