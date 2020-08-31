@@ -10,7 +10,6 @@ import UIKit
 import TudApi
 import SVProgressHUD
 import SwaggerClient
-import KeychainAccess
 
 class EntryConfirmVC: PreviewBaseVC {
     
@@ -259,12 +258,8 @@ extension EntryConfirmVC {
         .done { result in
             //応募に成功したら、type応募用パスワードをキーチェインに保存する（保存チェックある場合）
             //＊保存チェックがなかった場合には、逆にキーチェインのパスワードを削除する（このタイミングでOK?）
-            let keychain: Keychain = Keychain() //無視定でBundleIDが適用される
-            let email: String = _profile.mailAddress ?? ""
-            let keyPassword: String = "pwd_\(AuthManager.shared.sub)_\(email)"
-            let keyAccept: String = "accept_\(AuthManager.shared.sub)"
-            keychain[keyPassword] = _typePassword
-            keychain[keyAccept] = "accepted"
+            TudKeyChain.password(email: _profile.mailAddress).set(_typePassword)
+            TudKeyChain.accept.set("accepted")
             //シルバーエッグ・リコメンドを投げる
             RecommendManager.clickRecommend(type: .ap341, jobID: _jobCardCode)
             .done { result in

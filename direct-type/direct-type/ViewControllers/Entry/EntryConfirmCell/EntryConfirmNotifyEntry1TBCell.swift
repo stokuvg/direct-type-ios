@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import KeychainAccess
 
 class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
     var delegate: EntryConfirmNotifyEntryDelegate? = nil
@@ -57,9 +56,7 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
         toolbar.setItems([btnClose, separator1], animated: true)
         tfPassword.inputAccessoryView = toolbar
         //===キーチェインから値を取得
-        let keychain: Keychain = Keychain() //無視定でBundleIDが適用される
-        let keyPassword: String = "pwd_\(AuthManager.shared.sub)_\(email)"
-        if let bufPassword = try? keychain.getString(keyPassword) {
+        if let bufPassword = TudKeyChain.password(email: email).value() {
             tfPassword.text = bufPassword
             delegate.changePasswordText(text: bufPassword)
         }

@@ -7,39 +7,32 @@
 //
 
 import Foundation
-import Security
+import KeychainAccess
 
 public enum TudKeyChain {
-    case password(sub: String, email: String)
+    case accept
+    case password(email: String)
 
     var bufKey: String {
+        let sub: String = AuthManager.shared.sub
         switch self {
-        case .password(sub: let sub, email: let email):
-            return "password_\(sub)_\(email)"
+        case .accept:
+            return "accept_\(sub)"
+        case .password(email: let email):
+            return "pwd_\(sub)_\(email)"
         }
     }
-
-    public func set(_ key: String, _ value: String) {
-        let query: [String: AnyObject] = [
-        kSecClass as String: kSecClassGenericPassword,
-        kSecAttrAccount as String: self.bufKey as AnyObject,
-        kSecValueData as String: value.data(using: .utf8)! as AnyObject
-    ]
-    SecItemDelete(query as CFDictionary)
-    SecItemAdd(query as CFDictionary, nil)
+    public func set(_ value: String) {
+        let keychain: Keychain = Keychain() //無視定でBundleIDが適用される
+        keychain[bufKey] = value
   }
     public func value() -> String? {
-        let query: [String: AnyObject] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: self.bufKey as AnyObject,
-            kSecReturnData as String: kCFBooleanTrue,
-            kSecMatchLimit as String: kSecMatchLimitOne
-        ]
-        var result: AnyObject?
-        let status = SecItemCopyMatching(query as CFDictionary, &result)
-        guard status == noErr else { return nil }
-        guard let data = result as? Data else { return nil }
-        return String(data: data, encoding: .utf8)
+        let keychain: Keychain = Keychain() //無視定でBundleIDが適用される
+        if let bufValue = try? keychain.getString(bufKey) {
+            return bufValue
+        } else {
+            return nil
+        }
     }
 }
 
