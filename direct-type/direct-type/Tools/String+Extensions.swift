@@ -71,3 +71,40 @@ extension String {
         return resultString
     }
 }
+
+
+extension String {
+    func hiraToKana() -> String {
+        let convertText: [String] = self
+            .map({ String($0).toKatakana})
+            .compactMap({$0})
+        print(convertText)
+        return convertText.joined(separator: "")
+    }
+    
+    func kanaToHira() -> String {
+        let convertText: [String] = self
+            .map({ String($0).toHiragana})
+            .compactMap({$0})
+        print(convertText)
+        return convertText.joined(separator: "")
+    }
+    
+    var isHiragana: Bool {
+        let range = "^[ぁ-ゞ]+$"
+        return NSPredicate(format: "SELF MATCHES %@", range).evaluate(with: self)
+    }
+
+    var isKatakana: Bool {
+        let range = "^[ァ-ヾ]+$"
+        return NSPredicate(format: "SELF MATCHES %@", range).evaluate(with: self)
+    }
+
+    var toKatakana: String? {
+        return self.applyingTransform(.hiraganaToKatakana, reverse: false)
+    }
+
+    var toHiragana: String? {
+        return self.applyingTransform(.hiraganaToKatakana, reverse: true)
+    }
+}
