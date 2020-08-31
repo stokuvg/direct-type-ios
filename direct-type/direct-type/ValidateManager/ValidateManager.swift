@@ -13,7 +13,7 @@ enum ValidType {
     case zenkaku        //全角(改行などOK)
     case zenHanNumSym   //全角・半角英数字記号(改行などOK)
     case hiraKataKan    //ひらカタ漢字
-    case katakana       //全角カタカナ
+    case katakana       //全角カタカナ（自動変換あり）
     case email          //メールアドレス
     case number         //半角数字
     case password       //type用パスワード（＊半角英数4~20文字）
