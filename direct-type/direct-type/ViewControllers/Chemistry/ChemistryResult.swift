@@ -13,6 +13,7 @@ final class ChemistryResult: BaseChemistryVC {
     
     private var topRanker: ChemistryScoreCalculation.TopRanker?
     private let tableViewEstimateCellHeight: CGFloat = 330
+    private var isExistsData = false
     private var resultCellCount: Int {
         // 1位のセルとビジネスアビリティセルはデフォルト表示
         var cellCount = 2
@@ -39,6 +40,7 @@ final class ChemistryResult: BaseChemistryVC {
     
     func configure(with topRanker: ChemistryScoreCalculation.TopRanker) {
         self.topRanker = topRanker
+        isExistsData = true
     }
 }
 
@@ -51,7 +53,7 @@ private extension ChemistryResult {
         tableView.registerNib(nibName: "ChemistryBusinessAbilityCell", idName: "ChemistryBusinessAbilityCell")
         tableView.estimatedRowHeight = tableViewEstimateCellHeight
         tableView.rowHeight = UITableView.automaticDimension
-        navigationItem.hidesBackButton = true
+        navigationItem.hidesBackButton = !isExistsData
     }
     
     func getAvarageAvilityScore() -> BusinessAvilityScore {
@@ -74,6 +76,13 @@ private extension ChemistryResult {
         let denominator = Double(array.count)
         return molecule / denominator
     }
+    
+    func transitionToChemisrortSelect() {
+        let vc = UIStoryboard(name: "ChemistrySelect", bundle: nil)
+            .instantiateInitialViewController() as! ChemistrySelect
+        hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に非表示にする
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension ChemistryResult: UITableViewDelegate {
@@ -89,7 +98,7 @@ extension ChemistryResult: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footer = ChemistryResultFooterView()
-        footer.delegate = self
+        footer.configure(isExistsDat: isExistsData, delegate: self)
         return footer
     }
     
@@ -140,6 +149,10 @@ extension ChemistryResult: UITableViewDataSource {
 
 extension ChemistryResult: ChemistryResultFooterViewDelegate {
     func didTapCompleteButton() {
-        navigationController?.popToRootViewController(animated: true)
+        if isExistsData {
+            transitionToChemisrortSelect()
+        } else {
+            navigationController?.popToRootViewController(animated: true)
+        }
     }
 }

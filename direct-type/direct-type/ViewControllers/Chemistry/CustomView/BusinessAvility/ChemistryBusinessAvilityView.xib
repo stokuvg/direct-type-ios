@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChemistryBusinessAvilityView" customModule="direct_type" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChemistryBusinessAvilityView" customModule="Direct_type" customModuleProvider="target">
             <connections>
                 <outlet property="avilityScoreLabel" destination="OCc-jz-KBU" id="wiW-bp-ag4"/>
                 <outlet property="proportionBar" destination="QBb-Ae-j48" id="2pi-nl-2XL"/>
@@ -30,7 +30,7 @@
                                 <constraint firstAttribute="height" constant="1" id="NoO-MN-kaT"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QBb-Ae-j48" customClass="ProportionBarView" customModule="direct_type" customModuleProvider="target">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QBb-Ae-j48" customClass="ProportionBarView" customModule="Direct_type" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="22.5" width="185" height="5"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <constraints>

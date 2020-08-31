@@ -18,18 +18,12 @@ final class ChemistryStart: BaseChemistryVC {
     }
     
     private let carouselIconFrame = CGRect(x: .zero, y: .zero, width: 150, height: 150)
-    private var isExistsData = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         iconCarouselView.configure(with: generateCarouselIconView())
         iconCarouselView.startAnimation()
         setFont()
-        setLabel()
-    }
-    
-    func configure(isExistsData: Bool) {
-        self.isExistsData = isExistsData
     }
 }
 
@@ -37,11 +31,6 @@ private extension ChemistryStart {
     func setFont() {
         hukidashiLabel.font = UIFont(fontType: .font_SS)
         descriptionLabel.font = UIFont(fontType: .font_S)
-    }
-    
-    func setLabel() {
-        let buttonTitle = isExistsData ? "もう一度診断する" : "診断スタート"
-        startButton.setTitle(buttonTitle, for: .normal)
     }
     
     func generateCarouselIconView() -> [UIImageView]{

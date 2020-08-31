@@ -14,14 +14,16 @@ protocol ChemistryResultFooterViewDelegate: class {
 
 final class ChemistryResultFooterView: UIView {
     @IBOutlet private weak var whiteBackgroundView: UIView!
-    @IBAction func completeButton(_ sender: UIButton) {
+    @IBOutlet private weak var completeButton: UIButton!
+    @IBAction private func completeButton(_ sender: UIButton) {
         delegate?.didTapCompleteButton()
     }
     
     private let whiteBackgroundViewCornerRadius: CGFloat = 10
     
     static let height: CGFloat = 120
-    weak var delegate: ChemistryResultFooterViewDelegate?
+    private var isExistsDat = false
+    private weak var delegate: ChemistryResultFooterViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,6 +36,12 @@ final class ChemistryResultFooterView: UIView {
         loadNib()
         setCornerRadius()
     }
+    
+    func configure(isExistsDat: Bool, delegate: ChemistryResultFooterViewDelegate) {
+        self.isExistsDat = isExistsDat
+        self.delegate = delegate
+        setButtonText()
+    }
 }
 
 private extension ChemistryResultFooterView {
@@ -43,6 +51,11 @@ private extension ChemistryResultFooterView {
             .first as? UIView else { return }
         view.frame = bounds
         addSubview(view)
+    }
+    
+    func setButtonText() {
+        let buttonTitle = isExistsDat ? "もう一度診断する" : "マイページに戻る"
+        completeButton.setTitle(buttonTitle, for: .normal)
     }
     
     func setCornerRadius() {
