@@ -91,7 +91,7 @@
                                                 </subviews>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" name="color-white"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="31" id="7jP-1A-4Yb"/>
                                             <constraint firstItem="C77-Gp-tF3" firstAttribute="leading" secondItem="HJ3-co-Bel" secondAttribute="leading" id="A6M-As-fLA"/>
@@ -110,7 +110,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" name="color-white"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="6eo-BO-Ht1" secondAttribute="trailing" id="ITw-Jr-k2D"/>
                                             <constraint firstItem="6eo-BO-Ht1" firstAttribute="leading" secondItem="emq-wP-HPv" secondAttribute="leading" id="aeR-V7-dBU"/>
@@ -127,29 +127,31 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tN4-xb-o7d">
                                                         <rect key="frame" x="0.0" y="0.0" width="120.5" height="104"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0DP-77-dQc">
-                                                                <rect key="frame" x="-9" y="0.0" width="138.5" height="104"/>
+                                                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="0DP-77-dQc">
+                                                                <rect key="frame" x="0.0" y="0.0" width="120.5" height="104"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w8l-cB-6MY">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="138.5" height="104"/>
+                                                                        <rect key="frame" x="0.0" y="7" width="120.5" height="90"/>
                                                                         <color key="backgroundColor" name="color-white"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" secondItem="w8l-cB-6MY" secondAttribute="height" multiplier="4:3" id="mKJ-8o-BnS"/>
+                                                                        </constraints>
                                                                     </imageView>
                                                                 </subviews>
-                                                                <color key="backgroundColor" name="color-white"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
-                                                                    <constraint firstItem="w8l-cB-6MY" firstAttribute="top" secondItem="0DP-77-dQc" secondAttribute="top" id="HQK-wo-Qrn"/>
-                                                                    <constraint firstAttribute="width" secondItem="0DP-77-dQc" secondAttribute="height" multiplier="4:3" id="U7O-jT-RWh"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="w8l-cB-6MY" secondAttribute="trailing" id="WlX-7B-VEY"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="w8l-cB-6MY" secondAttribute="bottom" id="gpa-6w-inh"/>
-                                                                    <constraint firstItem="w8l-cB-6MY" firstAttribute="leading" secondItem="0DP-77-dQc" secondAttribute="leading" id="q8v-bD-2fK"/>
+                                                                    <constraint firstItem="w8l-cB-6MY" firstAttribute="centerY" secondItem="0DP-77-dQc" secondAttribute="centerY" id="JT7-IH-NK7"/>
+                                                                    <constraint firstItem="w8l-cB-6MY" firstAttribute="leading" secondItem="0DP-77-dQc" secondAttribute="leading" id="M1v-Nd-iQc"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="w8l-cB-6MY" secondAttribute="trailing" id="Vhg-n7-PCK"/>
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstItem="0DP-77-dQc" firstAttribute="centerX" secondItem="tN4-xb-o7d" secondAttribute="centerX" id="2a0-PW-L8t"/>
-                                                            <constraint firstItem="0DP-77-dQc" firstAttribute="top" secondItem="tN4-xb-o7d" secondAttribute="top" id="VQf-De-5JQ"/>
-                                                            <constraint firstAttribute="bottom" secondItem="0DP-77-dQc" secondAttribute="bottom" id="cs8-dT-R85"/>
+                                                            <constraint firstItem="0DP-77-dQc" firstAttribute="top" secondItem="tN4-xb-o7d" secondAttribute="top" id="OTI-3H-QlZ"/>
+                                                            <constraint firstAttribute="trailing" secondItem="0DP-77-dQc" secondAttribute="trailing" id="ZeP-2d-Jw5"/>
+                                                            <constraint firstItem="0DP-77-dQc" firstAttribute="leading" secondItem="tN4-xb-o7d" secondAttribute="leading" id="he7-9W-2ja"/>
+                                                            <constraint firstAttribute="bottom" secondItem="0DP-77-dQc" secondAttribute="bottom" id="vb3-cQ-gux"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a4v-nh-k6L">
@@ -300,6 +302,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                         </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstItem="WF7-PD-Bop" firstAttribute="top" secondItem="a4v-nh-k6L" secondAttribute="top" id="2uv-ay-F11"/>
                                                             <constraint firstAttribute="bottom" secondItem="WF7-PD-Bop" secondAttribute="bottom" id="OPk-gM-6j7"/>
@@ -313,7 +316,7 @@
                                                 </constraints>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" name="color-white"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="NZj-8Y-opc" firstAttribute="leading" secondItem="nhC-vr-uTq" secondAttribute="leading" id="CgV-Jp-Hec"/>
                                             <constraint firstItem="NZj-8Y-opc" firstAttribute="top" secondItem="nhC-vr-uTq" secondAttribute="top" id="TQ8-Q4-LQ2"/>
@@ -325,7 +328,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" name="color-white"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="9rt-lE-4JS" firstAttribute="leading" secondItem="gsA-nY-OcQ" secondAttribute="leading" constant="20" id="BYF-ZU-Ewz"/>
                             <constraint firstAttribute="trailing" secondItem="9rt-lE-4JS" secondAttribute="trailing" constant="20" id="GlB-Ta-3ZG"/>
@@ -350,6 +353,7 @@
             <connections>
                 <outlet property="areaLabel" destination="dEF-MS-1jR" id="17m-lt-Kkj"/>
                 <outlet property="companyNameLabel" destination="tYW-pQ-dnT" id="aZG-mH-2Me"/>
+                <outlet property="jobDataBackView" destination="nhC-vr-uTq" id="Bro-N2-XZH"/>
                 <outlet property="jobLabel" destination="6eo-BO-Ht1" id="ZHm-WI-PdH"/>
                 <outlet property="jobNameBackView" destination="emq-wP-HPv" id="RFU-T6-prw"/>
                 <outlet property="jobNameBackViewHeight" destination="t6j-Oo-PX6" id="H4Z-Er-5x3"/>

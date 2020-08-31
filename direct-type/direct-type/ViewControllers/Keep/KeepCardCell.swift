@@ -27,6 +27,8 @@ class KeepCardCell: BaseJobCardCell {
     @IBOutlet weak var jobNameBackView:UIView!
     @IBOutlet weak var jobNameBackViewHeight:NSLayoutConstraint!
     
+    @IBOutlet weak var jobDataBackView:UIView!
+    
     var jobId:String = ""
     
     var nowDate:Date = Date.init()
@@ -41,11 +43,11 @@ class KeepCardCell: BaseJobCardCell {
 //        thumbnailImageBackView.layer.cornerRadius = 15
 //        thumbnailImageBackView.clipsToBounds = true
         
+        self.spaceView.layer.cornerRadius = 15
+        self.spaceView.clipsToBounds = true
+        
         // 終了間近
         limitedLabel.text(text: "終了間近", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
-        
-        self.jobNameBackView.backgroundColor = UIColor.init(colorType: .color_light_gray)
-        self.jobLabel.backgroundColor = UIColor.init(colorType: .color_button)
     }
     
     override func prepareForReuse() {
@@ -78,17 +80,24 @@ class KeepCardCell: BaseJobCardCell {
         
         // 職種名
         let jobName = data.jobName
-        Log.selectLog(logLevel: .debug, "jobName:\(jobName)")
+//        Log.selectLog(logLevel: .debug, "jobName:\(jobName)")
         jobLabel.text(text: jobName, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         
+        var checkTextSize:CGFloat = 0.0
         let jobTextSize = CGFloat(jobName.count) * UIFont.init(fontType: .C_font_M)!.pointSize
         
         let jobWidth = self.jobLabel.frame.size.width
         
-        Log.selectLog(logLevel: .debug, "jobTextSize:\(jobTextSize)")
-        Log.selectLog(logLevel: .debug, "jobWidth:\(jobWidth)")
+        if jobName.isAllHalfWidthCharacter() {
+            checkTextSize = jobTextSize / 2
+        } else {
+            checkTextSize = jobTextSize
+        }
         
-        if jobTextSize <= jobWidth {
+//        Log.selectLog(logLevel: .debug, "jobTextSize:\(jobTextSize)")
+//        Log.selectLog(logLevel: .debug, "jobWidth:\(jobWidth)")
+        
+        if checkTextSize <= jobWidth {
             self.jobNameBackViewHeight.constant = 30
         } else {
             self.jobNameBackViewHeight.constant = 50

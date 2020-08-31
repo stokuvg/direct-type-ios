@@ -164,7 +164,42 @@ private extension KeepListVC {
 
 extension KeepListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return DeviceHelper.xsMaxCheck() ? 252 : 232
+        Log.selectLog(logLevel: .debug, "KeepListVC heightForRowAt start")
+//        return DeviceHelper.xsMaxCheck() ? 252 : 232
+        
+        let spaceWidth:CGFloat = 17.0
+        let stackSpaceWidth:CGFloat = 20.0
+        
+        let listTableWidth = self.keepTableView.frame.size.width
+        
+        let jobWidth = listTableWidth - (spaceWidth * 2) - (stackSpaceWidth * 2)
+        Log.selectLog(logLevel: .debug, "jobWidth:\(jobWidth)")
+        
+        var cellHeight:CGFloat
+        
+        let jobData = self.lists[indexPath.row]
+        let jobName = jobData.jobName
+//        Log.selectLog(logLevel: .debug, "jobName:\(jobName)")
+        let textSize = CGFloat(jobName.count) * UIFont.init(fontType: .C_font_M)!.pointSize
+//        Log.selectLog(logLevel: .debug, "textSize:\(textSize)")
+        
+        var checkTextSize:CGFloat = 0.0
+        if jobName.isAllHalfWidthCharacter() {
+            checkTextSize = textSize / 2
+        } else {
+            checkTextSize = textSize
+        }
+
+        if checkTextSize <= jobWidth {
+            cellHeight = 212.0
+        } else {
+            cellHeight = 232.0
+        }
+        
+        if DeviceHelper.xsMaxCheck() {
+            cellHeight += 20.0
+        }
+        return cellHeight
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

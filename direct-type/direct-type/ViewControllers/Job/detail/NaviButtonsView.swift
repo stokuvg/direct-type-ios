@@ -60,7 +60,7 @@ class NaviButtonsView: UIView {
         employeeBtn.setNoRadiusTitle(text: "待遇", fontType: .font_SSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         employeeBtn.backgroundColor = UIColor.init(colorType: .color_black)
         
-        infomationBtn.setNoRadiusTitle(text: "企業情報", fontType: .font_SSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        infomationBtn.setNoRadiusTitle(text: "会社概要", fontType: .font_SSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         infomationBtn.backgroundColor = UIColor.init(colorType: .color_black)
     }
     

@@ -71,3 +71,15 @@ extension String {
         return resultString
     }
 }
+
+extension String {
+    func isAllHalfWidthCharacter() -> Bool {
+        
+        let encodeString = self.data(using: .ascii, allowLossyConversion: false)
+        if encodeString != nil {
+            return true
+        } else {
+            return false
+        }
+    }
+}
