@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import KeychainAccess
 
 protocol EntryConfirmNotifyEntryDelegate {
     func changePasswordText(text: String)
@@ -66,6 +67,16 @@ class EntryConfirmNotifyEntry2TBCell: UITableViewCell {
         textVWNotice.isEditable = false
         textVWNotice.delegate = self
         textVWNotice.linkTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(colorType: .color_sub)!]
+        
+        //===キーチェインから値を取得
+        let keychain: Keychain = Keychain() //無視定でBundleIDが適用される
+        let keyAccept: String = "accept_\(AuthManager.shared.sub)"
+        if let bufAccept = try? keychain.getString(keyAccept) {
+            if !bufAccept.isEmpty {
+                isAccept = true
+                delegate.changeAcceptStatus(isAccept: true)
+            }
+        }
     }
     func dispCell() {
         ivAccept.image = isAccept ? R.image.checkOn() : R.image.checkOff()

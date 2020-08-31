@@ -10,6 +10,7 @@ import UIKit
 import TudApi
 import SVProgressHUD
 import SwaggerClient
+import KeychainAccess
 
 class EntryConfirmVC: PreviewBaseVC {
     
@@ -103,6 +104,7 @@ class EntryConfirmVC: PreviewBaseVC {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        chkButtonEnable()
     }
     //=== Notification通知の登録 ===
     // 画面遷移時にも取り除かないもの（他の画面で変更があった場合の更新のため）
@@ -255,6 +257,15 @@ extension EntryConfirmVC {
         LogManager.appendApiLog("postEntry", param, function: #function, line: #line)
         ApiManager.postEntry(param, isRetry: true)
         .done { result in
+            //応募に成功したら、type応募用パスワードをキーチェインに保存する（保存チェックある場合）
+            //＊保存チェックがなかった場合には、逆にキーチェインのパスワードを削除する（このタイミングでOK?）
+            let keychain: Keychain = Keychain() //無視定でBundleIDが適用される
+            let email: String = _profile.mailAddress ?? ""
+            let keyPassword: String = "pwd_\(AuthManager.shared.sub)_\(email)"
+            let keyAccept: String = "accept_\(AuthManager.shared.sub)"
+            keychain[keyPassword] = _typePassword
+            keychain[keyAccept] = "accepted"
+            //シルバーエッグ・リコメンドを投げる
             RecommendManager.clickRecommend(type: .ap341, jobID: _jobCardCode)
             .done { result in
                 Log.selectLog(logLevel: .debug, "応募完了のコンバージョン 成功:\(result)")
@@ -265,7 +276,6 @@ extension EntryConfirmVC {
             }
             .finally {
             }
-            
             LogManager.appendApiResultLog("postEntry", result, function: #function, line: #line)
             EntryFormManager.deleteCache(jobCardCode: _jobCard.jobCardCode)//応募フォーム情報はクリアして良し
             AnalyticsEventManager.track(type: .completeEntry)

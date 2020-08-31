@@ -82,6 +82,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.6.0):
     - GoogleUtilities/Logger
+  - KeychainAccess (4.2.0)
   - nanopb (1.30905.0):
     - nanopb/decode (= 1.30905.0)
     - nanopb/encode (= 1.30905.0)
@@ -117,6 +118,7 @@ DEPENDENCIES:
   - AWSMobileClient (~> 2.13.0)
   - Firebase/Analytics (~> 6.27.1)
   - Firebase/Crashlytics (~> 6.27.1)
+  - KeychainAccess
   - R.swift
   - SERecommend (from `../generatedRecommend/promise`)
   - SVProgressHUD
@@ -143,6 +145,7 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
     - GoogleUtilities
+    - KeychainAccess
     - nanopb
     - PromiseKit
     - PromisesObjC
@@ -177,6 +180,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 9a8a16f79feffc7f42096743de2a7c4815e84020
   GoogleDataTransportCCTSupport: 489c1265d2c85b68187a83a911913d190012158d
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
+  KeychainAccess: 3f760109aa99b05d0f231e28b22642da7153e38a
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
@@ -187,6 +191,6 @@ SPEC CHECKSUMS:
   SwaggerClient: a43eabc6c7947bfcd383a4351bfcdd508ae6f003
   TudApi: 5b3101447d7b1c2ed3ca4ccf295fab3c56057922
 
-PODFILE CHECKSUM: 9660e63bebce74e333cc053f25fe8b39c9538099
+PODFILE CHECKSUM: 238c5ff5a2e12dfdc29ec7a56726c49e04ec658f
 
 COCOAPODS: 1.8.4

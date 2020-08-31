@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import KeychainAccess
 
 class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
     var delegate: EntryConfirmNotifyEntryDelegate? = nil
@@ -55,6 +56,13 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
         let btnClose = IKBarButtonItem.init(title: "閉じる", style: .done, target: self, action: #selector(actInputCancelButton))
         toolbar.setItems([btnClose, separator1], animated: true)
         tfPassword.inputAccessoryView = toolbar
+        //===キーチェインから値を取得
+        let keychain: Keychain = Keychain() //無視定でBundleIDが適用される
+        let keyPassword: String = "pwd_\(AuthManager.shared.sub)_\(email)"
+        if let bufPassword = try? keychain.getString(keyPassword) {
+            tfPassword.text = bufPassword
+            delegate.changePasswordText(text: bufPassword)
+        }
     }
     @objc func actInputCancelButton(_ sender: IKBarButtonItem) {
         self.endEditing(true)
