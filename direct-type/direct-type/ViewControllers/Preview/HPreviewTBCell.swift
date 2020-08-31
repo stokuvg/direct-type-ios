@@ -60,19 +60,27 @@ class HPreviewTBCell: UITableViewCell {
         }
         //===表示用文字列の生成
         let bufTitle: String = _item.type.dispTitle
-        let bufValue: String = dispCellValue(_item)
+        let bufValue: String!
+        var colValue: UIColor!
+        if let buf = dispCellValue2(_item) {
+            bufValue = buf
+            colValue = UIColor(colorType: .color_black)!
+        } else {
+            bufValue = "未入力"
+            colValue = UIColor(colorType: .color_parts_gray)!
+        }
         let bufNotice: String = _item.notice
         //===表示させる
-        lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        lblTitle.text(text: bufTitle, fontType: .font_Sb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         lblValue.setProperties(fontType: .PV_font_S)
-        lblValue.text(text: bufValue, fontType: .PV_font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left, lineBreakMode: .byCharWrapping)
-        lblNotice.text(text: bufNotice, fontType: .font_SS, textColor: UIColor.init(colorType: .color_parts_gray)!, alignment: .left)
+        lblValue.text(text: bufValue, fontType: .PV_font_S, textColor: colValue, alignment: .left, lineBreakMode: .byCharWrapping)
+        lblNotice.text(text: bufNotice, fontType: .font_SS, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .left)
         lblNotice.isHidden = (_item.notice == "") ? true : false
         //Validationエラー発生時の表示
         if errMsg != "" {
             //lblErrorMsg.text = errMsg
             lblErrorMsg.text(text: errMsg, fontType: .font_SS, textColor: UIColor(colorType: .color_sub)!, alignment: .left)
-            vwMainArea.backgroundColor = UIColor.init(red: 1.0, green: 0.8, blue: 0.8, alpha: 1.0)
+            vwMainArea.backgroundColor = UIColor(red: 1.0, green: 0.8, blue: 0.8, alpha: 1.0)
         } else {
             lblErrorMsg.text = ""
             vwMainArea.backgroundColor = self.backgroundColor
