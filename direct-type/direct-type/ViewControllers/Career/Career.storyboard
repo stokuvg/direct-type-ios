@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -11,16 +11,16 @@
         <!--Career ListVC-->
         <scene sceneID="858-2R-6Ag">
             <objects>
-                <viewController storyboardIdentifier="Sbid_CareerListVC" id="BOl-wm-1XF" customClass="CareerListVC" customModule="direct_type" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Sbid_CareerListVC" id="BOl-wm-1XF" customClass="CareerListVC" customModule="Direct_type" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Y6Y-Jr-9CQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iol-Xd-3LG" userLabel="メイン">
-                                <rect key="frame" x="0.0" y="44" width="414" height="728"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="668"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="obd-xt-HE9">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="728"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="668"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <connections>
                                             <outlet property="dataSource" destination="BOl-wm-1XF" id="YwE-bu-Hc1"/>
@@ -37,13 +37,26 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KHv-g0-mMj" userLabel="フッタ">
-                                <rect key="frame" x="0.0" y="772" width="414" height="90"/>
+                                <rect key="frame" x="0.0" y="712" width="414" height="150"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="No1-OL-gch">
                                         <rect key="frame" x="20" y="20" width="374" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Oc0-fh-3tm"/>
+                                        </constraints>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="actAddCard:" destination="BOl-wm-1XF" eventType="touchUpInside" id="dLQ-wV-k6f"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BmJ-gC-JRm">
+                                        <rect key="frame" x="20" y="80" width="374" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Bxk-iT-Rrc"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="actComplete:" destination="BOl-wm-1XF" eventType="touchUpInside" id="MJI-Qt-RPn"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -51,8 +64,10 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="No1-OL-gch" secondAttribute="trailing" constant="20" id="3TC-q2-8xr"/>
                                     <constraint firstItem="No1-OL-gch" firstAttribute="top" secondItem="KHv-g0-mMj" secondAttribute="top" constant="20" id="7qz-E6-hQJ"/>
-                                    <constraint firstAttribute="height" constant="90" id="Cda-vo-ngP"/>
-                                    <constraint firstAttribute="bottom" secondItem="No1-OL-gch" secondAttribute="bottom" constant="20" id="aZ1-8x-lqH"/>
+                                    <constraint firstAttribute="trailing" secondItem="BmJ-gC-JRm" secondAttribute="trailing" constant="20" id="H3J-aT-seW"/>
+                                    <constraint firstItem="BmJ-gC-JRm" firstAttribute="leading" secondItem="KHv-g0-mMj" secondAttribute="leading" constant="20" id="Y4y-Mv-Aup"/>
+                                    <constraint firstItem="BmJ-gC-JRm" firstAttribute="top" secondItem="No1-OL-gch" secondAttribute="bottom" constant="10" id="YXF-ci-slh"/>
+                                    <constraint firstAttribute="bottom" secondItem="BmJ-gC-JRm" secondAttribute="bottom" constant="20" id="sum-fT-wkH"/>
                                     <constraint firstItem="No1-OL-gch" firstAttribute="leading" secondItem="KHv-g0-mMj" secondAttribute="leading" constant="20" id="w6d-d5-tkO"/>
                                 </constraints>
                             </view>
@@ -71,6 +86,7 @@
                     </view>
                     <connections>
                         <outlet property="btnAddCard" destination="No1-OL-gch" id="bhV-Rk-UKs"/>
+                        <outlet property="btnComplete" destination="BmJ-gC-JRm" id="qge-HU-cvt"/>
                         <outlet property="tableVW" destination="obd-xt-HE9" id="KYA-Uh-Mgk"/>
                         <outlet property="vwFootArea" destination="KHv-g0-mMj" id="GuU-Pg-g50"/>
                         <outlet property="vwMainArea" destination="iol-Xd-3LG" id="tJ6-Zd-si9"/>
@@ -78,7 +94,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ah3-0I-Xfe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2235" y="94"/>
+            <point key="canvasLocation" x="1991" y="86"/>
         </scene>
     </scenes>
 </document>
