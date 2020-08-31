@@ -33,6 +33,9 @@ class SubSelectSpecialVC: BaseVC {
     var arrSubData: [CodeDisp] = []
     var dicSelectedCode: [String: CodeDisp] = [:]//小分類コードに対応する経験年数のCodeDispを設定する
     var cellFocus: IndexPath? = nil //サブ選択中の仮選択表示用
+    //大項目内の選択状況の把握用
+    //GrpコードではなくセクションNo.をキーとし、そこに含まれる子項目のCode配列で管理とする
+    var dicSelItemCode: [Int: [Code]] = [:]
 
     @IBOutlet weak var vwHead: UIView!
     @IBOutlet weak var lblTitle: UILabel!
@@ -134,7 +137,7 @@ class SubSelectSpecialVC: BaseVC {
         //=== 表示アイテムを設定する
         self.arrSubData = SelectItemsManager.getMaster(self.subTsvMaster)
         let (dai, syou): ([CodeDisp], [GrpCodeDisp]) = SelectItemsManager.getMaster(self.mainTsvMaster)
-        for itemDai in dai {
+        for (sec, itemDai) in dai.enumerated() {
             var hoge: [CodeDisp] = []
             hoge.append(itemDai)
             hoge = hoge + syou.filter { (item) -> Bool in
@@ -144,8 +147,17 @@ class SubSelectSpecialVC: BaseVC {
             }
             //=== 選択されてるのが含まれたら、それは展開しておく場合：
             var isOpen: Bool = false
-            for item in hoge {
-                if dicSelectedCode.keys.contains(item.code) { isOpen = true }
+            for (n, item) in hoge.enumerated() {
+                if dicSelectedCode.keys.contains(item.code) {
+                    isOpen = true
+                    //===大分類に含まれている子項目の状態を変更（初期）
+                    if var arr = dicSelItemCode[sec] {
+                        arr.append(item.code)
+                        dicSelItemCode[sec] = arr
+                    } else {
+                        dicSelItemCode[sec] = [item.code]
+                    }
+                }
             }
             arrDataGrp.append(hoge)
             arrSelected.append(isOpen)//該当セクションが展開されているか否か
@@ -189,6 +201,8 @@ class SubSelectSpecialVC: BaseVC {
         default:
             vwInfoTextArea.isHidden = true
         }
+        //大項目内の選択フィードバックのため
+        tableVW.reloadData()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -218,7 +232,8 @@ extension SubSelectSpecialVC: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row == 0 {
             let cell: SubSelectDaiTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_SubSelectDaiTBCell", for: indexPath) as! SubSelectDaiTBCell
             let select: Bool = arrSelected[indexPath.section]
-            cell.initCell(self, item, select)
+            let arr: [Code] = dicSelItemCode[indexPath.section] ?? []
+            cell.initCell(self, item, select, arr)
             cell.dispCell()
             return cell
         } else {
@@ -244,6 +259,13 @@ extension SubSelectSpecialVC: UITableViewDataSource, UITableViewDelegate {
                 changeFocusItem(nil)//仮選択して、該当セルの描画しなおし
                 cellFocus = nil //選択解除
                 dicSelectedCode.removeValue(forKey: item.code)//削除する
+                //===大分類に含まれている子項目の状態を変更（削除）
+                if var arr = dicSelItemCode[indexPath.section] {
+                    arr.removeAll { (code) -> Bool in
+                        code == item.code
+                    }
+                    dicSelItemCode[indexPath.section] = arr
+                }
                 tableView.reloadRows(at: [indexPath], with: .none) //該当セルの描画しなおし
                 dispData()
             } else { //選択されてない
@@ -260,6 +282,13 @@ extension SubSelectSpecialVC: UITableViewDataSource, UITableViewDelegate {
                     showPicker(tfSubDummy)
                 } else {
                     dicSelectedCode[item.code] = item
+                    //===大分類に含まれている子項目の状態を変更（追加）
+                    if var arr = dicSelItemCode[indexPath.section] {
+                        arr.append(item.code)
+                        dicSelItemCode[indexPath.section] = arr
+                    } else {
+                        dicSelItemCode[indexPath.section] = [item.code]
+                    }
                     tableView.reloadRows(at: [indexPath], with: .none) //該当セルの描画しなおし
                     dispData()
                     selectAndCloseIfSingle()//===選択と同時に閉じて良いかのチェック

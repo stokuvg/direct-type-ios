@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell_SubSelectDaiTBCell" id="KGk-i7-Jjw" customClass="SubSelectDaiTBCell" customModule="direct_type" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell_SubSelectDaiTBCell" id="KGk-i7-Jjw" customClass="SubSelectDaiTBCell" customModule="Direct_type" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -20,6 +20,12 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YdU-7H-Fun">
                         <rect key="frame" x="280" y="0.0" width="40" height="44"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NYQ-W8-9Va">
+                                <rect key="frame" x="2" y="30" width="36" height="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Auq-gO-itE">
                                 <rect key="frame" x="12" y="14" width="16" height="16"/>
                                 <constraints>
@@ -31,8 +37,11 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="Hjw-5Y-BEW"/>
+                            <constraint firstAttribute="trailing" secondItem="NYQ-W8-9Va" secondAttribute="trailing" constant="2" id="e9a-eE-Rqx"/>
                             <constraint firstItem="Auq-gO-itE" firstAttribute="centerX" secondItem="YdU-7H-Fun" secondAttribute="centerX" id="o7H-2H-x8W"/>
+                            <constraint firstItem="NYQ-W8-9Va" firstAttribute="leading" secondItem="YdU-7H-Fun" secondAttribute="leading" constant="2" id="pzr-jQ-6QS"/>
                             <constraint firstItem="Auq-gO-itE" firstAttribute="centerY" secondItem="YdU-7H-Fun" secondAttribute="centerY" id="rI5-As-QAg"/>
+                            <constraint firstAttribute="bottom" secondItem="NYQ-W8-9Va" secondAttribute="bottom" constant="2" id="wKj-cl-MJN"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rEJ-MQ-EVZ">
@@ -75,6 +84,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="ivStatus" destination="Auq-gO-itE" id="LU0-NF-sPe"/>
+                <outlet property="lblCount" destination="NYQ-W8-9Va" id="YDr-Vy-pvY"/>
                 <outlet property="lblDebug" destination="J4G-v2-Rc2" id="5yj-Hs-gH4"/>
                 <outlet property="lblName" destination="XjB-Fv-7QK" id="Gbg-Bi-RNL"/>
                 <outlet property="vwCellArea" destination="H2p-sc-9uM" id="JFv-Y5-E3T"/>

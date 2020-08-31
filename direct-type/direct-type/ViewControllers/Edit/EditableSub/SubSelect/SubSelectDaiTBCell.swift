@@ -13,10 +13,12 @@ class SubSelectDaiTBCell: UITableViewCell {
 
     var item: CodeDisp!
     var selectStatus: Bool = false
+    var arrSelChild: [Code] = []
     
     @IBOutlet weak var vwCellArea: UIView!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblDebug: UILabel!
+    @IBOutlet weak var lblCount: UILabel!
 
     @IBOutlet weak var ivStatus: UIImageView!
 
@@ -27,10 +29,11 @@ class SubSelectDaiTBCell: UITableViewCell {
         vwCellArea.backgroundColor = UIColor(colorType: .color_base)
     }
     //== セルの初期化と初期表示
-    func initCell(_ delegate: SubSelectProtocol, _ item: CodeDisp, _ selected: Bool = false) {
+    func initCell(_ delegate: SubSelectProtocol, _ item: CodeDisp, _ selected: Bool = false, _ arrSelChild: [Code]) {
         self.delegate = delegate
         self.item = item
         self.selectStatus = selected
+        self.arrSelChild = arrSelChild
         if Constants.DbgDispStatus {
             self.lblDebug.isHidden = false
         } else {
@@ -46,6 +49,11 @@ class SubSelectDaiTBCell: UITableViewCell {
             ivStatus.image = R.image.arTop()
         } else {
             ivStatus.image = R.image.arBtm_2()
+        }
+        if arrSelChild.count > 0 {
+            lblCount.text = "(\(arrSelChild.count)件)"
+        } else {
+            lblCount.text = ""
         }
     }
     //=== 選択時の動作

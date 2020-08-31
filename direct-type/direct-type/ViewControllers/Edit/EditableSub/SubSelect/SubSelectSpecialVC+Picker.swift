@@ -102,6 +102,13 @@ extension SubSelectSpecialVC {
         //選択されたものに変更があったか調べる。依存関係がある場合には、関連する項目の値をリセット（未選択：""）にする
         if let (selItemKey, selIdxPath) = curSubItem {
             dicSelectedCode[selItemKey] = _selectedItem
+            //===大分類に含まれている子項目の状態を変更（追加）
+            if var arr = dicSelItemCode[selIdxPath.section] {
+                arr.append(selItemKey)
+                dicSelItemCode[selIdxPath.section] = arr
+            } else {
+                dicSelItemCode[selIdxPath.section] = [selItemKey]
+            }
             if _selectedItem.code == "" { //未選択コードは選択しない（仮）
                 dicSelectedCode.removeValue(forKey: selItemKey)
             }
