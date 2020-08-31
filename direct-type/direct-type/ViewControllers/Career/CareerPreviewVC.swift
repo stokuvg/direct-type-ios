@@ -203,7 +203,7 @@ extension CareerPreviewVC {
         let param = CreateCareerRequestDTO(careerHistory: _tempCards)
         self.dicGrpValidErrMsg.removeAll()//状態をクリアしておく
         self.dicValidErrMsg.removeAll()//状態をクリアしておく
-        SVProgressHUD.show(withStatus: "職務経歴書情報の作成")
+        SVProgressHUD.show(withStatus: "職務経歴書の作成")
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         LogManager.appendApiLog("createCareer", param, function: #function, line: #line)
         ApiManager.createCareer(param, isRetry: true)

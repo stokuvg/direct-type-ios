@@ -87,7 +87,7 @@ class CareerListVC: TmpBasicVC {
         self.lastDispUpdateCareerList = Date()//設定したデータで表示するので
     }
     func dispData() {
-        title = "職務経歴書情報入力"
+        title = "職務経歴書入力"
         //表示用にソートしておく
         arrDisp.removeAll()
         for item in arrData.sorted(by: { (lv, rv) -> Bool in
@@ -155,7 +155,7 @@ extension CareerListVC: UITableViewDataSource, UITableViewDelegate {
 //=== APIフェッチ
 extension CareerListVC {
     private func fetchGetCareerList() {
-        SVProgressHUD.show(withStatus: "職務経歴書情報の取得")
+        SVProgressHUD.show(withStatus: "職務経歴書の取得")
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         LogManager.appendApiLog("getCareer", Void(), function: #function, line: #line)
         ApiManager.getCareer(Void(), isRetry: true)
@@ -194,7 +194,7 @@ extension CareerListVC {
             tempCards.append(CareerHistoryDTO(item))
         }
         let param = CreateCareerRequestDTO(careerHistory: tempCards)
-        SVProgressHUD.show(withStatus: "職務経歴書情報の削除")
+        SVProgressHUD.show(withStatus: "職務経歴書の削除")
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
         LogManager.appendApiLog("createCareer", param, function: #function, line: #line)
         ApiManager.createCareer(param, isRetry: true)
