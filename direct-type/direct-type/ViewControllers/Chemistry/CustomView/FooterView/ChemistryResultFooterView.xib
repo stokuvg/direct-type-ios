@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChemistryResultFooterView" customModule="Direct_type" customModuleProvider="target">
             <connections>
+                <outlet property="completeButton" destination="xHR-ar-WZJ" id="aco-h0-FFn"/>
                 <outlet property="whiteBackgroundView" destination="31R-7T-KWU" id="vzw-dp-9AV"/>
             </connections>
         </placeholder>
