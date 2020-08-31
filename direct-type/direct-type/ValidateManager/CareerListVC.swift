@@ -21,6 +21,10 @@ class CareerListVC: TmpBasicVC {
     @IBOutlet weak var tableVW: UITableView!
     @IBOutlet weak var vwFootArea: UIView!
 
+    @IBOutlet weak var btnComplete: UIButton!
+    @IBAction func actComplete(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
     //===職歴書カードを追加する
     @IBOutlet weak var btnAddCard: UIButton!
     @IBAction func actAddCard(_ sender: UIButton) {
@@ -73,7 +77,9 @@ class CareerListVC: TmpBasicVC {
         self.vwFootArea.backgroundColor = UIColor(colorType: .color_base)
         self.tableVW.backgroundColor = UIColor(colorType: .color_base)
         btnAddCard.setTitle(text: "追加する", fontType: .font_M, textColor: UIColor(colorType: .color_white)!, alignment: .center)
-        btnAddCard.backgroundColor = UIColor.init(colorType: .color_button)
+        btnAddCard.backgroundColor = UIColor(colorType: .color_button)
+        btnComplete.setTitle(text: "完了する", fontType: .font_M, textColor: UIColor(colorType: .color_white)!, alignment: .center)
+        btnComplete.backgroundColor = UIColor(colorType: .color_button)
         //=== テーブル初期化
         self.tableVW.estimatedRowHeight = 100
         self.tableVW.rowHeight = UITableView.automaticDimension

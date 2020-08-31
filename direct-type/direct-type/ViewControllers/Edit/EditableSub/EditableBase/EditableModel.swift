@@ -63,7 +63,12 @@ class EditableModel {
     }
     //=== 編集中の値の保持
     func changeTempItem(_ item: EditableItemH, text: String) {
-        editTempCD[item.editableItemKey] = text
+        if item.editItem.valid.type == .katakana {
+            //「ひらがな => カタカナ変換」して保存しておく
+            editTempCD[item.editableItemKey] = text.hiraToKata()
+        } else {
+            editTempCD[item.editableItemKey] = text
+        }
         //!!!このオリジナルと同値なら編集中の値を削除する処理を入れてる場合、フェッチ後に初期値を変えずに設定した場合など、〔クリア〕ボタンでの動作に矛盾がでる
 //        if item.orgVal == text {
 //            editTempCD.removeValue(forKey: item.editableItemKey)

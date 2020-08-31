@@ -13,7 +13,7 @@ enum ValidType {
     case zenkaku        //全角(改行などOK)
     case zenHanNumSym   //全角・半角英数字記号(改行などOK)
     case hiraKataKan    //ひらカタ漢字
-    case katakana       //全角カタカナ
+    case katakana       //全角カタカナ（自動変換あり）
     case email          //メールアドレス
     case number         //半角数字
     case password       //type用パスワード（＊半角英数4~20文字）
@@ -173,7 +173,8 @@ extension ValidateManager {
                             errMsg = "\(keta)桁の文字で入力してください"
                         }
                         if let max = validInfo.max, bufMatch.count > max {
-                            errMsg = "入力文字数が超過しています (\(max))"
+                            let unit: String = (validInfo.type == .number) ? "桁まで" : "文字まで"
+                            errMsg = "入力文字数が超過しています (\(max)\(unit))"
                         }
                     } else {//正規表現にマッチしない（＝形式エラー）
                         errMsg = Constants.DbgDispStatus ? "入力してください [\(regexp)]" : "入力してください"
@@ -188,7 +189,8 @@ extension ValidateManager {
                             errMsg = "\(keta)桁の全角文字で入力してください"
                         }
                         if let max = validInfo.max, bufMatch.count > max {
-                            errMsg = "入力文字数が超過しています (\(max))"
+                            let unit: String = (validInfo.type == .number) ? "桁まで" : "文字まで"
+                            errMsg = "入力文字数が超過しています (\(max)\(unit))"
                         }
                     } else {//正規表現にマッチしない（＝形式エラー）
                         errMsg = Constants.DbgDispStatus ? "全角文字で入力してください [\(regexp)]" : "全角文字で入力してください"
@@ -202,7 +204,8 @@ extension ValidateManager {
                             errMsg = "\(keta)桁の全角・半角英数字記号で入力してください"
                         }
                         if let max = validInfo.max, bufMatch.count > max {
-                            errMsg = "入力文字数が超過しています (\(max))"
+                            let unit: String = (validInfo.type == .number) ? "桁まで" : "文字まで"
+                            errMsg = "入力文字数が超過しています (\(max)\(unit))"
                         }
                     } else {//正規表現にマッチしない（＝形式エラー）
                         errMsg = Constants.DbgDispStatus ? "全角・半角英数字記号で入力してください [\(regexp)]" : "全角・半角英数字記号で入力してください"
@@ -216,7 +219,8 @@ extension ValidateManager {
                             errMsg = "\(keta)桁の漢字・カナ・かなで入力してください"
                         }
                         if let max = validInfo.max, bufMatch.count > max {
-                            errMsg = "入力文字数が超過しています (\(max))"
+                            let unit: String = (validInfo.type == .number) ? "桁まで" : "文字まで"
+                            errMsg = "入力文字数が超過しています (\(max)\(unit))"
                         }
                     } else {//正規表現にマッチしない（＝形式エラー）
                         errMsg = "漢字・カナ・かなで入力してください"
@@ -230,7 +234,8 @@ extension ValidateManager {
                             errMsg = "\(keta)桁のカタカナで入力してください"
                         }
                         if let max = validInfo.max, bufMatch.count > max {
-                            errMsg = "入力文字数が超過しています (\(max))"
+                            let unit: String = (validInfo.type == .number) ? "桁まで" : "文字まで"
+                            errMsg = "入力文字数が超過しています (\(max)\(unit))"
                         }
                     } else {//正規表現にマッチしない（＝形式エラー）
                         errMsg = "カタカナで入力してください"
@@ -251,7 +256,8 @@ extension ValidateManager {
                             errMsg = "\(keta)桁の数字で入力してください"
                         }
                         if let max = validInfo.max, bufMatch.count > max {
-                            errMsg = "入力文字数が超過しています (\(max))"
+                            let unit: String = (validInfo.type == .number) ? "桁まで" : "文字まで"
+                            errMsg = "入力文字数が超過しています (\(max)\(unit))"
                         }
                     } else {//正規表現にマッチしない（＝形式エラー）
                         errMsg = "数字で入力してください"
