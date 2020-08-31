@@ -72,7 +72,6 @@ extension String {
     }
 }
 
-
 extension String {
     func hiraToKana() -> String {
         let convertText: [String] = self
@@ -106,5 +105,17 @@ extension String {
 
     var toHiragana: String? {
         return self.applyingTransform(.hiraganaToKatakana, reverse: true)
+    }
+}
+
+extension String {
+    func isAllHalfWidthCharacter() -> Bool {
+        
+        let encodeString = self.data(using: .ascii, allowLossyConversion: false)
+        if encodeString != nil {
+            return true
+        } else {
+            return false
+        }
     }
 }
