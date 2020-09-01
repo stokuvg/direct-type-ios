@@ -11,6 +11,7 @@ import UIKit
 protocol EntryConfirmNotifyEntryDelegate {
     func changePasswordText(text: String)
     func changeAcceptStatus(isAccept: Bool)
+    func changeSaveChkBox(isSaveChk: Bool)
 }
 class EntryConfirmNotifyEntry2TBCell: UITableViewCell {
     var delegate: EntryConfirmNotifyEntryDelegate? = nil

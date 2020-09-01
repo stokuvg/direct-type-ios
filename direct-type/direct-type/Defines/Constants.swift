@@ -18,6 +18,8 @@ struct Constants {
     // ⇒ 401の場合だけは、かならずリトライを１回は試みると内部で処理しておくべきか？（サインイン頻度の仕様によって考慮する）
     static let ApiAutoRetryDelaySecond: DispatchTimeInterval = .seconds(1) // 自動リトライ間隔
     
+    //=== type応募
+    static let TypeEntrySaveCheckDefault: Bool = true
     //=== 通知系
     static let NotificationKeepStatusChanged = NSNotification.Name(rawValue: "KeepStatusChanged")
     static let NotificationKeepStatusChangedParamJobID = "jobCardCode"
