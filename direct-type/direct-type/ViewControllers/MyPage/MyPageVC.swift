@@ -43,7 +43,6 @@ final class MyPageVC: TmpNaviTopVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchGetMyPageAll()
-        tabBarController?.tabBar.isHidden = false
     }
     
     private func editUserName() {
@@ -116,8 +115,10 @@ private extension MyPageVC {
             vc = UIStoryboard(name: "ChemistryStart", bundle: nil).instantiateInitialViewController() as! ChemistryStart
         }
         
-        hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に非表示にする
+        // 次画面は下部のTabBarを非表示にするため、hidesBottomBarWhenPushed を true にする。
+        hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
+        hidesBottomBarWhenPushed = false
     }
 
     func transitionToSetting() {
