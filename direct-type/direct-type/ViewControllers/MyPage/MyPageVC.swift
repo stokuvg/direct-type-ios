@@ -43,7 +43,6 @@ final class MyPageVC: TmpNaviTopVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchGetMyPageAll()
-        tabBarController?.tabBar.isHidden = false
     }
     
     private func editUserName() {
