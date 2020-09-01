@@ -23,6 +23,8 @@ enum FontType {
     case EC_font_Notice
     // プレビュー
     case PV_font_S
+    // 初回タイ子セリフ
+    case I_font_S
     // 求人系以外
     case font_XL
     case font_L
@@ -62,6 +64,8 @@ enum FontType {
                 return 9
             case .PV_font_S:
                 return 6
+            case .I_font_S:
+                return 10
             case .font_XL:
                 return 4
             case .font_L:
@@ -106,6 +110,8 @@ enum FontType {
         switch self {
         case .PV_font_S:
             return 8
+        case .I_font_S:
+            return 8
         default:
             return nil
         }
@@ -149,6 +155,9 @@ extension UIFont {
             case .PV_font_S:
                 fontName = "HiraginoSans-W3"
                 fontSize = 14.0
+            case .I_font_S:
+                fontName = "HiraginoSans-W3"
+                fontSize = 17.0
             case .font_XL:
                 fontName = "HiraginoSans-W6"
                 fontSize = 30.0

@@ -13,6 +13,7 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
     var email: String = ""
     var password: String = ""
     var isValidErrorExist: Bool = false
+    var isSaveChk: Bool = Constants.TypeEntrySaveCheckDefault
     
     @IBOutlet weak var vwMainArea: UIView!
     @IBOutlet weak var vwTitleArea: UIView!
@@ -27,6 +28,19 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
     @IBOutlet weak var tfPassword: IKTextField!
     @IBOutlet weak var vwMessageAreaA: UIView!
     @IBOutlet weak var lblMessageA: UILabel!
+    //保存するか尋ねる
+    @IBOutlet weak var vwSaveChkArea: UIView!
+    @IBOutlet weak var lblSaveChk: UILabel!
+    @IBOutlet weak var btnSaveChk: UIButton!
+    @IBAction func actSaveChk(_ sender: Any) {
+        isSaveChk = !isSaveChk
+        dispSaveChk()
+        delegate?.changeSaveChkBox(isSaveChk: isSaveChk)
+    }
+    private func dispSaveChk() {
+        let bufSaveChk: String = isSaveChk ? "■ 保存する" : "□ 保存する"
+        lblSaveChk.text(text: bufSaveChk, fontType: .font_SS, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .right)
+    }
 
 
     override func awakeFromNib() {
@@ -43,6 +57,8 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
         tfPassword.textColor = UIColor(colorType: .color_black)
         tfPassword.tintColor = UIColor(colorType: .color_black)
         tfPassword.backgroundColor = UIColor(colorType: .color_white)
+
+        btnSaveChk.setTitle("", for: .normal)
     }
     func initCell(_ delegate: EntryConfirmNotifyEntryDelegate, email: String, isValidError: Bool) {
         self.delegate = delegate
@@ -89,6 +105,7 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
             tfPassword.backgroundColor = UIColor(colorType: .color_white)
             lblValidateError.text(text: validMessage, fontType: .font_SS, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         }
+        dispSaveChk() //保存チェック
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

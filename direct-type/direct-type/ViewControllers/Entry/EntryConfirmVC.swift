@@ -13,6 +13,7 @@ import SwaggerClient
 
 class EntryConfirmVC: PreviewBaseVC {
     
+    var isSaveChk: Bool = Constants.TypeEntrySaveCheckDefault
     var isAccept: Bool = false
     var bufPassword: String = ""
     var flgValidErrExist: Bool = false
@@ -238,6 +239,9 @@ extension EntryConfirmVC: EntryConfirmNotifyEntryDelegate {
         self.isAccept = isAccept
         chkButtonEnable()
     }
+    func changeSaveChkBox(isSaveChk: Bool) {
+        self.isSaveChk = isSaveChk
+    }
 }
 
 //=== APIフェッチ
@@ -258,7 +262,11 @@ extension EntryConfirmVC {
         .done { result in
             //応募に成功したら、type応募用パスワードをキーチェインに保存する（保存チェックある場合）
             //＊保存チェックがなかった場合には、逆にキーチェインのパスワードを削除する（このタイミングでOK?）
-            TudKeyChain.password(email: _profile.mailAddress).set(_typePassword)
+            if self.isSaveChk {
+                TudKeyChain.password(email: _profile.mailAddress).set(_typePassword)
+            } else {
+                TudKeyChain.password(email: _profile.mailAddress).set("")//削除
+            }
             TudKeyChain.accept.set("accepted")
             //シルバーエッグ・リコメンドを投げる
             RecommendManager.clickRecommend(type: .ap341, jobID: _jobCardCode)
