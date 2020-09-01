@@ -511,6 +511,7 @@ extension JobOfferDetailVC: UITableViewDelegate {
         return self.returnForRowAt(indexPath: indexPath)
     }
 
+    /*
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         let headerHeight:CGFloat = 0
         /*
@@ -527,9 +528,11 @@ extension JobOfferDetailVC: UITableViewDelegate {
         tableView.sectionHeaderHeight = headerHeight
         return headerHeight
     }
+    */
 }
 
 extension JobOfferDetailVC: UITableViewDataSource {
+    /*
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
             /*
@@ -607,11 +610,12 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 return nil
         }
     }
+    */
 
     func numberOfSections(in tableView: UITableView) -> Int {
         //モデル取得できていなければ0にしておく
         if self._mdlJobDetail.jobCardCode.isEmpty { return 0 }//フェッチ失敗していた場合など、jobCardCodeが空になっているので
-        return 8
+        return 9
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -824,22 +828,6 @@ extension JobOfferDetailVC: UITableViewDataSource {
 
 }
 
-extension JobOfferDetailVC: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        // ヘッダーの位置調整
-        let sectionHeaderHeight = detailTableView.sectionHeaderHeight
-
-        if offsetY <= sectionHeaderHeight && offsetY >= 0.0 {
-            let edgeInset = UIEdgeInsets(top: -offsetY, left: 0.0, bottom: 0.0, right: 0.0)
-            scrollView.contentInset = edgeInset
-        } else if offsetY >= sectionHeaderHeight {
-            let edgeInset = UIEdgeInsets(top: -sectionHeaderHeight, left: 0.0, bottom: 0.0, right: 0.0)
-            scrollView.contentInset = edgeInset
-        }
-    }
-}
-
 extension JobOfferDetailVC: NaviButtonsViewDelegate {
     func workContentsAction() {
         if naviButtonTapActionFlag == true { return }
@@ -876,26 +864,39 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
 
     // 募集要項の移動
     func guidebookScrollAnimation(section: Int,row: Int,titleName: String) {
-        Log.selectLog(logLevel: .debug, "guidebookScrollAnimation start")
+//        Log.selectLog(logLevel: .debug, "guidebookScrollAnimation start section:\(section) row:\(row),titleName:\(titleName)")
 
-        let indexPath = IndexPath.init(row: row, section: section)
-        detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
-        naviButtonTapActionFlag = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            let indexPath = IndexPath(row: row, section: section)
+            self.detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
+            self.naviButtonTapActionFlag = false
+        }
     }
 
     // 企業情報,会社情報を表示
     func informationAction() {
+//        Log.selectLog(logLevel: .debug, "informationAction start")
+//        Log.selectLog(logLevel: .debug, "会社概要の展開表示")
         if naviButtonTapActionFlag == true { return }
         naviButtonTapActionFlag = true
         buttonsView.colorChange(no:3)
         companyOutlineOpenFlag = true
 
-        let indexPath = IndexPath.init(row: 0, section: 7)
-        let indexSet = IndexSet(arrayLiteral: 7)
-        self.detailTableView.reloadSections(indexSet, with: .none)
-        self.detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
-        self.naviButtonTapActionFlag = false
-
+        if self.firstOpenFlag == false {
+            self.firstOpenFlag = true
+            let indexSet = IndexSet(arrayLiteral: 6,7)
+            self.detailTableView.reloadSections(indexSet, with: .none)
+        } else {
+            let indexSet = IndexSet(arrayLiteral: 7)
+            self.detailTableView.reloadSections(indexSet, with: .none)
+        }
+        
+        DispatchQueue.main.async {
+            let indexPath = IndexPath.init(row: 0, section: 7)
+            self.detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
+            self.naviButtonTapActionFlag = false
+        }
+    
     }
 
 
@@ -979,6 +980,7 @@ extension JobOfferDetailVC: JobDetailArticleCellDelegate {
 // 折りたたみヘッダー
 extension JobOfferDetailVC: FoldingHeaderViewDelegate {
     func foldOpenCloseAction(tag: Int) {
+        Log.selectLog(logLevel: .debug, "JobOfferDetailVC foldOpenCloseAction start")
         let section = 4 + tag
         let index = IndexSet(arrayLiteral: section)
         let _allIndex = IndexSet(arrayLiteral: 4,5,6,7)
