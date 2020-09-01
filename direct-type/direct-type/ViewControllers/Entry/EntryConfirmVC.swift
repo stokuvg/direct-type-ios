@@ -103,6 +103,7 @@ class EntryConfirmVC: PreviewBaseVC {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        chkButtonEnable()
     }
     //=== Notification通知の登録 ===
     // 画面遷移時にも取り除かないもの（他の画面で変更があった場合の更新のため）
@@ -255,6 +256,11 @@ extension EntryConfirmVC {
         LogManager.appendApiLog("postEntry", param, function: #function, line: #line)
         ApiManager.postEntry(param, isRetry: true)
         .done { result in
+            //応募に成功したら、type応募用パスワードをキーチェインに保存する（保存チェックある場合）
+            //＊保存チェックがなかった場合には、逆にキーチェインのパスワードを削除する（このタイミングでOK?）
+            TudKeyChain.password(email: _profile.mailAddress).set(_typePassword)
+            TudKeyChain.accept.set("accepted")
+            //シルバーエッグ・リコメンドを投げる
             RecommendManager.clickRecommend(type: .ap341, jobID: _jobCardCode)
             .done { result in
                 Log.selectLog(logLevel: .debug, "応募完了のコンバージョン 成功:\(result)")
@@ -265,7 +271,6 @@ extension EntryConfirmVC {
             }
             .finally {
             }
-            
             LogManager.appendApiResultLog("postEntry", result, function: #function, line: #line)
             EntryFormManager.deleteCache(jobCardCode: _jobCard.jobCardCode)//応募フォーム情報はクリアして良し
             AnalyticsEventManager.track(type: .completeEntry)

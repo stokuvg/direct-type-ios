@@ -55,6 +55,11 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
         let btnClose = IKBarButtonItem.init(title: "閉じる", style: .done, target: self, action: #selector(actInputCancelButton))
         toolbar.setItems([btnClose, separator1], animated: true)
         tfPassword.inputAccessoryView = toolbar
+        //===キーチェインから値を取得
+        if let bufPassword = TudKeyChain.password(email: email).value() {
+            tfPassword.text = bufPassword
+            delegate.changePasswordText(text: bufPassword)
+        }
     }
     @objc func actInputCancelButton(_ sender: IKBarButtonItem) {
         self.endEditing(true)

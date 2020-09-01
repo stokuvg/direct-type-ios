@@ -66,6 +66,14 @@ class EntryConfirmNotifyEntry2TBCell: UITableViewCell {
         textVWNotice.isEditable = false
         textVWNotice.delegate = self
         textVWNotice.linkTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor(colorType: .color_sub)!]
+        
+        //===キーチェインから値を取得
+        if let bufAccept = TudKeyChain.accept.value() {
+            if !bufAccept.isEmpty {
+                isAccept = true
+                delegate.changeAcceptStatus(isAccept: true)
+            }
+        }
     }
     func dispCell() {
         ivAccept.image = isAccept ? R.image.checkOn() : R.image.checkOff()

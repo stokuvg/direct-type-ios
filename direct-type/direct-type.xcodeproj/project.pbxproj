@@ -292,6 +292,7 @@
 		26A4C1CB247B4A81008D8E68 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A4C1CA247B4A81008D8E68 /* ApiManager.swift */; };
 		26A5DD642475028E0035267A /* SubSelectSpecialVC+Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5DD632475028E0035267A /* SubSelectSpecialVC+Picker.swift */; };
 		26A5DD662476547D0035267A /* SubSelectBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A5DD652476547D0035267A /* SubSelectBaseVC.swift */; };
+		26A6C41924FCD195005042A5 /* TudKeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A6C41824FCD195005042A5 /* TudKeyChain.swift */; };
 		26AF3237248F538300AA78FD /* Validate+Resume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF3236248F538300AA78FD /* Validate+Resume.swift */; };
 		26AF3239248F68BD00AA78FD /* FirstInputPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF3238248F68BD00AA78FD /* FirstInputPreviewVC.swift */; };
 		26AF323B248F698E00AA78FD /* MdlFirstInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF323A248F698E00AA78FD /* MdlFirstInput.swift */; };
@@ -642,6 +643,7 @@
 		26A4C1CA247B4A81008D8E68 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		26A5DD632475028E0035267A /* SubSelectSpecialVC+Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubSelectSpecialVC+Picker.swift"; sourceTree = "<group>"; };
 		26A5DD652476547D0035267A /* SubSelectBaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSelectBaseVC.swift; sourceTree = "<group>"; };
+		26A6C41824FCD195005042A5 /* TudKeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TudKeyChain.swift; sourceTree = "<group>"; };
 		26AF3236248F538300AA78FD /* Validate+Resume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validate+Resume.swift"; sourceTree = "<group>"; };
 		26AF3238248F68BD00AA78FD /* FirstInputPreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstInputPreviewVC.swift; sourceTree = "<group>"; };
 		26AF323A248F698E00AA78FD /* MdlFirstInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlFirstInput.swift; sourceTree = "<group>"; };
@@ -1494,6 +1496,7 @@
 				0E1FB23824AC8A6E005E0BE7 /* AppDefine.swift */,
 				26BF48EF24639E7100E00215 /* Constants.swift */,
 				26CA071424DA980700A03E7B /* DirectTypeLinkURL.swift */,
+				26A6C41824FCD195005042A5 /* TudKeyChain.swift */,
 			);
 			path = Defines;
 			sourceTree = "<group>";
@@ -1841,6 +1844,7 @@
 				06E5199A2457DA18004E4B7A /* AccountChangeVC.swift in Sources */,
 				064570622465426500F3B015 /* JobDetailGuideBookHeaderView.swift in Sources */,
 				064EF6FB24654FDB00853ADD /* JobDetailArticleCell.swift in Sources */,
+				26A6C41924FCD195005042A5 /* TudKeyChain.swift in Sources */,
 				269AFFC2246A929300DB364B /* SubSelectDaiTBCell.swift in Sources */,
 				066CC17C24735DDB009A123A /* JobDetailTextView.swift in Sources */,
 				06CDF6BF247643200075370F /* MdlJobCard.swift in Sources */,

@@ -10,6 +10,9 @@ target 'direct-type' do
 
   # Pods for direct-type
 
+  ##=== KeyChain ===
+  pod 'KeychainAccess'
+  
   ##=== Cognito ===
   pod 'AWSMobileClient', '~> 2.13.0'      # Required dependency
 
