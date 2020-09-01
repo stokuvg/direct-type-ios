@@ -37,7 +37,30 @@ class JobDetailArticleHeaderCell: BaseTableViewCell {
     }
     
     func setup(string:String,openFlag:Bool) {
-        self.titleLabel.text(text: string, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+//        Log.selectLog(logLevel: .debug, "JobDetailArticleHeaderCell setup start")
+//        Log.selectLog(logLevel: .debug, "string:\(string)")
+        
+        let newTexts = string.components(separatedBy: .newlines)
+//        Log.selectLog(logLevel: .debug, "newTexts:\(newTexts)")
+        if newTexts.count > 1 {
+            var newText:String = ""
+            for i in 0..<newTexts.count {
+                let _text = newTexts[i]
+                if _text.count != 0 {
+                    newText += _text
+                    if i < (newTexts.count-1) {
+                        newText += " "
+                    }
+                }
+            }
+//            Log.selectLog(logLevel: .debug, "newText:\(newText)")
+            
+            self.titleLabel.text(text: newText, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        } else {
+            self.titleLabel.text(text: string, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        }
+        
+//        Log.selectLog(logLevel: .debug, "self.titleLabel:\(String(describing: self.titleLabel))")
         
         headerOpenBtn.isHidden = openFlag
         if openFlag {

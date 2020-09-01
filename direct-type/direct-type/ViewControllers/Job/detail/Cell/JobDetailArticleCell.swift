@@ -37,6 +37,7 @@ class JobDetailArticleCell: BaseTableViewCell {
     }
     
     func setup(data:String) {
+        
         articleMainLabel.text(text: data, fontType: .C_font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
     }
     
