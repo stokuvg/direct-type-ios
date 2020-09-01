@@ -30,20 +30,14 @@ final class InitialInputCompleteVC: TmpBasicVC {
             case .registeredPhoneNumber:
                 return """
                 は、はじめまして。あなた専属のAIアドバイザー「みつけ タイ子」です。（大変、緊張しております）
-
                 あなたに代わり、わたしが転職先の候補をみつけます！！！
-
                 まずは、1分ほどお時間いただき、いくつか質問をさせてください。
                 """
             case .registeredAll:
                 return """
                 ありがとうございます！すぐに求人を探してきます！！
-
                 はじめは、学習不足でご希望に合わないかもしれません。
-
-                でも、あなたに合う求人を見つけたいので、
-                ご希望に近いものは「キープ」をタップして、あなたの好みを教えてください。
-                
+                でも、あなたに合う求人を見つけたいので、ご希望に近いものは「キープ」をタップして、あなたの好みを教えてください。
                 使い方についてはマイページの「設定」からいつでも確認できますよ。
                 """
             }
@@ -84,13 +78,27 @@ final class InitialInputCompleteVC: TmpBasicVC {
     
     func configure(type: ContextType) {
         contextType = type
+        
     }
 }
 
 private extension InitialInputCompleteVC {
     func setup() {
-        textView.text = contextType.description
-        textView.textColor = UIColor.init(colorType: .color_black)
+        let fontType = FontType.I_font_S
+        let text: String = contextType.description
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = fontType.lineSpacing
+        if let _paragraphSpacing = fontType.paragraphSpacing {//行間とは別に段落間の余白を設定する
+            paragraphStyle.paragraphSpacing = _paragraphSpacing
+        }
+
+        let textAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor(colorType: .color_black) as Any,
+            .font: UIFont(fontType: fontType) as Any,
+            .paragraphStyle: paragraphStyle
+        ]
+        let attrText: NSAttributedString = NSAttributedString(string: text, attributes: textAttributes)
+        textView.attributedText = attrText
         navigationItem.hidesBackButton = true
         navigationItem.title = contextType.title
         
