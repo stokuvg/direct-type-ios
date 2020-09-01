@@ -50,7 +50,7 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
         backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
         vwMainArea.backgroundColor = UIColor(colorType: .color_base)
 
-        tfPassword.isSecureTextEntry = false
+        tfPassword.isSecureTextEntry = true
         tfPassword.textContentType = .password
         tfPassword.keyboardType = .asciiCapable
         tfPassword.attributedPlaceholder = NSAttributedString(string: "type用パスワード（半角英数4〜20文字）", attributes: [NSAttributedString.Key.foregroundColor : UIColor(colorType: .color_light_gray)!])

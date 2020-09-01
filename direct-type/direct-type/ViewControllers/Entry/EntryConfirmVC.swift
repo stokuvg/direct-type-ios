@@ -240,7 +240,6 @@ extension EntryConfirmVC: EntryConfirmNotifyEntryDelegate {
         chkButtonEnable()
     }
     func changeSaveChkBox(isSaveChk: Bool) {
-        print("保存するか状態[\(isSaveChk)]")
         self.isSaveChk = isSaveChk
     }
 }
