@@ -58,7 +58,7 @@ class JobDetailFoldingOutlineCell: BaseTableViewCell {
         let establishment = data.established
         self.makeEstablishmentView(data: establishment)
         
-        Log.selectLog(logLevel: .debug, "employeesCount:\(data.employeesCount)")
+//        Log.selectLog(logLevel: .debug, "employeesCount:\(data.employeesCount)")
         
         let employees = data.employeesCount
         self.makeEmployeesView(data: employees)
@@ -74,12 +74,12 @@ class JobDetailFoldingOutlineCell: BaseTableViewCell {
         
         self.makeSpaceViews()
         
-        Log.selectLog(logLevel: .debug, "self.stackView.subviews:\(self.stackView.subviews)")
+//        Log.selectLog(logLevel: .debug, "self.stackView.subviews:\(self.stackView.subviews)")
     }
     
     // 取引先
     private func makeClientsView(data: String) {
-        Log.selectLog(logLevel: .debug, "makeClientsView start")
+//        Log.selectLog(logLevel: .debug, "makeClientsView start")
         let title = "取引先"
         let names = data
         
@@ -94,7 +94,7 @@ class JobDetailFoldingOutlineCell: BaseTableViewCell {
     }
     // メディア
     private func makeMediaView(data: String) {
-        Log.selectLog(logLevel: .debug, "makeMediaView start")
+//        Log.selectLog(logLevel: .debug, "makeMediaView start")
         let title = "事業・サービスのメディア掲載実績"
         let text = data
         
@@ -110,7 +110,7 @@ class JobDetailFoldingOutlineCell: BaseTableViewCell {
     
     // 設立
     private func makeEstablishmentView(data: String) {
-        Log.selectLog(logLevel: .debug, "makeEstablishmentView start")
+//        Log.selectLog(logLevel: .debug, "makeEstablishmentView start")
         let title = "設立"
         let items = data
         
@@ -126,7 +126,7 @@ class JobDetailFoldingOutlineCell: BaseTableViewCell {
     
     // 従業員
     private func makeEmployeesView(data: JobCardDetailCompanyDescriptionEmployeesCount){
-        Log.selectLog(logLevel: .debug, "makeEmployeesView start")
+//        Log.selectLog(logLevel: .debug, "makeEmployeesView start")
         
         let _count = data.count
         let _average = data.averageAge
@@ -137,7 +137,7 @@ class JobDetailFoldingOutlineCell: BaseTableViewCell {
         }
         
         let title = "従業員"
-        Log.selectLog(logLevel: .debug, "data:\(data)")
+//        Log.selectLog(logLevel: .debug, "data:\(data)")
         
         var text = ""
         if _count!.count > 0 {
@@ -222,7 +222,7 @@ class JobDetailFoldingOutlineCell: BaseTableViewCell {
     
     // スペースの作成
     private func makeSpaceViews() {
-        Log.selectLog(logLevel: .debug, "makeSpaceViews start")
+//        Log.selectLog(logLevel: .debug, "makeSpaceViews start")
         
         self.spaceViewHeight.constant = 20
     }

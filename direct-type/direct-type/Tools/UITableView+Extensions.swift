@@ -74,6 +74,5 @@ extension UITableView {
         
         self.register(nib, forHeaderFooterViewReuseIdentifier: name)
     }
-    
 }
 
