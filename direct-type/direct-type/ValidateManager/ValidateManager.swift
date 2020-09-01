@@ -249,7 +249,7 @@ extension ValidateManager {
                     }
 
                 case .number:
-                    regexp = #"^\d*$"#
+                    regexp = #"^[0-9]]*$"#
                     if let bufMatch = getRegexMatchString(editTemp, regexp) {
                         if let keta = validInfo.keta, bufMatch.count != keta {
                             if bufMatch.isEmpty && validInfo.required == false { continue } //桁指定あっても必須じゃなければ0桁は許される
