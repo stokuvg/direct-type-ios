@@ -624,8 +624,7 @@
         "required": [
           "startWorkPeriod",
           "endWorkPeriod",
-          "companyName",
-          "employmentId"
+          "companyName"
         ]
       },
       "GetCareerResponseDTO": {
