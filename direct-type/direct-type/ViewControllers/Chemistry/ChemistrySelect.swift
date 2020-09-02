@@ -164,8 +164,8 @@ extension ChemistrySelect: ChemistrySelectCellDelegate {
         let index = getIndex(from: number)
         questionScores[index].selectedAnswer = type
         changeButtonImage()
-        ////ちょこっとスクロールさせたい
-        //let indexPath = IndexPath(row: index, section: 0)
-        //tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        //ちょこっとスクロールさせたい
+        let indexPath = IndexPath(row: index, section: 0)
+        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
 }
