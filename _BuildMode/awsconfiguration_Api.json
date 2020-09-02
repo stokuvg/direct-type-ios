@@ -1,0 +1,27 @@
+{
+    "UserAgent": "Direct type (Api) - CognitoAuth",
+    "Version": "1.0.0",
+    "IdentityManager": {
+        "Default": {}
+    },
+    "CredentialsProvider": {
+        "CognitoIdentity": {
+            "Default": {
+                "PoolId": "ap-northeast-1:4da204bb-c86f-419d-9879-8744af15248f",
+                "Region": "ap-northeast-1"
+            }
+        }
+    },
+    "CognitoUserPool": {
+        "Default": {
+            "PoolId": "ap-northeast-1_NI9NepAk6",
+            "AppClientId": "3s2402lj2dlte92s7aobkqtkd5",
+            "Region": "ap-northeast-1"
+        }
+    },
+    "Auth": {
+      "Default": {
+        "authenticationFlowType": "CUSTOM_AUTH"
+      }
+    }
+}
