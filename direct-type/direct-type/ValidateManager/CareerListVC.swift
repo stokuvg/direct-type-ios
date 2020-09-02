@@ -142,7 +142,8 @@ extension CareerListVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = arrDisp[indexPath.row]
         let cell: CareerCardTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_CareerCardTBCell", for: indexPath) as! CareerCardTBCell
-        let isEnableDelete = (arrData.count > 1) ? true : false
+        //let isEnableDelete = (arrData.count > 1) ? true : false
+        let isEnableDelete = true
         cell.initCell(self, pos: indexPath.row, item, isEnableDelete)
         cell.dispCell()
         return cell
