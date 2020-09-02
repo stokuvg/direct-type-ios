@@ -21,6 +21,7 @@ import Foundation
 // アプリ内全体の設定フラグなどを集約するためのファイル
 extension AppDefine {
     enum BuildMode {
+        case ApiDev
         case Develop
         case Release
     }
@@ -29,6 +30,7 @@ extension AppDefine {
     //Release: 【awsconfiguration_Rel.json】をリネームして利用する
     static var CognitoIdentityPoolId: String {
         switch AppDefine.buildMode {
+        case .ApiDev:   return "ap-northeast-1:4da204bb-c86f-419d-9879-8744af15248f"
         case .Develop:  return "ap-northeast-1:4da204bb-c86f-419d-9879-8744af15248f"
         case .Release:  return "ap-northeast-1:c6e549ed-db63-4016-8386-55cad2c2f020"
         }
@@ -36,6 +38,7 @@ extension AppDefine {
     //=== AWSデバッグログフラグ
     static var isDebugForAWS: Bool {
         switch AppDefine.buildMode {
+        case .ApiDev :  return true
         case .Develop:  return true
         case .Release:  return false
         }
@@ -47,6 +50,7 @@ extension AppDefine {
     //=== AppsFlyerデバッグログフラグ（Suffixの切り替えに用いている）
     static var isDebugForAppsFlyer: Bool {
         switch AppDefine.buildMode {
+        case .ApiDev :  return true
         case .Develop:  return true
         case .Release:  return false
         }
@@ -56,13 +60,15 @@ extension AppDefine {
     //=== TUDAPI通信の定義
     static var tudApiServer: String {
         switch AppDefine.buildMode {
-        case .Develop:  return "https://api.directtype.net"
-        case .Release:  return "https://api.directtype.jp"
+        case .ApiDev :  return "https://dev-api.directtype.net"//開発
+        case .Develop:  return "https://api.directtype.net"//検証
+        case .Release:  return "https://api.directtype.jp"//本番
         }
     }
     //=== レコメンド通信の定義
     static var RecommendServer: String {
         switch AppDefine.buildMode {
+        case .ApiDev :  return "https://directtype-test.silveregg.net"
         case .Develop:  return "https://directtype-test.silveregg.net"
         case .Release:  return "https://directtype.silveregg.net"
         }
@@ -71,6 +77,7 @@ extension AppDefine {
     //=== アプリ呼び出しWebページURL
     static var connectDommain: String {
         switch AppDefine.buildMode {
+        case .ApiDev :  return "directtype.net"
         case .Develop:  return "directtype.net"
         case .Release:  return "directtype.jp"
         }
