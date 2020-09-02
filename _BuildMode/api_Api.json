@@ -1,0 +1,2701 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "スマ転API",
+    "description": "スマ転iOSアプリ向けのAPI仕様です。",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "user-api",
+      "description": "https://docs.google.com/spreadsheets/d/1SP3OenknUQFExWUT4JjSBNRD6K1aTUT3p-GHE0xSznE/edit#gid=910738305"
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://api.directtype.jp",
+      "description": "本番環境"
+    },
+    {
+      "url": "https://api.directtype.net",
+      "description": "検証環境"
+    },
+    {
+      "url": "https://dev-api.directtype.net",
+      "description": "開発環境"
+    },
+    {
+      "url": "http://localhost:3000",
+      "description": "ローカル環境"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "GetProfileResponseDTO": {
+        "type": "object",
+        "properties": {
+          "nickname": {
+            "type": "string",
+            "example": "スマザワ",
+            "description": "ニックネーム"
+          },
+          "hopeJobPlaceIds": {
+            "example": [
+              "1",
+              "2",
+              "3"
+            ],
+            "description": "希望勤務地",
+            "maxItems": 5,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "familyName": {
+            "type": "string",
+            "example": "須磨澤",
+            "description": "氏",
+            "maxLength": 16
+          },
+          "firstName": {
+            "type": "string",
+            "example": "涼子",
+            "description": "名",
+            "maxLength": 16
+          },
+          "familyNameKana": {
+            "type": "string",
+            "example": "スマザワ",
+            "description": "氏（カナ）",
+            "maxLength": 16
+          },
+          "firstNameKana": {
+            "type": "string",
+            "example": "リョウコ",
+            "description": "名（カナ）",
+            "maxLength": 16
+          },
+          "birthday": {
+            "type": "string",
+            "example": "1995-11-01",
+            "description": "ISO8601(YYYY-MM-DD)",
+            "minLength": 10,
+            "maxLength": 10
+          },
+          "genderId": {
+            "type": "string",
+            "example": "2",
+            "description": "'1'：男性, '2'：女性"
+          },
+          "zipCode": {
+            "type": "string",
+            "example": "1070052",
+            "description": "ハイフン無しの郵便番号"
+          },
+          "prefectureId": {
+            "type": "string",
+            "example": "13",
+            "description": "都道府県マスタの取りうる値"
+          },
+          "city": {
+            "type": "string",
+            "example": "港区赤坂",
+            "description": "市区町村名",
+            "maxLength": 100
+          },
+          "town": {
+            "type": "string",
+            "example": "３－２１－２０ 赤坂ロングビーチビル２F",
+            "description": "番地、建物名等",
+            "maxLength": 100
+          },
+          "email": {
+            "type": "string",
+            "example": "r-sumazawa@directtype.jp",
+            "description": "メールアドレス",
+            "maxLength": 256
+          },
+          "phoneNumber": {
+            "type": "string",
+            "example": "09012345678",
+            "description": "ログインで使用する携帯電話番号"
+          }
+        },
+        "required": [
+          "nickname",
+          "hopeJobPlaceIds",
+          "birthday",
+          "genderId",
+          "phoneNumber"
+        ]
+      },
+      "CreateProfileRequestDTO": {
+        "type": "object",
+        "properties": {
+          "nickname": {
+            "type": "string",
+            "example": "スマザワ",
+            "description": "ニックネーム"
+          },
+          "hopeJobPlaceIds": {
+            "example": [
+              "1",
+              "2",
+              "3"
+            ],
+            "description": "希望勤務地",
+            "maxItems": 5,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "birthday": {
+            "type": "string",
+            "example": "1995-11-01",
+            "description": "ISO8601(YYYY-MM-DD)",
+            "minLength": 10,
+            "maxLength": 10
+          },
+          "genderId": {
+            "type": "string",
+            "example": "2",
+            "description": "'1'：男性, '2'：女性"
+          }
+        },
+        "required": [
+          "nickname",
+          "hopeJobPlaceIds",
+          "birthday",
+          "genderId"
+        ]
+      },
+      "UpdateProfileRequestDTO": {
+        "type": "object",
+        "properties": {
+          "nickname": {
+            "type": "string",
+            "example": "スマザワ",
+            "description": "ニックネーム"
+          },
+          "hopeJobPlaceIds": {
+            "example": [
+              "1",
+              "2",
+              "3"
+            ],
+            "description": "希望勤務地",
+            "maxItems": 5,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "familyName": {
+            "type": "string",
+            "example": "須磨澤",
+            "description": "氏",
+            "maxLength": 16
+          },
+          "firstName": {
+            "type": "string",
+            "example": "涼子",
+            "description": "名",
+            "maxLength": 16
+          },
+          "familyNameKana": {
+            "type": "string",
+            "example": "スマザワ",
+            "description": "氏（カナ）",
+            "maxLength": 16
+          },
+          "firstNameKana": {
+            "type": "string",
+            "example": "リョウコ",
+            "description": "名（カナ）",
+            "maxLength": 16
+          },
+          "birthday": {
+            "type": "string",
+            "example": "1995-11-01",
+            "description": "ISO8601(YYYY-MM-DD)",
+            "minLength": 10,
+            "maxLength": 10
+          },
+          "genderId": {
+            "type": "string",
+            "example": "2",
+            "description": "'1'：男性, '2'：女性"
+          },
+          "zipCode": {
+            "type": "string",
+            "example": "1070052",
+            "description": "ハイフン無しの郵便番号"
+          },
+          "prefectureId": {
+            "type": "string",
+            "example": "13",
+            "description": "都道府県マスタの取りうる値"
+          },
+          "city": {
+            "type": "string",
+            "example": "港区赤坂",
+            "description": "市区町村名",
+            "maxLength": 100
+          },
+          "town": {
+            "type": "string",
+            "example": "３－２１－２０ 赤坂ロングビーチビル２F",
+            "description": "番地、建物名等",
+            "maxLength": 100
+          },
+          "email": {
+            "type": "string",
+            "example": "r-sumazawa@directtype.jp",
+            "description": "メールアドレス",
+            "maxLength": 256
+          }
+        }
+      },
+      "WorkHistoryResponse": {
+        "type": "object",
+        "properties": {
+          "job3Id": {
+            "type": "string",
+            "example": "1",
+            "description": "職種小分類ID"
+          },
+          "experienceYears": {
+            "type": "string",
+            "example": "1",
+            "description": "経験年数"
+          }
+        },
+        "required": [
+          "job3Id",
+          "experienceYears"
+        ]
+      },
+      "FinalEducationResponse": {
+        "type": "object",
+        "properties": {
+          "schoolName": {
+            "type": "string",
+            "example": "スマ澤大学",
+            "description": "学校名",
+            "maxLength": 60
+          },
+          "faculty": {
+            "type": "string",
+            "example": "スマ澤学部",
+            "description": "学部",
+            "maxLength": 30
+          },
+          "department": {
+            "type": "string",
+            "example": "スマ澤学科",
+            "description": "学科/専攻",
+            "maxLength": 30
+          },
+          "guraduationYearMonth": {
+            "type": "string",
+            "example": "2020-03",
+            "description": "卒業年月"
+          }
+        },
+        "required": [
+          "schoolName",
+          "faculty",
+          "guraduationYearMonth"
+        ]
+      },
+      "GetResumeResponseDTO": {
+        "type": "object",
+        "properties": {
+          "isEmployed": {
+            "type": "boolean",
+            "example": true,
+            "description": "就業状況"
+          },
+          "changeJobCount": {
+            "type": "string",
+            "example": "1",
+            "description": "転職回数"
+          },
+          "workHistory": {
+            "description": "経験職種リスト",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkHistoryResponse"
+            }
+          },
+          "experienceIndustryIds": {
+            "example": [
+              "1",
+              "2",
+              "3"
+            ],
+            "description": "経験業種コード",
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "educationId": {
+            "type": "string",
+            "example": "1",
+            "description": "学種コード"
+          },
+          "finalEducation": {
+            "$ref": "#/components/schemas/FinalEducationResponse"
+          },
+          "toeic": {
+            "type": "string",
+            "example": "990",
+            "description": "TOEICスコア"
+          },
+          "toefl": {
+            "type": "string",
+            "example": "490",
+            "description": "TOEFLスコア"
+          },
+          "englishSkillId": {
+            "type": "string",
+            "example": "1",
+            "description": "英語スキルID"
+          },
+          "otherLanguageSkillId": {
+            "type": "string",
+            "example": "1",
+            "description": "その他言語スキルID"
+          },
+          "licenseIds": {
+            "example": [
+              "1",
+              "2",
+              "3"
+            ],
+            "description": "保有資格IDリスト",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selfPR": {
+            "type": "string",
+            "example": "私は英語とフランス語が得意です。何でも挑戦します。",
+            "description": "自己PR",
+            "maxLength": 4000
+          },
+          "currentSalary": {
+            "type": "string",
+            "example": "500",
+            "description": "現在の年収"
+          }
+        },
+        "required": [
+          "isEmployed",
+          "workHistory",
+          "educationId",
+          "currentSalary"
+        ]
+      },
+      "WorkHistoryDTO": {
+        "type": "object",
+        "properties": {
+          "job3Id": {
+            "type": "string",
+            "example": "1",
+            "description": "職種小分類ID"
+          },
+          "experienceYears": {
+            "type": "string",
+            "example": "1",
+            "description": "経験年数"
+          }
+        },
+        "required": [
+          "job3Id",
+          "experienceYears"
+        ]
+      },
+      "CreateResumeRequestDTO": {
+        "type": "object",
+        "properties": {
+          "isEmployed": {
+            "type": "boolean",
+            "example": true,
+            "description": "就業状況"
+          },
+          "workHistory": {
+            "description": "経験職種リスト",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkHistoryDTO"
+            }
+          },
+          "educationId": {
+            "type": "string",
+            "example": "1",
+            "description": "学種コード"
+          },
+          "currentSalary": {
+            "type": "string",
+            "example": "500",
+            "description": "現在の年収"
+          }
+        },
+        "required": [
+          "isEmployed",
+          "workHistory",
+          "educationId",
+          "currentSalary"
+        ]
+      },
+      "FinalEducationDTO": {
+        "type": "object",
+        "properties": {
+          "schoolName": {
+            "type": "string",
+            "example": "スマ澤大学",
+            "description": "学校名",
+            "maxLength": 60
+          },
+          "faculty": {
+            "type": "string",
+            "example": "スマ澤学部",
+            "description": "学部",
+            "maxLength": 30
+          },
+          "department": {
+            "type": "string",
+            "example": "スマ澤学科",
+            "description": "学科/専攻",
+            "maxLength": 30
+          },
+          "guraduationYearMonth": {
+            "type": "string",
+            "example": "2020-03",
+            "description": "卒業年月"
+          }
+        },
+        "required": [
+          "schoolName",
+          "faculty",
+          "guraduationYearMonth"
+        ]
+      },
+      "UpdateResumeRequestDTO": {
+        "type": "object",
+        "properties": {
+          "isEmployed": {
+            "type": "boolean",
+            "example": true,
+            "description": "就業状況"
+          },
+          "changeJobCount": {
+            "type": "string",
+            "example": "1",
+            "description": "転職回数"
+          },
+          "workHistory": {
+            "description": "経験職種リスト",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkHistoryDTO"
+            }
+          },
+          "experienceIndustryIds": {
+            "example": [
+              "1",
+              "2",
+              "3"
+            ],
+            "description": "経験業種コード",
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "educationId": {
+            "type": "string",
+            "example": "1",
+            "description": "学種コード"
+          },
+          "finalEducation": {
+            "$ref": "#/components/schemas/FinalEducationDTO"
+          },
+          "toeic": {
+            "type": "string",
+            "example": "990",
+            "description": "TOEICスコア"
+          },
+          "toefl": {
+            "type": "string",
+            "example": "490",
+            "description": "TOEFLスコア"
+          },
+          "englishSkillId": {
+            "type": "string",
+            "example": "1",
+            "description": "英語スキルID"
+          },
+          "otherLanguageSkillId": {
+            "type": "string",
+            "example": "1",
+            "description": "その他言語スキルID"
+          },
+          "licenseIds": {
+            "example": [
+              "1",
+              "2",
+              "3"
+            ],
+            "description": "保有資格IDリスト",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selfPR": {
+            "type": "string",
+            "example": "私は英語とフランス語が得意です。何でも挑戦します。",
+            "description": "自己PR",
+            "maxLength": 4000
+          },
+          "currentSalary": {
+            "type": "string",
+            "example": "500",
+            "description": "現在の年収"
+          }
+        }
+      },
+      "CareerHistoryDTO": {
+        "type": "object",
+        "properties": {
+          "startWorkPeriod": {
+            "type": "string",
+            "example": "2015-10",
+            "description": "勤務開始年月（ISO8601[YYYY-MM]）"
+          },
+          "endWorkPeriod": {
+            "type": "string",
+            "example": "9999-12",
+            "description": "勤務終了年月（ISO8601[YYYY-MM]）※就業中の場合は9999-12とする。"
+          },
+          "companyName": {
+            "type": "string",
+            "example": "株式会社キャリアデザインセンター",
+            "description": "企業名"
+          },
+          "employmentId": {
+            "type": "string",
+            "example": "1",
+            "description": "雇用形態マスタの値"
+          },
+          "employees": {
+            "type": "string",
+            "example": 100,
+            "description": "従業員数"
+          },
+          "salary": {
+            "type": "string",
+            "example": 999,
+            "description": "年収"
+          },
+          "workNote": {
+            "type": "string",
+            "example": "入社後半年間、研修を受けた後、半年間は主にサイトの更新・ページ作成を担当。その後、リーダーに昇格。新規のwebサイトの企画、デザイン、コーディング等を一環して行う。",
+            "description": "職務内容本文",
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "startWorkPeriod",
+          "endWorkPeriod",
+          "companyName",
+          "employmentId"
+        ]
+      },
+      "GetCareerResponseDTO": {
+        "type": "object",
+        "properties": {
+          "careerHistory": {
+            "description": "職務経歴",
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CareerHistoryDTO"
+            }
+          }
+        },
+        "required": [
+          "careerHistory"
+        ]
+      },
+      "CreateCareerRequestDTO": {
+        "type": "object",
+        "properties": {
+          "careerHistory": {
+            "description": "職務経歴",
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CareerHistoryDTO"
+            }
+          }
+        },
+        "required": [
+          "careerHistory"
+        ]
+      },
+      "UpdateCareerRequestDTO": {
+        "type": "object",
+        "properties": {
+          "careerHistory": {
+            "description": "職務経歴",
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CareerHistoryDTO"
+            }
+          }
+        }
+      },
+      "CreateSkipRequestDTO": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "example": "1186461",
+            "description": "求人ID"
+          }
+        },
+        "required": [
+          "jobId"
+        ]
+      },
+      "Job": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "example": "1182798",
+            "description": "求人ID"
+          },
+          "jobName": {
+            "type": "string",
+            "example": "ITソリューション企画・営業",
+            "description": "外部表示用職種名"
+          },
+          "pressStartDate": {
+            "type": "string",
+            "example": "2020-11-01",
+            "description": "掲載開始日（ISO8601[YYYY-MM-DD]）"
+          },
+          "pressEndDate": {
+            "type": "string",
+            "example": "2020-11-15",
+            "description": "掲載終了日（ISO8601[YYYY-MM-DD]）"
+          },
+          "mainTitle": {
+            "type": "string",
+            "example": "【急募】部長候補！高待遇で活躍できる。「東証一部上場」へ向けた急成長企業の経理財務業務",
+            "description": "メイン記事メインタイトル"
+          },
+          "mainPhotoURL": {
+            "type": "string",
+            "example": "https://type.jp/noindex-image?id=666666",
+            "description": "求人メイン画像URL"
+          },
+          "minSalaryId": {
+            "type": "string",
+            "example": "1",
+            "description": "年収マスタ値"
+          },
+          "maxSalaryId": {
+            "type": "string",
+            "example": "2",
+            "description": "年収マスタ値"
+          },
+          "isSalaryDisplay": {
+            "type": "boolean",
+            "example": true,
+            "description": "true: 年収公開, false: 年収非公開"
+          },
+          "companyName": {
+            "type": "string",
+            "example": "株式会社スマ澤",
+            "description": "企業名"
+          },
+          "isKeep": {
+            "type": "boolean",
+            "example": true,
+            "description": "true: キープしている, false: キープしていない"
+          },
+          "place2Ids": {
+            "example": [
+              "23"
+            ],
+            "description": "勤務地",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "jobId",
+          "jobName",
+          "pressStartDate",
+          "pressEndDate",
+          "mainTitle",
+          "mainPhotoURL",
+          "minSalaryId",
+          "maxSalaryId",
+          "isSalaryDisplay",
+          "companyName",
+          "isKeep",
+          "place2Ids"
+        ]
+      },
+      "GetJobsResponseDTO": {
+        "type": "object",
+        "properties": {
+          "hasNext": {
+            "type": "boolean",
+            "example": true,
+            "description": "true: 次ページあり, false: 次ページなし"
+          },
+          "recommendedAt": {
+            "type": "string",
+            "example": "2020-01-22T08:36:08.816Z",
+            "description": "おすすめ一覧作成日（RFC3339）"
+          },
+          "jobs": {
+            "description": "求人一覧",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Job"
+            }
+          }
+        },
+        "required": [
+          "hasNext",
+          "recommendedAt",
+          "jobs"
+        ]
+      },
+      "Contact": {
+        "type": "object",
+        "properties": {
+          "homepageUrl": {
+            "type": "string",
+            "example": "http://www.type.jp/",
+            "description": "企業ホームページURL"
+          },
+          "zip": {
+            "type": "string",
+            "example": "123-4567",
+            "description": "郵便番号"
+          },
+          "address": {
+            "type": "string",
+            "example": "東京都墨田区両国4-36-7 \nガイ・センタービル5階",
+            "description": "住所"
+          },
+          "tel": {
+            "type": "string",
+            "example": "03-5410-1012",
+            "description": "Tel"
+          },
+          "person": {
+            "type": "string",
+            "example": "担当／採用部　キャリア採用担当",
+            "description": "担当者"
+          },
+          "email": {
+            "type": "string",
+            "example": "担当／採用部　キャリア採用担当",
+            "description": "表示用e-mailアドレス"
+          }
+        },
+        "required": [
+          "homepageUrl",
+          "zip",
+          "address",
+          "tel",
+          "person",
+          "email"
+        ]
+      },
+      "Employees": {
+        "type": "object",
+        "properties": {
+          "employeesAll": {
+            "type": "string",
+            "example": "16名（2020年1月現在）※役員3名を含め、19名",
+            "description": "従業員数"
+          },
+          "averageAge": {
+            "type": "string",
+            "example": "30.0歳",
+            "description": "平均年齢"
+          },
+          "genderRatio": {
+            "type": "string",
+            "example": "男13：女10",
+            "description": "男女比"
+          },
+          "middleEnter": {
+            "type": "string",
+            "example": "77.8%（2020年3月1日現在）",
+            "description": "中途入社者の割合"
+          }
+        },
+        "required": [
+          "employeesAll",
+          "averageAge",
+          "genderRatio",
+          "middleEnter"
+        ]
+      },
+      "GetJobsDetailResponseDTO": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "example": "1182798",
+            "description": "求人ID"
+          },
+          "jobName": {
+            "type": "string",
+            "example": "ITソリューション企画・営業",
+            "description": "外部表示用職種名"
+          },
+          "minSalaryId": {
+            "type": "string",
+            "example": "1",
+            "description": "年収マスタ値"
+          },
+          "maxSalaryId": {
+            "type": "string",
+            "example": "2",
+            "description": "年収マスタ値"
+          },
+          "isSalaryDisplay": {
+            "type": "boolean",
+            "example": true,
+            "description": "true: 年収公開, false: 年収非公開"
+          },
+          "place2Ids": {
+            "example": [
+              "23"
+            ],
+            "description": "勤務地",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "companyName": {
+            "type": "string",
+            "example": "株式会社スマ澤",
+            "description": "企業名"
+          },
+          "pressStartDate": {
+            "type": "string",
+            "example": "2020-11-01",
+            "description": "掲載開始日（ISO8601[YYYY-MM-DD]）"
+          },
+          "pressEndDate": {
+            "type": "string",
+            "example": "2020-11-15",
+            "description": "掲載終了日（ISO8601[YYYY-MM-DD]）"
+          },
+          "mainPhotoURL": {
+            "type": "string",
+            "example": "https://type.jp/noindex-image?id=666666",
+            "description": "求人メイン画像URL"
+          },
+          "subPhotoURLs": {
+            "example": [
+              "https://type.jp/noindex-image?id=777777",
+              "https://type.jp/noindex-image?id=888888",
+              "https://type.jp/noindex-image?id=999999"
+            ],
+            "description": "求人メイン画像URL",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "mainTitle": {
+            "type": "string",
+            "example": "【急募】部長候補！高待遇で活躍できる。「東証一部上場」へ向けた急成長企業の経理財務業務",
+            "description": "メイン記事メインタイトル"
+          },
+          "mainBody": {
+            "type": "string",
+            "example": "大手BtoB企業をクライアントに持ち、\nサイトの企画・開発を中心に、\nWebコンサルティング事業を展開している当社。\n",
+            "description": "メイン記事本文"
+          },
+          "jobPrIds": {
+            "description": "．勤務地",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "salaryExample": {
+            "type": "string",
+            "example": "【年収例：400～800万円】\n30歳：600万円 (残業手当含む)",
+            "description": "給与例"
+          },
+          "background": {
+            "type": "string",
+            "example": "AIでモノ作りに革新をもたらすために、旭化成の膨大な技術情報資産をフルに活用するデジタルトランスフォーメーションを推進しています。その戦略構築と推進の為、今回増員募集を行います。",
+            "description": "募集背景"
+          },
+          "jobContents": {
+            "type": "string",
+            "example": "さまざまな国と地域で事業を展開し、世界を舞台に新たな挑戦を続けている当社。\n世界経済を牽引する新興国市場や、シェアが低い地域での拡販・シェアアップを成長戦略として重視しており、これらの市場に、人材をはじめとする経営資源を集中投入しています。\n現地のニーズに合った良質でコストパフォーマンスの高い製品をタイムリーに提供することで、積極的に拡販を進めています。\n\n■担当職務\n産業機材材料、イメージング、ライフサイエンスなどの事業部での海外マーケティング／事業企画\n\n1. 現法や現地代理店と連携して販売施策/販売計画の立案遂行管理\n2. 現法や現地代理店への経営指導、営業支援、業績管理\n3. 新規流通チャネル、顧客の開拓などの営業\n4. 新製品市場導入など",
+            "description": "仕事内容"
+          },
+          "projectsDealing": {
+            "type": "string",
+            "example": "●社内システム・基幹システム:インフラ設計・開発・構築・運用・保守・評価 \n●WindowsServerの構築・保守※ATM関連 \n●Linuxサーバの構築・運用・保守 など",
+            "description": "案件例"
+          },
+          "commodity": {
+            "type": "string",
+            "example": "当社がメインで手掛けるのは、中古住宅のリノベーションサービス。「好きな街」で「好きな暮らし」を送る唯一の方法として、お客様にかかる費用・労力の負担を最大限削減する一元化サービスを提供しています。",
+            "description": "手がける商品・サービス"
+          },
+          "scopeJob": {
+            "type": "string",
+            "example": "★チーム体制での配属！\n業界では珍しい複数名での『チーム体制』で出向しています。\n初めての現場でも気軽にやりとりできる仲間がいるため、\n新たなプロジェクトでもスムーズに業務に取り組むことができます。\n「自社開発で経験を積んできた」という方も、仲間との業務を通して、\n客先での立ち振る舞いなどを身に付けることができるのでご安心ください。",
+            "description": "開発環境・業務範囲"
+          },
+          "attentionPointCaption1": {
+            "type": "string",
+            "example": "☆顧客からの紹介がメイン！非効率な飛び込みは一切なし☆ ",
+            "description": "注目ポイント見出し１"
+          },
+          "attentionPointBody1": {
+            "type": "string",
+            "example": "創業から50年以上の間で培ってきた実績とお客様の信頼により、既存のお客様から新たなご依頼やニーズのある別のお客様をご紹介いただけます。そのため新たな顧客を獲得する際は「20階建てのビルを下から上までとにかく訪問」などの非効率な飛び込みは一切ナシ！情報の裏づけを取るなど提案する準備にしっかりと時間をかけられるため、ご提案に注力することができます。",
+            "description": "注目ポイント本文１"
+          },
+          "attentionPointCaption2": {
+            "type": "string",
+            "example": "☆顧客からの紹介がメイン！非効率な飛び込みは一切なし☆ ",
+            "description": "注目ポイント見出し２"
+          },
+          "attentionPointBody2": {
+            "type": "string",
+            "example": "創業から50年以上の間で培ってきた実績とお客様の信頼により、既存のお客様から新たなご依頼やニーズのある別のお客様をご紹介いただけます。そのため新たな顧客を獲得する際は「20階建てのビルを下から上までとにかく訪問」などの非効率な飛び込みは一切ナシ！情報の裏づけを取るなど提案する準備にしっかりと時間をかけられるため、ご提案に注力することができます。",
+            "description": "注目ポイント本文２"
+          },
+          "applicationSkill": {
+            "type": "string",
+            "example": "「学歴不問」「業界経験者歓迎」◎CAD使える方は優遇 \n\nいずれかの経験や資格、特技をお持ちの方は優遇しますが、 \nやる気一つで充分ですので、まずは面接にてお会いしましょう♪ \n\n\n ◆普通自動車免許（MT） \n （準中型自動車免許をお持ちの方は歓迎） \n\n※現場管理業務を行う際は2tダンプ車で移動願います。 \n\n◆とび・土工10年以上の実務経験ある方は歓迎します。 \n\n\n\n◎現場管理業務を中心に行いたい方は、2tダンプ車の運転ができれ方であれば、CADやパソコン入力の経験は問いません。 \nその場合は、並行して現場写真の撮影管理や作業日報の管理、元請・下請との打合せ業務を行って頂きたいと思います。 「学歴不問」「業界経験者歓迎」◎CAD使える方は優遇 \n\nいずれかの経験や資格、特技をお持ちの方は優遇しますが、 \nやる気一つで充分ですので、まずは面接にてお会いしましょう♪ \n\n\n ◆普通自動車免許（MT） \n （準中型自動車免許をお持ちの方は歓迎） \n\n※現場管理業務を行う際は2tダンプ車で移動願います。 \n\n◆とび・土工10年以上の実務経験ある方は歓迎します。 \n\n\n\n◎現場管理業務を中心に行いたい方は、2tダンプ車の運転ができれ方であれば、CADやパソコン入力の経験は問いません。 \nその場合は、並行して現場写真の撮影管理や作業日報の管理、元請・下請との打合せ業務を行って頂きたいと思います。 ",
+            "description": "応募資格"
+          },
+          "desirableCapability": {
+            "type": "string",
+            "example": "解体はもちろん、建築や土木などの施工関連有資格者は歓迎します。 \n 資格を取得するために培ってきた知識や、 \n 必要な実務経験で磨いてきたスキル、 \nぜひ「解体」で活かして、腰を据えてほしいと思っています。 \n\n\n 【具体的には】 \n 下記いずれかの資格をお持ちの方は優遇します！ \n◎1級建築施工管理技士 \n◎2級建築施工管理技士 \n◎1級土木施工管理技士 \n◎2級土木施工管理技士 \n◎解体工事施工技士",
+            "description": "歓迎する経験・スキル"
+          },
+          "adoptionExample": {
+            "type": "string",
+            "example": "業務システム運用SE、クラウド開発経験者",
+            "description": "過去の採用例"
+          },
+          "suitableForThisJob": {
+            "type": "string",
+            "example": "成果を上げれば上げるほど比例して立場も給与も上がっていくので、\nゲーム感覚で成果を出す事を楽しめる人、独立志向の強い方が向いています。",
+            "description": "この仕事の向き"
+          },
+          "notSuitableForThisJob": {
+            "type": "string",
+            "example": "個人のお客様と向き合うことが多い仕事になるので、\n人とコミュニケーションを取ることに苦手意識がある方。",
+            "description": "この仕事の不向き"
+          },
+          "employmentId": {
+            "type": "string",
+            "example": "1",
+            "description": "雇用形態コード"
+          },
+          "salary": {
+            "type": "string",
+            "example": "月給25万円～＋業績賞与\n※語学力に応じて給与額を考慮いたします。\n※みなし残業代30時間分 (5万円～)を給与に含みます\n※みなし残業時間を超過した残業が発生した場合は、残業時間分の代休を取得していただきます。\n※試用期間(最長6ヶ月／最短2カ月～)後にフルフレックス制での勤務が可能です。\n※試用期間は給与が月給23万円～になります（試用期間中はみなし残業がありません。残業代は全額支給いたします）。\n※深夜残業が発生する場合がございます。その場合は別途手当を支給いたします。詳細は面接でご説明いたします。月給25万円～＋業績賞与\n※語学力に応じて給与額を考慮いたします。\n※みなし残業代30時間分 (5万円～)を給与に含みます\n※みなし残業時間を超過した残業が発生した場合は、残業時間分の代休を取得していただきます。\n※試用期間(最長6ヶ月／最短2カ月～)後にフルフレックス制での勤務が可能です。\n※試用期間は給与が月給23万円～になります（試用期間中はみなし残業がありません。残業代は全額支給いたします）。\n※深夜残業が発生する場合がございます。その場合は別途手当を支給いたします。詳細は面接でご説明いたします。",
+            "description": "給与"
+          },
+          "bonus": {
+            "type": "string",
+            "example": "賞与は、年2回（7月・12月）支給。昨年度の支給実績は月給の3カ月分でした。",
+            "description": "賞与について"
+          },
+          "officeHours": {
+            "type": "string",
+            "example": "9:00～18:00（実働8時間／休憩1時間）",
+            "description": "勤務時間"
+          },
+          "indicationOvertimeId": {
+            "type": "string",
+            "example": "1",
+            "description": "目安残業時間コード"
+          },
+          "overtime": {
+            "type": "string",
+            "example": "残業は平均1日1.5h程度となります。",
+            "description": "残業について"
+          },
+          "jobPlace": {
+            "type": "string",
+            "example": "≪勤務地≫\n都内、神奈川県、千葉県など首都圏のプロジェクト先\n\n≪本社≫\n東京都渋谷区道玄坂1-22-12 和孝渋谷ビル5F\n・各線「渋谷」駅より徒歩7分\n\n【転勤・出張の可能性】\nありません。",
+            "description": "勤務地"
+          },
+          "transportation": {
+            "type": "string",
+            "example": "東京メトロ「西新宿駅」より徒歩3分\n各線「新宿駅」より徒歩8分",
+            "description": "交通・詳細"
+          },
+          "vacation": {
+            "type": "string",
+            "example": "≪年間休日121日（2018年度）≫\n★完全週休2日制（土・日）\n★祝日\n※配属先により一部土・日・祝日勤務の場合があります\n★年末年始休暇\n★有給休暇20日（初年度の有給休暇は入社月によって変動）\n★産前・産後休暇\n★育児休暇\n★子の看護休暇\n★介護休暇\n★メモリアル休暇（年に一度取得可能）",
+            "description": "休日休暇"
+          },
+          "jobCondition": {
+            "type": "string",
+            "example": "★昇給年1回\n★賞与あり　※正社員のみ\n★各種社会保険完備\n★交通費全額支給\n★残業手当（1分単位で全額支給）\n★住宅手当（独身・既婚・扶養状況により金額が異なる。※正社員対象）\n★退職金制度\n★資格試験費用負担（試験合格時に当社が負担） \n★スキルアップ研修\n★無料健康診断（35歳以上は人間ドック）\n★有名スポーツクラブ・テーマパーク・リゾート施設優待割引\n☆正社員登用制度あり★昇給年1回\n★賞与あり　※正社員のみ\n★各種社会保険完備\n★交通費全額支給\n★残業手当（1分単位で全額支給）\n★住宅手当（独身・既婚・扶養状況により金額が異なる。※正社員対象）\n★退職金制度\n★資格試験費用負担（試験合格時に当社が負担） \n★スキルアップ研修\n★無料健康診断（35歳以上は人間ドック）\n★有名スポーツクラブ・テーマパーク・リゾート施設優待割引\n☆正社員登用制度あり★昇給年1回\n★賞与あり　※正社員のみ\n★各種社会保険完備\n★交通費全額支給\n★残業手当（1分単位で全額支給）\n★住宅手当（独身・既婚・扶養状況により金額が異なる。※正社員対象）\n★退職金制度\n★資格試験費用負担（試験合格時に当社が負担） \n★スキルアップ研修\n★無料健康診断（35歳以上は人間ドック）\n★有名スポーツクラブ・テーマパーク・リゾート施設優待割引\n☆正社員登用制度あり★昇給年1回\n★賞与あり　※正社員のみ\n★各種社会保険完備\n★交通費全額支給\n★残業手当（1分単位で全額支給）\n★住宅手当（独身・既婚・扶養状況により金額が異なる。※正社員対象）\n★退職金制度\n★資格試験費用負担（試験合格時に当社が負担） \n★スキルアップ研修\n★無料健康診断（35歳以上は人間ドック）\n★有名スポーツクラブ・テーマパーク・リゾート施設優待割引\n☆正社員登用制度あり",
+            "description": "待遇・福利厚生"
+          },
+          "maternityChildcare": {
+            "type": "string",
+            "example": "産休からの復職率は【92.3％】。男女問わず、取得実績も豊富です！",
+            "description": "産休・育休取得状況"
+          },
+          "interviewBody": {
+            "type": "string",
+            "example": "創業から70年以上の伝統を誇る神奈川管材。歴史の長い会社の場合、古くからの慣習にこだわるところが多い中、いい意味で“歴史にこだわらない”のが同社の魅力だ。例えば、20代から40代と幅広い年齢層の社員から積極的に意見やアイデアを吸い上げ、改善すべき点はしっかりと改善に取り組んでいる。その結果、働きやすさ抜群の環境と、会社の成長を両立。現在も新たな営業所を続々とオープンさせている。それは同時に、ポジションが増えていくことにもつながるため、向上心の強い社員にとってはキャリアアップのチャンスが増え続けているといえる。また、社員が成長を目指せる環境だけでなく、ワークライフバランスを重視できる制度など、ゆとりを持って活躍できる環境づくりにも余念がない。新たな活躍の場を探されている方にとっては、これ以上ない会社といえるだろう。",
+            "description": "取材メモ"
+          },
+          "selectionProcessStep1": {
+            "type": "string",
+            "example": "Web履歴書による書類選考",
+            "description": "選考プロセス１"
+          },
+          "selectionProcessStep2": {
+            "type": "string",
+            "example": "1次選考（面接） ※現場リーダー",
+            "description": "選考プロセス２"
+          },
+          "selectionProcessStep3": {
+            "type": "string",
+            "example": "2次選考（面接） ※役員（社長含む）※その後、Web適性検査あり",
+            "description": "選考プロセス３"
+          },
+          "selectionProcessStep4": {
+            "type": "string",
+            "example": "最終面接（面接） ※社長以下役員（プレゼンテーションあり）",
+            "description": "選考プロセス４"
+          },
+          "selectionProcessStep5": {
+            "type": "string",
+            "example": "内定",
+            "description": "選考プロセス５"
+          },
+          "selectionProcess": {
+            "type": "string",
+            "example": "【type】の専用応募フォームからご応募下さい。\n※応募の秘密厳守します\n※書類選考は1週間程度お時間を頂いております\n※応募書類はご返却できませんので、予めご了承下さい\n\n◆ご応募から内定までは4週間以内を予定しております\n◆面接日、入社日はご相談に応じます。お気軽にお問い合わせ下さい\n◆結果については合否に関わらずご連絡致します",
+            "description": "選考プロセス詳細"
+          },
+          "contact": {
+            "$ref": "#/components/schemas/Contact"
+          },
+          "enterpriseContents": {
+            "type": "string",
+            "example": "【事業内容】\n一括受託開発です。設計（必要に応じて要件定義から）、開発、テストまで全工程を担っています。\n◆組み込みソフト（ファームウェア）\n◆業務用PCアプリ\n◆デバイスドライバ\n◆組み込みLinux\n対応OS：Linux、NonOS、iTRON、Windows\n得意分野：IoT（ゲートウェイ、端末）、車載ネットワーク\n\n★数年後には自社製品を開発したいと思っています。今は受託開発により、会社の安定基盤を整えている段階。自社製品の開発や会社が成長していくフェーズに、コアメンバーとして携わりませんか？",
+            "description": "事業内容"
+          },
+          "mainCustomer": {
+            "type": "string",
+            "example": "大手上場企業から、中小企業まで幅広く取引しています。",
+            "description": "主要取引先"
+          },
+          "mediaCoverageResult": {
+            "type": "string",
+            "example": "●2010.06.07／ベンチャー企業サイト情熱社長に記事掲載\n●2014.05.26／日経産業新聞に当社のオフィスビルテナント誘致活動が掲載\n●2014.08.04、10.22／週間ビル経営新聞に当社サイト「officeモアレント」が掲載\n●2016.05.16、07.04／日経産業新聞に当社代表のコメントが掲載\n●2017.04.20／日経産業新聞に当社代表のコメントが掲載\n●2017.08.04／日経 Visual Dataに当社代表のコメントが掲載",
+            "description": "事業・サービスのメディア掲載実績"
+          },
+          "established": {
+            "type": "string",
+            "example": "2009年1月",
+            "description": "設立"
+          },
+          "employees": {
+            "$ref": "#/components/schemas/Employees"
+          },
+          "capital": {
+            "type": "string",
+            "example": "2400万円",
+            "description": "資本金"
+          },
+          "turnover": {
+            "type": "string",
+            "example": "157億円（2018年度）",
+            "description": "売上高"
+          },
+          "presidentName": {
+            "type": "string",
+            "example": "代表取締役社長　河森",
+            "description": "代表者"
+          },
+          "presidentHistory": {
+            "type": "string",
+            "example": "日本IBMで副社長補佐などを担当後、日本シーベルの取締役営業本部長に就任。2002年1月 ブリッジグループ設立",
+            "description": "代表者略歴"
+          },
+          "isKeep": {
+            "type": "boolean",
+            "example": true,
+            "description": "true: キープしている, false: キープしていない"
+          },
+          "entryQuestion1": {
+            "type": "string",
+            "example": "リモート勤務可能ですか？",
+            "description": "１つ目の追加質問の設問テキスト（設問がない場合は空欄）"
+          },
+          "entryQuestion2": {
+            "type": "string",
+            "example": "",
+            "description": "２つ目の追加質問の設問テキスト（設問がない場合は空欄）"
+          },
+          "entryQuestion3": {
+            "type": "string",
+            "example": "",
+            "description": "３つ目の追加質問の設問テキスト（設問がない場合は空欄）"
+          }
+        },
+        "required": [
+          "jobId",
+          "jobName",
+          "minSalaryId",
+          "maxSalaryId",
+          "isSalaryDisplay",
+          "place2Ids",
+          "companyName",
+          "pressStartDate",
+          "pressEndDate",
+          "mainPhotoURL",
+          "subPhotoURLs",
+          "mainTitle",
+          "mainBody",
+          "jobPrIds",
+          "salaryExample",
+          "background",
+          "jobContents",
+          "projectsDealing",
+          "commodity",
+          "scopeJob",
+          "attentionPointCaption1",
+          "attentionPointBody1",
+          "attentionPointCaption2",
+          "attentionPointBody2",
+          "applicationSkill",
+          "desirableCapability",
+          "adoptionExample",
+          "suitableForThisJob",
+          "notSuitableForThisJob",
+          "employmentId",
+          "salary",
+          "bonus",
+          "officeHours",
+          "indicationOvertimeId",
+          "overtime",
+          "jobPlace",
+          "transportation",
+          "vacation",
+          "jobCondition",
+          "maternityChildcare",
+          "interviewBody",
+          "selectionProcessStep1",
+          "selectionProcessStep2",
+          "selectionProcessStep3",
+          "selectionProcessStep4",
+          "selectionProcessStep5",
+          "selectionProcess",
+          "contact",
+          "enterpriseContents",
+          "mainCustomer",
+          "mediaCoverageResult",
+          "established",
+          "employees",
+          "capital",
+          "turnover",
+          "presidentName",
+          "presidentHistory",
+          "isKeep",
+          "entryQuestion1",
+          "entryQuestion2",
+          "entryQuestion3"
+        ]
+      },
+      "KeepJob": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "example": "1182798",
+            "description": "求人ID"
+          },
+          "jobName": {
+            "type": "string",
+            "example": "ITソリューション企画・営業",
+            "description": "外部表示用職種名"
+          },
+          "pressStartDate": {
+            "type": "string",
+            "example": "2020-11-01",
+            "description": "掲載開始日（ISO8601[YYYY-MM-DD]）"
+          },
+          "pressEndDate": {
+            "type": "string",
+            "example": "2020-11-15",
+            "description": "掲載終了日（ISO8601[YYYY-MM-DD]）"
+          },
+          "mainTitle": {
+            "type": "string",
+            "example": "【急募】部長候補！高待遇で活躍できる。「東証一部上場」へ向けた急成長企業の経理財務業務",
+            "description": "メイン記事メインタイトル"
+          },
+          "mainPhotoURL": {
+            "type": "string",
+            "example": "https://type.jp/noindex-image?id=666666",
+            "description": "求人メイン画像URL"
+          },
+          "minSalaryId": {
+            "type": "string",
+            "example": "1",
+            "description": "年収マスタ値"
+          },
+          "maxSalaryId": {
+            "type": "string",
+            "example": "2",
+            "description": "年収マスタ値"
+          },
+          "isSalaryDisplay": {
+            "type": "boolean",
+            "example": true,
+            "description": "true: 年収公開, false: 年収非公開"
+          },
+          "companyName": {
+            "type": "string",
+            "example": "株式会社スマ澤",
+            "description": "企業名"
+          },
+          "place2Ids": {
+            "example": [
+              "23"
+            ],
+            "description": "勤務地",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "jobId",
+          "jobName",
+          "pressStartDate",
+          "pressEndDate",
+          "mainTitle",
+          "mainPhotoURL",
+          "minSalaryId",
+          "maxSalaryId",
+          "isSalaryDisplay",
+          "companyName",
+          "place2Ids"
+        ]
+      },
+      "GetKeepsResponseDTO": {
+        "type": "object",
+        "properties": {
+          "hasNext": {
+            "type": "boolean",
+            "example": true,
+            "description": "true: 次ページあり, false: 次ページなし"
+          },
+          "keepJobs": {
+            "description": "キープ求人一覧",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KeepJob"
+            }
+          }
+        },
+        "required": [
+          "hasNext",
+          "keepJobs"
+        ]
+      },
+      "CreateKeepRequestDTO": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "example": "1186461",
+            "description": "求人ID"
+          }
+        },
+        "required": [
+          "jobId"
+        ]
+      },
+      "GetChemistryResponseDTO": {
+        "type": "object",
+        "properties": {
+          "chemistryTypeIds": {
+            "example": [
+              "1",
+              "2",
+              "3"
+            ],
+            "maxItems": 3,
+            "description": "相性診断コード",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "chemistryTypeIds"
+        ]
+      },
+      "CreateChemistryRequestDTO": {
+        "type": "object",
+        "properties": {
+          "chemistryTypeIds": {
+            "example": [
+              "1",
+              "2",
+              "3"
+            ],
+            "maxItems": 3,
+            "description": "相性診断コード",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "chemistryTypeIds"
+        ]
+      },
+      "UpdateChemistryRequestDTO": {
+        "type": "object",
+        "properties": {
+          "chemistryTypeIds": {
+            "example": [
+              "1",
+              "2",
+              "3"
+            ],
+            "maxItems": 3,
+            "description": "相性診断コード",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "chemistryTypeIds"
+        ]
+      },
+      "GetSettingsResponseDTO": {
+        "type": "object",
+        "properties": {
+          "scoutEnable": {
+            "type": "boolean",
+            "example": true,
+            "description": "true: スカウト使用中, false: スカウト停止中"
+          }
+        },
+        "required": [
+          "scoutEnable"
+        ]
+      },
+      "CreateSettingsRequestDTO": {
+        "type": "object",
+        "properties": {
+          "scoutEnable": {
+            "type": "boolean",
+            "example": true,
+            "description": "true: スカウト使用中, false: スカウト停止中"
+          }
+        },
+        "required": [
+          "scoutEnable"
+        ]
+      },
+      "UpdateSettingsRequestDTO": {
+        "type": "object",
+        "properties": {
+          "scoutEnable": {
+            "type": "boolean",
+            "example": true,
+            "description": "true: スカウト使用中, false: スカウト停止中"
+          }
+        }
+      },
+      "AccountMigrateRequest": {
+        "type": "object",
+        "properties": {
+          "phoneNumber": {
+            "type": "string",
+            "example": "+819000123456",
+            "description": "ログインで使用する携帯電話番号"
+          }
+        },
+        "required": [
+          "phoneNumber"
+        ]
+      },
+      "AccountMigrateAnswerRequest": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "example": "666666",
+            "description": "電話番号変更認証コード",
+            "minLength": 6,
+            "maxLength": 6
+          }
+        },
+        "required": [
+          "code"
+        ]
+      },
+      "UserOldJob3": {
+        "type": "object",
+        "properties": {
+          "job3Id": {
+            "type": "string",
+            "example": "1",
+            "description": "職種マスタより選択"
+          },
+          "experienceYears": {
+            "type": "string",
+            "example": "1",
+            "description": "職種年数マスタより選択"
+          }
+        },
+        "required": [
+          "job3Id",
+          "experienceYears"
+        ]
+      },
+      "UserOldIndustry": {
+        "type": "object",
+        "properties": {
+          "industryId": {
+            "type": "string",
+            "example": "2",
+            "description": "業種マスタより選択"
+          }
+        },
+        "required": [
+          "industryId"
+        ]
+      },
+      "ExperienceCompany": {
+        "type": "object",
+        "properties": {
+          "company": {
+            "type": "string",
+            "example": "テスト工業株式会社"
+          },
+          "startworkY": {
+            "type": "string",
+            "example": "2012",
+            "description": "職種マスタより選択"
+          },
+          "startworkM": {
+            "type": "string",
+            "example": "4",
+            "description": "1～12"
+          },
+          "endworkY": {
+            "type": "string",
+            "example": "2012",
+            "description": "「現在就業中(9999)」＋職種マスタより選択"
+          },
+          "endworkM": {
+            "type": "string",
+            "example": "5",
+            "description": "1～12※勤務終了年が「現在就業中(9999)」の場合、12を設定"
+          },
+          "employees": {
+            "type": "string",
+            "example": "100"
+          },
+          "employmentId": {
+            "type": "string",
+            "example": "1",
+            "description": "雇用形態マスタより選択"
+          },
+          "salary": {
+            "type": "string",
+            "example": "200"
+          },
+          "workNote": {
+            "type": "string",
+            "example": "現場作業"
+          }
+        },
+        "required": [
+          "company",
+          "startworkY",
+          "startworkM",
+          "endworkY",
+          "endworkM",
+          "workNote"
+        ]
+      },
+      "UserSkill": {
+        "type": "object",
+        "properties": {
+          "skill3Id": {
+            "type": "string",
+            "example": "1",
+            "description": "スキルマスタより選択"
+          },
+          "experienceId": {
+            "type": "string",
+            "example": "2",
+            "description": "スキル経験値マスタより選択"
+          },
+          "skillsheetComment": {
+            "type": "string",
+            "example": "転職サイトの改修"
+          }
+        },
+        "required": [
+          "skill3Id",
+          "experienceId"
+        ]
+      },
+      "UserLicense": {
+        "type": "object",
+        "properties": {
+          "licenseId": {
+            "type": "string",
+            "example": "166",
+            "description": "資格マスタより選択"
+          }
+        },
+        "required": [
+          "licenseId"
+        ]
+      },
+      "EntryPlace": {
+        "type": "object",
+        "properties": {
+          "placeId": {
+            "type": "string",
+            "example": "23",
+            "description": "勤務地マスタより選択。応募職種の勤務地との整合性チェックは実施せず、応募情報には当該職種の勤務地と一致した勤務地のみ登録。"
+          }
+        },
+        "required": [
+          "placeId"
+        ]
+      },
+      "EntryContact": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "example": "2",
+            "description": "希望連絡先マスタより選択"
+          }
+        },
+        "required": [
+          "contactId"
+        ]
+      },
+      "WebAPIEntryUserDto": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string",
+            "example": "hoge1234"
+          },
+          "lastname": {
+            "type": "string",
+            "example": "須磨澤"
+          },
+          "firstname": {
+            "type": "string",
+            "example": "花子"
+          },
+          "lastnameKana": {
+            "type": "string",
+            "example": "スマザワ"
+          },
+          "firstnameKana": {
+            "type": "string",
+            "example": "ハナコ"
+          },
+          "sex": {
+            "type": "string",
+            "example": "2",
+            "description": "1:男性、2:女性"
+          },
+          "email": {
+            "type": "string",
+            "example": "hanako.sumazawa@sumaten.jp",
+            "description": "RFCに準拠したメールアドレス"
+          },
+          "emailMobile": {
+            "type": "string",
+            "example": "hanako.sumazawa@sumaten-mobile.jp",
+            "description": "RFCに準拠したメールアドレス"
+          },
+          "birthday": {
+            "type": "string",
+            "example": "2000-10-19",
+            "description": "生年月日"
+          },
+          "zip": {
+            "type": "string",
+            "example": "222-2222",
+            "description": "nnn-nnnn (nは0～9)"
+          },
+          "areaValue": {
+            "type": "string",
+            "example": "25",
+            "description": "都道府県マスタより選択"
+          },
+          "address": {
+            "type": "string",
+            "example": "須磨澤市",
+            "description": "登録内容の編集画面で編集可"
+          },
+          "tel": {
+            "type": "string",
+            "example": "03-1234-5678",
+            "description": "0～9,-（自宅電話番号・携帯電話番号のどちらかが入力されていること。）"
+          },
+          "mobile": {
+            "type": "string",
+            "example": "090-1234-5678",
+            "description": "0～9,-（自宅電話番号・携帯電話番号のどちらかが入力されていること。）"
+          },
+          "educationValue": {
+            "type": "string",
+            "example": "2",
+            "description": "学種マスタより選択"
+          },
+          "educationName": {
+            "type": "string",
+            "example": "TUD大学"
+          },
+          "educationDivision": {
+            "type": "string",
+            "example": "スマ転学部"
+          },
+          "graduationY": {
+            "type": "string",
+            "example": "2012",
+            "description": "nnnn(nは0～9)。西暦を指定。未来ではないこと。"
+          },
+          "graduationM": {
+            "type": "string",
+            "example": "3",
+            "description": "1～12"
+          },
+          "educationNote": {
+            "type": "string",
+            "example": "学歴細補足です。",
+            "description": "新規会員登録フォーム画面では「学歴」"
+          },
+          "workStatus": {
+            "type": "string",
+            "example": "0",
+            "description": "1:就業している、0:就業していない"
+          },
+          "changeJobCount": {
+            "type": "string",
+            "example": "10",
+            "description": "0～10"
+          },
+          "userOldJob3List": {
+            "description": "経験職種(userOldJob3)を参照",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserOldJob3"
+            }
+          },
+          "userOldIndustryList": {
+            "description": "経験業種(userOldIndustry)を参照",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserOldIndustry"
+            }
+          },
+          "toeic": {
+            "type": "string",
+            "example": "500",
+            "description": "0～999"
+          },
+          "toefl": {
+            "type": "string",
+            "example": "600",
+            "description": "0～999"
+          },
+          "englishSkillValue": {
+            "type": "string",
+            "example": "2",
+            "description": "英語スキルマスタより選択"
+          },
+          "otherLanguage": {
+            "type": "string",
+            "example": "その他言語の力"
+          },
+          "license": {
+            "type": "string",
+            "example": "保有資格あああ"
+          },
+          "jobId": {
+            "type": "string",
+            "example": "1186461"
+          },
+          "experienceCompanyList": {
+            "description": "職務経歴書(experienceCompany)を参照",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExperienceCompany"
+            }
+          },
+          "userSkillList": {
+            "description": "スキルシート(userSkill)を参照",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserSkill"
+            }
+          },
+          "userLicenseList": {
+            "description": "ライセンス(userLicense)を参照",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserLicense"
+            }
+          },
+          "skillsheetFreeword": {
+            "type": "string",
+            "example": "原付の運転が得意です。"
+          },
+          "entryEtc": {
+            "type": "string",
+            "example": "私は英語とフランス語が得意です。何でも挑戦します。"
+          },
+          "entryPlaceList": {
+            "description": "希望勤務地(entryPlace)を参照",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntryPlace"
+            }
+          },
+          "salaryId": {
+            "type": "string",
+            "example": "7",
+            "description": "年収マスタより選択。"
+          },
+          "changeTimeId": {
+            "type": "string",
+            "example": "4",
+            "description": "転職時期マスタより選択。"
+          },
+          "entryContactList": {
+            "description": "希望連絡先(entryContact)を参照",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntryContact"
+            }
+          },
+          "entryAnswer1": {
+            "type": "string",
+            "example": "",
+            "description": "対象求人に当該項目が設定されている場合のみ、チェックを行う。"
+          },
+          "entryAnswer2": {
+            "type": "string",
+            "example": "",
+            "description": "対象求人に当該項目が設定されている場合のみ、チェックを行う。"
+          },
+          "entryAnswer3": {
+            "type": "string",
+            "example": "",
+            "description": "対象求人に当該項目が設定されている場合のみ、チェックを行う。"
+          }
+        },
+        "required": [
+          "password",
+          "lastname",
+          "firstname",
+          "lastnameKana",
+          "firstnameKana",
+          "sex",
+          "email",
+          "birthday",
+          "zip",
+          "areaValue",
+          "address",
+          "tel",
+          "mobile",
+          "educationValue",
+          "educationName",
+          "educationDivision",
+          "graduationY",
+          "graduationM",
+          "workStatus",
+          "changeJobCount",
+          "userOldJob3List",
+          "userOldIndustryList",
+          "jobId",
+          "experienceCompanyList",
+          "entryAnswer1",
+          "entryAnswer2",
+          "entryAnswer3"
+        ]
+      }
+    }
+  },
+  "paths": {
+    "/activity": {
+      "post": {
+        "operationId": "ActivityController_create",
+        "summary": "最終ログイン日",
+        "description": "最終ログイン日更新",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "activity"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/profile": {
+      "get": {
+        "operationId": "ProfileController_get",
+        "summary": "プロフィール取得",
+        "description": "Api10_プロフィールの取得",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetProfileResponseDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "profile"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "ProfileController_create",
+        "summary": "プロフィール作成",
+        "description": "Api14_プロフィールの作成・更新",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProfileRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "profile"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "ProfileController_update",
+        "summary": "プロフィール更新",
+        "description": "Api14_プロフィールの作成・更新",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProfileRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "profile"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/resume": {
+      "get": {
+        "operationId": "ResumeController_get",
+        "summary": "履歴書取得",
+        "description": "Api11_履歴書の取得",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetResumeResponseDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "resume"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "ResumeController_register",
+        "summary": "履歴書作成",
+        "description": "Api15_履歴書の作成・更新",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateResumeRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "resume"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "ResumeController_update",
+        "summary": "履歴書更新",
+        "description": "Api15_履歴書の作成・更新",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateResumeRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "resume"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/career": {
+      "get": {
+        "operationId": "CareerController_get",
+        "summary": "職務経歴書取得",
+        "description": "Api12_職務経歴書の取得",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCareerResponseDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "career"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "CareerController_create",
+        "summary": "職務経歴書作成",
+        "description": "Api16_職務経歴書の作成・更新",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCareerRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "career"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "CareerController_update",
+        "summary": "職務経歴書更新",
+        "description": "Api16_職務経歴書の作成・更新",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCareerRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "career"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/skip": {
+      "post": {
+        "operationId": "SkipController_create",
+        "summary": "見送りリスト追加",
+        "description": "Api05_見送りリストに追加",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSkipRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "skip"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/jobs": {
+      "get": {
+        "operationId": "JobsController_get",
+        "parameters": [
+          {
+            "name": "page",
+            "required": true,
+            "in": "query",
+            "description": "ページ",
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetJobsResponseDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "jobs"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/jobs/recommended": {
+      "get": {
+        "operationId": "JobsController_recommended",
+        "parameters": [
+          {
+            "name": "page",
+            "required": true,
+            "in": "query",
+            "description": "ページ",
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetJobsResponseDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "jobs"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/jobs/{jobId}/detail": {
+      "get": {
+        "operationId": "JobsController_detail",
+        "parameters": [
+          {
+            "name": "jobId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetJobsDetailResponseDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "jobs"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/keeps": {
+      "get": {
+        "operationId": "KeepsController_get",
+        "summary": "キープ一覧取得",
+        "description": "Api06_キープリストを取得",
+        "parameters": [
+          {
+            "name": "page",
+            "required": true,
+            "in": "query",
+            "example": 1,
+            "description": "ページ番号",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetKeepsResponseDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "keeps"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "KeepsController_create",
+        "summary": "キープ追加",
+        "description": "Api03_キープリストに追加",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateKeepRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "keeps"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/keeps/{jobId}": {
+      "delete": {
+        "operationId": "KeepsController_delete",
+        "summary": "キープ削除",
+        "description": "Api04_キープリストから削除",
+        "parameters": [
+          {
+            "name": "jobId",
+            "required": true,
+            "in": "path",
+            "example": "7777777",
+            "description": "求人ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "keeps"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/chemistry": {
+      "get": {
+        "operationId": "ChemistryController_get",
+        "summary": "相性診断取得",
+        "description": "Api48_相性診断の取得",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetChemistryResponseDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "chemistry"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "ChemistryController_create",
+        "summary": "相性診断作成・更新",
+        "description": "Api37_相性診断の作成・更新",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateChemistryRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "chemistry"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "ChemistryController_update",
+        "summary": "相性診断作成・更新",
+        "description": "Api37_相性診断の作成・更新",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateChemistryRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "chemistry"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/settings": {
+      "get": {
+        "operationId": "SettingsController_get",
+        "summary": "アプローチ情報取得",
+        "description": "Api31_アプローチ情報の取得",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSettingsResponseDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "settings"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "SettingsController_create",
+        "summary": "アプローチ情報作成",
+        "description": "Api32_アプローチ情報を作成・更新",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSettingsRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "settings"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "SettingsController_update",
+        "summary": "アプローチ情報更新",
+        "description": "Api32_アプローチ情報を作成・更新",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSettingsRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "settings"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/withdraw": {
+      "delete": {
+        "operationId": "WithdrawController_delete",
+        "summary": "退会処理",
+        "description": "Api36_退会",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "withdraw"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/account/migrate": {
+      "post": {
+        "operationId": "AccountController_migrate",
+        "summary": "電話番号変更",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountMigrateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "account"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/account/migrate/answer": {
+      "patch": {
+        "operationId": "AccountController_migrateAnswer",
+        "summary": "電話番号変更認証コード",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountMigrateAnswerRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "description": "認証コードが間違っていた場合"
+          },
+          "410": {
+            "description": "認証コードが古い場合"
+          }
+        },
+        "tags": [
+          "account"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/entry": {
+      "post": {
+        "operationId": "EntryController_entry",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebAPIEntryUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "entry"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    }
+  }
+}
