@@ -18,22 +18,15 @@ final class ChemistryResultPersonalTypeCell: UITableViewCell {
     func configure(with personalType: ChemistryPersonalityType?) {
         self.personalType = personalType
         setup()
-        setFont()
     }
 }
 
 private extension ChemistryResultPersonalTypeCell {
+    
     func setup() {
         guard let personalType = personalType else { return }
         iconImageView.image = UIImage(named: personalType.imageName)
-        personalTypeLabel.text = personalType.title
-        descriptionLabel.text = personalType.description
-    }
-    
-    func setFont() {
-        personalTypeLabel.font = UIFont(fontType: .font_M)
-        personalTypeLabel.textColor = UIColor(colorType: .color_black)!
-        descriptionLabel.font = UIFont(fontType: .font_S)
-        descriptionLabel.textColor = UIColor(colorType: .color_black)!
+        personalTypeLabel.text(text: personalType.title, fontType: .font_M, textColor: UIColor(colorType: .color_black)!, alignment: .left)
+        descriptionLabel.text(text: personalType.description, fontType: .font_S, textColor: UIColor(colorType: .color_black)!, alignment: .left)
     }
 }
