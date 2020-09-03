@@ -134,7 +134,7 @@ extension PreviewBaseVC: UITableViewDataSource, UITableViewDelegate {
             let cell: HPreviewTBCell = tableView.dequeueReusableCell(withIdentifier: "Cell_HPreviewTBCell", for: indexPath) as! HPreviewTBCell
             //let errMsg = dicGrpValidErrMsg[item.type.itemKey]?.joined(separator: "\n") ?? ""
             //グループエラーの重複文言は除去る
-            let errMsg = Array(Set(dicGrpValidErrMsg[item.type.itemKey] ?? [])).sorted().joined(separator: "\n") ?? ""
+            let errMsg = Array(Set(dicGrpValidErrMsg[item.type.itemKey] ?? [])).sorted().joined(separator: "\n") 
             cell.initCell(item, editTempCD: editableModel.editTempCD, errMsg: errMsg)//編集中の値を表示適用させるためeditTempCDを渡す
             cell.dispCell()
             return cell
