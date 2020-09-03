@@ -358,21 +358,15 @@ extension SelectItemsManager {
             }
         }
         var sortCD: [CodeDisp] = []
-         switch tsv1 {
-         case .qualification://資格の列挙順序も、マスタのソート順を考慮する
-             let items: [CodeDisp] = SelectItemsManager.getMaster(tsv1)
-             for item in items {
-                 if let find = hashCD.filter({ (cd) -> Bool in
-                     cd.code == item.code
-                 }).first {
-                     sortCD.append(item)
-                 }
-             }
-             return sortCD
-         default:
-             return hashCD
-         }
-         return hashCD
+        let mst: [CodeDisp] = SelectItemsManager.getMaster(tsv1)
+        for item in mst {//マスタのソート順を考慮する
+            if let found = hashCD.filter({ (cd) -> Bool in
+                cd.code == item.code
+            }).first {
+                sortCD.append(found)
+            }
+        }
+        return sortCD
     }
 }
 

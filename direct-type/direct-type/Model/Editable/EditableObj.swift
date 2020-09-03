@@ -61,7 +61,7 @@ class EditItemTool {
             hashCC.append((tmp0, tmp1))
         }
         var sortCDC: [(CodeDisp, Code)] = []
-        for item in mst {
+        for item in mst {//マスタのソート順を考慮する
             if let find = hashCC.filter({ (cd1, cd2) -> Bool in
                 cd1 == item.codeDisp.code
             }).first {
@@ -83,7 +83,7 @@ class EditItemTool {
         let (_, mst) = SelectItemsManager.getMaster(tsvMaain)
         let hashCD = codes.split(separator: "_")
         var sortCD: [CodeDisp] = []
-        for item in mst {
+        for item in mst {//マスタのソート順を考慮する
             if let _ = hashCD.filter({ (cd) -> Bool in
                 cd == item.codeDisp.code
             }).first {
