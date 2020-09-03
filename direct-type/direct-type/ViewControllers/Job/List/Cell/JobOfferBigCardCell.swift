@@ -152,7 +152,12 @@ class JobOfferBigCardCell: BaseJobCardCell {
 //        cautionView.isHidden = true
         
         // 勤務地
-        let areaText = self.makeAreaNames(codes: data.workPlaceCode)
+        let codes: String = data.workPlaceCode.map { (code) -> String in
+            "\(code)"
+        }.joined(separator: EditItemTool.JoinMultiCodeSeparator)
+        let areaText: String = SelectItemsManager.convCodeDisp(.entryPlace, codes).map { (cd) -> String in
+            cd.disp
+        }.joined(separator: ",")
         areaLabel.text(text: areaText, fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         
         // 社名
@@ -197,23 +202,6 @@ class JobOfferBigCardCell: BaseJobCardCell {
         let displayText = curArray.first!
         
         return displayText
-    }
-    
-    private func makeAreaNames(codes:[Int]) -> String {
-//        Log.selectLog(logLevel: .debug, "JobOfferBigCardCell makeAreaNames start")
-        var text:String = ""
-        for i in 0..<codes.count {
-            let code = codes[i]
-//            Log.selectLog(logLevel: .debug, "code:\(code)")
-            if let placeText = (SelectItemsManager.getCodeDisp(.entryPlace, code: code)?.disp) {
-                text = text + placeText
-                if (codes.count - 1) > i {
-                    text += ","
-                }
-            }
-        }
-        
-        return text
     }
     
     private func keepBtnSetting(flag:Bool) {

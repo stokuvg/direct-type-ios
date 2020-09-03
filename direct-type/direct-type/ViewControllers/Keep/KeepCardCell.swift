@@ -139,32 +139,18 @@ class KeepCardCell: BaseJobCardCell {
         
         // 勤務地
         let areaCodes = data.areaNames
-        let areaNames = self.makeAreaNames(codes: areaCodes)
-//        let area:String = (data["area"] as! String)
-//        areaLabel.text(text: area, fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        let codes: String = areaCodes.map { (code) -> String in
+            "\(code)"
+        }.joined(separator: EditItemTool.JoinMultiCodeSeparator)
+        let areaNames: String = SelectItemsManager.convCodeDisp(.entryPlace, codes).map { (cd) -> String in
+            cd.disp
+        }.joined(separator: ",")
         self.areaLabel.text(text: areaNames, fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
-        
         
         // 社名
         let company = data.companyName
         companyNameLabel.text(text: company, fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         
-    }
-    
-    private func makeAreaNames(codes: [String]) -> String {
-//        Log.selectLog(logLevel: .debug, "self.makeAreaNames codes:\(codes)")
-        
-        var text:String = ""
-        for i in 0..<codes.count {
-            let code = Int(codes[i])
-            let areaString:String = (SelectItemsManager.getCodeDisp(.entryPlace, code: code!)?.disp ?? "")
-            text += areaString
-            if i < (codes.count - 1) {
-                text += ","
-            }
-        }
-        
-        return text
     }
     
     private func cutText(defaultText: String, cutString: String) -> String {
