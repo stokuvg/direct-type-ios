@@ -16,7 +16,6 @@ class ChemistrySelect: BaseChemistryVC {
     @IBOutlet private weak var buttonBackgroundView: UIView!
     @IBOutlet private weak var nextButton: UIButton!
     @IBAction func nextButton(_ sender: UIButton) {
-        guard currnetAnswerState == .complete else { return }
         postChemistryData()
     }
     
@@ -167,5 +166,12 @@ extension ChemistrySelect: ChemistrySelectCellDelegate {
         //ちょこっとスクロールさせたい
         let indexPath = IndexPath(row: index, section: 0)
         tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        
+        // すべて答えていたら結果を見るボタンを活性化
+        if case .complete = currnetAnswerState {
+            self.nextButton.isEnabled = true
+        } else {
+            self.nextButton.isEnabled = false
+        }
     }
 }
