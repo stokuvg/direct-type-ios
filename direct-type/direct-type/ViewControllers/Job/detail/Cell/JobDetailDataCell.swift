@@ -127,7 +127,7 @@ class JobDetailDataCell: BaseTableViewCell {
         }.joined(separator: EditItemTool.JoinMultiCodeSeparator)
         let areaText: String = SelectItemsManager.convCodeDisp(.entryPlace, codes).map { (cd) -> String in
             cd.disp
-        }.joined(separator: ", ")
+        }.joined(separator: ",")
         self.workPlaceLabel.text(text: areaText, fontType: .C_font_SSb ,textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         // 社名
         let company = data.companyName
