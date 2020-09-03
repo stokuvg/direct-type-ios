@@ -121,7 +121,13 @@ class JobDetailDataCell: BaseTableViewCell {
             self.salaryMarkLabel.text(text: "", fontType: .C_font_M, textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
         }
         // 勤務地
-        let areaText = self.makeAreaNames(codes: data.workPlaceCodes)
+        //let areaText = self.makeAreaNames(codes: data.workPlaceCodes)
+        let codes: String = data.workPlaceCodes.map { (code) -> String in
+            "\(code)"
+        }.joined(separator: EditItemTool.JoinMultiCodeSeparator)
+        let areaText: String = SelectItemsManager.convCodeDisp(.entryPlace, codes).map { (cd) -> String in
+            cd.disp
+        }.joined(separator: ", ")
         self.workPlaceLabel.text(text: areaText, fontType: .C_font_SSb ,textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         // 社名
         let company = data.companyName
@@ -162,19 +168,19 @@ class JobDetailDataCell: BaseTableViewCell {
         return displayText
     }
     
-    private func makeAreaNames(codes:[Int]) -> String {
-        var text:String = ""
-        for i in 0..<codes.count {
-            let code = codes[i]
-            let placeText = (SelectItemsManager.getCodeDisp(.entryPlace, code: code)?.disp) ?? ""
-            text = text + placeText
-            if (codes.count - 1) > i {
-                text += ","
-            }
-        }
-        
-        return text
-    }
+//    private func makeAreaNames(codes:[Int]) -> String {
+//        var text:String = ""
+//        for i in 0..<codes.count {
+//            let code = codes[i]
+//            let placeText = (SelectItemsManager.getCodeDisp(.entryPlace, code: code)?.disp) ?? ""
+//            text = text + placeText
+//            if (codes.count - 1) > i {
+//                text += ","
+//            }
+//        }
+//
+//        return text
+//    }
     
     private func limitedMarkSetting(type:LimitedType) {
         switch type {

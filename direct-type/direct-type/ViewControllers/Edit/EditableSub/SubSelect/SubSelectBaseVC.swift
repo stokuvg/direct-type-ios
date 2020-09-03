@@ -108,10 +108,11 @@ class SubSelectBaseVC: BaseVC {
         switch editableItem.editableItemKey {
         case EditItemMdlEntry.hopeArea.itemKey:
             if let jobCardDetail = editableItem.exModel as? MdlJobCardDetail {
-                for code in jobCardDetail.workPlaceCodes {
-                    if let codeDisp = SelectItemsManager.getCodeDisp(.entryPlace, code: code) {
-                        self.arrData.append(codeDisp)
-                    }
+                let codes: String = jobCardDetail.workPlaceCodes.map { (code) -> String in
+                    "\(code)"
+                }.joined(separator: EditItemTool.JoinMultiCodeSeparator)
+                for cd in SelectItemsManager.convCodeDisp(.entryPlace, codes) {
+                    self.arrData.append(cd)
                 }
             }
         default:
