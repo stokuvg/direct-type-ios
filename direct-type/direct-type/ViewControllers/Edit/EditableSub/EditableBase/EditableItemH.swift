@@ -62,9 +62,8 @@ struct EditableItemH {
         case .selectMulti:
             let tmp0: String = _val
             var arr0: [String] = []
-            for code in tmp0.split(separator: "_").sorted() { //コード順ソートしておく
-                let buf: String = SelectItemsManager.getCodeDisp(self.editItem.tsvMaster, code: String(code))?.disp ?? Constants.SelectItemsUndefine.disp
-                arr0.append(buf)
+            for cd in SelectItemsManager.convCodeDisp(.entryPlace, tmp0) { //マスタ順ソートしておく
+                arr0.append(cd.disp)
             }
             let buf0: String = arr0.joined(separator: " ")
             return "\(buf0)"

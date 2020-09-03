@@ -238,10 +238,9 @@ class EntryConfirmAnyModelTBCell: UITableViewCell {
                 }
                 //=== 希望勤務地
                 var dispHopeArea: [String] = []
-                for val in entry.hopeArea {
-                    if let cd = SelectItemsManager.getCodeDisp(.entryPlace, code: val) {
-                        dispHopeArea.append(cd.disp)
-                    }
+                let codes: String = entry.hopeArea.joined(separator: "_")
+                for cd in SelectItemsManager.convCodeDisp(.entryPlace, codes) { //マスタ順ソートしておく
+                    dispHopeArea.append(cd.disp)
                 }
                 addStackItem(type: .hopeAreaA9, val: dispHopeArea)
                 //=== 希望年収

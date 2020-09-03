@@ -244,165 +244,165 @@ private extension JobOfferDetailVC {
     }
 
     func setNaviButtons() {
-            let titleView = UINib(nibName: "NaviButtonsView", bundle: nil)
-            .instantiate(withOwner: nil, options: nil)
-                .first as! NaviButtonsView
-            titleView.delegate = self
-            navigationItem.titleView = titleView
-            buttonsView = titleView
+        let titleView = UINib(nibName: "NaviButtonsView", bundle: nil)
+        .instantiate(withOwner: nil, options: nil)
+            .first as! NaviButtonsView
+        titleView.delegate = self
+        navigationItem.titleView = titleView
+        buttonsView = titleView
+    }
+
+    // メイン記事タイトルサイズ
+    func makeArticleHeaderSize() {
+        articleHeaderMinSize = 80
+
+        let spaceW:CGFloat = 15
+        let width = detailTableView.frame.size.width - (spaceW * 2)
+        let label:UILabel = UILabel()
+        let text = _mdlJobDetail.mainTitle
+
+        label.text(text: text, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        label.numberOfLines = 0
+
+        let labelSize = label.sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
+
+        articleHeaderMaxSize = (labelSize.height + 10)
+    }
+
+    // メイン記事サイズ
+    func makeArticleCellSize() {
+        let spaceW: CGFloat = 15
+        let width = detailTableView.frame.size.width - (spaceW * 2)
+        let label: UILabel = UILabel()
+        let text = self._mdlJobDetail.mainContents
+
+        label.text(text: text, fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        label.numberOfLines = 0
+
+        let labelSize = label.sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
+
+        articleCellMaxSize = (labelSize.height + 40)
+    }
+
+    // PRコードの表示サイズ 最大３行
+    func makePrCodesCellSize() {
+        let spaceW: CGFloat = 15
+        let width = detailTableView.frame.size.width - (spaceW * 2)
+        let label:UILabel = UILabel()
+        let prCodes = _mdlJobDetail.prCodes
+
+        var allText:String = ""
+
+        for i in 0..<prCodes.count {
+            let codeNo = prCodes[i]
+            let prCode:String = (SelectItemsManager.getCodeDisp(.prCode, code: codeNo)?.disp) ?? ""
+            let tagText = "#" + prCode
+            allText += tagText
+            if i < (prCode.count-1) {
+                allText += " "
+            }
         }
+        label.lineBreakMode = .byClipping
+        label.text(text: allText, fontType: .font_SS, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        label.numberOfLines = 3
 
-        // メイン記事タイトルサイズ
-        func makeArticleHeaderSize() {
-            articleHeaderMinSize = 80
+        let labelSize = label.sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
+        prcodesCellMaxSize = (labelSize.height + 30)
+    }
 
-            let spaceW:CGFloat = 15
-            let width = detailTableView.frame.size.width - (spaceW * 2)
-            let label:UILabel = UILabel()
-            let text = _mdlJobDetail.mainTitle
+    // 取材メモ表示フラグ
+    func memoDispFlagCheck(memo: String) -> Bool {
+        return memo.count > 0
+    }
 
-            label.text(text: text, fontType: .C_font_M, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
-            label.numberOfLines = 0
+    private func changeButtonEnable(_ isEnable: Bool) {
+        buttonsView.isHidden = !isEnable//上部の表示切り替えは非表示にする
+        applicationBtn.isEnabled = isEnable//応募ボタンを非活性にする
+        keepBtn.isEnabled = isEnable//キープボタンを非活性にする
+    }
 
-            let labelSize = label.sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
+    func getJobDetail() {
+        SVProgressHUD.show()
+        LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+        self._mdlJobDetail = MdlJobCardDetail()//空のモデルを設定しておく
+        Log.selectLog(logLevel: .debug, "jobId:\(jobId)")
+        LogManager.appendApiLog("getJobDetail", "[jobId: \(jobId)]", function: #function, line: #line)
+        ApiManager.getJobDetail(jobId, isRetry: true)
+        .done { result in
+            self.changeButtonEnable(true)//求人詳細に対するUI操作を可能にする
+            LogManager.appendApiResultLog("getJobDetail", result, function: #function, line: #line)
+            debugLog("ApiManager getJobDetail result:\(result.debugDisp)")
+            self._mdlJobDetail = result//取得成功したら、そのモデルで更新する
+            Log.selectLog(logLevel: .debug, "_mdlJobDetail.jobCardCode:\(self._mdlJobDetail.jobCardCode)")
 
-            articleHeaderMaxSize = (labelSize.height + 10)
+            self.makeArticleHeaderSize()
+            self.makeArticleCellSize()
+
+            self.makePrCodesCellSize()
         }
-
-        // メイン記事サイズ
-        func makeArticleCellSize() {
-            let spaceW: CGFloat = 15
-            let width = detailTableView.frame.size.width - (spaceW * 2)
-            let label: UILabel = UILabel()
-            let text = self._mdlJobDetail.mainContents
-
-            label.text(text: text, fontType: .font_S, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
-            label.numberOfLines = 0
-
-            let labelSize = label.sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
-
-            articleCellMaxSize = (labelSize.height + 40)
-        }
-
-        // PRコードの表示サイズ 最大３行
-        func makePrCodesCellSize() {
-            let spaceW: CGFloat = 15
-            let width = detailTableView.frame.size.width - (spaceW * 2)
-            let label:UILabel = UILabel()
-            let prCodes = _mdlJobDetail.prCodes
-
-            var allText:String = ""
-
-            for i in 0..<prCodes.count {
-                let codeNo = prCodes[i]
-                let prCode:String = (SelectItemsManager.getCodeDisp(.prCode, code: codeNo)?.disp) ?? ""
-                let tagText = "#" + prCode
-                allText += tagText
-                if i < (prCode.count-1) {
-                    allText += " "
+        .catch { (error) in
+            self.changeButtonEnable(false)//求人詳細に対するUI操作を不可能にする
+            LogManager.appendApiErrorLog("getJobDetail", error, function: #function, line: #line)
+            Log.selectLog(logLevel: .debug, "error:\(error)")
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            Log.selectLog(logLevel: .debug, "myErr:\(myErr.debugDisp)")
+            //===取得できなかった場合、リトライさせるか、前の画面に戻るかする（ディープリンクで遷移してきた場合にも対応させるため）
+            switch myErr.code {
+            case 404, 410:
+                let title: String = ""
+                let message: String = "現在掲載されていない求人です"
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                let backAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+                    self.navigationController?.popViewController(animated: true)
                 }
-            }
-            label.lineBreakMode = .byClipping
-            label.text(text: allText, fontType: .font_SS, textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
-            label.numberOfLines = 3
-
-            let labelSize = label.sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
-            prcodesCellMaxSize = (labelSize.height + 30)
-        }
-
-        // 取材メモ表示フラグ
-        func memoDispFlagCheck(memo: String) -> Bool {
-            return memo.count > 0
-        }
-
-        private func changeButtonEnable(_ isEnable: Bool) {
-            buttonsView.isHidden = !isEnable//上部の表示切り替えは非表示にする
-            applicationBtn.isEnabled = isEnable//応募ボタンを非活性にする
-            keepBtn.isEnabled = isEnable//キープボタンを非活性にする
-        }
-
-        func getJobDetail() {
-            SVProgressHUD.show()
-            LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
-            self._mdlJobDetail = MdlJobCardDetail()//空のモデルを設定しておく
-            Log.selectLog(logLevel: .debug, "jobId:\(jobId)")
-            LogManager.appendApiLog("getJobDetail", "[jobId: \(jobId)]", function: #function, line: #line)
-            ApiManager.getJobDetail(jobId, isRetry: true)
-            .done { result in
-                self.changeButtonEnable(true)//求人詳細に対するUI操作を可能にする
-                LogManager.appendApiResultLog("getJobDetail", result, function: #function, line: #line)
-                debugLog("ApiManager getJobDetail result:\(result.debugDisp)")
-                self._mdlJobDetail = result//取得成功したら、そのモデルで更新する
-                Log.selectLog(logLevel: .debug, "_mdlJobDetail.jobCardCode:\(self._mdlJobDetail.jobCardCode)")
-
-                self.makeArticleHeaderSize()
-                self.makeArticleCellSize()
-
-                self.makePrCodesCellSize()
-            }
-            .catch { (error) in
-                self.changeButtonEnable(false)//求人詳細に対するUI操作を不可能にする
-                LogManager.appendApiErrorLog("getJobDetail", error, function: #function, line: #line)
-                Log.selectLog(logLevel: .debug, "error:\(error)")
-                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-                Log.selectLog(logLevel: .debug, "myErr:\(myErr.debugDisp)")
-                //===取得できなかった場合、リトライさせるか、前の画面に戻るかする（ディープリンクで遷移してきた場合にも対応させるため）
-                switch myErr.code {
-                case 404, 410:
-                    let title: String = ""
-                    let message: String = "現在掲載されていない求人です"
-                    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                    let backAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
-                        self.navigationController?.popViewController(animated: true)
-                    }
-                    alert.addAction(backAction)
-                    self.present(alert, animated: true, completion: nil)
-                default:
-                    let title: String = ""
-                    let message: String = "正常に取得出来ません"
-                    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                    let backAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
-                        self.navigationController?.popViewController(animated: true)
-                    }
-                    let retryAction = UIAlertAction(title: "リトライ", style: .default) { (action:UIAlertAction) in
-                        self.getJobDetail()
-                    }
-                    alert.addAction(backAction)
-                    alert.addAction(retryAction)
-                    self.present(alert, animated: true, completion: nil)
+                alert.addAction(backAction)
+                self.present(alert, animated: true, completion: nil)
+            default:
+                let title: String = ""
+                let message: String = "正常に取得出来ません"
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                let backAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+                    self.navigationController?.popViewController(animated: true)
                 }
-            }
-            .finally {
-                SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
-                self.recommendAction()//詳細表示をしようとしたのでリコメンド叩く（エラー出てても叩いて良い）
-                self.tableViewSettingAction()
-                self.dispKeepStatus()
-            }
-        }
-
-        // データがセットされた後にtableViewの表示を開始
-        func tableViewSettingAction() {
-            if _mdlJobDetail != nil {
-                memoDispFlag = self.memoDispFlagCheck(memo: _mdlJobDetail.interviewMemo)
-
-                detailTableView.delegate = self
-                detailTableView.dataSource = self
-                detailTableView.reloadData()
+                let retryAction = UIAlertAction(title: "リトライ", style: .default) { (action:UIAlertAction) in
+                    self.getJobDetail()
+                }
+                alert.addAction(backAction)
+                alert.addAction(retryAction)
+                self.present(alert, animated: true, completion: nil)
             }
         }
-
-        func recommendAction() {
-            RecommendManager.fetchRecommend(type: .ap341, jobID: self.jobId)
-            .done { result in
-                Log.selectLog(logLevel: .debug, "求人詳細のレコメンド 成功:\(result)")
-            }
-            .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
-                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-                Log.selectLog(logLevel: .debug, "求人詳細のレコメンド エラー:\(myErr.debugDisp)")
-            }
-            .finally {
-            }
+        .finally {
+            SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+            self.recommendAction()//詳細表示をしようとしたのでリコメンド叩く（エラー出てても叩いて良い）
+            self.tableViewSettingAction()
+            self.dispKeepStatus()
         }
+    }
+
+    // データがセットされた後にtableViewの表示を開始
+    func tableViewSettingAction() {
+        if _mdlJobDetail != nil {
+            memoDispFlag = self.memoDispFlagCheck(memo: _mdlJobDetail.interviewMemo)
+
+            detailTableView.delegate = self
+            detailTableView.dataSource = self
+            detailTableView.reloadData()
+        }
+    }
+
+    func recommendAction() {
+        RecommendManager.fetchRecommend(type: .ap341, jobID: self.jobId)
+        .done { result in
+            Log.selectLog(logLevel: .debug, "求人詳細のレコメンド 成功:\(result)")
+        }
+        .catch { (error) in  //なんか処理するなら分ける。とりあえず、そのまま横流し
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            Log.selectLog(logLevel: .debug, "求人詳細のレコメンド エラー:\(myErr.debugDisp)")
+        }
+        .finally {
+        }
+    }
     
     func returnForRowAt(indexPath: IndexPath) -> CGFloat {
         let section = indexPath.section

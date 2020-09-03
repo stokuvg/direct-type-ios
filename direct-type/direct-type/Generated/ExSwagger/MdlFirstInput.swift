@@ -92,7 +92,6 @@ enum EditItemMdlFirstInput: String, EditItemProtocol {
         case .gender: return .gender
         case .hopeArea: return .entryPlace
         case .school: return .schoolType
-        case .employmentStatus: return .employmentStatus
         case .salary: return .salarySelect//コードではなく選択数値が入るもの
         default: return .undefine
         }
