@@ -98,6 +98,8 @@ private extension InitialInputCompleteVC {
             .paragraphStyle: paragraphStyle
         ]
         let attrText: NSAttributedString = NSAttributedString(string: text, attributes: textAttributes)
+
+
         textView.attributedText = attrText
         navigationItem.hidesBackButton = true
         navigationItem.title = contextType.title

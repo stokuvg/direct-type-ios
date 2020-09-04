@@ -80,9 +80,10 @@ class EntryConfirmNotifyEntry2TBCell: UITableViewCell {
         ivAccept.image = isAccept ? R.image.checkOn() : R.image.checkOff()
         let bufAccept: String = "転職サイトtypeの会員規約・\n個人情報に同意する"
         let bufNotice: String = [
-            "※転職サイトtype未登録のメールアドレスの場合、転職サイトtypeに登録の上応募手続きを行います。",
-            "転職サイトtypeに登録済みのパスワードが分からない場合はこちら。",
-        ].joined(separator: "\n")
+            "※転職サイトtypeに未登録のメールアドレスの場合、登録の上で応募手続きを行います。",
+            "すでに転職サイトtypeへご登録済の方は、ご利用中のパスワードを入力してください。",
+            "ご登録済みのパスワードが分からない場合はこちら。",
+        ].joined(separator: "")
         let paraAccept = NSMutableParagraphStyle()
         paraAccept.alignment = .left
         paraAccept.lineSpacing = FontType.EC_font_Info.lineSpacing

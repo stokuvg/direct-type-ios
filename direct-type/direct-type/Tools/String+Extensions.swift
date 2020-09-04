@@ -77,7 +77,6 @@ extension String {
         let convertText: [String] = self
             .map({ String($0).toKatakana})
             .compactMap({$0})
-        print(convertText)
         return convertText.joined(separator: "")
     }
     
@@ -85,7 +84,6 @@ extension String {
         let convertText: [String] = self
             .map({ String($0).toHiragana})
             .compactMap({$0})
-        print(convertText)
         return convertText.joined(separator: "")
     }
     

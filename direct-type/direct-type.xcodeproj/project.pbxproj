@@ -72,7 +72,6 @@
 		066EF6C8245BBA1100E15AD2 /* BaseJobCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066EF6C7245BBA1100E15AD2 /* BaseJobCardCell.swift */; };
 		066EF6CB245C119000E15AD2 /* JobOfferCardMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066EF6C9245C119000E15AD2 /* JobOfferCardMoreCell.swift */; };
 		066EF6CC245C119000E15AD2 /* JobOfferCardMoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 066EF6CA245C119000E15AD2 /* JobOfferCardMoreCell.xib */; };
-		066F270D246E6B820040BDC1 /* UITextView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066F270C246E6B820040BDC1 /* UITextView+Extensions.swift */; };
 		066F2710246E811F0040BDC1 /* JobDetailFoldingMemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066F270E246E811F0040BDC1 /* JobDetailFoldingMemoCell.swift */; };
 		066F2711246E811F0040BDC1 /* JobDetailFoldingMemoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 066F270F246E811F0040BDC1 /* JobDetailFoldingMemoCell.xib */; };
 		066F2714246E818A0040BDC1 /* JobDetailFoldingProcessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066F2712246E818A0040BDC1 /* JobDetailFoldingProcessCell.swift */; };
@@ -233,6 +232,7 @@
 		26157DC22489CD5F00752C55 /* ApiManager+Career.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26157DC12489CD5F00752C55 /* ApiManager+Career.swift */; };
 		2619D2A524AB2E0600F24624 /* EntryConfirmAnyModelTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619D2A324AB2E0600F24624 /* EntryConfirmAnyModelTBCell.swift */; };
 		2619D2A624AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2619D2A424AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib */; };
+		261A0F0B2501CF9F00D9FBB7 /* TudTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261A0F0A2501CF9F00D9FBB7 /* TudTool.swift */; };
 		2622250124CFC53D004810F3 /* EntryFormManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2622250024CFC53D004810F3 /* EntryFormManager.swift */; };
 		2635444F24B6D2DC00C4B7C8 /* SpacerTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2635444D24B6D2DC00C4B7C8 /* SpacerTBCell.swift */; };
 		2635445024B6D2DC00C4B7C8 /* SpacerTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2635444E24B6D2DC00C4B7C8 /* SpacerTBCell.xib */; };
@@ -423,7 +423,6 @@
 		066EF6C7245BBA1100E15AD2 /* BaseJobCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseJobCardCell.swift; sourceTree = "<group>"; };
 		066EF6C9245C119000E15AD2 /* JobOfferCardMoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobOfferCardMoreCell.swift; sourceTree = "<group>"; };
 		066EF6CA245C119000E15AD2 /* JobOfferCardMoreCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobOfferCardMoreCell.xib; sourceTree = "<group>"; };
-		066F270C246E6B820040BDC1 /* UITextView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extensions.swift"; sourceTree = "<group>"; };
 		066F270E246E811F0040BDC1 /* JobDetailFoldingMemoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailFoldingMemoCell.swift; sourceTree = "<group>"; };
 		066F270F246E811F0040BDC1 /* JobDetailFoldingMemoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailFoldingMemoCell.xib; sourceTree = "<group>"; };
 		066F2712246E818A0040BDC1 /* JobDetailFoldingProcessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailFoldingProcessCell.swift; sourceTree = "<group>"; };
@@ -584,6 +583,7 @@
 		26157DC12489CD5F00752C55 /* ApiManager+Career.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Career.swift"; sourceTree = "<group>"; };
 		2619D2A324AB2E0600F24624 /* EntryConfirmAnyModelTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryConfirmAnyModelTBCell.swift; sourceTree = "<group>"; };
 		2619D2A424AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntryConfirmAnyModelTBCell.xib; sourceTree = "<group>"; };
+		261A0F0A2501CF9F00D9FBB7 /* TudTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TudTool.swift; sourceTree = "<group>"; };
 		2622250024CFC53D004810F3 /* EntryFormManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryFormManager.swift; sourceTree = "<group>"; };
 		2635444D24B6D2DC00C4B7C8 /* SpacerTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerTBCell.swift; sourceTree = "<group>"; };
 		2635444E24B6D2DC00C4B7C8 /* SpacerTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpacerTBCell.xib; sourceTree = "<group>"; };
@@ -882,10 +882,10 @@
 				2612AAB524D133620002BD6A /* LogManager.swift */,
 				0645705C2464F77700F3B015 /* Logs.swift */,
 				0645DDFE246B969000592572 /* Tags.swift */,
-				066F270C246E6B820040BDC1 /* UITextView+Extensions.swift */,
 				066FE3AD24A3163C006AB2B4 /* Device+Extensions.swift */,
 				066FE3AF24A3347D006AB2B4 /* String+Extensions.swift */,
 				0E5ECDAE24C6A728007CD98D /* UserDefaultsManager.swift */,
+				261A0F0A2501CF9F00D9FBB7 /* TudTool.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1810,6 +1810,7 @@
 				06E5198F2457D70B004E4B7A /* ChemistrySelect.swift in Sources */,
 				26F2A829246D2A230037D47F /* MdlJobExperiment.swift in Sources */,
 				06E519862457D2C1004E4B7A /* UIView+Extensions.swift in Sources */,
+				261A0F0B2501CF9F00D9FBB7 /* TudTool.swift in Sources */,
 				26157DC22489CD5F00752C55 /* ApiManager+Career.swift in Sources */,
 				066763622457AB7200AC5039 /* BaseTabBC.swift in Sources */,
 				06E519B1245814B2004E4B7A /* EntryConfirmVC.swift in Sources */,
@@ -1873,7 +1874,6 @@
 				067F28EA2456D135000AAD69 /* UIFont+Extensions.swift in Sources */,
 				0E7372DD2499EE1C00358EFA /* ApiManager+PhoneNumber.swift in Sources */,
 				067F28E82456D112000AAD69 /* UIColor+Extensions.swift in Sources */,
-				066F270D246E6B820040BDC1 /* UITextView+Extensions.swift in Sources */,
 				0670F4622491E14400E60FDC /* MdlKeepList.swift in Sources */,
 				0645DDFF246B969000592572 /* Tags.swift in Sources */,
 				0667636F2457B04500AC5039 /* HomeVC.swift in Sources */,
