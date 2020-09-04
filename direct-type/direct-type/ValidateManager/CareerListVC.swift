@@ -116,6 +116,7 @@ class CareerListVC: TmpBasicVC {
             fetchGetCareerList()
         } else {
             dispData()//画面引き渡しでモデルを渡しているので
+            self.chkFirstFetchZero() //===初回画面遷移時の0件誘導
         }
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -156,7 +157,6 @@ extension CareerListVC: UITableViewDataSource, UITableViewDelegate {
             nvc.initData(self, indexPath.row, arrDisp, false)
             self.navigationController?.pushViewController(nvc, animated: true)
         }
-
     }
 }
 //=== APIフェッチ
@@ -188,12 +188,16 @@ extension CareerListVC {
         .finally {
             self.dispData()
             SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
-            //===初回画面遷移時の0件誘導
-            if self.isFirstFetch && self.arrData.count == 0 {
-                self.actAddCard(self.btnAddCard)
-            }
-            self.isFirstFetch = false
+            self.chkFirstFetchZero() //===初回画面遷移時の0件誘導
         }
+    }
+    private func chkFirstFetchZero() {
+        //===初回画面遷移時の0件誘導
+        if self.isFirstFetch && self.arrData.count == 0 {
+            self.actAddCard(self.btnAddCard)
+        }
+        self.isFirstFetch = false
+
     }
     private func fetchUpdateCareerList() {
         var tempCards: [CareerHistoryDTO] = []
