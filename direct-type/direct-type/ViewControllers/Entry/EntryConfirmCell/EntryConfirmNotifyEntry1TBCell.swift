@@ -30,6 +30,7 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
     @IBOutlet weak var lblMessageA: UILabel!
     //保存するか尋ねる
     @IBOutlet weak var vwSaveChkArea: UIView!
+    @IBOutlet weak var ivSaveChk: UIImageView!
     @IBOutlet weak var lblSaveChk: UILabel!
     @IBOutlet weak var btnSaveChk: UIButton!
     @IBAction func actSaveChk(_ sender: Any) {
@@ -38,8 +39,7 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
         delegate?.changeSaveChkBox(isSaveChk: isSaveChk)
     }
     private func dispSaveChk() {
-        let bufSaveChk: String = isSaveChk ? "■ 保存する" : "□ 保存する"
-        lblSaveChk.text(text: bufSaveChk, fontType: .font_SS, textColor: UIColor(colorType: .color_parts_gray)!, alignment: .right)
+        ivSaveChk.image = isSaveChk ? R.image.checkOn() : R.image.checkOff()
     }
 
 
@@ -89,13 +89,14 @@ class EntryConfirmNotifyEntry1TBCell: UITableViewCell {
         let bufMessage: String = [
         "転職サイトtypeを通じて応募します。",
         "パスワードを設定してください。",
-        "（転職サイトtypeにご登録済の方は、ご利用中のパスワードを入力してください。）",
         ].joined(separator: "")
         let bufMessageA: String = "メールアドレス：\(email)"
+        let bufSaveChk: String = "パスワードを保存する"
         lblTitle.text(text: bufTitle, fontType: .font_M, textColor: UIColor(colorType: .color_black)!, alignment: .center)
         lblMessage.text(text: bufMessage, fontType: .EC_font_Info, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         lblMessageB.text(text: bufMessageB, fontType: .font_Sb, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         lblMessageA.text(text: bufMessageA, fontType: .font_S, textColor: UIColor(colorType: .color_black)!, alignment: .left)
+        lblSaveChk.text(text: bufSaveChk, fontType: .EC_font_Info, textColor: UIColor(colorType: .color_black)!, alignment: .left)
         //===エラーが存在した場合
         let validMessage: String = "半角英数字で4文字以上、20文字以内です"
         if isValidErrorExist {
