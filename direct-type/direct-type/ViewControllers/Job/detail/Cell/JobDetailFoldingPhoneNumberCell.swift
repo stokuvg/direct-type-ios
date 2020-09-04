@@ -15,10 +15,10 @@ class HomePageUrlView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.urlTextView.textColor = UIColor.init(colorType: .color_black)
-        self.urlTextView.font = UIFont.init(fontType: .C_font_S)
+        self.urlTextView.textColor = UIColor(colorType: .color_black)
+        self.urlTextView.font = UIFont(fontType: .C_font_S)
         self.urlTextView.linkTextAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor.init(colorType: .color_sub) as Any
+            NSAttributedString.Key.foregroundColor: UIColor(colorType: .color_sub) as Any
         ]
         self.urlTextView.textContainerInset = .zero
         self.urlTextView.dataDetectorTypes = .link
@@ -31,17 +31,7 @@ class HomePageUrlView: UIView {
     }
     
     func setup(urlString: String) {
-        let style = NSMutableParagraphStyle()
-        style.lineSpacing = FontType.C_font_S.lineSpacing
-        let attributes = [
-            NSAttributedString.Key.font: UIFont.init(fontType: .C_font_S) as Any,
-            NSAttributedString.Key.foregroundColor : UIColor.init(colorType: .color_black) as Any,
-            NSAttributedString.Key.paragraphStyle : style,
-//            NSAttributedString.Key.foregroundColor : UIColor.init(colorType: .color_sub)
-        ]
-        let attributedString = NSMutableAttributedString(string: urlString)
-        
-        self.urlTextView.attributedText = NSAttributedString(string: attributedString.string, attributes: attributes)
+        self.urlTextView.attributedText = TudTool.attrText(text: urlString, fontType: .C_font_S, textColor: UIColor(colorType: .color_black)!, alignment: .left, lineBreakMode: .byCharWrapping)
     }
 }
 
