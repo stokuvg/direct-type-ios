@@ -510,132 +510,43 @@ extension JobOfferDetailVC: UITableViewDelegate {
 //        Log.selectLog(logLevel: .debug, "JobOfferDetailVC heightForRowAt start")
         return self.returnForRowAt(indexPath: indexPath)
     }
-
-    /*
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        let headerHeight:CGFloat = 0
-        /*
-        var headerHeight:CGFloat = 0
-        switch section {
-//            case 1:
-//                headerHeight = articleOpenFlag ? articleHeaderMaxSize : articleHeaderMinSize
-            case 3:
-                headerHeight = 60
-            default:
-                headerHeight = 0
-        }
-        */
-        tableView.sectionHeaderHeight = headerHeight
-        return headerHeight
-    }
-    */
 }
 
 extension JobOfferDetailVC: UITableViewDataSource {
-    /*
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        switch section {
-            /*
-            case 1:
-                // メイン記事タイトル
-                let view = UINib(nibName: "JobDetailArticleHeaderView", bundle: nil)
-                    .instantiate(withOwner: self, options: nil)
-                    .first as! JobDetailArticleHeaderView
-                view.delegate = self
-                let articleTitle = _mdlJobDetail.mainTitle
-                view.setup(string: articleTitle,openFlag: articleOpenFlag)
-                return view
-            */
-            /*
-            case 3:
-                // 募集要項
-                let view = UINib(nibName: "JobDetailGuideBookHeaderView", bundle: nil)
-                    .instantiate(withOwner: self, options: nil)
-                    .first as! JobDetailGuideBookHeaderView
-                return view
-            case 4,5,6,7:
-                var dispFlag:Bool = false
-                switch section {
-                    case 4:
-                        dispFlag = memoDispFlag
-                    case 5:
-                        dispFlag = true
-                    case 6:
-                        dispFlag = true
-                    case 7:
-                        dispFlag = true
-                    default:
-                        dispFlag = false
-                }
-                if dispFlag == false {
-                    return nil
-                }
-                // 取材メモ
-                // 選考プロセス
-                // 連絡先
-                // 会社概要
-                let view = UINib(nibName: "JobDetailFoldingHeaderView", bundle: nil)
-                    .instantiate(withOwner: self, options: nil)
-                    .first as! JobDetailFoldingHeaderView
-                view.delegate = self
-                view.tag = (section - 4)
-
-                view.topLineView.isHidden = false
-
-                var openFlag:Bool = false
-                var title:String = ""
-                switch section {
-                    case 4:
-                    view.topLineView.isHidden = true
-                        openFlag = coverageMemoOpenFlag
-                        title = "取材メモ"
-                    case 5:
-                        openFlag = selectionProcessOpenFlag
-                        title = "選考プロセス"
-                    case 6:
-                        openFlag = phoneNumberOpenFlag
-                        title = "連絡先"
-                    case 7:
-                        openFlag = companyOutlineOpenFlag
-                        title = "会社概要"
-                    default:
-                        openFlag = false
-                        title = ""
-                }
-                view.setup(title: title,openFlag: openFlag)
-
-                return view
-            */
-            default:
-                return nil
-        }
-    }
-    */
-
     func numberOfSections(in tableView: UITableView) -> Int {
         //モデル取得できていなければ0にしておく
         if self._mdlJobDetail.jobCardCode.isEmpty { return 0 }//フェッチ失敗していた場合など、jobCardCodeが空になっているので
         return 9
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-            case 0:
+        case 0:
+            return 2
+        case 1:
+            return 2
+        case 2:
+            if _mdlJobDetail.salarySample.count > 0 {
                 return 2
-            case 1:
-                return 2
-            case 2:
-                if _mdlJobDetail.salarySample.count > 0 {
-                    return 2
-                } else {
-                    return 1
-                }
-            case 3:
-                return 11
-            case 4,5,6,7:
-                return 2
-            default:
+            } else {
                 return 1
+            }
+        case 3:
+            return 11
+        case 4:
+            let rowCount = coverageMemoOpenFlag ? 2 : 1
+            return rowCount
+        case 5:
+            let rowCount = selectionProcessOpenFlag ? 2 : 1
+            return rowCount
+        case 6:
+            let rowCount = phoneNumberOpenFlag ? 2 : 1
+            return rowCount
+        case 7:
+            let rowCount = companyOutlineOpenFlag ? 2 : 1
+            return rowCount
+        default:
+            return 1
         }
     }
 
@@ -779,53 +690,37 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 cell.setup(title: title, openFlag: openFlag)
                 return cell
             case (4,1): // メモ
-                if coverageMemoOpenFlag {
-                    let cell = tableView.loadCell(cellName: "JobDetailFoldingMemoCell", indexPath: indexPath) as! JobDetailFoldingMemoCell
-
-                    let memoData = _mdlJobDetail.interviewMemo
-                    cell.setup(data: memoData)
-                    return cell
-                } else {
-                    return UITableViewCell()
-                }
+                let cell = tableView.loadCell(cellName: "JobDetailFoldingMemoCell", indexPath: indexPath) as! JobDetailFoldingMemoCell
+                
+                let memoData = _mdlJobDetail.interviewMemo
+                cell.setup(data: memoData)
+                print(cell.bounds.height)
+                return cell
             case (5, 1):    // プロセス
-                if selectionProcessOpenFlag {
-                    let cell = tableView.loadCell(cellName: "JobDetailFoldingProcessCell", indexPath: indexPath) as! JobDetailFoldingProcessCell
-
-                    let process = _mdlJobDetail.selectionProcess
-                    cell.setup(data: process)
-                    return cell
-                } else {
-                    return UITableViewCell()
-                }
+                let cell = tableView.loadCell(cellName: "JobDetailFoldingProcessCell", indexPath: indexPath) as! JobDetailFoldingProcessCell
+                
+                let process = _mdlJobDetail.selectionProcess
+                cell.setup(data: process)
+                return cell
             case (6, 1):
                 // 連絡先
-                if phoneNumberOpenFlag {
-                    let cell = tableView.loadCell(cellName: "JobDetailFoldingPhoneNumberCell", indexPath: indexPath) as! JobDetailFoldingPhoneNumberCell
-
-                    let data = _mdlJobDetail.contactInfo
-                    cell.setup(data: data)
-                    return cell
-                } else {
-                    return UITableViewCell()
-                }
+                let cell = tableView.loadCell(cellName: "JobDetailFoldingPhoneNumberCell", indexPath: indexPath) as! JobDetailFoldingPhoneNumberCell
+                
+                let data = _mdlJobDetail.contactInfo
+                cell.setup(data: data)
+                return cell
             case (7, 1):    // 会社概要
-                if companyOutlineOpenFlag {
-                    let cell = tableView.loadCell(cellName: "JobDetailFoldingOutlineCell", indexPath: indexPath) as! JobDetailFoldingOutlineCell
-
-                    let data = _mdlJobDetail.companyDescription
-                    cell.setup(data: data)
-                    return cell
-                } else {
-                    return UITableViewCell()
-                }
+                let cell = tableView.loadCell(cellName: "JobDetailFoldingOutlineCell", indexPath: indexPath) as! JobDetailFoldingOutlineCell
+                
+                let data = _mdlJobDetail.companyDescription
+                cell.setup(data: data)
+                return cell
             default:
                 let cell = UITableViewCell()
                 cell.backgroundColor = UIColor.init(colorType: .color_base)
                 return cell
         }
     }
-
 }
 
 extension JobOfferDetailVC: NaviButtonsViewDelegate {

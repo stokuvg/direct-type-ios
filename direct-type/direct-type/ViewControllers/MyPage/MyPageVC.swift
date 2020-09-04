@@ -274,7 +274,7 @@ extension MyPageVC: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = UITableViewCell()
+        var cell: UITableViewCell!
         let cellType = CellType(indexPath)
 
         switch cellType {
@@ -308,7 +308,7 @@ extension MyPageVC: UITableViewDataSource {
         case .setting:
             cell = tableView.loadCell(cellName: "MyPageSettingCell", indexPath: indexPath) as! MyPageSettingCell
         case .unknown:
-            break
+            cell = UITableViewCell()
         }
         return cell
     }
