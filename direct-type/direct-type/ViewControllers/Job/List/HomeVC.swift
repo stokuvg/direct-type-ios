@@ -566,6 +566,32 @@ class HomeVC: TmpNaviTopVC {
 
         return rowHeight
     }
+    
+    private func skipGoAction(skipId: String, skipIndex:Int) {
+        Log.selectLog(logLevel: .debug, "HomeVC skipGoAction start")
+        
+        
+        ApiManager.sendJobSkip(id: skipId)
+            .done { result in
+        }.catch{ (error) in
+            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+            self.showError(myErr)
+        }.finally {
+            self.dispJobCards.jobCards.remove(at: skipIndex)
+            let deleteIndex = IndexPath(row: skipIndex, section: 0)
+
+            self.homeTableView.performBatchUpdates({
+                self.homeTableView.deleteRows(at: [deleteIndex], with: .left)
+            }, completion: { finished in
+                if finished {
+                    self.skipSendStatus = .none
+                    Log.selectLog(logLevel: .debug, "HomeVC skipAction finished")
+                } else {
+                    Log.selectLog(logLevel: .debug, "HomeVC skipAction no finished")
+                }
+            })
+        }
+    }
 }
 
 extension HomeVC: UITableViewDelegate {
@@ -690,6 +716,7 @@ extension HomeVC: JobOfferCardReloadCellDelegate {
 }
 
 extension HomeVC: BaseJobCardCellDelegate {
+    
     func skipAction(jobId: String) {
         Log.selectLog(logLevel: .debug, "HomeVC skipAction start")
         AnalyticsEventManager.track(type: .skipVacancies)
@@ -711,26 +738,25 @@ extension HomeVC: BaseJobCardCellDelegate {
                 continue
             }
         }
+        
+        // jobIdが現在キープ中かチェック
+        //let keepFlag: Bool = KeepManager.shared.getKeepStatus(jobCardID: jobId)
+        if KeepManager.shared.getKeepStatus(jobCardID: jobId) {
+            Log.selectLog(logLevel: .debug, "キープ中の求人を見送ろうとしている。")
 
-        ApiManager.sendJobSkip(id: jobId)
-            .done { result in
-        }.catch{ (error) in
-            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-            self.showError(myErr)
-        }.finally {
-            self.dispJobCards.jobCards.remove(at: jobCardIndex)
-            let deleteIndex = IndexPath(row: jobCardIndex, section: 0)
-
-            self.homeTableView.performBatchUpdates({
-                self.homeTableView.deleteRows(at: [deleteIndex], with: .left)
-            }, completion: { finished in
-                if finished {
-                    self.skipSendStatus = .none
-                    Log.selectLog(logLevel: .debug, "HomeVC skipAction finished")
-                } else {
-                    Log.selectLog(logLevel: .debug, "HomeVC skipAction no finished")
-                }
+            let alert = UIAlertController(title: "キープ済み", message: "キープ中ですが見送りますか？", preferredStyle:  .alert)
+            
+            let skipAction = UIAlertAction(title: "見送る", style: .default, handler: { _ in self.skipGoAction(skipId: jobId, skipIndex: jobCardIndex) })
+            let noAction = UIAlertAction(title: "いいえ", style: .cancel, handler:  { _ in
+                self.skipSendStatus = .none
             })
+            
+            alert.addAction(noAction)
+            alert.addAction(skipAction)
+            
+            present(alert, animated: true, completion: nil)
+        } else {
+            self.skipGoAction(skipId: jobId, skipIndex: jobCardIndex)
         }
     }
     
