@@ -95,15 +95,6 @@ private extension MyPageVC {
         pageTableView.registerNib(nibName: "MyPageSettingCell", idName: "MyPageSettingCell") // 設定
     }
     
-    func transitionToInitialInput() {
-        let storyboard = UIStoryboard(name: "Preview", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "Sbid_FirstInputPreviewVC") as! FirstInputPreviewVC
-        vc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に非表示にする
-        let navi = UINavigationController(rootViewController: vc)
-        navi.modalPresentationStyle = .fullScreen
-        present(navi, animated: true)
-    }
-
     func transitionToChemistry() {
         let isExistsData = topRanker != nil
         var vc = UIViewController()

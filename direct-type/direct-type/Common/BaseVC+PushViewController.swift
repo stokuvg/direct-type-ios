@@ -13,6 +13,7 @@ enum PushVCType {
     case resumePreviewH3(_ entryMode: Bool)
     case careerPreviewC15
     case smoothCareerPreviewF11
+    case initialInputStart
     case firstInputPreviewA
     case careerListC
     case entryForm(_ routeFrom: AnalyticsEventType.RouteFromType)
@@ -52,11 +53,18 @@ extension BaseVC {
                 nvc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に非表示にする
                 self.navigationController?.pushViewController(nvc, animated: true)
             }
+        case .initialInputStart://初回登録・ログインの選択
+            let vc = getVC(sbName: "InitialInputStartVC", vcName: "InitialInputStartVC") as! InitialInputStartVC
+            let newNavigationController = UINavigationController(rootViewController: vc)
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.switchViewController(newNavigationController) //遷移アニメ付きで表示させる
         case .firstInputPreviewA://A[系統] 初期入力
             let storyboard = UIStoryboard(name: "Preview", bundle: nil)
             if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_FirstInputPreviewVC") as? FirstInputPreviewVC{
                 nvc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に非表示にする
-                self.navigationController?.pushViewController(nvc, animated: true)
+                let navi = UINavigationController(rootViewController: nvc)
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.switchViewController(navi) //遷移アニメ付きで表示させる
             }
         case .careerListC://C[仮] 職歴一覧
             let storyboard2 = UIStoryboard(name: "Career", bundle: nil)
@@ -95,4 +103,7 @@ extension BaseVC {
 
         }
     }
+
+    
+    
 }
