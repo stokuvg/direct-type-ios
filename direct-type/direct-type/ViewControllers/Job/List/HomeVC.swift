@@ -424,21 +424,14 @@ class HomeVC: TmpNaviTopVC {
         present(alert, animated: true, completion: nil)
     }
 
+    //初回入力中断後の再開誘導
     private func showConfirm() {
         let alert = UIAlertController(title: "プロフィール入力をしてください", message: "", preferredStyle:  .alert)
-        let action = UIAlertAction(title: "OK", style: .default, handler: { _ in self.transitionToInitialInput() })
-
+        let action = UIAlertAction(title: "OK", style: .default, handler: { _ in
+            self.pushViewController(.firstInputPreviewA)
+        })
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
-    }
-
-    func transitionToInitialInput() {
-        let storyboard = UIStoryboard(name: "Preview", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "Sbid_FirstInputPreviewVC") as! FirstInputPreviewVC
-        vc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に非表示にする
-        let navi = UINavigationController(rootViewController: vc)
-        navi.modalPresentationStyle = .fullScreen
-        UIApplication.shared.keyWindow?.rootViewController = navi
     }
 
     private func setInitialDisplayedFlag() {

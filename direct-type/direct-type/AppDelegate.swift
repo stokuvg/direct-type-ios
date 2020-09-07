@@ -95,17 +95,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    //遷移アニメーション付きで表示する
+    func switchViewController(viewController: UIViewController, options: UIView.AnimationOptions) {
+        UIView.transition(with: self.window!, duration: 0.6, options: options, animations: {
+            let oldState: Bool = UIView.areAnimationsEnabled
+            UIView.setAnimationsEnabled(false)
+            self.window?.rootViewController = viewController
+            UIView.setAnimationsEnabled(oldState)
+        }, completion: nil)
+    }
 }
 
 private extension AppDelegate {
-    // 初期入力画面を表示
-    func displayInitialInputVC() {
-        window = UIWindow(frame: UIScreen.main.bounds)
-        let initialSB = UIStoryboard(name: "InitialInputRegistVC", bundle: nil)
-        let initialVC = initialSB.instantiateViewController(withIdentifier: "InitialInputRegistVC") as! InitialInputRegistVC
-        window?.rootViewController = initialVC
-        window?.makeKeyAndVisible()
-    }
     // ログイン済みだった場合は最終ログイン情報を送る
     func tryPostActivity() {
         if AuthManager.shared.isLogin {

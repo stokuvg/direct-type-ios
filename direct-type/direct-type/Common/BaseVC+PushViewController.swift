@@ -56,7 +56,11 @@ extension BaseVC {
             let storyboard = UIStoryboard(name: "Preview", bundle: nil)
             if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_FirstInputPreviewVC") as? FirstInputPreviewVC{
                 nvc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に非表示にする
-                self.navigationController?.pushViewController(nvc, animated: true)
+                //self.navigationController?.pushViewController(nvc, animated: true)
+                let navi = UINavigationController(rootViewController: nvc)
+                navi.modalPresentationStyle = .fullScreen
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.switchViewController(viewController: navi, options: .transitionCrossDissolve) //遷移アニメーション付きで表示させるため
             }
         case .careerListC://C[仮] 職歴一覧
             let storyboard2 = UIStoryboard(name: "Career", bundle: nil)
@@ -95,4 +99,7 @@ extension BaseVC {
 
         }
     }
+
+    
+    
 }
