@@ -410,10 +410,8 @@ class HomeVC: TmpNaviTopVC {
         }
     }
 
-    private func transitionToInitialView() {
-        let vc = getVC(sbName: "InitialInputStartVC", vcName: "InitialInputStartVC") as! InitialInputStartVC
-        let newNavigationController = UINavigationController(rootViewController: vc)
-        UIApplication.shared.keyWindow?.rootViewController = newNavigationController
+    func transitionToInitialView() {
+        pushViewController(.initialInputStart)
     }
 
     private func showRetryFetchProfile() {

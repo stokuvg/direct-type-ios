@@ -96,7 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     //遷移アニメーション付きで表示する
-    func switchViewController(viewController: UIViewController, options: UIView.AnimationOptions) {
+    func switchViewController(_ viewController: UIViewController, _ options: UIView.AnimationOptions =  .transitionCrossDissolve) {
         UIView.transition(with: self.window!, duration: 0.6, options: options, animations: {
             let oldState: Bool = UIView.areAnimationsEnabled
             UIView.setAnimationsEnabled(false)

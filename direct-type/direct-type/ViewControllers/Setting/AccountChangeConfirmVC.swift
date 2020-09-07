@@ -127,9 +127,7 @@ private extension AccountChangeConfirmVC {
     }
     
     func transitionToInitialView() {
-        let vc = getVC(sbName: "InitialInputStartVC", vcName: "InitialInputStartVC") as! InitialInputStartVC
-        let newNavigationController = UINavigationController(rootViewController: vc)
-        UIApplication.shared.keyWindow?.rootViewController = newNavigationController
+        pushViewController(.initialInputStart)
     }
     
     func resendAuthCode() {
