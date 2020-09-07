@@ -83,7 +83,7 @@ enum EditItemReqEntry: String, EditItemProtocol {
         case .careerModel:      return "職務経歴書・スキルシート"
         case .selfPr:           return "自己PR"
         case .hopeWorkPlace:    return "希望勤務地"
-        case .hopeSalary:       return "希望年収"
+        case .hopeSalary:       return "希望年収（下限）"
         case .exAnswer1:        return "企業からの質問項目"
         case .exAnswer2:        return "企業からの質問項目"
         case .exAnswer3:        return "企業からの質問項目"

@@ -126,7 +126,7 @@ enum HPreviewItemType: String {
         case .exQAItem3C9:    return " - 独自質問3"
         case .ownPRC9:        return "自己PR"
         case .hopeAreaC9:     return "希望勤務地"
-        case .hopeSalaryC9:   return "希望年収"
+        case .hopeSalaryC9:   return "希望年収（下限）"
         //=== [C-12]応募確認（[C-9]のもにに加えて表示されるものを定義）
         case .notifyEntry1C12:  return "応募前の確認事項"
         case .passwordC12:      return "typeパスワード"

@@ -74,7 +74,7 @@ case entryItems         //9、10、11、12を一括で扱うためのもの
         case .career:       return "職務経歴書"
         case .ownPR:        return "自己PR"
         case .hopeArea:     return "希望勤務地"
-        case .hopeSalary:   return "希望年収"
+        case .hopeSalary:   return "希望年収（下限）"
         case .exQuestionAnswer1:   return "企業からの質問項目"
         case .exQuestionAnswer2:   return "企業からの質問項目"
         case .exQuestionAnswer3:   return "企業からの質問項目"
