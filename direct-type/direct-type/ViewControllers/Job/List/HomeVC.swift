@@ -570,26 +570,27 @@ class HomeVC: TmpNaviTopVC {
     private func skipGoAction(skipId: String, skipIndex:Int) {
         Log.selectLog(logLevel: .debug, "HomeVC skipGoAction start")
         
-        
-        ApiManager.sendJobSkip(id: skipId)
-            .done { result in
-        }.catch{ (error) in
-            let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-            self.showError(myErr)
-        }.finally {
-            self.dispJobCards.jobCards.remove(at: skipIndex)
-            let deleteIndex = IndexPath(row: skipIndex, section: 0)
+        DispatchQueue.main.async {
+            ApiManager.sendJobSkip(id: skipId)
+                .done { result in
+            }.catch{ (error) in
+                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+                self.showError(myErr)
+            }.finally {
+                self.dispJobCards.jobCards.remove(at: skipIndex)
+                let deleteIndex = IndexPath(row: skipIndex, section: 0)
 
-            self.homeTableView.performBatchUpdates({
-                self.homeTableView.deleteRows(at: [deleteIndex], with: .left)
-            }, completion: { finished in
-                if finished {
-                    self.skipSendStatus = .none
-                    Log.selectLog(logLevel: .debug, "HomeVC skipAction finished")
-                } else {
-                    Log.selectLog(logLevel: .debug, "HomeVC skipAction no finished")
-                }
-            })
+                self.homeTableView.performBatchUpdates({
+                    self.homeTableView.deleteRows(at: [deleteIndex], with: .left)
+                }, completion: { finished in
+                    if finished {
+                        self.skipSendStatus = .none
+                        Log.selectLog(logLevel: .debug, "HomeVC skipAction finished")
+                    } else {
+                        Log.selectLog(logLevel: .debug, "HomeVC skipAction no finished")
+                    }
+                })
+            }
         }
     }
 }
