@@ -144,6 +144,7 @@ private extension InitialInputConfirmVC {
     }
     
     func transitionToComplete() {
+        AnalyticsEventManager.track(type: .confirmAuthCode)//認証が正常に完了した時点
         let vc = getVC(sbName: "InitialInputCompleteVC", vcName: "InitialInputCompleteVC") as! InitialInputCompleteVC
         vc.configure(type: .registeredPhoneNumber)
         navigationController?.pushViewController(vc, animated: true)

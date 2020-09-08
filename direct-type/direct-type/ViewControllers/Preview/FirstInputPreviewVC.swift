@@ -192,6 +192,7 @@ private extension FirstInputPreviewVC {
     }
     
     func transitionToComplete() {
+        AnalyticsEventManager.track(type: .registrationComplete)//初期登録が成功したタイミング（ユーザ作成に必要な全てのフェッチが完了した時点）
         let complete = getVC(sbName: "InitialInputCompleteVC", vcName: "InitialInputCompleteVC") as! InitialInputCompleteVC
         complete.configure(type: .registeredAll)
         navigationController?.pushViewController(complete, animated: true)
