@@ -121,6 +121,7 @@ private extension InitialInputCompleteVC {
     func transitionToBaseTab() {
         let tabSB = UIStoryboard(name: "BaseTabBC", bundle: nil)
         let tabBC = tabSB.instantiateViewController(withIdentifier: "Sbid_BaseTabBC")
-        UIApplication.shared.keyWindow?.rootViewController = tabBC
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.switchViewController(tabBC)//遷移アニメ付きで表示
     }
 }

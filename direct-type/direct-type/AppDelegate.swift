@@ -60,13 +60,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if AuthManager.shared.isLogin {
             let tabSB = UIStoryboard(name: "BaseTabBC", bundle: nil)
             let tabBC = tabSB.instantiateViewController(withIdentifier: "Sbid_BaseTabBC")
-
-            window?.rootViewController = tabBC
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.switchViewController(tabBC) //遷移アニメ付きで表示（ただこのタイミングだと遷移元がないから無効か）
         } else {
             let inputSB = UIStoryboard(name: "InitialInputStartVC", bundle: nil)
             let startNavi = inputSB.instantiateViewController(withIdentifier: "Sbid_InitialInputNavi") as! UINavigationController
-
-            window?.rootViewController = startNavi
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.switchViewController(startNavi) //遷移アニメ付きで表示（ただこのタイミングだと遷移元がないから無効か）
         }
 
         window?.makeKeyAndVisible()
@@ -86,7 +86,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard AuthManager.shared.isLogin else {
             let inputSB = UIStoryboard(name: "InitialInputStartVC", bundle: nil)
             let startNavi = inputSB.instantiateViewController(withIdentifier: "Sbid_InitialInputNavi") as! UINavigationController
-            window?.rootViewController = startNavi
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.switchViewController(startNavi) //遷移アニメ付きで表示
             return true
         }
         

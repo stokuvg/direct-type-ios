@@ -57,14 +57,14 @@ extension BaseVC {
             let vc = getVC(sbName: "InitialInputStartVC", vcName: "InitialInputStartVC") as! InitialInputStartVC
             let newNavigationController = UINavigationController(rootViewController: vc)
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.switchViewController(newNavigationController) //遷移アニメ付きで表示させる
+            appDelegate.switchViewController(newNavigationController) //遷移アニメ付きで表示
         case .firstInputPreviewA://A[系統] 初期入力
             let storyboard = UIStoryboard(name: "Preview", bundle: nil)
             if let nvc = storyboard.instantiateViewController(withIdentifier: "Sbid_FirstInputPreviewVC") as? FirstInputPreviewVC{
                 nvc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に非表示にする
                 let navi = UINavigationController(rootViewController: nvc)
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.switchViewController(navi) //遷移アニメ付きで表示させる
+                appDelegate.switchViewController(navi) //遷移アニメ付きで表示
             }
         case .careerListC://C[仮] 職歴一覧
             let storyboard2 = UIStoryboard(name: "Career", bundle: nil)
