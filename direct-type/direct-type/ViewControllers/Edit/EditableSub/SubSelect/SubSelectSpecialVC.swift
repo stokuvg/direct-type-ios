@@ -253,6 +253,9 @@ extension SubSelectSpecialVC: UITableViewDataSource, UITableViewDelegate {
             let select: Bool = arrSelected[indexPath.section]
             arrSelected[indexPath.section] = !select
             tableView.reloadData() //該当セルの描画しなおし
+            if !select {
+                tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+            }
         } else {
             //そのセルの選択状態に応じて、経験年数を入れさせるか、解錠するかを選ぶ
             if let _ = dicSelectedCode[item.code] {
