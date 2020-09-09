@@ -60,13 +60,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if AuthManager.shared.isLogin {
             let tabSB = UIStoryboard(name: "BaseTabBC", bundle: nil)
             let tabBC = tabSB.instantiateViewController(withIdentifier: "Sbid_BaseTabBC")
-
-            window?.rootViewController = tabBC
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.switchViewController(tabBC) //遷移アニメ付きで表示（ただこのタイミングだと遷移元がないから無効か）
         } else {
             let inputSB = UIStoryboard(name: "InitialInputStartVC", bundle: nil)
             let startNavi = inputSB.instantiateViewController(withIdentifier: "Sbid_InitialInputNavi") as! UINavigationController
-
-            window?.rootViewController = startNavi
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.switchViewController(startNavi) //遷移アニメ付きで表示（ただこのタイミングだと遷移元がないから無効か）
         }
 
         window?.makeKeyAndVisible()
@@ -86,7 +86,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard AuthManager.shared.isLogin else {
             let inputSB = UIStoryboard(name: "InitialInputStartVC", bundle: nil)
             let startNavi = inputSB.instantiateViewController(withIdentifier: "Sbid_InitialInputNavi") as! UINavigationController
-            window?.rootViewController = startNavi
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.switchViewController(startNavi) //遷移アニメ付きで表示
             return true
         }
         
@@ -95,17 +96,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    //遷移アニメーション付きで表示する
+    func switchViewController(_ viewController: UIViewController, _ options: UIView.AnimationOptions =  .transitionCrossDissolve) {
+        UIView.transition(with: self.window!, duration: 0.6, options: options, animations: {
+            let oldState: Bool = UIView.areAnimationsEnabled
+            UIView.setAnimationsEnabled(false)
+            self.window?.rootViewController = viewController
+            UIView.setAnimationsEnabled(oldState)
+        }, completion: nil)
+    }
 }
 
 private extension AppDelegate {
-    // 初期入力画面を表示
-    func displayInitialInputVC() {
-        window = UIWindow(frame: UIScreen.main.bounds)
-        let initialSB = UIStoryboard(name: "InitialInputRegistVC", bundle: nil)
-        let initialVC = initialSB.instantiateViewController(withIdentifier: "InitialInputRegistVC") as! InitialInputRegistVC
-        window?.rootViewController = initialVC
-        window?.makeKeyAndVisible()
-    }
     // ログイン済みだった場合は最終ログイン情報を送る
     func tryPostActivity() {
         if AuthManager.shared.isLogin {

@@ -13,6 +13,7 @@ enum AnalyticsEventType {
     // アクションイベント系
     case createAuthenticationCode
     case confirmAuthCode
+    case registrationComplete
     case keep
     case skipVacancies
     case entryJob
@@ -74,6 +75,8 @@ enum AnalyticsEventType {
             text =  "create_auth_code"
         case .confirmAuthCode:
             text =  "confirm_auth_code"
+        case .registrationComplete:
+            text = "registration_complete"
         case .keep:
             text =  "keep_job"
         case .skipVacancies:

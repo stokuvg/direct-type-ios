@@ -62,7 +62,6 @@ final class InitialInputCompleteVC: TmpBasicVC {
         super.viewDidLoad()
         setup()
         startAnimation()
-        AnalyticsEventManager.track(type: .confirmAuthCode)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,7 +77,6 @@ final class InitialInputCompleteVC: TmpBasicVC {
     
     func configure(type: ContextType) {
         contextType = type
-        
     }
 }
 
@@ -121,6 +119,7 @@ private extension InitialInputCompleteVC {
     func transitionToBaseTab() {
         let tabSB = UIStoryboard(name: "BaseTabBC", bundle: nil)
         let tabBC = tabSB.instantiateViewController(withIdentifier: "Sbid_BaseTabBC")
-        UIApplication.shared.keyWindow?.rootViewController = tabBC
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.switchViewController(tabBC)//遷移アニメ付きで表示
     }
 }

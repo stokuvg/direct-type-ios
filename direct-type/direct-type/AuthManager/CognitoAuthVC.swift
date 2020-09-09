@@ -235,8 +235,6 @@ private extension CognitoAuthVC {
     }
     
     func transitionToInitial() {
-        let vc = getVC(sbName: "InitialInputStartVC", vcName: "InitialInputStartVC") as! InitialInputStartVC
-        let newNavigationController = UINavigationController(rootViewController: vc)
-        UIApplication.shared.keyWindow?.rootViewController = newNavigationController
+        pushViewController(.initialInputStart)
     }
 }
