@@ -738,7 +738,10 @@ extension HomeVC: BaseJobCardCellDelegate {
 
             let alert = UIAlertController(title: "キープ済み", message: "キープ中ですが見送りますか？", preferredStyle:  .alert)
             
-            let skipAction = UIAlertAction(title: "見送る", style: .default, handler: { _ in self.skipGoAction(skipId: jobId, skipIndex: jobCardIndex) })
+            let skipAction = UIAlertAction(title: "見送る", style: .default, handler: { _ in
+                // キープを解除する
+                // 見送り処理
+                self.skipGoAction(skipId: jobId, skipIndex: jobCardIndex) })
             let noAction = UIAlertAction(title: "いいえ", style: .cancel, handler:  { _ in
                 self.skipSendStatus = .none
             })
@@ -748,6 +751,7 @@ extension HomeVC: BaseJobCardCellDelegate {
             
             present(alert, animated: true, completion: nil)
         } else {
+            // 見送り処理
             self.skipGoAction(skipId: jobId, skipIndex: jobCardIndex)
         }
     }
