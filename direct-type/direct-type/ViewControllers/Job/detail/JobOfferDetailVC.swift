@@ -51,6 +51,15 @@ final class JobOfferDetailVC: TmpBasicVC {
     var deviceType:String = ""
     
     var articleHeaderPosition:CGPoint = CGPoint.zero
+    
+    // 仕事内容セル
+    var checkWorkContentsCell:JobDetailWorkContentsCell!
+    // 応募資格セル
+    var checkQualificationCell:JobDetailItemCell!
+    // 待遇セル
+    var checkTreatmentCell:JobDetailItemCell!
+    // 会社概要セル
+    var checkOutlineHeaderCell:JobDetailFoldingHeaderCell!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,6 +126,7 @@ final class JobOfferDetailVC: TmpBasicVC {
 private extension JobOfferDetailVC {
     func setup() {
         detailTableView.backgroundColor = UIColor(colorType: .color_base)
+        detailTableView.decelerationRate = .normal
 
         setKeepButton()
         registerTableViewNib()
@@ -610,6 +620,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 // 仕事内容
                 let cell = tableView.loadCell(cellName: "JobDetailWorkContentsCell", indexPath: indexPath) as! JobDetailWorkContentsCell
                 cell.setup(data: _mdlJobDetail)
+                checkWorkContentsCell = cell
                 return cell
             case (3,2):
                 // 注目1
@@ -655,6 +666,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
 //                let employmentType = SelectItemsManager.getCodeDisp(.employmentType, code: type)?.disp ?? ""
 //                if employmentType.count > 0 {
                     cell.setup(data: _mdlJobDetail, indexPath: indexPath)
+                    checkQualificationCell = cell
                     return cell
                 } else {
                     return UITableViewCell()
@@ -663,6 +675,14 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 // 仕事内容
                 let cell = tableView.loadCell(cellName: "JobDetailItemCell", indexPath: indexPath) as! JobDetailItemCell
                 cell.setup(data: _mdlJobDetail, indexPath: indexPath)
+                switch row {
+                    case 4:
+                        checkQualificationCell = cell
+                    case 10:
+                        checkTreatmentCell = cell
+                    default:
+                        break
+                }
                 return cell
             case (4,0),(5,0),(6,0),(7,0):
                 let cell = tableView.loadCell(cellName: "JobDetailFoldingHeaderCell", indexPath: indexPath) as! JobDetailFoldingHeaderCell
@@ -688,6 +708,9 @@ extension JobOfferDetailVC: UITableViewDataSource {
                         title = ""
                 }
                 cell.setup(title: title, openFlag: openFlag)
+                if section == 7 {
+                    checkOutlineHeaderCell = cell
+                }
                 return cell
             case (4,1): // メモ
                 let cell = tableView.loadCell(cellName: "JobDetailFoldingMemoCell", indexPath: indexPath) as! JobDetailFoldingMemoCell
@@ -719,6 +742,103 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 let cell = UITableViewCell()
                 cell.backgroundColor = UIColor.init(colorType: .color_base)
                 return cell
+        }
+    }
+}
+
+extension JobOfferDetailVC: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if naviButtonTapActionFlag == true { return }
+//        Log.selectLog(logLevel: .debug, "JobOfferDetailVC scrollViewDidScroll start")
+        
+        self.checkButtonsViewPosition(scrollView: scrollView)
+    }
+    
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        if naviButtonTapActionFlag == true { return }
+//        Log.selectLog(logLevel: .debug, "JobOfferDetailVC scrollViewWillBeginDecelerating start")
+        
+        self.checkButtonsViewPosition(scrollView: scrollView)
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if naviButtonTapActionFlag == true { return }
+//        Log.selectLog(logLevel: .debug, "JobOfferDetailVC scrollViewDidEndDecelerating start")
+        
+        self.checkButtonsViewPosition(scrollView: scrollView)
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if naviButtonTapActionFlag == true { return }
+//        Log.selectLog(logLevel: .debug, "JobOfferDetailVC scrollViewWillBeginDragging start")
+        
+        self.checkButtonsViewPosition(scrollView: scrollView)
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if naviButtonTapActionFlag == true { return }
+//        Log.selectLog(logLevel: .debug, "JobOfferDetailVC scrollViewWillEndDragging start")
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if naviButtonTapActionFlag == true { return }
+//        Log.selectLog(logLevel: .debug, "JobOfferDetailVC scrollViewDidEndDragging start")
+        
+        self.checkButtonsViewPosition(scrollView: scrollView)
+    }
+    
+    private func checkButtonsViewPosition(scrollView: UIScrollView) {
+//        Log.selectLog(logLevel: .debug, "JobOfferDetailVC checkButtonsViewPosition start")
+//        Log.selectLog(logLevel: .debug, "scrollView:\(scrollView)")
+        
+        let offsetY:CGFloat = scrollView.contentOffset.y
+//        Log.selectLog(logLevel: .debug, "offsetY:\(offsetY)")
+        
+        let offsetSmallY = offsetY * 0.9
+        let offsetBigY = offsetY * 1.1
+        
+        if checkWorkContentsCell != nil {
+//            Log.selectLog(logLevel: .debug, "checkWorkContentsCell:\(String(describing: checkWorkContentsCell))")
+            
+            let workContentY:CGFloat = checkWorkContentsCell.frame.origin.y
+//            Log.selectLog(logLevel: .debug, "checkWorkContent:\(workContentY)")
+            
+//            Log.selectLog(logLevel: .debug, "offsetSmallY:\(offsetSmallY)")
+//            Log.selectLog(logLevel: .debug, "offsetBigY:\(offsetBigY)")
+            
+            if offsetSmallY <= workContentY && workContentY <= offsetBigY {
+//                Log.selectLog(logLevel: .debug, "仕事内容をON")
+                buttonsView.colorChange(no:0)
+            }
+        }
+        if checkQualificationCell != nil {
+//            Log.selectLog(logLevel: .debug, "checkQualificationCell:\(String(describing: checkQualificationCell))")
+            let qualificationY:CGFloat = checkQualificationCell.frame.origin.y
+//            Log.selectLog(logLevel: .debug, "bigQualificationY:\(bigQualificationY)")
+            
+            if offsetSmallY <= qualificationY && qualificationY <= offsetBigY {
+//                Log.selectLog(logLevel: .debug, "応募資格をON")
+                
+                buttonsView.colorChange(no:1)
+            }
+        }
+        if checkTreatmentCell != nil {
+//            Log.selectLog(logLevel: .debug, "checkTreatmentCell:\(String(describing: checkTreatmentCell))")
+            let treatmentY:CGFloat = checkTreatmentCell.frame.origin.y
+//            Log.selectLog(logLevel: .debug, "bigTreatmentY:\(bigTreatmentY)")
+            if offsetSmallY <= treatmentY && treatmentY <= offsetBigY {
+//                Log.selectLog(logLevel: .debug, "待遇をON")
+                buttonsView.colorChange(no:2)
+            }
+        }
+        if checkOutlineHeaderCell != nil {
+//            Log.selectLog(logLevel: .debug, "checkOutlineHeaderCell:\(String(describing: checkOutlineHeaderCell))")
+            let outlineHeaderY:CGFloat = checkOutlineHeaderCell.frame.origin.y
+//            Log.selectLog(logLevel: .debug, "bigOutlineHeaderY:\(bigOutlineHeaderY)")
+            if offsetSmallY <= outlineHeaderY && outlineHeaderY <= offsetBigY {
+//                Log.selectLog(logLevel: .debug, "会社概要をON")
+                buttonsView.colorChange(no:3)
+            }
         }
     }
 }
@@ -762,9 +882,12 @@ extension JobOfferDetailVC: NaviButtonsViewDelegate {
 //        Log.selectLog(logLevel: .debug, "guidebookScrollAnimation start section:\(section) row:\(row),titleName:\(titleName)")
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            let indexPath = IndexPath(row: row, section: section)
-            self.detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
-            self.naviButtonTapActionFlag = false
+            UIView.animate(withDuration: 0.0, animations: {
+                let indexPath = IndexPath(row: row, section: section)
+                self.detailTableView.scrollToRow(at: indexPath, at: .top, animated: true)
+            }, completion: { (finished) in
+                self.naviButtonTapActionFlag = false
+            })
         }
     }
 
