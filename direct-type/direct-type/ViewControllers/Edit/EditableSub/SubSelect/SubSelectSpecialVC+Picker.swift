@@ -115,7 +115,8 @@ extension SubSelectSpecialVC {
             //その大項目が閉じているときには対象がないので描画できずにクラッシュするのでチェックする
             let select: Bool = arrSelected[selIdxPath.section]
             if select {
-                tableVW.reloadRows(at: [selIdxPath], with: .none) //該当セルの描画しなおし
+                let iPathDai = IndexPath(row: 0, section: selIdxPath.section)//親項目部分
+                tableVW.reloadRows(at: [iPathDai, selIdxPath], with: .none) //該当セルの描画しなおし
             }
             dispData()
         }

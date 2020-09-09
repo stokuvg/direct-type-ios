@@ -171,18 +171,9 @@ class SubSelectSpecialVC: BaseVC {
         if selectMaxCount == 1 {
             lcFootHeight.constant = 0 //選択即反映にするため、下部尾選択ボタンも非表示とする
         }
-//        //ヘッダ下部の補足情報エリア
-//        let bufInfoText = editableItem.placeholder
-//        lblInfoText.text(text: bufInfoText, fontType: .font_S, textColor: UIColor.init(colorType: .color_white)!, alignment: .left)
         dispInfoCount()
     }
     func dispInfoCount() {
-//        var bufCount = ""
-//        if selectMaxCount > 1 {
-//            let count = dicSelectedCode.count
-//            bufCount = "\(count)/\(selectMaxCount)"
-//        }
-//        lblCount.text(text: bufCount, fontType: .font_SSS, textColor: UIColor.init(colorType: .color_white)!, alignment: .right)
         //=== 合わせて表示させる
         switch editableItem.editType {
         case .selectMulti, .selectSpecial, .selectSpecialYear:
@@ -201,8 +192,6 @@ class SubSelectSpecialVC: BaseVC {
         default:
             vwInfoTextArea.isHidden = true
         }
-        //大項目内の選択フィードバックのため
-        tableVW.reloadData()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -252,7 +241,7 @@ extension SubSelectSpecialVC: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row == 0 {
             let select: Bool = arrSelected[indexPath.section]
             arrSelected[indexPath.section] = !select
-            tableView.reloadData() //該当セルの描画しなおし
+            tableView.reloadData() //該当セルの描画しなおし（拡縮なので全てを対象）
             if !select {
                 tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             }
@@ -269,7 +258,8 @@ extension SubSelectSpecialVC: UITableViewDataSource, UITableViewDelegate {
                     }
                     dicSelItemCode[indexPath.section] = arr
                 }
-                tableView.reloadRows(at: [indexPath], with: .none) //該当セルの描画しなおし
+                let iPathDai = IndexPath(row: 0, section: indexPath.section)//親項目部分
+                tableView.reloadRows(at: [iPathDai, indexPath], with: .none) //該当セルの描画しなおし
                 dispData()
             } else { //選択されてない
                 //選択数の最大を超えるかのチェック
@@ -292,7 +282,8 @@ extension SubSelectSpecialVC: UITableViewDataSource, UITableViewDelegate {
                     } else {
                         dicSelItemCode[indexPath.section] = [item.code]
                     }
-                    tableView.reloadRows(at: [indexPath], with: .none) //該当セルの描画しなおし
+                    let iPathDai = IndexPath(row: 0, section: indexPath.section)//親項目部分
+                    tableView.reloadRows(at: [iPathDai, indexPath], with: .none) //該当セルの描画しなおし
                     dispData()
                     selectAndCloseIfSingle()//===選択と同時に閉じて良いかのチェック
                 }
@@ -331,7 +322,6 @@ extension SubSelectSpecialVC: SubSelectBaseDelegate {
         self.dismiss(animated: true) { }
     }
     func actPopupCancel() {
-        
         self.dismiss(animated: true) { }
     }
 }
