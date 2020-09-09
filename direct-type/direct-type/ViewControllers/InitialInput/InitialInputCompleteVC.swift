@@ -62,7 +62,6 @@ final class InitialInputCompleteVC: TmpBasicVC {
         super.viewDidLoad()
         setup()
         startAnimation()
-        AnalyticsEventManager.track(type: .confirmAuthCode)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,7 +77,6 @@ final class InitialInputCompleteVC: TmpBasicVC {
     
     func configure(type: ContextType) {
         contextType = type
-        
     }
 }
 
