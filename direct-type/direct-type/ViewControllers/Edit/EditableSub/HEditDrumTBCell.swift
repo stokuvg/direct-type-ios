@@ -97,3 +97,9 @@ extension HEditDrumTBCell {
     }
 }
 
+extension HEditDrumTBCell: UITextFieldDelegate {
+    //===元のTextFieldの直接編集は却下したい
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return false //HEditDrumTBCellの場合は、編集却下とする
+    }
+}
