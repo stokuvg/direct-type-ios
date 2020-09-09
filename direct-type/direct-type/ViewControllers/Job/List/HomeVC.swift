@@ -828,6 +828,7 @@ extension HomeVC: BaseJobCardCellDelegate {
                 SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             }
         } else {
+            Log.selectLog(logLevel: .debug, "キープ解除 実行")
             ApiManager.sendJobDeleteKeep(id: jobId)
                 .done { result in
             }.catch{ (error) in
@@ -836,6 +837,7 @@ extension HomeVC: BaseJobCardCellDelegate {
                 self.showError(myErr)
             }.finally {
                 if self.keepAfterSkipActionFlag {
+                    Log.selectLog(logLevel: .debug, "見送り処理も 実行")
                     // 見送り処理
                     self.skipGoAction(skipId: jobId, skipIndex: self.jobSkipIndex)
                 } else {
