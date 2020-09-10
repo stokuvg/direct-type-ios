@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// 日付変換シングルトンクラスh
+/// 日付変換シングルトンクラス
 class DateUtil {
     /// フォーマッタータイプ
     enum FormatterType {
