@@ -8,6 +8,7 @@
 
 import UIKit
 
+// FIXME: DateUtil にリファクタリングすること
 class DateHelper {
     class func dateTimeFormatterRecommendParam() -> DateFormatter {
         let dateTimeFormatter = DateFormatter()
