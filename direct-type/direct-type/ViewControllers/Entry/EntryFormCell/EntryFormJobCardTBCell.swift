@@ -25,7 +25,7 @@ class EntryFormJobCardTBCell: UITableViewCell {
         //===デザイン適用
         selectionStyle = .none
         backgroundColor = UIColor(colorType: .color_base)//Clearにしたとき、こちらが透過される
-        vwMainArea.backgroundColor = UIColor(colorType: .color_base)
+        vwMainArea.backgroundColor = UIColor(colorType: .color_white)//xcode11だと無視されるがxcode12だと適用される
     }
     func initCell(_ model: MdlJobCardDetail?, isFullDisp: Bool = false) {
         self.model = model
