@@ -304,6 +304,7 @@ extension SubSelectSpecialVC: UITableViewDataSource, UITableViewDelegate {
         if let ip = indexPath { //新しい箇所の描画更新
             tableVW.reloadRows(at: [ip], with: .none) //該当セルの描画しなおし
         }
+        tableVW.layoutIfNeeded()//展開直後の選択時に大項目部分で変な描画アニメが発生するのを防ぐため
     }
     func selectAndCloseIfSingle() {
         if selectMaxCount == 1 {
