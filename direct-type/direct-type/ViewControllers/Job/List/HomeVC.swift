@@ -55,8 +55,8 @@ class HomeVC: TmpNaviTopVC {
 
     var defaultCellHeight:CGFloat = 520
 
-    var skipSendStatus:SkipSendStatus = .none
-    var keepSendStatus:KeepSendStatus = .none
+    var skipSendStatus:SkipSendStatus = .none //連打抑止のため
+    var keepSendStatus:KeepSendStatus = .none //連打抑止のため
 
     // おすすめ求人を更新を使用しているか true:使用ずみ,false:未使用
 //    var recommendUseFlag:Bool = false
@@ -84,11 +84,6 @@ class HomeVC: TmpNaviTopVC {
     // キープされた求人をオンメモリ上で保有しておき、この画面が切り替わった際にイベント送信する
     var keepIdListForAppsFlyer: [String] = []
     var trackedKeepIdListForAppsFlyer: [String] = []
-    
-    // キープされた求人を見送る処理を実行する際の対応フラグ
-    var keepAfterSkipActionFlag:Bool = false
-    
-    var jobSkipIndex:Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -177,7 +172,6 @@ class HomeVC: TmpNaviTopVC {
 
     private func dataCheckAction() {
         Log.selectLog(logLevel: .debug, "HomeVC dataCheckAction start")
-
         Log.selectLog(logLevel: .debug, "pageJobCards.jobCards:\(pageJobCards.jobCards.count)")
         // ０件時レイアウト修正用
         if (pageJobCards.jobCards.count) > 0 {
@@ -562,44 +556,51 @@ class HomeVC: TmpNaviTopVC {
 
         return rowHeight
     }
-    
-    private func skipGoAction(skipId: String, skipIndex:Int) {
-        Log.selectLog(logLevel: .debug, "HomeVC skipGoAction start")
-        
-        var errorFlag:Bool = false
-        DispatchQueue.main.async {
-            ApiManager.sendJobSkip(id: skipId)
-                .done { result in
-                    errorFlag = false
-            }.catch{ (error) in
-                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-                self.showError(myErr)
-                errorFlag = true
-            }.finally {
-                if !errorFlag {
-                    self.dispJobCards.jobCards.remove(at: skipIndex)
-                    let deleteIndex = IndexPath(row: skipIndex, section: 0)
 
-                    self.homeTableView.performBatchUpdates({
-                        self.homeTableView.deleteRows(at: [deleteIndex], with: .left)
-                    }, completion: { finished in
-                        self.keepAfterSkipActionFlag = false
-                        if finished {
-                            self.skipSendStatus = .none
-                            Log.selectLog(logLevel: .debug, "HomeVC skipGoAction finished")
-                        } else {
-                            Log.selectLog(logLevel: .debug, "HomeVC skipGoAction no finished")
-                        }
-                    })
-                } else {
-                    Log.selectLog(logLevel: .debug, "エラーがあるため削除処理無し")
-                    self.skipSendStatus = .none
-                    self.keepAfterSkipActionFlag = false
-                }
-                SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+    
+    //キープ解除してからスキップ処理を実施させる場合
+    private func skipGoActionWithKeepDelete(jobId: String) {
+        DispatchQueue.main.async {
+            ApiManager.sendJobDeleteKeep(id: jobId)
+            .done { result in
+                self.skipGoAction(jobId: jobId)
+            }.catch { (error) in
+                //エラー表示なし
+            }.finally {
             }
         }
     }
+    //スキップ処理を実施し、成功したらテーブルからも削除する
+    private func skipGoAction(jobId: String) {
+        DispatchQueue.main.async {
+            ApiManager.sendJobSkip(id: jobId)
+            .done { result in
+                self.deleteSkipCell(jobId: jobId)
+            }.catch { (error) in
+                //エラー表示なし
+            }.finally {
+            }
+        }
+    }
+    //対象となる求人コードをもつセルをテーブルから除去する（表示の問題）
+    private func deleteSkipCell(jobId: String) {
+        if let skipIndex = dispJobCards.jobCards.firstIndex(where: { (item) -> Bool in
+            item.jobCardCode == jobId
+        }) {
+            self.dispJobCards.jobCards.remove(at: skipIndex)
+            let deleteIndex = IndexPath(row: skipIndex, section: 0)
+            self.homeTableView.performBatchUpdates({
+                self.homeTableView.deleteRows(at: [deleteIndex], with: .left)
+            }, completion: { finished in
+                self.skipSendStatus = .none //連打抑止のため
+            })
+        } else {//指定した求人コードを持つセルが見つからなかった場合は何もしない（なので連打対策不要になるはず）
+            self.skipSendStatus = .none //連打抑止のため
+        }
+    }
+    
+    
+    
 }
 
 extension HomeVC: UITableViewDelegate {
@@ -724,59 +725,27 @@ extension HomeVC: JobOfferCardReloadCellDelegate {
 }
 
 extension HomeVC: BaseJobCardCellDelegate {
-    
+    //「見送り」処理（キープされていた場合には、キープ解除API実行後に見送りAPI実行
     func skipAction(jobId: String) {
-        Log.selectLog(logLevel: .debug, "HomeVC skipAction start")
         AnalyticsEventManager.track(type: .skipVacancies)
-
-        if skipSendStatus == .sending {
-            Log.selectLog(logLevel: .debug, "HomeVC skipAction skipSendStatus == .sending")
-            return
-        }
-        SVProgressHUD.show()
-
-        self.skipSendStatus = .sending
-
-        jobSkipIndex = 0
-        for i in 0..<dispJobCards.jobCards.count {
-            let jobCard = dispJobCards.jobCards[i]
-            if jobCard.jobCardCode == jobId {
-                jobSkipIndex = i
-                break
-            } else {
-                continue
-            }
-        }
-        
+        if skipSendStatus == .sending { return }; self.skipSendStatus = .sending //連打抑止のため
         // jobIdが現在キープ中かチェック
-        //let keepFlag: Bool = KeepManager.shared.getKeepStatus(jobCardID: jobId)
         if KeepManager.shared.getKeepStatus(jobCardID: jobId) {
-            Log.selectLog(logLevel: .debug, "キープ中の求人を見送ろうとしている。")
-
-            let alert = UIAlertController(title: "キープ済み", message: "キープ中ですが見送りますか？", preferredStyle:  .alert)
-            
+            let alert = UIAlertController(title: "キープ済み", message: "キープ中ですが見送りますか？", preferredStyle: .alert)
             let skipAction = UIAlertAction(title: "見送る", style: .default, handler: { _ in
-                self.keepAfterSkipActionFlag = true
-                // キープを解除する
-                self.keepAction(jobId: jobId, newStatus: false)
-                
+                // キープを解除してから、見送り処理にする必要あり
+                self.skipGoActionWithKeepDelete(jobId: jobId)
             })
-            let noAction = UIAlertAction(title: "いいえ", style: .cancel, handler:  { _ in
-                self.keepAfterSkipActionFlag = false
-                self.skipSendStatus = .none
+            let noAction = UIAlertAction(title: "いいえ", style: .cancel, handler: { _ in
+                self.skipSendStatus = .none //連打抑止のため
             })
-            
             alert.addAction(noAction)
             alert.addAction(skipAction)
-            
             present(alert, animated: true, completion: nil)
-        } else {
-            self.keepAfterSkipActionFlag = false
-            // 見送り処理
-            self.skipGoAction(skipId: jobId, skipIndex: jobSkipIndex)
+        } else {// 見送り処理
+            self.skipGoAction(jobId: jobId)
         }
     }
-    
     func trackKeepActionEvent() {
         keepIdListForAppsFlyer.forEach({ id in
             guard trackedKeepIdListForAppsFlyer
@@ -785,30 +754,27 @@ extension HomeVC: BaseJobCardCellDelegate {
         })
         trackedKeepIdListForAppsFlyer = keepIdListForAppsFlyer
     }
-
+    
     func keepAction(jobId: String, newStatus: Bool) {
-        if self.keepSendStatus == .sending { return }
-        //LogManager.appendLogEx(.keepList, String(repeating: "🔖", count: 11), "[jobId: \(jobId)]", "[keepSendStatus: \(keepSendStatus)]", #function, #line)
+        if self.keepSendStatus == .sending { return } //連打抑止のため
         if newStatus {
             keepIdListForAppsFlyer.append(jobId)
         } else {
             keepIdListForAppsFlyer.removeAll(where: { $0 == jobId})
         }
-
-        SVProgressHUD.show()
         LogManager.appendLogProgressIn("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
-        self.keepSendStatus = .sending
-        // TODO:通信処理
-        var jobCard:MdlJobCard = MdlJobCard()
-        for i in 0..<dispJobCards.jobCards.count {
-            let checkJobCard = dispJobCards.jobCards[i]
-            if checkJobCard.jobCardCode == jobId {
-                jobCard = checkJobCard
-                break
-            } else {
-                continue
-            }
+        let jobCard: MdlJobCard!
+        if let card = dispJobCards.jobCards.filter({ (item) -> Bool in
+            item.jobCardCode == jobId
+        }).first {
+            jobCard = card
+        } else {
+            return //対象モデルが見つからなかった場合
         }
+        
+        SVProgressHUD.show()
+        self.keepSendStatus = .sending //連打抑止のため
+        
         let jobId = jobCard.jobCardCode
         let flag = !jobCard.keepStatus
         jobCard.keepStatus = flag
@@ -824,11 +790,10 @@ extension HomeVC: BaseJobCardCellDelegate {
                 self.showError(myErr)
             }.finally {
                 //フェッチ後の表示更新はKeepManagerに任せる
-                self.keepSendStatus = .none
+                self.keepSendStatus = .none //連打抑止のため
                 SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             }
         } else {
-            Log.selectLog(logLevel: .debug, "キープ解除 実行")
             ApiManager.sendJobDeleteKeep(id: jobId)
                 .done { result in
             }.catch{ (error) in
@@ -836,16 +801,10 @@ extension HomeVC: BaseJobCardCellDelegate {
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 self.showError(myErr)
             }.finally {
-                if self.keepAfterSkipActionFlag {
-                    Log.selectLog(logLevel: .debug, "見送り処理も 実行")
-                    // 見送り処理
-                    self.skipGoAction(skipId: jobId, skipIndex: self.jobSkipIndex)
-                } else {
-                    //フェッチ後の表示更新はKeepManagerに任せる
-                    //// セルの設定変更パターン
-                    self.keepSendStatus = .none
-                    SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
-                }
+                //フェッチ後の表示更新はKeepManagerに任せる
+                //// セルの設定変更パターン
+                self.keepSendStatus = .none //連打抑止のため
+                SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             }
         }
     }
