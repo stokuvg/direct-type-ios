@@ -575,10 +575,10 @@ class HomeVC: TmpNaviTopVC {
         DispatchQueue.main.async {
             ApiManager.sendJobSkip(id: jobId)
             .done { result in
+                self.deleteSkipCell(jobId: jobId)
             }.catch { (error) in
                 //エラー表示なし
             }.finally {
-                self.deleteSkipCell(jobId: jobId)
             }
         }
     }
