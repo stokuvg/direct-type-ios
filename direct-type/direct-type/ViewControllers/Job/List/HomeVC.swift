@@ -84,11 +84,6 @@ class HomeVC: TmpNaviTopVC {
     // キープされた求人をオンメモリ上で保有しておき、この画面が切り替わった際にイベント送信する
     var keepIdListForAppsFlyer: [String] = []
     var trackedKeepIdListForAppsFlyer: [String] = []
-    
-    // キープされた求人を見送る処理を実行する際の対応フラグ
-    var keepAfterSkipActionFlag:Bool = false
-    
-    var jobSkipIndex:Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -566,37 +561,26 @@ class HomeVC: TmpNaviTopVC {
     private func skipGoAction(skipId: String, skipIndex:Int) {
         Log.selectLog(logLevel: .debug, "HomeVC skipGoAction start")
         
-        var errorFlag:Bool = false
         DispatchQueue.main.async {
             ApiManager.sendJobSkip(id: skipId)
                 .done { result in
-                    errorFlag = false
             }.catch{ (error) in
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 self.showError(myErr)
-                errorFlag = true
             }.finally {
-                if !errorFlag {
-                    self.dispJobCards.jobCards.remove(at: skipIndex)
-                    let deleteIndex = IndexPath(row: skipIndex, section: 0)
+                self.dispJobCards.jobCards.remove(at: skipIndex)
+                let deleteIndex = IndexPath(row: skipIndex, section: 0)
 
-                    self.homeTableView.performBatchUpdates({
-                        self.homeTableView.deleteRows(at: [deleteIndex], with: .left)
-                    }, completion: { finished in
-                        self.keepAfterSkipActionFlag = false
-                        if finished {
-                            self.skipSendStatus = .none
-                            Log.selectLog(logLevel: .debug, "HomeVC skipGoAction finished")
-                        } else {
-                            Log.selectLog(logLevel: .debug, "HomeVC skipGoAction no finished")
-                        }
-                    })
-                } else {
-                    Log.selectLog(logLevel: .debug, "エラーがあるため削除処理無し")
-                    self.skipSendStatus = .none
-                    self.keepAfterSkipActionFlag = false
-                }
-                SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+                self.homeTableView.performBatchUpdates({
+                    self.homeTableView.deleteRows(at: [deleteIndex], with: .left)
+                }, completion: { finished in
+                    if finished {
+                        self.skipSendStatus = .none
+                        Log.selectLog(logLevel: .debug, "HomeVC skipAction finished")
+                    } else {
+                        Log.selectLog(logLevel: .debug, "HomeVC skipAction no finished")
+                    }
+                })
             }
         }
     }
@@ -733,15 +717,14 @@ extension HomeVC: BaseJobCardCellDelegate {
             Log.selectLog(logLevel: .debug, "HomeVC skipAction skipSendStatus == .sending")
             return
         }
-        SVProgressHUD.show()
 
         self.skipSendStatus = .sending
 
-        jobSkipIndex = 0
+        var jobCardIndex:Int = 0
         for i in 0..<dispJobCards.jobCards.count {
             let jobCard = dispJobCards.jobCards[i]
             if jobCard.jobCardCode == jobId {
-                jobSkipIndex = i
+                jobCardIndex = i
                 break
             } else {
                 continue
@@ -756,13 +739,10 @@ extension HomeVC: BaseJobCardCellDelegate {
             let alert = UIAlertController(title: "キープ済み", message: "キープ中ですが見送りますか？", preferredStyle:  .alert)
             
             let skipAction = UIAlertAction(title: "見送る", style: .default, handler: { _ in
-                self.keepAfterSkipActionFlag = true
                 // キープを解除する
-                self.keepAction(jobId: jobId, newStatus: false)
-                
-            })
+                // 見送り処理
+                self.skipGoAction(skipId: jobId, skipIndex: jobCardIndex) })
             let noAction = UIAlertAction(title: "いいえ", style: .cancel, handler:  { _ in
-                self.keepAfterSkipActionFlag = false
                 self.skipSendStatus = .none
             })
             
@@ -771,9 +751,8 @@ extension HomeVC: BaseJobCardCellDelegate {
             
             present(alert, animated: true, completion: nil)
         } else {
-            self.keepAfterSkipActionFlag = false
             // 見送り処理
-            self.skipGoAction(skipId: jobId, skipIndex: jobSkipIndex)
+            self.skipGoAction(skipId: jobId, skipIndex: jobCardIndex)
         }
     }
     
@@ -828,7 +807,6 @@ extension HomeVC: BaseJobCardCellDelegate {
                 SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             }
         } else {
-            Log.selectLog(logLevel: .debug, "キープ解除 実行")
             ApiManager.sendJobDeleteKeep(id: jobId)
                 .done { result in
             }.catch{ (error) in
@@ -836,16 +814,10 @@ extension HomeVC: BaseJobCardCellDelegate {
                 let myErr: MyErrorDisp = AuthManager.convAnyError(error)
                 self.showError(myErr)
             }.finally {
-                if self.keepAfterSkipActionFlag {
-                    Log.selectLog(logLevel: .debug, "見送り処理も 実行")
-                    // 見送り処理
-                    self.skipGoAction(skipId: jobId, skipIndex: self.jobSkipIndex)
-                } else {
-                    //フェッチ後の表示更新はKeepManagerに任せる
-                    //// セルの設定変更パターン
-                    self.keepSendStatus = .none
-                    SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
-                }
+                //フェッチ後の表示更新はKeepManagerに任せる
+                //// セルの設定変更パターン
+                self.keepSendStatus = .none
+                SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             }
         }
     }
