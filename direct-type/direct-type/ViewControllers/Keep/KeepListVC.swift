@@ -28,6 +28,8 @@ final class KeepListVC: TmpBasicVC {
     var pageNo: Int = 1
     var hasNext:Bool = false
     var isAddLoad:Bool = true
+    
+    var tableWidth:CGFloat = 0.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +55,12 @@ final class KeepListVC: TmpBasicVC {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.tableWidth = self.view.frame.size.width
     }
 }
 
@@ -227,6 +235,8 @@ extension KeepListVC: UITableViewDataSource {
         let cell = tableView.loadCell(cellName: "KeepCardCell", indexPath: indexPath) as! KeepCardCell
         cell.tag = row
         cell.delegate = self
+        Log.selectLog(logLevel: .debug, "tableWidth:\(tableWidth)")
+        cell.cellWidth = tableWidth
         cell.setup(data: _keepData)
             
         return cell

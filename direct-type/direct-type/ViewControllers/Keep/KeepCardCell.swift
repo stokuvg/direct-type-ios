@@ -32,9 +32,14 @@ class KeepCardCell: BaseJobCardCell {
     
     @IBOutlet weak var jobDataBackView:UIView!
     
+    @IBOutlet weak var jobDataTopSpaceView:UIView!
+    @IBOutlet weak var jobDataTopSpaceViewHeight:NSLayoutConstraint!
+    
     var jobId:String = ""
     
     var nowDate:Date = Date.init()
+    
+    var cellWidth:CGFloat = 0.0
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -90,7 +95,8 @@ class KeepCardCell: BaseJobCardCell {
         var checkTextSize:CGFloat = 0.0
         let jobTextSize = CGFloat(jobName.count) * UIFont.init(fontType: .C_font_M)!.pointSize
         
-        let jobWidth = self.jobLabel.frame.size.width
+//        let jobWidth = self.jobLabel.frame.size.width
+        let jobWidth = cellWidth - ((17 * 2) + (20 * 2))
         
         if jobName.isAllHalfWidthCharacter() {
             checkTextSize = jobTextSize / 2
@@ -102,8 +108,10 @@ class KeepCardCell: BaseJobCardCell {
 //        Log.selectLog(logLevel: .debug, "jobWidth:\(jobWidth)")
         
         if checkTextSize <= jobWidth {
+//            Log.selectLog(logLevel: .debug, "職種名1行")
             self.jobNameBackViewHeight.constant = 30
         } else {
+//            Log.selectLog(logLevel: .debug, "職種名2行")
             self.jobNameBackViewHeight.constant = 50
         }
         
