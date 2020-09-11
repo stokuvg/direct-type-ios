@@ -28,6 +28,8 @@ final class KeepListVC: TmpBasicVC {
     var pageNo: Int = 1
     var hasNext:Bool = false
     var isAddLoad:Bool = true
+    
+    var tableWidth:CGFloat = 0.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +55,12 @@ final class KeepListVC: TmpBasicVC {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.tableWidth = self.view.frame.size.width
     }
 }
 
@@ -164,7 +172,7 @@ private extension KeepListVC {
 
 extension KeepListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        Log.selectLog(logLevel: .debug, "KeepListVC heightForRowAt start")
+//        Log.selectLog(logLevel: .debug, "KeepListVC heightForRowAt start")
 //        return DeviceHelper.xsMaxCheck() ? 252 : 232
         
         let spaceWidth:CGFloat = 17.0
@@ -173,7 +181,7 @@ extension KeepListVC: UITableViewDelegate {
         let listTableWidth = self.keepTableView.frame.size.width
         
         let jobWidth = listTableWidth - (spaceWidth * 2) - (stackSpaceWidth * 2)
-        Log.selectLog(logLevel: .debug, "jobWidth:\(jobWidth)")
+//        Log.selectLog(logLevel: .debug, "jobWidth:\(jobWidth)")
         
         var cellHeight:CGFloat
         
@@ -191,9 +199,9 @@ extension KeepListVC: UITableViewDelegate {
         }
 
         if checkTextSize <= jobWidth {
-            cellHeight = 212.0
+            cellHeight = 242.0
         } else {
-            cellHeight = 232.0
+            cellHeight = 262.0
         }
         
         if DeviceHelper.xsMaxCheck() {
@@ -227,6 +235,8 @@ extension KeepListVC: UITableViewDataSource {
         let cell = tableView.loadCell(cellName: "KeepCardCell", indexPath: indexPath) as! KeepCardCell
         cell.tag = row
         cell.delegate = self
+//        Log.selectLog(logLevel: .debug, "tableWidth:\(tableWidth)")
+        cell.cellWidth = tableWidth
         cell.setup(data: _keepData)
             
         return cell

@@ -16,7 +16,10 @@ protocol KeepCardCellDelegate {
 
 class KeepCardCell: BaseJobCardCell {
     
+    @IBOutlet weak var salaryBackView:UIView!
+    @IBOutlet weak var salaryLabelTop:NSLayoutConstraint!
     @IBOutlet weak var unitLabel:UILabel!
+    @IBOutlet weak var unitLabelBottom:NSLayoutConstraint!
     @IBOutlet weak var keepActionBtn:UIButton!
     @IBAction func keepAction() {
         let keepFlag = KeepManager.shared.getKeepStatus(jobCardID: self.jobId)
@@ -29,9 +32,14 @@ class KeepCardCell: BaseJobCardCell {
     
     @IBOutlet weak var jobDataBackView:UIView!
     
+    @IBOutlet weak var jobDataTopSpaceView:UIView!
+    @IBOutlet weak var jobDataTopSpaceViewHeight:NSLayoutConstraint!
+    
     var jobId:String = ""
     
     var nowDate:Date = Date.init()
+    
+    var cellWidth:CGFloat = 0.0
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,14 +48,15 @@ class KeepCardCell: BaseJobCardCell {
 //        thumnailImageView.layer.cornerRadius = 15
 //        thumnailImageView.layer.maskedCorners = [.layerMinXMinYCorner,.layerMaxXMinYCorner,.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
         
-//        thumbnailImageBackView.layer.cornerRadius = 15
-//        thumbnailImageBackView.clipsToBounds = true
-        
         self.spaceView.layer.cornerRadius = 15
         self.spaceView.clipsToBounds = true
         
         // 終了間近
         limitedLabel.text(text: "終了間近", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        
+        keepActionBtn.imageView?.contentMode = .scaleAspectFit
+        keepActionBtn.contentHorizontalAlignment = .fill
+        keepActionBtn.contentVerticalAlignment = .fill
     }
     
     override func prepareForReuse() {
@@ -86,7 +95,8 @@ class KeepCardCell: BaseJobCardCell {
         var checkTextSize:CGFloat = 0.0
         let jobTextSize = CGFloat(jobName.count) * UIFont.init(fontType: .C_font_M)!.pointSize
         
-        let jobWidth = self.jobLabel.frame.size.width
+//        let jobWidth = self.jobLabel.frame.size.width
+        let jobWidth = cellWidth - ((17 * 2) + (20 * 2))
         
         if jobName.isAllHalfWidthCharacter() {
             checkTextSize = jobTextSize / 2
@@ -98,8 +108,10 @@ class KeepCardCell: BaseJobCardCell {
 //        Log.selectLog(logLevel: .debug, "jobWidth:\(jobWidth)")
         
         if checkTextSize <= jobWidth {
+//            Log.selectLog(logLevel: .debug, "職種名1行")
             self.jobNameBackViewHeight.constant = 30
         } else {
+//            Log.selectLog(logLevel: .debug, "職種名2行")
             self.jobNameBackViewHeight.constant = 50
         }
         
@@ -129,12 +141,16 @@ class KeepCardCell: BaseJobCardCell {
 //            let price:String = (data["price"] as! String)
             saralyLabel.adjustsFontSizeToFitWidth = true
             saralyLabel.text(text: priceText, fontType: .C_font_M , textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
+            self.salaryLabelTop.constant = 5
             // 単位
             unitLabel.text(text: "万円", fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_sub)!, alignment: .left)
+
+            self.unitLabelBottom.constant = 8
         } else {
             saralyLabel.text(text: "非公開", fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
             // 単位
             unitLabel.text(text: "", fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+            self.salaryLabelTop.constant = 10
         }
         
         // 勤務地
@@ -175,8 +191,10 @@ class KeepCardCell: BaseJobCardCell {
     }
     
     private func changeKeepImage(_ keepFlag: Bool) {
-        let offImage = UIImage(named: "like_gray")
-        let onImage = UIImage(named: "likeSelected")
+//        let offImage = UIImage(named: "like_gray")
+//        let onImage = UIImage(named: "likeSelected")
+        let offImage = UIImage(named: "btn_keepclose")
+        let onImage = UIImage(named: "btn_keep")
         let useImage = keepFlag ? onImage : offImage
         keepActionBtn.setImage(useImage, for: .normal)
     }
