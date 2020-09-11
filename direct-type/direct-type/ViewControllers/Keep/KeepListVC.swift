@@ -235,7 +235,7 @@ extension KeepListVC: UITableViewDataSource {
         let cell = tableView.loadCell(cellName: "KeepCardCell", indexPath: indexPath) as! KeepCardCell
         cell.tag = row
         cell.delegate = self
-        Log.selectLog(logLevel: .debug, "tableWidth:\(tableWidth)")
+//        Log.selectLog(logLevel: .debug, "tableWidth:\(tableWidth)")
         cell.cellWidth = tableWidth
         cell.setup(data: _keepData)
             
