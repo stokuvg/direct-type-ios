@@ -60,9 +60,9 @@ extension AppDefine {
     //=== TUDAPI通信の定義
     static var tudApiServer: String {
         switch AppDefine.buildMode {
-        case .ApiDev :  return "https://dev-api.directtype.net"//開発
-        case .Develop:  return "https://api.directtype.net"//検証
-        case .Release:  return "https://api.directtype.jp"//本番
+        case .ApiDev :  return "https://dev-api-m.directtype.net/v1.0"//開発
+        case .Develop:  return "https://api-m.directtype.net/v1.0"//検証
+        case .Release:  return "https://api-m.directtype.jp/v1.0"//本番
         }
     }
     //=== レコメンド通信の定義

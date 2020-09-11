@@ -1,28 +1,23 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "スマ転API",
-    "description": "スマ転iOSアプリ向けのAPI仕様です。",
-    "version": "1.0",
+    "title": "directtype api",
+    "description": "directtype IOSアプリ向けのAPI仕様です。",
+    "version": "v1.0",
     "contact": {}
   },
-  "tags": [
-    {
-      "name": "user-api",
-      "description": "https://docs.google.com/spreadsheets/d/1SP3OenknUQFExWUT4JjSBNRD6K1aTUT3p-GHE0xSznE/edit#gid=910738305"
-    }
-  ],
+  "tags": [],
   "servers": [
     {
-      "url": "https://api.directtype.jp",
+      "url": "https://api-m.directtype.jp/v1.0",
       "description": "本番環境"
     },
     {
-      "url": "https://api.directtype.net",
+      "url": "https://api-m.directtype.net/v1.0",
       "description": "検証環境"
     },
     {
-      "url": "https://dev-api.directtype.net",
+      "url": "https://dev-api-m.directtype.net/v1.0",
       "description": "開発環境"
     },
     {
