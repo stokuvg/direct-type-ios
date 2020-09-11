@@ -504,20 +504,15 @@ extension MyPageVC {
 extension MyPageVC: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         Log.selectLog(logLevel: .debug, "MyPageVC didSelect start")
-
         if let vcs = tabBarController.viewControllers {
             Log.selectLog(logLevel: .debug, "vcs:\(vcs)")
-            
             let firstNavi = vcs.first as! BaseNaviController
             let firstVC = firstNavi.visibleViewController as! HomeVC
-            
             Log.selectLog(logLevel: .debug, "firstVC:\(String(describing: firstVC))")
-            
             if tabBarController.selectedIndex == 0 {
                 Log.selectLog(logLevel: .debug, "切り替えた画面がHomeVC")
-//                Log.selectLog(logLevel: .debug, "updateCnt:\(updateCnt)")
                 if updateCnt > 0 {
-//                    Log.selectLog(logLevel: .debug, "更新した部分がある")
+                    //Log.selectLog(logLevel: .debug, "更新した部分がある")
                     firstVC.changeProfileFlag = true
                     updateCnt = 0
                 }

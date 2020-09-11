@@ -17,11 +17,6 @@ enum CardDispType: Int {
     case end // 最後まで表示
 }
 
-enum KeepSendStatus {
-    case none
-    case sending
-}
-
 enum LimitedType {
     case none
     case new
@@ -45,7 +40,6 @@ class HomeVC: TmpNaviTopVC {
     var safeAreaTop: CGFloat!
     var pageNo: Int = 1
     var defaultCellHeight: CGFloat = 520
-    var keepSendStatus: KeepSendStatus = .none //連打抑止のため
     var useApiListFlag: Bool = true
     // 求人追加表示フラグ
     var dataAddFlag = true
@@ -94,21 +88,6 @@ class HomeVC: TmpNaviTopVC {
             firstViewFlag = false
         }
         safeAreaTop = self.view.safeAreaInsets.top
-
-        //[Dbg]___
-        if Constants.DbgAutoPushVC {
-            switch Constants.DbgAutoPushVCNum {
-            case 1: pushViewController(.profilePreviewH2, model: MdlProfile.dummyData())
-            case 2: pushViewController(.resumePreviewH3(false))
-            case 3: pushViewController(.careerPreviewC15)
-            case 4: pushViewController(.smoothCareerPreviewF11)
-            case 5: pushViewController(.firstInputPreviewA)
-            case 6: pushViewController(.careerListC)
-            case 7: pushViewController(.entryForm(.fromHome), model: MdlJobCardDetail.dummyData())
-            default: break
-            }
-        }
-        //[Dbg]^^^
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -389,79 +368,12 @@ class HomeVC: TmpNaviTopVC {
         UserDefaultsManager.setObject(true, key: .isInitialDisplayedHome)
     }
 
-    #if false
-        private func makeDummyData() {
-
-            let mdlData1: MdlJobCard = MdlJobCard.init(jobCardCode: "1000000",
-                                                       displayPeriod: EntryFormInfoDisplayPeriod.init(startAt: "2020/06/30", endAt: "2020/07/11"),
-                                                       companyName: "株式会社キャリアデザインITパートナーズ「type」",
-                                                       jobName: "PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
-                                                       mainTitle: "メディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！",
-                                                       mainPicture: "https://type.jp/s/img_banner/top_pc_side_number1.jpg",
-                                                       salaryMinCode: 7,
-                                                       salaryMaxCode: 11,
-                                                       salaryDisplay: true,
-                                                       workPlaceCode: [1, 2, 3, 4, 5, 6],
-                                                       keepStatus: true)
-
-
-            let mdlData2: MdlJobCard = MdlJobCard.init(jobCardCode: "2",
-                                                       displayPeriod: EntryFormInfoDisplayPeriod.init(startAt: "2020/05/16", endAt: "2020/05/31"),
-                                                       companyName: "株式会社キャリアデザインITパートナーズ「type」",
-                                                       jobName: "PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
-                                                       mainTitle: "メディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！",
-                                                       mainPicture: "https://type.jp/s/img_banner/top_pc_side_number1.jpg",
-                                                       salaryMinCode: 9,
-                                                       salaryMaxCode: 10,
-                                                       salaryDisplay: false,
-                                                       workPlaceCode: [8, 9, 10, 11, 12, 13, 15],
-                                                       keepStatus: false)
-
-
-            let mdlData3: MdlJobCard = MdlJobCard.init(jobCardCode: "3",
-                                                       displayPeriod: EntryFormInfoDisplayPeriod.init(startAt: "2020/05/01", endAt: "2020/05/31"),
-                                                       companyName: "株式会社キャリアデザインITパートナーズ「type」",
-                                                       jobName: "PG・SE◆ユーザー直取引多数◆上流工程◆残業月15h◆年間休日128日◆[PG]平均月収25~35万円",
-                                                       mainTitle: "メディアで話題のヘルスケアアプリ運営企業!未経験からWebのお仕事にチャレンジしたい方、歓迎です！",
-                                                       mainPicture: "https://type.jp/s/img_banner/top_pc_side_number1.jpg",
-                                                       salaryMinCode: 20,
-                                                       salaryMaxCode: 24,
-                                                       salaryDisplay: true,
-                                                       workPlaceCode: [44, 45, 46, 47, 48, 49, 50],
-                                                       keepStatus: false)
-
-            let nowDateString = Date().dispYmdJP()
-            pageJobCards = MdlJobCardList.init(updateAt: nowDateString,
-                                               hasNext: true, jobList: [
-                                                   mdlData1, mdlData2, mdlData3,
-                                                   mdlData1, mdlData2, mdlData3,
-                                                   mdlData1, mdlData2, mdlData3,
-                                                   mdlData1, mdlData2, mdlData3,
-                                                   mdlData1, mdlData2, mdlData3,
-                                               ])
-
-            dispJobCards = MdlJobCardList()
-            if pageJobCards.jobCards.count > moreDataCount {
-                let jobCards = pageJobCards.jobCards
-                dispJobCards.jobCards = jobCards
-            } else {
-                for i in 0..<pageJobCards.jobCards.count {
-                    let data = pageJobCards.jobCards[i]
-                    dispJobCards.jobCards.append(data)
-                }
-            }
-        }
-    #endif
-
     private func makeCellHeight(row: Int) -> CGFloat {
         var rowHeight: CGFloat = defaultCellHeight
-
         if self.dispJobCards.jobCards.count == 0 {
             return 0
         }
-
         let jobData = self.dispJobCards.jobCards[row]
-
         // NEW・終了間近を確認。あれば heightを追加
         let nowDate = Date()
         // NEWマーク 表示チェック
@@ -470,13 +382,10 @@ class HomeVC: TmpNaviTopVC {
         // 終了マーク 表示チェック
         let end_date_string = jobData.displayPeriod.endAt
         let endPeriod = DateHelper.endFlagHiddenCheck(endDateString: end_date_string, nowDate: nowDate)
-
         let limitedType: LimitedType = DateHelper.limitedTypeCheck(startFlag: startPeriod, endFlag: endPeriod)
-
         if limitedType != LimitedType.none {
             rowHeight += 40
         }
-
         // 職種のサイズチェック
         // カード外 左:20pt,右20pt
         // カード内 左:24pt,右24pt
@@ -505,7 +414,12 @@ class HomeVC: TmpNaviTopVC {
                 .done { result in
                     self.skipGoAction(jobId: jobId)
                 }.catch { (error) in
-                    //エラー表示なし
+                    let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+                    switch myErr.code {
+                    case 500:   self.showError(myErr)
+                    default:    break //エラー表示しない
+                    }
+                    self.showError(myErr)
                 }.finally {
             }
         }
@@ -518,11 +432,17 @@ class HomeVC: TmpNaviTopVC {
                 .done { result in
                     self.deleteSkipCell(jobId: jobId)
                 }.catch { (error) in
-                    //エラー表示なし
+                    let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+                    switch myErr.code {
+                    case 500:   self.showError(myErr)
+                    default:    break //エラー表示しない
+                    }
+                    self.showError(myErr)
                 }.finally {
             }
         }
     }
+    
     //対象となる求人コードをもつセルをテーブルから除去する（表示の問題）
     private func deleteSkipCell(jobId: String) {
         //指定した求人コードを持つセルが見つからなかった場合は何もしない（なので連打対策不要になるはず）
@@ -537,9 +457,6 @@ class HomeVC: TmpNaviTopVC {
             })
         }
     }
-
-
-
 }
 
 extension HomeVC: UITableViewDelegate {
@@ -548,7 +465,6 @@ extension HomeVC: UITableViewDelegate {
         if row == dispJobCards.jobCards.count && (dispType == .add || dispType == .end) {
             return 100
         }
-
         return self.makeCellHeight(row: row)
     }
 
@@ -567,10 +483,8 @@ extension HomeVC: UITableViewDelegate {
 //        let jobId = "1193560"   // なか卯
 //        let jobId = "1199266"   // キャリアデザインセンター
         let vc = getVC(sbName: "JobOfferDetailVC", vcName: "JobOfferDetailVC") as! JobOfferDetailVC
-
         vc.configure(jobId: jobId, routeFrom: .fromHome)
         vc.hidesBottomBarWhenPushed = true//下部のTabBarを遷移時に非表示にする
-
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -578,9 +492,7 @@ extension HomeVC: UITableViewDelegate {
 extension HomeVC: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
         let jobCardsCount = dispJobCards.jobCards.count
-
         // 次に表示できるページが無い場合
         if pageJobCards.nextPage == false {
             dispType = .end
@@ -601,7 +513,6 @@ extension HomeVC: UITableViewDataSource {
                 return cell
             } else {
                 let data = dispJobCards.jobCards[row]
-
                 let cell = tableView.loadCell(cellName: "JobOfferBigCardCell", indexPath: indexPath) as! JobOfferBigCardCell
                 cell.delegate = self
                 cell.tag = row
@@ -639,8 +550,6 @@ extension HomeVC: JobOfferCardMoreCellDelegate {
 
 extension HomeVC: NoCardViewDelegate {
     func registEditAction() {
-//        // マイページへ移動
-//        self.tabBarController?.selectedIndex = 2
         self.useApiListFlag = true
         self.getJobRecommendList()
     }
@@ -686,8 +595,7 @@ extension HomeVC: BaseJobCardCellDelegate {
     }
 
     func keepAction(jobId: String, newStatus: Bool) {
-        if self.keepSendStatus == .sending { return } //連打抑止のため
-        if newStatus {
+        if newStatus { // True: 追加 / False: 削除
             keepIdListForAppsFlyer.append(jobId)
         } else {
             keepIdListForAppsFlyer.removeAll(where: { $0 == jobId })
@@ -699,42 +607,44 @@ extension HomeVC: BaseJobCardCellDelegate {
         }).first {
             jobCard = card
         } else {
-            return //対象モデルが見つからなかった場合
+            return //対象モデルが見つからなかった場合は処理を実施しない
         }
-
         SVProgressHUD.show()
-        self.keepSendStatus = .sending //連打抑止のため
-
         let jobId = jobCard.jobCardCode
         let flag = !jobCard.keepStatus
         jobCard.keepStatus = flag
         if newStatus == true {
-            LogManager.appendApiLog("sendJobKeep", "[jobId: \(jobId)]", function: #function, line: #line)
+            LogManager.appendApiLog("キープする", "[jobId: \(jobId)]", function: #function, line: #line)
             ApiManager.sendJobKeep(id: jobId)
-                .done { result in
-                    LogManager.appendApiResultLog("sendJobKeep", result, function: #function, line: #line)
-                }.catch { (error) in
-                    LogManager.appendApiErrorLog("sendJobKeep", error, function: #function, line: #line)
-                    Log.selectLog(logLevel: .debug, "keep send error:\(error)")
-                    let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-                    self.showError(myErr)
-                }.finally {
-                    //フェッチ後の表示更新はKeepManagerに任せる
-                    self.keepSendStatus = .none //連打抑止のため
-                    SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+            .done { result in
+                LogManager.appendApiResultLog("キープする", result, function: #function, line: #line)
+            }.catch { (error) in
+                LogManager.appendApiErrorLog("キープする", error, function: #function, line: #line)
+                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+                switch myErr.code {
+                case 500:   self.showError(myErr)
+                default:    break //エラー表示しない
+                }
+                self.showError(myErr)
+            }.finally {
+                //フェッチ後の表示更新はKeepManagerに任せる
+                SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             }
         } else {
+            LogManager.appendApiLog("キープ解除", "[jobId: \(jobId)]", function: #function, line: #line)
             ApiManager.sendJobDeleteKeep(id: jobId)
-                .done { result in
-                }.catch { (error) in
-                    Log.selectLog(logLevel: .debug, "keep delete error:\(error)")
-                    let myErr: MyErrorDisp = AuthManager.convAnyError(error)
-                    self.showError(myErr)
-                }.finally {
-                    //フェッチ後の表示更新はKeepManagerに任せる
-                    //// セルの設定変更パターン
-                    self.keepSendStatus = .none //連打抑止のため
-                    SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
+            .done { result in
+                LogManager.appendApiResultLog("キープ解除", result, function: #function, line: #line)
+            }.catch { (error) in
+                LogManager.appendApiErrorLog("キープ解除", error, function: #function, line: #line)
+                let myErr: MyErrorDisp = AuthManager.convAnyError(error)
+                switch myErr.code {
+                case 500:   self.showError(myErr)
+                default:    break //エラー表示しない
+                }
+            }.finally {
+                //フェッチ後の表示更新はKeepManagerに任せる
+                SVProgressHUD.dismiss(); /*Log出力*/LogManager.appendLogProgressOut("[\(NSString(#file).lastPathComponent)] [\(#line): \(#function)]")
             }
         }
     }
@@ -743,14 +653,10 @@ extension HomeVC: BaseJobCardCellDelegate {
 
 extension HomeVC: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        Log.selectLog(logLevel: .debug, "HomeVC didSelect start")
-
         if let vcs = tabBarController.viewControllers {
             Log.selectLog(logLevel: .debug, "vcs:\(vcs)")
-
             let secondNavi = vcs[1] as! BaseNaviController
             let secondVC = secondNavi.visibleViewController as! KeepListVC
-
             Log.selectLog(logLevel: .debug, "secondVC:\(String(describing: secondVC))")
         }
     }

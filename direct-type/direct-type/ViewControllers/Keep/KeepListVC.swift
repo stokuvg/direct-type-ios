@@ -290,13 +290,10 @@ extension KeepListVC: BaseJobCardCellDelegate {
 extension KeepListVC: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         Log.selectLog(logLevel: .debug, "KeepListVC didSelect start")
-
         if let vcs = tabBarController.viewControllers {
             Log.selectLog(logLevel: .debug, "vcs:\(vcs)")
-            
             let firstNavi = vcs.first as! BaseNaviController
             let firstVC = firstNavi.visibleViewController as! HomeVC
-            
             Log.selectLog(logLevel: .debug, "firstVC:\(String(describing: firstVC))")
         }
     }
