@@ -34,7 +34,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="246" height="51"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cwj-zi-psK">
-                                                        <rect key="frame" x="0.0" y="0.0" width="195" height="51"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="55" height="51"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ieo-5s-Sbn">
                                                                 <rect key="frame" x="0.0" y="15.5" width="55" height="20"/>
@@ -67,7 +67,28 @@
                                                         <constraints>
                                                             <constraint firstItem="ieo-5s-Sbn" firstAttribute="leading" secondItem="cwj-zi-psK" secondAttribute="leading" id="Ka5-K8-LeF"/>
                                                             <constraint firstItem="ieo-5s-Sbn" firstAttribute="centerY" secondItem="cwj-zi-psK" secondAttribute="centerY" id="Of1-o5-8ue"/>
+                                                            <constraint firstAttribute="width" constant="55" id="Vc9-Ad-IfZ"/>
                                                         </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vDa-se-VgK" customClass="ScoutNoticeView" customModule="Direct_type" customModuleProvider="target">
+                                                        <rect key="frame" x="55" y="0.0" width="140" height="51"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scout_notice" translatesAutoresizingMaskIntoConstraints="NO" id="BOC-1f-gX7">
+                                                                <rect key="frame" x="5" y="17.5" width="130" height="16"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="BOC-1f-gX7" secondAttribute="height" multiplier="129:16" id="sCy-I5-WtJ"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <constraints>
+                                                            <constraint firstItem="BOC-1f-gX7" firstAttribute="leading" secondItem="vDa-se-VgK" secondAttribute="leading" constant="5" id="0lf-Sf-dy5"/>
+                                                            <constraint firstAttribute="trailing" secondItem="BOC-1f-gX7" secondAttribute="trailing" constant="5" id="5qc-bo-QCv"/>
+                                                            <constraint firstItem="BOC-1f-gX7" firstAttribute="centerY" secondItem="vDa-se-VgK" secondAttribute="centerY" id="SBV-68-Hdt"/>
+                                                        </constraints>
+                                                        <connections>
+                                                            <outlet property="mark" destination="BOC-1f-gX7" id="Rsp-d2-0nW"/>
+                                                        </connections>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TW6-WE-AHg">
                                                         <rect key="frame" x="195" y="0.0" width="51" height="51"/>
@@ -401,6 +422,7 @@
                 <outlet property="salaryBackView" destination="Qig-a3-dYa" id="ckf-dv-9cg"/>
                 <outlet property="salaryLabelTop" destination="7aT-ZC-A73" id="w61-zz-su5"/>
                 <outlet property="saralyLabel" destination="RTX-bs-jW2" id="Ii2-Cz-7Ks"/>
+                <outlet property="scoutNoticeView" destination="vDa-se-VgK" id="456-zy-5VZ"/>
                 <outlet property="spaceView" destination="gsA-nY-OcQ" id="2QL-Rz-XZD"/>
                 <outlet property="stackView" destination="9rt-lE-4JS" id="3dF-5M-xeA"/>
                 <outlet property="thumbnailImageBackView" destination="0DP-77-dQc" id="6e3-8d-4Sm"/>
@@ -417,6 +439,7 @@
         <image name="companyName" width="16" height="16"/>
         <image name="place" width="16" height="16"/>
         <image name="salary" width="16" height="17"/>
+        <image name="scout_notice" width="90.5" height="12"/>
         <image name="upcoming" width="56" height="18"/>
         <namedColor name="color-white">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

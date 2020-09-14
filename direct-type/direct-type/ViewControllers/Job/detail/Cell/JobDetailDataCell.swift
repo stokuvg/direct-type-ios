@@ -14,11 +14,13 @@ class JobDetailDataCell: BaseTableViewCell {
     
     @IBOutlet weak var dataStackView:UIStackView!
     
-    // 期限,スカウト
+    // 期限
     @IBOutlet weak var limitedAndScountBackView:UIView!
     @IBOutlet weak var limitedBackView:UIView!
     @IBOutlet weak var limitedImageView:UIImageView!
     @IBOutlet weak var limitedLabel:UILabel!
+    // スカウト通知
+    @IBOutlet weak var scoutNoticeView:ScoutNoticeView!
     
     @IBOutlet weak var topSpaceView:UIView!
     @IBOutlet weak var topSpaceHeight:NSLayoutConstraint!
@@ -74,9 +76,10 @@ class JobDetailDataCell: BaseTableViewCell {
 //        let end_date_string = data.displayPeriod.endAt
         let end_date_string = data.end_date
         let endFlag = DateHelper.endFlagHiddenCheck(endDateString:end_date_string, nowDate:nowDate)
-                
+
+        let scoutFlag:Bool = true
         let limitedType:LimitedType = DateHelper.limitedTypeCheck(startFlag: startFlag, endFlag: endFlag)
-        self.limitedMarkSetting(type: limitedType)
+        self.limitedMarkSetting(type: limitedType, scout: scoutFlag)
         
         // 職種
 //        let job = data["job"] as! String
@@ -167,13 +170,18 @@ class JobDetailDataCell: BaseTableViewCell {
         return displayText
     }
     
-    private func limitedMarkSetting(type:LimitedType) {
+    private func limitedMarkSetting(type:LimitedType, scout:Bool) {
+        self.scoutNoticeView.isHidden = !scout
         switch type {
             case .none:
                 self.limitedLabel.isHidden = true
-                self.limitedAndScountBackView.isHidden = true
 //                self.dataStackView.removeArrangedSubview(self.limitedAndScountBackView)
                 self.topSpaceHeight.constant = 12
+                if scout {
+                    self.limitedAndScountBackView.isHidden = false
+                } else {
+                    self.limitedAndScountBackView.isHidden = true
+                }
             case .new:
                 self.limitedAndScountBackView.isHidden = false
                 self.limitedBackView.backgroundColor = UIColor.clear

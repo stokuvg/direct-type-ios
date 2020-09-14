@@ -14,6 +14,15 @@ protocol BaseJobCardCellDelegate {
     func keepAction(jobId:String, newStatus: Bool)
 }
 
+class ScoutNoticeView: UIView {
+    @IBOutlet weak var mark:UIImageView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+    }
+}
+
 class BaseJobCardCell: BaseTableViewCell {
     
     @IBOutlet weak var spaceView:UIView!
@@ -24,6 +33,9 @@ class BaseJobCardCell: BaseTableViewCell {
     @IBOutlet weak var limitedMarkView:UIView!              // 終了間近マーク
     @IBOutlet weak var limitedImageView:UIImageView!        // 期限ImageView
     @IBOutlet weak var limitedLabel:UILabel!                // 終了間近テキスト
+    
+    @IBOutlet weak var scoutNoticeView:ScoutNoticeView!
+    
     @IBOutlet weak var jobView:UIView!
     @IBOutlet weak var jobLabel:UILabel!
     @IBOutlet weak var saralyView:UIView!

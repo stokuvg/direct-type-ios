@@ -38,8 +38,10 @@ class MdlJobCard: Codable {
 //    var skipStatus: Bool
     
 //    var userFilter: UserFilterInfo
+    /** スカウト通知 **/
+    var scoutStatus: Bool
     
-    init(jobCardCode: String = "",displayPeriod:EntryFormInfoDisplayPeriod = EntryFormInfoDisplayPeriod.init(startAt: "", endAt: ""), companyName: String = "", jobName:String = "", mainTitle:String = "", mainPicture: String = "", salaryMinCode:Int = 0, salaryMaxCode:Int = 0, salaryDisplay:Bool = false, workPlaceCode:[Int] = [], keepStatus:Bool = false) {
+    init(jobCardCode: String = "",displayPeriod:EntryFormInfoDisplayPeriod = EntryFormInfoDisplayPeriod.init(startAt: "", endAt: ""), companyName: String = "", jobName:String = "", mainTitle:String = "", mainPicture: String = "", salaryMinCode:Int = 0, salaryMaxCode:Int = 0, salaryDisplay:Bool = false, workPlaceCode:[Int] = [], keepStatus:Bool = false, scoutStatus:Bool = false) {
         self.jobCardCode = jobCardCode
         self.displayPeriod = displayPeriod
         self.companyName = companyName
@@ -53,6 +55,7 @@ class MdlJobCard: Codable {
         self.keepStatus = keepStatus
 //        self.skipStatus = skipStatus
 //        self.userFilter = userFilter
+        self.scoutStatus = scoutStatus
     }
     
     // TudApiのデータを変換して保持
@@ -72,8 +75,13 @@ class MdlJobCard: Codable {
         
         let keepStatus = dto.isKeep
 //        Log.selectLog(logLevel: .debug, "keepStatus:\(keepStatus)")
+        
+        
+        let randomInt = Int.random(in: 0..<2)
+        
+        let dummyScout = Bool(truncating: randomInt as NSNumber)
 
-        self.init(jobCardCode: jobCardCode, displayPeriod: _displayPeriod, companyName: dto.companyName, jobName: dto.jobName, mainTitle:dto.mainTitle,mainPicture: dto.mainPhotoURL , salaryMinCode: minCode, salaryMaxCode: maxCode, salaryDisplay: dto.isSalaryDisplay,workPlaceCode:placeCodes, keepStatus: keepStatus)
+        self.init(jobCardCode: jobCardCode, displayPeriod: _displayPeriod, companyName: dto.companyName, jobName: dto.jobName, mainTitle:dto.mainTitle,mainPicture: dto.mainPhotoURL , salaryMinCode: minCode, salaryMaxCode: maxCode, salaryDisplay: dto.isSalaryDisplay,workPlaceCode:placeCodes, keepStatus: keepStatus, scoutStatus: dummyScout)
     }
 
     var debugDisp: String {

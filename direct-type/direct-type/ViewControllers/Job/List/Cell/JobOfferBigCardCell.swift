@@ -89,7 +89,9 @@ class JobOfferBigCardCell: BaseJobCardCell {
         let endPeriod = DateHelper.endFlagHiddenCheck(endDateString:end_date_string, nowDate:nowDate)
         
         let limitedType:LimitedType = DateHelper.limitedTypeCheck(startFlag: startPeriod, endFlag: endPeriod)
-        self.limitedMarkSetting(type: limitedType)
+        
+        let scoutFlag:Bool = data.scoutStatus
+        self.limitedMarkSetting(type: limitedType,scout: scoutFlag)
         
         // 職業
         let jobWidth = self.jobLabel.frame.size.width
@@ -173,14 +175,19 @@ class JobOfferBigCardCell: BaseJobCardCell {
         dispKeepStatus()
     }
     
-    private func limitedMarkSetting(type:LimitedType) {
+    private func limitedMarkSetting(type:LimitedType, scout:Bool) {
+        self.scoutNoticeView.mark.isHidden = !scout
         switch type {
             case .none:
                 self.limitedMarkView.isHidden = true
                 self.limitedImageView.isHidden = true
                 self.limitedLabel.isHidden = true
-                self.limitedMarkBackView.isHidden = true
-//                self.stackView.removeArrangedSubview(self.limitedMarkBackView)
+//                self.limitedMarkBackView.isHidden = true
+                if scout {
+                    self.limitedMarkBackView.isHidden = false
+                } else {
+                    self.limitedMarkBackView.isHidden = true
+                }
             case .new:
                 self.limitedMarkView.isHidden = false
                 self.limitedImageView.isHidden = false

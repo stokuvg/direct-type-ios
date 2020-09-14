@@ -383,7 +383,9 @@ class HomeVC: TmpNaviTopVC {
         let end_date_string = jobData.displayPeriod.endAt
         let endPeriod = DateHelper.endFlagHiddenCheck(endDateString: end_date_string, nowDate: nowDate)
         let limitedType: LimitedType = DateHelper.limitedTypeCheck(startFlag: startPeriod, endFlag: endPeriod)
-        if limitedType != LimitedType.none {
+        let scoutStatus:Bool = jobData.scoutStatus
+        
+        if limitedType != LimitedType.none && scoutStatus != false {
             rowHeight += 40
         }
         // 職種のサイズチェック

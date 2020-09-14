@@ -16,6 +16,9 @@ protocol KeepCardCellDelegate {
 
 class KeepCardCell: BaseJobCardCell {
     
+    
+//    @IBOutlet weak var scoutNoticeView: ScoutNoticeView!
+    
     @IBOutlet weak var salaryBackView:UIView!
     @IBOutlet weak var salaryLabelTop:NSLayoutConstraint!
     @IBOutlet weak var unitLabel:UILabel!
@@ -85,7 +88,8 @@ class KeepCardCell: BaseJobCardCell {
         let endFlag = DateHelper.endFlagHiddenCheck(endDateString:end_date_string, nowDate:nowDate)
         
         let limitedType:LimitedType = DateHelper.limitedTypeCheck(startFlag: startFlag, endFlag: endFlag)
-        self.limitedMarkSetting(type: limitedType)
+        let scoutFlag:Bool = false
+        self.limitedMarkSetting(type: limitedType,scout: scoutFlag)
         
         // 職種名
         let jobName = data.jobName
@@ -176,15 +180,17 @@ class KeepCardCell: BaseJobCardCell {
         return displayText
     }
     
-    private func limitedMarkSetting(type:LimitedType) {
+    private func limitedMarkSetting(type:LimitedType, scout:Bool) {
+        self.scoutNoticeView.mark.isHidden = !scout
         switch type {
             case .none:
                 self.limitedMarkView.isHidden = true
-                self.stackView.removeArrangedSubview(self.limitedMarkBackView)
             case .new:
+                self.limitedMarkView.isHidden = false
                 self.limitedLabel.text(text: "", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
                 self.limitedImageView.image = UIImage(named: "new")
             case .end:
+                self.limitedMarkView.isHidden = false
                 limitedLabel.text(text: "終了間近", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
                 self.limitedImageView.image = UIImage(named: "upcoming")
         }
