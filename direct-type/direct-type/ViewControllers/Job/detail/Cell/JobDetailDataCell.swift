@@ -37,6 +37,8 @@ class JobDetailDataCell: BaseTableViewCell {
     @IBOutlet weak var salaryMarkLabel:UILabel!
     // 勤務地
     @IBOutlet weak var workPlaceBackView:UIView!
+    @IBOutlet weak var workPlaceBackViewHeight:NSLayoutConstraint!
+    @IBOutlet weak var workPlaceLabelTop:NSLayoutConstraint!
     @IBOutlet weak var workPlaceLabel:UILabel!
     // 社名
     @IBOutlet weak var companyBackView:UIView!
@@ -49,7 +51,7 @@ class JobDetailDataCell: BaseTableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        Log.selectLog(logLevel: .debug, "JobDetailDataCell awakeFromNib start")
+//        Log.selectLog(logLevel: .debug, "JobDetailDataCell awakeFromNib start")
         // Initialization code
         self.backgroundColor = UIColor.init(colorType: .color_base)
     }
@@ -130,7 +132,29 @@ class JobDetailDataCell: BaseTableViewCell {
         let areaText: String = SelectItemsManager.convCodeDisp(.entryPlace, codes).map { (cd) -> String in
             cd.disp
         }.joined(separator: ",")
+        
+//        let checkAreaText = areaText + areaText
+        
+        let placeTextSize = CGFloat(areaText.count) * UIFont.init(fontType: .C_font_SSb)!.pointSize
+        
+        let placeLabelWidth = self.workPlaceLabel.frame.size.width
+        
         self.workPlaceLabel.text(text: areaText, fontType: .C_font_SSb ,textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
+        
+        if placeTextSize <= placeLabelWidth {
+//            Log.selectLog(logLevel: .debug, "1行")
+//            self.workPlaceLabelTop.constant = 10
+            self.workPlaceLabel.numberOfLines = 1
+            self.workPlaceBackViewHeight.constant = 30
+        } else {
+//            Log.selectLog(logLevel: .debug, "２行以上")
+            let lineCount = Int(placeTextSize / placeLabelWidth)
+//            Log.selectLog(logLevel: .debug, "lineCount:\(lineCount)")
+            
+            self.workPlaceLabel.numberOfLines = 0
+            let addConstant = CGFloat(15 * (lineCount/2))
+            self.workPlaceBackViewHeight.constant = 30 + addConstant
+        }
         // 社名
         let company = data.companyName
 //        let dCompany = company + company
