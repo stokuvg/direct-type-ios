@@ -21,6 +21,11 @@ enum VersionCheckResult {
         case patch
     }
 }
+enum VersionUpdateType {
+    case none
+    case optional
+    case force
+}
 
 struct VersionInfo {
     var majorVer: Int = 0
