@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -142,8 +142,8 @@
                                             <constraint firstAttribute="width" constant="20" id="uvy-Xq-dIZ"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvp-gy-5ud">
-                                        <rect key="frame" x="45" y="3" width="265" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvp-gy-5ud">
+                                        <rect key="frame" x="45" y="5" width="265" height="20"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -151,11 +151,12 @@
                                 </subviews>
                                 <color key="backgroundColor" name="color-white"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="mvp-gy-5ud" secondAttribute="bottom" constant="3" id="8CM-Xo-aHX"/>
-                                    <constraint firstItem="mvp-gy-5ud" firstAttribute="leading" secondItem="rYI-uq-zqB" secondAttribute="trailing" constant="10" id="CTC-l7-c4N"/>
-                                    <constraint firstItem="mvp-gy-5ud" firstAttribute="top" secondItem="jbq-tj-Lrl" secondAttribute="top" constant="3" id="Y7P-fo-8ny"/>
-                                    <constraint firstAttribute="trailing" secondItem="mvp-gy-5ud" secondAttribute="trailing" constant="10" id="iTi-PZ-CWe"/>
+                                    <constraint firstAttribute="bottom" secondItem="mvp-gy-5ud" secondAttribute="bottom" constant="5" id="HP7-cJ-dyM"/>
+                                    <constraint firstItem="mvp-gy-5ud" firstAttribute="leading" secondItem="rYI-uq-zqB" secondAttribute="trailing" constant="10" id="LdV-kf-k3d"/>
+                                    <constraint firstItem="mvp-gy-5ud" firstAttribute="top" secondItem="jbq-tj-Lrl" secondAttribute="top" constant="5" id="SKf-uZ-sKa"/>
+                                    <constraint firstAttribute="height" constant="30" id="Ucl-he-bo2"/>
                                     <constraint firstItem="rYI-uq-zqB" firstAttribute="centerY" secondItem="jbq-tj-Lrl" secondAttribute="centerY" id="jFg-RH-xf2"/>
+                                    <constraint firstAttribute="trailing" secondItem="mvp-gy-5ud" secondAttribute="trailing" constant="10" id="rYE-Lo-3ro"/>
                                     <constraint firstItem="rYI-uq-zqB" firstAttribute="leading" secondItem="jbq-tj-Lrl" secondAttribute="leading" constant="15" id="sDu-eJ-cCc"/>
                                 </constraints>
                             </view>
@@ -216,7 +217,6 @@
                             </view>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="jbq-tj-Lrl" firstAttribute="height" secondItem="po3-E0-g9z" secondAttribute="height" id="hZ0-4V-sxg"/>
                             <constraint firstItem="M2Q-bb-2Zh" firstAttribute="height" secondItem="po3-E0-g9z" secondAttribute="height" id="rwZ-ty-pg5"/>
                         </constraints>
                     </stackView>
@@ -252,7 +252,9 @@
                 <outlet property="topSpaceHeight" destination="3eE-qF-pXq" id="eRM-H4-ZeI"/>
                 <outlet property="topSpaceView" destination="tkD-hS-6Se" id="doW-vY-atb"/>
                 <outlet property="workPlaceBackView" destination="jbq-tj-Lrl" id="u5Q-GF-SNm"/>
+                <outlet property="workPlaceBackViewHeight" destination="Ucl-he-bo2" id="TiS-a1-xrz"/>
                 <outlet property="workPlaceLabel" destination="mvp-gy-5ud" id="aPX-FH-yD3"/>
+                <outlet property="workPlaceLabelTop" destination="SKf-uZ-sKa" id="jNv-8f-NsQ"/>
             </connections>
             <point key="canvasLocation" x="132" y="139"/>
         </tableViewCell>
