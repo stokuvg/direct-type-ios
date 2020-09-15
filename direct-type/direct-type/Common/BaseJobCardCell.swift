@@ -62,6 +62,9 @@ class BaseJobCardCell: BaseTableViewCell {
         self.delegate.skipAction(jobId: self.jobCardData.jobCardCode)
     }
     
+    // エントリー済
+    @IBOutlet weak var entryCompleteImage:UIImageView!
+    
     var delegate:BaseJobCardCellDelegate!
     var jobCardData:MdlJobCard!
 

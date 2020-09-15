@@ -38,8 +38,13 @@ class MdlKeepJob: Codable {
     
     // キープフラグ
     var keepStatus:Bool
+    
+    /** スカウト通知 **/
+    var scoutStatus: Bool
+    /** エントリー済 **/
+    var entryStatus: Bool
 
-    init(jobId: String = "", jobName: String = "", pressStartDate: String = "", pressEndDate: String = "", mainTitle: String = "", mainPhotoURL: String = "", salaryMinCode: Int = 0, salaryMaxCode: Int = 0, isSalaryDisplay: Bool = false, companyName: String = "", areaNames: [String] = [], keepStatus:Bool = true) {
+    init(jobId: String = "", jobName: String = "", pressStartDate: String = "", pressEndDate: String = "", mainTitle: String = "", mainPhotoURL: String = "", salaryMinCode: Int = 0, salaryMaxCode: Int = 0, isSalaryDisplay: Bool = false, companyName: String = "", areaNames: [String] = [], keepStatus:Bool = true, scoutStatus:Bool = false, entryStatus:Bool = false) {
         self.jobId = jobId
         self.jobName = jobName
         self.pressStartDate = pressStartDate
@@ -54,6 +59,10 @@ class MdlKeepJob: Codable {
         self.areaNames = areaNames
         
         self.keepStatus = keepStatus
+        
+        self.scoutStatus = scoutStatus
+        
+        self.entryStatus = entryStatus
     }
     // TudApiのデータを変換して保持
     convenience init(dto: KeepJob) {
@@ -61,6 +70,12 @@ class MdlKeepJob: Codable {
         let _minSalaryId = Int(dto.minSalaryId)
         let _maxSalaryId = Int(dto.maxSalaryId)
         
-        self.init(jobId: dto.jobId, jobName: dto.jobName,pressStartDate:dto.pressStartDate,pressEndDate:dto.pressEndDate, mainTitle:dto.mainTitle,mainPhotoURL: dto.mainPhotoURL , salaryMinCode: _minSalaryId!, salaryMaxCode: _maxSalaryId!, isSalaryDisplay: dto.isSalaryDisplay, companyName: dto.companyName, areaNames:dto.place2Ids)
+        let randomInt = Int.random(in: 0..<2)
+        let dummyScout = Bool(truncating: randomInt as NSNumber)
+        
+        let entryRandomInt = Int.random(in: 0..<2)
+        let dummyEntry = Bool(truncating: entryRandomInt as NSNumber)
+        
+        self.init(jobId: dto.jobId, jobName: dto.jobName,pressStartDate:dto.pressStartDate,pressEndDate:dto.pressEndDate, mainTitle:dto.mainTitle,mainPhotoURL: dto.mainPhotoURL , salaryMinCode: _minSalaryId!, salaryMaxCode: _maxSalaryId!, isSalaryDisplay: dto.isSalaryDisplay, companyName: dto.companyName, areaNames:dto.place2Ids, scoutStatus: dummyScout, entryStatus: dummyEntry)
     }
 }

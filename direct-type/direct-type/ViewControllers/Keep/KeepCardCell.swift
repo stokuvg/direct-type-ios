@@ -60,6 +60,8 @@ class KeepCardCell: BaseJobCardCell {
         keepActionBtn.imageView?.contentMode = .scaleAspectFit
         keepActionBtn.contentHorizontalAlignment = .fill
         keepActionBtn.contentVerticalAlignment = .fill
+        
+        self.entryCompleteImage.isHidden = true
     }
     
     override func prepareForReuse() {
@@ -88,7 +90,7 @@ class KeepCardCell: BaseJobCardCell {
         let endFlag = DateHelper.endFlagHiddenCheck(endDateString:end_date_string, nowDate:nowDate)
         
         let limitedType:LimitedType = DateHelper.limitedTypeCheck(startFlag: startFlag, endFlag: endFlag)
-        let scoutFlag:Bool = false
+        let scoutFlag:Bool = data.scoutStatus
         self.limitedMarkSetting(type: limitedType,scout: scoutFlag)
         
         // 職種名
@@ -171,6 +173,9 @@ class KeepCardCell: BaseJobCardCell {
         let company = data.companyName
         companyNameLabel.text(text: company, fontType: .C_font_SSb , textColor: UIColor.init(colorType: .color_black)!, alignment: .left)
         
+        // エントリー済
+        let entryFlag = data.entryStatus
+        self.entryCompleteImage.isHidden = !entryFlag
     }
     
     private func cutText(defaultText: String, cutString: String) -> String {

@@ -16,6 +16,7 @@ final class JobOfferDetailVC: TmpBasicVC {
     @IBOutlet private weak var applicationFooterView:UIView!
     @IBOutlet private weak var applicationBtn:UIButton!
     @IBAction private func applicationBtnAction() {
+        if (self._mdlJobDetail.entryStatus == true) { return }
         AnalyticsEventManager.track(type: .entryJob)
         // 応募フォームに遷移
         self.pushViewController(.entryForm(routeFrom), model: _mdlJobDetail)
@@ -210,7 +211,7 @@ private extension JobOfferDetailVC {
         // 会社概要
         detailTableView.registerNib(nibName: "JobDetailFoldingOutlineCell", idName: "JobDetailFoldingOutlineCell")
         /// section 8
-        applicationBtn.setTitle(text: "応募する", fontType: .C_font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+//        applicationBtn.setTitle(text: "応募する", fontType: .C_font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
     }
 
     func dispKeepStatus() {
@@ -333,6 +334,19 @@ private extension JobOfferDetailVC {
         applicationBtn.isEnabled = isEnable//応募ボタンを非活性にする
         keepBtn.isEnabled = isEnable//キープボタンを非活性にする
     }
+    
+    private func changeEventStatus(eventStatus: Bool) {
+        applicationBtn.isEnabled = !eventStatus
+        if eventStatus {
+            applicationBtn.setTitle(text: "応募済みです", fontType: .C_font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+            applicationBtn.backgroundColor = UIColor.lightGray
+            
+        } else {
+            applicationBtn.setTitle(text: "応募する", fontType: .C_font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+            applicationBtn.backgroundColor = UIColor.init(colorType: .color_button)
+            
+        }
+    }
 
     func getJobDetail() {
         SVProgressHUD.show()
@@ -346,6 +360,11 @@ private extension JobOfferDetailVC {
             LogManager.appendApiResultLog("getJobDetail", result, function: #function, line: #line)
             debugLog("ApiManager getJobDetail result:\(result.debugDisp)")
             self._mdlJobDetail = result//取得成功したら、そのモデルで更新する
+            
+            let eventStatus = self._mdlJobDetail.entryStatus
+            Log.selectLog(logLevel: .debug, "eventStatus:\(eventStatus)")
+            
+            self.changeEventStatus(eventStatus:self._mdlJobDetail.entryStatus)
             Log.selectLog(logLevel: .debug, "_mdlJobDetail.jobCardCode:\(self._mdlJobDetail.jobCardCode)")
 
             self.makeArticleHeaderSize()

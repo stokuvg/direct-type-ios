@@ -79,7 +79,7 @@ class JobDetailDataCell: BaseTableViewCell {
         let end_date_string = data.end_date
         let endFlag = DateHelper.endFlagHiddenCheck(endDateString:end_date_string, nowDate:nowDate)
 
-        let scoutFlag:Bool = true
+        let scoutFlag:Bool = data.scoutStatus
         let limitedType:LimitedType = DateHelper.limitedTypeCheck(startFlag: startFlag, endFlag: endFlag)
         self.limitedMarkSetting(type: limitedType, scout: scoutFlag)
         

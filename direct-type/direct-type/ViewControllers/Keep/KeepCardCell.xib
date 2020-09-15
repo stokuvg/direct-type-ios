@@ -24,6 +24,12 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gsA-nY-OcQ">
                         <rect key="frame" x="17" y="8" width="286" height="244"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="entryComplete" translatesAutoresizingMaskIntoConstraints="NO" id="vVx-hI-zat">
+                                <rect key="frame" x="219" y="176" width="67" height="68"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="vVx-hI-zat" secondAttribute="height" multiplier="68:69" id="5e7-a1-Hhw"/>
+                                </constraints>
+                            </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9rt-lE-4JS">
                                 <rect key="frame" x="20" y="15" width="246" height="219"/>
                                 <subviews>
@@ -76,7 +82,7 @@
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scout_notice" translatesAutoresizingMaskIntoConstraints="NO" id="BOC-1f-gX7">
                                                                 <rect key="frame" x="5" y="17.5" width="130" height="16"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" secondItem="BOC-1f-gX7" secondAttribute="height" multiplier="129:16" id="sCy-I5-WtJ"/>
+                                                                    <constraint firstAttribute="height" constant="16" id="nkM-PC-pgr"/>
                                                                 </constraints>
                                                             </imageView>
                                                         </subviews>
@@ -387,7 +393,9 @@
                         <constraints>
                             <constraint firstItem="9rt-lE-4JS" firstAttribute="leading" secondItem="gsA-nY-OcQ" secondAttribute="leading" constant="20" id="BYF-ZU-Ewz"/>
                             <constraint firstAttribute="trailing" secondItem="9rt-lE-4JS" secondAttribute="trailing" constant="20" id="GlB-Ta-3ZG"/>
+                            <constraint firstAttribute="trailing" secondItem="vVx-hI-zat" secondAttribute="trailing" id="NtH-In-k2O"/>
                             <constraint firstAttribute="bottom" secondItem="9rt-lE-4JS" secondAttribute="bottom" constant="10" id="UrZ-gZ-7XI"/>
+                            <constraint firstAttribute="bottom" secondItem="vVx-hI-zat" secondAttribute="bottom" id="diU-Fv-Hbd"/>
                             <constraint firstItem="9rt-lE-4JS" firstAttribute="top" secondItem="gsA-nY-OcQ" secondAttribute="top" constant="15" id="riy-tJ-5hj"/>
                         </constraints>
                     </view>
@@ -408,6 +416,7 @@
             <connections>
                 <outlet property="areaLabel" destination="dEF-MS-1jR" id="17m-lt-Kkj"/>
                 <outlet property="companyNameLabel" destination="tYW-pQ-dnT" id="aZG-mH-2Me"/>
+                <outlet property="entryCompleteImage" destination="vVx-hI-zat" id="vQR-OY-bZK"/>
                 <outlet property="jobDataBackView" destination="nhC-vr-uTq" id="Bro-N2-XZH"/>
                 <outlet property="jobDataTopSpaceView" destination="0FH-jr-5gO" id="U6e-13-jYx"/>
                 <outlet property="jobDataTopSpaceViewHeight" destination="6CH-cI-FZC" id="kyQ-w5-LJA"/>
@@ -437,6 +446,7 @@
         <image name="btn_keep" width="100" height="100"/>
         <image name="card_keep" width="383" height="296"/>
         <image name="companyName" width="16" height="16"/>
+        <image name="entryComplete" width="67" height="68"/>
         <image name="place" width="16" height="16"/>
         <image name="salary" width="16" height="17"/>
         <image name="scout_notice" width="90.5" height="12"/>
