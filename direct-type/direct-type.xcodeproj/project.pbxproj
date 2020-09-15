@@ -214,6 +214,7 @@
 		0EE8619B2488C9B3003C5242 /* ChemistrySelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EE8619A2488C9B3003C5242 /* ChemistrySelectCell.xib */; };
 		0EE8619D2488C9BF003C5242 /* ChemistrySelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8619C2488C9BF003C5242 /* ChemistrySelectCell.swift */; };
 		0EE8619F2488D50B003C5242 /* ChemistryAnswerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8619E2488D50B003C5242 /* ChemistryAnswerButton.swift */; };
+		2604322A25104F280020843A /* VersionCheckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2604322925104F280020843A /* VersionCheckManager.swift */; };
 		260BBFDC2465171D003D163A /* MdlProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260BBFDB2465171D003D163A /* MdlProfile.swift */; };
 		260BBFE024651732003D163A /* HPreviewTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260BBFDD24651732003D163A /* HPreviewTBCell.swift */; };
 		260BBFE124651732003D163A /* Preview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 260BBFDE24651732003D163A /* Preview.storyboard */; };
@@ -566,6 +567,7 @@
 		0EE8619A2488C9B3003C5242 /* ChemistrySelectCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChemistrySelectCell.xib; sourceTree = "<group>"; };
 		0EE8619C2488C9BF003C5242 /* ChemistrySelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistrySelectCell.swift; sourceTree = "<group>"; };
 		0EE8619E2488D50B003C5242 /* ChemistryAnswerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryAnswerButton.swift; sourceTree = "<group>"; };
+		2604322925104F280020843A /* VersionCheckManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheckManager.swift; sourceTree = "<group>"; };
 		260BBFDB2465171D003D163A /* MdlProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MdlProfile.swift; sourceTree = "<group>"; };
 		260BBFDD24651732003D163A /* HPreviewTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HPreviewTBCell.swift; sourceTree = "<group>"; };
 		260BBFDE24651732003D163A /* Preview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preview.storyboard; sourceTree = "<group>"; };
@@ -819,6 +821,7 @@
 			isa = PBXGroup;
 			children = (
 				26CA071324DA97E800A03E7B /* Defines */,
+				2604322825104EFE0020843A /* VersionCheckManager */,
 				2688B56624976888001975AC /* RecommendManager */,
 				26CA071624DBDCAA00A03E7B /* KeepManager */,
 				26A1F57A247F5D1000834213 /* ValidateManager */,
@@ -1258,6 +1261,14 @@
 				0EAE765C248F2A23009A8F4B /* ChemistryBusinessAbilityCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		2604322825104EFE0020843A /* VersionCheckManager */ = {
+			isa = PBXGroup;
+			children = (
+				2604322925104F280020843A /* VersionCheckManager.swift */,
+			);
+			path = VersionCheckManager;
 			sourceTree = "<group>";
 		};
 		260BBFDA2465171D003D163A /* ExSwagger */ = {
@@ -1987,6 +1998,7 @@
 				26BF48EE24639DEE00E00215 /* EditableObj.swift in Sources */,
 				26A1F57C247F5D3300834213 /* ValidateManager.swift in Sources */,
 				269AFFC5246A929300DB364B /* SubSelectSingleVC.swift in Sources */,
+				2604322A25104F280020843A /* VersionCheckManager.swift in Sources */,
 				0EAE7661248F2CCD009A8F4B /* ChemistryBusinessAvilityView.swift in Sources */,
 				06FFA0012484D6850085A3D9 /* MyPageChemistryStartCell.swift in Sources */,
 				267E635F24A9865E004169ED /* EntryFormExQuestionsHeadTBCell.swift in Sources */,
