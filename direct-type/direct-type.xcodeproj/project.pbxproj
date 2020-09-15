@@ -214,6 +214,8 @@
 		0EE8619B2488C9B3003C5242 /* ChemistrySelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EE8619A2488C9B3003C5242 /* ChemistrySelectCell.xib */; };
 		0EE8619D2488C9BF003C5242 /* ChemistrySelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8619C2488C9BF003C5242 /* ChemistrySelectCell.swift */; };
 		0EE8619F2488D50B003C5242 /* ChemistryAnswerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8619E2488D50B003C5242 /* ChemistryAnswerButton.swift */; };
+		2604322F251086DA0020843A /* LaunchVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2604322E251086DA0020843A /* LaunchVC.storyboard */; };
+		26043231251087500020843A /* LaunchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26043230251087500020843A /* LaunchVC.swift */; };
 		260BBFDC2465171D003D163A /* MdlProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260BBFDB2465171D003D163A /* MdlProfile.swift */; };
 		260BBFE024651732003D163A /* HPreviewTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260BBFDD24651732003D163A /* HPreviewTBCell.swift */; };
 		260BBFE124651732003D163A /* Preview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 260BBFDE24651732003D163A /* Preview.storyboard */; };
@@ -566,6 +568,8 @@
 		0EE8619A2488C9B3003C5242 /* ChemistrySelectCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChemistrySelectCell.xib; sourceTree = "<group>"; };
 		0EE8619C2488C9BF003C5242 /* ChemistrySelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistrySelectCell.swift; sourceTree = "<group>"; };
 		0EE8619E2488D50B003C5242 /* ChemistryAnswerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryAnswerButton.swift; sourceTree = "<group>"; };
+		2604322E251086DA0020843A /* LaunchVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchVC.storyboard; sourceTree = "<group>"; };
+		26043230251087500020843A /* LaunchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchVC.swift; sourceTree = "<group>"; };
 		260BBFDB2465171D003D163A /* MdlProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MdlProfile.swift; sourceTree = "<group>"; };
 		260BBFDD24651732003D163A /* HPreviewTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HPreviewTBCell.swift; sourceTree = "<group>"; };
 		260BBFDE24651732003D163A /* Preview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preview.storyboard; sourceTree = "<group>"; };
@@ -853,6 +857,7 @@
 		067F28D62456CEBF000AAD69 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				2604322B251086660020843A /* LaunchVC */,
 				06E519D424581691004E4B7A /* WebView */,
 				06E519D124581667004E4B7A /* Edit */,
 				06E519CA24581622004E4B7A /* Preview */,
@@ -1260,6 +1265,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		2604322B251086660020843A /* LaunchVC */ = {
+			isa = PBXGroup;
+			children = (
+				2604322E251086DA0020843A /* LaunchVC.storyboard */,
+				26043230251087500020843A /* LaunchVC.swift */,
+			);
+			path = LaunchVC;
+			sourceTree = "<group>";
+		};
 		260BBFDA2465171D003D163A /* ExSwagger */ = {
 			isa = PBXGroup;
 			children = (
@@ -1605,6 +1619,7 @@
 				06FFA0022484D6850085A3D9 /* MyPageChemistryStartCell.xib in Resources */,
 				0680958C24F7AC67001F8793 /* JobDetailGuideBookHeaderCell.xib in Resources */,
 				26147F36247267F9009B30B5 /* MstF22_pcSkillWord.tsv in Resources */,
+				2604322F251086DA0020843A /* LaunchVC.storyboard in Resources */,
 				2642E38F24A04C1F003E6907 /* MstSel_salary.tsv in Resources */,
 				267E636024A9865E004169ED /* EntryFormExQuestionsHeadTBCell.xib in Resources */,
 				06A3743024EA4E7700E2DE31 /* JobDetailAttentionCell.xib in Resources */,
@@ -1901,6 +1916,7 @@
 				26F18B5224AB0FB6003048AE /* EntryConfirmItem.swift in Sources */,
 				06DCAEAB245A7616008FE9FA /* UILabel+Extensions.swift in Sources */,
 				26147F30247258E9009B30B5 /* HPreviewTBCell+dispCellValue.swift in Sources */,
+				26043231251087500020843A /* LaunchVC.swift in Sources */,
 				26F2A81B246D10C30037D47F /* MdlResume.swift in Sources */,
 				06BE18FB2484A55000FAE476 /* MyPageNameCell.swift in Sources */,
 				0EC5B164248F41B80089670D /* BusinessAvilityScore.swift in Sources */,
