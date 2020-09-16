@@ -158,7 +158,7 @@ class JobDetailItemCell: BaseJobDetailCell {
                     let scopeData = ["title":"開発環境・業務範囲","text":data.scope]
                     optionalDatas.append(scopeData)
                 }
-            case 3:
+            case 4:
                 // 歓迎するスキル
                 if data.betterSkill.count > 0 {
 //                    let title = data.betterSkill.title!
@@ -192,7 +192,7 @@ class JobDetailItemCell: BaseJobDetailCell {
                     let suitableUnsuitableData = ["title": "この仕事の向き・不向き", "text": sumText]
                     optionalDatas.append(suitableUnsuitableData)
                 }
-            case 5:
+            case 6:
                 // 賞与について
                 if data.bonusAbout.count > 0 {
 //                    let title = data.bonusAbout.title!
@@ -201,7 +201,7 @@ class JobDetailItemCell: BaseJobDetailCell {
                     let bonusAboutData = ["title":"賞与について","text":text]
                     optionalDatas.append(bonusAboutData)
                 }
-            case 6:
+            case 7:
                 // 残業について
                 if data.overtimeAbout.count > 0 {
 //                    let title = data.overtimeAbout.title!
@@ -220,7 +220,7 @@ class JobDetailItemCell: BaseJobDetailCell {
                         optionalDatas.append(overtimeCodeData as [String : Any])
                     }
                 }
-            case 7:
+            case 8:
                 // 交通・詳細
                 if data.transport.count > 0 {
 //                    let title = data.transport.title!
@@ -229,7 +229,7 @@ class JobDetailItemCell: BaseJobDetailCell {
                     let transportData = ["title":"交通・詳細","text":text]
                     optionalDatas.append(transportData)
                 }
-            case 9:
+            case 10:
                 // 産休・育休取得状況
                 if data.childcare.count > 0 {
 //                    let title = data.childcare.title!
