@@ -430,6 +430,7 @@
                 <outlet property="limitedLabel" destination="LbM-VG-Vh6" id="lZi-oC-QM8"/>
                 <outlet property="limitedMarkBackView" destination="cwj-zi-psK" id="uUW-76-6q3"/>
                 <outlet property="limitedMarkView" destination="ieo-5s-Sbn" id="KCq-A5-hIa"/>
+                <outlet property="markStackView" destination="C77-Gp-tF3" id="0oj-JE-7hb"/>
                 <outlet property="salaryBackView" destination="Qig-a3-dYa" id="ckf-dv-9cg"/>
                 <outlet property="salaryLabelTop" destination="7aT-ZC-A73" id="w61-zz-su5"/>
                 <outlet property="saralyLabel" destination="RTX-bs-jW2" id="Ii2-Cz-7Ks"/>

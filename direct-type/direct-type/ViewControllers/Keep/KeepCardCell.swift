@@ -16,7 +16,7 @@ protocol KeepCardCellDelegate {
 
 class KeepCardCell: BaseJobCardCell {
     
-    
+    @IBOutlet weak var markStackView:UIStackView!
 //    @IBOutlet weak var scoutNoticeView: ScoutNoticeView!
     
     @IBOutlet weak var salaryBackView:UIView!
@@ -189,12 +189,15 @@ class KeepCardCell: BaseJobCardCell {
         self.scoutNoticeView.mark.isHidden = !scout
         switch type {
             case .none:
+                self.limitedMarkBackView.isHidden = true
                 self.limitedMarkView.isHidden = true
             case .new:
+            self.limitedMarkBackView.isHidden = false
                 self.limitedMarkView.isHidden = false
                 self.limitedLabel.text(text: "", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
                 self.limitedImageView.image = UIImage(named: "new")
             case .end:
+            self.limitedMarkBackView.isHidden = false
                 self.limitedMarkView.isHidden = false
                 limitedLabel.text(text: "終了間近", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
                 self.limitedImageView.image = UIImage(named: "upcoming")
