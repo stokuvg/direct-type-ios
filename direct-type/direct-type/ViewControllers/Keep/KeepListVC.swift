@@ -185,6 +185,8 @@ extension KeepListVC: UITableViewDelegate {
         
         var cellHeight:CGFloat
         
+        let row = indexPath.row
+        guard row < self.lists.count else { return 0 } //クラッシュ回避
         let jobData = self.lists[indexPath.row]
         let jobName = jobData.jobName
 //        Log.selectLog(logLevel: .debug, "jobName:\(jobName)")
@@ -212,6 +214,7 @@ extension KeepListVC: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = indexPath.row
+        guard row < self.lists.count else { return } //クラッシュ回避
         let cardData = self.lists[row]
         let jobId = cardData.jobId
         let vc = getVC(sbName: "JobOfferDetailVC", vcName: "JobOfferDetailVC") as! JobOfferDetailVC
@@ -230,7 +233,7 @@ extension KeepListVC: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = indexPath.row
-//        if self.lists.count == 0 { return UITableViewCell() }
+        guard row < self.lists.count else { return UITableViewCell() } //クラッシュ回避
         let _keepData = self.lists[row]
         let cell = tableView.loadCell(cellName: "KeepCardCell", indexPath: indexPath) as! KeepCardCell
         cell.tag = row

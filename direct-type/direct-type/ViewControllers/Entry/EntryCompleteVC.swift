@@ -15,6 +15,7 @@ class EntryCompleteVC: TmpBasicVC {
     @IBOutlet weak var vwFootArea: UIView!
     @IBOutlet weak var btnCommit: UIButton!
     @IBAction func actCommit(_ sender: UIButton) {
+        hidesBottomBarWhenPushed = false//下部のTabBarを遷移時に表示にする
         navigationController?.popToRootViewController(animated: true)
     }
     override func viewDidLoad() {
