@@ -22,6 +22,9 @@ extension EditableBasicVC {
         let (_, editTemp) = editableModel.makeTempItem(item)
         //Pickerを表示する
         let picker = IKDatePicker()
+        if #available(iOS 13.4, *) {
+            picker.preferredDatePickerStyle = .wheels
+        }
         let bufDate = editTemp.curVal
         let date = DateHelper.convStrYMD2Date(bufDate)
         picker.date = date
