@@ -53,12 +53,16 @@ final class JobOfferDetailVC: TmpBasicVC {
     var articleHeaderPosition:CGPoint = CGPoint.zero
     
     // 仕事内容セル
+    var checkWorkContentsY:CGFloat = -1000.0
     var checkWorkContentsCell:JobDetailWorkContentsCell!
     // 応募資格セル
-    var checkQualificationCell:JobDetailItemCell!
+    var checkQualificationY:CGFloat = -1000.0
+    var checkQualificationCell:JobDetailQualifcationCell!
     // 待遇セル
+    var checkTreatmentY:CGFloat = -1000.0
     var checkTreatmentCell:JobDetailItemCell!
     // 会社概要セル
+    var checkOutlineHeaderY:CGFloat = -1000.0
     var checkOutlineHeaderCell:JobDetailFoldingHeaderCell!
     
     // 画面スクロールを手動で行なっているか、ボタンなどで行なっているか。
@@ -181,6 +185,7 @@ private extension JobOfferDetailVC {
         // 　・注目ポイント:           任意 3-2,3-3
         detailTableView.registerNib(nibName: "JobDetailAttentionCell", idName: "JobDetailAttentionCell")
         // 2.応募資格:              必須  3-4
+        detailTableView.registerNib(nibName: "JobDetailQualifcationCell", idName: "JobDetailQualifcationCell")
         // 　・歓迎する経験・スキル:     任意
         // 　・過去の採用例:           任意
         // 　・この仕事の向き・不向き:  任意
@@ -624,6 +629,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 let cell = tableView.loadCell(cellName: "JobDetailWorkContentsCell", indexPath: indexPath) as! JobDetailWorkContentsCell
                 cell.setup(data: _mdlJobDetail)
                 checkWorkContentsCell = cell
+                checkWorkContentsY = checkWorkContentsCell.frame.origin.y
                 return cell
             case (3,2):
                 // 注目1
@@ -663,26 +669,29 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 }
             case (3,4):
                 // 応募資格
-                let cell = tableView.loadCell(cellName: "JobDetailItemCell", indexPath: indexPath) as! JobDetailItemCell
+                let cell = tableView.loadCell(cellName: "JobDetailQualifcationCell", indexPath: indexPath) as! JobDetailQualifcationCell
                 let type = _mdlJobDetail.employmentType
                 if type.count > 0 {
 //                let employmentType = SelectItemsManager.getCodeDisp(.employmentType, code: type)?.disp ?? ""
 //                if employmentType.count > 0 {
-                    cell.setup(data: _mdlJobDetail, indexPath: indexPath)
+                    cell.setup(data: _mdlJobDetail)
                     checkQualificationCell = cell
+                    checkQualificationY = checkQualificationCell.frame.origin.y
                     return cell
                 } else {
                     return UITableViewCell()
                 }
+            case (3,10):
+                // 待遇
+                let cell = tableView.loadCell(cellName: "JobDetailItemCell", indexPath: indexPath) as! JobDetailItemCell
+                cell.setup(data: _mdlJobDetail, indexPath: indexPath)
+                checkTreatmentCell = cell
+                checkTreatmentY = checkTreatmentCell.frame.origin.y
+                return cell
             case (3,_):
                 // 仕事内容
                 let cell = tableView.loadCell(cellName: "JobDetailItemCell", indexPath: indexPath) as! JobDetailItemCell
                 cell.setup(data: _mdlJobDetail, indexPath: indexPath)
-                if row == 4 {
-                    checkQualificationCell = cell
-                } else if row == 10 {
-                    checkTreatmentCell = cell
-                }
                 return cell
             case (4,0),(5,0),(6,0),(7,0):
                 let cell = tableView.loadCell(cellName: "JobDetailFoldingHeaderCell", indexPath: indexPath) as! JobDetailFoldingHeaderCell
@@ -710,6 +719,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 cell.setup(title: title, openFlag: openFlag)
                 if section == 7 {
                     checkOutlineHeaderCell = cell
+                    checkOutlineHeaderY = checkOutlineHeaderCell.frame.origin.y
                 }
                 return cell
             case (4,1): // メモ
@@ -789,41 +799,80 @@ extension JobOfferDetailVC: UIScrollViewDelegate {
         self.checkButtonsViewPosition(scrollView: scrollView)
     }
     
-    private func checkCellOffset(offset:CGPoint, no:Int, cell:UITableViewCell) {
-//        Log.selectLog(logLevel: .debug, "JobOfferDetailVC checkCellOffset start")
-        let offsetY:CGFloat = offset.y
-        let offsetSmallY = offsetY * 0.95
-        let offsetBigY = offsetY * 1.05
-                    
-        let checkY:CGFloat = cell.frame.origin.y
-        if offsetSmallY <= checkY && checkY <= offsetBigY {
-            buttonsView.colorChange(no: no)
+    private func checkCellOffset(offset:CGPoint, no:Int) {
+        Log.selectLog(logLevel: .debug, "JobOfferDetailVC checkCellOffset start")
+        
+        Log.selectLog(logLevel: .debug, "ボタンの一致:\(no)")
+        buttonsView.colorChange(no: no)
+        Log.selectLog(logLevel: .debug, "JobOfferDetailVC checkCellOffset end")
+    }
+    
+    private func checkInViewCell(cell: UITableViewCell, no:Int) -> Bool {
+//        Log.selectLog(logLevel: .debug, "checkInViewCell start")
+        
+//        Log.selectLog(logLevel: .debug, "self.detailTableView:\(String(describing: self.detailTableView))")
+        
+//        Log.selectLog(logLevel: .debug, "cell:\(cell)")
+        
+        let cellRect = cell.frame
+        
+//        let cellRectInView = self.detailTableView.convert(cellRect, to: self.navigationController?.view)
+        
+//        Log.selectLog(logLevel: .debug, "cellRectInView:\(cellRectInView)")
+//        let inViewMinY = cellRectInView.minY
+//        Log.selectLog(logLevel: .debug, "inViewMinY:\(inViewMinY)")
+//        let inViewMaxY = cellRectInView.maxY
+//        Log.selectLog(logLevel: .debug, "inViewMaxY:\(inViewMaxY)")
+        
+        var checkCell = cell
+        if no == 1 {
+            if cell != checkQualificationCell {
+                Log.selectLog(logLevel: .debug, "応募資格ではなく違うセルを見ている")
+                checkCell = checkQualificationCell
+            }
+        } else if no == 2 {
+            if cell != checkTreatmentCell {
+                Log.selectLog(logLevel: .debug, "待遇ではなく違うセルを見ている")
+                checkCell = checkTreatmentCell
+            }
         }
+        
+        let cellY = checkCell.frame.origin.y
+//        Log.selectLog(logLevel: .debug, "cellY:\(cellY)")
+        
+        let tableOffsetY = self.detailTableView.contentOffset.y
+//        Log.selectLog(logLevel: .debug, "tableOffsetY:\(tableOffsetY)")
+        
+        
+        let smallCellY = cellY * 0.97
+        let bigCellY = cellY * 1.03
+        // セルがテーブルのOffsetY座標より中にあるか
+        if smallCellY <= tableOffsetY && tableOffsetY <= bigCellY {
+            return true
+        }
+        
+//        Log.selectLog(logLevel: .debug, "checkInViewCell end")
+        return false
     }
     
     private func checkButtonsViewPosition(scrollView: UIScrollView) {
 //        Log.selectLog(logLevel: .debug, "JobOfferDetailVC checkButtonsViewPosition start")
-//        Log.selectLog(logLevel: .debug, "scrollView:\(scrollView)")
         
-//        Log.selectLog(logLevel: .debug, "offsetY:\(offsetY)")
-        
-        if checkWorkContentsCell != nil {
-//            Log.selectLog(logLevel: .debug, "checkWorkContentsCell:\(String(describing: checkWorkContentsCell))")
-            
-            self.checkCellOffset(offset:scrollView.contentOffset, no: 0, cell: checkWorkContentsCell)
+        if checkWorkContentsCell != nil && self.checkInViewCell(cell: checkWorkContentsCell, no:0) {
+//            Log.selectLog(logLevel: .debug, "画面内に仕事内容セルがある")
+            buttonsView.colorChange(no: 0)
+        } else if checkQualificationCell != nil && self.checkInViewCell(cell: checkQualificationCell, no:1) {
+//            Log.selectLog(logLevel: .debug, "画面内に応募資格セルがある")
+            buttonsView.colorChange(no: 1)
+        } else if checkTreatmentCell != nil && self.checkInViewCell(cell: checkTreatmentCell, no:2) {
+//           Log.selectLog(logLevel: .debug, "画面内に待遇セルがある")
+            buttonsView.colorChange(no: 2)
+        } else if checkOutlineHeaderCell != nil && self.checkInViewCell(cell: checkOutlineHeaderCell, no: 3) {
+//            Log.selectLog(logLevel: .debug, "画面内に会社概要セルがある")
+            buttonsView.colorChange(no: 3)
         }
-        if checkQualificationCell != nil {
-//            Log.selectLog(logLevel: .debug, "checkQualificationCell:\(String(describing: checkQualificationCell))")
-            self.checkCellOffset(offset:scrollView.contentOffset, no: 1, cell: checkQualificationCell)
-        }
-        if checkTreatmentCell != nil {
-//            Log.selectLog(logLevel: .debug, "checkTreatmentCell:\(String(describing: checkTreatmentCell))")
-            self.checkCellOffset(offset:scrollView.contentOffset, no: 2, cell: checkTreatmentCell)
-        }
-        if checkOutlineHeaderCell != nil {
-//            Log.selectLog(logLevel: .debug, "checkOutlineHeaderCell:\(String(describing: checkOutlineHeaderCell))")
-            self.checkCellOffset(offset:scrollView.contentOffset, no: 3, cell: checkOutlineHeaderCell)
-        }
+
+//        Log.selectLog(logLevel: .debug, "checkButtonsViewPosition scrollView end")
     }
 }
 
