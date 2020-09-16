@@ -385,9 +385,12 @@ class HomeVC: TmpNaviTopVC {
         let limitedType: LimitedType = DateHelper.limitedTypeCheck(startFlag: startPeriod, endFlag: endPeriod)
         let scoutStatus:Bool = jobData.scoutStatus
         
-        if limitedType != LimitedType.none && scoutStatus != false {
+        if limitedType != LimitedType.none {
+            rowHeight += 40
+        } else if scoutStatus {
             rowHeight += 40
         }
+        
         // 職種のサイズチェック
         // カード外 左:20pt,右20pt
         // カード内 左:24pt,右24pt
