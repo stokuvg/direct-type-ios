@@ -373,6 +373,7 @@ class HomeVC: TmpNaviTopVC {
         if self.dispJobCards.jobCards.count == 0 {
             return 0
         }
+        guard row < self.dispJobCards.jobCards.count else { return 0 } //クラッシュ回避
         let jobData = self.dispJobCards.jobCards[row]
         // NEW・終了間近を確認。あれば heightを追加
         let nowDate = Date()
@@ -473,6 +474,7 @@ extension HomeVC: UITableViewDelegate {
         if row == dispJobCards.jobCards.count {
             return
         }
+        guard row < self.dispJobCards.jobCards.count else { return } //クラッシュ回避
         let selectedJobData = dispJobCards.jobCards[row]
         let jobId = selectedJobData.jobCardCode
         // ダミーチェック
@@ -512,6 +514,7 @@ extension HomeVC: UITableViewDataSource {
                 cell.delegate = self
                 return cell
             } else {
+                guard row < self.dispJobCards.jobCards.count else { return UITableViewCell() } //クラッシュ回避
                 let data = dispJobCards.jobCards[row]
                 let cell = tableView.loadCell(cellName: "JobOfferBigCardCell", indexPath: indexPath) as! JobOfferBigCardCell
                 cell.delegate = self
@@ -525,6 +528,7 @@ extension HomeVC: UITableViewDataSource {
                 cell.delegate = self
                 return cell
             } else {
+                guard row < self.dispJobCards.jobCards.count else { return UITableViewCell() } //クラッシュ回避
                 let data = dispJobCards.jobCards[row]
                 let cell = tableView.loadCell(cellName: "JobOfferBigCardCell", indexPath: indexPath) as! JobOfferBigCardCell
                 cell.delegate = self
