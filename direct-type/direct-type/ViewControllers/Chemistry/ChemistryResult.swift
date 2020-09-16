@@ -152,6 +152,7 @@ extension ChemistryResult: ChemistryResultFooterViewDelegate {
         if isExistsData {
             transitionToChemisrortSelect()
         } else {
+            hidesBottomBarWhenPushed = false//下部のTabBarを遷移時に表示にする
             navigationController?.popToRootViewController(animated: true)
         }
     }
