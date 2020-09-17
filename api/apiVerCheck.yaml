@@ -1,0 +1,129 @@
+openapi: 3.0.0
+info:
+  version: 20.9.15
+  title: アップデート確認API
+  description: APIの仕様書です
+
+servers:
+  - url: 'https://s3-ap-northeast-1.amazonaws.com'
+    description: TudVersionCheckJson
+  - url: 'https://itunes.apple.com'
+    description: iTunesStoreSearch
+
+paths:
+###============================================================###
+###======== iTunesStoreSearch ========
+  /app-info.directtype.net/direct-type-ios-version.json:
+    get:
+      description: |
+        TudVersionCheck用のJSONを取得する
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTudVersionCheckResponseDTO'
+      tags:
+        - tudVerChk
+###============================================================###
+###======== iTunesStoreSearch ========
+  /lookup:
+    get:
+      description: |
+        iTunesStoreSearchで公開中アプリの情報を取得する
+      parameters:
+        - name: id
+          required: true
+          in: query
+          description: AppごとのストアID
+          example: '1525688066'
+          schema:
+            type: string
+        - name: country
+          required: false
+          in: query
+          description: ストア指定
+          example: 'JP'
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetStoreAppInfoResponseDTO'
+      tags:
+        - itunes
+###============================================================###
+###============================================================###
+###======== スキーマ定義 ========
+components:
+  schemas:
+###============================================================###
+###============================================================###
+###ストアから取得したバージョン情報など
+###==============================
+    GetStoreAppInfoResponseDTO:
+      description: iTunesStoreを検索して取得した公開中アプリの情報
+      type: object
+      properties:
+        resultCount:
+          type: integer
+          description: 見つかった個数
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreAppInfo'
+      required:
+        - resultCount
+        - results
+    ###============================================================###
+    StoreAppInfo:
+      description: iTunesStoreを検索して取得した公開中アプリの情報
+      type: object
+      properties:
+        trackId:
+          type: integer
+          description: アプリID
+        trackName:
+          type: string
+          description: アプリ名
+        releaseDate:
+          type: string
+          description: 初回リリース日
+        currentVersionReleaseDate:
+          type: string
+          description: 現在バージョン公開日
+        version:
+          type: string
+          description: バージョン番号
+      required:
+        - trackId
+        - trackName
+        - releaseDate
+        - currentVersionReleaseDate
+        - version
+###============================================================###
+###============================================================###
+###Jsonから取得したバージョン情報など
+###==============================
+    GetTudVersionCheckResponseDTO:
+      description: Json取得した公開中アプリの情報
+      type: object
+      properties:
+        required_version:
+          type: string
+          description: チェック対象バージョン
+        type:
+          type: string
+          description: 強制アップデートするかフラグ
+        update_url:
+          type: string
+          description: AppStoreへの誘導URL
+      required:
+        - required_version
+        - type
+        - update_url
+

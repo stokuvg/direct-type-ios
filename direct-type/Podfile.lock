@@ -111,6 +111,9 @@ PODS:
   - TudApi (0.20.8.6):
     - Alamofire (~> 4.9.0)
     - PromiseKit (~> 6.8)
+  - TudVerCheck (0.20.9.15):
+    - Alamofire (~> 4.9.0)
+    - PromiseKit (~> 6.8)
 
 DEPENDENCIES:
   - AlamofireImage
@@ -124,6 +127,7 @@ DEPENDENCIES:
   - SVProgressHUD
   - SwaggerClient (from `../generated/promise`)
   - TudApi (from `../generatedSvr/promise`)
+  - TudVerCheck (from `../generatedVerCheck/promise`)
 
 SPEC REPOS:
   trunk:
@@ -160,6 +164,8 @@ EXTERNAL SOURCES:
     :path: "../generated/promise"
   TudApi:
     :path: "../generatedSvr/promise"
+  TudVerCheck:
+    :path: "../generatedVerCheck/promise"
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
@@ -190,7 +196,8 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwaggerClient: a43eabc6c7947bfcd383a4351bfcdd508ae6f003
   TudApi: 5b3101447d7b1c2ed3ca4ccf295fab3c56057922
+  TudVerCheck: e9f5d940d5b681b957b60956ebcf39c34f7a5523
 
-PODFILE CHECKSUM: 238c5ff5a2e12dfdc29ec7a56726c49e04ec658f
+PODFILE CHECKSUM: 0695396c0aa1a2bf96b01bf39e04bef6c78e80ee
 
 COCOAPODS: 1.8.4
