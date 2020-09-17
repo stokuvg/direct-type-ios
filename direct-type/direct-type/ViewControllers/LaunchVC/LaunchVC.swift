@@ -16,12 +16,16 @@ class LaunchVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         dispVersion()
     }
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //chkNeedUpdate()//アップデートチェック
+        switchNextVC()//全て終わって「次」の画面へ
+    }
+    
     private func chkNeedUpdate() {
         //バージョンチェックなどするなら、ここで
         VersionCheckManager.getStoreVersion()
@@ -82,11 +86,6 @@ class LaunchVC: BaseVC {
         .finally {
         }
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        chkNeedUpdate()//アップデートチェック
-    }
     func firstFetchAll() {
         self.fetchGetProfile()//とりあえず、プロフィール取得させてみる
     }
@@ -114,11 +113,13 @@ extension LaunchVC {
         var disp: String = ""
         let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "0.0.0"
         disp = "Version: \(version)"
+        #if DEBUG
         if let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String {
             if version != build {
                 disp = "Version: \(version) (\(build))"
             }
         }
+        #endif
         let attrDisp = TudTool.attrText(text: disp, fontType: .font_SS, textColor: UIColor(colorType: .color_light_gray)!, alignment: .left)
         lblVerStatus.attributedText = attrDisp
     }
