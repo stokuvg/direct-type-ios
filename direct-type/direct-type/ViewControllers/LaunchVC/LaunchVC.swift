@@ -22,24 +22,25 @@ class LaunchVC: BaseVC {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //chkNeedUpdate()//アップデートチェック
-        switchNextVC()//全て終わって「次」の画面へ
+        chkNeedUpdate()//アップデートチェック
     }
     
     private func chkNeedUpdate() {
         //バージョンチェックなどするなら、ここで
-        VersionCheckManager.getStoreVersion()
-        .done { (storeVer) in
+        VersionCheckManager.getVersionInfo()
+        .done { (isForce, storeVer) in
             let appVer = VersionCheckManager.getAppVersion()
             var updateTyep: VersionUpdateType = .none
             switch appVer.checkVersion(target: storeVer) {
             case .same: break //公開中のバージョンと同じなので、何もしない
-            case .older(let type):
-                switch type {
-                case .major: updateTyep = .force
-                case .minor: updateTyep = .optional
-                case .patch: break //マイナーバージョンアップも誘導しない場合
-                }
+            case .older(_):
+                updateTyep = isForce ? .force : .optional
+            //case .older(let type):
+            //    switch type {
+            //    case .major: updateTyep = .force
+            //    case .minor: updateTyep = .optional
+            //    case .patch: break //マイナーバージョンアップも誘導しない場合
+            //    }
             case .newer(_): break //自分のバージョンの方が新しいので、何もしない
             }
             //===結果に応じて、画面遷移
@@ -51,14 +52,16 @@ class LaunchVC: BaseVC {
         }
         .catch { (_) in
             //バージョン取得に失敗しても、アプリ利用可能にして良い場合
+            self.firstFetchAll()
         }
         .finally {
         }
     }
     private func dispUpdateDialog() {
-        self.showConfirm(title: "新しいバージョンがあります", message: "今すぐアップデートしますか？")
+        let dialog = VersionCheckManager.shared.updateDialog
+        self.showConfirm(title: dialog.updateTitle, message: dialog.updateMessage)
         .done { success in
-            let url = URL(string: "https://itunes.apple.com/jp/app/id1525688066?mt=")!
+            let url = URL(string: dialog.appStoreUrl)!
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:]) { success in
                     self.firstFetchAll()//本来の処理を実施（遷移した後にアプリに戻した場合に、何もできなくなるのを回避）
@@ -72,9 +75,10 @@ class LaunchVC: BaseVC {
         }
     }
     private func dispForceUpdateDialog() {
-        self.showConfirm(title: "新しいバージョンがあります", message: "アップデートしてください。", onlyOK: true)
+        let dialog = VersionCheckManager.shared.updateDialog
+        self.showConfirm(title: dialog.updateTitle, message: dialog.updateMessage, onlyOK: true)
         .done { success in
-            let url = URL(string: "https://itunes.apple.com/jp/app/id1525688066?mt=")!
+            let url = URL(string: dialog.appStoreUrl)!
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:]) { success in
                     //強制アップデートの場合には、アプリに戻ったときにロックされたままなのは、ある意味正しい
@@ -87,7 +91,9 @@ class LaunchVC: BaseVC {
         }
     }
     func firstFetchAll() {
-        self.fetchGetProfile()//とりあえず、プロフィール取得させてみる
+        //FIXME: 今は初期フェッチ不要にしているので
+        //self.fetchGetProfile()//とりあえず、プロフィール取得させてみる
+        self.switchNextVC() //次の画面へ遷移する
     }
     func transitionToDeepLinkDestination(with hierarchy: DeepLinkHierarchy) {
         guard let rootNavigationController = hierarchy.rootNavigation,

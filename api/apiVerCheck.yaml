@@ -23,9 +23,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetTudVersionCheckResponseDTO'
+                $ref: '#/components/schemas/GetUpdateInfoResponseDTO'
       tags:
-        - tudVerChk
+        - tudUpdateInfo
 ###============================================================###
 ###======== iTunesStoreSearch ========
   /lookup:
@@ -109,21 +109,27 @@ components:
 ###============================================================###
 ###Jsonから取得したバージョン情報など
 ###==============================
-    GetTudVersionCheckResponseDTO:
+    GetUpdateInfoResponseDTO:
       description: Json取得した公開中アプリの情報
       type: object
       properties:
         required_version:
           type: string
-          description: チェック対象バージョン
-        type:
+          description: 必要バージョン（実行アプリが、これ未満だとダイアログが表示される）
+        force_update:
+          type: boolean
+          description: 強制アップデートするかフラグ（trueなら〔OK〕のみ、falseなら〔OK〕〔Cancel〕でダイアログ表示される）
+        dialog_title:
           type: string
-          description: 強制アップデートするかフラグ
+          description: AppStore誘導ダイアログのタイトル
+        dialog_message:
+          type: string
+          description: AppStore誘導ダイアログのメッセージ
         update_url:
           type: string
           description: AppStoreへの誘導URL
       required:
         - required_version
-        - type
+        - force_update
         - update_url
-
+        - dialog_message
