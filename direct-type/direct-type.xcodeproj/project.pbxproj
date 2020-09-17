@@ -216,6 +216,9 @@
 		0EE8619B2488C9B3003C5242 /* ChemistrySelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EE8619A2488C9B3003C5242 /* ChemistrySelectCell.xib */; };
 		0EE8619D2488C9BF003C5242 /* ChemistrySelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8619C2488C9BF003C5242 /* ChemistrySelectCell.swift */; };
 		0EE8619F2488D50B003C5242 /* ChemistryAnswerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8619E2488D50B003C5242 /* ChemistryAnswerButton.swift */; };
+		2604322A25104F280020843A /* VersionCheckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2604322925104F280020843A /* VersionCheckManager.swift */; };
+		260687C92510AB00003BFFF1 /* LaunchVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 260687C72510AB00003BFFF1 /* LaunchVC.storyboard */; };
+		260687CA2510AB00003BFFF1 /* LaunchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260687C82510AB00003BFFF1 /* LaunchVC.swift */; };
 		260BBFDC2465171D003D163A /* MdlProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260BBFDB2465171D003D163A /* MdlProfile.swift */; };
 		260BBFE024651732003D163A /* HPreviewTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260BBFDD24651732003D163A /* HPreviewTBCell.swift */; };
 		260BBFE124651732003D163A /* Preview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 260BBFDE24651732003D163A /* Preview.storyboard */; };
@@ -570,6 +573,9 @@
 		0EE8619A2488C9B3003C5242 /* ChemistrySelectCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChemistrySelectCell.xib; sourceTree = "<group>"; };
 		0EE8619C2488C9BF003C5242 /* ChemistrySelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistrySelectCell.swift; sourceTree = "<group>"; };
 		0EE8619E2488D50B003C5242 /* ChemistryAnswerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemistryAnswerButton.swift; sourceTree = "<group>"; };
+		2604322925104F280020843A /* VersionCheckManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheckManager.swift; sourceTree = "<group>"; };
+		260687C72510AB00003BFFF1 /* LaunchVC.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchVC.storyboard; sourceTree = "<group>"; };
+		260687C82510AB00003BFFF1 /* LaunchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchVC.swift; sourceTree = "<group>"; };
 		260BBFDB2465171D003D163A /* MdlProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MdlProfile.swift; sourceTree = "<group>"; };
 		260BBFDD24651732003D163A /* HPreviewTBCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HPreviewTBCell.swift; sourceTree = "<group>"; };
 		260BBFDE24651732003D163A /* Preview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preview.storyboard; sourceTree = "<group>"; };
@@ -823,6 +829,7 @@
 			isa = PBXGroup;
 			children = (
 				26CA071324DA97E800A03E7B /* Defines */,
+				2604322825104EFE0020843A /* VersionCheckManager */,
 				2688B56624976888001975AC /* RecommendManager */,
 				26CA071624DBDCAA00A03E7B /* KeepManager */,
 				26A1F57A247F5D1000834213 /* ValidateManager */,
@@ -857,6 +864,7 @@
 		067F28D62456CEBF000AAD69 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				260687C62510AB00003BFFF1 /* LaunchVC */,
 				06E519D424581691004E4B7A /* WebView */,
 				06E519D124581667004E4B7A /* Edit */,
 				06E519CA24581622004E4B7A /* Preview */,
@@ -1266,6 +1274,23 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		2604322825104EFE0020843A /* VersionCheckManager */ = {
+			isa = PBXGroup;
+			children = (
+				2604322925104F280020843A /* VersionCheckManager.swift */,
+			);
+			path = VersionCheckManager;
+			sourceTree = "<group>";
+		};
+		260687C62510AB00003BFFF1 /* LaunchVC */ = {
+			isa = PBXGroup;
+			children = (
+				260687C72510AB00003BFFF1 /* LaunchVC.storyboard */,
+				260687C82510AB00003BFFF1 /* LaunchVC.swift */,
+			);
+			path = LaunchVC;
+			sourceTree = "<group>";
+		};
 		260BBFDA2465171D003D163A /* ExSwagger */ = {
 			isa = PBXGroup;
 			children = (
@@ -1611,6 +1636,7 @@
 				06FFA0022484D6850085A3D9 /* MyPageChemistryStartCell.xib in Resources */,
 				0680958C24F7AC67001F8793 /* JobDetailGuideBookHeaderCell.xib in Resources */,
 				26147F36247267F9009B30B5 /* MstF22_pcSkillWord.tsv in Resources */,
+				260687C92510AB00003BFFF1 /* LaunchVC.storyboard in Resources */,
 				2642E38F24A04C1F003E6907 /* MstSel_salary.tsv in Resources */,
 				267E636024A9865E004169ED /* EntryFormExQuestionsHeadTBCell.xib in Resources */,
 				06A3743024EA4E7700E2DE31 /* JobDetailAttentionCell.xib in Resources */,
@@ -1864,6 +1890,7 @@
 				2688B568249768DA001975AC /* RecommendManager.swift in Sources */,
 				0E59D7C524B40D7600FA4570 /* ApiManager+Activity.swift in Sources */,
 				0670F4662491FCBB00E60FDC /* ApiManager+Keeps.swift in Sources */,
+				260687CA2510AB00003BFFF1 /* LaunchVC.swift in Sources */,
 				066763722457B08300AC5039 /* EntryFormVC.swift in Sources */,
 				06E519A42457DC7B004E4B7A /* InitialInputCompleteVC.swift in Sources */,
 				0667636C2457B02200AC5039 /* KeepListVC.swift in Sources */,
@@ -1994,6 +2021,7 @@
 				26BF48EE24639DEE00E00215 /* EditableObj.swift in Sources */,
 				26A1F57C247F5D3300834213 /* ValidateManager.swift in Sources */,
 				269AFFC5246A929300DB364B /* SubSelectSingleVC.swift in Sources */,
+				2604322A25104F280020843A /* VersionCheckManager.swift in Sources */,
 				0EAE7661248F2CCD009A8F4B /* ChemistryBusinessAvilityView.swift in Sources */,
 				06FFA0012484D6850085A3D9 /* MyPageChemistryStartCell.swift in Sources */,
 				267E635F24A9865E004169ED /* EntryFormExQuestionsHeadTBCell.swift in Sources */,
@@ -2173,7 +2201,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20200911_14;
+				CURRENT_PROJECT_VERSION = 20200917_10;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = T9NJN3ZF88;
@@ -2199,7 +2227,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20200911_14;
+				CURRENT_PROJECT_VERSION = 20200917_10;
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = T9NJN3ZF88;
 				INFOPLIST_FILE = "direct-type/Info.plist";
