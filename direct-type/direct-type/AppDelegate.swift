@@ -54,46 +54,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupAppsFlyer()
         tryPostActivity()//これはCognito初期化後でないと意味ないのでは？
         FirebaseApp.configure()
-        
         window = UIWindow(frame: UIScreen.main.bounds)
-
-        if AuthManager.shared.isLogin {
-            let tabSB = UIStoryboard(name: "BaseTabBC", bundle: nil)
-            let tabBC = tabSB.instantiateViewController(withIdentifier: "Sbid_BaseTabBC")
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.switchViewController(tabBC) //遷移アニメ付きで表示（ただこのタイミングだと遷移元がないから無効か）
-        } else {
-            let inputSB = UIStoryboard(name: "InitialInputStartVC", bundle: nil)
-            let startNavi = inputSB.instantiateViewController(withIdentifier: "Sbid_InitialInputNavi") as! UINavigationController
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.switchViewController(startNavi) //遷移アニメ付きで表示（ただこのタイミングだと遷移元がないから無効か）
-        }
-
+        firstLaunhVC(openUrl: nil)//アプリ起動時の処理が完了してから、画面遷移させるため
         window?.makeKeyAndVisible()
-
-        // スプラッシュの表示を確実にするための起動遅延
-        #if (!arch(i386) && !arch(x86_64))
-            // 実機
-            sleep(2)
-        #else
-            // シミュレータ
-        #endif
         return true
     }
     
+    private func firstLaunhVC(openUrl: URL? = nil) {
+        let sb = UIStoryboard(name: "LaunchVC", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "Sbid_LaunchVC") as! LaunchVC
+        vc.deepLinkUrl = openUrl
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.switchViewController(vc) //遷移アニメ付きで表示（ただこのタイミングだと遷移元がないから無効か）
+    }
+    
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        // 未ログインの場合は初期画面へ遷移
-        guard AuthManager.shared.isLogin else {
-            let inputSB = UIStoryboard(name: "InitialInputStartVC", bundle: nil)
-            let startNavi = inputSB.instantiateViewController(withIdentifier: "Sbid_InitialInputNavi") as! UINavigationController
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.switchViewController(startNavi) //遷移アニメ付きで表示
-            return true
-        }
-        
-        let deepLinkHierarchy = DeepLinkHierarchy(host: url.host ?? "", path: url.path , query: url.query ?? "")
-        transitionToDeepLinkDestination(with: deepLinkHierarchy)
-        
+        firstLaunhVC(openUrl: url)//アプリ起動時の処理が完了してから、画面遷移させるため
         return true
     }
     //遷移アニメーション付きで表示する
@@ -115,13 +91,6 @@ private extension AppDelegate {
         }
     }
     
-    func transitionToDeepLinkDestination(with hierarchy: DeepLinkHierarchy) {
-        guard let rootNavigationController = hierarchy.rootNavigation,
-            let destinationViewController = hierarchy.distination else { return }
-        
-        rootNavigationController.popToRootViewController(animated: false)
-        rootNavigationController.pushViewController(destinationViewController, animated: true)
-    }
 }
 
 extension AppDelegate: AppsFlyerTrackerDelegate {

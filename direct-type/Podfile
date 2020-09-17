@@ -25,6 +25,9 @@ target 'direct-type' do
   ##=== Swagger ===（シルバーエッグレコメンド叩くIF）
   pod 'SERecommend', :path => '../generatedRecommend/promise'
   
+  ##=== Swagger ===（強制アップデート向けバージョンチェック）
+  pod 'TudVerCheck', :path => '../generatedVerCheck/promise'
+  
   ##=== Swagger ===（最終的なサーバ側API）
   pod 'TudApi', :path => '../generatedSvr/promise'
   
