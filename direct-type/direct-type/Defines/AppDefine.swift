@@ -82,6 +82,7 @@ extension AppDefine {
         }
     }
     static let tudUpdateInfoJsonName: String = "direct-type-ios-version.json"
+    //=== AppStore公開中の情報取得 (iTunesSearch lookup)
     static let ItunesLookupServerPath: String = "https://itunes.apple.com"
     static let ItunesLookupAppId: String = "1525688066"
     static let ItunesLookupCountry: String = "JP"
