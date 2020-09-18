@@ -118,6 +118,8 @@
 		06BE18FC2484A55000FAE476 /* MyPageNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06BE18FA2484A55000FAE476 /* MyPageNameCell.xib */; };
 		06BE18FE2484B10B00FAE476 /* BasePercentageCompletionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BE18FD2484B10B00FAE476 /* BasePercentageCompletionCell.swift */; };
 		06C347242463A595000FB4DA /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C347232463A595000FB4DA /* UIButton+Extensions.swift */; };
+		06CD3F9325148FCA00F188FF /* JobDetailTreatmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CD3F9125148FCA00F188FF /* JobDetailTreatmentCell.swift */; };
+		06CD3F9425148FCA00F188FF /* JobDetailTreatmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06CD3F9225148FCA00F188FF /* JobDetailTreatmentCell.xib */; };
 		06CDF6BF247643200075370F /* MdlJobCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CDF6BE247643200075370F /* MdlJobCard.swift */; };
 		06CDF6C1247648730075370F /* MdlJobCardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CDF6C0247648730075370F /* MdlJobCardList.swift */; };
 		06D07C0C24F79A7A00189326 /* JobDetailFoldingHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D07C0A24F79A7A00189326 /* JobDetailFoldingHeaderCell.swift */; };
@@ -475,6 +477,8 @@
 		06BE18FA2484A55000FAE476 /* MyPageNameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyPageNameCell.xib; sourceTree = "<group>"; };
 		06BE18FD2484B10B00FAE476 /* BasePercentageCompletionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePercentageCompletionCell.swift; sourceTree = "<group>"; };
 		06C347232463A595000FB4DA /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
+		06CD3F9125148FCA00F188FF /* JobDetailTreatmentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobDetailTreatmentCell.swift; sourceTree = "<group>"; };
+		06CD3F9225148FCA00F188FF /* JobDetailTreatmentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JobDetailTreatmentCell.xib; sourceTree = "<group>"; };
 		06CDF6BE247643200075370F /* MdlJobCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlJobCard.swift; sourceTree = "<group>"; };
 		06CDF6C0247648730075370F /* MdlJobCardList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MdlJobCardList.swift; sourceTree = "<group>"; };
 		06D07C0A24F79A7A00189326 /* JobDetailFoldingHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailFoldingHeaderCell.swift; sourceTree = "<group>"; };
@@ -663,7 +667,6 @@
 		26B491DB247E2F4E00B58AD4 /* ApiManager+Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Profile.swift"; sourceTree = "<group>"; };
 		26B491DD247E394900B58AD4 /* ApiManager+Jobs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Jobs.swift"; sourceTree = "<group>"; };
 		26B491DF247E3CB100B58AD4 /* ApiManager+Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Entry.swift"; sourceTree = "<group>"; };
-		26BF48C524639A8200E00215 /* Models */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Models; path = ../../../../generated/promise/SwaggerClient/Classes/Swaggers/Models; sourceTree = "<group>"; };
 		26BF48C824639D2A00E00215 /* MstK25_employmentStatus.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK25_employmentStatus.tsv; sourceTree = "<group>"; };
 		26BF48C924639D2A00E00215 /* MstK14_place.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK14_place.tsv; sourceTree = "<group>"; };
 		26BF48CA24639D2A00E00215 /* MstK11_entryPlace.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK11_entryPlace.tsv; sourceTree = "<group>"; };
@@ -942,6 +945,8 @@
 		06D07C0824F7969500189326 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				06CD3F9125148FCA00F188FF /* JobDetailTreatmentCell.swift */,
+				06CD3F9225148FCA00F188FF /* JobDetailTreatmentCell.xib */,
 				0665FCC72511CEF700B1074B /* JobDetailQualifcationCell.swift */,
 				0665FCC62511CEF700B1074B /* JobDetailQualifcationCell.xib */,
 				064EF6F524654A7300853ADD /* JobDetailDataCell.swift */,
@@ -1467,17 +1472,8 @@
 			children = (
 				260BBFDA2465171D003D163A /* ExSwagger */,
 				26BF48C624639CC700E00215 /* ByMaster */,
-				26B6E8B5245C1B7000BE5B90 /* BySwagger */,
 			);
 			path = Generated;
-			sourceTree = "<group>";
-		};
-		26B6E8B5245C1B7000BE5B90 /* BySwagger */ = {
-			isa = PBXGroup;
-			children = (
-				26BF48C524639A8200E00215 /* Models */,
-			);
-			path = BySwagger;
 			sourceTree = "<group>";
 		};
 		26BF48C624639CC700E00215 /* ByMaster */ = {
@@ -1635,6 +1631,7 @@
 				269B29A6249708C300B33FBD /* Career.storyboard in Resources */,
 				06FFA0022484D6850085A3D9 /* MyPageChemistryStartCell.xib in Resources */,
 				0680958C24F7AC67001F8793 /* JobDetailGuideBookHeaderCell.xib in Resources */,
+				06CD3F9425148FCA00F188FF /* JobDetailTreatmentCell.xib in Resources */,
 				26147F36247267F9009B30B5 /* MstF22_pcSkillWord.tsv in Resources */,
 				260687C92510AB00003BFFF1 /* LaunchVC.storyboard in Resources */,
 				2642E38F24A04C1F003E6907 /* MstSel_salary.tsv in Resources */,
@@ -1864,6 +1861,7 @@
 				0645DE05246BDE8600592572 /* BaseJobDetailCell.swift in Sources */,
 				06E519802457CF63004E4B7A /* BaseTableViewCell.swift in Sources */,
 				26CA071224DA938600A03E7B /* BuildMode.swift in Sources */,
+				06CD3F9325148FCA00F188FF /* JobDetailTreatmentCell.swift in Sources */,
 				0E22833D24AEB5AB0008765E /* ApiManager+Chemistry.swift in Sources */,
 				0EAE765D248F2A23009A8F4B /* ChemistryBusinessAbilityCell.swift in Sources */,
 				06E519A72458138E004E4B7A /* SignupVC.swift in Sources */,
@@ -2201,7 +2199,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20200917_13;
+				CURRENT_PROJECT_VERSION = 20200918_12;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = T9NJN3ZF88;
@@ -2227,7 +2225,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20200917_13;
+				CURRENT_PROJECT_VERSION = 20200918_12;
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = T9NJN3ZF88;
 				INFOPLIST_FILE = "direct-type/Info.plist";

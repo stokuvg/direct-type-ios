@@ -51,3 +51,28 @@ $ sh rebuildAll.sh
 ```
 
 
+## 強制アップデート対応
+
+### 定義ファイルの配置
+- アプリは起動時にJSONファイルを取得し、その記述に従ってアップデート誘導ダイアログを表示する
+- JSONファイルの配置先は、【AppDefine.swift】「tudUpdateInfoServerPath」「tudUpdateInfoJsonName」で定義
+- JSONファイルの定義は、「api」フォルダ内の【apiVerCheck.yaml】としてSwagger形式で定義
+    - 「required_version」：必要となるバージョンを記載。これ未満のアプリが起動された場合に、アップデート誘導ダイアログが表示される
+    - 「force_update」：強制アップデートを実施させるか。trueを指定した場合には〔OK〕ボタンのみとなる。falseならば〔OK〕〔Cancel〕ボタンあり
+    - 「dialog_title」：表示するダイアログのタイトル部分。なければ省略される
+    - 「dialog_message」：表示するダイアログのメッセージ部分
+    - 「update_url」：〔OK〕ボタン押下時に遷移させるURL
+
+```
+{
+  "required_version": "1.0.3",
+  "force_update": true,
+  "dialog_title": "強制アップデート",
+  "dialog_message": "このアプリを利用するには、最新バージョンへのアップデートが必要です。\nAppStoreへ移動します。",
+  "update_url": "https://itunes.apple.com/jp/app/id1525688066?mt="
+}
+```
+
+
+
+

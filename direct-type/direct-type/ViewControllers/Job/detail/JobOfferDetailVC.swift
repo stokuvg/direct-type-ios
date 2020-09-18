@@ -54,16 +54,12 @@ final class JobOfferDetailVC: TmpBasicVC {
     var articleHeaderPosition:CGPoint = CGPoint.zero
     
     // 仕事内容セル
-    var checkWorkContentsY:CGFloat = -1000.0
     var checkWorkContentsCell:JobDetailWorkContentsCell!
     // 応募資格セル
-    var checkQualificationY:CGFloat = -1000.0
     var checkQualificationCell:JobDetailQualifcationCell!
     // 待遇セル
-    var checkTreatmentY:CGFloat = -1000.0
-    var checkTreatmentCell:JobDetailItemCell!
+    var checkTreatmentCell:JobDetailTreatmentCell!
     // 会社概要セル
-    var checkOutlineHeaderY:CGFloat = -1000.0
     var checkOutlineHeaderCell:JobDetailFoldingHeaderCell!
     
     // 画面スクロールを手動で行なっているか、ボタンなどで行なっているか。
@@ -198,9 +194,10 @@ private extension JobOfferDetailVC {
         // 6.勤務地:              必須 3-8
         //   ・交通詳細
         // 7.休日休暇:            必須 3-9
+        detailTableView.registerNib(nibName: "JobDetailItemCell", idName: "JobDetailItemCell")
         // 8.待遇・福利厚生:       必須 3-10
         // 　・産休・育休取得:      任意
-        detailTableView.registerNib(nibName: "JobDetailItemCell", idName: "JobDetailItemCell")
+        detailTableView.registerNib(nibName: "JobDetailTreatmentCell", idName: "JobDetailTreatmentCell")
         /// section 4
         // ヘッダー
         detailTableView.registerNib(nibName: "JobDetailFoldingHeaderCell", idName: "JobDetailFoldingHeaderCell")
@@ -648,7 +645,6 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 let cell = tableView.loadCell(cellName: "JobDetailWorkContentsCell", indexPath: indexPath) as! JobDetailWorkContentsCell
                 cell.setup(data: _mdlJobDetail)
                 checkWorkContentsCell = cell
-                checkWorkContentsY = checkWorkContentsCell.frame.origin.y
                 return cell
             case (3,2):
                 // 注目1
@@ -666,7 +662,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                     cell.setup(title: spotTitle1, text: spotDetail1, bottomSpaceFlag: flag)
                     return cell
                 } else {
-                    Log.selectLog(logLevel: .debug, "注目１セル非表示")
+//                    Log.selectLog(logLevel: .debug, "注目１セル非表示")
                     let cell = UITableViewCell()
                     cell.backgroundColor = UIColor.init(colorType: .color_base)
                     return cell
@@ -681,7 +677,7 @@ extension JobOfferDetailVC: UITableViewDataSource {
                     cell.setup(title: spotTitle2, text: spotDetail2, bottomSpaceFlag: true)
                     return cell
                 } else {
-                    Log.selectLog(logLevel: .debug, "注目２セル非表示")
+//                    Log.selectLog(logLevel: .debug, "注目２セル非表示")
                     let cell = UITableViewCell()
                     cell.backgroundColor = UIColor.init(colorType: .color_base)
                     return cell
@@ -695,17 +691,15 @@ extension JobOfferDetailVC: UITableViewDataSource {
 //                if employmentType.count > 0 {
                     cell.setup(data: _mdlJobDetail)
                     checkQualificationCell = cell
-                    checkQualificationY = checkQualificationCell.frame.origin.y
                     return cell
                 } else {
                     return UITableViewCell()
                 }
             case (3,10):
                 // 待遇
-                let cell = tableView.loadCell(cellName: "JobDetailItemCell", indexPath: indexPath) as! JobDetailItemCell
-                cell.setup(data: _mdlJobDetail, indexPath: indexPath)
+                let cell = tableView.loadCell(cellName: "JobDetailTreatmentCell", indexPath: indexPath) as! JobDetailTreatmentCell
+                cell.setup(data: _mdlJobDetail)
                 checkTreatmentCell = cell
-                checkTreatmentY = checkTreatmentCell.frame.origin.y
                 return cell
             case (3,_):
                 // 仕事内容
@@ -738,7 +732,6 @@ extension JobOfferDetailVC: UITableViewDataSource {
                 cell.setup(title: title, openFlag: openFlag)
                 if section == 7 {
                     checkOutlineHeaderCell = cell
-                    checkOutlineHeaderY = checkOutlineHeaderCell.frame.origin.y
                 }
                 return cell
             case (4,1): // メモ
@@ -832,8 +825,6 @@ extension JobOfferDetailVC: UIScrollViewDelegate {
 //        Log.selectLog(logLevel: .debug, "self.detailTableView:\(String(describing: self.detailTableView))")
         
 //        Log.selectLog(logLevel: .debug, "cell:\(cell)")
-        
-        let cellRect = cell.frame
         
 //        let cellRectInView = self.detailTableView.convert(cellRect, to: self.navigationController?.view)
         
