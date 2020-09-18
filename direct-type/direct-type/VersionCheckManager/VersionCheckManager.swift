@@ -10,42 +10,31 @@ import Foundation
 import PromiseKit
 import TudVerCheck
 
-enum VersionCheckResult {
-    case same
-    case older(Position)
-    case newer(Position)
-
-    enum Position {
-        case major
-        case minor
-        case patch
-    }
-}
-enum VersionUpdateType {
-    case none
-    case optional
-    case force
-}
-
 struct VersionInfo {
+    enum VersionCheckResult {
+        case same
+        case older(Position)
+        case newer(Position)
+
+        enum Position {
+            case major
+            case minor
+            case patch
+        }
+    }
+
     var majorVer: Int = 0
     var minorVer: Int = 0
     var patchVer: Int = 0
 
     init(bufVer: String) {
         let arr = bufVer.split(separator: ".")
-        switch arr.count {
-        case 0:
-            print("Format Error! - [\(bufVer)]")
-        case 1:
-            majorVer = Int(arr[0]) ?? 0; minorVer = 0; patchVer = 0
-        case 2:
-            majorVer = Int(arr[0]) ?? 0; minorVer = Int(arr[1]) ?? 0; patchVer = 0
-        case 3:
-            majorVer = Int(arr[0]) ?? 0; minorVer = Int(arr[1]) ?? 0; patchVer = Int(arr[2]) ?? 0
-        default:
-            print("Format Error! - [\(bufVer)]")
-            majorVer = Int(arr[0]) ?? 0; minorVer = Int(arr[1]) ?? 0; patchVer = Int(arr[2]) ?? 0
+        switch arr.count { //存在しない場所は「0」としておく
+        case 0: majorVer = 0; minorVer = 0; patchVer = 0
+        case 1: majorVer = Int(arr[0]) ?? 0; minorVer = 0; patchVer = 0
+        case 2: majorVer = Int(arr[0]) ?? 0; minorVer = Int(arr[1]) ?? 0; patchVer = 0
+        case 3: majorVer = Int(arr[0]) ?? 0; minorVer = Int(arr[1]) ?? 0; patchVer = Int(arr[2]) ?? 0
+        default: majorVer = Int(arr[0]) ?? 0; minorVer = Int(arr[1]) ?? 0; patchVer = Int(arr[2]) ?? 0
         }
     }
 
@@ -70,10 +59,16 @@ struct VersionInfo {
 }
 
 final public class VersionCheckManager {
+    enum UpdateType {
+        case none
+        case optional
+        case force
+    }
+
     struct UpdateDialog {
-        var updateTitle: String = ""
-        var updateMessage: String = "最新のバージョンがあります。\nAppStoreへ移動しますか？"
-        var appStoreUrl: String = "https://itunes.apple.com/jp/app/id1525688066?mt="
+        var updateTitle: String = Constants.TudUpdateDialogTitle
+        var updateMessage: String = Constants.TudUpdateDialogMessage
+        var appStoreUrl: String = Constants.TudUpdateAppStoreUrl
     }
     var updateDialog: UpdateDialog = UpdateDialog()
 
@@ -96,8 +91,8 @@ extension VersionCheckManager {
 extension VersionCheckManager {
     class func getStoreVersion() -> Promise<VersionInfo> {
         let (promise, resolver) = Promise<VersionInfo>.pending()
-        TudVerCheckAPI.basePath = "https://itunes.apple.com"
-        ItunesAPI.lookupGet(_id: "1525688066", country: "JP")
+        TudVerCheckAPI.basePath = AppDefine.ItunesLookupServerPath
+        ItunesAPI.lookupGet(_id: AppDefine.ItunesLookupAppId, country: AppDefine.ItunesLookupCountry)
         .done { result in
             if let bufVer = result.results.first?.version {
                 let verStore = VersionInfo(bufVer: bufVer)
@@ -115,8 +110,8 @@ extension VersionCheckManager {
     }
     class func getVersionInfo() -> Promise<(Bool, VersionInfo)> {
         let (promise, resolver) = Promise<(Bool, VersionInfo)>.pending()
-        TudVerCheckAPI.basePath = "https://s3-ap-northeast-1.amazonaws.com"
-        TudUpdateInfoAPI.appInfoDirecttypeNetDirectTypeIosVersionJsonGet()
+        TudVerCheckAPI.basePath = AppDefine.tudUpdateInfoServerPath
+        TudUpdateInfoAPI.appInfoDirecttypeNetJsonNameGet(jsonName: AppDefine.tudUpdateInfoJsonName)
         .done { result in
             //===ダイアログ文言などを定義に従って変更しておく
             VersionCheckManager.shared.updateDialog.updateTitle = result.dialogTitle ?? ""

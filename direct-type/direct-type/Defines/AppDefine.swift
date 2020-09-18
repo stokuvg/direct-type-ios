@@ -73,6 +73,19 @@ extension AppDefine {
         case .Release:  return "https://directtype.silveregg.net"
         }
     }
+    //=== アップデート情報の定義
+    static var tudUpdateInfoServerPath: String {
+        switch AppDefine.buildMode {
+        case .ApiDev :  return "https://s3-ap-northeast-1.amazonaws.com"//開発
+        case .Develop:  return "https://s3-ap-northeast-1.amazonaws.com"//検証
+        case .Release:  return "https://s3-ap-northeast-1.amazonaws.com"//本番
+        }
+    }
+    static let tudUpdateInfoJsonName: String = "direct-type-ios-version.json"
+    static let ItunesLookupServerPath: String = "https://itunes.apple.com"
+    static let ItunesLookupAppId: String = "1525688066"
+    static let ItunesLookupCountry: String = "JP"
+
     //======== その他のサイト定義
     //=== アプリ呼び出しWebページURL
     static var connectDommain: String {

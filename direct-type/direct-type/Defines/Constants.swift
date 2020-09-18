@@ -11,13 +11,13 @@ import UIKit
 // このファイルでは定数関係を扱い、フラグなどは「AppDefine」で管理する
 struct Constants {
     static var AuthDummyPassword: String { return UUID().uuidString }//パスワード不要のためダミーでOK（公式サンプルが uuid だったので、それにならっておく）
-    
+
     //=== 通信関連の設定値
     static let FetchIntervalSecond: TimeInterval = 10 * 60 // 10minutes経つまで、フェッチを抑止する(APIError.noFetchを返す)
     static let ApiAutoRetryMax: Int = 3 // 自動リトライ回数（初回含めているので、2以上じゃないとidTokenリフレッシュができない）
     // ⇒ 401の場合だけは、かならずリトライを１回は試みると内部で処理しておくべきか？（サインイン頻度の仕様によって考慮する）
     static let ApiAutoRetryDelaySecond: DispatchTimeInterval = .seconds(1) // 自動リトライ間隔
-    
+
     //=== type応募
     static let TypeEntrySaveCheckDefault: Bool = true
     //=== 通知系
@@ -28,7 +28,12 @@ struct Constants {
     static let NotificationKeepStatusChangedParamMode_Del = "modeAddDel_Del"
     //キープリストのタブ位置
     static let TabIndexKeepList: Int = 1
-    
+
+    //アップデート誘導ダイアログの初期文言
+    static let TudUpdateDialogTitle: String = ""
+    static let TudUpdateDialogMessage: String = "最新のバージョンがあります。\nAppStoreへ移動しますか？"
+    static let TudUpdateAppStoreUrl: String = "https://itunes.apple.com/jp/app/id1525688066?mt="
+
     //制限値の定数定義
     static let SelectMultidMaxUndefine: Int = 9999 //最大選択数未定義の場合
     static let CareerCardMax: Int = 10 //職務経歴書カードの登録際台数
@@ -50,11 +55,11 @@ struct Constants {
     static let SelectItemsUndefineDateJP: String = "未設定"
     static let SelectItemsUndefineBirthday: Date = DateHelper.convStrYMD2Date("1996-01-01")//誕生日の場合の初期値
     //選択肢などでマスタからの選択だった場合の文言
-    static let SelectItemsUndefine: CodeDisp = CodeDisp("", "<未選択>")  //未定義な値だった場合
+    static let SelectItemsUndefine: CodeDisp = CodeDisp("", "<未選択>") //未定義な値だった場合
     //プレビュ・編集などでの未設定時（初期値）での表示文字列
     static let SelectItemsValEmpty: CodeDisp = CodeDisp("", "<未入力>")
-    
-    static let SelectItemsNotSelect: String = "選択しない"   //ユーザが「選択しない」を選んだ場合
+
+    static let SelectItemsNotSelect: String = "選択しない" //ユーザが「選択しない」を選んだ場合
 
     //[Debug] Debug時以外はfalseにすべきフラグで設定しておく
     static let DbgDispStatus: Bool = false
