@@ -32,35 +32,34 @@ class LaunchVC: BaseVC {
         chkNeedUpdate()//アップデートチェック
     }
     private func chkNeedUpdate() {
-        //バージョンチェックなどするなら、ここで
         VersionCheckManager.getVersionInfo()
-            .done { (isForce, storeVer) in
-                let appVer = VersionCheckManager.getAppVersion()
-                var updateTyep: VersionCheckManager.UpdateType = .none
-                //===どのアップデート誘導ダイアログを表示するか
-                switch appVer.checkVersion(target: storeVer) {
-                case .same: break //公開中のバージョンと同じなので、何もしない
-                case .older(_): updateTyep = isForce ? .force : .optional
+        .done { (jsonVer, isForce) in
+            let appVer = VersionCheckManager.getAppVersion()
+            var updateTyep: VersionCheckManager.UpdateType = .none
+            //===どのアップデート誘導ダイアログを表示するか
+            switch appVer.checkVersion(target: jsonVer) {
+            case .same: break //公開中のバージョンと同じなので、何もしない
+            case .older(_): updateTyep = isForce ? .force : .optional
                 //case .older(let type): //majorが古いなら強制、minorなら任意などとルール決めされている場合
                 //    switch type {
                 //    case .major: updateTyep = .force
                 //    case .minor: updateTyep = .optional
                 //    case .patch: break //マイナーバージョンアップも誘導しない場合
                 //    }
-                case .newer(_): break //自分のバージョンの方が新しいので、何もしない
-                }
-                //===結果に応じて、画面遷移
-                switch updateTyep {
-                case .none: self.firstFetchAll()//本来の処理を実施
-                case .optional: self.dispUpdateDialog()//アップデート誘導表示
-                case .force: self.dispForceUpdateDialog()//強制アップデート表示
-                }
+            case .newer(_): break //自分のバージョンの方が新しいので、何もしない
             }
-            .catch { (_) in
-                //バージョン取得に失敗した場合、アプリを利用可能にして良いなら次の処理へ
-                self.firstFetchAll()
+            //===結果に応じて、画面遷移
+            switch updateTyep {
+            case .none: self.firstFetchAll()//本来の処理を実施
+            case .optional: self.dispUpdateDialog()//アップデート誘導表示
+            case .force: self.dispForceUpdateDialog()//強制アップデート表示
             }
-            .finally {
+        }
+        .catch { (_) in
+            //バージョン取得に失敗した場合、アプリを利用可能にして良いなら次の処理へ
+            self.firstFetchAll()
+        }
+        .finally {
         }
     }
     private func firstFetchAll() {
@@ -103,34 +102,34 @@ extension LaunchVC {
     private func dispUpdateDialog() {
         let dialog = VersionCheckManager.shared.updateDialog
         self.showConfirm(title: dialog.updateTitle, message: dialog.updateMessage)
-            .done { success in
-                let url = URL(string: dialog.appStoreUrl)!
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url, options: [:]) { success in
-                        self.firstFetchAll()//本来の処理を実施（遷移した後にアプリに戻した場合に、何もできなくなるのを回避）
-                    }
+        .done { success in
+            let url = URL(string: dialog.appStoreUrl)!
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:]) { success in
+                    self.firstFetchAll()//本来の処理を実施（遷移した後にアプリに戻した場合に、何もできなくなるのを回避）
                 }
             }
-            .catch { (_) in //〔キャンセル〕ボタン押下時
-                self.firstFetchAll()//本来の処理を実施
-            }
-            .finally {
+        }
+        .catch { (_) in //〔キャンセル〕ボタン押下時
+            self.firstFetchAll()//本来の処理を実施
+        }
+        .finally {
         }
     }
     private func dispForceUpdateDialog() {
         let dialog = VersionCheckManager.shared.updateDialog
         self.showConfirm(title: dialog.updateTitle, message: dialog.updateMessage, onlyOK: true)
-            .done { success in
-                let url = URL(string: dialog.appStoreUrl)!
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url, options: [:]) { success in
-                        //強制アップデートの場合には、アプリに戻ったときにロックされたままなのは、ある意味正しい
-                    }
+        .done { success in
+            let url = URL(string: dialog.appStoreUrl)!
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:]) { success in
+                    //強制アップデートの場合には、アプリに戻ったときにロックされたままなのは、ある意味正しい
                 }
             }
-            .catch { (_) in //〔キャンセル〕ボタン押下時
-            }
-            .finally {
+        }
+        .catch { (_) in //〔キャンセル〕ボタン押下時
+        }
+        .finally {
         }
     }
 }
@@ -139,13 +138,13 @@ extension LaunchVC {
     private func fetchGetProfile() {
         SVProgressHUD.show()
         ApiManager.getProfile(Void(), isRetry: true)
-            .done { result in
-            }
-            .catch { (error) in
-            }
-            .finally {
-                SVProgressHUD.dismiss()
-                self.switchNextVC() //次の画面へ遷移する
+        .done { result in
+        }
+        .catch { (error) in
+        }
+        .finally {
+            SVProgressHUD.dismiss()
+            self.switchNextVC() //次の画面へ遷移する
         }
     }
     private func transitionToDeepLinkDestination(with hierarchy: DeepLinkHierarchy) {
