@@ -16,7 +16,7 @@ final class JobOfferDetailVC: TmpBasicVC {
     @IBOutlet private weak var applicationFooterView:UIView!
     @IBOutlet private weak var applicationBtn:UIButton!
     @IBAction private func applicationBtnAction() {
-        if (self._mdlJobDetail.entryStatus == true) { return }
+//        if (self._mdlJobDetail.entryStatus == true) { return }
         AnalyticsEventManager.track(type: .entryJob)
         // 応募フォームに遷移
         self.pushViewController(.entryForm(routeFrom), model: _mdlJobDetail)
@@ -366,11 +366,11 @@ private extension JobOfferDetailVC {
             debugLog("ApiManager getJobDetail result:\(result.debugDisp)")
             self._mdlJobDetail = result//取得成功したら、そのモデルで更新する
             
-            let eventStatus = self._mdlJobDetail.entryStatus
-            Log.selectLog(logLevel: .debug, "eventStatus:\(eventStatus)")
+//            let eventStatus = self._mdlJobDetail.entryStatus
+//            Log.selectLog(logLevel: .debug, "eventStatus:\(eventStatus)")
             
-            self.changeEventStatus(eventStatus:self._mdlJobDetail.entryStatus)
-            Log.selectLog(logLevel: .debug, "_mdlJobDetail.jobCardCode:\(self._mdlJobDetail.jobCardCode)")
+//            self.changeEventStatus(eventStatus:self._mdlJobDetail.entryStatus)
+//            Log.selectLog(logLevel: .debug, "_mdlJobDetail.jobCardCode:\(self._mdlJobDetail.jobCardCode)")
 
             self.makeArticleHeaderSize()
             self.makeArticleCellSize()

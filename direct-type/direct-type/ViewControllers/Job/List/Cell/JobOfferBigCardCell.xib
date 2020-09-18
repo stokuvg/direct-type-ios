@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -60,10 +61,10 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             </view>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RFZ-3q-Zxt">
                                                         <rect key="frame" x="140" y="0.0" width="140" height="40"/>
@@ -78,7 +79,7 @@
                                                                         </constraints>
                                                                     </imageView>
                                                                 </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstItem="o3s-Hu-tdc" firstAttribute="leading" secondItem="BTf-eT-1v6" secondAttribute="leading" constant="5" id="CIM-dI-TQR"/>
                                                                     <constraint firstItem="o3s-Hu-tdc" firstAttribute="centerY" secondItem="BTf-eT-1v6" secondAttribute="centerY" id="PUd-cv-gEY"/>
@@ -89,7 +90,7 @@
                                                                 </connections>
                                                             </view>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="bottom" secondItem="BTf-eT-1v6" secondAttribute="bottom" id="503-6x-GFO"/>
                                                             <constraint firstItem="BTf-eT-1v6" firstAttribute="leading" secondItem="RFZ-3q-Zxt" secondAttribute="leading" id="FN5-gn-rZQ"/>
@@ -98,6 +99,7 @@
                                                         </constraints>
                                                     </view>
                                                 </subviews>
+                                                <color key="backgroundColor" name="color-white"/>
                                                 <constraints>
                                                     <constraint firstItem="RFZ-3q-Zxt" firstAttribute="width" secondItem="mwz-YD-uxK" secondAttribute="width" id="0bT-hQ-JKY"/>
                                                 </constraints>
@@ -291,13 +293,14 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" name="color-white"/>
                                 <constraints>
                                     <constraint firstItem="94W-Hi-kO6" firstAttribute="height" secondItem="1q9-xq-Hg2" secondAttribute="height" id="K2L-jW-0j8"/>
                                     <constraint firstItem="Rco-zA-gd4" firstAttribute="height" secondItem="1q9-xq-Hg2" secondAttribute="height" id="eI8-UU-MRI"/>
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="color-white"/>
                         <constraints>
                             <constraint firstItem="YaZ-jT-msC" firstAttribute="leading" secondItem="bRV-uw-7T5" secondAttribute="leading" id="B0F-xw-yge"/>
                             <constraint firstAttribute="trailing" secondItem="YaZ-jT-msC" secondAttribute="trailing" id="CJa-di-DgV"/>
@@ -318,8 +321,8 @@
                     <constraint firstAttribute="bottom" secondItem="380-mX-B8p" secondAttribute="bottom" id="xNW-gn-U7s"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="areaLabel" destination="o1S-ZS-qhT" id="cxW-jW-nbm"/>
                 <outlet property="areaView" destination="Rco-zA-gd4" id="rNn-EZ-S9e"/>
@@ -370,5 +373,8 @@
         <namedColor name="color-white">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
