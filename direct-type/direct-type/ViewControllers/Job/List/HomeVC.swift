@@ -387,9 +387,11 @@ class HomeVC: TmpNaviTopVC {
         let scoutStatus:Bool = jobData.scoutStatus
         
         if limitedType != LimitedType.none {
-            rowHeight += 40
+            rowHeight += 20
         } else if scoutStatus {
-            rowHeight += 40
+            rowHeight += 20
+        } else {
+            rowHeight -= 20
         }
         
         // 職種のサイズチェック
