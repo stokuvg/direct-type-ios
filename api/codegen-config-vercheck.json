@@ -1,0 +1,11 @@
+{
+    "projectName": "TudVerCheck",
+    "allowUnicodeIdentifiers" : true,
+    "unwrapRequired" : true,
+    "lenientTypeCast" : false,
+    "responseAs" : "PromiseKit",
+    "podVersion" : "0.20.9.15",
+    "podHomepage" : "http://tud-swagger-ui.s3-website-ap-northeast-1.amazonaws.com",
+    "podSummary" : "アップデート確認API"
+}
+

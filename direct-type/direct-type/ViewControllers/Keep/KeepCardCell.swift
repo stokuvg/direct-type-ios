@@ -23,12 +23,8 @@ class KeepCardCell: BaseJobCardCell {
     @IBOutlet weak var salaryLabelTop:NSLayoutConstraint!
     @IBOutlet weak var unitLabel:UILabel!
     @IBOutlet weak var unitLabelBottom:NSLayoutConstraint!
-    @IBOutlet weak var keepActionBtn:UIButton!
-    @IBAction func keepAction() {
-        let keepFlag = KeepManager.shared.getKeepStatus(jobCardID: self.jobId)
-        self.changeKeepImage(!keepFlag)//表示だけ更新
-        self.delegate.keepAction(jobId: self.jobId, newStatus: !keepFlag)//実際にフェッチさせる
-    }
+    @IBOutlet weak var keepTapBackView:UIView!
+    @IBOutlet weak var keepMarkImageView:UIImageView!
     
     @IBOutlet weak var jobNameBackView:UIView!
     @IBOutlet weak var jobNameBackViewHeight:NSLayoutConstraint!
@@ -57,11 +53,13 @@ class KeepCardCell: BaseJobCardCell {
         // 終了間近
         limitedLabel.text(text: "終了間近", fontType: .C_font_SSSb, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
         
-        keepActionBtn.imageView?.contentMode = .scaleAspectFit
-        keepActionBtn.contentHorizontalAlignment = .fill
-        keepActionBtn.contentVerticalAlignment = .fill
-        
-        self.entryCompleteImage.isHidden = true
+        //        keepActionBtn.imageView?.contentMode = .scaleAspectFit
+        //        keepActionBtn.contentHorizontalAlignment = .fill
+        //        keepActionBtn.contentVerticalAlignment = .fill
+                
+                let keepTapAction = UITapGestureRecognizer.init(target: self, action: #selector(keepTapGestureAction(sender:)))
+                keepTapAction.delegate = self
+                self.keepTapBackView.addGestureRecognizer(keepTapAction)
     }
     
     override func prepareForReuse() {
@@ -210,7 +208,14 @@ class KeepCardCell: BaseJobCardCell {
         let offImage = UIImage(named: "btn_keepclose")
         let onImage = UIImage(named: "btn_keep")
         let useImage = keepFlag ? onImage : offImage
-        keepActionBtn.setImage(useImage, for: .normal)
+//        keepActionBtn.setImage(useImage, for: .normal)
+        keepMarkImageView.image = useImage
+    }
+    
+    @objc func keepTapGestureAction(sender: UITapGestureRecognizer) {
+        let keepFlag = KeepManager.shared.getKeepStatus(jobCardID: self.jobId)
+        self.changeKeepImage(!keepFlag)//表示だけ更新
+        self.delegate.keepAction(jobId: self.jobId, newStatus: !keepFlag)//実際にフェッチさせる
     }
     
 }
