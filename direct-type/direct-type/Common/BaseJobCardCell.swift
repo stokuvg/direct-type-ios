@@ -55,7 +55,7 @@ class BaseJobCardCell: BaseTableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        deleteBtn.isExclusiveTouch = true
         spaceView.layer.cornerRadius = 15
     }
 
