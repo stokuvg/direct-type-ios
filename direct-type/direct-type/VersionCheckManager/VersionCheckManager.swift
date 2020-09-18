@@ -70,6 +70,13 @@ struct VersionInfo {
 }
 
 final public class VersionCheckManager {
+    struct UpdateDialog {
+        var updateTitle: String = ""
+        var updateMessage: String = "最新のバージョンがあります。\nAppStoreへ移動しますか？"
+        var appStoreUrl: String = "https://itunes.apple.com/jp/app/id1525688066?mt="
+    }
+    var updateDialog: UpdateDialog = UpdateDialog()
+
     var version: String {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "0.0.0"
     }
@@ -94,7 +101,6 @@ extension VersionCheckManager {
         .done { result in
             if let bufVer = result.results.first?.version {
                 let verStore = VersionInfo(bufVer: bufVer)
-                print(result.debugDisp)
                 resolver.fulfill(verStore)
             } else {
                 resolver.reject(NSError(domain: "Format Error", code: 0, userInfo: nil))
@@ -107,14 +113,19 @@ extension VersionCheckManager {
         }
         return promise
     }
-    class func getVersionInfo() -> Promise<VersionInfo> {
-        let (promise, resolver) = Promise<VersionInfo>.pending()
+    class func getVersionInfo() -> Promise<(Bool, VersionInfo)> {
+        let (promise, resolver) = Promise<(Bool, VersionInfo)>.pending()
         TudVerCheckAPI.basePath = "https://s3-ap-northeast-1.amazonaws.com"
-        TudVerChkAPI.appInfoDirecttypeNetDirectTypeIosVersionJsonGet()
+        TudUpdateInfoAPI.appInfoDirecttypeNetDirectTypeIosVersionJsonGet()
         .done { result in
+            //===ダイアログ文言などを定義に従って変更しておく
+            VersionCheckManager.shared.updateDialog.updateTitle = result.dialogTitle ?? ""
+            VersionCheckManager.shared.updateDialog.updateMessage = result.dialogMessage
+            VersionCheckManager.shared.updateDialog.appStoreUrl = result.updateUrl
+            let isForceUpdate: Bool = result.forceUpdate
+            //===返却はバージョン番号のみ
             let verJson = VersionInfo(bufVer: result.requiredVersion)
-            print(result.debugDisp)
-            resolver.fulfill(verJson)
+            resolver.fulfill((isForceUpdate, verJson))
         }
         .catch { (error) in
             resolver.reject(error)
@@ -139,12 +150,14 @@ extension GetStoreAppInfoResponseDTO {
         return disp.joined(separator: "\n")
     }
 }
-extension GetTudVersionCheckResponseDTO {
+extension GetUpdateInfoResponseDTO {
     var debugDisp: String {
         var disp: [String] = []
         disp.append(String(repeating: "=", count: 22))
         disp.append("[チェック対象バージョン: \(requiredVersion)]")
-        disp.append("[動作フラグ: \(type)]")
+        disp.append("[強制アップデートフラグ: \(forceUpdate)]")
+        disp.append("[誘導ダイアログタイトル: \(dialogTitle ?? "")]")
+        disp.append("[誘導ダイアログメッセージ: \(dialogMessage)]")
         disp.append("[AppStoreへの誘導URL: \(updateUrl)]")
         return disp.joined(separator: "\n")
     }
