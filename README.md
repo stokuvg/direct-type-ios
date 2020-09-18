@@ -51,3 +51,23 @@ $ sh rebuildAll.sh
 ```
 
 
+## 強制アップデート対応
+
+### 定義ファイルの配置
+- S3に下記形式のJSONファイルを配置
+
+```
+{
+  "required_version": "1.0.3",
+  "force_update": true,
+  "dialog_title": "強制アップデート",
+  "dialog_message": "このアプリを利用するには、最新バージョンへのアップデートが必要です。\nAppStoreへ移動します。",
+  "update_url": "https://itunes.apple.com/jp/app/id1525688066?mt="
+}
+```
+- アプリは起動時にJSONファイルを取得し、その記述に従ってアップデート誘導ダイアログを表示する
+- JSONファイルの配置先は、【AppDefine.swift】「tudUpdateInfoServerPath」「tudUpdateInfoJsonName」で定義
+
+
+
+
