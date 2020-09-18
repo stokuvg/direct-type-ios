@@ -44,6 +44,20 @@ class PreviewBaseVC: TmpBasicVC {
             return false
         }
     }
+    func refreshPreviewTable() { //テーブル表示の更新（エラー頭出しあり）
+        tableVW.reloadData()
+        //dispFirstErrorCell() //エラーの頭出しを実施する場合
+    }
+    private func dispFirstErrorCell() {
+        //ここで、「最初のエラー箇所」を検出して、移動する
+        if let firstErrIdx = arrData.firstIndex(where: { (item) -> Bool in
+            dicGrpValidErrMsg.contains { (key, _) -> Bool in
+                item.type.itemKey == key
+            }
+        }) {
+            tableVW.scrollToRow(at: IndexPath(row: firstErrIdx, section: 0), at: .top, animated: true)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

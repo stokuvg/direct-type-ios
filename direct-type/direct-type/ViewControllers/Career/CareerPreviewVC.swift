@@ -26,7 +26,7 @@ class CareerPreviewVC: PreviewBaseVC {
     override func actCommit(_ sender: UIButton) {
         //===== フェッチかける
         if validateLocalModel() {
-            tableVW.reloadData()
+            refreshPreviewTable()
             return
         }
         //===複数項目にわたるものなど、拡張バリデーションの実施
@@ -41,7 +41,7 @@ class CareerPreviewVC: PreviewBaseVC {
         if isExistDummyText {
             self.dicValidErrMsg.addDicArrVal(key: EditItemMdlCareerCard.contents.itemKey, val: "ダミーテキストが残っています")
             self.dicGrpValidErrMsg = ValidateManager.makeGrpErrByItemErr(self.dicValidErrMsg)
-            tableVW.reloadData()            
+            refreshPreviewTable()
             let title: String = "確認"
             let message: String = "ダミーの文字を削除して保存しますが、よろしいですか？"
             let alert = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
@@ -56,7 +56,7 @@ class CareerPreviewVC: PreviewBaseVC {
                     let newText = text.replacementString(text: text, regexp: regexp, fixedReplacementString: "")
                     self.editableModel.changeTempItem(workMemo, text: newText)
                     if self.validateLocalModel() {
-                        self.tableVW.reloadData()
+                        self.refreshPreviewTable()
                         return
                     }
                     self.fetchCreateCareerList()
@@ -134,7 +134,7 @@ class CareerPreviewVC: PreviewBaseVC {
         editableModel.arrData.removeAll()
         for items in arrData { editableModel.arrData.append(items.childItems) }//editableModelに登録
         editableModel.chkTableCellAll()//これ実施しておくと、getItemByKeyが利用可能になる
-        tableVW.reloadData()//描画しなおし
+        refreshPreviewTable()//描画しなおし
     }
     //========================================
     override func viewWillAppear(_ animated: Bool) {
