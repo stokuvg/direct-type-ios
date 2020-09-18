@@ -663,7 +663,6 @@
 		26B491DB247E2F4E00B58AD4 /* ApiManager+Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Profile.swift"; sourceTree = "<group>"; };
 		26B491DD247E394900B58AD4 /* ApiManager+Jobs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Jobs.swift"; sourceTree = "<group>"; };
 		26B491DF247E3CB100B58AD4 /* ApiManager+Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Entry.swift"; sourceTree = "<group>"; };
-		26BF48C524639A8200E00215 /* Models */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Models; path = ../../../../generated/promise/SwaggerClient/Classes/Swaggers/Models; sourceTree = "<group>"; };
 		26BF48C824639D2A00E00215 /* MstK25_employmentStatus.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK25_employmentStatus.tsv; sourceTree = "<group>"; };
 		26BF48C924639D2A00E00215 /* MstK14_place.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK14_place.tsv; sourceTree = "<group>"; };
 		26BF48CA24639D2A00E00215 /* MstK11_entryPlace.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstK11_entryPlace.tsv; sourceTree = "<group>"; };
@@ -1467,17 +1466,8 @@
 			children = (
 				260BBFDA2465171D003D163A /* ExSwagger */,
 				26BF48C624639CC700E00215 /* ByMaster */,
-				26B6E8B5245C1B7000BE5B90 /* BySwagger */,
 			);
 			path = Generated;
-			sourceTree = "<group>";
-		};
-		26B6E8B5245C1B7000BE5B90 /* BySwagger */ = {
-			isa = PBXGroup;
-			children = (
-				26BF48C524639A8200E00215 /* Models */,
-			);
-			path = BySwagger;
 			sourceTree = "<group>";
 		};
 		26BF48C624639CC700E00215 /* ByMaster */ = {
@@ -2201,7 +2191,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20200917_13;
+				CURRENT_PROJECT_VERSION = 20200918_12;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = T9NJN3ZF88;
@@ -2227,7 +2217,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20200917_13;
+				CURRENT_PROJECT_VERSION = 20200918_12;
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = T9NJN3ZF88;
 				INFOPLIST_FILE = "direct-type/Info.plist";
