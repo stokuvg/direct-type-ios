@@ -46,7 +46,7 @@ class PreviewBaseVC: TmpBasicVC {
     }
     func refreshPreviewTable() { //テーブル表示の更新（エラー頭出しあり）
         tableVW.reloadData()
-        //dispFirstErrorCell() //エラーの頭出しを実施する場合
+        dispFirstErrorCell() //エラーの頭出しを実施する場合
     }
     private func dispFirstErrorCell() {
         //ここで、「最初のエラー箇所」を検出して、移動する
