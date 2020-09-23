@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -102,6 +102,13 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TW6-WE-AHg">
                                                         <rect key="frame" x="195" y="0.0" width="61" height="51"/>
                                                         <subviews>
+                                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QsG-gs-tZq">
+                                                                <rect key="frame" x="30" y="25" width="1" height="1"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="1" id="JtD-Tf-Zo7"/>
+                                                                    <constraint firstAttribute="width" constant="1" id="aGL-S5-b6v"/>
+                                                                </constraints>
+                                                            </button>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_keep" translatesAutoresizingMaskIntoConstraints="NO" id="rrc-aE-x3c">
                                                                 <rect key="frame" x="0.0" y="0.0" width="61" height="51"/>
                                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17" scale="default"/>
@@ -111,6 +118,8 @@
                                                             <constraint firstItem="rrc-aE-x3c" firstAttribute="leading" secondItem="TW6-WE-AHg" secondAttribute="leading" id="6Sv-hn-lco"/>
                                                             <constraint firstAttribute="trailing" secondItem="rrc-aE-x3c" secondAttribute="trailing" id="ROX-Xm-2cF"/>
                                                             <constraint firstAttribute="width" constant="61" id="b7K-6Z-tWP"/>
+                                                            <constraint firstItem="QsG-gs-tZq" firstAttribute="centerY" secondItem="TW6-WE-AHg" secondAttribute="centerY" id="dUl-Y5-7yW"/>
+                                                            <constraint firstItem="QsG-gs-tZq" firstAttribute="centerX" secondItem="TW6-WE-AHg" secondAttribute="centerX" id="q6Z-qL-DwJ"/>
                                                             <constraint firstItem="rrc-aE-x3c" firstAttribute="top" secondItem="TW6-WE-AHg" secondAttribute="top" id="w65-jo-kDD"/>
                                                             <constraint firstAttribute="bottom" secondItem="rrc-aE-x3c" secondAttribute="bottom" id="xtF-FG-cW8"/>
                                                         </constraints>
@@ -411,11 +420,12 @@
                     <constraint firstItem="gsA-nY-OcQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="yxc-j4-OJk"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="areaLabel" destination="dEF-MS-1jR" id="17m-lt-Kkj"/>
                 <outlet property="companyNameLabel" destination="tYW-pQ-dnT" id="aZG-mH-2Me"/>
+                <outlet property="deleteBtn" destination="QsG-gs-tZq" id="gBA-6B-zH5"/>
                 <outlet property="entryCompleteImage" destination="vVx-hI-zat" id="vQR-OY-bZK"/>
                 <outlet property="jobDataBackView" destination="nhC-vr-uTq" id="Bro-N2-XZH"/>
                 <outlet property="jobDataTopSpaceView" destination="0FH-jr-5gO" id="U6e-13-jYx"/>
