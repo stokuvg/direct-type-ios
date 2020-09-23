@@ -83,20 +83,25 @@ final public class VersionCheckManager {
     }
 }
 extension VersionCheckManager {
+    //===アプリのバンドル情報を取得する
+    //versionInfo: VersionInfo バージョン情報
     class func getAppVersion() -> VersionInfo {
         let ver = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "0.0.0"
         return VersionInfo(bufVer: ver)
     }
 }
 extension VersionCheckManager {
-    class func getStoreVersion() -> Promise<VersionInfo> {
-        let (promise, resolver) = Promise<VersionInfo>.pending()
+    //===Apple提供 iTunesSearch/Lookupでストア公開中の情報を取得する
+    //versionInfo: VersionInfo バージョン情報
+    //storeAppInfo: GetStoreAppInfoResponseDTO アプリ情報の抜粋モデル
+    class func getStoreVersion() -> Promise<(VersionInfo, GetStoreAppInfoResponseDTO)> {
+        let (promise, resolver) = Promise<(VersionInfo, GetStoreAppInfoResponseDTO)>.pending()
         TudVerCheckAPI.basePath = AppDefine.ItunesLookupServerPath
         ItunesAPI.lookupGet(_id: AppDefine.ItunesLookupAppId, country: AppDefine.ItunesLookupCountry)
         .done { result in
             if let bufVer = result.results.first?.version {
                 let verStore = VersionInfo(bufVer: bufVer)
-                resolver.fulfill(verStore)
+                resolver.fulfill((verStore, result))
             } else {
                 resolver.reject(NSError(domain: "Format Error", code: 0, userInfo: nil))
             }
@@ -108,8 +113,11 @@ extension VersionCheckManager {
         }
         return promise
     }
-    class func getVersionInfo() -> Promise<(Bool, VersionInfo)> {
-        let (promise, resolver) = Promise<(Bool, VersionInfo)>.pending()
+    //===Tud定義アップデート情報ファイルを取得する
+    //versionInfo: VersionInfo バージョン情報
+    //isFroce: Bool 強制アップデートするか、しないか
+    class func getVersionInfo() -> Promise<(VersionInfo, Bool)> {
+        let (promise, resolver) = Promise<(VersionInfo, Bool)>.pending()
         TudVerCheckAPI.basePath = AppDefine.tudUpdateInfoServerPath
         TudUpdateInfoAPI.appInfoDirecttypeNetJsonNameGet(jsonName: AppDefine.tudUpdateInfoJsonName)
         .done { result in
@@ -120,7 +128,7 @@ extension VersionCheckManager {
             let isForceUpdate: Bool = result.forceUpdate
             //===返却はバージョン番号のみ
             let verJson = VersionInfo(bufVer: result.requiredVersion)
-            resolver.fulfill((isForceUpdate, verJson))
+            resolver.fulfill((verJson, isForceUpdate))
         }
         .catch { (error) in
             resolver.reject(error)
