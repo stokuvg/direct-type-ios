@@ -70,12 +70,14 @@ class MdlKeepJob: Codable {
         let _minSalaryId = Int(dto.minSalaryId)
         let _maxSalaryId = Int(dto.maxSalaryId)
         
-        let randomInt = Int.random(in: 0..<2)
-        let dummyScout = Bool(truncating: randomInt as NSNumber)
+//        let randomInt = Int.random(in: 0..<2)
+//        let dummyScout = Bool(truncating: randomInt as NSNumber)
         
-        let entryRandomInt = Int.random(in: 0..<2)
-        let dummyEntry = Bool(truncating: entryRandomInt as NSNumber)
+//        let entryRandomInt = Int.random(in: 0..<2)
+//        let dummyEntry = Bool(truncating: entryRandomInt as NSNumber)
         
-        self.init(jobId: dto.jobId, jobName: dto.jobName,pressStartDate:dto.pressStartDate,pressEndDate:dto.pressEndDate, mainTitle:dto.mainTitle,mainPhotoURL: dto.mainPhotoURL , salaryMinCode: _minSalaryId!, salaryMaxCode: _maxSalaryId!, isSalaryDisplay: dto.isSalaryDisplay, companyName: dto.companyName, areaNames:dto.place2Ids, scoutStatus: dummyScout, entryStatus: dummyEntry)
+//        self.init(jobId: dto.jobId, jobName: dto.jobName,pressStartDate:dto.pressStartDate,pressEndDate:dto.pressEndDate, mainTitle:dto.mainTitle,mainPhotoURL: dto.mainPhotoURL , salaryMinCode: _minSalaryId!, salaryMaxCode: _maxSalaryId!, isSalaryDisplay: dto.isSalaryDisplay, companyName: dto.companyName, areaNames:dto.place2Ids, scoutStatus: dummyScout, entryStatus: dummyEntry)
+        
+        self.init(jobId: dto.jobId, jobName: dto.jobName,pressStartDate:dto.pressStartDate,pressEndDate:dto.pressEndDate, mainTitle:dto.mainTitle,mainPhotoURL: dto.mainPhotoURL , salaryMinCode: _minSalaryId!, salaryMaxCode: _maxSalaryId!, isSalaryDisplay: dto.isSalaryDisplay, companyName: dto.companyName, areaNames:dto.place2Ids)
     }
 }

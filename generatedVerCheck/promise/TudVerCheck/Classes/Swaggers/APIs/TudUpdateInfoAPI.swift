@@ -13,23 +13,23 @@ import PromiseKit
 
 open class TudUpdateInfoAPI {
     /**
-
+     - parameter jsonName: (path)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func appInfoDirecttypeNetDirectTypeIosVersionJsonGet(completion: @escaping ((_ data: GetUpdateInfoResponseDTO?,_ error: Error?) -> Void)) {
-        appInfoDirecttypeNetDirectTypeIosVersionJsonGetWithRequestBuilder().execute { (response, error) -> Void in
+    open class func appInfoDirecttypeNetJsonNameGet(jsonName: String, completion: @escaping ((_ data: GetUpdateInfoResponseDTO?,_ error: Error?) -> Void)) {
+        appInfoDirecttypeNetJsonNameGetWithRequestBuilder(jsonName: jsonName).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
 
     /**
-
+     - parameter jsonName: (path)  
      - returns: Promise<GetUpdateInfoResponseDTO>
      */
-    open class func appInfoDirecttypeNetDirectTypeIosVersionJsonGet() -> Promise<GetUpdateInfoResponseDTO> {
+    open class func appInfoDirecttypeNetJsonNameGet( jsonName: String) -> Promise<GetUpdateInfoResponseDTO> {
         //let deferred = Promise<GetUpdateInfoResponseDTO>.pending()
         let (promise, resolver) = Promise<GetUpdateInfoResponseDTO>.pending()
-        appInfoDirecttypeNetDirectTypeIosVersionJsonGet() { data, error in
+        appInfoDirecttypeNetJsonNameGet(jsonName: jsonName) { data, error in
             if let error = error {
                 //deferred.reject(error)
                 resolver.reject(error)
@@ -43,7 +43,7 @@ open class TudUpdateInfoAPI {
     }
 
     /**
-     - GET /app-info.directtype.net/direct-type-ios-version.json
+     - GET /app-info.directtype.net/{jsonName}
      - TudVersionCheck用のJSONを取得する 
      - examples: [{contentType=application/json, example={
   "required_version" : "required_version",
@@ -52,11 +52,15 @@ open class TudUpdateInfoAPI {
   "update_url" : "update_url",
   "force_update" : true
 }}]
+     - parameter jsonName: (path)  
 
      - returns: RequestBuilder<GetUpdateInfoResponseDTO> 
      */
-    open class func appInfoDirecttypeNetDirectTypeIosVersionJsonGetWithRequestBuilder() -> RequestBuilder<GetUpdateInfoResponseDTO> {
-        let path = "/app-info.directtype.net/direct-type-ios-version.json"
+    open class func appInfoDirecttypeNetJsonNameGetWithRequestBuilder(jsonName: String) -> RequestBuilder<GetUpdateInfoResponseDTO> {
+        var path = "/app-info.directtype.net/{jsonName}"
+        let jsonNamePreEscape = "\(jsonName)"
+        let jsonNamePostEscape = jsonNamePreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{jsonName}", with: jsonNamePostEscape, options: .literal, range: nil)
         let URLString = TudVerCheckAPI.basePath + path
         let parameters: [String:Any]? = nil
 

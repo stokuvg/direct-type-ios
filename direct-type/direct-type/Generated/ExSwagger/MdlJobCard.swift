@@ -81,14 +81,16 @@ class MdlJobCard: Codable {
 //        Log.selectLog(logLevel: .debug, "keepStatus:\(keepStatus)")
         
         
-        let randomInt = Int.random(in: 0..<2)
+//        let randomInt = Int.random(in: 0..<2)
         
-        let dummyScout = Bool(truncating: randomInt as NSNumber)
+//        let dummyScout = Bool(truncating: randomInt as NSNumber)
         
-        let entryRandomInt = Int.random(in: 0..<2)
-        let dummyEntry = Bool(truncating: entryRandomInt as NSNumber)
+//        let entryRandomInt = Int.random(in: 0..<2)
+//        let dummyEntry = Bool(truncating: entryRandomInt as NSNumber)
 
-        self.init(jobCardCode: jobCardCode, displayPeriod: _displayPeriod, companyName: dto.companyName, jobName: dto.jobName, mainTitle:dto.mainTitle,mainPicture: dto.mainPhotoURL , salaryMinCode: minCode, salaryMaxCode: maxCode, salaryDisplay: dto.isSalaryDisplay,workPlaceCode:placeCodes, keepStatus: keepStatus, scoutStatus: dummyScout, entryStatus: dummyEntry)
+//        self.init(jobCardCode: jobCardCode, displayPeriod: _displayPeriod, companyName: dto.companyName, jobName: dto.jobName, mainTitle:dto.mainTitle,mainPicture: dto.mainPhotoURL , salaryMinCode: minCode, salaryMaxCode: maxCode, salaryDisplay: dto.isSalaryDisplay,workPlaceCode:placeCodes, keepStatus: keepStatus, scoutStatus: dummyScout, entryStatus: dummyEntry)
+        
+        self.init(jobCardCode: jobCardCode, displayPeriod: _displayPeriod, companyName: dto.companyName, jobName: dto.jobName, mainTitle:dto.mainTitle,mainPicture: dto.mainPhotoURL , salaryMinCode: minCode, salaryMaxCode: maxCode, salaryDisplay: dto.isSalaryDisplay,workPlaceCode:placeCodes, keepStatus: keepStatus)
     }
 
     var debugDisp: String {

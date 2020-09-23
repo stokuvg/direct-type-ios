@@ -99,11 +99,7 @@
                                                         </constraints>
                                                     </view>
                                                 </subviews>
-<<<<<<< HEAD
                                                 <color key="backgroundColor" name="color-white"/>
-=======
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
->>>>>>> feature/project_acceptance_2020091801
                                                 <constraints>
                                                     <constraint firstItem="RFZ-3q-Zxt" firstAttribute="width" secondItem="mwz-YD-uxK" secondAttribute="width" id="0bT-hQ-JKY"/>
                                                 </constraints>

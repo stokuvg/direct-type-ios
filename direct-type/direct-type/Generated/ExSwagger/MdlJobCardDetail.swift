@@ -358,8 +358,8 @@ class MdlJobCardDetail: Codable {
         let _entryQuestion2 = dto.entryQuestion2
         let _entryQuestion3 = dto.entryQuestion3
         
-        let randomInt = Int.random(in: 0..<2)
-        let dummyScout = Bool(truncating: randomInt as NSNumber)
+//        let randomInt = Int.random(in: 0..<2)
+//        let dummyScout = Bool(truncating: randomInt as NSNumber)
 
         self.init(
             jobCardCode: dto.jobId,
@@ -381,9 +381,10 @@ class MdlJobCardDetail: Codable {
             transport: dto.transportation, holiday: dto.vacation, welfare: dto.jobCondition,
             childcare: _childcare, interviewMemo: _interviewMemo, selectionProcess: _selectionProcess,
             contactInfo: _contactInfo, companyDescription: _companyDescription, userFilter: _userFileter,
-            entryQuestion1: _entryQuestion1, entryQuestion2: _entryQuestion2, entryQuestion3: _entryQuestion3,
-            scoutStatus: dummyScout,
-            entryStatus: true
+            entryQuestion1: _entryQuestion1, entryQuestion2: _entryQuestion2, entryQuestion3: _entryQuestion3
+//            ,
+//            scoutStatus: dummyScout,
+//            entryStatus: true
         )
     }
 

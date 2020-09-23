@@ -338,6 +338,7 @@ private extension JobOfferDetailVC {
     }
     
     private func changeEventStatus(eventStatus: Bool) {
+        /*
         applicationBtn.isEnabled = !eventStatus
         if eventStatus {
             applicationBtn.setTitle(text: "応募済みです", fontType: .C_font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
@@ -348,6 +349,9 @@ private extension JobOfferDetailVC {
             applicationBtn.backgroundColor = UIColor.init(colorType: .color_button)
             
         }
+        */
+        applicationBtn.setTitle(text: "応募する", fontType: .C_font_M, textColor: UIColor.init(colorType: .color_white)!, alignment: .center)
+        applicationBtn.backgroundColor = UIColor.init(colorType: .color_button)
     }
 
     func getJobDetail() {
@@ -366,7 +370,7 @@ private extension JobOfferDetailVC {
 //            let eventStatus = self._mdlJobDetail.entryStatus
 //            Log.selectLog(logLevel: .debug, "eventStatus:\(eventStatus)")
             
-//            self.changeEventStatus(eventStatus:self._mdlJobDetail.entryStatus)
+            self.changeEventStatus(eventStatus:self._mdlJobDetail.entryStatus)
 //            Log.selectLog(logLevel: .debug, "_mdlJobDetail.jobCardCode:\(self._mdlJobDetail.jobCardCode)")
 
             self.makeArticleHeaderSize()

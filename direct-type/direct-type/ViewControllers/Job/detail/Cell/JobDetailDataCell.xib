@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -76,7 +76,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="160" height="40"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scout_notice" translatesAutoresizingMaskIntoConstraints="NO" id="UPL-7m-Mqt">
-                                                                <rect key="frame" x="10" y="12" width="119" height="16"/>
+                                                                <rect key="frame" x="31" y="12" width="119" height="16"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="UPL-7m-Mqt" secondAttribute="height" multiplier="119:16" id="K3q-eW-KvY"/>
                                                                     <constraint firstAttribute="height" constant="16" id="aid-V5-oOh"/>
@@ -85,7 +85,7 @@
                                                         </subviews>
                                                         <color key="backgroundColor" name="color-white"/>
                                                         <constraints>
-                                                            <constraint firstItem="UPL-7m-Mqt" firstAttribute="leading" secondItem="9I8-ON-HLQ" secondAttribute="leading" constant="10" id="Xdv-xv-Epb"/>
+                                                            <constraint firstAttribute="trailing" secondItem="UPL-7m-Mqt" secondAttribute="trailing" constant="10" id="r0v-BV-rEy"/>
                                                             <constraint firstItem="UPL-7m-Mqt" firstAttribute="centerY" secondItem="9I8-ON-HLQ" secondAttribute="centerY" id="uyg-7z-IX3"/>
                                                         </constraints>
                                                         <connections>
