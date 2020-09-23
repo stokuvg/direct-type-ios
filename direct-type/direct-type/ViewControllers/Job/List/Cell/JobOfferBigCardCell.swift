@@ -26,6 +26,7 @@ class JobOfferBigCardCell: BaseJobCardCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        keepBtn.isExclusiveTouch = true
         // Initialization code
         self.backgroundColor = UIColor.init(colorType: .color_base)
         

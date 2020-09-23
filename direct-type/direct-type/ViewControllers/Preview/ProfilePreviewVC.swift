@@ -21,7 +21,7 @@ class ProfilePreviewVC: PreviewBaseVC {
             return
         }
         if validateLocalModel() {
-            tableVW.reloadData()
+            refreshPreviewTable()
             return
         }
         fetchUpdateProfile()
@@ -107,7 +107,7 @@ class ProfilePreviewVC: PreviewBaseVC {
         editableModel.arrData.removeAll()
         for items in arrData { editableModel.arrData.append(items.childItems) }//editableModelに登録
         editableModel.chkTableCellAll()//これ実施しておくと、getItemByKeyが利用可能になる
-        tableVW.reloadData()//描画しなおし
+        refreshPreviewTable()//描画しなおし
     }
     //========================================
     override func viewWillAppear(_ animated: Bool) {
