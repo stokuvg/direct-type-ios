@@ -81,6 +81,13 @@ extension AppDefine {
         case .Release:  return "https://s3-ap-northeast-1.amazonaws.com"//本番
         }
     }
+    static var tudUpdateInfoJsonPath: String {
+        switch AppDefine.buildMode {
+        case .ApiDev :  return "app-info.directtype.net"//開発
+        case .Develop:  return "app-info.directtype.net"//検証
+        case .Release:  return "app-info.directtype.jp"//本番
+        }
+    }
     static let tudUpdateInfoJsonName: String = "direct-type-ios-version.json"
     //=== AppStore公開中の情報取得 (iTunesSearch lookup)
     static let ItunesLookupServerPath: String = "https://itunes.apple.com"
