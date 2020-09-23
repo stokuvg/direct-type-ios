@@ -119,7 +119,7 @@ extension VersionCheckManager {
     class func getVersionInfo() -> Promise<(VersionInfo, Bool)> {
         let (promise, resolver) = Promise<(VersionInfo, Bool)>.pending()
         TudVerCheckAPI.basePath = AppDefine.tudUpdateInfoServerPath
-        TudUpdateInfoAPI.appInfoDirecttypeNetJsonNameGet(jsonName: AppDefine.tudUpdateInfoJsonName)
+        TudUpdateInfoAPI.jsonPathJsonNameGet(jsonPath: AppDefine.tudUpdateInfoJsonPath, jsonName: AppDefine.tudUpdateInfoJsonName)
         .done { result in
             //===ダイアログ文言などを定義に従って変更しておく
             VersionCheckManager.shared.updateDialog.updateTitle = result.dialogTitle ?? ""

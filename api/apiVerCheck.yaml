@@ -13,11 +13,17 @@ servers:
 paths:
 ###============================================================###
 ###======== iTunesStoreSearch ========
-  /app-info.directtype.net/{jsonName}:
+#  /app-info.directtype.net/{jsonName}:
+  /{jsonPath}/{jsonName}:
     get:
       description: |
         TudVersionCheck用のJSONを取得する
       parameters:
+        - name: jsonPath
+          required: true
+          in: path
+          schema:
+            type: string
         - name: jsonName
           required: true
           in: path
