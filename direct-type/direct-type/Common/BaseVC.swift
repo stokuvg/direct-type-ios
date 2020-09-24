@@ -31,7 +31,12 @@ class BaseVC: UIViewController {
         // 画面タップ不可設定
         SVProgressHUD.setDefaultMaskType(.black)
         
-        self.navigationItem.backBarButtonItem = UIBarButtonItem.init(title: "", style: .plain, target: self, action: nil)
+        if #available(iOS 14.0, *) {
+            let backButton = DisabledStackMenuBarButtonItem(title: "", style: .plain, target: self, action: nil)
+            self.navigationItem.backBarButtonItem = backButton
+        } else {
+            self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        }
 
         initNotify()//通知登録（画面遷移でも残すもの）
     }
