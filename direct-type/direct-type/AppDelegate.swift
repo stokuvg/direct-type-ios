@@ -72,6 +72,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         firstLaunhVC(openUrl: url)//アプリ起動時の処理が完了してから、画面遷移させるため
         return true
     }
+    
+    //ホームからの復帰時
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        print(self.window?.rootViewController)
+        self.window?.rootViewController?.chkNeedUpdate {
+            print("ホームからの復帰時でのチェック")
+        }
+    }
+}
+
+
+extension AppDelegate {
     //遷移アニメーション付きで表示する
     func switchViewController(_ viewController: UIViewController, _ options: UIView.AnimationOptions =  .transitionCrossDissolve) {
         UIView.transition(with: self.window!, duration: 0.6, options: options, animations: {

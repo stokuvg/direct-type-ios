@@ -238,6 +238,7 @@
 		26147F38247267F9009B30B5 /* MstF22_pcSkillPowerPoint.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 26147F35247267F9009B30B5 /* MstF22_pcSkillPowerPoint.tsv */; };
 		26157DC02489CD4B00752C55 /* ApiManager+Resume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26157DBF2489CD4B00752C55 /* ApiManager+Resume.swift */; };
 		26157DC22489CD5F00752C55 /* ApiManager+Career.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26157DC12489CD5F00752C55 /* ApiManager+Career.swift */; };
+		2619C603251DE5200003B99E /* UIViewController+UpdateCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619C602251DE5200003B99E /* UIViewController+UpdateCheck.swift */; };
 		2619D2A524AB2E0600F24624 /* EntryConfirmAnyModelTBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619D2A324AB2E0600F24624 /* EntryConfirmAnyModelTBCell.swift */; };
 		2619D2A624AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2619D2A424AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib */; };
 		261A0F0B2501CF9F00D9FBB7 /* TudTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261A0F0A2501CF9F00D9FBB7 /* TudTool.swift */; };
@@ -597,6 +598,7 @@
 		26147F35247267F9009B30B5 /* MstF22_pcSkillPowerPoint.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MstF22_pcSkillPowerPoint.tsv; sourceTree = "<group>"; };
 		26157DBF2489CD4B00752C55 /* ApiManager+Resume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Resume.swift"; sourceTree = "<group>"; };
 		26157DC12489CD5F00752C55 /* ApiManager+Career.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiManager+Career.swift"; sourceTree = "<group>"; };
+		2619C602251DE5200003B99E /* UIViewController+UpdateCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+UpdateCheck.swift"; sourceTree = "<group>"; };
 		2619D2A324AB2E0600F24624 /* EntryConfirmAnyModelTBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryConfirmAnyModelTBCell.swift; sourceTree = "<group>"; };
 		2619D2A424AB2E0600F24624 /* EntryConfirmAnyModelTBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntryConfirmAnyModelTBCell.xib; sourceTree = "<group>"; };
 		261A0F0A2501CF9F00D9FBB7 /* TudTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TudTool.swift; sourceTree = "<group>"; };
@@ -1283,6 +1285,7 @@
 			isa = PBXGroup;
 			children = (
 				2604322925104F280020843A /* VersionCheckManager.swift */,
+				2619C602251DE5200003B99E /* UIViewController+UpdateCheck.swift */,
 			);
 			path = VersionCheckManager;
 			sourceTree = "<group>";
@@ -1888,6 +1891,7 @@
 				2688B568249768DA001975AC /* RecommendManager.swift in Sources */,
 				0E59D7C524B40D7600FA4570 /* ApiManager+Activity.swift in Sources */,
 				0670F4662491FCBB00E60FDC /* ApiManager+Keeps.swift in Sources */,
+				2619C603251DE5200003B99E /* UIViewController+UpdateCheck.swift in Sources */,
 				260687CA2510AB00003BFFF1 /* LaunchVC.swift in Sources */,
 				066763722457B08300AC5039 /* EntryFormVC.swift in Sources */,
 				06E519A42457DC7B004E4B7A /* InitialInputCompleteVC.swift in Sources */,
@@ -2199,7 +2203,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20200923_17;
+				CURRENT_PROJECT_VERSION = 20200925_18;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = T9NJN3ZF88;
@@ -2225,7 +2229,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 20200923_17;
+				CURRENT_PROJECT_VERSION = 20200925_18;
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = T9NJN3ZF88;
 				INFOPLIST_FILE = "direct-type/Info.plist";
